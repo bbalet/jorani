@@ -358,5 +358,25 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
+
+
+
+/*
+|--------------------------------------------------------------------------
+| LMS application settings
+|--------------------------------------------------------------------------
+|
+| 
+| 
+| 
+| 
+|
+*/
+//Password minimal length
+$config['password_length'] = 8;
+//Default role id (e.g. 2 for user)
+$config['default_role_id'] = 2;
+
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

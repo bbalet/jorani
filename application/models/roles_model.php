@@ -22,7 +22,7 @@ class Roles_model extends CI_Model {
      * Default constructor
      */
     public function __construct() {
-        $this->load->database();
+        
     }
 
     /**

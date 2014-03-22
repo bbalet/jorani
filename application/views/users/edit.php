@@ -13,21 +13,22 @@
 
 	<label for="login">Login</label>
 	<input type="input" name="login" value="<?php echo $users_item['lastname']; ?>" /><br />
-	
-	<label for="password">Password</label>
-	<input type="password" name="password" value="<?php echo $users_item['password']; ?>" /><br />
-	
-	<label for="role">Role</label>
-	<select name="role">
-		<option value="1" selected>user</option>
-		<option value="2">administrator</option>
-	</select>
-	
-	<label for="manager">Manager</label>
-	<select name="manager">
-		<option value="1" selected>a</option>
-		<option value="2">b</option>
-	</select>
+		
+        <label for="role">Role</label>
+        <select name="role">
+        <?php foreach ($roles as $roles_item): ?>
+            <option value="<?php echo $roles_item['id'] ?>" <?php if ($roles_item['id'] == 2) echo "selected" ?>><?php echo $roles_item['name'] ?></option>
+        <?php endforeach ?>
+        </select>
+
+        <label for="manager">Manager</label>
+        <select name="manager">
+        <?php foreach ($users as $users_item): ?>
+            <option value="<?php echo $users_item['id'] ?>"><?php echo $users_item['firstname'] . ' ' . $users_item['lastname']; ?></option>
+        <?php endforeach ?>
+        </select> If a user has no manager (itself), its leave requests are automatically validated.
+        <br /><br />
+    
 	<br /><br />
 	<button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update user</button>
 	&nbsp;

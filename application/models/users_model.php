@@ -22,7 +22,6 @@ class Users_model extends CI_Model {
      * Default constructor
      */
     public function __construct() {
-        $this->load->database();
         //Load password hasher for create/update functions
         $this->load->library('bcrypt');
     }
@@ -55,7 +54,19 @@ class Users_model extends CI_Model {
      * @return type
      */
     public function set_users() {
-        $hash = $this->bcrypt->hash_password($this->input->post('password'));
+        //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
+        set_include_path(get_include_path() . PATH_SEPARATOR . APPPATH . 'third_party/phpseclib');
+        include(APPPATH . '/third_party/phpseclib/Crypt/RSA.php');
+        define("CRYPT_RSA_MODE", CRYPT_RSA_MODE_INTERNAL);
+        $private_key = file_get_contents('./assets/keys/private.pem', true);
+        $rsa = new Crypt_RSA();
+        $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
+        $rsa->loadKey($private_key, CRYPT_RSA_PRIVATE_FORMAT_PKCS1);
+        $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
+        
+        //Hash the clear password using bcrypt
+        $hash = $this->bcrypt->hash_password($password);
+        
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
@@ -81,6 +92,44 @@ class Users_model extends CI_Model {
 
         $this->db->where('id', $this->input->post('id'));
         return $this->db->update('users', $data);
+    }
+
+    /**
+     * Check the provided credentials
+     * @param type $login user login
+     * @param type $password password
+     * @return bool true if the user is succesfully authenticated, false otherwise
+     */
+    public function check_credentials($login, $password) {
+
+        $this->db->select('id, role, login, password');
+        $this->db->from('users');
+        $this->db->where('login', $login);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 0) {
+            //No match found
+            return false;
+        } else {
+            $row = $query->row();
+            
+            if ($this->bcrypt->check_password($password, $row->password)) {
+                // Password does match stored password.                
+                if ($row->role == 1)
+                    $is_admin = 1;
+                $newdata = array(
+                    'login' => $row->login,
+                    'id' => $row->id,
+                    'is_admin' => $is_admin,
+                    'logged_in' => TRUE
+                );
+                $this->session->set_userdata($newdata);
+                return true;
+            } else {
+                // Password does not match stored password.
+                return false;
+            }
+        }
     }
 
 }

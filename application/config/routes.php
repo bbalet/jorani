@@ -38,8 +38,7 @@
 |
 */
 
-/*$route['users/create'] = 'users/create';
-$route['users/(:any)'] = 'users/view/$1';*/
+//Admin : user management
 $route['users/export'] = 'users/export';
 $route['users/create'] = 'users/create';
 $route['users/edit/(:any)'] = 'users/edit/$1';
@@ -47,6 +46,20 @@ $route['users/update'] = 'users/update';
 $route['users/delete/(:any)'] = 'users/delete/$1';
 $route['users/(:any)'] = 'users/view/$1';
 $route['users'] = 'users';
+
+//My leave requests
+$route['leaves/export'] = 'leaves/export';
+$route['leaves/create'] = 'leaves/create';
+$route['leaves/edit/(:any)'] = 'leaves/edit/$1';
+$route['leaves/update'] = 'leaves/update';
+$route['leaves/delete/(:any)'] = 'leaves/delete/$1';
+$route['leaves/(:any)'] = 'leaves/view/$1';
+$route['leaves'] = 'leaves';
+
+//Session management
+$route['session/login'] = 'session/login';
+$route['session/logout'] = 'session/logout';
+
 $route['default_controller'] = 'pages/view';
 $route['(:any)'] = 'pages/view/$1';
 

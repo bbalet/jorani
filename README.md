@@ -6,12 +6,15 @@ Features :
 
 Dependancies
 Backend :
-*https://github.com/dwightwatson/codeigniter-bcrypt
-https://github.com/PHPOffice/PHPExcel
+* BCRYPT password hasher https://github.com/dwightwatson/codeigniter-bcrypt
+* RSA Encryption in pure PHP https://github.com/phpseclib/phpseclib
+* Excel import/export https://github.com/PHPOffice/PHPExcel
 
 Frontend
 * bootstrap 2.3
-* JQuery 1.
-* http://www.eyecon.ro/bootstrap-datepicker/
-* http://arshaw.com/fullcalendar/
-* https://datatables.net/
+* JQuery 1.x
+* Datepicker http://www.eyecon.ro/bootstrap-datepicker/
+* Calendar http://arshaw.com/fullcalendar/
+* Datatable https://datatables.net/
+* RSA implementation https://github.com/travist/jsencrypt
+

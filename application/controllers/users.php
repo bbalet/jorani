@@ -26,6 +26,10 @@ class Users extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('users_model');
+        //Check if user is connected
+        if (!$this->session->userdata('logged_in')) {
+            redirect('session/login');
+        }
     }
 
     /**
@@ -35,6 +39,7 @@ class Users extends CI_Controller {
         $data['users'] = $this->users_model->get_users();
         $data['title'] = 'Users';
         $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
         $this->load->view('users/index', $data);
         $this->load->view('templates/footer');
     }
@@ -50,6 +55,7 @@ class Users extends CI_Controller {
         }
         $data['title'] = 'User';
         $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
         $this->load->view('users/view', $data);
         $this->load->view('templates/footer');
     }
@@ -65,13 +71,22 @@ class Users extends CI_Controller {
 
         $this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
+        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
+        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
+        $this->form_validation->set_rules('login', 'Login identifier', 'required');
+        $this->form_validation->set_rules('email', 'E-mail', 'required');
+        $this->form_validation->set_rules('role', 'role', 'required');
 
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
             show_404();
         }
         $data['title'] = 'User';
+        $this->load->model('roles_model');
+        $data['roles'] = $this->roles_model->get_roles();
+        $data['users'] = $this->users_model->get_users();
         $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
         $this->load->view('users/edit', $data);
         $this->load->view('templates/footer');
     }
@@ -102,16 +117,19 @@ class Users extends CI_Controller {
         $this->load->model('roles_model');
         $data['roles'] = $this->roles_model->get_roles();
         $data['users'] = $this->users_model->get_users();
+        $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
         
         $this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
         $this->form_validation->set_rules('login', 'Login identifier', 'required');
         $this->form_validation->set_rules('email', 'E-mail', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
+        //$this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
         $this->form_validation->set_rules('role', 'role', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
             $this->load->view('users/create');
             $this->load->view('templates/footer');
         } else {
@@ -133,6 +151,7 @@ class Users extends CI_Controller {
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
             $this->load->view('users/edit/' . $this->input->post('id'));
             $this->load->view('templates/footer');
         } else {
@@ -171,4 +190,7 @@ class Users extends CI_Controller {
         $objWriter->save('php://output');
     }
 
+    //TODO reset password from list
+    
+    //TODO reset my password as connected user
 }

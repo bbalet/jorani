@@ -27,7 +27,9 @@
 		<option value="1" selected>a</option>
 		<option value="2">b</option>
 	</select>
-	
-	<input type="submit" name="submit" value="Create user" class="btn btn-primary" />
+	<br /><br />
+	<button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Create user</button>
+	&nbsp;
+	<a href="<?php echo base_url();?>index.php/users/" class="btn btn-primary"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
 
 </form>

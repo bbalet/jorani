@@ -38,9 +38,13 @@
 |
 */
 
+/*$route['users/create'] = 'users/create';
+$route['users/(:any)'] = 'users/view/$1';*/
+$route['users/export'] = 'users/export';
 $route['users/create'] = 'users/create';
-$route['users/(:any)'] = 'users/view/$1';
-$route['users/create'] = 'users/create';
+$route['users/edit/(:any)'] = 'users/edit/$1';
+$route['users/update'] = 'users/update';
+$route['users/delete/(:any)'] = 'users/delete/$1';
 $route['users/(:any)'] = 'users/view/$1';
 $route['users'] = 'users';
 $route['default_controller'] = 'pages/view';

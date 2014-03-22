@@ -8,12 +8,11 @@ Leave request send by e-mail to the manager
 Dependancies
 Backend :
 https://github.com/dwightwatson/codeigniter-bcrypt
+https://github.com/PHPOffice/PHPExcel
 
 Frontend
 bootstrap 2.3
 JQuery 1.
 http://www.eyecon.ro/bootstrap-datepicker/
 http://arshaw.com/fullcalendar/
-
-
-
+https://datatables.net/

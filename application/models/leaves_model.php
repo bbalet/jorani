@@ -16,29 +16,37 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class Users_model extends CI_Model {
+class Leaves_model extends CI_Model {
 
     public function __construct() {
         
     }
 
-    public function get_users($id = 0) {
+    public function get_leaves($id = 0) {
         if ($id === 0) {
-            $query = $this->db->get('users');
+            $query = $this->db->get('leaves');
             return $query->result_array();
         }
 
-        $query = $this->db->get_where('users', array('id' => $id));
+        $query = $this->db->get_where('leaves', array('id' => $id));
         return $query->row_array();
     }
 
-    public function set_users() {
+    public function set_leaves() {      
         $data = array(
-            'firstname' => $this->input->post('firstname'),
-            'lastname' => $this->input->post('lastname')
-        );
+            'startdate' => $this->input->post('startdate'),
+            'startdatetype' => $this->input->post('startdatetype'),
+            'enddate' => $this->input->post('enddate'),
+            'enddatetype' => $this->input->post('enddatetype'),
+            'duration' => $this->input->post('duration'),
+            'cause' => $this->input->post('cause'),
+            'status' => $this->input->post('status')
+        );        
+        return $this->db->insert('leaves', $data);
+    }
 
-        return $this->db->insert('users', $data);
+    public function delete_leave($id = 0) {
+        $query = $this->db->delete('leaves', array('id' => $id));
     }
 
 }

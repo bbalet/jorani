@@ -8,6 +8,7 @@
                 <span class="icon-bar"></span>
               </a>
             <div class="nav-collapse">
+                
               <ul class="nav">			  
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
@@ -16,14 +17,34 @@
                     <li><a href="<?php echo base_url();?>users/create">Add a user</a></li>
                     <li class="divider"></li>
                     <li class="nav-header">Settings</li>
-                    <li><a href="<?php echo base_url();?>">Settings</a></li>
+                    <li><a href="<?php echo base_url();?>settings">Settings</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+              <ul class="nav">			  
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My leaves <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="<?php echo base_url();?>leaves/">List</a></li>
+                    <li><a href="<?php echo base_url();?>leaves/create">Request a leave</a></li>
+                  </ul>
+                </li>
+              </ul>
+                
+              <ul class="nav">			  
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Calendar <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="<?php echo base_url();?>calendar/team/">Team calendar</a></li>
+                    <li><a href="<?php echo base_url();?>calendar/individual/">My calendar</a></li>
                   </ul>
                 </li>
               </ul>
                 
                 <ul class="nav navbar-nav pull-right">
                    <li>Welcome</li>
-                   <li><a href="<?php echo base_url();?>/session/logout">Logout</a></li>		
+                   <li><a href="<?php echo base_url();?>session/logout">Logout</a></li>		
                 </ul>
                 
             </div>		   

@@ -32,14 +32,13 @@ class Session extends CI_Controller {
      * Login form
      */
     public function login() {
-        
         $data['title'] = 'Login';
         $this->load->helper('form');
         $this->load->library('form_validation');
         //Note that we don't receive the password as a clear string
         $this->form_validation->set_rules('login', 'Login identifier', 'required');
         $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
-
+        
         if ($this->form_validation->run() === FALSE) {
             $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
             $this->load->view('templates/header', $data);
@@ -71,11 +70,7 @@ class Session extends CI_Controller {
      */
     public function logout()
     {
-        $this->session->unset_userdata('logged_in');
-        $this->session->unset_userdata('id');
-        $this->session->unset_userdata('login');
-        $this->session->unset_userdata('is_admin');
-        session_destroy();
+        $this->session->sess_destroy();
         redirect('session/login');
     }
 

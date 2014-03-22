@@ -102,7 +102,7 @@ class Users_model extends CI_Model {
      */
     public function check_credentials($login, $password) {
 
-        $this->db->select('id, role, login, password');
+        $this->db->select('id, role, login, password, manager');
         $this->db->from('users');
         $this->db->where('login', $login);
         $query = $this->db->get();
@@ -112,15 +112,17 @@ class Users_model extends CI_Model {
             return false;
         } else {
             $row = $query->row();
-            
             if ($this->bcrypt->check_password($password, $row->password)) {
                 // Password does match stored password.                
                 if ($row->role == 1)
-                    $is_admin = 1;
+                    $is_admin = true;
+                else
+                    $is_admin = false;
                 $newdata = array(
                     'login' => $row->login,
                     'id' => $row->id,
                     'is_admin' => $is_admin,
+                    'manager' => $row->manager,
                     'logged_in' => TRUE
                 );
                 $this->session->set_userdata($newdata);

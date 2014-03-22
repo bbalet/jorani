@@ -47,10 +47,10 @@
 
 <div class="row-fluid">
     <div class="span2">
-      <a href="<?php echo base_url();?>index.php/users/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
+      <a href="<?php echo base_url();?>users/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
     </div>
     <div class="span2">
-      <a href="<?php echo base_url();?>index.php/users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; Create a new user</a>
+      <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; Create a new user</a>
     </div>
     <div class="span2">&nbsp;</div>
 </div>
@@ -64,11 +64,11 @@
          <h3>Delete User</h3>
     </div>
     <div class="modal-body">
-        <p>You are about to delete one track url, this procedure is irreversible.</p>
+        <p>You are about to delete one user, this procedure is irreversible.</p>
         <p>Do you want to proceed?</p>
     </div>
     <div class="modal-footer">
-        <a href="<?php echo base_url();?>index.php/users/delete/" class="btn danger">Yes</a>
+        <a href="<?php echo base_url();?>users/delete/" class="btn danger">Yes</a>
         <a href="javascript:$('#modal-from-dom').modal('hide')" class="btn secondary">No</a>
     </div>
 </div>

@@ -18,28 +18,33 @@ if (!defined('BASEPATH'))
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class Pages extends CI_Controller {
+class Calendar extends CI_Controller {
 
-    /**
-     * Default constructor
-     */
     public function __construct() {
         parent::__construct();
         //Check if user is connected
         if (!$this->session->userdata('logged_in')) {
             redirect('session/login');
         }
+        $this->load->model('leaves_model');
     }
 
-    public function view($page = 'home') {
-        if (!file_exists('application/views/pages/' . $page . '.php')) {
-            show_404();
-        }
-
-        $data['title'] = ucfirst($page); // Capitalize the first letter
+    public function team() {
+        $data['leaves'] = $this->leaves_model->get_leaves();
+        $data['title'] = 'My Leave Requests';
         $this->load->view('templates/header', $data);
-        $this->load->view('pages/' . $page, $data);
-        $this->load->view('templates/footer', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('calendar/team', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function individual() {
+        $data['leaves'] = $this->leaves_model->get_leaves();
+        $data['title'] = 'My Leave Requests';
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('calendar/individual', $data);
+        $this->load->view('templates/footer');
     }
 
 }

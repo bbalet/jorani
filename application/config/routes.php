@@ -47,6 +47,15 @@ $route['users/delete/(:any)'] = 'users/delete/$1';
 $route['users/(:any)'] = 'users/view/$1';
 $route['users'] = 'users';
 
+//Admin : View and change settings
+$route['settings'] = 'settings/set';
+
+//Team leave requests (manager->team UNION team->manager)
+$route['calendar/team'] = 'calendar/team';
+$route['calendar/individual'] = 'calendar/individual';
+$route['calendar/team/(:any)'] = 'calendar/team/$1';
+$route['calendar/individual/(:any)'] = 'calendar/individual/$1';
+
 //My leave requests
 $route['leaves/export'] = 'leaves/export';
 $route['leaves/create'] = 'leaves/create';
@@ -56,11 +65,19 @@ $route['leaves/delete/(:any)'] = 'leaves/delete/$1';
 $route['leaves/(:any)'] = 'leaves/view/$1';
 $route['leaves'] = 'leaves';
 
+//leave requests of my team
+$route['requests/export'] = 'requests/export';
+$route['requests/edit/(:any)'] = 'requests/edit/$1';
+$route['requests/update'] = 'requests/update';
+$route['requests/delete/(:any)'] = 'requests/delete/$1';
+$route['requests/(:any)'] = 'requests/view/$1';
+$route['requests'] = 'requests';
+
 //Session management
 $route['session/login'] = 'session/login';
 $route['session/logout'] = 'session/logout';
 
-$route['default_controller'] = 'pages/view';
+$route['default_controller'] = 'leaves';
 $route['(:any)'] = 'pages/view/$1';
 
 

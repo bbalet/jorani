@@ -1,4 +1,5 @@
 LMS is a Leave Management System developed in PHP/MySQL under a GPL v3 licence
+This project is under development
 
 Features :
 * User management
@@ -17,4 +18,4 @@ Frontend
 * Calendar http://arshaw.com/fullcalendar/
 * Datatable https://datatables.net/
 * RSA implementation https://github.com/travist/jsencrypt
-
+* Form validation http://reactiveraven.github.io/jqBootstrapValidation/

@@ -21,6 +21,18 @@ if (!defined('BASEPATH'))
 class Pages extends CI_Controller {
 
     /**
+     * Connected user fullname
+     * @var string $fullname
+     */
+    private $fullname;
+    
+    /**
+     * Connected user privilege
+     * @var bool true if admin, false otherwise  
+     */
+    private $is_admin;  
+    
+    /**
      * Default constructor
      */
     public function __construct() {
@@ -29,6 +41,9 @@ class Pages extends CI_Controller {
         if (!$this->session->userdata('logged_in')) {
             redirect('session/login');
         }
+        $this->fullname = $this->session->userdata('firstname') . ' ' .
+                $this->session->userdata('lastname');
+        $this->is_admin = $this->session->userdata('is_admin');
     }
 
     public function view($page = 'home') {
@@ -37,7 +52,10 @@ class Pages extends CI_Controller {
         }
 
         $data['title'] = ucfirst($page); // Capitalize the first letter
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
         $this->load->view('pages/' . $page, $data);
         $this->load->view('templates/footer', $data);
     }

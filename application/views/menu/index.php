@@ -1,4 +1,10 @@
 
+<div class="row-fluid">    
+    <div class="span12">
+Welcome <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout">Logout</a>
+    </div>
+</div>
+
 <div class="navbar navbar-inverse">
       <div class="navbar-inner">
         <div class="container">
@@ -9,6 +15,7 @@
               </a>
             <div class="nav-collapse">
                 
+              <?php if ($is_admin == TRUE) { ?>
               <ul class="nav">			  
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
@@ -21,6 +28,7 @@
                   </ul>
                 </li>
               </ul>
+              <?php } ?>
 
               <ul class="nav">			  
                 <li class="dropdown">
@@ -41,11 +49,6 @@
                   </ul>
                 </li>
               </ul>
-                
-                <ul class="nav navbar-nav pull-right">
-                   <li>Welcome</li>
-                   <li><a href="<?php echo base_url();?>session/logout">Logout</a></li>		
-                </ul>
                 
             </div>		   
         </div>

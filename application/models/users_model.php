@@ -22,8 +22,7 @@ class Users_model extends CI_Model {
      * Default constructor
      */
     public function __construct() {
-        //Load password hasher for create/update functions
-        $this->load->library('bcrypt');
+
     }
 
     /**
@@ -54,6 +53,9 @@ class Users_model extends CI_Model {
      * @return type
      */
     public function set_users() {
+        //Load password hasher for create/update functions
+        $this->load->library('bcrypt');
+        
         //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
         set_include_path(get_include_path() . PATH_SEPARATOR . APPPATH . 'third_party/phpseclib');
         include(APPPATH . '/third_party/phpseclib/Crypt/RSA.php');
@@ -101,8 +103,8 @@ class Users_model extends CI_Model {
      * @return bool true if the user is succesfully authenticated, false otherwise
      */
     public function check_credentials($login, $password) {
-
-        $this->db->select('id, role, login, password, manager');
+        //Load password hasher for create/update functions
+        $this->load->library('bcrypt');
         $this->db->from('users');
         $this->db->where('login', $login);
         $query = $this->db->get();
@@ -121,10 +123,12 @@ class Users_model extends CI_Model {
                 $newdata = array(
                     'login' => $row->login,
                     'id' => $row->id,
+                    'firstname' => $row->firstname,
+                    'lastname' => $row->lastname,
                     'is_admin' => $is_admin,
                     'manager' => $row->manager,
                     'logged_in' => TRUE
-                );
+                );                
                 $this->session->set_userdata($newdata);
                 return true;
             } else {

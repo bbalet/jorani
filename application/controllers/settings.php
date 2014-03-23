@@ -20,6 +20,18 @@ if (!defined('BASEPATH'))
 
 class Settings extends CI_Controller {
 
+    /**
+     * Connected user fullname
+     * @var string $fullname
+     */
+    private $fullname;
+    
+    /**
+     * Connected user privilege
+     * @var bool true if admin, false otherwise  
+     */
+    private $is_admin;  
+    
     public function __construct() {
         parent::__construct();
         //Check if user is connected
@@ -27,11 +39,16 @@ class Settings extends CI_Controller {
             redirect('session/login');
         }
         //$this->load->model('leaves_model');
+        $this->fullname = $this->session->userdata('firstname') . ' ' .
+                $this->session->userdata('lastname');
+        $this->is_admin = $this->session->userdata('is_admin');
     }
 
     public function set() {
         /*$data['leaves'] = $this->leaves_model->get_leaves();*/
         $data['title'] = 'Settings';
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('settings/set', $data);

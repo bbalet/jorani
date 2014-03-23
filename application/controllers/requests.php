@@ -21,6 +21,18 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Users extends CI_Controller {
 
     /**
+     * Connected user fullname
+     * @var string $fullname
+     */
+    private $fullname;
+    
+    /**
+     * Connected user privilege
+     * @var bool true if admin, false otherwise  
+     */
+    private $is_admin;  
+    
+    /**
      * Default constructor
      */
     public function __construct() {
@@ -30,6 +42,9 @@ class Users extends CI_Controller {
             redirect('session/login');
         }
         $this->load->model('users_model');
+        $this->fullname = $this->session->userdata('firstname') . ' ' .
+                $this->session->userdata('lastname');
+        $this->is_admin = $this->session->userdata('is_admin');
     }
 
     /**
@@ -38,6 +53,8 @@ class Users extends CI_Controller {
     public function index() {
         $data['users'] = $this->users_model->get_users();
         $data['title'] = 'Users';
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/index', $data);
@@ -48,12 +65,14 @@ class Users extends CI_Controller {
      * Display details of a given user
      * @param int $id User identifier
      */
-    public function view($id) {
+    public function accept($id, $comment="") {
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
             show_404();
         }
         $data['title'] = 'User';
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/view', $data);
@@ -64,24 +83,21 @@ class Users extends CI_Controller {
      * Display a for that allows updating a given user
      * @param int $id User identifier
      */
-    public function edit($id) {
+    public function reject($id, $comment="") {
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Create a new user';
+        $data['title'] = 'Update a leave request';
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
 
         $this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-        $this->form_validation->set_rules('login', 'Login identifier', 'required');
-        $this->form_validation->set_rules('email', 'E-mail', 'required');
-        $this->form_validation->set_rules('role', 'role', 'required');
+
 
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
             show_404();
         }
-        $data['title'] = 'User';
         $this->load->model('roles_model');
         $data['roles'] = $this->roles_model->get_roles();
         $data['users'] = $this->users_model->get_users();
@@ -90,107 +106,4 @@ class Users extends CI_Controller {
         $this->load->view('users/edit', $data);
         $this->load->view('templates/footer');
     }
-
-    /**
-     * Delete a given user
-     * @param int $id User identifier
-     */
-    public function delete($id) {
-        //Test if user exists
-        $data['users_item'] = $this->users_model->get_users($id);
-        if (empty($data['users_item'])) {
-            show_404();
-        } else {
-            $this->users_model->delete_user($id);
-        }
-        $this->index();
-    }
-
-    /**
-     * Display the form / action Create a new user
-     */
-    public function create() {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $data['title'] = 'Create a new user';
-
-        $this->load->model('roles_model');
-        $data['roles'] = $this->roles_model->get_roles();
-        $data['users'] = $this->users_model->get_users();
-        $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
-        
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-        $this->form_validation->set_rules('login', 'Login identifier', 'required');
-        $this->form_validation->set_rules('email', 'E-mail', 'required');
-        //$this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
-        $this->form_validation->set_rules('role', 'role', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('menu/index', $data);
-            $this->load->view('users/create');
-            $this->load->view('templates/footer');
-        } else {
-            $this->users_model->set_users();
-            $this->index();
-        }
-    }
-
-    /**
-     * Action : update a user (using data from HTTP form)
-     */
-    public function update() {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $data['title'] = 'Create a new user';
-
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('menu/index', $data);
-            $this->load->view('users/edit/' . $this->input->post('id'));
-            $this->load->view('templates/footer');
-        } else {
-            $this->users_model->update_users();
-            $this->index();
-        }
-    }
-
-    /**
-     * Action: export the list of all users into an Excel file
-     */
-    public function export() {
-        $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of users');
-        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Firstname');
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Lastname');
-        $this->excel->getActiveSheet()->getStyle('A1:C1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $users = $this->users_model->get_users();
-        $line = 2;
-        foreach ($users as $user) {
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $user['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $user['firstname']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $user['lastname']);
-            $line++;
-        }
-
-        $filename = 'users.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
-    }
-
-    //TODO reset password from list
-    
-    //TODO reset my password as connected user
 }

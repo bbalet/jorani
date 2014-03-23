@@ -20,41 +20,35 @@ if (!defined('BASEPATH'))
 
 class Leaves extends CI_Controller {
 
+    /**
+     * Connected user fullname
+     * @var string $fullname
+     */
+    private $fullname;
+    
+    /**
+     * Connected user privilege
+     * @var bool true if admin, false otherwise  
+     */
+    private $is_admin;    
+    
     public function __construct() {
         parent::__construct();
         //Check if user is connected
         if (!$this->session->userdata('logged_in')) {
             redirect('session/login');
         }
-        
+        $this->fullname = $this->session->userdata('firstname') . ' ' .
+                $this->session->userdata('lastname');
+        $this->is_admin = $this->session->userdata('is_admin');
         $this->load->model('leaves_model');
-        /*
-          //See: http://www.codeigniter.fr/user_guide/libraries/email.html
-          $this->load->library('email');
-
-          $config['protocol'] = 'sendmail';
-          $config['mailpath'] = '/usr/sbin/sendmail';
-          $config['charset'] = 'iso-8859-1';
-          $config['wordwrap'] = TRUE;
-
-          $this->email->initialize($config);
-
-          $this->email->from('your@example.com', 'Your Name');
-          $this->email->to('someone@example.com');
-          $this->email->cc('another@another-example.com');
-          $this->email->bcc('them@their-example.com');
-
-          $this->email->subject('Email Test');
-          $this->email->message('Testing the email class.');
-
-          $this->email->send();
-
-          echo $this->email->print_debugger(); */
     }
 
     public function index() {
         $data['leaves'] = $this->leaves_model->get_leaves();
         $data['title'] = 'My Leave Requests';
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leaves/index', $data);
@@ -66,7 +60,9 @@ class Leaves extends CI_Controller {
         if (empty($data['leaves_item'])) {
             show_404();
         }
-        $data['title'] = 'User';
+        $data['title'] = 'Leave details';
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leaves/view', $data);
@@ -77,6 +73,8 @@ class Leaves extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Request a leave';
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
 
         $this->form_validation->set_rules('startdate', 'Start Date', 'required');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required');
@@ -93,6 +91,34 @@ class Leaves extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $this->leaves_model->set_leaves();
+            $this->load->model('users_model');
+            $this->load->model('settings_model');
+            $manager = $this->users_model->get_users($this->session->userdata('manager'));
+            
+            //Send an e-mail to the manager
+            //See: http://www.codeigniter.fr/user_guide/libraries/email.html
+            $this->load->library('email');
+            $config = $this->settings_model->get_mail_config();            
+            $this->email->initialize($config);
+
+            $this->load->library('parser');
+            $data = array(
+                'Title' => 'Leave Request',
+                'Firstname' => $this->session->userdata('firstname'),
+                'Lastname' => $this->session->userdata('lastname'),
+                'StartDate' => $this->input->post('startdate'),
+                'EndDate' => $this->input->post('enddate')
+            );
+            $message = $this->parser->parse('emails/request', $data, TRUE);
+            
+            $this->email->from('do.not@reply.me', 'LMS');
+            $this->email->to($manager['email']);
+            $this->email->subject('[LMS] Leave Request from ' .
+                    $this->session->userdata('firstname') . ' ' .
+                    $this->session->userdata('lastname'));
+            $this->email->message($message);
+            $this->email->send();
+            //echo $this->email->print_debugger();
             $this->index();
         }
     }
@@ -140,7 +166,7 @@ class Leaves extends CI_Controller {
             $line++;
         }
 
-        /*//For debug purposes
+        /*//For debuging purposes
         $filename = 'testFile.csv';
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment;filename="' . $filename . '"');

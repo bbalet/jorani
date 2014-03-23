@@ -55,8 +55,9 @@ class Session extends CI_Controller {
             $rsa->loadKey($private_key, CRYPT_RSA_PRIVATE_FORMAT_PKCS1);
             $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
             
+            //Hash the password passed through the login form and check if it matches the stored password
             if ($this->users_model->check_credentials($this->input->post('login'), $password)) {
-                redirect('users/index');
+                redirect('home');
             }
             else
             {

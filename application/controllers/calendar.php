@@ -20,6 +20,18 @@ if (!defined('BASEPATH'))
 
 class Calendar extends CI_Controller {
 
+    /**
+     * Connected user fullname
+     * @var string $fullname
+     */
+    private $fullname;
+    
+    /**
+     * Connected user privilege
+     * @var bool true if admin, false otherwise  
+     */
+    private $is_admin;  
+    
     public function __construct() {
         parent::__construct();
         //Check if user is connected
@@ -27,11 +39,16 @@ class Calendar extends CI_Controller {
             redirect('session/login');
         }
         $this->load->model('leaves_model');
+        $this->fullname = $this->session->userdata('firstname') . ' ' .
+                $this->session->userdata('lastname');
+        $this->is_admin = $this->session->userdata('is_admin');
     }
 
     public function team() {
         $data['leaves'] = $this->leaves_model->get_leaves();
         $data['title'] = 'My Leave Requests';
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/team', $data);
@@ -41,6 +58,8 @@ class Calendar extends CI_Controller {
     public function individual() {
         $data['leaves'] = $this->leaves_model->get_leaves();
         $data['title'] = 'My Leave Requests';
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/individual', $data);

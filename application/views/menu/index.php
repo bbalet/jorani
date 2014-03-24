@@ -1,7 +1,10 @@
 
-<div class="row-fluid">    
-    <div class="span12">
-Welcome <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout">Logout</a>
+<div class="row-fluid">
+    <div class="span8">
+        <h3><a href="<?php echo base_url();?>" style="text-decoration:none; color:black;"><img src="<?php echo base_url();?>assets/images/favicon.png">&nbsp;Passerelles numériques</a>
+    </div>
+    <div class="span4 pull-right">
+        Welcome <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout">Logout</a>
     </div>
 </div>
 

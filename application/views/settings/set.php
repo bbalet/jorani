@@ -9,14 +9,17 @@
 
 <div class="tab-content">
   <div class="tab-pane active" id="general">
-  
+      Nothing to set
   </div>
+    
   <div class="tab-pane" id="modules">
-  
+      Nothing to set
   </div>
+    
   <div class="tab-pane" id="security">
-  
+      Nothing to set
   </div>
+    
   <div class="tab-pane" id="email">
   
       TODO : E-mail template can be changed by updating views/emails/requests.php

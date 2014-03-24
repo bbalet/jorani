@@ -39,6 +39,7 @@ class Users extends CI_Controller {
         parent::__construct();
         //Check if user is connected
         if (!$this->session->userdata('logged_in')) {
+            $this->session->set_userdata('last_page', current_url());
             redirect('session/login');
         }
         $this->load->model('users_model');
@@ -51,6 +52,7 @@ class Users extends CI_Controller {
      * Display the list of all users
      */
     public function index() {
+        $this->auth->check_is_granted('list_users');
         $data['users'] = $this->users_model->get_users();
         $data['title'] = 'Users';
         $data['fullname'] = $this->fullname;
@@ -66,6 +68,7 @@ class Users extends CI_Controller {
      * @param int $id User identifier
      */
     public function view($id) {
+        $this->auth->check_is_granted('view_user');
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
             show_404();
@@ -84,6 +87,7 @@ class Users extends CI_Controller {
      * @param int $id User identifier
      */
     public function edit($id) {
+        $this->auth->check_is_granted('edit_user');
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Create a new user';
@@ -119,6 +123,7 @@ class Users extends CI_Controller {
      * @param int $id User identifier
      */
     public function delete($id) {
+        $this->auth->check_is_granted('delete_user');
         //Test if user exists
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
@@ -126,13 +131,15 @@ class Users extends CI_Controller {
         } else {
             $this->users_model->delete_user($id);
         }
-        $this->index();
+        $this->session->set_flashdata('msg', 'The user has been succesfully deleted');
+        redirect('users/index');
     }
 
     /**
      * Display the form / action Create a new user
      */
     public function create() {
+        $this->auth->check_is_granted('create_user');
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Create a new user';
@@ -159,7 +166,8 @@ class Users extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $this->users_model->set_users();
-            $this->index();
+            $this->session->set_flashdata('msg', 'The user has been succesfully created');
+            redirect('users/index');
         }
     }
 
@@ -167,6 +175,7 @@ class Users extends CI_Controller {
      * Action : update a user (using data from HTTP form)
      */
     public function update() {
+        $this->auth->check_is_granted('update_user');
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Create a new user';
@@ -191,6 +200,7 @@ class Users extends CI_Controller {
      * Action: export the list of all users into an Excel file
      */
     public function export() {
+        $this->auth->check_is_granted('export_user');
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle('List of users');

@@ -35,7 +35,7 @@ class Settings_model extends CI_Model {
         $config['useragent'] = 'CodeIgniter';
         //$config['mailpath'] = '/usr/sbin/sendmail';
         $config['smtp_host'] = 'auth.smtp.1and1.fr';
-        $config['smtp_user'] = '';
+        $config['smtp_user'] = 'contact@benjamin-balet.info';
         $config['smtp_pass'] = '';
         $config['_smtp_auth'] = TRUE;
         $config['smtp_port'] = '587';
@@ -49,6 +49,17 @@ class Settings_model extends CI_Model {
         $config['newline'] = "\r\n";
         $config['crlf'] = "\r\n";
         return $config;
+    }
+
+    /**
+     * Query a category from the configuration table (return a set of key/value)
+     * @param string $category
+     * @return type
+     */
+    public function get_config_category($category) {
+        $this->db->from('settings');
+        $this->db->where('category', $category);
+        return $this->db->get();
     }
 
 }

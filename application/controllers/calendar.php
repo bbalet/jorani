@@ -36,6 +36,7 @@ class Calendar extends CI_Controller {
         parent::__construct();
         //Check if user is connected
         if (!$this->session->userdata('logged_in')) {
+            $this->session->set_userdata('last_page', current_url());
             redirect('session/login');
         }
         $this->load->model('leaves_model');

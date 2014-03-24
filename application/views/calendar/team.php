@@ -8,7 +8,7 @@
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#calendar').fullCalendar({
-        // put your options and callbacks here
+        events: '<?php echo base_url();?>leaves/team'
     });
 });
 </script>

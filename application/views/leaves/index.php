@@ -1,7 +1,22 @@
 
 <div class="row-fluid">
     <div class="span12">
-	
+
+<?php if($this->session->flashdata('msg')){ ?>
+<div class="alert fade in" id="flashbox">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <?php echo $this->session->flashdata('msg'); ?>
+ 
+</div>
+ 
+<script type="text/javascript">
+//Flash message
+$(document).ready(function() {
+                $(".alert").alert();
+});
+</script>
+<?php } ?>
+
 <h1>My leave requests</h1>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">

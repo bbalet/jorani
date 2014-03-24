@@ -36,6 +36,7 @@ class Leaves extends CI_Controller {
         parent::__construct();
         //Check if user is connected
         if (!$this->session->userdata('logged_in')) {
+            $this->session->set_userdata('last_page', current_url());
             redirect('session/login');
         }
         $this->fullname = $this->session->userdata('firstname') . ' ' .
@@ -44,8 +45,12 @@ class Leaves extends CI_Controller {
         $this->load->model('leaves_model');
     }
 
+    /**
+     * Display the list of the leave requests of the connected user
+     */
     public function index() {
-        $data['leaves'] = $this->leaves_model->get_leaves();
+        $this->auth->check_is_granted('list_leaves');
+        $data['leaves'] = $this->leaves_model->get_user_leaves($this->session->userdata('id'));
         $data['title'] = 'My Leave Requests';
         $data['fullname'] = $this->fullname;
         $data['is_admin'] = $this->is_admin;
@@ -56,6 +61,7 @@ class Leaves extends CI_Controller {
     }
 
     public function view($id) {
+        $this->auth->check_is_granted('view_leaves');
         $data['leaves_item'] = $this->users_model->get_leaves($id);
         if (empty($data['leaves_item'])) {
             show_404();
@@ -70,6 +76,7 @@ class Leaves extends CI_Controller {
     }
 
     public function create() {
+        $this->auth->check_is_granted('create_leaves');
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Request a leave';
@@ -119,7 +126,8 @@ class Leaves extends CI_Controller {
             $this->email->message($message);
             $this->email->send();
             //echo $this->email->print_debugger();
-            $this->index();
+            $this->session->set_flashdata('msg', 'The leave request has been succesfully created');
+            redirect('leaves/index');
         }
     }
     
@@ -131,7 +139,8 @@ class Leaves extends CI_Controller {
         } else {
             $this->leaves_model->delete_leave($id);
         }
-        $this->index();
+        $this->session->set_flashdata('msg', 'The leave request has been succesfully deleted');
+        redirect('leaves/index');
     }
 
     /**
@@ -180,4 +189,16 @@ class Leaves extends CI_Controller {
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output');
     }
+    
+    	public function team()
+	{//TODO: filter start/end
+		header("Content-Type: application/json");
+		echo $this->leaves_model->team($this->session->userdata('manager'));
+	}
+
+	public function individual()
+	{//TODO: filter start/end
+		header("Content-Type: application/json");
+		echo $this->leaves_model->individual($this->session->userdata('id'));
+	}
 }

@@ -53,8 +53,8 @@ $route['settings'] = 'settings/set';
 //Team leave requests (manager->team UNION team->manager)
 $route['calendar/team'] = 'calendar/team';
 $route['calendar/individual'] = 'calendar/individual';
-$route['calendar/team/(:any)'] = 'calendar/team/$1';
-$route['calendar/individual/(:any)'] = 'calendar/individual/$1';
+$route['leaves/team'] = 'leaves/team';
+$route['leaves/individual'] = 'leaves/individual';
 
 //My leave requests
 $route['leaves/export'] = 'leaves/export';

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of lms.
  *
@@ -16,7 +17,8 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 class Session extends CI_Controller {
 
@@ -38,7 +40,7 @@ class Session extends CI_Controller {
         //Note that we don't receive the password as a clear string
         $this->form_validation->set_rules('login', 'Login identifier', 'required');
         $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
-        
+
         if ($this->form_validation->run() === FALSE) {
             $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
             $this->load->view('templates/header', $data);
@@ -54,23 +56,24 @@ class Session extends CI_Controller {
             $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
             $rsa->loadKey($private_key, CRYPT_RSA_PRIVATE_FORMAT_PKCS1);
             $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
-            
+
             //Hash the password passed through the login form and check if it matches the stored password
             if ($this->users_model->check_credentials($this->input->post('login'), $password)) {
                 redirect('home');
-            }
-            else
-            {
-                redirect('session/login');
+            } else {
+                if ($this->session->userdata('last_page') != '') {
+                    redirect($this->session->userdata('last_page'));
+                } else {
+                    redirect('home');
+                }
             }
         }
     }
-    
+
     /**
      * Logout the user and destroy the session data
      */
-    public function logout()
-    {
+    public function logout() {
         $this->session->sess_destroy();
         redirect('session/login');
     }

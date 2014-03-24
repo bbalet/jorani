@@ -32,6 +32,9 @@ class Calendar extends CI_Controller {
      */
     private $is_admin;  
     
+    /**
+     * Default constructor
+     */
     public function __construct() {
         parent::__construct();
         //Check if user is connected
@@ -45,7 +48,11 @@ class Calendar extends CI_Controller {
         $this->is_admin = $this->session->userdata('is_admin');
     }
 
+    /**
+     * Display the page of the team calendar (users having the same manager)
+     */
     public function team() {
+        $this->auth->check_is_granted('team_calendar');
         $data['leaves'] = $this->leaves_model->get_leaves();
         $data['title'] = 'My Leave Requests';
         $data['fullname'] = $this->fullname;
@@ -56,7 +63,11 @@ class Calendar extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    /**
+     * Display the page of the individual calendar
+     */
     public function individual() {
+        $this->auth->check_is_granted('individual_calendar');
         $data['leaves'] = $this->leaves_model->get_leaves();
         $data['title'] = 'My Leave Requests';
         $data['fullname'] = $this->fullname;

@@ -51,7 +51,6 @@ class Auth {
                 if ($this->CI->session->userdata('is_admin') == true)
                     return true;
                 else
-                    die();
                     return false;
                 break;
 

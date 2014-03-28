@@ -89,7 +89,11 @@ class Users_model extends CI_Model {
     public function update_users() {
         $data = array(
             'firstname' => $this->input->post('firstname'),
-            'lastname' => $this->input->post('lastname')
+            'lastname' => $this->input->post('lastname'),
+            'login' => $this->input->post('login'),
+            'email' => $this->input->post('email'),
+            'role' => $this->input->post('role'),
+            'manager' => $this->input->post('manager')
         );
 
         $this->db->where('id', $this->input->post('id'));

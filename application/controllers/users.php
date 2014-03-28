@@ -69,13 +69,16 @@ class Users extends CI_Controller {
      */
     public function view($id) {
         $this->auth->check_is_granted('view_user');
-        $data['users_item'] = $this->users_model->get_users($id);
-        if (empty($data['users_item'])) {
+        $data['user'] = $this->users_model->get_users($id);
+        if (empty($data['user'])) {
             show_404();
         }
         $data['title'] = 'User';
         $data['fullname'] = $this->fullname;
         $data['is_admin'] = $this->is_admin;
+		$this->load->model('roles_model');
+		$data['roles'] = $this->roles_model->get_roles();
+		$data['users'] = $this->users_model->get_users();
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/view', $data);
@@ -101,12 +104,28 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('login', 'Login identifier', 'required');
         $this->form_validation->set_rules('email', 'E-mail', 'required');
         $this->form_validation->set_rules('role', 'role', 'required');
+		$this->form_validation->set_rules('manager', 'manager', 'required');
 
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
             show_404();
         }
-        $data['title'] = 'User';
+		
+		if ($this->form_validation->run() === FALSE) {
+			$this->load->model('roles_model');
+		    $data['roles'] = $this->roles_model->get_roles();
+			$data['users'] = $this->users_model->get_users();
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('users/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->users_model->update_users();
+            $this->session->set_flashdata('msg', 'The user has been succesfully updated');
+            redirect('users/index');
+        }
+		
+        /*$data['title'] = 'User';
         $data['fullname'] = $this->fullname;
         $data['is_admin'] = $this->is_admin;
         $this->load->model('roles_model');
@@ -115,7 +134,7 @@ class Users extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/edit', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footer');*/
     }
 
     /**
@@ -158,6 +177,7 @@ class Users extends CI_Controller {
         //$this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
         $this->form_validation->set_rules('role', 'role', 'required');
+		$this->form_validation->set_rules('manager', 'manager', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);

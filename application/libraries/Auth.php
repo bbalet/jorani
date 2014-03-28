@@ -20,8 +20,15 @@ if (!defined('BASEPATH'))
 
 class Auth {
 
+    /**
+     * Access to CI framework so as to use other libraries
+     * @var type Code Igniter framework
+     */
     private $CI;
 
+    /**
+     * Default constructor
+     */
     public function __construct() {
         $this->CI = & get_instance();
         $this->CI->load->library('session');
@@ -35,10 +42,12 @@ class Auth {
      * This function only prevents gross security issues when a user try to access 
      * a restricted screen.
      * Note that any operation needs the user to be connected.
+     * @param string $operation Operation attempted by the user
      * @param int $id  optional object identifier of the operation (e.g. user id)
      * @return bool true if the user is granted, false otherwise
      */
     public function is_granted($operation, $object_id = 0) {
+        log_message('debug', '{librairies/auth/is_granted} Entering method with Operation=' . $operation . ' / object_id=' . $object_id);
         switch ($operation) {
             //User management
             case 'list_users' :
@@ -58,8 +67,17 @@ class Auth {
             case 'change_password' :
                 if ($this->CI->session->userdata('is_admin') == true)
                     return true;
-                else //a user can change its own password
-                if ($this->CI->session->userdata('id') == $object_id)
+                else {//a user can change its own password
+                    if ($this->CI->session->userdata('id') == $object_id)
+                        return true;
+                    else
+                        return false;
+                }
+                break;
+                
+            //Configuration
+            case 'edit_settings' :
+                if ($this->CI->session->userdata('is_admin') == true)
                     return true;
                 else
                     return false;
@@ -90,14 +108,19 @@ class Auth {
     /**
      * Check if the current user can perform a given action on the system.
      * @use is_granted
+     * @param string $operation Operation attempted by the user
      * @param int $id  optional object identifier of the operation (e.g. user id)
      * @return bool true if the user is granted, false otherwise
      */
     public function check_is_granted($operation, $object_id = 0) {
-        if (!$this->is_granted($operation)) {
+        if (!$this->is_granted($operation, $object_id)) {
             $this->CI->load->helper('url');
+            log_message('error', 'User #' . $this->CI->session->userdata('id') . ' illegally tried to access to ' . $operation);
             $this->CI->session->set_flashdata('msg', 'Operation (' . $operation . ') is not granted');
             redirect('forbidden');
+        }
+        else {
+            log_message('debug', '{libraries/auth/check_is_granted} User #' . $this->CI->session->userdata('id') . ' granted access to ' . $operation);
         }
     }
 

@@ -46,6 +46,19 @@ class Users extends CI_Controller {
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
+        $this->user_id = $this->session->userdata('id');
+    }
+    
+    /**
+     * Prepare an array containing information about the current user
+     * @return array data to be passed to the view
+     */
+    private function getUserContext()
+    {
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
+        $data['user_id'] =  $this->user_id;
+        return $data;
     }
 
     /**
@@ -53,9 +66,8 @@ class Users extends CI_Controller {
      */
     public function index() {
         $data['users'] = $this->users_model->get_users();
+        $data = $this->getUserContext();
         $data['title'] = 'Users';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/index', $data);
@@ -67,13 +79,13 @@ class Users extends CI_Controller {
      * @param int $id User identifier
      */
     public function accept($id, $comment="") {
+        //TODO : logic
+        $data = $this->getUserContext();
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
             show_404();
         }
         $data['title'] = 'User';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/view', $data);
@@ -85,11 +97,11 @@ class Users extends CI_Controller {
      * @param int $id User identifier
      */
     public function reject($id, $comment="") {
+        //TODO : logic
+        $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Update a leave request';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
 
         $this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');

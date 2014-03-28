@@ -4,7 +4,22 @@
         <h3><a href="<?php echo base_url();?>" style="text-decoration:none; color:black;"><img src="<?php echo base_url();?>assets/images/favicon.png">&nbsp;Passerelles numériques</a>
     </div>
     <div class="span4 pull-right">
+        <a href="<?php echo base_url();?>users/reset/<?php echo $user_id; ?>" title="reset password" data-target="#frmChangeMyPwd" data-toggle="modal"><i class="icon-lock"></i></a>
+        &nbsp;
         Welcome <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout">Logout</a>
+    </div>
+</div>
+
+<div id="frmChangeMyPwd" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#frmChangeMyPwd').modal('hide')" class="close">&times;</a>
+         <h3>Change password</h3>
+    </div>
+    <div class="modal-body">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:$('#frmChangeMyPwd').modal('hide')" class="btn secondary">Cancel</a>
     </div>
 </div>
 

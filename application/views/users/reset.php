@@ -1,5 +1,3 @@
-<h2>Login to the application</h2>
-
 <?php if($this->session->flashdata('msg')){ ?>
 <div class="alert fade in" id="flashbox">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -8,7 +6,7 @@
 <script type="text/javascript">
 //Flash message
 $(document).ready(function() {
-                $(".alert").alert();
+    $(".alert").alert();
 });
 </script>
 <?php } ?>
@@ -17,16 +15,13 @@ $(document).ready(function() {
 
 <?php
 $attributes = array('id' => 'target');
-echo form_open('session/login', $attributes); ?>
-
-    <label for="login">Login</label>
-    <input type="input" name="login" id="firstname" value="<?php echo set_value('login'); ?>" autofocus required /><br />
+echo form_open('users/reset/' . $target_user_id, $attributes); ?>
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
 </form>
     <label for="password">Password</label>
     <input type="password" name="password" id="password" required /><br />
     <br />
-    <button id="send" class="btn btn-primary">Login</button>
+    <button id="send" class="btn btn-primary">Reset</button>
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript">

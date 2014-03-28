@@ -43,6 +43,19 @@ class Leaves extends CI_Controller {
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
         $this->load->model('leaves_model');
+        $this->user_id = $this->session->userdata('id');
+    }
+    
+    /**
+     * Prepare an array containing information about the current user
+     * @return array data to be passed to the view
+     */
+    private function getUserContext()
+    {
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
+        $data['user_id'] =  $this->user_id;
+        return $data;
     }
 
     /**
@@ -50,10 +63,9 @@ class Leaves extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('list_leaves');
+        $data = $this->getUserContext();
         $data['leaves'] = $this->leaves_model->get_user_leaves($this->session->userdata('id'));
         $data['title'] = 'My Leave Requests';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leaves/index', $data);
@@ -62,13 +74,12 @@ class Leaves extends CI_Controller {
 
     public function view($id) {
         $this->auth->check_is_granted('view_leaves');
+        $data = $this->getUserContext();
         $data['leaves_item'] = $this->users_model->get_leaves($id);
         if (empty($data['leaves_item'])) {
             show_404();
         }
         $data['title'] = 'Leave details';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leaves/view', $data);
@@ -77,12 +88,11 @@ class Leaves extends CI_Controller {
 
     public function create() {
         $this->auth->check_is_granted('create_leaves');
+        $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Request a leave';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-
+        
         $this->form_validation->set_rules('startdate', 'Start Date', 'required');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required');
         $this->form_validation->set_rules('enddate', 'End Date', 'required');

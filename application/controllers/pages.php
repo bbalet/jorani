@@ -45,16 +45,28 @@ class Pages extends CI_Controller {
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
+        $this->user_id = $this->session->userdata('id');
+    }
+    
+    /**
+     * Prepare an array containing information about the current user
+     * @return array data to be passed to the view
+     */
+    private function getUserContext()
+    {
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
+        $data['user_id'] =  $this->user_id;
+        return $data;
     }
 
     public function view($page = 'home') {
+        $data = $this->getUserContext();
         if (!file_exists('application/views/pages/' . $page . '.php')) {
             show_404();
         }
 
         $data['title'] = ucfirst($page); // Capitalize the first letter
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('pages/' . $page, $data);

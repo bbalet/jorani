@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of lms.
  *
@@ -16,7 +17,8 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 class Users extends CI_Controller {
 
@@ -25,13 +27,13 @@ class Users extends CI_Controller {
      * @var string $fullname
      */
     private $fullname;
-    
+
     /**
      * Connected user privilege
      * @var bool true if admin, false otherwise  
      */
-    private $is_admin;  
-    
+    private $is_admin;
+
     /**
      * Default constructor
      */
@@ -45,7 +47,19 @@ class Users extends CI_Controller {
         $this->load->model('users_model');
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin'); 
+        $this->is_admin = $this->session->userdata('is_admin');
+        $this->user_id = $this->session->userdata('id');
+    }
+
+    /**
+     * Prepare an array containing information about the current user
+     * @return array data to be passed to the view
+     */
+    private function getUserContext() {
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
+        $data['user_id'] = $this->user_id;
+        return $data;
     }
 
     /**
@@ -53,10 +67,9 @@ class Users extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('list_users');
+        $data = $this->getUserContext();
         $data['users'] = $this->users_model->get_users();
         $data['title'] = 'Users';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/index', $data);
@@ -69,16 +82,15 @@ class Users extends CI_Controller {
      */
     public function view($id) {
         $this->auth->check_is_granted('view_user');
+        $data = $this->getUserContext();
         $data['user'] = $this->users_model->get_users($id);
         if (empty($data['user'])) {
             show_404();
         }
         $data['title'] = 'User';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-		$this->load->model('roles_model');
-		$data['roles'] = $this->roles_model->get_roles();
-		$data['users'] = $this->users_model->get_users();
+        $this->load->model('roles_model');
+        $data['roles'] = $this->roles_model->get_roles();
+        $data['users'] = $this->users_model->get_users();
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/view', $data);
@@ -91,11 +103,10 @@ class Users extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->check_is_granted('edit_user');
+        $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Create a new user';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
 
         $this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
@@ -104,17 +115,17 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('login', 'Login identifier', 'required');
         $this->form_validation->set_rules('email', 'E-mail', 'required');
         $this->form_validation->set_rules('role', 'role', 'required');
-		$this->form_validation->set_rules('manager', 'manager', 'required');
+        $this->form_validation->set_rules('manager', 'manager', 'required');
 
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
             show_404();
         }
-		
-		if ($this->form_validation->run() === FALSE) {
-			$this->load->model('roles_model');
-		    $data['roles'] = $this->roles_model->get_roles();
-			$data['users'] = $this->users_model->get_users();
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->model('roles_model');
+            $data['roles'] = $this->roles_model->get_roles();
+            $data['users'] = $this->users_model->get_users();
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('users/edit', $data);
@@ -124,17 +135,6 @@ class Users extends CI_Controller {
             $this->session->set_flashdata('msg', 'The user has been succesfully updated');
             redirect('users/index');
         }
-		
-        /*$data['title'] = 'User';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-        $this->load->model('roles_model');
-        $data['roles'] = $this->roles_model->get_roles();
-        $data['users'] = $this->users_model->get_users();
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('users/edit', $data);
-        $this->load->view('templates/footer');*/
     }
 
     /**
@@ -142,16 +142,59 @@ class Users extends CI_Controller {
      * @param int $id User identifier
      */
     public function delete($id) {
+        log_message('debug', '{controllers/users/delete} Entering method with id=' . $id);
         $this->auth->check_is_granted('delete_user');
         //Test if user exists
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
+            log_message('debug', '{controllers/users/delete} user not found');
             show_404();
         } else {
             $this->users_model->delete_user($id);
         }
+        log_message('info', 'User #' . $id . ' has been deleted by user #' . $this->session->userdata('id'));
         $this->session->set_flashdata('msg', 'The user has been succesfully deleted');
+        log_message('debug', '{controllers/users/delete} Leaving method (before redirect)');
         redirect('users/index');
+    }
+
+    /**
+     * Reset the password of a user
+     * Can be accessed by the user itself or by admin
+     * @param int $id User identifier
+     */
+    public function reset($id) {
+        log_message('debug', '{controllers/users/reset} Entering method with id=' . $id);
+        $this->auth->check_is_granted('change_password', $id);
+
+        //Test if user exists
+        $data['users_item'] = $this->users_model->get_users($id);
+        if (empty($data['users_item'])) {
+            log_message('debug', '{controllers/users/reset} user not found');
+            show_404();
+        } else {
+            $data['target_user_id'] = $id;
+            $this->load->helper('form');
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
+            if ($this->form_validation->run() === FALSE) {
+                log_message('debug', '{controllers/users/reset} Initial form call or bad values');
+                $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
+                $this->load->view('templates/header', $data);
+                $this->load->view('users/reset', $data);
+            } else {
+                $this->users_model->reset_password($id, $this->input->post('CipheredValue'));
+                log_message('info', 'Password of user #' . $id . ' has been modified by user #' . $this->session->userdata('id'));
+                $this->session->set_flashdata('msg', 'The password has been succesfully changed');
+                log_message('debug', '{controllers/users/reset} Leaving method (before redirect)');
+                if ($this->is_admin) {
+                    redirect('users');
+                }
+                else {
+                    redirect('home');
+                }
+            }
+        }
     }
 
     /**
@@ -159,25 +202,23 @@ class Users extends CI_Controller {
      */
     public function create() {
         $this->auth->check_is_granted('create_user');
+        $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Create a new user';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
 
         $this->load->model('roles_model');
         $data['roles'] = $this->roles_model->get_roles();
         $data['users'] = $this->users_model->get_users();
         $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
-        
+
         $this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
         $this->form_validation->set_rules('login', 'Login identifier', 'required');
         $this->form_validation->set_rules('email', 'E-mail', 'required');
-        //$this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
         $this->form_validation->set_rules('role', 'role', 'required');
-		$this->form_validation->set_rules('manager', 'manager', 'required');
+        $this->form_validation->set_rules('manager', 'manager', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -186,6 +227,7 @@ class Users extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $this->users_model->set_users();
+            log_message('info', 'User ' . $this->input->post('login') . ' has been created by user #' . $this->session->userdata('id'));
             $this->session->set_flashdata('msg', 'The user has been succesfully created');
             redirect('users/index');
         }
@@ -196,11 +238,10 @@ class Users extends CI_Controller {
      */
     public function update() {
         $this->auth->check_is_granted('update_user');
+        $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Create a new user';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
 
         $this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
@@ -250,6 +291,5 @@ class Users extends CI_Controller {
     }
 
     //TODO reset password from list
-    
     //TODO reset my password as connected user
 }

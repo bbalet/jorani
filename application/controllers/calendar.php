@@ -46,6 +46,19 @@ class Calendar extends CI_Controller {
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
+        $this->user_id = $this->session->userdata('id');
+    }
+    
+    /**
+     * Prepare an array containing information about the current user
+     * @return array data to be passed to the view
+     */
+    private function getUserContext()
+    {
+        $data['fullname'] = $this->fullname;
+        $data['is_admin'] = $this->is_admin;
+        $data['user_id'] =  $this->user_id;
+        return $data;
     }
 
     /**
@@ -53,10 +66,9 @@ class Calendar extends CI_Controller {
      */
     public function team() {
         $this->auth->check_is_granted('team_calendar');
+        $data = $this->getUserContext();
         $data['leaves'] = $this->leaves_model->get_leaves();
         $data['title'] = 'My Leave Requests';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/team', $data);
@@ -68,10 +80,9 @@ class Calendar extends CI_Controller {
      */
     public function individual() {
         $this->auth->check_is_granted('individual_calendar');
+        $data = $this->getUserContext();
         $data['leaves'] = $this->leaves_model->get_leaves();
         $data['title'] = 'My Leave Requests';
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/individual', $data);

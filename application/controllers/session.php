@@ -58,9 +58,14 @@ class Session extends CI_Controller {
             $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
 
             //Hash the password passed through the login form and check if it matches the stored password
-            if ($this->users_model->check_credentials($this->input->post('login'), $password)) {
-                redirect('home');
+            if (!$this->users_model->check_credentials($this->input->post('login'), $password)) {
+                $this->session->set_flashdata('msg', 'Invalid login id or password');
+                $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
+                $this->load->view('templates/header', $data);
+                $this->load->view('session/login', $data);
+                $this->load->view('templates/footer');
             } else {
+                //If the user has a target page (e.g. link in an e-mail), redirect to this destination
                 if ($this->session->userdata('last_page') != '') {
                     redirect($this->session->userdata('last_page'));
                 } else {

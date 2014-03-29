@@ -6,13 +6,12 @@
 <div class="alert fade in" id="flashbox">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <?php echo $this->session->flashdata('msg'); ?>
- 
 </div>
  
 <script type="text/javascript">
 //Flash message
 $(document).ready(function() {
-                $(".alert").alert();
+    $("#flashbox").alert();
 });
 </script>
 <?php } ?>
@@ -35,13 +34,15 @@ $(document).ready(function() {
 <?php foreach ($users as $users_item): ?>
     <tr>
         <td>
-            <a href="<?php echo base_url();?>index.php/users/<?php echo $users_item['id'] ?>" title="View user"><?php echo $users_item['id'] ?></a>
+            <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="View user"><?php echo $users_item['id'] ?></a>
             &nbsp;
-            <a href="<?php echo base_url();?>index.php/users/<?php echo $users_item['id'] ?>" title="view user details"><i class="icon-eye-open"></i></a>
+            <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="view user details"><i class="icon-eye-open"></i></a>
             &nbsp;
-            <a href="<?php echo base_url();?>index.php/users/edit/<?php echo $users_item['id'] ?>" title="edit user details"><i class="icon-pencil"></i></a>
+            <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="edit user details"><i class="icon-pencil"></i></a>
             &nbsp;
             <a href="#" class="confirm-delete" data-id="<?php echo $users_item['id'];?>" title="delete user"><i class="icon-trash"></i></a>
+            &nbsp;
+            <a href="<?php echo base_url();?>users/reset/<?php echo $users_item['id'] ?>" title="reset password" data-target="#frmChangePwd" data-toggle="modal"><i class="icon-lock"></i></a>
         </td>
         <td><?php echo $users_item['firstname'] ?></td>
         <td><?php echo $users_item['lastname'] ?></td>
@@ -75,7 +76,7 @@ $(document).ready(function() {
 
 <div id="modal-from-dom" class="modal hide fade">
     <div class="modal-header">
-        <a href="#" class="close">&times;</a>
+        <a href="javascript:$('#modal-from-dom').modal('hide')" class="close">&times;</a>
          <h3>Delete User</h3>
     </div>
     <div class="modal-body">
@@ -88,10 +89,24 @@ $(document).ready(function() {
     </div>
 </div>
 
+<div id="frmChangePwd" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#frmChangePwd').modal('hide')" class="close">&times;</a>
+         <h3>Change password</h3>
+    </div>
+    <div class="modal-body">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:$('#frmChangePwd').modal('hide')" class="btn secondary">Cancel</a>
+    </div>
+</div>
+
 <script type="text/javascript">
 $(document).ready(function() {
-	//Transform the HTML table in a fancy datatable
+    //Transform the HTML table in a fancy datatable
     $('#users').dataTable();
+    $("#frmChangePwd").alert();
 	
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
     $('#modal-from-dom').on('show', function() {

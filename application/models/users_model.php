@@ -118,6 +118,39 @@ class Users_model extends CI_Model {
     }
 
     /**
+     * Update a given user in the database. Update data are coming from an
+     * HTML form
+     * @return type
+     */
+    public function reset_password($id, $CipheredNewPassword) {
+        log_message('debug', '{models/users_model/reset_password} Entering function id=' . $id . ' / Ciphered password=' . $CipheredNewPassword);
+        //Load password hasher for create/update functions
+        $this->load->library('bcrypt');
+        
+        //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
+        set_include_path(get_include_path() . PATH_SEPARATOR . APPPATH . 'third_party/phpseclib');
+        include(APPPATH . '/third_party/phpseclib/Crypt/RSA.php');
+        define("CRYPT_RSA_MODE", CRYPT_RSA_MODE_INTERNAL);
+        $private_key = file_get_contents('./assets/keys/private.pem', true);
+        $rsa = new Crypt_RSA();
+        $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
+        $rsa->loadKey($private_key, CRYPT_RSA_PRIVATE_FORMAT_PKCS1);
+        $password = $rsa->decrypt(base64_decode($CipheredNewPassword));
+        log_message('debug', '{models/users_model/reset_password} Password=' . $password);
+        
+        //Hash the clear password using bcrypt
+        $hash = $this->bcrypt->hash_password($password);
+        log_message('debug', '{models/users_model/reset_password} Hash=' . $hash);
+        
+        $data = array(
+            'password' => $hash
+        );
+        $this->db->where('id', $id);
+        return $this->db->update('users', $data);
+        log_message('debug', '{models/users_model/reset_password} Leaving function');
+    }
+    
+    /**
      * Check the provided credentials
      * @param type $login user login
      * @param type $password password

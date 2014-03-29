@@ -40,6 +40,8 @@
 
 //Admin : user management
 $route['users/export'] = 'users/export';
+$route['users/import'] = 'users/import';
+$route['users/reset/(:any)'] = 'users/reset/$1';
 $route['users/create'] = 'users/create';
 $route['users/edit/(:any)'] = 'users/edit/$1';
 $route['users/update'] = 'users/update';

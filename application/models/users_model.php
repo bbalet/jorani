@@ -40,6 +40,23 @@ class Users_model extends CI_Model {
     }
 
     /**
+     * Check if a login can be used before creating the user
+     * @param type $login login identifier
+     * @return bool true if available, false otherwise
+     */
+    public function is_login_available($login) {
+        $this->db->from('users');
+        $this->db->where('login', $login);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
      * Delete a user from the database
      * @param int $id identifier of the user
      */
@@ -141,5 +158,4 @@ class Users_model extends CI_Model {
             }
         }
     }
-
 }

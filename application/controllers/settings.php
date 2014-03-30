@@ -1,6 +1,7 @@
 <?php
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 /*
  * This file is part of lms.
  *
@@ -32,6 +33,10 @@ class Settings extends CI_Controller {
      */
     private $is_admin;  
     
+    /**
+     * Default constructor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
     public function __construct() {
         parent::__construct();
         //Check if user is connected
@@ -48,7 +53,8 @@ class Settings extends CI_Controller {
     
     /**
      * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
+     * @return array data to be passed to the menu view
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function getUserContext()
     {
@@ -58,6 +64,11 @@ class Settings extends CI_Controller {
         return $data;
     }
 
+    /**
+     * Display the settings form
+     * TODO : to be implemented
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
     public function set() {
         $this->auth->check_is_granted('edit_settings');
         $data = $this->getUserContext();

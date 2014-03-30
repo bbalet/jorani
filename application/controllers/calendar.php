@@ -1,6 +1,8 @@
 <?php
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
+
 /*
  * This file is part of lms.
  *
@@ -34,6 +36,7 @@ class Calendar extends CI_Controller {
     
     /**
      * Default constructor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
         parent::__construct();
@@ -52,6 +55,7 @@ class Calendar extends CI_Controller {
     /**
      * Prepare an array containing information about the current user
      * @return array data to be passed to the view
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function getUserContext()
     {
@@ -63,6 +67,8 @@ class Calendar extends CI_Controller {
 
     /**
      * Display the page of the team calendar (users having the same manager)
+     * Data (calendar events) is retrieved by AJAX from leaves' controller
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function team() {
         $this->auth->check_is_granted('team_calendar');
@@ -77,6 +83,8 @@ class Calendar extends CI_Controller {
 
     /**
      * Display the page of the individual calendar
+     * Data (calendar events) is retrieved by AJAX from leaves' controller
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function individual() {
         $this->auth->check_is_granted('individual_calendar');
@@ -88,5 +96,4 @@ class Calendar extends CI_Controller {
         $this->load->view('calendar/individual', $data);
         $this->load->view('templates/footer');
     }
-
 }

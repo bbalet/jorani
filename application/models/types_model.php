@@ -1,5 +1,5 @@
 <?php
-/*
+/* 
  * This file is part of lms.
  *
  * lms is free software: you can redistribute it and/or modify
@@ -16,21 +16,29 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-    //You can change the content of this template
-?>
-<html>
-    <body>
-        <h3>{Title}</h3>
-        {Firstname} {Lastname} requests a leave. Below, the details :
-        <table border="0">
-            <tr>
-                <td>From &nbsp;</td><td>{StartDate}</td>
-            </tr>
-            <tr>
-                <td>To &nbsp;</td><td>{EndDate}</td>
-            </tr>            
-        </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
-    </body>
-</html>
+class Types_model extends CI_Model {
+
+    /**
+     * Default constructor
+     */
+    public function __construct() {
+        
+    }
+
+    /**
+     * Get the label of a given type id
+     * @param type $id
+     * @return string label
+     */
+    public function get_label($id) {
+        switch ($id) {
+            case 1 : return 'paid leave';
+            case 2 : return 'maternity leave';
+            case 3 : return 'paternity leave';
+            case 4 : return 'special leave';
+            case 4 : return 'sick leave';
+            default : return 'Unknown';
+        }
+    }
+}
+	

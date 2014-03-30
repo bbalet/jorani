@@ -1,6 +1,8 @@
 <?php
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
+
 /*
  * This file is part of lms.
  *
@@ -87,6 +89,8 @@ class Auth {
             case 'list_leaves' :
             case 'create_leaves' :
             case 'export_leaves' :
+            case 'view_leaves' :
+            case 'edit_leaves' :
                 return true;
                 break;
             //Additionnal access logic: cannot view/edit/update the leave of another user except for admin/manager

@@ -1,6 +1,8 @@
 <?php
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
+
 /*
  * This file is part of lms.
  *
@@ -34,6 +36,7 @@ class Pages extends CI_Controller {
     
     /**
      * Default constructor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
         parent::__construct();
@@ -51,6 +54,7 @@ class Pages extends CI_Controller {
     /**
      * Prepare an array containing information about the current user
      * @return array data to be passed to the view
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function getUserContext()
     {
@@ -60,6 +64,12 @@ class Pages extends CI_Controller {
         return $data;
     }
 
+    /**
+     * Display a static web page. We try to find if a filename matches with the
+     * views available in views/pages/ folder
+     * @param type $page
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
     public function view($page = 'home') {
         $data = $this->getUserContext();
         if (!file_exists('application/views/pages/' . $page . '.php')) {

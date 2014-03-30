@@ -29,6 +29,7 @@ class Users_model extends CI_Model {
      * Get the list of users or one user
      * @param int $id optional id of one user
      * @return array record of users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_users($id = 0) {
         if ($id === 0) {
@@ -43,6 +44,7 @@ class Users_model extends CI_Model {
      * Check if a login can be used before creating the user
      * @param type $login login identifier
      * @return bool true if available, false otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function is_login_available($login) {
         $this->db->from('users');
@@ -59,8 +61,9 @@ class Users_model extends CI_Model {
     /**
      * Delete a user from the database
      * @param int $id identifier of the user
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_user($id = 0) {
+    public function delete_user($id) {
         $query = $this->db->delete('users', array('id' => $id));
     }
 
@@ -68,6 +71,7 @@ class Users_model extends CI_Model {
      * Insert a new user into the database. Inserted data are coming from an
      * HTML form
      * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function set_users() {
         //Load password hasher for create/update functions
@@ -102,6 +106,7 @@ class Users_model extends CI_Model {
      * Update a given user in the database. Update data are coming from an
      * HTML form
      * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function update_users() {
         $data = array(
@@ -121,6 +126,7 @@ class Users_model extends CI_Model {
      * Update a given user in the database. Update data are coming from an
      * HTML form
      * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reset_password($id, $CipheredNewPassword) {
         log_message('debug', '{models/users_model/reset_password} Entering function id=' . $id . ' / Ciphered password=' . $CipheredNewPassword);
@@ -155,6 +161,7 @@ class Users_model extends CI_Model {
      * @param type $login user login
      * @param type $password password
      * @return bool true if the user is succesfully authenticated, false otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function check_credentials($login, $password) {
         //Load password hasher for create/update functions
@@ -170,10 +177,12 @@ class Users_model extends CI_Model {
             $row = $query->row();
             if ($this->bcrypt->check_password($password, $row->password)) {
                 // Password does match stored password.                
-                if ($row->role == 1)
+                if ($row->role == 1) {
                     $is_admin = true;
-                else
+                }
+                else {
                     $is_admin = false;
+                }
                 $newdata = array(
                     'login' => $row->login,
                     'id' => $row->id,

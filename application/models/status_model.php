@@ -16,7 +16,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class Roles_model extends CI_Model {
+class Status_model extends CI_Model {
 
     /**
      * Default constructor
@@ -26,17 +26,32 @@ class Roles_model extends CI_Model {
     }
 
     /**
-     * Get the list of roles or one role
-     * @param int $id optional id of one role
-     * @return array record of roles
+     * Get the list of status or one status
+     * @param int $id optional id of a status
+     * @return array record of statuses
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_roles($id = 0) {
+    public function get_status($id = 0) {
         if ($id === 0) {
-            $query = $this->db->get('roles');
+            $query = $this->db->get('status');
             return $query->result_array();
         }
-        $query = $this->db->get_where('roles', array('id' => $id));
+        $query = $this->db->get_where('status', array('id' => $id));
         return $query->row_array();
+    }
+    
+    /**
+     * Get the label of a given status id
+     * @param type $id
+     * @return string label
+     */
+    public function get_label($id) {
+        switch ($id) {
+            case 1 : return 'Planned';
+            case 2 : return 'Requested';
+            case 3 : return 'Accepted';
+            case 4 : return 'Rejected';
+            default : return 'Unknown';
+        }
     }
 }

@@ -21,16 +21,6 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests a leave. Below, the details :
-        <table border="0">
-            <tr>
-                <td>From &nbsp;</td><td>{StartDate}</td>
-            </tr>
-            <tr>
-                <td>To &nbsp;</td><td>{EndDate}</td>
-            </tr>            
-        </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+        Your password has been reset. If you didn't perform this operation, please contact your administrator.
     </body>
 </html>

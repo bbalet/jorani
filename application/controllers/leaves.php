@@ -1,6 +1,8 @@
 <?php
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
+
 /*
  * This file is part of lms.
  *
@@ -32,6 +34,10 @@ class Leaves extends CI_Controller {
      */
     private $is_admin;    
     
+    /**
+     * Default constructor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
     public function __construct() {
         parent::__construct();
         //Check if user is connected
@@ -49,6 +55,7 @@ class Leaves extends CI_Controller {
     /**
      * Prepare an array containing information about the current user
      * @return array data to be passed to the view
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function getUserContext()
     {
@@ -60,11 +67,20 @@ class Leaves extends CI_Controller {
 
     /**
      * Display the list of the leave requests of the connected user
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
         $this->auth->check_is_granted('list_leaves');
         $data = $this->getUserContext();
         $data['leaves'] = $this->leaves_model->get_user_leaves($this->session->userdata('id'));
+        
+        $this->load->model('status_model');
+        $this->load->model('types_model');
+        for ($i = 0; $i < count($data['leaves']); ++$i) {
+            $data['leaves'][$i]['status'] = $this->status_model->get_label($data['leaves'][$i]['status']);
+            $data['leaves'][$i]['type'] = $this->types_model->get_label($data['leaves'][$i]['type']);
+        }
+        
         $data['title'] = 'My Leave Requests';
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -72,13 +88,23 @@ class Leaves extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    /**
+     * Display a leave request
+     * @param int $id identifier of the leave request
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
     public function view($id) {
         $this->auth->check_is_granted('view_leaves');
         $data = $this->getUserContext();
-        $data['leaves_item'] = $this->users_model->get_leaves($id);
-        if (empty($data['leaves_item'])) {
+        $data['leave'] = $this->leaves_model->get_leaves($id);
+        $this->load->model('status_model');
+        $this->load->model('types_model');
+        if (empty($data['leave'])) {
             show_404();
         }
+        $data['leave']['status'] = $this->status_model->get_label($data['leave']['status']);
+        $data['leave']['type'] = $this->types_model->get_label($data['leave']['type']);
+        
         $data['title'] = 'Leave details';
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -86,6 +112,10 @@ class Leaves extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    /**
+     * Create a leave request
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
     public function create() {
         $this->auth->check_is_granted('create_leaves');
         $data = $this->getUserContext();
@@ -93,13 +123,14 @@ class Leaves extends CI_Controller {
         $this->load->library('form_validation');
         $data['title'] = 'Request a leave';
         
-        $this->form_validation->set_rules('startdate', 'Start Date', 'required');
-        $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required');
-        $this->form_validation->set_rules('enddate', 'End Date', 'required');
-        $this->form_validation->set_rules('enddatetype', 'End Date type', 'required');
-        $this->form_validation->set_rules('duration', 'Duration', 'required');
-        $this->form_validation->set_rules('cause', 'Cause', 'required');
-        $this->form_validation->set_rules('status', 'Status', 'required');
+        $this->form_validation->set_rules('startdate', 'Start Date', 'required|xss_clean');
+        $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
+        $this->form_validation->set_rules('enddate', 'End Date', 'required|xss_clean');
+        $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean');
+        $this->form_validation->set_rules('duration', 'Duration', 'required|xss_clean');
+        $this->form_validation->set_rules('type', 'Type', 'required|xss_clean');
+        $this->form_validation->set_rules('cause', 'Cause', 'xss_clean');
+        $this->form_validation->set_rules('status', 'Status', 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -107,40 +138,103 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/create');
             $this->load->view('templates/footer');
         } else {
-            $this->leaves_model->set_leaves();
-            $this->load->model('users_model');
-            $this->load->model('settings_model');
-            $manager = $this->users_model->get_users($this->session->userdata('manager'));
-            
-            //Send an e-mail to the manager
-            //See: http://www.codeigniter.fr/user_guide/libraries/email.html
-            $this->load->library('email');
-            $config = $this->settings_model->get_mail_config();            
-            $this->email->initialize($config);
-
-            $this->load->library('parser');
-            $data = array(
-                'Title' => 'Leave Request',
-                'Firstname' => $this->session->userdata('firstname'),
-                'Lastname' => $this->session->userdata('lastname'),
-                'StartDate' => $this->input->post('startdate'),
-                'EndDate' => $this->input->post('enddate')
-            );
-            $message = $this->parser->parse('emails/request', $data, TRUE);
-            
-            $this->email->from('do.not@reply.me', 'LMS');
-            $this->email->to($manager['email']);
-            $this->email->subject('[LMS] Leave Request from ' .
-                    $this->session->userdata('firstname') . ' ' .
-                    $this->session->userdata('lastname'));
-            $this->email->message($message);
-            $this->email->send();
-            //echo $this->email->print_debugger();
+            $leave_id = $this->leaves_model->set_leaves();
+            //If the status is requested, send an email to the manager
+            if ($this->input->post('status') == 2) {
+                $this->sendMail($leave_id);
+            }            
             $this->session->set_flashdata('msg', 'The leave request has been succesfully created');
             redirect('leaves/index');
         }
     }
     
+    /**
+     * Edit a leave request
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function edit() {
+        $this->auth->check_is_granted('edit_leaves');
+        $data = $this->getUserContext();
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $data['title'] = 'Edit a leave request';
+        
+        //TODO : check if exists
+        //TODO : check if leave is at 'planned state'
+        /*$this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
+        redirect('home');*/        
+        
+        $this->form_validation->set_rules('startdate', 'Start Date', 'required|xss_clean');
+        $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
+        $this->form_validation->set_rules('enddate', 'End Date', 'required|xss_clean');
+        $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean');
+        $this->form_validation->set_rules('duration', 'Duration', 'required|xss_clean');
+        $this->form_validation->set_rules('type', 'Type', 'required|xss_clean');
+        $this->form_validation->set_rules('cause', 'Cause', 'xss_clean');
+        $this->form_validation->set_rules('status', 'Status', 'required|xss_clean');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('leaves/create');
+            $this->load->view('templates/footer');
+        } else {
+            $leave_id = $this->leaves_model->set_leaves();
+            //If the status is requested, send an email to the manager
+            if ($this->input->post('status') == 2) {
+                $this->sendMail($leave_id);
+            }            
+            $this->session->set_flashdata('msg', 'The leave request has been succesfully updated');
+            redirect('leaves/index');
+        }
+    }
+    
+    /**
+     * Send a leave request email to the manager
+     * @param int $id Leave request identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    private function sendMail($id)
+    {
+        $this->load->model('users_model');
+        $this->load->model('settings_model');
+        $manager = $this->users_model->get_users($this->session->userdata('manager'));
+        $acceptUrl = base_url() . 'requests/accept/' . $id;
+        $rejectUrl = base_url() . 'requests/accept/' . $id;
+
+        //Send an e-mail to the manager
+        //See: http://www.codeigniter.fr/user_guide/libraries/email.html
+        $this->load->library('email');
+        $config = $this->settings_model->get_mail_config();            
+        $this->email->initialize($config);
+
+        $this->load->library('parser');
+        $data = array(
+            'Title' => 'Leave Request',
+            'Firstname' => $this->session->userdata('firstname'),
+            'Lastname' => $this->session->userdata('lastname'),
+            'StartDate' => $this->input->post('startdate'),
+            'EndDate' => $this->input->post('enddate'),
+            'UrlAccept' => $acceptUrl,
+            'UrlReject' => $rejectUrl
+        );
+        $message = $this->parser->parse('emails/request', $data, TRUE);
+
+        $this->email->from('do.not@reply.me', 'LMS');
+        $this->email->to($manager['email']);
+        $this->email->subject('[LMS] Leave Request from ' .
+                $this->session->userdata('firstname') . ' ' .
+                $this->session->userdata('lastname'));
+        $this->email->message($message);
+        $this->email->send();
+        //echo $this->email->print_debugger();
+    }
+    
+    /**
+     * Delete a leave request
+     * @param int $id identifier of the leave request
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
     public function delete($id) {
         //Test if the leave request exists
         $data['leaves_item'] = $this->leaves_model->get_leaves($id);
@@ -166,12 +260,16 @@ class Leaves extends CI_Controller {
         $this->excel->getActiveSheet()->setCellValue('D1', 'End Date');
         $this->excel->getActiveSheet()->setCellValue('E1', 'End Date type');
         $this->excel->getActiveSheet()->setCellValue('F1', 'Duration');
-        $this->excel->getActiveSheet()->setCellValue('G1', 'Cause');
-        $this->excel->getActiveSheet()->setCellValue('H1', 'Status');
-        $this->excel->getActiveSheet()->getStyle('A1:H1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:H1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $this->excel->getActiveSheet()->setCellValue('G1', 'Type');
+        $this->excel->getActiveSheet()->setCellValue('H1', 'Cause');
+        $this->excel->getActiveSheet()->setCellValue('I1', 'Status');
+        $this->excel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $leaves = $this->leaves_model->get_leaves();
+        $this->load->model('status_model');
+        $this->load->model('types_model');
+        
         $line = 2;
         foreach ($leaves as $leave) {
             $this->excel->getActiveSheet()->setCellValue('A' . $line, $leave['id']);
@@ -180,18 +278,12 @@ class Leaves extends CI_Controller {
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $leave['enddate']);
             $this->excel->getActiveSheet()->setCellValue('E' . $line, $leave['enddatetype']);
             $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['duration']);
-            $this->excel->getActiveSheet()->setCellValue('G' . $line, $leave['cause']);
-            $this->excel->getActiveSheet()->setCellValue('H' . $line, $leave['status']);
+            $this->excel->getActiveSheet()->setCellValue('G' . $line, $this->types_model->get_label($leave['type']));
+            $this->excel->getActiveSheet()->setCellValue('H' . $line, $leave['cause']);
+            $this->excel->getActiveSheet()->setCellValue('I' . $line, $this->status_model->get_label($leave['status']));
             $line++;
         }
 
-        /*//For debuging purposes
-        $filename = 'testFile.csv';
-        header('Content-Type: text/csv');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'CSV');
-        $objWriter->save('php://output');*/
         $filename = 'leaves.xls';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
@@ -200,15 +292,20 @@ class Leaves extends CI_Controller {
         $objWriter->save('php://output');
     }
     
-    	public function team()
-	{//TODO: filter start/end
-		header("Content-Type: application/json");
-		echo $this->leaves_model->team($this->session->userdata('manager'));
-	}
+    /**
+     * REST endpoint : Send a list of fullcalendar events
+     */
+    public function team() {
+        header("Content-Type: application/json");
+        echo $this->leaves_model->team($this->session->userdata('manager'));
+    }
 
-	public function individual()
-	{//TODO: filter start/end
-		header("Content-Type: application/json");
-		echo $this->leaves_model->individual($this->session->userdata('id'));
-	}
+    /**
+     * REST endpoint : Send a list of fullcalendar events
+     */
+    public function individual() {
+        header("Content-Type: application/json");
+        echo $this->leaves_model->individual($this->session->userdata('id'));
+    }
+
 }

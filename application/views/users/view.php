@@ -27,6 +27,6 @@
 	</select>
 		
 	<br /><br />
-	<a href="<?php echo base_url();?>index.php/users/edit/<?php echo $user['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;Edit</a>
+	<a href="<?php echo base_url();?>users/edit/<?php echo $user['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;Edit</a>
 	&nbsp;
-	<a href="<?php echo base_url();?>index.php/users/" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;Back to list</a>
+	<a href="<?php echo base_url();?>users/" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;Back to list</a>

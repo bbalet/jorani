@@ -73,6 +73,8 @@ $route['requests/edit/(:any)'] = 'requests/edit/$1';
 $route['requests/update'] = 'requests/update';
 $route['requests/delete/(:any)'] = 'requests/delete/$1';
 $route['requests/(:any)'] = 'requests/view/$1';
+$route['requests/accept/(:any)'] = 'requests/accept/$1';
+$route['requests/reject/(:any)'] = 'requests/reject/$1';
 $route['requests'] = 'requests';
 
 //Session management

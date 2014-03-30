@@ -1,4 +1,7 @@
 <?php
+if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 
 /*
  * This file is part of lms.
@@ -36,6 +39,7 @@ class Users extends CI_Controller {
 
     /**
      * Default constructor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
         parent::__construct();
@@ -54,6 +58,7 @@ class Users extends CI_Controller {
     /**
      * Prepare an array containing information about the current user
      * @return array data to be passed to the view
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function getUserContext() {
         $data['fullname'] = $this->fullname;
@@ -64,6 +69,7 @@ class Users extends CI_Controller {
 
     /**
      * Display the list of all users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
         $this->auth->check_is_granted('list_users');
@@ -79,6 +85,7 @@ class Users extends CI_Controller {
     /**
      * Display details of a given user
      * @param int $id User identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function view($id) {
         $this->auth->check_is_granted('view_user');
@@ -100,6 +107,7 @@ class Users extends CI_Controller {
     /**
      * Display a for that allows updating a given user
      * @param int $id User identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
         $this->auth->check_is_granted('edit_user');
@@ -108,14 +116,14 @@ class Users extends CI_Controller {
         $this->load->library('form_validation');
         $data['title'] = 'Create a new user';
 
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-        $this->form_validation->set_rules('login', 'Login identifier', 'required');
-        $this->form_validation->set_rules('email', 'E-mail', 'required');
-        $this->form_validation->set_rules('role', 'role', 'required');
-        $this->form_validation->set_rules('manager', 'manager', 'required');
+        $this->form_validation->set_rules('firstname', 'Firstname', 'required|xss_clean');
+        $this->form_validation->set_rules('lastname', 'Lastname', 'required|xss_clean');
+        $this->form_validation->set_rules('firstname', 'Firstname', 'required|xss_clean');
+        $this->form_validation->set_rules('lastname', 'Lastname', 'required|xss_clean');
+        $this->form_validation->set_rules('login', 'Login identifier', 'required|callback_login_check|xss_clean');
+        $this->form_validation->set_rules('email', 'E-mail', 'required|xss_clean');
+        $this->form_validation->set_rules('role', 'role', 'required|xss_clean');
+        $this->form_validation->set_rules('manager', 'manager', 'required|xss_clean');
 
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
@@ -140,6 +148,7 @@ class Users extends CI_Controller {
     /**
      * Delete a given user
      * @param int $id User identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
         log_message('debug', '{controllers/users/delete} Entering method with id=' . $id);
@@ -162,6 +171,7 @@ class Users extends CI_Controller {
      * Reset the password of a user
      * Can be accessed by the user itself or by admin
      * @param int $id User identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reset($id) {
         log_message('debug', '{controllers/users/reset} Entering method with id=' . $id);
@@ -199,6 +209,7 @@ class Users extends CI_Controller {
 
     /**
      * Display the form / action Create a new user
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function create() {
         $this->auth->check_is_granted('create_user');
@@ -212,18 +223,18 @@ class Users extends CI_Controller {
         $data['users'] = $this->users_model->get_users();
         $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
 
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-        $this->form_validation->set_rules('login', 'Login identifier', 'required');
-        $this->form_validation->set_rules('email', 'E-mail', 'required');
+        $this->form_validation->set_rules('firstname', 'Firstname', 'required|xss_clean');
+        $this->form_validation->set_rules('lastname', 'Lastname', 'required|xss_clean');
+        $this->form_validation->set_rules('login', 'Login identifier', 'required|callback_login_check|xss_clean');
+        $this->form_validation->set_rules('email', 'E-mail', 'required|xss_clean');
         $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
-        $this->form_validation->set_rules('role', 'role', 'required');
-        $this->form_validation->set_rules('manager', 'manager', 'required');
+        $this->form_validation->set_rules('role', 'role', 'required|xss_clean');
+        $this->form_validation->set_rules('manager', 'manager', 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
-            $this->load->view('users/create');
+            $this->load->view('users/create', $data);
             $this->load->view('templates/footer');
         } else {
             $this->users_model->set_users();
@@ -232,9 +243,24 @@ class Users extends CI_Controller {
             redirect('users/index');
         }
     }
+   
+    /**
+     * Form validation callback : prevent from lgon duplication
+     * @param type $login
+     * @return boolean
+     */
+    public function login_check($login) {
+        if (!$this->users_model->is_login_available($login)) {
+            $this->form_validation->set_message('login_check', 'Username already exists.');
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     /**
      * Action : update a user (using data from HTTP form)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function update() {
         $this->auth->check_is_granted('update_user');
@@ -259,6 +285,7 @@ class Users extends CI_Controller {
 
     /**
      * Action: export the list of all users into an Excel file
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
         $this->auth->check_is_granted('export_user');
@@ -290,6 +317,6 @@ class Users extends CI_Controller {
         $objWriter->save('php://output');
     }
 
-    //TODO reset password from list
-    //TODO reset my password as connected user
+    //TODO import a list of users from CSV or Excel
+    //TODO check duplicated login on creation
 }

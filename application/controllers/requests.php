@@ -1,4 +1,8 @@
 <?php
+if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
+
 /*
  * This file is part of lms.
  *
@@ -34,6 +38,7 @@ class Users extends CI_Controller {
     
     /**
      * Default constructor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
         parent::__construct();
@@ -42,7 +47,7 @@ class Users extends CI_Controller {
             $this->session->set_userdata('last_page', current_url());
             redirect('session/login');
         }
-        $this->load->model('users_model');
+        $this->load->model('leaves_model');
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
@@ -52,6 +57,7 @@ class Users extends CI_Controller {
     /**
      * Prepare an array containing information about the current user
      * @return array data to be passed to the view
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function getUserContext()
     {
@@ -63,6 +69,7 @@ class Users extends CI_Controller {
 
     /**
      * Display the list of all users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
         $data['users'] = $this->users_model->get_users();
@@ -75,48 +82,56 @@ class Users extends CI_Controller {
     }
 
     /**
-     * Display details of a given user
-     * @param int $id User identifier
+     * Accept a leave request
+     * @param int $id leave request identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function accept($id, $comment="") {
-        //TODO : logic
-        $data = $this->getUserContext();
-        $data['users_item'] = $this->users_model->get_users($id);
-        if (empty($data['users_item'])) {
+    public function accept($id) {
+        $this->load->model('users_model');
+        $leave = $this->leaves_model->get_leaves($id);
+        if (empty($leave)) {
             show_404();
         }
+        $employee = $this->users_model->get_users($leave['employee']);
+        if ($this->user_id != $leave['manager']) {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to accept leave #' . $id);
+            $this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
+            redirect('home');
+        } else {
+            $this->leaves_model->accept_leave($id);
+        }
+
         $data['title'] = 'User';
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
-        $this->load->view('users/view', $data);
+        $this->load->view('leaves/view', $data);
         $this->load->view('templates/footer');
     }
 
     /**
-     * Display a for that allows updating a given user
-     * @param int $id User identifier
+     * Reject a leave request
+     * @param int $id leave request identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reject($id, $comment="") {
-        //TODO : logic
-        $data = $this->getUserContext();
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $data['title'] = 'Update a leave request';
-
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-
-
-        $data['users_item'] = $this->users_model->get_users($id);
-        if (empty($data['users_item'])) {
+        $this->load->model('users_model');
+        $leave = $this->leaves_model->get_leaves($id);
+        if (empty($leave)) {
             show_404();
         }
-        $this->load->model('roles_model');
-        $data['roles'] = $this->roles_model->get_roles();
-        $data['users'] = $this->users_model->get_users();
+        $employee = $this->users_model->get_users($leave['employee']);
+        if ($this->user_id != $leave['manager']) {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to accept leave #' . $id);
+            $this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
+            redirect('home');
+        } else {
+            $this->leaves_model->reject_leave($id);
+        }
+
+        $data['title'] = 'User';
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
-        $this->load->view('users/edit', $data);
+        $this->load->view('leaves/view', $data);
         $this->load->view('templates/footer');
     }
 }

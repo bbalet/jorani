@@ -1,4 +1,7 @@
 <?php
+if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 
 /*
  * This file is part of lms.
@@ -24,6 +27,7 @@ class Session extends CI_Controller {
 
     /**
      * Default constructor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
         parent::__construct();
@@ -32,6 +36,7 @@ class Session extends CI_Controller {
 
     /**
      * Login form
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function login() {
         $data['title'] = 'Login';
@@ -77,6 +82,7 @@ class Session extends CI_Controller {
 
     /**
      * Logout the user and destroy the session data
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function logout() {
         $this->session->sess_destroy();

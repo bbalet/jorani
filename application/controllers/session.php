@@ -74,7 +74,7 @@ class Session extends CI_Controller {
                 if ($this->session->userdata('last_page') != '') {
                     redirect($this->session->userdata('last_page'));
                 } else {
-                    redirect('home');
+                    redirect(base_url() . 'home');
                 }
             }
         }

@@ -64,6 +64,7 @@ class Session extends CI_Controller {
 
             //Hash the password passed through the login form and check if it matches the stored password
             if (!$this->users_model->check_credentials($this->input->post('login'), $password)) {
+                log_message('error', '{controllers/session/login} Invalid login id or password for user=' . $this->input->post('login'));
                 $this->session->set_flashdata('msg', 'Invalid login id or password');
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
                 $this->load->view('templates/header', $data);
@@ -71,9 +72,17 @@ class Session extends CI_Controller {
                 $this->load->view('templates/footer');
             } else {
                 //If the user has a target page (e.g. link in an e-mail), redirect to this destination
+                $parsed_url = parse_url($this->session->userdata('last_page'));
+                //log_message('debug', '{controllers/session/login}  page=' . $parsed_url['path']);
+                if ($parsed_url['path'] == '/lms/index.php') {
+                    //log_message('debug', '{controllers/session/login}  page=' . $this->session->userdata('last_page'));
+                    $this->session->set_userdata('last_page', '');
+                }
                 if ($this->session->userdata('last_page') != '') {
+                    log_message('debug', '{controllers/session/login} Redirect to last page=' . $this->session->userdata('last_page'));
                     redirect($this->session->userdata('last_page'));
                 } else {
+                    log_message('debug', '{controllers/session/login} Redirect to home page');
                     redirect(base_url() . 'home');
                 }
             }

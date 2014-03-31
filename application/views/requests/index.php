@@ -42,7 +42,7 @@ $(document).ready(function() {
             &nbsp;
             <a href="<?php echo base_url();?>requests/accept/<?php echo $requests_item['id']; ?>" title="accept request"><i class="icon-ok"></i></a>
             &nbsp;
-            <a href="#" class="confirm-delete" data-id="<?php echo $requests_item['id'];?>" title="reject request"><i class="icon-remove"></i></a>
+            <a href="<?php echo base_url();?>requests/reject/<?php echo $requests_item['id']; ?>" title="reject request"><i class="icon-remove"></i></a>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
         <td><?php echo $requests_item['startdate'] . ' / ' . $requests_item['startdatetype']; ?></td>
@@ -65,7 +65,13 @@ $(document).ready(function() {
     <div class="span2">
       <a href="<?php echo base_url();?>requests/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
     </div>
-    <div class="span10">&nbsp;</div>
+     <div class="span2">
+      <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; All requests</a>
+    </div>
+    <div class="span2">
+      <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; Pending requests</a>
+    </div>
+    <div class="span8">&nbsp;</div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">

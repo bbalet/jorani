@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Dim 30 Mars 2014 à 20:18
+-- Généré le: Lun 31 Mars 2014 à 18:31
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.4.3
 
@@ -38,19 +38,21 @@ CREATE TABLE IF NOT EXISTS `leaves` (
   `duration` decimal(10,0) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Contenu de la table `leaves`
 --
 
 INSERT INTO `leaves` (`id`, `startdate`, `enddate`, `status`, `employee`, `cause`, `startdatetype`, `enddatetype`, `duration`, `type`) VALUES
-(15, '2014-03-26', '2014-03-28', 1, 6, 'personal', 'Morning', 'Morning', '2', NULL),
-(17, '2014-03-30', '2014-03-31', 2, 5, '', 'Morning', 'Afternoon', '2', 1),
+(15, '2014-03-26', '2014-03-28', 1, 6, 'personal', 'Morning', 'Morning', '2', 5),
+(17, '2014-03-30', '2014-03-31', 3, 5, '', 'Morning', 'Afternoon', '2', 1),
 (18, '2014-03-30', '2014-04-01', 2, 5, 'i''m sick', 'Morning', 'Morning', '3', 1),
 (19, '2014-03-30', '2014-04-01', 2, 5, 'i''m sick', 'Morning', 'Morning', '3', 1),
-(20, '2014-03-30', '2014-03-31', 2, 5, '', 'Morning', 'Morning', '2', 1),
-(21, '2014-03-30', '2014-03-31', 1, 5, 'test', 'Morning', 'Morning', '3', 1);
+(20, '2014-03-30', '2014-03-31', 4, 5, '', 'Morning', 'Morning', '2', 1),
+(21, '2014-03-30', '2014-03-31', 1, 5, 'test', 'Morning', 'Morning', '3', 1),
+(22, '2014-04-02', '2014-04-03', 2, 5, 'need free time', 'Morning', 'Afternoon', '1', 4),
+(23, '2014-04-02', '2014-04-04', 2, 5, 'test', 'Morning', 'Morning', '2', 1);
 
 -- --------------------------------------------------------
 
@@ -145,6 +147,29 @@ INSERT INTO `status` (`id`, `name`) VALUES
 (2, 'Requested'),
 (3, 'Accepted'),
 (4, 'Rejected');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `types`
+--
+
+CREATE TABLE IF NOT EXISTS `types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Contenu de la table `types`
+--
+
+INSERT INTO `types` (`id`, `name`) VALUES
+(1, 'paid leave'),
+(2, 'maternity leave'),
+(3, 'paternity leave'),
+(4, 'special leave'),
+(5, 'sick leave');
 
 -- --------------------------------------------------------
 

@@ -212,6 +212,7 @@ class Leaves extends CI_Controller {
      */
     private function sendMail($id)
     {
+        log_message('debug', '{controllers/leaves/sendMail} Entering method with id=' . $id);
         $this->load->model('users_model');
         $this->load->model('settings_model');
         $manager = $this->users_model->get_users($this->session->userdata('manager'));
@@ -244,6 +245,7 @@ class Leaves extends CI_Controller {
         $this->email->message($message);
         $this->email->send();
         //echo $this->email->print_debugger();
+        log_message('debug', '{controllers/leaves/sendMail} Leaving method.');
     }
     
     /**

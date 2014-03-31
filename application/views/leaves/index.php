@@ -39,7 +39,7 @@ $(document).ready(function() {
             &nbsp;
             <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="view request details"><i class="icon-eye-open"></i></a>
             &nbsp;
-            <?php if ($leaves_item['status'] == 'Planned') { ?>
+            <?php if ($leaves_item['status'] == 1) { ?>
             <a href="<?php echo base_url();?>leaves/edit/<?php echo $leaves_item['id']; ?>" title="edit request details"><i class="icon-pencil"></i></a>
             &nbsp;
             <a href="#" class="confirm-delete" data-id="<?php echo $leaves_item['id'];?>" title="delete request"><i class="icon-trash"></i></a>
@@ -49,8 +49,8 @@ $(document).ready(function() {
         <td><?php echo $leaves_item['enddate'] . ' / ' . $leaves_item['enddatetype']; ?></td>
         <td><?php echo $leaves_item['cause']; ?></td>
         <td><?php echo $leaves_item['duration']; ?></td>
-        <td><?php echo $leaves_item['type']; ?></td>
-        <td><?php echo $leaves_item['status']; ?></td>
+        <td><?php echo $leaves_item['type_label']; ?></td>
+        <td><?php echo $leaves_item['status_label']; ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>

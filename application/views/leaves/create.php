@@ -23,11 +23,9 @@
     
     <label for="type" required>Leave type</label>
     <select name="type">
-        <option value="1" selected>paid leave</option>
-        <option value="2">maternity leave</option>
-        <option value="3">paternity leave</option>
-        <option value="4">special leave</option>
-        <option value="5">sick leave</option>    
+    <?php foreach ($types as $types_item): ?>
+        <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 1) echo "selected" ?>><?php echo $types_item['name'] ?></option>
+    <?php endforeach ?> 
     </select><br />
     
     <label for="cause">Cause</label>

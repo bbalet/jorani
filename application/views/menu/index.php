@@ -48,6 +48,12 @@
               </ul>
               <?php } ?>
 
+             <ul class="nav">			  
+                <li class="dropdown">
+                  <a href="<?php echo base_url();?>requests/">Requests</a>
+                </li>
+              </ul>
+                
               <ul class="nav">			  
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My leaves <b class="caret"></b></a>

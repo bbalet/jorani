@@ -77,8 +77,8 @@ class Leaves extends CI_Controller {
         $this->load->model('status_model');
         $this->load->model('types_model');
         for ($i = 0; $i < count($data['leaves']); ++$i) {
-            $data['leaves'][$i]['status'] = $this->status_model->get_label($data['leaves'][$i]['status']);
-            $data['leaves'][$i]['type'] = $this->types_model->get_label($data['leaves'][$i]['type']);
+            $data['leaves'][$i]['status_label'] = $this->status_model->get_label($data['leaves'][$i]['status']);
+            $data['leaves'][$i]['type_label'] = $this->types_model->get_label($data['leaves'][$i]['type']);
         }
         
         $data['title'] = 'My Leave Requests';
@@ -102,8 +102,10 @@ class Leaves extends CI_Controller {
         if (empty($data['leave'])) {
             show_404();
         }
-        $data['leave']['status'] = $this->status_model->get_label($data['leave']['status']);
-        $data['leave']['type'] = $this->types_model->get_label($data['leave']['type']);
+        $this->load->model('types_model');
+        $data['types'] = $this->types_model->get_types();
+        $data['leave']['status_label'] = $this->status_model->get_label($data['leave']['status']);
+        $data['leave']['type_label'] = $this->types_model->get_label($data['leave']['type']);
         
         $data['title'] = 'Leave details';
         $this->load->view('templates/header', $data);
@@ -122,6 +124,8 @@ class Leaves extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Request a leave';
+        $this->load->model('types_model');
+        $data['types'] = $this->types_model->get_types();
         
         $this->form_validation->set_rules('startdate', 'Start Date', 'required|xss_clean');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
@@ -152,18 +156,30 @@ class Leaves extends CI_Controller {
      * Edit a leave request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function edit() {
+    public function edit($id) {
         $this->auth->check_is_granted('edit_leaves');
         $data = $this->getUserContext();
+        $data['leave'] = $this->leaves_model->get_leaves($id);
+        //Check if exists
+        if (empty($data['leave'])) {
+            show_404();
+        }
+        //If the user is not its own manager and if the leave is 
+        //already requested, the employee can't modify it
+        if (($this->session->userdata('manager') != $this->user_id) &&
+                $data['leave']['status'] != 1) {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to edit leave #' . $id);
+            $this->session->set_flashdata('msg', 'You cannot edit a leave request already submitted');
+            redirect('leaves');
+        }      
+        
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Edit a leave request';
+        $data['title'] = 'Edit a leave request';        
         
-        //TODO : check if exists
-        //TODO : check if leave is at 'planned state'
-        /*$this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
-        redirect('home');*/        
-        
+        $this->load->model('types_model');  
+        $data['types'] = $this->types_model->get_types();
+                
         $this->form_validation->set_rules('startdate', 'Start Date', 'required|xss_clean');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
         $this->form_validation->set_rules('enddate', 'End Date', 'required|xss_clean');
@@ -176,7 +192,7 @@ class Leaves extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
-            $this->load->view('leaves/create');
+            $this->load->view('leaves/edit', $data);
             $this->load->view('templates/footer');
         } else {
             $leave_id = $this->leaves_model->set_leaves();

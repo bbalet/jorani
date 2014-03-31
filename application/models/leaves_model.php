@@ -112,12 +112,12 @@ class Leaves_model extends CI_Model {
     
     /**
      * All leave request of the user
-     * @param type $id
-     * @return type
+     * @param int $user_id connected user
+     * @return string JSON encoded list of full calendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function individual($id) {
-        $this->db->where('employee', $id);
+    public function individual($user_id) {
+        $this->db->where('employee', $user_id);
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(70);
         $events = $this->db->get('leaves')->result();
@@ -137,13 +137,13 @@ class Leaves_model extends CI_Model {
 
     /**
      * All users having the same manager
-     * @param type $id
-     * @return type
+     * @param int $user_id id of the manager
+     * @return string JSON encoded list of full calendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function team($id) {
+    public function team($user_id) {
         $this->db->join('users', 'users.id = leaves.employee');
-        $this->db->where('users.manager', $id);
+        $this->db->where('users.manager', $user_id);
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(70);
         $events = $this->db->get('leaves')->result();
@@ -161,4 +161,22 @@ class Leaves_model extends CI_Model {
         return json_encode($jsonevents);
     }
 
+    /**
+     * List all leave requests submitted to the connected user or only those
+     * with the "Requested" status.
+     * @param int $user_id connected user
+     * @param bool $all true all requests, false otherwise
+     * @return array Recordset (can be empty if no requests or not a manager)
+     */
+    public function requests($user_id, $all = false) {
+        $this->db->join('users', 'users.id = leaves.employee');
+        $this->db->where('users.manager', $user_id);
+        if (!$all) {
+            $this->db->where('status', 2);
+        }
+        $this->db->order_by('startdate', 'desc');
+        //return $this->db->get('leaves')->result();
+        $query = $this->db->get('leaves');
+        return $query->result_array();
+    }
 }

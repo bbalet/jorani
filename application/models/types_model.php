@@ -26,19 +26,28 @@ class Types_model extends CI_Model {
     }
 
     /**
+     * Get the list of types or one type
+     * @param int $id optional id of a type
+     * @return array record of types
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_types($id = 0) {
+        if ($id === 0) {
+            $query = $this->db->get('types');
+            return $query->result_array();
+        }
+        $query = $this->db->get_where('types', array('id' => $id));
+        return $query->row_array();
+    }
+    
+    /**
      * Get the label of a given type id
      * @param type $id
      * @return string label
      */
     public function get_label($id) {
-        switch ($id) {
-            case 1 : return 'paid leave';
-            case 2 : return 'maternity leave';
-            case 3 : return 'paternity leave';
-            case 4 : return 'special leave';
-            case 4 : return 'sick leave';
-            default : return 'Unknown';
-        }
+        $type = $this->get_types($id);
+        return $type['name'];
     }
 }
 	

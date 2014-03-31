@@ -217,7 +217,7 @@ class Leaves extends CI_Controller {
         $this->load->model('settings_model');
         $manager = $this->users_model->get_users($this->session->userdata('manager'));
         $acceptUrl = base_url() . 'requests/accept/' . $id;
-        $rejectUrl = base_url() . 'requests/accept/' . $id;
+        $rejectUrl = base_url() . 'requests/reject/' . $id;
 
         //Send an e-mail to the manager
         //See: http://www.codeigniter.fr/user_guide/libraries/email.html

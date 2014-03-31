@@ -67,15 +67,12 @@ $route['leaves/delete/(:any)'] = 'leaves/delete/$1';
 $route['leaves/(:any)'] = 'leaves/view/$1';
 $route['leaves'] = 'leaves';
 
-//leave requests of my team
-$route['requests/export'] = 'requests/export';
-$route['requests/edit/(:any)'] = 'requests/edit/$1';
-$route['requests/update'] = 'requests/update';
-$route['requests/delete/(:any)'] = 'requests/delete/$1';
-$route['requests/(:any)'] = 'requests/view/$1';
+//leave requests
+$route['requests/export/(:any)'] = 'requests/export/$1';
+$route['requests/(:any)'] = 'requests/index/$1';
 $route['requests/accept/(:any)'] = 'requests/accept/$1';
 $route['requests/reject/(:any)'] = 'requests/reject/$1';
-$route['requests'] = 'requests';
+$route['requests'] = 'requests/index/requested';
 
 //Session management
 $route['session/login'] = 'session/login';

@@ -1,33 +1,31 @@
-<h2>Submit a leave request</h2>
+<h2>Edit Leave Request #<?php echo $leave['id']; ?></h2>
 
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('leaves/create') ?>
+<?php echo form_open('leaves/edit') ?>
 
     <label for="startdate" required>Start Date</label>
-    <input type="input" name="startdate" id="startdate" value="<?php echo set_value('startdate'); ?>" />
+    <input type="input" name="startdate" id="startdate" value="<?php echo $leave['startdate']; ?>" />
     <select name="startdatetype">
         <option value="Morning">Morning</option>
         <option value="Afternoon">Afternoon</option>
     </select><br />
     
     <label for="enddate" required>End Date</label>
-    <input type="input" name="enddate" id="enddate" value="<?php echo set_value('enddate'); ?>" />
+    <input type="input" name="enddate" id="enddate" value="<?php echo $leave['enddate']; ?>" />
     <select name="enddatetype">
         <option value="Morning">Morning</option>
         <option value="Afternoon">Afternoon</option>
     </select><br />
     
     <label for="duration" required>Duration</label>
-    <input type="input" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" />
+    <input type="input" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" />
     
     <label for="type" required>Leave type</label>
     <select name="type">
-        <option value="1" selected>paid leave</option>
-        <option value="2">maternity leave</option>
-        <option value="3">paternity leave</option>
-        <option value="4">special leave</option>
-        <option value="5">sick leave</option>    
+    <?php foreach ($types as $types_item): ?>
+        <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 1) echo "selected" ?>><?php echo $types_item['name'] ?></option>
+    <?php endforeach ?>    
     </select><br />
     
     <label for="cause">Cause</label>

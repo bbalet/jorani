@@ -95,6 +95,11 @@ class Auth {
                 break;
             //Additionnal access logic: cannot view/edit/update the leave of another user except for admin/manager
             //Request
+            case 'list_requests' :
+            case 'accept_requests' :
+            case 'reject_requests' :
+                return true;
+                break;
             //Access logic is in the controller : if the connected user manages nobody, the list will be empty
             //Calendar
             case 'team_calendar' :

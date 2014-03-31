@@ -75,15 +75,16 @@ class Leaves_model extends CI_Model {
     /**
      * Accept a leave request
      * @param int $id leave request identifier
-     * @return type
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function accept_leave($id) {
+        //log_message('debug', '{models/requests_model/reject} Entering method with id=' . $id);
         $data = array(
             'status' => 3
         );
-        $this->db->where('id', $this->input->post('id'));
-        return $this->db->update('leaves', $data);
+        $this->db->where('id', $id);
+        $this->db->update('leaves', $data);
+        //log_message('debug', '{models/requests_model/reject} SQL=' . $this->db->last_query());
     }
 
     /**
@@ -96,7 +97,7 @@ class Leaves_model extends CI_Model {
         $data = array(
             'status' => 4
         );
-        $this->db->where('id', $this->input->post('id'));
+        $this->db->where('id', $id);
         return $this->db->update('leaves', $data);
     }
     
@@ -169,6 +170,7 @@ class Leaves_model extends CI_Model {
      * @return array Recordset (can be empty if no requests or not a manager)
      */
     public function requests($user_id, $all = false) {
+        $this->db->select('leaves.id as id, users.*, leaves.*');
         $this->db->join('users', 'users.id = leaves.employee');
         $this->db->where('users.manager', $user_id);
         if (!$all) {

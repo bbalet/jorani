@@ -69,9 +69,9 @@ $route['leaves'] = 'leaves';
 
 //leave requests
 $route['requests/export/(:any)'] = 'requests/export/$1';
-$route['requests/(:any)'] = 'requests/index/$1';
 $route['requests/accept/(:any)'] = 'requests/accept/$1';
 $route['requests/reject/(:any)'] = 'requests/reject/$1';
+$route['requests/(:any)'] = 'requests/index/$1';
 $route['requests'] = 'requests/index/requested';
 
 //Session management

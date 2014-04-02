@@ -22,7 +22,16 @@ class Roles_model extends CI_Model {
      * Default constructor
      */
     public function __construct() {
-        
+
+        /*
+            00000001 1  Admin
+            00000010 2	User
+            00000100 8	HR Officier / Local HR Manager
+            00001000 16	HR Manager
+            00010000 32	General Manager
+            00100000 34	Global Manager
+         * 
+         */
     }
 
     /**

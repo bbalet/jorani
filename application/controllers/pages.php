@@ -48,6 +48,7 @@ class Pages extends CI_Controller {
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
+        $this->is_hr = $this->session->userdata('is_hr');
         $this->user_id = $this->session->userdata('id');
     }
     
@@ -60,6 +61,7 @@ class Pages extends CI_Controller {
     {
         $data['fullname'] = $this->fullname;
         $data['is_admin'] = $this->is_admin;
+        $data['is_hr'] = $this->is_hr;
         $data['user_id'] =  $this->user_id;
         return $data;
     }

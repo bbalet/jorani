@@ -47,6 +47,21 @@
                 </li>
               </ul>
               <?php } ?>
+                
+              <?php if ($is_hr == TRUE) { ?>
+              <ul class="nav">			  
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">HR <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="<?php echo base_url();?>hr/">HR Entry 1</a></li>
+                    <li><a href="<?php echo base_url();?>hr/">HR Entry 2</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Contracts</li>
+                    <li><a href="<?php echo base_url();?>hr/">HR Entry 3</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <?php } ?>
 
              <ul class="nav">			  
                 <li class="dropdown">

@@ -40,5 +40,54 @@ class Contracts_model extends CI_Model {
         return $query->row_array();
     }
     
+    /**
+     * Insert a new contract into the database. Inserted data are coming from an
+     * HTML form
+     * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function set_contracts() {
+        $startentdate = str_pad($this->input->post('startentdatemonth'), 2, "0", STR_PAD_LEFT) .
+                "/" . str_pad($this->input->post('startentdateday'), 2, "0", STR_PAD_LEFT);
+        $endentdate = str_pad($this->input->post('endentdatemonth'), 2, "0", STR_PAD_LEFT) .
+                "/" . str_pad($this->input->post('endentdateday'), 2, "0", STR_PAD_LEFT);
+        $data = array(
+            'name' => $this->input->post('name'),
+            'startentdate' => $startentdate,
+            'endentdate' => $endentdate
+        );
+        return $this->db->insert('contracts', $data);
+    }
+    
+    /**
+     * Delete a contract from the database
+     * @param int $id identifier of the contract
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delete_contract($id) {
+        $query = $this->db->delete('contracts', array('id' => $id));
+    }
+    
+    /**
+     * Update a given contract in the database. Update data are coming from an
+     * HTML form
+     * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function update_contract() {
+        
+        $startentdate = str_pad($this->input->post('startentdatemonth'), 2, "0", STR_PAD_LEFT) .
+                "/" . str_pad($this->input->post('startentdateday'), 2, "0", STR_PAD_LEFT);
+        $endentdate = str_pad($this->input->post('endentdatemonth'), 2, "0", STR_PAD_LEFT) .
+                "/" . str_pad($this->input->post('endentdateday'), 2, "0", STR_PAD_LEFT);
+        $data = array(
+            'name' => $this->input->post('name'),
+            'startentdate' => $startentdate,
+            'endentdate' => $endentdate
+        );
+
+        $this->db->where('id', $this->input->post('id'));
+        return $this->db->update('users', $data);
+    }
+    
 }
-	

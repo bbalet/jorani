@@ -1,18 +1,10 @@
-<h2>Edit Contract</h2>
+<h2>Contract # details</h2>
 
-<?php echo validation_errors(); ?>
-
-<?php
-$attributes = array('id' => 'target');
-echo form_open('contracts/edit', $attributes); ?>
-
-    <input type="hidden" name="id" value="<?php echo $contract['id']; ?>" required />
-    
     <label for="name">Name</label>
-    <input type="input" name="name" value="<?php echo $contract['name']; ?>" required /><br />
+    <input type="input" name="name" value="<?php echo $contract['name']; ?>" readonly /><br />
   
     <label for="startentdatemonth">Month / Start</label>
-    <select name="startentdatemonth" required>
+    <select name="startentdatemonth" readonly>
         <option value="1" <?php if (substr($contract['startentdate'], 0, 2) == '1') { echo "selected"; } ?>>January</option>
         <option value="2" <?php if (substr($contract['startentdate'], 0, 2) == '2') { echo "selected"; } ?>>February</option>
         <option value="3" <?php if (substr($contract['startentdate'], 0, 2) == '3') { echo "selected"; } ?>>March</option>
@@ -28,7 +20,7 @@ echo form_open('contracts/edit', $attributes); ?>
     </select>
     
     <label for="startentdateday">Day / Start</label>
-    <select name="startentdateday" required>
+    <select name="startentdateday" readonly>
         <option value='1' <?php if (substr($contract['startentdate'], 3, 2) == '1') { echo "selected"; } ?>>1</option>
         <option value='2' <?php if (substr($contract['startentdate'], 3, 2) == '2') { echo "selected"; } ?>>2</option>
         <option value='3' <?php if (substr($contract['startentdate'], 3, 2) == '3') { echo "selected"; } ?>>3</option>
@@ -65,7 +57,7 @@ echo form_open('contracts/edit', $attributes); ?>
     <br /><br />
     
     <label for="endentdatemonth">Month / End</label>
-    <select name="endentdatemonth" required>
+    <select name="endentdatemonth" readonly>
         <option value="1" <?php if (substr($contract['endentdate'], 0, 2) == '1') { echo "selected"; } ?>>January</option>
         <option value="2" <?php if (substr($contract['endentdate'], 0, 2) == '2') { echo "selected"; } ?>>February</option>
         <option value="3" <?php if (substr($contract['endentdate'], 0, 2) == '3') { echo "selected"; } ?>>March</option>
@@ -81,7 +73,7 @@ echo form_open('contracts/edit', $attributes); ?>
     </select>
     
     <label for="endentdateday">Day / End</label>
-    <select name="endentdateday" required>
+    <select name="endentdateday" readonly>
         <option value='1' <?php if (substr($contract['endentdate'], 3, 2) == '1') { echo "selected"; } ?>>1</option>
         <option value='2' <?php if (substr($contract['endentdate'], 3, 2) == '2') { echo "selected"; } ?>>2</option>
         <option value='3' <?php if (substr($contract['endentdate'], 3, 2) == '3') { echo "selected"; } ?>>3</option>
@@ -116,7 +108,6 @@ echo form_open('contracts/edit', $attributes); ?>
     </select>
 
     <br /><br />
-    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update contract</button>
+    <a href="<?php echo base_url();?>contracts/edit/<?php echo $contract['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;Edit</a>
     &nbsp;
-    <a href="<?php echo base_url();?>contracts/" class="btn btn-primary"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
-</form>
+    <a href="<?php echo base_url();?>contracts/" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;Back to list</a>

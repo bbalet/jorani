@@ -13,8 +13,8 @@ echo form_open('users/create', $attributes); ?>
     <label for="lastname">Lastname</label>
     <input type="input" name="lastname" id="lastname" required /><br />
 
-    <label for="role">Role</label>
-    <select name="role">
+    <label for="role[]">Role</label>
+    <select name="role[]" multiple="multiple" size="6">
     <?php foreach ($roles as $roles_item): ?>
         <option value="<?php echo $roles_item['id'] ?>" <?php if ($roles_item['id'] == 2) echo "selected" ?>><?php echo $roles_item['name'] ?></option>
     <?php endforeach ?>

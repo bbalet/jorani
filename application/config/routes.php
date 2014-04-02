@@ -52,6 +52,10 @@ $route['users'] = 'users';
 //Admin : View and change settings
 $route['settings'] = 'settings/set';
 
+//Human Resources Management
+$route['hr/index'] = 'hr/index';
+$route['hr'] = 'hr';
+
 //Team leave requests (manager->team UNION team->manager)
 $route['calendar/team'] = 'calendar/team';
 $route['calendar/individual'] = 'calendar/individual';

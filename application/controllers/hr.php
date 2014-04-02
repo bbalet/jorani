@@ -20,7 +20,9 @@ if (!defined('BASEPATH')) {
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class Calendar extends CI_Controller {
+if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+class Hr extends CI_Controller {
 
     /**
      * Connected user fullname
@@ -68,34 +70,32 @@ class Calendar extends CI_Controller {
     }
 
     /**
-     * Display the page of the team calendar (users having the same manager)
-     * Data (calendar events) is retrieved by AJAX from leaves' controller
+     * Display the list of all requests submitted to you
+     * Status is submitted
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function team() {
-        $this->auth->check_is_granted('team_calendar');
+    public function index($filter = 'requested') {
+        $this->auth->check_is_granted('list_requests');
+        if ($filter == 'all') {
+            $showAll = true;
+        } else {
+            $showAll = false;
+        }
+        
         $data = $this->getUserContext();
-        $data['leaves'] = $this->leaves_model->get_leaves();
-        $data['title'] = 'My Leave Requests';
+        $data['filter'] = $filter;
+        $data['title'] = 'List of requested leaves';
+        $data['requests'] = $this->leaves_model->requests($this->user_id, $showAll);
+        
+        $this->load->model('types_model');
+        for ($i = 0; $i < count($data['requests']); ++$i) {
+            $data['requests'][$i]['type_label'] = $this->types_model->get_label($data['requests'][$i]['type']);
+        }
+        
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
-        $this->load->view('calendar/team', $data);
+        $this->load->view('hr/index', $data);
         $this->load->view('templates/footer');
     }
 
-    /**
-     * Display the page of the individual calendar
-     * Data (calendar events) is retrieved by AJAX from leaves' controller
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function individual() {
-        $this->auth->check_is_granted('individual_calendar');
-        $data = $this->getUserContext();
-        $data['leaves'] = $this->leaves_model->get_leaves();
-        $data['title'] = 'My Leave Requests';
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('calendar/individual', $data);
-        $this->load->view('templates/footer');
-    }
 }

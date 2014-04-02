@@ -90,13 +90,19 @@ class Users_model extends CI_Model {
         //Hash the clear password using bcrypt
         $hash = $this->bcrypt->hash_password($password);
         
+        //Role field is a binary mask
+        $role = 0;
+        foreach($this->input->post("role") as $role_bit){
+            $role = $role | $role_bit;
+        }        
+        
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
             'login' => $this->input->post('login'),
             'email' => $this->input->post('email'),
             'password' => $hash,
-            'role' => $this->input->post('role'),
+            'role' => $role,
             'manager' => $this->input->post('manager')
         );
         return $this->db->insert('users', $data);
@@ -109,12 +115,19 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function update_users() {
+        
+        //Role field is a binary mask
+        $role = 0;
+        foreach($this->input->post("role") as $role_bit){
+            $role = $role | $role_bit;
+        }
+        
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
             'login' => $this->input->post('login'),
             'email' => $this->input->post('email'),
-            'role' => $this->input->post('role'),
+            'role' => $role,
             'manager' => $this->input->post('manager')
         );
 
@@ -176,19 +189,34 @@ class Users_model extends CI_Model {
         } else {
             $row = $query->row();
             if ($this->bcrypt->check_password($password, $row->password)) {
-                // Password does match stored password.                
-                if ($row->role == 1) {
+                // Password does match stored password.
+                if (((int) $row->role & 1)) {
                     $is_admin = true;
                 }
                 else {
                     $is_admin = false;
                 }
+                
+               /*
+                00000001 1  Admin
+                00000100 8  HR Officier / Local HR Manager
+                00001000 16 HR Manager
+              = 00001101 25 Can access to HR functions
+                */
+                if (((int) $row->role & 25)) {
+                    $is_hr = true;
+                }
+                else {
+                    $is_hr = false;
+                }
+                
                 $newdata = array(
                     'login' => $row->login,
                     'id' => $row->id,
                     'firstname' => $row->firstname,
                     'lastname' => $row->lastname,
                     'is_admin' => $is_admin,
+                    'is_hr' => $is_hr,
                     'manager' => $row->manager,
                     'logged_in' => TRUE
                 );                

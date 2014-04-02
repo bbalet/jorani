@@ -75,7 +75,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index($filter = 'requested') {
-        $this->auth->check_is_granted('list_requests');
+        $this->auth->check_is_granted('list_contracts');
         if ($filter == 'all') {
             $showAll = true;
         } else {
@@ -93,4 +93,110 @@ class Contracts extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    /**
+     * Display details of a given contract
+     * @param int $id contract identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function view($id) {
+        $this->auth->check_is_granted('view_contract');
+        $data = $this->getUserContext();
+        $data['contract'] = $this->contracts_model->get_contracts($id);
+        if (empty($data['contract'])) {
+            show_404();
+        }
+        $data['title'] = 'Contrat details';
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('contracts/view', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Display a for that allows updating a given user
+     * @param int $id User identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function edit($id) {
+        $this->auth->check_is_granted('edit_contract');
+        $data = $this->getUserContext();
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $data['title'] = 'Edit a contract';
+
+        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
+        $this->form_validation->set_rules('startentdatemonth', 'Month / Start', 'required|xss_clean');
+        $this->form_validation->set_rules('startentdateday', 'Day / Start', 'required|xss_clean');
+        $this->form_validation->set_rules('endentdatemonth', 'Month / End', 'required|xss_clean');
+        $this->form_validation->set_rules('endentdateday', 'Day / End', 'required|xss_clean');
+
+        $data['contract'] = $this->contracts_model->get_contracts($id);
+        if (empty($data['contract'])) {
+            show_404();
+        }
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('contracts/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->contracts_model->set_contracts();
+            $this->session->set_flashdata('msg', 'The contract has been succesfully updated');
+            redirect('contracts/index');
+        }
+    }
+    
+    /**
+     * Display the form / action Create a new contract
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function create() {
+        $this->auth->check_is_granted('create_contract');
+        $data = $this->getUserContext();
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $data['title'] = 'Create a new contract';
+
+        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
+        $this->form_validation->set_rules('startentdatemonth', 'Month / Start', 'required|xss_clean');
+        $this->form_validation->set_rules('startentdateday', 'Day / Start', 'required|xss_clean');
+        $this->form_validation->set_rules('endentdatemonth', 'Month / End', 'required|xss_clean');
+        $this->form_validation->set_rules('endentdateday', 'Day / End', 'required|xss_clean');
+
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('contracts/create', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->contracts_model->set_contracts();
+            log_message('info', 'contract ' . $this->input->post('name') . ' has been created by user #' . $this->session->userdata('id'));
+            $this->session->set_flashdata('msg', 'The contract has been succesfully created');
+            redirect('contracts/index');
+        }
+    }
+    
+    /**
+     * Delete a given contract
+     * @param int $id contract identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delete($id) {
+        log_message('debug', '{controllers/contracts/delete} Entering method with id=' . $id);
+        $this->auth->check_is_granted('delete_user');
+        //Test if user exists
+        $data['contract'] = $this->contracts_model->get_contracts($id);
+        if (empty($data['contract'])) {
+            log_message('debug', '{controllers/contracts/delete} user not found');
+            show_404();
+        } else {
+            $this->contracts_model->delete_contract($id);
+        }
+        log_message('info', 'contract #' . $id . ' has been deleted by user #' . $this->session->userdata('id'));
+        $this->session->set_flashdata('msg', 'The contract has been succesfully deleted');
+        log_message('debug', '{controllers/contracts/delete} Leaving method (before redirect)');
+        redirect('contracts/index');
+    }
 }

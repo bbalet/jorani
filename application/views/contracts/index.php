@@ -16,7 +16,7 @@ $(document).ready(function() {
 </script>
 <?php } ?>
         
-<h1>List of users</h1>
+<h1>List of contracts</h1>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
     <thead>
@@ -76,7 +76,7 @@ $(document).ready(function() {
         <p>Do you want to proceed?</p>
     </div>
     <div class="modal-footer">
-        <a href="<?php echo base_url();?>users/delete/" class="btn danger">Yes</a>
+        <a href="<?php echo base_url();?>contracts/delete/" class="btn danger">Yes</a>
         <a href="javascript:$('#modal-from-dom').modal('hide')" class="btn secondary">No</a>
     </div>
 </div>

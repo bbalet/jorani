@@ -35,5 +35,5 @@
     <br /><br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update user</button>
     &nbsp;
-    <a href="<?php echo base_url();?>index.php/users/" class="btn btn-primary"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <a href="<?php echo base_url();?>users/" class="btn btn-primary"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
 </form>

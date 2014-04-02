@@ -85,6 +85,17 @@ class Auth {
                     return false;
                 break;
 
+            //Configuration
+            case 'list_contracts' :
+            case 'view_contract' :
+            case 'create_contract' :
+            case 'edit_contract' :
+                if ($this->CI->session->userdata('is_hr') == true)
+                    return true;
+                else
+                    return false;
+                break;
+                
             //Leaves
             case 'list_leaves' :
             case 'create_leaves' :

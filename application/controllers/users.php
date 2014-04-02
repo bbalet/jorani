@@ -116,7 +116,7 @@ class Users extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Create a new user';
+        $data['title'] = 'Edit a user';
 
         $this->form_validation->set_rules('firstname', 'Firstname', 'required|xss_clean');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required|xss_clean');

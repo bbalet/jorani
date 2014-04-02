@@ -57,7 +57,7 @@
                     <li><a href="<?php echo base_url();?>hr/">HR Entry 2</a></li>
                     <li class="divider"></li>
                     <li class="nav-header">Contracts</li>
-                    <li><a href="<?php echo base_url();?>hr/">HR Entry 3</a></li>
+                    <li><a href="<?php echo base_url();?>contracts/">List contracts</a></li>
                   </ul>
                 </li>
               </ul>

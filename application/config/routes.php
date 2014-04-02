@@ -55,6 +55,13 @@ $route['settings'] = 'settings/set';
 //Human Resources Management
 $route['hr/index'] = 'hr/index';
 $route['hr'] = 'hr';
+$route['contracts/export'] = 'contracts/export';
+$route['contracts/create'] = 'contracts/create';
+$route['contracts/edit/(:any)'] = 'contracts/edit/$1';
+$route['contracts/update'] = 'contracts/update';
+$route['contracts/delete/(:any)'] = 'contracts/delete/$1';
+$route['contracts/(:any)'] = 'contracts/view/$1';
+$route['contracts'] = 'contracts';
 
 //Team leave requests (manager->team UNION team->manager)
 $route['calendar/team'] = 'calendar/team';

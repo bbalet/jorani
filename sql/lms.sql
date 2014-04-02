@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 02 Avril 2014 à 15:25
+-- Généré le: Mer 02 Avril 2014 à 16:05
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.3.13
 
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `action`
+-- Structure de la table `actions`
 --
 
-CREATE TABLE IF NOT EXISTS `action` (
+CREATE TABLE IF NOT EXISTS `actions` (
   `name` varchar(45) NOT NULL,
   `mask` bit(16) NOT NULL,
   `Description` text NOT NULL,
@@ -34,10 +34,10 @@ CREATE TABLE IF NOT EXISTS `action` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `action`
+-- Contenu de la table `actions`
 --
 
-INSERT INTO `action` (`name`, `mask`, `Description`) VALUES
+INSERT INTO `actions` (`name`, `mask`, `Description`) VALUES
 ('accept_requests', b'0011001000110101', 'Accept the request of my team members'),
 ('admin_menu', b'0011000100000000', 'View admin menu'),
 ('change_password', b'0011001000110101', 'Change password'),
@@ -64,10 +64,10 @@ INSERT INTO `action` (`name`, `mask`, `Description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `contract`
+-- Structure de la table `contracts`
 --
 
-CREATE TABLE IF NOT EXISTS `contract` (
+CREATE TABLE IF NOT EXISTS `contracts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
   `startentdate` varchar(5) NOT NULL,
@@ -258,15 +258,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `service` int(11) DEFAULT NULL,
   `contract` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Contenu de la table `users`
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `login`, `email`, `password`, `role`, `manager`, `country`, `service`, `contract`) VALUES
-(5, 'John', 'DOE', 'DOE', 'benjamin.balet@gmail.com', '$2a$08$4TEenFJqPXnqrRSbrWwQBu.rV9nxsUSmT.3z6TQ4FSFdGSQEV7YX6', 66, 5, NULL, NULL, NULL),
-(6, 'Benjamin', 'BALET', 'bbalet', 'benjamin.balet@gmail.com', '$2a$08$KTQ6KRC6rtsPG3Qkf0TKreRjUDB.CyxEY9/1dX1mZc50kqIiI3MYi', 1, 6, NULL, NULL, NULL);
+(5, 'John', 'DOE', 'DOE', 'benjamin.balet@gmail.com', '$2a$08$NeL/A7xVRbsFr9lxVSDmfOQsXepBom/PfvfTnua4AnFH2YkVZpjCa', 66, 5, NULL, NULL, NULL),
+(6, 'Benjamin', 'BALET', 'bbalet', 'benjamin.balet@gmail.com', '$2a$08$KTQ6KRC6rtsPG3Qkf0TKreRjUDB.CyxEY9/1dX1mZc50kqIiI3MYi', 1, 6, NULL, NULL, NULL),
+(12, 'toto', 'toto', 'ttoto', 'benjamin.balet@gmail.com', '$2a$08$VekQrrBj18Z3FEteTcL6eufitZBcqhmHk/BbBNMl4D16879.IjY7S', 8, 5, NULL, NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

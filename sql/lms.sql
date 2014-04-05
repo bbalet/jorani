@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 02 Avril 2014 à 16:05
+-- Généré le: Sam 05 Avril 2014 à 08:01
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.3.13
 
@@ -38,28 +38,28 @@ CREATE TABLE IF NOT EXISTS `actions` (
 --
 
 INSERT INTO `actions` (`name`, `mask`, `Description`) VALUES
-('accept_requests', b'0011001000110101', 'Accept the request of my team members'),
-('admin_menu', b'0011000100000000', 'View admin menu'),
-('change_password', b'0011001000110101', 'Change password'),
-('create_leaves', b'0011001000110101', 'Create a new user leave request'),
-('create_user', b'0011000100000000', 'Create a new user'),
-('delete_user', b'0011000100000000', 'Delete an existing user'),
-('edit_leaves', b'0011001000110101', 'Edit a leave request'),
-('edit_settings', b'0011000100000000', 'Edit application settings'),
-('edit_user', b'0011000100000000', 'Edit a user'),
-('export_leaves', b'0011001000110101', 'Export the list of leave requests into an Excel file'),
-('export_user', b'0011000100000000', 'Export the list of users into an Excel file'),
-('hr_menu', b'0011001000111001', 'View HR menu'),
-('individual_calendar', b'0011001000110101', 'View my leaves in a calendar'),
-('list_leaves', b'0011001000110101', 'List my leave requests'),
-('list_requests', b'0011001000110101', 'List the request of my team members'),
-('list_users', b'0011000100000000', 'List users'),
-('reject_requests', b'0011001000110101', 'Reject the request of my team members'),
-('reset_password', b'0011000100000000', 'Modifiy the password of another user'),
-('team_calendar', b'0011001000110101', 'View the leaves of my team in a calendar'),
-('update_user', b'0011000100000000', 'Update a user'),
-('view_leaves', b'0011001000110101', 'View the details of a leave request'),
-('view_user', b'0011000100000000', 'View user''s details');
+('accept_requests', b'0011000100110010', 'Accept the request of my team members'),
+('admin_menu', b'0011000100110010', 'View admin menu'),
+('change_password', b'0011000100110010', 'Change password'),
+('create_leaves', b'0011000100110010', 'Create a new user leave request'),
+('create_user', b'0011000100110010', 'Create a new user'),
+('delete_user', b'0011000100110010', 'Delete an existing user'),
+('edit_leaves', b'0011000100110010', 'Edit a leave request'),
+('edit_settings', b'0011000100110010', 'Edit application settings'),
+('edit_user', b'0011000100110010', 'Edit a user'),
+('export_leaves', b'0011000100110010', 'Export the list of leave requests into an Excel file'),
+('export_user', b'0011000100110010', 'Export the list of users into an Excel file'),
+('hr_menu', b'0011000100110010', 'View HR menu'),
+('individual_calendar', b'0011000100110010', 'View my leaves in a calendar'),
+('list_leaves', b'0011000100110010', 'List my leave requests'),
+('list_requests', b'0011000100110010', 'List the request of my team members'),
+('list_users', b'0011000100110010', 'List users'),
+('reject_requests', b'0011000100110010', 'Reject the request of my team members'),
+('reset_password', b'0011000100110010', 'Modifiy the password of another user'),
+('team_calendar', b'0011000100110010', 'View the leaves of my team in a calendar'),
+('update_user', b'0011000100110010', 'Update a user'),
+('view_leaves', b'0011000100110010', 'View the details of a leave request'),
+('view_user', b'0011000100110010', 'View user''s details');
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,8 @@ CREATE TABLE IF NOT EXISTS `contracts` (
 CREATE TABLE IF NOT EXISTS `entitleddays` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contract` int(11) NOT NULL,
-  `year` int(11) NOT NULL,
+  `startdate` date DEFAULT NULL,
+  `enddate` date DEFAULT NULL,
   `days` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

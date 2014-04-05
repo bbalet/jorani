@@ -105,6 +105,13 @@ class Contracts extends CI_Controller {
         if (empty($data['contract'])) {
             show_404();
         }
+        
+        //  Prepare to load the content of the entitleddays sub view
+        //  the "TRUE" argument tells it to return the content, rather than display it immediately
+        //$this->load->model('entitleddays_model');
+        //$data['entitleddays'] = $this->entitleddays_model->get_entitleddays($id);
+        //$data['entitleddays_view'] = $this->load->view('entitleddays/index', $data, TRUE);
+        
         $data['title'] = 'Contrat details';
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);

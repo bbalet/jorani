@@ -274,6 +274,7 @@ class Users extends CI_Controller {
             $this->load->library('parser');
             $data = array(
                 'Title' => 'Your account has been created',
+                'BaseURL' => base_url(),
                 'Firstname' => $this->input->post('firstname'),
                 'Lastname' => $this->input->post('lastname'),
                 'Login' => $this->input->post('login'),

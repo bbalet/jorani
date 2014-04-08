@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 05 Avril 2014 à 08:01
+-- Généré le: Mar 08 Avril 2014 à 19:01
 -- Version du serveur: 5.5.24-log
--- Version de PHP: 5.3.13
+-- Version de PHP: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -73,7 +73,14 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `startentdate` varchar(5) NOT NULL,
   `endentdate` varchar(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `contracts`
+--
+
+INSERT INTO `contracts` (`id`, `name`, `startentdate`, `endentdate`) VALUES
+(1, 'PNC Regular Staff member', '01/01', '12/31');
 
 -- --------------------------------------------------------
 
@@ -84,11 +91,22 @@ CREATE TABLE IF NOT EXISTS `contracts` (
 CREATE TABLE IF NOT EXISTS `entitleddays` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contract` int(11) NOT NULL,
+  `employee` int(11) NOT NULL,
   `startdate` date DEFAULT NULL,
   `enddate` date DEFAULT NULL,
+  `type` int(11) NOT NULL,
   `days` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `entitleddays`
+--
+
+INSERT INTO `entitleddays` (`id`, `contract`, `employee`, `startdate`, `enddate`, `type`, `days`) VALUES
+(1, 1, 0, '2014-01-01', '2014-12-31', 1, 25),
+(2, 0, 6, '2014-01-01', '2014-12-31', 4, 5),
+(3, 0, 6, '2014-01-01', '2014-12-31', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -108,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `leaves` (
   `duration` decimal(10,0) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- Contenu de la table `leaves`
@@ -119,7 +137,11 @@ INSERT INTO `leaves` (`id`, `startdate`, `enddate`, `status`, `employee`, `cause
 (18, '2014-03-30', '2014-04-01', 2, 5, 'i''m sick', 'Morning', 'Morning', '3', 1),
 (19, '2014-03-30', '2014-04-01', 2, 5, 'i''m sick', 'Morning', 'Morning', '3', 1),
 (20, '2014-03-30', '2014-03-31', 2, 5, '', 'Morning', 'Morning', '2', 1),
-(21, '2014-03-30', '2014-03-31', 1, 5, 'test', 'Morning', 'Morning', '3', 1);
+(21, '2014-03-30', '2014-03-31', 1, 5, 'test', 'Morning', 'Morning', '3', 1),
+(22, '2014-04-06', '2014-04-10', 3, 6, '', 'Morning', 'Afternoon', '5', 1),
+(23, '2014-04-14', '2014-04-15', 3, 6, '', 'Morning', 'Afternoon', '1', 4),
+(24, '2014-05-19', '2014-05-23', 3, 6, '', 'Morning', 'Morning', '5', 1),
+(25, '2013-10-08', '2013-10-09', 3, 6, NULL, 'Morning', 'Morning', '2', 1);
 
 -- --------------------------------------------------------
 
@@ -259,7 +281,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `service` int(11) DEFAULT NULL,
   `contract` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Contenu de la table `users`
@@ -267,8 +289,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `login`, `email`, `password`, `role`, `manager`, `country`, `service`, `contract`) VALUES
 (5, 'John', 'DOE', 'DOE', 'benjamin.balet@gmail.com', '$2a$08$NeL/A7xVRbsFr9lxVSDmfOQsXepBom/PfvfTnua4AnFH2YkVZpjCa', 66, 5, NULL, NULL, NULL),
-(6, 'Benjamin', 'BALET', 'bbalet', 'benjamin.balet@gmail.com', '$2a$08$KTQ6KRC6rtsPG3Qkf0TKreRjUDB.CyxEY9/1dX1mZc50kqIiI3MYi', 1, 6, NULL, NULL, NULL),
-(12, 'toto', 'toto', 'ttoto', 'benjamin.balet@gmail.com', '$2a$08$VekQrrBj18Z3FEteTcL6eufitZBcqhmHk/BbBNMl4D16879.IjY7S', 8, 5, NULL, NULL, NULL);
+(6, 'Benjamin', 'BALET', 'bbalet', 'benjamin.balet@gmail.com', '$2a$08$KTQ6KRC6rtsPG3Qkf0TKreRjUDB.CyxEY9/1dX1mZc50kqIiI3MYi', 1, 6, NULL, NULL, 1),
+(12, 'toto', 'toto', 'ttoto', 'benjamin.balet@gmail.com', '$2a$08$Ijed..gLC.VRaoFNVhW.J.qHiD0.9mv9a8hIZIJHccfBvQ/1jAAEW', 8, 5, NULL, NULL, 1),
+(13, 'aaaaaa', 'aaaaaa', 'aaaaaaa', 'benjamin.balet@gmail.com', '$2a$08$pGCACb6wWfXsWHGIH/G1O.Qh.AR6XsKhB1LGmhj8f1/csShUpTm6G', 2, 5, NULL, NULL, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

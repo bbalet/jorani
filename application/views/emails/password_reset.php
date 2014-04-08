@@ -21,6 +21,7 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        Your password has been reset. If you didn't perform this operation, please contact your administrator.
+        <p>Dear {Firstname} {Lastname},</p>
+        <p>If you didn't perform this operation, please contact your administrator.</p>
     </body>
 </html>

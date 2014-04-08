@@ -41,13 +41,72 @@ class Leaves_model extends CI_Model {
     }
 
     /**
-     * Get the the list of leaves requested by a givane employee
+     * Get the the list of leaves requested by a given employee
      * @param int $id ID of the employee
      * @return array list of records
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_user_leaves($id) {
         $query = $this->db->get_where('leaves', array('employee' => $id));
+        return $query->result_array();
+    }
+
+    /**
+     * Get the the list of entitled and taken leaves of a given employee
+     * @param int $id ID of the employee
+     * @return array list of records
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_user_leaves_summary($id) {
+        
+        //leaves['type'][x][x]
+        $summary = array();
+        $types = $this->db->get_where('types')->result_array();
+        foreach ($types as $type) {
+            $summary[$type['name']][0] = 0; //Taken
+            $summary[$type['name']][1] = 0; //Entitled
+        }
+        
+        /*select sum(leaves.duration) as taken, types.name as type
+        from leaves
+        inner join types on types.id = leaves.type
+        where leaves.employee = 6
+                and leaves.status = 3
+        group by leaves.type*/
+        
+        //TODO : need to set boundaries (in-period)
+        $this->db->select('sum(leaves.duration) as taken, types.name as type');
+        $this->db->from('leaves');
+        $this->db->join('types', 'types.id = leaves.type');
+        $this->db->where('leaves.employee', $id);
+        $this->db->where('leaves.status', 3); 
+        $this->db->group_by("leaves.type");
+        $taken_days = $this->db->get();
+        foreach ($taken_days as $taken) {
+            $summary[$taken['type']][0] = $taken['taken']; //Taken
+        }
+
+        //From contract
+        /*
+        select types.name, entitleddays.days
+        from users
+        inner join contracts on contracts.id = users.contract
+        left outer join entitleddays on entitleddays.contract = users.contract
+        inner join types on types.id = entitleddays.type
+        where users.id = 6
+         */
+        
+        //From entitled days of employee
+        
+        /*
+        select types.name, entitleddays.days
+        from users
+        inner join contracts on contracts.id = users.contract
+        left outer join entitleddays on entitleddays.employee = users.id
+        inner join types on types.id = entitleddays.type
+        where users.id = 6
+         */
+        
         return $query->result_array();
     }
     

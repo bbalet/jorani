@@ -31,8 +31,19 @@ class Entitleddays_model extends CI_Model {
      * @return array record of periods
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_entitleddays($contract) {
+    public function get_entitleddays_contract($contract) {
         $query = $this->db->get_where('entitleddays', array('contract' => $contract));
+        return $query->row_array();
+    }
+    
+    /**
+     * Get the list of entitleddays or one entitleddays record
+     * @param int $id optional id of a entitleddays record
+     * @return array record of periods
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_entitleddays_employee($employee) {
+        $query = $this->db->get_where('entitleddays', array('employee' => $employee));
         return $query->row_array();
     }
     

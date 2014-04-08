@@ -197,6 +197,29 @@ class Users extends CI_Controller {
             } else {
                 $this->users_model->reset_password($id, $this->input->post('CipheredValue'));
                 log_message('info', 'Password of user #' . $id . ' has been modified by user #' . $this->session->userdata('id'));
+                
+                //Send an e-mail to the user so as to inform that its password has been changed
+                $this->load->model('settings_model');
+                $user = $this->users_model->get_users($id);
+                $this->load->library('email');
+                $config = $this->settings_model->get_mail_config();            
+                $this->email->initialize($config);
+
+                $this->load->library('parser');
+                $data = array(
+                    'Title' => 'Your password has been reset',
+                    'Firstname' => $user['firstname'],
+                    'Lastname' => $user['lastname']
+                );
+                $message = $this->parser->parse('emails/password_reset', $data, TRUE);
+
+                $this->email->from('do.not@reply.me', 'LMS');
+                $this->email->to($user['email']);
+                $this->email->subject('[LMS] Your password has been reset ');
+                $this->email->message($message);
+                $this->email->send();
+                
+                //Inform back the user by flash message
                 $this->session->set_flashdata('msg', 'The password has been succesfully changed');
                 log_message('debug', '{controllers/users/reset} Leaving method (before redirect)');
                 if ($this->is_admin) {
@@ -239,8 +262,31 @@ class Users extends CI_Controller {
             $this->load->view('users/create', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->users_model->set_users();
+            $password = $this->users_model->set_users();
             log_message('info', 'User ' . $this->input->post('login') . ' has been created by user #' . $this->session->userdata('id'));
+            
+            //Send an e-mail to the user so as to inform that its password has been changed
+            $this->load->model('settings_model');
+            $this->load->library('email');
+            $config = $this->settings_model->get_mail_config();            
+            $this->email->initialize($config);
+
+            $this->load->library('parser');
+            $data = array(
+                'Title' => 'Your account has been created',
+                'Firstname' => $this->input->post('firstname'),
+                'Lastname' => $this->input->post('lastname'),
+                'Login' => $this->input->post('login'),
+                'Password' => $password
+            );
+            $message = $this->parser->parse('emails/new_user', $data, TRUE);
+
+            $this->email->from('do.not@reply.me', 'LMS');
+            $this->email->to($this->input->post('email'));
+            $this->email->subject('[LMS] Your account has been created');
+            $this->email->message($message);
+            $this->email->send();
+            
             $this->session->set_flashdata('msg', 'The user has been succesfully created');
             redirect('users/index');
         }
@@ -298,8 +344,9 @@ class Users extends CI_Controller {
         $this->excel->getActiveSheet()->setCellValue('B1', 'Firstname');
         $this->excel->getActiveSheet()->setCellValue('C1', 'Lastname');
         $this->excel->getActiveSheet()->setCellValue('D1', 'E-mail');
-        $this->excel->getActiveSheet()->getStyle('A1:D1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Manager');
+        $this->excel->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $users = $this->users_model->get_users();
         $line = 2;
@@ -308,6 +355,7 @@ class Users extends CI_Controller {
             $this->excel->getActiveSheet()->setCellValue('B' . $line, $user['firstname']);
             $this->excel->getActiveSheet()->setCellValue('C' . $line, $user['lastname']);
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $user['email']);
+            $this->excel->getActiveSheet()->setCellValue('E' . $line, $user['manager']);
             $line++;
         }
 
@@ -320,5 +368,57 @@ class Users extends CI_Controller {
     }
 
     //TODO import a list of users from CSV or Excel
-    //TODO check duplicated login on creation
+        /**
+     * Action: export the list of all users into an Excel file
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function import() {
+        $this->auth->check_is_granted('import_user');
+        $this->load->view('users/import');
+        
+        //A : Firstname
+        //B : Lastname
+        //C : E-mail
+        //D : Role (2 for user if ommitted)
+        //E : optional login (first letter of firstname + lastname if ommitted
+        //F : manager optional (cell into this Worksheet, "self" or ID in database) : cell must preceed)
+        //G : optional password (automatically generated if ommitted)
+        //H : optional Identifier into the database if set, will update user
+        
+        //Filename <= uniqid($prefix);
+        
+        /*$config['upload_path'] = 'temp/';
+        $config['allowed_types'] = 'xls|csv|xlxs';
+        $config['max_size'] = '100';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload()) {
+            $error = array('error' => $this->upload->display_errors());
+
+            $this->load->view('upload_form', $error);
+        } else {
+            $this->load->library('excel');
+            $data = array('upload_data' => $this->upload->data());
+
+            //$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+            $objPHPExcel = PHPExcel_IOFactory::load($path);
+            $worksheet->getHighestRow();
+            
+            //First line contains an header with the names of columns
+            for ($row = 2; $row <= $highestRow; ++ $row) {
+                
+            }
+            //$cell = $worksheet->getCellByColumnAndRow($col, $row);
+            $val = $cell->getValue();
+            $line++;
+
+            
+            //$this->load->view('upload_success', $data);
+        }*/
+        
+
+    }    
 }

@@ -257,4 +257,46 @@ class Users_model extends CI_Model {
             }
         }
     }
+    
+    /**
+     * Get the list of employees or one employee
+     * @param int $id optional id of one user
+     * @return array record of users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_employees($id = 0) {
+        if ($id === 0) {
+            $this->db->select('users.id as id,'
+                        . ' users.firstname as firstname,'
+                        . ' users.lastname as lastname,'
+                        . ' users.email as email,'
+                        . ' contracts.name as contract');
+            $this->db->from('users');
+            $this->db->join('contracts', 'contracts.id = users.contract', 'left outer');
+            return $this->db->get()->result_array();
+        } else {
+            $this->db->select('users.id as id,'
+                        . ' users.firstname as firstname,'
+                        . ' users.lastname as lastname,'
+                        . ' users.email as email,'
+                        . ' contracts.name as contract');
+            $this->db->from('users');
+            $this->db->join('contracts', 'contracts.id = users.contract', 'left outer');
+            $this->db->where('users.id = ', $id);
+        return $this->db->get()->row_array();
+        }
+    }
+    
+    /**
+     * Update a given employee in the database with the contract ID. 
+     * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function set_contract() {
+        $data = array(
+            'contract' => $this->input->post('contract')
+        );
+        $this->db->where('id', $this->input->post('id'));
+        return $this->db->update('users', $data);
+    }
 }

@@ -97,5 +97,46 @@ class Hr extends CI_Controller {
         $this->load->view('hr/index', $data);
         $this->load->view('templates/footer');
     }
+    
+    /**
+     * Display the list of all employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function employees() {
+        $this->auth->check_is_granted('list_employees');
+        $data = $this->getUserContext();
+        $data['title'] = 'List of employees';
+        $this->load->model('users_model');
+        $data['users'] = $this->users_model->get_employees();
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('hr/employees', $data);
+        $this->load->view('templates/footer');
+    }
 
+    /**
+     * Display a form that allows updating the contract of a given user
+     * @param int $id User identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function contract($id) {
+        $this->auth->check_is_granted('employee_contract');
+        $data = $this->getUserContext();
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $data['title'] = 'Attach a contract';
+        $this->form_validation->set_rules('contract', 'contract', 'required|xss_clean');
+        if ($this->form_validation->run() === FALSE) {
+            $data['id'] = $id;
+            $this->load->model('contracts_model');
+            $data['contracts'] = $this->contracts_model->get_contracts();
+            $this->load->view('hr/contract', $data);
+        } else {
+            $this->load->model('users_model');
+            $this->users_model->set_contract();
+            $this->session->set_flashdata('msg', 'The contract has been succesfully attached to the employee');
+            redirect('hr/employees');
+        }
+    }
 }

@@ -99,11 +99,16 @@ class Leaves extends CI_Controller {
         //$data['leaves'] = this->leaves_model->$get_user_leaves($this->session->userdata('id'));
         $data['summary'] = $this->leaves_model->get_user_leaves_summary($this->user_id);
         
-        $data['title'] = 'Counters';
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('leaves/counters', $data);
-        $this->load->view('templates/footer');
+        if ($data['summary'] != null) {
+            $data['title'] = 'Counters';
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('leaves/counters', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->session->set_flashdata('msg', 'It appears you have no contract. Please contact your HR Officer / Manager.');
+            redirect('leaves/index');
+        }
     }
 
     /**

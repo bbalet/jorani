@@ -21,7 +21,7 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        Welcome to LMS {Firstname} {Lastname}. Please use these credentials to login to the system :
+        Welcome to LMS {Firstname} {Lastname}. Please use these credentials to <a href="{BaseURL}">login to the system</a> :
         <table border="0">
             <tr>
                 <td>Login</td><td>{Login}</td>

@@ -192,7 +192,7 @@ class Contracts extends CI_Controller {
      */
     public function delete($id) {
         log_message('debug', '{controllers/contracts/delete} Entering method with id=' . $id);
-        $this->auth->check_is_granted('delete_user');
+        $this->auth->check_is_granted('delete_contract');
         //Test if user exists
         $data['contract'] = $this->contracts_model->get_contracts($id);
         if (empty($data['contract'])) {
@@ -205,5 +205,39 @@ class Contracts extends CI_Controller {
         $this->session->set_flashdata('msg', 'The contract has been succesfully deleted');
         log_message('debug', '{controllers/contracts/delete} Leaving method (before redirect)');
         redirect('contracts/index');
+    }
+    
+    /**
+     * Action: export the list of all contracts into an Excel file
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function export() {
+        $this->auth->check_is_granted('export_contracts');
+        $this->load->library('excel');
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle('List of contracts');
+        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Name');
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Start period');
+        $this->excel->getActiveSheet()->setCellValue('D1', 'End period');
+        $this->excel->getActiveSheet()->getStyle('A1:D1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1:D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $users = $this->contracts_model->get_contracts();
+        $line = 2;
+        foreach ($users as $user) {
+            $this->excel->getActiveSheet()->setCellValue('A' . $line, $user['id']);
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, $user['name']);
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $user['startentdate']);
+            $this->excel->getActiveSheet()->setCellValue('D' . $line, $user['endentdate']);
+            $line++;
+        }
+
+        $filename = 'contracts.xls';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $objWriter->save('php://output');
     }
 }

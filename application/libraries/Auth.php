@@ -90,6 +90,7 @@ class Auth {
             case 'list_employees' :
             case 'employee_contract' :
             case 'list_contracts' :
+            case 'export_contracts' :
             case 'view_contract' :
             case 'create_contract' :
             case 'edit_contract' :

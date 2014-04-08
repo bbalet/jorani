@@ -58,6 +58,7 @@ class Auth {
             case 'view_user' :
             case 'edit_user' :
             case 'update_user' :
+            case 'import_user' :
             case 'export_user' :
                 if ($this->CI->session->userdata('is_admin') == true)
                     return true;

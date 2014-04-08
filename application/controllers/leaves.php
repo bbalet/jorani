@@ -266,6 +266,13 @@ class Leaves extends CI_Controller {
         $this->session->set_flashdata('msg', 'The leave request has been succesfully deleted');
         redirect('leaves/index');
     }
+    
+    /*
+     function decimal($str)
+    {
+        return (bool)preg_match('/^[\-+]?[0-9]+\.[0-9]+$/', $str);
+    }
+     */
 
     /**
      * Action: export the list of all leaves into an Excel file

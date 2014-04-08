@@ -68,7 +68,10 @@ $(document).ready(function() {
     <div class="span2">
       <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; Create a new user</a>
     </div>
-    <div class="span2">&nbsp;</div>
+    <div class="span2">
+        <a href="<?php echo base_url();?>users/import" class="btn btn-primary" data-target="#frmImportUsers" data-toggle="modal"><i class="icon-arrow-up icon-white"></i>&nbsp; Import users</a>
+        
+    </div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
@@ -102,11 +105,25 @@ $(document).ready(function() {
     </div>
 </div>
 
+<div id="frmImportUsers" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#frmImportUsers').modal('hide')" class="close">&times;</a>
+         <h3>Import Users</h3>
+    </div>
+    <div class="modal-body">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:$('#frmImportUsers').modal('hide')" class="btn secondary">Cancel</a>
+    </div>
+</div>
+
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#users').dataTable();
     $("#frmChangePwd").alert();
+    $("#frmImportUsers").alert();
 	
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
     $('#modal-from-dom').on('show', function() {

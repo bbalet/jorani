@@ -8,3 +8,8 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /nbproject/private/
+
+application/temp/*
+!application/temp/index.html
+!application/temp/.htaccess
+!application/temp/README.TXT

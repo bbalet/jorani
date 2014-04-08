@@ -70,7 +70,7 @@ class Users_model extends CI_Model {
     /**
      * Insert a new user into the database. Inserted data are coming from an
      * HTML form
-     * @return type
+     * @return string deciphered password (so as to send it by e-mail in clear)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function set_users() {
@@ -105,7 +105,36 @@ class Users_model extends CI_Model {
             'role' => $role,
             'manager' => $this->input->post('manager')
         );
-        return $this->db->insert('users', $data);
+        $this->db->insert('users', $data);
+        return $password;
+    }
+    
+    /**
+     * Create a user record in the database
+     * @param type $firstname User firstname
+     * @param type $lastname User lastname
+     * @param type $login User login
+     * @param type $email User e-mail
+     * @param type $password User password
+     * @param int $role role mask
+     * @param int $manager Id of the manager or 0
+     * @return int Inserted User Identifier
+     */
+    public function insert_user($firstname, $lastname, $login, $email, $password, $role, $manager) {
+        //Hash the clear password using bcrypt
+        $this->load->library('bcrypt');
+        $hash = $this->bcrypt->hash_password($password);
+        $data = array(
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'login' => $login,
+            'email' => $email,
+            'password' => $hash,
+            'role' => $role,
+            'manager' => $manager
+        );
+        $this->db->insert('users', $data);
+        return $this->db->insert_id();
     }
 
     /**

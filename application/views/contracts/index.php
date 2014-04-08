@@ -38,6 +38,8 @@ $(document).ready(function() {
             <a href="<?php echo base_url();?>contracts/edit/<?php echo $contracts_item['id'] ?>" title="edit contract details"><i class="icon-pencil"></i></a>
             &nbsp;
             <a href="#" class="confirm-delete" data-id="<?php echo $contracts_item['id'];?>" title="delete contract"><i class="icon-trash"></i></a>
+            &nbsp;
+            <a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contracts_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
         </td>
         <td><?php echo $contracts_item['name'] ?></td>
         <td><?php echo $contracts_item['startentdate'] ?></td>
@@ -81,11 +83,25 @@ $(document).ready(function() {
     </div>
 </div>
 
+<div id="frmEntitledDays" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#frmEntitledDays').modal('hide')" class="close">&times;</a>
+         <h3>Entitled days</h3>
+    </div>
+    <div class="modal-body">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:$('#frmEntitledDays').modal('hide')" class="btn secondary">Cancel</a>
+    </div>
+</div>
+
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#users').dataTable();
     $("#frmChangePwd").alert();
+    $("#frmEntitledDays").alert();
 	
     //On showing the confirmation pop-up, add the contract id at the end of the delete url action
     $('#modal-from-dom').on('show', function() {

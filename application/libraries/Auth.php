@@ -103,6 +103,7 @@ class Auth {
             case 'export_leaves' :
             case 'view_leaves' :
             case 'edit_leaves' :
+            case 'counters_leaves' :
                 return true;
                 break;
             //Additionnal access logic: cannot view/edit/update the leave of another user except for admin/manager

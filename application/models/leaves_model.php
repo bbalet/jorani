@@ -54,7 +54,7 @@ class Leaves_model extends CI_Model {
     /**
      * Get the the list of entitled and taken leaves of a given employee
      * @param int $id ID of the employee
-     * @return array list of records
+     * @return array computed aggregated taken/entitled leaves
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_user_leaves_summary($id) {
@@ -66,6 +66,9 @@ class Leaves_model extends CI_Model {
             $summary[$type['name']][0] = 0; //Taken
             $summary[$type['name']][1] = 0; //Entitled
         }
+        
+/*        var_dump($summary);
+        die();*/
         
         /*select sum(leaves.duration) as taken, types.name as type
         from leaves
@@ -82,7 +85,10 @@ class Leaves_model extends CI_Model {
         $this->db->where('leaves.status', 3); 
         $this->db->group_by("leaves.type");
         $taken_days = $this->db->get();
+        var_dump($taken_days);
         foreach ($taken_days as $taken) {
+            var_dump($taken);
+            die();
             $summary[$taken['type']][0] = $taken['taken']; //Taken
         }
 
@@ -107,7 +113,7 @@ class Leaves_model extends CI_Model {
         where users.id = 6
          */
         
-        return $query->result_array();
+        return $summary;
     }
     
     /**

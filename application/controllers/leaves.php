@@ -89,6 +89,22 @@ class Leaves extends CI_Controller {
         $this->load->view('leaves/index', $data);
         $this->load->view('templates/footer');
     }
+    
+    /**
+     * Display the details of leaves taken/entitled for the connected user
+     */
+    public function counters() {
+        $this->auth->check_is_granted('counters_leaves');
+        $data = $this->getUserContext();
+        //$data['leaves'] = this->leaves_model->$get_user_leaves($this->session->userdata('id'));
+        $data['summary'] = $this->leaves_model->get_user_leaves_summary($this->user_id);
+        
+        $data['title'] = 'Counters';
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('leaves/counters', $data);
+        $this->load->view('templates/footer');
+    }
 
     /**
      * Display a leave request

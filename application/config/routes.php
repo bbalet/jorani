@@ -70,6 +70,7 @@ $route['leaves/team'] = 'leaves/team';
 $route['leaves/individual'] = 'leaves/individual';
 
 //My leave requests
+$route['leaves/counters'] = 'leaves/counters';
 $route['leaves/export'] = 'leaves/export';
 $route['leaves/create'] = 'leaves/create';
 $route['leaves/edit/(:any)'] = 'leaves/edit/$1';

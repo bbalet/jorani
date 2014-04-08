@@ -25,21 +25,23 @@ $(document).ready(function() {
             <th>Firstname</th>
             <th>Lastname</th>
             <th>E-mail</th>
+            <th>Contract</th>
         </tr>
     </thead>
     <tbody>
 <?php foreach ($users as $users_item): ?>
     <tr>
         <td>
-            <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="View user"><?php echo $users_item['id'] ?></a>
+            <?php echo $users_item['id'] ?>
             &nbsp;
-            <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="view user details"><i class="icon-eye-open"></i></a>
+            <a href="<?php echo base_url();?>hr/contract/<?php echo $users_item['id'] ?>" data-target="#frmContract" data-toggle="modal" title="set employee contract"><i class="icon-pencil"></i></a>
             &nbsp;
             <a href="<?php echo base_url();?>entitleddays/user/<?php echo $users_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
         </td>
         <td><?php echo $users_item['firstname'] ?></td>
         <td><?php echo $users_item['lastname'] ?></td>
         <td><?php echo $users_item['email'] ?></td>
+        <td><?php echo $users_item['contract'] ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>
@@ -67,11 +69,25 @@ $(document).ready(function() {
     </div>
 </div>
 
+<div id="frmContract" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#frmContract').modal('hide')" class="close">&times;</a>
+         <h3>Entitled days</h3>
+    </div>
+    <div class="modal-body">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:$('#frmContract').modal('hide')" class="btn secondary">Cancel</a>
+    </div>
+</div>
+
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#users').dataTable();
     $("#frmEntitledDays").alert();
+    $("#frmContract").alert();
 });
 </script>
 

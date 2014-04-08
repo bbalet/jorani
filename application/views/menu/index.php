@@ -38,7 +38,7 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url();?>users/">List users</a></li>
+                    <li><a href="<?php echo base_url();?>users/">List of users</a></li>
                     <li><a href="<?php echo base_url();?>users/create">Add a user</a></li>
                     <li class="divider"></li>
                     <li class="nav-header">Settings</li>
@@ -53,11 +53,11 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">HR <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url();?>hr/">HR Entry 1</a></li>
+                    <li><a href="<?php echo base_url();?>hr/employees">List of employees</a></li>
                     <li><a href="<?php echo base_url();?>hr/">HR Entry 2</a></li>
                     <li class="divider"></li>
                     <li class="nav-header">Contracts</li>
-                    <li><a href="<?php echo base_url();?>contracts/">List contracts</a></li>
+                    <li><a href="<?php echo base_url();?>contracts/">List of contracts</a></li>
                   </ul>
                 </li>
               </ul>
@@ -74,7 +74,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My leaves <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="<?php echo base_url();?>leaves/counters">Counters</a></li>
-                    <li><a href="<?php echo base_url();?>leaves/">List</a></li>
+                    <li><a href="<?php echo base_url();?>leaves/">List of leave requests</a></li>
                     <li><a href="<?php echo base_url();?>leaves/create">Request a leave</a></li>
                   </ul>
                 </li>
@@ -82,7 +82,7 @@
                 
               <ul class="nav">			  
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Calendar <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Calendars <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="<?php echo base_url();?>calendar/team/">Team calendar</a></li>
                     <li><a href="<?php echo base_url();?>calendar/individual/">My calendar</a></li>

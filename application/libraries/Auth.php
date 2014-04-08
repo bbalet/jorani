@@ -87,6 +87,8 @@ class Auth {
                 break;
 
             //Configuration
+            case 'list_employees' :
+            case 'employee_contract' :
             case 'list_contracts' :
             case 'view_contract' :
             case 'create_contract' :

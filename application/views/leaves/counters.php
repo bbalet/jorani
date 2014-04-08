@@ -1,4 +1,6 @@
 
+<h1>My summary</h1>
+
 <table class="table table-bordered table-hover">
 <thead>
     <tr>
@@ -8,15 +10,12 @@
     </tr>
   </thead>
   <tbody>
+  <?php foreach ($summary as $key => $value) { ?>
     <tr>
-      <td><?php echo $summary[0][0]; ?></td>
-      <td>...</td>
-      <td>...</td>
+      <td><?php echo $key; ?></td>
+      <td><?php echo $value[0]; ?></td>
+      <td><?php echo $value[1]; ?></td>
     </tr>
-    <tr>
-      <td><?php echo $summary[0][1]; ?></td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
+  <?php } ?>
   </tbody>
 </table>

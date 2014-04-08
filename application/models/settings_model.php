@@ -36,7 +36,7 @@ class Settings_model extends CI_Model {
         //$config['mailpath'] = '/usr/sbin/sendmail';
         $config['smtp_host'] = 'auth.smtp.1and1.fr';
         $config['smtp_user'] = 'contact@benjamin-balet.info';
-        $config['smtp_pass'] = 'japonais';
+        $config['smtp_pass'] = '';
         $config['_smtp_auth'] = TRUE;
         $config['smtp_port'] = '587';
         $config['smtp_timeout'] = '20';

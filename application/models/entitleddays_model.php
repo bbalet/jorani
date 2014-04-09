@@ -32,8 +32,12 @@ class Entitleddays_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_entitleddays_contract($contract) {
-        $query = $this->db->get_where('entitleddays', array('contract' => $contract));
-        return $query->row_array();
+        $this->db->select('entitleddays.*, types.name as type');
+        $this->db->from('entitleddays');
+        $this->db->join('types', 'types.id = entitleddays.type');
+        $this->db->order_by("startdate", "desc");
+        $this->db->where('contract =', $contract);
+        return $this->db->get()->result_array();
     }
     
     /**
@@ -61,6 +65,24 @@ class Entitleddays_model extends CI_Model {
         
         $data = array(
             'employee' => $this->input->post('id'),
+            'startdate' => $this->input->post('startdate'),
+            'enddate' => $this->input->post('enddate'),
+            'days' => $this->input->post('days'),
+            'type' => $this->input->post('type')
+        );
+        return $this->db->insert('entitleddays', $data);
+    }
+    
+    /**
+     * Insert a new entitleddays record into the database. 
+     * Inserted data are coming from an HTML form
+     * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function set_entitleddays_contract() {
+        
+        $data = array(
+            'contract' => $this->input->post('id'),
             'startdate' => $this->input->post('startdate'),
             'enddate' => $this->input->post('enddate'),
             'days' => $this->input->post('days'),

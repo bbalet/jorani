@@ -116,5 +116,9 @@ $(document).ready(function() {
             var id = $(this).data('id');
             $('#modal-from-dom').data('id', id).modal('show');
     });
+    
+    $('#frmEntitledDays').on('hidden', function() {
+        $(this).removeData('modal');
+    });
 });
 </script>

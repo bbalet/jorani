@@ -45,7 +45,7 @@ class Entitleddays extends CI_Controller {
             $this->session->set_userdata('last_page', current_url());
             redirect('session/login');
         }
-        $this->load->model('leaves_model');
+        $this->load->model('entitleddays_model');
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
@@ -78,26 +78,35 @@ class Entitleddays extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Change entitled days';
+        $data['title'] = 'Add entitled days';
         
-        $this->form_validation->set_rules('type', 'type', 'required|xss_clean');
         $this->form_validation->set_rules('startdate', 'startdate', 'required|xss_clean');
         $this->form_validation->set_rules('enddate', 'enddate', 'required|xss_clean');
         $this->form_validation->set_rules('days', 'days', 'required|xss_clean');
+        $this->form_validation->set_rules('type', 'type', 'required|xss_clean');        
         
         if ($this->form_validation->run() === FALSE) {
             $data['id'] = $id;
-            $this->load->model('entitleddays_model');
             $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_employee($id);
             $this->load->model('types_model');
             $data['types'] = $this->types_model->get_types();
             $this->load->view('entitleddays/user', $data);
         } else {
-            $this->load->model('users_model');
-            $this->users_model->set_manager();
-            $this->session->set_flashdata('msg', 'The manager has been succesfully attached to the employee');
+            $this->entitleddays_model->set_entitleddays_employee();
+            $this->session->set_flashdata('msg', 'The entitled days has been succesfully added for the employee');
             redirect('hr/employees');
         }
     }
     
+    /**
+     * Action : delete an entitled days credit
+     * @param int $id entitled days credit identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function userdelete($id) {
+        $this->auth->check_is_granted('entitleddays_user_delete');
+        $this->entitleddays_model->delete_entitleddays($id);
+        $this->session->set_flashdata('msg', 'The entitled days has been succesfully deleted for the employee');
+        redirect('hr/employees');
+    }
 }

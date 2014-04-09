@@ -12,7 +12,7 @@
   <tbody>
   <?php foreach ($entitleddays as $days) { ?>
     <tr>
-      <td><a href="<?php echo base_url();?>entitleddays/user/delete/<?php echo $days['id'] ?>" title="delete"><i class="icon-remove"></i></a></td>
+      <td><a href="<?php echo base_url();?>entitleddays/userdelete/<?php echo $days['id'] ?>" title="delete"><i class="icon-remove"></i></a></td>
       <td><?php echo $days['startdate']; ?></td>
       <td><?php echo $days['enddate']; ?></td>
       <td><?php echo $days['days']; ?></td>
@@ -28,27 +28,20 @@
 </table>
 
 <?php echo form_open('entitleddays/user/' . $id); ?>
-
     <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-    
     <label for="startdate" required>Start Date</label>
     <input type="input" name="startdate" id="startdate" />
-    <br />
-    
     <label for="enddate" required>End Date</label>
     <input type="input" name="enddate" id="enddate" />
-    
     <label for="type" required>Leave type</label>
     <select name="type">
     <?php foreach ($types as $types_item): ?>
         <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 1) echo "selected" ?>><?php echo $types_item['name'] ?></option>
     <?php endforeach ?> 
-    </select><br />
-    
-    <label for="duration" required>Duration</label>
-    <input type="input" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" />
-    
-    <button id="send" class="btn btn-primary">Add entitled days</button>
+    </select>    
+    <label for="days" required>Days</label>
+    <input type="input" name="days" id="days" />
+    <button id="send" class="btn btn-primary">Add</button>
 </form>
 
 <link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>

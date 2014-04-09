@@ -58,6 +58,9 @@
                     <li class="divider"></li>
                     <li class="nav-header">Contracts</li>
                     <li><a href="<?php echo base_url();?>contracts/">List of contracts</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Leaves</li>
+                    <li><a href="<?php echo base_url();?>leavetypes/">List of types</a></li>
                   </ul>
                 </li>
               </ul>

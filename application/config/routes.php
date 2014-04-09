@@ -59,6 +59,14 @@ $route['hr/contract/(:any)'] = 'hr/contract/$1';
 $route['hr/manager/(:any)'] = 'hr/manager/$1';
 $route['hr/entitleddays/(:any)'] = 'hr/entitleddays/$1';
 $route['hr'] = 'hr';
+
+$route['leavetypes/delete/(:any)'] = 'leavetypes/delete/$1';
+$route['leavetypes/edit/(:any)'] = 'leavetypes/edit/$1';
+$route['leavetypes/index'] = 'leavetypes/index';
+$route['leavetypes/create'] = 'leavetypes/create';
+$route['leavetypes/export'] = 'leavetypes/export';
+$route['leavetypes'] = 'leavetypes';
+
 $route['contracts/export'] = 'contracts/export';
 $route['contracts/create'] = 'contracts/create';
 $route['contracts/edit/(:any)'] = 'contracts/edit/$1';

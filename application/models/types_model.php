@@ -49,5 +49,43 @@ class Types_model extends CI_Model {
         $type = $this->get_types($id);
         return $type['name'];
     }
+    
+    /**
+     * Insert a new leave type
+     * Inserted data are coming from an HTML form
+     * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function set_types() {
+        
+        $data = array(
+            'name' => $this->input->post('name')
+        );
+        return $this->db->insert('types', $data);
+    }
+    
+    /**
+     * Delete a leave type from the database
+     * @param int $id identifier of the leave type record
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delete_type($id) {
+        $query = $this->db->delete('types', array('id' => $id));
+    }
+    
+    /**
+     * Update a given leave type in the database. Update data are coming from an
+     * HTML form
+     * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function update_types() {
+        $data = array(
+            'name' => $this->input->post('name')
+        );
+
+        $this->db->where('id', $this->input->post('id'));
+        return $this->db->update('types', $data);
+    }
 }
 	

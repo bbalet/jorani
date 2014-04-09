@@ -91,7 +91,9 @@ $route['requests/(:any)'] = 'requests/index/$1';
 $route['requests'] = 'requests/index/requested';
 
 $route['entitleddays/user/(:any)'] = 'entitleddays/user/$1';
+$route['entitleddays/userdelete/(:any)'] = 'entitleddays/userdelete/$1';
 $route['entitleddays/contract/(:any)'] = 'entitleddays/contract/$1';
+$route['entitleddays/contractdelete/(:any)'] = 'entitleddays/contractdelete/$1';
 
 //Session management
 $route['session/login'] = 'session/login';

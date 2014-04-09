@@ -57,12 +57,14 @@ class Entitleddays_model extends CI_Model {
      * @return type
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_entitleddays() {
+    public function set_entitleddays_employee() {
         
         $data = array(
-            'name' => $this->input->post('name'),
+            'employee' => $this->input->post('id'),
             'startdate' => $this->input->post('startdate'),
-            'enddate' => $this->input->post('enddate')
+            'enddate' => $this->input->post('enddate'),
+            'days' => $this->input->post('days'),
+            'type' => $this->input->post('type')
         );
         return $this->db->insert('entitleddays', $data);
     }

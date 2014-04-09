@@ -150,6 +150,6 @@ class Entitleddays extends CI_Controller {
         $this->auth->check_is_granted('entitleddays_contract_delete');
         $this->entitleddays_model->delete_entitleddays($id);
         $this->session->set_flashdata('msg', 'The entitled days has been succesfully deleted for the contract');
-        redirect('hr/contract');
+        redirect('contracts');
     }
 }

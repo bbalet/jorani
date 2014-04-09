@@ -139,4 +139,29 @@ class Hr extends CI_Controller {
             redirect('hr/employees');
         }
     }
+    
+    /**
+     * Display a form that allows updating the manager of a given user
+     * @param int $id User identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function manager($id) {
+        $this->auth->check_is_granted('employee_manager');
+        $data = $this->getUserContext();
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $data['title'] = 'Attach a manager';
+        $this->form_validation->set_rules('manager', 'manager', 'required|xss_clean');
+        if ($this->form_validation->run() === FALSE) {
+            $data['id'] = $id;
+            $this->load->model('users_model');
+            $data['users'] = $this->users_model->get_users();
+            $this->load->view('hr/manager', $data);
+        } else {
+            $this->load->model('users_model');
+            $this->users_model->set_manager();
+            $this->session->set_flashdata('msg', 'The manager has been succesfully attached to the employee');
+            redirect('hr/employees');
+        }
+    }
 }

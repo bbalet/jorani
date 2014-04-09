@@ -89,6 +89,7 @@ class Auth {
             //Configuration
             case 'list_employees' :
             case 'employee_contract' :
+            case 'employee_manager' :
             case 'list_contracts' :
             case 'export_contracts' :
             case 'view_contract' :

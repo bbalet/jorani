@@ -56,6 +56,7 @@ $route['settings'] = 'settings/set';
 $route['hr/index'] = 'hr/index';
 $route['hr/employees'] = 'hr/employees';
 $route['hr/contract/(:any)'] = 'hr/contract/$1';
+$route['hr/manager/(:any)'] = 'hr/manager/$1';
 $route['hr/entitleddays/(:any)'] = 'hr/entitleddays/$1';
 $route['hr'] = 'hr';
 $route['contracts/export'] = 'contracts/export';

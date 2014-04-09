@@ -53,8 +53,8 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">HR <b class="caret"></b></a>
                   <ul class="dropdown-menu">
+                    <li class="nav-header">Employees</li>
                     <li><a href="<?php echo base_url();?>hr/employees">List of employees</a></li>
-                    <li><a href="<?php echo base_url();?>hr/">HR Entry 2</a></li>
                     <li class="divider"></li>
                     <li class="nav-header">Contracts</li>
                     <li><a href="<?php echo base_url();?>contracts/">List of contracts</a></li>

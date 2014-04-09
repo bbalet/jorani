@@ -270,9 +270,12 @@ class Users_model extends CI_Model {
                         . ' users.firstname as firstname,'
                         . ' users.lastname as lastname,'
                         . ' users.email as email,'
-                        . ' contracts.name as contract');
+                        . ' contracts.name as contract,'
+                        . ' managers.firstname as manager_firstname,'
+                        . ' managers.lastname as manager_lastname');
             $this->db->from('users');
             $this->db->join('contracts', 'contracts.id = users.contract', 'left outer');
+            $this->db->join('users as managers', 'managers.id = users.manager', 'left outer');
             return $this->db->get()->result_array();
         } else {
             $this->db->select('users.id as id,'
@@ -295,6 +298,19 @@ class Users_model extends CI_Model {
     public function set_contract() {
         $data = array(
             'contract' => $this->input->post('contract')
+        );
+        $this->db->where('id', $this->input->post('id'));
+        return $this->db->update('users', $data);
+    }
+    
+    /**
+     * Update a given employee in the database with the manager ID. 
+     * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function set_manager() {
+        $data = array(
+            'manager' => $this->input->post('manager')
         );
         $this->db->where('id', $this->input->post('id'));
         return $this->db->update('users', $data);

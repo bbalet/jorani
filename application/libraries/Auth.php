@@ -101,6 +101,16 @@ class Auth {
                     return false;
                 break;
                 
+            case 'entitleddays_user' :
+            case 'entitleddays_user_delete' :
+            case 'entitleddays_contract' :
+            case 'entitleddays_contract_delete' :
+                if ($this->CI->session->userdata('is_hr') == true)
+                    return true;
+                else
+                    return false;
+                break;
+                
             //Leaves
             case 'list_leaves' :
             case 'create_leaves' :

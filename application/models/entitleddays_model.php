@@ -43,8 +43,12 @@ class Entitleddays_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_entitleddays_employee($employee) {
-        $query = $this->db->get_where('entitleddays', array('employee' => $employee));
-        return $query->row_array();
+        $this->db->select('entitleddays.*, types.name as type');
+        $this->db->from('entitleddays');
+        $this->db->join('types', 'types.id = entitleddays.type');
+        $this->db->order_by("startdate", "desc");
+        $this->db->where('employee =', $employee);
+        return $this->db->get()->result_array();
     }
     
     /**

@@ -16,7 +16,7 @@ $(document).ready(function() {
 </script>
 <?php } ?>
         
-<h1>List of users</h1>
+<h1>List of employees</h1>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
     <thead>
@@ -100,12 +100,23 @@ $(document).ready(function() {
 </div>
 
 <script type="text/javascript">
-$(document).ready(function() {
+$(function () {
     //Transform the HTML table in a fancy datatable
     $('#users').dataTable();
     $("#frmEntitledDays").alert();
     $("#frmContract").alert();
     $("#frmManager").alert();
+    
+    //Prevent to load always the same content (refreshed each time)
+    $('#frmEntitledDays').on('hidden', function() {
+        $(this).removeData('modal');
+    });
+    $('#frmContract').on('hidden', function() {
+        $(this).removeData('modal');
+    });
+    $('#frmManager').on('hidden', function() {
+        $(this).removeData('modal');
+    });
 });
 </script>
 

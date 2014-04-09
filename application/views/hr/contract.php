@@ -5,7 +5,7 @@
     <label for="contract">Contract</label>
     <select name="contract">
     <?php foreach ($contracts as $contract): ?>
-        <option value="<?php echo $contract['id'] ?>"><?php echo $contract['name']; ?></option>
+        <option value="<?php echo $contract['id'] ?>"<?php if ($user['contract'] == $contract['id']) echo "selected"; ?>><?php echo $contract['name']; ?></option>
     <?php endforeach ?>
     </select>
     <br />

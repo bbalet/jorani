@@ -129,6 +129,8 @@ class Hr extends CI_Controller {
         $this->form_validation->set_rules('contract', 'contract', 'required|xss_clean');
         if ($this->form_validation->run() === FALSE) {
             $data['id'] = $id;
+            $this->load->model('users_model');
+            $data['user'] = $this->users_model->get_users($id);
             $this->load->model('contracts_model');
             $data['contracts'] = $this->contracts_model->get_contracts();
             $this->load->view('hr/contract', $data);
@@ -155,6 +157,7 @@ class Hr extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $data['id'] = $id;
             $this->load->model('users_model');
+            $data['user'] = $this->users_model->get_users($id);
             $data['users'] = $this->users_model->get_users();
             $this->load->view('hr/manager', $data);
         } else {

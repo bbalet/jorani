@@ -8,7 +8,7 @@
 <script type="text/javascript">
 //Flash message
 $(document).ready(function() {
-                $(".alert").alert();
+    $(".alert").alert();
 });
 </script>
 <?php } ?>
@@ -18,9 +18,9 @@ $(document).ready(function() {
 <?php
 $attributes = array('id' => 'target');
 echo form_open('session/login', $attributes); ?>
-
+    <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
     <label for="login">Login</label>
-    <input type="input" name="login" id="firstname" value="<?php echo set_value('login'); ?>" autofocus required /><br />
+    <input type="input" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required /><br />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
 </form>
     <label for="password">Password</label>
@@ -34,7 +34,8 @@ echo form_open('session/login', $attributes); ?>
         $('#send').click(function() {
             var encrypt = new JSEncrypt();
             encrypt.setPublicKey($('#pubkey').val());
-            var encrypted = encrypt.encrypt($('#password').val());
+            //Encrypt the concatenation of the password and the salt
+            var encrypted = encrypt.encrypt($('#password').val() + $('#salt').val());
             $('#CipheredValue').val(encrypted);
             $('#target').submit();
         });

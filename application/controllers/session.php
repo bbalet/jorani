@@ -34,6 +34,14 @@ class Session extends CI_Controller {
         $this->load->model('users_model');
     }
 
+    private function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $randomString;
+    }
     /**
      * Login form
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -48,6 +56,7 @@ class Session extends CI_Controller {
 
         if ($this->form_validation->run() === FALSE) {
             $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
+            $data['salt'] = $this->generateRandomString(rand(5, 20));
             $this->load->view('templates/header', $data);
             $this->load->view('session/login', $data);
             $this->load->view('templates/footer');
@@ -61,12 +70,16 @@ class Session extends CI_Controller {
             $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
             $rsa->loadKey($private_key, CRYPT_RSA_PRIVATE_FORMAT_PKCS1);
             $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
-
+            //Remove the salt
+            $len_salt = strlen($this->input->post('salt')) * (-1);
+            $password = substr($password, 0, $len_salt);
+            
             //Hash the password passed through the login form and check if it matches the stored password
             if (!$this->users_model->check_credentials($this->input->post('login'), $password)) {
                 log_message('error', '{controllers/session/login} Invalid login id or password for user=' . $this->input->post('login'));
                 $this->session->set_flashdata('msg', 'Invalid login id or password');
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
+                $data['salt'] = $this->generateRandomString(rand(5, 20));
                 $this->load->view('templates/header', $data);
                 $this->load->view('session/login', $data);
                 $this->load->view('templates/footer');

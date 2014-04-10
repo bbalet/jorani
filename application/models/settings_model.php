@@ -26,7 +26,7 @@ class Settings_model extends CI_Model {
     }
 
     /**
-     * 
+     * You can use smtp4test for testing purpose
      * @return array e-mail configuration
      */
     public function get_mail_config() {
@@ -34,11 +34,11 @@ class Settings_model extends CI_Model {
         $config['protocol'] = 'smtp';
         $config['useragent'] = 'CodeIgniter';
         //$config['mailpath'] = '/usr/sbin/sendmail';
-        $config['smtp_host'] = 'auth.smtp.1and1.fr';
-        $config['smtp_user'] = 'contact@benjamin-balet.info';
+        $config['smtp_host'] = 'localhost';
+        $config['smtp_user'] = '';
         $config['smtp_pass'] = '';
         $config['_smtp_auth'] = TRUE;
-        $config['smtp_port'] = '587';
+        $config['smtp_port'] = '25';
         $config['smtp_timeout'] = '20';
         $config['charset'] = 'utf-8';   //'iso-8859-1'
         $config['mailtype'] = 'html';

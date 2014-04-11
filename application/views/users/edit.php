@@ -29,7 +29,7 @@
     <?php foreach ($users as $users_item): ?>
         <option value="<?php echo $users_item['id'] ?>"><?php echo $users_item['firstname'] . ' ' . $users_item['lastname']; ?></option>
     <?php endforeach ?>
-    </select> If a user has no manager (itself), its leave requests are automatically validated.
+    </select> If a user has no manager (itself), it can validate its leave requests.
     <br /><br />
     
     <br /><br />

@@ -22,11 +22,11 @@ $(document).ready(function() {
 <?php
 $attributes = array('id' => 'target');
 echo form_open('session/login', $attributes); ?>
-    <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
     <label for="login"><?php echo lang('session_login_field_login');?></label>
     <input type="input" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required /><br />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
 </form>
+    <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
     <label for="password"><?php echo lang('session_login_field_password');?></label>
     <input type="password" name="password" id="password" required /><br />
     <br />

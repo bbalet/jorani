@@ -1,0 +1,46 @@
+<?php
+/*
+ * This file is part of lms.
+ *
+ * lms is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * lms is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+$lang['menu_banner_welcome'] = 'Welcome %s';
+$lang['menu_banner_logout'] = 'Logout';
+$lang['menu_banner_change_password'] = 'Change password';
+
+$lang['menu_admin_title'] = 'Admin';
+$lang['menu_admin_list_users'] = 'List of users';
+$lang['menu_admin_add_user'] = 'Add a user';
+$lang['menu_admin_settings_divider'] = 'Settings';
+$lang['menu_admin_settings'] = 'Settings';
+
+$lang['menu_hr_title'] = 'HR';
+$lang['menu_hr_employees_divider'] = 'Employees';
+$lang['menu_hr_list_employees'] = 'List of employees';
+$lang['menu_hr_contracts_divider'] = 'Contracts';
+$lang['menu_hr_list_contracts'] = 'List of contracts';
+$lang['menu_hr_leaves_type_divider'] = 'Leaves';
+$lang['menu_hr_list_leaves_type'] = 'List of types';
+
+$lang['menu_requests_title'] = 'Requests';
+
+$lang['menu_leaves_title'] = 'My leaves';
+$lang['menu_leaves_counters'] = 'Counters';
+$lang['menu_leaves_list_requests'] = 'List of leave requests';
+$lang['menu_leaves_create_request'] = 'Request a leave';
+
+$lang['menu_calendar_title'] = 'Calendars';
+$lang['menu_calendar_team'] = 'Team calendar';
+$lang['menu_calendar_individual'] = 'My calendar';

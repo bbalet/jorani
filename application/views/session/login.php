@@ -1,4 +1,8 @@
-<h2>Login to the application</h2>
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('session', 'english');?>
+
+<h2><?php echo lang('session_login_title');?></h2>
 
 <?php if($this->session->flashdata('msg')){ ?>
 <div class="alert fade in" id="flashbox">
@@ -19,14 +23,14 @@ $(document).ready(function() {
 $attributes = array('id' => 'target');
 echo form_open('session/login', $attributes); ?>
     <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
-    <label for="login">Login</label>
+    <label for="login"><?php echo lang('session_login_field_login');?></label>
     <input type="input" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required /><br />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
 </form>
-    <label for="password">Password</label>
+    <label for="password"><?php echo lang('session_login_field_password');?></label>
     <input type="password" name="password" id="password" required /><br />
     <br />
-    <button id="send" class="btn btn-primary">Login</button>
+    <button id="send" class="btn btn-primary"><?php echo lang('session_login_button_login');?></button>
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript">

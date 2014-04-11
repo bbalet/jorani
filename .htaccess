@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
- 
+    Options +FollowSymLinks
+
     RewriteEngine On
     RewriteBase /lms/
  

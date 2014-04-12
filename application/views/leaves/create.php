@@ -46,8 +46,8 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
-        $('#startdate').datepicker({format: 'yyyy-mm-dd'});
-        $('#enddate').datepicker({format: 'yyyy-mm-dd'});
+        $('#startdate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+        $('#enddate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
     });
 
 </script>

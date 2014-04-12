@@ -1,20 +1,30 @@
-LMS is a Leave Management System developed in PHP/MySQL under a GPL v3 licence
-This project is under development
+LMS is a Leave Management System developed in PHP/MySQL under a GPL v3 licence.
 
-Features :
-* User management
-* Leave request send by e-mail to the manager
+## Status
 
-Dependancies
-Backend :
+This project is under development.
+
+## Features
+* User management.
+* Leave request sent by e-mail to the manager.
+
+## Credits
+
+### Contributors 
+
+### Third party libraries and components
+
+We thank the following open source projects for the components used by LMS:
+
+#### Backend
 * BCRYPT password hasher https://github.com/dwightwatson/codeigniter-bcrypt
 * RSA Encryption in pure PHP https://github.com/phpseclib/phpseclib
 * Excel import/export https://github.com/PHPOffice/PHPExcel
 
-Frontend
+#### Frontend
 * bootstrap 2.3
 * JQuery 1.x
-* Datepicker http://www.eyecon.ro/bootstrap-datepicker/
+* Datepicker https://github.com/eternicode/bootstrap-datepicker
 * Calendar http://arshaw.com/fullcalendar/
 * Datatable https://datatables.net/
 * RSA implementation https://github.com/travist/jsencrypt

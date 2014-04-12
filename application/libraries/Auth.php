@@ -86,7 +86,7 @@ class Auth {
                     return false;
                 break;
 
-            //Configuration
+            //Configuration of HR objects
             case 'list_employees' :
             case 'employee_contract' :
             case 'employee_manager' :
@@ -94,6 +94,7 @@ class Auth {
             case 'export_contracts' :
             case 'view_contract' :
             case 'create_contract' :
+            case 'delete_contract' :
             case 'edit_contract' :
                 if ($this->CI->session->userdata('is_hr') == true)
                     return true;
@@ -137,6 +138,7 @@ class Auth {
             //Calendar
             case 'team_calendar' :
             case 'individual_calendar' :
+            case 'download_calendar' :
                 return true;
                 break;
             //Additionnal access logic: filter on the connected user

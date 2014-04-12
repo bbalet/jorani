@@ -80,6 +80,7 @@ $route['calendar/team'] = 'calendar/team';
 $route['calendar/individual'] = 'calendar/individual';
 $route['leaves/team'] = 'leaves/team';
 $route['leaves/individual'] = 'leaves/individual';
+$route['leaves/ical/(:any)'] = 'leaves/ical/$1';
 
 //My leave requests
 $route['leaves/counters'] = 'leaves/counters';

@@ -39,7 +39,7 @@
 
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Request leave</button>
     &nbsp;
-    <a href="<?php echo base_url(); ?>leaves/" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <a href="<?php echo base_url(); ?>leaves" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
 </form>
 
 <link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>

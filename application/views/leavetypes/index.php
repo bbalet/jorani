@@ -1,11 +1,14 @@
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('leavetypes', $language);?>
 
-<h1>Leave types</h1>
+<h1><?php echo lang('hr_leaves_type_title');?></h1>
 
 <table class="table table-bordered table-hover">
 <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
+      <th><?php echo lang('hr_leaves_type_thead_id');?></th>
+      <th><?php echo lang('hr_leaves_type_thead_name');?></th>
     </tr>
   </thead>
   <tbody>
@@ -19,7 +22,7 @@
   <?php } ?>
   <?php if (count($leavetypes) == 0) { ?>
     <tr>
-        <td colspan="5">No leave type found into the database.</td>
+        <td colspan="5"><?php echo lang('hr_leaves_type_not_found');?></td>
     </tr>
   <?php } ?>
   </tbody>
@@ -31,10 +34,10 @@
 
 <div class="row-fluid">
     <div class="span3">
-      <a href="<?php echo base_url();?>leavetypes/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
+      <a href="<?php echo base_url();?>leavetypes/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('hr_leaves_type_button_export');?></a>
     </div>
     <div class="span3">
-        <a href="<?php echo base_url();?>leavetypes/create" class="btn btn-primary" data-target="#frmAddLeaveType" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>&nbsp; Create a new type</a>
+        <a href="<?php echo base_url();?>leavetypes/create" class="btn btn-primary" data-target="#frmAddLeaveType" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('hr_leaves_type_button_create');?></a>
     </div>
     <div class="span6">&nbsp;</div>
 </div>
@@ -48,7 +51,7 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmAddLeaveType').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="javascript:$('#frmAddLeaveType').modal('hide')" class="btn secondary"><?php echo lang('hr_leaves_popup_create_button_cancel');?></a>
     </div>
 </div>
 
@@ -61,13 +64,13 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmEditLeaveType').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="javascript:$('#frmEditLeaveType').modal('hide')" class="btn secondary"><?php echo lang('hr_leaves_popup_update_button_cancel');?></a>
     </div>
 </div>
 
-<div id="modal-from-dom" class="modal hide fade">
+<div id="frmDeleteLeaveType" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#modal-from-dom').modal('hide')" class="close">&times;</a>
+        <a href="javascript:$('#frmDeleteLeaveType').modal('hide')" class="close">&times;</a>
          <h3>Delete Leave Type</h3>
     </div>
     <div class="modal-body">
@@ -75,8 +78,8 @@
         <p>Do you want to proceed?</p>
     </div>
     <div class="modal-footer">
-        <a href="<?php echo base_url();?>leavetypes/delete/" class="btn danger">Yes</a>
-        <a href="javascript:$('#modal-from-dom').modal('hide')" class="btn secondary">No</a>
+        <a href="#" id="lnkDeleteLeaveType" class="btn danger"><?php echo lang('hr_leaves_popup_delete_button_yes');?></a>
+        <a href="javascript:$('#frmDeleteLeaveType').modal('hide')" class="btn secondary"><?php echo lang('hr_leaves_popup_delete_button_no');?></a>
     </div>
 </div>
 
@@ -86,17 +89,20 @@ $(document).ready(function() {
     $("#frmEditLeaveType").alert();
 	
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
-    $('#modal-from-dom').on('show', function() {
-            var id = $(this).data('id'),
-            removeBtn = $(this).find('.danger');
-            removeBtn.attr('href', removeBtn.attr('href') + id);
+    $('#frmDeleteLeaveType').on('show', function() {
+        var link = "<?php echo base_url();?>leavetypes/delete/" + $(this).data('id');
+        $("#lnkDeleteLeaveType").attr('href', link);
     })
 
     //Display a modal pop-up so as to confirm if a user has to be deleted or not
     $('.confirm-delete').on('click', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            $('#modal-from-dom').data('id', id).modal('show');
+        e.preventDefault();
+        var id = $(this).data('id');
+        $('#frmDeleteLeaveType').data('id', id).modal('show');
+    });
+    
+    $('#frmDeleteLeaveType').on('hidden', function() {
+        $(this).removeData('modal');
     });
 });
 </script>

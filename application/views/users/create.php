@@ -45,7 +45,7 @@ echo form_open('users/create', $attributes); ?>
     
     <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Create user</button>
     &nbsp;
-    <a href="<?php echo base_url(); ?>users/" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <a href="<?php echo base_url(); ?>users" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
 </form>
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jqBootstrapValidation.js"></script>

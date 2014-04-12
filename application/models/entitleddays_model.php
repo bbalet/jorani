@@ -99,6 +99,25 @@ class Entitleddays_model extends CI_Model {
     public function delete_entitleddays($id) {
         $query = $this->db->delete('entitleddays', array('id' => $id));
     }
+
+    /**
+     * Delete a entitled days attached to a user
+     * @param int $id identifier of an employee
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delete_entitleddays_cascade_user($id) {
+        $query = $this->db->delete('entitleddays', array('employee' => $id));
+    }
+    
+    /**
+     * Delete a entitled days attached to a contract
+     * @param int $id identifier of a contract
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delete_entitleddays_cascade_contract($id) {
+        $query = $this->db->delete('entitleddays', array('contract' => $id));
+    }
+    
     
     /**
      * Update a given contract in the database. Update data are coming from an

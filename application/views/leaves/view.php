@@ -35,4 +35,4 @@
     <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;Edit</a>
     &nbsp;
     <?php } ?>
-    <a href="<?php echo base_url();?>leaves/" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;Back to list</a>
+    <a href="<?php echo base_url();?>leaves" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;Back to list</a>

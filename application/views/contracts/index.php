@@ -68,9 +68,9 @@ $(document).ready(function() {
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 
-<div id="modal-from-dom" class="modal hide fade">
+<div id="frmDeleteContract" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#modal-from-dom').modal('hide')" class="close">&times;</a>
+        <a href="javascript:$('#frmDeleteContract').modal('hide')" class="close">&times;</a>
          <h3>Delete Contract</h3>
     </div>
     <div class="modal-body">
@@ -78,8 +78,8 @@ $(document).ready(function() {
         <p>Do you want to proceed?</p>
     </div>
     <div class="modal-footer">
-        <a href="<?php echo base_url();?>contracts/delete/" class="btn danger">Yes</a>
-        <a href="javascript:$('#modal-from-dom').modal('hide')" class="btn secondary">No</a>
+        <a href="#" id="lnkDeleteContract" class="btn danger">Yes</a>
+        <a href="javascript:$('#frmDeleteContract').modal('hide')" class="btn secondary">No</a>
     </div>
 </div>
 
@@ -104,17 +104,16 @@ $(document).ready(function() {
     $("#frmEntitledDays").alert();
 	
     //On showing the confirmation pop-up, add the contract id at the end of the delete url action
-    $('#modal-from-dom').on('show', function() {
-            var id = $(this).data('id'),
-            removeBtn = $(this).find('.danger');
-            removeBtn.attr('href', removeBtn.attr('href') + id);
+    $('#frmDeleteContract').on('show', function() {
+        var link = "<?php echo base_url();?>contracts/delete/" + $(this).data('id');
+        $("#lnkDeleteContract").attr('href', link);
     })
 
     //Display a modal pop-up so as to confirm if a contract has to be deleted or not
     $('.confirm-delete').on('click', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
-            $('#modal-from-dom').data('id', id).modal('show');
+            $('#frmDeleteContract').data('id', id).modal('show');
     });
     
     $('#frmEntitledDays').on('hidden', function() {

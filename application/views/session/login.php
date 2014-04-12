@@ -1,6 +1,6 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('session', 'english');?>
+$this->lang->load('session', $language);?>
 
 <h2><?php echo lang('session_login_title');?></h2>
 

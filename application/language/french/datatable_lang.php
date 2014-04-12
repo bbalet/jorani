@@ -16,11 +16,20 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['datatable_show'] = 'Afficher';
-$lang['datatable_entries'] = 'entrées';
-$lang['datatable_search'] = 'Chercher:';
-$lang['datatable_nodata'] = 'Aucune donnée n\'est disponible';
-$lang['datatable_summary'] = 'Afficher %s à %s sur %s entrées';
-$lang['datatable_previous'] = 'Précédent';
-$lang['datatable_next'] = 'Suivant';
-
+$lang['datatable_sEmptyTable'] = 'Aucune donnée disponible dans le tableau';
+$lang['datatable_sInfo'] = 'Affichage de l\'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments';
+$lang['datatable_sInfoEmpty'] = 'Affichage de l\'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments';
+$lang['datatable_sInfoFiltered'] = '(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)';
+$lang['datatable_sInfoPostFix'] = '';
+$lang['datatable_sInfoThousands'] = '';
+$lang['datatable_sLengthMenu'] = 'Afficher _MENU_ &eacute;l&eacute;ments';
+$lang['datatable_sLoadingRecords'] = 'Chargement en cours...';
+$lang['datatable_sProcessing'] = 'Traitement en cours...';
+$lang['datatable_sSearch'] = 'Rechercher&nbsp;:';
+$lang['datatable_sZeroRecords'] = 'Aucun &eacute;l&eacute;ment &agrave; afficher';
+$lang['datatable_sFirst'] = 'Premier';
+$lang['datatable_sLast'] = 'Dernier';
+$lang['datatable_sNext'] = 'Suivant';
+$lang['datatable_sPrevious'] = 'Pr&eacute;c&eacute;dent';
+$lang['datatable_sSortAscending'] = ': activer pour trier la colonne par ordre croissant';
+$lang['datatable_sSortDescending'] = ': activer pour trier la colonne par ordre décroissant';

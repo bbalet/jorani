@@ -1,12 +1,15 @@
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('leaves', $language);?>
 
-<h1>My summary</h1>
+<h1><?php echo lang('leaves_summary_title');?></h1>
 
 <table class="table table-bordered table-hover">
 <thead>
     <tr>
-      <th>Leave type</th>
-      <th>Taken</th>
-      <th>Entitled</th>
+      <th><?php echo lang('leaves_summary_thead_type');?></th>
+      <th><?php echo lang('leaves_summary_thead_taken');?></th>
+      <th><?php echo lang('leaves_summary_thead_entitled');?></th>
     </tr>
   </thead>
   <tbody>

@@ -16,11 +16,20 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['datatable_show'] = 'Show';
-$lang['datatable_entries'] = 'entries';
-$lang['datatable_search'] = 'Search:';
-$lang['datatable_nodata'] = 'No data available in table';
-$lang['datatable_summary'] = 'Showing %s to %s of %s entriesPreviousNext';
-$lang['datatable_previous'] = 'Previous';
-$lang['datatable_next'] = 'Next';
-
+$lang['datatable_sEmptyTable'] = 'No data available in table';
+$lang['datatable_sInfo'] = 'Showing _START_ to _END_ of _TOTAL_ entries';
+$lang['datatable_sInfoEmpty'] = 'Showing 0 to 0 of 0 entries';
+$lang['datatable_sInfoFiltered'] = '(filtered from _MAX_ total entries)';
+$lang['datatable_sInfoPostFix'] = '';
+$lang['datatable_sInfoThousands'] = ',';
+$lang['datatable_sLengthMenu'] = 'Show _MENU_ entries';
+$lang['datatable_sLoadingRecords'] = 'Loading...';
+$lang['datatable_sProcessing'] = 'Processing...';
+$lang['datatable_sSearch'] = 'Search:';
+$lang['datatable_sZeroRecords'] = 'No matching records found';
+$lang['datatable_sFirst'] = 'First';
+$lang['datatable_sLast'] = 'Last';
+$lang['datatable_sNext'] = 'Next';
+$lang['datatable_sPrevious'] = 'Previous';
+$lang['datatable_sSortAscending'] = ': activate to sort column ascending';
+$lang['datatable_sSortDescending'] = ': activate to sort column descending';

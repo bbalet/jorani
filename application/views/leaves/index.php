@@ -1,3 +1,9 @@
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('leaves', $language);
+$this->lang->load('datatable', $language);
+$this->lang->load('status', $language);
+?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -12,23 +18,23 @@
 <script type="text/javascript">
 //Flash message
 $(document).ready(function() {
-                $(".alert").alert();
+    $(".alert").alert();
 });
 </script>
 <?php } ?>
 
-<h1>My leave requests</h1>
+<h1><?php echo lang('leaves_index_title');?></h1>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Cause</th>
-            <th>Duration</th>
-            <th>Type</th>
-            <th>Status</th>
+            <th><?php echo lang('leaves_index_thead_id');?></th>
+            <th><?php echo lang('leaves_index_thead_start_date');?></th>
+            <th><?php echo lang('leaves_index_thead_end_date');?></th>
+            <th><?php echo lang('leaves_index_thead_cause');?></th>
+            <th><?php echo lang('leaves_index_thead_duration');?></th>
+            <th><?php echo lang('leaves_index_thead_type');?></th>
+            <th><?php echo lang('leaves_index_thead_status');?></th>
         </tr>
     </thead>
     <tbody>
@@ -50,7 +56,7 @@ $(document).ready(function() {
         <td><?php echo $leaves_item['cause']; ?></td>
         <td><?php echo $leaves_item['duration']; ?></td>
         <td><?php echo $leaves_item['type_label']; ?></td>
-        <td><?php echo $leaves_item['status_label']; ?></td>
+        <td><?php echo lang($leaves_item['status_label']); ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>
@@ -64,10 +70,10 @@ $(document).ready(function() {
 
 <div class="row-fluid">
     <div class="span2">
-      <a href="<?php echo base_url();?>leaves/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
+      <a href="<?php echo base_url();?>leaves/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('leaves_index_button_export');?></a>
     </div>
     <div class="span2">
-      <a href="<?php echo base_url();?>leaves/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; New request</a>
+      <a href="<?php echo base_url();?>leaves/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('leaves_index_button_create');?></a>
     </div>
     <div class="span2">&nbsp;</div>
 </div>
@@ -75,38 +81,65 @@ $(document).ready(function() {
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 
-<div id="modal-from-dom" class="modal hide fade">
+<div id="frmDeleteLeaveRequest" class="modal hide fade">
     <div class="modal-header">
         <a href="#" class="close">&times;</a>
-         <h3>Delete leave request</h3>
+         <h3><?php echo lang('leaves_index_popup_delete_title');?></h3>
     </div>
     <div class="modal-body">
-        <p>You are about to delete one leave request, this procedure is irreversible.</p>
-        <p>Do you want to proceed?</p>
+        <p><?php echo lang('leaves_index_popup_delete_message');?></p>
+        <p><?php echo lang('leaves_index_popup_delete_question');?></p>
     </div>
     <div class="modal-footer">
-        <a href="<?php echo base_url();?>leaves/delete/" class="btn danger">Yes</a>
-        <a href="javascript:$('#modal-from-dom').modal('hide')" class="btn secondary">No</a>
+        <a href="#" id="lnkDeleteUser" class="btn danger"><?php echo lang('leaves_index_popup_delete_button_yes');?></a>
+        <a href="javascript:$('#frmDeleteLeaveRequest').modal('hide')" class="btn secondary"><?php echo lang('leaves_index_popup_delete_button_no');?></a>
     </div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
-    $('#leaves').dataTable();
-	
+    $('#leaves').dataTable({
+		"oLanguage": {
+                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                    "oPaginate": {
+                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                        "sLast":     "<?php echo lang('datatable_sLast');?>",
+                        "sNext":     "<?php echo lang('datatable_sNext');?>",
+                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                    },
+                    "oAria": {
+                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                    }
+                }
+            });
+      
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
-    $('#modal-from-dom').on('show', function() {
-        var id = $(this).data('id'),
-        removeBtn = $(this).find('.danger');
-        removeBtn.attr('href', removeBtn.attr('href') + id);
+    $('#frmDeleteLeaveRequest').on('show', function() {
+        var link = "<?php echo base_url();?>leaves/delete/" + $(this).data('id');
+        $("#lnkDeleteUser").attr('href', link);
     })
 
-    //Display a modal pop-up so as to confirm if a user has to be deleted or not
+    //Display a modal pop-up so as to confirm if a leave request has to be deleted or not
     $('.confirm-delete').on('click', function(e) {
         e.preventDefault();
         var id = $(this).data('id');
-        $('#modal-from-dom').data('id', id).modal('show');
+        $('#frmDeleteLeaveRequest').data('id', id).modal('show');
+    });
+    
+    $('#frmDeleteLeaveRequest').on('hidden', function() {
+        $(this).removeData('modal');
     });
 });
 </script>

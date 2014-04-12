@@ -23,18 +23,6 @@ if (!defined('BASEPATH')) {
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Contracts extends CI_Controller {
-
-    /**
-     * Connected user fullname
-     * @var string $fullname
-     */
-    private $fullname;
-    
-    /**
-     * Connected user privilege
-     * @var bool true if admin, false otherwise  
-     */
-    private $is_admin;  
     
     /**
      * Default constructor
@@ -53,6 +41,8 @@ class Contracts extends CI_Controller {
         $this->is_admin = $this->session->userdata('is_admin');
         $this->is_hr = $this->session->userdata('is_hr');
         $this->user_id = $this->session->userdata('id');
+        $this->language = $this->session->userdata('language');
+        $this->language_code = $this->session->userdata('language_code');
     }
     
     /**
@@ -66,6 +56,8 @@ class Contracts extends CI_Controller {
         $data['is_admin'] = $this->is_admin;
         $data['is_hr'] = $this->is_hr;
         $data['user_id'] =  $this->user_id;
+        $data['language'] = $this->language;
+        $data['language_code'] =  $this->language_code;
         return $data;
     }
 
@@ -106,12 +98,6 @@ class Contracts extends CI_Controller {
             show_404();
         }
         
-        //  Prepare to load the content of the entitleddays sub view
-        //  the "TRUE" argument tells it to return the content, rather than display it immediately
-        //$this->load->model('entitleddays_model');
-        //$data['entitleddays'] = $this->entitleddays_model->get_entitleddays($id);
-        //$data['entitleddays_view'] = $this->load->view('entitleddays/index', $data, TRUE);
-        
         $data['title'] = 'Contrat details';
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -150,7 +136,7 @@ class Contracts extends CI_Controller {
         } else {
             $this->contracts_model->set_contracts();
             $this->session->set_flashdata('msg', 'The contract has been succesfully updated');
-            redirect('contracts/index');
+            redirect('contracts');
         }
     }
     
@@ -181,7 +167,7 @@ class Contracts extends CI_Controller {
             $this->contracts_model->set_contracts();
             log_message('info', 'contract ' . $this->input->post('name') . ' has been created by user #' . $this->session->userdata('id'));
             $this->session->set_flashdata('msg', 'The contract has been succesfully created');
-            redirect('contracts/index');
+            redirect('contracts');
         }
     }
     
@@ -204,7 +190,7 @@ class Contracts extends CI_Controller {
         log_message('info', 'contract #' . $id . ' has been deleted by user #' . $this->session->userdata('id'));
         $this->session->set_flashdata('msg', 'The contract has been succesfully deleted');
         log_message('debug', '{controllers/contracts/delete} Leaving method (before redirect)');
-        redirect('contracts/index');
+        redirect('contracts');
     }
     
     /**

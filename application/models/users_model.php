@@ -65,6 +65,8 @@ class Users_model extends CI_Model {
      */
     public function delete_user($id) {
         $query = $this->db->delete('users', array('id' => $id));
+        $this->load->model('entitleddays_model');
+        $this->entitleddays_model->delete_entitleddays_cascade_user($id);
     }
 
     /**
@@ -247,6 +249,8 @@ class Users_model extends CI_Model {
                     'is_admin' => $is_admin,
                     'is_hr' => $is_hr,
                     'manager' => $row->manager,
+                    'language' => 'english',
+                    'language_code' => 'en',
                     'logged_in' => TRUE
                 );                
                 $this->session->set_userdata($newdata);

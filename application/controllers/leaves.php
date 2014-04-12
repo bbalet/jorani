@@ -21,18 +21,6 @@ if (!defined('BASEPATH')) {
  */
 
 class Leaves extends CI_Controller {
-
-    /**
-     * Connected user fullname
-     * @var string $fullname
-     */
-    private $fullname;
-    
-    /**
-     * Connected user privilege
-     * @var bool true if admin, false otherwise  
-     */
-    private $is_admin;    
     
     /**
      * Default constructor
@@ -51,6 +39,8 @@ class Leaves extends CI_Controller {
         $this->is_hr = $this->session->userdata('is_hr');
         $this->load->model('leaves_model');
         $this->user_id = $this->session->userdata('id');
+        $this->language = $this->session->userdata('language');
+        $this->language_code = $this->session->userdata('language_code');
     }
     
     /**
@@ -64,6 +54,8 @@ class Leaves extends CI_Controller {
         $data['is_admin'] = $this->is_admin;
         $data['is_hr'] = $this->is_hr;
         $data['user_id'] =  $this->user_id;
+        $data['language'] = $this->language;
+        $data['language_code'] =  $this->language_code;
         return $data;
     }
 
@@ -171,7 +163,7 @@ class Leaves extends CI_Controller {
                 $this->sendMail($leave_id);
             }            
             $this->session->set_flashdata('msg', 'The leave request has been succesfully created');
-            redirect('leaves/index');
+            redirect('leaves');
         }
     }
     
@@ -224,7 +216,7 @@ class Leaves extends CI_Controller {
                 $this->sendMail($leave_id);
             }            
             $this->session->set_flashdata('msg', 'The leave request has been succesfully updated');
-            redirect('leaves/index');
+            redirect('leaves');
         }
     }
     
@@ -285,7 +277,7 @@ class Leaves extends CI_Controller {
             $this->leaves_model->delete_leave($id);
         }
         $this->session->set_flashdata('msg', 'The leave request has been succesfully deleted');
-        redirect('leaves/index');
+        redirect('leaves');
     }
     
     /*
@@ -356,4 +348,33 @@ class Leaves extends CI_Controller {
         echo $this->leaves_model->individual($this->session->userdata('id'));
     }
 
+        
+    /**
+     * Action : download an iCal event corresponding to a leave request
+     * @param int leave request id
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function ical($id) {
+        //$this->auth->check_is_granted('download_calendar');
+        $leave = $this->leaves_model->get_leaves($id);
+        header('Content-type: text/calendar; charset=utf-8');
+        header('Content-Disposition: attachment; filename=leave.ics');
+        
+        $ical = "BEGIN:VCALENDAR\r\n" .
+                "VERSION:2.0\r\n" .
+                "PRODID:-//hacksw/handcal//NONSGML v1.0//EN\r\n" .
+                "CALSCALE:GREGORIAN\r\n" .
+                "BEGIN:VEVENT\r\n" .
+                "DTEND:" . date('Ymd\Tgis\Z',strtotime($leave['enddate'])) . "\r\n" .
+                "UID:" . md5(uniqid(mt_rand(), true)) . "\r\n" .
+                "DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "\r\n" .
+                "LOCATION:home\r\n" .
+                "DESCRIPTION:" . htmlspecialchars($leave['cause']) . "\r\n" .
+                "URL;VALUE=URI:" . htmlspecialchars(base_url() . "lms/leaves/" . $id) . "\r\n" .
+                "SUMMARY:leave request\r\n" .
+                "DTSTART:" . date('Ymd\Tgis\Z',strtotime($leave['startdate'])) . "\r\n" .
+                "END:VEVENT\r\n" .
+                "END:VCALENDAR\r\n";
+        echo $ical;
+    }
 }

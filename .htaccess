@@ -2,7 +2,6 @@
     Options +FollowSymLinks
 
     RewriteEngine On
-    RewriteBase /lms/
  
     ### Canonicalize codeigniter URLs
     RewriteRule ^(welcome(/index)?|index(\.php)?)/?$ / [L,R=301]

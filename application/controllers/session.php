@@ -32,6 +32,9 @@ class Session extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('users_model');
+        //TODO : to be improved
+        $this->language = 'english';
+        $this->language_code = 'en';
     }
 
     private function generateRandomString($length = 10) {
@@ -57,6 +60,8 @@ class Session extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
             $data['salt'] = $this->generateRandomString(rand(5, 20));
+            $data['language'] = $this->language;
+            $data['language_code'] = $this->language_code;
             $this->session->set_userdata('salt', $data['salt']);
             $this->load->view('templates/header', $data);
             $this->load->view('session/login', $data);
@@ -81,6 +86,8 @@ class Session extends CI_Controller {
                 $this->session->set_flashdata('msg', 'Invalid login id or password');
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
                 $data['salt'] = $this->generateRandomString(rand(5, 20));
+                $data['language'] = $this->language;
+                $data['language_code'] = $this->language_code;
                 $this->session->set_userdata('salt', $data['salt']);
                 $this->load->view('templates/header', $data);
                 $this->load->view('session/login', $data);

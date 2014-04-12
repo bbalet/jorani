@@ -26,8 +26,8 @@
 
     <label for="manager">Manager</label>
     <select name="manager" required>
-    <?php foreach ($users as $users_item): ?>
-        <option value="<?php echo $users_item['id'] ?>"><?php echo $users_item['firstname'] . ' ' . $users_item['lastname']; ?></option>
+    <?php foreach ($users as $manager): ?>
+        <option value="<?php echo $manager['id']; ?>" <?php if ($manager['id'] == $users_item['manager']) { echo "selected"; } ?>><?php echo $manager['firstname'] . ' ' . $manager['lastname']; ?></option>
     <?php endforeach ?>
     </select> If a user has no manager (itself), it can validate its leave requests.
     <br /><br />
@@ -35,5 +35,5 @@
     <br /><br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update user</button>
     &nbsp;
-    <a href="<?php echo base_url();?>users/" class="btn btn-primary"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <a href="<?php echo base_url();?>users" class="btn btn-primary"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
 </form>

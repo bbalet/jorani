@@ -21,18 +21,6 @@ if (!defined('BASEPATH')) {
  */
 
 class LeaveTypes extends CI_Controller {
-
-    /**
-     * Connected user fullname
-     * @var string $fullname
-     */
-    private $fullname;
-    
-    /**
-     * Connected user privilege
-     * @var bool true if admin, false otherwise  
-     */
-    private $is_admin;  
     
     /**
      * Default constructor
@@ -51,6 +39,8 @@ class LeaveTypes extends CI_Controller {
         $this->is_admin = $this->session->userdata('is_admin');
         $this->is_hr = $this->session->userdata('is_hr');
         $this->user_id = $this->session->userdata('id');
+        $this->language = $this->session->userdata('language');
+        $this->language_code = $this->session->userdata('language_code');
     }
     
     /**
@@ -64,6 +54,8 @@ class LeaveTypes extends CI_Controller {
         $data['is_admin'] = $this->is_admin;
         $data['is_hr'] = $this->is_hr;
         $data['user_id'] =  $this->user_id;
+        $data['language'] = $this->language;
+        $data['language_code'] =  $this->language_code;
         return $data;
     }
 

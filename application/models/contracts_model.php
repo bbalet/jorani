@@ -66,6 +66,8 @@ class Contracts_model extends CI_Model {
      */
     public function delete_contract($id) {
         $query = $this->db->delete('contracts', array('id' => $id));
+        $this->load->model('entitleddays_model');
+        $this->entitleddays_model->delete_entitleddays_cascade_contract($id);
     }
     
     /**

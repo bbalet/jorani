@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 08 Avril 2014 à 19:01
+-- Généré le: Sam 12 Avril 2014 à 19:35
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.4.3
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `startentdate` varchar(5) NOT NULL,
   `endentdate` varchar(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `contracts`
@@ -95,18 +95,18 @@ CREATE TABLE IF NOT EXISTS `entitleddays` (
   `startdate` date DEFAULT NULL,
   `enddate` date DEFAULT NULL,
   `type` int(11) NOT NULL,
-  `days` int(11) NOT NULL,
+  `days` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `entitleddays`
 --
 
 INSERT INTO `entitleddays` (`id`, `contract`, `employee`, `startdate`, `enddate`, `type`, `days`) VALUES
-(1, 1, 0, '2014-01-01', '2014-12-31', 1, 25),
-(2, 0, 6, '2014-01-01', '2014-12-31', 4, 5),
-(3, 0, 6, '2014-01-01', '2014-12-31', 1, 2);
+(1, 1, 0, '2014-01-01', '2014-12-31', 1, '25.00'),
+(2, 0, 6, '2014-01-01', '2014-12-31', 4, '5.00'),
+(3, 0, 6, '2014-01-01', '2014-12-31', 1, '2.00');
 
 -- --------------------------------------------------------
 
@@ -123,25 +123,27 @@ CREATE TABLE IF NOT EXISTS `leaves` (
   `cause` text,
   `startdatetype` varchar(12) DEFAULT NULL,
   `enddatetype` varchar(12) DEFAULT NULL,
-  `duration` decimal(10,0) DEFAULT NULL,
+  `duration` decimal(10,2) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- Contenu de la table `leaves`
 --
 
 INSERT INTO `leaves` (`id`, `startdate`, `enddate`, `status`, `employee`, `cause`, `startdatetype`, `enddatetype`, `duration`, `type`) VALUES
-(17, '2014-03-30', '2014-03-31', 2, 5, '', 'Morning', 'Afternoon', '2', 1),
-(18, '2014-03-30', '2014-04-01', 2, 5, 'i''m sick', 'Morning', 'Morning', '3', 1),
-(19, '2014-03-30', '2014-04-01', 2, 5, 'i''m sick', 'Morning', 'Morning', '3', 1),
-(20, '2014-03-30', '2014-03-31', 2, 5, '', 'Morning', 'Morning', '2', 1),
-(21, '2014-03-30', '2014-03-31', 1, 5, 'test', 'Morning', 'Morning', '3', 1),
-(22, '2014-04-06', '2014-04-10', 3, 6, '', 'Morning', 'Afternoon', '5', 1),
-(23, '2014-04-14', '2014-04-15', 3, 6, '', 'Morning', 'Afternoon', '1', 4),
-(24, '2014-05-19', '2014-05-23', 3, 6, '', 'Morning', 'Morning', '5', 1),
-(25, '2013-10-08', '2013-10-09', 3, 6, NULL, 'Morning', 'Morning', '2', 1);
+(17, '2014-03-30', '2014-03-31', 2, 5, '', 'Morning', 'Afternoon', '2.00', 1),
+(18, '2014-03-30', '2014-04-01', 2, 5, 'i''m sick', 'Morning', 'Morning', '3.00', 1),
+(19, '2014-03-30', '2014-04-01', 2, 5, 'i''m sick', 'Morning', 'Morning', '3.00', 1),
+(20, '2014-03-30', '2014-03-31', 2, 5, '', 'Morning', 'Morning', '2.00', 1),
+(21, '2014-03-30', '2014-03-31', 1, 5, 'test', 'Morning', 'Morning', '3.00', 1),
+(22, '2014-04-06', '2014-04-10', 3, 6, '', 'Morning', 'Afternoon', '5.00', 1),
+(23, '2014-04-14', '2014-04-15', 3, 6, '', 'Morning', 'Afternoon', '1.00', 4),
+(24, '2014-05-19', '2014-05-23', 3, 6, '', 'Morning', 'Morning', '5.00', 1),
+(25, '2013-10-08', '2013-10-09', 3, 6, NULL, 'Morning', 'Morning', '2.00', 1),
+(27, '2014-04-10', '2014-04-17', 2, 6, '', 'Morning', 'Morning', '7.00', 1),
+(28, '2014-04-10', '2014-04-17', 2, 6, '', 'Morning', 'Morning', '7.00', 1);
 
 -- --------------------------------------------------------
 
@@ -249,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `types`
@@ -260,7 +262,9 @@ INSERT INTO `types` (`id`, `name`) VALUES
 (2, 'maternity leave'),
 (3, 'paternity leave'),
 (4, 'special leave'),
-(5, 'sick leave');
+(5, 'sick leave'),
+(7, 'RTTE'),
+(9, 'RTTS');
 
 -- --------------------------------------------------------
 
@@ -281,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `service` int(11) DEFAULT NULL,
   `contract` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Contenu de la table `users`
@@ -291,7 +295,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `login`, `email`, `password`
 (5, 'John', 'DOE', 'DOE', 'benjamin.balet@gmail.com', '$2a$08$NeL/A7xVRbsFr9lxVSDmfOQsXepBom/PfvfTnua4AnFH2YkVZpjCa', 66, 5, NULL, NULL, NULL),
 (6, 'Benjamin', 'BALET', 'bbalet', 'benjamin.balet@gmail.com', '$2a$08$KTQ6KRC6rtsPG3Qkf0TKreRjUDB.CyxEY9/1dX1mZc50kqIiI3MYi', 1, 6, NULL, NULL, 1),
 (12, 'toto', 'toto', 'ttoto', 'benjamin.balet@gmail.com', '$2a$08$Ijed..gLC.VRaoFNVhW.J.qHiD0.9mv9a8hIZIJHccfBvQ/1jAAEW', 8, 5, NULL, NULL, 1),
-(13, 'aaaaaa', 'aaaaaa', 'aaaaaaa', 'benjamin.balet@gmail.com', '$2a$08$pGCACb6wWfXsWHGIH/G1O.Qh.AR6XsKhB1LGmhj8f1/csShUpTm6G', 2, 5, NULL, NULL, 1);
+(15, 'Jane', 'DOE', 'jdoe', 'benjamin.balet@gmail.com', '$2a$08$2vJMASbNOsMP2Gf06YI7TONk5mgnnKuGzfogwqtMh6qoj89ZzeIqi', 2, 5, NULL, NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

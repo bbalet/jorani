@@ -30,7 +30,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">192.168.0.30</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -46,21 +46,9 @@
           <stringProp name="CookieManager.implementation">org.apache.jmeter.protocol.http.control.HC4CookieHandler</stringProp>
         </CookieManager>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Source de données CSV" enabled="true">
-          <stringProp name="delimiter">,</stringProp>
-          <stringProp name="fileEncoding">UTF-8</stringProp>
-          <stringProp name="filename">C:\Users\balet\Documents\Osiatis\Formations\LoadTest\tests\Products.csv</stringProp>
-          <boolProp name="quotedData">false</boolProp>
-          <boolProp name="recycle">true</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
-          <boolProp name="stopThread">false</boolProp>
-          <stringProp name="variableNames">CRITERE,PRODUIT</stringProp>
-        </CSVDataSet>
-        <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="Arbre de résultats" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
-            <name>saveConfig</name>
             <value class="SampleSaveConfiguration">
               <time>true</time>
               <latency>true</latency>
@@ -84,10 +72,19 @@
               <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
             </value>
           </objProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Data set" enabled="true">
+          <stringProp name="BeanShellSampler.query">vars.put(&quot;USER&quot;, &quot;bbalet&quot;);
+vars.put(&quot;PASSWORD_CLEAR&quot;, &quot;bbalet&quot;);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login Form" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
@@ -99,7 +96,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">lms/index.php/session/login</stringProp>
+          <stringProp name="HTTPSampler.path">index.php/session/login</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -110,7 +107,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assertion Réponse" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert answer login" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="-1486438733">Login to the application</stringProp>
             </collectionProp>
@@ -119,11 +116,11 @@
             <intProp name="Assertion.test_type">16</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Compteur de temps fixe" enabled="true">
-            <stringProp name="ConstantTimer.delay">2000</stringProp>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait 4s" enabled="true">
+            <stringProp name="ConstantTimer.delay">4000</stringProp>
           </ConstantTimer>
           <hashTree/>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extracteur REGEX SALT" enabled="true">
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extractor REGEX SALT" enabled="true">
             <stringProp name="TestPlan.comments">&lt;input type=&quot;hidden&quot; name=&quot;salt&quot; id=&quot;salt&quot; value=&quot;nXpdBfnck60w&quot; /&gt;</stringProp>
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">SALT</stringProp>
@@ -133,13 +130,40 @@
             <stringProp name="RegexExtractor.match_number">0</stringProp>
           </RegexExtractor>
           <hashTree/>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BS : Extract Public key" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">import java.util.regex;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+String pattern = &quot;&lt;textarea id=\&quot;pubkey\&quot; style=\&quot;visibility:hidden;\&quot;&gt;(.*?)&lt;/textarea&gt;&quot;;
+String response = prev.getResponseDataAsString();
+StringBuffer sb = new StringBuffer();
+
+Pattern r = Pattern.compile(pattern, Pattern.MULTILINE | Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+Matcher m = r.matcher(response);
+
+if (m.find()){
+	vars.put(&quot;PUBKEY&quot;, m.group(1));
+	}
+else {
+	log.info(&quot;Impossible to extract public key.&quot;);
+	org.apache.jmeter.engine.StandardJMeterEngine.stopThread(Thread.currentThread().getName());
+}
+
+
+</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login Action" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="login" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">bbalet</stringProp>
+                <stringProp name="Argument.value">${USER}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">login</stringProp>
@@ -151,13 +175,6 @@
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">CipheredValue</stringProp>
               </elementProp>
-              <elementProp name="salt" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">${SALT}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">salt</stringProp>
-              </elementProp>
             </collectionProp>
           </elementProp>
           <stringProp name="HTTPSampler.domain"></stringProp>
@@ -166,7 +183,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">lms/index.php/session/login</stringProp>
+          <stringProp name="HTTPSampler.path">session/login</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -176,7 +193,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Pré-Processeur BeanShell" enabled="true">
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BS : cipher password and Salt" enabled="true">
             <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
@@ -186,16 +203,14 @@ import java.security.spec.*;
 import javax.crypto.Cipher;
 import org.apache.commons.codec.binary.Base64;
 
-String PUBLIC_KEY_FILE = &quot;C:/Users/balet/Documents/Osiatis/Formations/LoadTest/tests/public.pem&quot;;
+log.info(&quot;\n----------------------------------------&quot;);
+log.info(&quot;USER=&quot; + vars.get(&quot;USER&quot;));
+log.info(&quot;PASSWORD_CLEAR=&quot; + vars.get(&quot;PASSWORD_CLEAR&quot;));
+log.info(&quot;SALT=&quot; + vars.get(&quot;SALT&quot;));
+log.info(&quot;PUBLIC_KEY_FILE=&quot; + vars.get(&quot;PUBKEY&quot;));
+log.info(&quot;\n\n----------------------------------------&quot;);
 
-File f = new File(PUBLIC_KEY_FILE);
-FileInputStream fis = new FileInputStream(f);
-DataInputStream dis = new DataInputStream(fis);
-byte[] keyBytes = new byte[(int)f.length()];
-dis.readFully(keyBytes);
-dis.close();
-
-String publicKeyPEM = new String(keyBytes, &quot;UTF-8&quot;);
+String publicKeyPEM = vars.get(&quot;PUBKEY&quot;);
 publicKeyPEM = publicKeyPEM.replaceAll(&quot;(-+BEGIN PUBLIC KEY-+\\r?\\n|-+END PUBLIC KEY-+\\r?\\n?)&quot;, &quot;&quot;);
 
 Base64 b64 = new Base64();
@@ -206,8 +221,7 @@ KeyFactory kf = KeyFactory.getInstance(&quot;RSA&quot;);
 
 PublicKey publicKey = kf.generatePublic(spec);
 
-log.info(&quot;SALT=&quot; + vars.get(&quot;SALT&quot;)); 
-String originalText = &quot;bbalet&quot; + vars.get(&quot;SALT&quot;);
+String originalText = vars.get(&quot;PASSWORD_CLEAR&quot;) + vars.get(&quot;SALT&quot;);
 
 byte[] cipherText = null;
 try {
@@ -215,8 +229,8 @@ try {
       cipher.init(Cipher.ENCRYPT_MODE, publicKey);
       cipherText = cipher.doFinal(originalText.getBytes());
 } catch (Exception e) {
-    	log.info(&quot;Error cipher&quot;); 
-      e.printStackTrace();
+    	log.info(&quot;Error cipher&quot;);
+     org.apache.jmeter.engine.StandardJMeterEngine.stopThread(Thread.currentThread().getName());
 }
 
 byte[] encoded = Base64.encodeBase64(cipherText);
@@ -236,8 +250,8 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <intProp name="Assertion.test_type">16</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Compteur de temps fixe" enabled="true">
-            <stringProp name="ConstantTimer.delay">1000</stringProp>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait 4s" enabled="true">
+            <stringProp name="ConstantTimer.delay">4000</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
@@ -251,7 +265,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">lms/leaves/counters</stringProp>
+          <stringProp name="HTTPSampler.path">leaves/counters</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -270,7 +284,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <intProp name="Assertion.test_type">16</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Compteur de temps fixe" enabled="true">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait 120s" enabled="true">
             <stringProp name="ConstantTimer.delay">120000</stringProp>
           </ConstantTimer>
           <hashTree/>
@@ -285,7 +299,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">lms/leaves/create</stringProp>
+          <stringProp name="HTTPSampler.path">leaves/create</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -376,7 +390,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">lms/leaves/create</stringProp>
+          <stringProp name="HTTPSampler.path">leaves/create</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -411,7 +425,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">lms/requests</stringProp>
+          <stringProp name="HTTPSampler.path">requests</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -431,7 +445,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
           </ResponseAssertion>
           <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extracteur Expression régulière" enabled="true">
-            <stringProp name="TestPlan.comments">http://benjamin-balet.info/lms/leaves/28&quot; title=&quot;View request&quot;&gt;28&lt;/a&gt;</stringProp>
+            <stringProp name="TestPlan.comments">http://host/lms/leaves/28&quot; title=&quot;View request&quot;&gt;28&lt;/a&gt;</stringProp>
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">REQUEST</stringProp>
             <stringProp name="RegexExtractor.regex">leaves/(.+)&quot; title=&quot;</stringProp>
@@ -478,7 +492,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
-            <stringProp name="script">vars.put(&quot;PATH_ACCEPT_REQUEST&quot;, &quot;lms/requests/accept/&quot; + vars.get(&quot;REQUEST&quot;));</stringProp>
+            <stringProp name="script">vars.put(&quot;PATH_ACCEPT_REQUEST&quot;, &quot;/requests/accept/&quot; + vars.get(&quot;REQUEST&quot;));</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Compteur de temps fixe" enabled="true">
@@ -496,7 +510,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">lms/session/logout</stringProp>
+          <stringProp name="HTTPSampler.path">session/logout</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -526,7 +540,6 @@ vars.put(&quot;PASSWORD&quot;, encText);
       <ResultCollector guiclass="AssertionVisualizer" testclass="ResultCollector" testname="Récepteur d&apos;assertions" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
-          <name>saveConfig</name>
           <value class="SampleSaveConfiguration">
             <time>true</time>
             <latency>true</latency>
@@ -550,6 +563,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
             <assertionsResultsToSave>0</assertionsResultsToSave>
             <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
           </value>
         </objProp>
         <stringProp name="filename"></stringProp>
@@ -558,7 +572,6 @@ vars.put(&quot;PASSWORD&quot;, encText);
       <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ThreadsStateOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Active Threads Over Time" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
-          <name>saveConfig</name>
           <value class="SampleSaveConfiguration">
             <time>true</time>
             <latency>true</latency>
@@ -582,6 +595,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
             <assertionsResultsToSave>0</assertionsResultsToSave>
             <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
           </value>
         </objProp>
         <stringProp name="filename"></stringProp>
@@ -594,7 +608,6 @@ vars.put(&quot;PASSWORD&quot;, encText);
       <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Over Time" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
-          <name>saveConfig</name>
           <value class="SampleSaveConfiguration">
             <time>true</time>
             <latency>true</latency>
@@ -618,6 +631,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
             <assertionsResultsToSave>0</assertionsResultsToSave>
             <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
           </value>
         </objProp>
         <stringProp name="filename"></stringProp>
@@ -630,7 +644,6 @@ vars.put(&quot;PASSWORD&quot;, encText);
       <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Rapport consolidé" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
-          <name>saveConfig</name>
           <value class="SampleSaveConfiguration">
             <time>true</time>
             <latency>true</latency>
@@ -654,6 +667,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
             <assertionsResultsToSave>0</assertionsResultsToSave>
             <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
           </value>
         </objProp>
         <stringProp name="filename"></stringProp>
@@ -662,7 +676,6 @@ vars.put(&quot;PASSWORD&quot;, encText);
       <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Rapport agrégé" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
-          <name>saveConfig</name>
           <value class="SampleSaveConfiguration">
             <time>true</time>
             <latency>true</latency>
@@ -686,6 +699,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
             <assertionsResultsToSave>0</assertionsResultsToSave>
             <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
           </value>
         </objProp>
         <stringProp name="filename"></stringProp>
@@ -694,7 +708,6 @@ vars.put(&quot;PASSWORD&quot;, encText);
       <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="Tableau de résultats" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
-          <name>saveConfig</name>
           <value class="SampleSaveConfiguration">
             <time>true</time>
             <latency>true</latency>
@@ -718,10 +731,73 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
             <assertionsResultsToSave>0</assertionsResultsToSave>
             <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
           </value>
         </objProp>
         <stringProp name="filename"></stringProp>
       </ResultCollector>
+      <hashTree/>
+      <kg.apc.jmeter.perfmon.PerfMonCollector guiclass="kg.apc.jmeter.vizualizers.PerfMonGui" testclass="kg.apc.jmeter.perfmon.PerfMonCollector" testname="jp@gc - PerfMon Metrics Collector" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+        <longProp name="interval_grouping">1000</longProp>
+        <boolProp name="graph_aggregated">false</boolProp>
+        <stringProp name="include_sample_labels"></stringProp>
+        <stringProp name="exclude_sample_labels"></stringProp>
+        <collectionProp name="metricConnections">
+          <collectionProp name="-1711209971">
+            <stringProp name="1734915482">192.168.0.30</stringProp>
+            <stringProp name="1600768">4444</stringProp>
+            <stringProp name="66952">CPU</stringProp>
+            <stringProp name="0"></stringProp>
+          </collectionProp>
+          <collectionProp name="283043004">
+            <stringProp name="1734915482">192.168.0.30</stringProp>
+            <stringProp name="1600768">4444</stringProp>
+            <stringProp name="-1993889503">Memory</stringProp>
+            <stringProp name="0"></stringProp>
+          </collectionProp>
+          <collectionProp name="-2122915041">
+            <stringProp name="1734915482">192.168.0.30</stringProp>
+            <stringProp name="1600768">4444</stringProp>
+            <stringProp name="2112896831">Disks I/O</stringProp>
+            <stringProp name="0"></stringProp>
+          </collectionProp>
+          <collectionProp name="395383020">
+            <stringProp name="1734915482">192.168.0.30</stringProp>
+            <stringProp name="1600768">4444</stringProp>
+            <stringProp name="-274342153">Network I/O</stringProp>
+            <stringProp name="0"></stringProp>
+          </collectionProp>
+        </collectionProp>
+      </kg.apc.jmeter.perfmon.PerfMonCollector>
       <hashTree/>
     </hashTree>
   </hashTree>

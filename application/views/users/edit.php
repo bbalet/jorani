@@ -12,7 +12,7 @@
     <input type="input" name="lastname" value="<?php echo $users_item['lastname']; ?>" required /><br />
 
     <label for="login">Login</label>
-    <input type="input" name="login" value="<?php echo $users_item['lastname']; ?>" required /><br />
+    <input type="input" name="login" value="<?php echo $users_item['login']; ?>" required /><br />
 	
     <label for="email">E-mail</label>
     <input type="email" id="email" name="email" value="<?php echo $users_item['email']; ?>" required /><br />

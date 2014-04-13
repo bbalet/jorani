@@ -17,7 +17,7 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">100</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">2</stringProp>
+        <stringProp name="ThreadGroup.num_threads">20</stringProp>
         <stringProp name="ThreadGroup.ramp_time">60</stringProp>
         <longProp name="ThreadGroup.start_time">1397117449000</longProp>
         <longProp name="ThreadGroup.end_time">1397117449000</longProp>
@@ -46,8 +46,35 @@
           <stringProp name="CookieManager.implementation">org.apache.jmeter.protocol.http.control.HC4CookieHandler</stringProp>
         </CookieManager>
         <hashTree/>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="Arbre de résultats" enabled="true">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="Arbre de résultats" enabled="false">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
+            </value>
+          </objProp>
           <objProp>
             <value class="SampleSaveConfiguration">
               <time>true</time>
@@ -79,13 +106,67 @@
         </ResultCollector>
         <hashTree/>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Data set" enabled="true">
-          <stringProp name="BeanShellSampler.query">String[][] parmUser = new String[10][10]; 
-parmUser[0][0] = &quot;bbalet&quot;; 	parmUser[0][1] = &quot;bbalet&quot;;
-parmUser[1][0] = &quot;jdoe&quot;; 	parmUser[1][1] = &quot;jdoe&quot;;
-parmUser[2][0] = &quot;bbalet&quot;; 	parmUser[2][1] = &quot;bbalet&quot;;
-parmUser[3][0] = &quot;jdoe&quot;; 	parmUser[3][1] = &quot;jdoe&quot;;
-parmUser[4][0] = &quot;bbalet&quot;; 	parmUser[4][1] = &quot;bbalet&quot;;
-parmUser[5][0] = &quot;jdoe&quot;; 	parmUser[5][1] = &quot;jdoe&quot;;
+          <stringProp name="BeanShellSampler.query">String[][] parmUser = new String[50][50]; 
+parmUser[0][0] = &quot;user12&quot;; 	parmUser[0][1] = &quot;user12&quot;;
+
+parmUser[1][0] = &quot;user11&quot;; 	parmUser[1][1] = &quot;user11&quot;;
+parmUser[2][0] = &quot;user1&quot;; 	parmUser[2][1] = &quot;user1&quot;;
+parmUser[3][0] = &quot;user2&quot;; 	parmUser[3][1] = &quot;user2&quot;;
+parmUser[4][0] = &quot;user3&quot;; 	parmUser[4][1] = &quot;user3&quot;;
+parmUser[5][0] = &quot;user4&quot;; 	parmUser[5][1] = &quot;user4&quot;;
+
+parmUser[6][0] = &quot;user5&quot;; 	parmUser[6][1] = &quot;user5&quot;;
+parmUser[7][0] = &quot;user6&quot;; 	parmUser[7][1] = &quot;user6&quot;;
+parmUser[8][0] = &quot;user7&quot;; 	parmUser[8][1] = &quot;user7&quot;;
+parmUser[9][0] = &quot;user8&quot;; 	parmUser[9][1] = &quot;user8&quot;;
+parmUser[10][0] = &quot;user9&quot;; 	parmUser[10][1] = &quot;user9&quot;;
+
+parmUser[11][0] = &quot;user13&quot;; 	parmUser[11][1] = &quot;user13&quot;;
+parmUser[12][0] = &quot;user10&quot;; 	parmUser[12][1] = &quot;user10&quot;;
+parmUser[13][0] = &quot;user11&quot;; 	parmUser[13][1] = &quot;user11&quot;;
+parmUser[14][0] = &quot;user12&quot;; 	parmUser[14][1] = &quot;user12&quot;;
+parmUser[15][0] = &quot;user&quot;; 	parmUser[15][1] = &quot;user&quot;;
+
+parmUser[16][0] = &quot;user&quot;; 	parmUser[16][1] = &quot;user&quot;;
+parmUser[17][0] = &quot;user&quot;; 	parmUser[17][1] = &quot;user&quot;;
+parmUser[18][0] = &quot;user&quot;; 	parmUser[18][1] = &quot;user&quot;;
+parmUser[19][0] = &quot;user&quot;; 	parmUser[19][1] = &quot;user&quot;;
+parmUser[20][0] = &quot;user&quot;; 	parmUser[20][1] = &quot;user&quot;;
+
+parmUser[21][0] = &quot;user&quot;; 	parmUser[21][1] = &quot;user&quot;;
+parmUser[22][0] = &quot;user&quot;; 	parmUser[22][1] = &quot;user&quot;;
+parmUser[23][0] = &quot;user&quot;; 	parmUser[23][1] = &quot;user&quot;;
+parmUser[24][0] = &quot;user&quot;; 	parmUser[24][1] = &quot;user&quot;;
+parmUser[25][0] = &quot;user&quot;; 	parmUser[25][1] = &quot;user&quot;;
+
+parmUser[26][0] = &quot;user&quot;; 	parmUser[26][1] = &quot;user&quot;;
+parmUser[27][0] = &quot;user&quot;; 	parmUser[27][1] = &quot;user&quot;;
+parmUser[28][0] = &quot;user&quot;; 	parmUser[28][1] = &quot;user&quot;;
+parmUser[29][0] = &quot;user&quot;; 	parmUser[29][1] = &quot;user&quot;;
+parmUser[30][0] = &quot;user&quot;; 	parmUser[30][1] = &quot;user&quot;;
+
+parmUser[31][0] = &quot;user&quot;; 	parmUser[31][1] = &quot;user&quot;;
+parmUser[32][0] = &quot;user&quot;; 	parmUser[32][1] = &quot;user&quot;;
+parmUser[33][0] = &quot;user&quot;; 	parmUser[33][1] = &quot;user&quot;;
+parmUser[34][0] = &quot;user&quot;; 	parmUser[34][1] = &quot;user&quot;;
+parmUser[35][0] = &quot;user&quot;; 	parmUser[35][1] = &quot;user&quot;;
+
+parmUser[36][0] = &quot;user&quot;; 	parmUser[36][1] = &quot;user&quot;;
+parmUser[37][0] = &quot;user&quot;; 	parmUser[37][1] = &quot;user&quot;;
+parmUser[38][0] = &quot;user&quot;; 	parmUser[38][1] = &quot;user&quot;;
+parmUser[39][0] = &quot;user&quot;; 	parmUser[39][1] = &quot;user&quot;;
+parmUser[40][0] = &quot;user&quot;; 	parmUser[40][1] = &quot;user&quot;;
+
+parmUser[41][0] = &quot;user&quot;; 	parmUser[41][1] = &quot;user&quot;;
+parmUser[42][0] = &quot;user&quot;; 	parmUser[42][1] = &quot;user&quot;;
+parmUser[43][0] = &quot;user&quot;; 	parmUser[43][1] = &quot;user&quot;;
+parmUser[44][0] = &quot;user&quot;; 	parmUser[44][1] = &quot;user&quot;;
+parmUser[45][0] = &quot;user&quot;; 	parmUser[45][1] = &quot;user&quot;;
+
+parmUser[46][0] = &quot;user&quot;; 	parmUser[46][1] = &quot;user&quot;;
+parmUser[47][0] = &quot;user&quot;; 	parmUser[47][1] = &quot;user&quot;;
+parmUser[48][0] = &quot;user&quot;; 	parmUser[48][1] = &quot;user&quot;;
+parmUser[49][0] = &quot;user50&quot;; 	parmUser[19][1] = &quot;user50&quot;;
 
 threadIndex = ctx.getThreadNum();
 
@@ -261,7 +342,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <intProp name="Assertion.test_type">16</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait 4s" enabled="true">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait 5s" enabled="true">
             <stringProp name="ConstantTimer.delay">4000</stringProp>
           </ConstantTimer>
           <hashTree/>
@@ -286,7 +367,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assertion Réponse" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assertion Réponse" enabled="false">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="467386706">My summary</stringProp>
             </collectionProp>
@@ -329,7 +410,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <intProp name="Assertion.test_type">16</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Compteur de temps fixe" enabled="true">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait 20s" enabled="true">
             <stringProp name="ConstantTimer.delay">20000</stringProp>
           </ConstantTimer>
           <hashTree/>
@@ -421,7 +502,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <intProp name="Assertion.test_type">16</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Compteur de temps fixe" enabled="true">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait 2s" enabled="true">
             <stringProp name="ConstantTimer.delay">2000</stringProp>
           </ConstantTimer>
           <hashTree/>
@@ -465,7 +546,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <stringProp name="RegexExtractor.match_number">0</stringProp>
           </RegexExtractor>
           <hashTree/>
-          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Compteur de temps fixe" enabled="true">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait 20s" enabled="true">
             <stringProp name="ConstantTimer.delay">20000</stringProp>
           </ConstantTimer>
           <hashTree/>
@@ -506,7 +587,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <stringProp name="script">vars.put(&quot;PATH_ACCEPT_REQUEST&quot;, &quot;/requests/accept/&quot; + vars.get(&quot;REQUEST&quot;));</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
-          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Compteur de temps fixe" enabled="true">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait 10s" enabled="true">
             <stringProp name="ConstantTimer.delay">10000</stringProp>
           </ConstantTimer>
           <hashTree/>
@@ -540,7 +621,7 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <intProp name="Assertion.test_type">16</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Compteur de temps fixe" enabled="true">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait 2s" enabled="true">
             <stringProp name="ConstantTimer.delay">2000</stringProp>
           </ConstantTimer>
           <hashTree/>
@@ -577,11 +658,65 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
+        <objProp>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
       <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ThreadsStateOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Active Threads Over Time" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
         <objProp>
           <value class="SampleSaveConfiguration">
             <time>true</time>
@@ -645,6 +780,33 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
+        <objProp>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
         <stringProp name="filename"></stringProp>
         <longProp name="interval_grouping">500</longProp>
         <boolProp name="graph_aggregated">false</boolProp>
@@ -652,8 +814,35 @@ vars.put(&quot;PASSWORD&quot;, encText);
         <stringProp name="exclude_sample_labels"></stringProp>
       </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Rapport consolidé" enabled="true">
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Rapport consolidé" enabled="false">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
         <objProp>
           <value class="SampleSaveConfiguration">
             <time>true</time>
@@ -713,11 +902,65 @@ vars.put(&quot;PASSWORD&quot;, encText);
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
+        <objProp>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="Tableau de résultats" enabled="true">
+      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="Tableau de résultats" enabled="false">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
         <objProp>
           <value class="SampleSaveConfiguration">
             <time>true</time>
@@ -750,6 +993,33 @@ vars.put(&quot;PASSWORD&quot;, encText);
       <hashTree/>
       <kg.apc.jmeter.perfmon.PerfMonCollector guiclass="kg.apc.jmeter.vizualizers.PerfMonGui" testclass="kg.apc.jmeter.perfmon.PerfMonCollector" testname="jp@gc - PerfMon Metrics Collector" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
         <objProp>
           <value class="SampleSaveConfiguration">
             <time>true</time>

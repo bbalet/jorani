@@ -37,7 +37,7 @@ echo form_open('users/create', $attributes); ?>
     </form>
 
     <label for="password">Password</label>
-    <input type="input" name="password" id="password" required />&nbsp;
+    <input type="password" name="password" id="password" required />&nbsp;
     <a class="btn" id="cmdGeneratePassword">
         <i class="icon-refresh"></i>&nbsp;Generate password
     </a>

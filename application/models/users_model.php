@@ -82,7 +82,11 @@ class Users_model extends CI_Model {
         //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
         set_include_path(get_include_path() . PATH_SEPARATOR . APPPATH . 'third_party/phpseclib');
         include(APPPATH . '/third_party/phpseclib/Crypt/RSA.php');
-        define("CRYPT_RSA_MODE", CRYPT_RSA_MODE_INTERNAL);
+        if (extension_loaded('openssl') && file_exists(CRYPT_RSA_OPENSSL_CONFIG)) {
+            define("CRYPT_RSA_MODE", CRYPT_RSA_MODE_OPENSSL);
+        } else {
+            define("CRYPT_RSA_MODE", CRYPT_RSA_MODE_INTERNAL);
+        }
         $private_key = file_get_contents('./assets/keys/private.pem', true);
         $rsa = new Crypt_RSA();
         $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);

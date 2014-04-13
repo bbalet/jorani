@@ -15,6 +15,8 @@
 |
 */
 $config['base_url']	= '';
+/*If you are using LMS with Nginx on HTTP protocol
+$_SERVER['HTTPS'] = 'off';*/
 
 /*
 |--------------------------------------------------------------------------

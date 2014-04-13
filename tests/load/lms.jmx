@@ -15,10 +15,10 @@
         <stringProp name="ThreadGroup.on_sample_error">stopthread</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Contrôleur Boucle" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">100</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">2</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">60</stringProp>
         <longProp name="ThreadGroup.start_time">1397117449000</longProp>
         <longProp name="ThreadGroup.end_time">1397117449000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
@@ -79,8 +79,19 @@
         </ResultCollector>
         <hashTree/>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Data set" enabled="true">
-          <stringProp name="BeanShellSampler.query">vars.put(&quot;USER&quot;, &quot;bbalet&quot;);
-vars.put(&quot;PASSWORD_CLEAR&quot;, &quot;bbalet&quot;);</stringProp>
+          <stringProp name="BeanShellSampler.query">String[][] parmUser = new String[10][10]; 
+parmUser[0][0] = &quot;bbalet&quot;; 	parmUser[0][1] = &quot;bbalet&quot;;
+parmUser[1][0] = &quot;jdoe&quot;; 	parmUser[1][1] = &quot;jdoe&quot;;
+parmUser[2][0] = &quot;bbalet&quot;; 	parmUser[2][1] = &quot;bbalet&quot;;
+parmUser[3][0] = &quot;jdoe&quot;; 	parmUser[3][1] = &quot;jdoe&quot;;
+parmUser[4][0] = &quot;bbalet&quot;; 	parmUser[4][1] = &quot;bbalet&quot;;
+parmUser[5][0] = &quot;jdoe&quot;; 	parmUser[5][1] = &quot;jdoe&quot;;
+
+threadIndex = ctx.getThreadNum();
+
+vars.put(&quot;USER&quot;, parmUser[threadIndex][0]);
+vars.put(&quot;PASSWORD_CLEAR&quot;, parmUser[threadIndex][1]);
+</stringProp>
           <stringProp name="BeanShellSampler.filename"></stringProp>
           <stringProp name="BeanShellSampler.parameters"></stringProp>
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>

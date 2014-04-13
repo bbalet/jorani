@@ -1,0 +1,89 @@
+# 
+# LMS nginx sample configuration file
+# If you are using HTTP protocol, don't forget to disable HTTPS in application/config/config.php
+# $_SERVER['HTTPS'] = 'off';
+#
+
+server { 
+	listen 80 default;
+	server_name localhost;
+	access_log /var/log/nginx/localhost.access.log;
+	root /var/www/;
+	index  index.php index.html;
+
+	gzip on;
+	gzip_disable "msie6";
+	gzip_min_length 1100;
+	gzip_types text/xml text/css image/x-icon image/bmp application/atom+xml
+                   text/javascript application/x-javascript
+                   application/pdf application/postscript
+                   application/rtf application/vnd.ms-powerpoint
+                   application/msword application/vnd.ms-excel
+                   application/vnd.wap.xhtml+xml;
+
+	# If file is an asset, set expires and break
+    	location ~* \.(ico|css|js|gif|jpe?g|png)(\?[0-9]+)?$ {
+        	expires max;
+        	break;
+    	}
+
+	#Allow acces to some specific assets
+	location ~* ^/(robots\.txt) {
+            expires max;
+            break;
+        }
+
+	# canonicalize codeigniter url end points
+	# if your default controller is something other than "welcome" you should change the following
+	if ($request_uri ~* ^(/leaves(/index)?|/index(.php)?)/?$)
+ 	{
+        	rewrite ^(.*)$ / permanent;
+    	}
+ 
+	# removes trailing "index" from all controllers
+    	if ($request_uri ~* index/?$)
+    	{
+        	rewrite ^/(.*)/index/?$ /$1 permanent;
+    	}
+ 
+    	# removes trailing slashes (prevents SEO duplicate content issues)
+    	if (!-d $request_filename)
+    	{
+        	rewrite ^/(.+)/$ /$1 permanent;
+    	}
+ 
+    	# removes access to "system" folder, also allows a "System.php" controller
+    	if ($request_uri ~* ^/system)
+    	{
+        	rewrite ^/(.*)$ /index.php?/$1 last;
+        	break;
+    	}
+ 
+    	# unless the request is for a valid file (image, js, css, etc.), send to bootstrap
+    	if (!-e $request_filename)
+    	{
+        	rewrite ^/(.*)$ /index.php?/$1 last;
+        	break;
+    	}
+ 
+    	# catch all
+    	error_page 404 /index.php;
+
+	location ~ \.php$ {
+		try_files $uri $uri/ /index.php?/$request_uri;
+		include fastcgi_params;
+		fastcgi_split_path_info ^(.+\.php)(.*)$;
+		#This is a Linux socket config
+		#fastcgi_pass unix:/var/run/php-fastcgi/php-fastcgi.socket;
+		#Alternatively, you can configure nginx/PHP with a backend
+		fastcgi_pass 127.0.0.1:9000;
+		fastcgi_index index.php;
+		fastcgi_param SCRIPT_FILENAME
+			$document_root$fastcgi_script_name;
+	}
+
+	## Disable viewing some files such as .htaccess & .htpassword
+        location ~* \.(ht|htpassword|pem) {
+                deny all;
+        }
+}

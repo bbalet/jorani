@@ -34,7 +34,7 @@ $lang['menu_hr_list_contracts'] = 'List of contracts';
 $lang['menu_hr_leaves_type_divider'] = 'Leaves';
 $lang['menu_hr_list_leaves_type'] = 'List of types';
 
-$lang['menu_requests_title'] = 'Requests';
+$lang['menu_requests_title'] = 'Validation';
 
 $lang['menu_leaves_title'] = 'My leaves';
 $lang['menu_leaves_counters'] = 'Counters';

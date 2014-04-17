@@ -20,7 +20,7 @@ if (!defined('BASEPATH')) {
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class Calendar extends CI_Controller {
+class Reports extends CI_Controller {
     
     /**
      * Default constructor
@@ -32,7 +32,7 @@ class Calendar extends CI_Controller {
         if (!$this->session->userdata('logged_in')) {
             $this->session->set_userdata('last_page', current_url());
             redirect('session/login');
-        }
+        }      
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
@@ -40,6 +40,8 @@ class Calendar extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('reports', $this->language);
     }
     
     /**
@@ -59,32 +61,46 @@ class Calendar extends CI_Controller {
     }
 
     /**
-     * Display the page of the team calendar (users having the same manager)
-     * Data (calendar events) is retrieved by AJAX from leaves' controller
+     * List the available reports (all folders into local/reports
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function team() {
-        $this->auth->check_is_granted('team_calendar');
+    public function index() {
+        $this->auth->check_is_granted('report_list');
         $data = $this->getUserContext();
-        $data['title'] = 'Team calendar';
+        
+        $reports = array();
+        $files = glob(FCPATH . '/local/reports/*', GLOB_ONLYDIR);
+        foreach($files as $file) {
+            $ini_array = parse_ini_file($file . '/report.ini', true);
+            $reports[$ini_array[$this->language_code]['name']] = array(
+                basename($file),
+                $ini_array[$this->language_code]['description']
+                );
+        }
+        
+        $data['title'] = lang('reports_index_title');
+        $data['reports'] = $reports;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
-        $this->load->view('calendar/team', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('reports/index', $data);
+        $this->load->view('templates/footer'); 
     }
 
     /**
-     * Display the page of the individual calendar
-     * Data (calendar events) is retrieved by AJAX from leaves' controller
+     * Execute a report
+     * @param string $report Name of the folder containing the report
+     * @param string $action PHP file to be executed
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function individual() {
-        $this->auth->check_is_granted('individual_calendar');
+    public function execute($report, $action = "index.php") {
+        $this->auth->check_is_granted('report_execute');
         $data = $this->getUserContext();
-        $data['title'] = 'My calendar';
+        $data['title'] = lang('reports_execute_title');
+        $data['report'] = $report;
+        $data['action'] = $action;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
-        $this->load->view('calendar/individual', $data);
+        $this->load->view('reports/execute', $data);
         $this->load->view('templates/footer');
     }
 }

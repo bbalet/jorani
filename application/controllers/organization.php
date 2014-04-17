@@ -20,7 +20,7 @@ if (!defined('BASEPATH')) {
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class Calendar extends CI_Controller {
+class Organization extends CI_Controller {
     
     /**
      * Default constructor
@@ -33,6 +33,7 @@ class Calendar extends CI_Controller {
             $this->session->set_userdata('last_page', current_url());
             redirect('session/login');
         }
+        $this->load->model('leaves_model');
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
@@ -59,32 +60,22 @@ class Calendar extends CI_Controller {
     }
 
     /**
-     * Display the page of the team calendar (users having the same manager)
-     * Data (calendar events) is retrieved by AJAX from leaves' controller
+     * 
+     * 
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function team() {
-        $this->auth->check_is_granted('team_calendar');
+    public function index() {
+        $this->auth->check_is_granted('organization');
         $data = $this->getUserContext();
-        $data['title'] = 'Team calendar';
+        $data['leaves'] = $this->leaves_model->get_leaves();
+        
+        //TODO : to be implemented
+        
+        /*$data['title'] = 'My Leave Requests';
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/team', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footer');*/
     }
 
-    /**
-     * Display the page of the individual calendar
-     * Data (calendar events) is retrieved by AJAX from leaves' controller
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function individual() {
-        $this->auth->check_is_granted('individual_calendar');
-        $data = $this->getUserContext();
-        $data['title'] = 'My calendar';
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('calendar/individual', $data);
-        $this->load->view('templates/footer');
-    }
 }

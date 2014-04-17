@@ -102,6 +102,14 @@ class Auth {
                     return false;
                 break;
             
+            case 'report_list' :
+            case 'report_execute' :
+                if ($this->CI->session->userdata('is_hr') == true)
+                    return true;
+                else
+                    return false;
+                break;
+            
             //HR
             case 'leavetypes_delete' :
             case 'leavetypes_list' :

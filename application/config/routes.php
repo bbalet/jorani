@@ -104,6 +104,10 @@ $route['entitleddays/userdelete/(:any)'] = 'entitleddays/userdelete/$1';
 $route['entitleddays/contract/(:any)'] = 'entitleddays/contract/$1';
 $route['entitleddays/contractdelete/(:any)'] = 'entitleddays/contractdelete/$1';
 
+//Reports
+$route['reports/(:any)/(:any)'] = 'reports/execute/$1/$2';
+$route['reports'] = 'reports';
+
 //Session management
 $route['session/login'] = 'session/login';
 $route['session/logout'] = 'session/logout';

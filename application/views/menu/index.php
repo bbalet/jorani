@@ -1,3 +1,6 @@
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('menu', $language);?>
 
 <div class="row-fluid">
     <div class="span8">
@@ -68,7 +71,7 @@
 
              <ul class="nav">			  
                 <li class="dropdown">
-                  <a href="<?php echo base_url();?>requests">Requests</a>
+                  <a href="<?php echo base_url();?>requests"><?php echo lang('menu_requests_title');?></a>
                 </li>
               </ul>
                 

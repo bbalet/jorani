@@ -34,7 +34,7 @@ $lang['menu_hr_list_contracts'] = 'Liste des contrats';
 $lang['menu_hr_leaves_type_divider'] = 'Congés';
 $lang['menu_hr_list_leaves_type'] = 'Liste des types';
 
-$lang['menu_requests_title'] = 'Demandes';
+$lang['menu_requests_title'] = 'Validation';
 
 $lang['menu_leaves_title'] = 'Mes demandes';
 $lang['menu_leaves_counters'] = 'Compteurs';

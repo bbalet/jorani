@@ -22,7 +22,8 @@ $lang['calendar_individual_link_ical_description'] = '(pour importer l\'absence 
 $lang['calendar_individual_popup_event_title'] = 'Détails de l\'événement';
 $lang['calendar_individual_popup_event_button_close'] = 'Fermer';
 
-$lang['calendar_team_title'] = 'calendrier de l\'équipe';
+$lang['calendar_workmates_title'] = 'Calendar of mes collègues';
+$lang['calendar_collaborators_title'] = 'Calendar of my collaborateurs';
 
 $lang['calendar_component_monthNames'] = '\'Janvier\',\'Février\',\'Mars\',\'Avril\',\'Mai\',\'Juin\',\'Juillet\',\'Août\',\'Septembre\',\'Octobre\',\'Novembre\',\'Décembre\'';
 $lang['calendar_component_monthNamesShort'] = '\'janv.\',\'févr.\',\'mars\',\'avr.\',\'mai\',\'juin\',\'juil.\',\'août\',\'sept.\',\'oct.\',\'nov.\',\'déc.\'';

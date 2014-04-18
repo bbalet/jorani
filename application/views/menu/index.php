@@ -4,25 +4,25 @@ $this->lang->load('menu', $language);?>
 
 <div class="row-fluid">
     <div class="span8">
-        <h3><a href="<?php echo base_url();?>" style="text-decoration:none; color:black;"><img src="<?php echo base_url();?>assets/images/favicon.png">&nbsp;Passerelles numériques</a>
+        <h3><a href="<?php echo base_url();?>" style="text-decoration:none; color:black;"><img src="<?php echo base_url();?>assets/images/logo.png">&nbsp;<?php echo lang('menu_banner_slogan');?></a>
     </div>
     <div class="span4 pull-right">
         <a href="<?php echo base_url();?>users/reset/<?php echo $user_id; ?>" title="reset password" data-target="#frmChangeMyPwd" data-toggle="modal"><i class="icon-lock"></i></a>
         &nbsp;
-        Welcome <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout">Logout</a>
+        <?php echo lang('menu_banner_welcome');?> <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout"><?php echo lang('menu_banner_logout');?></a>
     </div>
 </div>
 
 <div id="frmChangeMyPwd" class="modal hide fade">
     <div class="modal-header">
         <a href="javascript:$('#frmChangeMyPwd').modal('hide')" class="close">&times;</a>
-         <h3>Change password</h3>
+         <h3><?php echo lang('menu_password_popup_title');?></h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmChangeMyPwd').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="javascript:$('#frmChangeMyPwd').modal('hide')" class="btn secondary"><?php echo lang('menu_password_popup_button_cancel');?></a>
     </div>
 </div>
 
@@ -39,31 +39,31 @@ $this->lang->load('menu', $language);?>
               <?php if ($is_admin == TRUE) { ?>
               <ul class="nav">			  
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_admin_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url();?>users">List of users</a></li>
-                    <li><a href="<?php echo base_url();?>users/create">Add a user</a></li>
+                    <li><a href="<?php echo base_url();?>users"><?php echo lang('menu_admin_list_users');?></a></li>
+                    <li><a href="<?php echo base_url();?>users/create"><?php echo lang('menu_admin_add_user');?></a></li>
                     <li class="divider"></li>
-                    <li class="nav-header">Settings</li>
-                    <li><a href="<?php echo base_url();?>settings">Settings</a></li>
+                    <li class="nav-header"><?php echo lang('menu_admin_settings_divider');?></li>
+                    <li><a href="<?php echo base_url();?>settings"><?php echo lang('menu_admin_settings');?></a></li>
                   </ul>
                 </li>
               </ul>
               <?php } ?>
-                
+
               <?php if ($is_hr == TRUE) { ?>
               <ul class="nav">			  
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">HR <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_hr_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li class="nav-header">Employees</li>
-                    <li><a href="<?php echo base_url();?>hr/employees">List of employees</a></li>
+                    <li class="nav-header"><?php echo lang('menu_hr_employees_divider');?></li>
+                    <li><a href="<?php echo base_url();?>hr/employees"><?php echo lang('menu_hr_list_employees');?></a></li>
                     <li class="divider"></li>
-                    <li class="nav-header">Contracts</li>
-                    <li><a href="<?php echo base_url();?>contracts">List of contracts</a></li>
+                    <li class="nav-header"><?php echo lang('menu_hr_contracts_divider');?></li>
+                    <li><a href="<?php echo base_url();?>contracts"><?php echo lang('menu_hr_list_contracts');?></a></li>
                     <li class="divider"></li>
-                    <li class="nav-header">Leaves</li>
-                    <li><a href="<?php echo base_url();?>leavetypes">List of types</a></li>
+                    <li class="nav-header"><?php echo lang('menu_hr_leaves_type_divider');?></li>
+                    <li><a href="<?php echo base_url();?>leavetypes"><?php echo lang('menu_hr_list_leaves_type');?></a></li>
                   </ul>
                 </li>
               </ul>
@@ -74,24 +74,25 @@ $this->lang->load('menu', $language);?>
                   <a href="<?php echo base_url();?>requests"><?php echo lang('menu_requests_title');?></a>
                 </li>
               </ul>
-                
+              
               <ul class="nav">			  
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My leaves <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_leaves_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url();?>leaves/counters">Counters</a></li>
-                    <li><a href="<?php echo base_url();?>leaves">List of leave requests</a></li>
-                    <li><a href="<?php echo base_url();?>leaves/create">Request a leave</a></li>
+                    <li><a href="<?php echo base_url();?>leaves/counters"><?php echo lang('menu_leaves_counters');?></a></li>
+                    <li><a href="<?php echo base_url();?>leaves"><?php echo lang('menu_leaves_list_requests');?></a></li>
+                    <li><a href="<?php echo base_url();?>leaves/create"><?php echo lang('menu_leaves_create_request');?></a></li>
                   </ul>
                 </li>
               </ul>
-                
+         
               <ul class="nav">			  
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Calendars <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_calendar_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url();?>calendar/team">Team calendar</a></li>
-                    <li><a href="<?php echo base_url();?>calendar/individual">My calendar</a></li>
+                      <li><a href="<?php echo base_url();?>calendar/individual"><?php echo lang('menu_calendar_individual');?></a></li>
+                      <li><a href="<?php echo base_url();?>calendar/workmates"><?php echo lang('menu_calendar_workmates');?></a></li>
+                      <li><a href="<?php echo base_url();?>calendar/collaborators"><?php echo lang('menu_calendar_collaborators');?></a></li>
                   </ul>
                 </li>
               </ul>

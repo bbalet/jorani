@@ -76,16 +76,19 @@ $route['contracts/(:any)'] = 'contracts/view/$1';
 $route['contracts'] = 'contracts';
 
 //Team leave requests (manager->team UNION team->manager)
-$route['calendar/team'] = 'calendar/team';
 $route['calendar/individual'] = 'calendar/individual';
-$route['leaves/team'] = 'leaves/team';
+$route['calendar/workmates'] = 'calendar/workmates';
+$route['calendar/collaborators'] = 'calendar/collaborators';
 $route['leaves/individual'] = 'leaves/individual';
+$route['leaves/collaborators'] = 'leaves/collaborators';
+$route['leaves/team'] = 'leaves/team';
 $route['leaves/ical/(:any)'] = 'leaves/ical/$1';
 
 //My leave requests
 $route['leaves/counters'] = 'leaves/counters';
 $route['leaves/export'] = 'leaves/export';
 $route['leaves/create'] = 'leaves/create';
+$route['leaves/credit'] = 'leaves/credit';
 $route['leaves/edit/(:any)'] = 'leaves/edit/$1';
 $route['leaves/update'] = 'leaves/update';
 $route['leaves/delete/(:any)'] = 'leaves/delete/$1';

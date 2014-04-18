@@ -110,7 +110,7 @@ class Leaves_model extends CI_Model {
             $entitled_days = $this->db->get()->result_array();
 
             foreach ($entitled_days as $entitled) {
-                $summary[$entitled['type']][1] = $entitled['entitled']; //Taken
+                $summary[$entitled['type']][1] = $entitled['entitled']; //entitled
             }
 
             //Add entitled days of employee      
@@ -128,7 +128,7 @@ class Leaves_model extends CI_Model {
             foreach ($entitled_days as $entitled) {
                 //Note: this is an addition to the entitled days attached to the contract
                 //Most common use cases are 'special leave', 'maternity leave'...
-                $summary[$entitled['type']][1] += $entitled['entitled']; //Taken
+                $summary[$entitled['type']][1] += $entitled['entitled']; //entitled
             }
 
             //Remove all lines having taken and entitled set to set to 0
@@ -142,6 +142,18 @@ class Leaves_model extends CI_Model {
         }
         
         return $summary;
+    }
+    
+    /**
+     * Get the number of days a user can take for a given leave type
+     * @param int $id employee id
+     * @param int $type type of leave
+     * @return int number of days not taken
+     */
+    public function get_user_leaves_credit($id, $type) {
+        $summary = $this->get_user_leaves_summary($id);
+        //return entitled days - taken (for a given leave type)
+        return ($summary[$type][1] - $summary[$type][0]);
     }
     
     /**
@@ -165,6 +177,26 @@ class Leaves_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    /**
+     * Update a leave request in the database
+     * @param type $id
+     * @return type
+     */
+    public function update_leaves($id) {
+        $data = array(
+            'startdate' => $this->input->post('startdate'),
+            'startdatetype' => $this->input->post('startdatetype'),
+            'enddate' => $this->input->post('enddate'),
+            'enddatetype' => $this->input->post('enddatetype'),
+            'duration' => $this->input->post('duration'),
+            'type' => $this->input->post('type'),
+            'cause' => $this->input->post('cause'),
+            'status' => $this->input->post('status')
+        );
+        $this->db->where('id', $id);
+        $this->db->update('leaves', $data);
+    }
+    
     /**
      * Accept a leave request
      * @param int $id leave request identifier
@@ -211,6 +243,8 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function individual($user_id) {
+        $this->db->select('leaves.*, types.name as type');
+        $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('employee', $user_id);
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(70);
@@ -218,12 +252,34 @@ class Leaves_model extends CI_Model {
 
         $jsonevents = array();
         foreach ($events as $entry) {
+            
+            if ($entry->startdatetype == "Morning") {
+                $startdate = $entry->startdate . 'T07:00:00';
+            } else {
+                $startdate = $entry->startdate . 'T12:00:00';
+            }
+
+            if ($entry->enddatetype == "Morning") {
+                $enddate = $entry->enddate . 'T12:00:00';
+            } else {
+                $enddate = $entry->enddate . 'T18:00:00';
+            }
+            
+            switch ($entry->status)
+            {
+                case 1: $color = 'grey'; break;     // Planned
+                case 2: $color = 'blue'; break;     // Requested
+                case 3: $color = 'yellow'; break;   // Accepted
+                case 4: $color = 'red'; break;      // Rejected
+            }
+            
             $jsonevents[] = array(
                 'id' => $entry->id,
-                'title' => 'Leave',
-                'start' => $entry->startdate,
+                'title' => $entry->type,
+                'start' => $startdate,
+                'color' => $color,
                 'allDay' => false,
-                'end' => $entry->enddate
+                'end' => $enddate
             );
         }
         return json_encode($jsonevents);
@@ -235,26 +291,96 @@ class Leaves_model extends CI_Model {
      * @return string JSON encoded list of full calendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function team($user_id) {
+    public function workmates($user_id) {
         $this->db->join('users', 'users.id = leaves.employee');
         $this->db->where('users.manager', $user_id);
+        $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(70);
         $events = $this->db->get('leaves')->result();
-
+        
         $jsonevents = array();
         foreach ($events as $entry) {
+            if ($entry->startdatetype == "Morning") {
+                $startdate = $entry->startdate . 'T07:00:00';
+            } else {
+                $startdate = $entry->startdate . 'T12:00:00';
+            }
+
+            if ($entry->enddatetype == "Morning") {
+                $enddate = $entry->enddate . 'T12:00:00';
+            } else {
+                $enddate = $entry->enddate . 'T18:00:00';
+            }
+            
+            switch ($entry->status)
+            {
+                case 1: $color = 'grey'; break;     // Planned
+                case 2: $color = 'blue'; break;     // Requested
+                case 3: $color = 'yellow'; break;   // Accepted
+                case 4: $color = 'red'; break;      // Rejected
+            }
+            
             $jsonevents[] = array(
                 'id' => $entry->id,
-                'title' => 'Leave',
-                'start' => $entry->startdate,
+                'title' => $entry->firstname .' ' . $entry->lastname,
+                'start' => $startdate,
+                'color' => $color,
                 'allDay' => false,
-                'end' => $entry->enddate
+                'end' => $enddate
             );
         }
         return json_encode($jsonevents);
     }
 
+    /**
+     * All users having the same manager
+     * @param int $user_id id of the manager
+     * @return string JSON encoded list of full calendar events
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function collaborators($user_id) {
+        $this->db->join('users', 'users.id = leaves.employee');
+        $this->db->where('users.manager', $user_id);
+        $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
+        $this->db->order_by('startdate', 'desc');
+        $this->db->limit(70);
+        $events = $this->db->get('leaves')->result();
+        
+        $jsonevents = array();
+        foreach ($events as $entry) {
+            if ($entry->startdatetype == "Morning") {
+                $startdate = $entry->startdate . 'T07:00:00';
+            } else {
+                $startdate = $entry->startdate . 'T12:00:00';
+            }
+
+            if ($entry->enddatetype == "Morning") {
+                $enddate = $entry->enddate . 'T12:00:00';
+            } else {
+                $enddate = $entry->enddate . 'T18:00:00';
+            }
+            
+            switch ($entry->status)
+            {
+                case 1: $color = 'grey'; break;     // Planned
+                case 2: $color = 'blue'; break;     // Requested
+                case 3: $color = 'yellow'; break;   // Accepted
+                case 4: $color = 'red'; break;      // Rejected
+            }
+            
+            $jsonevents[] = array(
+                'id' => $entry->id,
+                'title' => $entry->firstname .' ' . $entry->lastname,
+                'start' => $startdate,
+                'color' => $color,
+                'allDay' => false,
+                'end' => $enddate
+            );
+        }
+        return json_encode($jsonevents);
+    }
+    
     /**
      * List all leave requests submitted to the connected user or only those
      * with the "Requested" status.
@@ -270,7 +396,6 @@ class Leaves_model extends CI_Model {
             $this->db->where('status', 2);
         }
         $this->db->order_by('startdate', 'desc');
-        //return $this->db->get('leaves')->result();
         $query = $this->db->get('leaves');
         return $query->result_array();
     }

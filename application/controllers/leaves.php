@@ -189,7 +189,8 @@ class Leaves extends CI_Controller {
         
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Edit a leave request';        
+        $data['title'] = 'Edit a leave request';
+        $data['id'] = $id;
         
         $this->load->model('types_model');  
         $data['types'] = $this->types_model->get_types();
@@ -209,7 +210,7 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $leave_id = $this->leaves_model->set_leaves();
+            $leave_id = $this->leaves_model->update_leaves($id);
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
                 $this->sendMail($leave_id);
@@ -330,24 +331,41 @@ class Leaves extends CI_Controller {
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output');
     }
-    
-    /**
-     * REST endpoint : Send a list of fullcalendar events
-     */
-    public function team() {
-        header("Content-Type: application/json");
-        echo $this->leaves_model->team($this->session->userdata('manager'));
-    }
 
     /**
-     * REST endpoint : Send a list of fullcalendar events
+     * Ajax endpoint : Send a list of fullcalendar events
      */
     public function individual() {
         header("Content-Type: application/json");
         echo $this->leaves_model->individual($this->session->userdata('id'));
     }
 
-        
+    /**
+     * Ajax endpoint : Send a list of fullcalendar events
+     */
+    public function workmates() {
+        header("Content-Type: application/json");
+        echo $this->leaves_model->workmates($this->session->userdata('manager'));
+    }
+    
+    /**
+     * Ajax endpoint : Send a list of fullcalendar events
+     */
+    public function collaborators() {
+        header("Content-Type: application/json");
+        echo $this->leaves_model->collaborators($this->session->userdata('id'));
+    }
+    
+    /**
+     * Ajax endpoint : difference between the entitled and the taken days
+     */
+    public function credit() {
+        header("Content-Type: application/json");
+        echo $this->leaves_model->get_user_leaves_credit(
+                $this->input->post('id'),
+                $this->input->post('type'));
+    }
+    
     /**
      * Action : download an iCal event corresponding to a leave request
      * @param int leave request id

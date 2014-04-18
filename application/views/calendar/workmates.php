@@ -2,7 +2,7 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('calendar', $language);?>
 
-<h1><?php echo lang('calendar_team_title');?></h1>
+<h1><?php echo lang('calendar_workmates_title');?></h1>
 
 <div id='calendar'></div>
 
@@ -43,7 +43,7 @@ $(document).ready(function() {
             center: "<?php echo lang('calendar_component_header_center');?>",
             right: "<?php echo lang('calendar_component_header_right');?>"
         },
-        events: '<?php echo base_url();?>leaves/team'
+        events: '<?php echo base_url();?>leaves/workmates'
     });
 });
 </script>

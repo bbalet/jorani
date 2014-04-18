@@ -22,7 +22,8 @@ $lang['calendar_individual_popup_event_link_ical_description'] = '(import the ev
 $lang['calendar_individual_popup_event_title'] = 'Event details';
 $lang['calendar_individual_popup_event_button_close'] = 'Close';
 
-$lang['calendar_team_title'] = 'Team calendar';
+$lang['calendar_workmates_title'] = 'Calendar of my workmates';
+$lang['calendar_collaborators_title'] = 'Calendar of my collaborators';
 
 $lang['calendar_component_monthNames'] = '\'January\',\'February\',\'March\',\'April\',\'May\',\'June\',\'July\',\'August\',\'September\',\'October\',\'November\',\'December\'';
 $lang['calendar_component_monthNamesShort'] = '\'Jan\',\'Feb\',\'Mar\',\'Apr\',\'May\',\'Jun\',\'Jul\',\'Aug\',\'Sep\',\'Oct\',\'Nov\',\'Dec\'';

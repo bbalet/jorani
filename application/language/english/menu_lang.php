@@ -16,9 +16,15 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+$lang['menu_banner_slogan'] = 'Leave Management System';
 $lang['menu_banner_welcome'] = 'Welcome %s';
 $lang['menu_banner_logout'] = 'Logout';
 $lang['menu_banner_change_password'] = 'Change password';
+
+$lang['menu_banner_welcome'] = 'Welcome';
+$lang['menu_banner_logout'] = 'Logout';
+$lang['menu_password_popup_title'] = 'Change password';
+$lang['menu_password_popup_button_cancel'] = 'Cancel';
 
 $lang['menu_admin_title'] = 'Admin';
 $lang['menu_admin_list_users'] = 'List of users';
@@ -42,5 +48,7 @@ $lang['menu_leaves_list_requests'] = 'List of leave requests';
 $lang['menu_leaves_create_request'] = 'Request a leave';
 
 $lang['menu_calendar_title'] = 'Calendars';
-$lang['menu_calendar_team'] = 'Team calendar';
 $lang['menu_calendar_individual'] = 'My calendar';
+$lang['menu_calendar_workmates'] = 'My workmates';
+$lang['menu_calendar_collaborators'] = 'My collaborators';
+

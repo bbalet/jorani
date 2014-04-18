@@ -16,9 +16,15 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+$lang['menu_banner_slogan'] = 'Gestion des demandes de congés';
 $lang['menu_banner_welcome'] = 'Bienvenue %s';
 $lang['menu_banner_logout'] = 'Déconnexion';
 $lang['menu_banner_change_password'] = 'Changer le mot de passe';
+
+$lang['menu_banner_welcome'] = 'Bienvenue';
+$lang['menu_banner_logout'] = 'Déconnexion';
+$lang['menu_password_popup_title'] = 'Changer le mot de passe';
+$lang['menu_password_popup_button_cancel'] = 'Annuler';
 
 $lang['menu_admin_title'] = 'Admin';
 $lang['menu_admin_list_users'] = 'Liste des utilisateurs';
@@ -42,6 +48,6 @@ $lang['menu_leaves_list_requests'] = 'Liste des demandes de congés';
 $lang['menu_leaves_create_request'] = 'Faire une demande de congés';
 
 $lang['menu_calendar_title'] = 'Calendriers';
-$lang['menu_calendar_team'] = 'Calendrier de l\'équipe';
 $lang['menu_calendar_individual'] = 'Mon calendrier';
-
+$lang['menu_calendar_workmates'] = 'Mes collègues';
+$lang['menu_calendar_collaborators'] = 'Mes collaborateurs';

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $language_code;?>">
 <head>
     <title><?php echo $title ?> - LMS</title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">

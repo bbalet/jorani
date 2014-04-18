@@ -40,6 +40,8 @@ class Calendar extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('calendar', $this->language);
     }
     
     /**
@@ -59,32 +61,51 @@ class Calendar extends CI_Controller {
     }
 
     /**
-     * Display the page of the team calendar (users having the same manager)
-     * Data (calendar events) is retrieved by AJAX from leaves' controller
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function team() {
-        $this->auth->check_is_granted('team_calendar');
-        $data = $this->getUserContext();
-        $data['title'] = 'Team calendar';
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('calendar/team', $data);
-        $this->load->view('templates/footer');
-    }
-
-    /**
-     * Display the page of the individual calendar
+     * Display the page of the individual calendar (of the connected user)
      * Data (calendar events) is retrieved by AJAX from leaves' controller
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function individual() {
         $this->auth->check_is_granted('individual_calendar');
         $data = $this->getUserContext();
-        $data['title'] = 'My calendar';
+        $data['title'] = lang('calendar_individual_title');
+        $data['googleApi'] = false;
+        $data['clientId'] = 'key';
+        $data['apiKey'] = 'key';
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/individual', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Display the page of the team calendar (users having the same manager
+     * than the connected user)
+     * Data (calendar events) is retrieved by AJAX from leaves' controller
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function workmates() {
+        $this->auth->check_is_granted('workmates_calendar');
+        $data = $this->getUserContext();
+        $data['title'] = lang('calendar_workmates_title');
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('calendar/workmates', $data);
+        $this->load->view('templates/footer');
+    }
+
+    /**
+     * Display the calendar of the employees managed by the connected user
+     * Data (calendar events) is retrieved by AJAX from leaves' controller
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function collaborators() {
+        $this->auth->check_is_granted('collaborators_calendar');
+        $data = $this->getUserContext();
+        $data['title'] = lang('calendar_collaborators_title');
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('calendar/collaborators', $data);
         $this->load->view('templates/footer');
     }
 }

@@ -2,7 +2,7 @@
 
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('leaves/edit') ?>
+<?php echo form_open('leaves/edit/' . $id) ?>
 
     <label for="startdate" required>Start Date</label>
     <input type="input" name="startdate" id="startdate" value="<?php echo $leave['startdate']; ?>" />
@@ -18,15 +18,20 @@
         <option value="Afternoon">Afternoon</option>
     </select><br />
     
-    <label for="duration" required>Duration</label>
-    <input type="input" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" />
-    
     <label for="type" required>Leave type</label>
-    <select name="type">
+    <select name="type" id="type">
     <?php foreach ($types as $types_item): ?>
         <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 1) echo "selected" ?>><?php echo $types_item['name'] ?></option>
     <?php endforeach ?>    
     </select><br />
+    
+    <label for="duration" required>Duration</label>
+    <input type="input" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" />
+    
+    <div class="alert hide alert-error" id="lblCreditAlert">
+        <button type="button" class="close">&times;</button>
+        You are exceeding your entitled days
+    </div>
     
     <label for="cause">Cause</label>
     <textarea name="cause"><?php echo set_value('cause'); ?></textarea>
@@ -37,7 +42,7 @@
         <option value="2">Requested</option>
     </select><br />
 
-    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Request leave</button>
+    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update leave</button>
     &nbsp;
     <a href="<?php echo base_url(); ?>leaves" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
 </form>
@@ -48,6 +53,24 @@
     $(function () {
         $('#startdate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
         $('#enddate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+        
+        //Check if the user has not exceed the number of entitled days
+        $("#duration").keyup(function() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url();?>leaves/credit",
+                data: { id: <?php echo $user_id; ?>, type: $("#type option:selected").text() }
+                })
+                .done(function( msg ) {
+                    var credit = parseInt(msg);
+                    var duration = parseInt($("#duration").val());
+                    if (duration > credit) {
+                        $("#lblCreditAlert").show();
+                        
+                    } else {
+                        $("#lblCreditAlert").hide();
+                    }
+                });
+        });
     });
-
 </script>

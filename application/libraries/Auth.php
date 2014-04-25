@@ -96,6 +96,7 @@ class Auth {
             case 'create_contract' :
             case 'delete_contract' :
             case 'edit_contract' :
+            case 'calendar_contract' :
                 if ($this->CI->session->userdata('is_hr') == true)
                     return true;
                 else

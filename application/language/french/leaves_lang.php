@@ -36,3 +36,37 @@ $lang['leaves_index_popup_delete_message'] = 'Vous êtes sur le point de supprim
 $lang['leaves_index_popup_delete_question'] = 'Voulez-vous continuer ?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Oui';
 $lang['leaves_index_popup_delete_button_no'] = 'Non';
+
+$lang['leaves_date_type_morning'] = 'Matin';
+$lang['leaves_date_type_afternoon'] = 'Après-midi';
+
+$lang['leaves_create_title'] = 'Créer une nouvelle demande';
+$lang['leaves_create_field_start'] = 'Date de début';
+$lang['leaves_create_field_end'] = 'Date de fin';
+$lang['leaves_create_field_type'] = 'Type de congés';
+$lang['leaves_create_field_duration'] = 'Durée';
+$lang['leaves_create_field_duration_message'] = 'Vous dépassez le nombre de jours permis';
+$lang['leaves_create_field_cause'] = 'Cause (optionelle)';
+$lang['leaves_create_field_status'] = 'Statut';
+$lang['leaves_create_button_create'] = 'Créer la demande';
+$lang['leaves_create_button_cancel'] = 'Annuler';
+
+$lang['leaves_edit_title'] = 'Modifier la demande N°';
+$lang['leaves_edit_field_start'] = 'Date de début';
+$lang['leaves_edit_field_end'] = 'Date de fin';
+$lang['leaves_edit_field_type'] = 'Type de congés';
+$lang['leaves_edit_field_duration'] = 'Durée';
+$lang['leaves_edit_field_duration_message'] = 'Vous dépassez le nombre de jours permis';
+$lang['leaves_edit_field_cause'] = 'Cause (optionelle)';
+$lang['leaves_edit_field_status'] = 'Statut';
+$lang['leaves_edit_button_update'] = 'Mettre à jour';
+$lang['leaves_edit_button_cancel'] = 'Annuler';
+
+$lang['leaves_view_title'] = 'Visualiser la demande N°';
+$lang['leaves_view_field_start'] = 'Date de début';
+$lang['leaves_view_field_end'] = 'Date de fin';
+$lang['leaves_view_field_type'] = 'Type de congés';
+$lang['leaves_view_field_duration'] = 'Durée';
+$lang['leaves_view_field_cause'] = 'Cause';
+$lang['leaves_view_field_status'] = 'Statut';
+$lang['leaves_view_button_back_list'] = 'Retour à la liste';

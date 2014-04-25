@@ -36,3 +36,34 @@ $lang['leaves_index_popup_delete_message'] = 'You are about to delete one leave 
 $lang['leaves_index_popup_delete_question'] = 'Do you want to proceed?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Yes';
 $lang['leaves_index_popup_delete_button_no'] = 'No';
+
+$lang['leaves_create_title'] = 'Submit a leave request';
+$lang['leaves_create_field_start'] = 'Start Date';
+$lang['leaves_create_field_end'] = 'End Date';
+$lang['leaves_create_field_type'] = 'Leave type';
+$lang['leaves_create_field_duration'] = 'Duration';
+$lang['leaves_create_field_duration_message'] = 'You are exceeding your entitled days';
+$lang['leaves_create_field_cause'] = 'Cause (optional)';
+$lang['leaves_create_field_status'] = 'Status';
+$lang['leaves_create_button_create'] = 'Request leave';
+$lang['leaves_create_button_cancel'] = 'Cancel';
+
+$lang['leaves_edit_title'] = 'Edit leave request #';
+$lang['leaves_edit_field_start'] = 'Start Date';
+$lang['leaves_edit_field_end'] = 'End Date';
+$lang['leaves_edit_field_type'] = 'Leave type';
+$lang['leaves_edit_field_duration'] = 'Duration';
+$lang['leaves_edit_field_duration_message'] = 'You are exceeding your entitled days';
+$lang['leaves_edit_field_cause'] = 'Cause (optional)';
+$lang['leaves_edit_field_status'] = 'Status';
+$lang['leaves_edit_button_update'] = 'Update leave';
+$lang['leaves_edit_button_cancel'] = 'Cancel';
+
+$lang['leaves_view_title'] = 'View leave request #';
+$lang['leaves_view_field_start'] = 'Start Date';
+$lang['leaves_view_field_end'] = 'End Date';
+$lang['leaves_view_field_type'] = 'Leave type';
+$lang['leaves_view_field_duration'] = 'Duration';
+$lang['leaves_view_field_cause'] = 'Cause';
+$lang['leaves_view_field_status'] = 'Status';
+$lang['leaves_view_button_back_list'] = 'Back to list';

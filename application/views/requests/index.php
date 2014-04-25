@@ -1,3 +1,8 @@
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('requests', $language);
+$this->lang->load('datatable', $language);
+?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -17,19 +22,19 @@ $(document).ready(function() {
 </script>
 <?php } ?>
 
-<h1>Requests submitted to me</h1>
+<h1><?php echo lang('requests_index_title');?></h1>
 
-<p>This screen lists the leave requests submitted to you. If you are not a manager, this list will always be empty.</p>
+<p><?php echo lang('requests_index_description');?></p>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Full name</th>
-            <th>Start Date</th>
-            <th>End Date</th>            
-            <th>Duration</th>
-            <th>Type</th>
+            <th><?php echo lang('requests_index_thead_id');?></th>
+            <th><?php echo lang('requests_index_thead_fullname');?></th>
+            <th><?php echo lang('requests_index_thead_startdate');?></th>
+            <th><?php echo lang('requests_index_thead_enddate');?></th>            
+            <th><?php echo lang('requests_index_thead_duration');?></th>
+            <th><?php echo lang('requests_index_thead_type');?></th>
         </tr>
     </thead>
     <tbody>
@@ -63,13 +68,13 @@ $(document).ready(function() {
 
 <div class="row-fluid">
     <div class="span2">
-      <a href="<?php echo base_url();?>requests/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
+      <a href="<?php echo base_url();?>requests/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('requests_index_button_export');?></a>
     </div>
      <div class="span2">
-      <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; All requests</a>
+      <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_all');?></a>
     </div>
     <div class="span2">
-      <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; Pending requests</a>
+      <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_pending');?></a>
     </div>
     <div class="span8">&nbsp;</div>
 </div>
@@ -95,8 +100,31 @@ $(document).ready(function() {
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
-    $('#leaves').dataTable();
-	
+    $('#leaves').dataTable({
+		"oLanguage": {
+                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                    "oPaginate": {
+                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                        "sLast":     "<?php echo lang('datatable_sLast');?>",
+                        "sNext":     "<?php echo lang('datatable_sNext');?>",
+                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                    },
+                    "oAria": {
+                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                    }
+                }
+            });	
 
 });
 </script>

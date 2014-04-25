@@ -17,7 +17,9 @@
  */
 
 $lang['session_login_title'] = 'Login to the application';
+$lang['session_login_field_language'] = 'Language';
 $lang['session_login_field_login'] = 'Login';
 $lang['session_login_field_password'] = 'Password';
 $lang['session_login_button_login'] = 'Login';
 $lang['session_login_flash_bad_credentials'] = 'Invalid login id or password';
+$lang['session_login_flash_change_language'] = 'The language has been succesfully set to ';

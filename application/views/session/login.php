@@ -20,8 +20,17 @@ $(document).ready(function() {
 <?php echo validation_errors(); ?>
 
 <?php
-$attributes = array('id' => 'target');
+$attributes = array('id' => 'loginFrom');
 echo form_open('session/login', $attributes); ?>
+
+    <input type="hidden" name="last_page" value="session/login" />
+    <!--
+    <label for="login"><?php echo lang('session_login_field_language');?></label>
+    <select name="language" id="language">
+        <option value="en" <?php if ($language_code == 'en') echo 'selected'; ?>>English</option>
+        <option value="fr" <?php if ($language_code == 'fr') echo 'selected'; ?>>Français</option>
+    </select>
+    //-->
     <label for="login"><?php echo lang('session_login_field_login');?></label>
     <input type="input" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required /><br />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
@@ -41,7 +50,7 @@ echo form_open('session/login', $attributes); ?>
             //Encrypt the concatenation of the password and the salt
             var encrypted = encrypt.encrypt($('#password').val() + $('#salt').val());
             $('#CipheredValue').val(encrypted);
-            $('#target').submit();
+            $('#loginFrom').submit();
         });
         
         //Validate the form if the user press enter key in password field
@@ -49,6 +58,12 @@ echo form_open('session/login', $attributes); ?>
             if(e.keyCode==13)
             $('#send').click();
         });
+        
+        //Refresh page language
+//        $('#language').change(function(){
+//            $('#loginFrom').prop('action', 'session/language');
+//            $('#loginFrom').submit();
+//        });
     });
 </script>
 

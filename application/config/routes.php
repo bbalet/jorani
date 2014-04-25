@@ -41,12 +41,12 @@
 //Admin : user management
 $route['users/export'] = 'users/export';
 $route['users/import'] = 'users/import';
-$route['users/reset/(:any)'] = 'users/reset/$1';
+$route['users/reset/(:num)'] = 'users/reset/$1';
 $route['users/create'] = 'users/create';
-$route['users/edit/(:any)'] = 'users/edit/$1';
+$route['users/edit/(:num)'] = 'users/edit/$1';
 $route['users/update'] = 'users/update';
-$route['users/delete/(:any)'] = 'users/delete/$1';
-$route['users/(:any)'] = 'users/view/$1';
+$route['users/delete/(:num)'] = 'users/delete/$1';
+$route['users/(:num)'] = 'users/view/$1';
 $route['users'] = 'users';
 
 //Admin : View and change settings
@@ -55,57 +55,65 @@ $route['settings'] = 'settings/set';
 //Human Resources Management
 $route['hr/index'] = 'hr/index';
 $route['hr/employees'] = 'hr/employees';
-$route['hr/contract/(:any)'] = 'hr/contract/$1';
-$route['hr/manager/(:any)'] = 'hr/manager/$1';
-$route['hr/entitleddays/(:any)'] = 'hr/entitleddays/$1';
+$route['hr/contract/(:num)'] = 'hr/contract/$1';
+$route['hr/manager/(:num)'] = 'hr/manager/$1';
+$route['hr/entitleddays/(:num)'] = 'hr/entitleddays/$1';
 $route['hr'] = 'hr';
 
-$route['leavetypes/delete/(:any)'] = 'leavetypes/delete/$1';
-$route['leavetypes/edit/(:any)'] = 'leavetypes/edit/$1';
+//HR edit leave types
+$route['leavetypes/delete/(:num)'] = 'leavetypes/delete/$1';
+$route['leavetypes/edit/(:num)'] = 'leavetypes/edit/$1';
 $route['leavetypes/index'] = 'leavetypes/index';
 $route['leavetypes/create'] = 'leavetypes/create';
 $route['leavetypes/export'] = 'leavetypes/export';
 $route['leavetypes'] = 'leavetypes';
 
+//HR edit contracts
 $route['contracts/export'] = 'contracts/export';
 $route['contracts/create'] = 'contracts/create';
-$route['contracts/edit/(:any)'] = 'contracts/edit/$1';
+$route['contracts/edit/(:num)'] = 'contracts/edit/$1';
 $route['contracts/update'] = 'contracts/update';
-$route['contracts/delete/(:any)'] = 'contracts/delete/$1';
-$route['contracts/(:any)'] = 'contracts/view/$1';
+$route['contracts/delete/(:num)'] = 'contracts/delete/$1';
+$route['contracts/(:num)/calendar'] = 'contracts/calendar/$1';
+$route['contracts/(:num)/calendar/(:num)'] = 'contracts/calendar/$1/$2';
+$route['contracts/(:num)/calendar/add/(:num)/(:num)'] = 'contracts/adddayoff/$1/$2/$3';
+$route['contracts/(:num)/calendar/edit/(:num)/(:num)'] = 'contracts/editdayoff/$1/$2/$3';
+$route['contracts/(:num)/calendar/delete/(:num)/(:num)'] = 'contracts/deletedayoff/$1/$2/$3';
+$route['contracts/(:num)'] = 'contracts/view/$1';
 $route['contracts'] = 'contracts';
 
 //Team leave requests (manager->team UNION team->manager)
 $route['calendar/individual'] = 'calendar/individual';
 $route['calendar/workmates'] = 'calendar/workmates';
 $route['calendar/collaborators'] = 'calendar/collaborators';
+$route['calendar/fullyear/(:num)'] = 'calendar/fullyear/$1';
 $route['leaves/individual'] = 'leaves/individual';
 $route['leaves/collaborators'] = 'leaves/collaborators';
 $route['leaves/team'] = 'leaves/team';
-$route['leaves/ical/(:any)'] = 'leaves/ical/$1';
+$route['leaves/ical/(:num)'] = 'leaves/ical/$1';
 
 //My leave requests
 $route['leaves/counters'] = 'leaves/counters';
 $route['leaves/export'] = 'leaves/export';
 $route['leaves/create'] = 'leaves/create';
 $route['leaves/credit'] = 'leaves/credit';
-$route['leaves/edit/(:any)'] = 'leaves/edit/$1';
+$route['leaves/edit/(:num)'] = 'leaves/edit/$1';
 $route['leaves/update'] = 'leaves/update';
-$route['leaves/delete/(:any)'] = 'leaves/delete/$1';
-$route['leaves/(:any)'] = 'leaves/view/$1';
+$route['leaves/delete/(:num)'] = 'leaves/delete/$1';
+$route['leaves/(:num)'] = 'leaves/view/$1';
 $route['leaves'] = 'leaves';
 
 //leave requests
-$route['requests/export/(:any)'] = 'requests/export/$1';
-$route['requests/accept/(:any)'] = 'requests/accept/$1';
-$route['requests/reject/(:any)'] = 'requests/reject/$1';
-$route['requests/(:any)'] = 'requests/index/$1';
+$route['requests/export/(:num)'] = 'requests/export/$1';
+$route['requests/accept/(:num)'] = 'requests/accept/$1';
+$route['requests/reject/(:num)'] = 'requests/reject/$1';
+$route['requests/(:num)'] = 'requests/index/$1';
 $route['requests'] = 'requests/index/requested';
 
-$route['entitleddays/user/(:any)'] = 'entitleddays/user/$1';
-$route['entitleddays/userdelete/(:any)'] = 'entitleddays/userdelete/$1';
-$route['entitleddays/contract/(:any)'] = 'entitleddays/contract/$1';
-$route['entitleddays/contractdelete/(:any)'] = 'entitleddays/contractdelete/$1';
+$route['entitleddays/user/(:num)'] = 'entitleddays/user/$1';
+$route['entitleddays/userdelete/(:num)'] = 'entitleddays/userdelete/$1';
+$route['entitleddays/contract/(:num)'] = 'entitleddays/contract/$1';
+$route['entitleddays/contractdelete/(:num)'] = 'entitleddays/contractdelete/$1';
 
 //Reports
 $route['reports/(:any)/(:any)'] = 'reports/execute/$1/$2';

@@ -17,7 +17,9 @@
  */
 
 $lang['session_login_title'] = 'Connexion à l\'application';
+$lang['session_login_field_language'] = 'Langage';
 $lang['session_login_field_login'] = 'Identifiant';
 $lang['session_login_field_password'] = 'Mot de passe';
 $lang['session_login_button_login'] = 'Se connecter';
 $lang['session_login_flash_bad_credentials'] = 'Identifiant ou Mot de passe invalide.';
+$lang['session_login_flash_change_language'] = 'Le langage a été changé à ';

@@ -3,13 +3,32 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('menu', $language);?>
 
 <div class="row-fluid">
-    <div class="span8">
+    <div class="span6">
         <h3><a href="<?php echo base_url();?>" style="text-decoration:none; color:black;"><img src="<?php echo base_url();?>assets/images/logo.png">&nbsp;<?php echo lang('menu_banner_slogan');?></a>
     </div>
-    <div class="span4 pull-right">
+    <div class="span6 pull-right">
         <a href="<?php echo base_url();?>users/reset/<?php echo $user_id; ?>" title="reset password" data-target="#frmChangeMyPwd" data-toggle="modal"><i class="icon-lock"></i></a>
         &nbsp;
         <?php echo lang('menu_banner_welcome');?> <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout"><?php echo lang('menu_banner_logout');?></a>
+        <!--
+        &nbsp;
+        <form id="languageFrom" action="<?php echo base_url();?>session/language">
+            <input type="hidden" name="last_page" value="<?php echo current_url();?>" />
+            <select name="language" id="language">
+                <option value="en" <?php if ($language_code == 'en') echo 'selected'; ?>>English</option>
+                <option value="fr" <?php if ($language_code == 'fr') echo 'selected'; ?>>Français</option>
+            </select>
+        </form>
+
+        <script type="text/javascript">
+            $(function () {
+               //Change the current language
+                $('#language').change(function(){
+                    $('#languageFrom').submit();
+                });
+            });
+        </script>
+        //-->
     </div>
 </div>
 

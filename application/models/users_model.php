@@ -253,8 +253,6 @@ class Users_model extends CI_Model {
                     'is_admin' => $is_admin,
                     'is_hr' => $is_hr,
                     'manager' => $row->manager,
-                    'language' => 'english',
-                    'language_code' => 'en',
                     'logged_in' => TRUE
                 );                
                 $this->session->set_userdata($newdata);

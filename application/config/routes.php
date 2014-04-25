@@ -114,6 +114,7 @@ $route['reports'] = 'reports';
 //Session management
 $route['session/login'] = 'session/login';
 $route['session/logout'] = 'session/logout';
+$route['session/language'] = 'session/language';
 
 $route['default_controller'] = 'leaves';
 $route['(:any)'] = 'pages/view/$1';

@@ -31,12 +31,25 @@ class Session extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        $this->load->model('users_model');
-        //TODO : to be improved
-        $this->language = 'english';
-        $this->language_code = 'en';
+        if($this->session->userdata('language')) {
+            $this->language = $this->session->userdata('language');
+            $this->language_code = $this->session->userdata('language_code');
+        } else {
+            $this->session->set_userdata('language', 'french');
+            $this->session->set_userdata('language_code', 'fr');
+            $this->language = 'french';
+            $this->language_code = 'fr';
+        }
+        $this->load->helper('language');
+        $this->lang->load('session', $this->language);
     }
 
+    /**
+     * Generate a random string by picking randomly in letters and numbers
+     * @param int $length optional length of the string
+     * @return string random string
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
     private function generateRandomString($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
@@ -50,7 +63,7 @@ class Session extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function login() {
-        $data['title'] = 'Login';
+        $data['title'] = lang('session_login_title');
         $this->load->helper('form');
         $this->load->library('form_validation');
         //Note that we don't receive the password as a clear string
@@ -67,6 +80,15 @@ class Session extends CI_Controller {
             $this->load->view('session/login', $data);
             $this->load->view('templates/footer');
         } else {
+            $this->load->model('users_model');
+            //Set language
+            /*$this->session->set_userdata('language_code', $this->input->post('language'));
+            switch ($this->input->post('language')) {
+                case "fr" : $this->session->set_userdata('language', 'french'); break;
+                case "en" : $this->session->set_userdata('language', 'english'); break;
+                case "kh" : $this->session->set_userdata('language', 'khmer'); break;
+            }*/
+            
             //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
             set_include_path(get_include_path() . PATH_SEPARATOR . APPPATH . 'third_party/phpseclib');
             include(APPPATH . '/third_party/phpseclib/Crypt/RSA.php');
@@ -87,7 +109,7 @@ class Session extends CI_Controller {
             //Hash the password passed through the login form and check if it matches the stored password
             if (!$this->users_model->check_credentials($this->input->post('login'), $password)) {
                 log_message('error', '{controllers/session/login} Invalid login id or password for user=' . $this->input->post('login'));
-                $this->session->set_flashdata('msg', 'Invalid login id or password');
+                $this->session->set_flashdata('msg', lang('session_login_flash_bad_credentials'));
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
                 $data['salt'] = $this->generateRandomString(rand(5, 20));
                 $data['language'] = $this->language;
@@ -124,4 +146,20 @@ class Session extends CI_Controller {
         redirect('session/login');
     }
 
+    /**
+     * Change the language and redirect to last page (i.e. page that submit the
+     * language form)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function language() {
+        $this->load->helper('form');
+        switch ($this->input->post('language')) {
+            case "fr" : $this->session->set_userdata('language', 'french'); break;
+            case "en" : $this->session->set_userdata('language', 'english'); break;
+            case "kh" : $this->session->set_userdata('language', 'khmer'); break;
+        }
+        $this->session->set_userdata('language_code', $this->input->post('language'));
+        $this->session->set_flashdata('msg', lang('session_login_flash_change_language') . $this->session->userdata('language'));
+        redirect($this->input->post('last_page'));
+    }
 }

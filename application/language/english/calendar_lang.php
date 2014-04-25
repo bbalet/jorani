@@ -53,3 +53,10 @@ $lang['calendar_component_header_left'] = 'prev,next today';
 $lang['calendar_component_header_center'] = 'title';
 $lang['calendar_component_header_right'] = 'month,basicWeek,basicDay';
 
+$lang['calendar_monday_short'] = 'Mo';
+$lang['calendar_tuesday_short'] = 'Tu';
+$lang['calendar_wednesday_short'] = 'We';
+$lang['calendar_thursday_short'] = 'Th';
+$lang['calendar_friday_short'] = 'Fr';
+$lang['calendar_saturday_short'] = 'Sa';
+$lang['calendar_sunday_short'] = 'Su';

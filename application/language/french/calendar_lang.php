@@ -52,3 +52,11 @@ $lang['calendar_component_buttonText_'] = 'mois';
 $lang['calendar_component_header_left'] = 'précédent,suivant aujourd\'hui';
 $lang['calendar_component_header_center'] = 'title';
 $lang['calendar_component_header_right'] = 'mois,semaine,jour';
+
+$lang['calendar_monday_short'] = 'Lu';
+$lang['calendar_tuesday_short'] = 'Ma';
+$lang['calendar_wednesday_short'] = 'Me';
+$lang['calendar_thursday_short'] = 'Je';
+$lang['calendar_friday_short'] = 'Ve';
+$lang['calendar_saturday_short'] = 'Sa';
+$lang['calendar_sunday_short'] = 'Di';

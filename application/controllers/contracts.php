@@ -194,6 +194,31 @@ class Contracts extends CI_Controller {
     }
     
     /**
+     * Display an interactive calendar that allows to dynamically set the days
+     * off, bank holidays, etc. for a given contract
+     * @param type $id contract identifier
+     * @param type $year optional year number (4 digits), current year if empty
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function calendar($id, $year = 0) {
+        $this->auth->check_is_granted('calendar_contract');
+        $data = $this->getUserContext();
+        $data['title'] = 'All year in one page';
+        if ($year <> 0) {
+            $data['year'] = $year;
+        } else {
+            $data['year'] = date("Y");
+        }
+        $data['contract_id'] = $id;
+        //$data['contract'] = $this->contracts_model->get_contracts($id);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('contracts/calendar', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
      * Action: export the list of all contracts into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */

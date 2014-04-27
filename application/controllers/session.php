@@ -35,10 +35,10 @@ class Session extends CI_Controller {
             $this->language = $this->session->userdata('language');
             $this->language_code = $this->session->userdata('language_code');
         } else {
-            $this->session->set_userdata('language', 'french');
-            $this->session->set_userdata('language_code', 'fr');
-            $this->language = 'french';
-            $this->language_code = 'fr';
+            $this->session->set_userdata('language', 'english');
+            $this->session->set_userdata('language_code', 'en');
+            $this->language = 'english';
+            $this->language_code = 'en';
         }
         $this->load->helper('language');
         $this->lang->load('session', $this->language);

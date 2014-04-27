@@ -107,7 +107,7 @@ $route['leaves'] = 'leaves';
 $route['requests/export/(:num)'] = 'requests/export/$1';
 $route['requests/accept/(:num)'] = 'requests/accept/$1';
 $route['requests/reject/(:num)'] = 'requests/reject/$1';
-$route['requests/(:num)'] = 'requests/index/$1';
+$route['requests/(:any)'] = 'requests/index/$1';
 $route['requests'] = 'requests/index/requested';
 
 $route['entitleddays/user/(:num)'] = 'entitleddays/user/$1';

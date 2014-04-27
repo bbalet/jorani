@@ -19,16 +19,17 @@ $this->lang->load('menu', $language);?>
                 <option value="fr" <?php if ($language_code == 'fr') echo 'selected'; ?>>Français</option>
             </select>
         </form>
-
+        //-->
         <script type="text/javascript">
             $(function () {
                //Change the current language
-                $('#language').change(function(){
+                /*$('#language').change(function(){
                     $('#languageFrom').submit();
-                });
+                });*/
+                $('#frmChangeMyPwd').alert();
             });
         </script>
-        //-->
+        
     </div>
 </div>
 

@@ -177,6 +177,7 @@ class Users extends CI_Controller {
             log_message('debug', '{controllers/users/reset} user not found');
             show_404();
         } else {
+            $data = $this->getUserContext();
             $data['target_user_id'] = $id;
             $this->load->helper('form');
             $this->load->library('form_validation');

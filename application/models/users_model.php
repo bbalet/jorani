@@ -41,6 +41,28 @@ class Users_model extends CI_Model {
     }
 
     /**
+     * Get the list of employees
+     * @return array record of users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_all_employees() {
+        $this->db->select('id, firstname, lastname, email');
+        $query = $this->db->get('users');
+        return $query->result_array();
+    }
+    
+    /**
+     * Get the list of employees belonging to an entity
+     * @param int $id identifier of the entity
+     * @return array record of users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_employees_entity($id = 0) {
+        $query = $this->db->get_where('users', array('organization' => $id));
+        return $query->result_array();
+    }
+    
+    /**
      * Check if a login can be used before creating the user
      * @param type $login login identifier
      * @return bool true if available, false otherwise

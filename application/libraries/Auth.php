@@ -126,6 +126,18 @@ class Auth {
                 else
                     return false;
                 break;
+
+            case 'organization_index' :
+                if ($this->CI->session->userdata('is_hr') == true)
+                    return true;
+                else
+                    return false;
+                break;
+            
+            //General
+            case 'employees_list' :
+                return true;
+                break;
                 
             //Leaves
             case 'list_leaves' :

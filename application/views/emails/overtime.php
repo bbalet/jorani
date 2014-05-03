@@ -16,11 +16,21 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['reports_index_title'] = 'List of reports';
-$lang['reports_index_thead_report'] = 'Report';
-$lang['reports_index_thead_description'] = 'Description';
-
-$lang['reports_execute_title'] = 'Report';
-$lang['reports_execute_button_back_list'] = 'Back to list of reports';
-
-$lang['reports_native_title'] = 'List of Report';
+    //You can change the content of this template
+?>
+<html>
+    <body>
+        <h3>{Title}</h3>
+        {Firstname} {Lastname} requests a leave. Below, the details :
+        <table border="0">
+            <tr>
+                <td>From &nbsp;</td><td>{StartDate}</td>
+            </tr>
+            <tr>
+                <td>To &nbsp;</td><td>{EndDate}</td>
+            </tr>            
+        </table>
+        <a href="{UrlAccept}">Accept</a>
+        <a href="{UrlReject}">Reject</a>
+    </body>
+</html>

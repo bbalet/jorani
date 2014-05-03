@@ -34,6 +34,7 @@ $lang['menu_admin_settings'] = 'Settings';
 
 $lang['menu_hr_title'] = 'HR';
 $lang['menu_hr_employees_divider'] = 'Employees';
+$lang['menu_hr_list_organization'] = 'Organization';
 $lang['menu_hr_list_employees'] = 'List of employees';
 $lang['menu_hr_contracts_divider'] = 'Contracts';
 $lang['menu_hr_list_contracts'] = 'List of contracts';

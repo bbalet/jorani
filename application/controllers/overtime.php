@@ -83,6 +83,7 @@ class Requests extends CI_Controller {
         for ($i = 0; $i < count($data['requests']); ++$i) {
             $data['requests'][$i]['type_label'] = $this->types_model->get_label($data['requests'][$i]['type']);
         }
+        
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('requests/index', $data);
@@ -109,11 +110,16 @@ class Requests extends CI_Controller {
             redirect('home');
         } else {
             $this->leaves_model->accept_leave($id);
-            $this->sendMail($id);
             $this->session->set_flashdata('msg', 'The leave request has been successfully accepted.');
             log_message('debug', '{controllers/requests/accept} Leaving method (before redirect)');
             redirect('requests');
         }
+        
+        /*$data['title'] = 'User';
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('leaves/view', $data);
+        $this->load->view('templates/footer');*/
     }
 
     /**
@@ -136,57 +142,14 @@ class Requests extends CI_Controller {
             redirect('home');
         } else {
             $this->leaves_model->reject_leave($id);
-            $this->sendMail($id);
             $this->session->set_flashdata('msg', 'The leave request has been successfully rejected.');
             log_message('debug', '{controllers/requests/reject} Leaving method (before redirect)');
             redirect('requests');
         }
-    }
-    
-    /**
-     * Send a leave request email to the employee that requested the leave
-     * The method will check if the leave request wes accepted or rejected 
-     * before sending the e-mail
-     * @param int $id Leave request identifier
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function sendMail($id)
-    {
-        log_message('debug', '{controllers/requests/sendMail} Entering method with id=' . $id);
-        $this->load->model('users_model');
-        $this->load->model('settings_model');
-        $leave = $this->leaves_model->get_leaves($id);
-        $employee = $this->users_model->get_users($leave['employee']);
-
-        //Send an e-mail to the employee
-        $this->load->library('email');
-        $config = $this->settings_model->get_mail_config();            
-        $this->email->initialize($config);
-
-        $this->load->library('parser');
-        $data = array(
-            'Title' => 'Leave Request',
-            'Firstname' => $employee['firstname'],
-            'Lastname' => $employee['lastname'],
-            'StartDate' => $leave['startdate'],
-            'EndDate' => $leave['enddate']
-        );
-        
-        $message = "";
-        if ($leave['status'] == 3) {
-            $message = $this->parser->parse('emails/request_accepted', $data, TRUE);
-            $this->email->subject('[LMS] Your leave request has been accepted');
-        } else {
-            $message = $this->parser->parse('emails/request_rejected', $data, TRUE);
-            $this->email->subject('[LMS] Your leave request has been rejected');
-        }
-
-        $this->email->from('do.not@reply.me', 'LMS');
-        $this->email->to($employee['email']);
-        $this->email->message($message);
-        $this->email->send();
-        //echo $this->email->print_debugger();
-        log_message('debug', '{controllers/requests/sendMail} Leaving method.');
+        /*$this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('leaves/view', $data);
+        $this->load->view('templates/footer');*/
     }
     
     /**

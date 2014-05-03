@@ -77,6 +77,18 @@ class Users extends CI_Controller {
     }
 
     /**
+     * Display the modal pop-up content of the list of employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function employees() {
+        $this->auth->check_is_granted('employees_list');
+        $data = $this->getUserContext();
+        $data['employees'] = $this->users_model->get_all_employees();
+        $data['title'] = 'List of employees';
+        $this->load->view('users/employees', $data);
+    }
+    
+    /**
      * Display details of a given user
      * @param int $id User identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>

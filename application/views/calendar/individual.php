@@ -4,6 +4,8 @@ $this->lang->load('calendar', $language);?>
 
 <h1><?php echo lang('calendar_individual_title');?></h1>
 
+Calendar of my leaves.
+
 <div id='calendar'></div>
 
 <div id="frmEvent" class="modal hide fade">

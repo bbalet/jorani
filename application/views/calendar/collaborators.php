@@ -4,6 +4,8 @@ $this->lang->load('calendar', $language);?>
 
 <h1><?php echo lang('calendar_collaborators_title');?></h1>
 
+Leaves of my collaborators (will be empty if I'm not a manager).
+
 <div id='calendar'></div>
 
 <link href="<?php echo base_url();?>assets/fullcalendar/fullcalendar.css" rel="stylesheet">

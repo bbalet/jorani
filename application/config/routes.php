@@ -39,6 +39,7 @@
 */
 
 //Admin : user management
+$route['users/employees'] = 'users/employees';
 $route['users/export'] = 'users/export';
 $route['users/import'] = 'users/import';
 $route['users/reset/(:num)'] = 'users/reset/$1';
@@ -82,15 +83,30 @@ $route['contracts/(:num)/calendar/delete/(:num)/(:num)'] = 'contracts/deletedayo
 $route['contracts/(:num)'] = 'contracts/view/$1';
 $route['contracts'] = 'contracts';
 
+//HR Organization
+$route['organization'] = 'organization';
+$route['organization/root'] = 'organization/root';
+$route['organization/delete'] = 'organization/delete';
+$route['organization/create'] = 'organization/create';
+$route['organization/rename'] = 'organization/rename';
+$route['organization/move'] = 'organization/move';
+$route['organization/copy'] = 'organization/copy';
+$route['organization/employees'] = 'organization/employees';
+$route['organization/addemployee'] = 'organization/addemployee';
+$route['organization/delemployee'] = 'organization/delemployee';
+
 //Team leave requests (manager->team UNION team->manager)
 $route['calendar/individual'] = 'calendar/individual';
 $route['calendar/workmates'] = 'calendar/workmates';
 $route['calendar/collaborators'] = 'calendar/collaborators';
+$route['calendar/global'] = 'calendar/global';
+$route['calendar/department'] = 'calendar/department';
 $route['calendar/fullyear/(:num)'] = 'calendar/fullyear/$1';
 $route['leaves/individual'] = 'leaves/individual';
 $route['leaves/collaborators'] = 'leaves/collaborators';
 $route['leaves/team'] = 'leaves/team';
 $route['leaves/ical/(:num)'] = 'leaves/ical/$1';
+$route['leaves/organization/(:num)'] = 'leaves/organization/$1';
 
 //My leave requests
 $route['leaves/counters'] = 'leaves/counters';
@@ -110,6 +126,24 @@ $route['requests/reject/(:num)'] = 'requests/reject/$1';
 $route['requests/(:any)'] = 'requests/index/$1';
 $route['requests'] = 'requests/index/requested';
 
+//overtime requests
+$route['extra/counters'] = 'extra/counters'; 
+$route['extra/export'] = 'extra/export';
+$route['extra/create'] = 'extra/create';
+$route['extra/credit'] = 'extra/credit';
+$route['extra/edit/(:num)'] = 'extra/edit/$1';
+$route['extra/update'] = 'extra/update';
+$route['extra/delete/(:num)'] = 'extra/delete/$1';
+$route['extra/(:num)'] = 'extra/view/$1';
+$route['extra'] = 'extra';
+//overtime validation
+$route['overtime/export/(:num)'] = 'overtime/export/$1';
+$route['overtime/accept/(:num)'] = 'overtime/accept/$1';
+$route['overtime/reject/(:num)'] = 'overtime/reject/$1';
+$route['overtime/(:any)'] = 'overtime/index/$1';
+$route['overtime'] = 'overtime/index/requested';
+
+//Entititled days
 $route['entitleddays/user/(:num)'] = 'entitleddays/user/$1';
 $route['entitleddays/userdelete/(:num)'] = 'entitleddays/userdelete/$1';
 $route['entitleddays/contract/(:num)'] = 'entitleddays/contract/$1';

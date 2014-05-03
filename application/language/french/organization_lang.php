@@ -16,11 +16,11 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['reports_index_title'] = 'List of reports';
-$lang['reports_index_thead_report'] = 'Report';
-$lang['reports_index_thead_description'] = 'Description';
+$lang['organization_index_title'] = 'List of entities';
+$lang['organization_index_title'] = 'Add an entity';
+$lang['organization_index_title'] = 'Remove an entity';
 
-$lang['reports_execute_title'] = 'Report';
-$lang['reports_execute_button_back_list'] = 'Back to list of reports';
+$lang['organization_index_title'] = 'Select an entity of the organization';
+$lang['organization_index_title'] = 'An entity can be a country, a branch, a department, etc.';
 
-$lang['reports_native_title'] = 'List of Report';
+$lang['organization_index_title'] = '';

@@ -33,7 +33,7 @@ class Organization extends CI_Controller {
             $this->session->set_userdata('last_page', current_url());
             redirect('session/login');
         }
-        $this->load->model('leaves_model');
+        $this->load->model('organization_model');
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
@@ -41,6 +41,8 @@ class Organization extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('organization', $this->language);
     }
     
     /**
@@ -65,17 +67,153 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
-        $this->auth->check_is_granted('organization');
+        $this->auth->check_is_granted('organization_index');
         $data = $this->getUserContext();
-        $data['leaves'] = $this->leaves_model->get_leaves();
         
-        //TODO : to be implemented
-        
-        /*$data['title'] = 'My Leave Requests';
+        $data['title'] = lang('organization_index_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
-        $this->load->view('calendar/team', $data);
-        $this->load->view('templates/footer');*/
+        $this->load->view('organization/index', $data);
+        $this->load->view('templates/footer');
     }
 
+    /**
+     * Rename an entity of the organization
+     * takes parameters by GET
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function rename() {
+        header("Content-Type: application/json");
+        $id = $this->input->get('id', TRUE);
+        $text = $this->input->get('text', TRUE);
+        $this->organization_model->rename($id, $text);
+    }
+    
+    /**
+     * Create an entity in the organization
+     * takes parameters by GET
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function create() {
+        header("Content-Type: application/json");
+        $id = $this->input->get('id', TRUE);
+        $text = $this->input->get('text', TRUE);
+        $this->organization_model->create($id, $text);
+    }
+    
+    /**
+     * Move an entity into the organization
+     * takes parameters by GET
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function move() {
+        header("Content-Type: application/json");
+        $id = $this->input->get('id', TRUE);
+        $parent = $this->input->get('parent', TRUE);
+        $this->organization_model->move($id, $parent);
+    }
+    
+    /**
+     * Copy an entity into the organization
+     * takes parameters by GET
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function copy() {
+        header("Content-Type: application/json");
+        $id = $this->input->get('id', TRUE);
+        $parent = $this->input->get('parent', TRUE);
+        $this->organization_model->copy($id, $parent);
+    }
+
+    /**
+     * Returns the list of the employees attached to an entity
+     * takes parameters by GET
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function employees() {
+        header("Content-Type: application/json");
+        $id = $this->input->get('id', TRUE);
+        $employees = $this->organization_model->employees($id);
+        //{"iTotalRecords":1,"iTotalDisplayRecords":1,"aaData":[
+        //["9643200005325405325","20140503132254.397415400","do.not@reply.me","[LMS]_Leave_Request_from_Benjamin_BALET","127.0.0.1:51649"]
+        //]}
+        $msg = '{"iTotalRecords":' . count($employees);
+        $msg .= ',"iTotalDisplayRecords":' . count($employees);
+        $msg .= ',"aaData":[';
+        foreach ($employees->result() as $employee) {
+            $msg .= '["' . $employee->id . '",';
+            $msg .= '"' . $employee->firstname . '",';
+            $msg .= '"' . $employee->lastname . '",';
+            $msg .= '"' . $employee->email . '"';
+            $msg .= '],';
+        }
+        $msg = rtrim($msg, ",");
+        $msg .= ']}';
+        echo $msg;
+    }
+    
+    /**
+     * Add an employee to an entity of the organization
+     * takes parameters by GET
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function addemployee() {
+        header("Content-Type: application/json");
+        $id = $this->input->get('user', TRUE);
+        $entity = $this->input->get('entity', TRUE);
+        echo json_encode($this->organization_model->add_employee($id, $entity));
+    }   
+    
+    /**
+     * Add an employee to an entity of the organization
+     * takes parameters by GET
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delemployee() {
+        header("Content-Type: application/json");
+        $id = $this->input->get('user', TRUE);
+        echo json_encode($this->organization_model->delete_employee($id));
+    } 
+    
+    /**
+     * Cascade delete children and set employees' org to NULL
+     * takes parameters by GET
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delete() {
+        header("Content-Type: application/json");
+        $entity = $this->input->get('entity', TRUE);
+        echo json_encode($this->organization_model->delete($entity));
+    }
+    
+    /**
+     * 
+     * 
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function root() {
+        header("Content-Type: application/json");
+        $id = $this->input->get('id', TRUE);
+        if ($id == "#") {
+            unset($id);
+        }
+        $this->auth->check_is_granted('organization_index');
+        $data = $this->getUserContext();
+        header("Content-Type: application/json");
+        $entities = $this->organization_model->get_all_entities();
+        $msg = '[';
+        foreach ($entities->result() as $entity) {
+            $msg .= '{"id":"' . $entity->id . '",';
+            if ($entity->parent_id == -1) {
+                $msg .= '"parent":"#",';
+            } else {
+                $msg .= '"parent":"' . $entity->parent_id . '",';
+            }
+            $msg .= '"text":"' . $entity->name . '"';
+            $msg .= '},';
+        }
+        $msg = rtrim($msg, ",");
+        $msg .= ']';
+        echo $msg;
+    }
 }

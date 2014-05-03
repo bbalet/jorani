@@ -16,7 +16,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class Leaves_model extends CI_Model {
+class Overtime_model extends CI_Model {
 
     /**
      * Default constructor
@@ -269,7 +269,7 @@ class Leaves_model extends CI_Model {
             {
                 case 1: $color = 'grey'; break;     // Planned
                 case 2: $color = 'blue'; break;     // Requested
-                case 3: $color = 'cyan'; break;     // Accepted
+                case 3: $color = 'yellow'; break;   // Accepted
                 case 4: $color = 'red'; break;      // Rejected
             }
             
@@ -317,7 +317,7 @@ class Leaves_model extends CI_Model {
             {
                 case 1: $color = 'grey'; break;     // Planned
                 case 2: $color = 'blue'; break;     // Requested
-                case 3: $color = 'cyan'; break;     // Accepted
+                case 3: $color = 'yellow'; break;   // Accepted
                 case 4: $color = 'red'; break;      // Rejected
             }
             
@@ -365,7 +365,7 @@ class Leaves_model extends CI_Model {
             {
                 case 1: $color = 'grey'; break;     // Planned
                 case 2: $color = 'blue'; break;     // Requested
-                case 3: $color = 'cyan'; break;     // Accepted
+                case 3: $color = 'yellow'; break;   // Accepted
                 case 4: $color = 'red'; break;      // Rejected
             }
             

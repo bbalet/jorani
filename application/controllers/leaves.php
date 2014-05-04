@@ -337,7 +337,9 @@ class Leaves extends CI_Controller {
      */
     public function individual() {
         header("Content-Type: application/json");
-        echo $this->leaves_model->individual($this->session->userdata('id'));
+        $start = $this->input->get('start', TRUE);
+        $end = $this->input->get('end', TRUE);
+        echo $this->leaves_model->individual($this->session->userdata('id'), $start, $end);
     }
 
     /**
@@ -345,7 +347,9 @@ class Leaves extends CI_Controller {
      */
     public function workmates() {
         header("Content-Type: application/json");
-        echo $this->leaves_model->workmates($this->session->userdata('manager'));
+        $start = $this->input->get('start', TRUE);
+        $end = $this->input->get('end', TRUE);
+        echo $this->leaves_model->workmates($this->session->userdata('manager'), $start, $end);
     }
     
     /**
@@ -353,7 +357,34 @@ class Leaves extends CI_Controller {
      */
     public function collaborators() {
         header("Content-Type: application/json");
-        echo $this->leaves_model->collaborators($this->session->userdata('id'));
+        $start = $this->input->get('start', TRUE);
+        $end = $this->input->get('end', TRUE);
+        echo $this->leaves_model->collaborators($this->session->userdata('id'), $start, $end);
+    }
+
+    /**
+     * Ajax endpoint : Send a list of fullcalendar events
+     * @param int $entity_id Entity identifier
+     */
+    public function organization($entity_id) {
+        header("Content-Type: application/json");
+        $this->load->model('organization_model');
+        $start = $this->input->get('start', TRUE);
+        $end = $this->input->get('end', TRUE);
+        $children = $this->input->get('children', TRUE);
+        echo $this->leaves_model->department($entity_id, $start, $end, $children);
+    }
+
+    /**
+     * Ajax endpoint : Send a list of fullcalendar events
+     */
+    public function department() {
+        header("Content-Type: application/json");
+        $this->load->model('organization_model');
+        $department = $this->organization_model->get_department($this->user_id);
+        $start = $this->input->get('start', TRUE);
+        $end = $this->input->get('end', TRUE);
+        echo $this->leaves_model->department($department[0]['id'], $start, $end);
     }
     
     /**

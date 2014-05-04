@@ -26,6 +26,25 @@ class Organization_model extends CI_Model {
     }
 
     /**
+     * Get the department details from the user's record
+     * @param int $user_id User identifier
+     * @return array department details
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_department($user_id) {
+        $this->db->select('organization.id as id, organization.name as name');
+        $this->db->from('organization');
+        $this->db->join('users', 'users.organization = organization.id');
+        $data = array(
+            'users.id' => $user_id
+        );
+        $this->db->where('users.id', $user_id);
+        $query = $this->db->get();
+        $arr = $query->result_array();
+        return $arr;
+    }
+    
+    /**
      * List all entities of the organisation
      * @return array all entities of the organization sorted out by id and name
      * @author Benjamin BALET <benjamin.balet@gmail.com>

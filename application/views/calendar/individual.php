@@ -1,10 +1,18 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('calendar', $language);?>
+$this->lang->load('calendar', $language);
+$this->lang->load('status', $language);?>
 
 <h1><?php echo lang('calendar_individual_title');?></h1>
 
-Calendar of my leaves.
+<?php echo lang('calendar_individual_description');?>
+
+<div class="row-fluid">
+    <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
+    <div class="span3"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
+    <div class="span3"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
+    <div class="span3"><span class="label label-important"><?php echo lang('Rejected');?></span></div>
+</div>
 
 <div id='calendar'></div>
 

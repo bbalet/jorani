@@ -17,6 +17,7 @@
  */
 
 $lang['calendar_individual_title'] = 'My calendar';
+$lang['calendar_individual_description'] = 'Calendar of my leaves.';
 $lang['calendar_individual_popup_event_link_ical'] = 'Download an iCal file';
 $lang['calendar_individual_popup_event_link_ical_description'] = '(import the event into Outlook, Thunderbird, etc.)';
 $lang['calendar_individual_popup_event_title'] = 'Event details';
@@ -24,6 +25,12 @@ $lang['calendar_individual_popup_event_button_close'] = 'Close';
 
 $lang['calendar_workmates_title'] = 'Calendar of my workmates';
 $lang['calendar_collaborators_title'] = 'Calendar of my collaborators';
+
+$lang['calendar_department_title'] = 'Calendar of my department';
+$lang['calendar_department_description'] = 'Calendar of employees working in my department';
+
+$lang['calendar_organization_title'] = 'Calendar of the organization';
+$lang['calendar_organization_description'] = 'Global calendar with a filter on entity';
 
 $lang['calendar_component_monthNames'] = '\'January\',\'February\',\'March\',\'April\',\'May\',\'June\',\'July\',\'August\',\'September\',\'October\',\'November\',\'December\'';
 $lang['calendar_component_monthNamesShort'] = '\'Jan\',\'Feb\',\'Mar\',\'Apr\',\'May\',\'Jun\',\'Jul\',\'Aug\',\'Sep\',\'Oct\',\'Nov\',\'Dec\'';

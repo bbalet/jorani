@@ -62,8 +62,8 @@ class Organization extends CI_Controller {
     }
 
     /**
-     * 
-     * 
+     * Main view that allows to describe the entities of the organization
+     * And to attach employees to entities (lot of Ajax callbacks)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
@@ -77,6 +77,17 @@ class Organization extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    /**
+     * Pop-up showing the tree of the organization and allowing a
+     * user to choose an entity (filter of a report or a calendar)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function select() {
+        $this->auth->check_is_granted('organization_select');
+        $data = $this->getUserContext();
+        $this->load->view('organization/select', $data);
+    }
+    
     /**
      * Rename an entity of the organization
      * takes parameters by GET

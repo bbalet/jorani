@@ -52,10 +52,10 @@ $this->lang->load('status', $language);?>
         var text = $('#organization').jstree().get_text(entity);
         $('#txtEntity').val(text);
         $('#calendar').fullCalendar('removeEvents');
-        if ($('#checkbox').prop('checked') == true) {
-            $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>leaves/organization/' + entity + '?children=false');
-        } else {
+        if ($('#chkIncludeChildren').prop('checked') == true) {
             $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>leaves/organization/' + entity + '?children=true');
+        } else {
+            $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>leaves/organization/' + entity + '?children=false');
         }
         $('#calendar').fullCalendar('rerenderEvents');
         $("#frmSelectEntity").modal('hide');

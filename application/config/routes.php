@@ -69,6 +69,14 @@ $route['leavetypes/create'] = 'leavetypes/create';
 $route['leavetypes/export'] = 'leavetypes/export';
 $route['leavetypes'] = 'leavetypes';
 
+//HR edit positions
+$route['positions/delete/(:num)'] = 'positions/delete/$1';
+$route['positions/edit/(:num)'] = 'positions/edit/$1';
+$route['positions/index'] = 'positions/index';
+$route['positions/create'] = 'positions/create';
+$route['positions/export'] = 'positions/export';
+$route['positions'] = 'positions';
+
 //HR edit contracts
 $route['contracts/export'] = 'contracts/export';
 $route['contracts/create'] = 'contracts/create';

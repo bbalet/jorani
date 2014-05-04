@@ -82,6 +82,7 @@ $this->lang->load('menu', $language);?>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_hr_contracts_divider');?></li>
                     <li><a href="<?php echo base_url();?>contracts"><?php echo lang('menu_hr_list_contracts');?></a></li>
+                    <!--<li><a href="<?php echo base_url();?>positions"><?php echo lang('menu_hr_list_positions');?></a></li>//-->
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_hr_leaves_type_divider');?></li>
                     <li><a href="<?php echo base_url();?>leavetypes"><?php echo lang('menu_hr_list_leaves_type');?></a></li>

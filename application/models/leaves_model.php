@@ -441,7 +441,6 @@ class Leaves_model extends CI_Model {
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(512);  //Security limit
         $events = $this->db->get()->result();
-        
         $jsonevents = array();
         foreach ($events as $entry) {
             

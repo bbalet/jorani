@@ -38,6 +38,7 @@ $lang['menu_hr_list_organization'] = 'Organization';
 $lang['menu_hr_list_employees'] = 'List of employees';
 $lang['menu_hr_contracts_divider'] = 'Contracts';
 $lang['menu_hr_list_contracts'] = 'List of contracts';
+$lang['menu_hr_list_positions'] = 'List of positions';
 $lang['menu_hr_leaves_type_divider'] = 'Leaves';
 $lang['menu_hr_list_leaves_type'] = 'List of types';
 

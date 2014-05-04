@@ -59,10 +59,10 @@ $(document).ready(function() {
     <div class="span2">
       <a href="<?php echo base_url();?>contracts/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
     </div>
-    <div class="span2">
+    <div class="span3">
       <a href="<?php echo base_url();?>contracts/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; Create a new contract</a>
     </div>
-    <div class="span2">&nbsp;</div>
+    <div class="span7">&nbsp;</div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
@@ -107,7 +107,7 @@ $(document).ready(function() {
     $('#frmDeleteContract').on('show', function() {
         var link = "<?php echo base_url();?>contracts/delete/" + $(this).data('id');
         $("#lnkDeleteContract").attr('href', link);
-    })
+    });
 
     //Display a modal pop-up so as to confirm if a contract has to be deleted or not
     $('.confirm-delete').on('click', function(e) {

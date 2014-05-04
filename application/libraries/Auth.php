@@ -136,6 +136,7 @@ class Auth {
             
             //General
             case 'employees_list' :
+            case 'organization_select' :
                 return true;
                 break;
                 
@@ -160,6 +161,8 @@ class Auth {
             case 'individual_calendar' :
             case 'workmates_calendar' :
             case 'collaborators_calendar' :
+            case 'department_calendar' :
+            case 'organization_calendar' :
             case 'download_calendar' :
                 return true;
                 break;

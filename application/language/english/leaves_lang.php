@@ -37,6 +37,9 @@ $lang['leaves_index_popup_delete_question'] = 'Do you want to proceed?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Yes';
 $lang['leaves_index_popup_delete_button_no'] = 'No';
 
+$lang['leaves_date_type_morning'] = 'Morning';
+$lang['leaves_date_type_afternoon'] = 'Afternoon';
+
 $lang['leaves_create_title'] = 'Submit a leave request';
 $lang['leaves_create_field_start'] = 'Start Date';
 $lang['leaves_create_field_end'] = 'End Date';

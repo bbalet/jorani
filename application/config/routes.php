@@ -85,6 +85,7 @@ $route['contracts'] = 'contracts';
 
 //HR Organization
 $route['organization'] = 'organization';
+$route['organization/select'] = 'organization/select';
 $route['organization/root'] = 'organization/root';
 $route['organization/delete'] = 'organization/delete';
 $route['organization/create'] = 'organization/create';
@@ -99,10 +100,13 @@ $route['organization/delemployee'] = 'organization/delemployee';
 $route['calendar/individual'] = 'calendar/individual';
 $route['calendar/workmates'] = 'calendar/workmates';
 $route['calendar/collaborators'] = 'calendar/collaborators';
-$route['calendar/global'] = 'calendar/global';
+$route['calendar/organization'] = 'calendar/organization';
 $route['calendar/department'] = 'calendar/department';
 $route['calendar/fullyear/(:num)'] = 'calendar/fullyear/$1';
 $route['leaves/individual'] = 'leaves/individual';
+$route['leaves/workmates'] = 'leaves/workmates';
+$route['leaves/department'] = 'leaves/department';
+$route['leaves/organization/(:num)'] = 'leaves/organization/$1';
 $route['leaves/collaborators'] = 'leaves/collaborators';
 $route['leaves/team'] = 'leaves/team';
 $route['leaves/ical/(:num)'] = 'leaves/ical/$1';

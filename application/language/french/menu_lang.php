@@ -52,3 +52,5 @@ $lang['menu_calendar_title'] = 'Calendriers';
 $lang['menu_calendar_individual'] = 'Mon calendrier';
 $lang['menu_calendar_workmates'] = 'Mes collègues';
 $lang['menu_calendar_collaborators'] = 'Mes collaborateurs';
+$lang['menu_calendar_department'] = 'Service';
+$lang['menu_calendar_organization'] = 'Global';

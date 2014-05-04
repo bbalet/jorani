@@ -108,4 +108,44 @@ class Calendar extends CI_Controller {
         $this->load->view('calendar/collaborators', $data);
         $this->load->view('templates/footer');
     }
+    
+    /**
+     * Display the calendar of the employees working in the same department
+     * than the connected user.
+     * Data (calendar events) is retrieved by AJAX from leaves' controller
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function department() {
+        $this->auth->check_is_granted('department_calendar');
+        $data = $this->getUserContext();
+        $data['title'] = lang('calendar_department_title');
+        $this->load->model('organization_model');
+        $department = $this->organization_model->get_department($this->user_id);
+        if (empty($department)) {
+            $this->session->set_flashdata('msg', 'It appears that you don\'t belong to any department. Please contact your HR Officer / Manager.');
+            redirect('leaves');
+        } else {
+            $data['department'] = $department[0]['name'];
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('calendar/department', $data);
+            $this->load->view('templates/footer');
+        }
+    }
+    
+    /**
+     * Display a global calendar filtered by organization/entity
+     * than the connected user.
+     * Data (calendar events) is retrieved by AJAX from leaves' controller
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function organization() {
+        $this->auth->check_is_granted('organization_calendar');
+        $data = $this->getUserContext();
+        $data['title'] = lang('calendar_organization_title');
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('calendar/organization', $data);
+        $this->load->view('templates/footer');
+    }
 }

@@ -6,8 +6,10 @@ $this->lang->load('organization', $language);?>
 
 <div class="row-fluid">
     <div class="span4">
+        <div class="input-append">
         <input type="text" placeholder="Search for an entity" id="txtSearch" />
         <button id="cmdSearch" class="btn btn-primary">Search</button>
+        </div>
         <div style="text-align: left;" id="organization"></div>
     </div>
     <div class="span8">
@@ -165,30 +167,29 @@ $this->lang->load('organization', $language);?>
         
         $('#organization').jstree({
             rules : {
-                /*multiple   : false,*/
                 deletable  : [ "folder" ],
                 creatable  : [ "folder" ],
                 draggable  : [ "folder" ],
                 dragrules  : [ "folder * folder", "folder inside root" ],
                 renameable : "all"
               },
-                          /*ui : { select_multiple_modifier : false },*/
-            'core' : {
-              'data' : {
-                'url' : function (node) {
+            core : {
+              multiple : false,
+              data : {
+                url : function (node) {
                   return node.id === '#' ? 
-                    'organization/root' : 
-                    'organization/children';
+                    '<?php echo base_url(); ?>organization/root' : 
+                    '<?php echo base_url(); ?>organization/children';
                 },
-                'data' : function (node) {
+                data : function (node) {
                   return { 'id' : node.id };
                 }
               },
-              'check_callback' : true
+              check_callback : true
             },
-            "plugins" : [
+            plugins : [
               "contextmenu", "dnd", "search",
-              "state", "types", "sort", "unique"
+              "state", "sort", "unique"
             ]
         })
         .on('delete_node.jstree', function (e, data) {
@@ -211,39 +212,39 @@ $this->lang->load('organization', $language);?>
                         data.instance.refresh();
                     });
                 })
-                .on('rename_node.jstree', function(e, data) {
-                    $.get('organization/rename', {'id': data.node.id, 'text': data.text})
-                        .fail(function() {
-                            data.instance.refresh();
-                        });
-                })
-                .on('move_node.jstree', function(e, data) {
-                    $.get('organization/move', {'id': data.node.id, 'parent': data.parent, 'position': data.position})
-                        .fail(function() {
-                            data.instance.refresh();
-                        });
-                })
-                .on('copy_node.jstree', function(e, data) {
-                    $.get('organization/copy', {'id': data.original.id, 'parent': data.parent, 'position': data.position})
-                        .always(function() {
-                            data.instance.refresh();
-                        });
-                })
-                .on('changed.jstree', function(e, data) {
-                    if (data && data.selected && data.selected.length) {
-                        oTable.fnReloadAjax("<?php echo base_url(); ?>organization/employees?id=" + data.selected.join(':'));
-                    }
+        .on('rename_node.jstree', function(e, data) {
+            $.get('organization/rename', {'id': data.node.id, 'text': data.text})
+                .fail(function() {
+                    data.instance.refresh();
                 });
-
-            //Transform the HTML table in a fancy datatable
-            oTable = $('#collaborators').dataTable({
-		fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-                    //As the datatable is populated with Ajax we need to add a callback this way
-                    $('td', nRow).on('click', function() {
-                        $("#collaborators tbody tr").removeClass('row_selected');
-                        $(nRow).addClass("row_selected");
-                    });
-		}
-            });
+        })
+        .on('move_node.jstree', function(e, data) {
+            $.get('organization/move', {'id': data.node.id, 'parent': data.parent, 'position': data.position})
+                .fail(function() {
+                    data.instance.refresh();
+                });
+        })
+        .on('copy_node.jstree', function(e, data) {
+            $.get('organization/copy', {'id': data.original.id, 'parent': data.parent, 'position': data.position})
+                .always(function() {
+                    data.instance.refresh();
+                });
+        })
+        .on('changed.jstree', function(e, data) {
+            if (data && data.selected && data.selected.length) {
+                oTable.fnReloadAjax("<?php echo base_url(); ?>organization/employees?id=" + data.selected.join(':'));
+            }
         });
+
+        //Transform the HTML table in a fancy datatable
+        oTable = $('#collaborators').dataTable({
+            fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                //As the datatable is populated with Ajax we need to add a callback this way
+                $('td', nRow).on('click', function() {
+                    $("#collaborators tbody tr").removeClass('row_selected');
+                    $(nRow).addClass("row_selected");
+                });
+            }
+        });
+    });
 </script>

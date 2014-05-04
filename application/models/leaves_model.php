@@ -203,13 +203,11 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function accept_leave($id) {
-        //log_message('debug', '{models/requests_model/reject} Entering method with id=' . $id);
         $data = array(
             'status' => 3
         );
         $this->db->where('id', $id);
         $this->db->update('leaves', $data);
-        //log_message('debug', '{models/requests_model/reject} SQL=' . $this->db->last_query());
     }
 
     /**
@@ -239,15 +237,23 @@ class Leaves_model extends CI_Model {
     /**
      * All leave request of the user
      * @param int $user_id connected user
+     * @param string $start Unix timestamp / Start date displayed on calendar
+     * @param string $end Unix timestamp / End date displayed on calendar
      * @return string JSON encoded list of full calendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function individual($user_id) {
+    public function individual($user_id, $start = "", $end = "") {
         $this->db->select('leaves.*, types.name as type');
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('employee', $user_id);
+        if ($start != "") {
+            $this->db->where('leaves.startdate > FROM_UNIXTIME(' . $start .')');
+        }
+        if ($end != "") {
+            $this->db->where('leaves.enddate < FROM_UNIXTIME(' . $end .')');
+        }
         $this->db->order_by('startdate', 'desc');
-        $this->db->limit(70);
+        $this->db->limit(255);  //Security limit
         $events = $this->db->get('leaves')->result();
 
         $jsonevents = array();
@@ -267,10 +273,10 @@ class Leaves_model extends CI_Model {
             
             switch ($entry->status)
             {
-                case 1: $color = 'grey'; break;     // Planned
-                case 2: $color = 'blue'; break;     // Requested
-                case 3: $color = 'cyan'; break;     // Accepted
-                case 4: $color = 'red'; break;      // Rejected
+                case 1: $color = '#000999'; break;     // Planned
+                case 2: $color = '#f89406'; break;     // Requested
+                case 3: $color = '#468847'; break;     // Accepted
+                case 4: $color = '#b94a48'; break;      // Rejected
             }
             
             $jsonevents[] = array(
@@ -288,15 +294,23 @@ class Leaves_model extends CI_Model {
     /**
      * All users having the same manager
      * @param int $user_id id of the manager
+     * @param string $start Unix timestamp / Start date displayed on calendar
+     * @param string $end Unix timestamp / End date displayed on calendar
      * @return string JSON encoded list of full calendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function workmates($user_id) {
+    public function workmates($user_id, $start = "", $end = "") {
         $this->db->join('users', 'users.id = leaves.employee');
         $this->db->where('users.manager', $user_id);
         $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
+        if ($start != "") {
+            $this->db->where('leaves.startdate > FROM_UNIXTIME(' . $start .')');
+        }
+        if ($end != "") {
+            $this->db->where('leaves.enddate < FROM_UNIXTIME(' . $end .')');
+        }
         $this->db->order_by('startdate', 'desc');
-        $this->db->limit(70);
+        $this->db->limit(255);  //Security limit
         $events = $this->db->get('leaves')->result();
         
         $jsonevents = array();
@@ -315,10 +329,10 @@ class Leaves_model extends CI_Model {
             
             switch ($entry->status)
             {
-                case 1: $color = 'grey'; break;     // Planned
-                case 2: $color = 'blue'; break;     // Requested
-                case 3: $color = 'cyan'; break;     // Accepted
-                case 4: $color = 'red'; break;      // Rejected
+                case 1: $color = '#000999'; break;     // Planned
+                case 2: $color = '#f89406'; break;     // Requested
+                case 3: $color = '#468847'; break;     // Accepted
+                case 4: $color = '#b94a48'; break;      // Rejected
             }
             
             $jsonevents[] = array(
@@ -336,15 +350,23 @@ class Leaves_model extends CI_Model {
     /**
      * All users having the same manager
      * @param int $user_id id of the manager
+     * @param string $start Unix timestamp / Start date displayed on calendar
+     * @param string $end Unix timestamp / End date displayed on calendar
      * @return string JSON encoded list of full calendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function collaborators($user_id) {
+    public function collaborators($user_id, $start = "", $end = "") {
         $this->db->join('users', 'users.id = leaves.employee');
         $this->db->where('users.manager', $user_id);
         $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
+        if ($start != "") {
+            $this->db->where('leaves.startdate > FROM_UNIXTIME(' . $start .')');
+        }
+        if ($end != "") {
+            $this->db->where('leaves.enddate < FROM_UNIXTIME(' . $end .')');
+        }
         $this->db->order_by('startdate', 'desc');
-        $this->db->limit(70);
+        $this->db->limit(255);  //Security limit
         $events = $this->db->get('leaves')->result();
         
         $jsonevents = array();
@@ -363,10 +385,10 @@ class Leaves_model extends CI_Model {
             
             switch ($entry->status)
             {
-                case 1: $color = 'grey'; break;     // Planned
-                case 2: $color = 'blue'; break;     // Requested
-                case 3: $color = 'cyan'; break;     // Accepted
-                case 4: $color = 'red'; break;      // Rejected
+                case 1: $color = '#000999'; break;     // Planned
+                case 2: $color = '#f89406'; break;     // Requested
+                case 3: $color = '#468847'; break;     // Accepted
+                case 4: $color = '#b94a48'; break;      // Rejected
             }
             
             $jsonevents[] = array(
@@ -380,6 +402,80 @@ class Leaves_model extends CI_Model {
         }
         return json_encode($jsonevents);
     }
+    
+    /**
+     * All leave request of the user
+     * @param int $entity_id Entity identifier (the department)
+     * @param string $start Unix timestamp / Start date displayed on calendar
+     * @param string $end Unix timestamp / End date displayed on calendar
+     * @param bool $children Include sub department in the query
+     * @return string JSON encoded list of full calendar events
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function department($entity_id, $start = "", $end = "", $children = false) {
+        $this->db->select('users.firstname, users.lastname,  leaves.*, types.name as type');
+        $this->db->from('organization');
+        $this->db->join('users', 'users.organization = organization.id');
+        $this->db->join('leaves', 'leaves.employee  = users.id');
+        $this->db->join('types', 'leaves.type = types.id');
+        
+        if ($start != "") {
+            $this->db->where('leaves.startdate > FROM_UNIXTIME(' . $start .')');
+        }
+        if ($end != "") {
+            $this->db->where('leaves.enddate < FROM_UNIXTIME(' . $end .')');
+        }
+        if ($children == true) {
+            $this->load->model('organization_model');
+            $list = $this->organization_model->get_all_children($entity_id);
+            $ids = array();
+            if (count($list) > 0) {
+                $ids = explode(",", $list[0]['id']);
+            }
+            array_push($ids, $entity_id);
+            $this->db->where_in('organization.id', $ids);
+        } else {
+            $this->db->where('organization.id', $entity_id);
+        }
+        
+        $this->db->order_by('startdate', 'desc');
+        $this->db->limit(512);  //Security limit
+        $events = $this->db->get()->result();
+        
+        $jsonevents = array();
+        foreach ($events as $entry) {
+            
+            if ($entry->startdatetype == "Morning") {
+                $startdate = $entry->startdate . 'T07:00:00';
+            } else {
+                $startdate = $entry->startdate . 'T12:00:00';
+            }
+
+            if ($entry->enddatetype == "Morning") {
+                $enddate = $entry->enddate . 'T12:00:00';
+            } else {
+                $enddate = $entry->enddate . 'T18:00:00';
+            }
+            
+            switch ($entry->status)
+            {
+                case 1: $color = '#000999'; break;     // Planned
+                case 2: $color = '#f89406'; break;     // Requested
+                case 3: $color = '#468847'; break;     // Accepted
+                case 4: $color = '#b94a48'; break;      // Rejected
+            }
+            
+            $jsonevents[] = array(
+                'id' => $entry->id,
+                'title' => $entry->firstname .' ' . $entry->lastname,
+                'start' => $startdate,
+                'color' => $color,
+                'allDay' => false,
+                'end' => $enddate
+            );
+        }
+        return json_encode($jsonevents);
+    }    
     
     /**
      * List all leave requests submitted to the connected user or only those

@@ -17,6 +17,7 @@
  */
 
 $lang['calendar_individual_title'] = 'Mon calendrier';
+$lang['calendar_individual_description'] = 'Calendrier de mes absences.';
 $lang['calendar_individual_link_ical'] = 'Télécharger le fichier iCal';
 $lang['calendar_individual_link_ical_description'] = '(pour importer l\'absence dans Outlook, Thunderbird, etc.)';
 $lang['calendar_individual_popup_event_title'] = 'Détails de l\'événement';
@@ -24,6 +25,12 @@ $lang['calendar_individual_popup_event_button_close'] = 'Fermer';
 
 $lang['calendar_workmates_title'] = 'Calendrier de mes collègues';
 $lang['calendar_collaborators_title'] = 'Calendrier de mes collaborateurs';
+
+$lang['calendar_department_title'] = 'Calendrier de mon service';
+$lang['calendar_department_description'] = 'Calendrier des employés travaillant dans mon service';
+
+$lang['calendar_organization_title'] = 'Calendrier de l\'organisation';
+$lang['calendar_organization_description'] = 'Calendrier global avec un filtre sur les entitées';
 
 $lang['calendar_component_monthNames'] = '\'Janvier\',\'Février\',\'Mars\',\'Avril\',\'Mai\',\'Juin\',\'Juillet\',\'Août\',\'Septembre\',\'Octobre\',\'Novembre\',\'Décembre\'';
 $lang['calendar_component_monthNamesShort'] = '\'janv.\',\'févr.\',\'mars\',\'avr.\',\'mai\',\'juin\',\'juil.\',\'août\',\'sept.\',\'oct.\',\'nov.\',\'déc.\'';

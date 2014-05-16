@@ -23,15 +23,19 @@ $(document).ready(function() {
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
 <?php foreach ($positions as $position): ?>
     <tr>
         <td>
-            <a href="#" class="confirm-delete" data-id="<?php echo $position['id'];?>" title="delete position"><i class="icon-trash"></i></a>&nbsp; <?php echo $position['id'];?>
+            <a href="#" class="confirm-delete" data-id="<?php echo $position['id'];?>" title="delete"><i class="icon-trash"></i></a>&nbsp; 
+            <a href="<?php echo base_url();?>positions/edit/<?php echo $position['id']; ?>" title="edit"><i class="icon-pencil"></i></a>&nbsp; 
+            <?php echo $position['id'];?>
         </td>
-        <td><a href="<?php echo base_url();?>positions/edit/<?php echo $position['id']; ?>" data-target="#frmChangeName" data-toggle="modal" title="change name"><i class="icon-pencil"></i></a>&nbsp; <?php echo $position['name']; ?></td>
+        <td><?php echo $position['name']; ?></td>
+        <td><?php echo $position['description']; ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>
@@ -45,10 +49,10 @@ $(document).ready(function() {
 
 <div class="row-fluid">
     <div class="span2">
-      <a href="<?php echo base_url();?>contracts/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
+      <a href="<?php echo base_url();?>positions/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
     </div>
     <div class="span3">
-      <button id="cmdCreatePosition" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; Create a new position</button>
+      <a href="<?php echo base_url();?>positions/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; Create a new position</a>
     </div>
     <div class="span7">&nbsp;</div>
 </div>
@@ -71,45 +75,11 @@ $(document).ready(function() {
     </div>
 </div>
 
-<div id="frmCreatePosition" class="modal hide fade">
-    <div class="modal-header">
-        <a href="javascript:$('#frmCreatePosition').modal('hide')" class="close">&times;</a>
-         <h3>Create a Position</h3>
-    </div>
-    <div class="modal-body">
-        <label for="txtPositionName">Position</label>
-        <input type="text" id="txtPositionName" />
-    </div>
-    <div class="modal-footer">
-        <a href="#" id="lnkCreatePosition" class="btn danger">OK</a>
-        <a href="javascript:$('#frmCreatePosition').modal('hide')" class="btn secondary">Cancel</a>
-    </div>
-</div>
-
-<div id="frmChangeName" class="modal hide fade">
-    <div class="modal-header">
-        <a href="javascript:$('#frmChangeName').modal('hide')" class="close">&times;</a>
-         <h3>Entitled days</h3>
-    </div>
-    <div class="modal-body">
-        <img src="<?php echo base_url();?>assets/images/loading.gif">
-    </div>
-    <div class="modal-footer">
-        <a href="javascript:$('#frmChangeName').modal('hide')" class="btn secondary">Cancel</a>
-    </div>
-</div>
-
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#positions').dataTable();
     $("#frmDeletePosition").alert();
-    $("#frmChangeName").alert();
-    $("#frmCreatePosition").alert();
-	
-    $("#cmdCreatePosition").click(function() {
-        $("#frmCreatePosition").modal('show');
-    });
     
     //On showing the confirmation pop-up, add the contract id at the end of the delete url action
     $('#frmDeletePosition').on('show', function() {
@@ -122,10 +92,6 @@ $(document).ready(function() {
             e.preventDefault();
             var id = $(this).data('id');
             $('#frmDeletePosition').data('id', id).modal('show');
-    });
-    //Prevent from remanent data
-    $('#frmChangeName').on('hidden', function() {
-        $(this).removeData('modal');
     });
 });
 </script>

@@ -45,6 +45,23 @@ class Organization_model extends CI_Model {
     }
     
     /**
+     * Get the label of a given entity id
+     * @param type $id
+     * @return string label
+     */
+    public function get_label($id) {
+        $this->db->from('organization');
+        $this->db->where("id", $id); 
+        $query = $this->db->get();
+        $record = $query->result_array();
+        if(count($record) > 0) {
+            return $record[0]['name'];
+        } else {
+            return '';
+        }
+    }
+    
+    /**
      * List all entities of the organisation
      * @return array all entities of the organization sorted out by id and name
      * @author Benjamin BALET <benjamin.balet@gmail.com>

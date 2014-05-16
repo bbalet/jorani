@@ -52,6 +52,16 @@ class Users_model extends CI_Model {
     }
     
     /**
+     * Get the label of a given user id
+     * @param type $id
+     * @return string label
+     */
+    public function get_label($id) {
+        $record = $this->get_users($id);
+        return $record['firstname'] . ' ' . $record['lastname'];
+    }
+    
+    /**
      * Get the list of employees belonging to an entity
      * @param int $id identifier of the entity
      * @return array record of users
@@ -131,7 +141,9 @@ class Users_model extends CI_Model {
             'email' => $this->input->post('email'),
             'password' => $hash,
             'role' => $role,
-            'manager' => $this->input->post('manager')
+            'manager' => $this->input->post('manager'),
+            'organization' => $this->input->post('entity'),
+            'position' => $this->input->post('position')
         );
         $this->db->insert('users', $data);
         return $password;
@@ -185,7 +197,9 @@ class Users_model extends CI_Model {
             'login' => $this->input->post('login'),
             'email' => $this->input->post('email'),
             'role' => $role,
-            'manager' => $this->input->post('manager')
+            'manager' => $this->input->post('manager'),
+            'organization' => $this->input->post('entity'),
+            'position' => $this->input->post('position')
         );
 
         $this->db->where('id', $this->input->post('id'));

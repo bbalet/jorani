@@ -103,7 +103,11 @@ class Users extends CI_Controller {
         $data['title'] = 'User';
         $this->load->model('roles_model');
         $data['roles'] = $this->roles_model->get_roles();
-        $data['users'] = $this->users_model->get_users();
+        $this->load->model('positions_model');
+        $this->load->model('organization_model');
+        $data['manager_label'] = $this->users_model->get_label($data['user']['manager']);
+        $data['position_label'] = $this->positions_model->get_label($data['user']['position']);
+        $data['organization_label'] = $this->organization_model->get_label($data['user']['organization']);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/view', $data);
@@ -129,7 +133,9 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('login', 'Login identifier', 'required|callback_login_check|xss_clean');
         $this->form_validation->set_rules('email', 'E-mail', 'required|xss_clean');
         $this->form_validation->set_rules('role', 'role', 'required|xss_clean');
-        $this->form_validation->set_rules('manager', 'manager', 'required|xss_clean');
+        $this->form_validation->set_rules('manager', 'Manager', 'required|xss_clean');
+        $this->form_validation->set_rules('entity', 'Entity', 'xss_clean');
+        $this->form_validation->set_rules('position', 'Position', 'xss_clean');
 
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
@@ -138,8 +144,12 @@ class Users extends CI_Controller {
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->model('roles_model');
+            $this->load->model('positions_model');
+            $this->load->model('organization_model');
+            $data['manager_label'] = $this->users_model->get_label($data['users_item']['manager']);
+            $data['position_label'] = $this->positions_model->get_label($data['users_item']['position']);
+            $data['organization_label'] = $this->organization_model->get_label($data['users_item']['organization']);
             $data['roles'] = $this->roles_model->get_roles();
-            $data['users'] = $this->users_model->get_users();
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('users/edit', $data);
@@ -250,7 +260,6 @@ class Users extends CI_Controller {
 
         $this->load->model('roles_model');
         $data['roles'] = $this->roles_model->get_roles();
-        $data['users'] = $this->users_model->get_users();
         $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
 
         $this->form_validation->set_rules('firstname', 'Firstname', 'required|xss_clean');
@@ -260,6 +269,8 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
         $this->form_validation->set_rules('role[]', 'Role', 'required|xss_clean');
         $this->form_validation->set_rules('manager', 'Manager', 'required|xss_clean');
+        $this->form_validation->set_rules('position', 'Position', 'xss_clean');
+        $this->form_validation->set_rules('entity', 'Entity', 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);

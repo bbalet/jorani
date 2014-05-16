@@ -26,8 +26,8 @@ class Positions_model extends CI_Model {
     }
 
     /**
-     * Get the list of types or one type
-     * @param int $id optional id of a type
+     * Get the list of positions or one position
+     * @param int $id optional id of a position
      * @return array record of types
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -41,51 +41,54 @@ class Positions_model extends CI_Model {
     }
     
     /**
-     * Get the label of a given type id
+     * Get the label of a given position id
      * @param type $id
      * @return string label
      */
     public function get_label($id) {
-        $type = $this->get_types($id);
-        return $type['name'];
+        $record = $this->get_positions($id);
+        return $record['name'];
     }
     
     /**
-     * Insert a new leave type
+     * Insert a new position
      * Inserted data are coming from an HTML form
      * @return type
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_types() {
+    public function set_positions() {
         
         $data = array(
-            'name' => $this->input->post('name')
+            'name' => $this->input->post('name'),
+            'description' => $this->input->post('description')
         );
-        return $this->db->insert('types', $data);
+        return $this->db->insert('positions', $data);
     }
     
     /**
-     * Delete a leave type from the database
-     * @param int $id identifier of the leave type record
+     * Delete a position from the database
+     * @param int $id identifier of the position record
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_type($id) {
-        $query = $this->db->delete('types', array('id' => $id));
+    public function delete_position($id) {
+        $query = $this->db->delete('positions', array('id' => $id));
     }
     
     /**
-     * Update a given leave type in the database. Update data are coming from an
+     * Update a given position in the database. Update data are coming from an
      * HTML form
+     * @param int $id Identifier of the database
      * @return type
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function update_types() {
+    public function update_positions($id) {
         $data = array(
-            'name' => $this->input->post('name')
+            'name' => $this->input->post('name'),
+            'description' => $this->input->post('description')
         );
 
-        $this->db->where('id', $this->input->post('id'));
-        return $this->db->update('types', $data);
+        $this->db->where('id', $id);
+        return $this->db->update('positions', $data);
     }
 }
 	

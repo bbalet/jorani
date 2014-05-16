@@ -75,24 +75,39 @@ class Positions extends CI_Controller {
     }
     
     /**
-     * Display a form that allows adding a leave type
+     * Display a popup showing the list of positions
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function select() {
+        $this->auth->check_is_granted('list_positions');
+        $data = $this->getUserContext();
+        $data['positions'] = $this->positions_model->get_positions();
+        $this->load->view('positions/select', $data);
+    }
+    
+    /**
+     * Display a form that allows adding a position
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function create() {
-        $this->auth->check_is_granted('leavetypes_create');
+        $this->auth->check_is_granted('create_positions');
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Add leave type';
+        $data['title'] = 'Add position';
         
-        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');        
+        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
+        $this->form_validation->set_rules('description', 'Description', 'xss_clean');
         
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('leavetypes/create', $data);
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('positions/create', $data);
+            $this->load->view('templates/footer');
         } else {
-            $this->types_model->set_types();
-            $this->session->set_flashdata('msg', 'The leave type has been succesfully created.');
-            redirect('leavetypes');
+            $this->positions_model->set_positions();
+            $this->session->set_flashdata('msg', 'The position has been succesfully created.');
+            redirect('positions');
         }
     }
 
@@ -101,60 +116,65 @@ class Positions extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
-        $this->auth->check_is_granted('leavetypes_edit');
+        $this->auth->check_is_granted('edit_positions');
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Edit leave type';
-        $data['id'] = $id;
-        $data['type_name'] = $this->types_model->get_label($id);
+        $data['title'] = 'Edit a position';
+        $data['position'] = $this->positions_model->get_positions($id);
         
-        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');        
+        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
+        $this->form_validation->set_rules('description', 'Description', 'xss_clean');
         
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('leavetypes/edit', $data);
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('positions/edit', $data);
+            $this->load->view('templates/footer');
         } else {
-            $this->types_model->update_types();
-            $this->session->set_flashdata('msg', 'The leave type has been succesfully created.');
-            redirect('leavetypes');
+            $this->positions_model->update_positions($id);
+            $this->session->set_flashdata('msg', 'The position has been succesfully updated.');
+            redirect('positions');
         }
     }
     
     /**
-     * Action : delete a leave type
-     * @param int $id leave type identifier
+     * Action : delete a positions
+     * @param int $id position identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
-        $this->auth->check_is_granted('leavetypes_delete');
-        $this->types_model->delete_type($id);
-        $this->session->set_flashdata('msg', 'The leave type has been succesfully deleted.');
-        redirect('leavetypes');
+        $this->auth->check_is_granted('delete_positions');
+        $this->positions_model->delete_position($id);
+        $this->session->set_flashdata('msg', 'The position has been succesfully deleted.');
+        redirect('positions');
     }
 
     /**
-     * Action: export the list of all users into an Excel file
+     * Action: export the list of all positions into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
-        $this->auth->check_is_granted('leavetypes_export');
+        $this->auth->check_is_granted('export_positions');
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of leave types');
+        $this->excel->getActiveSheet()->setTitle('List of positions');
         $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
         $this->excel->getActiveSheet()->setCellValue('B1', 'Name');
-        $this->excel->getActiveSheet()->getStyle('A1:B1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Description');
+        $this->excel->getActiveSheet()->getStyle('A1:C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1:C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $types = $this->types_model->get_types();
+        $types = $this->positions_model->get_positions();
         $line = 2;
         foreach ($types as $type) {
             $this->excel->getActiveSheet()->setCellValue('A' . $line, $type['id']);
             $this->excel->getActiveSheet()->setCellValue('B' . $line, $type['name']);
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $type['description']);
             $line++;
         }
 
-        $filename = 'leave_types.xls';
+        $filename = 'positions.xls';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');

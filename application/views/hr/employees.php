@@ -35,9 +35,9 @@ $(document).ready(function() {
         <td>
             <?php echo $users_item['id'] ?>
             &nbsp;
-            <a href="<?php echo base_url();?>hr/manager/<?php echo $users_item['id'] ?>" data-target="#frmManager" data-toggle="modal" title="change manager"><i class="icon-user"></i></a>
+            <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="edit user"><i class="icon-pencil"></i></a>
             &nbsp;
-            <a href="<?php echo base_url();?>hr/contract/<?php echo $users_item['id'] ?>" data-target="#frmContract" data-toggle="modal" title="change contract"><i class="icon-pencil"></i></a>
+            <a href="<?php echo base_url();?>hr/contract/<?php echo $users_item['id'] ?>" data-target="#frmContract" data-toggle="modal" title="change contract"><i class="icon-file"></i></a>
             &nbsp;
             <a href="<?php echo base_url();?>entitleddays/user/<?php echo $users_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
         </td>
@@ -86,35 +86,18 @@ $(document).ready(function() {
     </div>
 </div>
 
-<div id="frmManager" class="modal hide fade">
-    <div class="modal-header">
-        <a href="javascript:$('#frmManager').modal('hide')" class="close">&times;</a>
-         <h3>Manager</h3>
-    </div>
-    <div class="modal-body">
-        <img src="<?php echo base_url();?>assets/images/loading.gif">
-    </div>
-    <div class="modal-footer">
-        <a href="javascript:$('#frmManager').modal('hide')" class="btn secondary">Cancel</a>
-    </div>
-</div>
-
 <script type="text/javascript">
 $(function () {
     //Transform the HTML table in a fancy datatable
     $('#users').dataTable();
     $("#frmEntitledDays").alert();
     $("#frmContract").alert();
-    $("#frmManager").alert();
     
     //Prevent to load always the same content (refreshed each time)
     $('#frmEntitledDays').on('hidden', function() {
         $(this).removeData('modal');
     });
     $('#frmContract').on('hidden', function() {
-        $(this).removeData('modal');
-    });
-    $('#frmManager').on('hidden', function() {
         $(this).removeData('modal');
     });
 });

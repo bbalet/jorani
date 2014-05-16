@@ -73,6 +73,7 @@ $route['leavetypes'] = 'leavetypes';
 $route['positions/delete/(:num)'] = 'positions/delete/$1';
 $route['positions/edit/(:num)'] = 'positions/edit/$1';
 $route['positions/index'] = 'positions/index';
+$route['positions/select'] = 'positions/select';
 $route['positions/create'] = 'positions/create';
 $route['positions/export'] = 'positions/export';
 $route['positions'] = 'positions';

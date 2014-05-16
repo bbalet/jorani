@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 03 Mai 2014 à 14:49
+-- Généré le: Ven 16 Mai 2014 à 15:26
 -- Version du serveur: 5.5.24-log
--- Version de PHP: 5.4.3
+-- Version de PHP: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -291,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `organization` (
   `name` varchar(512) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
 
 --
 -- Contenu de la table `organization`
@@ -299,7 +299,44 @@ CREATE TABLE IF NOT EXISTS `organization` (
 
 INSERT INTO `organization` (`id`, `name`, `parent_id`) VALUES
 (16, 'Passerelles numériques', -1),
-(24, 't2', 16);
+(24, 'PNP', 16),
+(30, 'PNC', 16),
+(31, 'PNV', 16),
+(32, 'PNF', 16),
+(33, 'HR', 32),
+(34, 'Finance', 32),
+(35, 'S&L', 30),
+(36, 'ERO', 30),
+(37, 'Training', 30);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `positions`
+--
+
+CREATE TABLE IF NOT EXISTS `positions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+
+--
+-- Contenu de la table `positions`
+--
+
+INSERT INTO `positions` (`id`, `name`, `description`) VALUES
+(2, 'trainer', 'trains'),
+(3, 'WEP Coordinator', 'Manages trainers'),
+(4, 'PNC Manager', 'General manager of the PNC center'),
+(5, 'HR Officer', 'Assists the HR Manager'),
+(6, 'Cleaner', 'Cleans the PN premises'),
+(7, 'Accountant', 'Book keeping'),
+(8, 'Training manager', ''),
+(9, 'ERO Manager', ''),
+(10, 'ERO Officer', ''),
+(11, 'S&L Officer', '');
 
 -- --------------------------------------------------------
 
@@ -427,19 +464,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `country` int(11) DEFAULT NULL,
   `organization` int(11) DEFAULT NULL,
   `contract` int(11) DEFAULT NULL,
+  `position` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Contenu de la table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `login`, `email`, `password`, `role`, `manager`, `country`, `organization`, `contract`) VALUES
-(5, 'John', 'DOE', 'jdoe', 'test@toto.com', '$2a$08$NeL/A7xVRbsFr9lxVSDmfOQsXepBom/PfvfTnua4AnFH2YkVZpjCa', 66, 5, NULL, 24, NULL),
-(6, 'Benjamin', 'BALET', 'bbalet', 'benjamin.balet@gmail.com', '$2a$08$KTQ6KRC6rtsPG3Qkf0TKreRjUDB.CyxEY9/1dX1mZc50kqIiI3MYi', 1, 5, NULL, NULL, 1),
-(12, 'toto', 'toto', 'toto', 'benjamin.balet@gmail.com', '$2a$08$Ijed..gLC.VRaoFNVhW.J.qHiD0.9mv9a8hIZIJHccfBvQ/1jAAEW', 8, 5, NULL, NULL, 1),
-(15, 'Jane', 'DOE', 'DOE', 'benjamin.balet@gmail.com', '$2a$08$2vJMASbNOsMP2Gf06YI7TONk5mgnnKuGzfogwqtMh6qoj89ZzeIqi', 2, 5, NULL, NULL, NULL),
-(18, 'Test', 'TEST', 'test', 'benjamin.balet@gmail.com', '$2a$08$cMDH7iGfp51alOVNu6dIw.95zfWxW0ZRK8pLuFm13If8Blynir6he', 2, 5, NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `login`, `email`, `password`, `role`, `manager`, `country`, `organization`, `contract`, `position`) VALUES
+(5, 'John', 'DOE', 'jdoe', 'test@toto.com', '$2a$08$NeL/A7xVRbsFr9lxVSDmfOQsXepBom/PfvfTnua4AnFH2YkVZpjCa', 66, 5, NULL, 24, NULL, 0),
+(6, 'Benjamin', 'BALET', 'bbalet', 'benjamin.balet@gmail.com', '$2a$08$KTQ6KRC6rtsPG3Qkf0TKreRjUDB.CyxEY9/1dX1mZc50kqIiI3MYi', 1, 5, NULL, NULL, 1, 0),
+(12, 'toto', 'toto', 'toto', 'benjamin.balet@gmail.com', '$2a$08$Ijed..gLC.VRaoFNVhW.J.qHiD0.9mv9a8hIZIJHccfBvQ/1jAAEW', 8, 6, NULL, 24, 1, 7),
+(15, 'Jane', 'DOE', 'DOE', 'benjamin.balet@gmail.com', '$2a$08$2vJMASbNOsMP2Gf06YI7TONk5mgnnKuGzfogwqtMh6qoj89ZzeIqi', 2, 5, NULL, NULL, NULL, 0),
+(18, 'Test', 'TEST', 'test', 'benjamin.balet@gmail.com', '$2a$08$cMDH7iGfp51alOVNu6dIw.95zfWxW0ZRK8pLuFm13If8Blynir6he', 2, 5, NULL, NULL, NULL, 0),
+(19, 'aaaaaa', 'aaaaaa', 'aaaaaaa', 'aaaaaa@aaaaaa.com', '$2a$08$kc7NJ25Lnpp5dvtikbPkEuN2oxxTchD36iRPhjI2d1a9.tXoOtLOK', 2, 6, NULL, 34, NULL, 7);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

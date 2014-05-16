@@ -24,16 +24,130 @@
     <?php endforeach ?>
     </select>
 
-    <label for="manager">Manager</label>
-    <select name="manager" required>
-    <?php foreach ($users as $manager): ?>
-        <option value="<?php echo $manager['id']; ?>" <?php if ($manager['id'] == $users_item['manager']) { echo "selected"; } ?>><?php echo $manager['firstname'] . ' ' . $manager['lastname']; ?></option>
-    <?php endforeach ?>
-    </select> If a user has no manager (itself), it can validate its leave requests.
-    <br /><br />
+    <br />
+    <input type="hidden" name="manager" id="manager" value="<?php echo $users_item['manager']; ?>" required /><br />
+    <label for="txtManager">Select the manager</label>
+    <div class="input-append">
+        <input type="text" id="txtManager" name="txtManager" value="<?php echo $manager_label; ?>"/>
+        <a id="cmdSelectManager" class="btn btn-primary">Select</a>
+    </div><br />
+    <i>If a user is its own manager, it can validate its own leave requests.</i>
+    <br />
     
-    <br /><br />
+    <input type="hidden" name="entity" id="entity" value="<?php echo $users_item['organization']; ?>" required /><br />
+    <label for="txtEntity">Select the entity</label>
+    <div class="input-append">
+        <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $organization_label; ?>" />
+        <a id="cmdSelectEntity" class="btn btn-primary">Select</a>
+    </div>
+    <br />
+    
+    <input type="hidden" name="position" id="position" value="<?php echo $users_item['position']; ?>" required /><br />
+    <label for="txtPosition">Select the position</label>
+    <div class="input-append">
+        <input type="text" id="txtPosition" name="txtPosition" value="<?php echo $position_label; ?>" />
+        <a id="cmdSelectPosition" class="btn btn-primary">Select</a>
+    </div>    
+    <br />
+    <br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update user</button>
     &nbsp;
-    <a href="<?php echo base_url();?>users" class="btn btn-primary"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <a href="<?php echo base_url();?>users" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
 </form>
+
+<div id="frmSelectManager" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#frmSelectManager').modal('hide')" class="close">&times;</a>
+         <h3>Select the manager</h3>
+    </div>
+    <div class="modal-body" id="frmSelectManagerBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:select_manager();" class="btn secondary">OK</a>
+        <a href="javascript:$('#frmSelectManager').modal('hide')" class="btn secondary">Cancel</a>
+    </div>
+</div>
+
+<div id="frmSelectEntity" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#frmSelectEntity').modal('hide')" class="close">&times;</a>
+         <h3>Select an entity</h3>
+    </div>
+    <div class="modal-body" id="frmSelectEntityBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:select_entity();" class="btn secondary">OK</a>
+        <a href="javascript:$('#frmSelectEntity').modal('hide')" class="btn secondary">Cancel</a>
+    </div>
+</div>
+
+<div id="frmSelectPosition" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#frmSelectPosition').modal('hide')" class="close">&times;</a>
+         <h3>Select a position</h3>
+    </div>
+    <div class="modal-body" id="frmSelectPositionBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:select_position();" class="btn secondary">OK</a>
+        <a href="javascript:$('#frmSelectPosition').modal('hide')" class="btn secondary">Cancel</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    
+    function select_manager() {
+        var manager = $('#employees .row_selected td:first').text();
+        var text = $('#employees .row_selected td:eq(1)').text();
+        text += ' ' + $('#employees .row_selected td:eq(2)').text();
+        $('#manager').val(manager);
+        $('#txtManager').val(text);
+        $("#frmSelectManager").modal('hide');
+    }
+    
+    function select_entity() {
+        var entity = $('#organization').jstree('get_selected')[0];
+        var text = $('#organization').jstree().get_text(entity);
+        $('#entity').val(entity);
+        $('#txtEntity').val(text);
+        $("#frmSelectEntity").modal('hide');
+    }
+    
+    function select_position() {
+        var position = $('#positions .row_selected td:first').text();
+        var text = $('#positions .row_selected td:eq(1)').text();
+        $('#position').val(position);
+        $('#txtPosition').val(text);
+        $("#frmSelectPosition").modal('hide');
+    }
+
+    $(document).ready(function() {
+        //Popup select position
+        $("#cmdSelectManager").click(function() {
+            $("#frmSelectManager").modal('show');
+            $("#frmSelectManagerBody").load('<?php echo base_url(); ?>users/employees');
+        });
+        
+        //Popup select position
+        $("#cmdSelectPosition").click(function() {
+            $("#frmSelectPosition").modal('show');
+            $("#frmSelectPositionBody").load('<?php echo base_url(); ?>positions/select');
+        });
+        
+        //Popup select entity
+        $("#cmdSelectEntity").click(function() {
+            $("#frmSelectEntity").modal('show');
+            $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
+        });
+
+        //Load alert forms
+        $("#frmSelectEntity").alert();
+        //Prevent to load always the same content (refreshed each time)
+        $('#frmSelectEntity').on('hidden', function() {
+            $(this).removeData('modal');
+        });
+    });
+</script>

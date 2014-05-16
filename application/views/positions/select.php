@@ -1,19 +1,17 @@
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="employees" width="100%">
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="positions" width="100%">
     <thead>
         <tr>
             <th>ID</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>E-mail</th>
+            <th>Name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
-<?php foreach ($employees as $employee): ?>
+<?php foreach ($positions as $position): ?>
     <tr>
-        <td><?php echo $employee['id'] ?></td>
-        <td><?php echo $employee['firstname'] ?></td>
-        <td><?php echo $employee['lastname'] ?></td>
-        <td><?php echo $employee['email'] ?></td>
+        <td><?php echo $position['id'] ?></td>
+        <td><?php echo $position['name'] ?></td>
+        <td><?php echo $position['description'] ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>
@@ -29,16 +27,16 @@
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
-    $('#employees').dataTable({
+    $('#positions').dataTable({
         "pageLength": 5
     });
     //Hide pagination select box in order to save space
     $('.dataTables_length').css("display", "none");
     //Display selected row
-    $("#employees tbody tr").on('click',function(event) {
-            $("#employees tbody tr").removeClass('row_selected');		
+    $("#positions tbody tr").on('click',function(event) {
+            $("#positions tbody tr").removeClass('row_selected');		
             $(this).addClass('row_selected');
     });
-    $("#employees tbody tr:first").addClass('row_selected');
+    $("#positions tbody tr:first").addClass('row_selected');
 });
 </script>

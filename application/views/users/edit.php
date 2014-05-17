@@ -18,7 +18,7 @@
     <input type="email" id="email" name="email" value="<?php echo $users_item['email']; ?>" required /><br />
 		
     <label for="role[]">Role</label>
-    <select name="role[]" multiple="multiple" size="6">
+    <select name="role[]" multiple="multiple" size="2">
     <?php foreach ($roles as $roles_item): ?>
         <option value="<?php echo $roles_item['id'] ?>" <?php if ((((int)$roles_item['id']) & ((int) $users_item['role']))) echo "selected" ?>><?php echo $roles_item['name'] ?></option>
     <?php endforeach ?>
@@ -29,6 +29,7 @@
     <label for="txtManager">Select the manager</label>
     <div class="input-append">
         <input type="text" id="txtManager" name="txtManager" value="<?php echo $manager_label; ?>"/>
+        <a id="cmdSelfManager" class="btn btn-primary">Self</a>
         <a id="cmdSelectManager" class="btn btn-primary">Select</a>
     </div><br />
     <i>If a user is its own manager, it can validate its own leave requests.</i>
@@ -148,6 +149,11 @@
         //Prevent to load always the same content (refreshed each time)
         $('#frmSelectEntity').on('hidden', function() {
             $(this).removeData('modal');
+        });
+        //Self manager button
+        $("#cmdSelfManager").click(function() {
+            $("#manager").val('-1');
+            $('#txtManager').val('No line manager');
         });
     });
 </script>

@@ -379,6 +379,37 @@ $config['password_length'] = 8;
 //Default role id (e.g. 2 for user)
 $config['default_role_id'] = 2;
 
+//E-mail settings
+$config['protocol'] = 'smtp';
+$config['useragent'] = 'CodeIgniter';
+//$config['mailpath'] = '/usr/sbin/sendmail';
+$config['smtp_host'] = 'localhost';
+$config['smtp_user'] = '';
+$config['smtp_pass'] = '';
+$config['_smtp_auth'] = TRUE;
+$config['smtp_port'] = '25';
+$config['smtp_timeout'] = '20';
+$config['charset'] = 'utf-8';   //'iso-8859-1'
+$config['mailtype'] = 'html';
+$config['wordwrap'] = TRUE;
+$config['wrapchars'] = 80;
+$config['validate'] = FALSE;
+$config['priority'] = 3;
+$config['newline'] = "\r\n";
+$config['crlf'] = "\r\n";
+
+//Profiling options
+$config['enable_profiling'] = FALSE;
+$config['benchmarks'] = TRUE;
+$config['config'] = FALSE;
+$config['controller_info'] = FALSE;
+$config['get'] = FALSE;
+$config['http_headers'] = FALSE;
+$config['memory_usage'] = FALSE;
+$config['post'] = FALSE;
+$config['queries'] = TRUE;
+$config['uri_string'] = FALSE;
+$config['query_toggle_count'] = FALSE;
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

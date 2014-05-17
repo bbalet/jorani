@@ -31,6 +31,7 @@ class Users extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
+        //$this->output->enable_profiler($this->config->item('enable_profiling'));
         //Check if user is connected
         if (!$this->session->userdata('logged_in')) {
             $this->session->set_userdata('last_page', current_url());
@@ -270,7 +271,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('role[]', 'Role', 'required|xss_clean');
         $this->form_validation->set_rules('manager', 'Manager', 'required|xss_clean');
         $this->form_validation->set_rules('position', 'Position', 'xss_clean');
-        $this->form_validation->set_rules('entity', 'Entity', 'required|xss_clean');
+        $this->form_validation->set_rules('entity', 'Entity', 'xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);

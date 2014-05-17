@@ -80,6 +80,9 @@ server {
 		fastcgi_index index.php;
 		fastcgi_param SCRIPT_FILENAME
 			$document_root$fastcgi_script_name;
+                fastcgi_buffer_size 128k;
+                fastcgi_buffers 4 256k;
+                fastcgi_busy_buffers_size 256k;
 	}
 
 	## Disable viewing some files such as .htaccess & .htpassword

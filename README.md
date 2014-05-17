@@ -6,7 +6,9 @@ This project is under development.
 
 ## Features
 * User management.
-* Leave request sent by e-mail to the manager.
+* Notifications by e-mail.
+* Leave request approval workflow.
+* Set your own contracts and leave types.
 
 ## Installation
 
@@ -21,6 +23,7 @@ See <code>/docs/install/README.md</code>
 We thank the following open source projects for the components used by LMS:
 
 #### Backend
+* CodeIgniter MVC framework http://ellislab.com/codeigniter
 * BCRYPT password hasher https://github.com/dwightwatson/codeigniter-bcrypt
 * RSA Encryption in pure PHP https://github.com/phpseclib/phpseclib
 * Excel import/export https://github.com/PHPOffice/PHPExcel

@@ -56,16 +56,23 @@ $this->lang->load('menu', $language);?>
               </a>
             <div class="nav-collapse">
                 
-              <?php if ($is_admin == TRUE) { ?>
+              <?php if ($is_hr == TRUE) { ?>
               <ul class="nav">			  
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_admin_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="<?php echo base_url();?>users"><?php echo lang('menu_admin_list_users');?></a></li>
                     <li><a href="<?php echo base_url();?>users/create"><?php echo lang('menu_admin_add_user');?></a></li>
-                    <li class="divider"></li>
+                    <!--<li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_admin_settings_divider');?></li>
-                    <li><a href="<?php echo base_url();?>settings"><?php echo lang('menu_admin_settings');?></a></li>
+                    <li><a href="<?php echo base_url();?>settings"><?php echo lang('menu_admin_settings');?></a></li>//-->
+                    <li class="divider"></li>
+                    <li class="nav-header"><?php echo lang('menu_hr_leaves_type_divider');?></li>
+                    <li><a href="<?php echo base_url();?>leavetypes"><?php echo lang('menu_hr_list_leaves_type');?></a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header"><?php echo lang('menu_hr_contracts_divider');?></li>
+                    <li><a href="<?php echo base_url();?>contracts"><?php echo lang('menu_hr_list_contracts');?></a></li>
+                    <li><a href="<?php echo base_url();?>positions"><?php echo lang('menu_hr_list_positions');?></a></li>
                   </ul>
                 </li>
               </ul>
@@ -79,13 +86,6 @@ $this->lang->load('menu', $language);?>
                     <li class="nav-header"><?php echo lang('menu_hr_employees_divider');?></li>
                     <li><a href="<?php echo base_url();?>hr/employees"><?php echo lang('menu_hr_list_employees');?></a></li>
                     <li><a href="<?php echo base_url();?>organization"><?php echo lang('menu_hr_list_organization');?></a></li>
-                    <li class="divider"></li>
-                    <li class="nav-header"><?php echo lang('menu_hr_contracts_divider');?></li>
-                    <li><a href="<?php echo base_url();?>contracts"><?php echo lang('menu_hr_list_contracts');?></a></li>
-                    <li><a href="<?php echo base_url();?>positions"><?php echo lang('menu_hr_list_positions');?></a></li>
-                    <li class="divider"></li>
-                    <li class="nav-header"><?php echo lang('menu_hr_leaves_type_divider');?></li>
-                    <li><a href="<?php echo base_url();?>leavetypes"><?php echo lang('menu_hr_list_leaves_type');?></a></li>
                   </ul>
                 </li>
               </ul>

@@ -14,7 +14,7 @@ echo form_open('users/create', $attributes); ?>
     <input type="input" name="lastname" id="lastname" required /><br />
 
     <label for="role[]">Role</label>
-    <select name="role[]" multiple="multiple" size="6">
+    <select name="role[]" multiple="multiple" size="2">
     <?php foreach ($roles as $roles_item): ?>
         <option value="<?php echo $roles_item['id'] ?>" <?php if ($roles_item['id'] == 2) echo "selected" ?>><?php echo $roles_item['name'] ?></option>
     <?php endforeach ?>
@@ -31,9 +31,10 @@ echo form_open('users/create', $attributes); ?>
     <label for="txtManager">Select the manager</label>
     <div class="input-append">
         <input type="text" id="txtManager" name="txtManager" />
+        <a id="cmdSelfManager" class="btn btn-primary">Self</a>
         <a id="cmdSelectManager" class="btn btn-primary">Select</a>
     </div><br />
-    <i>If a user is its own manager, it can validate its own leave requests.</i>
+    <i>If a user is its own manager (Self), it can validate its own leave requests.</i>
     <br />
     
     <input type="hidden" name="entity" id="entity" required /><br />
@@ -186,6 +187,12 @@ echo form_open('users/create', $attributes); ?>
         //Prevent to load always the same content (refreshed each time)
         $('#frmSelectEntity').on('hidden', function() {
             $(this).removeData('modal');
+        });
+        
+        //Self manager button
+        $("#cmdSelfManager").click(function() {
+            $("#manager").val('-1');
+            $('#txtManager').val('No line manager');
         });
     });
 

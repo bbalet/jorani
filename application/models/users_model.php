@@ -146,6 +146,17 @@ class Users_model extends CI_Model {
             'position' => $this->input->post('position')
         );
         $this->db->insert('users', $data);
+        
+        //Deal with user having no line manager
+        if ($this->input->post('manager') == -1) {
+            $id = $this->db->insert_id();
+            $data = array(
+                'manager' => $id
+            );
+            $this->db->where('id', $id);
+            $this->db->update('users', $data);
+        }
+        
         return $password;
     }
     
@@ -191,13 +202,20 @@ class Users_model extends CI_Model {
             $role = $role | $role_bit;
         }
         
+        //Deal with user having no line manager
+        if ($this->input->post('manager') == -1) {
+            $manager = $this->input->post('id');
+        } else {
+            $manager = $this->input->post('manager');
+        }
+        
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
             'login' => $this->input->post('login'),
             'email' => $this->input->post('email'),
             'role' => $role,
-            'manager' => $this->input->post('manager'),
+            'manager' => $manager,
             'organization' => $this->input->post('entity'),
             'position' => $this->input->post('position')
         );

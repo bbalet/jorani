@@ -1,8 +1,8 @@
 # Installation
 
 LMS has been tested with Apache and ngnix.
-LMS should be compatible with HHVM as Codeigniter is 100% compatible with the VM. 
-However, HHVM is still under development and LMS has not been fully tested with this VM.
+LMS is compatible with HHVM as Codeigniter is 100% compatible with the VM. 
+However, please note that HHVM is still under development.
 
 ## General considerations
 
@@ -10,19 +10,20 @@ The LMS application must have write privileges on <code>temp</code> and <code>ap
 
 ## Database setup
 
-LMS has been tested with MySQL. Please follow these steps :
+LMS has been tested with MySQL and MariaDB (please note that functions are created in the schema). Please follow these steps :
 * Create a database.
 * Import <code>/sql/lms.sql</code>.
 * Change <code>application/config/database.php</code> according to your environment.
+* Change <code>application/config/config.php</code> according to your environment.
 
 # E-mail setup
 
-LMS uses e-mail to notify users and managers. TEMPORARY (under development), modify :
-<code>application/models/settings_model.php</code>
+LMS uses e-mail to notify users and managers. In order to setup e-mail modify the end of 
+<code>application/config/config.php</code> file according to your environment.
 
 ## Apache
 
-LMS is a classic PHP/CI application using rewrite rules and .htaccess files. 
+LMS is a PHP/CI application using rewrite rules and .htaccess files. 
 So your Apache configuration must allow overwriting configuration by .htaccess files and mod_rewrite must be enabled.
 
 ## nginx
@@ -52,6 +53,22 @@ In <code>/etc/php5/fpm/pool.d/www.conf</code> which is set by default to 5
 pm.max_children = xxxx (number of simultaneous processes)
 For a load test, allow a margin of 25%
 
+## Error upstream sent too big header
+
+If you get this error : <code>upstream sent too big header while reading response header from upstream</code>, you need to enlarge the buffers used by nginx.
+
+Add this to your http {} of the nginx.conf file normally located at /etc/nginx/nginx.conf:
+
+proxy_buffer_size   128k;
+proxy_buffers   4 256k;
+proxy_busy_buffers_size   256k;
+
+Then add this to your php location block, this will be located in your vhost file look for the block that begins with location ~ .php$ {
+
+fastcgi_buffer_size 128k;
+fastcgi_buffers 4 256k;
+fastcgi_busy_buffers_size 256k;
+
 If you are running nginx, tune your configuration (see <code>/etc/nginx/nginx.conf</code>).
 
 ## Tested environments
@@ -61,3 +78,4 @@ If you are running nginx, tune your configuration (see <code>/etc/nginx/nginx.co
 * Windows 7 / 64 - WAMP
 * Windows XP / 32 - WAMP
 * Centos - Apache + PHP
+* Ubuntu 13.10 x86_64 - ngnix + php-fpm or HHVM

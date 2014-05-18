@@ -111,6 +111,7 @@ class Auth {
                     return false;
                 break;
             
+            case 'native_report_balance':
             case 'report_list' :
             case 'report_execute' :
                 if ($this->CI->session->userdata('is_hr') == true)

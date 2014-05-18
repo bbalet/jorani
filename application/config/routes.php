@@ -163,6 +163,8 @@ $route['entitleddays/contract/(:num)'] = 'entitleddays/contract/$1';
 $route['entitleddays/contractdelete/(:num)'] = 'entitleddays/contractdelete/$1';
 
 //Reports
+$route['reports/balance'] = 'reports/balance';
+
 $route['reports/(:any)/(:any)'] = 'reports/execute/$1/$2';
 $route['reports'] = 'reports';
 

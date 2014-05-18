@@ -134,7 +134,7 @@ class Contracts extends CI_Controller {
             $this->load->view('contracts/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->contracts_model->set_contracts();
+            $this->contracts_model->update_contract();
             $this->session->set_flashdata('msg', 'The contract has been succesfully updated');
             redirect('contracts');
         }

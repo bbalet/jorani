@@ -118,5 +118,5 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
     <br /><br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update contract</button>
     &nbsp;
-    <a href="<?php echo base_url();?>contracts" class="btn btn-primary"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
 </form>

@@ -1,4 +1,6 @@
-<h2>Create a new user</h2>
+<h2>Create a new user &nbsp;
+<a href="http://www.leave-management-system.org/en/documentation/page-create-a-new-user/" title="Link to documentation" target="_blank"><i class="icon-question-sign"></i></a>
+</h2>
 
 <?php echo validation_errors(); ?>
 

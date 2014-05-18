@@ -103,4 +103,18 @@ class Reports extends CI_Controller {
         $this->load->view('reports/execute', $data);
         $this->load->view('templates/footer');
     }
+    
+    /**
+     * Execute the shipped-in balance report
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function balance() {
+        $this->auth->check_is_granted('native_report_balance');
+        $data = $this->getUserContext();
+        $data['title'] = 'Leave Balance Report';
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('reports/balance/index', $data);
+        $this->load->view('templates/footer');
+    }
 }

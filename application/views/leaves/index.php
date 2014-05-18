@@ -43,13 +43,15 @@ $(document).ready(function() {
         <td>
             <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="View request"><?php echo $leaves_item['id']; ?></a>
             &nbsp;
-            <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="view request details"><i class="icon-eye-open"></i></a>
-            &nbsp;
-            <?php if ($leaves_item['status'] == 1) { ?>
-            <a href="<?php echo base_url();?>leaves/edit/<?php echo $leaves_item['id']; ?>" title="edit request details"><i class="icon-pencil"></i></a>
-            &nbsp;
-            <a href="#" class="confirm-delete" data-id="<?php echo $leaves_item['id'];?>" title="delete request"><i class="icon-trash"></i></a>
-            <?php } ?>
+            <div class="pull-right">
+                <?php if ($leaves_item['status'] == 1) { ?>
+                <a href="<?php echo base_url();?>leaves/edit/<?php echo $leaves_item['id']; ?>" title="edit request details"><i class="icon-pencil"></i></a>
+                &nbsp;
+                <a href="#" class="confirm-delete" data-id="<?php echo $leaves_item['id'];?>" title="delete request"><i class="icon-trash"></i></a>
+                <?php } ?>
+                &nbsp;
+                <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="view request details"><i class="icon-eye-open"></i></a>
+            </div>
         </td>
         <td><?php echo $leaves_item['startdate'] . ' / ' . $leaves_item['startdatetype']; ?></td>
         <td><?php echo $leaves_item['enddate'] . ' / ' . $leaves_item['enddatetype']; ?></td>
@@ -92,12 +94,14 @@ $(document).ready(function() {
     </div>
     <div class="modal-footer">
         <a href="#" id="lnkDeleteUser" class="btn danger"><?php echo lang('leaves_index_popup_delete_button_yes');?></a>
-        <a href="javascript:$('#frmDeleteLeaveRequest').modal('hide')" class="btn secondary"><?php echo lang('leaves_index_popup_delete_button_no');?></a>
+        <a href="#" onclick="$('#frmDeleteLeaveRequest').modal('hide');" class="btn secondary"><?php echo lang('leaves_index_popup_delete_button_no');?></a>
     </div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
+    $('#frmDeleteLeaveRequest').alert();
+    
     //Transform the HTML table in a fancy datatable
     $('#leaves').dataTable({
 		"oLanguage": {
@@ -130,14 +134,16 @@ $(document).ready(function() {
         var link = "<?php echo base_url();?>leaves/delete/" + $(this).data('id');
         $("#lnkDeleteUser").attr('href', link);
     })
-
+    
     //Display a modal pop-up so as to confirm if a leave request has to be deleted or not
-    $('.confirm-delete').on('click', function(e) {
-        e.preventDefault();
+    //We build a complex selector because datatable does horrible things on DOM...
+    //a simplier selector doesn't work when the delete is on page >1 
+    $("#leaves tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
         $('#frmDeleteLeaveRequest').data('id', id).modal('show');
     });
     
+    //Prevent to load always the same content (refreshed each time)
     $('#frmDeleteLeaveRequest').on('hidden', function() {
         $(this).removeData('modal');
     });

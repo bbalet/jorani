@@ -36,13 +36,15 @@ $(document).ready(function() {
         <td>
             <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="View user"><?php echo $users_item['id'] ?></a>
             &nbsp;
-            <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="view user details"><i class="icon-eye-open"></i></a>
-            &nbsp;
-            <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="edit user details"><i class="icon-pencil"></i></a>
-            &nbsp;
-            <a href="#" class="confirm-delete" data-id="<?php echo $users_item['id'];?>" title="delete user"><i class="icon-trash"></i></a>
-            &nbsp;
-            <a href="<?php echo base_url();?>users/reset/<?php echo $users_item['id'] ?>" title="reset password" data-target="#frmChangePwd" data-toggle="modal"><i class="icon-lock"></i></a>
+            <div class="pull-right">
+                <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="view user details"><i class="icon-eye-open"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="edit user details"><i class="icon-pencil"></i></a>
+                &nbsp;
+                <a href="#" class="confirm-delete" data-id="<?php echo $users_item['id'];?>" title="delete user"><i class="icon-trash"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>users/reset/<?php echo $users_item['id'] ?>" title="reset password" data-target="#frmResetPwd" data-toggle="modal"><i class="icon-lock"></i></a>
+            </div>
         </td>
         <td><?php echo $users_item['firstname'] ?></td>
         <td><?php echo $users_item['lastname'] ?></td>
@@ -70,7 +72,6 @@ $(document).ready(function() {
     </div>
     <div class="span2">
         <a href="<?php echo base_url();?>users/import" class="btn btn-primary" data-target="#frmImportUsers" data-toggle="modal"><i class="icon-arrow-up icon-white"></i>&nbsp; Import users</a>
-        
     </div>
 </div>
 
@@ -79,7 +80,7 @@ $(document).ready(function() {
 
 <div id="frmConfirmDelete" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmConfirmDelete').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="close">&times;</a>
          <h3>Delete User</h3>
     </div>
     <div class="modal-body">
@@ -88,33 +89,33 @@ $(document).ready(function() {
     </div>
     <div class="modal-footer">
         <a href="#" class="btn danger" id="lnkDeleteUser">Yes</a>
-        <a href="javascript:$('#frmConfirmDelete').modal('hide')" class="btn secondary">No</a>
+        <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="btn secondary">No</a>
     </div>
 </div>
 
-<div id="frmChangePwd" class="modal hide fade">
+<div id="frmResetPwd" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmChangePwd').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmResetPwd').modal('hide');" class="close">&times;</a>
          <h3>Change password</h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmChangePwd').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="$('#frmResetPwd').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
 
 <div id="frmImportUsers" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmImportUsers').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmImportUsers').modal('hide');" class="close">&times;</a>
          <h3>Import Users</h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmImportUsers').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="$('#frmImportUsers').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
 
@@ -122,7 +123,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#users').dataTable();
-    $("#frmChangePwd").alert();
+    $("#frmResetPwd").alert();
     $("#frmImportUsers").alert();
 	
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
@@ -132,8 +133,9 @@ $(document).ready(function() {
     })
 
     //Display a modal pop-up so as to confirm if a user has to be deleted or not
-    $('.confirm-delete').on('click', function(e) {
-        e.preventDefault();
+    //We build a complex selector because datatable does horrible things on DOM...
+    //a simplier selector doesn't work when the delete is on page >1 
+    $("#users tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
         $('#frmConfirmDelete').data('id', id).modal('show');
     });
@@ -142,7 +144,7 @@ $(document).ready(function() {
     $('#frmConfirmDelete').on('hidden', function() {
         $(this).removeData('modal');
     });
-    $('#frmChangePwd').on('hidden', function() {
+    $('#frmResetPwd').on('hidden', function() {
         $(this).removeData('modal');
     });
     $('#frmImportUsers').on('hidden', function() {

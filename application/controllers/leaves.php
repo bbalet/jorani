@@ -269,15 +269,36 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
+        $can_delete = false;
         //Test if the leave request exists
-        $data['leaves_item'] = $this->leaves_model->get_leaves($id);
-        if (empty($data['leaves_item'])) {
+        $leaves = $this->leaves_model->get_leaves($id);
+        if (empty($leaves)) {
             show_404();
         } else {
-            $this->leaves_model->delete_leave($id);
+            if ($this->is_hr) {
+                $can_delete = true;
+            } else {
+                if ($leaves['status'] == 1 ) {
+                    $can_delete = true;
+                }
+            }
+            if ($can_delete == true) {
+                $this->leaves_model->delete_leave($id);
+            } else {
+                $this->session->set_flashdata('msg', 'You can\'t delete this leave request');
+                if (isset($_GET['source'])) {
+                    redirect($_GET['source']);
+                } else {
+                    redirect('leaves');
+                }
+            }
         }
         $this->session->set_flashdata('msg', 'The leave request has been succesfully deleted');
-        redirect('leaves');
+        if (isset($_GET['source'])) {
+            redirect($_GET['source']);
+        } else {
+            redirect('leaves');
+        }
     }
     
     /*

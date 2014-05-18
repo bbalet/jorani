@@ -56,6 +56,8 @@ $route['settings'] = 'settings/set';
 //Human Resources Management
 $route['hr/index'] = 'hr/index';
 $route['hr/employees'] = 'hr/employees';
+$route['hr/leaves/(:num)'] = 'hr/leaves/$1';
+$route['hr/leaves/export/(:num)'] = 'hr/export_leaves/$1';
 $route['hr/contract/(:num)'] = 'hr/contract/$1';
 $route['hr/manager/(:num)'] = 'hr/manager/$1';
 $route['hr/entitleddays/(:num)'] = 'hr/entitleddays/$1';
@@ -163,7 +165,7 @@ $route['entitleddays/contract/(:num)'] = 'entitleddays/contract/$1';
 $route['entitleddays/contractdelete/(:num)'] = 'entitleddays/contractdelete/$1';
 
 //Reports
-$route['reports/balance'] = 'reports/balance';
+$route['reports/balance'] = 'reports/balance'; 
 
 $route['reports/(:any)/(:any)'] = 'reports/execute/$1/$2';
 $route['reports'] = 'reports';

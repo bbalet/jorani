@@ -132,7 +132,7 @@ for ($mC = 1; $mC <= 12; $mC++) {
 
 <div id="frmAddDayOff" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmAddDayOff').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmAddDayOff').modal('hide');" class="close">&times;</a>
          <h3>Add day off</h3>
     </div>
     <label for="cboDayOffType">Set day off</label>
@@ -143,13 +143,13 @@ for ($mC = 1; $mC <= 12; $mC++) {
     </select>
     <span id="timestamp"></span>
     <div class="modal-footer">
-        <a href="javascript:$('#frmAddDayOff').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="$('#frmAddDayOff').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
 
 <div id="frmSetRangeDayOff" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmSetRangeDayOff').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="close">&times;</a>
          <h3>Add day off</h3>
     </div>
     Mark every
@@ -188,8 +188,8 @@ for ($mC = 1; $mC <= 12; $mC++) {
     as a non working day
     <span id="timestamp"></span>
     <div class="modal-footer">
-        <a href="javascript:$('#frmSetRangeDayOff').modal('hide')" class="btn secondary">Apply</a>
-        <a href="javascript:$('#frmSetRangeDayOff').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="btn secondary">Apply</a>
+        <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
 

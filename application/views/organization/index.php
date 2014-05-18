@@ -37,7 +37,7 @@ $this->lang->load('organization', $language);?>
 
 <div id="frmConfirmDelete" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmConfirmDelete').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="close">&times;</a>
          <h3>Delete User</h3>
     </div>
     <div class="modal-body">
@@ -46,32 +46,32 @@ $this->lang->load('organization', $language);?>
     </div>
     <div class="modal-footer">
         <a href="#" class="btn danger" id="lnkDeleteUser">Yes</a>
-        <a href="javascript:$('#frmConfirmDelete').modal('hide')" class="btn secondary">No</a>
+        <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="btn secondary">No</a>
     </div>
 </div>
 
 <div id="frmAddEmployee" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmAddEmployee').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="close">&times;</a>
          <h3>Add an Employee</h3>
     </div>
     <div class="modal-body" id="frmAddEmployeeBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:add_employee();" class="btn secondary">OK</a>
-        <a href="javascript:$('#frmAddEmployee').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="add_employee();" class="btn secondary">OK</a>
+        <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
 
 <div id="frmError" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmError').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmError').modal('hide');" class="close">&times;</a>
          <h3>An error occured</h3>
     </div>
     <div class="modal-body" id="lblError"></div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmError').modal('hide')" class="btn secondary">OK</a>
+        <a href="#" onclick="$('#frmError').modal('hide');" class="btn secondary">OK</a>
     </div>
 </div>
 

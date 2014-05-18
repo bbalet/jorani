@@ -93,7 +93,7 @@ $(document).ready(function() {
     </div>
     <div class="modal-footer">
         <a href="<?php echo base_url();?>leaves/delete/" class="btn danger">Yes</a>
-        <a href="javascript:$('#modal-from-dom').modal('hide')" class="btn secondary">No</a>
+        <a href="#" onclick="$('#modal-from-dom').modal('hide');" class="btn secondary">No</a>
     </div>
 </div>
 

@@ -70,43 +70,43 @@ echo form_open('users/create', $attributes); ?>
 
 <div id="frmSelectManager" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmSelectManager').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmSelectManager').modal('hide');" class="close">&times;</a>
          <h3>Select the manager</h3>
     </div>
     <div class="modal-body" id="frmSelectManagerBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:select_manager();" class="btn secondary">OK</a>
-        <a href="javascript:$('#frmSelectManager').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="select_manager();" class="btn secondary">OK</a>
+        <a href="#" onclick="$('#frmSelectManager').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
 
 <div id="frmSelectEntity" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmSelectEntity').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="close">&times;</a>
          <h3>Select an entity</h3>
     </div>
     <div class="modal-body" id="frmSelectEntityBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:select_entity();" class="btn secondary">OK</a>
-        <a href="javascript:$('#frmSelectEntity').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="select_entity();" class="btn secondary">OK</a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
 
 <div id="frmSelectPosition" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmSelectPosition').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmSelectPosition').modal('hide');" class="close">&times;</a>
          <h3>Select a position</h3>
     </div>
     <div class="modal-body" id="frmSelectPositionBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:select_position();" class="btn secondary">OK</a>
-        <a href="javascript:$('#frmSelectPosition').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="select_position();" class="btn secondary">OK</a>
+        <a href="#" onclick="$('#frmSelectPosition').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
     

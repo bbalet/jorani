@@ -62,7 +62,7 @@ $(document).ready(function() {
 
 <div id="frmDeletePosition" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmDeletePosition').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmDeletePosition').modal('hide');" class="close">&times;</a>
          <h3>Delete Position</h3>
     </div>
     <div class="modal-body">
@@ -71,7 +71,7 @@ $(document).ready(function() {
     </div>
     <div class="modal-footer">
         <a href="#" id="lnkDeletePosition" class="btn danger">Yes</a>
-        <a href="javascript:$('#frmDeletePosition').modal('hide')" class="btn secondary">No</a>
+        <a href="#" onclick="$('#frmDeletePosition').modal('hide');" class="btn secondary">No</a>
     </div>
 </div>
 
@@ -88,8 +88,9 @@ $(document).ready(function() {
     });
 
     //Display a modal pop-up so as to confirm if a contract has to be deleted or not
-    $('.confirm-delete').on('click', function(e) {
-            e.preventDefault();
+    //We build a complex selector because datatable does horrible things on DOM...
+    //a simplier selector doesn't work when the delete is on page >1 
+    $("#positions tbody").on('click', '.confirm-delete',  function(){
             var id = $(this).data('id');
             $('#frmDeletePosition').data('id', id).modal('show');
     });

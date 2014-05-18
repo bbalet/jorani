@@ -95,7 +95,6 @@ class Requests extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function accept($id) {
-        log_message('debug', '{controllers/requests/accept} Entering method with id=' . $id);
         $this->auth->check_is_granted('accept_requests');
         $this->load->model('users_model');
         $leave = $this->leaves_model->get_leaves($id);
@@ -103,7 +102,7 @@ class Requests extends CI_Controller {
             show_404();
         }
         $employee = $this->users_model->get_users($leave['employee']);
-        if ($this->user_id != $employee['manager']) {
+        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to accept leave #' . $id);
             $this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
             redirect('home');
@@ -111,8 +110,11 @@ class Requests extends CI_Controller {
             $this->leaves_model->accept_leave($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg', 'The leave request has been successfully accepted.');
-            log_message('debug', '{controllers/requests/accept} Leaving method (before redirect)');
-            redirect('requests');
+            if (isset($_GET['source'])) {
+                redirect($_GET['source']);
+            } else {
+                redirect('requests');
+            }
         }
     }
 
@@ -122,7 +124,6 @@ class Requests extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reject($id) {
-        log_message('debug', '{controllers/requests/reject} Entering method with id=' . $id);
         $this->auth->check_is_granted('reject_requests');
         $this->load->model('users_model');
         $leave = $this->leaves_model->get_leaves($id);
@@ -130,7 +131,7 @@ class Requests extends CI_Controller {
             show_404();
         }
         $employee = $this->users_model->get_users($leave['employee']);
-        if ($this->user_id != $employee['manager']) {
+        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to reject leave #' . $id);
             $this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
             redirect('home');
@@ -138,8 +139,11 @@ class Requests extends CI_Controller {
             $this->leaves_model->reject_leave($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg', 'The leave request has been successfully rejected.');
-            log_message('debug', '{controllers/requests/reject} Leaving method (before redirect)');
-            redirect('requests');
+            if (isset($_GET['source'])) {
+                redirect($_GET['source']);
+            } else {
+                redirect('requests');
+            }
         }
     }
     
@@ -152,7 +156,6 @@ class Requests extends CI_Controller {
      */
     private function sendMail($id)
     {
-        log_message('debug', '{controllers/requests/sendMail} Entering method with id=' . $id);
         $this->load->model('users_model');
         $this->load->model('settings_model');
         $leave = $this->leaves_model->get_leaves($id);

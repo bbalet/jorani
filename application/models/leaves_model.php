@@ -41,7 +41,7 @@ class Leaves_model extends CI_Model {
     }
 
     /**
-     * Get the the list of leaves requested by a given employee
+     * Get the the list of leaves requested for a given employee
      * @param int $id ID of the employee
      * @return array list of records
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -51,6 +51,23 @@ class Leaves_model extends CI_Model {
         return $query->result_array();
     }
 
+    /**
+     * Get the the list of leaves requested for a given employee
+     * Id are replaced by label
+     * @param int $id ID of the employee
+     * @return array list of records
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_employee_leaves($id) {
+        $this->db->select('leaves.id, status.name as status, leaves.startdate, leaves.enddate, leaves.duration, types.name as type');
+        $this->db->from('leaves');
+        $this->db->join('status', 'leaves.status = status.id');
+        $this->db->join('types', 'leaves.type = types.id');
+        $this->db->where('leaves.employee', $id);
+        $this->db->order_by('leaves.id', 'desc');
+        return $this->db->get()->result_array();
+    }
+    
     /**
      * Get the the list of entitled and taken leaves of a given employee
      * @param int $id ID of the employee

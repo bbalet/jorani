@@ -108,6 +108,25 @@ class Hr extends CI_Controller {
     }
 
     /**
+     * Display the list of leaves for a given employee
+     * @param int $id employee id
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function leaves($id) {
+        $this->auth->check_is_granted('list_employees');
+        $data = $this->getUserContext();
+        $data['title'] = 'List of leaves';
+        $data['user_id'] = $id;
+        $this->load->model('leaves_model');
+        $data['leaves'] = $this->leaves_model->get_employee_leaves($id);
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('hr/leaves', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
      * Display a form that allows updating the contract of a given user
      * @param int $id User identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -158,5 +177,48 @@ class Hr extends CI_Controller {
             $this->session->set_flashdata('msg', 'The manager has been succesfully attached to the employee');
             redirect('hr/employees');
         }
+    }
+    
+    /**
+     * Action: export the list of all leaves into an Excel file
+     * @param int $id employee id
+     */
+    public function export_leaves($id) {
+        $this->load->library('excel');
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle('List of leaves');
+        $this->excel->getActiveSheet()->setCellValue('A3', 'ID');
+        $this->excel->getActiveSheet()->setCellValue('B3', 'Status');
+        $this->excel->getActiveSheet()->setCellValue('C3', 'Start Date');
+        $this->excel->getActiveSheet()->setCellValue('D3', 'End Date');
+        $this->excel->getActiveSheet()->setCellValue('E3', 'Duration');
+        $this->excel->getActiveSheet()->setCellValue('F3', 'Type');
+        
+        $this->excel->getActiveSheet()->getStyle('A3:F3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A3:F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->load->model('leaves_model');
+        $leaves = $this->leaves_model->get_employee_leaves($id);
+        $this->load->model('users_model');
+        $fullname = $this->users_model->get_label($id);
+        $this->excel->getActiveSheet()->setCellValue('A1', $fullname);
+        
+        $line = 4;
+        foreach ($leaves as $leave) {
+            $this->excel->getActiveSheet()->setCellValue('A' . $line, $leave['id']);
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, $leave['status']);
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $leave['startdate']);
+            $this->excel->getActiveSheet()->setCellValue('D' . $line, $leave['enddate']);
+            $this->excel->getActiveSheet()->setCellValue('E' . $line, $leave['duration']);
+            $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['type']);
+            $line++;
+        }
+
+        $filename = 'leaves.xls';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $objWriter->save('php://output');
     }
 }

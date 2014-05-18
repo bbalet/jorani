@@ -44,33 +44,33 @@ $this->lang->load('leavetypes', $language);?>
 
 <div id="frmAddLeaveType" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmAddLeaveType').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="close">&times;</a>
          <h3>Add a leave type</h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmAddLeaveType').modal('hide')" class="btn secondary"><?php echo lang('hr_leaves_popup_create_button_cancel');?></a>
+        <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="btn secondary"><?php echo lang('hr_leaves_popup_create_button_cancel');?></a>
     </div>
 </div>
 
 <div id="frmEditLeaveType" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmEditLeaveType').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmEditLeaveType').modal('hide');" class="close">&times;</a>
          <h3>Edit a  Leave type</h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmEditLeaveType').modal('hide')" class="btn secondary"><?php echo lang('hr_leaves_popup_update_button_cancel');?></a>
+        <a href="#" onclick="$('#frmEditLeaveType').modal('hide');" class="btn secondary"><?php echo lang('hr_leaves_popup_update_button_cancel');?></a>
     </div>
 </div>
 
 <div id="frmDeleteLeaveType" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmDeleteLeaveType').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmDeleteLeaveType').modal('hide');" class="close">&times;</a>
          <h3>Delete Leave Type</h3>
     </div>
     <div class="modal-body">
@@ -79,7 +79,7 @@ $this->lang->load('leavetypes', $language);?>
     </div>
     <div class="modal-footer">
         <a href="#" id="lnkDeleteLeaveType" class="btn danger"><?php echo lang('hr_leaves_popup_delete_button_yes');?></a>
-        <a href="javascript:$('#frmDeleteLeaveType').modal('hide')" class="btn secondary"><?php echo lang('hr_leaves_popup_delete_button_no');?></a>
+        <a href="#" onclick="$('#frmDeleteLeaveType').modal('hide');" class="btn secondary"><?php echo lang('hr_leaves_popup_delete_button_no');?></a>
     </div>
 </div>
 
@@ -87,6 +87,7 @@ $this->lang->load('leavetypes', $language);?>
 $(document).ready(function() {
     $("#frmAddLeaveType").alert();
     $("#frmEditLeaveType").alert();
+    $("#frmDeleteLeaveType").alert();
 	
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
     $('#frmDeleteLeaveType').on('show', function() {
@@ -101,6 +102,13 @@ $(document).ready(function() {
         $('#frmDeleteLeaveType').data('id', id).modal('show');
     });
     
+    //Prevent to load always the same content (refreshed each time)
+    $('#frmAddLeaveType').on('hidden', function() {
+        $(this).removeData('modal');
+    });
+    $('#frmEditLeaveType').on('hidden', function() {
+        $(this).removeData('modal');
+    });
     $('#frmDeleteLeaveType').on('hidden', function() {
         $(this).removeData('modal');
     });

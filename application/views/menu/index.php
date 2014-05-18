@@ -19,30 +19,20 @@ $this->lang->load('menu', $language);?>
                 <option value="fr" <?php if ($language_code == 'fr') echo 'selected'; ?>>Français</option>
             </select>
         </form>
-        //-->
-        <script type="text/javascript">
-            $(function () {
-               //Change the current language
-                /*$('#language').change(function(){
-                    $('#languageFrom').submit();
-                });*/
-                $('#frmChangeMyPwd').alert();
-            });
-        </script>
-        
+        //-->        
     </div>
 </div>
 
 <div id="frmChangeMyPwd" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmChangeMyPwd').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmChangeMyPwd').modal('hide');" class="close">&times;</a>
          <h3><?php echo lang('menu_password_popup_title');?></h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmChangeMyPwd').modal('hide')" class="btn secondary"><?php echo lang('menu_password_popup_button_cancel');?></a>
+        <a href="#" onclick="$('#frmChangeMyPwd').modal('hide');" class="btn secondary"><?php echo lang('menu_password_popup_button_cancel');?></a>
     </div>
 </div>
 
@@ -126,3 +116,12 @@ $this->lang->load('menu', $language);?>
       </div>
     </div><!-- /.navbar -->
 
+    <script type="text/javascript">
+        $(function () {
+           //Change the current language
+            /*$('#language').change(function(){
+                $('#languageFrom').submit();
+            });*/
+            $('#frmChangeMyPwd').alert();
+        });
+    </script>

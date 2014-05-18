@@ -34,12 +34,16 @@ $(document).ready(function() {
     <tr>
         <td>
             <?php echo $users_item['id'] ?>
-            &nbsp;
-            <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="edit user"><i class="icon-pencil"></i></a>
-            &nbsp;
-            <a href="<?php echo base_url();?>hr/contract/<?php echo $users_item['id'] ?>" data-target="#frmContract" data-toggle="modal" title="change contract"><i class="icon-file"></i></a>
-            &nbsp;
-            <a href="<?php echo base_url();?>entitleddays/user/<?php echo $users_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
+            <div class="pull-right">
+                &nbsp;
+                <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="edit user"><i class="icon-pencil"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>hr/contract/<?php echo $users_item['id'] ?>" data-target="#frmContract" data-toggle="modal" title="change contract"><i class="icon-file"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>entitleddays/user/<?php echo $users_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>hr/leaves/<?php echo $users_item['id'] ?>">Leaves</a>
+            </div>
         </td>
         <td><?php echo $users_item['firstname']; ?></td>
         <td><?php echo $users_item['lastname']; ?></td>
@@ -62,27 +66,27 @@ $(document).ready(function() {
 
 <div id="frmEntitledDays" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmEntitledDays').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="close">&times;</a>
          <h3>Entitled days</h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmEntitledDays').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
 
 <div id="frmContract" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmContract').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmContract').modal('hide');" class="close">&times;</a>
          <h3>Contract</h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmContract').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="$('#frmContract').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
 

@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 <h1><?php echo lang('leaves_index_title');?></h1>
 
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="extra" width="100%">
     <thead>
         <tr>
             <th><?php echo lang('leaves_index_thead_id');?></th>
@@ -92,14 +92,14 @@ $(document).ready(function() {
     </div>
     <div class="modal-footer">
         <a href="#" id="lnkDeleteUser" class="btn danger"><?php echo lang('leaves_index_popup_delete_button_yes');?></a>
-        <a href="javascript:$('#frmDeleteLeaveRequest').modal('hide')" class="btn secondary"><?php echo lang('leaves_index_popup_delete_button_no');?></a>
+        <a href="#" onclick="$('#frmDeleteLeaveRequest').modal('hide');" class="btn secondary"><?php echo lang('leaves_index_popup_delete_button_no');?></a>
     </div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
-    $('#leaves').dataTable({
+    $('#extra').dataTable({
 		"oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",
@@ -132,8 +132,9 @@ $(document).ready(function() {
     })
 
     //Display a modal pop-up so as to confirm if a leave request has to be deleted or not
-    $('.confirm-delete').on('click', function(e) {
-        e.preventDefault();
+    //We build a complex selector because datatable does horrible things on DOM...
+    //a simplier selector doesn't work when the delete is on page >1 
+    $("#extra tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
         $('#frmDeleteLeaveRequest').data('id', id).modal('show');
     });

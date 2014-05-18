@@ -43,11 +43,13 @@ $(document).ready(function() {
         <td>
             <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>" title="View request"><?php echo $requests_item['id']; ?></a>
             &nbsp;
-            <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>" title="view request details"><i class="icon-eye-open"></i></a>
-            &nbsp;
-            <a href="<?php echo base_url();?>requests/accept/<?php echo $requests_item['id']; ?>" title="accept request"><i class="icon-ok"></i></a>
-            &nbsp;
-            <a href="<?php echo base_url();?>requests/reject/<?php echo $requests_item['id']; ?>" title="reject request"><i class="icon-remove"></i></a>
+            <div class="pull-right">
+                <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>" title="view request details"><i class="icon-eye-open"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>requests/accept/<?php echo $requests_item['id']; ?>" title="accept request"><i class="icon-ok"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>requests/reject/<?php echo $requests_item['id']; ?>" title="reject request"><i class="icon-remove"></i></a>
+            </div>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
         <td><?php echo $requests_item['startdate'] . ' / ' . $requests_item['startdatetype']; ?></td>
@@ -73,29 +75,14 @@ $(document).ready(function() {
      <div class="span2">
       <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_all');?></a>
     </div>
-    <div class="span2">
+    <div class="span3">
       <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_pending');?></a>
     </div>
-    <div class="span8">&nbsp;</div>
+    <div class="span7">&nbsp;</div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
-
-<div id="modal-from-dom" class="modal hide fade">
-    <div class="modal-header">
-        <a href="#" class="close">&times;</a>
-         <h3>Delete leave request</h3>
-    </div>
-    <div class="modal-body">
-        <p>You are about to delete one leave request, this procedure is irreversible.</p>
-        <p>Do you want to proceed?</p>
-    </div>
-    <div class="modal-footer">
-        <a href="<?php echo base_url();?>leaves/delete/" class="btn danger">Yes</a>
-        <a href="javascript:$('#modal-from-dom').modal('hide')" class="btn secondary">No</a>
-    </div>
-</div>
 
 <script type="text/javascript">
 $(document).ready(function() {

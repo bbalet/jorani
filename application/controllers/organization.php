@@ -208,7 +208,7 @@ class Organization extends CI_Controller {
         if ($id == "#") {
             unset($id);
         }
-        $this->auth->check_is_granted('organization_index');
+        $this->auth->check_is_granted('organization_select');
         $data = $this->getUserContext();
         header("Content-Type: application/json");
         $entities = $this->organization_model->get_all_entities();

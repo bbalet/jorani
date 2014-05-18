@@ -18,7 +18,7 @@ $(document).ready(function() {
         
 <h1>List of contracts</h1>
 
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="contracts" width="100%">
     <thead>
         <tr>
             <th>ID</th>
@@ -33,13 +33,15 @@ $(document).ready(function() {
         <td>
             <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>" title="View contract"><?php echo $contracts_item['id'] ?></a>
             &nbsp;
-            <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>" title="view contract details"><i class="icon-eye-open"></i></a>
-            &nbsp;
-            <a href="<?php echo base_url();?>contracts/edit/<?php echo $contracts_item['id'] ?>" title="edit contract details"><i class="icon-pencil"></i></a>
-            &nbsp;
-            <a href="#" class="confirm-delete" data-id="<?php echo $contracts_item['id'];?>" title="delete contract"><i class="icon-trash"></i></a>
-            &nbsp;
-            <a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contracts_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
+            <div class="pull-right">
+                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>" title="view contract details"><i class="icon-eye-open"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>contracts/edit/<?php echo $contracts_item['id'] ?>" title="edit contract details"><i class="icon-pencil"></i></a>
+                &nbsp;
+                <a href="#" class="confirm-delete" data-id="<?php echo $contracts_item['id'];?>" title="delete contract"><i class="icon-trash"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contracts_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
+            </div>
         </td>
         <td><?php echo $contracts_item['name'] ?></td>
         <td><?php echo $contracts_item['startentdate'] ?></td>
@@ -70,7 +72,7 @@ $(document).ready(function() {
 
 <div id="frmDeleteContract" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmDeleteContract').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmDeleteContract').modal('hide');" class="close">&times;</a>
          <h3>Delete Contract</h3>
     </div>
     <div class="modal-body">
@@ -79,27 +81,27 @@ $(document).ready(function() {
     </div>
     <div class="modal-footer">
         <a href="#" id="lnkDeleteContract" class="btn danger">Yes</a>
-        <a href="javascript:$('#frmDeleteContract').modal('hide')" class="btn secondary">No</a>
+        <a href="#" onclick="$('#frmDeleteContract').modal('hide');" class="btn secondary">No</a>
     </div>
 </div>
 
 <div id="frmEntitledDays" class="modal hide fade">
     <div class="modal-header">
-        <a href="javascript:$('#frmEntitledDays').modal('hide')" class="close">&times;</a>
+        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="close">&times;</a>
          <h3>Entitled days</h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="javascript:$('#frmEntitledDays').modal('hide')" class="btn secondary">Cancel</a>
+        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
-    $('#users').dataTable();
+    $('#contracts').dataTable();
     $("#frmChangePwd").alert();
     $("#frmEntitledDays").alert();
 	
@@ -110,10 +112,11 @@ $(document).ready(function() {
     });
 
     //Display a modal pop-up so as to confirm if a contract has to be deleted or not
-    $('.confirm-delete').on('click', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            $('#frmDeleteContract').data('id', id).modal('show');
+    //We build a complex selector because datatable does horrible things on DOM...
+    //a simplier selector doesn't work when the delete is on page >1 
+    $("#contracts tbody").on('click', '.confirm-delete',  function(){
+        var id = $(this).data('id');
+        $('#frmDeleteContract').data('id', id).modal('show');
     });
     
     $('#frmEntitledDays').on('hidden', function() {

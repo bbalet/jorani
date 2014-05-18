@@ -1,4 +1,6 @@
-<h2>Details of user #<?php echo $users_item['id']; ?></h2>
+<h2>Details of user #<?php echo $users_item['id']; ?> &nbsp;
+<a href="http://www.leave-management-system.org/en/documentation/page-create-a-new-user/" title="Link to documentation" target="_blank"><i class="icon-question-sign"></i></a>
+</h2>
 
 <?php echo validation_errors(); ?>
 

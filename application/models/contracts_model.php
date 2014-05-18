@@ -89,7 +89,7 @@ class Contracts_model extends CI_Model {
         );
 
         $this->db->where('id', $this->input->post('id'));
-        return $this->db->update('users', $data);
+        return $this->db->update('contracts', $data);
     }
     
 }

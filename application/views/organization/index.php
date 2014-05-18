@@ -80,6 +80,7 @@ $this->lang->load('organization', $language);?>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/jsTree/jstree.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable.ajax.reload.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">
     //In order to manipulate datable object
@@ -204,14 +205,20 @@ $this->lang->load('organization', $language);?>
             }
         })
         .on('create_node.jstree', function (e, data) {
-            $.get('organization/create', { 'id' : data.node.parent, 'position' : data.position, 'text' : data.node.text })
-                .done(function (d) {
+            bootbox.prompt("Name of the entity", function(result) {                
+                if (result === null) {
+                
+                } else {
+                    $.get('organization/create', { 'id' : data.node.parent, 'position' : data.position, 'text' : result })
+                    .done(function (d) {
                         data.instance.set_id(data.node, d.id);
                     })
                     .fail(function() {
                         data.instance.refresh();
                     });
-                })
+                }
+              });
+        })
         .on('rename_node.jstree', function(e, data) {
             $.get('organization/rename', {'id': data.node.id, 'text': data.text})
                 .fail(function() {

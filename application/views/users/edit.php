@@ -52,6 +52,13 @@
         <a id="cmdSelectPosition" class="btn btn-primary">Select</a>
     </div>    
     <br />
+    
+    <label for="datehired">Date hired/started</label>
+    <input type="text" name="datehired" id="datehired" value="<?php echo $users_item['datehired'];; ?>" /><br />
+    
+    <label for="identifier">Internal/Company Identifier</label>
+    <input type="text" name="identifier" value="<?php echo $users_item['identifier'];; ?>" /><br />
+    
     <br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update user</button>
     &nbsp;
@@ -100,6 +107,8 @@
     </div>
 </div>
 
+<link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script type="text/javascript">
     
     function select_manager() {
@@ -128,6 +137,8 @@
     }
 
     $(document).ready(function() {
+        $('#datehired').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+        
         //Popup select position
         $("#cmdSelectManager").click(function() {
             $("#frmSelectManager").modal('show');

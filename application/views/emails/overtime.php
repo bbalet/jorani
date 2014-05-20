@@ -21,13 +21,13 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests a leave. Below, the details :
+        {Firstname} {Lastname} requests an overtime. Below, the details :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}</td>
+                <td>From &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}</td>
+                <td>To &nbsp;</td><td>{Duration}</td>
             </tr>            
         </table>
         <a href="{UrlAccept}">Accept</a>

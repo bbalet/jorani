@@ -135,30 +135,28 @@ $route['leaves/(:num)'] = 'leaves/view/$1';
 $route['leaves'] = 'leaves';
 
 //leave requests
-$route['requests/export/(:num)'] = 'requests/export/$1';
+$route['requests/export/(:any)'] = 'requests/export/$1';
 $route['requests/accept/(:num)'] = 'requests/accept/$1';
 $route['requests/reject/(:num)'] = 'requests/reject/$1';
 $route['requests/(:any)'] = 'requests/index/$1';
 $route['requests'] = 'requests/index/requested';
 
 //overtime requests
-$route['extra/counters'] = 'extra/counters'; 
 $route['extra/export'] = 'extra/export';
 $route['extra/create'] = 'extra/create';
-$route['extra/credit'] = 'extra/credit';
 $route['extra/edit/(:num)'] = 'extra/edit/$1';
-$route['extra/update'] = 'extra/update';
+$route['extra/view/(:num)'] = 'extra/view/$1';
 $route['extra/delete/(:num)'] = 'extra/delete/$1';
 $route['extra/(:num)'] = 'extra/view/$1';
 $route['extra'] = 'extra';
 //overtime validation
-$route['overtime/export/(:num)'] = 'overtime/export/$1';
+$route['overtime/export/(:any)'] = 'overtime/export/$1';
 $route['overtime/accept/(:num)'] = 'overtime/accept/$1';
 $route['overtime/reject/(:num)'] = 'overtime/reject/$1';
 $route['overtime/(:any)'] = 'overtime/index/$1';
 $route['overtime'] = 'overtime/index/requested';
 
-//Entititled days
+//Entitled days
 $route['entitleddays/user/(:num)'] = 'entitleddays/user/$1';
 $route['entitleddays/userdelete/(:num)'] = 'entitleddays/userdelete/$1';
 $route['entitleddays/contract/(:num)'] = 'entitleddays/contract/$1';

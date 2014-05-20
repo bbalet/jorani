@@ -34,7 +34,7 @@
     </div>
     
     <label for="cause">Cause</label>
-    <textarea name="cause"><?php echo set_value('cause'); ?></textarea>
+    <textarea name="cause"><?php echo $leave['cause']; ?></textarea>
     
     <label for="status" required>Status</label>
     <select name="status">

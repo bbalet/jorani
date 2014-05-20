@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Client: localhost
--- Généré le: Ven 16 Mai 2014 à 15:26
--- Version du serveur: 5.5.24-log
--- Version de PHP: 5.3.13
+-- Client :  127.0.0.1
+-- Généré le :  Mar 20 Mai 2014 à 21:58
+-- Version du serveur :  5.6.17
+-- Version de PHP :  5.5.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `lms`
+-- Base de données :  `lms`
 --
 
 DELIMITER $$
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `startentdate` varchar(5) NOT NULL,
   `endentdate` varchar(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `contracts`
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `contracts` (
 
 INSERT INTO `contracts` (`id`, `name`, `startentdate`, `endentdate`) VALUES
 (1, 'PNC Regular Staff member', '01/01', '12/31'),
-(3, 'PNC Regular Staff member', '01/01', '12/31');
+(4, 'PNF regular', '01/01', '12/31');
 
 -- --------------------------------------------------------
 
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `entitleddays` (
   `type` int(11) NOT NULL,
   `days` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `entitleddays`
@@ -194,7 +194,9 @@ INSERT INTO `entitleddays` (`id`, `contract`, `employee`, `startdate`, `enddate`
 (1, 1, 0, '2014-01-01', '2014-12-31', 1, '25.00'),
 (2, 0, 6, '2014-01-01', '2014-12-31', 4, '5.00'),
 (3, 0, 6, '2014-01-01', '2014-12-31', 1, '2.00'),
-(4, 0, 6, '2014-05-01', '2014-05-31', 1, '-1.00');
+(4, 0, 6, '2014-05-01', '2014-05-31', 1, '-1.00'),
+(5, 4, 0, '2014-04-01', '2014-05-31', 1, '1.00'),
+(6, 4, 0, '2014-05-01', '2014-05-31', 1, '1.00');
 
 -- --------------------------------------------------------
 
@@ -214,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `leaves` (
   `duration` decimal(10,2) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
 
 --
 -- Contenu de la table `leaves`
@@ -222,10 +224,9 @@ CREATE TABLE IF NOT EXISTS `leaves` (
 
 INSERT INTO `leaves` (`id`, `startdate`, `enddate`, `status`, `employee`, `cause`, `startdatetype`, `enddatetype`, `duration`, `type`) VALUES
 (17, '2014-03-30', '2014-03-31', 2, 5, '', 'Morning', 'Afternoon', '2.00', 1),
-(18, '2014-03-30', '2014-04-01', 2, 5, 'i''m sick', 'Morning', 'Morning', '3.00', 1),
+(18, '2014-03-30', '2014-04-01', 4, 5, 'i''m sick', 'Morning', 'Morning', '3.00', 1),
 (19, '2014-03-30', '2014-04-01', 2, 5, 'i''m sick', 'Morning', 'Morning', '3.00', 1),
-(20, '2014-03-30', '2014-03-31', 2, 5, '', 'Morning', 'Morning', '2.00', 1),
-(21, '2014-03-30', '2014-03-31', 1, 5, 'test', 'Morning', 'Morning', '3.00', 1),
+(20, '2014-03-30', '2014-03-31', 4, 5, '', 'Morning', 'Morning', '2.00', 1),
 (22, '2014-04-06', '2014-04-10', 3, 6, '', 'Morning', 'Afternoon', '5.00', 1),
 (23, '2014-04-14', '2014-04-15', 3, 6, '', 'Morning', 'Afternoon', '1.00', 4),
 (24, '2014-05-19', '2014-05-23', 3, 6, '', 'Morning', 'Morning', '5.00', 1),
@@ -234,7 +235,7 @@ INSERT INTO `leaves` (`id`, `startdate`, `enddate`, `status`, `employee`, `cause
 (28, '2014-04-10', '2014-04-17', 4, 6, '', 'Morning', 'Morning', '7.00', 1),
 (29, '2014-04-22', '2014-04-22', 3, 6, '', 'Morning', 'Morning', '1.00', 1),
 (30, '2014-04-15', '2014-04-16', 3, 6, '', 'Morning', 'Morning', '1.00', 1),
-(31, '2014-04-17', '2014-04-18', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
+(31, '2014-04-17', '2014-04-18', 3, 6, '', 'Morning', 'Morning', '1.00', 1),
 (32, '2014-04-08', '2014-04-09', 4, 6, '', 'Morning', 'Morning', '1.00', 1),
 (33, '2014-04-23', '2014-04-24', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
 (34, '2014-04-23', '2014-04-24', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
@@ -259,7 +260,6 @@ INSERT INTO `leaves` (`id`, `startdate`, `enddate`, `status`, `employee`, `cause
 (53, '2014-04-08', '2014-04-23', 1, 6, '', 'Morning', 'Morning', '3.00', 1),
 (54, '2014-04-07', '2014-04-14', 2, 6, 'gfg', 'Morning', 'Morning', '2.00', 1),
 (55, '2014-04-16', '2014-04-25', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
-(56, '2014-04-13', '2014-04-14', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
 (57, '2014-04-13', '2014-04-14', 2, 6, '', 'Morning', 'Morning', '1.00', 2),
 (58, '2014-04-22', '2014-04-24', 2, 6, '', 'Morning', 'Morning', '2.00', 1),
 (59, '2014-04-22', '2014-04-23', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
@@ -268,17 +268,16 @@ INSERT INTO `leaves` (`id`, `startdate`, `enddate`, `status`, `employee`, `cause
 (62, '2014-04-14', '2014-04-15', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
 (63, '2014-04-27', '2014-04-28', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
 (64, '2014-04-07', '2014-04-08', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
-(65, '2014-04-13', '2014-04-14', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
 (66, '2014-04-03', '2014-04-04', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
-(67, '2014-04-13', '2014-04-14', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
+(67, '2014-04-13', '2014-04-14', 3, 6, '', 'Morning', 'Morning', '1.00', 1),
 (68, '2014-04-06', '2014-04-07', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
 (69, '2014-04-15', '2014-04-16', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
 (70, '2014-04-06', '2014-04-07', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
 (71, '2014-04-07', '2014-04-08', 2, 6, '', 'Morning', 'Morning', '1.00', 1),
-(72, '2014-04-07', '2014-04-08', 2, 6, '', 'Morning', 'Morning', '12.00', 1),
 (73, '2014-05-01', '2014-05-02', 4, 6, '', 'Morning', 'Morning', '1.00', 1),
-(74, '2014-05-11', '2014-05-12', 3, 6, '', 'Morning', 'Morning', '1.00', 1),
-(75, '2014-05-07', '2014-05-08', 2, 6, '', 'Morning', 'Morning', '1.00', 1);
+(74, '2014-05-11', '2014-05-12', 4, 6, '', 'Morning', 'Morning', '1.00', 1),
+(75, '2014-05-07', '2014-05-08', 3, 6, '', 'Morning', 'Morning', '1.00', 1),
+(76, '2014-05-28', '2014-05-29', 1, 5, '', 'Morning', 'Morning', '1.00', 1);
 
 -- --------------------------------------------------------
 
@@ -291,23 +290,27 @@ CREATE TABLE IF NOT EXISTS `organization` (
   `name` varchar(512) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
 -- Contenu de la table `organization`
 --
 
 INSERT INTO `organization` (`id`, `name`, `parent_id`) VALUES
-(16, 'Passerelles numériques', -1),
-(24, 'PNP', 16),
-(30, 'PNC', 16),
-(31, 'PNV', 16),
-(32, 'PNF', 16),
-(33, 'HR', 32),
-(34, 'Finance', 32),
-(35, 'S&L', 30),
-(36, 'ERO', 30),
-(37, 'Training', 30);
+(0, 'Passerelles  numériques', -1),
+(40, 'PNP', 0),
+(41, 'PNF', 0),
+(42, 'ERO', 41),
+(43, 'ERO', 40),
+(44, 'PNV', 0),
+(45, 'ERO', 44),
+(46, 'Finance', 41),
+(47, 'PNC', 0),
+(48, 'Finance', 47),
+(49, 'Training', 47),
+(50, 'Selection', 47),
+(51, 'Communication', 47),
+(52, 'Pedagogy', 41);
 
 -- --------------------------------------------------------
 
@@ -323,7 +326,14 @@ CREATE TABLE IF NOT EXISTS `overtime` (
   `cause` text NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `overtime`
+--
+
+INSERT INTO `overtime` (`id`, `employee`, `date`, `duration`, `cause`, `status`) VALUES
+(2, 6, '2014-05-12', '1', 'test', 4);
 
 -- --------------------------------------------------------
 
@@ -371,12 +381,8 @@ CREATE TABLE IF NOT EXISTS `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`) VALUES
-(1, 'admin'),
 (2, 'user'),
-(8, 'HR Officer / HR Manager'),
-(16, 'Global HR Manager'),
-(32, 'General Manager'),
-(64, 'Global Manager');
+(8, 'HR user');
 
 -- --------------------------------------------------------
 
@@ -458,7 +464,7 @@ INSERT INTO `types` (`id`, `name`) VALUES
 (2, 'maternity leave'),
 (3, 'paternity leave'),
 (4, 'special leave'),
-(5, 'sick leave'),
+(5, 'sickness leave'),
 (7, 'RTTE'),
 (9, 'RTTS');
 
@@ -481,20 +487,24 @@ CREATE TABLE IF NOT EXISTS `users` (
   `organization` int(11) DEFAULT NULL,
   `contract` int(11) DEFAULT NULL,
   `position` int(11) NOT NULL,
+  `datehired` date DEFAULT NULL COMMENT 'Date hired / Started',
+  `identifier` varchar(64) NOT NULL COMMENT 'Internal/company identifier',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
 -- Contenu de la table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `login`, `email`, `password`, `role`, `manager`, `country`, `organization`, `contract`, `position`) VALUES
-(5, 'John', 'DOE', 'jdoe', 'test@toto.com', '$2a$08$NeL/A7xVRbsFr9lxVSDmfOQsXepBom/PfvfTnua4AnFH2YkVZpjCa', 66, 5, NULL, 24, NULL, 0),
-(6, 'Benjamin', 'BALET', 'bbalet', 'benjamin.balet@gmail.com', '$2a$08$KTQ6KRC6rtsPG3Qkf0TKreRjUDB.CyxEY9/1dX1mZc50kqIiI3MYi', 1, 5, NULL, NULL, 1, 0),
-(12, 'toto', 'toto', 'toto', 'benjamin.balet@gmail.com', '$2a$08$Ijed..gLC.VRaoFNVhW.J.qHiD0.9mv9a8hIZIJHccfBvQ/1jAAEW', 8, 6, NULL, 24, 1, 7),
-(15, 'Jane', 'DOE', 'DOE', 'benjamin.balet@gmail.com', '$2a$08$2vJMASbNOsMP2Gf06YI7TONk5mgnnKuGzfogwqtMh6qoj89ZzeIqi', 2, 5, NULL, NULL, NULL, 0),
-(18, 'Test', 'TEST', 'test', 'benjamin.balet@gmail.com', '$2a$08$cMDH7iGfp51alOVNu6dIw.95zfWxW0ZRK8pLuFm13If8Blynir6he', 2, 5, NULL, NULL, NULL, 0),
-(19, 'aaaaaa', 'aaaaaa', 'aaaaaaa', 'aaaaaa@aaaaaa.com', '$2a$08$kc7NJ25Lnpp5dvtikbPkEuN2oxxTchD36iRPhjI2d1a9.tXoOtLOK', 2, 6, NULL, 34, NULL, 7);
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `login`, `email`, `password`, `role`, `manager`, `country`, `organization`, `contract`, `position`, `datehired`, `identifier`) VALUES
+(5, 'John', 'DOE', 'jdoe', 'test@toto.com', '$2a$08$NeL/A7xVRbsFr9lxVSDmfOQsXepBom/PfvfTnua4AnFH2YkVZpjCa', 2, 5, NULL, 0, NULL, 0, '2014-05-30', 'AAA'),
+(6, 'Benjamin', 'BALET', 'bbalet', 'benjamin.balet@gmail.com', '$2a$08$lKuLIUd7wGquZQ.tilcd7e9JZkUKtTjXQAhakzIAnU2yTTB3bxf0i', 1, 5, NULL, 42, 1, 10, NULL, ''),
+(15, 'Jane', 'DOE', 'jdoe', 'jdoe@gmail.com', '$2a$08$2vJMASbNOsMP2Gf06YI7TONk5mgnnKuGzfogwqtMh6qoj89ZzeIqi', 2, 15, NULL, 0, NULL, 7, '2014-05-04', 'deded'),
+(22, 'Bernard', 'DUPOND', 'bdupond', 'bdupond@test.org', '$2a$08$wDiqhwjD2ZEm6YemLzkJae31a9UnxaiojMfIj32AvPzoCFXPwgv9W', 2, 22, NULL, 0, NULL, 0, NULL, ''),
+(23, 'georges', 'durand', 'gdurand', 'gdurand@lms.org', '$2a$08$ZtjuIR/z8u8M4j6ed/MHtePG5tACNFJ2YsHFuwoABP1NODhbanFFe', 8, 23, NULL, NULL, NULL, 9, NULL, ''),
+(24, 'Georges', 'DUPOND', 'gdupond', 'gdupond@test.com', '$2a$08$u8Op8QfceajdLMcic24NNuzQqR7zbdxlUaC3pDRNx9lAP10q5HE4q', 2, 24, NULL, 0, NULL, 0, NULL, ''),
+(25, 'boris', 'vian', 'bvian', 'bvian@pp.vo', '$2a$08$sAA9rruRvw9LPL.mJ/A03uWqcJwSYUAOT2rPT16PMUMkNnovyeZju', 2, 25, NULL, 0, NULL, 0, NULL, ''),
+(26, 'Elvis', 'PRESLEY', 'epresley', 'epresley@test.org', '$2a$08$aHS6A7baCjjnGFXG55xGveM7nOSrIhulNJJCAk0uhD3zhqTf74nbW', 2, 26, NULL, 0, NULL, 0, '2014-05-25', 'b123');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

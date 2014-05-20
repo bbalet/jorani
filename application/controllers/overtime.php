@@ -103,7 +103,7 @@ class Overtime extends CI_Controller {
             show_404();
         }
         $employee = $this->users_model->get_users($extra['employee']);
-        if ($this->user_id != $employee['manager']) {
+        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to accept leave #' . $id);
             $this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
             redirect('home');
@@ -133,7 +133,7 @@ class Overtime extends CI_Controller {
             show_404();
         }
         $employee = $this->users_model->get_users($extra['employee']);
-        if ($this->user_id != $employee['manager']) {
+        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to reject leave #' . $id);
             $this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
             redirect('home');
@@ -194,7 +194,7 @@ class Overtime extends CI_Controller {
     }
     
     /**
-     * Action: export the list of all leave requests into an Excel file
+     * Action: export the list of all overtime requests into an Excel file
      */
     public function export($filter = 'requested') {
         $this->load->library('excel');

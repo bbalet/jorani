@@ -327,7 +327,7 @@ class Leaves extends CI_Controller {
         $this->excel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $leaves = $this->leaves_model->get_leaves();
+        $leaves = $this->leaves_model->get_user_leaves($this->user_id);
         $this->load->model('status_model');
         $this->load->model('types_model');
         

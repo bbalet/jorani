@@ -158,6 +158,23 @@ class Auth {
             case 'counters_leaves' :
                 return true;
                 break;
+            
+            //Extra
+            case 'list_extra' :
+            case 'create_extra' :
+            case 'export_extra' :
+            case 'view_extra' :
+            case 'edit_extra' :
+                return true;
+                break;
+            //Additionnal access logic: cannot view/edit/update the leave of another user except for admin/manager
+            //Extra Request
+            case 'list_overtime' :
+            case 'accept_overtime' :
+            case 'reject_overtime' :
+                return true;
+                break;
+            
             //Additionnal access logic: cannot view/edit/update the leave of another user except for admin/manager
             //Request
             case 'list_requests' :

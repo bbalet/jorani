@@ -83,17 +83,26 @@ $this->lang->load('menu', $language);?>
 
              <ul class="nav">			  
                 <li class="dropdown">
-                  <a href="<?php echo base_url();?>requests"><?php echo lang('menu_requests_title');?></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Validation <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="<?php echo base_url();?>requests">Leaves</a></li>
+                    <li><a href="<?php echo base_url();?>overtime">Overtime</a></li>
+                  </ul>
                 </li>
               </ul>
               
               <ul class="nav">			  
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_leaves_title');?> <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requests <b class="caret"></b></a>
                   <ul class="dropdown-menu">
+                    <li class="nav-header">Leaves</li>
                     <li><a href="<?php echo base_url();?>leaves/counters"><?php echo lang('menu_leaves_counters');?></a></li>
                     <li><a href="<?php echo base_url();?>leaves"><?php echo lang('menu_leaves_list_requests');?></a></li>
                     <li><a href="<?php echo base_url();?>leaves/create"><?php echo lang('menu_leaves_create_request');?></a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Overtime</li>
+                    <li><a href="<?php echo base_url();?>extra">List of extras</a></li>
+                    <li><a href="<?php echo base_url();?>extra/create">Request an extra</a></li>
                   </ul>
                 </li>
               </ul>

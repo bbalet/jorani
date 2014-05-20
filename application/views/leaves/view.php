@@ -25,8 +25,8 @@
     <label for="cause">Cause</label>
     <textarea name="cause" readonly><?php echo $leave['cause']; ?></textarea>
     
-    <label for="status" readonly>Status</label>
-    <select name="status">
+    <label for="status">Status</label>
+    <select name="status" readonly>
         <option selected><?php echo $leave['status_label']; ?></option>
     </select><br />
 

@@ -16,7 +16,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['requests_index_title'] = 'Requests submitted to me';
+$lang['requests_index_title'] = 'Leave Requests submitted to me';
 $lang['requests_index_description'] = 'This screen lists the leave requests submitted to you. If you are not a manager, this list will always be empty.';
 
 $lang['requests_index_thead_id'] = 'ID';

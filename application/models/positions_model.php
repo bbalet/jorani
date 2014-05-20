@@ -47,7 +47,11 @@ class Positions_model extends CI_Model {
      */
     public function get_label($id) {
         $record = $this->get_positions($id);
-        return $record['name'];
+        if (count($record) > 0) {
+            return $record['name'];
+        } else {
+            return '';
+        }
     }
     
     /**
@@ -67,11 +71,18 @@ class Positions_model extends CI_Model {
     
     /**
      * Delete a position from the database
+     * Cascade update all users having this postion (filled with 0)
      * @param int $id identifier of the position record
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_position($id) {
-        $query = $this->db->delete('positions', array('id' => $id));
+        $delete = $this->db->delete('positions', array('id' => $id));
+        $data = array(
+            'position' => 0
+        );
+        $this->db->where('position', $id);
+        $update = $this->db->update('users', $data);
+        return $delete && $update;
     }
     
     /**

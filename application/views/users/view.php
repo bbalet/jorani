@@ -29,6 +29,12 @@
     <label for="entity">Entity</label>
     <input type="text" name="entity" value="<?php echo $organization_label; ?>" readonly /><br />
     
+    <label for="datehired">Date hired/started</label>
+    <input type="text" name="datehired" value="<?php echo $user['datehired'];; ?>" readonly /><br />
+    
+    <label for="identifier">Internal/Company Identifier</label>
+    <input type="text" name="identifier" value="<?php echo $user['identifier'];; ?>" readonly /><br />
+    
     <br /><br />
     <a href="<?php echo base_url();?>users/edit/<?php echo $user['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;Edit</a>
     &nbsp;

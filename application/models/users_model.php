@@ -143,7 +143,9 @@ class Users_model extends CI_Model {
             'role' => $role,
             'manager' => $this->input->post('manager'),
             'organization' => $this->input->post('entity'),
-            'position' => $this->input->post('position')
+            'position' => $this->input->post('position'),
+            'datehired' => $this->input->post('entity'),
+            'identifier' => $this->input->post('entity')
         );
         $this->db->insert('users', $data);
         
@@ -217,7 +219,9 @@ class Users_model extends CI_Model {
             'role' => $role,
             'manager' => $manager,
             'organization' => $this->input->post('entity'),
-            'position' => $this->input->post('position')
+            'position' => $this->input->post('position'),
+            'datehired' => $this->input->post('entity'),
+            'identifier' => $this->input->post('entity')
         );
 
         $this->db->where('id', $this->input->post('id'));

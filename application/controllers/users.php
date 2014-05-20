@@ -137,6 +137,8 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('manager', 'Manager', 'required|xss_clean');
         $this->form_validation->set_rules('entity', 'Entity', 'xss_clean');
         $this->form_validation->set_rules('position', 'Position', 'xss_clean');
+        $this->form_validation->set_rules('datehired', 'Date hired/started', 'xss_clean');
+        $this->form_validation->set_rules('identifier', 'Internal/Company Identifier', 'xss_clean');
 
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
@@ -272,6 +274,8 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('manager', 'Manager', 'required|xss_clean');
         $this->form_validation->set_rules('position', 'Position', 'xss_clean');
         $this->form_validation->set_rules('entity', 'Entity', 'xss_clean');
+        $this->form_validation->set_rules('datehired', 'Date hired/started', 'xss_clean');
+        $this->form_validation->set_rules('identifier', 'Internal/Company Identifier', 'xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);

@@ -55,6 +55,12 @@ echo form_open('users/create', $attributes); ?>
     </div>    
     <br />
     
+    <label for="datehired">Date hired/started</label>
+    <input type="text" name="datehired" id="datehired" /><br />
+    
+    <label for="identifier">Internal/Company Identifier</label>
+    <input type="text" name="identifier" /><br />
+    
 </form>
 
     <label for="password">Password</label>
@@ -113,6 +119,8 @@ echo form_open('users/create', $attributes); ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jqBootstrapValidation.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/lms.password.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
+<link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script type="text/javascript">
 
     function select_manager() {
@@ -141,6 +149,7 @@ echo form_open('users/create', $attributes); ?>
     }
 
     $(function () {
+        $('#datehired').datepicker({format: 'yyyy-mm-dd', autoclose: true});
         $("input").not("[type=submit]").jqBootstrapValidation(); 
         
         $("#cmdGeneratePassword").click(function() {

@@ -1,18 +1,3 @@
-<?php if($this->session->flashdata('msg')){ ?>
-<div class="alert fade in" id="flashbox">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <?php echo $this->session->flashdata('msg'); ?>
-</div>
-<script type="text/javascript">
-//Flash message
-$(document).ready(function() {
-    $(".alert").alert();
-});
-</script>
-<?php } ?>
-
-<?php echo validation_errors(); ?>
-
 <?php
 $attributes = array('id' => 'target');
 echo form_open('users/reset/' . $target_user_id, $attributes); ?>

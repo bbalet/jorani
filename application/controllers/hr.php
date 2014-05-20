@@ -127,6 +127,25 @@ class Hr extends CI_Controller {
     }
     
     /**
+     * Display the list of overtime requests for a given employee
+     * @param int $id employee id
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function overtime($id) {
+        $this->auth->check_is_granted('list_employees');
+        $data = $this->getUserContext();
+        $data['title'] = 'List of overtime requests';
+        $data['user_id'] = $id;
+        $this->load->model('overtime_model');
+        $data['extras'] = $this->overtime_model->get_employee_extras($id);
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('hr/overtime', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
      * Display a form that allows updating the contract of a given user
      * @param int $id User identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -215,6 +234,46 @@ class Hr extends CI_Controller {
         }
 
         $filename = 'leaves.xls';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $objWriter->save('php://output');
+    }
+    
+    /**
+     * Action: export the list of all overtime requests into an Excel file
+     * @param int $id employee id
+     */
+    public function export_overtime($id) {
+        $this->load->library('excel');
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle('List of overtime resquests');
+        $this->excel->getActiveSheet()->setCellValue('A3', 'ID');
+        $this->excel->getActiveSheet()->setCellValue('B3', 'Status');
+        $this->excel->getActiveSheet()->setCellValue('C3', 'Date');
+        $this->excel->getActiveSheet()->setCellValue('D3', 'Duration');
+        $this->excel->getActiveSheet()->setCellValue('E3', 'Cause');
+        $this->excel->getActiveSheet()->getStyle('A3:E3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A3:E3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->load->model('overtime_model');
+        $requests = $this->overtime_model->get_employee_extras($id);
+        $this->load->model('users_model');
+        $fullname = $this->users_model->get_label($id);
+        $this->excel->getActiveSheet()->setCellValue('A1', $fullname);
+        
+        $line = 4;
+        foreach ($requests as $request) {
+            $this->excel->getActiveSheet()->setCellValue('A' . $line, $request['id']);
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, $request['status']);
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $request['date']);
+            $this->excel->getActiveSheet()->setCellValue('D' . $line, $request['duration']);
+            $this->excel->getActiveSheet()->setCellValue('E' . $line, $request['cause']);
+            $line++;
+        }
+
+        $filename = 'overtime.xls';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');

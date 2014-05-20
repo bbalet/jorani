@@ -52,6 +52,22 @@ class Overtime_model extends CI_Model {
     }
     
     /**
+     * Get the the list of overtime requested for a given employee
+     * Ids are replaced by label
+     * @param int $id ID of the employee
+     * @return array list of records
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_employee_extras($id) {
+        $this->db->select('overtime.id, status.name as status, overtime.date, overtime.duration, overtime.cause');
+        $this->db->from('overtime');
+        $this->db->join('status', 'overtime.status = status.id');
+        $this->db->where('overtime.employee', $id);
+        $this->db->order_by('overtime.id', 'desc');
+        return $this->db->get()->result_array();
+    }
+    
+    /**
      * Create an overtime request
      * @return int id of the overtime request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>

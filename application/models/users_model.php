@@ -134,6 +134,12 @@ class Users_model extends CI_Model {
             $role = $role | $role_bit;
         }        
         
+        if ($this->input->post('datehired') == "") {
+            $datehired = NULL;
+        } else {
+            $datehired = $this->input->post('datehired');
+        }
+        
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
@@ -144,8 +150,8 @@ class Users_model extends CI_Model {
             'manager' => $this->input->post('manager'),
             'organization' => $this->input->post('entity'),
             'position' => $this->input->post('position'),
-            'datehired' => $this->input->post('entity'),
-            'identifier' => $this->input->post('entity')
+            'datehired' => $datehired,
+            'identifier' => $this->input->post('identifier')
         );
         $this->db->insert('users', $data);
         
@@ -211,6 +217,12 @@ class Users_model extends CI_Model {
             $manager = $this->input->post('manager');
         }
         
+        if ($this->input->post('datehired') == "") {
+            $datehired = NULL;
+        } else {
+            $datehired = $this->input->post('datehired');
+        }
+        
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
@@ -220,8 +232,8 @@ class Users_model extends CI_Model {
             'manager' => $manager,
             'organization' => $this->input->post('entity'),
             'position' => $this->input->post('position'),
-            'datehired' => $this->input->post('entity'),
-            'identifier' => $this->input->post('entity')
+            'datehired' => $datehired,
+            'identifier' => $this->input->post('identifier')
         );
 
         $this->db->where('id', $this->input->post('id'));

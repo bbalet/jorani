@@ -43,6 +43,8 @@ $(document).ready(function() {
                 <a href="<?php echo base_url();?>entitleddays/user/<?php echo $users_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
                 &nbsp;
                 <a href="<?php echo base_url();?>hr/leaves/<?php echo $users_item['id'] ?>">Leaves</a>
+                &nbsp;
+                <a href="<?php echo base_url();?>hr/overtime/<?php echo $users_item['id'] ?>">Extras</a>
             </div>
         </td>
         <td><?php echo $users_item['firstname']; ?></td>

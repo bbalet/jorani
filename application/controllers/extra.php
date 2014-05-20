@@ -122,10 +122,10 @@ class Extra extends CI_Controller {
             $this->load->view('extra/create');
             $this->load->view('templates/footer');
         } else {
-            $leave_id = $this->overtime_model->set_extra();
+            $extra_id = $this->overtime_model->set_extra();
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
-                $this->sendMail($leave_id);
+                $this->sendMail($extra_id);
             }            
             $this->session->set_flashdata('msg', 'The overtime request has been succesfully created');
             redirect('extra');
@@ -204,6 +204,7 @@ class Extra extends CI_Controller {
             'Lastname' => $this->session->userdata('lastname'),
             'Date' => $this->input->post('date'),
             'Duration' => $this->input->post('duration'),
+            'Cause' => $this->input->post('cause'),
             'UrlAccept' => $acceptUrl,
             'UrlReject' => $rejectUrl
         );

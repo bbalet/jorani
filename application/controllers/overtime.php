@@ -170,11 +170,12 @@ class Overtime extends CI_Controller {
 
         $this->load->library('parser');
         $data = array(
-            'Title' => 'Leave Request',
+            'Title' => 'Overtime Request',
             'Firstname' => $employee['firstname'],
             'Lastname' => $employee['lastname'],
-            'Date' => $leave['startdate'],
-            'Duration' => $leave['enddate']
+            'Date' => $extra['date'],
+            'Duration' => $extra['duration'],
+            'Cause' => $extra['cause']
         );
         
         $message = "";

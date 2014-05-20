@@ -30,7 +30,10 @@
             </tr>
             <tr>
                 <td>To &nbsp;</td><td>{Duration}</td>
-            </tr>            
+            </tr>
+            <tr>
+                <td>Cause &nbsp;</td><td>{Cause}</td>
+            </tr>
         </table>
     </body>
 </html>

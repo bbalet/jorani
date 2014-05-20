@@ -26,11 +26,14 @@
         The overtime you've requested has been rejected. Below, the details :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{Date}</td>
+                <td>Date &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{Duration}</td>
-            </tr>            
+                <td>Duration &nbsp;</td><td>{Duration}</td>
+            </tr>
+            <tr>
+                <td>Cause &nbsp;</td><td>{Cause}</td>
+            </tr>
         </table>
     </body>
 </html>

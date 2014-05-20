@@ -28,7 +28,10 @@
             </tr>
             <tr>
                 <td>To &nbsp;</td><td>{Duration}</td>
-            </tr>            
+            </tr>
+            <tr>
+                <td>Cause &nbsp;</td><td>{Cause}</td>
+            </tr>
         </table>
         <a href="{UrlAccept}">Accept</a>
         <a href="{UrlReject}">Reject</a>

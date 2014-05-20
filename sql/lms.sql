@@ -312,6 +312,22 @@ INSERT INTO `organization` (`id`, `name`, `parent_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `overtime`
+--
+
+CREATE TABLE IF NOT EXISTS `overtime` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employee` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `duration` decimal(10,0) NOT NULL,
+  `cause` text NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `positions`
 --
 

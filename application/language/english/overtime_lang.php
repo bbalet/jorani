@@ -16,21 +16,15 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//You can change the content of this template
-?>
-<html>
-    <body>
-        <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
-        <br />
-        The overtime you've requested has been accepted. Below, the details :
-        <table border="0">
-            <tr>
-                <td>From &nbsp;</td><td>{Date}</td>
-            </tr>
-            <tr>
-                <td>To &nbsp;</td><td>{Duration}</td>
-            </tr>            
-        </table>
-    </body>
-</html>
+$lang['overtime_index_title'] = 'Overtime Requests submitted to me';
+$lang['overtime_index_description'] = 'This screen lists the overtime requests submitted to you. If you are not a manager, this list will always be empty.';
+
+$lang['overtime_index_thead_id'] = 'ID';
+$lang['overtime_index_thead_fullname'] = 'Fullname';
+$lang['overtime_index_thead_date'] = 'Date';
+$lang['overtime_index_thead_duration'] = 'Duration';
+$lang['overtime_index_thead_status'] = 'Status';
+
+$lang['overtime_index_button_export'] = 'Export this list';
+$lang['overtime_index_button_show_all'] = 'All requests';
+$lang['overtime_index_button_show_pending'] = 'Pending requests ';

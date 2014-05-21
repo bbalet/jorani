@@ -4,6 +4,21 @@ $this->lang->load('leavetypes', $language);?>
 
 <h1><?php echo lang('hr_leaves_type_title');?></h1>
 
+<?php if($this->session->flashdata('msg')){ ?>
+<div class="alert fade in" id="flashbox">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <?php echo $this->session->flashdata('msg'); ?>
+</div>
+ 
+<script type="text/javascript">
+//Flash message
+$(document).ready(function() {
+    $("#flashbox").alert();
+});
+</script>
+<?php } ?>
+
+
 <table class="table table-bordered table-hover">
 <thead>
     <tr>
@@ -14,7 +29,10 @@ $this->lang->load('leavetypes', $language);?>
   <tbody>
   <?php foreach ($leavetypes as $type) { ?>
     <tr>
-      <td><?php echo $type['id'] ?> &nbsp; <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="delete leave type"><i class="icon-trash"></i></a></td>
+      <td><?php echo $type['id'] ?> &nbsp; 
+          <?php if ($type['id'] !=0 ) { ?>
+          <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="delete leave type"><i class="icon-trash"></i></a></td>
+          <?php } ?>
       <td>
           <a href="<?php echo base_url();?>leavetypes/edit/<?php echo $type['id'] ?>" data-target="#frmEditLeaveType" data-toggle="modal" title="edit leave type"><i class="icon-pencil"></i></a>
           &nbsp; <?php echo $type['name']; ?></td>

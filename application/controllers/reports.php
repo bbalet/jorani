@@ -28,6 +28,7 @@ class Reports extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
+        //$this->output->enable_profiler($this->config->item('enable_profiling'));
         //Check if user is connected
         if (!$this->session->userdata('logged_in')) {
             $this->session->set_userdata('last_page', current_url());
@@ -116,5 +117,143 @@ class Reports extends CI_Controller {
         $this->load->view('menu/index', $data);
         $this->load->view('reports/balance/index', $data);
         $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Ajax end-point : execute the balance report
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function balance_execute() {
+        $this->auth->check_is_granted('native_report_balance');
+        $data = $this->getUserContext();
+        
+        $this->load->model('leaves_model');
+        $this->load->model('types_model');
+        $this->load->model('organization_model');
+        $result = array();
+        $types = $this->types_model->get_types();
+        
+        $users = $this->organization_model->all_employees($_GET['entity'], $_GET['children']);
+        foreach ($users as $user) {
+            $result[$user->id]['identifier'] = $user->identifier;
+            $result[$user->id]['firstname'] = $user->firstname;
+            $result[$user->id]['lastname'] = $user->lastname;
+            $result[$user->id]['datehired'] = $user->datehired;
+            $result[$user->id]['department'] = $user->department;
+            $result[$user->id]['position'] = $user->position;
+            $result[$user->id]['contract'] = $user->contract;
+            //Init type columns
+            foreach ($types as $type) {
+                $result[$user->id][$type['name']] = '';
+            }
+            
+            $summary = $this->leaves_model->get_user_leaves_summary($user->id, TRUE);
+            if (count($summary) > 0 ) {
+                foreach ($summary as $key => $value) {
+                    $result[$user->id][$key] = $value[1] - $value[0];
+                }
+            }
+        }
+        
+        $table = '';
+        $thead = '';
+        $tbody = '';
+        $line = 2;
+        foreach ($result as $row) {
+            $index = 1;
+            $tbody .= '<tr>';
+            foreach ($row as $key => $value) {
+                if ($line == 2) {
+                    $thead .= '<th>' . $key . '</th>';
+                }
+                $tbody .= '<td>' . $value . '</td>';
+                $index++;
+            }
+            $tbody .= '</tr>';
+            $line++;
+        }
+        $table = '<table class="table table-bordered table-hover">' .
+                    '<thead>' .
+                        '<tr>' .
+                            $thead .
+                        '</tr>' .
+                    '</thead>' .
+                    '<tbody>' .
+                        $tbody .
+                    '</tbody>' .
+                '</table>';
+        
+        echo $table;
+    }
+    
+    /**
+     * Export the balance report into Excel
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function balance_export() {
+        $this->auth->check_is_granted('native_report_balance');
+        $data = $this->getUserContext();
+        $this->load->library('excel');
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle('Leave balance');
+
+        $this->load->model('leaves_model');
+        $this->load->model('types_model');
+        $this->load->model('organization_model');
+        $result = array();
+        $summary = array();
+        $types = $this->types_model->get_types();
+        
+        //Build the list
+        $users = $this->organization_model->all_employees($_GET['entity'], $_GET['children']);
+        foreach ($users as $user) {
+            $result[$user->id]['identifier'] = $user->identifier;
+            $result[$user->id]['firstname'] = $user->firstname;
+            $result[$user->id]['lastname'] = $user->lastname;
+            $result[$user->id]['datehired'] = $user->datehired;
+            $result[$user->id]['department'] = $user->department;
+            $result[$user->id]['position'] = $user->position;
+            $result[$user->id]['contract'] = $user->contract;
+            //Init type columns
+            foreach ($types as $type) {
+                $result[$user->id][$type['name']] = '';
+            }
+            
+            $summary = $this->leaves_model->get_user_leaves_summary($user->id, TRUE);
+            if (count($summary) > 0 ) {
+                foreach ($summary as $key => $value) {
+                    $result[$user->id][$key] = $value[1] - $value[0];
+                }
+            }
+        }
+        
+        $max = 0;
+        $line = 2;
+        foreach ($result as $row) {
+            $index = 1;
+            foreach ($row as $key => $value) {
+                if ($line == 2) {
+                    $colidx = $this->excel->column_name($index) . '1';
+                    $this->excel->getActiveSheet()->setCellValue($colidx, $key);
+                    $max++;
+                }
+                $colidx = $this->excel->column_name($index) . $line;
+                $this->excel->getActiveSheet()->setCellValue($colidx, $value);
+                $index++;
+            }
+            $line++;
+        }
+
+        $colidx = $this->excel->column_name($max) . '1';
+        $this->excel->getActiveSheet()->getStyle('A1:' . $colidx)->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1:' . $colidx)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        
+        $filename = 'leave_balance.xls';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $objWriter->save('php://output');
     }
 }

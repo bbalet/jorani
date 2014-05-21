@@ -127,9 +127,14 @@ class LeaveTypes extends CI_Controller {
      */
     public function delete($id) {
         $this->auth->check_is_granted('leavetypes_delete');
-        $this->types_model->delete_type($id);
-        $this->session->set_flashdata('msg', 'The leave type has been succesfully deleted.');
-        redirect('leavetypes');
+        if ($id != 0) {
+            $this->types_model->delete_type($id);
+            $this->session->set_flashdata('msg', 'The leave type has been succesfully deleted.');
+            redirect('leavetypes');
+        } else {
+            $this->session->set_flashdata('msg', 'You cannot delete a system leavetype.');
+            redirect('leavetypes');
+        }
     }
 
     /**

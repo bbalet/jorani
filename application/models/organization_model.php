@@ -213,4 +213,34 @@ class Organization_model extends CI_Model {
         return $this->db->get();
     }
     
+    /**
+     * Returns the list of the employees attached to an entity
+     * @param int $id identifier of the entity
+     * @param bool $children Include sub department in the query
+     * @return type
+     */
+    public function all_employees($id, $children = false) {
+        $this->db->select('users.id, users.identifier, users.firstname, users.lastname, users.datehired');
+        $this->db->select('organization.name as department, positions.name as position, contracts.name as contract');
+        $this->db->from('organization');
+        $this->db->join('users', 'users.organization = organization.id');
+        $this->db->join('positions', 'positions.id  = users.position', 'left');
+        $this->db->join('contracts', 'contracts.id  = users.contract', 'left');
+        if ($children == true) {
+            $this->load->model('organization_model');
+            $list = $this->organization_model->get_all_children($id);
+            $ids = array();
+            if (count($list) > 0) {
+                $ids = explode(",", $list[0]['id']);
+            }
+            array_push($ids, $id);
+            $this->db->where_in('organization.id', $ids);
+        } else {
+            $this->db->where('organization.id', $id);
+        }
+        $this->db->order_by('lastname', 'asc'); 
+        $this->db->order_by('firstname', 'asc');
+        $employees = $this->db->get()->result();
+        return $employees;
+    }    
 }

@@ -31,5 +31,19 @@ class Excel extends PHPExcel {
      */
     public function __construct() {
         parent::__construct(); 
-    } 
+    }
+    
+    /**
+     * Return the excel column name for a given column index
+     * @param type $number
+     * @return string
+     */
+    public function column_name($number) {
+        if ($number < 27) {
+            return substr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", $number - 1, 1);
+        } else {
+            return substr("AAABACADAEAFAGAHAIAJAKALAMANAOAPAQARASATAUAVAWAXAYAZ", $number, 2);
+        }
+    }
+
 }

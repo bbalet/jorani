@@ -43,10 +43,11 @@ class Leaves_model extends CI_Model {
     /**
      * Get the the list of leaves requested for a given employee
      * @param int $id ID of the employee
+     * @param bool $sum_extra true = sum the overtime credits
      * @return array list of records
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_user_leaves($id) {
+    public function get_user_leaves($id, $sum_extra = FALSE) {
         $query = $this->db->get_where('leaves', array('employee' => $id));
         return $query->result_array();
     }
@@ -71,10 +72,11 @@ class Leaves_model extends CI_Model {
     /**
      * Get the the list of entitled and taken leaves of a given employee
      * @param int $id ID of the employee
+     * @param bool $sum_extra TRUE: sum compensate summary
      * @return array computed aggregated taken/entitled leaves
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_user_leaves_summary($id) {
+    public function get_user_leaves_summary($id, $sum_extra = FALSE) {
         //Compute the boundaries of the contract of the user
         $this->db->select('startentdate, endentdate');
         $this->db->from('contracts');
@@ -98,7 +100,13 @@ class Leaves_model extends CI_Model {
             $types = $this->db->get_where('types')->result_array();
             foreach ($types as $type) {
                 $summary[$type['name']][0] = 0; //Taken
-                $summary[$type['name']][1] = 0; //Entitled
+                if ($type['id'] != 0) {
+                    $summary[$type['name']][1] = 0; //Entitled
+                    $summary[$type['name']][2] = ''; //Description
+                } else {
+                    $summary[$type['name']][1] = '-'; //Entitled for catch up
+                    $summary[$type['name']][2] = 'Entitled days vary according to validated overtime'; //Description
+                }
             }
             
             $this->db->select('sum(leaves.duration) as taken, types.name as type');
@@ -154,6 +162,31 @@ class Leaves_model extends CI_Model {
                     unset($summary[$key]);
                 }
             }
+            
+            //Add the validated catch up days
+            //Employee must catch up in the year
+            $this->db->select('duration, date, cause');
+            $this->db->from('overtime');
+            $this->db->where('employee', $id);
+            $this->db->where('date >= DATE_SUB(NOW(),INTERVAL 1 YEAR)');
+            $this->db->where('status = 3'); //Accepted
+            $overtime_days = $this->db->get()->result_array();
+            $sum = 0;
+            foreach ($overtime_days as $entitled) {
+                if ($sum_extra == FALSE) {
+                    $summary['Catch up for ' . $entitled['date']][0] = '-'; //taken
+                    $summary['Catch up for ' . $entitled['date']][1] = $entitled['duration']; //entitled
+                    $summary['Catch up for ' . $entitled['date']][2] = $entitled['cause']; //description
+                } else {
+                    $sum += $entitled['duration']; //entitled
+                }
+            }
+            if ($sum_extra == TRUE) {
+                $summary['compensate'][0] = '-'; //taken
+                $summary['compensate'][1] = $sum; //entitled
+                $summary['compensate'][2] = '-'; //description
+            }
+            
         } else { //User attached to no contract
             $summary = null;
         }

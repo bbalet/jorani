@@ -10,6 +10,7 @@ $this->lang->load('leaves', $language);?>
       <th><?php echo lang('leaves_summary_thead_type');?></th>
       <th><?php echo lang('leaves_summary_thead_taken');?></th>
       <th><?php echo lang('leaves_summary_thead_entitled');?></th>
+      <th><?php echo lang('leaves_summary_thead_description');?></th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,7 @@ $this->lang->load('leaves', $language);?>
       <td><?php echo $key; ?></td>
       <td><?php echo $value[0]; ?></td>
       <td><?php echo $value[1]; ?></td>
+      <td><?php echo $value[2]; ?></td>
     </tr>
   <?php } ?>
   </tbody>

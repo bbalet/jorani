@@ -20,6 +20,7 @@ $lang['leaves_summary_title'] = 'My summary';
 $lang['leaves_summary_thead_type'] = 'Leave type';
 $lang['leaves_summary_thead_taken'] = 'Taken';
 $lang['leaves_summary_thead_entitled'] = 'Entitled';
+$lang['leaves_summary_thead_description'] = 'Description';
 
 $lang['leaves_index_title'] = 'My leave requests';
 $lang['leaves_index_thead_id'] = 'ID';

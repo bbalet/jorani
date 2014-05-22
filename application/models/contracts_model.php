@@ -41,6 +41,20 @@ class Contracts_model extends CI_Model {
     }
     
     /**
+     * Get the label for a given contract id
+     * @param type $id
+     * @return string label
+     */
+    public function get_label($id) {
+        $record = $this->get_contracts($id);
+        if (count($record) > 0) {
+            return $record['name'];
+        } else {
+            return '';
+        }
+    }
+    
+    /**
      * Insert a new contract into the database. Inserted data are coming from an
      * HTML form
      * @return type

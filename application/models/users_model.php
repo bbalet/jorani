@@ -58,7 +58,9 @@ class Users_model extends CI_Model {
      */
     public function get_label($id) {
         $record = $this->get_users($id);
-        return $record['firstname'] . ' ' . $record['lastname'];
+        if (count($record) > 0) {
+            return $record['firstname'] . ' ' . $record['lastname'];
+        }
     }
     
     /**
@@ -99,6 +101,12 @@ class Users_model extends CI_Model {
         $query = $this->db->delete('users', array('id' => $id));
         $this->load->model('entitleddays_model');
         $this->entitleddays_model->delete_entitleddays_cascade_user($id);
+        //Cascade delete line manager role
+        $data = array(
+            'manager' => NULL
+        );
+        $this->db->where('manager', $id);
+        $this->db->update('users', $data);
     }
 
     /**
@@ -230,6 +238,7 @@ class Users_model extends CI_Model {
             'email' => $this->input->post('email'),
             'role' => $role,
             'manager' => $manager,
+            'contract' => $this->input->post('contract'),
             'organization' => $this->input->post('entity'),
             'position' => $this->input->post('position'),
             'datehired' => $datehired,

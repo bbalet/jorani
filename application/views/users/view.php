@@ -23,6 +23,9 @@
     <label for="manager">Manager</label>
     <input type="text" name="manager" value="<?php echo $manager_label; ?>" readonly /><br />
     
+    <label for="contract">Contract</label>
+    <input type="text" name="contract" value="<?php echo $contract_label; ?>" readonly /><br />
+    
     <label for="position">Position</label>
     <input type="text" name="position" value="<?php echo $position_label; ?>" readonly /><br />
     

@@ -34,7 +34,7 @@ $this->lang->load('status', $language);
     <label for="duration" required><?php echo lang('leaves_create_field_duration');?></label>
     <input type="input" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" />
     
-    <div class="alert hide alert-error" id="lblCreditAlert">
+    <div class="alert hide alert-error" id="lblCreditAlert" onclick="$('#lblCreditAlert').hide();">
         <button type="button" class="close">&times;</button>
         <?php echo lang('leaves_create_field_duration_message');?>
     </div>

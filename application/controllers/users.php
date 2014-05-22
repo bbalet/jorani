@@ -103,10 +103,12 @@ class Users extends CI_Controller {
         }
         $data['title'] = 'User';
         $this->load->model('roles_model');
-        $data['roles'] = $this->roles_model->get_roles();
         $this->load->model('positions_model');
+        $this->load->model('contracts_model');
         $this->load->model('organization_model');
+        $data['roles'] = $this->roles_model->get_roles();
         $data['manager_label'] = $this->users_model->get_label($data['user']['manager']);
+        $data['contract_label'] = $this->contracts_model->get_label($data['user']['contract']);
         $data['position_label'] = $this->positions_model->get_label($data['user']['position']);
         $data['organization_label'] = $this->organization_model->get_label($data['user']['organization']);
         $this->load->view('templates/header', $data);
@@ -135,6 +137,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('email', 'E-mail', 'required|xss_clean');
         $this->form_validation->set_rules('role', 'role', 'required|xss_clean');
         $this->form_validation->set_rules('manager', 'Manager', 'required|xss_clean');
+        $this->form_validation->set_rules('contract', 'Contract', 'xss_clean');
         $this->form_validation->set_rules('entity', 'Entity', 'xss_clean');
         $this->form_validation->set_rules('position', 'Position', 'xss_clean');
         $this->form_validation->set_rules('datehired', 'Date hired/started', 'xss_clean');
@@ -149,6 +152,8 @@ class Users extends CI_Controller {
             $this->load->model('roles_model');
             $this->load->model('positions_model');
             $this->load->model('organization_model');
+            $this->load->model('contracts_model');
+            $data['contracts'] = $this->contracts_model->get_contracts();
             $data['manager_label'] = $this->users_model->get_label($data['users_item']['manager']);
             $data['position_label'] = $this->positions_model->get_label($data['users_item']['position']);
             $data['organization_label'] = $this->organization_model->get_label($data['users_item']['organization']);
@@ -233,7 +238,7 @@ class Users extends CI_Controller {
 
                 $this->email->from('do.not@reply.me', 'LMS');
                 $this->email->to($user['email']);
-                $this->email->subject('[LMS] Your password has been reset ');
+                $this->email->subject('[LMS] Your password has been reset');
                 $this->email->message($message);
                 $this->email->send();
                 
@@ -263,6 +268,8 @@ class Users extends CI_Controller {
 
         $this->load->model('roles_model');
         $data['roles'] = $this->roles_model->get_roles();
+        $this->load->model('contracts_model');
+        $data['contracts'] = $this->contracts_model->get_contracts();
         $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
 
         $this->form_validation->set_rules('firstname', 'Firstname', 'required|xss_clean');
@@ -272,6 +279,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
         $this->form_validation->set_rules('role[]', 'Role', 'required|xss_clean');
         $this->form_validation->set_rules('manager', 'Manager', 'required|xss_clean');
+        $this->form_validation->set_rules('contract', 'Contract', 'xss_clean');
         $this->form_validation->set_rules('position', 'Position', 'xss_clean');
         $this->form_validation->set_rules('entity', 'Entity', 'xss_clean');
         $this->form_validation->set_rules('datehired', 'Date hired/started', 'xss_clean');
@@ -315,7 +323,7 @@ class Users extends CI_Controller {
     }
    
     /**
-     * Form validation callback : prevent from lgon duplication
+     * Form validation callback : prevent from login duplication
      * @param type $login
      * @return boolean
      */
@@ -325,6 +333,18 @@ class Users extends CI_Controller {
             return false;
         } else {
             return true;
+        }
+    }
+    
+    /**
+     * Ajax endpoint : check login duplication
+     */
+    public function check_login() {
+        header("Content-Type: text/plain");
+        if ($this->users_model->is_login_available($this->input->post('login'))) {
+            echo 'true';
+        } else {
+            echo 'false';
         }
     }
 

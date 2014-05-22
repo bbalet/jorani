@@ -2,7 +2,11 @@
 
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('extra/edit/' . $id) ?>
+<?php if (isset($_GET['source'])) {
+    echo form_open('extra/edit/' . $id . '?source=' . $_GET['source']);
+} else {
+    echo form_open('extra/edit/' . $id);
+} ?>
 
     <label for="date" required>Date</label>
     <input type="input" name="date" id="date" value="<?php echo $leave['date']; ?>" />
@@ -15,13 +19,21 @@
     
     <label for="status" required>Status</label>
     <select name="status">
-        <option value="1" selected>Planned</option>
-        <option value="2">Requested</option>
+        <option value="1" <?php if ($leave['status'] == 1) echo 'selected'; ?>>Planned</option>
+        <option value="2" <?php if ($leave['status'] == 2) echo 'selected'; ?>>Requested</option>
+        <?php if ($is_hr) {?>
+        <option value="3" <?php if ($leave['status'] == 3) echo 'selected'; ?>>Accepted</option>
+        <option value="4" <?php if ($leave['status'] == 4) echo 'selected'; ?>>Rejected</option>        
+        <?php } ?>
     </select><br />
 
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update overtime</button>
     &nbsp;
-    <a href="<?php echo base_url(); ?>extra" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <?php if (isset($_GET['source'])) {?>
+        <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <?php } else {?>
+        <a href="<?php echo base_url(); ?>extra" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <?php } ?>
 </form>
 
 <link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>

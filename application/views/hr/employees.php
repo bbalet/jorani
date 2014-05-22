@@ -36,7 +36,7 @@ $(document).ready(function() {
             <?php echo $users_item['id'] ?>
             <div class="pull-right">
                 &nbsp;
-                <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="edit user"><i class="icon-pencil"></i></a>
+                <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>?source=hr%2Femployees" title="edit user"><i class="icon-pencil"></i></a>
                 &nbsp;
                 <a href="<?php echo base_url();?>hr/contract/<?php echo $users_item['id'] ?>" data-target="#frmContract" data-toggle="modal" title="change contract"><i class="icon-file"></i></a>
                 &nbsp;

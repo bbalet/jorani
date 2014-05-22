@@ -32,7 +32,7 @@ $(document).ready(function() {
 <?php foreach ($extras as $extra): ?>
     <tr>
         <td>
-            <?php echo $extra['id'] ?>
+            <a href="<?php echo base_url();?>extra/edit/<?php echo $extra['id']; ?>?source=hr%2Fovertime%2F<?php echo $user_id; ?>" title="edit request"><?php echo $extra['id'] ?></a>
             <div class="pull-right">
                 &nbsp;
                 <a href="<?php echo base_url();?>overtime/accept/<?php echo $extra['id']; ?>?source=hr%2Fovertime%2F<?php echo $user_id; ?>" title="accept request"><i class="icon-ok"></i></a>

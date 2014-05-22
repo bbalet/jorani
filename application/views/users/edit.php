@@ -4,7 +4,12 @@
 
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('users/update') ?>
+<?php if (isset($_GET['source'])) {
+    echo form_open('users/update?source=' . $_GET['source']);
+} else {
+    echo form_open('users/update');
+} ?>
+
     <input type="hidden" name="id" value="<?php echo $users_item['id']; ?>" required /><br />
 
     <label for="firstname">Firstname</label>
@@ -40,7 +45,7 @@
     <label for="contract">Contract</label>
     <select name="contract">
     <?php foreach ($contracts as $contract): ?>
-        <option value="<?php echo $contract['id'] ?>" <?php if ($contract == $users_item['contract']) echo "selected" ?>><?php echo $contract['name'] ?></option>
+        <option value="<?php echo $contract['id'] ?>" <?php if ($contract['id'] == $users_item['contract']) echo "selected" ?>><?php echo $contract['name'] ?></option>
     <?php endforeach ?>
     </select>
     
@@ -69,7 +74,11 @@
     <br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update user</button>
     &nbsp;
-    <a href="<?php echo base_url();?>users" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <?php if (isset($_GET['source'])) {?>
+        <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <?php } else {?>
+        <a href="<?php echo base_url();?>users" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <?php } ?>
 </form>
 
 <div id="frmSelectManager" class="modal hide fade">

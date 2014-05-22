@@ -35,9 +35,6 @@ class Organization_model extends CI_Model {
         $this->db->select('organization.id as id, organization.name as name');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
-        $data = array(
-            'users.id' => $user_id
-        );
         $this->db->where('users.id', $user_id);
         $query = $this->db->get();
         $arr = $query->result_array();
@@ -128,7 +125,7 @@ class Organization_model extends CI_Model {
             'organization' => NULL
         );
         $ids = array();
-        if (count($list) > 0) {
+        if (strlen($list[0]['id']) > 0) {
             $ids = explode(",", $list[0]['id']);
         }
         array_push($ids, $entity);

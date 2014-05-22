@@ -15,8 +15,8 @@
 |
 */
 $config['base_url']	= '';
-/*If you are using LMS with Nginx on HTTP protocol
-$_SERVER['HTTPS'] = 'off';*/
+//If you are using LMS with Nginx on HTTP protocol
+//$_SERVER['HTTPS'] = 'off';
 
 /*
 |--------------------------------------------------------------------------
@@ -182,7 +182,7 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 2;
+$config['log_threshold'] = 1;
 
 /*
 |--------------------------------------------------------------------------

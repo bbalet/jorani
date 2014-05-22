@@ -38,15 +38,15 @@ $this->lang->load('organization', $language);?>
 <div id="frmConfirmDelete" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="close">&times;</a>
-         <h3>Delete User</h3>
+         <h3>Delete Entity</h3>
     </div>
     <div class="modal-body">
-        <p>You are about to delete one user, this procedure is irreversible.</p>
+        <p>You are about to delete one entity, this procedure is irreversible.</p>
         <p>Do you want to proceed?</p>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn danger" id="lnkDeleteUser">Yes</a>
-        <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="btn secondary">No</a>
+        <a href="#" class="btn danger" id="lnkDeleteEntity">Yes</a>
+        <a href="#" onclick="$('#organization').jstree('refresh'); $('#frmConfirmDelete').modal('hide');" class="btn secondary">No</a>
     </div>
 </div>
 
@@ -104,7 +104,7 @@ $this->lang->load('organization', $language);?>
     $(function () {
         
         //On confirm the deletion of the node, launch heavy cascade deletion
-        $("#lnkDeleteUser").click(function() {
+        $("#lnkDeleteEntity").click(function() {
             $.ajax({
                 type: "GET",
                 url: "<?php echo base_url(); ?>organization/delete",

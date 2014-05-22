@@ -180,12 +180,14 @@ class Leaves extends CI_Controller {
         }
         //If the user is not its own manager and if the leave is 
         //already requested, the employee can't modify it
-        if (($this->session->userdata('manager') != $this->user_id) &&
-                $data['leave']['status'] != 1) {
-            log_message('error', 'User #' . $this->user_id . ' illegally tried to edit leave #' . $id);
-            $this->session->set_flashdata('msg', 'You cannot edit a leave request already submitted');
-            redirect('leaves');
-        }      
+        if (!$this->is_hr) {
+            if (($this->session->userdata('manager') != $this->user_id) &&
+                    $data['leave']['status'] != 1) {
+                log_message('error', 'User #' . $this->user_id . ' illegally tried to edit leave #' . $id);
+                $this->session->set_flashdata('msg', 'You cannot edit a leave request already submitted');
+                redirect('leaves');
+            }
+        } //Admin
         
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -216,7 +218,11 @@ class Leaves extends CI_Controller {
                 $this->sendMail($leave_id);
             }            
             $this->session->set_flashdata('msg', 'The leave request has been succesfully updated');
-            redirect('leaves');
+            if (isset($_GET['source'])) {
+                redirect($_GET['source']);
+            } else {
+                redirect('leaves');
+            }
         }
     }
     
@@ -380,7 +386,7 @@ class Leaves extends CI_Controller {
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
-        echo $this->leaves_model->collaborators($this->session->userdata('id'), $start, $end);
+        echo $this->leaves_model->collaborators($this->user_id, $start, $end);
     }
 
     /**

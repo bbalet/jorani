@@ -8,7 +8,7 @@
     <input type="input" name="name" id="name" value="<?php echo $position['name']; ?>" required /><br />
 
     <label for="description">Description</label>
-    <textarea type="input" name="description" id="description" value="<?php echo $position['description']; ?>" /></textarea>
+    <textarea type="input" name="description" id="description" /><?php echo $position['description']; ?></textarea>
 		
     <br /><br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update position</button>

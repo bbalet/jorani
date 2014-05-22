@@ -146,12 +146,14 @@ class Extra extends CI_Controller {
         }
         //If the user is not its own manager and if the leave is 
         //already requested, the employee can't modify it
-        if (($this->session->userdata('manager') != $this->user_id) &&
-                $data['leave']['status'] != 1) {
-            log_message('error', 'User #' . $this->user_id . ' illegally tried to edit overtime request #' . $id);
-            $this->session->set_flashdata('msg', 'You cannot edit an overtime request already submitted');
-            redirect('extra');
-        }      
+        if (!$this->is_hr) {
+            if (($this->session->userdata('manager') != $this->user_id) &&
+                    $data['leave']['status'] != 1) {
+                log_message('error', 'User #' . $this->user_id . ' illegally tried to edit overtime request #' . $id);
+                $this->session->set_flashdata('msg', 'You cannot edit an overtime request already submitted');
+                redirect('extra');
+            }
+        } //Admin
         
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -174,7 +176,11 @@ class Extra extends CI_Controller {
                 $this->sendMail($extra_id);
             }            
             $this->session->set_flashdata('msg', 'The overtime request has been succesfully updated');
-            redirect('extra');
+            if (isset($_GET['source'])) {
+                redirect($_GET['source']);
+            } else {
+                redirect('extra');
+            }
         }
     }
     

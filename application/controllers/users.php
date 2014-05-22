@@ -165,7 +165,11 @@ class Users extends CI_Controller {
         } else {
             $this->users_model->update_users();
             $this->session->set_flashdata('msg', 'The user has been succesfully updated');
-            redirect('users');
+            if (isset($_GET['source'])) {
+                redirect($_GET['source']);
+            } else {
+                redirect('users');
+            }
         }
     }
 

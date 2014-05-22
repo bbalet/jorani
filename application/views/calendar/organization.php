@@ -24,7 +24,7 @@ $this->lang->load('status', $language);?>
     <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
     <div class="span3"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
     <div class="span3"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
-    <div class="span3"><span class="label label-important"><?php echo lang('Rejected');?></span></div>
+    <div class="span3">&nbsp;</div>
 </div>
 
 <div id="frmSelectEntity" class="modal hide fade">
@@ -73,6 +73,7 @@ $this->lang->load('status', $language);?>
 
         //On click the check box "include sub-department", refresh the content if a department was selected
         $('#chkIncludeChildren').click(function() {
+            $('#calendar').fullCalendar('removeEvents');
             if (entity != -1) {
                 if ($('#chkIncludeChildren').prop('checked') == true) {
                     $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>leaves/organization/' + entity + '?children=true');

@@ -335,10 +335,10 @@ class Leaves_model extends CI_Model {
             
             switch ($entry->status)
             {
-                case 1: $color = '#000999'; break;     // Planned
-                case 2: $color = '#f89406'; break;     // Requested
-                case 3: $color = '#468847'; break;     // Accepted
-                case 4: $color = '#b94a48'; break;      // Rejected
+                case 1: $color = '#999'; break;     // Planned
+                case 2: $color = '#f89406'; break;  // Requested
+                case 3: $color = '#468847'; break;  // Accepted
+                case 4: $color = '#b94a48'; break;  // Rejected
             }
             
             $jsonevents[] = array(
@@ -371,6 +371,7 @@ class Leaves_model extends CI_Model {
         if ($end != "") {
             $this->db->where('leaves.enddate < FROM_UNIXTIME(' . $end .')');
         }
+        $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(255);  //Security limit
         $events = $this->db->get('leaves')->result();
@@ -391,10 +392,10 @@ class Leaves_model extends CI_Model {
             
             switch ($entry->status)
             {
-                case 1: $color = '#000999'; break;     // Planned
-                case 2: $color = '#f89406'; break;     // Requested
-                case 3: $color = '#468847'; break;     // Accepted
-                case 4: $color = '#b94a48'; break;      // Rejected
+                case 1: $color = '#999'; break;     // Planned
+                case 2: $color = '#f89406'; break;  // Requested
+                case 3: $color = '#468847'; break;  // Accepted
+                case 4: $color = '#b94a48'; break;  // Rejected
             }
             
             $jsonevents[] = array(
@@ -420,7 +421,6 @@ class Leaves_model extends CI_Model {
     public function collaborators($user_id, $start = "", $end = "") {
         $this->db->join('users', 'users.id = leaves.employee');
         $this->db->where('users.manager', $user_id);
-        $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
         if ($start != "") {
             $this->db->where('leaves.startdate > FROM_UNIXTIME(' . $start .')');
         }
@@ -447,10 +447,10 @@ class Leaves_model extends CI_Model {
             
             switch ($entry->status)
             {
-                case 1: $color = '#000999'; break;     // Planned
-                case 2: $color = '#f89406'; break;     // Requested
-                case 3: $color = '#468847'; break;     // Accepted
-                case 4: $color = '#b94a48'; break;      // Rejected
+                case 1: $color = '#999'; break;     // Planned
+                case 2: $color = '#f89406'; break;  // Requested
+                case 3: $color = '#468847'; break;  // Accepted
+                case 4: $color = '#b94a48'; break;  // Rejected
             }
             
             $jsonevents[] = array(
@@ -499,7 +499,7 @@ class Leaves_model extends CI_Model {
         } else {
             $this->db->where('organization.id', $entity_id);
         }
-        
+        $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(512);  //Security limit
         $events = $this->db->get()->result();
@@ -520,10 +520,10 @@ class Leaves_model extends CI_Model {
             
             switch ($entry->status)
             {
-                case 1: $color = '#000999'; break;     // Planned
-                case 2: $color = '#f89406'; break;     // Requested
-                case 3: $color = '#468847'; break;     // Accepted
-                case 4: $color = '#b94a48'; break;      // Rejected
+                case 1: $color = '#999'; break;     // Planned
+                case 2: $color = '#f89406'; break;  // Requested
+                case 3: $color = '#468847'; break;  // Accepted
+                case 4: $color = '#b94a48'; break;  // Rejected
             }
             
             $jsonevents[] = array(

@@ -123,7 +123,7 @@ class Calendar extends CI_Controller {
         $department = $this->organization_model->get_department($this->user_id);
         if (empty($department)) {
             $this->session->set_flashdata('msg', 'It appears that you don\'t belong to any department. Please contact your HR Officer / Manager.');
-            redirect('leaves');
+            //redirect('leaves');
         } else {
             $data['department'] = $department[0]['name'];
             $this->load->view('templates/header', $data);

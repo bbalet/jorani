@@ -33,7 +33,7 @@ $(document).ready(function() {
 <?php foreach ($leaves as $leave): ?>
     <tr>
         <td>
-            <?php echo $leave['id'] ?>
+            <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="edit request"><?php echo $leave['id'] ?></a>
             <div class="pull-right">
                 &nbsp;
                 <a href="<?php echo base_url();?>requests/accept/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="accept request"><i class="icon-ok"></i></a>

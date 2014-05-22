@@ -156,6 +156,7 @@ class Users_model extends CI_Model {
             'password' => $hash,
             'role' => $role,
             'manager' => $this->input->post('manager'),
+            'contract' => $this->input->post('contract'),
             'organization' => $this->input->post('entity'),
             'position' => $this->input->post('position'),
             'datehired' => $datehired,

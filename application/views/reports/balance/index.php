@@ -14,7 +14,7 @@
     <div class="span8">
         <div class="pull-right">    
             <label class="checkbox">
-                <input type="checkbox" value="" id="chkIncludeChildren"> Include sub-departments
+                <input type="checkbox" id="chkIncludeChildren" checked /> Include sub-departments
             </label>
             &nbsp;
             <button class="btn btn-primary" id="cmdLaunchReport"><i class="icon-file icon-white"></i>&nbsp; Launch</button>

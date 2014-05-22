@@ -11,7 +11,7 @@ Leaves of employees having the same line manager
     <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
     <div class="span3"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
     <div class="span3"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
-    <div class="span3"><span class="label label-important"><?php echo lang('Rejected');?></span></div>
+    <div class="span3">&nbsp;</div>
 </div>
 
 <div id='calendar'></div>

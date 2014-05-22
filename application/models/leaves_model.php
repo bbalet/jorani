@@ -182,7 +182,19 @@ class Leaves_model extends CI_Model {
                 }
             }
             if ($sum_extra == TRUE) {
-                $summary['compensate'][0] = '-'; //taken
+                $this->db->select('sum(leaves.duration) as taken');
+                $this->db->from('leaves');
+                $this->db->where('leaves.employee', $id);
+                $this->db->where('leaves.status', 3);
+                $this->db->where('leaves.type', 0);
+                $this->db->where('leaves.startdate >= DATE_SUB(NOW(),INTERVAL 1 YEAR)');
+                $this->db->group_by("leaves.type");
+                $taken_days = $this->db->get()->result_array();
+                if (count($taken_days) > 0) {
+                    $summary['compensate'][0] = $taken_days[0]['taken']; //taken
+                } else {
+                    $summary['compensate'][0] = 0; //taken
+                }
                 $summary['compensate'][1] = $sum; //entitled
                 $summary['compensate'][2] = '-'; //description
             }

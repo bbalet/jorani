@@ -35,7 +35,14 @@
         <a id="cmdSelectManager" class="btn btn-primary">Select</a>
     </div><br />
     <i>If a user is its own manager, it can validate its own leave requests.</i>
-    <br />
+    <br /><br />
+    
+    <label for="contract">Contract</label>
+    <select name="contract">
+    <?php foreach ($contracts as $contract): ?>
+        <option value="<?php echo $contract['id'] ?>" <?php if ($contract == $users_item['contract']) echo "selected" ?>><?php echo $contract['name'] ?></option>
+    <?php endforeach ?>
+    </select>
     
     <input type="hidden" name="entity" id="entity" value="<?php echo $users_item['organization']; ?>" required /><br />
     <label for="txtEntity">Select the entity</label>

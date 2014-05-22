@@ -48,6 +48,7 @@ $route['users/edit/(:num)'] = 'users/edit/$1';
 $route['users/update'] = 'users/update';
 $route['users/delete/(:num)'] = 'users/delete/$1';
 $route['users/(:num)'] = 'users/view/$1';
+$route['users/check/login'] = 'users/check_login';
 $route['users'] = 'users';
 
 //Admin : View and change settings

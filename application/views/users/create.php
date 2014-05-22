@@ -9,6 +9,7 @@ $attributes = array('id' => 'target');
 echo form_open('users/create', $attributes); ?>
 
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
+    
     <label for="firstname">Firstname</label>
     <input type="input" name="firstname" id="firstname" required /><br />
 
@@ -16,51 +17,64 @@ echo form_open('users/create', $attributes); ?>
     <input type="input" name="lastname" id="lastname" required /><br />
 
     <label for="role[]">Role</label>
-    <select name="role[]" multiple="multiple" size="2">
+    <select name="role[]" multiple="multiple" size="2" required>
     <?php foreach ($roles as $roles_item): ?>
         <option value="<?php echo $roles_item['id'] ?>" <?php if ($roles_item['id'] == 2) echo "selected" ?>><?php echo $roles_item['name'] ?></option>
     <?php endforeach ?>
     </select>
-    
+
     <label for="login">Login</label>
     <input type="input" name="login" id="login" required /><br />
+    <div class="alert hide alert-error" id="lblLoginAlert">
+        <button type="button" class="close" onclick="$('#lblLoginAlert').hide();">&times;</button>
+        This login is not available
+    </div>
 
     <label for="email">E-mail</label>
     <input type="email" id="email" name="email" required /><br />
-    
-    <br />
-    <input type="hidden" name="manager" id="manager" required /><br />
+
+    <input type="hidden" name="manager" id="manager" /><br />
     <label for="txtManager">Select the manager</label>
     <div class="input-append">
-        <input type="text" id="txtManager" name="txtManager" />
+        <input type="text" id="txtManager" name="txtManager" required />
         <a id="cmdSelfManager" class="btn btn-primary">Self</a>
         <a id="cmdSelectManager" class="btn btn-primary">Select</a>
     </div><br />
     <i>If a user is its own manager (Self), it can validate its own leave requests.</i>
-    <br />
-    
-    <input type="hidden" name="entity" id="entity" required /><br />
+    <br /><br />
+
+    <label for="contract">Contract</label>
+    <select name="contract">
+    <?php $index = 0;
+         foreach ($contracts as $contract) { ?>
+        <option value="<?php echo $contract['id'] ?>" <?php if ($index == 0) echo "selected" ?>><?php echo $contract['name'] ?></option>
+    <?php 
+            $index++;
+        } ?>
+    </select>
+
+    <input type="hidden" name="entity" id="entity" /><br />
     <label for="txtEntity">Select the entity</label>
     <div class="input-append">
         <input type="text" id="txtEntity" name="txtEntity" />
         <a id="cmdSelectEntity" class="btn btn-primary">Select</a>
     </div>
     <br />
-    
-    <input type="hidden" name="position" id="position" required /><br />
+
+    <input type="hidden" name="position" id="position" /><br />
     <label for="txtPosition">Select the position</label>
     <div class="input-append">
         <input type="text" id="txtPosition" name="txtPosition" />
         <a id="cmdSelectPosition" class="btn btn-primary">Select</a>
-    </div>    
+    </div>
     <br />
-    
+
     <label for="datehired">Date hired/started</label>
     <input type="text" name="datehired" id="datehired" /><br />
-    
+
     <label for="identifier">Internal/Company Identifier</label>
     <input type="text" name="identifier" /><br />
-    
+        
 </form>
 
     <label for="password">Password</label>
@@ -116,11 +130,11 @@ echo form_open('users/create', $attributes); ?>
     </div>
 </div>
     
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jqBootstrapValidation.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/lms.password.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
 
     function select_manager() {
@@ -148,9 +162,40 @@ echo form_open('users/create', $attributes); ?>
         $("#frmSelectPosition").modal('hide');
     }
 
+    function validate_form() {
+        result = false;
+        var fieldname = "";
+        if ($('#firstname').val() == "") fieldname = "firstname";
+        if ($('#lastname').val() == "") fieldname = "lastname";
+        //if ($('#role:selected').length == 0) fieldname = "role";
+        if ($('#login').val() == "") fieldname = "login";
+        if ($('#email').val() == "") fieldname = "email";
+        if ($('#txtManager').val() == "") fieldname = "manager";
+        if ($('#contract').val() == "") fieldname = "contract";
+        //if ($('#txtEntity').val() == "") fieldname = "entity";
+        //if ($('#txtPosition').val() == "") fieldname = "position";
+        //if ($('#datehired').val() == "") fieldname = "datehired";
+        //if ($('#identifier').val() == "") fieldname = "identifier";
+        if ($('#password').val() == "") fieldname = "password";
+        if (fieldname == "") {
+            return true;
+        } else {
+            bootbox.alert("The field " + fieldname + " is mandatory");
+            return false;
+        }
+    }
+    
+    function submit_form() {
+        var encrypt = new JSEncrypt();
+        encrypt.setPublicKey($('#pubkey').val());
+        var encrypted = encrypt.encrypt($('#password').val());
+        $('#CipheredValue').val(encrypted);
+        $('#target').submit();
+    }
+    
     $(function () {
         $('#datehired').datepicker({format: 'yyyy-mm-dd', autoclose: true});
-        $("input").not("[type=submit]").jqBootstrapValidation(); 
+        $("#lblLoginAlert").alert();
         
         $("#cmdGeneratePassword").click(function() {
             $("#password").val(password_generator(<?php echo $this->config->item('password_length');?>));
@@ -160,19 +205,55 @@ echo form_open('users/create', $attributes); ?>
         //login identifier with first character of firstname and lastname
         $("#firstname").change(function() {
             $("#login").val($("#firstname").val().charAt(0).toLowerCase() +
-                    $("#lastname").val().toLowerCase());            
+                $("#lastname").val().toLowerCase());            
         });
         $("#lastname").change(function() {
+            $("#lastname").val($("#lastname").val().toUpperCase());
             $("#login").val($("#firstname").val().charAt(0).toLowerCase() +
-                    $("#lastname").val().toLowerCase());            
+                $("#lastname").val().toLowerCase());            
+        });
+        
+        //Check if the user has not exceed the number of entitled days
+        $("#login").change(function() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url();?>users/check/login",
+                data: { login: $("#login").val() }
+                })
+                .done(function( msg ) {
+                    if (msg == "true") {
+                        $("#lblLoginAlert").hide();
+                    } else {
+                        $("#lblLoginAlert").show();
+                    }
+                });
         });
         
         $('#send').click(function() {
-            var encrypt = new JSEncrypt();
-            encrypt.setPublicKey($('#pubkey').val());
-            var encrypted = encrypt.encrypt($('#password').val());
-            $('#CipheredValue').val(encrypted);
-            $('#target').submit();
+            if (validate_form() == false) {
+                //Error of validation
+            } else {
+                $.ajax({
+                type: "POST",
+                url: "<?php echo base_url();?>users/check/login",
+                data: { login: $("#login").val() }
+                })
+                .done(function( msg ) {
+                    if (msg == "true") {
+                        if ($('#contract').val() == "") {
+                            bootbox.confirm("It is recommanded to select a contract. Do you want to create the user without a contract?", function(result) {
+                                if (result == true) {
+                                    submit_form();
+                                }
+                            });
+                        } else {
+                            submit_form()
+                        }
+                    } else {
+                        bootbox.alert("This login is not available");
+                    }
+                });
+            }
         });
         
         //Popup select position

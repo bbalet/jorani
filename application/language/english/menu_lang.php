@@ -28,7 +28,7 @@ $lang['menu_password_popup_button_cancel'] = 'Cancel';
 
 $lang['menu_admin_title'] = 'Admin';
 $lang['menu_admin_list_users'] = 'List of users';
-$lang['menu_admin_add_user'] = 'Add a user';
+$lang['menu_admin_add_user'] = 'Create user';
 $lang['menu_admin_settings_divider'] = 'Settings';
 $lang['menu_admin_settings'] = 'Settings';
 

@@ -63,6 +63,13 @@ $(document).ready(function() {
     <div class="span12">&nbsp;</div>
 </div>
 
+<div class="row-fluid">
+    <div class="span3">
+      <a href="<?php echo base_url();?>hr/employees/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
+    </div>
+    <div class="span9">&nbsp;</div>
+</div>
+
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 

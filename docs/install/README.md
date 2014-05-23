@@ -16,7 +16,9 @@ LMS has been tested with MySQL and MariaDB (please note that functions are creat
 * Change <code>application/config/database.php</code> according to your environment.
 * Change <code>application/config/config.php</code> according to your environment.
 
-# E-mail setup
+Please note that the schema contains procedures, so the user created must have EXECUTE permission.
+
+## E-mail setup
 
 LMS uses e-mail to notify users and managers. In order to setup e-mail modify the end of 
 <code>application/config/config.php</code> file according to your environment.

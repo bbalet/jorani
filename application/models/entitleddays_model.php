@@ -74,6 +74,50 @@ class Entitleddays_model extends CI_Model {
     }
     
     /**
+     * Insert a new entitleddays record into the database and return the id
+     * @param int $contract_id contract identifier
+     * @param date $startdate Start Date
+     * @param date $enddate End Date
+     * @param int $days number of days to be added
+     * @param int $type Description
+     * @return int last inserted id
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function insert_entitleddays_contract($contract_id, $startdate, $enddate, $days, $type) {
+        $data = array(
+            'contract' => $contract_id,
+            'startdate' => $startdate,
+            'enddate' => $enddate,
+            'days' => $days,
+            'type' => $type
+        );
+        $this->db->insert('entitleddays', $data);
+        return $this->db->insert_id();
+    }
+
+    /**
+     * Insert a new entitleddays record into the database and return the id
+     * @param int $user_id employee identifier
+     * @param date $startdate Start Date
+     * @param date $enddate End Date
+     * @param int $days number of days to be added
+     * @param int $type Description
+     * @return int last inserted id
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function insert_entitleddays_employee($user_id, $startdate, $enddate, $days, $type) {
+        $data = array(
+            'employee' => $user_id,
+            'startdate' => $startdate,
+            'enddate' => $enddate,
+            'days' => $days,
+            'type' => $type
+        );
+        $this->db->insert('entitleddays', $data);
+        return $this->db->insert_id();
+    }
+    
+    /**
      * Insert a new entitleddays record into the database. 
      * Inserted data are coming from an HTML form
      * @return type

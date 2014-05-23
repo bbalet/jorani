@@ -68,7 +68,7 @@ $(document).ready(function() {
       <a href="<?php echo base_url();?>users/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
     </div>
     <div class="span2">
-      <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; Create a new user</a>
+      <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; Create user</a>
     </div>
     <div class="span2">
         <a href="<?php echo base_url();?>users/import" class="btn btn-primary" data-target="#frmImportUsers" data-toggle="modal"><i class="icon-arrow-up icon-white"></i>&nbsp; Import users</a>

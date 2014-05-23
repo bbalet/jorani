@@ -24,6 +24,7 @@ See <code>/docs/install/README.md</code> for advanced configuration. In a nutshe
 * Download or clone LMS.
 * Upload the content of this folder on your server (in <code>/var/www/...</code>).
 * Create a database with <code>/sql/lms.sql</code> script.
+* Create a user with SELECT, INSERT, UPDATE, DELETE, EXECUTE permissions on the database.
 * Update <code>/application/config/database.php</code> according to your database settings.
 * Update the end of <code>/application/config/config.php</code> with your e-mails settings.
 

@@ -7,7 +7,7 @@
     <div class="span4">
         <label for="txtEntity">Select the entity</label>
         <div class="input-append">
-        <input type="text" id="txtEntity" name="txtEntity" />
+        <input type="text" id="txtEntity" name="txtEntity" readonly />
         <button id="cmdSelectEntity" class="btn btn-primary">Select</button>
         </div>
     </div>

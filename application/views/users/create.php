@@ -36,7 +36,7 @@ echo form_open('users/create', $attributes); ?>
     <input type="hidden" name="manager" id="manager" /><br />
     <label for="txtManager">Select the manager</label>
     <div class="input-append">
-        <input type="text" id="txtManager" name="txtManager" required />
+        <input type="text" id="txtManager" name="txtManager" required readonly />
         <a id="cmdSelfManager" class="btn btn-primary">Self</a>
         <a id="cmdSelectManager" class="btn btn-primary">Select</a>
     </div><br />
@@ -56,7 +56,7 @@ echo form_open('users/create', $attributes); ?>
     <input type="hidden" name="entity" id="entity" /><br />
     <label for="txtEntity">Select the entity</label>
     <div class="input-append">
-        <input type="text" id="txtEntity" name="txtEntity" />
+        <input type="text" id="txtEntity" name="txtEntity" readonly />
         <a id="cmdSelectEntity" class="btn btn-primary">Select</a>
     </div>
     <br />
@@ -64,7 +64,7 @@ echo form_open('users/create', $attributes); ?>
     <input type="hidden" name="position" id="position" /><br />
     <label for="txtPosition">Select the position</label>
     <div class="input-append">
-        <input type="text" id="txtPosition" name="txtPosition" />
+        <input type="text" id="txtPosition" name="txtPosition" readonly />
         <a id="cmdSelectPosition" class="btn btn-primary">Select</a>
     </div>
     <br />

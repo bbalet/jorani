@@ -32,10 +32,10 @@
     </select>
 
     <br />
-    <input type="hidden" name="manager" id="manager" value="<?php echo $users_item['manager']; ?>" required /><br />
+    <input type="hidden" name="manager" id="manager" value="<?php echo $users_item['manager']; ?>" /><br />
     <label for="txtManager">Select the manager</label>
     <div class="input-append">
-        <input type="text" id="txtManager" name="txtManager" value="<?php echo $manager_label; ?>"/>
+        <input type="text" id="txtManager" name="txtManager" value="<?php echo $manager_label; ?>" required readonly/>
         <a id="cmdSelfManager" class="btn btn-primary">Self</a>
         <a id="cmdSelectManager" class="btn btn-primary">Select</a>
     </div><br />
@@ -49,18 +49,18 @@
     <?php endforeach ?>
     </select>
     
-    <input type="hidden" name="entity" id="entity" value="<?php echo $users_item['organization']; ?>" required /><br />
+    <input type="hidden" name="entity" id="entity" value="<?php echo $users_item['organization']; ?>" /><br />
     <label for="txtEntity">Select the entity</label>
     <div class="input-append">
-        <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $organization_label; ?>" />
+        <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $organization_label; ?>" required readonly />
         <a id="cmdSelectEntity" class="btn btn-primary">Select</a>
     </div>
     <br />
     
-    <input type="hidden" name="position" id="position" value="<?php echo $users_item['position']; ?>" required /><br />
+    <input type="hidden" name="position" id="position" value="<?php echo $users_item['position']; ?>" /><br />
     <label for="txtPosition">Select the position</label>
     <div class="input-append">
-        <input type="text" id="txtPosition" name="txtPosition" value="<?php echo $position_label; ?>" />
+        <input type="text" id="txtPosition" name="txtPosition" value="<?php echo $position_label; ?>" required readonly />
         <a id="cmdSelectPosition" class="btn btn-primary">Select</a>
     </div>    
     <br />

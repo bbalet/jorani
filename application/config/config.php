@@ -379,6 +379,8 @@ $config['password_length'] = 8;
 //Default role id (e.g. 2 for user)
 $config['default_role_id'] = 2;
 
+$config['version'] = 'v0.1_alpha-2';
+
 //E-mail settings
 $config['protocol'] = 'smtp';
 $config['useragent'] = 'CodeIgniter';

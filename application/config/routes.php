@@ -57,6 +57,7 @@ $route['settings'] = 'settings/set';
 //Human Resources Management
 $route['hr/index'] = 'hr/index';
 $route['hr/employees'] = 'hr/employees';
+$route['hr/employees/export'] = 'hr/export_employees';
 $route['hr/leaves/(:num)'] = 'hr/leaves/$1';
 $route['hr/leaves/export/(:num)'] = 'hr/export_leaves/$1';
 $route['hr/overtime/(:num)'] = 'hr/overtime/$1';
@@ -161,8 +162,10 @@ $route['overtime'] = 'overtime/index/requested';
 
 //Entitled days
 $route['entitleddays/user/(:num)'] = 'entitleddays/user/$1';
+$route['entitleddays/ajax/user'] = 'entitleddays/ajax_user';
 $route['entitleddays/userdelete/(:num)'] = 'entitleddays/userdelete/$1';
 $route['entitleddays/contract/(:num)'] = 'entitleddays/contract/$1';
+$route['entitleddays/ajax/contract'] = 'entitleddays/ajax_contract';
 $route['entitleddays/contractdelete/(:num)'] = 'entitleddays/contractdelete/$1';
 
 //Reports

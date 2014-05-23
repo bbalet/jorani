@@ -71,23 +71,11 @@ class Entitleddays extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = 'Add entitled days';
-        
-        $this->form_validation->set_rules('startdate', 'startdate', 'required|xss_clean');
-        $this->form_validation->set_rules('enddate', 'enddate', 'required|xss_clean');
-        $this->form_validation->set_rules('days', 'days', 'required|xss_clean');
-        $this->form_validation->set_rules('type', 'type', 'required|xss_clean');        
-        
-        if ($this->form_validation->run() === FALSE) {
-            $data['id'] = $id;
-            $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_employee($id);
-            $this->load->model('types_model');
-            $data['types'] = $this->types_model->get_types();
-            $this->load->view('entitleddays/user', $data);
-        } else {
-            $this->entitleddays_model->set_entitleddays_employee();
-            $this->session->set_flashdata('msg', 'The entitled days has been succesfully added for the employee');
-            redirect('hr/employees');
-        }
+        $data['id'] = $id;
+        $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_employee($id);
+        $this->load->model('types_model');
+        $data['types'] = $this->types_model->get_types();
+        $this->load->view('entitleddays/user', $data);
     }
     
     /**
@@ -143,5 +131,51 @@ class Entitleddays extends CI_Controller {
         $this->entitleddays_model->delete_entitleddays($id);
         $this->session->set_flashdata('msg', 'The entitled days has been succesfully deleted for the contract');
         redirect('contracts');
+    }
+    
+    /**
+     * Ajax endpoint : insert into the list of entitled days for a given user
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function ajax_user() {
+        if ($this->auth->is_granted('entitleddays_user') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $user_id = $this->input->post('user_id', TRUE);
+            $startdate = $this->input->post('startdate', TRUE);
+            $enddate = $this->input->post('enddate', TRUE);
+            $days = $this->input->post('days', TRUE);
+            $type = $this->input->post('type', TRUE);   
+            if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($user_id)) {
+                $this->output->set_content_type('text/plain');
+                $id = $this->entitleddays_model->insert_entitleddays_employee($user_id, $startdate, $enddate, $days, $type);
+                echo $id;
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            }
+        }
+    }
+    
+    /**
+     * Ajax endpoint : insert into the list of entitled days for a given contract
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function ajax_contract() {
+        if ($this->auth->is_granted('entitleddays_user') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $contract_id = $this->input->post('contract_id', TRUE);
+            $startdate = $this->input->post('startdate', TRUE);
+            $enddate = $this->input->post('enddate', TRUE);
+            $days = $this->input->post('days', TRUE);
+            $type = $this->input->post('type', TRUE);   
+            if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($contract_id)) {
+                $this->output->set_content_type('text/plain');
+                $id = $this->entitleddays_model->insert_entitleddays_contract($contract_id, $startdate, $enddate, $days, $type);
+                echo $id;
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            }
+        }
     }
 }

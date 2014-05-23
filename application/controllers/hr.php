@@ -280,4 +280,43 @@ class Hr extends CI_Controller {
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output');
     }
+    
+    /**
+     * Action: export the list of all employees into an Excel file
+     * @param int $id employee id
+     */
+    public function export_employees() {
+        $this->load->library('excel');
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle('List of overtime resquests');
+        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Firstname');
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Lastname');
+        $this->excel->getActiveSheet()->setCellValue('D1', 'E-mail');
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Contract');
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Manager');
+        $this->excel->getActiveSheet()->getStyle('A1:F1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1:F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        $this->load->model('users_model');
+        $users = $this->users_model->get_employees();
+        
+        $line = 2;
+        foreach ($users as $user) {
+            $this->excel->getActiveSheet()->setCellValue('A' . $line, $user['id']);
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, $user['firstname']);
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $user['lastname']);
+            $this->excel->getActiveSheet()->setCellValue('D' . $line, $user['email']);
+            $this->excel->getActiveSheet()->setCellValue('E' . $line, $user['contract']);
+            $this->excel->getActiveSheet()->setCellValue('F' . $line, $user['manager_firstname'] . ' ' . $user['manager_lastname']);
+            $line++;
+        }
+
+        $filename = 'employees.xls';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $objWriter->save('php://output');
+    }
 }

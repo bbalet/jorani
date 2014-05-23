@@ -93,7 +93,7 @@ class Leaves_model extends CI_Model {
             } else {
                 $startentdate = date("Y", strtotime("-1 year")) . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
                 $endentdate = date("Y", strtotime("+1 year")) . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
-            }        
+            }
 
             //Fill a list of all existing leave types
             $summary = array();
@@ -129,8 +129,8 @@ class Leaves_model extends CI_Model {
             $this->db->join('entitleddays', 'entitleddays.contract = users.contract', 'left outer');
             $this->db->join('types', 'types.id = entitleddays.type');
             $this->db->where('users.id', $id);
-            $this->db->where('entitleddays.startdate >= ', $startentdate);
-            $this->db->where('entitleddays.enddate <=', $endentdate);
+            $this->db->where('entitleddays.startdate < CURDATE()');
+            $this->db->where('entitleddays.enddate > CURDATE()');
             $this->db->group_by("entitleddays.type");
             $entitled_days = $this->db->get()->result_array();
 
@@ -138,15 +138,15 @@ class Leaves_model extends CI_Model {
                 $summary[$entitled['type']][1] = $entitled['entitled']; //entitled
             }
 
-            //Add entitled days of employee      
+            //Add entitled days of employee (number of entitled days can be negative)
             $this->db->select('types.name as type, entitleddays.days as entitled');
             $this->db->from('users');
             $this->db->join('contracts', 'contracts.id = users.contract');
             $this->db->join('entitleddays', 'entitleddays.employee = users.id', 'left outer');
             $this->db->join('types', 'types.id = entitleddays.type');
             $this->db->where('users.id', $id);
-            $this->db->where('entitleddays.startdate >= ', $startentdate);
-            $this->db->where('entitleddays.enddate <=', $endentdate);
+            $this->db->where('entitleddays.startdate < CURDATE()');
+            $this->db->where('entitleddays.enddate > CURDATE()');
             $this->db->group_by("entitleddays.type");
             $entitled_days = $this->db->get()->result_array();
 

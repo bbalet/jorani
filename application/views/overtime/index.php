@@ -71,10 +71,10 @@ $(document).ready(function() {
      <div class="span2">
       <a href="<?php echo base_url();?>overtime/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_show_all');?></a>
     </div>
-    <div class="span2">
+    <div class="span3">
       <a href="<?php echo base_url();?>overtime/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_show_pending');?></a>
     </div>
-    <div class="span8">&nbsp;</div>
+    <div class="span7">&nbsp;</div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">

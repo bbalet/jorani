@@ -2,7 +2,8 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('session', $language);?>
 
-<h2><?php echo lang('session_login_title');?></h2>
+<h2><?php echo lang('session_login_title');?> &nbsp;
+<a href="http://www.leave-management-system.org/page-login-to-the-application.html" title="Link to documentation" target="_blank"><i class="icon-question-sign"></i></a></h2>
 
 <?php if($this->session->flashdata('msg')){ ?>
 <div class="alert fade in" id="flashbox">

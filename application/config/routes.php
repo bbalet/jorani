@@ -90,11 +90,12 @@ $route['contracts/create'] = 'contracts/create';
 $route['contracts/edit/(:num)'] = 'contracts/edit/$1';
 $route['contracts/update'] = 'contracts/update';
 $route['contracts/delete/(:num)'] = 'contracts/delete/$1';
-$route['contracts/(:num)/calendar'] = 'contracts/calendar/$1';
 $route['contracts/(:num)/calendar/(:num)'] = 'contracts/calendar/$1/$2';
-$route['contracts/(:num)/calendar/add/(:num)/(:num)'] = 'contracts/adddayoff/$1/$2/$3';
-$route['contracts/(:num)/calendar/edit/(:num)/(:num)'] = 'contracts/editdayoff/$1/$2/$3';
-$route['contracts/(:num)/calendar/delete/(:num)/(:num)'] = 'contracts/deletedayoff/$1/$2/$3';
+$route['contracts/(:num)/calendar'] = 'contracts/calendar/$1';
+$route['contracts/calendar/add'] = 'contracts/adddayoff';
+$route['contracts/calendar/addseries'] = 'contracts/addseries';
+$route['contracts/calendar/edit'] = 'contracts/editdayoff';
+$route['contracts/calendar/delete'] = 'contracts/deletedayoff';
 $route['contracts/(:num)'] = 'contracts/view/$1';
 $route['contracts'] = 'contracts';
 

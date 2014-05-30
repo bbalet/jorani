@@ -105,6 +105,8 @@ class Auth {
             case 'list_positions' :
                 
             case 'calendar_contract' :
+            case 'adddayoff_contract' :
+            case 'deletedayoff_contract' :
                 if ($this->CI->session->userdata('is_hr') == true)
                     return true;
                 else

@@ -1,5 +1,5 @@
 <?php
-CI_Controller::get_instance()->load->helper('language');
+$this->load->helper('language');
 $this->lang->load('calendar', $language);
 
 $dDaysOnPage = 37;
@@ -12,8 +12,9 @@ background:#FFC;
 color:red;
 }
 .days:hover {
-background:#9F0;
+background:#999;
 border-color:#000;
+cursor:pointer;
 }
 .day6 {
 background:#ECECFF;
@@ -40,12 +41,19 @@ padding-left:10px;
         <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) + 1);?>" class="btn btn-primary"><?php echo intval($year) + 1;?>&nbsp; <i class="icon-arrow-right icon-white"></i></a>
     </div>
     <div class="span6">
-        <a href="<?php echo base_url();?>contracts/dayoff" class="btn btn-primary" data-target="#frmSetRangeDayOff" data-toggle="modal"><i class="icon-retweet icon-white"></i>&nbsp; Set many days off</a>
+        <a href="<?php echo base_url();?>contracts/dayoff" class="btn btn-primary" data-target="#frmSetRangeDayOff" data-toggle="modal"><i class="icon-retweet icon-white"></i>&nbsp; Series of non working days</a>
+        &nbsp;
+        <button class="btn secondary btn-danger" onclick="toggle_delete_mode();" id="cmdDelete">Delete mode</button>
     </div>
 </div>
 
 <div class="row-fluid">
     <div class="span12">&nbsp;</div>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+        Day offs and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".</div>
 </div>
 
 <table width="100%" border="1" cellspacing="0" cellpadding="0" id="fullyear">
@@ -109,20 +117,16 @@ for ($mC = 1; $mC <= 12; $mC++) {
 
     for ($i = 1; $i <= $daysInMonth; $i++) {
         $exactDT = mktime(0, 0, 0, $mC, $i, $year);
-        /*if ($i == date("d") && date("m", $currentDT) == date("m") && $year == date("Y")) {
-            $class = "currentDay";
-        } else {
-            $class = "";
-        }*/
         $class = "";
-        $type = 0; //0 working, 1 off, 2 morning working, 3 afternoon working
+        $type = isset($dayoffs[$exactDT]) ? $dayoffs[$exactDT][0] : 0; //0 working, 1 off, 2 morning working, 3 afternoon working
+        $title = isset($dayoffs[$exactDT]) ? $dayoffs[$exactDT][1] : '';
         $image= "&nbsp;";
         switch ($type) {
             case 1: $image= "<img src='" . base_url() . "assets/images/day.png' />"; break;
             case 2: $image= "<img src='" . base_url() . "assets/images/morning.png' />"; break;
             case 3: $image= "<img src='" . base_url() . "assets/images/afternoon.png' />"; break;
         }
-        echo "<td class='" . $class . " days day" . date("N", $exactDT) . "' data-id='" . $exactDT . "' data-type='" . $type . "'>" . $i . "<br/>" . $image . "</td>";
+        echo "<td class='" . $class . " days day" . date("N", $exactDT) . "' data-id='" . $exactDT . "'>" . $i . "<br/><span id='" . $exactDT . "' data-type='" . $type . "' title='" . $title . "'>" . $image . "</span></td>";
     }
     echo InsertBlankTd($dDaysOnPage - $daysInMonth - date("N", $currentDT) + 1);
     echo "</tr>";
@@ -135,15 +139,20 @@ for ($mC = 1; $mC <= 12; $mC++) {
         <a href="#" onclick="$('#frmAddDayOff').modal('hide');" class="close">&times;</a>
          <h3>Add day off</h3>
     </div>
-    <label for="cboDayOffType">Set day off</label>
-    <select id="cboDayOffType" name="cboDayOffType">
-        <option value="0" selected>All day</option>
-        <option value="1">Morning</option>
-        <option value="2">Afternoon</option>
-    </select>
-    <span id="timestamp"></span>
+    <div class="modal-header">
+        <label for="txtDayOffTitle">Title</label>
+        <input type="text" id="txtDayOffTitle" name="txtDayOffTitle" />
+        <label for="cboDayOffType">Type</label>
+        <select id="cboDayOffType" name="cboDayOffType">
+            <option value="1" selected>All day</option>
+            <option value="2">Morning</option>
+            <option value="3">Afternoon</option>
+        </select>
+        <span id="timestamp"></span>
+    </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmAddDayOff').modal('hide');" class="btn secondary">Cancel</a>
+        <button onclick="add_day_off();" class="btn secondary">OK</button>
+        <button onclick="$('#frmAddDayOff').modal('hide');" class="btn secondary">Cancel</button>
     </div>
 </div>
 
@@ -200,20 +209,82 @@ for ($mC = 1; $mC <= 12; $mC++) {
     .datepicker{z-index:1151 !important;}
 </style>
 <script type="text/javascript">
+
+var timestamp;
+var delete_mode = false;
+
+function toggle_delete_mode() {
+    delete_mode = !delete_mode;
+    if (delete_mode) {
+        $(".days:hover").css("cursor", "crosshair");
+        $("#cmdDelete").html("Create mode");
+    } else {
+        $(".days:hover").css("cursor", "pointer");
+        $("#cmdDelete").html("Delete mode");
+    }
+}
+
+function add_day_off() {
+    $("#cboType").val($('#' + timestamp).data("type"));
+    $.ajax({
+        url: "<?php echo base_url();?>contracts/calendar/add",
+        type: "POST",
+        data: { contract: <?php echo $contract_id;?>,
+                timestamp: timestamp,
+                type: $("#cboDayOffType").val(),
+                title: $("#txtDayOffTitle").val()
+            }
+      }).done(function( msg ) {
+            var image;
+            switch ($("#cboDayOffType").val()) {
+                case "1": image= "<img src='<?php echo base_url();?>assets/images/day.png' />"; break;
+                case "2": image= "<img src='<?php echo base_url();?>assets/images/morning.png' />"; break;
+                case "3": image= "<img src='<?php echo base_url();?>assets/images/afternoon.png' />"; break;
+            }
+            $('#' + timestamp).html(image);
+            $('#frmAddDayOff').modal('hide');
+        });
+}
+
+function delete_day_off() {
+    $.ajax({
+        url: "<?php echo base_url();?>contracts/calendar/delete",
+        type: "POST",
+        data: { contract: <?php echo $contract_id;?>,
+                timestamp: timestamp
+            }
+      }).done(function( msg ) {
+            $('#' + timestamp).html("&nbsp;");
+            $('#frmAddDayOff').modal('hide');
+        });
+}
+    
 $(function() {
     $("#frmAddDayOff").alert();
     $('#enddate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
     
     //Display modal form that allow adding a day off
     $("#fullyear").on("click", "td", function() {
-        $val = $(this).data("id");
-        if ($val != 0) {
+        timestamp = $(this).data("id");
+        switch ($('#' + timestamp).data("type")) {
+            case 0:
+                $("#txtDayOffTitle").val('');
+                $("#cmdDelete").hide();
+                break;
+            case 1:
+            case 2:
+            case 3:
+                $("#cmdDelete").show();
+                $('#cboDayOffType option[value="' + $('#' + timestamp).data("type") + '"]').prop('selected', true);
+                $("#txtDayOffTitle").val($('#' + timestamp).attr("title"));
+                break;
+        }
+        if (timestamp != 0) {
             $('#frmAddDayOff').modal('show');
-            $("#timestamp").text($val);
         }
     });
     
-        //Prevent to load always the same content (refreshed each time)
+    //Prevent to load always the same content
     $('#frmAddDayOff').on('hidden', function() {
         $(this).removeData('modal');
     });

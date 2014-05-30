@@ -1,5 +1,9 @@
-LMS is a simple Leave Management System developed in PHP/MySQL under a GPL v3 licence.
-LMS is designed to provide a simple leave and overtime request workflow for small organizations.
+LMS is a Leave Management System developed in PHP/MySQL under a GPL v3 licence.
+LMS is designed to provide simple leave and overtime request workflows for small organizations.
+
+## Informations / getting help
+
+Official website : http://www.leave-management-system.org/
 
 ## Status
 
@@ -12,6 +16,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Notifications by e-mail (requested, accepted, rejected and new user).
 * Leave request approval workflow.
 * Overtime request approval workflow.
+* Leave balance report (filtered by department).
 * Export to Excel in a click.
 * HR users can edit any leave or overtime request.
 * Set your own contracts and leave types.
@@ -27,6 +32,16 @@ See <code>/docs/install/README.md</code> for advanced configuration. In a nutshe
 * Create a user with SELECT, INSERT, UPDATE, DELETE, EXECUTE permissions on the database.
 * Update <code>/application/config/database.php</code> according to your database settings.
 * Update the end of <code>/application/config/config.php</code> with your e-mails settings.
+
+## What's next ?
+
+* Define non working days (weekends and day offs) on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
+* Translation of the software in French.
+
+## Contribute
+
+* Suggest ideas, declare bugs with Github's issue tracking system.
+* Translate the software in your language.
 
 ## Credits
 

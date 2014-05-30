@@ -106,4 +106,70 @@ class Contracts_model extends CI_Model {
         return $this->db->update('contracts', $data);
     }
     
+    /**
+     * Get the list of contracts or one contract
+     * @param int $contract identifier of the contract
+     * @param string $year year to be displayed on the calendar
+     * @return array record of contracts
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_dayoffs($contract, $year) {
+        $this->db->select('UNIX_TIMESTAMP(date) as timestamp, type, title');
+        $this->db->where('contract', $contract);
+        $this->db->where('YEAR(date)', $year);
+        $query = $this->db->get('dayoffs');
+        foreach($query->result() as $row)
+        {
+            $dayoffs[$row->timestamp][0] = $row->type;
+            $dayoffs[$row->timestamp][1] = $row->title;
+        }
+        return $dayoffs;
+    }
+    
+    /**
+     * Insert a day off into the day offs table
+     * @param int $contract Identifier of the contract
+     * @param string $timestamp Date of the day off
+     * @return bool outcome of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function deletedayoff($contract, $timestamp) {
+        $this->db->where('contract', $contract);
+        $this->db->where('date', date('Y/m/d', $timestamp));
+        return $this->db->delete('dayoffs');
+    }
+    
+    /**
+     * Insert a day off into the day offs table
+     * @param int $contract Identifier of the contract
+     * @param string $timestamp Date of the day off
+     * @param int $type 1:day, 2:morning, 3:afternoon
+     * @param string $title Short description of the day off
+     * @return bool outcome of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function adddayoff($contract, $timestamp, $type, $title) {
+
+        $this->db->select('id');
+        $this->db->where('contract', $contract);
+        $this->db->where('date', date('Y/m/d', $timestamp));
+        $query = $this->db->get('dayoffs');
+        if ($query->num_rows() > 0) {
+            $data = array(
+                'date' => date('Y/m/d', $timestamp),
+                'type' => $type,
+                'title' => $title
+            );
+            $this->db->where('id', $query->row('id'));
+            return $this->db->update('dayoffs', $data);
+        } else {
+            $data = array(
+                'contract' => $contract,
+                'date' => date('Y/m/d', $timestamp),
+                'type' => $type,
+                'title' => $title
+            );
+            return $this->db->insert('dayoffs', $data);
+        }
+    }
 }

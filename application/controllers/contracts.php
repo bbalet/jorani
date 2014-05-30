@@ -203,19 +203,58 @@ class Contracts extends CI_Controller {
     public function calendar($id, $year = 0) {
         $this->auth->check_is_granted('calendar_contract');
         $data = $this->getUserContext();
-        $data['title'] = 'All year in one page';
+        $data['title'] = 'Calendar of non working days';
         if ($year <> 0) {
             $data['year'] = $year;
         } else {
             $data['year'] = date("Y");
         }
         $data['contract_id'] = $id;
-        //$data['contract'] = $this->contracts_model->get_contracts($id);
-
+        $data['dayoffs'] = $this->contracts_model->get_dayoffs($id, $data['year']);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('contracts/calendar', $data);
         $this->load->view('templates/footer');
+    }
+
+    /**
+     * Ajax endpoint : add a day off to a contract
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function adddayoff() {
+        if ($this->auth->is_granted('adddayoff_contract') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $contract = $this->input->post('contract', TRUE);
+            $timestamp = $this->input->post('timestamp', TRUE);
+            $type = $this->input->post('type', TRUE);
+            $title = $this->input->post('title', TRUE);  
+            if (isset($contract) && isset($timestamp) && isset($type) && isset($title)) {
+                $this->output->set_content_type('text/plain');
+                echo $this->contracts_model->adddayoff($contract, $timestamp, $type, $title);
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            }
+        }
+    }
+
+    /**
+     * Ajax endpoint : delete a day off to a contract
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function deletedayoff() {
+        if ($this->auth->is_granted('deletedayoff_contract') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $contract = $this->input->post('contract', TRUE);
+            $timestamp = $this->input->post('timestamp', TRUE); 
+            if (isset($contract) && isset($timestamp)) {
+                $this->output->set_content_type('text/plain');
+                echo $this->contracts_model->deletedayoff($contract, $timestamp);
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            }
+        }
     }
     
     /**

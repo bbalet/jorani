@@ -31,16 +31,18 @@ $(document).ready(function() {
 <?php foreach ($contracts as $contracts_item): ?>
     <tr>
         <td>
-            <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>" title="View contract"><?php echo $contracts_item['id'] ?></a>
+            <?php echo $contracts_item['id'] ?>
             &nbsp;
             <div class="pull-right">
+                <a href="#" class="confirm-delete" data-id="<?php echo $contracts_item['id'];?>" title="delete contract"><i class="icon-trash"></i></a>
+                &nbsp;
                 <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>" title="view contract details"><i class="icon-eye-open"></i></a>
                 &nbsp;
                 <a href="<?php echo base_url();?>contracts/edit/<?php echo $contracts_item['id'] ?>" title="edit contract details"><i class="icon-pencil"></i></a>
                 &nbsp;
-                <a href="#" class="confirm-delete" data-id="<?php echo $contracts_item['id'];?>" title="delete contract"><i class="icon-trash"></i></a>
-                &nbsp;
                 <a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contracts_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
+                <!--&nbsp;
+                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>/calendar" title="day offs and weekends"><i class="icon-calendar"></i></a>//-->
             </div>
         </td>
         <td><?php echo $contracts_item['name'] ?></td>

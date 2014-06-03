@@ -1,4 +1,8 @@
-<h2>Edit Contract</h2>
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('contract', $language);?>
+
+<h2><?php echo lang('contract_edit_description');?> <?php echo $contract['id']; ?></h2>
 
 <?php echo validation_errors(); ?>
 
@@ -8,10 +12,10 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
 
     <input type="hidden" name="id" value="<?php echo $contract['id']; ?>" required />
     
-    <label for="name">Name</label>
+    <label for="name"><?php echo lang('contract_edit_field_name');?></label>
     <input type="input" name="name" value="<?php echo $contract['name']; ?>" required /><br />
   
-    <label for="startentdatemonth">Month / Start</label>
+    <label for="startentdatemonth"><?php echo lang('contract_edit_field_start_month');?></label>
     <select name="startentdatemonth" required>
         <option value="1" <?php if (substr($contract['startentdate'], 0, 2) == '1') { echo "selected"; } ?>>January</option>
         <option value="2" <?php if (substr($contract['startentdate'], 0, 2) == '2') { echo "selected"; } ?>>February</option>
@@ -27,7 +31,7 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
         <option value="12" <?php if (substr($contract['startentdate'], 0, 2) == '12') { echo "selected"; } ?>>December</option>
     </select>
     
-    <label for="startentdateday">Day / Start</label>
+    <label for="startentdateday"><?php echo lang('contract_edit_field_start_day');?></label>
     <select name="startentdateday" required>
         <option value='1' <?php if (substr($contract['startentdate'], 3, 2) == '1') { echo "selected"; } ?>>1</option>
         <option value='2' <?php if (substr($contract['startentdate'], 3, 2) == '2') { echo "selected"; } ?>>2</option>
@@ -64,7 +68,7 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
     
     <br /><br />
     
-    <label for="endentdatemonth">Month / End</label>
+    <label for="endentdatemonth"><?php echo lang('contract_edit_field_end_month');?></label>
     <select name="endentdatemonth" required>
         <option value="1" <?php if (substr($contract['endentdate'], 0, 2) == '1') { echo "selected"; } ?>>January</option>
         <option value="2" <?php if (substr($contract['endentdate'], 0, 2) == '2') { echo "selected"; } ?>>February</option>
@@ -80,7 +84,7 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
         <option value="12" <?php if (substr($contract['endentdate'], 0, 2) == '12') { echo "selected"; } ?>>December</option>
     </select>
     
-    <label for="endentdateday">Day / End</label>
+    <label for="endentdateday"><?php echo lang('contract_edit_field_end_day');?></label>
     <select name="endentdateday" required>
         <option value='1' <?php if (substr($contract['endentdate'], 3, 2) == '1') { echo "selected"; } ?>>1</option>
         <option value='2' <?php if (substr($contract['endentdate'], 3, 2) == '2') { echo "selected"; } ?>>2</option>
@@ -116,7 +120,7 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
     </select>
 
     <br /><br />
-    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Update contract</button>
+    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('contract_edit_button_update');?></button>
     &nbsp;
-    <a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('contract_edit_button_cancel');?></a>
 </form>

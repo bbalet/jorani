@@ -1,3 +1,6 @@
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('contract', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -15,8 +18,8 @@ $(document).ready(function() {
 });
 </script>
 <?php } ?>
-        
-<h1>List of contracts</h1>
+
+<h1><?php echo lang('contract_index_title');?></h1>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="contracts" width="100%">
     <thead>

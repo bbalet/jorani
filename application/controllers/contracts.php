@@ -43,6 +43,8 @@ class Contracts extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('contract', $this->language);
     }
     
     /**
@@ -62,8 +64,7 @@ class Contracts extends CI_Controller {
     }
 
     /**
-     * Display the list of all requests submitted to you
-     * Status is submitted
+     * Display the list of all contracts defined in the system
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index($filter = 'requested') {
@@ -76,9 +77,8 @@ class Contracts extends CI_Controller {
         
         $data = $this->getUserContext();
         $data['filter'] = $filter;
-        $data['title'] = 'List of contracts';
+        $data['title'] = lang('contract_index_title');
         $data['contracts'] = $this->contracts_model->get_contracts();
-        
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('contracts/index', $data);
@@ -98,7 +98,7 @@ class Contracts extends CI_Controller {
             show_404();
         }
         
-        $data['title'] = 'Contrat details';
+        $data['title'] = lang('contract_view_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('contracts/view', $data);
@@ -106,8 +106,8 @@ class Contracts extends CI_Controller {
     }
     
     /**
-     * Display a for that allows updating a given user
-     * @param int $id User identifier
+     * Display a form that allows updating a given contract
+     * @param int $id Contract identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
@@ -115,8 +115,7 @@ class Contracts extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Edit a contract';
-
+        $data['title'] = lang('contract_edit_title');
         $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
         $this->form_validation->set_rules('startentdatemonth', 'Month / Start', 'required|xss_clean');
         $this->form_validation->set_rules('startentdateday', 'Day / Start', 'required|xss_clean');
@@ -149,14 +148,13 @@ class Contracts extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Create a new contract';
+        $data['title'] = lang('contract_create_title');
 
         $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
         $this->form_validation->set_rules('startentdatemonth', 'Month / Start', 'required|xss_clean');
         $this->form_validation->set_rules('startentdateday', 'Day / Start', 'required|xss_clean');
         $this->form_validation->set_rules('endentdatemonth', 'Month / End', 'required|xss_clean');
         $this->form_validation->set_rules('endentdateday', 'Day / End', 'required|xss_clean');
-
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -166,7 +164,7 @@ class Contracts extends CI_Controller {
         } else {
             $this->contracts_model->set_contracts();
             log_message('info', 'contract ' . $this->input->post('name') . ' has been created by user #' . $this->session->userdata('id'));
-            $this->session->set_flashdata('msg', 'The contract has been succesfully created');
+            $this->session->set_flashdata('msg', lang('contract_create_msg_success'));
             redirect('contracts');
         }
     }
@@ -177,7 +175,6 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
-        log_message('debug', '{controllers/contracts/delete} Entering method with id=' . $id);
         $this->auth->check_is_granted('delete_contract');
         //Test if user exists
         $data['contract'] = $this->contracts_model->get_contracts($id);
@@ -188,8 +185,7 @@ class Contracts extends CI_Controller {
             $this->contracts_model->delete_contract($id);
         }
         log_message('info', 'contract #' . $id . ' has been deleted by user #' . $this->session->userdata('id'));
-        $this->session->set_flashdata('msg', 'The contract has been succesfully deleted');
-        log_message('debug', '{controllers/contracts/delete} Leaving method (before redirect)');
+        $this->session->set_flashdata('msg', lang('contract_delete_msg_success'));
         redirect('contracts');
     }
     

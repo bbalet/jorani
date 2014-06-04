@@ -1,4 +1,9 @@
-<h2>Create a new Contract</h2>
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('contract', $language);
+$this->lang->load('calendar', $language);?>
+
+<h2><?php echo lang('contract_create_title');?></h2>
 
 <?php echo validation_errors(); ?>
 
@@ -6,26 +11,26 @@
 $attributes = array('id' => 'target');
 echo form_open('contracts/create', $attributes); ?>
 
-    <label for="name">Name</label>
+    <label for="name"><?php echo lang('contract_create_field_name');?></label>
     <input type="input" name="name" id="name" required /><br />
-  
-    <label for="startentdatemonth">Month / Start</label>
+
+    <label for="startentdatemonth"><?php echo lang('contract_create_field_start_month');?></label>
     <select name="startentdatemonth" id="startentdatemonth" required>
-        <option value="1">January</option>
-        <option value="2">February</option>
-        <option value="3">March</option>
-        <option value="4">April</option>
-        <option value="5">May</option>
-        <option value="6">June</option>
-        <option value="7">July</option>
-        <option value="8">August</option>
-        <option value="9">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
+        <option value="1"><?php echo lang('January');?></option>
+        <option value="2"><?php echo lang('February');?></option>
+        <option value="3"><?php echo lang('March');?></option>
+        <option value="4"><?php echo lang('April');?></option>
+        <option value="5"><?php echo lang('May');?></option>
+        <option value="6"><?php echo lang('June');?></option>
+        <option value="7"><?php echo lang('July');?></option>
+        <option value="8"><?php echo lang('August');?></option>
+        <option value="9"><?php echo lang('September');?></option>
+        <option value="10"><?php echo lang('October');?></option>
+        <option value="11"><?php echo lang('November');?></option>
+        <option value="12"><?php echo lang('December');?></option>
     </select>
     
-    <label for="startentdateday">Day / Start</label>
+    <label for="startentdateday"><?php echo lang('contract_create_field_start_day');?></label>
     <select name="startentdateday" id="startentdateday" required>
         <option value='1'>1</option>
         <option value='2'>2</option>
@@ -62,23 +67,23 @@ echo form_open('contracts/create', $attributes); ?>
     
     <br /><br />
     
-    <label for="endentdatemonth">Month / End</label>
+    <label for="endentdatemonth"><?php echo lang('contract_create_field_end_month');?></label>
     <select name="endentdatemonth" id="endentdatemonth" required>
-        <option value="1">January</option>
-        <option value="2">February</option>
-        <option value="3">March</option>
-        <option value="4">April</option>
-        <option value="5">May</option>
-        <option value="6">June</option>
-        <option value="7">July</option>
-        <option value="8">August</option>
-        <option value="9">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
+        <option value="1"><?php echo lang('January');?></option>
+        <option value="2"><?php echo lang('February');?></option>
+        <option value="3"><?php echo lang('March');?></option>
+        <option value="4"><?php echo lang('April');?></option>
+        <option value="5"><?php echo lang('May');?></option>
+        <option value="6"><?php echo lang('June');?></option>
+        <option value="7"><?php echo lang('July');?></option>
+        <option value="8"><?php echo lang('August');?></option>
+        <option value="9"><?php echo lang('September');?></option>
+        <option value="10"><?php echo lang('October');?></option>
+        <option value="11"><?php echo lang('November');?></option>
+        <option value="12"><?php echo lang('December');?></option>
     </select>
     
-    <label for="endentdateday">Day / End</label>
+    <label for="endentdateday"><?php echo lang('contract_create_field_end_day');?></label>
     <select name="endentdateday" id="endentdateday" required>
         <option value='1'>1</option>
         <option value='2'>2</option>
@@ -114,10 +119,9 @@ echo form_open('contracts/create', $attributes); ?>
     </select>
 
     <br /><br />
-    
-    <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Create Contract</button>
+    <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('contract_create_button_create');?></button>
     &nbsp;
-    <a href="<?php echo base_url(); ?>contracts" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <a href="<?php echo base_url(); ?>contracts" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('contract_create_button_cancel');?></a>
 </form>
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jqBootstrapValidation.js"></script>

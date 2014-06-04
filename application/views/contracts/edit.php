@@ -1,6 +1,7 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('contract', $language);?>
+$this->lang->load('contract', $language);
+$this->lang->load('calendar', $language);?>
 
 <h2><?php echo lang('contract_edit_description');?> <?php echo $contract['id']; ?></h2>
 
@@ -17,18 +18,18 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
   
     <label for="startentdatemonth"><?php echo lang('contract_edit_field_start_month');?></label>
     <select name="startentdatemonth" required>
-        <option value="1" <?php if (substr($contract['startentdate'], 0, 2) == '1') { echo "selected"; } ?>>January</option>
-        <option value="2" <?php if (substr($contract['startentdate'], 0, 2) == '2') { echo "selected"; } ?>>February</option>
-        <option value="3" <?php if (substr($contract['startentdate'], 0, 2) == '3') { echo "selected"; } ?>>March</option>
-        <option value="4" <?php if (substr($contract['startentdate'], 0, 2) == '4') { echo "selected"; } ?>>April</option>
-        <option value="5" <?php if (substr($contract['startentdate'], 0, 2) == '5') { echo "selected"; } ?>>May</option>
-        <option value="6" <?php if (substr($contract['startentdate'], 0, 2) == '6') { echo "selected"; } ?>>June</option>
-        <option value="7" <?php if (substr($contract['startentdate'], 0, 2) == '7') { echo "selected"; } ?>>July</option>
-        <option value="8" <?php if (substr($contract['startentdate'], 0, 2) == '8') { echo "selected"; } ?>>August</option>
-        <option value="9" <?php if (substr($contract['startentdate'], 0, 2) == '9') { echo "selected"; } ?>>September</option>
-        <option value="10" <?php if (substr($contract['startentdate'], 0, 2) == '10') { echo "selected"; } ?>>October</option>
-        <option value="11" <?php if (substr($contract['startentdate'], 0, 2) == '11') { echo "selected"; } ?>>November</option>
-        <option value="12" <?php if (substr($contract['startentdate'], 0, 2) == '12') { echo "selected"; } ?>>December</option>
+        <option value="1" <?php if (substr($contract['startentdate'], 0, 2) == '1') { echo "selected"; } ?>><?php echo lang('January');?></option>
+        <option value="2" <?php if (substr($contract['startentdate'], 0, 2) == '2') { echo "selected"; } ?>><?php echo lang('February');?></option>
+        <option value="3" <?php if (substr($contract['startentdate'], 0, 2) == '3') { echo "selected"; } ?>><?php echo lang('March');?></option>
+        <option value="4" <?php if (substr($contract['startentdate'], 0, 2) == '4') { echo "selected"; } ?>><?php echo lang('April');?></option>
+        <option value="5" <?php if (substr($contract['startentdate'], 0, 2) == '5') { echo "selected"; } ?>><?php echo lang('May');?></option>
+        <option value="6" <?php if (substr($contract['startentdate'], 0, 2) == '6') { echo "selected"; } ?>><?php echo lang('June');?></option>
+        <option value="7" <?php if (substr($contract['startentdate'], 0, 2) == '7') { echo "selected"; } ?>><?php echo lang('July');?></option>
+        <option value="8" <?php if (substr($contract['startentdate'], 0, 2) == '8') { echo "selected"; } ?>><?php echo lang('August');?></option>
+        <option value="9" <?php if (substr($contract['startentdate'], 0, 2) == '9') { echo "selected"; } ?>><?php echo lang('September');?></option>
+        <option value="10" <?php if (substr($contract['startentdate'], 0, 2) == '10') { echo "selected"; } ?>><?php echo lang('October');?></option>
+        <option value="11" <?php if (substr($contract['startentdate'], 0, 2) == '11') { echo "selected"; } ?>><?php echo lang('November');?></option>
+        <option value="12" <?php if (substr($contract['startentdate'], 0, 2) == '12') { echo "selected"; } ?>><?php echo lang('December');?></option>
     </select>
     
     <label for="startentdateday"><?php echo lang('contract_edit_field_start_day');?></label>
@@ -70,18 +71,18 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
     
     <label for="endentdatemonth"><?php echo lang('contract_edit_field_end_month');?></label>
     <select name="endentdatemonth" required>
-        <option value="1" <?php if (substr($contract['endentdate'], 0, 2) == '1') { echo "selected"; } ?>>January</option>
-        <option value="2" <?php if (substr($contract['endentdate'], 0, 2) == '2') { echo "selected"; } ?>>February</option>
-        <option value="3" <?php if (substr($contract['endentdate'], 0, 2) == '3') { echo "selected"; } ?>>March</option>
-        <option value="4" <?php if (substr($contract['endentdate'], 0, 2) == '4') { echo "selected"; } ?>>April</option>
-        <option value="5" <?php if (substr($contract['endentdate'], 0, 2) == '5') { echo "selected"; } ?>>May</option>
-        <option value="6" <?php if (substr($contract['endentdate'], 0, 2) == '6') { echo "selected"; } ?>>June</option>
-        <option value="7" <?php if (substr($contract['endentdate'], 0, 2) == '7') { echo "selected"; } ?>>July</option>
-        <option value="8" <?php if (substr($contract['endentdate'], 0, 2) == '8') { echo "selected"; } ?>>August</option>
-        <option value="9" <?php if (substr($contract['endentdate'], 0, 2) == '9') { echo "selected"; } ?>>September</option>
-        <option value="10" <?php if (substr($contract['endentdate'], 0, 2) == '10') { echo "selected"; } ?>>October</option>
-        <option value="11" <?php if (substr($contract['endentdate'], 0, 2) == '11') { echo "selected"; } ?>>November</option>
-        <option value="12" <?php if (substr($contract['endentdate'], 0, 2) == '12') { echo "selected"; } ?>>December</option>
+        <option value="1" <?php if (substr($contract['endentdate'], 0, 2) == '1') { echo "selected"; } ?>><?php echo lang('January');?></option>
+        <option value="2" <?php if (substr($contract['endentdate'], 0, 2) == '2') { echo "selected"; } ?>><?php echo lang('February');?></option>
+        <option value="3" <?php if (substr($contract['endentdate'], 0, 2) == '3') { echo "selected"; } ?>><?php echo lang('March');?></option>
+        <option value="4" <?php if (substr($contract['endentdate'], 0, 2) == '4') { echo "selected"; } ?>><?php echo lang('April');?></option>
+        <option value="5" <?php if (substr($contract['endentdate'], 0, 2) == '5') { echo "selected"; } ?>><?php echo lang('May');?></option>
+        <option value="6" <?php if (substr($contract['endentdate'], 0, 2) == '6') { echo "selected"; } ?>><?php echo lang('June');?></option>
+        <option value="7" <?php if (substr($contract['endentdate'], 0, 2) == '7') { echo "selected"; } ?>><?php echo lang('July');?></option>
+        <option value="8" <?php if (substr($contract['endentdate'], 0, 2) == '8') { echo "selected"; } ?>><?php echo lang('August');?></option>
+        <option value="9" <?php if (substr($contract['endentdate'], 0, 2) == '9') { echo "selected"; } ?>><?php echo lang('September');?></option>
+        <option value="10" <?php if (substr($contract['endentdate'], 0, 2) == '10') { echo "selected"; } ?>><?php echo lang('October');?></option>
+        <option value="11" <?php if (substr($contract['endentdate'], 0, 2) == '11') { echo "selected"; } ?>><?php echo lang('November');?></option>
+        <option value="12" <?php if (substr($contract['endentdate'], 0, 2) == '12') { echo "selected"; } ?>><?php echo lang('December');?></option>
     </select>
     
     <label for="endentdateday"><?php echo lang('contract_edit_field_end_day');?></label>

@@ -16,32 +16,64 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['contract_index_title'] = 'List of contracts';
-$lang['contract_index_'] = 'Export this list';
-$lang['contract_index_'] = 'Create a new contract';
-$lang['contract_index_'] = 'ID';
-$lang['contract_index_'] = 'Name';
-$lang['contract_index_'] = 'Start period';
-$lang['contract_index_'] = 'End period';
-$lang['contract_index_'] = 'View contract';
-$lang['contract_index_'] = 'view contract details';
-$lang['contract_index_'] = 'edit contract details';
-$lang['contract_index_'] = 'delete contract';
-$lang['contract_index_'] = 'entitled days';
+$lang['contract_index_title'] = 'Liste des contrats';
+$lang['contract_index_thead_id'] = 'N°';
+$lang['contract_index_thead_name'] = 'Nom';
+$lang['contract_index_thead_start'] = 'Début période';
+$lang['contract_index_thead_end'] = 'Fin période';
+$lang['contract_index_tip_delete'] = 'supprimer contrat';
+$lang['contract_index_tip_view'] = 'Voir contrat';
+$lang['contract_index_tip_edit'] = 'Modifier contrat';
+$lang['contract_index_tip_entitled'] = 'Crédit congés';
+$lang['contract_index_tip_dayoffs'] = 'Jours chomés et weekends';
+$lang['contract_index_button_export'] = 'Exporter cette liste';
+$lang['contract_index_button_create'] = 'Créer contrat';
 
-$lang['contract_view_title'] = 'Contract details';
-$lang['contract_view_description'] = 'Details of contract #';
-$lang['contract_view_field_name'] = 'Name';
-$lang['contract_view_field_start_month'] = 'Month / Start';
-$lang['contract_view_field_start_day'] = 'Day / Start';
-$lang['contract_view_field_end_month'] = 'Month / End';
-$lang['contract_view_field_end_day'] = 'Day / End';
-$lang['contract_view_button_edit'] = 'Edit';
-$lang['contract_view_button_cancel'] = 'Back to list';
+$lang['contract_index_popup_delete_title'] = 'Supprimer contrat';
+$lang['contract_index_popup_delete_description'] = 'Vous êtes sur le point de supprimer un contrat, cette procédure est irréversible.';
+$lang['contract_index_popup_delete_confirm'] = 'Voulez-vous continuer ?';
+$lang['contract_index_popup_delete_button_yes'] = 'Oui';
+$lang['contract_index_popup_delete_button_no'] = 'Non';
+$lang['contract_index_popup_entitled_title'] = 'Crédit congés';
+$lang['contract_index_popup_entitled_button_cancel'] = 'Annuler';
 
-$lang['contract_edit_title'] = 'Edit a contract';
+$lang['contract_view_title'] = 'Détails du contrat';
+$lang['contract_view_description'] = 'Détails du contrat n°';
+$lang['contract_view_field_name'] = 'Nom';
+$lang['contract_view_field_start_month'] = 'Mois / Début';
+$lang['contract_view_field_start_day'] = 'Jour / Début';
+$lang['contract_view_field_end_month'] = 'Mois / Fin';
+$lang['contract_view_field_end_day'] = 'Jour / Fin';
+$lang['contract_view_button_edit'] = 'Modifier';
+$lang['contract_view_button_cancel'] = 'Retourner à la liste';
 
-$lang['contract_create_title'] = 'Create a new contract';
-$lang['contract_create_msg_success'] = 'The contract has been succesfully created';
+$lang['contract_edit_title'] = 'Modifier un contrat';
+$lang['contract_edit_description'] = 'Modifier le contrat n°';
+$lang['contract_edit_field_name'] = 'Nom';
+$lang['contract_edit_field_start_month'] = 'Mois / Début';
+$lang['contract_edit_field_start_day'] = 'Jour / Début';
+$lang['contract_edit_field_end_month'] = 'Mois / Fin';
+$lang['contract_edit_field_end_day'] = 'Jour / Fin';
+$lang['contract_edit_button_update'] = 'Modifier contrat';
+$lang['contract_edit_button_cancel'] = 'Annuler';
+$lang['contract_edit_msg_success'] = 'Le contrat a été modifié avec succès';
 
-$lang['contract_delete_msg_success'] = 'The contract has been succesfully deleted';
+$lang['contract_create_title'] = 'Créer un nouveau contrat';
+$lang['contract_create_field_name'] = 'Nom';
+$lang['contract_create_field_start_month'] = 'Mois / Début';
+$lang['contract_create_field_start_day'] = 'Jour / Début';
+$lang['contract_create_field_end_month'] = 'Mois / Fin';
+$lang['contract_create_field_end_day'] = 'Jour / Fin';
+$lang['contract_create_button_create'] = 'Créer contrat';
+$lang['contract_create_button_cancel'] = 'Annuler';
+$lang['contract_create_msg_success'] = 'Le contrat a été créé avec succès';
+
+$lang['contract_delete_msg_success'] = 'Le contrat a été supprimé avec succès';
+
+$lang['contract_export_title'] = 'Liste des contrats';
+$lang['contract_export_thead_id'] = 'N°';
+$lang['contract_export_thead_name'] = 'Nom';
+$lang['contract_export_thead_start'] = 'Début période';
+$lang['contract_export_thead_end'] = 'Fin période';
+
+$lang['contract_calendar_title'] = 'Calendrier des jours chomés';

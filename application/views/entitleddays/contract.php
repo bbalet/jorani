@@ -1,18 +1,21 @@
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('entitleddays', $language);?>
 
 <table class="table table-bordered table-hover" id="entitleddayscontract">
 <thead>
     <tr>
       <th>&nbsp;</th>
-      <th>Start</th>
-      <th>End</th>
-      <th>Days</th>
-      <th>Leave type</th>
+      <th><?php echo lang('entitleddays_contract_index_thead_start');?></th>
+      <th><?php echo lang('entitleddays_contract_index_thead_end');?></th>
+      <th><?php echo lang('entitleddays_contract_index_thead_days');?></th>
+      <th><?php echo lang('entitleddays_contract_index_thead_type');?></th>
     </tr>
   </thead>
   <tbody>
   <?php foreach ($entitleddays as $days) { ?>
     <tr data-id="<?php echo $days['id'] ?>">
-      <td><a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="delete"><i class="icon-remove"></i></a></td>
+      <td><a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>
       <td><?php echo $days['startdate']; ?></td>
       <td><?php echo $days['enddate']; ?></td>
       <td><?php echo $days['days']; ?></td>
@@ -21,25 +24,25 @@
   <?php } ?>
   <?php if (count($entitleddays) == 0) { ?>
     <tr id="noentitleddays">
-        <td colspan="5">No entitled days attached to the contract.</td>
+        <td colspan="5"><?php echo lang('entitleddays_contract_index_no_data');?></td>
     </tr>
   <?php } ?>
   </tbody>
 </table>
 
-<label for="startdate" required>Start Date</label>
-<input type="input" name="startdate" id="startdate" />
-<label for="enddate" required>End Date</label>
-<input type="input" name="enddate" id="enddate" />
-<label for="type" required>Leave type</label>
-<select name="type" id="type">
+<label for="startdate"><?php echo lang('entitleddays_contract_index_field_start');?></label>
+<input type="input" name="startdate" id="startdate" required />
+<label for="enddate"><?php echo lang('entitleddays_contract_index_field_end');?></label>
+<input type="input" name="enddate" id="enddate" required />
+<label for="type"><?php echo lang('entitleddays_contract_index_field_type');?></label>
+<select name="type" id="type" required>
 <?php foreach ($types as $types_item): ?>
     <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 1) echo "selected" ?>><?php echo $types_item['name'] ?></option>
 <?php endforeach ?> 
 </select>    
-<label for="days" required>Days</label>
+<label for="days" required><?php echo lang('entitleddays_contract_index_field_days');?></label>
 <input type="input" name="days" id="days" />
-<button id="cmdAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();">Add</button>
+<button id="cmdAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_contract_index_button_add');?></button>
 
 <link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
@@ -54,13 +57,14 @@
     function validate_form() {
         result = false;
         var fieldname = "";
-        if ($('#startdate').val() == "") fieldname = "Start Date";
-        if ($('#enddate').val() == "") fieldname = "End Date";
-        if ($('#type').val() == "") fieldname = "Leave type";
+        if ($('#startdate').val() == "") fieldname = "<?php echo lang('entitleddays_contract_index_field_start');?>";
+        if ($('#enddate').val() == "") fieldname = "<?php echo lang('entitleddays_contract_index_field_end');?>";
+        if ($('#type').val() == "") fieldname = "<?php echo lang('entitleddays_contract_index_field_type');?>";
+        if ($('#days').val() == "") fieldname = "<?php echo lang('entitleddays_contract_index_field_days');?>";
         if (fieldname == "") {
             return true;
         } else {
-            bootbox.alert("The field " + fieldname + " is mandatory");
+            bootbox.alert(<?php echo lang('entitleddays_contract_mandatory_js_msg');?>);
             return false;
         }
     }
@@ -72,7 +76,7 @@
               $('tr[data-id="' + id + '"]').remove();
               var rowCount = $('#entitleddayscontract tbody tr').length;
               if (rowCount == 0) {
-                  $('#entitleddayscontract > tbody:last').append('<tr id="noentitleddays"><td colspan="5">No entitled days attached to the user.</td></tr>');
+                  $('#entitleddayscontract > tbody:last').append('<tr id="noentitleddays"><td colspan="5"><?php echo lang('entitleddays_contract_index_no_data');?></td></tr>');
               }
           });
     }
@@ -92,7 +96,7 @@
                   id = parseInt(msg);
                   $('#noentitleddays').remove();
                   myRow = '<tr data-id="' + id + '">' +
-                            '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="delete"><i class="icon-remove"></i></a></td>' +
+                            '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>' +
                             '<td>' + $('#startdate').val() + '</td>' +
                             '<td>' + $('#enddate').val() + '</td>' +
                             '<td>' + $('#days').val() + '</td>' +

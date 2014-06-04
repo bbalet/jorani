@@ -138,10 +138,11 @@ class Entitleddays_model extends CI_Model {
     /**
      * Delete a entitleddays record from the database
      * @param int $id identifier of the entitleddays record
+     * @return int number of rows affected
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_entitleddays($id) {
-        $query = $this->db->delete('entitleddays', array('id' => $id));
+        return $this->db->delete('entitleddays', array('id' => $id));
     }
 
     /**

@@ -23,6 +23,7 @@ $lang['menu_banner_change_password'] = 'Changer le mot de passe';
 
 $lang['menu_banner_welcome'] = 'Bienvenue';
 $lang['menu_banner_logout'] = 'Déconnexion';
+$lang['menu_banner_tip_reset'] = 'Changer le mot de passe';
 $lang['menu_password_popup_title'] = 'Changer le mot de passe';
 $lang['menu_password_popup_button_cancel'] = 'Annuler';
 
@@ -41,8 +42,17 @@ $lang['menu_hr_list_contracts'] = 'Liste des contrats';
 $lang['menu_hr_list_positions'] = 'Liste des postes';
 $lang['menu_hr_leaves_type_divider'] = 'Congés';
 $lang['menu_hr_list_leaves_type'] = 'Liste des types';
+$lang['menu_hr_report_leave_balance'] = 'État des congés';
 
-$lang['menu_requests_title'] = 'Validation';
+$lang['menu_validation_title'] = 'Validation';
+$lang['menu_validation_leaves'] = 'Congés';
+$lang['menu_validation_overtime'] = 'Heures supp.';
+
+$lang['menu_requests_title'] = 'Demandes';
+$lang['menu_requests_leaves'] = 'Congés';
+$lang['menu_requests_overtime'] = 'Heures supplémentaires';
+$lang['menu_requests_list_extras'] = 'Liste heures supp.';
+$lang['menu_requests_request_extra'] = 'Déclarer Heures supp.';
 
 $lang['menu_leaves_title'] = 'Mes demandes';
 $lang['menu_leaves_counters'] = 'Compteurs';

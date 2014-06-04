@@ -5,7 +5,7 @@ $this->lang->load('status', $language);?>
 
 <h1><?php echo lang('calendar_workmates_title');?></h1>
 
-Leaves of employees having the same line manager
+<p><?php echo lang('calendar_workmates_description');?></p>
 
 <div class="row-fluid">
     <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>

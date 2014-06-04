@@ -1,22 +1,23 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('calendar', $language);
-$this->lang->load('status', $language);?>
+$this->lang->load('status', $language);
+$this->lang->load('global', $language);?>
 
 <h1><?php echo lang('calendar_organization_title');?> &nbsp;
-<a href="http://www.leave-management-system.org/page-calendar-organization.html" title="Link to documentation" target="_blank"><i class="icon-question-sign"></i></a></h1>
+<a href="http://www.leave-management-system.org/page-calendar-organization.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a></h1>
 
 <div class="row-fluid">
     <div class="span4">
-        <label for="txtEntity">Select the entity</label>
+        <label for="txtEntity"><?php echo lang('calendar_organization_field_select_entity');?></label>
         <div class="input-append">
         <input type="text" id="txtEntity" name="txtEntity" readonly />
-        <button id="cmdSelectEntity" class="btn btn-primary">Select</button>
+        <button id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('calendar_organization_button_select_entity');?></button>
         </div>
     </div>
     <div class="span3">
         <label class="checkbox">
-            <input type="checkbox" value="" id="chkIncludeChildren"> Include sub-departments
+            <input type="checkbox" value="" id="chkIncludeChildren"> <?php echo lang('calendar_organization_check_include_subdept');?>
         </label>
     </div>
     <div class="span5">&nbsp;</div>
@@ -31,14 +32,14 @@ $this->lang->load('status', $language);?>
 <div id="frmSelectEntity" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="close">&times;</a>
-         <h3>Select an entity</h3>
+         <h3><?php echo lang('calendar_organization_popup_entity_title');?></h3>
     </div>
     <div class="modal-body" id="frmSelectEntityBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_entity();" class="btn secondary">OK</a>
-        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary">Cancel</a>
+        <a href="#" onclick="select_entity();" class="btn secondary"><?php echo lang('calendar_organization_popup_entity_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('calendar_organization_popup_entity_button_cancel');?></a>
     </div>
 </div>
 

@@ -7,7 +7,7 @@ $this->lang->load('menu', $language);?>
         <h3><a href="<?php echo base_url();?>" style="text-decoration:none; color:black;"><img src="<?php echo base_url();?>assets/images/logo.png">&nbsp;<?php echo lang('menu_banner_slogan');?></a>
     </div>
     <div class="span6 pull-right">
-        <a href="<?php echo base_url();?>users/reset/<?php echo $user_id; ?>" title="reset password" data-target="#frmChangeMyPwd" data-toggle="modal"><i class="icon-lock"></i></a>
+        <a href="<?php echo base_url();?>users/reset/<?php echo $user_id; ?>" title="<?php echo lang('menu_banner_tip_reset');?>" data-target="#frmChangeMyPwd" data-toggle="modal"><i class="icon-lock"></i></a>
         &nbsp;
         <?php echo lang('menu_banner_welcome');?> <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout"><?php echo lang('menu_banner_logout');?></a>
         <!--
@@ -77,7 +77,7 @@ $this->lang->load('menu', $language);?>
                     <li><a href="<?php echo base_url();?>hr/employees"><?php echo lang('menu_hr_list_employees');?></a></li>
                     <li><a href="<?php echo base_url();?>organization"><?php echo lang('menu_hr_list_organization');?></a></li>
                     <li class="nav-header">Reports</li>
-                    <li><a href="<?php echo base_url();?>reports/balance">Leave balance</a></li>
+                    <li><a href="<?php echo base_url();?>reports/balance"><?php echo lang('menu_hr_report_leave_balance');?></a></li>
                   </ul>
                 </li>
               </ul>
@@ -85,26 +85,26 @@ $this->lang->load('menu', $language);?>
 
              <ul class="nav">			  
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Validation <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_validation_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url();?>requests">Leaves</a></li>
-                    <li><a href="<?php echo base_url();?>overtime">Overtime</a></li>
+                    <li><a href="<?php echo base_url();?>requests"><?php echo lang('menu_validation_leaves');?></a></li>
+                    <li><a href="<?php echo base_url();?>overtime"><?php echo lang('menu_validation_overtime');?></a></li>
                   </ul>
                 </li>
               </ul>
               
               <ul class="nav">			  
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requests <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_requests_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li class="nav-header">Leaves</li>
+                    <li class="nav-header"><?php echo lang('menu_requests_leaves');?></li>
                     <li><a href="<?php echo base_url();?>leaves/counters"><?php echo lang('menu_leaves_counters');?></a></li>
                     <li><a href="<?php echo base_url();?>leaves"><?php echo lang('menu_leaves_list_requests');?></a></li>
                     <li><a href="<?php echo base_url();?>leaves/create"><?php echo lang('menu_leaves_create_request');?></a></li>
                     <li class="divider"></li>
-                    <li class="nav-header">Overtime</li>
-                    <li><a href="<?php echo base_url();?>extra">List of extras</a></li>
-                    <li><a href="<?php echo base_url();?>extra/create">Request an extra</a></li>
+                    <li class="nav-header"><?php echo lang('menu_requests_overtime');?></li>
+                    <li><a href="<?php echo base_url();?>extra"><?php echo lang('menu_requests_list_extras');?></a></li>
+                    <li><a href="<?php echo base_url();?>extra/create"><?php echo lang('menu_requests_request_extra');?></a></li>
                   </ul>
                 </li>
               </ul>

@@ -23,6 +23,7 @@ $lang['menu_banner_change_password'] = 'Change password';
 
 $lang['menu_banner_welcome'] = 'Welcome';
 $lang['menu_banner_logout'] = 'Logout';
+$lang['menu_banner_tip_reset'] = 'reset password';
 $lang['menu_password_popup_title'] = 'Change password';
 $lang['menu_password_popup_button_cancel'] = 'Cancel';
 
@@ -41,8 +42,17 @@ $lang['menu_hr_list_contracts'] = 'List of contracts';
 $lang['menu_hr_list_positions'] = 'List of positions';
 $lang['menu_hr_leaves_type_divider'] = 'Leaves';
 $lang['menu_hr_list_leaves_type'] = 'List of types';
+$lang['menu_hr_report_leave_balance'] = 'Leave balance';
 
-$lang['menu_requests_title'] = 'Validation';
+$lang['menu_validation_title'] = 'Validation';
+$lang['menu_validation_leaves'] = 'Leaves';
+$lang['menu_validation_overtime'] = 'Overtime';
+
+$lang['menu_requests_title'] = 'Requests';
+$lang['menu_requests_leaves'] = 'Leaves';
+$lang['menu_requests_overtime'] = 'Overtime';
+$lang['menu_requests_list_extras'] = 'List of extras';
+$lang['menu_requests_request_extra'] = 'Request an extra';
 
 $lang['menu_leaves_title'] = 'My leaves';
 $lang['menu_leaves_counters'] = 'Counters';

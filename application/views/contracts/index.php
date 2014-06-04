@@ -1,6 +1,7 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('contract', $language);?>
+$this->lang->load('contract', $language);
+$this->lang->load('datatable', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -24,10 +25,10 @@ $(document).ready(function() {
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="contracts" width="100%">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Start period</th>
-            <th>End period</th>
+            <th><?php echo lang('contract_index_thead_id');?></th>
+            <th><?php echo lang('contract_index_thead_name');?></th>
+            <th><?php echo lang('contract_index_thead_start');?></th>
+            <th><?php echo lang('contract_index_thead_end');?></th>
         </tr>
     </thead>
     <tbody>
@@ -37,15 +38,15 @@ $(document).ready(function() {
             <?php echo $contracts_item['id'] ?>
             &nbsp;
             <div class="pull-right">
-                <a href="#" class="confirm-delete" data-id="<?php echo $contracts_item['id'];?>" title="delete contract"><i class="icon-trash"></i></a>
+                <a href="#" class="confirm-delete" data-id="<?php echo $contracts_item['id'];?>" title="<?php echo lang('contract_index_tip_delete');?>"><i class="icon-trash"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>" title="view contract details"><i class="icon-eye-open"></i></a>
+                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>" title="<?php echo lang('contract_index_tip_view');?>"><i class="icon-eye-open"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>contracts/edit/<?php echo $contracts_item['id'] ?>" title="edit contract details"><i class="icon-pencil"></i></a>
+                <a href="<?php echo base_url();?>contracts/edit/<?php echo $contracts_item['id'] ?>" title="<?php echo lang('contract_index_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contracts_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
+                <a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contracts_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="<?php echo lang('contract_index_tip_dayoffs');?>"><i class="icon-edit"></i></a>
                 <!--&nbsp;
-                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>/calendar" title="day offs and weekends"><i class="icon-calendar"></i></a>//-->
+                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>/calendar" title="<?php echo lang('contract_index_tip_dayoffs');?>"><i class="icon-calendar"></i></a>//-->
             </div>
         </td>
         <td><?php echo $contracts_item['name'] ?></td>
@@ -64,10 +65,10 @@ $(document).ready(function() {
 
 <div class="row-fluid">
     <div class="span2">
-      <a href="<?php echo base_url();?>contracts/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
+      <a href="<?php echo base_url();?>contracts/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('contract_index_button_export');?></a>
     </div>
     <div class="span3">
-      <a href="<?php echo base_url();?>contracts/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; Create a new contract</a>
+      <a href="<?php echo base_url();?>contracts/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('contract_index_button_create');?></a>
     </div>
     <div class="span7">&nbsp;</div>
 </div>
@@ -78,35 +79,59 @@ $(document).ready(function() {
 <div id="frmDeleteContract" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmDeleteContract').modal('hide');" class="close">&times;</a>
-         <h3>Delete Contract</h3>
+         <h3><?php echo lang('contract_index_popup_delete_title');?></h3>
     </div>
     <div class="modal-body">
-        <p>You are about to delete one contract, this procedure is irreversible.</p>
-        <p>Do you want to proceed?</p>
+        <p><?php echo lang('contract_index_popup_delete_description');?></p>
+        <p><?php echo lang('contract_index_popup_delete_confirm');?></p>
     </div>
     <div class="modal-footer">
-        <a href="#" id="lnkDeleteContract" class="btn danger">Yes</a>
-        <a href="#" onclick="$('#frmDeleteContract').modal('hide');" class="btn secondary">No</a>
+        <a href="#" id="lnkDeleteContract" class="btn danger"><?php echo lang('contract_index_popup_delete_button_yes');?></a>
+        <a href="#" onclick="$('#frmDeleteContract').modal('hide');" class="btn secondary"><?php echo lang('contract_index_popup_delete_button_no');?></a>
     </div>
 </div>
 
 <div id="frmEntitledDays" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="close">&times;</a>
-         <h3>Entitled days</h3>
+         <h3><?php echo lang('contract_index_popup_entitled_title');?></h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary">Cancel</a>
+        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary"><?php echo lang('contract_index_popup_entitled_button_cancel');?></a>
     </div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
-    $('#contracts').dataTable();
+    $('#contracts').dataTable({
+		"oLanguage": {
+                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                    "oPaginate": {
+                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                        "sLast":     "<?php echo lang('datatable_sLast');?>",
+                        "sNext":     "<?php echo lang('datatable_sNext');?>",
+                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                    },
+                    "oAria": {
+                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                    }
+                }
+            });
     $("#frmChangePwd").alert();
     $("#frmEntitledDays").alert();
 	

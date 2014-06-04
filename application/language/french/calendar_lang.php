@@ -24,13 +24,23 @@ $lang['calendar_individual_popup_event_title'] = 'Détails de l\'événement';
 $lang['calendar_individual_popup_event_button_close'] = 'Fermer';
 
 $lang['calendar_workmates_title'] = 'Calendrier de mes collègues';
+$lang['calendar_workmates_description'] = 'Demandes de congés des employés ayant le même supérieur hierarchique.';
+
 $lang['calendar_collaborators_title'] = 'Calendrier de mes collaborateurs';
+$lang['calendar_collaborators_description'] = 'Demandes de congés de mes collaborateurs. Cette page sera vide si je ne suis pas manager.';
 
 $lang['calendar_department_title'] = 'Calendrier de mon service';
 $lang['calendar_department_description'] = 'Calendrier des employés travaillant dans mon service';
+$lang['contract_department_msg_error'] = 'Vous n\'appartenez à aucun service. Veuillez contacter le service des ressources humaines.';
 
 $lang['calendar_organization_title'] = 'Calendrier de l\'organisation';
 $lang['calendar_organization_description'] = 'Calendrier global avec un filtre sur les entitées';
+$lang['calendar_organization_field_select_entity'] = 'Choisir l\'entité';
+$lang['calendar_organization_button_select_entity'] = 'Choisir';
+$lang['calendar_organization_check_include_subdept'] = 'Inclure les sous-entités';
+$lang['calendar_organization_popup_entity_title'] = 'Choisir l\'entité';
+$lang['calendar_organization_popup_entity_button_ok'] = 'OK';
+$lang['calendar_organization_popup_entity_button_cancel'] = 'Annuler';
 
 $lang['calendar_component_monthNames'] = '\'Janvier\',\'Février\',\'Mars\',\'Avril\',\'Mai\',\'Juin\',\'Juillet\',\'Août\',\'Septembre\',\'Octobre\',\'Novembre\',\'Décembre\'';
 $lang['calendar_component_monthNamesShort'] = '\'janv.\',\'févr.\',\'mars\',\'avr.\',\'mai\',\'juin\',\'juil.\',\'août\',\'sept.\',\'oct.\',\'nov.\',\'déc.\'';
@@ -67,3 +77,16 @@ $lang['calendar_thursday_short'] = 'Je';
 $lang['calendar_friday_short'] = 'Ve';
 $lang['calendar_saturday_short'] = 'Sa';
 $lang['calendar_sunday_short'] = 'Di';
+
+$lang['January'] = 'Janvier';
+$lang['February'] = 'Février';
+$lang['March'] = 'Mars';
+$lang['April'] = 'Avril';
+$lang['May'] = 'Mai';
+$lang['June'] = 'Juin';
+$lang['July'] = 'Juillet';
+$lang['August'] = 'Août';
+$lang['September'] = 'Septembre';
+$lang['October'] = 'Octobre';
+$lang['November'] = 'Novembre';
+$lang['December'] = 'Décembre';

@@ -5,7 +5,7 @@ $this->lang->load('status', $language);?>
 
 <h1><?php echo lang('calendar_collaborators_title');?></h1>
 
-Leaves of my collaborators (will be empty if I'm not a manager).
+<p><?php echo lang('calendar_collaborators_description');?></p>
 
 <div class="row-fluid">
     <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>

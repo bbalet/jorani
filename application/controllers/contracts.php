@@ -96,8 +96,7 @@ class Contracts extends CI_Controller {
         $data['contract'] = $this->contracts_model->get_contracts($id);
         if (empty($data['contract'])) {
             show_404();
-        }
-        
+        }        
         $data['title'] = lang('contract_view_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -116,11 +115,13 @@ class Contracts extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('contract_edit_title');
-        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
-        $this->form_validation->set_rules('startentdatemonth', 'Month / Start', 'required|xss_clean');
-        $this->form_validation->set_rules('startentdateday', 'Day / Start', 'required|xss_clean');
-        $this->form_validation->set_rules('endentdatemonth', 'Month / End', 'required|xss_clean');
-        $this->form_validation->set_rules('endentdateday', 'Day / End', 'required|xss_clean');
+        
+        $this->form_validation->set_rules('name', lang('contract_edit_field_name'), 'required|xss_clean');
+        $this->form_validation->set_rules('startentdatemonth', lang('contract_edit_field_start_month'), 'required|xss_clean');
+        $this->form_validation->set_rules('startentdateday', lang('contract_edit_field_start_day'), 'required|xss_clean');
+        $this->form_validation->set_rules('endentdatemonth', lang('contract_edit_field_end_month'), 'required|xss_clean');
+        $this->form_validation->set_rules('endentdateday', lang('contract_edit_field_end_day'), 'required|xss_clean');
+
 
         $data['contract'] = $this->contracts_model->get_contracts($id);
         if (empty($data['contract'])) {
@@ -134,7 +135,7 @@ class Contracts extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $this->contracts_model->update_contract();
-            $this->session->set_flashdata('msg', 'The contract has been succesfully updated');
+            $this->session->set_flashdata('msg', lang('contract_edit_msg_success'));
             redirect('contracts');
         }
     }
@@ -150,11 +151,11 @@ class Contracts extends CI_Controller {
         $this->load->library('form_validation');
         $data['title'] = lang('contract_create_title');
 
-        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
-        $this->form_validation->set_rules('startentdatemonth', 'Month / Start', 'required|xss_clean');
-        $this->form_validation->set_rules('startentdateday', 'Day / Start', 'required|xss_clean');
-        $this->form_validation->set_rules('endentdatemonth', 'Month / End', 'required|xss_clean');
-        $this->form_validation->set_rules('endentdateday', 'Day / End', 'required|xss_clean');
+        $this->form_validation->set_rules('name', lang('contract_create_field_name'), 'required|xss_clean');
+        $this->form_validation->set_rules('startentdatemonth', lang('contract_create_field_start_month'), 'required|xss_clean');
+        $this->form_validation->set_rules('startentdateday', lang('contract_create_field_start_day'), 'required|xss_clean');
+        $this->form_validation->set_rules('endentdatemonth', lang('contract_create_field_end_month'), 'required|xss_clean');
+        $this->form_validation->set_rules('endentdateday', lang('contract_create_field_end_day'), 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -199,7 +200,7 @@ class Contracts extends CI_Controller {
     public function calendar($id, $year = 0) {
         $this->auth->check_is_granted('calendar_contract');
         $data = $this->getUserContext();
-        $data['title'] = 'Calendar of non working days';
+        $data['title'] = lang('contract_calendar_title');
         if ($year <> 0) {
             $data['year'] = $year;
         } else {
@@ -261,11 +262,11 @@ class Contracts extends CI_Controller {
         $this->auth->check_is_granted('export_contracts');
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of contracts');
-        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Name');
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Start period');
-        $this->excel->getActiveSheet()->setCellValue('D1', 'End period');
+        $this->excel->getActiveSheet()->setTitle(lang('contract_index_title'));
+        $this->excel->getActiveSheet()->setCellValue('A1', lang('contract_export_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B1', lang('contract_export_thead_name'));
+        $this->excel->getActiveSheet()->setCellValue('C1', lang('contract_export_thead_start'));
+        $this->excel->getActiveSheet()->setCellValue('D1', lang('contract_export_thead_end'));
         $this->excel->getActiveSheet()->getStyle('A1:D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 

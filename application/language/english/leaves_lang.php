@@ -23,6 +23,9 @@ $lang['leaves_summary_thead_entitled'] = 'Entitled';
 $lang['leaves_summary_thead_description'] = 'Description';
 
 $lang['leaves_index_title'] = 'My leave requests';
+$lang['leaves_index_thead_tip_view'] = 'view';
+$lang['leaves_index_thead_tip_edit'] = 'edit';
+$lang['leaves_index_thead_tip_delete'] = 'delete';
 $lang['leaves_index_thead_id'] = 'ID';
 $lang['leaves_index_thead_start_date'] = 'Start Date';
 $lang['leaves_index_thead_end_date'] = 'End Date';
@@ -64,10 +67,12 @@ $lang['leaves_edit_button_update'] = 'Update leave';
 $lang['leaves_edit_button_cancel'] = 'Cancel';
 
 $lang['leaves_view_title'] = 'View leave request #';
+$lang['leaves_view_html_title'] = 'View a leave request';
 $lang['leaves_view_field_start'] = 'Start Date';
 $lang['leaves_view_field_end'] = 'End Date';
 $lang['leaves_view_field_type'] = 'Leave type';
 $lang['leaves_view_field_duration'] = 'Duration';
 $lang['leaves_view_field_cause'] = 'Cause';
 $lang['leaves_view_field_status'] = 'Status';
+$lang['leaves_view_button_edit'] = 'Edit';
 $lang['leaves_view_button_back_list'] = 'Back to list';

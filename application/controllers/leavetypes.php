@@ -41,6 +41,8 @@ class LeaveTypes extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('leavetypes', $this->language);
     }
     
     /**
@@ -67,7 +69,7 @@ class LeaveTypes extends CI_Controller {
         $this->auth->check_is_granted('leavetypes_list');
         $data = $this->getUserContext();
         $data['leavetypes'] = $this->types_model->get_types();
-        $data['title'] = 'Leave Types';
+        $data['title'] = lang('hr_leaves_type_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leavetypes/index', $data);
@@ -83,15 +85,15 @@ class LeaveTypes extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Add leave type';
+        $data['title'] = lang('hr_leaves_popup_create_title');
         
-        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');        
+        $this->form_validation->set_rules('name', lang('hr_leaves_popup_create_field_name'), 'required|xss_clean');        
         
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/create', $data);
         } else {
             $this->types_model->set_types();
-            $this->session->set_flashdata('msg', 'The leave type has been succesfully created.');
+            $this->session->set_flashdata('msg', lang('hr_leaves_popup_create_flash_msg'));
             redirect('leavetypes');
         }
     }
@@ -105,17 +107,17 @@ class LeaveTypes extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Edit leave type';
+        $data['title'] = lang('hr_leaves_popup_update_title');
         $data['id'] = $id;
         $data['type_name'] = $this->types_model->get_label($id);
         
-        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');        
+        $this->form_validation->set_rules('name', lang('hr_leaves_popup_update_field_name'), 'required|xss_clean');        
         
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/edit', $data);
         } else {
             $this->types_model->update_types();
-            $this->session->set_flashdata('msg', 'The leave type has been succesfully created.');
+            $this->session->set_flashdata('msg', lang('hr_leaves_popup_update_flash_msg'));
             redirect('leavetypes');
         }
     }
@@ -129,25 +131,25 @@ class LeaveTypes extends CI_Controller {
         $this->auth->check_is_granted('leavetypes_delete');
         if ($id != 0) {
             $this->types_model->delete_type($id);
-            $this->session->set_flashdata('msg', 'The leave type has been succesfully deleted.');
+            $this->session->set_flashdata('msg', lang('hr_leaves_popup_delete_flash_msg'));
             redirect('leavetypes');
         } else {
-            $this->session->set_flashdata('msg', 'You cannot delete a system leavetype.');
+            $this->session->set_flashdata('msg', lang('hr_leaves_popup_delete_flash_error'));
             redirect('leavetypes');
         }
     }
 
     /**
-     * Action: export the list of all users into an Excel file
+     * Action: export the list of all leave types into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
         $this->auth->check_is_granted('leavetypes_export');
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of leave types');
-        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Name');
+        $this->excel->getActiveSheet()->setTitle(lang('hr_leaves_type_export_title'));
+        $this->excel->getActiveSheet()->setCellValue('A1', lang('hr_leaves_type_export_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B1', lang('hr_leaves_type_export_thead_name'));
         $this->excel->getActiveSheet()->getStyle('A1:B1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 

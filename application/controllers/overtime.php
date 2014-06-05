@@ -43,6 +43,8 @@ class Overtime extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('overtime', $this->language);
     }
     
     /**
@@ -76,7 +78,7 @@ class Overtime extends CI_Controller {
         
         $data = $this->getUserContext();
         $data['filter'] = $filter;
-        $data['title'] = 'List of requested overtime';
+        $data['title'] = lang('overtime_index_title');
         $data['requests'] = $this->overtime_model->requests($this->user_id, $showAll);
         
         $this->load->model('status_model');

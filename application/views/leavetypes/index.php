@@ -31,10 +31,10 @@ $(document).ready(function() {
     <tr>
       <td><?php echo $type['id'] ?> &nbsp; 
           <?php if ($type['id'] !=0 ) { ?>
-          <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="delete leave type"><i class="icon-trash"></i></a></td>
+          <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="<?php echo lang('hr_leaves_type_thead_tip_delete');?>"><i class="icon-trash"></i></a></td>
           <?php } ?>
       <td>
-          <a href="<?php echo base_url();?>leavetypes/edit/<?php echo $type['id'] ?>" data-target="#frmEditLeaveType" data-toggle="modal" title="edit leave type"><i class="icon-pencil"></i></a>
+          <a href="<?php echo base_url();?>leavetypes/edit/<?php echo $type['id'] ?>" data-target="#frmEditLeaveType" data-toggle="modal" title="<?php echo lang('hr_leaves_type_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
           &nbsp; <?php echo $type['name']; ?></td>
     </tr>
   <?php } ?>
@@ -63,7 +63,7 @@ $(document).ready(function() {
 <div id="frmAddLeaveType" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="close">&times;</a>
-         <h3>Add a leave type</h3>
+         <h3><?php echo lang('hr_leaves_popup_create_title');?></h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
@@ -76,7 +76,7 @@ $(document).ready(function() {
 <div id="frmEditLeaveType" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmEditLeaveType').modal('hide');" class="close">&times;</a>
-         <h3>Edit a  Leave type</h3>
+         <h3><?php echo lang('hr_leaves_popup_update_title');?></h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
@@ -89,11 +89,11 @@ $(document).ready(function() {
 <div id="frmDeleteLeaveType" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmDeleteLeaveType').modal('hide');" class="close">&times;</a>
-         <h3>Delete Leave Type</h3>
+         <h3><?php echo lang('hr_leaves_popup_delete_title');?></h3>
     </div>
     <div class="modal-body">
-        <p>You are about to delete one leave type, this procedure is irreversible.</p>
-        <p>Do you want to proceed?</p>
+        <p><?php echo lang('hr_leaves_popup_delete_description');?></p>
+        <p><?php echo lang('hr_leaves_popup_delete_confirm');?></p>
     </div>
     <div class="modal-footer">
         <a href="#" id="lnkDeleteLeaveType" class="btn danger"><?php echo lang('hr_leaves_popup_delete_button_yes');?></a>

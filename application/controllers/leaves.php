@@ -41,6 +41,8 @@ class Leaves extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('leaves', $this->language);
     }
     
     /**
@@ -75,7 +77,7 @@ class Leaves extends CI_Controller {
             $data['leaves'][$i]['type_label'] = $this->types_model->get_label($data['leaves'][$i]['type']);
         }
         
-        $data['title'] = 'My Leave Requests';
+        $data['title'] = lang('leaves_index_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leaves/index', $data);
@@ -91,7 +93,7 @@ class Leaves extends CI_Controller {
         $data['summary'] = $this->leaves_model->get_user_leaves_summary($this->user_id);
         
         if ($data['summary'] != null) {
-            $data['title'] = 'Counters';
+            $data['title'] = lang('leaves_summary_title');
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('leaves/counters', $data);
@@ -121,7 +123,7 @@ class Leaves extends CI_Controller {
         $data['leave']['status_label'] = $this->status_model->get_label($data['leave']['status']);
         $data['leave']['type_label'] = $this->types_model->get_label($data['leave']['type']);
         
-        $data['title'] = 'Leave details';
+        $data['title'] = lang('leaves_view_html_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leaves/view', $data);

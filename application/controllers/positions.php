@@ -41,6 +41,8 @@ class Positions extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('positions', $this->language);
     }
     
     /**
@@ -67,7 +69,7 @@ class Positions extends CI_Controller {
         $this->auth->check_is_granted('list_positions');
         $data = $this->getUserContext();
         $data['positions'] = $this->positions_model->get_positions();
-        $data['title'] = 'List of positions';
+        $data['title'] = lang('positions_index_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('positions/index', $data);
@@ -94,10 +96,10 @@ class Positions extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Add position';
+        $data['title'] = lang('positions_create_title');
         
-        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
-        $this->form_validation->set_rules('description', 'Description', 'xss_clean');
+        $this->form_validation->set_rules('name', lang('positions_create_field_name'), 'required|xss_clean');
+        $this->form_validation->set_rules('description', lang('positions_create_field_description'), 'xss_clean');
         
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -106,7 +108,7 @@ class Positions extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $this->positions_model->set_positions();
-            $this->session->set_flashdata('msg', 'The position has been succesfully created.');
+            $this->session->set_flashdata('msg', lang('positions_create_flash_msg'));
             redirect('positions');
         }
     }
@@ -120,11 +122,11 @@ class Positions extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Edit a position';
+        $data['title'] = lang('positions_edit_title');
         $data['position'] = $this->positions_model->get_positions($id);
         
-        $this->form_validation->set_rules('name', 'Name', 'required|xss_clean');
-        $this->form_validation->set_rules('description', 'Description', 'xss_clean');
+        $this->form_validation->set_rules('name', lang('positions_edit_field_name'), 'required|xss_clean');
+        $this->form_validation->set_rules('description', lang('positions_edit_field_description'), 'xss_clean');
         
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -133,7 +135,7 @@ class Positions extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $this->positions_model->update_positions($id);
-            $this->session->set_flashdata('msg', 'The position has been succesfully updated.');
+            $this->session->set_flashdata('msg', lang('positions_edit_flash_msg'));
             redirect('positions');
         }
     }
@@ -146,7 +148,7 @@ class Positions extends CI_Controller {
     public function delete($id) {
         $this->auth->check_is_granted('delete_positions');
         $this->positions_model->delete_position($id);
-        $this->session->set_flashdata('msg', 'The position has been succesfully deleted.');
+        $this->session->set_flashdata('msg', lang('positions_delete_flash_msg'));
         redirect('positions');
     }
 
@@ -158,10 +160,10 @@ class Positions extends CI_Controller {
         $this->auth->check_is_granted('export_positions');
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of positions');
-        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Name');
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Description');
+        $this->excel->getActiveSheet()->setTitle(lang('positions_export_title'));
+        $this->excel->getActiveSheet()->setCellValue('A1', lang('positions_export_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B1', lang('positions_export_thead_name'));
+        $this->excel->getActiveSheet()->setCellValue('C1', lang('positions_export_thead_description'));
         $this->excel->getActiveSheet()->getStyle('A1:C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 

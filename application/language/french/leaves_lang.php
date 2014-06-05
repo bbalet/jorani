@@ -23,6 +23,9 @@ $lang['leaves_summary_thead_entitled'] = 'Disponible';
 $lang['leaves_summary_thead_description'] = 'Description';
 
 $lang['leaves_index_title'] = 'Mes demandes de congés';
+$lang['leaves_index_thead_tip_view'] = 'voir';
+$lang['leaves_index_thead_tip_edit'] = 'modifier';
+$lang['leaves_index_thead_tip_delete'] = 'supprimer';
 $lang['leaves_index_thead_id'] = 'N°';
 $lang['leaves_index_thead_start_date'] = 'Date début';
 $lang['leaves_index_thead_end_date'] = 'Date fin';
@@ -64,10 +67,12 @@ $lang['leaves_edit_button_update'] = 'Mettre à jour';
 $lang['leaves_edit_button_cancel'] = 'Annuler';
 
 $lang['leaves_view_title'] = 'Visualiser la demande N°';
+$lang['leaves_view_html_title'] = 'Visualiser une demande';
 $lang['leaves_view_field_start'] = 'Date de début';
 $lang['leaves_view_field_end'] = 'Date de fin';
 $lang['leaves_view_field_type'] = 'Type de congés';
 $lang['leaves_view_field_duration'] = 'Durée';
 $lang['leaves_view_field_cause'] = 'Cause';
 $lang['leaves_view_field_status'] = 'Statut';
+$lang['leaves_view_button_edit'] = 'Modifier';
 $lang['leaves_view_button_back_list'] = 'Retour à la liste';

@@ -43,6 +43,8 @@ class Requests extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('requests', $this->language);
     }
     
     /**
@@ -76,7 +78,7 @@ class Requests extends CI_Controller {
         
         $data = $this->getUserContext();
         $data['filter'] = $filter;
-        $data['title'] = 'List of requested leaves';
+        $data['title'] = lang('requests_index_title');
         $data['requests'] = $this->leaves_model->requests($this->user_id, $showAll);
         
         $this->load->model('types_model');

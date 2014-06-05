@@ -16,15 +16,14 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['overtime_index_title'] = 'Demandes de congés à valider';
-$lang['overtime_index_description'] = 'Cet écran liste les demandes de congés qui m\'ont été soumises pour validation. Si vous n\'êtes pas un manager, cette liste sera vide.';
+$lang['overtime_index_title'] = 'Déclarations d\'heures supp. à valider';
+$lang['overtime_index_description'] = 'Cet écran liste les déclarations d\'heures supp. qui m\'ont été soumises pour validation. Si vous n\'êtes pas un manager, cette liste sera vide.';
 
 $lang['overtime_index_thead_id'] = 'N°';
 $lang['overtime_index_thead_fullname'] = 'Nom complet';
-$lang['overtime_index_thead_startdate'] = 'Date début';
-$lang['overtime_index_thead_enddate'] = 'Date fin';
+$lang['overtime_index_thead_date'] = 'Date';
 $lang['overtime_index_thead_duration'] = 'Durée';
-$lang['overtime_index_thead_type'] = 'Type';
+$lang['overtime_index_thead_status'] = 'Statut';
 
 $lang['overtime_index_button_export'] = 'Exporter cette liste';
 $lang['overtime_index_button_show_all'] = 'Toutes les demandes';

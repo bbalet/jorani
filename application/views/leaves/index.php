@@ -41,16 +41,16 @@ $(document).ready(function() {
 <?php foreach ($leaves as $leaves_item): ?>
     <tr>
         <td>
-            <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="View request"><?php echo $leaves_item['id']; ?></a>
+            <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><?php echo $leaves_item['id']; ?></a>
             &nbsp;
             <div class="pull-right">
                 <?php if ($leaves_item['status'] == 1) { ?>
-                <a href="<?php echo base_url();?>leaves/edit/<?php echo $leaves_item['id']; ?>" title="edit request details"><i class="icon-pencil"></i></a>
+                <a href="<?php echo base_url();?>leaves/edit/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;
-                <a href="#" class="confirm-delete" data-id="<?php echo $leaves_item['id'];?>" title="delete request"><i class="icon-trash"></i></a>
+                <a href="#" class="confirm-delete" data-id="<?php echo $leaves_item['id'];?>" title="<?php echo lang('leaves_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
                 <?php } ?>
                 &nbsp;
-                <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="view request details"><i class="icon-eye-open"></i></a>
+                <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
             </div>
         </td>
         <td><?php echo $leaves_item['startdate'] . ' / ' . $leaves_item['startdatetype']; ?></td>

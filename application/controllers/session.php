@@ -35,11 +35,15 @@ class Session extends CI_Controller {
             $this->language = $this->session->userdata('language');
             $this->language_code = $this->session->userdata('language_code');
         } else {
-            $this->session->set_userdata('language', 'english');
-            $this->session->set_userdata('language_code', 'en');
-            $this->language = 'english';
-            $this->language_code = 'en';
+            $this->session->set_userdata('language', $this->config->item('language'));
+            switch ($this->config->item('language')) {
+                case 'english' : $this->session->set_userdata('language_code', 'en'); break;
+                case 'french' : $this->session->set_userdata('language_code', 'fr'); break;
+                case 'khmer' : $this->session->set_userdata('language_code', 'kh'); break;
+            }
         }
+        $this->language = $this->session->userdata('language');
+        $this->language_code = $this->session->userdata('language_code');
         $this->load->helper('language');
         $this->lang->load('session', $this->language);
     }
@@ -67,8 +71,8 @@ class Session extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         //Note that we don't receive the password as a clear string
-        $this->form_validation->set_rules('login', 'Login identifier', 'required');
-        $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
+        $this->form_validation->set_rules('login', lang('session_login_field_login'), 'required');
+        $this->form_validation->set_rules('CipheredValue', lang('session_login_field_password'), 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
@@ -82,12 +86,12 @@ class Session extends CI_Controller {
         } else {
             $this->load->model('users_model');
             //Set language
-            /*$this->session->set_userdata('language_code', $this->input->post('language'));
+            $this->session->set_userdata('language_code', $this->input->post('language'));
             switch ($this->input->post('language')) {
                 case "fr" : $this->session->set_userdata('language', 'french'); break;
                 case "en" : $this->session->set_userdata('language', 'english'); break;
                 case "kh" : $this->session->set_userdata('language', 'khmer'); break;
-            }*/
+            }
             
             //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
             set_include_path(get_include_path() . PATH_SEPARATOR . APPPATH . 'third_party/phpseclib');
@@ -153,6 +157,7 @@ class Session extends CI_Controller {
      */
     public function language() {
         $this->load->helper('form');
+        var_dump($this->input->post('language'));
         switch ($this->input->post('language')) {
             case "fr" : $this->session->set_userdata('language', 'french'); break;
             case "en" : $this->session->set_userdata('language', 'english'); break;

@@ -138,16 +138,13 @@ class Organization extends CI_Controller {
 
     /**
      * Returns the list of the employees attached to an entity
-     * takes parameters by GET
+     * Prints the table content in a JSON format expected by jQuery Datatable
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function employees() {
         header("Content-Type: application/json");
         $id = $this->input->get('id', TRUE);
         $employees = $this->organization_model->employees($id);
-        //{"iTotalRecords":1,"iTotalDisplayRecords":1,"aaData":[
-        //["9643200005325405325","20140503132254.397415400","do.not@reply.me","[LMS]_Leave_Request_from_Benjamin_BALET","127.0.0.1:51649"]
-        //]}
         $msg = '{"iTotalRecords":' . count($employees);
         $msg .= ',"iTotalDisplayRecords":' . count($employees);
         $msg .= ',"aaData":[';
@@ -198,8 +195,8 @@ class Organization extends CI_Controller {
     }
     
     /**
-     * 
-     * 
+     * Returns a JSON string describing the organization structure.
+     * In a format expected by jsTree component.
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function root() {

@@ -65,3 +65,13 @@ $lang['users_create_field_manager_description'] = 'If a user has no manager (its
 $lang['users_create_button_generate_password'] = 'Generate password';
 $lang['users_create_button_create'] = 'Create user';
 $lang['users_create_button_cancel'] = 'Cancel';
+
+//Pop-up select employee
+$lang['users_employees_thead_id'] = 'ID';
+$lang['users_employees_thead_firstname'] = 'Firstname';
+$lang['users_employees_thead_lastname'] = 'Lastname';
+$lang['users_employees_thead_email'] = 'E-mail';
+
+//Pop-up reset password
+$lang['users_reset_field_password'] = 'Password';
+$lang['users_reset_button_reset'] = 'Reset';

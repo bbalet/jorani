@@ -25,13 +25,11 @@ $attributes = array('id' => 'loginFrom');
 echo form_open('session/login', $attributes); ?>
 
     <input type="hidden" name="last_page" value="session/login" />
-    <!--
     <label for="login"><?php echo lang('session_login_field_language');?></label>
     <select name="language" id="language">
         <option value="en" <?php if ($language_code == 'en') echo 'selected'; ?>>English</option>
         <option value="fr" <?php if ($language_code == 'fr') echo 'selected'; ?>>Français</option>
     </select>
-    //-->
     <label for="login"><?php echo lang('session_login_field_login');?></label>
     <input type="input" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required /><br />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
@@ -42,9 +40,22 @@ echo form_open('session/login', $attributes); ?>
     <br />
     <button id="send" class="btn btn-primary"><?php echo lang('session_login_button_login');?></button>
 
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript">
     $(function () {
+        //Memorize the last selected language with a cookie
+        if($.cookie('language') != null) {
+            $('#language option[value="' + $.cookie('language') + '"]').attr('selected', 'selected');
+            if ($.cookie('language') != "<?php echo $language_code; ?>") {
+                $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
+                $('#loginFrom').submit();
+            }
+        }
+        $('#language').change(function() {
+            $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
+        });
+        
         $('#send').click(function() {
             var encrypt = new JSEncrypt();
             encrypt.setPublicKey($('#pubkey').val());
@@ -61,10 +72,10 @@ echo form_open('session/login', $attributes); ?>
         });
         
         //Refresh page language
-//        $('#language').change(function(){
-//            $('#loginFrom').prop('action', 'session/language');
-//            $('#loginFrom').submit();
-//        });
+        $('#language').change(function(){
+            $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
+            $('#loginFrom').submit();
+        });
     });
 </script>
 

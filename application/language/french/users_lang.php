@@ -65,3 +65,13 @@ $lang['users_create_field_manager_description'] = 'Un utilisateur qui est son pr
 $lang['users_create_button_generate_password'] = 'Générer un mot de passe';
 $lang['users_create_button_create'] = 'Créer l\'utilsateur';
 $lang['users_create_button_cancel'] = 'Annuler';
+
+//Pop-up select employee
+$lang['users_employees_thead_id'] = 'ID';
+$lang['users_employees_thead_firstname'] = 'Prénom';
+$lang['users_employees_thead_lastname'] = 'Nom';
+$lang['users_employees_thead_email'] = 'E-mail';
+
+//Pop-up reset password
+$lang['users_reset_field_password'] = 'Mot de passe';
+$lang['users_reset_button_reset'] = 'Modifier';

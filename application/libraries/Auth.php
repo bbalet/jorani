@@ -212,8 +212,10 @@ class Auth {
     public function check_is_granted($operation, $object_id = 0) {
         if (!$this->is_granted($operation, $object_id)) {
             $this->CI->load->helper('url');
+            $this->CI->load->helper('language');
+            $this->CI->lang->load('global', $this->CI->session->userdata('language'));
             log_message('error', 'User #' . $this->CI->session->userdata('id') . ' illegally tried to access to ' . $operation);
-            $this->CI->session->set_flashdata('msg', 'Operation (' . $operation . ') is not granted');
+            $this->CI->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), $operation));
             redirect('forbidden');
         }
         else {

@@ -17,3 +17,4 @@
  */
 
 $lang['global_link_tooltip_documentation'] = 'Link to documentation';
+$lang['global_msg_error_forbidden'] = 'Operation (%s) is not granted';

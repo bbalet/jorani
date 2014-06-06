@@ -66,14 +66,18 @@ class Pages extends CI_Controller {
      */
     public function view($page = 'home') {
         $data = $this->getUserContext();
-        if (!file_exists('application/views/pages/' . $page . '.php')) {
-            show_404();
+        $path = 'pages/' . $this->language_code . '/' . $page . '.php';
+        if (!file_exists('application/views/' . $path)) {
+            $path = 'pages/en/' . $page . '.php';
+            if (!file_exists('application/views/' . $path)) { //fallback on default language
+                show_404();
+            }
         }
 
         $data['title'] = ucfirst($page); // Capitalize the first letter
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
-        $this->load->view('pages/' . $page, $data);
+        $this->load->view($path, $data);
         $this->load->view('templates/footer', $data);
     }
 

@@ -1,10 +1,14 @@
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('users', $language);
+$this->lang->load('datatable', $language);?>
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="employees" width="100%">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>E-mail</th>
+            <th><?php echo lang('users_employees_thead_id');?></th>
+            <th><?php echo lang('users_employees_thead_firstname');?></th>
+            <th><?php echo lang('users_employees_thead_lastname');?></th>
+            <th><?php echo lang('users_employees_thead_email');?></th>
         </tr>
     </thead>
     <tbody>
@@ -30,12 +34,35 @@
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#employees').dataTable({
-        "pageLength": 5
+        "pageLength": 5,
+        "oLanguage": {
+                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                    "oPaginate": {
+                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                        "sLast":     "<?php echo lang('datatable_sLast');?>",
+                        "sNext":     "<?php echo lang('datatable_sNext');?>",
+                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                    },
+                    "oAria": {
+                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                    }
+                }
     });
     //Hide pagination select box in order to save space
     $('.dataTables_length').css("display", "none");
     //Display selected row
-    $("#employees tbody tr").on('click',function(event) {
+    $('body').on("click", "#employees tbody tr", function () {
             $("#employees tbody tr").removeClass('row_selected');		
             $(this).addClass('row_selected');
     });

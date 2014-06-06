@@ -1,12 +1,15 @@
 <?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('users', $language);?>
+<?php
 $attributes = array('id' => 'target');
 echo form_open('users/reset/' . $target_user_id, $attributes); ?>
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
 </form>
-    <label for="password">Password</label>
+    <label for="password"><?php echo lang('users_reset_field_password');?></label>
     <input type="password" name="password" id="password" required /><br />
     <br />
-    <button id="send" class="btn btn-primary">Reset</button>
+    <button id="send" class="btn btn-primary"><?php echo lang('users_reset_button_reset');?></button>
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript">

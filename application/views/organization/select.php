@@ -1,10 +1,11 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('organization', $language);?>
+$this->lang->load('organization', $language);
+$this->lang->load('treeview', $language);?>
 
 <div class="input-append">
-<input type="text" placeholder="Search for an entity" id="txtSearch" />
-<button id="cmdSearchOrg" class="btn btn-primary">Search</button>
+<input type="text" placeholder="<?php echo lang('organization_select_field_search_placeholder');?>" id="txtSearch" />
+<button id="cmdSearchOrg" class="btn btn-primary"><?php echo lang('organization_select_button_search');?></button>
 </div>
 
 <div style="text-align: left;" id="organization"></div>
@@ -41,9 +42,7 @@ $this->lang->load('organization', $language);?>
               },
               'check_callback' : true
             },
-            "plugins" : [
-              "search", "state", "sort"
-            ]
+            plugins: [ "search", "state", "sort" ]
         });
     });
 </script>

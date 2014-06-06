@@ -1,14 +1,18 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('organization', $language);?>
+$this->lang->load('organization', $language);
+$this->lang->load('global', $language);
+$this->lang->load('datatable', $language);
+$this->lang->load('treeview', $language);?>
 
-<h1><?php echo lang('organization_index_title');?></h1>
+<h1><?php echo lang('organization_index_title');?> &nbsp;
+<a href="http://www.leave-management-system.org/page-describe-organization.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a></h1>
 
 <div class="row-fluid">
     <div class="span4">
         <div class="input-append">
-        <input type="text" placeholder="Search for an entity" id="txtSearch" />
-        <button id="cmdSearch" class="btn btn-primary">Search</button>
+        <input type="text" placeholder="<?php echo lang('organization_index_field_search_placeholder');?>" id="txtSearch" />
+        <button id="cmdSearch" class="btn btn-primary"><?php echo lang('organization_index_button_search');?></button>
         </div>
         <div style="text-align: left;" id="organization"></div>
     </div>
@@ -16,18 +20,18 @@ $this->lang->load('organization', $language);?>
         <table cellpadding="0" cellspacing="0" border="0" class="display" id="collaborators" width="100%">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>E-mail</th>
+                    <th><?php echo lang('organization_index_thead_id');?></th>
+                    <th><?php echo lang('organization_index_thead_firstname');?></th>
+                    <th><?php echo lang('organization_index_thead_lastname');?></th>
+                    <th><?php echo lang('organization_index_thead_email');?></th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
         <br /><br />
-        <button id="cmdAddEmployee" class="btn btn-primary">Attach an Employee</button>
-        <button id="cmdRemoveEmployee" class="btn btn-primary">Detach an Employee</button>
+        <button id="cmdAddEmployee" class="btn btn-primary"><?php echo lang('organization_index_button_add_employee');?></button>
+        <button id="cmdRemoveEmployee" class="btn btn-primary"><?php echo lang('organization_index_button_remove_employee');?></button>
     </div>
 </div>
 
@@ -38,40 +42,40 @@ $this->lang->load('organization', $language);?>
 <div id="frmConfirmDelete" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="close">&times;</a>
-         <h3>Delete Entity</h3>
+         <h3><?php echo lang('organization_index_popup_delete_title');?></h3>
     </div>
     <div class="modal-body">
-        <p>You are about to delete one entity, this procedure is irreversible.</p>
-        <p>Do you want to proceed?</p>
+        <p><?php echo lang('organization_index_popup_delete_description');?></p>
+        <p><?php echo lang('organization_index_popup_delete_confirm');?></p>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn danger" id="lnkDeleteEntity">Yes</a>
-        <a href="#" onclick="$('#organization').jstree('refresh'); $('#frmConfirmDelete').modal('hide');" class="btn secondary">No</a>
+        <a href="#" class="btn danger" id="lnkDeleteEntity"><?php echo lang('organization_index_popup_delete_button_yes');?></a>
+        <a href="#" onclick="$('#organization').jstree('refresh'); $('#frmConfirmDelete').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_delete_button_no');?></a>
     </div>
 </div>
 
 <div id="frmAddEmployee" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="close">&times;</a>
-         <h3>Add an Employee</h3>
+         <h3><?php echo lang('organization_index_popup_add_title');?></h3>
     </div>
     <div class="modal-body" id="frmAddEmployeeBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="add_employee();" class="btn secondary">OK</a>
-        <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="btn secondary">Cancel</a>
+        <a href="#" onclick="add_employee();" class="btn secondary"><?php echo lang('organization_index_popup_add_button_ok');?></a>
+        <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_add_button_cancel');?></a>
     </div>
 </div>
 
 <div id="frmError" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmError').modal('hide');" class="close">&times;</a>
-         <h3>An error occured</h3>
+         <h3><?php echo lang('organization_index_popup_error_title');?></h3>
     </div>
     <div class="modal-body" id="lblError"></div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmError').modal('hide');" class="btn secondary">OK</a>
+        <a href="#" onclick="$('#frmError').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_error_button_ok');?></a>
     </div>
 </div>
 
@@ -102,7 +106,6 @@ $this->lang->load('organization', $language);?>
     }
     
     $(function () {
-        
         //On confirm the deletion of the node, launch heavy cascade deletion
         $("#lnkDeleteEntity").click(function() {
             $.ajax({
@@ -110,7 +113,7 @@ $this->lang->load('organization', $language);?>
                 url: "<?php echo base_url(); ?>organization/delete",
                 data: { 'entity': $('#frmConfirmDelete').data('id') }
               })
-              .done(function( msg ) {
+              .done(function(msg) {
                 $("#organization").jstree("select_node", "0"); 
                 $("#organization").jstree("refresh");
                 $("#frmConfirmDelete").modal('hide');
@@ -123,7 +126,7 @@ $this->lang->load('organization', $language);?>
                 $("#frmAddEmployee").modal('show');
                 $("#frmAddEmployeeBody").load('<?php echo base_url(); ?>users/employees');
             } else {
-                $("#lblError").text("Please select one entity in the organization (treeview on the right).");
+                $("#lblError").text("<?php echo lang('organization_index_error_msg_select_entity');?>");
                 $("#frmError").modal('show');
             }
         });
@@ -144,11 +147,11 @@ $this->lang->load('organization', $language);?>
                         oTable.fnReloadAjax("<?php echo base_url(); ?>organization/employees?id=" + entity);
                     });
                 } else {
-                    $("#lblError").text("Please select one entity in the organization (treeview on the right).");
+                    $("#lblError").text("<?php echo lang('organization_index_error_msg_select_entity');?>");
                     $("#frmError").modal('show');
                 }
             } else {
-                $("#lblError").text("Please select one employee in the table of users belonging to the selected entity.");
+                $("#lblError").text("<?php echo lang('organization_index_error_msg_select_employee');?>");
                 $("#frmError").modal('show');
                 $("#frmErrorEmployee").modal('show');
             }
@@ -167,37 +170,47 @@ $this->lang->load('organization', $language);?>
         });
         
         $('#organization').jstree({
-            rules : {
+            contextmenu: {
+                items: function(n) {
+                    var tmp = $.jstree.defaults.contextmenu.items();
+                    tmp.create.label = '<?php echo lang('treeview_context_menu_create');?>';
+                    tmp.rename.label = '<?php echo lang('treeview_context_menu_rename');?>';
+                    tmp.remove.label = '<?php echo lang('treeview_context_menu_remove');?>';
+                    tmp.ccp.label = '<?php echo lang('treeview_context_menu_edit');?>';
+                    tmp.ccp.submenu.copy.label = '<?php echo lang('treeview_context_menu_copy');?>';
+                    tmp.ccp.submenu.cut.label = '<?php echo lang('treeview_context_menu_cut');?>';
+                    tmp.ccp.submenu.paste.label = '<?php echo lang('treeview_context_menu_paste');?>';
+                    return tmp;
+                }
+            },
+            rules: {
                 deletable  : [ "folder" ],
                 creatable  : [ "folder" ],
                 draggable  : [ "folder" ],
                 dragrules  : [ "folder * folder", "folder inside root" ],
                 renameable : "all"
               },
-            core : {
+            core: {
               multiple : false,
-              data : {
-                url : function (node) {
+              data: {
+                url: function (node) {
                   return node.id === '#' ? 
                     '<?php echo base_url(); ?>organization/root' : 
                     '<?php echo base_url(); ?>organization/children';
                 },
-                data : function (node) {
+                data: function (node) {
                   return { 'id' : node.id };
                 }
               },
               check_callback : true
             },
-            plugins : [
-              "contextmenu", "dnd", "search",
-              "state", "sort", "unique"
-            ]
+            plugins: ["contextmenu", "dnd", "search", "state", "sort", "unique"]
         })
         .on('delete_node.jstree', function (e, data) {
             e.preventDefault();
             var id = data.node.id;
             if (id == 0) {
-                $("#lblError").text("You cannot delete the root entity.");
+                $("#lblError").text("<?php echo lang('organization_index_error_msg_delete_root');?>");
                 $("#frmError").modal('show');
                 $("#organization").jstree("refresh");
             } else {
@@ -205,7 +218,7 @@ $this->lang->load('organization', $language);?>
             }
         })
         .on('create_node.jstree', function (e, data) {
-            bootbox.prompt("Name of the entity", function(result) {                
+            bootbox.prompt("<?php echo lang('organization_index_prompt_entity_name');?>", function(result) {                
                 if (result === null) {
                 
                 } else {
@@ -251,7 +264,30 @@ $this->lang->load('organization', $language);?>
                     $("#collaborators tbody tr").removeClass('row_selected');
                     $(nRow).addClass("row_selected");
                 });
-            }
+            },
+            "oLanguage": {
+                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                    "oPaginate": {
+                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                        "sLast":     "<?php echo lang('datatable_sLast');?>",
+                        "sNext":     "<?php echo lang('datatable_sNext');?>",
+                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                    },
+                    "oAria": {
+                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                    }
+                }
         });
     });
 </script>

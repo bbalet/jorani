@@ -60,7 +60,7 @@ $(document).ready(function() {
     //Hide pagination select box in order to save space
     $('.dataTables_length').css("display", "none");
     //Display selected row
-    $("#positions tbody tr").on('click',function(event) {
+    $('body').on("click", "#positions tbody tr", function () {
             $("#positions tbody tr").removeClass('row_selected');		
             $(this).addClass('row_selected');
     });

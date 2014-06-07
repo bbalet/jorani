@@ -60,8 +60,7 @@ class Auth {
             case 'update_user' :
             case 'import_user' :
             case 'export_user' :
-                if (($this->CI->session->userdata('is_admin') == true) ||
-                        ($this->CI->session->userdata('is_hr') == true))
+                if ($this->CI->session->userdata('is_hr') == true)
                     return true;
                 else
                     return false;
@@ -69,7 +68,7 @@ class Auth {
 
             //Password management
             case 'change_password' :
-                if ($this->CI->session->userdata('is_admin') == true)
+                if ($this->CI->session->userdata('is_hr') == true)
                     return true;
                 else {//a user can change its own password
                     if ($this->CI->session->userdata('id') == $object_id)
@@ -81,7 +80,7 @@ class Auth {
                 
             //Configuration
             case 'edit_settings' :
-                if ($this->CI->session->userdata('is_admin') == true)
+                if ($this->CI->session->userdata('is_hr') == true)
                     return true;
                 else
                     return false;

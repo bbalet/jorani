@@ -1,4 +1,8 @@
-<h2>Details of user #<?php echo $users_item['id']; ?> &nbsp;
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('users', $language);?>
+
+<h2><?php echo lang('users_edit_title');?><?php echo $users_item['id']; ?> &nbsp;
 <a href="http://www.leave-management-system.org/en/documentation/page-create-a-new-user/" title="Link to documentation" target="_blank"><i class="icon-question-sign"></i></a>
 </h2>
 

@@ -2,8 +2,7 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('leaves', $language);
 $this->lang->load('datatable', $language);
-$this->lang->load('status', $language);
-?>
+$this->lang->load('status', $language);?>
 
 <div class="row-fluid">
     <div class="span12">

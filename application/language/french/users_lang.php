@@ -16,8 +16,11 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//Index view
-$lang['users_index_title'] = 'List des utilisateurs';
+$lang['users_index_title'] = 'Liste des utilisateurs';
+$lang['users_index_thead_tip_view'] = 'Voir la fiche utilisateur';
+$lang['users_index_thead_tip_edit'] = 'Modifier la fiche utilisateur';
+$lang['users_index_thead_tip_delete'] = 'supprimer l\'utilisateur';
+$lang['users_index_thead_tip_reset'] = 'réinitialiser le mot de passe';
 $lang['users_index_thead_id'] = 'ID';
 $lang['users_index_thead_firstname'] = 'Prénom';
 $lang['users_index_thead_lastname'] = 'Nom';
@@ -25,26 +28,41 @@ $lang['users_index_thead_login'] = 'Identifiant';
 $lang['users_index_thead_email'] = 'E-mail';
 $lang['users_index_thead_role'] = 'Rôle';
 $lang['users_index_thead_manager'] = 'Manager';
-
 $lang['users_index_button_export'] = 'Exporter cette liste';
-$lang['users_index_button_create_user'] = 'Créer un nouvel utilisateurs';
-$lang['users_index_button_import_user'] = 'Importer des utilisateurs';
+$lang['users_index_button_create_user'] = 'Créer utilisateurs';
+$lang['users_index_button_import_user'] = 'Importer utilisateurs';
+$lang['users_index_popup_delete_title'] = 'Supprimer un utilisateur';
+$lang['users_index_popup_delete_title'] = 'Vous êtes sur le point de supprimer un utilisateur, cette procédure est irréversible.';
+$lang['users_index_popup_delete_title'] = 'Voulez-vous continuer ?';
+$lang['users_index_popup_delete_button_yes'] = 'Oui';
+$lang['users_index_popup_delete_button_no'] = 'Non';
+$lang['users_index_popup_password_title'] = 'Changer le mot de passe';
+$lang['users_index_popup_password_button_cancel'] = 'Annuler';
+$lang['users_index_popup_import_title'] = 'Import Users';
+$lang['users_index_popup_field_filename'] = 'Nom de fichier';
+$lang['users_index_popup_import_button_cancel'] = 'Annuler';
 
-//View a user
-$lang['users_view_title'] = 'Détail de l\'utilisateur n°%s';
+$lang['employees_index_title'] = 'Liste des employés';
+
+$lang['users_view_title'] = 'Détail de l\'utilisateur n°';
+$lang['users_view_html_title'] = 'Détail d\'un utilisateur';
 $lang['users_view_field_firstname'] = 'Prénom';
-$lang['users_view_field_firstname'] = 'Nom';
+$lang['users_view_field_lastname'] = 'Nom';
 $lang['users_view_field_login'] = 'Identifiant';
 $lang['users_view_field_email'] = 'E-mail';
 $lang['users_view_field_role'] = 'Rôle';
 $lang['users_view_field_manager'] = 'Manager';
+$lang['users_view_field_contract'] = 'Contrat';
+$lang['users_view_field_position'] = 'Poste';
+$lang['users_view_field_entity'] = 'Entité';
+$lang['users_view_field_hired'] = 'Date d\'embauche/démmarrage';
+$lang['users_view_field_identifier'] = 'Identifiant interne';
 $lang['users_view_button_edit'] = 'Modifier';
 $lang['users_view_button_back'] = 'Retourner à la liste';
 
-//Edit a user
-$lang['users_edit_title'] = 'Modification de l\'utilsateur n°%s';
+$lang['users_edit_title'] = 'Modification de l\'utilisateur n°';
 $lang['users_edit_field_firstname'] = 'Prénom';
-$lang['users_edit_field_firstname'] = 'Nom';
+$lang['users_edit_field_lastname'] = 'Nom';
 $lang['users_edit_field_login'] = 'Identifiant';
 $lang['users_edit_field_email'] = 'E-mail';
 $lang['users_edit_field_role'] = 'Rôle';
@@ -53,10 +71,9 @@ $lang['users_edit_field_manager_description'] = 'Un utilisateur qui est son prop
 $lang['users_edit_button_update'] = 'Modifier l\'utilsateur';
 $lang['users_edit_button_cancel'] = 'Annuler';
 
-//Create a user
-$lang['users_create_title'] = 'Créer un nouvel utilsateur';
+$lang['users_create_title'] = 'Créer un nouvel utilisateur';
 $lang['users_create_field_firstname'] = 'Prénom';
-$lang['users_create_field_firstname'] = 'Nom';
+$lang['users_create_field_lastname'] = 'Nom';
 $lang['users_create_field_login'] = 'Identifiant';
 $lang['users_create_field_email'] = 'E-mail';
 $lang['users_create_field_role'] = 'Rôle';
@@ -66,12 +83,17 @@ $lang['users_create_button_generate_password'] = 'Générer un mot de passe';
 $lang['users_create_button_create'] = 'Créer l\'utilsateur';
 $lang['users_create_button_cancel'] = 'Annuler';
 
-//Pop-up select employee
 $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Prénom';
 $lang['users_employees_thead_lastname'] = 'Nom';
 $lang['users_employees_thead_email'] = 'E-mail';
 
-//Pop-up reset password
 $lang['users_reset_field_password'] = 'Mot de passe';
 $lang['users_reset_button_reset'] = 'Modifier';
+
+$lang['users_export_title'] = 'Liste des utilisateurs';
+$lang['users_export_thead_id'] = 'ID';
+$lang['users_export_thead_firstname'] = 'Prénom';
+$lang['users_export_thead_lastname'] = 'Nom';
+$lang['users_export_thead_email'] = 'E-mail';
+$lang['users_export_thead_manager'] = 'Manager';

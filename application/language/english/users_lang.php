@@ -18,6 +18,10 @@
 
 //Index view
 $lang['users_index_title'] = 'List of users';
+$lang['users_index_thead_tip_view'] = 'View user details';
+$lang['users_index_thead_tip_edit'] = 'edit user details';
+$lang['users_index_thead_tip_delete'] = 'delete user';
+$lang['users_index_thead_tip_reset'] = 'reset password';
 $lang['users_index_thead_id'] = 'ID';
 $lang['users_index_thead_firstname'] = 'Firstname';
 $lang['users_index_thead_lastname'] = 'Lastname';
@@ -25,26 +29,41 @@ $lang['users_index_thead_login'] = 'Login';
 $lang['users_index_thead_email'] = 'E-mail';
 $lang['users_index_thead_role'] = 'Role';
 $lang['users_index_thead_manager'] = 'Manager';
-
 $lang['users_index_button_export'] = 'Export this list';
 $lang['users_index_button_create_user'] = 'Create a new user';
 $lang['users_index_button_import_user'] = 'Import users';
+$lang['users_index_popup_delete_title'] = 'Delete User';
+$lang['users_index_popup_delete_title'] = 'You are about to delete one user, this procedure is irreversible.';
+$lang['users_index_popup_delete_title'] = 'Do you want to proceed?';
+$lang['users_index_popup_delete_button_yes'] = 'Yes';
+$lang['users_index_popup_delete_button_no'] = 'No';
+$lang['users_index_popup_password_title'] = 'Change password';
+$lang['users_index_popup_password_button_cancel'] = 'Cancel';
+$lang['users_index_popup_import_title'] = 'Import Users';
+$lang['users_index_popup_field_filename'] = 'Filename';
+$lang['users_index_popup_import_button_cancel'] = 'Cancel';
 
-//View a user
-$lang['users_view_title'] = 'Details of user %s';
+$lang['employees_index_title'] = 'List of employees';
+
+$lang['users_view_title'] = 'Details of user #';
+$lang['users_view_html_title'] = 'Details of a user';
 $lang['users_view_field_firstname'] = 'Firstname';
-$lang['users_view_field_firstname'] = 'Lastname';
+$lang['users_view_field_lastname'] = 'Lastname';
 $lang['users_view_field_login'] = 'Login';
 $lang['users_view_field_email'] = 'E-mail';
 $lang['users_view_field_role'] = 'Role';
 $lang['users_view_field_manager'] = 'Manager';
+$lang['users_view_field_contract'] = 'Contract';
+$lang['users_view_field_position'] = 'Position';
+$lang['users_view_field_entity'] = 'Entity';
+$lang['users_view_field_hired'] = 'Date hired/started';
+$lang['users_view_field_identifier'] = 'Internal/Company Identifier';
 $lang['users_view_button_edit'] = 'Edit';
 $lang['users_view_button_back'] = 'Back to list';
 
-//Edit a user
-$lang['users_edit_title'] = 'Details of user %s';
+$lang['users_edit_title'] = 'Edit user #';
 $lang['users_edit_field_firstname'] = 'Firstname';
-$lang['users_edit_field_firstname'] = 'Lastname';
+$lang['users_edit_field_lastname'] = 'Lastname';
 $lang['users_edit_field_login'] = 'Login';
 $lang['users_edit_field_email'] = 'E-mail';
 $lang['users_edit_field_role'] = 'Role';
@@ -53,10 +72,9 @@ $lang['users_edit_field_manager_description'] = 'If a user has no manager (itsel
 $lang['users_edit_button_update'] = 'Update user';
 $lang['users_edit_button_cancel'] = 'Cancel';
 
-//Create a user
 $lang['users_create_title'] = 'Create a new user';
 $lang['users_create_field_firstname'] = 'Firstname';
-$lang['users_create_field_firstname'] = 'Lastname';
+$lang['users_create_field_lastname'] = 'Lastname';
 $lang['users_create_field_login'] = 'Login';
 $lang['users_create_field_email'] = 'E-mail';
 $lang['users_create_field_role'] = 'Role';
@@ -66,12 +84,17 @@ $lang['users_create_button_generate_password'] = 'Generate password';
 $lang['users_create_button_create'] = 'Create user';
 $lang['users_create_button_cancel'] = 'Cancel';
 
-//Pop-up select employee
 $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Firstname';
 $lang['users_employees_thead_lastname'] = 'Lastname';
 $lang['users_employees_thead_email'] = 'E-mail';
 
-//Pop-up reset password
 $lang['users_reset_field_password'] = 'Password';
 $lang['users_reset_button_reset'] = 'Reset';
+
+$lang['users_export_title'] = 'List of users';
+$lang['users_export_thead_id'] = 'ID';
+$lang['users_export_thead_firstname'] = 'Firstname';
+$lang['users_export_thead_lastname'] = 'Lastname';
+$lang['users_export_thead_email'] = 'E-mail';
+$lang['users_export_thead_manager'] = 'Manager';

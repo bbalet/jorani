@@ -43,6 +43,8 @@ class Hr extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('hr', $this->language);
     }
     
     /**
@@ -73,17 +75,14 @@ class Hr extends CI_Controller {
         } else {
             $showAll = false;
         }
-        
         $data = $this->getUserContext();
         $data['filter'] = $filter;
-        $data['title'] = 'List of requested leaves';
+        $data['title'] = lang('hr_leaves_title');
         $data['requests'] = $this->leaves_model->requests($this->user_id, $showAll);
-        
         $this->load->model('types_model');
         for ($i = 0; $i < count($data['requests']); ++$i) {
             $data['requests'][$i]['type_label'] = $this->types_model->get_label($data['requests'][$i]['type']);
         }
-        
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/index', $data);
@@ -97,10 +96,9 @@ class Hr extends CI_Controller {
     public function employees() {
         $this->auth->check_is_granted('list_employees');
         $data = $this->getUserContext();
-        $data['title'] = 'List of employees';
+        $data['title'] = lang('hr_employees_title');
         $this->load->model('users_model');
         $data['users'] = $this->users_model->get_employees();
-        
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/employees', $data);
@@ -115,11 +113,10 @@ class Hr extends CI_Controller {
     public function leaves($id) {
         $this->auth->check_is_granted('list_employees');
         $data = $this->getUserContext();
-        $data['title'] = 'List of leaves';
+        $data['title'] = lang('hr_leaves_title');
         $data['user_id'] = $id;
         $this->load->model('leaves_model');
         $data['leaves'] = $this->leaves_model->get_employee_leaves($id);
-        
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/leaves', $data);
@@ -134,70 +131,16 @@ class Hr extends CI_Controller {
     public function overtime($id) {
         $this->auth->check_is_granted('list_employees');
         $data = $this->getUserContext();
-        $data['title'] = 'List of overtime requests';
+        $data['title'] = lang('hr_overtime_title');
         $data['user_id'] = $id;
         $this->load->model('overtime_model');
         $data['extras'] = $this->overtime_model->get_employee_extras($id);
-        
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/overtime', $data);
         $this->load->view('templates/footer');
     }
-    
-    /**
-     * Display a form that allows updating the contract of a given user
-     * @param int $id User identifier
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function contract($id) {
-        $this->auth->check_is_granted('employee_contract');
-        $data = $this->getUserContext();
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $data['title'] = 'Attach a contract';
-        $this->form_validation->set_rules('contract', 'contract', 'required|xss_clean');
-        if ($this->form_validation->run() === FALSE) {
-            $data['id'] = $id;
-            $this->load->model('users_model');
-            $data['user'] = $this->users_model->get_users($id);
-            $this->load->model('contracts_model');
-            $data['contracts'] = $this->contracts_model->get_contracts();
-            $this->load->view('hr/contract', $data);
-        } else {
-            $this->load->model('users_model');
-            $this->users_model->set_contract();
-            $this->session->set_flashdata('msg', 'The contract has been succesfully attached to the employee');
-            redirect('hr/employees');
-        }
-    }
-    
-    /**
-     * Display a form that allows updating the manager of a given user
-     * @param int $id User identifier
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function manager($id) {
-        $this->auth->check_is_granted('employee_manager');
-        $data = $this->getUserContext();
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $data['title'] = 'Attach a manager';
-        $this->form_validation->set_rules('manager', 'manager', 'required|xss_clean');
-        if ($this->form_validation->run() === FALSE) {
-            $data['id'] = $id;
-            $this->load->model('users_model');
-            $data['user'] = $this->users_model->get_users($id);
-            $data['users'] = $this->users_model->get_users();
-            $this->load->view('hr/manager', $data);
-        } else {
-            $this->load->model('users_model');
-            $this->users_model->set_manager();
-            $this->session->set_flashdata('msg', 'The manager has been succesfully attached to the employee');
-            redirect('hr/employees');
-        }
-    }
-    
+        
     /**
      * Action: export the list of all leaves into an Excel file
      * @param int $id employee id
@@ -205,13 +148,13 @@ class Hr extends CI_Controller {
     public function export_leaves($id) {
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of leaves');
-        $this->excel->getActiveSheet()->setCellValue('A3', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B3', 'Status');
-        $this->excel->getActiveSheet()->setCellValue('C3', 'Start Date');
-        $this->excel->getActiveSheet()->setCellValue('D3', 'End Date');
-        $this->excel->getActiveSheet()->setCellValue('E3', 'Duration');
-        $this->excel->getActiveSheet()->setCellValue('F3', 'Type');
+        $this->excel->getActiveSheet()->setTitle(lang('hr_export_leaves_title'));
+        $this->excel->getActiveSheet()->setCellValue('A3', lang('hr_export_leaves_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B3', lang('hr_export_leaves_thead_status'));
+        $this->excel->getActiveSheet()->setCellValue('C3', lang('hr_export_leaves_thead_start'));
+        $this->excel->getActiveSheet()->setCellValue('D3', lang('hr_export_leaves_thead_end'));
+        $this->excel->getActiveSheet()->setCellValue('E3', lang('hr_export_leaves_thead_duration'));
+        $this->excel->getActiveSheet()->setCellValue('F3', lang('hr_export_leaves_thead_type'));
         
         $this->excel->getActiveSheet()->getStyle('A3:F3')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A3:F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -248,12 +191,12 @@ class Hr extends CI_Controller {
     public function export_overtime($id) {
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of overtime resquests');
-        $this->excel->getActiveSheet()->setCellValue('A3', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B3', 'Status');
-        $this->excel->getActiveSheet()->setCellValue('C3', 'Date');
-        $this->excel->getActiveSheet()->setCellValue('D3', 'Duration');
-        $this->excel->getActiveSheet()->setCellValue('E3', 'Cause');
+        $this->excel->getActiveSheet()->setTitle(lang('hr_export_overtime_title'));
+        $this->excel->getActiveSheet()->setCellValue('A3', lang('hr_export_overtime_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B3', lang('hr_export_overtime_thead_status'));
+        $this->excel->getActiveSheet()->setCellValue('C3', lang('hr_export_overtime_thead_date'));
+        $this->excel->getActiveSheet()->setCellValue('D3', lang('hr_export_overtime_thead_duration'));
+        $this->excel->getActiveSheet()->setCellValue('E3', lang('hr_export_overtime_thead_cause'));
         $this->excel->getActiveSheet()->getStyle('A3:E3')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A3:E3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
@@ -288,13 +231,13 @@ class Hr extends CI_Controller {
     public function export_employees() {
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of overtime resquests');
-        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Firstname');
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Lastname');
-        $this->excel->getActiveSheet()->setCellValue('D1', 'E-mail');
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Contract');
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Manager');
+        $this->excel->getActiveSheet()->setTitle(lang('hr_export_employees_title'));
+        $this->excel->getActiveSheet()->setCellValue('A1', lang('hr_export_employees_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B1', lang('hr_export_employees_thead_firstname'));
+        $this->excel->getActiveSheet()->setCellValue('C1', lang('hr_export_employees_thead_lastname'));
+        $this->excel->getActiveSheet()->setCellValue('D1', lang('hr_export_employees_thead_email'));
+        $this->excel->getActiveSheet()->setCellValue('E1', lang('hr_export_employees_thead_contract'));
+        $this->excel->getActiveSheet()->setCellValue('F1', lang('hr_export_employees_thead_manager'));
         $this->excel->getActiveSheet()->getStyle('A1:F1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         

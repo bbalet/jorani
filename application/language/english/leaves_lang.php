@@ -55,6 +55,7 @@ $lang['leaves_create_field_status'] = 'Status';
 $lang['leaves_create_button_create'] = 'Request leave';
 $lang['leaves_create_button_cancel'] = 'Cancel';
 
+$lang['leaves_edit_html_title'] = 'Edit leave request';
 $lang['leaves_edit_title'] = 'Edit leave request #';
 $lang['leaves_edit_field_start'] = 'Start Date';
 $lang['leaves_edit_field_end'] = 'End Date';

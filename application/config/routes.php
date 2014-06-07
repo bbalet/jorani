@@ -62,8 +62,6 @@ $route['hr/leaves/(:num)'] = 'hr/leaves/$1';
 $route['hr/leaves/export/(:num)'] = 'hr/export_leaves/$1';
 $route['hr/overtime/(:num)'] = 'hr/overtime/$1';
 $route['hr/overtime/export/(:num)'] = 'hr/export_overtime/$1';
-$route['hr/contract/(:num)'] = 'hr/contract/$1';
-$route['hr/manager/(:num)'] = 'hr/manager/$1';
 $route['hr/entitleddays/(:num)'] = 'hr/entitleddays/$1';
 $route['hr'] = 'hr';
 

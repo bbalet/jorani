@@ -66,7 +66,7 @@ $this->lang->load('menu', $language);?>
                     <li class="nav-header"><?php echo lang('menu_hr_employees_divider');?></li>
                     <li><a href="<?php echo base_url();?>hr/employees"><?php echo lang('menu_hr_list_employees');?></a></li>
                     <li><a href="<?php echo base_url();?>organization"><?php echo lang('menu_hr_list_organization');?></a></li>
-                    <li class="nav-header">Reports</li>
+                    <li class="nav-header"><?php echo lang('menu_hr_reports_divider');?></li>
                     <li><a href="<?php echo base_url();?>reports/balance"><?php echo lang('menu_hr_report_leave_balance');?></a></li>
                   </ul>
                 </li>

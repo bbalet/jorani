@@ -7,7 +7,7 @@ Official website : http://www.leave-management-system.org/
 
 ## Status
 
-This project is under development. An online demo is available here : http://demo.leave-management-system.org/
+This project is being tested. An online demo is available here : http://demo.leave-management-system.org/
 Use bbalet / bbalet for login / password. Be nice and don't screw up the data of the demo.
 
 ## Features
@@ -22,6 +22,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Set your own contracts and leave types.
 * Calendars of leaves (individual, team, collaborators, etc.).
 * Describe your organization in a tree structure and attach employees to entities.
+* Available in English and French
 
 ## Installation
 
@@ -36,7 +37,6 @@ See <code>/docs/install/README.md</code> for advanced configuration. In a nutshe
 ## What's next ?
 
 * Define non working days (weekends and day offs) on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
-* Translation of the software in French.
 
 ## Contribute
 

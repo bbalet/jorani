@@ -55,6 +55,7 @@ $lang['leaves_create_field_status'] = 'Statut';
 $lang['leaves_create_button_create'] = 'Créer la demande';
 $lang['leaves_create_button_cancel'] = 'Annuler';
 
+$lang['leaves_edit_html_title'] = 'Modifier la demande';
 $lang['leaves_edit_title'] = 'Modifier la demande N°';
 $lang['leaves_edit_field_start'] = 'Date de début';
 $lang['leaves_edit_field_end'] = 'Date de fin';

@@ -22,3 +22,15 @@ $lang['reports_index_thead_description'] = 'Description';
 
 $lang['reports_execute_title'] = 'Rapport';
 $lang['reports_execute_button_back_list'] = 'Retour à la liste des rapports';
+
+$lang['reports_balance_title'] = 'État des congés';
+$lang['reports_balance_field_entity'] = 'Choisir l\'entité';
+$lang['reports_balance_button_entity'] = 'Choisir';
+$lang['reports_balance_field_subdepts'] = 'Inclure les sous-départments';
+$lang['reports_balance_button_launch'] = 'Exécuter';
+$lang['reports_balance_button_export'] = 'Exporter';
+$lang['reports_balance_popup_entity_title'] = 'Choisir une entité';
+$lang['reports_balance_popup_entity_button_ok'] = 'OK';
+$lang['reports_balance_popup_entity_button_cancel'] = 'Annuler';
+
+$lang['reports_export_balance_title'] = 'État des congés';

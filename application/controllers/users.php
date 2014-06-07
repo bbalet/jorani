@@ -45,6 +45,8 @@ class Users extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('users', $this->language);
     }
 
     /**
@@ -70,7 +72,7 @@ class Users extends CI_Controller {
         $this->auth->check_is_granted('list_users');
         $data = $this->getUserContext();
         $data['users'] = $this->users_model->get_users();
-        $data['title'] = 'Users';
+        $data['title'] = lang('users_index_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/index', $data);
@@ -85,7 +87,7 @@ class Users extends CI_Controller {
         $this->auth->check_is_granted('employees_list');
         $data = $this->getUserContext();
         $data['employees'] = $this->users_model->get_all_employees();
-        $data['title'] = 'List of employees';
+        $data['title'] = lang('employees_index_title');
         $this->load->view('users/employees', $data);
     }
     
@@ -101,7 +103,7 @@ class Users extends CI_Controller {
         if (empty($data['user'])) {
             show_404();
         }
-        $data['title'] = 'User';
+        $data['title'] = lang('users_view_html_title');
         $this->load->model('roles_model');
         $this->load->model('positions_model');
         $this->load->model('contracts_model');
@@ -179,7 +181,6 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) { 
-        log_message('debug', '{controllers/users/delete} Entering method with id=' . $id);
         $this->auth->check_is_granted('delete_user');
         //Test if user exists
         $data['users_item'] = $this->users_model->get_users($id);
@@ -191,7 +192,6 @@ class Users extends CI_Controller {
         }
         log_message('info', 'User #' . $id . ' has been deleted by user #' . $this->session->userdata('id'));
         $this->session->set_flashdata('msg', 'The user has been succesfully deleted');
-        log_message('debug', '{controllers/users/delete} Leaving method (before redirect)');
         redirect('users');
     }
 
@@ -385,12 +385,13 @@ class Users extends CI_Controller {
         $this->auth->check_is_granted('export_user');
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of users');
-        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Firstname');
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Lastname');
-        $this->excel->getActiveSheet()->setCellValue('D1', 'E-mail');
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Manager');
+        $this->excel->getActiveSheet()->setTitle(lang('users_export_title'));
+        $this->excel->getActiveSheet()->setCellValue('A1', lang('users_export_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B1', lang('users_export_thead_firstname'));
+        $this->excel->getActiveSheet()->setCellValue('C1', lang('users_export_thead_lastname'));
+        $this->excel->getActiveSheet()->setCellValue('D1', lang('users_export_thead_email'));
+        $this->excel->getActiveSheet()->setCellValue('E1', lang('users_export_thead_manager'));
+        
         $this->excel->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
@@ -414,7 +415,7 @@ class Users extends CI_Controller {
     }
 
     //TODO import a list of users from CSV or Excel
-        /**
+    /**
      * Action: export the list of all users into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */

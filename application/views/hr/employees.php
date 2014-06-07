@@ -1,3 +1,7 @@
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('hr', $language);
+$this->lang->load('datatable', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -16,17 +20,17 @@ $(document).ready(function() {
 </script>
 <?php } ?>
         
-<h1>List of employees</h1>
+<h1><?php echo lang('hr_employees_title');?></h1>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>E-mail</th>
-            <th>Contract</th>
-            <th>Manager</th>
+            <th><?php echo lang('hr_employees_thead_id');?></th>
+            <th><?php echo lang('hr_employees_thead_firstname');?></th>
+            <th><?php echo lang('hr_employees_thead_lastname');?></th>
+            <th><?php echo lang('hr_employees_thead_email');?></th>
+            <th><?php echo lang('hr_employees_thead_contract');?></th>
+            <th><?php echo lang('hr_employees_thead_manager');?></th>
         </tr>
     </thead>
     <tbody>
@@ -36,15 +40,13 @@ $(document).ready(function() {
             <?php echo $users_item['id'] ?>
             <div class="pull-right">
                 &nbsp;
-                <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>?source=hr%2Femployees" title="edit user"><i class="icon-pencil"></i></a>
+                <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>?source=hr%2Femployees" title="<?php echo lang('hr_employees_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>hr/contract/<?php echo $users_item['id'] ?>" data-target="#frmContract" data-toggle="modal" title="change contract"><i class="icon-file"></i></a>
+                <a href="<?php echo base_url();?>entitleddays/user/<?php echo $users_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="<?php echo lang('hr_employees_thead_tip_entitlment');?>"><i class="icon-edit"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>entitleddays/user/<?php echo $users_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="entitled days"><i class="icon-edit"></i></a>
+                <a href="<?php echo base_url();?>hr/leaves/<?php echo $users_item['id'] ?>"><?php echo lang('hr_employees_thead_link_leaves');?></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>hr/leaves/<?php echo $users_item['id'] ?>">Leaves</a>
-                &nbsp;
-                <a href="<?php echo base_url();?>hr/overtime/<?php echo $users_item['id'] ?>">Extras</a>
+                <a href="<?php echo base_url();?>hr/overtime/<?php echo $users_item['id'] ?>"><?php echo lang('hr_employees_thead_link_extra');?></a>
             </div>
         </td>
         <td><?php echo $users_item['firstname']; ?></td>
@@ -65,7 +67,7 @@ $(document).ready(function() {
 
 <div class="row-fluid">
     <div class="span3">
-      <a href="<?php echo base_url();?>hr/employees/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; Export this list</a>
+      <a href="<?php echo base_url();?>hr/employees/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
     </div>
     <div class="span9">&nbsp;</div>
 </div>
@@ -76,41 +78,48 @@ $(document).ready(function() {
 <div id="frmEntitledDays" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="close">&times;</a>
-         <h3>Entitled days</h3>
+         <h3><?php echo lang('hr_employees_popup_entitlment_title');?></h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary">Cancel</a>
-    </div>
-</div>
-
-<div id="frmContract" class="modal hide fade">
-    <div class="modal-header">
-        <a href="#" onclick="$('#frmContract').modal('hide');" class="close">&times;</a>
-         <h3>Contract</h3>
-    </div>
-    <div class="modal-body">
-        <img src="<?php echo base_url();?>assets/images/loading.gif">
-    </div>
-    <div class="modal-footer">
-        <a href="#" onclick="$('#frmContract').modal('hide');" class="btn secondary">Cancel</a>
+        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary"><?php echo lang('hr_employees_popup_entitlment_button_cancel');?></a>
     </div>
 </div>
 
 <script type="text/javascript">
 $(function () {
     //Transform the HTML table in a fancy datatable
-    $('#users').dataTable();
+    $('#users').dataTable({
+		"oLanguage": {
+                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                    "oPaginate": {
+                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                        "sLast":     "<?php echo lang('datatable_sLast');?>",
+                        "sNext":     "<?php echo lang('datatable_sNext');?>",
+                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                    },
+                    "oAria": {
+                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                    }
+                }
+            });
     $("#frmEntitledDays").alert();
-    $("#frmContract").alert();
     
     //Prevent to load always the same content (refreshed each time)
     $('#frmEntitledDays').on('hidden', function() {
-        $(this).removeData('modal');
-    });
-    $('#frmContract').on('hidden', function() {
         $(this).removeData('modal');
     });
 });

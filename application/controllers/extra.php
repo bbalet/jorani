@@ -41,6 +41,8 @@ class Extra extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('extra', $this->language);
     }
     
     /**
@@ -72,7 +74,7 @@ class Extra extends CI_Controller {
         for ($i = 0; $i < count($data['extras']); ++$i) {
             $data['extras'][$i]['status_label'] = $this->status_model->get_label($data['extras'][$i]['status']);
         }
-        $data['title'] = 'My Overtime Requests';
+        $data['title'] = lang('extra_index_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('extra/index', $data);
@@ -93,7 +95,7 @@ class Extra extends CI_Controller {
             show_404();
         }
         $data['leave']['status_label'] = $this->status_model->get_label($data['leave']['status']);
-        $data['title'] = 'Overtime details';
+        $data['title'] = lang('extra_view_hmtl_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('extra/view', $data);
@@ -109,12 +111,12 @@ class Extra extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Request an overtime';
+        $data['title'] = lang('extra_create_title');
         
-        $this->form_validation->set_rules('date', 'Date', 'required|xss_clean');
-        $this->form_validation->set_rules('duration', 'Duration', 'required|xss_clean');
-        $this->form_validation->set_rules('cause', 'Cause', 'required|xss_clean');
-        $this->form_validation->set_rules('status', 'Status', 'required|xss_clean');
+        $this->form_validation->set_rules('date', lang('extra_create_field_date'), 'required|xss_clean');
+        $this->form_validation->set_rules('duration', lang('extra_create_field_duration'), 'required|xss_clean');
+        $this->form_validation->set_rules('cause', lang('extra_create_field_cause'), 'required|xss_clean');
+        $this->form_validation->set_rules('status', lang('extra_create_field_status'), 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -127,7 +129,7 @@ class Extra extends CI_Controller {
             if ($this->input->post('status') == 2) {
                 $this->sendMail($extra_id);
             }            
-            $this->session->set_flashdata('msg', 'The overtime request has been succesfully created');
+            $this->session->set_flashdata('msg', lang('extra_create_msg_success'));
             redirect('extra');
         }
     }
@@ -150,19 +152,19 @@ class Extra extends CI_Controller {
             if (($this->session->userdata('manager') != $this->user_id) &&
                     $data['leave']['status'] != 1) {
                 log_message('error', 'User #' . $this->user_id . ' illegally tried to edit overtime request #' . $id);
-                $this->session->set_flashdata('msg', 'You cannot edit an overtime request already submitted');
+                $this->session->set_flashdata('msg', lang('extra_edit_msg_error'));
                 redirect('extra');
             }
         } //Admin
         
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Edit a overtime request';
-        $data['id'] = $id;                
-        $this->form_validation->set_rules('date', 'Date', 'required|xss_clean');
-        $this->form_validation->set_rules('duration', 'Duration', 'required|xss_clean');
-        $this->form_validation->set_rules('cause', 'Cause', 'required|xss_clean');
-        $this->form_validation->set_rules('status', 'Status', 'required|xss_clean');
+        $data['title'] = lang('extra_edit_hmtl_title');
+        $data['id'] = $id;      
+        $this->form_validation->set_rules('date', lang('extra_edit_field_date'), 'required|xss_clean');
+        $this->form_validation->set_rules('duration', lang('extra_edit_field_duration'), 'required|xss_clean');
+        $this->form_validation->set_rules('cause', lang('extra_edit_field_cause'), 'required|xss_clean');
+        $this->form_validation->set_rules('status', lang('extra_edit_field_status'), 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -175,7 +177,7 @@ class Extra extends CI_Controller {
             if ($this->input->post('status') == 2) {
                 $this->sendMail($extra_id);
             }            
-            $this->session->set_flashdata('msg', 'The overtime request has been succesfully updated');
+            $this->session->set_flashdata('msg', lang('extra_edit_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
             } else {
@@ -223,7 +225,6 @@ class Extra extends CI_Controller {
                 $this->session->userdata('lastname'));
         $this->email->message($message);
         $this->email->send();
-        //echo $this->email->print_debugger();
     }
     
     /**
@@ -247,9 +248,9 @@ class Extra extends CI_Controller {
             }
             if ($can_delete == true) {
                 $this->overtime_model->delete_extra($id);
-                $this->session->set_flashdata('msg', 'The overtime request has been succesfully deleted');
+                $this->session->set_flashdata('msg', lang('extra_delete_msg_success'));
             } else {
-                $this->session->set_flashdata('msg', 'You can\'t delete this overtime request');
+                $this->session->set_flashdata('msg', lang('extra_delete_msg_error'));
             }
         }
         if (isset($_GET['source'])) {
@@ -265,25 +266,25 @@ class Extra extends CI_Controller {
     public function export() {
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of leaves');
-        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Date');
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Duration');
-        $this->excel->getActiveSheet()->setCellValue('D1', 'Cause');
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Status');
+        $this->excel->getActiveSheet()->setTitle(lang('extra_export_title'));
+        $this->excel->getActiveSheet()->setCellValue('A1', lang('extra_export_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B1', lang('extra_export_thead_date'));
+        $this->excel->getActiveSheet()->setCellValue('C1', lang('extra_export_thead_duration'));
+        $this->excel->getActiveSheet()->setCellValue('D1', lang('extra_export_thead_cause'));
+        $this->excel->getActiveSheet()->setCellValue('E1', lang('extra_export_thead_status'));
         $this->excel->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $leaves = $this->overtime_model->get_user_extras($this->user_id);
+        $extras = $this->overtime_model->get_user_extras($this->user_id);
         $this->load->model('status_model');
         
         $line = 2;
-        foreach ($leaves as $leave) {
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $leave['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $leave['date']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $leave['duration']);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $leave['cause']);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, $this->status_model->get_label($leave['status']));
+        foreach ($extras as $extra) {
+            $this->excel->getActiveSheet()->setCellValue('A' . $line, $extra['id']);
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, $extra['date']);
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $extra['duration']);
+            $this->excel->getActiveSheet()->setCellValue('D' . $line, $extra['cause']);
+            $this->excel->getActiveSheet()->setCellValue('E' . $line, $this->status_model->get_label($extra['status']));
             $line++;
         }
 

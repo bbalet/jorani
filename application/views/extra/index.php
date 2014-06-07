@@ -2,8 +2,7 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('extra', $language);
 $this->lang->load('datatable', $language);
-$this->lang->load('status', $language);
-?>
+$this->lang->load('status', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -39,15 +38,15 @@ $(document).ready(function() {
 <?php foreach ($extras as $extra_item): ?>
     <tr>
         <td>
-            <a href="<?php echo base_url();?>extra/<?php echo $extra_item['id']; ?>" title="View request"><?php echo $extra_item['id']; ?></a>
+            <a href="<?php echo base_url();?>extra/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_view');?>"><?php echo $extra_item['id']; ?></a>
             &nbsp;
             <div class="pull-right">
-                <a href="<?php echo base_url();?>extra/<?php echo $extra_item['id']; ?>" title="view request details"><i class="icon-eye-open"></i></a>
+                <a href="<?php echo base_url();?>extra/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
                 &nbsp;
                 <?php if ($extra_item['status'] == 1) { ?>
-                <a href="<?php echo base_url();?>extra/edit/<?php echo $extra_item['id']; ?>" title="edit request details"><i class="icon-pencil"></i></a>
+                <a href="<?php echo base_url();?>extra/edit/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;
-                <a href="#" class="confirm-delete" data-id="<?php echo $extra_item['id'];?>" title="delete request"><i class="icon-trash"></i></a>
+                <a href="#" class="confirm-delete" data-id="<?php echo $extra_item['id'];?>" title="<?php echo lang('extra_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
                 <?php } ?>
             </div>
         </td>

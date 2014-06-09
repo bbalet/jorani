@@ -104,12 +104,12 @@ class Requests extends CI_Controller {
         $employee = $this->users_model->get_users($leave['employee']);
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to accept leave #' . $id);
-            $this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
+            $this->session->set_flashdata('msg', lang('requests_accept_flash_msg_error'));
             redirect('home');
         } else {
             $this->leaves_model->accept_leave($id);
             $this->sendMail($id);
-            $this->session->set_flashdata('msg', 'The leave request has been successfully accepted.');
+            $this->session->set_flashdata('msg', lang('requests_accept_flash_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
             } else {
@@ -133,12 +133,12 @@ class Requests extends CI_Controller {
         $employee = $this->users_model->get_users($leave['employee']);
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to reject leave #' . $id);
-            $this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
+            $this->session->set_flashdata('msg', lang('requests_reject_flash_msg_error'));
             redirect('home');
         } else {
             $this->leaves_model->reject_leave($id);
             $this->sendMail($id);
-            $this->session->set_flashdata('msg', 'The leave request has been successfully rejected.');
+            $this->session->set_flashdata('msg',  lang('requests_reject_flash_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
             } else {
@@ -165,10 +165,14 @@ class Requests extends CI_Controller {
         $this->load->library('email');
         $config = $this->settings_model->get_mail_config();            
         $this->email->initialize($config);
+        
+        $this->load->library('language');
+        $usr_lang = $this->language->code2language($employee['language']);
+        $this->lang->load('email', $usr_lang);
 
         $this->load->library('parser');
         $data = array(
-            'Title' => 'Leave Request',
+            'Title' => lang('email_leave_request_validation_title'),
             'Firstname' => $employee['firstname'],
             'Lastname' => $employee['lastname'],
             'StartDate' => $leave['startdate'],
@@ -177,12 +181,13 @@ class Requests extends CI_Controller {
         
         $message = "";
         if ($leave['status'] == 3) {
-            $message = $this->parser->parse('emails/request_accepted', $data, TRUE);
-            $this->email->subject('[LMS] Your leave request has been accepted');
+            $message = $this->parser->parse('emails/' . $employee['language'] . '/request_accepted', $data, TRUE);
+            $this->email->subject(lang('email_leave_request_accept_subject'));
         } else {
-            $message = $this->parser->parse('emails/request_rejected', $data, TRUE);
-            $this->email->subject('[LMS] Your leave request has been rejected');
+            $message = $this->parser->parse('emails/' . $employee['language'] . '/request_rejected', $data, TRUE);
+            $this->email->subject(lang('email_leave_request_reject_subject'));
         }
+        //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
 
         $this->email->from('do.not@reply.me', 'LMS');
         $this->email->to($employee['email']);
@@ -197,17 +202,18 @@ class Requests extends CI_Controller {
     public function export($filter = 'requested') {
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of leave resquests');
-        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Fullname');
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Start Date');
-        $this->excel->getActiveSheet()->setCellValue('D1', 'Start Date type');
-        $this->excel->getActiveSheet()->setCellValue('E1', 'End Date');
-        $this->excel->getActiveSheet()->setCellValue('F1', 'End Date type');
-        $this->excel->getActiveSheet()->setCellValue('G1', 'Duration');
-        $this->excel->getActiveSheet()->setCellValue('H1', 'Type');
-        $this->excel->getActiveSheet()->setCellValue('I1', 'Cause');
-        $this->excel->getActiveSheet()->setCellValue('J1', 'Status');
+
+        $this->excel->getActiveSheet()->setTitle(lang('requests_export_title'));
+        $this->excel->getActiveSheet()->setCellValue('A1', lang('requests_export_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B1', lang('requests_export_thead_fullname'));
+        $this->excel->getActiveSheet()->setCellValue('C1', lang('requests_export_thead_startdate'));
+        $this->excel->getActiveSheet()->setCellValue('D1', lang('requests_export_thead_startdate_type'));
+        $this->excel->getActiveSheet()->setCellValue('E1', lang('requests_export_thead_enddate'));
+        $this->excel->getActiveSheet()->setCellValue('F1', lang('requests_export_thead_enddate_type'));
+        $this->excel->getActiveSheet()->setCellValue('G1', lang('requests_export_thead_duration'));
+        $this->excel->getActiveSheet()->setCellValue('H1', lang('requests_export_thead_type'));
+        $this->excel->getActiveSheet()->setCellValue('I1', lang('requests_export_thead_cause'));
+        $this->excel->getActiveSheet()->setCellValue('J1', lang('requests_export_thead_status'));
         $this->excel->getActiveSheet()->getStyle('A1:J1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:J1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 

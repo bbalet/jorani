@@ -66,7 +66,7 @@ class Language {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function code2language($code) {
-        switch ($code) {
+        switch (strtolower($code)) {
             //User management
             case 'en' : return 'english'; break;
             case 'fr' : return 'french'; break;
@@ -82,7 +82,7 @@ class Language {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function language2code($language) {
-        switch ($language) {
+        switch (strtolower($language)) {
             //User management
             case 'english' : return 'en'; break;
             case 'french' : return 'fr'; break;
@@ -98,7 +98,7 @@ class Language {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function code2nativelanguage($code) {
-        switch ($code) {
+        switch (strtolower($code)) {
             //User management
             case 'en' : return 'english'; break;
             case 'fr' : return 'français'; break;
@@ -114,7 +114,7 @@ class Language {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function nativelanguage2code($language) {
-        switch ($language) {
+        switch (strtolower($language)) {
             //User management
             case 'english' : return 'en'; break;
             case 'français' : return 'fr'; break;

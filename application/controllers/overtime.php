@@ -105,13 +105,12 @@ class Overtime extends CI_Controller {
         $employee = $this->users_model->get_users($extra['employee']);
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to accept leave #' . $id);
-            $this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
+            $this->session->set_flashdata('msg', 'You are not the line manager of this employee. You cannot reject this overtime request.');
             redirect('home');
         } else {
             $this->overtime_model->accept_extra($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg', 'The overtime request has been successfully accepted.');
-            log_message('debug', '{controllers/requests/accept} Leaving method (before redirect)');
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
             } else {
@@ -135,7 +134,7 @@ class Overtime extends CI_Controller {
         $employee = $this->users_model->get_users($extra['employee']);
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to reject leave #' . $id);
-            $this->session->set_flashdata('msg', 'You are not the manager of this employee. You cannot validate this leave request.');
+            $this->session->set_flashdata('msg', 'You are not the line manager of this employee. You cannot reject this overtime request.');
             redirect('home');
         } else {
             $this->overtime_model->reject_extra($id);
@@ -167,10 +166,14 @@ class Overtime extends CI_Controller {
         $this->load->library('email');
         $config = $this->settings_model->get_mail_config();            
         $this->email->initialize($config);
+        
+        $this->load->library('language');
+        $usr_lang = $this->language->code2language($employee['language']);
+        $this->lang->load('email', $usr_lang);
 
         $this->load->library('parser');
         $data = array(
-            'Title' => 'Overtime Request',
+            'Title' => lang('email_overtime_request_validation_title'),
             'Firstname' => $employee['firstname'],
             'Lastname' => $employee['lastname'],
             'Date' => $extra['date'],
@@ -180,11 +183,11 @@ class Overtime extends CI_Controller {
         
         $message = "";
         if ($extra['status'] == 3) {
-            $message = $this->parser->parse('emails/overtime_accepted', $data, TRUE);
-            $this->email->subject('[LMS] Your overtime request has been accepted');
+            $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_accepted', $data, TRUE);
+            $this->email->subject(lang('email_overtime_request_accept_subject'));
         } else {
-            $message = $this->parser->parse('emails/overtime_rejected', $data, TRUE);
-            $this->email->subject('[LMS] Your overtime request has been rejected');
+            $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_rejected', $data, TRUE);
+            $this->email->subject(lang('email_overtime_request_reject_subject'));
         }
 
         $this->email->from('do.not@reply.me', 'LMS');
@@ -200,13 +203,13 @@ class Overtime extends CI_Controller {
     public function export($filter = 'requested') {
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of overtime resquests');
-        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Fullname');
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Date');
-        $this->excel->getActiveSheet()->setCellValue('D1', 'Duration');
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Cause');
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Status');
+        $this->excel->getActiveSheet()->setTitle(lang('overtime_export_title'));
+        $this->excel->getActiveSheet()->setCellValue('A1', lang('overtime_export_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B1', lang('overtime_export_thead_fullname'));
+        $this->excel->getActiveSheet()->setCellValue('C1', lang('overtime_export_thead_date'));
+        $this->excel->getActiveSheet()->setCellValue('D1', lang('overtime_export_thead_duration'));
+        $this->excel->getActiveSheet()->setCellValue('E1', lang('overtime_export_thead_cause'));
+        $this->excel->getActiveSheet()->setCellValue('F1', lang('overtime_export_thead_status'));
         $this->excel->getActiveSheet()->getStyle('A1:F1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 

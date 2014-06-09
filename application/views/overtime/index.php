@@ -40,13 +40,13 @@ $(document).ready(function() {
 <?php foreach ($requests as $requests_item): ?>
     <tr>
         <td>
-            <a href="<?php echo base_url();?>extra/<?php echo $requests_item['id']; ?>" title="View request"><?php echo $requests_item['id']; ?></a>
+            <a href="<?php echo base_url();?>extra/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
             &nbsp;
-            <a href="<?php echo base_url();?>extra/<?php echo $requests_item['id']; ?>" title="view request details"><i class="icon-eye-open"></i></a>
+            <a href="<?php echo base_url();?>extra/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
             &nbsp;
-            <a href="<?php echo base_url();?>overtime/accept/<?php echo $requests_item['id']; ?>" title="accept request"><i class="icon-ok"></i></a>
+            <a href="<?php echo base_url();?>overtime/accept/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
             &nbsp;
-            <a href="<?php echo base_url();?>overtime/reject/<?php echo $requests_item['id']; ?>" title="reject request"><i class="icon-remove"></i></a>
+            <a href="<?php echo base_url();?>overtime/reject/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
         <td><?php echo $requests_item['date']; ?></td>
@@ -68,13 +68,13 @@ $(document).ready(function() {
     <div class="span2">
       <a href="<?php echo base_url();?>overtime/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_export');?></a>
     </div>
-     <div class="span2">
+     <div class="span3">
       <a href="<?php echo base_url();?>overtime/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_show_all');?></a>
     </div>
     <div class="span3">
       <a href="<?php echo base_url();?>overtime/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_show_pending');?></a>
     </div>
-    <div class="span7">&nbsp;</div>
+    <div class="span4">&nbsp;</div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">

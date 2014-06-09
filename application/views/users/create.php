@@ -1,4 +1,9 @@
-<h2>Create a new user &nbsp;
+<?php
+CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('users', $language);
+CI_Controller::get_instance()->load->library('language');?>
+
+<h2><?php echo lang('users_create_title');?> &nbsp;
 <a href="http://www.leave-management-system.org/page-create-a-new-user.html" title="Link to documentation" target="_blank"><i class="icon-question-sign"></i></a>
 </h2>
 
@@ -10,40 +15,40 @@ echo form_open('users/create', $attributes); ?>
 
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
     
-    <label for="firstname">Firstname</label>
+    <label for="firstname"><?php echo lang('users_create_field_firstname');?></label>
     <input type="input" name="firstname" id="firstname" required /><br />
 
-    <label for="lastname">Lastname</label>
+    <label for="lastname"><?php echo lang('users_create_field_lastname');?></label>
     <input type="input" name="lastname" id="lastname" required /><br />
 
-    <label for="role[]">Role</label>
+    <label for="role[]"><?php echo lang('users_create_field_role');?></label>
     <select name="role[]" multiple="multiple" size="2" required>
     <?php foreach ($roles as $roles_item): ?>
         <option value="<?php echo $roles_item['id'] ?>" <?php if ($roles_item['id'] == 2) echo "selected" ?>><?php echo $roles_item['name'] ?></option>
     <?php endforeach ?>
     </select>
 
-    <label for="login">Login</label>
+    <label for="login"><?php echo lang('users_create_field_login');?></label>
     <input type="input" name="login" id="login" required /><br />
     <div class="alert hide alert-error" id="lblLoginAlert">
         <button type="button" class="close" onclick="$('#lblLoginAlert').hide();">&times;</button>
-        This login is not available
+        <?php echo lang('users_create_flash_msg_error');?>
     </div>
 
-    <label for="email">E-mail</label>
+    <label for="email"><?php echo lang('users_create_field_email');?></label>
     <input type="email" id="email" name="email" required /><br />
 
     <input type="hidden" name="manager" id="manager" /><br />
-    <label for="txtManager">Select the manager</label>
+    <label for="txtManager"><?php echo lang('users_create_field_manager');?></label>
     <div class="input-append">
         <input type="text" id="txtManager" name="txtManager" required readonly />
-        <a id="cmdSelfManager" class="btn btn-primary">Self</a>
-        <a id="cmdSelectManager" class="btn btn-primary">Select</a>
+        <a id="cmdSelfManager" class="btn btn-primary"><?php echo lang('users_create_button_self');?></a>
+        <a id="cmdSelectManager" class="btn btn-primary"><?php echo lang('users_create_button_select');?></a>
     </div><br />
-    <i>If a user is its own manager (Self), it can validate its own leave requests.</i>
+    <i><?php echo lang('users_create_field_manager_description');?></i>
     <br /><br />
 
-    <label for="contract">Contract</label>
+    <label for="contract"><?php echo lang('users_create_field_contract');?></label>
     <select name="contract">
     <?php $index = 0;
          foreach ($contracts as $contract) { ?>
@@ -54,7 +59,7 @@ echo form_open('users/create', $attributes); ?>
     </select>
 
     <input type="hidden" name="entity" id="entity" /><br />
-    <label for="txtEntity">Select the entity</label>
+    <label for="txtEntity"><?php echo lang('users_create_field_entity');?></label>
     <div class="input-append">
         <input type="text" id="txtEntity" name="txtEntity" readonly />
         <a id="cmdSelectEntity" class="btn btn-primary">Select</a>
@@ -62,71 +67,81 @@ echo form_open('users/create', $attributes); ?>
     <br />
 
     <input type="hidden" name="position" id="position" /><br />
-    <label for="txtPosition">Select the position</label>
+    <label for="txtPosition"><?php echo lang('users_create_field_position');?></label>
     <div class="input-append">
         <input type="text" id="txtPosition" name="txtPosition" readonly />
-        <a id="cmdSelectPosition" class="btn btn-primary">Select</a>
+        <a id="cmdSelectPosition" class="btn btn-primary"><?php echo lang('users_create_button_select');?></a>
     </div>
     <br />
 
-    <label for="datehired">Date hired/started</label>
+    <label for="datehired"><?php echo lang('users_create_field_hired');?></label>
     <input type="text" name="datehired" id="datehired" /><br />
 
-    <label for="identifier">Internal/Company Identifier</label>
+    <label for="identifier"><?php echo lang('users_create_field_identifier');?></label>
     <input type="text" name="identifier" /><br />
-        
+    
+    <label for="language"><?php echo lang('users_create_field_language');?></label>
+    <select name="language">
+         <?php 
+         $languages = $this->language->nativelanguages($this->config->item('languages'));
+         $default_lang = $this->language->language2code($this->config->item('language'));
+         foreach ($languages as $code => $language): ?>
+        <option value="<?php echo $code; ?>" <?php if ($code == $default_lang) echo "selected" ?>><?php echo $language; ?></option>
+        <?php endforeach ?>
+    </select>
+
 </form>
 
-    <label for="password">Password</label>
+    <label for="password"><?php echo lang('users_create_field_password');?></label>
     <input type="password" name="password" id="password" required />&nbsp;
     <a class="btn" id="cmdGeneratePassword">
-        <i class="icon-refresh"></i>&nbsp;Generate password
+        <i class="icon-refresh"></i>&nbsp;<?php echo lang('users_create_button_generate_password');?>
     </a>
     <br />
     
-    <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;Create user</button>
+    <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('users_create_button_create');?></button>
     &nbsp;
-    <a href="<?php echo base_url(); ?>users" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;Cancel</a>
+    <a href="<?php echo base_url(); ?>users" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('users_create_button_cancel');?></a>
 
 <div id="frmSelectManager" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmSelectManager').modal('hide');" class="close">&times;</a>
-         <h3>Select the manager</h3>
+         <h3><?php echo lang('users_create_popup_manager_title');?></h3>
     </div>
     <div class="modal-body" id="frmSelectManagerBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_manager();" class="btn secondary">OK</a>
-        <a href="#" onclick="$('#frmSelectManager').modal('hide');" class="btn secondary">Cancel</a>
+        <a href="#" onclick="select_manager();" class="btn secondary"><?php echo lang('users_create_popup_manager_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectManager').modal('hide');" class="btn secondary"><?php echo lang('users_create_popup_manager_button_cancel');?></a>
     </div>
 </div>
 
 <div id="frmSelectEntity" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="close">&times;</a>
-         <h3>Select an entity</h3>
+         <h3><?php echo lang('users_create_popup_entity_title');?></h3>
     </div>
     <div class="modal-body" id="frmSelectEntityBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_entity();" class="btn secondary">OK</a>
-        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary">Cancel</a>
+        <a href="#" onclick="select_entity();" class="btn secondary"><?php echo lang('users_create_popup_entity_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('users_create_popup_entity_button_cancel');?></a>
     </div>
 </div>
 
 <div id="frmSelectPosition" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmSelectPosition').modal('hide');" class="close">&times;</a>
-         <h3>Select a position</h3>
+         <h3><?php echo lang('users_create_popup_position_title');?></h3>
     </div>
     <div class="modal-body" id="frmSelectPositionBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_position();" class="btn secondary">OK</a>
-        <a href="#" onclick="$('#frmSelectPosition').modal('hide');" class="btn secondary">Cancel</a>
+        <a href="#" onclick="select_position();" class="btn secondary"><?php echo lang('users_create_popup_position_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectPosition').modal('hide');" class="btn secondary"><?php echo lang('users_create_popup_position_button_cancel');?></a>
     </div>
 </div>
     

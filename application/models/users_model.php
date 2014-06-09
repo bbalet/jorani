@@ -160,7 +160,8 @@ class Users_model extends CI_Model {
             'organization' => $this->input->post('entity'),
             'position' => $this->input->post('position'),
             'datehired' => $datehired,
-            'identifier' => $this->input->post('identifier')
+            'identifier' => $this->input->post('identifier'),
+            'language' => $this->input->post('language')
         );
         $this->db->insert('users', $data);
         
@@ -178,7 +179,8 @@ class Users_model extends CI_Model {
     }
     
     /**
-     * Create a user record in the database
+     * Create a user record in the database. the difference with set_users function is that it doesn't
+     * values posted by en HTML form. Can be used by a mass importer for example.
      * @param type $firstname User firstname
      * @param type $lastname User lastname
      * @param type $login User login
@@ -243,7 +245,8 @@ class Users_model extends CI_Model {
             'organization' => $this->input->post('entity'),
             'position' => $this->input->post('position'),
             'datehired' => $datehired,
-            'identifier' => $this->input->post('identifier')
+            'identifier' => $this->input->post('identifier'),
+            'language' => $this->input->post('language')
         );
 
         $this->db->where('id', $this->input->post('id'));

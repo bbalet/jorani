@@ -35,7 +35,6 @@ class Extra extends CI_Controller {
         }
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
         $this->is_hr = $this->session->userdata('is_hr');
         $this->load->model('overtime_model');
         $this->user_id = $this->session->userdata('id');
@@ -53,7 +52,6 @@ class Extra extends CI_Controller {
     private function getUserContext()
     {
         $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $data['is_hr'] = $this->is_hr;
         $data['user_id'] =  $this->user_id;
         $data['language'] = $this->language;
@@ -204,10 +202,14 @@ class Extra extends CI_Controller {
         $this->load->library('email');
         $config = $this->settings_model->get_mail_config();            
         $this->email->initialize($config);
+        
+        $this->load->library('language');
+        $usr_lang = $this->language->code2language($manager['language']);
+        $this->lang->load('email', $usr_lang);
 
         $this->load->library('parser');
         $data = array(
-            'Title' => 'Overtime Request',
+            'Title' => lang('email_extra_request_validation_title'),
             'Firstname' => $this->session->userdata('firstname'),
             'Lastname' => $this->session->userdata('lastname'),
             'Date' => $this->input->post('date'),
@@ -216,11 +218,12 @@ class Extra extends CI_Controller {
             'UrlAccept' => $acceptUrl,
             'UrlReject' => $rejectUrl
         );
-        $message = $this->parser->parse('emails/overtime', $data, TRUE);
+        $message = $this->parser->parse('emails/' . $manager['language'] . '/overtime', $data, TRUE);
+        //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
 
         $this->email->from('do.not@reply.me', 'LMS');
         $this->email->to($manager['email']);
-        $this->email->subject('[LMS] Overtime Request from ' .
+        $this->email->subject(lang('email_extra_request_reject_subject') .
                 $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname'));
         $this->email->message($message);

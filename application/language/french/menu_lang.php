@@ -40,13 +40,13 @@ $lang['menu_hr_list_employees'] = 'Liste des employés';
 $lang['menu_hr_contracts_divider'] = 'Contrats';
 $lang['menu_hr_list_contracts'] = 'Liste des contrats';
 $lang['menu_hr_list_positions'] = 'Liste des postes';
-$lang['menu_hr_leaves_type_divider'] = 'Congés';
+$lang['menu_hr_leaves_type_divider'] = 'Absences';
 $lang['menu_hr_list_leaves_type'] = 'Liste des types';
 $lang['menu_hr_reports_divider'] = 'Rapports';
 $lang['menu_hr_report_leave_balance'] = 'État des congés';
 
 $lang['menu_validation_title'] = 'Validation';
-$lang['menu_validation_leaves'] = 'Congés';
+$lang['menu_validation_leaves'] = 'Absences';
 $lang['menu_validation_overtime'] = 'Heures supp.';
 
 $lang['menu_requests_title'] = 'Demandes';

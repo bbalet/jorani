@@ -1,6 +1,8 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('users', $language);?>
+$this->lang->load('users', $language);
+CI_Controller::get_instance()->load->library('language');
+?>
 
 <h2><?php echo lang('users_view_title');?><?php echo $user['id']; ?></h2>
 
@@ -19,7 +21,7 @@ $this->lang->load('users', $language);?>
     <label for="role"><?php echo lang('users_view_field_role');?></label>
     <select name="role" multiple="multiple" size="2" readonly>
     <?php foreach ($roles as $roles_item): ?>
-        <option value="<?php echo $roles_item['id'] ?>" <?php if ((((int)$roles_item['id']) & ((int) $user['role']))) echo "selected" ?>><?php echo $roles_item['name'] ?></option>
+        <option value="<?php echo $roles_item['id']; ?>" <?php if ((((int)$roles_item['id']) & ((int) $user['role']))) echo "selected"; ?>><?php echo $roles_item['name']; ?></option>
     <?php endforeach ?>
     </select>
 
@@ -36,10 +38,15 @@ $this->lang->load('users', $language);?>
     <input type="text" name="entity" value="<?php echo $organization_label; ?>" readonly /><br />
     
     <label for="datehired"><?php echo lang('users_view_field_hired');?></label>
-    <input type="text" name="datehired" value="<?php echo $user['datehired'];; ?>" readonly /><br />
+    <input type="text" name="datehired" value="<?php echo $user['datehired']; ?>" readonly /><br />
     
     <label for="identifier"><?php echo lang('users_view_field_identifier');?></label>
-    <input type="text" name="identifier" value="<?php echo $user['identifier'];; ?>" readonly /><br />
+    <input type="text" name="identifier" value="<?php echo $user['identifier']; ?>" readonly /><br />
+    
+    <label for="language"><?php echo lang('users_create_field_language');?></label>
+    <select name="language" readonly>
+        <option><?php echo $this->language->code2nativelanguage($user['language']); ?></option>
+    </select>
     
     <br /><br />
     <a href="<?php echo base_url();?>users/edit/<?php echo $user['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;<?php echo lang('users_view_button_edit');?></a>

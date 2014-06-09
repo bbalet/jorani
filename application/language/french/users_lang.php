@@ -29,7 +29,7 @@ $lang['users_index_thead_email'] = 'E-mail';
 $lang['users_index_thead_role'] = 'Rôle';
 $lang['users_index_thead_manager'] = 'Manager';
 $lang['users_index_button_export'] = 'Exporter cette liste';
-$lang['users_index_button_create_user'] = 'Créer utilisateurs';
+$lang['users_index_button_create_user'] = 'Créer utilisateur';
 $lang['users_index_button_import_user'] = 'Importer utilisateurs';
 $lang['users_index_popup_delete_title'] = 'Supprimer un utilisateur';
 $lang['users_index_popup_delete_title'] = 'Vous êtes sur le point de supprimer un utilisateur, cette procédure est irréversible.';
@@ -126,6 +126,7 @@ $lang['users_create_button_create'] = 'Créer l\'utilsateur';
 $lang['users_create_button_cancel'] = 'Annuler';
 $lang['users_create_flash_msg_success'] = 'L\'utilisateur a été créé avec succès.';
 $lang['users_create_login_check'] = 'Cet identifiant existe déjà.';
+$lang['users_create_flash_msg_error'] = 'Cet identifiant n\'est pas disponible.';
 
 $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Prénom';

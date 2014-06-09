@@ -1,6 +1,7 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('users', $language);?>
+$this->lang->load('users', $language);
+CI_Controller::get_instance()->load->library('language');?>
 
 <h2><?php echo lang('users_edit_title');?><?php echo $users_item['id']; ?> &nbsp;
 <a href="http://www.leave-management-system.org/en/documentation/page-create-a-new-user/" title="Link to documentation" target="_blank"><i class="icon-question-sign"></i></a>
@@ -49,7 +50,7 @@ $this->lang->load('users', $language);?>
     <label for="contract"><?php echo lang('users_edit_field_contract');?></label>
     <select name="contract">
     <?php foreach ($contracts as $contract): ?>
-        <option value="<?php echo $contract['id'] ?>" <?php if ($contract['id'] == $users_item['contract']) echo "selected" ?>><?php echo $contract['name'] ?></option>
+        <option value="<?php echo $contract['id'] ?>" <?php if ($contract['id'] == $users_item['contract']) echo "selected"; ?>><?php echo $contract['name']; ?></option>
     <?php endforeach ?>
     </select>
     
@@ -70,10 +71,19 @@ $this->lang->load('users', $language);?>
     <br />
     
     <label for="datehired"><?php echo lang('users_edit_field_hired');?></label>
-    <input type="text" name="datehired" id="datehired" value="<?php echo $users_item['datehired'];; ?>" /><br />
+    <input type="text" name="datehired" id="datehired" value="<?php echo $users_item['datehired']; ?>" /><br />
     
     <label for="identifier"><?php echo lang('users_edit_field_identifier');?></label>
-    <input type="text" name="identifier" value="<?php echo $users_item['identifier'];; ?>" /><br />
+    <input type="text" name="identifier" value="<?php echo $users_item['identifier']; ?>" /><br />
+    
+    <label for="language"><?php echo lang('users_edit_field_language');?></label>
+    <select name="language">
+         <?php 
+         $languages = $this->language->nativelanguages($this->config->item('languages'));
+         foreach ($languages as $code => $language): ?>
+        <option value="<?php echo $code; ?>" <?php if ($code == $users_item['language']) echo "selected" ?>><?php echo $language; ?></option>
+        <?php endforeach ?>
+    </select>
     
     <br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('users_edit_button_update');?></button>

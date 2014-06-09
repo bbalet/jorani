@@ -126,6 +126,7 @@ $lang['users_create_button_create'] = 'Create user';
 $lang['users_create_button_cancel'] = 'Cancel';
 $lang['users_create_flash_msg_success'] = 'The user has been succesfully created';
 $lang['users_create_login_check'] = 'Username already exists.';
+$lang['users_create_flash_msg_error'] = 'This username is not available.';
 
 $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Firstname';

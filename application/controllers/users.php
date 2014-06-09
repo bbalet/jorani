@@ -304,25 +304,25 @@ class Users extends CI_Controller {
             $config = $this->settings_model->get_mail_config();            
             $this->email->initialize($config);
             
-            /*
-            $lang['email_user_create_subject'] = '[LMS] Votre compte a été créé';
-            $lang['email_user_create_title'] = 'Votre compte a été créé';
-            */
+            $this->load->library('language');
+            $usr_lang = $this->language->code2language($this->input->post('language'));
+            $this->lang->load('email', $usr_lang);
             
             $this->load->library('parser');
             $data = array(
-                'Title' => 'Your account has been created',
+                'Title' => lang('email_user_create_title'),
                 'BaseURL' => base_url(),
                 'Firstname' => $this->input->post('firstname'),
                 'Lastname' => $this->input->post('lastname'),
                 'Login' => $this->input->post('login'),
                 'Password' => $password
             );
-            $message = $this->parser->parse('emails/new_user', $data, TRUE);
+            $message = $this->parser->parse('emails/' . $this->input->post('language') . '/new_user', $data, TRUE);
+            //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
 
             $this->email->from('do.not@reply.me', 'LMS');
             $this->email->to($this->input->post('email'));
-            $this->email->subject('[LMS] Your account has been created');
+            $this->email->subject(lang('email_user_create_subject'));
             $this->email->message($message);
             $this->email->send();
             

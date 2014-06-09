@@ -259,6 +259,7 @@ class Leaves extends CI_Controller {
             'UrlReject' => $rejectUrl
         );
         $message = $this->parser->parse('emails/' . $manager['language'] . '/request', $data, TRUE);
+        //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
 
         $this->email->from('do.not@reply.me', 'LMS');
         $this->email->to($manager['email']);

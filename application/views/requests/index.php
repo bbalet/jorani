@@ -41,14 +41,14 @@ $(document).ready(function() {
 <?php foreach ($requests as $requests_item): ?>
     <tr>
         <td>
-            <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>" title="View request"><?php echo $requests_item['id']; ?></a>
+            <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
             &nbsp;
             <div class="pull-right">
-                <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>" title="view request details"><i class="icon-eye-open"></i></a>
+                <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>requests/accept/<?php echo $requests_item['id']; ?>" title="accept request"><i class="icon-ok"></i></a>
+                <a href="<?php echo base_url();?>requests/accept/<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>requests/reject/<?php echo $requests_item['id']; ?>" title="reject request"><i class="icon-remove"></i></a>
+                <a href="<?php echo base_url();?>requests/reject/<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
             </div>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
@@ -72,13 +72,13 @@ $(document).ready(function() {
     <div class="span2">
       <a href="<?php echo base_url();?>requests/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('requests_index_button_export');?></a>
     </div>
-     <div class="span2">
+     <div class="span3">
       <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_all');?></a>
     </div>
-    <div class="span3">
+    <div class="span2">
       <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_pending');?></a>
     </div>
-    <div class="span7">&nbsp;</div>
+    <div class="span5">&nbsp;</div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
@@ -88,7 +88,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#leaves').dataTable({
-		"oLanguage": {
+                    "oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",
                     "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",

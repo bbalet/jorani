@@ -36,7 +36,6 @@ class Organization extends CI_Controller {
         $this->load->model('organization_model');
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
         $this->is_hr = $this->session->userdata('is_hr');
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
@@ -53,7 +52,6 @@ class Organization extends CI_Controller {
     private function getUserContext()
     {
         $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $data['is_hr'] = $this->is_hr;
         $data['user_id'] =  $this->user_id;
         $data['language'] = $this->language;

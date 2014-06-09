@@ -18,22 +18,22 @@
 
     //You can change the content of this template
 ?>
-<html>
+<html lang="fr">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta charset="UTF-8">
+    </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests an overtime. Below, the details :
+        Bienvenue dans LMS {Firstname} {Lastname}. Veuillez utiliser ces identifiants pour <a href="{BaseURL}">vous connecter à l'application</a> :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{Date}</td>
+                <td>Identifiant</td><td>{Login}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
-            </tr>
-            <tr>
-                <td>Cause &nbsp;</td><td>{Cause}</td>
-            </tr>
+                <td>Mot de passe</td><td>{Password}</td>
+            </tr>            
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+        Une fois connecté, vous pouvez modifier votre mot de passe comme expliqué <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Lien vers la documentation" target="_blank">dans cet article (en anglais)</a>.
     </body>
 </html>

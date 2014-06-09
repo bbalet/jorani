@@ -16,24 +16,28 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-    //You can change the content of this template
+//You can change the content of this template
 ?>
-<html>
+<html lang="fr">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta charset="UTF-8">
+    </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests an overtime. Below, the details :
+        Cher {Firstname} {Lastname}, <br />
+        <br />
+        La déclaration d'heures supplémentaires que vous avez soumise a été refusée. Voici les détails :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{Date}</td>
+                <td>Date &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Durée &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Cause &nbsp;</td><td>{Cause}</td>
+                <td>Raison &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
     </body>
 </html>

@@ -16,11 +16,24 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['email_password_reset_subject'] = '[LMS] Votre mot de passe a été modifié';
-$lang['email_password_reset_title'] = 'Votre mot de passe a été modifié';
-
-$lang['email_user_create_subject'] = '[LMS] Votre compte a été créé';
-$lang['email_user_create_title'] = 'Votre compte a été créé';
-
-$lang['email_leave_request_subject'] = '[LMS] Demande d\'absence de ';
-$lang['email_leave_request_title'] = 'Demande d\'absence';
+//You can change the content of this template
+?>
+<html>
+    <body>
+        <h3>{Title}</h3>
+        Dear {Firstname} {Lastname}, <br />
+        <br />
+        The overtime you've requested has been accepted. Below, the details :
+        <table border="0">
+            <tr>
+                <td>From &nbsp;</td><td>{Date}</td>
+            </tr>
+            <tr>
+                <td>Duration &nbsp;</td><td>{Duration}</td>
+            </tr>
+            <tr>
+                <td>Cause &nbsp;</td><td>{Cause}</td>
+            </tr>
+        </table>
+    </body>
+</html>

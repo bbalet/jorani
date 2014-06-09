@@ -26,7 +26,7 @@ $lang['organization_index_thead_email'] = 'E-mail';
 $lang['organization_index_button_add_employee'] = 'Attacher un employé';
 $lang['organization_index_button_remove_employee'] = 'Détacher un employé';
 $lang['organization_index_popup_delete_title'] = 'Supprimer entitée';
-$lang['organization_index_popup_delete_description'] = 'Vous êtes sur le point de supprimer une entitée, cette procédure est irréversible.';
+$lang['organization_index_popup_delete_description'] = 'Vous êtes sur le point de supprimer une entité, cette procédure est irréversible.';
 $lang['organization_index_popup_delete_confirm'] = 'Voulez-vous continuer ?';
 $lang['organization_index_popup_delete_button_yes'] = 'Oui';
 $lang['organization_index_popup_delete_button_no'] = 'Non';
@@ -38,10 +38,10 @@ $lang['organization_index_popup_add_button_cancel'] = 'Annuler';
 $lang['organization_index_popup_error_title'] = 'Une erreur est apparue';
 $lang['organization_index_popup_error_button_ok'] = 'OK';
 
-$lang['organization_index_prompt_entity_name'] = 'Nom de l\'entitée';
-$lang['organization_index_error_msg_select_entity'] = 'Veuillez sélectionner une entitée dans l\'organisation (arborescence à droite).';
-$lang['organization_index_error_msg_select_employee'] = 'Veuillez sélectionner un employé dans la table des utilisateurs appartenant à cette entitée.';
-$lang['organization_index_error_msg_delete_root'] = 'Vous ne pouvez pas supprimer l\'entitée racine.';
+$lang['organization_index_prompt_entity_name'] = 'Nom de l\'entité';
+$lang['organization_index_error_msg_select_entity'] = 'Veuillez sélectionner une entité dans l\'organisation (arborescence à droite).';
+$lang['organization_index_error_msg_select_employee'] = 'Veuillez sélectionner un employé dans la table des utilisateurs appartenant à cette entité.';
+$lang['organization_index_error_msg_delete_root'] = 'Vous ne pouvez pas supprimer l\'entité racine.';
 
-$lang['organization_select_field_search_placeholder'] = 'chercher une entitée';
+$lang['organization_select_field_search_placeholder'] = 'chercher une entité';
 $lang['organization_select_button_search'] = 'Chercher';

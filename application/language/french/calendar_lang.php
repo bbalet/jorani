@@ -34,7 +34,7 @@ $lang['calendar_department_description'] = 'Calendrier des employés travaillant
 $lang['contract_department_msg_error'] = 'Vous n\'appartenez à aucun service. Veuillez contacter le service des ressources humaines.';
 
 $lang['calendar_organization_title'] = 'Calendrier de l\'organisation';
-$lang['calendar_organization_description'] = 'Calendrier global avec un filtre sur les entitées';
+$lang['calendar_organization_description'] = 'Calendrier global avec un filtre sur les entités';
 $lang['calendar_organization_field_select_entity'] = 'Choisir l\'entité';
 $lang['calendar_organization_button_select_entity'] = 'Choisir';
 $lang['calendar_organization_check_include_subdept'] = 'Inclure les sous-entités';

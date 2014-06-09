@@ -16,4 +16,11 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['global_link_tooltip_documentation'] = 'Link to documentation';
+$lang['email_password_reset_subject'] = '[LMS] Your password has been reset';
+$lang['email_password_reset_title'] = 'Your password has been reset';
+
+$lang['email_user_create_subject'] = '[LMS] Your account has been created';
+$lang['email_user_create_title'] = 'Your account has been created';
+
+$lang['email_leave_request_subject'] = '[LMS] Leave Request from ';
+$lang['email_leave_request_title'] = 'Leave Request';

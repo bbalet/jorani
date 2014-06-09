@@ -21,19 +21,15 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests an overtime. Below, the details :
+        Welcome to LMS {Firstname} {Lastname}. Please use these credentials to <a href="{BaseURL}">login to the system</a> :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{Date}</td>
+                <td>Login</td><td>{Login}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
-            </tr>
-            <tr>
-                <td>Cause &nbsp;</td><td>{Cause}</td>
-            </tr>
+                <td>Password</td><td>{Password}</td>
+            </tr>            
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+        Once connected, you can change your password, as explained <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
     </body>
 </html>

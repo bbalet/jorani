@@ -35,7 +35,6 @@ class Leaves extends CI_Controller {
         }
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
         $this->is_hr = $this->session->userdata('is_hr');
         $this->load->model('leaves_model');
         $this->user_id = $this->session->userdata('id');
@@ -53,7 +52,6 @@ class Leaves extends CI_Controller {
     private function getUserContext()
     {
         $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $data['is_hr'] = $this->is_hr;
         $data['user_id'] =  $this->user_id;
         $data['language'] = $this->language;
@@ -99,7 +97,7 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/counters', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->session->set_flashdata('msg', 'It appears you have no contract. Please contact your HR Officer / Manager.');
+            $this->session->set_flashdata('msg', lang('leaves_summary_flash_msg_error'));
             redirect('leaves');
         }
     }
@@ -139,18 +137,18 @@ class Leaves extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Request a leave';
+        $data['title'] = lang('leaves_create_title');
         $this->load->model('types_model');
         $data['types'] = $this->types_model->get_types();
         
-        $this->form_validation->set_rules('startdate', 'Start Date', 'required|xss_clean');
+        $this->form_validation->set_rules('startdate', lang('leaves_create_field_start'), 'required|xss_clean');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
-        $this->form_validation->set_rules('enddate', 'End Date', 'required|xss_clean');
+        $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|xss_clean');
         $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean');
-        $this->form_validation->set_rules('duration', 'Duration', 'required|xss_clean');
-        $this->form_validation->set_rules('type', 'Type', 'required|xss_clean');
-        $this->form_validation->set_rules('cause', 'Cause', 'xss_clean');
-        $this->form_validation->set_rules('status', 'Status', 'required|xss_clean');
+        $this->form_validation->set_rules('duration', lang('leaves_create_field_duration'), 'required|xss_clean');
+        $this->form_validation->set_rules('type', lang('leaves_create_field_type'), 'required|xss_clean');
+        $this->form_validation->set_rules('cause', lang('leaves_create_field_cause'), 'xss_clean');
+        $this->form_validation->set_rules('status', lang('leaves_create_field_status'), 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -163,7 +161,7 @@ class Leaves extends CI_Controller {
             if ($this->input->post('status') == 2) {
                 $this->sendMail($leave_id);
             }            
-            $this->session->set_flashdata('msg', 'The leave request has been succesfully created');
+            $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
             redirect('leaves');
         }
     }
@@ -186,27 +184,27 @@ class Leaves extends CI_Controller {
             if (($this->session->userdata('manager') != $this->user_id) &&
                     $data['leave']['status'] != 1) {
                 log_message('error', 'User #' . $this->user_id . ' illegally tried to edit leave #' . $id);
-                $this->session->set_flashdata('msg', 'You cannot edit a leave request already submitted');
+                $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_error'));
                 redirect('leaves');
             }
         } //Admin
         
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Edit a leave request';
+        $data['title'] = lang('leaves_edit_html_title');
         $data['id'] = $id;
         
         $this->load->model('types_model');  
         $data['types'] = $this->types_model->get_types();
-                
-        $this->form_validation->set_rules('startdate', 'Start Date', 'required|xss_clean');
+        
+        $this->form_validation->set_rules('startdate', lang('leaves_edit_field_start'), 'required|xss_clean');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
-        $this->form_validation->set_rules('enddate', 'End Date', 'required|xss_clean');
+        $this->form_validation->set_rules('enddate', lang('leaves_edit_field_end'), 'required|xss_clean');
         $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean');
-        $this->form_validation->set_rules('duration', 'Duration', 'required|xss_clean');
-        $this->form_validation->set_rules('type', 'Type', 'required|xss_clean');
-        $this->form_validation->set_rules('cause', 'Cause', 'xss_clean');
-        $this->form_validation->set_rules('status', 'Status', 'required|xss_clean');
+        $this->form_validation->set_rules('duration', lang('leaves_edit_field_duration'), 'required|xss_clean');
+        $this->form_validation->set_rules('type', lang('leaves_edit_field_type'), 'required|xss_clean');
+        $this->form_validation->set_rules('cause', lang('leaves_edit_field_cause'), 'xss_clean');
+        $this->form_validation->set_rules('status', lang('leaves_edit_field_status'), 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -218,8 +216,8 @@ class Leaves extends CI_Controller {
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
                 $this->sendMail($leave_id);
-            }            
-            $this->session->set_flashdata('msg', 'The leave request has been succesfully updated');
+            }
+            $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
             } else {
@@ -235,7 +233,6 @@ class Leaves extends CI_Controller {
      */
     private function sendMail($id)
     {
-        log_message('debug', '{controllers/leaves/sendMail} Entering method with id=' . $id);
         $this->load->model('users_model');
         $this->load->model('settings_model');
         $manager = $this->users_model->get_users($this->session->userdata('manager'));
@@ -243,14 +240,17 @@ class Leaves extends CI_Controller {
         $rejectUrl = base_url() . 'requests/reject/' . $id;
 
         //Send an e-mail to the manager
-        //See: http://www.codeigniter.fr/user_guide/libraries/email.html
         $this->load->library('email');
         $config = $this->settings_model->get_mail_config();            
         $this->email->initialize($config);
+        
+        $this->load->library('language');
+        $usr_lang = $this->language->code2language($manager['language']);
+        $this->lang->load('email', $usr_lang);
 
         $this->load->library('parser');
         $data = array(
-            'Title' => 'Leave Request',
+            'Title' => lang('email_leave_request_title'),
             'Firstname' => $this->session->userdata('firstname'),
             'Lastname' => $this->session->userdata('lastname'),
             'StartDate' => $this->input->post('startdate'),
@@ -258,17 +258,15 @@ class Leaves extends CI_Controller {
             'UrlAccept' => $acceptUrl,
             'UrlReject' => $rejectUrl
         );
-        $message = $this->parser->parse('emails/request', $data, TRUE);
+        $message = $this->parser->parse('emails/' . $manager['language'] . '/request', $data, TRUE);
 
         $this->email->from('do.not@reply.me', 'LMS');
         $this->email->to($manager['email']);
-        $this->email->subject('[LMS] Leave Request from ' .
+        $this->email->subject(lang('email_leave_request_subject') .
                 $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname'));
         $this->email->message($message);
         $this->email->send();
-        //echo $this->email->print_debugger();
-        log_message('debug', '{controllers/leaves/sendMail} Leaving method.');
     }
     
     /**
@@ -293,7 +291,7 @@ class Leaves extends CI_Controller {
             if ($can_delete == true) {
                 $this->leaves_model->delete_leave($id);
             } else {
-                $this->session->set_flashdata('msg', 'You can\'t delete this leave request');
+                $this->session->set_flashdata('msg', lang('leaves_delete_flash_msg_error'));
                 if (isset($_GET['source'])) {
                     redirect($_GET['source']);
                 } else {
@@ -301,7 +299,7 @@ class Leaves extends CI_Controller {
                 }
             }
         }
-        $this->session->set_flashdata('msg', 'The leave request has been succesfully deleted');
+        $this->session->set_flashdata('msg', lang('leaves_delete_flash_msg_success'));
         if (isset($_GET['source'])) {
             redirect($_GET['source']);
         } else {
@@ -322,16 +320,17 @@ class Leaves extends CI_Controller {
     public function export() {
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('List of leaves');
-        $this->excel->getActiveSheet()->setCellValue('A1', 'ID');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Start Date');
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Start Date type');
-        $this->excel->getActiveSheet()->setCellValue('D1', 'End Date');
-        $this->excel->getActiveSheet()->setCellValue('E1', 'End Date type');
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Duration');
-        $this->excel->getActiveSheet()->setCellValue('G1', 'Type');
-        $this->excel->getActiveSheet()->setCellValue('H1', 'Cause');
-        $this->excel->getActiveSheet()->setCellValue('I1', 'Status');
+
+        $this->excel->getActiveSheet()->setTitle(lang('leaves_export_title'));
+        $this->excel->getActiveSheet()->setCellValue('A1', lang('leaves_export_thead_id'));
+        $this->excel->getActiveSheet()->setCellValue('B1', lang('leaves_export_thead_start_date'));
+        $this->excel->getActiveSheet()->setCellValue('C1', lang('leaves_export_thead_start_date_type'));
+        $this->excel->getActiveSheet()->setCellValue('D1', lang('leaves_export_thead_end_date'));
+        $this->excel->getActiveSheet()->setCellValue('E1', lang('leaves_export_thead_end_date_type'));
+        $this->excel->getActiveSheet()->setCellValue('F1', lang('leaves_export_thead_cause'));
+        $this->excel->getActiveSheet()->setCellValue('G1', lang('leaves_export_thead_duration'));
+        $this->excel->getActiveSheet()->setCellValue('H1', lang('leaves_export_thead_type'));
+        $this->excel->getActiveSheet()->setCellValue('I1', lang('leaves_export_thead_status'));
         $this->excel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 

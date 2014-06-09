@@ -16,11 +16,25 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['email_password_reset_subject'] = '[LMS] Votre mot de passe a été modifié';
-$lang['email_password_reset_title'] = 'Votre mot de passe a été modifié';
-
-$lang['email_user_create_subject'] = '[LMS] Votre compte a été créé';
-$lang['email_user_create_title'] = 'Votre compte a été créé';
-
-$lang['email_leave_request_subject'] = '[LMS] Demande d\'absence de ';
-$lang['email_leave_request_title'] = 'Demande d\'absence';
+//You can change the content of this template
+?>
+<html lang="fr">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h3>{Title}</h3>
+        Cher {Firstname} {Lastname}, <br />
+        <br />
+        La demande d'absence que vous avez soumise a été acceptée. Voici les détails :
+        <table border="0">
+            <tr>
+                <td>Du &nbsp;</td><td>{StartDate}</td>
+            </tr>
+            <tr>
+                <td>Au &nbsp;</td><td>{EndDate}</td>
+            </tr>            
+        </table>
+    </body>
+</html>

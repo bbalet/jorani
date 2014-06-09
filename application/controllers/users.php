@@ -40,7 +40,6 @@ class Users extends CI_Controller {
         $this->load->model('users_model');
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
         $this->is_hr = $this->session->userdata('is_hr');
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
@@ -56,7 +55,6 @@ class Users extends CI_Controller {
      */
     private function getUserContext() {
         $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
         $data['is_hr'] = $this->is_hr;
         $data['user_id'] = $this->user_id;
         $data['language'] = $this->language;
@@ -129,22 +127,21 @@ class Users extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Edit a user';
-
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required|xss_clean');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required|xss_clean');
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required|xss_clean');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required|xss_clean');
-        $this->form_validation->set_rules('login', 'Login identifier', 'required|callback_login_check|xss_clean');
-        $this->form_validation->set_rules('email', 'E-mail', 'required|xss_clean');
-        $this->form_validation->set_rules('role', 'role', 'required|xss_clean');
-        $this->form_validation->set_rules('manager', 'Manager', 'required|xss_clean');
-        $this->form_validation->set_rules('contract', 'Contract', 'xss_clean');
-        $this->form_validation->set_rules('entity', 'Entity', 'xss_clean');
-        $this->form_validation->set_rules('position', 'Position', 'xss_clean');
-        $this->form_validation->set_rules('datehired', 'Date hired/started', 'xss_clean');
-        $this->form_validation->set_rules('identifier', 'Internal/Company Identifier', 'xss_clean');
-
+        $data['title'] = lang('users_edit_html_title');
+        
+        $this->form_validation->set_rules('firstname', lang('users_edit_field_firstname'), 'required|xss_clean');
+        $this->form_validation->set_rules('lastname', lang('users_edit_field_lastname'), 'required|xss_clean');
+        $this->form_validation->set_rules('login', lang('users_edit_field_login'), 'required|xss_clean');
+        $this->form_validation->set_rules('email', lang('users_edit_field_email'), 'required|xss_clean');
+        $this->form_validation->set_rules('role', lang('users_edit_field_role'), 'required|xss_clean');
+        $this->form_validation->set_rules('manager', lang('users_edit_field_manager'), 'required|xss_clean');
+        $this->form_validation->set_rules('contract', lang('users_edit_field_contract'), 'xss_clean');
+        $this->form_validation->set_rules('entity', lang('users_edit_field_entity'), 'xss_clean');
+        $this->form_validation->set_rules('position', lang('users_edit_field_position'), 'xss_clean');
+        $this->form_validation->set_rules('datehired', lang('users_edit_field_hired'), 'xss_clean');
+        $this->form_validation->set_rules('identifier', lang('users_edit_field_identifier'), 'xss_clean');
+        $this->form_validation->set_rules('language', lang('users_edit_field_language'), 'xss_clean');
+        
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
             show_404();
@@ -166,7 +163,7 @@ class Users extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $this->users_model->update_users();
-            $this->session->set_flashdata('msg', 'The user has been succesfully updated');
+            $this->session->set_flashdata('msg', lang('users_edit_flash_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
             } else {
@@ -191,7 +188,7 @@ class Users extends CI_Controller {
             $this->users_model->delete_user($id);
         }
         log_message('info', 'User #' . $id . ' has been deleted by user #' . $this->session->userdata('id'));
-        $this->session->set_flashdata('msg', 'The user has been succesfully deleted');
+        $this->session->set_flashdata('msg', lang('users_delete_flash_msg_success'));
         redirect('users');
     }
 
@@ -202,7 +199,6 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reset($id) {
-        log_message('debug', '{controllers/users/reset} Entering method with id=' . $id);
         $this->auth->check_is_granted('change_password', $id);
 
         //Test if user exists
@@ -217,7 +213,6 @@ class Users extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
             if ($this->form_validation->run() === FALSE) {
-                log_message('debug', '{controllers/users/reset} Initial form call or bad values');
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
                 $this->load->view('templates/header', $data);
                 $this->load->view('users/reset', $data);
@@ -231,25 +226,29 @@ class Users extends CI_Controller {
                 $this->load->library('email');
                 $config = $this->settings_model->get_mail_config();            
                 $this->email->initialize($config);
+                
+                $this->load->library('language');
+                $usr_lang = $this->language->code2language($user['language']);
+                $this->lang->load('email', $usr_lang);
 
                 $this->load->library('parser');
                 $data = array(
-                    'Title' => 'Your password has been reset',
+                    'Title' => lang('email_password_reset_title'),
                     'Firstname' => $user['firstname'],
                     'Lastname' => $user['lastname']
                 );
-                $message = $this->parser->parse('emails/password_reset', $data, TRUE);
+                $message = $this->parser->parse('emails/' . $user['language'] . '/password_reset', $data, TRUE);
+                //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
 
                 $this->email->from('do.not@reply.me', 'LMS');
                 $this->email->to($user['email']);
-                $this->email->subject('[LMS] Your password has been reset');
+                $this->email->subject(lang('email_password_reset_subject'));
                 $this->email->message($message);
                 $this->email->send();
                 
                 //Inform back the user by flash message
-                $this->session->set_flashdata('msg', 'The password has been succesfully changed');
-                log_message('debug', '{controllers/users/reset} Leaving method (before redirect)');
-                if ($this->is_admin) {
+                $this->session->set_flashdata('msg', lang('users_reset_flash_msg_success'));
+                if ($this->is_hr) {
                     redirect('users');
                 }
                 else {
@@ -268,7 +267,7 @@ class Users extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = 'Create a new user';
+        $data['title'] = lang('users_create_title');
 
         $this->load->model('roles_model');
         $data['roles'] = $this->roles_model->get_roles();
@@ -276,18 +275,19 @@ class Users extends CI_Controller {
         $data['contracts'] = $this->contracts_model->get_contracts();
         $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
 
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required|xss_clean');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required|xss_clean');
-        $this->form_validation->set_rules('login', 'Login identifier', 'required|callback_login_check|xss_clean');
-        $this->form_validation->set_rules('email', 'E-mail', 'required|xss_clean');
-        $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
-        $this->form_validation->set_rules('role[]', 'Role', 'required|xss_clean');
-        $this->form_validation->set_rules('manager', 'Manager', 'required|xss_clean');
-        $this->form_validation->set_rules('contract', 'Contract', 'xss_clean');
-        $this->form_validation->set_rules('position', 'Position', 'xss_clean');
-        $this->form_validation->set_rules('entity', 'Entity', 'xss_clean');
-        $this->form_validation->set_rules('datehired', 'Date hired/started', 'xss_clean');
-        $this->form_validation->set_rules('identifier', 'Internal/Company Identifier', 'xss_clean');
+        $this->form_validation->set_rules('firstname', lang('users_create_field_firstname'), 'required|xss_clean');
+        $this->form_validation->set_rules('lastname', lang('users_create_field_lastname'), 'required|xss_clean');
+        $this->form_validation->set_rules('login', lang('users_create_field_login'), 'required|callback_login_check|xss_clean');
+        $this->form_validation->set_rules('email', lang('users_create_field_email'), 'required|xss_clean');
+        $this->form_validation->set_rules('CipheredValue', lang('users_create_field_password'), 'required');
+        $this->form_validation->set_rules('role[]', lang('users_create_field_role'), 'required|xss_clean');
+        $this->form_validation->set_rules('manager', lang('users_create_field_manager'), 'required|xss_clean');
+        $this->form_validation->set_rules('contract', lang('users_create_field_contract'), 'xss_clean');
+        $this->form_validation->set_rules('position', lang('users_create_field_position'), 'xss_clean');
+        $this->form_validation->set_rules('entity', lang('users_create_field_entity'), 'xss_clean');
+        $this->form_validation->set_rules('datehired', lang('users_create_field_hired'), 'xss_clean');
+        $this->form_validation->set_rules('identifier', lang('users_create_field_identifier'), 'xss_clean');
+        $this->form_validation->set_rules('language', lang('users_create_field_language'), 'xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -298,12 +298,17 @@ class Users extends CI_Controller {
             $password = $this->users_model->set_users();
             log_message('info', 'User ' . $this->input->post('login') . ' has been created by user #' . $this->session->userdata('id'));
             
-            //Send an e-mail to the user so as to inform that its password has been changed
+            //Send an e-mail to the user so as to inform that its account has been created
             $this->load->model('settings_model');
             $this->load->library('email');
             $config = $this->settings_model->get_mail_config();            
             $this->email->initialize($config);
-
+            
+            /*
+            $lang['email_user_create_subject'] = '[LMS] Votre compte a été créé';
+            $lang['email_user_create_title'] = 'Votre compte a été créé';
+            */
+            
             $this->load->library('parser');
             $data = array(
                 'Title' => 'Your account has been created',
@@ -321,7 +326,7 @@ class Users extends CI_Controller {
             $this->email->message($message);
             $this->email->send();
             
-            $this->session->set_flashdata('msg', 'The user has been succesfully created');
+            $this->session->set_flashdata('msg', lang('users_create_flash_msg_success'));
             redirect('users');
         }
     }
@@ -329,11 +334,11 @@ class Users extends CI_Controller {
     /**
      * Form validation callback : prevent from login duplication
      * @param type $login
-     * @return boolean
+     * @return boolean true if the field is valid, false otherwise
      */
     public function login_check($login) {
         if (!$this->users_model->is_login_available($login)) {
-            $this->form_validation->set_message('login_check', 'Username already exists.');
+            $this->form_validation->set_message('login_check', lang('users_create_login_check'));
             return false;
         } else {
             return true;
@@ -349,31 +354,6 @@ class Users extends CI_Controller {
             echo 'true';
         } else {
             echo 'false';
-        }
-    }
-
-    /**
-     * Action : update a user (using data from HTTP form)
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function update() {
-        $this->auth->check_is_granted('update_user');
-        $data = $this->getUserContext();
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $data['title'] = 'Create a new user';
-
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('menu/index', $data);
-            $this->load->view('users/edit/' . $this->input->post('id'));
-            $this->load->view('templates/footer');
-        } else {
-            $this->users_model->update_users();
-            $this->index();
         }
     }
 

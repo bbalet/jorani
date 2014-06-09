@@ -21,6 +21,7 @@ $lang['leaves_summary_thead_type'] = 'Type d\'absence';
 $lang['leaves_summary_thead_taken'] = 'Pris';
 $lang['leaves_summary_thead_entitled'] = 'Disponible';
 $lang['leaves_summary_thead_description'] = 'Description';
+$lang['leaves_summary_flash_msg_error'] = 'Il semble que vous n\'ayez pas de contrat. Veuillez contacter un responsable des ressources humaines.';
 
 $lang['leaves_index_title'] = 'Mes demandes de congés';
 $lang['leaves_index_thead_tip_view'] = 'voir';
@@ -54,6 +55,7 @@ $lang['leaves_create_field_cause'] = 'Cause (optionelle)';
 $lang['leaves_create_field_status'] = 'Statut';
 $lang['leaves_create_button_create'] = 'Créer la demande';
 $lang['leaves_create_button_cancel'] = 'Annuler';
+$lang['leaves_create_flash_msg_success'] = 'La demande d\'absence a été créée avec succès.';
 
 $lang['leaves_edit_html_title'] = 'Modifier la demande';
 $lang['leaves_edit_title'] = 'Modifier la demande N°';
@@ -66,6 +68,11 @@ $lang['leaves_edit_field_cause'] = 'Cause (optionelle)';
 $lang['leaves_edit_field_status'] = 'Statut';
 $lang['leaves_edit_button_update'] = 'Mettre à jour';
 $lang['leaves_edit_button_cancel'] = 'Annuler';
+$lang['leaves_edit_flash_msg_error'] = 'Vous ne pouvez pas modifier une demande déjà soumise.';
+$lang['leaves_edit_flash_msg_success'] = 'La demande d\'absence a été modifiée avec succès.';
+
+$lang['leaves_delete_flash_msg_error'] = 'Vous ne pouvez pas supprimer cette demande d\'absence.';
+$lang['leaves_delete_flash_msg_success'] = 'La demande d\'absence a été supprimée avec succès.';
 
 $lang['leaves_view_title'] = 'Visualiser la demande N°';
 $lang['leaves_view_html_title'] = 'Visualiser une demande';
@@ -77,3 +84,14 @@ $lang['leaves_view_field_cause'] = 'Cause';
 $lang['leaves_view_field_status'] = 'Statut';
 $lang['leaves_view_button_edit'] = 'Modifier';
 $lang['leaves_view_button_back_list'] = 'Retour à la liste';
+
+$lang['leaves_export_title'] = 'Liste des demandes d\'absence';
+$lang['leaves_export_thead_id'] = 'ID';
+$lang['leaves_export_thead_start_date'] = 'Date début';
+$lang['leaves_export_thead_start_date_type'] = 'Matin/Après-midi';
+$lang['leaves_export_thead_end_date'] = 'Date fin';
+$lang['leaves_export_thead_end_date_type'] = 'Matin/Après-midi';
+$lang['leaves_export_thead_cause'] = 'Cause';
+$lang['leaves_export_thead_duration'] = 'Durée';
+$lang['leaves_export_thead_type'] = 'Type';
+$lang['leaves_export_thead_status'] = 'Statut';

@@ -21,18 +21,18 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        Cher {Firstname} {Lastname}, <br />
+        Dear {Firstname} {Lastname}, <br />
         <br />
-        La déclaration d'heures supplémentaires que vous avez soumise a été refusée. Voici les détails :
+        The overtime you've requested has been rejected. Below, the details :
         <table border="0">
             <tr>
                 <td>Date &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>Durée &nbsp;</td><td>{Duration}</td>
+                <td>Duration &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Raison &nbsp;</td><td>{Cause}</td>
+                <td>Cause &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
     </body>

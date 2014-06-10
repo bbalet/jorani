@@ -24,7 +24,7 @@
         {Firstname} {Lastname} requests an overtime. Below, the details :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{Date}</td>
+                <td>Date &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
                 <td>Duration &nbsp;</td><td>{Duration}</td>

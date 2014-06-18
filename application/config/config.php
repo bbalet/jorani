@@ -381,7 +381,7 @@ $config['default_role_id'] = 2;
 
 $config['version'] = 'v0.1_alpha-2';
 
-$config['languages'] = 'en,fr';
+$config['languages'] = 'en,fr,kh';
 
 //E-mail settings
 $config['protocol'] = 'smtp';

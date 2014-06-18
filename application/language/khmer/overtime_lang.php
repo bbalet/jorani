@@ -18,15 +18,15 @@
 
 $lang['overtime_index_title'] = 'Overtime Requests submitted to me';
 $lang['overtime_index_description'] = 'This screen lists the overtime requests submitted to you. If you are not a manager, this list will always be empty.';
-$lang['overtime_index_thead_tip_view'] = 'view';
+$lang['overtime_index_thead_tip_view'] = 'បង្ហាញ';
 $lang['overtime_index_thead_tip_accept'] = 'accept';
 $lang['overtime_index_thead_tip_reject'] = 'reject';
 $lang['overtime_index_thead_id'] = 'ID';
 $lang['overtime_index_thead_fullname'] = 'Fullname';
-$lang['overtime_index_thead_date'] = 'Date';
-$lang['overtime_index_thead_duration'] = 'Duration';
-$lang['overtime_index_thead_status'] = 'Status';
-$lang['overtime_index_button_export'] = 'Export this list';
+$lang['overtime_index_thead_date'] = 'កាលបរិច្ឆេទ';
+$lang['overtime_index_thead_duration'] = 'រយៈពេល';
+$lang['overtime_index_thead_status'] = 'ស្ថានភាព';
+$lang['overtime_index_button_export'] = 'បញ្ជីនាំចេញ';
 $lang['overtime_index_button_show_all'] = 'All requests';
 $lang['overtime_index_button_show_pending'] = 'Pending requests ';
 
@@ -39,7 +39,7 @@ $lang['overtime_index_button_show_pending'] = 'Pending requests ';
 $lang['overtime_export_title'] = 'List of overtime resquests';
 $lang['overtime_export_thead_id'] = 'ID';
 $lang['overtime_export_thead_fullname'] = 'Fullname';
-$lang['overtime_export_thead_date'] = 'Date';
-$lang['overtime_export_thead_duration'] = 'Duration';
-$lang['overtime_export_thead_cause'] = 'Reason';
-$lang['overtime_export_thead_status'] = 'Status';
+$lang['overtime_export_thead_date'] = 'កាលបរិច្ឆេទ';
+$lang['overtime_export_thead_duration'] = 'រយៈពេល';
+$lang['overtime_export_thead_cause'] = 'មូលហេតុ';
+$lang['overtime_export_thead_status'] = 'ស្ថានភាព';

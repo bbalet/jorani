@@ -1,9 +1,12 @@
 <?php
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('session', $language);?>
+$CI =& get_instance();
+$CI->load->library('language');
+$CI->load->helper('language');
+$this->lang->load('session', $language);
+$this->lang->load('global', $language);?>
 
 <h2><?php echo lang('session_login_title');?> &nbsp;
-<a href="http://www.leave-management-system.org/page-login-to-the-application.html" title="Link to documentation" target="_blank"><i class="icon-question-sign"></i></a></h2>
+<a href="http://www.leave-management-system.org/page-login-to-the-application.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a></h2>
 
 <?php if($this->session->flashdata('msg')){ ?>
 <div class="alert fade in" id="flashbox">
@@ -22,14 +25,20 @@ $(document).ready(function() {
 
 <?php
 $attributes = array('id' => 'loginFrom');
-echo form_open('session/login', $attributes); ?>
+echo form_open('session/login', $attributes);
+$languages = $CI->language->nativelanguages($this->config->item('languages'));?>
 
     <input type="hidden" name="last_page" value="session/login" />
+    <?php if (count($languages) == 1) { ?>
+    <input type="hidden" name="language" value="<?php echo $language_code; ?>" />
+    <?php } else { ?>
     <label for="login"><?php echo lang('session_login_field_language');?></label>
-    <select name="language" id="language">
-        <option value="en" <?php if ($language_code == 'en') echo 'selected'; ?>>English</option>
-        <option value="fr" <?php if ($language_code == 'fr') echo 'selected'; ?>>Français</option>
+    <select name="language" id="language" onchange="Javascript:change_language();">
+        <?php foreach ($languages as $lang_code => $lang_name) { ?>
+        <option value="<?php echo $lang_code; ?>" <?php if ($language_code == $lang_code) echo 'selected'; ?>><?php echo $lang_name; ?></option>
+        <?php }?>
     </select>
+    <?php } ?>
     <label for="login"><?php echo lang('session_login_field_login');?></label>
     <input type="input" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required /><br />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
@@ -43,6 +52,13 @@ echo form_open('session/login', $attributes); ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript">
+    //Refresh page language
+    function change_language() {
+        $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
+        $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
+        $('#loginFrom').submit();
+    }
+    
     $(function () {
         //Memorize the last selected language with a cookie
         if($.cookie('language') != null) {
@@ -52,9 +68,6 @@ echo form_open('session/login', $attributes); ?>
                 $('#loginFrom').submit();
             }
         }
-        $('#language').change(function() {
-            $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
-        });
         
         $('#send').click(function() {
             var encrypt = new JSEncrypt();
@@ -69,12 +82,6 @@ echo form_open('session/login', $attributes); ?>
         $('#password').keypress(function(e){
             if(e.keyCode==13)
             $('#send').click();
-        });
-        
-        //Refresh page language
-        $('#language').change(function(){
-            $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
-            $('#loginFrom').submit();
         });
     });
 </script>

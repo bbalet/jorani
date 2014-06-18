@@ -48,6 +48,7 @@ See <code>/docs/install/README.md</code> for advanced configuration. In a nutshe
 ### Contributors
 
 * NGO Passerelles numériques, our first user http://passerellesnumeriques.org/en/
+* Students of Passerelles numériques for the khmer translation.
 
 ### Third party libraries and components
 

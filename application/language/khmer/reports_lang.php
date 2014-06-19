@@ -31,8 +31,8 @@ $lang['reports_balance_button_entity'] = 'Select';
 $lang['reports_balance_field_subdepts'] = 'Include sub-departments';
 $lang['reports_balance_button_launch'] = 'Launch';
 $lang['reports_balance_button_export'] = 'នាំចេញ';
-$lang['reports_balance_popup_entity_title'] = 'Select an entity';
-$lang['reports_balance_popup_entity_button_ok'] = 'OK';
+$lang['reports_balance_popup_entity_title'] = 'ជ្រើសរើសអង្គភាព';
+$lang['reports_balance_popup_entity_button_ok'] = 'យល់ព្រម';
 $lang['reports_balance_popup_entity_button_cancel'] = 'បោះបង់';
 
 $lang['reports_export_balance_title'] = 'Balance of leaves';

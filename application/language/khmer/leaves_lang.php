@@ -17,7 +17,7 @@
  */
 
 $lang['leaves_summary_title'] = 'My summary';
-$lang['leaves_summary_thead_type'] = 'Leave type';
+$lang['leaves_summary_thead_type'] = 'បែបផែននៃការចាកចេញ';
 $lang['leaves_summary_thead_taken'] = 'Taken';
 $lang['leaves_summary_thead_entitled'] = 'Entitled';
 $lang['leaves_summary_thead_description'] = 'Description';
@@ -46,9 +46,9 @@ $lang['leaves_date_type_morning'] = 'Morning';
 $lang['leaves_date_type_afternoon'] = 'Afternoon';
 
 $lang['leaves_create_title'] = 'Submit a leave request';
-$lang['leaves_create_field_start'] = 'Start Date';
-$lang['leaves_create_field_end'] = 'End Date';
-$lang['leaves_create_field_type'] = 'Leave type';
+$lang['leaves_create_field_start'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
+$lang['leaves_create_field_end'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
+$lang['leaves_create_field_type'] = 'បែបផែននៃការចាកចេញ';
 $lang['leaves_create_field_duration'] = 'រយៈពេល';
 $lang['leaves_create_field_duration_message'] = 'You are exceeding your entitled days';
 $lang['leaves_create_field_cause'] = 'Cause (optional)';
@@ -59,9 +59,9 @@ $lang['leaves_create_flash_msg_success'] = 'The leave request has been succesful
 
 $lang['leaves_edit_html_title'] = 'Edit a leave request';
 $lang['leaves_edit_title'] = 'កែប្រែការសំុច្បាប់ លេខ#';
-$lang['leaves_edit_field_start'] = 'Start Date';
-$lang['leaves_edit_field_end'] = 'End Date';
-$lang['leaves_edit_field_type'] = 'Leave type';
+$lang['leaves_edit_field_start'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
+$lang['leaves_edit_field_end'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
+$lang['leaves_edit_field_type'] = 'បែបផែននៃការចាកចេញ';
 $lang['leaves_edit_field_duration'] = 'រយៈពេល';
 $lang['leaves_edit_field_duration_message'] = 'You are exceeding your entitled days';
 $lang['leaves_edit_field_cause'] = 'Cause (optional)';
@@ -76,20 +76,20 @@ $lang['leaves_delete_flash_msg_success'] = 'The leave request has been succesful
 
 $lang['leaves_view_title'] = 'View leave request #';
 $lang['leaves_view_html_title'] = 'View a leave request';
-$lang['leaves_view_field_start'] = 'Start Date';
-$lang['leaves_view_field_end'] = 'End Date';
-$lang['leaves_view_field_type'] = 'Leave type';
+$lang['leaves_view_field_start'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
+$lang['leaves_view_field_end'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
+$lang['leaves_view_field_type'] = 'បែបផែននៃការចាកចេញ';
 $lang['leaves_view_field_duration'] = 'រយៈពេល';
 $lang['leaves_view_field_cause'] = 'មូលហេតុ';
 $lang['leaves_view_field_status'] = 'ស្ថានភាព';
 $lang['leaves_view_button_edit'] = 'កែសម្រួល';
-$lang['leaves_view_button_back_list'] = 'Back to list';
+$lang['leaves_view_button_back_list'] = 'ត្រឡប់ទៅបញ្ជីឈ្មោះ';
 
 $lang['leaves_export_title'] = 'List of leaves';
 $lang['leaves_export_thead_id'] = 'ID';
-$lang['leaves_export_thead_start_date'] = 'Start Date';
+$lang['leaves_export_thead_start_date'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
 $lang['leaves_export_thead_start_date_type'] = 'Morning/Afternnon';
-$lang['leaves_export_thead_end_date'] = 'End Date';
+$lang['leaves_export_thead_end_date'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
 $lang['leaves_export_thead_end_date_type'] = 'Morning/Afternnon';
 $lang['leaves_export_thead_cause'] = 'មូលហេតុ';
 $lang['leaves_export_thead_duration'] = 'រយៈពេល';

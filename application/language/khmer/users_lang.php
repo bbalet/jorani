@@ -17,7 +17,7 @@
  */
 
 //Index view
-$lang['users_index_title'] = 'List of users';
+$lang['users_index_title'] = 'បញ្ជីនៃនាក់ប្រើប្រាស់';
 $lang['users_index_thead_tip_view'] = 'View user details';
 $lang['users_index_thead_tip_edit'] = 'edit user details';
 $lang['users_index_thead_tip_delete'] = 'delete user';
@@ -60,7 +60,7 @@ $lang['users_view_field_hired'] = 'Date hired/started';
 $lang['users_view_field_identifier'] = 'Internal/Company Identifier';
 $lang['users_view_field_language'] = 'Language';
 $lang['users_view_button_edit'] = 'កែសម្រួល';
-$lang['users_view_button_back'] = 'Back to list';
+$lang['users_view_button_back'] = 'ត្រឡប់ទៅបញ្ជីឈ្មោះ';
 
 $lang['users_edit_title'] = 'Edit user #';
 $lang['users_edit_html_title'] = 'Edit user';
@@ -79,13 +79,13 @@ $lang['users_edit_field_hired'] = 'Date hired/started';
 $lang['users_edit_field_identifier'] = 'Internal/Company Identifier';
 $lang['users_edit_field_language'] = 'Language';
 $lang['users_edit_popup_manager_title'] = 'Select the manager';
-$lang['users_edit_popup_manager_button_ok'] = 'OK';
+$lang['users_edit_popup_manager_button_ok'] = 'យល់ព្រម';
 $lang['users_edit_popup_manager_button_cancel'] = 'បោះបង់';
-$lang['users_edit_popup_entity_title'] = 'Select an entity';
-$lang['users_edit_popup_entity_button_ok'] = 'OK';
+$lang['users_edit_popup_entity_title'] = 'ជ្រើសរើសអង្គភាព';
+$lang['users_edit_popup_entity_button_ok'] = 'យល់ព្រម';
 $lang['users_edit_popup_entity_button_cancel'] = 'បោះបង់';
 $lang['users_edit_popup_position_title'] = 'Select a position';
-$lang['users_edit_popup_position_button_ok'] = 'OK';
+$lang['users_edit_popup_position_button_ok'] = 'យល់ព្រម';
 $lang['users_edit_popup_position_button_cancel'] = 'បោះបង់';
 $lang['users_edit_button_update'] = 'Update user';
 $lang['users_edit_button_cancel'] = 'បោះបង់';
@@ -112,13 +112,13 @@ $lang['users_create_field_hired'] = 'Date hired/started';
 $lang['users_create_field_identifier'] = 'Internal/Company Identifier';
 $lang['users_create_field_language'] = 'Language';
 $lang['users_create_popup_manager_title'] = 'Select the manager';
-$lang['users_create_popup_manager_button_ok'] = 'OK';
+$lang['users_create_popup_manager_button_ok'] = 'យល់ព្រម';
 $lang['users_create_popup_manager_button_cancel'] = 'បោះបង់';
-$lang['users_create_popup_entity_title'] = 'Select an entity';
-$lang['users_create_popup_entity_button_ok'] = 'OK';
+$lang['users_create_popup_entity_title'] = 'ជ្រើសរើសអង្គភាព';
+$lang['users_create_popup_entity_button_ok'] = 'យល់ព្រម';
 $lang['users_create_popup_entity_button_cancel'] = 'បោះបង់';
 $lang['users_create_popup_position_title'] = 'Select a position';
-$lang['users_create_popup_position_button_ok'] = 'OK';
+$lang['users_create_popup_position_button_ok'] = 'យល់ព្រម';
 $lang['users_create_popup_position_button_cancel'] = 'បោះបង់';
 $lang['users_create_field_manager_description'] = 'If a user has no manager (itself), it can validate its leave requests.';
 $lang['users_create_button_generate_password'] = 'Generate password';

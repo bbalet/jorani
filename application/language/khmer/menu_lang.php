@@ -28,8 +28,8 @@ $lang['menu_password_popup_title'] = 'ផ្លាស់ប្តូរពាក
 $lang['menu_password_popup_button_cancel'] = 'បោះបង់';
 
 $lang['menu_admin_title'] = 'អ្នកគ្រប់គ្រង';
-$lang['menu_admin_list_users'] = 'List of users';
-$lang['menu_admin_add_user'] = 'Create user';
+$lang['menu_admin_list_users'] = 'បញ្ជីនៃនាក់ប្រើប្រាស់';
+$lang['menu_admin_add_user'] = 'បង្កើតឈ្មោះថ្មី';
 $lang['menu_admin_settings_divider'] = 'Settings';
 $lang['menu_admin_settings'] = 'Settings';
 
@@ -38,7 +38,7 @@ $lang['menu_hr_employees_divider'] = 'Employees';
 $lang['menu_hr_list_organization'] = 'Organization';
 $lang['menu_hr_list_employees'] = 'List of employees';
 $lang['menu_hr_contracts_divider'] = 'Contracts';
-$lang['menu_hr_list_contracts'] = 'List of contracts';
+$lang['menu_hr_list_contracts'] = 'បញ្ជីនៃកិច្ចសន្យា';
 $lang['menu_hr_list_positions'] = 'List of positions';
 $lang['menu_hr_leaves_type_divider'] = 'Leaves';
 $lang['menu_hr_list_leaves_type'] = 'List of types';

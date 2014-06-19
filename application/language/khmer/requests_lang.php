@@ -19,10 +19,10 @@
 $lang['requests_index_title'] = 'Leave Requests submitted to me';
 $lang['requests_index_description'] = 'This screen lists the leave requests submitted to you. If you are not a manager, this list will always be empty.';
 $lang['requests_index_thead_tip_view'] = 'បង្ហាញ';
-$lang['requests_index_thead_tip_accept'] = 'accept';
-$lang['requests_index_thead_tip_reject'] = 'reject';
+$lang['requests_index_thead_tip_accept'] = 'ទទួលយកបាន';
+$lang['requests_index_thead_tip_reject'] = 'បដិសេធចោល';
 $lang['requests_index_thead_id'] = 'ID';
-$lang['requests_index_thead_fullname'] = 'Fullname';
+$lang['requests_index_thead_fullname'] = 'ឈ្មោះពេញ';
 $lang['requests_index_thead_startdate'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
 $lang['requests_index_thead_enddate'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
 $lang['requests_index_thead_duration'] = 'រយៈពេល';
@@ -40,7 +40,7 @@ $lang['requests_reject_flash_msg_success'] = 'The leave request has been success
 
 $lang['requests_export_title'] = 'List of leave resquests';
 $lang['requests_export_thead_id'] = 'ID';
-$lang['requests_export_thead_fullname'] = 'Fullname';
+$lang['requests_export_thead_fullname'] = 'ឈ្មោះពេញ';
 $lang['requests_export_thead_startdate'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
 $lang['requests_export_thead_startdate_type'] = 'Morning/Afternoon';
 $lang['requests_export_thead_enddate'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';

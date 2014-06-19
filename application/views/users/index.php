@@ -100,14 +100,14 @@ $(document).ready(function() {
 
 <div id="frmResetPwd" class="modal hide fade">
     <div class="modal-header">
-        <a href="#" onclick="$('#frmResetPwd').modal('hide');" class="close">&times;</a>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
          <h3><?php echo lang('users_index_popup_password_title');?></h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmResetPwd').modal('hide');" class="btn secondary"><?php echo lang('users_index_popup_password_button_cancel');?></a>
+        <button class="btn" data-dismiss="modal"><?php echo lang('users_index_popup_password_button_cancel');?></button>
     </div>
 </div>
 

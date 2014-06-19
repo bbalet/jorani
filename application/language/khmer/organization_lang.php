@@ -32,11 +32,11 @@ $lang['organization_index_popup_delete_button_yes'] = 'យល់ព្រម';
 $lang['organization_index_popup_delete_button_no'] = 'មិនយល់ព្រម';
 
 $lang['organization_index_popup_add_title'] = 'Add an Employee';
-$lang['organization_index_popup_add_button_ok'] = 'OK';
+$lang['organization_index_popup_add_button_ok'] = 'យល់ព្រម';
 $lang['organization_index_popup_add_button_cancel'] = 'បោះបង់';
 
 $lang['organization_index_popup_error_title'] = 'An error occured';
-$lang['organization_index_popup_error_button_ok'] = 'OK';
+$lang['organization_index_popup_error_button_ok'] = 'យល់ព្រម';
 
 $lang['organization_index_prompt_entity_name'] = 'Name of the entity';
 $lang['organization_index_error_msg_select_entity'] = 'Please select one entity in the organization (treeview on the right).';

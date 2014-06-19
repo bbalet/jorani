@@ -15,14 +15,14 @@ $this->lang->load('menu', $language);?>
 
 <div id="frmChangeMyPwd" class="modal hide fade">
     <div class="modal-header">
-        <a href="#" onclick="$('#frmChangeMyPwd').modal('hide');" class="close">&times;</a>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
          <h3><?php echo lang('menu_password_popup_title');?></h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmChangeMyPwd').modal('hide');" class="btn secondary"><?php echo lang('menu_password_popup_button_cancel');?></a>
+        <button class="btn" data-dismiss="modal"><?php echo lang('menu_password_popup_button_cancel');?></button>
     </div>
 </div>
 

@@ -48,24 +48,24 @@ $lang['extra_edit_field_date'] = 'កាលបរិច្ឆេទ';
 $lang['extra_edit_field_duration'] = 'រយៈពេល';
 $lang['extra_edit_field_cause'] = 'មូលហេតុ';
 $lang['extra_edit_field_status'] = 'ស្ថានភាព';
-$lang['extra_edit_button_update'] = 'Update overtime';
+$lang['extra_edit_button_update'] = 'កែប្រែម៉ោងបន្ថែមឡេីងវិញ';
 $lang['extra_edit_button_cancel'] = 'បោះបង់';
-$lang['extra_edit_msg_error'] = 'You cannot edit an overtime request already submitted';
-$lang['extra_edit_msg_success'] = 'The overtime request has been succesfully updated';
+$lang['extra_edit_msg_error'] = ' អ្នកមិនអាចកែសំណើរដែលបានដាក់រួចហើយទេ';
+$lang['extra_edit_msg_success'] = 'សំណើរបន្ថែមម៉ោងនេះត្រូវបានធ្វើដោយជោគជ័យ';
 
-$lang['extra_delete_msg_success'] = 'The overtime request has been succesfully deleted';
-$lang['extra_delete_msg_error'] = 'You can\'t delete this overtime request';
+$lang['extra_delete_msg_success'] = 'សំណើរម៉ោងបន្ថែមត្រូវបានលុបដោយជោគជ័យ';
+$lang['extra_delete_msg_error'] = 'អ្នកមិនអាចលុបសំណើរម៉ោងបន្ថែមនេះបានទេ';
 
-$lang['extra_view_title'] = 'View overtime request #';
-$lang['extra_view_hmtl_title'] = 'View overtime request';
+$lang['extra_view_title'] = ' មើលសំណើរម៉ោងបន្ថែម លេខ#';
+$lang['extra_view_hmtl_title'] = 'មើលសំណើរម៉ោងបន្ថែម';
 $lang['extra_view_field_date'] = 'កាលបរិច្ឆេទ';
 $lang['extra_view_field_duration'] = 'រយៈពេល';
 $lang['extra_view_field_cause'] = 'មូលហេតុ';
 $lang['extra_view_field_status'] = 'ស្ថានភាព';
 $lang['extra_view_button_edit'] = 'កែសម្រួល';
-$lang['extra_view_button_back_list'] = 'Back to list';
+$lang['extra_view_button_back_list'] = 'ត្រឡប់ទៅបញ្ជីឈ្មោះ';
 
-$lang['extra_export_title'] = 'List of overtime requests';
+$lang['extra_export_title'] = 'បញ្ជីនៃសំណើសុំក្រៅម៉ោង';
 $lang['extra_export_thead_id'] = 'ID';
 $lang['extra_export_thead_date'] = 'កាលបរិច្ឆេទ';
 $lang['extra_export_thead_duration'] = 'រយៈពេល';

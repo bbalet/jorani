@@ -16,23 +16,23 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['email_password_reset_subject'] = '[LMS] Your password has been reset';
-$lang['email_password_reset_title'] = 'Your password has been reset';
+$lang['email_password_reset_subject'] = '[LMS] លេខសំងាត់របស់អ្នកត្រូវបានអនុញ្ញាតិ';
+$lang['email_password_reset_title'] = 'លេខសំងាត់របស់អ្នកត្រូវបានអនុញ្ញាតិ';
 
-$lang['email_user_create_subject'] = '[LMS] Your account has been created';
-$lang['email_user_create_title'] = 'Your account has been created';
+$lang['email_user_create_subject'] = '[LMS] គណនីរបស់អ្នកត្រូវបានបង្កើត';
+$lang['email_user_create_title'] = 'គណនីរបស់អ្នកត្រូវបានបង្កើត';
 
-$lang['email_leave_request_subject'] = '[LMS] Leave Request from ';
-$lang['email_leave_request_title'] = 'Leave Request';
+$lang['email_leave_request_subject'] = '[LMS] ការស្នើសុំឈប់សំរាកពី ';
+$lang['email_leave_request_title'] = 'ការស្នើសុំឈប់សំរាក';
 
-$lang['email_leave_request_accept_subject'] = '[LMS] Your leave request has been accepted';
-$lang['email_leave_request_reject_subject'] = '[LMS] Your leave request has been rejected';
-$lang['email_leave_request_validation_title'] = 'Leave Request';
+$lang['email_leave_request_accept_subject'] = '[LMS] ការចាកចេញរបស់អ្នកត្រូវបានទទួលយក';
+$lang['email_leave_request_reject_subject'] = '[LMS] ការស្នើសុំចាកចេញរបស់អ្នកត្រូវបានច្រានចោល';
+$lang['email_leave_request_validation_title'] = 'ការស្នើសុំឈប់សំរាក';
 
-$lang['email_overtime_request_accept_subject'] = '[LMS] Your overtime request has been accepted';
-$lang['email_overtime_request_reject_subject'] = '[LMS] Your overtime request has been rejected';
-$lang['email_overtime_request_validation_title'] = 'Overtime Request';
+$lang['email_overtime_request_accept_subject'] = '[LMS] ការស្នើសុំម៉ោងបន្ថែមរបស់អ្នកត្រូវបានទទួលយក';
+$lang['email_overtime_request_reject_subject'] = '[LMS] ការស្នើសុំម៉ោងបន្ថែមរបស់អ្នកត្រូវបាច្រាលចោល';
+$lang['email_overtime_request_validation_title'] = 'ការស្នើសុំម៉ោងបន្ថែម';
 
-$lang['email_extra_request_reject_subject'] = '[LMS] Your overtime request from ';
-$lang['email_extra_request_validation_title'] = 'Overtime Request';
+$lang['email_extra_request_reject_subject'] = '[LMS] ការស្នើសុំម៉ោងបន្ថែមមកពី ';
+$lang['email_extra_request_validation_title'] = 'ការស្នើសុំម៉ោងបន្ថែម';
         

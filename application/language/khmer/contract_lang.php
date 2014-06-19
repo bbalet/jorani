@@ -16,64 +16,64 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['contract_index_title'] = 'List of contracts';
+$lang['contract_index_title'] = 'បញ្ជីនៃកិច្ចសន្យា';
 $lang['contract_index_thead_id'] = 'ID';
-$lang['contract_index_thead_name'] = 'Name';
-$lang['contract_index_thead_start'] = 'Start period';
-$lang['contract_index_thead_end'] = 'End period';
-$lang['contract_index_tip_delete'] = 'delete contract';
-$lang['contract_index_tip_view'] = 'View contract';
-$lang['contract_index_tip_edit'] = 'edit contract';
-$lang['contract_index_tip_entitled'] = 'entitled days';
-$lang['contract_index_tip_dayoffs'] = 'day offs and weekends';
+$lang['contract_index_thead_name'] = 'ឈ្មោះ';
+$lang['contract_index_thead_start'] = 'ពេលចាប់ផ្តើម';
+$lang['contract_index_thead_end'] = 'ពេលបញ្ចប់';
+$lang['contract_index_tip_delete'] = 'លុបកិច្ចសន្យា';
+$lang['contract_index_tip_view'] = 'មើលកិច្ចសន្យា';
+$lang['contract_index_tip_edit'] = 'កែកិច្ចសន្យា';
+$lang['contract_index_tip_entitled'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
+$lang['contract_index_tip_dayoffs'] = 'ថ្ងៃឈប់សម្រាកនិងថ្ងៃចុងសបា្ដហ៏';
 $lang['contract_index_button_export'] = 'បញ្ជីនាំចេញ';
-$lang['contract_index_button_create'] = 'Create contract';
+$lang['contract_index_button_create'] = 'ធ្វើកិច្ចសន្យា';
 
-$lang['contract_index_popup_delete_title'] = 'Delete Contract';
-$lang['contract_index_popup_delete_description'] = 'You are about to delete one contract, this procedure is irreversible.';
+$lang['contract_index_popup_delete_title'] = 'លុបកិច្ចសន្យា';
+$lang['contract_index_popup_delete_description'] = 'អ្នកអាចលុបកិច្ចសន្យាបានមួយប៉ុណ្ណោះ,អ្នកបង្កើតនេះគឺមិនអាចកែប្រែបាន';
 $lang['contract_index_popup_delete_confirm'] = 'តើអ្នកចង់បន្ត?';
 $lang['contract_index_popup_delete_button_yes'] = 'យល់ព្រម';
 $lang['contract_index_popup_delete_button_no'] = 'មិនយល់ព្រម';
-$lang['contract_index_popup_entitled_title'] = 'Entitled days';
+$lang['contract_index_popup_entitled_title'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
 $lang['contract_index_popup_entitled_button_cancel'] = 'បោះបង់';
 
-$lang['contract_view_title'] = 'Contract details';
-$lang['contract_view_description'] = 'Details of contract #';
-$lang['contract_view_field_name'] = 'Name';
-$lang['contract_view_field_start_month'] = 'Month / Start';
-$lang['contract_view_field_start_day'] = 'Day / Start';
-$lang['contract_view_field_end_month'] = 'Month / End';
-$lang['contract_view_field_end_day'] = 'Day / End';
+$lang['contract_view_title'] = 'រៀបរាប់កិច្ចសន្យា';
+$lang['contract_view_description'] = 'ការរៀបរាប់នៃកិច្ចសន្យា#';
+$lang['contract_view_field_name'] = 'ឈ្មោះ';
+$lang['contract_view_field_start_month'] = 'ខែ/ចាប់ផ្តើម';
+$lang['contract_view_field_start_day'] = 'ថ្ងៃ/ចាប់ផ្តើម';
+$lang['contract_view_field_end_month'] = 'ខែ/បញ្ចប់';
+$lang['contract_view_field_end_day'] = 'ថ្ងៃ/បញ្ចប់';
 $lang['contract_view_button_edit'] = 'កែសម្រួល';
-$lang['contract_view_button_cancel'] = 'Back to list';
+$lang['contract_view_button_cancel'] = 'ត្រឡប់ទៅបញ្ជីឈ្មោះ';
 
-$lang['contract_edit_title'] = 'Edit a contract';
-$lang['contract_edit_description'] = 'Edit contract #';
-$lang['contract_edit_field_name'] = 'Name';
-$lang['contract_edit_field_start_month'] = 'Month / Start';
-$lang['contract_edit_field_start_day'] = 'Day / Start';
-$lang['contract_edit_field_end_month'] = 'Month / End';
-$lang['contract_edit_field_end_day'] = 'Day / End';
-$lang['contract_edit_button_update'] = 'Update contract';
+$lang['contract_edit_title'] = 'កែប្រែកិច្ចសន្យា';
+$lang['contract_edit_description'] = 'កែប្រែកិច្ចសន្យា#';
+$lang['contract_edit_field_name'] = 'ឈ្មោះ';
+$lang['contract_edit_field_start_month'] = 'ខែ/ចាប់ផ្តើម';
+$lang['contract_edit_field_start_day'] = 'ថ្ងៃ/ចាប់ផ្តើម';
+$lang['contract_edit_field_end_month'] = 'ខែ/បញ្ចប់';
+$lang['contract_edit_field_end_day'] = 'ថ្ងៃ/បញ្ចប់';
+$lang['contract_edit_button_update'] = 'បន្ថែមកិច្ចសន្យា';
 $lang['contract_edit_button_cancel'] = 'បោះបង់';
-$lang['contract_edit_msg_success'] = 'The contract has been succesfully updated';
+$lang['contract_edit_msg_success'] = 'កិច្ចសន្យាត្រូវបានបន្ថែមដោយជោគជ័យ';
 
-$lang['contract_create_title'] = 'Create a new contract';
-$lang['contract_create_field_name'] = 'Name';
-$lang['contract_create_field_start_month'] = 'Month / Start';
-$lang['contract_create_field_start_day'] = 'Day / Start';
-$lang['contract_create_field_end_month'] = 'Month / End';
-$lang['contract_create_field_end_day'] = 'Day / End';
-$lang['contract_create_button_create'] = 'Create contract';
+$lang['contract_create_title'] = 'បង្កើតកិច្ចសន្យាថ្មី';
+$lang['contract_create_field_name'] = 'ឈ្មោះ';
+$lang['contract_create_field_start_month'] = 'ខែ/ចាប់ផ្តើម';
+$lang['contract_create_field_start_day'] = 'ថ្ងៃ/ចាប់ផ្តើម';
+$lang['contract_create_field_end_month'] = 'ខែ/បញ្ចប់';
+$lang['contract_create_field_end_day'] = 'ថ្ងៃ/បញ្ចប់';
+$lang['contract_create_button_create'] = 'ធ្វើកិច្ចសន្យា';
 $lang['contract_create_button_cancel'] = 'បោះបង់';
-$lang['contract_create_msg_success'] = 'The contract has been succesfully created';
+$lang['contract_create_msg_success'] = 'កិច្ចសន្យាត្រូវបានបង្កើតដោយជោគជ័យ';
 
-$lang['contract_delete_msg_success'] = 'The contract has been succesfully deleted';
+$lang['contract_delete_msg_success'] = 'កិច្ចសន្យាត្រូវបានលុបដោយជោគជ័យ';
 
-$lang['contract_export_title'] = 'List of contracts';
+$lang['contract_export_title'] = 'បញ្ជីនៃកិច្ចសន្យា';
 $lang['contract_export_thead_id'] = 'ID';
-$lang['contract_export_thead_name'] = 'Name';
-$lang['contract_export_thead_start'] = 'Start period';
-$lang['contract_export_thead_end'] = 'End period';
+$lang['contract_export_thead_name'] = 'ឈ្មោះ';
+$lang['contract_export_thead_start'] = 'ពេលចាប់ផ្តើម';
+$lang['contract_export_thead_end'] = 'ពេលបញ្ចប់';
 
-$lang['contract_calendar_title'] = 'Calendar of non working days';
+$lang['contract_calendar_title'] = 'ប្រតិទិននៃថ្ងៃឈប់សម្រាក់';

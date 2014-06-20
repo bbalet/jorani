@@ -89,8 +89,8 @@ $(document).ready(function() {
          <h3><?php echo lang('users_index_popup_delete_title');?></h3>
     </div>
     <div class="modal-body">
-        <p><?php echo lang('users_index_popup_delete_title');?></p>
-        <p><?php echo lang('users_index_popup_delete_title');?></p>
+        <p><?php echo lang('users_index_popup_delete_message');?></p>
+        <p><?php echo lang('users_index_popup_delete_question');?></p>
     </div>
     <div class="modal-footer">
         <a href="#" class="btn danger" id="lnkDeleteUser"><?php echo lang('users_index_popup_delete_button_yes');?></a>

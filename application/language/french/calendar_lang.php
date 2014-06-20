@@ -66,9 +66,9 @@ $lang['calendar_component_buttonText_'] = 'jour';
 $lang['calendar_component_buttonText_'] = 'semaine';
 $lang['calendar_component_buttonText_'] = 'mois';
 
-$lang['calendar_component_header_left'] = 'précédent,suivant aujourd\'hui';
+$lang['calendar_component_header_left'] = 'prev,next today';
 $lang['calendar_component_header_center'] = 'title';
-$lang['calendar_component_header_right'] = 'mois,semaine,jour';
+$lang['calendar_component_header_right'] = 'month,basicWeek,basicDay';
 
 $lang['calendar_monday_short'] = 'Lu';
 $lang['calendar_tuesday_short'] = 'Ma';

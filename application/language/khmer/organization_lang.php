@@ -16,13 +16,13 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['organization_index_title'] = 'Organization';
-$lang['organization_index_field_search_placeholder'] = 'Search for an entity';
-$lang['organization_index_button_search'] = 'Search';
+$lang['organization_index_title'] = 'អង្គការ';
+$lang['organization_index_field_search_placeholder'] = 'ស្ចែងរកអង្គភាពមួយ';
+$lang['organization_index_button_search'] = 'ស្ចែងរក';
 $lang['organization_index_thead_id'] = 'ID';
 $lang['organization_index_thead_firstname'] = 'នាមត្រកូលអ្នកប្រើប្រាស់';
 $lang['organization_index_thead_lastname'] = 'ឈ្មោះអ្នកប្រើប្រាស់';
-$lang['organization_index_thead_email'] = 'E-mail';
+$lang['organization_index_thead_email'] = 'ម៉ែល';
 $lang['organization_index_button_add_employee'] = 'Attach an Employee';
 $lang['organization_index_button_remove_employee'] = 'Detach an Employee';
 $lang['organization_index_popup_delete_title'] = 'Delete Entity';
@@ -35,7 +35,7 @@ $lang['organization_index_popup_add_title'] = 'Add an Employee';
 $lang['organization_index_popup_add_button_ok'] = 'យល់ព្រម';
 $lang['organization_index_popup_add_button_cancel'] = 'បោះបង់';
 
-$lang['organization_index_popup_error_title'] = 'An error occured';
+$lang['organization_index_popup_error_title'] = 'មានបញ្ហាកើតឡើង';
 $lang['organization_index_popup_error_button_ok'] = 'យល់ព្រម';
 
 $lang['organization_index_prompt_entity_name'] = 'Name of the entity';
@@ -43,5 +43,5 @@ $lang['organization_index_error_msg_select_entity'] = 'Please select one entity 
 $lang['organization_index_error_msg_select_employee'] = 'Please select one employee in the table of users belonging to the selected entity.';
 $lang['organization_index_error_msg_delete_root'] = 'You cannot delete the root entity.';
 
-$lang['organization_select_field_search_placeholder'] = 'Search for an entity';
-$lang['organization_select_button_search'] = 'Search';
+$lang['organization_select_field_search_placeholder'] = 'ស្ចែងរកអង្គភាពមួយ';
+$lang['organization_select_button_search'] = 'ស្ចែងរក';

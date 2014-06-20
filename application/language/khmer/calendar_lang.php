@@ -66,8 +66,8 @@ $lang['calendar_component_buttonText_day'] = 'ថ្ងៃ';
 $lang['calendar_component_buttonText_week'] = 'សប្តាហ៍';
 $lang['calendar_component_buttonText_month'] = 'ខែ';
         
-$lang['calendar_component_header_left'] = 'ថ្ងៃមុន, ថ្ងៃស្អែក';
-$lang['calendar_component_header_center'] = 'ចំនងជើង';
+$lang['calendar_component_header_left'] = 'prev,next today';
+$lang['calendar_component_header_center'] = 'title';
 $lang['calendar_component_header_right'] = 'month,basicWeek,basicDay';
 	
 $lang['calendar_monday_short'] = 'ច';

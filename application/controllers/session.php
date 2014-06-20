@@ -39,7 +39,7 @@ class Session extends CI_Controller {
             switch ($this->config->item('language')) {
                 case 'english' : $this->session->set_userdata('language_code', 'en'); break;
                 case 'french' : $this->session->set_userdata('language_code', 'fr'); break;
-                case 'khmer' : $this->session->set_userdata('language_code', 'kh'); break;
+                case 'khmer' : $this->session->set_userdata('language_code', 'km'); break;
             }
         }
         $this->language = $this->session->userdata('language');
@@ -90,7 +90,7 @@ class Session extends CI_Controller {
             switch ($this->input->post('language')) {
                 case "fr" : $this->session->set_userdata('language', 'french'); break;
                 case "en" : $this->session->set_userdata('language', 'english'); break;
-                case "kh" : $this->session->set_userdata('language', 'khmer'); break;
+                case "km" : $this->session->set_userdata('language', 'khmer'); break;
             }
             
             //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
@@ -161,7 +161,7 @@ class Session extends CI_Controller {
         switch ($this->input->post('language')) {
             case "fr" : $this->session->set_userdata('language', 'french'); break;
             case "en" : $this->session->set_userdata('language', 'english'); break;
-            case "kh" : $this->session->set_userdata('language', 'khmer'); break;
+            case "km" : $this->session->set_userdata('language', 'khmer'); break;
         }
         $this->session->set_userdata('language_code', $this->input->post('language'));
         $this->session->set_flashdata('msg', lang('session_login_flash_change_language') . $this->session->userdata('language'));

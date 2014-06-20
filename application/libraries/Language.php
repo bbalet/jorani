@@ -70,7 +70,7 @@ class Language {
             //User management
             case 'en' : return 'english'; break;
             case 'fr' : return 'french'; break;
-            case 'kh' : return 'khmer'; break;
+            case 'km' : return 'khmer'; break;
             default: return 'english'; break;
         }
     }
@@ -86,7 +86,7 @@ class Language {
             //User management
             case 'english' : return 'en'; break;
             case 'french' : return 'fr'; break;
-            case 'khmer' : return 'kh'; break;
+            case 'khmer' : return 'km'; break;
             default: return 'en'; break;
         }
     }
@@ -102,7 +102,7 @@ class Language {
             //User management
             case 'en' : return 'english'; break;
             case 'fr' : return 'français'; break;
-            case 'kh' : return 'ភាសាខ្មែរ'; break;
+            case 'km' : return 'ភាសាខ្មែរ'; break;
             default: return 'english'; break;
         }
     }
@@ -118,7 +118,7 @@ class Language {
             //User management
             case 'english' : return 'en'; break;
             case 'français' : return 'fr'; break;
-            case 'ភាសាខ្មែរ' : return 'kh'; break;
+            case 'ភាសាខ្មែរ' : return 'km'; break;
             default: return 'en'; break;
         }
     }

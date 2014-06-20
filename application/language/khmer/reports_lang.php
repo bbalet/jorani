@@ -18,7 +18,7 @@
 
 $lang['reports_index_title'] = 'List of reports';
 $lang['reports_index_thead_report'] = 'Report';
-$lang['reports_index_thead_description'] = 'Description';
+$lang['reports_index_thead_description'] = 'ព័ត៌មានលម្អិត';
 
 $lang['reports_execute_title'] = 'Report';
 $lang['reports_execute_button_back_list'] = 'Back to list of reports';

@@ -18,9 +18,9 @@
 
 $lang['leaves_summary_title'] = 'My summary';
 $lang['leaves_summary_thead_type'] = 'បែបផែននៃការចាកចេញ';
-$lang['leaves_summary_thead_taken'] = 'Taken';
-$lang['leaves_summary_thead_entitled'] = 'Entitled';
-$lang['leaves_summary_thead_description'] = 'Description';
+$lang['leaves_summary_thead_taken'] = ' បានយក';
+$lang['leaves_summary_thead_entitled'] = 'សិទ្ធិទទួលបាន';
+$lang['leaves_summary_thead_description'] = 'ព័ត៌មានលម្អិត';
 $lang['leaves_summary_flash_msg_error'] = 'It appears you have no contract. Please contact your HR Officer / Manager.';
 
 $lang['leaves_index_title'] = 'ការសុំច្បាប់របស់ខ្ញុំ';

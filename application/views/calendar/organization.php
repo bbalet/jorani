@@ -46,22 +46,34 @@ $this->lang->load('global', $language);?>
 <div id='calendar'></div>
 
 <link href="<?php echo base_url();?>assets/fullcalendar/fullcalendar.css" rel="stylesheet">
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lib/moment.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/fullcalendar.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo $language_code;?>.js"></script>
 <script type="text/javascript">
     var entity = -1; //Id of the selected entity
     var text; //Label of the selected entity
+    
+    //Refresh the calendar if data is available
+    function refresh_calendar() {
+        if (entity != -1) {
+            var source = '';
+            if ($('#chkIncludeChildren').prop('checked') == true) {
+                source = '<?php echo base_url();?>leaves/organization/' + entity + '?children=true';
+            } else {
+                source = '<?php echo base_url();?>leaves/organization/' + entity + '?children=false';
+            }
+            $('#calendar').fullCalendar('removeEvents');
+            $('#calendar').fullCalendar('addEventSource', source);
+            $('#calendar').fullCalendar('rerenderEvents');
+            $('#calendar').fullCalendar('removeEventSource', source);
+        }
+    }
     
     function select_entity() {
         entity = $('#organization').jstree('get_selected')[0];
         text = $('#organization').jstree().get_text(entity);
         $('#txtEntity').val(text);
-        $('#calendar').fullCalendar('removeEvents');
-        if ($('#chkIncludeChildren').prop('checked') == true) {
-            $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>leaves/organization/' + entity + '?children=true');
-        } else {
-            $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>leaves/organization/' + entity + '?children=false');
-        }
-        $('#calendar').fullCalendar('rerenderEvents');
+        refresh_calendar();
         $("#frmSelectEntity").modal('hide');
     }
 
@@ -75,14 +87,7 @@ $this->lang->load('global', $language);?>
 
         //On click the check box "include sub-department", refresh the content if a department was selected
         $('#chkIncludeChildren').click(function() {
-            $('#calendar').fullCalendar('removeEvents');
-            if (entity != -1) {
-                if ($('#chkIncludeChildren').prop('checked') == true) {
-                    $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>leaves/organization/' + entity + '?children=true');
-                } else {
-                    $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>leaves/organization/' + entity + '?children=false');
-                }
-            }
+            refresh_calendar();
         });
 
         //Load alert forms
@@ -94,37 +99,19 @@ $this->lang->load('global', $language);?>
 
         //Create a calendar and fill it with AJAX events
         $('#calendar').fullCalendar({
-            monthNames: [<?php echo lang('calendar_component_monthNames');?>],
-            monthNamesShort: [<?php echo lang('calendar_component_monthNamesShort');?>],
-            dayNames: [<?php echo lang('calendar_component_dayNames');?>],
-            dayNamesShort: [<?php echo lang('calendar_component_dayNamesShort');?>],
-            titleFormat: {
-                month: '<?php echo lang('calendar_component_titleFormat_month');?>',
-                week: "<?php echo lang('calendar_component_titleFormat_week');?>",
-                day: '<?php echo lang('calendar_component_titleFormat_day');?>'
-            },
-            columnFormat: {
-                month: '<?php echo lang('calendar_component_columnFormat_month');?>',
-                week: '<?php echo lang('calendar_component_columnFormat_week');?>',
-                day: '<?php echo lang('calendar_component_columnFormat_day');?>'
-            },
-            axisFormat: "<?php echo lang('calendar_component_axisFormat');?>",
-            timeFormat: {
-                '': "<?php echo lang('calendar_component_timeFormat');?>",
-                agenda: "<?php echo lang('calendar_component_timeFormat_agenda');?>"
-            },
-            firstDay: <?php echo lang('calendar_component_firstDay');?>,
-            buttonText: {
-                today: "<?php echo lang('calendar_component_buttonText_today');?>",
-                day: "<?php echo lang('calendar_component_buttonText_day');?>",
-                week: "<?php echo lang('calendar_component_buttonText_week');?>",
-                month: "<?php echo lang('calendar_component_buttonText_month');?>"
-            },
-            header: {
-                left: "<?php echo lang('calendar_component_header_left');?>",
-                center: "<?php echo lang('calendar_component_header_center');?>",
-                right: "<?php echo lang('calendar_component_header_right');?>"
+                header: {
+                left: "prev,next today",
+                center: "title",
+                right: ""
             }
+        });
+        //Catch the onclick event on prev button
+        $('.fc-button-prev span').click(function(){
+            refresh_calendar();
+         });
+         //Catch the onclick event on next button
+        $('.fc-button-next span').click(function(){
+           refresh_calendar();
         });
     });
 </script>

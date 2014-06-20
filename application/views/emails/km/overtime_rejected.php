@@ -21,7 +21,7 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        សូមជំរាបមកដល់{Firstname}{Lasname},<br />
         <br />
         The overtime you've requested has been rejected. Below, the details :
         <table border="0">

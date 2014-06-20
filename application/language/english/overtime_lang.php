@@ -30,11 +30,11 @@ $lang['overtime_index_button_export'] = 'Export this list';
 $lang['overtime_index_button_show_all'] = 'All requests';
 $lang['overtime_index_button_show_pending'] = 'Pending requests ';
 
-/*'You are not the line manager of this employee. You cannot reject this overtime request.';
-'The overtime request has been successfully accepted.';
+$lang['overtime_reject_flash_msg_error'] = 'You are not the line manager of this employee. You cannot reject this overtime request.';
+$lang['overtime_reject_flash_msg_success'] = 'The overtime request has been successfully rejected.';
 
-'You are not the line manager of this employee. You cannot reject this overtime request.';
-'The overtime request has been successfully rejected.';*/
+$lang['overtime_accept_flash_msg_error'] = 'You are not the line manager of this employee. You cannot accept this overtime request.';
+$lang['overtime_accept_flash_msg_success'] = 'The overtime request has been successfully accepted.';
 
 $lang['overtime_export_title'] = 'List of overtime resquests';
 $lang['overtime_export_thead_id'] = 'ID';

@@ -16,12 +16,12 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['leaves_summary_title'] = 'My summary';
+$lang['leaves_summary_title'] = 'សេចក្តីសង្ខេបរបស់ខ្ញុំ';
 $lang['leaves_summary_thead_type'] = 'បែបផែននៃការចាកចេញ';
 $lang['leaves_summary_thead_taken'] = ' បានយក';
 $lang['leaves_summary_thead_entitled'] = 'សិទ្ធិទទួលបាន';
 $lang['leaves_summary_thead_description'] = 'ព័ត៌មានលម្អិត';
-$lang['leaves_summary_flash_msg_error'] = 'It appears you have no contract. Please contact your HR Officer / Manager.';
+$lang['leaves_summary_flash_msg_error'] = 'វាហាក់ដូចជាអ្នកមានកិច្ចសន្យាទេ។ សូមទាក់ទងមន្រ្តីធនធានមនុស្ស / ប្រធានផ្នែករបស់អ្នក។';
 
 $lang['leaves_index_title'] = 'ការសុំច្បាប់របស់ខ្ញុំ';
 $lang['leaves_index_thead_tip_view'] = 'បង្ហាញ';
@@ -37,21 +37,21 @@ $lang['leaves_index_thead_status'] = 'ស្ថានភាព';
 $lang['leaves_index_button_export'] = 'បញ្ជីនាំចេញ';
 $lang['leaves_index_button_create'] = 'សំណើរសំុថ្មី';
 $lang['leaves_index_popup_delete_title'] = 'លុបចោលនៅសំណើរសំុក្រៅម៉ោង';
-$lang['leaves_index_popup_delete_message'] = 'You are about to delete one leave request, this procedure is irreversible.';
+$lang['leaves_index_popup_delete_message'] = 'អ្នកត្រូវបានលុបចោលការស្នេីរសំុ នេះជាច្បាប់មិនអាចកែប្រែ';
 $lang['leaves_index_popup_delete_question'] = 'តើអ្នកចង់បន្ត?';
 $lang['leaves_index_popup_delete_button_yes'] = 'យល់ព្រម';
 $lang['leaves_index_popup_delete_button_no'] = 'មិនយល់ព្រម';
 
-$lang['leaves_date_type_morning'] = 'Morning';
-$lang['leaves_date_type_afternoon'] = 'Afternoon';
+$lang['leaves_date_type_morning'] = 'អរុណសួស្ដី';
+$lang['leaves_date_type_afternoon'] = 'ទិវាសួស្ដី';
 
 $lang['leaves_create_title'] = 'Submit a leave request';
 $lang['leaves_create_field_start'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
 $lang['leaves_create_field_end'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
 $lang['leaves_create_field_type'] = 'បែបផែននៃការចាកចេញ';
 $lang['leaves_create_field_duration'] = 'រយៈពេល';
-$lang['leaves_create_field_duration_message'] = 'You are exceeding your entitled days';
-$lang['leaves_create_field_cause'] = 'Cause (optional)';
+$lang['leaves_create_field_duration_message'] = 'អ្នកគឺកំពុងលើសថ្ងៃឈប់សម្រាករបស់អ្នកហើយ';
+$lang['leaves_create_field_cause'] = 'មូលហេតុ (optional)';
 $lang['leaves_create_field_status'] = 'ស្ថានភាព';
 $lang['leaves_create_button_create'] = 'Request leave';
 $lang['leaves_create_button_cancel'] = 'បោះបង់';
@@ -63,19 +63,19 @@ $lang['leaves_edit_field_start'] = 'កាលបរិច្ឆេទដែល�
 $lang['leaves_edit_field_end'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
 $lang['leaves_edit_field_type'] = 'បែបផែននៃការចាកចេញ';
 $lang['leaves_edit_field_duration'] = 'រយៈពេល';
-$lang['leaves_edit_field_duration_message'] = 'You are exceeding your entitled days';
+$lang['leaves_edit_field_duration_message'] = 'អ្នកគឺកំពុងលើសថ្ងៃឈប់សម្រាករបស់អ្នកហើយ';
 $lang['leaves_edit_field_cause'] = 'Cause (optional)';
 $lang['leaves_edit_field_status'] = 'ស្ថានភាព';
 $lang['leaves_edit_button_update'] = 'Update leave';
 $lang['leaves_edit_button_cancel'] = 'បោះបង់';
 $lang['leaves_edit_flash_msg_error'] = 'You cannot edit a leave request already submitted';
-$lang['leaves_edit_flash_msg_success'] = 'The leave request has been succesfully updated';
+$lang['leaves_edit_flash_msg_success'] = 'សំណើរការឈប់សំរាកនេះត្រូវបានគេធ្វើអោយទាន់សម័យដោយជោគជ័យ';
 
-$lang['leaves_delete_flash_msg_error'] = 'You can\'t delete this leave request';
-$lang['leaves_delete_flash_msg_success'] = 'The leave request has been succesfully deleted';
+$lang['leaves_delete_flash_msg_error'] = 'អ្នកមិនអាចលុបការចាកចេញពីការស្នើសំុបានទេ';
+$lang['leaves_delete_flash_msg_success'] = 'សំណើការឈប់សម្រាកនេះត្រូវបានគេលុបដោយជោគជ័យ';
 
-$lang['leaves_view_title'] = 'View leave request #';
-$lang['leaves_view_html_title'] = 'View a leave request';
+$lang['leaves_view_title'] = 'សំណើឈប់សំរាក #';
+$lang['leaves_view_html_title'] = 'ទិដ្ឋភាពចាកចេញពីសំណើមួយ';
 $lang['leaves_view_field_start'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
 $lang['leaves_view_field_end'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
 $lang['leaves_view_field_type'] = 'បែបផែននៃការចាកចេញ';
@@ -85,13 +85,13 @@ $lang['leaves_view_field_status'] = 'ស្ថានភាព';
 $lang['leaves_view_button_edit'] = 'កែសម្រួល';
 $lang['leaves_view_button_back_list'] = 'ត្រឡប់ទៅបញ្ជីឈ្មោះ';
 
-$lang['leaves_export_title'] = 'List of leaves';
+$lang['leaves_export_title'] = 'បញ្ជីនៃការឈប់សម្រាក';
 $lang['leaves_export_thead_id'] = 'ID';
 $lang['leaves_export_thead_start_date'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
 $lang['leaves_export_thead_start_date_type'] = 'Morning/Afternnon';
 $lang['leaves_export_thead_end_date'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
-$lang['leaves_export_thead_end_date_type'] = 'Morning/Afternnon';
+$lang['leaves_export_thead_end_date_type'] = 'ព្រឹក/រសៀល';
 $lang['leaves_export_thead_cause'] = 'មូលហេតុ';
 $lang['leaves_export_thead_duration'] = 'រយៈពេល';
-$lang['leaves_export_thead_type'] = 'Type';
+$lang['leaves_export_thead_type'] = 'ប្រភេទ';
 $lang['leaves_export_thead_status'] = 'ស្ថានភាព';

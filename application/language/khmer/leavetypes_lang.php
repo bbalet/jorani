@@ -37,13 +37,13 @@ $lang['hr_leaves_popup_update_button_update'] = 'Update';
 $lang['hr_leaves_popup_update_field_name'] = 'ឈ្មោះ';
 $lang['hr_leaves_popup_update_flash_msg'] = 'The leave type has been succesfully updated.';
 
-$lang['hr_leaves_popup_delete_title'] = 'Delete Leave Type';
-$lang['hr_leaves_popup_delete_description'] = 'You are about to delete one leave type, this procedure is irreversible.';
+$lang['hr_leaves_popup_delete_title'] = 'លុបចេញពីទម្រង់ដើម';
+$lang['hr_leaves_popup_delete_description'] = 'អ្នកគឺជាអ្នកលុបទម្រង់ដើមវាជាទម្រង់ដែលមិនអាចត្រឡប់វិញបាន';
 $lang['hr_leaves_popup_delete_confirm'] = 'តើអ្នកចង់បន្ត?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'យល់ព្រម';
 $lang['hr_leaves_popup_delete_button_no'] = 'មិនយល់ព្រម';
 $lang['hr_leaves_popup_delete_flash_msg'] = 'ប្រភេទនៃការឈប់សម្រាកត្រួវបានលុបដោយជោគជ័យ';
-$lang['hr_leaves_popup_delete_flash_error'] = 'You cannot delete a system leavetype.';
+$lang['hr_leaves_popup_delete_flash_error'] = 'អ្នកមិនអាចលុបនួវទម្រង់ដើម';
 
 $lang['hr_leaves_type_export_title'] = 'ចាកចេញពីតម្រង់ដើម';
 $lang['hr_leaves_type_export_thead_id'] = 'ID';

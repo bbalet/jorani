@@ -1,10 +1,11 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('users', $language);
+$this->lang->load('global', $language);
 CI_Controller::get_instance()->load->library('language');?>
 
 <h2><?php echo lang('users_edit_title');?><?php echo $users_item['id']; ?> &nbsp;
-<a href="http://www.leave-management-system.org/en/documentation/page-create-a-new-user/" title="Link to documentation" target="_blank"><i class="icon-question-sign"></i></a>
+<a href="http://www.leave-management-system.org/en/documentation/page-create-a-new-user/" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a>
 </h2>
 
 <?php echo validation_errors(); ?>

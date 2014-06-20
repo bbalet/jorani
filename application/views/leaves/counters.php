@@ -1,9 +1,10 @@
 <?php
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('leaves', $language);?>
+$this->lang->load('leaves', $language);
+$this->lang->load('global', $language);?>
 
 <h1><?php echo lang('leaves_summary_title');?> &nbsp;
-<a href="http://www.leave-management-system.org/page-my-summary.html" title="Link to documentation" target="_blank"><i class="icon-question-sign"></i></a></h1>
+<a href="http://www.leave-management-system.org/page-my-summary.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a></h1>
 
 <table class="table table-bordered table-hover">
 <thead>

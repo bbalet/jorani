@@ -30,7 +30,7 @@
                 <td>Duration &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Cause &nbsp;</td><td>{Cause}</td>
+                <td>Reason &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
         <a href="{UrlAccept}">Accept</a>

@@ -21,16 +21,16 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests a leave. Below, the details :
+        {Firstname} {lastname} ស្នើសុំចាកចេញមួយខាងក្រោមសេចក្ដីលម្អិត :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}</td>
+                <td>មកពី &nbsp;</td><td>{StartDate}</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}</td>
+                <td>ទៅកាន់ &nbsp;</td><td>{EndDate}</td>
             </tr>            
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+        <a href="{UrlAccept}">ទទួលយកបាន</a>
+        <a href="{UrlReject}">បដិសេធចោល</a>
     </body>
 </html>

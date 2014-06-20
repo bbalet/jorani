@@ -21,15 +21,15 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        Welcome to LMS {Firstname} {Lastname}. Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        សូមស្វាគមន៍មកកាន់ LMS {Firstname} { Lastname} <a href="{BaseURL}">សូមប្រើប្រាស់ព័ត៌មានបញ្ជាក់អត្តសញ្ញាណទាំងនេះដើម្បីចូលទៅកាន់ប្រព័ន្ធ</a> :
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>ឈ្មោះ</td><td>{Login}</td>
             </tr>
             <tr>
-                <td>Password</td><td>{Password}</td>
+                <td>លេខសំងាត់</td><td>{Password}</td>
             </tr>            
         </table>
-        Once connected, you can change your password, as explained <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="តំណភ្ជាប់ទៅឯកសារ" target="_blank">នៅពេលដែលបានភ្ជាប់អ្នកអាចផ្លាស់ប្តូរពាក្យសម្ងាត់របស់អ្នកជាការពន្យល់នៅទីនេះ</a>.
     </body>
 </html>

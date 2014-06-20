@@ -105,12 +105,12 @@ class Overtime extends CI_Controller {
         $employee = $this->users_model->get_users($extra['employee']);
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to accept leave #' . $id);
-            $this->session->set_flashdata('msg', 'You are not the line manager of this employee. You cannot reject this overtime request.');
+            $this->session->set_flashdata('msg', lang('overtime_accept_flash_msg_error'));
             redirect('home');
         } else {
             $this->overtime_model->accept_extra($id);
             $this->sendMail($id);
-            $this->session->set_flashdata('msg', 'The overtime request has been successfully accepted.');
+            $this->session->set_flashdata('msg', lang('overtime_accept_flash_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
             } else {
@@ -134,12 +134,12 @@ class Overtime extends CI_Controller {
         $employee = $this->users_model->get_users($extra['employee']);
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to reject leave #' . $id);
-            $this->session->set_flashdata('msg', 'You are not the line manager of this employee. You cannot reject this overtime request.');
+            $this->session->set_flashdata('msg', lang('overtime_reject_flash_msg_error'));
             redirect('home');
         } else {
             $this->overtime_model->reject_extra($id);
             $this->sendMail($id);
-            $this->session->set_flashdata('msg', 'The overtime request has been successfully rejected.');
+            $this->session->set_flashdata('msg', lang('overtime_reject_flash_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
             } else {

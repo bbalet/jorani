@@ -21,19 +21,19 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests an overtime. Below, the details :
+        {Firstname}{Lastname}ស្នើសុំថែមមួយម៉ោង។ ខាងក្រោមជាពត៏មានលម្អិត :
         <table border="0">
             <tr>
-                <td>Date &nbsp;</td><td>{Date}</td>
+                <td>កាលបរិច្ឆេទ &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>រយៈពេល &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Cause &nbsp;</td><td>{Cause}</td>
+                <td>មូលហេតុ &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+        <a href="{UrlAccept}">ទទួលយកបាន</a>
+        <a href="{UrlReject}">បដិសេធចោល</a>
     </body>
 </html>

@@ -75,10 +75,10 @@ $(document).ready(function() {
      <div class="span3">
       <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_all');?></a>
     </div>
-    <div class="span2">
+    <div class="span3">
       <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_pending');?></a>
     </div>
-    <div class="span5">&nbsp;</div>
+    <div class="span4">&nbsp;</div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">

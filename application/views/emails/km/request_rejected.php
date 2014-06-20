@@ -21,15 +21,15 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        សូមជំរាបមកដល់{Firstname}{Lasname},<br />
         <br />
-        The leave you've requested has been rejected. Below, the details :
+        ការចាកចេញពីទីនេះអ្នកបានស្នើសុំត្រូវបានទទួលយកខាងក្រោមសេចក្ដីលម្អិត:
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}</td>
+                <td>មកពី &nbsp;</td><td>{StartDate}</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}</td>
+                <td>ទៅកាន់ &nbsp;</td><td>{EndDate}</td>
             </tr>            
         </table>
     </body>

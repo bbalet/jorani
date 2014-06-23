@@ -173,7 +173,7 @@ class Extra extends CI_Controller {
             $extra_id = $this->overtime_model->update_extra($id);
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
-                $this->sendMail($extra_id);
+                $this->sendMail($id);
             }            
             $this->session->set_flashdata('msg', lang('extra_edit_msg_success'));
             if (isset($_GET['source'])) {

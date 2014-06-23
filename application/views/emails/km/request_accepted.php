@@ -18,7 +18,11 @@
 
 //You can change the content of this template
 ?>
-<html>
+<html lang="km">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta charset="UTF-8">
+    </head>
     <body>
         <h3>{Title}</h3>
         សូមជំរាបមកដល់{Firstname}{Lasname},<br />

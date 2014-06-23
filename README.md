@@ -22,7 +22,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Set your own contracts and leave types.
 * Calendars of leaves (individual, team, collaborators, etc.).
 * Describe your organization in a tree structure and attach employees to entities.
-* Available in English and French
+* Available in English, French and Khmer (localization is in progress).
 
 ## Installation
 
@@ -33,6 +33,7 @@ See <code>/docs/install/README.md</code> for advanced configuration. In a nutshe
 * Create a user with SELECT, INSERT, UPDATE, DELETE, EXECUTE permissions on the database.
 * Update <code>/application/config/database.php</code> according to your database settings.
 * Update the end of <code>/application/config/config.php</code> with your e-mails settings.
+* It is recommended to change the private and public RSA keys (in <code>assets/keys</code>).
 
 ## What's next ?
 

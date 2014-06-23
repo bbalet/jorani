@@ -32,11 +32,11 @@ $lang['requests_index_button_export'] = 'បញ្ជីនាំចេញ';
 $lang['requests_index_button_show_all'] = 'សំណេីទាំងអស់';
 $lang['requests_index_button_show_pending'] = 'សំនើរដែលមិនទាន់​បានទទូលយក';
 
-$lang['requests_accept_flash_msg_error'] = 'You are not the line manager of this employee. You cannot accept this leave request.';
-$lang['requests_accept_flash_msg_success'] = 'The leave request has been successfully accepted.';
+$lang['requests_accept_flash_msg_error'] = 'អ្នកមិនមែនជាបុគ្គលិក​នៅទីនេះទេ។ អ្នកមិនអនុញ្ញាតអោយមានជាសំនើរទេ។';
+$lang['requests_accept_flash_msg_success'] = 'សំនើររបស់អ្នកត្រូវបានគេទទួលយក។';
 
-$lang['requests_reject_flash_msg_error'] = 'You are not the line manager of this employee. You cannot reject this leave request.';
-$lang['requests_reject_flash_msg_success'] = 'The leave request has been successfully rejected.';
+$lang['requests_reject_flash_msg_error'] = 'អ្នកមិនមែនជាបុគ្គលិក​នៅទីនេះទេ។ អ្នកមិនមានសិទ្ធបដិសេធសំនើរនេះទេ។';
+$lang['requests_reject_flash_msg_success'] = 'សំនើររបស់អ្នកមិនត្រូវបានគេទទួលយកទេ។';
 
 $lang['requests_export_title'] = 'តារាងនៃការស្នើរសុំ';
 $lang['requests_export_thead_id'] = 'ID';

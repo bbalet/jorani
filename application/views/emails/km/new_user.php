@@ -18,7 +18,11 @@
 
     //You can change the content of this template
 ?>
-<html>
+<html lang="km">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta charset="UTF-8">
+    </head>
     <body>
         <h3>{Title}</h3>
         សូមស្វាគមន៍មកកាន់ LMS {Firstname} { Lastname} <a href="{BaseURL}">សូមប្រើប្រាស់ព័ត៌មានបញ្ជាក់អត្តសញ្ញាណទាំងនេះដើម្បីចូលទៅកាន់ប្រព័ន្ធ</a> :

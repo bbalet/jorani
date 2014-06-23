@@ -27,15 +27,15 @@ $lang['hr_leaves_type_not_found'] = 'គ្មានទម្រង់ថ្ម�
 
 $lang['hr_leaves_popup_create_title'] = 'បន្ថែមការឈប់សម្រាក';
 $lang['hr_leaves_popup_create_button_cancel'] = 'បោះបង់';
-$lang['hr_leaves_popup_create_button_create'] = 'Create';
+$lang['hr_leaves_popup_create_button_create'] = 'បង្កើត';
 $lang['hr_leaves_popup_create_field_name'] = 'ឈ្មោះ';
 $lang['hr_leaves_popup_create_flash_msg'] = 'ស្លឹកបង្កេីតដោយជោគជ័យ';
 
-$lang['hr_leaves_popup_update_title'] = 'Edit a Leave type';
+$lang['hr_leaves_popup_update_title'] = 'កែសម្រួលប្រភេទឈប់សំរាក';
 $lang['hr_leaves_popup_update_button_cancel'] = 'បោះបង់';
-$lang['hr_leaves_popup_update_button_update'] = 'Update';
+$lang['hr_leaves_popup_update_button_update'] = 'ធ្វើអោយទាន់សម័យ';
 $lang['hr_leaves_popup_update_field_name'] = 'ឈ្មោះ';
-$lang['hr_leaves_popup_update_flash_msg'] = 'The leave type has been succesfully updated.';
+$lang['hr_leaves_popup_update_flash_msg'] = 'ប្រភេទឈប់សម្រាកបានធ្វើអោយទាន់សម័យដោយជោគជ័យ';
 
 $lang['hr_leaves_popup_delete_title'] = 'លុបចេញពីទម្រង់ដើម';
 $lang['hr_leaves_popup_delete_description'] = 'អ្នកគឺជាអ្នកលុបទម្រង់ដើមវាជាទម្រង់ដែលមិនអាចត្រឡប់វិញបាន';

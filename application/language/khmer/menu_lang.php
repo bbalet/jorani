@@ -55,10 +55,10 @@ $lang['menu_requests_overtime'] = 'បន្ថែមម៉ោង';
 $lang['menu_requests_list_extras'] = 'បញ្ជីនៃបន្ថែម';
 $lang['menu_requests_request_extra'] = 'ស្នើសុំបន្ថែមមួយ';
 
-$lang['menu_leaves_title'] = 'My leaves';
-$lang['menu_leaves_counters'] = 'Counters';
-$lang['menu_leaves_list_requests'] = 'List of leave requests';
-$lang['menu_leaves_create_request'] = 'Request a leave';
+$lang['menu_leaves_title'] = 'ស្លឹករបស់ខ្ញុំ';
+$lang['menu_leaves_counters'] = 'តុកិតលុយ';
+$lang['menu_leaves_list_requests'] = 'បញ្ជីនៃសំណើឈប់សំរាក';
+$lang['menu_leaves_create_request'] = 'ស្នើសំុឈប់សំរាក';
 
 $lang['menu_calendar_title'] = 'ប្រតិទិន';
 $lang['menu_calendar_individual'] = 'ប្រតិទិនរបស់ខ្ញុំ';

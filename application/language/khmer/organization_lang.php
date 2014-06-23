@@ -23,25 +23,25 @@ $lang['organization_index_thead_id'] = 'ID';
 $lang['organization_index_thead_firstname'] = 'នាមត្រកូលអ្នកប្រើប្រាស់';
 $lang['organization_index_thead_lastname'] = 'ឈ្មោះអ្នកប្រើប្រាស់';
 $lang['organization_index_thead_email'] = 'ម៉ែល';
-$lang['organization_index_button_add_employee'] = 'Attach an Employee';
-$lang['organization_index_button_remove_employee'] = 'Detach an Employee';
-$lang['organization_index_popup_delete_title'] = 'Delete Entity';
-$lang['organization_index_popup_delete_description'] = 'You are about to delete one entity, this procedure is irreversible.';
+$lang['organization_index_button_add_employee'] = 'ភ្ជាប់ជាមួយបុគ្គលិក';
+$lang['organization_index_button_remove_employee'] = 'ផ្តាច់ចេញពីបុគ្គលិក';
+$lang['organization_index_popup_delete_title'] = 'លុបអង្គភាព';
+$lang['organization_index_popup_delete_description'] = 'អ្នកលុបអង្គភាពមួយ​​  នេះជានីតិវិធីដែលមិនអាចថយក្រោយវិញបាន';
 $lang['organization_index_popup_delete_confirm'] = 'តើអ្នកចង់បន្ត?';
 $lang['organization_index_popup_delete_button_yes'] = 'យល់ព្រម';
 $lang['organization_index_popup_delete_button_no'] = 'មិនយល់ព្រម';
 
-$lang['organization_index_popup_add_title'] = 'Add an Employee';
+$lang['organization_index_popup_add_title'] = 'បន្ថែមបុគ្គលិក';
 $lang['organization_index_popup_add_button_ok'] = 'យល់ព្រម';
 $lang['organization_index_popup_add_button_cancel'] = 'បោះបង់';
 
 $lang['organization_index_popup_error_title'] = 'មានបញ្ហាកើតឡើង';
 $lang['organization_index_popup_error_button_ok'] = 'យល់ព្រម';
 
-$lang['organization_index_prompt_entity_name'] = 'Name of the entity';
-$lang['organization_index_error_msg_select_entity'] = 'Please select one entity in the organization (treeview on the right).';
-$lang['organization_index_error_msg_select_employee'] = 'Please select one employee in the table of users belonging to the selected entity.';
-$lang['organization_index_error_msg_delete_root'] = 'You cannot delete the root entity.';
+$lang['organization_index_prompt_entity_name'] = 'ឈ្មោះរបស់អង្គភាព';
+$lang['organization_index_error_msg_select_entity'] = 'សូមជ្រើសរើសបុគ្គលិកមួយនៅក្នងអង្គការ';
+$lang['organization_index_error_msg_select_employee'] = 'សូមជ្រើសរើសបុគ្គលិកមួយនៅក្នុងតារាងអ្នកប្រើប្រាស់ដែលជាកម្មសិទ្ធិរបស់អង្គភាពដែលបានជ្រើស។';
+$lang['organization_index_error_msg_delete_root'] = 'អ្នកមិនអាចលុបអង្គភាព root ។';
 
 $lang['organization_select_field_search_placeholder'] = 'ស្ចែងរកអង្គភាពមួយ';
 $lang['organization_select_button_search'] = 'ស្ចែងរក';

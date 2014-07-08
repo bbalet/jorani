@@ -16,7 +16,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['hr_leaves_type_title'] = 'ចាកចេញពីតម្រង់ដើម';
+$lang['hr_leaves_type_title'] = 'ប្រភេទនៃការសុំច្បាប់';
 $lang['hr_leaves_type_thead_id'] = 'ID';
 $lang['hr_leaves_type_thead_name'] = 'ឈ្មោះ';
 $lang['hr_leaves_type_thead_tip_delete'] = 'លុប';

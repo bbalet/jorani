@@ -36,6 +36,7 @@ $lang['contract_index_popup_delete_button_yes'] = 'Oui';
 $lang['contract_index_popup_delete_button_no'] = 'Non';
 $lang['contract_index_popup_entitled_title'] = 'Crédit congés';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Annuler';
+$lang['contract_index_popup_entitled_button_close'] = 'Fermer';
 
 $lang['contract_view_title'] = 'Détails du contrat';
 $lang['contract_view_description'] = 'Détails du contrat n°';

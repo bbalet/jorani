@@ -84,7 +84,7 @@ $(document).ready(function() {
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary"><?php echo lang('hr_employees_popup_entitlment_button_cancel');?></a>
+        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary"><?php echo lang('hr_employees_popup_entitlment_button_close');?></a>
     </div>
 </div>
 

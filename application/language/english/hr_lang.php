@@ -30,6 +30,7 @@ $lang['hr_employees_thead_manager'] = 'Manager';
 $lang['hr_employees_button_export'] = 'Export this list';
 $lang['hr_employees_popup_entitlment_title'] = 'Entitled days';
 $lang['hr_employees_popup_entitlment_button_cancel'] = 'Cancel';
+$lang['hr_employees_popup_entitlment_button_close'] = 'Close';
 
 $lang['hr_export_employees_title'] = 'List of employees';
 $lang['hr_export_employees_thead_id'] = 'ID';

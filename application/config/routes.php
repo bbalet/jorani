@@ -165,6 +165,7 @@ $route['entitleddays/userdelete/(:num)'] = 'entitleddays/userdelete/$1';
 $route['entitleddays/contract/(:num)'] = 'entitleddays/contract/$1';
 $route['entitleddays/ajax/contract'] = 'entitleddays/ajax_contract';
 $route['entitleddays/contractdelete/(:num)'] = 'entitleddays/contractdelete/$1';
+$route['entitleddays/ajax/incdec'] = 'entitleddays/ajax_incdec';
 
 //Reports
 $route['reports/balance'] = 'reports/balance';

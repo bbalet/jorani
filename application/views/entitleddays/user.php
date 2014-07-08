@@ -18,7 +18,8 @@ $this->lang->load('entitleddays', $language);?>
       <td><a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>
       <td><?php echo $days['startdate']; ?></td>
       <td><?php echo $days['enddate']; ?></td>
-      <td><?php echo $days['days']; ?></td>
+      <td><span id="days<?php echo $days['id'] ?>"><?php echo $days['days']; ?></span> &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id'] ?>, 'decrease');"><i class="icon-minus"></i></a>
+             &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id'] ?>, 'increase');"><i class="icon-plus"></i></a></td>
       <td><?php echo $days['type']; ?></td>
     </tr>
   <?php } ?>
@@ -82,6 +83,23 @@ $this->lang->load('entitleddays', $language);?>
           });
     }
     
+    //"increase" or "decrease" the number of entitled days of a given row
+    function incdec(id, operation) {
+        $.ajax({
+            url: "<?php echo base_url();?>entitleddays/ajax/incdec",
+                            type: "POST",
+                data: { id: id,
+                        operation: operation
+                    }
+          }).done(function() {
+              var days = parseInt($('#days' + id).text());
+              switch(operation) {
+                  case "increase": days++; $('#days' + id).text(days.toFixed(2)); break;
+                  case "decrease": days--; $('#days' + id).text(days.toFixed(2)); break;
+              }
+          });
+    }
+    
     function add_entitleddays() {
         if (validate_form()) {
             $.ajax({
@@ -95,12 +113,15 @@ $this->lang->load('entitleddays', $language);?>
                     }
               }).done(function( msg ) {
                   id = parseInt(msg);
+                  days = parseInt($('#days').val());
                   $('#noentitleddays').remove();
                   myRow = '<tr data-id="' + id + '">' +
                             '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_user_index_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>' +
                             '<td>' + $('#startdate').val() + '</td>' +
                             '<td>' + $('#enddate').val() + '</td>' +
-                            '<td>' + $('#days').val() + '</td>' +
+                            '<td><span id="days' + id + '">' + days.toFixed(2) + '</span> &nbsp; ' +
+                            '<a href="#" onclick="Javascript:incdec(' + id + ', \'decrease\');"><i class="icon-minus"></i></a>' +
+                            '&nbsp; <a href="#" onclick="Javascript:incdec(' + id + ', \'increase\');"><i class="icon-plus"></i></a></td>' +
                             '<td>' + $('#type option:selected').text() + '</td>' +
                         '</tr>';
                   $('#entitleddaysuser > tbody:last').append(myRow);

@@ -30,6 +30,7 @@ $lang['hr_employees_thead_manager'] = 'អ្នកគ្រប់គ្រង';
 $lang['hr_employees_button_export'] = 'បញ្ជីនាំចេញ';
 $lang['hr_employees_popup_entitlment_title'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
 $lang['hr_employees_popup_entitlment_button_cancel'] = 'បោះបង់';
+$lang['hr_employees_popup_entitlment_button_close'] = 'បិទ';
 
 $lang['hr_export_employees_title'] = 'បញ្ជីនៃបុគ្គលិក';
 $lang['hr_export_employees_thead_id'] = 'ID';

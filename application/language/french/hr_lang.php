@@ -30,6 +30,7 @@ $lang['hr_employees_thead_manager'] = 'Manager';
 $lang['hr_employees_button_export'] = 'Exporter cette liste';
 $lang['hr_employees_popup_entitlment_title'] = 'Crédit congés';
 $lang['hr_employees_popup_entitlment_button_cancel'] = 'Annuler';
+$lang['hr_employees_popup_entitlment_button_close'] = 'Fermer';
 
 $lang['hr_export_employees_title'] = 'Liste des employés';
 $lang['hr_export_employees_thead_id'] = 'N°';

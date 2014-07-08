@@ -36,6 +36,7 @@ $lang['contract_index_popup_delete_button_yes'] = 'Yes';
 $lang['contract_index_popup_delete_button_no'] = 'No';
 $lang['contract_index_popup_entitled_title'] = 'Entitled days';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Cancel';
+$lang['contract_index_popup_entitled_button_close'] = 'Close';
 
 $lang['contract_view_title'] = 'Contract details';
 $lang['contract_view_description'] = 'Details of contract #';

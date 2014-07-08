@@ -36,6 +36,7 @@ $lang['contract_index_popup_delete_button_yes'] = 'យល់ព្រម';
 $lang['contract_index_popup_delete_button_no'] = 'មិនយល់ព្រម';
 $lang['contract_index_popup_entitled_title'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
 $lang['contract_index_popup_entitled_button_cancel'] = 'បោះបង់';
+$lang['contract_index_popup_entitled_button_close'] = 'បិទ';
 
 $lang['contract_view_title'] = 'រៀបរាប់កិច្ចសន្យា';
 $lang['contract_view_description'] = 'ការរៀបរាប់នៃកិច្ចសន្យា#';

@@ -28,7 +28,7 @@ $lang['menu_password_popup_title'] = 'ផ្លាស់ប្តូរពាក
 $lang['menu_password_popup_button_cancel'] = 'បោះបង់';
 
 $lang['menu_admin_title'] = 'អ្នកគ្រប់គ្រង';
-$lang['menu_admin_list_users'] = 'បញ្ជីនៃនាក់ប្រើប្រាស់';
+$lang['menu_admin_list_users'] = 'បញ្ជីនៃអ្នកប្រើប្រាស់';
 $lang['menu_admin_add_user'] = 'បង្កើតឈ្មោះថ្មី';
 $lang['menu_admin_settings_divider'] = 'ការកំណត់';
 $lang['menu_admin_settings'] = 'ការកំណត់';
@@ -41,22 +41,22 @@ $lang['menu_hr_contracts_divider'] = 'អង្គការ';
 $lang['menu_hr_list_contracts'] = 'បញ្ជីនៃកិច្ចសន្យា';
 $lang['menu_hr_list_positions'] = 'បញ្ជីមុខតំណែង';
 $lang['menu_hr_leaves_type_divider'] = 'ស្លឹកឈើ';
-$lang['menu_hr_list_leaves_type'] = 'បញ្ជីនៃប្រភេទ';
+$lang['menu_hr_list_leaves_type'] = 'ប្រភេទនៃការសុំច្បាប់';
 $lang['menu_hr_reports_divider'] = 'របាយការណ៍';
-$lang['menu_hr_report_leave_balance'] = 'ទុកឱ្យមានតុល្យភាព';
+$lang['menu_hr_report_leave_balance'] = 'តុល្យភាពនៃការចាកចេញ';
 
 $lang['menu_validation_title'] = 'ការរង្វាយតំលៃ';
 $lang['menu_validation_leaves'] = 'ស្លឹកឈើ';
 $lang['menu_validation_overtime'] = 'បន្ថែមម៉ោង';
 
 $lang['menu_requests_title'] = 'ការស្នើរសុំ';
-$lang['menu_requests_leaves'] = 'ស្លឹកឈើ';
+$lang['menu_requests_leaves'] = 'ការសុំច្បាប់';
 $lang['menu_requests_overtime'] = 'បន្ថែមម៉ោង';
 $lang['menu_requests_list_extras'] = 'បញ្ជីនៃបន្ថែម';
 $lang['menu_requests_request_extra'] = 'ស្នើសុំបន្ថែមមួយ';
 
 $lang['menu_leaves_title'] = 'ស្លឹករបស់ខ្ញុំ';
-$lang['menu_leaves_counters'] = 'តុកិតលុយ';
+$lang['menu_leaves_counters'] = 'ចំនួនសរុបនៃការឈប់';
 $lang['menu_leaves_list_requests'] = 'បញ្ជីនៃសំណើឈប់សំរាក';
 $lang['menu_leaves_create_request'] = 'ស្នើសំុឈប់សំរាក';
 

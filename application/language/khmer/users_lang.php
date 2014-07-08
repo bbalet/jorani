@@ -17,7 +17,7 @@
  */
 
 //Index view
-$lang['users_index_title'] = 'បញ្ជីនៃនាក់ប្រើប្រាស់';
+$lang['users_index_title'] = 'បញ្ជីនៃអ្នកប្រើប្រាស់';
 $lang['users_index_thead_tip_view'] = 'មើលពត៏មានលំអិតនៃនាក់ប្រើប្រាស់';
 $lang['users_index_thead_tip_edit'] = 'កែប្រែឈ្មោះអ្នកប្រើប្រាស់';
 $lang['users_index_thead_tip_delete'] = 'លុប';

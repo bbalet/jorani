@@ -189,7 +189,7 @@ class Overtime extends CI_Controller {
             $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_rejected', $data, TRUE);
             $this->email->subject(lang('email_overtime_request_reject_subject'));
         }
-
+        //$message = mb_convert_encoding($message, "UTF-8");
         $this->email->from('do.not@reply.me', 'LMS');
         $this->email->to($employee['email']);
         $this->email->message($message);

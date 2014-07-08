@@ -100,7 +100,7 @@ $(document).ready(function() {
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary"><?php echo lang('contract_index_popup_entitled_button_cancel');?></a>
+        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary"><?php echo lang('contract_index_popup_entitled_button_close');?></a>
     </div>
 </div>
 

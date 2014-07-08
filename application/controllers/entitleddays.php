@@ -160,4 +160,37 @@ class Entitleddays extends CI_Controller {
             }
         }
     }
+    
+    /**
+     * Ajax endpoint : Increase or decrease by one an entitled days row 
+     * on a contract of an employee (as the both are stored into the same table)
+     * id : row identifier into the database
+     * operation : "increase" or "decrease" by 1 (the number can be negative).
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function ajax_incdec() {
+        if ($this->auth->is_granted('entitleddays_user') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $id = $this->input->post('id', TRUE);
+            $operation = $this->input->post('operation', TRUE);   
+            if (isset($id) && isset($operation)) {
+                $this->output->set_content_type('text/plain');
+                switch ($operation) {
+                    case  "increase":
+                        $id = $this->entitleddays_model->inc_entitleddays($id);
+                        break;
+                    case "decrease":
+                        $id = $this->entitleddays_model->dec_entitleddays($id);
+                        break;
+                    default:
+                        $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+                }
+                echo $id;
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            }
+        }
+    }
+
 }

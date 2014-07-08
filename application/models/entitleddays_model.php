@@ -163,7 +163,6 @@ class Entitleddays_model extends CI_Model {
         $query = $this->db->delete('entitleddays', array('contract' => $id));
     }
     
-    
     /**
      * Update a given contract in the database. Update data are coming from an
      * HTML form
@@ -182,4 +181,27 @@ class Entitleddays_model extends CI_Model {
         return $this->db->update('entitleddays', $data);
     }
     
+    /**
+     * Increase an entitled days row
+     * @param int $id row identifier
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function inc_entitleddays($id) {
+        $this->db->set('days', 'days + 1', FALSE);
+        $this->db->where('id', $id);
+        return $this->db->update('entitleddays');
+    }
+    
+    /**
+     * Decrease an entitled days row
+     * @param int $id row identifier
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function dec_entitleddays($id) {
+        $this->db->set('days', 'days - 1', FALSE);
+        $this->db->where('id', $id);
+        return $this->db->update('entitleddays');
+    }
 }

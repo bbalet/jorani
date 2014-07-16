@@ -31,7 +31,6 @@ padding-left:10px;
 }
 </style>
 
-
 <div class="row-fluid">
     <div class="span6">
         <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) - 1);?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo intval($year) - 1;?></a>
@@ -42,8 +41,6 @@ padding-left:10px;
     </div>
     <div class="span6">
         <a href="<?php echo base_url();?>contracts/dayoff" class="btn btn-primary" data-target="#frmSetRangeDayOff" data-toggle="modal"><i class="icon-retweet icon-white"></i>&nbsp; Series of non working days</a>
-        &nbsp;
-        <button class="btn secondary btn-danger" onclick="toggle_delete_mode();" id="cmdDelete">Delete mode</button>
     </div>
 </div>
 
@@ -137,16 +134,17 @@ for ($mC = 1; $mC <= 12; $mC++) {
 <div id="frmAddDayOff" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmAddDayOff').modal('hide');" class="close">&times;</a>
-         <h3>Add day off</h3>
+         <h3>Edit day off</h3>
     </div>
-    <div class="modal-header">
+    <div class="modal-body">
         <label for="txtDayOffTitle">Title</label>
         <input type="text" id="txtDayOffTitle" name="txtDayOffTitle" />
         <label for="cboDayOffType">Type</label>
         <select id="cboDayOffType" name="cboDayOffType">
-            <option value="1" selected>All day</option>
-            <option value="2">Morning</option>
-            <option value="3">Afternoon</option>
+            <option value="0" selected>Working day</option>
+            <option value="1" selected>All day is off</option>
+            <option value="2">Morning is off</option>
+            <option value="3">Afternoon is off</option>
         </select>
         <span id="timestamp"></span>
     </div>
@@ -159,45 +157,33 @@ for ($mC = 1; $mC <= 12; $mC++) {
 <div id="frmSetRangeDayOff" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="close">&times;</a>
-         <h3>Add day off</h3>
+         <h3>Edit a series of day offs</h3>
     </div>
-    Mark every
-    <select id="cboDayOffType">
-        <option value="" selected>Saturday and sunday</option>
-        <option value="" selected>Saturday afternoon and sunday</option>
-        <option value="" selected>Saturday</option>
-        <option value="" selected>Sunday</option>
-        <option value="" selected>Monday</option>
-        <option value="" selected>Tuesday</option>
-        <option value="" selected>Wednesday</option>
-        <option value="" selected>Thursday</option>
-        <option value="" selected>Friday</option>
-        <option value="" selected>Sunday</option>
+    <div class="modal-body">
+        Mark every
+        <select id="cboDayOffSeriesDay">
+            <option value="saturday" selected>Saturday</option>
+            <option value="sunday" selected>Sunday</option>
+            <option value="monday" selected>Monday</option>
+            <option value="tuesday" selected>Tuesday</option>
+            <option value="wednesday" selected>Wednesday</option>
+            <option value="thursday" selected>Thursday</option>
+            <option value="friday" selected>Friday</option>
+        </select>
+        from  <input id="txtStartDate" type="text" /><br />
+        to <input id="txtEndDate" type="text" /><br />
+        <br />
         
-        <option value="" selected>Saturday morning</option>
-        <option value="" selected>Sunday morning</option>
-        <option value="" selected>Monday morning</option>
-        <option value="" selected>Tuesday morning</option>
-        <option value="" selected>Wednesday morning</option>
-        <option value="" selected>Thursday morning</option>
-        <option value="" selected>Friday morning</option>
-        <option value="" selected>Sunday morning</option>
-        
-        <option value="" selected>Saturday afternoon</option>
-        <option value="" selected>Sunday afternoon</option>
-        <option value="" selected>Monday afternoon</option>
-        <option value="" selected>Tuesday afternoon</option>
-        <option value="" selected>Wednesday afternoon</option>
-        <option value="" selected>Thursday afternoon</option>
-        <option value="" selected>Friday afternoon</option>
-        <option value="" selected>Sunday afternoon</option>
-    </select>
-    until 
-    <input type="text" id="enddate" />
-    as a non working day
-    <span id="timestamp"></span>
+        <label for="cboDayOffSeriesType">as a :</label>
+        <select id="cboDayOffSeriesType" name="cboDayOffType">
+            <option value="0" selected>Working day</option>
+            <option value="1" selected>All day is off</option>
+            <option value="2">Morning is off</option>
+            <option value="3">Afternoon is off</option>
+        </select>
+    </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="btn secondary">Apply</a>
+        <a href="#" onclick="edit_series();" class="btn secondary">OK</a>
         <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="btn secondary">Cancel</a>
     </div>
 </div>
@@ -211,9 +197,9 @@ for ($mC = 1; $mC <= 12; $mC++) {
 <script type="text/javascript">
 
 var timestamp;
-var delete_mode = false;
+//var delete_mode = false;
 
-function toggle_delete_mode() {
+/*function toggle_delete_mode() {
     delete_mode = !delete_mode;
     if (delete_mode) {
         $(".days:hover").css("cursor", "crosshair");
@@ -222,7 +208,7 @@ function toggle_delete_mode() {
         $(".days:hover").css("cursor", "pointer");
         $("#cmdDelete").html("Delete mode");
     }
-}
+}*/
 
 function add_day_off() {
     $("#cboType").val($('#' + timestamp).data("type"));
@@ -246,6 +232,30 @@ function add_day_off() {
         });
 }
 
+function edit_series() {
+    $("#cboType").val($('#' + timestamp).data("type"));
+    $.ajax({
+        url: "<?php echo base_url();?>contracts/calendar/series",
+        type: "POST",
+        data: { contract: <?php echo $contract_id;?>,
+                start: $("#txtStartDate").val(),
+                end: $("#txtEndDate").val(),
+                day: $("cboDayOffSeriesDay").val(),
+                type: $("#cboDayOffSeriesType").val()
+            }
+      }).done(function( msg ) {
+            /*var image;
+            switch ($("#cboDayOffType").val()) {
+                case "1": image= "<img src='<?php echo base_url();?>assets/images/day.png' />"; break;
+                case "2": image= "<img src='<?php echo base_url();?>assets/images/morning.png' />"; break;
+                case "3": image= "<img src='<?php echo base_url();?>assets/images/afternoon.png' />"; break;
+            }
+            $('#' + timestamp).html(image);*/
+            alert(msg);
+            $('#frmSetRangeDayOff').modal('hide');
+        });
+}
+
 function delete_day_off() {
     $.ajax({
         url: "<?php echo base_url();?>contracts/calendar/delete",
@@ -261,7 +271,8 @@ function delete_day_off() {
     
 $(function() {
     $("#frmAddDayOff").alert();
-    $('#enddate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+    $('#txtStartDate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+    $('#txtEndDate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
     
     //Display modal form that allow adding a day off
     $("#fullyear").on("click", "td", function() {

@@ -213,6 +213,22 @@ class Contracts extends CI_Controller {
         $this->load->view('contracts/calendar', $data);
         $this->load->view('templates/footer');
     }
+    
+    /**
+     * Internal utility function
+     * make sure a resource is reloaded every time
+     */
+    private function expires_now() {
+        // Date in the past
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        // always modified
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        // HTTP/1.1
+        header("Cache-Control: no-store, no-cache, must-revalidate");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        // HTTP/1.0
+        header("Pragma: no-cache");
+    }
 
     /**
      * Ajax endpoint : add a day off to a contract
@@ -232,6 +248,33 @@ class Contracts extends CI_Controller {
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             }
+        }
+    }
+    
+    /**
+     * Ajax endpoint : 
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function series() {
+        if ($this->auth->is_granted('adddayoff_contract') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $this->expires_now();
+            header("Content-Type: text/plain");
+            
+            
+            $start = strtotime($this->input->post('start', TRUE));
+            $end = strtotime($this->input->post('end', TRUE));
+            $type = $this->input->post('type', TRUE);            
+            $day = strtotime($this->input->post('day', TRUE), $start);
+            $list = '';
+            
+            while($day <= $end) {
+                $list .= date("m/d/Y", $day) . ",";
+                $day = strtotime("+1 weeks", $day);
+            }
+            $list = rtrim($list, ",");
+            echo $list;
         }
     }
 

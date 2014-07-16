@@ -84,6 +84,7 @@ class Leaves extends CI_Controller {
     
     /**
      * Display the details of leaves taken/entitled for the connected user
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function counters() {
         $this->auth->check_is_granted('counters_leaves');
@@ -365,6 +366,7 @@ class Leaves extends CI_Controller {
      * Ajax endpoint : Send a list of fullcalendar events
      */
     public function individual() {
+        $this->expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -375,6 +377,7 @@ class Leaves extends CI_Controller {
      * Ajax endpoint : Send a list of fullcalendar events
      */
     public function workmates() {
+        $this->expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -385,6 +388,7 @@ class Leaves extends CI_Controller {
      * Ajax endpoint : Send a list of fullcalendar events
      */
     public function collaborators() {
+        $this->expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -396,6 +400,7 @@ class Leaves extends CI_Controller {
      * @param int $entity_id Entity identifier
      */
     public function organization($entity_id) {
+        $this->expires_now();
         header("Content-Type: application/json");
         $this->load->model('organization_model');
         $start = $this->input->get('start', TRUE);
@@ -408,6 +413,7 @@ class Leaves extends CI_Controller {
      * Ajax endpoint : Send a list of fullcalendar events
      */
     public function department() {
+        $this->expires_now();
         header("Content-Type: application/json");
         $this->load->model('organization_model');
         $department = $this->organization_model->get_department($this->user_id);
@@ -420,12 +426,29 @@ class Leaves extends CI_Controller {
      * Ajax endpoint : difference between the entitled and the taken days
      */
     public function credit() {
+        $this->expires_now();
         header("Content-Type: application/json");
         echo $this->leaves_model->get_user_leaves_credit(
                 $this->input->post('id'),
                 $this->input->post('type'));
     }
     
+    /**
+     * Internal utility function
+     * make sure a resource is reloaded every time
+     */
+    private function expires_now() {
+        // Date in the past
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        // always modified
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        // HTTP/1.1
+        header("Cache-Control: no-store, no-cache, must-revalidate");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        // HTTP/1.0
+        header("Pragma: no-cache");
+    }
+
     /**
      * Action : download an iCal event corresponding to a leave request
      * @param int leave request id

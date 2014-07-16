@@ -22,6 +22,17 @@ $this->lang->load('global', $language);?>
     </div>
     <div class="span5">&nbsp;</div>
 </div>
+
+<div class="row-fluid">
+    <div class="span4">
+        <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
+        <button id="cmdToday" class="btn btn-primary"><?php echo lang('calendar_component_buttonText_today');?></button>
+        <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
+    </div>
+    <div class="span8">&nbsp;</div>
+</div>
+
+
 <div class="row-fluid">
     <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
     <div class="span3"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
@@ -100,18 +111,25 @@ $this->lang->load('global', $language);?>
         //Create a calendar and fill it with AJAX events
         $('#calendar').fullCalendar({
                 header: {
-                left: "prev,next today",
-                center: "title",
-                right: ""
+                    left: "",
+                    center: "title",
+                    right: ""
             }
         });
-        //Catch the onclick event on prev button
-        $('.fc-button-prev span').click(function(){
+        
+        $('#cmdNext').click(function() {
+            $('#calendar').fullCalendar('next');
             refresh_calendar();
-         });
-         //Catch the onclick event on next button
-        $('.fc-button-next span').click(function(){
-           refresh_calendar();
+        });
+        
+        $('#cmdPrevious').click(function() {
+            $('#calendar').fullCalendar('prev');
+            refresh_calendar();
+        });
+        
+        $('#cmdToday').click(function() {
+            $('#calendar').fullCalendar('today');
+            refresh_calendar();
         });
     });
 </script>

@@ -50,7 +50,14 @@ padding-left:10px;
 
 <div class="row-fluid">
     <div class="span12">
-        Day offs and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".</div>
+        Day offs and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+        <u>Legend:</u> <img src='<?php echo base_url();?>assets/images/day.png' /> All day, <img src='<?php echo base_url();?>assets/images/morning.png' /> Morning, <img src='<?php echo base_url();?>assets/images/afternoon.png' /> Afternoon
+    </div>
 </div>
 
 <table width="100%" border="1" cellspacing="0" cellpadding="0" id="fullyear">
@@ -160,27 +167,30 @@ for ($mC = 1; $mC <= 12; $mC++) {
          <h3>Edit a series of day offs</h3>
     </div>
     <div class="modal-body">
-        Mark every
-        <select id="cboDayOffSeriesDay">
+        <label for="cboDayOffSeriesDay">Mark every</label>
+        <select name="cboDayOffSeriesDay" id="cboDayOffSeriesDay">
             <option value="saturday" selected>Saturday</option>
-            <option value="sunday" selected>Sunday</option>
-            <option value="monday" selected>Monday</option>
-            <option value="tuesday" selected>Tuesday</option>
-            <option value="wednesday" selected>Wednesday</option>
-            <option value="thursday" selected>Thursday</option>
-            <option value="friday" selected>Friday</option>
+            <option value="sunday">Sunday</option>
+            <option value="monday">Monday</option>
+            <option value="tuesday">Tuesday</option>
+            <option value="wednesday">Wednesday</option>
+            <option value="thursday">Thursday</option>
+            <option value="friday">Friday</option>
         </select>
-        from  <input id="txtStartDate" type="text" /><br />
-        to <input id="txtEndDate" type="text" /><br />
-        <br />
-        
-        <label for="cboDayOffSeriesType">as a :</label>
+        <label for="txtStartDate">From</label>
+        <input name="txtStartDate" id="txtStartDate" type="text" /><br />
+        <label for="txtEndDate">To</label>
+        <input name="txtEndDate" id="txtEndDate" type="text" /><br />
+        <label for="cboDayOffSeriesType">As a</label>
         <select id="cboDayOffSeriesType" name="cboDayOffType">
             <option value="0" selected>Working day</option>
             <option value="1" selected>All day is off</option>
             <option value="2">Morning is off</option>
             <option value="3">Afternoon is off</option>
         </select>
+        <br />
+        <label for="cboDayOffSeriesTitle">Title</label>
+        <input type="text" id="cboDayOffSeriesTitle" name="cboDayOffSeriesTitle" />
     </div>
     <div class="modal-footer">
         <a href="#" onclick="edit_series();" class="btn secondary">OK</a>
@@ -240,10 +250,12 @@ function edit_series() {
         data: { contract: <?php echo $contract_id;?>,
                 start: $("#txtStartDate").val(),
                 end: $("#txtEndDate").val(),
-                day: $("cboDayOffSeriesDay").val(),
-                type: $("#cboDayOffSeriesType").val()
+                day: $("#cboDayOffSeriesDay").val(),
+                type: $("#cboDayOffSeriesType").val(),
+                title: $("#cboDayOffSeriesTitle").val()
             }
       }).done(function( msg ) {
+          alert($("#cboDayOffSeriesDay").val());
             /*var image;
             switch ($("#cboDayOffType").val()) {
                 case "1": image= "<img src='<?php echo base_url();?>assets/images/day.png' />"; break;

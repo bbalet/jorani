@@ -252,29 +252,34 @@ class Contracts extends CI_Controller {
     }
     
     /**
-     * Ajax endpoint : 
+     * Ajax endpoint : Edit a series of day offs for a given contract
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function series() {
         if ($this->auth->is_granted('adddayoff_contract') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
-            $this->expires_now();
-            header("Content-Type: text/plain");
-            
-            
-            $start = strtotime($this->input->post('start', TRUE));
-            $end = strtotime($this->input->post('end', TRUE));
-            $type = $this->input->post('type', TRUE);            
-            $day = strtotime($this->input->post('day', TRUE), $start);
-            $list = '';
-            
-            while($day <= $end) {
-                $list .= date("m/d/Y", $day) . ",";
-                $day = strtotime("+1 weeks", $day);
+            if (isset($this->input->post('day', TRUE)) && isset($this->input->post('type', TRUE)) &&
+                    isset($this->input->post('start', TRUE)) && isset($this->input->post('end', TRUE))) {
+                $this->expires_now();
+                header("Content-Type: text/plain");
+
+                //Build the list of dates to be marked
+                $start = strtotime($this->input->post('start', TRUE));
+                $end = strtotime($this->input->post('end', TRUE));
+                $type = $this->input->post('type', TRUE);
+                $day = strtotime($this->input->post('day', TRUE), $start);
+                $list = '';
+                while ($day <= $end) {
+                    $list .= date("m/d/Y", $day) . ",";
+                    $day = strtotime("+1 weeks", $day);
+                }
+                $list = rtrim($list, ",");
+                $this->contracts_model->deletedayoffs($contract, $list);
+                echo $this->contracts_model->adddayoffs($contract, $type, $title, $list);
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             }
-            $list = rtrim($list, ",");
-            echo $list;
         }
     }
 

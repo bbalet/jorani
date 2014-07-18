@@ -118,6 +118,7 @@ class Contracts_model extends CI_Model {
         $this->db->where('contract', $contract);
         $this->db->where('YEAR(date)', $year);
         $query = $this->db->get('dayoffs');
+        $dayoffs =array();
         foreach($query->result() as $row)
         {
             $dayoffs[$row->timestamp][0] = $row->type;
@@ -127,7 +128,7 @@ class Contracts_model extends CI_Model {
     }
     
     /**
-     * Insert a day off into the day offs table
+     * Delete a day off into the day offs table
      * @param int $contract Identifier of the contract
      * @param string $timestamp Date of the day off
      * @return bool outcome of the query
@@ -137,6 +138,50 @@ class Contracts_model extends CI_Model {
         $this->db->where('contract', $contract);
         $this->db->where('date', date('Y/m/d', $timestamp));
         return $this->db->delete('dayoffs');
+    }
+    
+    /**
+     * Delete a list of day offs into the day offs table
+     * @param int $contract Identifier of the contract
+     * @param string $dateList comma-separated list of dates
+     * @return bool outcome of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function deletedayoffs($contract, $dateList) {
+        $dates = explode(",", $dateList);
+        $this->db->where('contract', $contract);
+        $this->db->where_in('date', $dates);
+        return $this->db->delete('dayoffs');
+    }
+
+    /**
+     * Insert a list of day offs into the day offs table
+     * @param int $contract Identifier of the contract
+     * @param int $type 1:day, 2:morning, 3:afternoon
+     * @param string $title Short description of the day off
+     * @param string $dateList comma-separated list of dates
+     * @return bool outcome of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function adddayoffs($contract, $type, $title, $dateList) {
+        //Prepare a command in order to insert multiple rows with one query MySQL
+        //INSERT INTO table (a,b) VALUES (1,2), (2,3), (3,4);
+        //$query = 'INSERT INTO dayoffs (contract, date, type, title) VALUES ';
+        $dates = explode(",", $dateList);
+        $data = array();
+        foreach ($dates as $date) {
+            //$query .= '(' . $contract . ',' . $date . ',' . $type . ',' . $title . '),';
+            $row = array(
+                'contract' => $contract,
+                'date' => $date,
+                'type' => $type,
+                'title' => $title
+            );
+            array_push($data, $row);
+        }
+        return $this->db->insert_batch('mytable', $data); 
+        //$query = rtrim($query, ",");
+        //return $this->db->insert('dayoffs', $data);
     }
     
     /**

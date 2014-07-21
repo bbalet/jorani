@@ -165,23 +165,35 @@ class Contracts_model extends CI_Model {
      */
     public function adddayoffs($contract, $type, $title, $dateList) {
         //Prepare a command in order to insert multiple rows with one query MySQL
-        //INSERT INTO table (a,b) VALUES (1,2), (2,3), (3,4);
-        //$query = 'INSERT INTO dayoffs (contract, date, type, title) VALUES ';
         $dates = explode(",", $dateList);
         $data = array();
         foreach ($dates as $date) {
-            //$query .= '(' . $contract . ',' . $date . ',' . $type . ',' . $title . '),';
             $row = array(
                 'contract' => $contract,
-                'date' => $date,
+                'date' => date('Y-m-d', strtotime($date)),
                 'type' => $type,
                 'title' => $title
             );
             array_push($data, $row);
         }
-        return $this->db->insert_batch('mytable', $data); 
-        //$query = rtrim($query, ",");
-        //return $this->db->insert('dayoffs', $data);
+        return $this->db->insert_batch('dayoffs', $data); 
+    }
+    
+    /**
+     * Get the sum of day offs between two dates for a given contract
+     * @param int $contract contract identifier
+     * @param date $start start date
+     * @param date $end end date
+     * @return int number of day offs
+     */
+    public function sumdayoffs($contract, $start, $end) {
+        $this->db->select('sum(CASE `type` WHEN 1 THEN 1 WHEN 2 THEN 0.5 WHEN 3 THEN 0.5 END) as nb');
+        $this->db->where('contract', $contract);
+        $this->db->where('date >=', $start);
+        $this->db->where('date <=', $end);
+        $query = $this->db->get('dayoffs');
+        
+        return 1; 
     }
     
     /**

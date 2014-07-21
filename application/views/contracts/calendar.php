@@ -40,7 +40,7 @@ padding-left:10px;
         <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) + 1);?>" class="btn btn-primary"><?php echo intval($year) + 1;?>&nbsp; <i class="icon-arrow-right icon-white"></i></a>
     </div>
     <div class="span6">
-        <a href="<?php echo base_url();?>contracts/dayoff" class="btn btn-primary" data-target="#frmSetRangeDayOff" data-toggle="modal"><i class="icon-retweet icon-white"></i>&nbsp; Series of non working days</a>
+        <a href="#frmSetRangeDayOff" class="btn btn-primary" data-toggle="modal"><i class="icon-retweet icon-white"></i>&nbsp; Series of non working days</a>
     </div>
 </div>
 
@@ -207,18 +207,6 @@ for ($mC = 1; $mC <= 12; $mC++) {
 <script type="text/javascript">
 
 var timestamp;
-//var delete_mode = false;
-
-/*function toggle_delete_mode() {
-    delete_mode = !delete_mode;
-    if (delete_mode) {
-        $(".days:hover").css("cursor", "crosshair");
-        $("#cmdDelete").html("Create mode");
-    } else {
-        $(".days:hover").css("cursor", "pointer");
-        $("#cmdDelete").html("Delete mode");
-    }
-}*/
 
 function add_day_off() {
     $("#cboType").val($('#' + timestamp).data("type"));
@@ -231,13 +219,14 @@ function add_day_off() {
                 title: $("#txtDayOffTitle").val()
             }
       }).done(function( msg ) {
-            var image;
+            var image = "&nbsp;";
             switch ($("#cboDayOffType").val()) {
                 case "1": image= "<img src='<?php echo base_url();?>assets/images/day.png' />"; break;
                 case "2": image= "<img src='<?php echo base_url();?>assets/images/morning.png' />"; break;
                 case "3": image= "<img src='<?php echo base_url();?>assets/images/afternoon.png' />"; break;
             }
             $('#' + timestamp).html(image);
+            $('#' + timestamp).attr("title", $("#txtDayOffTitle").val());
             $('#frmAddDayOff').modal('hide');
         });
 }
@@ -255,34 +244,14 @@ function edit_series() {
                 title: $("#cboDayOffSeriesTitle").val()
             }
       }).done(function( msg ) {
-          alert($("#cboDayOffSeriesDay").val());
-            /*var image;
-            switch ($("#cboDayOffType").val()) {
-                case "1": image= "<img src='<?php echo base_url();?>assets/images/day.png' />"; break;
-                case "2": image= "<img src='<?php echo base_url();?>assets/images/morning.png' />"; break;
-                case "3": image= "<img src='<?php echo base_url();?>assets/images/afternoon.png' />"; break;
-            }
-            $('#' + timestamp).html(image);*/
-            alert(msg);
-            $('#frmSetRangeDayOff').modal('hide');
+            //Reload the page
+            location.reload(true);
         });
 }
 
-function delete_day_off() {
-    $.ajax({
-        url: "<?php echo base_url();?>contracts/calendar/delete",
-        type: "POST",
-        data: { contract: <?php echo $contract_id;?>,
-                timestamp: timestamp
-            }
-      }).done(function( msg ) {
-            $('#' + timestamp).html("&nbsp;");
-            $('#frmAddDayOff').modal('hide');
-        });
-}
-    
 $(function() {
     $("#frmAddDayOff").alert();
+    $("#frmSetRangeDayOff").alert();
     $('#txtStartDate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
     $('#txtEndDate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
     

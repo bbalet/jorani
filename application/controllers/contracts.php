@@ -241,10 +241,14 @@ class Contracts extends CI_Controller {
             $contract = $this->input->post('contract', TRUE);
             $timestamp = $this->input->post('timestamp', TRUE);
             $type = $this->input->post('type', TRUE);
-            $title = $this->input->post('title', TRUE);  
+            $title = $this->input->post('title', TRUE);
             if (isset($contract) && isset($timestamp) && isset($type) && isset($title)) {
                 $this->output->set_content_type('text/plain');
-                echo $this->contracts_model->adddayoff($contract, $timestamp, $type, $title);
+                if ($type == 0) {
+                    echo $this->contracts_model->deletedayoff($contract, $timestamp);
+                } else {
+                    echo $this->contracts_model->adddayoff($contract, $timestamp, $type, $title);
+                }
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             }
@@ -259,8 +263,9 @@ class Contracts extends CI_Controller {
         if ($this->auth->is_granted('adddayoff_contract') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
-            if (isset($this->input->post('day', TRUE)) && isset($this->input->post('type', TRUE)) &&
-                    isset($this->input->post('start', TRUE)) && isset($this->input->post('end', TRUE))) {
+            if ($this->input->post('day', TRUE) !=null && $this->input->post('type', TRUE) !=null &&
+                    $this->input->post('start', TRUE) !=null && $this->input->post('end', TRUE) !=null
+                     && $this->input->post('contract', TRUE) !=null) {
                 $this->expires_now();
                 header("Content-Type: text/plain");
 
@@ -275,8 +280,15 @@ class Contracts extends CI_Controller {
                     $day = strtotime("+1 weeks", $day);
                 }
                 $list = rtrim($list, ",");
+                $contract = $this->input->post('contract', TRUE);
+                $title = $this->input->post('title', TRUE);
                 $this->contracts_model->deletedayoffs($contract, $list);
-                echo $this->contracts_model->adddayoffs($contract, $type, $title, $list);
+                if ($type != 0) {
+                    $this->contracts_model->adddayoffs($contract, $type, $title, $list);
+                    echo 'updated';
+                } else {
+                    echo 'deleted';
+                }
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             }

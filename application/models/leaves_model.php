@@ -70,6 +70,33 @@ class Leaves_model extends CI_Model {
     }
     
     /**
+     * Try to calculate the lenght of a leave using the start and and date of the leave
+     * and the non working days defined on a contract
+     * @param int $employee
+     * @param date $start
+     * @param date $end
+     * @return float length of leave
+     */
+    public function length($employee, $start, $end) {
+        $this->db->select('sum(CASE `type` WHEN 1 THEN 1 WHEN 2 THEN 0.5 WHEN 3 THEN 0.5 END) as days');
+        $this->db->from('users');
+        $this->db->join('dayoffs', 'users.contract = dayoffs.contract');
+        $this->db->where('users.id', $employee);
+        $this->db->where('date >=', $start);
+        $this->db->where('date <=', $end);
+        $result = $this->db->get()->result_array();
+        $startTimeStamp = strtotime($start);
+        $endTimeStamp = strtotime($end);
+        $timeDiff = abs($endTimeStamp - $startTimeStamp);
+        $numberDays = $timeDiff / 86400;  // 86400 seconds in one day
+        if (count($result) != 0) { //Test if some non working days are defined on a contract
+            return $numberDays - $result[0]['days'];
+        } else {
+            return $numberDays;
+        }
+    }
+    
+    /**
      * Get the the list of entitled and taken leaves of a given employee
      * @param int $id ID of the employee
      * @param bool $sum_extra TRUE: sum compensate summary

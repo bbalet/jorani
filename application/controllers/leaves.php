@@ -309,12 +309,21 @@ class Leaves extends CI_Controller {
         }
     }
     
-    /*
-     function decimal($str)
-    {
-        return (bool)preg_match('/^[\-+]?[0-9]+\.[0-9]+$/', $str);
-    }
+    /**
+     * Ajax endpoint : Try to calculate the length of the leave
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
+    public function length() {
+        $user_id = $this->input->post('user_id', TRUE);
+        $start = $this->input->post('start', TRUE);
+        $end = $this->input->post('end', TRUE);
+        if (isset($user_id) && isset($start) && isset($end)) {
+            $this->output->set_content_type('text/plain');
+            echo $this->leaves_model->length($user_id, $start, $end);
+        } else {
+            $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+        }
+    }
 
     /**
      * Action: export the list of all leaves into an Excel file

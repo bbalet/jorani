@@ -22,6 +22,7 @@ $lang['calendar_individual_popup_event_link_ical'] = 'Download an iCal file';
 $lang['calendar_individual_popup_event_link_ical_description'] = '(import the event into Outlook, Thunderbird, etc.)';
 $lang['calendar_individual_popup_event_title'] = 'Event details';
 $lang['calendar_individual_popup_event_button_close'] = 'Close';
+$lang['calendar_individual_day_offs'] = 'Day offs';
 
 $lang['calendar_workmates_title'] = 'Calendar of my workmates';
 $lang['calendar_workmates_description'] = 'Leaves of employees having the same line manager';
@@ -78,6 +79,14 @@ $lang['calendar_friday_short'] = 'Fr';
 $lang['calendar_saturday_short'] = 'Sa';
 $lang['calendar_sunday_short'] = 'Su';
 
+$lang['Monday'] = 'Monday';
+$lang['Tuesday'] = 'Tuesday';
+$lang['Wednesday'] = 'Wednesday';
+$lang['Thursday'] = 'Thursday';
+$lang['Friday'] = 'Friday';
+$lang['Saturday'] = 'Saturday';
+$lang['Sunday'] = 'Sunday';
+
 $lang['January'] = 'January';
 $lang['February'] = 'February';
 $lang['March'] = 'March';
@@ -90,3 +99,6 @@ $lang['September'] = 'September';
 $lang['October'] = 'October';
 $lang['November'] = 'November';
 $lang['December'] = 'December';
+
+$lang['Morning'] = 'Morning';
+$lang['Afternoon'] = 'Afternoon';

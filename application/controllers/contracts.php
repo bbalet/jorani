@@ -234,7 +234,7 @@ class Contracts extends CI_Controller {
      * Ajax endpoint : add a day off to a contract
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function adddayoff() {
+    public function editdayoff() {
         if ($this->auth->is_granted('adddayoff_contract') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
@@ -294,24 +294,31 @@ class Contracts extends CI_Controller {
             }
         }
     }
-
+    
     /**
-     * Ajax endpoint : delete a day off to a contract
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * Ajax endpoint : Send a list of fullcalendar events
+     * List of day offs for the connected user
+     * @param int $entity_id Entity identifier
      */
-    public function deletedayoff() {
-        if ($this->auth->is_granted('deletedayoff_contract') == FALSE) {
-            $this->output->set_header("HTTP/1.1 403 Forbidden");
-        } else {
-            $contract = $this->input->post('contract', TRUE);
-            $timestamp = $this->input->post('timestamp', TRUE); 
-            if (isset($contract) && isset($timestamp)) {
-                $this->output->set_content_type('text/plain');
-                echo $this->contracts_model->deletedayoff($contract, $timestamp);
-            } else {
-                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
-            }
-        }
+    public function userDayoffs() {
+        $this->expires_now();
+        header("Content-Type: application/json");
+        $start = $this->input->get('start', TRUE);
+        $end = $this->input->get('end', TRUE);
+        echo $this->contracts_model->userDayoffs($this->user_id, $start, $end);
+    }
+    
+    /**
+     * Ajax endpoint : Send a list of fullcalendar events
+     * List of all possible day offs
+     * @param int $entity_id Entity identifier
+     */
+    public function allDayoffs() {
+        $this->expires_now();
+        header("Content-Type: application/json");
+        $start = $this->input->get('start', TRUE);
+        $end = $this->input->get('end', TRUE);
+        echo $this->contracts_model->allDayoffs($start, $end);
     }
     
     /**

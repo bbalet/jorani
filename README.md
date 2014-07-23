@@ -70,6 +70,6 @@ We thank the following open source projects for the components used by LMS:
 * Calendar http://arshaw.com/fullcalendar/
 * Datatable https://datatables.net/
 * RSA implementation https://github.com/travist/jsencrypt
-* Form validation http://reactiveraven.github.io/jqBootstrapValidation/
+* Moment (JS dates lib) http://momentjs.com/
 
 Favicon was created by Dakirby309 - http://dakirby309.deviantart.com / License: Creative Commons (Attribution 3.0 Unported)

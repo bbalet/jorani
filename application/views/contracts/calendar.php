@@ -1,6 +1,24 @@
 <?php
+/*
+ * This file is part of lms.
+ *
+ * lms is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * lms is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 $this->load->helper('language');
 $this->lang->load('calendar', $language);
+$this->lang->load('contract', $language);
 
 $dDaysOnPage = 37;
 $dDay = 1;
@@ -104,6 +122,11 @@ padding-left:10px;
 
 <?php
 
+/**
+ * 
+ * @param type $numberOfTdsToAdd
+ * @return string
+ */
 function InsertBlankTd($numberOfTdsToAdd) {
     $tdString = '';
     for($i=1;$i<=$numberOfTdsToAdd;$i++) {
@@ -112,6 +135,7 @@ function InsertBlankTd($numberOfTdsToAdd) {
     return $tdString;
 }
 
+//This loop creates the calendar displayed on the page
 for ($mC = 1; $mC <= 12; $mC++) {
     $currentDT = mktime(0, 0, 0, $mC, $dDay, $year);
     echo "<tr><td class='monthName'><div>" . date("F", $currentDT) . "</div></td>";
@@ -156,6 +180,7 @@ for ($mC = 1; $mC <= 12; $mC++) {
         <span id="timestamp"></span>
     </div>
     <div class="modal-footer">
+        <button id="cmdDeleteDayOff" onclick="delete_day_off();" class="btn btn-danger">Delete</button>
         <button onclick="add_day_off();" class="btn secondary">OK</button>
         <button onclick="$('#frmAddDayOff').modal('hide');" class="btn secondary">Cancel</button>
     </div>
@@ -169,13 +194,13 @@ for ($mC = 1; $mC <= 12; $mC++) {
     <div class="modal-body">
         <label for="cboDayOffSeriesDay">Mark every</label>
         <select name="cboDayOffSeriesDay" id="cboDayOffSeriesDay">
-            <option value="saturday" selected>Saturday</option>
-            <option value="sunday">Sunday</option>
-            <option value="monday">Monday</option>
-            <option value="tuesday">Tuesday</option>
-            <option value="wednesday">Wednesday</option>
-            <option value="thursday">Thursday</option>
-            <option value="friday">Friday</option>
+            <option value="saturday" selected><?php echo lang('Saturday');?></option>
+            <option value="sunday"><?php echo lang('Sunday');?></option>
+            <option value="monday"><?php echo lang('Monday');?></option>
+            <option value="tuesday"><?php echo lang('Tuesday');?></option>
+            <option value="wednesday"><?php echo lang('Wednesday');?></option>
+            <option value="thursday"><?php echo lang('Thursday');?></option>
+            <option value="friday"><?php echo lang('Friday');?></option>
         </select>
         <label for="txtStartDate">From</label>
         <input name="txtStartDate" id="txtStartDate" type="text" /><br />
@@ -211,7 +236,7 @@ var timestamp;
 function add_day_off() {
     $("#cboType").val($('#' + timestamp).data("type"));
     $.ajax({
-        url: "<?php echo base_url();?>contracts/calendar/add",
+        url: "<?php echo base_url();?>contracts/calendar/edit",
         type: "POST",
         data: { contract: <?php echo $contract_id;?>,
                 timestamp: timestamp,
@@ -227,6 +252,22 @@ function add_day_off() {
             }
             $('#' + timestamp).html(image);
             $('#' + timestamp).attr("title", $("#txtDayOffTitle").val());
+            $('#frmAddDayOff').modal('hide');
+        });
+}
+
+function delete_day_off() {
+    $.ajax({
+        url: "<?php echo base_url();?>contracts/calendar/edit",
+        type: "POST",
+        data: { contract: <?php echo $contract_id;?>,
+                timestamp: timestamp,
+                type: 0,
+                title: ""
+            }
+      }).done(function( msg ) {
+            $('#' + timestamp).html("&nbsp;");
+            $('#' + timestamp).attr("title", "");
             $('#frmAddDayOff').modal('hide');
         });
 }
@@ -261,12 +302,12 @@ $(function() {
         switch ($('#' + timestamp).data("type")) {
             case 0:
                 $("#txtDayOffTitle").val('');
-                $("#cmdDelete").hide();
+                $("#cmdDeleteDayOff").hide();
                 break;
             case 1:
             case 2:
             case 3:
-                $("#cmdDelete").show();
+                $("#cmdDeleteDayOff").show();
                 $('#cboDayOffType option[value="' + $('#' + timestamp).data("type") + '"]').prop('selected', true);
                 $("#txtDayOffTitle").val($('#' + timestamp).attr("title"));
                 break;

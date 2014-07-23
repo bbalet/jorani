@@ -89,10 +89,10 @@ $route['contracts/update'] = 'contracts/update';
 $route['contracts/delete/(:num)'] = 'contracts/delete/$1';
 $route['contracts/(:num)/calendar/(:num)'] = 'contracts/calendar/$1/$2';
 $route['contracts/(:num)/calendar'] = 'contracts/calendar/$1';
-$route['contracts/calendar/add'] = 'contracts/adddayoff';
-$route['contracts/calendar/series'] = 'contracts/series';
 $route['contracts/calendar/edit'] = 'contracts/editdayoff';
-$route['contracts/calendar/delete'] = 'contracts/deletedayoff';
+$route['contracts/calendar/series'] = 'contracts/series';
+$route['contracts/calendar/userdayoffs'] = 'contracts/userDayoffs';
+$route['contracts/calendar/alldayoffs'] = 'contracts/allDayoffs';
 $route['contracts/(:num)'] = 'contracts/view/$1';
 $route['contracts'] = 'contracts';
 

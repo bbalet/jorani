@@ -1,4 +1,21 @@
 <?php
+/*
+ * This file is part of lms.
+ *
+ * lms is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * lms is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('calendar', $language);
 $this->lang->load('status', $language);
@@ -29,9 +46,11 @@ $this->lang->load('global', $language);?>
         <button id="cmdToday" class="btn btn-primary"><?php echo lang('calendar_component_buttonText_today');?></button>
         <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
     </div>
-    <div class="span8">&nbsp;</div>
+    <div class="span2">
+        <button id="cmdDisplayDayOff" class="btn btn-primary"><i class="icon-calendar icon-white"></i><?php echo lang('calendar_individual_day_offs');?></button>
+    </div>
+    <div class="span6">&nbsp;</div>
 </div>
-
 
 <div class="row-fluid">
     <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
@@ -63,6 +82,7 @@ $this->lang->load('global', $language);?>
 <script type="text/javascript">
     var entity = -1; //Id of the selected entity
     var text; //Label of the selected entity
+    var toggleDayoffs = false;
     
     //Refresh the calendar if data is available
     function refresh_calendar() {
@@ -78,6 +98,13 @@ $this->lang->load('global', $language);?>
             $('#calendar').fullCalendar('rerenderEvents');
             $('#calendar').fullCalendar('removeEventSource', source);
         }
+        source = '<?php echo base_url();?>contracts/calendar/alldayoffs';
+        if (toggleDayoffs) {
+            $('#calendar').fullCalendar('addEventSource', source);
+        } else {
+            $('#calendar').fullCalendar('removeEventSource', source);
+        }
+        $('#calendar').fullCalendar('rerenderEvents');
     }
     
     function select_entity() {
@@ -115,6 +142,12 @@ $this->lang->load('global', $language);?>
                     center: "title",
                     right: ""
             }
+        });
+        
+        //Toggle day offs displays
+        $('#cmdDisplayDayOff').on('click', function() {
+            toggleDayoffs = !toggleDayoffs;
+            refresh_calendar();
         });
         
         $('#cmdNext').click(function() {

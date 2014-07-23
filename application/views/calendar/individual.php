@@ -1,11 +1,42 @@
 <?php
+/*
+ * This file is part of lms.
+ *
+ * lms is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * lms is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('calendar', $language);
 $this->lang->load('status', $language);?>
 
 <h1><?php echo lang('calendar_individual_title');?></h1>
 
-<?php echo lang('calendar_individual_description');?>
+<div class="row-fluid">
+    <div class="span12"><?php echo lang('calendar_individual_description');?></div>
+</div>
+
+<div class="row-fluid">
+    <div class="span4">
+        <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
+        <button id="cmdToday" class="btn btn-primary"><?php echo lang('calendar_component_buttonText_today');?></button>
+        <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
+    </div>
+    <div class="span2">
+        <button id="cmdDisplayDayOff" class="btn btn-primary"><i class="icon-calendar icon-white"></i><?php echo lang('calendar_individual_day_offs');?></button>
+    </div>
+    <div class="span6">&nbsp;</div>
+</div>
 
 <div class="row-fluid">
     <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
@@ -35,12 +66,29 @@ $this->lang->load('status', $language);?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/fullcalendar.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo $language_code;?>.js"></script>
 <script type="text/javascript">
+    var toggleDayoffs = false;
+    
+    //Refresh the calendar if data is available
+    function refresh_calendar() {
+        source = '<?php echo base_url();?>leaves/individual';;
+        $('#calendar').fullCalendar('removeEvents');
+        $('#calendar').fullCalendar('addEventSource', source);
+        $('#calendar').fullCalendar('removeEventSource', source);
+        source = '<?php echo base_url();?>contracts/calendar/userdayoffs';
+        if (toggleDayoffs) {
+            $('#calendar').fullCalendar('addEventSource', source);
+        } else {
+            $('#calendar').fullCalendar('removeEventSource', source);
+        }
+        $('#calendar').fullCalendar('rerenderEvents');
+    }
+    
 $(function () {
     $("#frmEvent").alert();
 
     $('#calendar').fullCalendar({
         header: {
-            left: "prev,next today",
+            left: "",
             center: "title",
             right: ""
         },
@@ -55,6 +103,27 @@ $(function () {
     //Prevent to load always the same content (refreshed each time)
     $('#frmEvent').on('hidden', function() {
         $(this).removeData('modal');
+    });
+    
+    //Toggle day offs displays
+    $('#cmdDisplayDayOff').on('click', function() {
+        toggleDayoffs = !toggleDayoffs;
+        refresh_calendar();
+    });
+    
+    $('#cmdNext').click(function() {
+        $('#calendar').fullCalendar('next');
+        refresh_calendar();
+    });
+
+    $('#cmdPrevious').click(function() {
+        $('#calendar').fullCalendar('prev');
+        refresh_calendar();
+    });
+
+    $('#cmdToday').click(function() {
+        $('#calendar').fullCalendar('today');
+        refresh_calendar();
     });
 });
 </script>

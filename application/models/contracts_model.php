@@ -187,13 +187,13 @@ class Contracts_model extends CI_Model {
      * @return int number of day offs
      */
     public function sumdayoffs($contract, $start, $end) {
-        $this->db->select('sum(CASE `type` WHEN 1 THEN 1 WHEN 2 THEN 0.5 WHEN 3 THEN 0.5 END) as nb');
+        $this->db->select('sum(CASE `type` WHEN 1 THEN 1 WHEN 2 THEN 0.5 WHEN 3 THEN 0.5 END) as days');
         $this->db->where('contract', $contract);
         $this->db->where('date >=', $start);
         $this->db->where('date <=', $end);
-        $query = $this->db->get('dayoffs');
-        
-        return 1; 
+        $this->db->from('dayoffs');
+        $result = $this->db->get()->result_array();
+        return $result[0]['days']; 
     }
     
     /**
@@ -228,5 +228,110 @@ class Contracts_model extends CI_Model {
             );
             return $this->db->insert('dayoffs', $data);
         }
+    }
+    
+    /**
+     * All day offs of a given user
+     * @param int $user_id connected user
+     * @param string $start Start date displayed on calendar
+     * @param string $end End date displayed on calendar
+     * @return string JSON encoded list of full calendar events
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function userDayoffs($user_id, $start = "", $end = "") {
+        $this->load->helper('language');
+        $this->lang->load('calendar', $this->session->userdata('language'));
+        
+        $this->db->select('dayoffs.*');
+        $this->db->join('dayoffs', 'users.contract = dayoffs.contract');
+        $this->db->where('users.id', $user_id);
+        $this->db->where('date >=', $start);
+        $this->db->where('date <=', $end);
+        $events = $this->db->get('users')->result();
+        
+        $jsonevents = array();
+        foreach ($events as $entry) {
+            switch ($entry->type)
+            {
+                case 1:
+                    $title = $entry->title;
+                    $startdate = $entry->date . 'T07:00:00';
+                    $enddate = $entry->date . 'T18:00:00';
+                    $allDay = true;
+                    break;
+                case 2:
+                    $title = lang('Morning') . ': ' . $entry->title;
+                    $startdate = $entry->date . 'T07:00:00';
+                    $enddate = $entry->date . 'T12:00:00';
+                    $allDay = false;
+                    break;
+                case 3:
+                    $title = lang('Afternoon') . ': ' . $entry->title;
+                    $startdate = $entry->date . 'T12:00:00';
+                    $enddate = $entry->date . 'T18:00:00';
+                    $allDay = false;
+                    break;
+            }
+            $jsonevents[] = array(
+                'id' => $entry->id,
+                'title' => $title,
+                'start' => $startdate,
+                'color' => '#000000',
+                'allDay' => $allDay,
+                'end' => $enddate
+            );
+        }
+        return json_encode($jsonevents);
+    }
+    
+    /**
+     * All day offs for the organization
+     * @param string $start Start date displayed on calendar
+     * @param string $end End date displayed on calendar
+     * @return string JSON encoded list of full calendar events
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function allDayoffs($start = "", $end = "") {
+        $this->load->helper('language');
+        $this->lang->load('calendar', $this->session->userdata('language'));
+        $this->db->select('dayoffs.*, contracts.name');
+        $this->db->join('contracts', 'dayoffs.contract = contracts.id');
+        $this->db->where('date >=', $start);
+        $this->db->where('date <=', $end);
+        $events = $this->db->get('dayoffs')->result();
+        
+        $jsonevents = array();
+        foreach ($events as $entry) {
+            switch ($entry->type)
+            {
+                case 1:
+                    $title = $entry->title;
+                    $startdate = $entry->date . 'T07:00:00';
+                    $enddate = $entry->date . 'T18:00:00';
+                    $allDay = true;
+                    break;
+                case 2:
+                    $title = lang('Morning') . ': ' . $entry->title;
+                    $startdate = $entry->date . 'T07:00:00';
+                    $enddate = $entry->date . 'T12:00:00';
+                    $allDay = false;
+                    break;
+                case 3:
+                    $title = lang('Afternoon') . ': ' . $entry->title;
+                    $startdate = $entry->date . 'T12:00:00';
+                    $enddate = $entry->date . 'T18:00:00';
+                    $allDay = false;
+                    break;
+            }
+            $jsonevents[] = array(
+                'id' => $entry->id,
+                'title' => $entry->name . ': ' . $title,
+                'start' => $startdate,
+                'color' => '#000000',
+                'allDay' => $allDay,
+                'end' => $enddate
+            );
+        }
+        return json_encode($jsonevents);
     }
 }

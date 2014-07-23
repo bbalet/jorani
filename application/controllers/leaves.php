@@ -329,6 +329,7 @@ class Leaves extends CI_Controller {
      * Action: export the list of all leaves into an Excel file
      */
     public function export() {
+        $this->expires_now();
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
 
@@ -465,6 +466,7 @@ class Leaves extends CI_Controller {
      */
     public function ical($id) {
         //$this->auth->check_is_granted('download_calendar');
+        $this->expires_now();
         $leave = $this->leaves_model->get_leaves($id);
         header('Content-type: text/calendar; charset=utf-8');
         header('Content-Disposition: attachment; filename=leave.ics');

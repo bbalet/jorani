@@ -78,3 +78,39 @@ $lang['contract_export_thead_start'] = 'Start period';
 $lang['contract_export_thead_end'] = 'End period';
 
 $lang['contract_calendar_title'] = 'Calendar of non working days';
+
+/*
+Day offs and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".
+<u>Legend:</u> <img src='<?php echo base_url();?>assets/images/day.png' /> All day, <img src='<?php echo base_url();?>assets/images/morning.png' /> Morning, <img src='<?php echo base_url();?>assets/images/afternoon.png' /> Afternoon
+
+
+
+frmAddDayOff:
+Edit day off
+Title
+Type
+Working day
+All day is off
+Morning is off
+Afternoon is off
+Delete
+OK
+Cancel
+
+frmSetRangeDayOff:
+Edit a series of day offs
+Mark every
+From
+To
+As a
+Working day
+All day is off
+Morning is off
+Afternoon is off
+Title
+Delete
+OK
+Cancel
+
+ 
+ */

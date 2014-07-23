@@ -22,6 +22,7 @@ $lang['calendar_individual_link_ical'] = 'Télécharger le fichier iCal';
 $lang['calendar_individual_link_ical_description'] = '(pour importer l\'absence dans Outlook, Thunderbird, etc.)';
 $lang['calendar_individual_popup_event_title'] = 'Détails de l\'événement';
 $lang['calendar_individual_popup_event_button_close'] = 'Fermer';
+$lang['calendar_individual_day_offs'] = 'Jours non travaillés';
 
 $lang['calendar_workmates_title'] = 'Calendrier de mes collègues';
 $lang['calendar_workmates_description'] = 'Demandes de congés des employés ayant le même supérieur hierarchique.';
@@ -78,6 +79,14 @@ $lang['calendar_friday_short'] = 'Ve';
 $lang['calendar_saturday_short'] = 'Sa';
 $lang['calendar_sunday_short'] = 'Di';
 
+$lang['Monday'] = 'Lundi';
+$lang['Tuesday'] = 'Mardi';
+$lang['Wednesday'] = 'Mercredi';
+$lang['Thursday'] = 'Jeudi';
+$lang['Friday'] = 'Vendredi';
+$lang['Saturday'] = 'Samedi';
+$lang['Sunday'] = 'Dimanche';
+
 $lang['January'] = 'Janvier';
 $lang['February'] = 'Février';
 $lang['March'] = 'Mars';
@@ -90,3 +99,6 @@ $lang['September'] = 'Septembre';
 $lang['October'] = 'Octobre';
 $lang['November'] = 'Novembre';
 $lang['December'] = 'Décembre';
+
+$lang['Morning'] = 'Matin';
+$lang['Afternoon'] = 'Après-midi';

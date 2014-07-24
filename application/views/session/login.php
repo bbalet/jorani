@@ -49,7 +49,7 @@ $languages = $CI->language->nativelanguages($this->config->item('languages'));?>
     <?php if (count($languages) == 1) { ?>
     <input type="hidden" name="language" value="<?php echo $language_code; ?>" />
     <?php } else { ?>
-    <label for="login"><?php echo lang('session_login_field_language');?></label>
+    <label for="language"><?php echo lang('session_login_field_language');?></label>
     <select name="language" id="language" onchange="Javascript:change_language();">
         <?php foreach ($languages as $lang_code => $lang_name) { ?>
         <option value="<?php echo $lang_code; ?>" <?php if ($language_code == $lang_code) echo 'selected'; ?>><?php echo $lang_name; ?></option>
@@ -64,10 +64,14 @@ $languages = $CI->language->nativelanguages($this->config->item('languages'));?>
     <label for="password"><?php echo lang('session_login_field_password');?></label>
     <input type="password" name="password" id="password" required /><br />
     <br />
-    <button id="send" class="btn btn-primary"><?php echo lang('session_login_button_login');?></button>
-
+    <button id="send" class="btn btn-primary"><?php echo lang('session_login_button_login');?></button><br />
+    <br />
+    <button id="cmdForgetPassword" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
+    
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+
 <script type="text/javascript">
     //Refresh page language
     function change_language() {
@@ -93,6 +97,29 @@ $languages = $CI->language->nativelanguages($this->config->item('languages'));?>
             var encrypted = encrypt.encrypt($('#password').val() + $('#salt').val());
             $('#CipheredValue').val(encrypted);
             $('#loginFrom').submit();
+        });
+        
+        //If the user has forgotten his password, send an e-mail
+        $('#cmdForgetPassword').click(function() {
+            if ($('#login').val() == "") {
+                bootbox.alert("<?php echo lang('session_login_msg_empty_login');?>");
+            } else {
+                $.ajax({
+                   type: "POST",
+                   url: "<?php echo base_url(); ?>session/forgetpassword",
+                   data: { login: $('#login').val() }
+                 })
+                 .done(function(msg) {
+                   switch(msg) {
+                       case "OK":
+                           bootbox.alert("<?php echo lang('session_login_msg_password_sent');?>");
+                           break;
+                       case "UNKNOWN":
+                           bootbox.alert("<?php echo lang('session_login_flash_bad_credentials');?>");
+                           break;
+                   }
+                 });
+            }
         });
         
         //Validate the form if the user press enter key in password field

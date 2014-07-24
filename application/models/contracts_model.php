@@ -114,15 +114,18 @@ class Contracts_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_dayoffs($contract, $year) {
-        $this->db->select('UNIX_TIMESTAMP(date) as timestamp, type, title');
+        $this->db->select('DAY(date) as d, MONTH(date) as m, YEAR(date) as y, type, title');
         $this->db->where('contract', $contract);
         $this->db->where('YEAR(date)', $year);
         $query = $this->db->get('dayoffs');
         $dayoffs =array();
         foreach($query->result() as $row)
         {
-            $dayoffs[$row->timestamp][0] = $row->type;
-            $dayoffs[$row->timestamp][1] = $row->title;
+            //We decompose the date before creating the unix timestamp because there are diffrences of
+            //few hours depending the configuration of the system hosting the db (due to time part ?).
+            $timestamp = mktime(0, 0, 0, $row->m, $row->d, $row->y);
+            $dayoffs[$timestamp][0] = $row->type;
+            $dayoffs[$timestamp][1] = $row->title;
         }
         return $dayoffs;
     }

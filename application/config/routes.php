@@ -151,6 +151,7 @@ $route['extra/view/(:num)'] = 'extra/view/$1';
 $route['extra/delete/(:num)'] = 'extra/delete/$1';
 $route['extra/(:num)'] = 'extra/view/$1';
 $route['extra'] = 'extra';
+
 //overtime validation
 $route['overtime/export/(:any)'] = 'overtime/export/$1';
 $route['overtime/accept/(:num)'] = 'overtime/accept/$1';
@@ -171,7 +172,7 @@ $route['entitleddays/ajax/incdec'] = 'entitleddays/ajax_incdec';
 $route['reports/balance'] = 'reports/balance';
 $route['reports/balance/execute'] = 'reports/balance_execute';
 $route['reports/balance/export'] = 'reports/balance_export';
-
+//Custom reports
 $route['reports/(:any)/(:any)'] = 'reports/execute/$1/$2';
 $route['reports'] = 'reports';
 
@@ -179,6 +180,7 @@ $route['reports'] = 'reports';
 $route['session/login'] = 'session/login';
 $route['session/logout'] = 'session/logout';
 $route['session/language'] = 'session/language';
+$route['session/forgetpassword'] = 'session/forgetpassword';
 
 $route['default_controller'] = 'leaves';
 $route['(:any)'] = 'pages/view/$1';

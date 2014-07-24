@@ -33,13 +33,19 @@ $this->lang->load('global', $language);?>
     </tr>
   </thead>
   <tbody>
-  <?php foreach ($summary as $key => $value) { ?>
+  <?php if (count($summary) > 0) {
+  foreach ($summary as $key => $value) { ?>
     <tr>
       <td><?php echo $key; ?></td>
       <td><?php echo $value[0]; ?></td>
       <td><?php echo $value[1]; ?></td>
       <td><?php echo $value[2]; ?></td>
     </tr>
-  <?php } ?>
+  <?php }
+  } else {?>
+    <tr>
+      <td colspan="4"><?php echo lang('leaves_summary_tbody_empty');; ?></td>
+    </tr>
+    <?php } ?>
   </tbody>
 </table>

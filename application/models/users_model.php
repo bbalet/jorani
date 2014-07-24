@@ -288,6 +288,40 @@ class Users_model extends CI_Model {
     }
     
     /**
+     * Reset a password. Generate a new password and store its hash into db.
+     * @param int $id User identifier
+     * @return string clear password
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function resetClearPassword($id) {
+        //Load password hasher for create/update functions
+        $this->load->library('bcrypt');
+        //generate a random password of length 10
+        $password = $this->randomPassword(10);
+        //Hash the clear password using bcrypt
+        $hash = $this->bcrypt->hash_password($password);
+        //Store the new password into db
+        $data = array(
+            'password' => $hash
+        );
+        $this->db->where('id', $id);
+        $this->db->update('users', $data);
+        return $password;
+    }
+    
+    /**
+     * Generate a random password
+     * @param int $length length of the generated password
+     * @return string generated password
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    private function randomPassword($length) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $password = substr( str_shuffle( $chars ), 0, $length );
+        return $password;
+    }
+    
+    /**
      * Check the provided credentials
      * @param type $login user login
      * @param type $password password
@@ -403,5 +437,22 @@ class Users_model extends CI_Model {
         );
         $this->db->where('id', $this->input->post('id'));
         return $this->db->update('users', $data);
+    }
+    
+    /**
+     * Try to return the user information from the login field
+     * @param type $login
+     * @return User data row or null if no user was found
+     */
+    public function getUserByLogin($login) {
+        $this->db->from('users');
+        $this->db->where('login', $login);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+            //No match found
+            return null;
+        } else {
+            return $query->row();
+        }
     }
 }

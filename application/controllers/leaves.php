@@ -90,8 +90,8 @@ class Leaves extends CI_Controller {
         $this->auth->check_is_granted('counters_leaves');
         $data = $this->getUserContext();
         $data['summary'] = $this->leaves_model->get_user_leaves_summary($this->user_id);
-        
-        if ($data['summary'] != null) {
+
+        if (!is_null($data['summary'])) {
             $data['title'] = lang('leaves_summary_title');
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
@@ -318,6 +318,7 @@ class Leaves extends CI_Controller {
         $start = $this->input->post('start', TRUE);
         $end = $this->input->post('end', TRUE);
         if (isset($user_id) && isset($start) && isset($end)) {
+            $this->expires_now();
             $this->output->set_content_type('text/plain');
             echo $this->leaves_model->length($user_id, $start, $end);
         } else {

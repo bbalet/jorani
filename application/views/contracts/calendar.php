@@ -123,7 +123,7 @@ padding-left:10px;
 <?php
 
 /**
- * 
+ * Insert a blank cell for a working day
  * @param type $numberOfTdsToAdd
  * @return string
  */

@@ -112,7 +112,6 @@ class Leaves_model extends CI_Model {
         $boundaries = $this->db->get()->result_array();
         
         if (count($boundaries) != 0) {
-        
             $startmonth = intval(substr($boundaries[0]['startentdate'], 2));
             if ($startmonth < 6 ) {
                 $startentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
@@ -225,12 +224,10 @@ class Leaves_model extends CI_Model {
                 $summary['compensate'][1] = $sum; //entitled
                 $summary['compensate'][2] = '-'; //description
             }
-            
+            return $summary;
         } else { //User attached to no contract
-            $summary = null;
-        }
-        
-        return $summary;
+            return null;
+        }        
     }
     
     /**

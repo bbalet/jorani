@@ -70,7 +70,7 @@ $(document).ready(function() {
         <td><?php echo $users_item['firstname'] ?></td>
         <td><?php echo $users_item['lastname'] ?></td>
         <td><?php echo $users_item['login'] ?></td>
-        <td><?php echo $users_item['email'] ?></td>
+        <td><a href="mailto:<?php echo $users_item['email']; ?>"><?php echo $users_item['email']; ?></a></td>
         <td><?php echo $users_item['role'] ?></td>
         <td><?php echo $users_item['manager'] ?></td>
     </tr>

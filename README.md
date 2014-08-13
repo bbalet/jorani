@@ -34,10 +34,12 @@ See <code>/docs/install/README.md</code> for advanced configuration. In a nutshe
 * Update <code>/application/config/database.php</code> according to your database settings.
 * Update the end of <code>/application/config/config.php</code> with your e-mails settings.
 * It is recommended to change the private and public RSA keys (in <code>assets/keys</code>).
+* Non working days (weekends and day offs) can be defined on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
 
 ## What's next ?
 
-* Define non working days (weekends and day offs) on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
+* Mass importer of users.
+* Setup assistant.
 
 ## Contribute
 

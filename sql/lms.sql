@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `actions` (
   `mask` bit(16) NOT NULL,
   `Description` text NOT NULL,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Contenu de la table `actions`
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `startentdate` varchar(5) NOT NULL,
   `endentdate` varchar(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `contracts`
@@ -186,25 +186,15 @@ CREATE TABLE IF NOT EXISTS `dayoffs` (
   PRIMARY KEY (`id`),
   KEY `type` (`type`),
   KEY `contract` (`contract`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `dayoffs`
 --
 
 INSERT INTO `dayoffs` (`id`, `contract`, `date`, `type`, `title`) VALUES
-(4, 1, '2014-05-01', 1, 'labour day'),
-(5, 1, '2014-04-01', 2, 'test'),
-(6, 1, '2014-04-02', 0, 'test 3'),
-(7, 1, '2014-04-04', 0, 'fdfdfdf'),
-(8, 1, '2014-01-03', 1, 'jjjjj'),
-(9, 1, '2014-03-05', 1, 'test'),
-(10, 1, '2014-04-10', 1, 'test'),
-(11, 1, '2014-02-05', 1, 'essai'),
-(12, 1, '2014-02-12', 1, 'fvf'),
-(13, 1, '2014-05-14', 1, 'hghfghfghfg'),
-(14, 1, '2014-07-10', 3, 'gfgfg'),
-(15, 1, '2014-07-14', 2, 'gghfhfg');
+(4, 1, '2014-05-01', 1, 'labour day');
+
 
 -- --------------------------------------------------------
 
@@ -224,20 +214,20 @@ CREATE TABLE IF NOT EXISTS `entitleddays` (
   KEY `contract` (`contract`),
   KEY `employee` (`employee`),
   KEY `type` (`type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `entitleddays`
 --
 
 INSERT INTO `entitleddays` (`id`, `contract`, `employee`, `startdate`, `enddate`, `type`, `days`) VALUES
-(7, 5, 0, '2014-01-01', '2014-12-31', 1, '25.00'),
-(11, 6, 0, '2014-01-01', '2014-12-31', 1, '24.00'),
-(12, 7, 0, '2014-01-01', '2014-12-31', 1, '20.00'),
-(14, 1, 0, '2013-06-01', '2014-05-31', 1, '30.00'),
-(15, 1, 0, '2013-06-01', '2014-05-31', 7, '10.00'),
-(18, 0, 34, '2013-06-01', '2014-05-31', 1, '-20.00'),
-(19, 0, 34, '2013-06-01', '2014-05-31', 7, '-8.00');
+(1, 5, 0, '2014-01-01', '2014-12-31', 1, '25.00'),
+(2, 6, 0, '2014-01-01', '2014-12-31', 1, '24.00'),
+(3, 7, 0, '2014-01-01', '2014-12-31', 1, '20.00'),
+(4, 1, 0, '2013-06-01', '2014-05-31', 1, '30.00'),
+(5, 1, 0, '2013-06-01', '2014-05-31', 7, '10.00'),
+(6, 0, 34, '2013-06-01', '2014-05-31', 1, '-20.00'),
+(7, 0, 34, '2013-06-01', '2014-05-31', 7, '-8.00');
 
 -- --------------------------------------------------------
 
@@ -259,23 +249,23 @@ CREATE TABLE IF NOT EXISTS `leaves` (
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
   KEY `employee` (`employee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=89 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `leaves`
 --
 
 INSERT INTO `leaves` (`id`, `startdate`, `enddate`, `status`, `employee`, `cause`, `startdatetype`, `enddatetype`, `duration`, `type`) VALUES
-(78, '2014-05-05', '2014-05-06', 3, 33, '', 'Morning', 'Morning', '2.00', 1),
-(79, '2014-05-07', '2014-05-07', 4, 33, 'test', 'Morning', 'Morning', '1.00', 1),
-(80, '2014-05-08', '2014-05-08', 4, 33, '', 'Morning', 'Afternoon', '1.00', 1),
-(81, '2014-05-26', '2014-05-26', 3, 31, '', 'Morning', 'Morning', '1.00', 1),
-(82, '2014-05-14', '2014-05-14', 2, 31, '', 'Morning', 'Morning', '1.00', 1),
-(83, '2014-05-30', '2014-05-30', 3, 31, '', 'Morning', 'Afternoon', '1.00', 0),
-(84, '2014-05-26', '2014-05-30', 3, 1, '', 'Morning', 'Morning', '5.00', 1),
-(86, '2014-06-02', '2014-06-03', 1, 1, '', 'Morning', 'Morning', '0.50', 1),
-(87, '2014-06-02', '2014-06-10', 3, 1, 'test', 'Morning', 'Morning', '2.00', 1),
-(88, '2014-06-16', '2014-06-19', 4, 1, 'test fr', 'Morning', 'Morning', '3.00', 5);
+(1, '2014-05-05', '2014-05-06', 3, 33, '', 'Morning', 'Morning', '2.00', 1),
+(2, '2014-05-07', '2014-05-07', 4, 33, 'test', 'Morning', 'Morning', '1.00', 1),
+(3, '2014-05-08', '2014-05-08', 4, 33, '', 'Morning', 'Afternoon', '1.00', 1),
+(4, '2014-05-26', '2014-05-26', 3, 31, '', 'Morning', 'Morning', '1.00', 1),
+(5, '2014-05-14', '2014-05-14', 2, 31, '', 'Morning', 'Morning', '1.00', 1),
+(6, '2014-05-30', '2014-05-30', 3, 31, '', 'Morning', 'Afternoon', '1.00', 0),
+(7, '2014-05-26', '2014-05-30', 3, 1, '', 'Morning', 'Morning', '5.00', 1),
+(8, '2014-06-02', '2014-06-03', 1, 1, '', 'Morning', 'Morning', '0.50', 1),
+(9, '2014-06-02', '2014-06-10', 3, 1, 'test', 'Morning', 'Morning', '2.00', 1),
+(10, '2014-06-16', '2014-06-19', 4, 1, 'test fr', 'Morning', 'Morning', '3.00', 5);
 
 -- --------------------------------------------------------
 
@@ -288,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `organization` (
   `name` varchar(512) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `organization`
@@ -338,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `overtime` (
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
   KEY `employee` (`employee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `overtime`
@@ -360,10 +350,10 @@ INSERT INTO `overtime` (`id`, `employee`, `date`, `duration`, `cause`, `status`)
 
 CREATE TABLE IF NOT EXISTS `positions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `description` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 --
 -- Contenu de la table `positions`
@@ -391,7 +381,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Contenu de la table `roles`
@@ -414,7 +404,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `value` varchar(1024) DEFAULT NULL,
   `type` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -426,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `status` (
   `id` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Contenu de la table `status`
@@ -448,7 +438,7 @@ CREATE TABLE IF NOT EXISTS `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `types`
@@ -499,7 +489,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `organization` (`organization`),
   KEY `contract` (`contract`),
   KEY `position` (`position`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `users`

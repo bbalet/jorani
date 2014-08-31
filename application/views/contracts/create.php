@@ -141,7 +141,6 @@ echo form_open('contracts/create', $attributes); ?>
     <a href="<?php echo base_url(); ?>contracts" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('contract_create_button_cancel');?></a>
 </form>
 
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jqBootstrapValidation.js"></script>
 <script type="text/javascript">
     $(function () {
         //TODO on form validation before sending to server

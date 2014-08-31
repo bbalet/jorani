@@ -1,5 +1,8 @@
 <?php
 
+//Force UTF-8 charset for all outgoing outputs
+header("Content-Type: text/html; charset=UTF-8", true);
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

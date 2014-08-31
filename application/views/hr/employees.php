@@ -61,14 +61,16 @@ $(document).ready(function() {
                 &nbsp;
                 <a href="<?php echo base_url();?>entitleddays/user/<?php echo $users_item['id'] ?>" data-target="#frmEntitledDays" data-toggle="modal" title="<?php echo lang('hr_employees_thead_tip_entitlment');?>"><i class="icon-edit"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>hr/leaves/<?php echo $users_item['id'] ?>"><?php echo lang('hr_employees_thead_link_leaves');?></a>
+                <a href="<?php echo base_url();?>hr/leaves/<?php echo $users_item['id'] ?>" title="<?php echo lang('hr_employees_thead_link_leaves');?>"><i class="icon-list-alt"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>hr/overtime/<?php echo $users_item['id'] ?>"><?php echo lang('hr_employees_thead_link_extra');?></a>
+                <a href="<?php echo base_url();?>hr/overtime/<?php echo $users_item['id'] ?>" title="<?php echo lang('hr_employees_thead_link_extra');?>"><i class="icon-list-alt"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>hr/counters/<?php echo $users_item['id'] ?>" title="<?php echo lang('hr_employees_thead_link_balance');?>"><i class="icon-info-sign"></i></a>
             </div>
         </td>
         <td><?php echo $users_item['firstname']; ?></td>
         <td><?php echo $users_item['lastname']; ?></td>
-        <td><?php echo $users_item['email']; ?></td>
+        <td><a href="mailto:<?php echo $users_item['email']; ?>"><?php echo $users_item['email']; ?></a></td>
         <td><?php echo $users_item['contract']; ?></td>
         <td><?php echo $users_item['manager_firstname'] . ' ' . $users_item['manager_lastname']; ?></td>
     </tr>

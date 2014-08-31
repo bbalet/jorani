@@ -318,7 +318,9 @@ class Contracts extends CI_Controller {
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
-        echo $this->contracts_model->allDayoffs($start, $end);
+        $entity = $this->input->get('entity', TRUE);
+        $children = filter_var($this->input->get('children', TRUE), FILTER_VALIDATE_BOOLEAN);
+        echo $this->contracts_model->allDayoffs($start, $end, $entity, $children);
     }
     
     /**

@@ -87,18 +87,23 @@ $this->lang->load('global', $language);?>
     //Refresh the calendar if data is available
     function refresh_calendar() {
         if (entity != -1) {
-            var source = '';
+            var source = '<?php echo base_url();?>leaves/organization/' + entity;
             if ($('#chkIncludeChildren').prop('checked') == true) {
-                source = '<?php echo base_url();?>leaves/organization/' + entity + '?children=true';
+                source += '?children=true';
             } else {
-                source = '<?php echo base_url();?>leaves/organization/' + entity + '?children=false';
+                source += '?children=false';
             }
             $('#calendar').fullCalendar('removeEvents');
             $('#calendar').fullCalendar('addEventSource', source);
             $('#calendar').fullCalendar('rerenderEvents');
             $('#calendar').fullCalendar('removeEventSource', source);
         }
-        source = '<?php echo base_url();?>contracts/calendar/alldayoffs';
+        source = '<?php echo base_url();?>contracts/calendar/alldayoffs?entity=' + entity;
+        if ($('#chkIncludeChildren').prop('checked') == true) {
+            source += '&children=true';
+        } else {
+            source += '&children=false';
+        }
         if (toggleDayoffs) {
             $('#calendar').fullCalendar('addEventSource', source);
         } else {

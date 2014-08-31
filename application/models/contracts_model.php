@@ -291,16 +291,36 @@ class Contracts_model extends CI_Model {
      * All day offs for the organization
      * @param string $start Start date displayed on calendar
      * @param string $end End date displayed on calendar
+     * @param integer $entity_id identifier of the entity
+     * @param boolean $children include all sub entities or not
      * @return string JSON encoded list of full calendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function allDayoffs($start = "", $end = "") {
+    public function allDayoffs($start, $end, $entity_id, $children) {
         $this->load->helper('language');
         $this->lang->load('calendar', $this->session->userdata('language'));
+        
         $this->db->select('dayoffs.*, contracts.name');
+        $this->db->distinct();
         $this->db->join('contracts', 'dayoffs.contract = contracts.id');
+        $this->db->join('users', 'users.contract = contracts.id');
+        $this->db->join('organization', 'users.organization = organization.id');
         $this->db->where('date >=', $start);
         $this->db->where('date <=', $end);
+        
+        if ($children == true) {
+            $this->load->model('organization_model');
+            $list = $this->organization_model->get_all_children($entity_id);
+            $ids = array();
+            if (count($list) > 0) {
+                $ids = explode(",", $list[0]['id']);
+            }
+            array_push($ids, $entity_id);
+            $this->db->where_in('organization.id', $ids);
+        } else {
+            $this->db->where('organization.id', $entity_id);
+        }        
+        
         $events = $this->db->get('dayoffs')->result();
         
         $jsonevents = array();

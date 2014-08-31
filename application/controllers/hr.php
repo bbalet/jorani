@@ -140,6 +140,27 @@ class Hr extends CI_Controller {
         $this->load->view('hr/overtime', $data);
         $this->load->view('templates/footer');
     }
+    
+    /**
+     * Display the details of leaves taken/entitled for a given employee
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function counters($id) {
+        $this->auth->check_is_granted('list_employees');
+        $data = $this->getUserContext();
+        $data['summary'] = $this->leaves_model->get_user_leaves_summary($id);
+        $data['user_id'] = $id;
+        if (!is_null($data['summary'])) {
+            $data['title'] = lang('hr_summary_title');
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('hr/counters', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->session->set_flashdata('msg', lang('hr_summary_flash_msg_error'));
+            redirect('hr/employees');
+        }
+    }
         
     /**
      * Action: export the list of all leaves into an Excel file

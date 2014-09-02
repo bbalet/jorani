@@ -35,7 +35,6 @@ class Contracts extends CI_Controller {
             $this->session->set_userdata('last_page', current_url());
             redirect('session/login');
         }
-        $this->load->model('contracts_model');
         $this->fullname = $this->session->userdata('firstname') . ' ' .
                 $this->session->userdata('lastname');
         $this->is_admin = $this->session->userdata('is_admin');
@@ -78,6 +77,7 @@ class Contracts extends CI_Controller {
         $data = $this->getUserContext();
         $data['filter'] = $filter;
         $data['title'] = lang('contract_index_title');
+        $this->load->model('contracts_model');
         $data['contracts'] = $this->contracts_model->get_contracts();
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -93,6 +93,7 @@ class Contracts extends CI_Controller {
     public function view($id) {
         $this->auth->check_is_granted('view_contract');
         $data = $this->getUserContext();
+        $this->load->model('contracts_model');
         $data['contract'] = $this->contracts_model->get_contracts($id);
         if (empty($data['contract'])) {
             show_404();
@@ -122,7 +123,7 @@ class Contracts extends CI_Controller {
         $this->form_validation->set_rules('endentdatemonth', lang('contract_edit_field_end_month'), 'required|xss_clean');
         $this->form_validation->set_rules('endentdateday', lang('contract_edit_field_end_day'), 'required|xss_clean');
 
-
+        $this->load->model('contracts_model');
         $data['contract'] = $this->contracts_model->get_contracts($id);
         if (empty($data['contract'])) {
             show_404();
@@ -163,6 +164,7 @@ class Contracts extends CI_Controller {
             $this->load->view('contracts/create', $data);
             $this->load->view('templates/footer');
         } else {
+            $this->load->model('contracts_model');
             $this->contracts_model->set_contracts();
             log_message('info', 'contract ' . $this->input->post('name') . ' has been created by user #' . $this->session->userdata('id'));
             $this->session->set_flashdata('msg', lang('contract_create_msg_success'));
@@ -178,6 +180,7 @@ class Contracts extends CI_Controller {
     public function delete($id) {
         $this->auth->check_is_granted('delete_contract');
         //Test if user exists
+        $this->load->model('contracts_model');
         $data['contract'] = $this->contracts_model->get_contracts($id);
         if (empty($data['contract'])) {
             log_message('debug', '{controllers/contracts/delete} user not found');
@@ -207,7 +210,8 @@ class Contracts extends CI_Controller {
             $data['year'] = date("Y");
         }
         $data['contract_id'] = $id;
-        $data['dayoffs'] = $this->contracts_model->get_dayoffs($id, $data['year']);
+        $this->load->model('dayoffs_model');
+        $data['dayoffs'] = $this->dayoffs_model->get_dayoffs($id, $data['year']);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('contracts/calendar', $data);
@@ -243,11 +247,12 @@ class Contracts extends CI_Controller {
             $type = $this->input->post('type', TRUE);
             $title = $this->input->post('title', TRUE);
             if (isset($contract) && isset($timestamp) && isset($type) && isset($title)) {
+                $this->load->model('dayoffs_model');
                 $this->output->set_content_type('text/plain');
                 if ($type == 0) {
-                    echo $this->contracts_model->deletedayoff($contract, $timestamp);
+                    echo $this->dayoffs_model->deletedayoff($contract, $timestamp);
                 } else {
-                    echo $this->contracts_model->adddayoff($contract, $timestamp, $type, $title);
+                    echo $this->dayoffs_model->adddayoff($contract, $timestamp, $type, $title);
                 }
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
@@ -282,9 +287,10 @@ class Contracts extends CI_Controller {
                 $list = rtrim($list, ",");
                 $contract = $this->input->post('contract', TRUE);
                 $title = $this->input->post('title', TRUE);
-                $this->contracts_model->deletedayoffs($contract, $list);
+                $this->load->model('dayoffs_model');
+                $this->dayoffs_model->deletedayoffs($contract, $list);
                 if ($type != 0) {
-                    $this->contracts_model->adddayoffs($contract, $type, $title, $list);
+                    $this->dayoffs_model->adddayoffs($contract, $type, $title, $list);
                     echo 'updated';
                 } else {
                     echo 'deleted';
@@ -305,7 +311,8 @@ class Contracts extends CI_Controller {
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
-        echo $this->contracts_model->userDayoffs($this->user_id, $start, $end);
+        $this->load->model('dayoffs_model');
+        echo $this->dayoffs_model->userDayoffs($this->user_id, $start, $end);
     }
     
     /**
@@ -320,7 +327,8 @@ class Contracts extends CI_Controller {
         $end = $this->input->get('end', TRUE);
         $entity = $this->input->get('entity', TRUE);
         $children = filter_var($this->input->get('children', TRUE), FILTER_VALIDATE_BOOLEAN);
-        echo $this->contracts_model->allDayoffs($start, $end, $entity, $children);
+        $this->load->model('dayoffs_model');
+        echo $this->dayoffs_model->allDayoffs($start, $end, $entity, $children);
     }
     
     /**

@@ -257,4 +257,66 @@ class Reports extends CI_Controller {
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output');
     }
+    
+    /**
+     * Execute the shipped-in history report
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function history() {
+        $this->auth->check_is_granted('native_report_history');
+        $data = $this->getUserContext();
+        $data['title'] = lang('reports_history_title');
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('reports/history/index', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Ajax end-point : execute the history report
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function history_execute() {
+        $this->auth->check_is_granted('native_report_history');
+        $data = $this->getUserContext();
+        $this->load->model('history_model');
+        
+        $table = $_GET['table'];
+        $modification_type = $_GET['modification_type'];
+        $modified_by = isset($_GET['modified_by'])?$_GET['modified_by']:null;
+        $startdate = isset($_GET['startdate'])?$_GET['startdate']:null;
+        $enddate = isset($_GET['enddate'])?$_GET['enddate']:null;
+        $result = $this->history_model->get_history($modification_type, $table, $modified_by, $startdate, $enddate);
+        
+        $table = '';
+        $thead = '';
+        $tbody = '';
+        $line = 2;
+        foreach ($result as $row) {
+            $index = 1;
+            $tbody .= '<tr>';
+            foreach ($row as $key => $value) {
+                if ($line == 2) {
+                    $thead .= '<th>' . $key . '</th>';
+                }
+                $tbody .= '<td>' . $value . '</td>';
+                $index++;
+            }
+            $tbody .= '</tr>';
+            $line++;
+        }
+        $table = '<table class="table table-bordered table-hover">' .
+                    '<thead>' .
+                        '<tr>' .
+                            $thead .
+                        '</tr>' .
+                    '</thead>' .
+                    '<tbody>' .
+                        $tbody .
+                    '</tbody>' .
+                '</table>';
+        
+        echo $table;
+    }
+    
 }

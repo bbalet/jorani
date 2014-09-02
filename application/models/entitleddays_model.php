@@ -204,4 +204,27 @@ class Entitleddays_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('entitleddays');
     }
+    
+    /**
+     * Purge the table by deleting the records prior $toDate
+     * @param date $toDate 
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function purge_entitleddays($toDate) {
+        $this->db->where('enddate <= ', $toDate);
+        return $this->db->delete('entitleddays');
+    }
+
+    /**
+     * Count the number of rows into the table
+     * @return int number of rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function count() {
+        $this->db->select('count(*) as number', FALSE);
+        $this->db->from('entitleddays');
+        $result = $this->db->get();
+        return $result->row()->number;
+    }
 }

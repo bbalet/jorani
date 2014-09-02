@@ -53,6 +53,10 @@ $route['users'] = 'users';
 //Admin : View and change settings
 $route['settings'] = 'settings/set';
 
+//Admin : purge database
+$route['database'] = 'database/index';
+$route['database/purge'] = 'database/purge';
+
 //Human Resources Management
 $route['hr/index'] = 'hr/index';
 $route['hr/employees'] = 'hr/employees';
@@ -169,13 +173,17 @@ $route['entitleddays/ajax/contract'] = 'entitleddays/ajax_contract';
 $route['entitleddays/contractdelete/(:num)'] = 'entitleddays/contractdelete/$1';
 $route['entitleddays/ajax/incdec'] = 'entitleddays/ajax_incdec';
 
+//_______________________________________________
 //Reports
 $route['reports/balance'] = 'reports/balance';
 $route['reports/balance/execute'] = 'reports/balance_execute';
 $route['reports/balance/export'] = 'reports/balance_export';
-//Custom reports
-$route['reports/(:any)/(:any)'] = 'reports/execute/$1/$2';
-$route['reports'] = 'reports';
+
+//Admin: search into the history of modifications
+$route['reports/history'] = 'reports/history';
+$route['reports/history/execute'] = 'reports/history_execute';
+$route['reports/history/export'] = 'reports/history_export';
+$route['reports/history/details/(:num)'] = 'reports/history_details/$1';
 
 //Session management
 $route['session/login'] = 'session/login';

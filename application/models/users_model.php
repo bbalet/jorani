@@ -107,6 +107,12 @@ class Users_model extends CI_Model {
         );
         $this->db->where('manager', $id);
         $this->db->update('users', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->set_history(3, 'users', $id, $this->session->userdata('id'));
+        }
     }
 
     /**
@@ -165,6 +171,12 @@ class Users_model extends CI_Model {
         );
         $this->db->insert('users', $data);
         
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->set_history(1, 'users', $this->db->insert_id(), $this->session->userdata('id'));
+        }
+        
         //Deal with user having no line manager
         if ($this->input->post('manager') == -1) {
             $id = $this->db->insert_id();
@@ -204,6 +216,13 @@ class Users_model extends CI_Model {
             'manager' => $manager
         );
         $this->db->insert('users', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->set_history(1, 'users', $this->db->insert_id(), $this->session->userdata('id'));
+        }
+        
         return $this->db->insert_id();
     }
 
@@ -250,7 +269,15 @@ class Users_model extends CI_Model {
         );
 
         $this->db->where('id', $this->input->post('id'));
-        return $this->db->update('users', $data);
+        $result = $this->db->update('users', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->set_history(2, 'users', $this->input->post('id'), $this->session->userdata('id'));
+        }
+        
+        return $result;
     }
 
     /**
@@ -260,7 +287,7 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reset_password($id, $CipheredNewPassword) {
-        log_message('debug', '{models/users_model/reset_password} Entering function id=' . $id . ' / Ciphered password=' . $CipheredNewPassword);
+        //log_message('debug', '{models/users_model/reset_password} Entering function id=' . $id . ' / Ciphered password=' . $CipheredNewPassword);
         //Load password hasher for create/update functions
         $this->load->library('bcrypt');
         
@@ -283,8 +310,16 @@ class Users_model extends CI_Model {
             'password' => $hash
         );
         $this->db->where('id', $id);
-        return $this->db->update('users', $data);
-        log_message('debug', '{models/users_model/reset_password} Leaving function');
+        $result = $this->db->update('users', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
+        }
+        
+        //log_message('debug', '{models/users_model/reset_password} Leaving function');
+        return $result;
     }
     
     /**
@@ -306,6 +341,13 @@ class Users_model extends CI_Model {
         );
         $this->db->where('id', $id);
         $this->db->update('users', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
+        }
+        
         return $password;
     }
     
@@ -423,7 +465,15 @@ class Users_model extends CI_Model {
             'contract' => $this->input->post('contract')
         );
         $this->db->where('id', $this->input->post('id'));
-        return $this->db->update('users', $data);
+        $result = $this->db->update('users', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
+        }
+        
+        return $result;
     }
     
     /**
@@ -436,7 +486,15 @@ class Users_model extends CI_Model {
             'manager' => $this->input->post('manager')
         );
         $this->db->where('id', $this->input->post('id'));
-        return $this->db->update('users', $data);
+        $result = $this->db->update('users', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
+        }
+        
+        return $result;
     }
     
     /**

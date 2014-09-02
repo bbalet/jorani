@@ -110,7 +110,6 @@ $config['enable_hooks'] = FALSE;
 */
 $config['subclass_prefix'] = 'MY_';
 
-
 /*
 |--------------------------------------------------------------------------
 | Allowed URL Characters
@@ -129,7 +128,6 @@ $config['subclass_prefix'] = 'MY_';
 |
 */
 $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
-
 
 /*
 |--------------------------------------------------------------------------
@@ -332,7 +330,6 @@ $config['compress_output'] = FALSE;
 */
 $config['time_reference'] = 'local';
 
-
 /*
 |--------------------------------------------------------------------------
 | Rewrite PHP Short Tags
@@ -344,7 +341,6 @@ $config['time_reference'] = 'local';
 |
 */
 $config['rewrite_short_tags'] = FALSE;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -358,10 +354,6 @@ $config['rewrite_short_tags'] = FALSE;
 |
 */
 $config['proxy_ips'] = '';
-
-
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -379,9 +371,22 @@ $config['password_length'] = 8;
 //Default role id (e.g. 2 for user)
 $config['default_role_id'] = 2;
 
-$config['version'] = 'v0.1_beta';
+$config['version'] = 'v0.1_beta2';
 
+//List of available languages
 $config['languages'] = 'en,fr,km';
+
+//Enable history of changes. Warning: this will increase the volume of the database and impacts performance
+$config['enable_history'] = FALSE;
+
+//Allow access to the purge new feature (mass deletion into database in order to save space)
+$config['enable_purge'] = FALSE;
+
+//Enable time management module
+$config['enable_time'] = FALSE;
+
+//Google analytics tracking code (if empty, the Javascript tracking code will be desactivated)
+$config['ga_code'] = '';
 
 //E-mail settings
 $config['protocol'] = 'smtp';

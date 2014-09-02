@@ -562,4 +562,27 @@ class Leaves_model extends CI_Model {
         $query = $this->db->get('leaves');
         return $query->result_array();
     }
+    
+    /**
+     * Purge the table by deleting the records prior $toDate
+     * @param date $toDate 
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function purge_leaves($toDate) {
+        $this->db->where(' <= ', $toDate);
+        return $this->db->delete('leaves');
+    }
+
+    /**
+     * Count the number of rows into the table
+     * @return int number of rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function count() {
+        $this->db->select('count(*) as number', FALSE);
+        $this->db->from('leaves');
+        $result = $this->db->get();
+        return $result->row()->number;
+    }
 }

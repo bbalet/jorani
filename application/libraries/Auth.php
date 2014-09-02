@@ -52,6 +52,15 @@ class Auth {
     public function is_granted($operation, $object_id = 0) {
         //log_message('debug', '{librairies/auth/is_granted} Entering method with Operation=' . $operation . ' / object_id=' . $object_id);
         switch ($operation) {
+            
+            //Admin functions
+            case 'purge_database' :
+                if ($this->CI->session->userdata('is_hr') == true)
+                    return true;
+                else
+                    return false;
+                break;
+            
             //User management
             case 'list_users' :
             case 'create_user' :
@@ -113,6 +122,7 @@ class Auth {
                     return false;
                 break;
             
+            case 'native_report_history':
             case 'native_report_balance':
             case 'report_list' :
             case 'report_execute' :

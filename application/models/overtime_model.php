@@ -155,4 +155,27 @@ class Overtime_model extends CI_Model {
         $query = $this->db->get('overtime');
         return $query->result_array();
     }
+    
+    /**
+     * Purge the table by deleting the records prior $toDate
+     * @param date $toDate 
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function purge_overtime($toDate) {
+        $this->db->where(' <= ', $toDate);
+        return $this->db->delete('overtime');
+    }
+
+    /**
+     * Count the number of rows into the table
+     * @return int number of rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function count() {
+        $this->db->select('count(*) as number', FALSE);
+        $this->db->from('overtime');
+        $result = $this->db->get();
+        return $result->row()->number;
+    }
 }

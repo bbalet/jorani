@@ -90,8 +90,8 @@ class History_model extends CI_Model {
         $sql = 'INSERT INTO ' . $table . '_history';
         $sql .= ' SELECT *, NULL,';
         $sql .= ' ' . $type;
-        $sql .= ' ' . $user_id;
-        $sql .= ' NOW() FROM users' . $table . ' WHERE id = ' . $id;
+        $sql .= ', ' . $user_id;
+        $sql .= ', NOW() FROM ' . $table . ' WHERE id = ' . $id;
         $this->db->query($sql);
     }
     

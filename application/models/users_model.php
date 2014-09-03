@@ -98,6 +98,12 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_user($id) {
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->set_history(3, 'users', $id, $this->session->userdata('id'));
+        }
+        
         $query = $this->db->delete('users', array('id' => $id));
         $this->load->model('entitleddays_model');
         $this->entitleddays_model->delete_entitleddays_cascade_user($id);
@@ -107,12 +113,6 @@ class Users_model extends CI_Model {
         );
         $this->db->where('manager', $id);
         $this->db->update('users', $data);
-        
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->set_history(3, 'users', $id, $this->session->userdata('id'));
-        }
     }
 
     /**

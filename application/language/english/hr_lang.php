@@ -28,6 +28,7 @@ $lang['hr_employees_thead_lastname'] = 'Lastname';
 $lang['hr_employees_thead_email'] = 'E-mail';
 $lang['hr_employees_thead_contract'] = 'Contract';
 $lang['hr_employees_thead_manager'] = 'Manager';
+$lang['hr_employees_button_create_user'] = 'Create';
 $lang['hr_employees_button_export'] = 'Export this list';
 $lang['hr_employees_popup_entitlment_title'] = 'Entitled days';
 $lang['hr_employees_popup_entitlment_button_cancel'] = 'Cancel';
@@ -97,6 +98,7 @@ $lang['hr_export_overtime_thead_cause'] = 'Reason';
 
 $lang['hr_summary_title'] = 'Leave balance for user #';
 $lang['hr_summary_thead_type'] = 'Leave type';
+$lang['hr_summary_thead_available'] = 'Available';
 $lang['hr_summary_thead_taken'] = 'Taken';
 $lang['hr_summary_thead_entitled'] = 'Entitled';
 $lang['hr_summary_thead_description'] = 'Description';

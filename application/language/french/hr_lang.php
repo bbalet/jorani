@@ -28,6 +28,7 @@ $lang['hr_employees_thead_lastname'] = 'Nom';
 $lang['hr_employees_thead_email'] = 'E-mail';
 $lang['hr_employees_thead_contract'] = 'Contrat';
 $lang['hr_employees_thead_manager'] = 'Manager';
+$lang['hr_employees_button_create_user'] = 'Créer';
 $lang['hr_employees_button_export'] = 'Exporter cette liste';
 $lang['hr_employees_popup_entitlment_title'] = 'Crédit congés';
 $lang['hr_employees_popup_entitlment_button_cancel'] = 'Annuler';
@@ -97,6 +98,7 @@ $lang['hr_export_overtime_thead_cause'] = 'Cause';
 
 $lang['hr_summary_title'] = 'Compteur de congés pour l\'employée #';
 $lang['hr_summary_thead_type'] = 'Type de congés';
+$lang['hr_summary_thead_available'] = 'Disponible';
 $lang['hr_summary_thead_taken'] = 'Pris';
 $lang['hr_summary_thead_entitled'] = 'Disponible';
 $lang['hr_summary_thead_description'] = 'Description';

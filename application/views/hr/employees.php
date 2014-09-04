@@ -85,10 +85,13 @@ $(document).ready(function() {
 </div>
 
 <div class="row-fluid">
-    <div class="span3">
+    <div class="span2">
+      <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_create_user');?></a>
+    </div>
+    <div class="span2">
       <a href="<?php echo base_url();?>hr/employees/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
     </div>
-    <div class="span9">&nbsp;</div>
+    <div class="span8">&nbsp;</div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
@@ -111,18 +114,19 @@ $(document).ready(function() {
 $(function () {
     //Transform the HTML table in a fancy datatable
     $('#users').dataTable({
-		"oLanguage": {
-                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
-                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
-                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
-                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
-                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
-                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
-                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
-                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
-                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
-                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
-                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                    "iDisplayLength": 50,
+                    "oLanguage": {
+                        "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                        "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                        "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                        "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                        "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                        "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                        "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                        "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                        "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                        "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                        "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
                     "oPaginate": {
                         "sFirst":    "<?php echo lang('datatable_sFirst');?>",
                         "sLast":     "<?php echo lang('datatable_sLast');?>",

@@ -62,6 +62,17 @@ $lang['users_view_field_language'] = 'ភាសា';
 $lang['users_view_button_edit'] = 'កែសម្រួល';
 $lang['users_view_button_back'] = 'ត្រឡប់ទៅបញ្ជីឈ្មោះ';
 
+$lang['users_myprofile_title'] = 'My personal information';
+$lang['users_myprofile_html_title'] = 'My personal information';
+$lang['users_myprofile_field_firstname'] = 'នាមត្រកូលអ្នកប្រើប្រាស់';
+$lang['users_myprofile_field_lastname'] = 'ឈ្មោះអ្នកប្រើប្រាស់';
+$lang['users_myprofile_field_manager'] = 'អ្នកគ្រប់គ្រង';
+$lang['users_myprofile_field_contract'] = 'ខសន្យា';
+$lang['users_myprofile_field_position'] = 'តំណែង';
+$lang['users_myprofile_field_entity'] = 'អង្គភាព';
+$lang['users_myprofile_field_hired'] = 'កាលបរិច្ឆេទជួល / បានចាប់ផ្តើ';
+$lang['users_myprofile_field_identifier'] = 'អ្នកកំណត់អត្តសញ្ញាណ';
+
 $lang['users_edit_title'] = 'កែសម្រួលអ្នកប្រើ #';
 $lang['users_edit_html_title'] = 'កែសម្រួលអ្នកប្រើ';
 $lang['users_edit_field_firstname'] = 'នាមត្រកូលអ្នកប្រើប្រាស់';

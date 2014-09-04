@@ -18,6 +18,7 @@
 
 $lang['leaves_summary_title'] = 'សេចក្តីសង្ខេបរបស់ខ្ញុំ';
 $lang['leaves_summary_thead_type'] = 'បែបផែននៃការចាកចេញ';
+$lang['leaves_summary_thead_available'] = 'Available';
 $lang['leaves_summary_thead_taken'] = ' បានយក';
 $lang['leaves_summary_thead_entitled'] = 'សិទ្ធិទទួលបាន';
 $lang['leaves_summary_thead_description'] = 'ព័ត៌មានលម្អិត';

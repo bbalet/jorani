@@ -117,6 +117,33 @@ class Users extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+        /**
+     * Display details of the connected user (contract, line manager, etc.)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function myprofile() {
+        $this->auth->check_is_granted('view_myprofile');
+        $data = $this->getUserContext();
+        $data['user'] = $this->users_model->get_users($this->user_id);
+        if (empty($data['user'])) {
+            show_404();
+        }
+        $data['title'] = lang('users_myprofile_html_title');
+        $this->load->model('roles_model');
+        $this->load->model('positions_model');
+        $this->load->model('contracts_model');
+        $this->load->model('organization_model');
+        $data['roles'] = $this->roles_model->get_roles();
+        $data['manager_label'] = $this->users_model->get_label($data['user']['manager']);
+        $data['contract_label'] = $this->contracts_model->get_label($data['user']['contract']);
+        $data['position_label'] = $this->positions_model->get_label($data['user']['position']);
+        $data['organization_label'] = $this->organization_model->get_label($data['user']['organization']);
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('users/myprofile', $data);
+        $this->load->view('templates/footer');
+    }
+    
     /**
      * Display a for that allows updating a given user
      * @param int $id User identifier

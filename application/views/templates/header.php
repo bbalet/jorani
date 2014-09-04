@@ -27,8 +27,6 @@
     <link rel="icon" type="image/png" href="<?php echo base_url();?>favicon.ico" sizes="32x32">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-TileImage" content="<?php echo base_url();?>mstile-144x144.png">
-    
-
 <?php if ($this->config->item('ga_code') != "") { ?>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

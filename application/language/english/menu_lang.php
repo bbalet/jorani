@@ -23,6 +23,7 @@ $lang['menu_banner_change_password'] = 'Change password';
 
 $lang['menu_banner_welcome'] = 'Welcome';
 $lang['menu_banner_logout'] = 'Logout';
+$lang['menu_banner_tip_myprofile'] = 'View my personal information';
 $lang['menu_banner_tip_reset'] = 'reset password';
 $lang['menu_password_popup_title'] = 'Change password';
 $lang['menu_password_popup_button_cancel'] = 'Cancel';

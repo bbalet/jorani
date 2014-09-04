@@ -27,6 +27,7 @@ $this->lang->load('global', $language);?>
 <thead>
     <tr>
       <th><?php echo lang('leaves_summary_thead_type');?></th>
+      <th><?php echo lang('leaves_summary_thead_available');?></th>
       <th><?php echo lang('leaves_summary_thead_taken');?></th>
       <th><?php echo lang('leaves_summary_thead_entitled');?></th>
       <th><?php echo lang('leaves_summary_thead_description');?></th>
@@ -37,8 +38,9 @@ $this->lang->load('global', $language);?>
   foreach ($summary as $key => $value) { ?>
     <tr>
       <td><?php echo $key; ?></td>
-      <td><?php echo $value[0]; ?></td>
-      <td><?php echo $value[1]; ?></td>
+      <td><?php echo ((float) $value[1] - (float) $value[0]); ?></td>
+      <td><?php echo (float) $value[0]; ?></td>
+      <td><?php echo (float) $value[1]; ?></td>
       <td><?php echo $value[2]; ?></td>
     </tr>
   <?php }

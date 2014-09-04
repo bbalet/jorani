@@ -28,6 +28,7 @@ $lang['hr_employees_thead_lastname'] = 'ឈ្មោះអ្នកប្រើ�
 $lang['hr_employees_thead_email'] = 'ម៉ែល';
 $lang['hr_employees_thead_contract'] = 'ខសន្យា';
 $lang['hr_employees_thead_manager'] = 'អ្នកគ្រប់គ្រង';
+$lang['hr_employees_button_create_user'] = 'Create';
 $lang['hr_employees_button_export'] = 'បញ្ជីនាំចេញ';
 $lang['hr_employees_popup_entitlment_title'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
 $lang['hr_employees_popup_entitlment_button_cancel'] = 'បោះបង់';
@@ -97,6 +98,7 @@ $lang['hr_export_overtime_thead_cause'] = 'មូលហេតុ';
 
 $lang['hr_summary_title'] = 'Leave balance for user #';
 $lang['hr_summary_thead_type'] = 'Leave type';
+$lang['hr_summary_thead_available'] = 'Available';
 $lang['hr_summary_thead_taken'] = 'Taken';
 $lang['hr_summary_thead_entitled'] = 'Entitled';
 $lang['hr_summary_thead_description'] = 'Description';

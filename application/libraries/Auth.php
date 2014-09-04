@@ -156,6 +156,7 @@ class Auth {
                 break;
             
             //General
+            case 'view_myprofile' :
             case 'employees_list' :
             case 'organization_select' :
                 return true;

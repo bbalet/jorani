@@ -18,6 +18,7 @@
 
 $lang['leaves_summary_title'] = 'My summary';
 $lang['leaves_summary_thead_type'] = 'Leave type';
+$lang['leaves_summary_thead_available'] = 'Available';
 $lang['leaves_summary_thead_taken'] = 'Taken';
 $lang['leaves_summary_thead_entitled'] = 'Entitled';
 $lang['leaves_summary_thead_description'] = 'Description';

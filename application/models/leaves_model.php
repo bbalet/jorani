@@ -123,6 +123,7 @@ class Leaves_model extends CI_Model {
 
             //Fill a list of all existing leave types
             $summary = array();
+            $compensate_name = '';
             $types = $this->db->get_where('types')->result_array();
             foreach ($types as $type) {
                 $summary[$type['name']][0] = 0; //Taken
@@ -130,6 +131,7 @@ class Leaves_model extends CI_Model {
                     $summary[$type['name']][1] = 0; //Entitled
                     $summary[$type['name']][2] = ''; //Description
                 } else {
+                    $compensate_name = $type['name'];
                     $summary[$type['name']][1] = '-'; //Entitled for catch up
                     $summary[$type['name']][2] = 'Entitled days vary according to validated overtime'; //Description
                 }
@@ -217,12 +219,12 @@ class Leaves_model extends CI_Model {
                 $this->db->group_by("leaves.type");
                 $taken_days = $this->db->get()->result_array();
                 if (count($taken_days) > 0) {
-                    $summary['compensate'][0] = $taken_days[0]['taken']; //taken
+                    $summary[$compensate_name][0] = $taken_days[0]['taken']; //taken
                 } else {
-                    $summary['compensate'][0] = 0; //taken
+                    $summary[$compensate_name][0] = 0; //taken
                 }
-                $summary['compensate'][1] = $sum; //entitled
-                $summary['compensate'][2] = '-'; //description
+                $summary[$compensate_name][1] = $sum; //entitled
+                $summary[$compensate_name][2] = '-'; //description
             }
             return $summary;
         } else { //User attached to no contract

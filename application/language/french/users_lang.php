@@ -61,6 +61,17 @@ $lang['users_view_field_language'] = 'Langage';
 $lang['users_view_button_edit'] = 'Modifier';
 $lang['users_view_button_back'] = 'Retourner à la liste';
 
+$lang['users_myprofile_title'] = 'Mes informations personelles ';
+$lang['users_myprofile_html_title'] = 'Mes informations personelles';
+$lang['users_myprofile_field_firstname'] = 'Prénom';
+$lang['users_myprofile_field_lastname'] = 'Nom';
+$lang['users_myprofile_field_manager'] = 'Manager';
+$lang['users_myprofile_field_contract'] = 'Contrat';
+$lang['users_myprofile_field_position'] = 'Poste';
+$lang['users_myprofile_field_entity'] = 'Entité';
+$lang['users_myprofile_field_hired'] = 'Date d\'embauche/démarrage';
+$lang['users_myprofile_field_identifier'] = 'Identifiant interne';
+
 $lang['users_edit_title'] = 'Modification de l\'utilisateur n°';
 $lang['users_edit_html_title'] = 'Edit user';
 $lang['users_edit_field_firstname'] = 'Prénom';

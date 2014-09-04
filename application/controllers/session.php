@@ -163,7 +163,6 @@ class Session extends CI_Controller {
             case "km" : $this->session->set_userdata('language', 'khmer'); break;
         }
         $this->session->set_userdata('language_code', $this->input->post('language'));
-        $this->session->set_flashdata('msg', lang('session_login_flash_change_language') . $this->session->userdata('language'));
         redirect($this->input->post('last_page'));
     }
     

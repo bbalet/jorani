@@ -18,6 +18,7 @@
 
 $lang['leaves_summary_title'] = 'Mes compteurs';
 $lang['leaves_summary_thead_type'] = 'Type d\'absence';
+$lang['leaves_summary_thead_available'] = 'Disponible';
 $lang['leaves_summary_thead_taken'] = 'Pris';
 $lang['leaves_summary_thead_entitled'] = 'Disponible';
 $lang['leaves_summary_thead_description'] = 'Description';

@@ -72,6 +72,7 @@ $lang['users_myprofile_field_position'] = 'តំណែង';
 $lang['users_myprofile_field_entity'] = 'អង្គភាព';
 $lang['users_myprofile_field_hired'] = 'កាលបរិច្ឆេទជួល / បានចាប់ផ្តើ';
 $lang['users_myprofile_field_identifier'] = 'អ្នកកំណត់អត្តសញ្ញាណ';
+$lang['users_myprofile_button_export'] = 'បញ្ជីនាំចេញ';
 
 $lang['users_edit_title'] = 'កែសម្រួលអ្នកប្រើ #';
 $lang['users_edit_html_title'] = 'កែសម្រួលអ្នកប្រើ';

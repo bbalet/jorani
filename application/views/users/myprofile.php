@@ -68,3 +68,14 @@ $this->lang->load('users', $language);?>
     <div class="span3"><?php echo $user['identifier'];?></div>
     <div class="span6">&nbsp;</div>
 </div>
+
+<div class="row-fluid">
+    <div class="span12">&nbsp;</div>
+</div>
+
+<div class="row-fluid">
+    <div class="span2">
+      <a href="<?php echo base_url();?>users/pdf_myprofile" class="btn btn-primary" target="_blank"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('users_myprofile_button_export');?></a>
+    </div>
+    <div class="span10">&nbsp;</div>
+</div>

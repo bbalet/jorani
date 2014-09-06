@@ -81,7 +81,7 @@ $(document).ready(function() {
 </div>
 
 <div class="row-fluid">
-	<div class="span12">&nbsp;</div>
+    <div class="span12">&nbsp;</div>
 </div>
 
 <div class="row-fluid">

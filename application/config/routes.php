@@ -40,6 +40,7 @@
 
 //Admin : user management
 $route['users/myprofile'] = 'users/myprofile';
+$route['users/pdf_myprofile'] = 'users/pdf_myprofile';
 $route['users/employees'] = 'users/employees';
 $route['users/export'] = 'users/export';
 $route['users/import'] = 'users/import';

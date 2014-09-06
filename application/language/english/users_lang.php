@@ -72,6 +72,7 @@ $lang['users_myprofile_field_position'] = 'Position';
 $lang['users_myprofile_field_entity'] = 'Entity';
 $lang['users_myprofile_field_hired'] = 'Date hired/started';
 $lang['users_myprofile_field_identifier'] = 'Internal/Company Identifier';
+$lang['users_myprofile_button_export'] = 'Export';
 
 $lang['users_edit_title'] = 'Edit user #';
 $lang['users_edit_html_title'] = 'Edit user';

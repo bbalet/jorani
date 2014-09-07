@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `activities_employee_history` (
 -- ------------------------------------------------------------------------------------------
 -- Update of the model for Time management module
 
-ALTER TABLE `contracts` ADD `weekly_duration` INT NOT NULL COMMENT 'Approximate duration of work per week and in minutes' ;
+  ALTER TABLE `contracts` ADD `weekly_duration` INT NOT NULL COMMENT 'Approximate duration of work per week and in minutes' ;
 
 CREATE TABLE IF NOT EXISTS `time` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'unique identifier of the time declaration',

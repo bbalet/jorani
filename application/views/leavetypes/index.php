@@ -17,9 +17,12 @@
  */
 
 CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('global', $language);
 $this->lang->load('leavetypes', $language);?>
 
-<h1><?php echo lang('hr_leaves_type_title');?></h1>
+<h1><?php echo lang('hr_leaves_type_title');?> &nbsp;
+<a href="http://www.leave-management-system.org/edit-leave-types.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a>
+</h1>
 
 <?php if($this->session->flashdata('msg')){ ?>
 <div class="alert fade in" id="flashbox">

@@ -371,6 +371,9 @@ $config['password_length'] = 8;
 //Default role id (e.g. 2 for user)
 $config['default_role_id'] = 2;
 
+//Set this value to TRUE if you want to create leaves at status requested instead of planned
+$config['leave_status_requested'] = FALSE;
+
 $config['version'] = 'v0.1_beta2';
 
 //List of available languages
@@ -385,8 +388,11 @@ $config['enable_purge'] = FALSE;
 //Enable time management module
 $config['enable_time'] = FALSE;
 
-//Google analytics tracking code (if empty, the Javascript tracking code will be desactivated)
+//Google analytics tracking code (if empty, the Javascript tracking code will be desactivated).
+//An option allows you to send the identifier of the connected user (a special configuration must be set in GA first).
+//See https://developers.google.com/analytics/devguides/collection/analyticsjs/user-id
 $config['ga_code'] = '';
+$config['ga_send_userid'] = FALSE;
 
 //E-mail settings
 $config['protocol'] = 'smtp';

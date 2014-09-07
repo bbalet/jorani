@@ -3,15 +3,20 @@ LMS is designed to provide simple leave and overtime request workflows for small
 
 ## Informations / getting help
 
-Official website : http://www.leave-management-system.org/
+* Official website : http://www.leave-management-system.org/
+* Google group : https://groups.google.com/forum/?hl=fr#!forum/lms-users
+* G+ : https://plus.google.com/+LeavemanagementsystemOrganization/posts
+* FB : https://www.facebook.com/lmsoss
+* Tweeter : https://twitter.com/LeaveMS
 
 ## Status
 
-This project is being tested. An online demo is available here : http://demo.leave-management-system.org/
+This project is being tested however some users have gone live. An online demo is available here : http://demo.leave-management-system.org/
 Use bbalet / bbalet for login / password. Be nice and don't screw up the data of the demo.
 
 ## Features
 
+* Comprehensive online documentation.
 * User management.
 * Notifications by e-mail (requested, accepted, rejected and new user).
 * Leave request approval workflow.
@@ -38,6 +43,9 @@ See <code>/docs/install/README.md</code> for advanced configuration. In a nutshe
 
 ## What's next ?
 
+* More HR management features (time, tasks, employee record, etc.).
+* History of changes
+* Purge data.
 * Mass importer of users.
 * Setup assistant.
 
@@ -63,6 +71,7 @@ We thank the following open source projects for the components used by LMS:
 * BCRYPT password hasher https://github.com/dwightwatson/codeigniter-bcrypt
 * RSA Encryption in pure PHP https://github.com/phpseclib/phpseclib
 * Excel import/export https://github.com/PHPOffice/PHPExcel
+* TCPDF http://www.tcpdf.org/
 
 #### Frontend
 

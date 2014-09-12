@@ -19,6 +19,7 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('requests', $language);
 $this->lang->load('datatable', $language);
+$this->lang->load('global', $language);
 ?>
 
 <div class="row-fluid">
@@ -39,7 +40,9 @@ $(document).ready(function() {
 </script>
 <?php } ?>
 
-<h1><?php echo lang('requests_index_title');?></h1>
+<h1><?php echo lang('requests_index_title');?>&nbsp;
+<a href="http://www.leave-management-system.org/page-leave-requests-validation.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a>
+</h2>
 
 <p><?php echo lang('requests_index_description');?></p>
 

@@ -28,7 +28,13 @@
             </tr>
             <tr>
                 <td>To &nbsp;</td><td>{EndDate}</td>
-            </tr>            
+            </tr>
+            <tr>
+                <td>Type &nbsp;</td><td>{Type}</td>
+            </tr>
+            <tr>
+                <td>Reason &nbsp;</td><td>{Reason}</td>
+            </tr>
         </table>
         <a href="{UrlAccept}">Accept</a>
         <a href="{UrlReject}">Reject</a>

@@ -236,6 +236,7 @@ class Leaves extends CI_Controller {
     {
         $this->load->model('users_model');
         $this->load->model('settings_model');
+        $this->load->model('types_model');
         $manager = $this->users_model->get_users($this->session->userdata('manager'));
         $acceptUrl = base_url() . 'requests/accept/' . $id;
         $rejectUrl = base_url() . 'requests/reject/' . $id;
@@ -256,6 +257,8 @@ class Leaves extends CI_Controller {
             'Lastname' => $this->session->userdata('lastname'),
             'StartDate' => $this->input->post('startdate'),
             'EndDate' => $this->input->post('enddate'),
+            'Type' => $this->types_model->get_label($this->input->post('type')),
+            'Reason' => $this->input->post('cause'),
             'UrlAccept' => $acceptUrl,
             'UrlReject' => $rejectUrl
         );
@@ -265,8 +268,8 @@ class Leaves extends CI_Controller {
         $this->email->from('do.not@reply.me', 'LMS');
         $this->email->to($manager['email']);
         $this->email->subject(lang('email_leave_request_subject') .
-                $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname'));
+        $this->session->userdata('firstname') . ' ' .
+        $this->session->userdata('lastname'));
         $this->email->message($message);
         $this->email->send();
     }

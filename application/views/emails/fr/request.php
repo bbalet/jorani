@@ -32,7 +32,13 @@
             </tr>
             <tr>
                 <td>Au &nbsp;</td><td>{EndDate}</td>
-            </tr>            
+            </tr>
+            <tr>
+                <td>Type &nbsp;</td><td>{Type}</td>
+            </tr>
+            <tr>
+                <td>Cause &nbsp;</td><td>{Reason}</td>
+            </tr>
         </table>
         <a href="{UrlAccept}">Accepter</a>
         <a href="{UrlReject}">Refuser</a>

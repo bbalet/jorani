@@ -19,9 +19,12 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('leaves', $language);
 $this->lang->load('status', $language);
+$this->lang->load('global', $language);
 ?>
 
-<h2><?php echo lang('leaves_create_title');?></h2>
+<h2><?php echo lang('leaves_create_title');?> &nbsp;
+<a href="http://www.leave-management-system.org/how-to-request-a-leave.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a>
+</h2>
 
 <div class="row-fluid">
     <div class="span8">

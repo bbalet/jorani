@@ -19,7 +19,7 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('users', $language);
 CI_Controller::get_instance()->load->library('language');
-?>
+$this->lang->load('global', $language);?>
 
 <h2><?php echo lang('users_view_title');?><?php echo $user['id']; ?></h2>
 
@@ -55,7 +55,9 @@ CI_Controller::get_instance()->load->library('language');
     <input type="text" name="entity" value="<?php echo $organization_label; ?>" readonly /><br />
     
     <label for="datehired"><?php echo lang('users_view_field_hired');?></label>
-    <input type="text" name="datehired" value="<?php echo $user['datehired']; ?>" readonly /><br />
+    <input type="text" name="datehired" value="<?php 
+    $date = new DateTime($user['datehired']);
+echo $date->format(lang('global_date_format')); ?>" readonly /><br />
     
     <label for="identifier"><?php echo lang('users_view_field_identifier');?></label>
     <input type="text" name="identifier" value="<?php echo $user['identifier']; ?>" readonly /><br />

@@ -17,7 +17,8 @@
  */
 
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('users', $language);?>
+$this->lang->load('users', $language);
+$this->lang->load('global', $language);?>
 
 <h1><?php echo lang('users_myprofile_title');?></h1>
 
@@ -59,7 +60,10 @@ $this->lang->load('users', $language);?>
 
 <div class="row-fluid">
     <div class="span3"><strong><?php echo lang('users_myprofile_field_hired');?></strong></div>
-    <div class="span3"><?php echo $user['datehired'];?></div>
+    <div class="span3"><?php 
+$date = new DateTime($user['datehired']);
+echo $date->format(lang('global_date_format'));
+?></div>
     <div class="span6">&nbsp;</div>
 </div>
 

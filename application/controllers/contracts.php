@@ -212,6 +212,8 @@ class Contracts extends CI_Controller {
         $data['contract_id'] = $id;
         $this->load->model('dayoffs_model');
         $data['dayoffs'] = $this->dayoffs_model->get_dayoffs($id, $data['year']);
+        $this->load->model('contracts_model');
+        $data['name'] = $this->contracts_model->get_label($id);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('contracts/calendar', $data);

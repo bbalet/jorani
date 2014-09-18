@@ -16,6 +16,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+$lang['entitleddays_contract_index_title'] = 'Entitled days for contract';
 $lang['entitleddays_contract_index_thead_tip_delete'] = 'Delete';
 $lang['entitleddays_contract_index_thead_start'] = 'Start';
 $lang['entitleddays_contract_index_thead_end'] = 'End';
@@ -28,7 +29,9 @@ $lang['entitleddays_contract_index_field_type'] = 'Leave type';
 $lang['entitleddays_contract_index_field_days'] = 'Days';
 $lang['entitleddays_contract_index_button_add'] = 'Add';
 $lang['entitleddays_contract_mandatory_js_msg'] = '"The field " + fieldname + " is mandatory."';
+$lang['entitleddays_contract_index_button_back'] = 'Back to the list of contracts';
 
+$lang['entitleddays_user_index_title'] = 'Entitled days for employee';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Delete';
 $lang['entitleddays_user_index_thead_start'] = 'Start';
 $lang['entitleddays_user_index_thead_end'] = 'End';
@@ -41,3 +44,4 @@ $lang['entitleddays_user_index_field_type'] = 'Leave type';
 $lang['entitleddays_user_index_field_days'] = 'Days';
 $lang['entitleddays_user_index_button_add'] = 'Add';
 $lang['entitleddays_user_mandatory_js_msg'] = '"The field " + fieldname + " is mandatory."';
+$lang['entitleddays_user_index_button_back'] = 'Back to the list of employees';

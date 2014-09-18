@@ -80,7 +80,7 @@ echo form_open('users/create', $attributes); ?>
     <label for="txtEntity"><?php echo lang('users_create_field_entity');?></label>
     <div class="input-append">
         <input type="text" id="txtEntity" name="txtEntity" readonly />
-        <a id="cmdSelectEntity" class="btn btn-primary">Select</a>
+        <a id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('users_create_button_select');?></a>
     </div>
     <br />
 
@@ -92,8 +92,9 @@ echo form_open('users/create', $attributes); ?>
     </div>
     <br />
 
-    <label for="datehired"><?php echo lang('users_create_field_hired');?></label>
-    <input type="text" name="datehired" id="datehired" /><br />
+    <label for="viz_datehired"><?php echo lang('users_create_field_hired');?></label>
+    <input type="text" id="viz_datehired" name="viz_datehired" /><br />
+    <input type="hidden" name="datehired" id="datehired" />
 
     <label for="identifier"><?php echo lang('users_create_field_identifier');?></label>
     <input type="text" name="identifier" /><br />
@@ -165,8 +166,9 @@ echo form_open('users/create', $attributes); ?>
     
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/lms.password.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
-<link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
 
@@ -213,7 +215,7 @@ echo form_open('users/create', $attributes); ?>
         if (fieldname == "") {
             return true;
         } else {
-            bootbox.alert("The field " + fieldname + " is mandatory");
+            bootbox.alert(<?php echo lang('users_create_mandatory_js_msg');?>);
             return false;
         }
     }
@@ -227,7 +229,12 @@ echo form_open('users/create', $attributes); ?>
     }
     
     $(function () {
-        $('#datehired').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+        $("#viz_datehired").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            altFormat: "yy-mm-dd",
+            altField: "#datehired"
+        }, $.datepicker.regional['<?php echo $language_code;?>']);
         $("#lblLoginAlert").alert();
         
         $("#cmdGeneratePassword").click(function() {
@@ -274,7 +281,7 @@ echo form_open('users/create', $attributes); ?>
                 .done(function( msg ) {
                     if (msg == "true") {
                         if ($('#contract').val() == "") {
-                            bootbox.confirm("It is recommanded to select a contract. Do you want to create the user without a contract?", function(result) {
+                            bootbox.confirm("<?php echo lang('users_create_no_contract_confirm');?>", function(result) {
                                 if (result == true) {
                                     submit_form();
                                 }
@@ -283,7 +290,7 @@ echo form_open('users/create', $attributes); ?>
                             submit_form()
                         }
                     } else {
-                        bootbox.alert("This login is not available");
+                        bootbox.alert("<?php echo lang('users_create_login_check');?>");
                     }
                 });
             }
@@ -317,7 +324,7 @@ echo form_open('users/create', $attributes); ?>
         //Self manager button
         $("#cmdSelfManager").click(function() {
             $("#manager").val('-1');
-            $('#txtManager').val('No line manager');
+            $('#txtManager').val('<?php echo lang('users_create_field_manager_alt');?>');
         });
     });
 

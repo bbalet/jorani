@@ -132,6 +132,7 @@ class Reports extends CI_Controller {
         $this->load->model('organization_model');
         $result = array();
         $types = $this->types_model->get_types();
+        $this->lang->load('global', $this->language);
         
         $include_children = filter_var($_GET['children'], FILTER_VALIDATE_BOOLEAN);
         $users = $this->organization_model->all_employees($_GET['entity'], $include_children);
@@ -139,7 +140,8 @@ class Reports extends CI_Controller {
             $result[$user->id]['identifier'] = $user->identifier;
             $result[$user->id]['firstname'] = $user->firstname;
             $result[$user->id]['lastname'] = $user->lastname;
-            $result[$user->id]['datehired'] = $user->datehired;
+            $date = new DateTime($user->datehired);
+            $result[$user->id]['datehired'] = $date->format(lang('global_date_format'));
             $result[$user->id]['department'] = $user->department;
             $result[$user->id]['position'] = $user->position;
             $result[$user->id]['contract'] = $user->contract;

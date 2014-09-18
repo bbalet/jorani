@@ -19,7 +19,7 @@
 $this->load->helper('language');
 $this->lang->load('calendar', $language);
 $this->lang->load('contract', $language);
-
+$this->lang->load('global', $language);
 $dDaysOnPage = 37;
 $dDay = 1;
 ?>
@@ -49,6 +49,8 @@ padding-left:10px;
 }
 </style>
 
+<h2><?php echo lang('contract_calendar_title');?> <span class="muted"><?php echo $name; ?></span></h2>
+
 <div class="row-fluid">
     <div class="span6">
         <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) - 1);?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo intval($year) - 1;?></a>
@@ -57,8 +59,11 @@ padding-left:10px;
         &nbsp;
         <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) + 1);?>" class="btn btn-primary"><?php echo intval($year) + 1;?>&nbsp; <i class="icon-arrow-right icon-white"></i></a>
     </div>
-    <div class="span6">
-        <a href="#frmSetRangeDayOff" class="btn btn-primary" data-toggle="modal"><i class="icon-retweet icon-white"></i>&nbsp; Series of non working days</a>
+    <div class="span3">
+        <a href="<?php echo base_url() . 'contracts';?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_back');?></a>
+    </div>
+    <div class="span3">
+        <a href="#frmSetRangeDayOff" class="btn btn-primary" data-toggle="modal"><i class="icon-retweet icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_series');?></a>
     </div>
 </div>
 
@@ -68,13 +73,13 @@ padding-left:10px;
 
 <div class="row-fluid">
     <div class="span12">
-        Day offs and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".
+        <?php echo lang('contract_calendar_description');?>
     </div>
 </div>
 
 <div class="row-fluid">
     <div class="span12">
-        <u>Legend:</u> <img src='<?php echo base_url();?>assets/images/day.png' /> All day, <img src='<?php echo base_url();?>assets/images/morning.png' /> Morning, <img src='<?php echo base_url();?>assets/images/afternoon.png' /> Afternoon
+        <u><?php echo lang('contract_calendar_legend_title');?></u> <img src='<?php echo base_url();?>assets/images/day.png' /> <?php echo lang('contract_calendar_legend_allday');?>, <img src='<?php echo base_url();?>assets/images/morning.png' /> <?php echo lang('contract_calendar_legend_morning');?>, <img src='<?php echo base_url();?>assets/images/afternoon.png' /> <?php echo lang('contract_calendar_legend_afternoon');?>
     </div>
 </div>
 
@@ -165,24 +170,23 @@ for ($mC = 1; $mC <= 12; $mC++) {
 <div id="frmAddDayOff" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmAddDayOff').modal('hide');" class="close">&times;</a>
-         <h3>Edit day off</h3>
+         <h3><?php echo lang('contract_calendar_popup_dayoff_title');?></h3>
     </div>
     <div class="modal-body">
-        <label for="txtDayOffTitle">Title</label>
+        <label for="txtDayOffTitle"><?php echo lang('contract_calendar_popup_dayoff_field_title');?></label>
         <input type="text" id="txtDayOffTitle" name="txtDayOffTitle" />
-        <label for="cboDayOffType">Type</label>
+        <label for="cboDayOffType"><?php echo lang('contract_calendar_popup_dayoff_field_type');?></label>
         <select id="cboDayOffType" name="cboDayOffType">
-            <option value="0" selected>Working day</option>
-            <option value="1" selected>All day is off</option>
-            <option value="2">Morning is off</option>
-            <option value="3">Afternoon is off</option>
+            <option value="0" selected><?php echo lang('contract_calendar_popup_dayoff_type_working');?></option>
+            <option value="1" selected><?php echo lang('contract_calendar_popup_dayoff_type_off');?></option>
+            <option value="2"><?php echo lang('contract_calendar_popup_dayoff_type_morning');?></option>
+            <option value="3"><?php echo lang('contract_calendar_popup_dayoff_type_afternoon');?></option>
         </select>
-        <span id="timestamp"></span>
     </div>
     <div class="modal-footer">
-        <button id="cmdDeleteDayOff" onclick="delete_day_off();" class="btn btn-danger">Delete</button>
-        <button onclick="add_day_off();" class="btn secondary">OK</button>
-        <button onclick="$('#frmAddDayOff').modal('hide');" class="btn secondary">Cancel</button>
+        <button id="cmdDeleteDayOff" onclick="delete_day_off();" class="btn btn-danger"><?php echo lang('contract_calendar_popup_dayoff_button_delete');?></button>
+        <button onclick="add_day_off();" class="btn secondary"><?php echo lang('contract_calendar_popup_dayoff_button_ok');?></button>
+        <button onclick="$('#frmAddDayOff').modal('hide');" class="btn secondary"><?php echo lang('contract_calendar_popup_dayoff_button_cancel');?></button>
     </div>
 </div>
 
@@ -203,9 +207,11 @@ for ($mC = 1; $mC <= 12; $mC++) {
             <option value="friday"><?php echo lang('Friday');?></option>
         </select>
         <label for="txtStartDate">From</label>
-        <input name="txtStartDate" id="txtStartDate" type="text" /><br />
+        <input type="text" id="viz_startdate" name="viz_startdate" required /><br />
+        <input type="hidden" name="txtStartDate" id="txtStartDate" /><br />
         <label for="txtEndDate">To</label>
-        <input name="txtEndDate" id="txtEndDate" type="text" /><br />
+        <input type="text" id="viz_enddate" name="viz_enddate" required /><br />
+        <input type="hidden" name="txtEndDate" id="txtEndDate" /><br />
         <label for="cboDayOffSeriesType">As a</label>
         <select id="cboDayOffSeriesType" name="cboDayOffType">
             <option value="0" selected>Working day</option>
@@ -223,12 +229,9 @@ for ($mC = 1; $mC <= 12; $mC++) {
     </div>
 </div>
 
-<link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
-<!--Avoid datepicker to appear behind the modal form//-->
-<style>
-    .datepicker{z-index:1151 !important;}
-</style>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <script type="text/javascript">
 
 var timestamp;
@@ -293,8 +296,28 @@ function edit_series() {
 $(function() {
     $("#frmAddDayOff").alert();
     $("#frmSetRangeDayOff").alert();
-    $('#txtStartDate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
-    $('#txtEndDate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+    
+        $("#viz_startdate").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        altFormat: "yy-mm-dd",
+        altField: "#txtStartDate",
+        numberOfMonths: 3,
+              onClose: function( selectedDate ) {
+                $( "#viz_enddate" ).datepicker( "option", "minDate", selectedDate );
+              }
+    }, $.datepicker.regional['<?php echo $language_code;?>']);
+    $("#viz_enddate").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        altFormat: "yy-mm-dd",
+        altField: "#txtEndDate",
+        numberOfMonths: 3,
+              onClose: function( selectedDate ) {
+                $( "#viz_startdate" ).datepicker( "option", "maxDate", selectedDate );
+              }
+    }, $.datepicker.regional['<?php echo $language_code;?>']);
+    
     
     //Display modal form that allow adding a day off
     $("#fullyear").on("click", "td", function() {

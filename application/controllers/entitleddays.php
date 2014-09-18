@@ -41,6 +41,8 @@ class Entitleddays extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
+        $this->load->helper('language');
+        $this->lang->load('entitleddays', $this->language);
     }
     
     /**
@@ -72,7 +74,14 @@ class Entitleddays extends CI_Controller {
         $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_employee($id);
         $this->load->model('types_model');
         $data['types'] = $this->types_model->get_types();
+        $this->load->model('users_model');
+        $data['name'] = $this->users_model->get_label($id);
+        
+        $data['title'] = lang('entitleddays_user_index_title');
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
         $this->load->view('entitleddays/user', $data);
+        $this->load->view('templates/footer');
     }
     
     /**
@@ -88,7 +97,14 @@ class Entitleddays extends CI_Controller {
         $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_contract($id);
         $this->load->model('types_model');
         $data['types'] = $this->types_model->get_types();
+        $this->load->model('contracts_model');
+        $data['name'] = $this->contracts_model->get_label($id);
+        
+        $data['title'] = lang('entitleddays_contract_index_title');
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
         $this->load->view('entitleddays/contract', $data);
+        $this->load->view('templates/footer');
     }
     
     /**

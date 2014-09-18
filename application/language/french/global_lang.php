@@ -18,3 +18,6 @@
 
 $lang['global_link_tooltip_documentation'] = 'Lien vers la documentation';
 $lang['global_msg_error_forbidden'] = 'L\'opération (%s) n\'est pas autorisée';
+
+$lang['global_date_format'] = 'd/m/Y';
+

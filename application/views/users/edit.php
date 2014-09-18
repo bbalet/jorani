@@ -88,8 +88,12 @@ CI_Controller::get_instance()->load->library('language');?>
     </div>    
     <br />
     
-    <label for="datehired"><?php echo lang('users_edit_field_hired');?></label>
-    <input type="text" name="datehired" id="datehired" value="<?php echo $users_item['datehired']; ?>" /><br />
+    <label for="viz_datehired"><?php echo lang('users_edit_field_hired');?></label>
+    <input type="text" id="viz_datehired" name="viz_datehired" value="<?php 
+$date = new DateTime($users_item['datehired']);
+echo $date->format(lang('global_date_format'));
+?>" /><br />
+    <input type="hidden" name="datehired" id="datehired" /><br />
     
     <label for="identifier"><?php echo lang('users_edit_field_identifier');?></label>
     <input type="text" name="identifier" value="<?php echo $users_item['identifier']; ?>" /><br />
@@ -155,8 +159,9 @@ CI_Controller::get_instance()->load->library('language');?>
     </div>
 </div>
 
-<link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <script type="text/javascript">
     
     function select_manager() {
@@ -185,7 +190,12 @@ CI_Controller::get_instance()->load->library('language');?>
     }
 
     $(document).ready(function() {
-        $('#datehired').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+        $("#viz_datehired").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            altFormat: "yy-mm-dd",
+            altField: "#datehired"
+        }, $.datepicker.regional['<?php echo $language_code;?>']);
         
         //Popup select position
         $("#cmdSelectManager").click(function() {
@@ -214,7 +224,7 @@ CI_Controller::get_instance()->load->library('language');?>
         //Self manager button
         $("#cmdSelfManager").click(function() {
             $("#manager").val('-1');
-            $('#txtManager').val('No line manager');
+            $('#txtManager').val('<?php echo lang('users_edit_field_manager_alt');?>');
         });
     });
 </script>

@@ -78,26 +78,41 @@ $lang['contract_export_thead_start'] = 'Start period';
 $lang['contract_export_thead_end'] = 'End period';
 
 $lang['contract_calendar_title'] = 'Calendar of non working days';
-
+$lang['contract_calendar_description'] = 'Day offs and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".';
+$lang['contract_calendar_legend_title'] = 'Legend:';
+$lang['contract_calendar_legend_allday'] = 'All day';
+$lang['contract_calendar_legend_morning'] = 'Morning';
+$lang['contract_calendar_legend_afternoon'] = 'Afternoon';
+$lang['contract_calendar_button_back'] = 'Back to contracts';
+$lang['contract_calendar_button_series'] = 'Series of non-working days';
+$lang['contract_calendar_popup_dayoff_title'] = 'Edit day off';
+$lang['contract_calendar_popup_dayoff_field_title'] = 'Title';
+$lang['contract_calendar_popup_dayoff_field_type'] = 'Type';
+$lang['contract_calendar_popup_dayoff_type_working'] = 'Working day';
+$lang['contract_calendar_popup_dayoff_type_off'] = 'All day is off';
+$lang['contract_calendar_popup_dayoff_type_morning'] = 'Morning is off';
+$lang['contract_calendar_popup_dayoff_type_afternoon'] = 'Afternoon is off';
+$lang['contract_calendar_popup_dayoff_button_delete'] = 'Delete';
+$lang['contract_calendar_popup_dayoff_button_ok'] = 'OK';
+$lang['contract_calendar_popup_dayoff_button_cancel'] = 'Cancel';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_popup_series_'] = '';
+$lang['contract_calendar_'] = '';
+$lang['contract_calendar_'] = '';
+$lang['contract_calendar_'] = '';
 /*
-Day offs and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".
-<u>Legend:</u> <img src='<?php echo base_url();?>assets/images/day.png' /> All day, <img src='<?php echo base_url();?>assets/images/morning.png' /> Morning, <img src='<?php echo base_url();?>assets/images/afternoon.png' /> Afternoon
-
-
-
-frmAddDayOff:
-Edit day off
-Title
-Type
-Working day
-All day is off
-Morning is off
-Afternoon is off
-Delete
-OK
-Cancel
-
-frmSetRangeDayOff:
+ * frmSetRangeDayOff:
 Edit a series of day offs
 Mark every
 From
@@ -110,7 +125,7 @@ Afternoon is off
 Title
 Delete
 OK
-Cancel
+Cancel 
 
- 
- */
+ * frmAddDayOff:*/
+

@@ -62,10 +62,10 @@ $lang['calendar_component_timeFormat_agenda'] = 'H:mm{ - H:mm}';
 
 $lang['calendar_component_firstDay'] = '1';
 
-$lang['calendar_component_buttonText_'] = 'aujourd\'hui';
-$lang['calendar_component_buttonText_'] = 'jour';
-$lang['calendar_component_buttonText_'] = 'semaine';
-$lang['calendar_component_buttonText_'] = 'mois';
+$lang['calendar_component_buttonText_today'] = 'aujourd\'hui';
+$lang['calendar_component_buttonText_day'] = 'jour';
+$lang['calendar_component_buttonText_week'] = 'semaine';
+$lang['calendar_component_buttonText_month'] = 'mois';
 
 $lang['calendar_component_header_left'] = 'prev,next today';
 $lang['calendar_component_header_center'] = 'title';

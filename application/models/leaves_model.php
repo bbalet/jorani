@@ -360,7 +360,7 @@ class Leaves_model extends CI_Model {
                 case 1: $color = '#999'; break;     // Planned
                 case 2: $color = '#f89406'; break;  // Requested
                 case 3: $color = '#468847'; break;  // Accepted
-                case 4: $color = '#b94a48'; break;  // Rejected
+                case 4: $color = '#ff0000'; break;  // Rejected
             }
             
             $jsonevents[] = array(
@@ -412,7 +412,7 @@ class Leaves_model extends CI_Model {
                 case 1: $color = '#999'; break;     // Planned
                 case 2: $color = '#f89406'; break;  // Requested
                 case 3: $color = '#468847'; break;  // Accepted
-                case 4: $color = '#b94a48'; break;  // Rejected
+                case 4: $color = '#ff0000'; break;  // Rejected
             }
             
             $jsonevents[] = array(
@@ -463,7 +463,7 @@ class Leaves_model extends CI_Model {
                 case 1: $color = '#999'; break;     // Planned
                 case 2: $color = '#f89406'; break;  // Requested
                 case 3: $color = '#468847'; break;  // Accepted
-                case 4: $color = '#b94a48'; break;  // Rejected
+                case 4: $color = '#ff0000'; break;  // Rejected
             }
             
             $jsonevents[] = array(
@@ -531,7 +531,7 @@ class Leaves_model extends CI_Model {
                 case 1: $color = '#999'; break;     // Planned
                 case 2: $color = '#f89406'; break;  // Requested
                 case 3: $color = '#468847'; break;  // Accepted
-                case 4: $color = '#b94a48'; break;  // Rejected
+                case 4: $color = '#ff0000'; break;  // Rejected
             }
             
             $jsonevents[] = array(

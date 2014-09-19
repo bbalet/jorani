@@ -68,6 +68,7 @@ class Users extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('list_users');
+        $this->expires_now();
         $data = $this->getUserContext();
         $data['users'] = $this->users_model->get_users();
         $data['title'] = lang('users_index_title');
@@ -523,7 +524,21 @@ class Users extends CI_Controller {
             
             //$this->load->view('upload_success', $data);
         }*/
-        
-
-    }    
+    }
+    
+    /**
+     * Internal utility function
+     * make sure a resource is reloaded every time
+     */
+    private function expires_now() {
+        // Date in the past
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        // always modified
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        // HTTP/1.1
+        header("Cache-Control: no-store, no-cache, must-revalidate");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        // HTTP/1.0
+        header("Pragma: no-cache");
+    }
 }

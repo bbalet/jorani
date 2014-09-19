@@ -82,7 +82,7 @@ $(document).ready(function() {
 </div>
 
 <div class="row-fluid">
-    <div class="span2">
+    <div class="span3">
       <a href="<?php echo base_url();?>overtime/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_export');?></a>
     </div>
      <div class="span3">
@@ -91,7 +91,7 @@ $(document).ready(function() {
     <div class="span3">
       <a href="<?php echo base_url();?>overtime/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_show_pending');?></a>
     </div>
-    <div class="span4">&nbsp;</div>
+    <div class="span3">&nbsp;</div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">

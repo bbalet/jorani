@@ -18,7 +18,8 @@
 
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('extra', $language);
-$this->lang->load('status', $language);?>
+$this->lang->load('status', $language);
+$this->lang->load('global', $language);?>
 
 <h2><?php echo lang('extra_create_title');?></h2>
 
@@ -26,8 +27,9 @@ $this->lang->load('status', $language);?>
 
 <?php echo form_open('extra/create') ?>
 
-    <label for="date" required><?php echo lang('extra_create_field_date');?></label>
-    <input type="input" name="date" id="date" value="<?php echo set_value('date'); ?>" />
+    <label for="viz_date" required><?php echo lang('extra_create_field_date');?></label>
+    <input type="input" name="viz_date" id="viz_date" value="<?php echo set_value('date'); ?>" />
+    <input type="hidden" name="date" id="date" />
     
     <label for="duration" required><?php echo lang('extra_create_field_duration');?></label>
     <input type="input" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" />
@@ -46,10 +48,16 @@ $this->lang->load('status', $language);?>
     <a href="<?php echo base_url(); ?>leaves" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp; <?php echo lang('extra_create_button_cancel');?></a>
 </form>
 
-<link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <script type="text/javascript">
     $(function () {
-        $('#date').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+        $("#viz_date").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            altFormat: "yy-mm-dd",
+            altField: "#date"
+        }, $.datepicker.regional['<?php echo $language_code;?>']);
     });
 </script>

@@ -19,7 +19,8 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('extra', $language);
 $this->lang->load('datatable', $language);
-$this->lang->load('status', $language);?>
+$this->lang->load('status', $language);
+$this->lang->load('global', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -67,7 +68,10 @@ $(document).ready(function() {
                 <?php } ?>
             </div>
         </td>
-        <td><?php echo $extra_item['date']; ?></td>
+        <td><?php 
+$date = new DateTime($extra_item['date']);
+echo $date->format(lang('global_date_format'));
+?></td>
         <td><?php echo $extra_item['duration']; ?></td>
         <td><?php echo $extra_item['cause']; ?></td>
         <td><?php echo lang($extra_item['status_label']); ?></td>

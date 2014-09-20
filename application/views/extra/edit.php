@@ -18,9 +18,10 @@
 
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('extra', $language);
-$this->lang->load('status', $language);?>
+$this->lang->load('status', $language);
+$this->lang->load('global', $language);?>
 
-<h2><?php echo lang('extra_edit_title');?><?php echo $leave['id']; ?></h2>
+<h2><?php echo lang('extra_edit_title');?><?php echo $extra['id']; ?></h2>
 
 <?php echo validation_errors(); ?>
 
@@ -30,22 +31,26 @@ $this->lang->load('status', $language);?>
     echo form_open('extra/edit/' . $id);
 } ?>
 
-    <label for="date"><?php echo lang('extra_edit_field_date');?></label>
-    <input type="input" name="date" id="date" value="<?php echo $leave['date']; ?>" required />
+    <label for="viz_date"><?php echo lang('extra_edit_field_date');?></label>
+    <input type="input" name="viz_date" id="viz_date" value="<?php 
+$date = new DateTime($extra['date']);
+echo $date->format(lang('global_date_format'));
+?>" required />
+    <input type="hidden" name="date" id="date" />
     
     <label for="duration"><?php echo lang('extra_edit_field_duration');?></label>
-    <input type="input" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" required />
+    <input type="input" name="duration" id="duration" value="<?php echo $extra['duration']; ?>" required />
     
     <label for="cause"><?php echo lang('extra_edit_field_cause');?></label>
-    <textarea name="cause" required><?php echo $leave['cause']; ?></textarea>
+    <textarea name="cause" required><?php echo $extra['cause']; ?></textarea>
     
     <label for="status"><?php echo lang('extra_edit_field_status');?></label>
     <select name="status" required>
-        <option value="1" <?php if ($leave['status'] == 1) echo 'selected'; ?>><?php echo lang('Planned');?></option>
-        <option value="2" <?php if ($leave['status'] == 2) echo 'selected'; ?>><?php echo lang('Requested');?></option>
+        <option value="1" <?php if ($extra['status'] == 1) echo 'selected'; ?>><?php echo lang('Planned');?></option>
+        <option value="2" <?php if ($extra['status'] == 2) echo 'selected'; ?>><?php echo lang('Requested');?></option>
         <?php if ($is_hr) {?>
-        <option value="3" <?php if ($leave['status'] == 3) echo 'selected'; ?>><?php echo lang('Accepted');?></option>
-        <option value="4" <?php if ($leave['status'] == 4) echo 'selected'; ?>><?php echo lang('Rejected');?></option>        
+        <option value="3" <?php if ($extra['status'] == 3) echo 'selected'; ?>><?php echo lang('Accepted');?></option>
+        <option value="4" <?php if ($extra['status'] == 4) echo 'selected'; ?>><?php echo lang('Rejected');?></option>        
         <?php } ?>
     </select><br />
 
@@ -58,10 +63,16 @@ $this->lang->load('status', $language);?>
     <?php } ?>
 </form>
 
-<link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <script type="text/javascript">
     $(function () {
-        $('#date').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+        $("#viz_date").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            altFormat: "yy-mm-dd",
+            altField: "#date"
+        }, $.datepicker.regional['<?php echo $language_code;?>']);
     });
 </script>

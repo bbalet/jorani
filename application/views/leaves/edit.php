@@ -19,9 +19,12 @@
 
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('leaves', $language);
-$this->lang->load('status', $language);?>
+$this->lang->load('status', $language);
+$this->lang->load('global', $language);?>
 
-<h2><?php echo lang('leaves_edit_title');?><?php echo $leave['id']; ?></h2>
+<h2><?php echo lang('leaves_edit_title');?><?php echo $leave['id']; ?> &nbsp;
+<a href="http://www.leave-management-system.org/how-to-request-a-leave.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a>
+</h2>
 
 <div class="row-fluid">
     <div class="span8">
@@ -34,15 +37,17 @@ $this->lang->load('status', $language);?>
     echo form_open('leaves/edit/' . $id);
 } ?>
 
-    <label for="startdate" required><?php echo lang('leaves_edit_field_start');?></label>
-    <input type="input" name="startdate" id="startdate" value="<?php echo $leave['startdate']; ?>" />
+    <label for="viz_startdate" required><?php echo lang('leaves_edit_field_start');?></label>
+    <input type="input" name="viz_startdate" id="viz_startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" />
+    <input type="hidden" name="startdate" id="startdate" />
     <select name="startdatetype" id="startdatetype">
         <option value="Morning"><?php echo lang('leaves_date_type_morning');?></option>
         <option value="Afternoon"><?php echo lang('leaves_date_type_afternoon');?></option>
     </select><br />
     
-    <label for="enddate" required><?php echo lang('leaves_edit_field_end');?></label>
-    <input type="input" name="enddate" id="enddate" value="<?php echo $leave['enddate']; ?>" />
+    <label for="viz_enddate" required><?php echo lang('leaves_edit_field_end');?></label>
+    <input type="input" name="viz_enddate" id="viz_enddate" value="<?php $date = new DateTime($leave['enddate']); echo $date->format(lang('global_date_format'));?>" />
+    <input type="hidden" name="enddate" id="enddate" />
     <select name="enddatetype" id="enddatetype">
         <option value="Morning"><?php echo lang('leaves_date_type_morning');?></option>
         <option value="Afternoon"><?php echo lang('leaves_date_type_afternoon');?></option>
@@ -92,8 +97,9 @@ $this->lang->load('status', $language);?>
     </div>
 </div>
 
-<link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-langs.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     
@@ -207,11 +213,36 @@ $this->lang->load('status', $language);?>
     }
     
     $(function () {
-        $('#startdate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
-        $('#enddate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+        $("#viz_startdate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            altFormat: "yy-mm-dd",
+            altField: "#startdate",
+            numberOfMonths: 1,
+                  onClose: function( selectedDate ) {
+                    $( "#viz_enddate" ).datepicker( "option", "minDate", selectedDate );
+                  }
+        }, $.datepicker.regional['<?php echo $language_code;?>']);
+        $("#viz_enddate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            altFormat: "yy-mm-dd",
+            altField: "#enddate",
+            numberOfMonths: 1,
+                  onClose: function( selectedDate ) {
+                    $( "#viz_startdate" ).datepicker( "option", "maxDate", selectedDate );
+                  }
+        }, $.datepicker.regional['<?php echo $language_code;?>']);
         
-        $('#startdate').change(function() {getLeaveLength();});
-        $('#enddate').change(function() {getLeaveLength();});
+        //Force decimal separator whatever the locale is
+        $( "#days" ).keyup(function() {
+            var value = $("#days").val();
+            value = value.replace(",", ".");
+            $("#days").val(value);
+        });
+        
+        $('#viz_startdate').change(function() {getLeaveLength();});
+        $('#viz_enddate').change(function() {getLeaveLength();});
         $('#startdatetype').change(function() {getLeaveLength();});
         $('#enddatetype').change(function() {getLeaveLength();});
         $('#type').change(function() {checkDuration();});
@@ -220,7 +251,5 @@ $this->lang->load('status', $language);?>
         $("#duration").keyup(function() {
             checkDuration();
         });
-        
-        //getLeaveLength();
     });
 </script>

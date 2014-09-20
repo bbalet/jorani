@@ -141,8 +141,8 @@ echo $date->format(lang('global_date_format'));
                   $('#noentitleddays').remove();
                   myRow = '<tr data-id="' + id + '">' +
                             '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>' +
-                            '<td>' + $('#startdate').val() + '</td>' +
-                            '<td>' + $('#enddate').val() + '</td>' +
+                            '<td>' + $('#viz_startdate').val() + '</td>' +
+                            '<td>' + $('#viz_enddate').val() + '</td>' +
                             '<td><span id="days' + id + '">' + days + '</span> &nbsp; ' +
                             '<a href="#" onclick="Javascript:incdec(' + id + ', \'decrease\');"><i class="icon-minus"></i></a>' +
                             '&nbsp; <a href="#" onclick="Javascript:incdec(' + id + ', \'increase\');"><i class="icon-plus"></i></a></td>' +

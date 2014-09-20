@@ -4,7 +4,7 @@ LMS is designed to provide simple leave and overtime request workflows for small
 ## Informations / getting help
 
 * Official website : http://www.leave-management-system.org/
-* Google group : https://groups.google.com/forum/?hl=fr#!forum/lms-users
+* Google group : https://groups.google.com/forum/?hl=en#!forum/lms-users
 * G+ : https://plus.google.com/+LeavemanagementsystemOrganization/posts
 * FB : https://www.facebook.com/lmsoss
 * Tweeter : https://twitter.com/LeaveMS
@@ -76,8 +76,7 @@ We thank the following open source projects for the components used by LMS:
 #### Frontend
 
 * bootstrap 2.3
-* JQuery 1.x
-* Datepicker https://github.com/eternicode/bootstrap-datepicker
+* JQuery 1.x and JQuery-UI
 * Calendar http://arshaw.com/fullcalendar/
 * Datatable https://datatables.net/
 * RSA implementation https://github.com/travist/jsencrypt

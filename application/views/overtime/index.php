@@ -19,7 +19,8 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('overtime', $language);
 $this->lang->load('datatable', $language);
-?>
+$this->lang->load('status', $language);
+$this->lang->load('global', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -66,9 +67,12 @@ $(document).ready(function() {
             <a href="<?php echo base_url();?>overtime/reject/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
-        <td><?php echo $requests_item['date']; ?></td>
+        <td><?php 
+$date = new DateTime($requests_item['date']);
+echo $date->format(lang('global_date_format'));
+?></td>
         <td><?php echo $requests_item['duration']; ?></td>
-        <td><?php echo $requests_item['status_label']; ?></td>
+        <td><?php echo lang($requests_item['status_label']); ?></td>
         
     </tr>
 <?php endforeach ?>

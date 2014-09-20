@@ -88,12 +88,12 @@ class Extra extends CI_Controller {
     public function view($id) {
         $this->auth->check_is_granted('view_extra');
         $data = $this->getUserContext();
-        $data['leave'] = $this->overtime_model->get_extra($id);
+        $data['extra'] = $this->overtime_model->get_extra($id);
         $this->load->model('status_model');
-        if (empty($data['leave'])) {
+        if (empty($data['extra'])) {
             show_404();
         }
-        $data['leave']['status_label'] = $this->status_model->get_label($data['leave']['status']);
+        $data['extra']['status_label'] = $this->status_model->get_label($data['extra']['status']);
         $data['title'] = lang('extra_view_hmtl_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -140,16 +140,16 @@ class Extra extends CI_Controller {
     public function edit($id) {
         $this->auth->check_is_granted('edit_extra');
         $data = $this->getUserContext();
-        $data['leave'] = $this->overtime_model->get_extra($id);
+        $data['extra'] = $this->overtime_model->get_extra($id);
         //Check if exists
-        if (empty($data['leave'])) {
+        if (empty($data['extra'])) {
             show_404();
         }
         //If the user is not its own manager and if the leave is 
         //already requested, the employee can't modify it
         if (!$this->is_hr) {
             if (($this->session->userdata('manager') != $this->user_id) &&
-                    $data['leave']['status'] != 1) {
+                    $data['extra']['status'] != 1) {
                 log_message('error', 'User #' . $this->user_id . ' illegally tried to edit overtime request #' . $id);
                 $this->session->set_flashdata('msg', lang('extra_edit_msg_error'));
                 redirect('extra');

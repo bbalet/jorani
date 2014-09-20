@@ -79,7 +79,7 @@ $(document).ready(function() {
             </tr>
         </tbody>
     </table>
-	</div>
+    </div>
 </div>
 
 <div class="row-fluid">
@@ -88,7 +88,8 @@ $(document).ready(function() {
 
 <div class="row-fluid">
     <div class="span3">
-      <input type="input" name="todate" id="todate" />
+      <input type="input" name="viz_todate" id="viz_todate" />
+      <input type="hidden" name="todate" id="todate" />
     </div>
     <div class="span3">
       <a href="<?php echo base_url();?>database/purge" class="btn btn-danger"><i class="icon-trash icon-white"></i>&nbsp; <?php echo lang('database_index_button_purge');?></a>
@@ -96,9 +97,9 @@ $(document).ready(function() {
     <div class="span6">&nbsp;</div>
 </div>
 
-<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
-<link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="<?php echo base_url();?>assets/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-langs.min.js" type="text/javascript"></script>
 
 <div id="frmConfirmPurge" class="modal hide fade">
@@ -121,7 +122,12 @@ $(document).ready(function() {
 $(document).ready(function() {
 
     $("#frmConfirmPurge").alert();
-    $('#todate').datepicker({format: 'yyyy-mm-dd', autoclose: true});
+    $("#viz_todate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            altFormat: "yy-mm-dd",
+            altField: "#date"
+        }, $.datepicker.regional['<?php echo $language_code;?>']);
     
     //var start = moment($('#startdate').val());
 

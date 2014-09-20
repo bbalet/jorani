@@ -19,20 +19,21 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('leaves', $language);
 $this->lang->load('status', $language);
-?>
+$this->lang->load('calendar', $language);
+$this->lang->load('global', $language);?>
 
 <h2><?php echo lang('leaves_view_title');?><?php echo $leave['id']; ?></h2>
 
     <label for="startdate"><?php echo lang('leaves_view_field_start');?></label>
-    <input type="input" name="startdate" value="<?php echo $leave['startdate']; ?>" readonly />
+    <input type="input" name="startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" readonly />
     <select name="startdatetype" readonly>
-        <option selected><?php echo $leave['startdatetype']; ?></option>
+        <option selected><?php echo lang($leave['startdatetype']); ?></option>
     </select><br />
     
     <label for="enddate"><?php echo lang('leaves_view_field_end');?></label>
-    <input type="input" name="enddate"  value="<?php echo $leave['enddate']; ?>" readonly />
+    <input type="input" name="enddate"  value="<?php $date = new DateTime($leave['enddate']); echo $date->format(lang('global_date_format'));?>" readonly />
     <select name="enddatetype" readonly>
-        <option selected><?php echo $leave['enddatetype']; ?></option>
+        <option selected><?php echo lang($leave['enddatetype']); ?></option>
     </select><br />
     
     <label for="duration"><?php echo lang('leaves_view_field_duration');?></label>

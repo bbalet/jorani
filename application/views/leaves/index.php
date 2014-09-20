@@ -19,7 +19,9 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('leaves', $language);
 $this->lang->load('datatable', $language);
-$this->lang->load('status', $language);?>
+$this->lang->load('status', $language);
+$this->lang->load('calendar', $language);
+$this->lang->load('global', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -54,7 +56,11 @@ $(document).ready(function() {
         </tr>
     </thead>
     <tbody>
-<?php foreach ($leaves as $leaves_item): ?>
+<?php foreach ($leaves as $leaves_item): 
+    $date = new DateTime($leaves_item['startdate']);
+    $startdate = $date->format(lang('global_date_format'));
+    $date = new DateTime($leaves_item['enddate']);
+    $enddate = $date->format(lang('global_date_format'));?>
     <tr>
         <td>
             <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><?php echo $leaves_item['id']; ?></a>
@@ -69,8 +75,8 @@ $(document).ready(function() {
                 <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
             </div>
         </td>
-        <td><?php echo $leaves_item['startdate'] . ' / ' . $leaves_item['startdatetype']; ?></td>
-        <td><?php echo $leaves_item['enddate'] . ' / ' . $leaves_item['enddatetype']; ?></td>
+        <td><?php echo $startdate . ' (' . lang($leaves_item['startdatetype']). ')'; ?></td>
+        <td><?php echo $enddate . ' (' . lang($leaves_item['enddatetype']) . ')'; ?></td>
         <td><?php echo $leaves_item['cause']; ?></td>
         <td><?php echo $leaves_item['duration']; ?></td>
         <td><?php echo $leaves_item['type_label']; ?></td>

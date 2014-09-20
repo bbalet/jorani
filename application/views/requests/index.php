@@ -19,8 +19,8 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('requests', $language);
 $this->lang->load('datatable', $language);
-$this->lang->load('global', $language);
-?>
+$this->lang->load('calendar', $language);
+$this->lang->load('global', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -58,7 +58,11 @@ $(document).ready(function() {
         </tr>
     </thead>
     <tbody>
-<?php foreach ($requests as $requests_item): ?>
+<?php foreach ($requests as $requests_item):
+    $date = new DateTime($requests_item['startdate']);
+    $startdate = $date->format(lang('global_date_format'));
+    $date = new DateTime($requests_item['enddate']);
+    $enddate = $date->format(lang('global_date_format'));?>
     <tr>
         <td>
             <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
@@ -72,8 +76,8 @@ $(document).ready(function() {
             </div>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
-        <td><?php echo $requests_item['startdate'] . ' / ' . $requests_item['startdatetype']; ?></td>
-        <td><?php echo $requests_item['enddate'] . ' / ' . $requests_item['enddatetype']; ?></td>
+        <td><?php echo $startdate . ' (' . lang($requests_item['startdatetype']). ')'; ?></td>
+        <td><?php echo $enddate . ' (' . lang($requests_item['enddatetype']) . ')'; ?></td>
         <td><?php echo $requests_item['duration']; ?></td>
         <td><?php echo $requests_item['type_label']; ?></td>
         

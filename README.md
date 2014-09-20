@@ -11,7 +11,7 @@ LMS is designed to provide simple leave and overtime request workflows for small
 
 ## Status
 
-This project is being tested however some users have gone live. An online demo is available here : http://demo.leave-management-system.org/
+This project is stable and ready for production. An online demo is available here : http://demo.leave-management-system.org/
 Use bbalet / bbalet for login / password. Be nice and don't screw up the data of the demo.
 
 ## Features
@@ -31,7 +31,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 
 ## Installation
 
-See <code>/docs/install/README.md</code> for advanced configuration. In a nutshell :
+[See the installation instructions](docs/install/README.md) for advanced configuration. In a nutshell :
 * Download or clone LMS.
 * Upload the content of this folder on your server (in <code>/var/www/...</code>).
 * Create a database with <code>/sql/lms.sql</code> script.
@@ -53,6 +53,7 @@ See <code>/docs/install/README.md</code> for advanced configuration. In a nutshe
 
 * Suggest ideas, declare bugs with Github's issue tracking system.
 * Translate the software in your language.
+* Code enhancement requests declared in Github's issue tracking system.
 
 ## Credits
 

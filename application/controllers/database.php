@@ -79,10 +79,26 @@ class Database extends CI_Controller {
         
         $data['dayoffs_count'] = $this->dayoffs_model->count();
         $data['entitleddays_count'] = $this->entitleddays_model->count();
-        $data['history_users_count'] = $this->history_model->count('users');
         $data['leaves_count'] = $this->leaves_model->count();
         $data['overtime_count'] = $this->overtime_model->count();
-        $data['time_count'] = ''; //$this->time_model->count();
+        
+        if ($this->config->item('enable_history') == true) {
+            $data['contracts_history_count'] = $this->history_model->count('contracts');
+            $data['entitleddays_history_count'] = $this->history_model->count('entitleddays');
+            $data['organization_history_count'] = $this->history_model->count('organization');
+            $data['overtime_history_count'] = $this->history_model->count('overtime');
+            $data['positions_history_count'] = $this->history_model->count('positions');
+            $data['types_history_count'] = $this->history_model->count('types');
+            $data['users_history_count'] = $this->history_model->count('users');
+        }
+        
+        if ($this->config->item('enable_time') == true) {
+            $data['time_count'] = $this->time_model->count();
+            if ($this->config->item('enable_history') == true) {
+                $data['activities_employee_history_count'] = $this->history_model->count('activities_employee');
+                $data['activities_history_count'] = $this->history_model->count('activities');
+            }
+        }
         
         $data['title'] = lang('database_index_title');
         $this->load->view('templates/header', $data);

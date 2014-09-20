@@ -36,65 +36,154 @@ $(document).ready(function() {
 </script>
 <?php } ?>
 
-<h1><?php echo lang('database_index_title');?></h1>
-
-    <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover" id="contracts" width="100%">
-        <thead>
-            <tr>
-                <th><?php echo lang('database_index_thead_select');?></th>
-                <th><?php echo lang('database_index_thead_rows');?></th>
-                <th><?php echo lang('database_index_thead_table_name');?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input type="checkbox" id="" name=""></td>
-                <td><?php echo $leaves_count; ?></td>
-                <td><?php echo lang('database_index_table_leaves_desc');?></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="" name=""></td>
-                <td><?php echo $overtime_count; ?></td>
-                <td><?php echo lang('database_index_table_overtime_desc');?></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="" name=""></td>
-                <td><?php echo $dayoffs_count; ?></td>
-                <td><?php echo lang('database_index_table_dayoffs_desc');?></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="" name=""></td>
-                <td><?php echo $history_users_count; ?></td>
-                <td><?php echo lang('database_index_table_history_users_desc');?></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="" name=""></td>
-                <td><?php echo $entitleddays_count; ?></td>
-                <td><?php echo lang('database_index_table_entitleddays_desc');?></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="" name=""></td>
-                <td><?php echo $time_count; ?></td>
-                <td><?php echo lang('database_index_table_time_desc');?></td>
-            </tr>
-        </tbody>
-    </table>
+<h2><?php echo lang('database_index_title');?></h2>
     </div>
 </div>
+
+<div class="row-fluid">
+    <div class="span12">
+        <h3><?php echo lang('database_index_title');?></h3>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover" id="contracts" width="100%">
+            <thead>
+                <tr>
+                    <th><?php echo lang('database_index_thead_select');?></th>
+                    <th><?php echo lang('database_index_thead_rows');?></th>
+                    <th><?php echo lang('database_index_thead_table_name');?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $leaves_count; ?></td>
+                    <td><?php echo lang('database_index_table_leaves_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $overtime_count; ?></td>
+                    <td><?php echo lang('database_index_table_overtime_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $dayoffs_count; ?></td>
+                    <td><?php echo lang('database_index_table_dayoffs_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $entitleddays_count; ?></td>
+                    <td><?php echo lang('database_index_table_entitleddays_desc');?></td>
+                </tr>
+                <?php if ($this->config->item('enable_time') == true) { ?>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $activities_employee_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $activities_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $time_count; ?></td>
+                    <td><?php echo lang('database_index_table_time_desc');?></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<?php if ($this->config->item('enable_history') == true) { ?>
+<div class="row-fluid">
+    <div class="span12">
+        <h3><?php echo lang('database_index_title');?></h3>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover" id="contracts" width="100%">
+            <thead>
+                <tr>
+                    <th><?php echo lang('database_index_thead_select');?></th>
+                    <th><?php echo lang('database_index_thead_rows');?></th>
+                    <th><?php echo lang('database_index_thead_table_name');?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $contracts_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $entitleddays_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $organization_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $overtime_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $positions_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $types_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $users_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <?php if ($this->config->item('enable_time') == true) { ?>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $activities_employee_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="" name=""></td>
+                    <td><?php echo $activities_history_count; ?></td>
+                    <td><?php echo lang('database_index_table_history_users_desc');?></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<?php } ?>
 
 <div class="row-fluid">
     <div class="span12">&nbsp;</div>
 </div>
 
 <div class="row-fluid">
-    <div class="span3">
+    <div class="span5">
+      <label for="viz_todate">eeee<?php echo lang('users_create_field_lastname');?>
       <input type="input" name="viz_todate" id="viz_todate" />
-      <input type="hidden" name="todate" id="todate" />
+      <input type="hidden" name="todate" id="todate" /></label>
     </div>
     <div class="span3">
       <a href="<?php echo base_url();?>database/purge" class="btn btn-danger"><i class="icon-trash icon-white"></i>&nbsp; <?php echo lang('database_index_button_purge');?></a>
     </div>
-    <div class="span6">&nbsp;</div>
+    <div class="span4">&nbsp;</div>
 </div>
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">

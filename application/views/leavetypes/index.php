@@ -21,7 +21,7 @@ $this->lang->load('global', $language);
 $this->lang->load('leavetypes', $language);?>
 
 <h1><?php echo lang('hr_leaves_type_title');?> &nbsp;
-<a href="http://www.leave-management-system.org/edit-leave-types.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a>
+<a href="<?php echo lang('global_link_doc_page_edit_leave_type');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
 </h1>
 
 <?php if($this->session->flashdata('msg')){ ?>

@@ -208,12 +208,16 @@ class Extra extends CI_Controller {
         $usr_lang = $this->language->code2language($manager['language']);
         $this->lang->load('email', $usr_lang);
 
+        $this->lang->load('global', $usr_lang);
+        $date = new DateTime($this->input->post('date'));
+        $startdate = $date->format(lang('global_date_format'));
+        
         $this->load->library('parser');
         $data = array(
             'Title' => lang('email_extra_request_validation_title'),
             'Firstname' => $this->session->userdata('firstname'),
             'Lastname' => $this->session->userdata('lastname'),
-            'Date' => $this->input->post('date'),
+            'Date' => $startdate,
             'Duration' => $this->input->post('duration'),
             'Cause' => $this->input->post('cause'),
             'UrlAccept' => $acceptUrl,

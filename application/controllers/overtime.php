@@ -171,13 +171,17 @@ class Overtime extends CI_Controller {
         $this->load->library('language');
         $usr_lang = $this->language->code2language($employee['language']);
         $this->lang->load('email', $usr_lang);
+        
+        $this->lang->load('global', $usr_lang);
+        $date = new DateTime($extra['startdate']);
+        $startdate = $date->format(lang('global_date_format'));
 
         $this->load->library('parser');
         $data = array(
             'Title' => lang('email_overtime_request_validation_title'),
             'Firstname' => $employee['firstname'],
             'Lastname' => $employee['lastname'],
-            'Date' => $extra['date'],
+            'Date' => $startdate,
             'Duration' => $extra['duration'],
             'Cause' => $extra['cause']
         );

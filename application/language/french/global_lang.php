@@ -21,3 +21,15 @@ $lang['global_msg_error_forbidden'] = 'L\'opération (%s) n\'est pas autorisée'
 
 $lang['global_date_format'] = 'd/m/Y';
 
+//Links to documentation
+$lang['global_link_doc_page_calendar_organization'] = 'http://www.leave-management-system.org/page-calendar-organization.html';
+$lang['global_link_doc_page_my_summary'] = 'http://www.leave-management-system.org/page-my-summary.html';
+$lang['global_link_doc_page_request_leave'] = 'http://www.leave-management-system.org/how-to-request-a-leave.html';
+$lang['global_link_doc_page_edit_leave_type'] = 'http://www.leave-management-system.org/edit-leave-types.html';
+$lang['global_link_doc_page_hr_organization'] = 'http://www.leave-management-system.org/page-describe-organization.html';
+$lang['global_link_doc_page_reset_password'] = 'http://www.leave-management-system.org/how-to-change-my-password.html';
+$lang['global_link_doc_page_leave_validation'] = 'http://www.leave-management-system.org/page-leave-requests-validation.html';
+$lang['global_link_doc_page_login'] = 'http://www.leave-management-system.org/page-login-to-the-application.html';
+$lang['global_link_doc_page_create_user'] = 'http://www.leave-management-system.org/page-create-a-new-user.html';
+$lang['global_link_doc_page_list_users'] = 'http://www.leave-management-system.org/page-list-of-users.html';
+$lang['global_link_doc_page_list_employees'] = 'http://www.leave-management-system.org/page-list-of-employees.html';

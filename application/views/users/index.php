@@ -18,7 +18,8 @@
 
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('users', $language);
-$this->lang->load('datatable', $language);?>
+$this->lang->load('datatable', $language);
+$this->lang->load('global', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -38,7 +39,7 @@ $(document).ready(function() {
 <?php } ?>
         
 <h1><?php echo lang('users_index_title');?> &nbsp;
-<a href="http://www.leave-management-system.org/page-list-of-users.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a>
+<a href="<?php echo lang('global_link_doc_page_list_users');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
 </h1>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">

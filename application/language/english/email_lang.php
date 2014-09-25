@@ -35,4 +35,6 @@ $lang['email_overtime_request_validation_title'] = 'Overtime Request';
 
 $lang['email_extra_request_reject_subject'] = '[LMS] Your overtime request from ';
 $lang['email_extra_request_validation_title'] = 'Overtime Request';
-        
+
+$lang['email_password_forgotten_subject'] = '[LMS] Your password has been reset';
+$lang['email_password_forgotten_title'] = 'Your password has been reset';

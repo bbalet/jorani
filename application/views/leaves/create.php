@@ -22,7 +22,7 @@ $this->lang->load('status', $language);
 $this->lang->load('global', $language);?>
 
 <h2><?php echo lang('leaves_create_title');?> &nbsp;
-<a href="http://www.leave-management-system.org/how-to-request-a-leave.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a>
+<a href="<?php echo lang('global_link_doc_page_request_leave');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
 </h2>
 
 <div class="row-fluid">
@@ -36,7 +36,7 @@ $this->lang->load('global', $language);?>
     <input type="input" name="viz_startdate" id="viz_startdate" value="<?php echo set_value('startdate'); ?>" />
     <input type="hidden" name="startdate" id="startdate" />
     <select name="startdatetype" id="startdatetype">
-        <option value="Morning"><?php echo lang('leaves_date_type_morning');?></option>
+        <option value="Morning" selected><?php echo lang('leaves_date_type_morning');?></option>
         <option value="Afternoon"><?php echo lang('leaves_date_type_afternoon');?></option>
     </select><br />
     
@@ -45,7 +45,7 @@ $this->lang->load('global', $language);?>
     <input type="hidden" name="enddate" id="enddate" />
     <select name="enddatetype" id="enddatetype">
         <option value="Morning"><?php echo lang('leaves_date_type_morning');?></option>
-        <option value="Afternoon"><?php echo lang('leaves_date_type_afternoon');?></option>
+        <option value="Afternoon" selected><?php echo lang('leaves_date_type_afternoon');?></option>
     </select><br />
     
     <label for="type" required><?php echo lang('leaves_create_field_type');?></label>

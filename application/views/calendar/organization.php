@@ -22,7 +22,7 @@ $this->lang->load('status', $language);
 $this->lang->load('global', $language);?>
 
 <h1><?php echo lang('calendar_organization_title');?> &nbsp;
-<a href="http://www.leave-management-system.org/page-calendar-organization.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a></h1>
+<a href="<?php echo lang('global_link_doc_page_calendar_organization');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h1>
 
 <div class="row-fluid">
     <div class="span4">

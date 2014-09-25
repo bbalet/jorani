@@ -77,9 +77,11 @@ echo $date->format(lang('global_date_format'));
     <div class="span12">&nbsp;</div>
 </div>
 
+<!-- TCPDF has some problems with UTF-8 and Unicode. Further tests need to be done
 <div class="row-fluid">
     <div class="span2">
       <a href="<?php echo base_url();?>users/pdf_myprofile" class="btn btn-primary" target="_blank"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('users_myprofile_button_export');?></a>
     </div>
     <div class="span10">&nbsp;</div>
 </div>
+//-->

@@ -250,13 +250,19 @@ class Leaves extends CI_Controller {
         $usr_lang = $this->language->code2language($manager['language']);
         $this->lang->load('email', $usr_lang);
 
+        $this->lang->load('global', $usr_lang);
+        $date = new DateTime($this->input->post('startdate'));
+        $startdate = $date->format(lang('global_date_format'));
+        $date = new DateTime($this->input->post('enddate'));
+        $enddate = $date->format(lang('global_date_format'));
+        
         $this->load->library('parser');
         $data = array(
             'Title' => lang('email_leave_request_title'),
             'Firstname' => $this->session->userdata('firstname'),
             'Lastname' => $this->session->userdata('lastname'),
-            'StartDate' => $this->input->post('startdate'),
-            'EndDate' => $this->input->post('enddate'),
+            'StartDate' => $startdate,
+            'EndDate' => $enddate,
             'Type' => $this->types_model->get_label($this->input->post('type')),
             'Reason' => $this->input->post('cause'),
             'UrlAccept' => $acceptUrl,

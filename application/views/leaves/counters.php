@@ -21,7 +21,7 @@ $this->lang->load('leaves', $language);
 $this->lang->load('global', $language);?>
 
 <h1><?php echo lang('leaves_summary_title');?> &nbsp;
-<a href="http://www.leave-management-system.org/page-my-summary.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a></h1>
+<a href="<?php echo lang('global_link_doc_page_my_summary');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h1>
 
 <table class="table table-bordered table-hover">
 <thead>

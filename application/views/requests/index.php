@@ -41,7 +41,7 @@ $(document).ready(function() {
 <?php } ?>
 
 <h1><?php echo lang('requests_index_title');?>&nbsp;
-<a href="http://www.leave-management-system.org/page-leave-requests-validation.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a>
+<a href="<?php echo lang('global_link_doc_page_leave_validation');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
 </h2>
 
 <p><?php echo lang('requests_index_description');?></p>

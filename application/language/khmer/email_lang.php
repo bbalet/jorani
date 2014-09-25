@@ -35,4 +35,6 @@ $lang['email_overtime_request_validation_title'] = 'ការស្នើសុ�
 
 $lang['email_extra_request_reject_subject'] = '[LMS] ការស្នើសុំម៉ោងបន្ថែមមកពី ';
 $lang['email_extra_request_validation_title'] = 'ការស្នើសុំម៉ោងបន្ថែម';
-        
+
+$lang['email_password_forgotten_subject'] = '[LMS] លេខសំងាត់របស់អ្នកត្រូវបានអនុញ្ញាតិ';
+$lang['email_password_forgotten_title'] = 'លេខសំងាត់របស់អ្នកត្រូវបានអនុញ្ញាតិ';

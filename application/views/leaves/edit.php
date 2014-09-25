@@ -23,7 +23,7 @@ $this->lang->load('status', $language);
 $this->lang->load('global', $language);?>
 
 <h2><?php echo lang('leaves_edit_title');?><?php echo $leave['id']; ?> &nbsp;
-<a href="http://www.leave-management-system.org/how-to-request-a-leave.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a>
+<a href="<?php echo lang('global_link_doc_page_request_leave');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
 </h2>
 
 <div class="row-fluid">

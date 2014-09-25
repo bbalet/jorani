@@ -171,13 +171,19 @@ class Requests extends CI_Controller {
         $usr_lang = $this->language->code2language($employee['language']);
         $this->lang->load('email', $usr_lang);
 
+        $this->lang->load('global', $usr_lang);
+        $date = new DateTime($leave['startdate']);
+        $startdate = $date->format(lang('global_date_format'));
+        $date = new DateTime($leave['enddate']);
+        $enddate = $date->format(lang('global_date_format'));
+
         $this->load->library('parser');
         $data = array(
             'Title' => lang('email_leave_request_validation_title'),
             'Firstname' => $employee['firstname'],
             'Lastname' => $employee['lastname'],
-            'StartDate' => $leave['startdate'],
-            'EndDate' => $leave['enddate']
+            'StartDate' => $startdate,
+            'EndDate' => $enddate
         );
         
         $message = "";

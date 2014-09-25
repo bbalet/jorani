@@ -23,7 +23,7 @@ $this->lang->load('session', $language);
 $this->lang->load('global', $language);?>
 
 <h2><?php echo lang('session_login_title');?> &nbsp;
-<a href="http://www.leave-management-system.org/page-login-to-the-application.html" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank"><i class="icon-question-sign"></i></a></h2>
+<a href="<?php echo lang('global_link_doc_page_login');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h2>
 
 <?php if($this->session->flashdata('msg')){ ?>
 <div class="alert fade in" id="flashbox">
@@ -68,7 +68,7 @@ $languages = $CI->language->nativelanguages($this->config->item('languages'));?>
     <br />
     <button id="cmdForgetPassword" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
     
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 

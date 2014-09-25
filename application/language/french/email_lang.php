@@ -35,3 +35,6 @@ $lang['email_overtime_request_validation_title'] = 'Déclaration heure suppléme
 
 $lang['email_extra_request_reject_subject'] = '[LMS] Déclaration heure supplémentaire de ';
 $lang['email_extra_request_validation_title'] = 'Déclaration heure supplémentaire';
+
+$lang['email_password_forgotten_subject'] = '[LMS] Votre mot de passe a été modifié';
+$lang['email_password_forgotten_title'] = 'Votre mot de passe a été modifié';

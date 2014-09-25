@@ -192,19 +192,19 @@ class Session extends CI_Controller {
             //Send an e-mail to the user requesting a new password
             $this->load->library('parser');
             $data = array(
-                'Title' => lang('email_user_create_title'),
+                'Title' => lang('email_password_forgotten_title'),
                 'BaseURL' => base_url(),
                 'Firstname' => $user->firstname,
                 'Lastname' => $user->lastname,
                 'Login' => $user->login,
                 'Password' => $password
             );
-            $message = $this->parser->parse('emails/' . $user->language . '/new_user', $data, TRUE);
+            $message = $this->parser->parse('emails/' . $user->language . '/password_forgotten', $data, TRUE);
             //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
 
             $this->email->from('do.not@reply.me', 'LMS');
             $this->email->to($user->email);
-            $this->email->subject(lang('email_password_reset_subject'));
+            $this->email->subject(lang('email_password_forgotten_subject'));
             $this->email->message($message);
             $this->email->send();
             echo "OK";

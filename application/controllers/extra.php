@@ -201,9 +201,6 @@ class Extra extends CI_Controller {
         //Send an e-mail to the manager
         //See: http://www.codeigniter.fr/user_guide/libraries/email.html
         $this->load->library('email');
-        $config = $this->settings_model->get_mail_config();            
-        $this->email->initialize($config);
-        
         $this->load->library('language');
         $usr_lang = $this->language->code2language($manager['language']);
         $this->lang->load('email', $usr_lang);
@@ -224,7 +221,9 @@ class Extra extends CI_Controller {
             'UrlReject' => $rejectUrl
         );
         $message = $this->parser->parse('emails/' . $manager['language'] . '/overtime', $data, TRUE);
-        //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
+        if ($this->email->mailer_engine== 'phpmailer') {
+            $this->email->phpmailer->Encoding = 'quoted-printable';
+        }
 
         $this->email->from('do.not@reply.me', 'LMS');
         $this->email->to($manager['email']);

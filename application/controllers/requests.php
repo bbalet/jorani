@@ -164,9 +164,6 @@ class Requests extends CI_Controller {
 
         //Send an e-mail to the employee
         $this->load->library('email');
-        $config = $this->settings_model->get_mail_config();            
-        $this->email->initialize($config);
-        
         $this->load->library('language');
         $usr_lang = $this->language->code2language($employee['language']);
         $this->lang->load('email', $usr_lang);
@@ -194,7 +191,9 @@ class Requests extends CI_Controller {
             $message = $this->parser->parse('emails/' . $employee['language'] . '/request_rejected', $data, TRUE);
             $this->email->subject(lang('email_leave_request_reject_subject'));
         }
-        //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
+        if ($this->email->mailer_engine== 'phpmailer') {
+            $this->email->phpmailer->Encoding = 'quoted-printable';
+        }
 
         $this->email->from('do.not@reply.me', 'LMS');
         $this->email->to($employee['email']);

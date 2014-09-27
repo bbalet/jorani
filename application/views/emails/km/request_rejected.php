@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        សូមជំរាបមកដល់{Firstname}{Lasname},<br />
+        សូមជំរាបមកដល់ {Firstname} {Lastname},<br />
         <br />
         ការចាកចេញពីទីនេះអ្នកបានស្នើសុំត្រូវបានទទួលយកខាងក្រោមសេចក្ដីលម្អិត:
         <table border="0">

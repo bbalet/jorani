@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        សូមជំរាបមកដល់{Firstname}{Lasname},<br />
+        សូមជំរាបមកដល់ {Firstname} {Lastname},<br />
         <br />
         បញ្ជីសំណើបន្ថែមម៉ោងរបស់លោកអ្នកត្រូវបានទទូលយក។ ខាងក្រោមជាពត៏មានលម្អិត:
         <table border="0">

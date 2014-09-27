@@ -173,24 +173,31 @@ class Users extends CI_Controller {
         $obj_pdf->SetCreator(PDF_CREATOR);
         $title = 'LMS  -  ' . lang('users_myprofile_html_title');
         $obj_pdf->SetTitle($title);
+        $obj_pdf->SetAuthor($this->fullname);
+        $obj_pdf->SetSubject('LMS Report');
+        $obj_pdf->SetKeywords('lms, hr, hrm, employee, information, details, personnal, report');
         $obj_pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $title, '');
         $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
         $obj_pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-        $obj_pdf->SetDefaultMonospacedFont('helvetica');
+        //$obj_pdf->SetDefaultMonospacedFont('freeserif');
         $obj_pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
         $obj_pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
         $obj_pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
         $obj_pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-        $obj_pdf->SetFont('helvetica', '', 9);
-        $obj_pdf->setFontSubsetting(false);
+        //$obj_pdf->SetFont('helvetica', '', 9);
+        //$obj_pdf->SetDefaultMonospacedFont('freemono');
+        $obj_pdf->SetDefaultMonospacedFont('khmeros');
+        $obj_pdf->SetFont('khmeros','',12);
+        $obj_pdf->setFontSubsetting(true);
         $obj_pdf->AddPage();
         ob_start();
 
         $this->load->view('templates/pdf_header', $data);
         $this->load->view('users/pdf_myprofile', $data);
         $this->load->view('templates/pdf_footer');
-        
         $content = ob_get_contents();
+        //$content = iconv("UTF-8", "ISO-8859-1", $content);
+        
         ob_end_clean();
         $obj_pdf->writeHTML($content, true, false, true, false, '');
         $obj_pdf->Output('lms_myprofile.pdf', 'I');
@@ -303,9 +310,6 @@ class Users extends CI_Controller {
                 $this->load->model('settings_model');
                 $user = $this->users_model->get_users($id);
                 $this->load->library('email');
-                $config = $this->settings_model->get_mail_config();            
-                $this->email->initialize($config);
-                
                 $this->load->library('language');
                 $usr_lang = $this->language->code2language($user['language']);
                 $this->lang->load('email', $usr_lang);
@@ -317,7 +321,9 @@ class Users extends CI_Controller {
                     'Lastname' => $user['lastname']
                 );
                 $message = $this->parser->parse('emails/' . $user['language'] . '/password_reset', $data, TRUE);
-                //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
+                if ($this->email->mailer_engine== 'phpmailer') {
+                    $this->email->phpmailer->Encoding = 'quoted-printable';
+                }
 
                 $this->email->from('do.not@reply.me', 'LMS');
                 $this->email->to($user['email']);
@@ -380,9 +386,6 @@ class Users extends CI_Controller {
             //Send an e-mail to the user so as to inform that its account has been created
             $this->load->model('settings_model');
             $this->load->library('email');
-            $config = $this->settings_model->get_mail_config();            
-            $this->email->initialize($config);
-            
             $this->load->library('language');
             $usr_lang = $this->language->code2language($this->input->post('language'));
             $this->lang->load('email', $usr_lang);
@@ -397,7 +400,9 @@ class Users extends CI_Controller {
                 'Password' => $password
             );
             $message = $this->parser->parse('emails/' . $this->input->post('language') . '/new_user', $data, TRUE);
-            //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
+            if ($this->email->mailer_engine== 'phpmailer') {
+                $this->email->phpmailer->Encoding = 'quoted-printable';
+            }
 
             $this->email->from('do.not@reply.me', 'LMS');
             $this->email->to($this->input->post('email'));

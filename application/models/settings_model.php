@@ -26,32 +26,6 @@ class Settings_model extends CI_Model {
     }
 
     /**
-     * You can use smtp4test for testing purpose
-     * @return array e-mail configuration
-     */
-    public function get_mail_config() {
-        //TODO : get configuration from DB ?
-        $config['protocol'] = $this->config->item('protocol');
-        $config['useragent'] = $this->config->item('useragent');
-        //$config['mailpath'] = $this->config->item('mailpath');
-        $config['smtp_host'] = $this->config->item('smtp_host');
-        $config['smtp_user'] = $this->config->item('smtp_user');
-        $config['smtp_pass'] = $this->config->item('smtp_pass');
-        $config['_smtp_auth'] = $this->config->item('_smtp_auth');
-        $config['smtp_port'] = $this->config->item('smtp_port');
-        $config['smtp_timeout'] = $this->config->item('smtp_timeout');
-        $config['charset'] = $this->config->item('charset');   //'iso-8859-1'
-        $config['mailtype'] = $this->config->item('mailtype');
-        $config['wordwrap'] = $this->config->item('wordwrap');
-        $config['wrapchars'] = $this->config->item('wrapchars');
-        $config['validate'] = $this->config->item('validate');
-        $config['priority'] = $this->config->item('priority');
-        $config['newline'] = $this->config->item('newline');
-        $config['crlf'] = $this->config->item('crlf');
-        return $config;
-    }
-
-    /**
      * Query a category from the configuration table (return a set of key/value)
      * @param string $category
      * @return type

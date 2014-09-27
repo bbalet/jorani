@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname}{Lastname}ស្នើសុំថែមមួយម៉ោង។ ខាងក្រោមជាពត៏មានលម្អិត :
+        {Firstname} {Lastname} ស្នើសុំថែមមួយម៉ោង។ ខាងក្រោមជាពត៏មានលម្អិត :
         <table border="0">
             <tr>
                 <td>កាលបរិច្ឆេទ &nbsp;</td><td>{Date}</td>

@@ -165,9 +165,6 @@ class Overtime extends CI_Controller {
 
         //Send an e-mail to the employee
         $this->load->library('email');
-        $config = $this->settings_model->get_mail_config();            
-        $this->email->initialize($config);
-        
         $this->load->library('language');
         $usr_lang = $this->language->code2language($employee['language']);
         $this->lang->load('email', $usr_lang);
@@ -194,7 +191,9 @@ class Overtime extends CI_Controller {
             $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_rejected', $data, TRUE);
             $this->email->subject(lang('email_overtime_request_reject_subject'));
         }
-        //$message = mb_convert_encoding($message, "UTF-8");
+        if ($this->email->mailer_engine== 'phpmailer') {
+            $this->email->phpmailer->Encoding = 'quoted-printable';
+        }
         $this->email->from('do.not@reply.me', 'LMS');
         $this->email->to($employee['email']);
         $this->email->message($message);

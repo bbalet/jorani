@@ -394,24 +394,7 @@ $config['enable_time'] = FALSE;
 $config['ga_code'] = '';
 $config['ga_send_userid'] = FALSE;
 
-//E-mail settings
-$config['protocol'] = 'smtp';
-$config['useragent'] = 'CodeIgniter';
-//$config['mailpath'] = '/usr/sbin/sendmail';
-$config['smtp_host'] = 'localhost';
-$config['smtp_user'] = '';
-$config['smtp_pass'] = '';
-$config['_smtp_auth'] = TRUE;
-$config['smtp_port'] = '25';
-$config['smtp_timeout'] = '20';
-$config['charset'] = 'utf-8';   //'iso-8859-1'
-$config['mailtype'] = 'html';
-$config['wordwrap'] = TRUE;
-$config['wrapchars'] = 80;
-$config['validate'] = FALSE;
-$config['priority'] = 3;
-$config['newline'] = "\r\n";
-$config['crlf'] = "\r\n";
+//E-mail settings of the application are now stored into email.php file
 
 //Profiling options
 $config['enable_profiling'] = FALSE;

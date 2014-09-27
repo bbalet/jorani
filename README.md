@@ -37,7 +37,8 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Create a database with <code>/sql/lms.sql</code> script.
 * Create a user with SELECT, INSERT, UPDATE, DELETE, EXECUTE permissions on the database.
 * Update <code>/application/config/database.php</code> according to your database settings.
-* Update the end of <code>/application/config/config.php</code> with your e-mails settings.
+* Update the end of <code>/application/config/email.php</code> with your e-mails settings.
+* Update the end of <code>/application/config/config.php</code> if you want to change the default behaviour.
 * It is recommended to change the private and public RSA keys (in <code>assets/keys</code>).
 * Non working days (weekends and day offs) can be defined on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
 

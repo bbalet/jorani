@@ -181,8 +181,6 @@ class Session extends CI_Controller {
             //Send an email to the user with its login information
             $this->load->model('settings_model');
             $this->load->library('email');
-            $config = $this->settings_model->get_mail_config();            
-            $this->email->initialize($config);         
             $this->load->library('language');
             $this->lang->load('email', $this->language_name);
             
@@ -200,7 +198,9 @@ class Session extends CI_Controller {
                 'Password' => $password
             );
             $message = $this->parser->parse('emails/' . $user->language . '/password_forgotten', $data, TRUE);
-            //$message = iconv(mb_detect_encoding($message, mb_detect_order(), true), "UTF-8", $message);
+            if ($this->email->mailer_engine== 'phpmailer') {
+                $this->email->phpmailer->Encoding = 'quoted-printable';
+            }
 
             $this->email->from('do.not@reply.me', 'LMS');
             $this->email->to($user->email);

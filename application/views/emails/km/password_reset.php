@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>សូមជំរាបមកដល់{Firstname}{Lasname},</p>
+        <p>សូមជំរាបមកដល់ {Firstname} {Lastname},</p>
         <p>ប្រសិនបើអ្នកធ្វើមិនបានទេ សូមទាក់ទងអ្នកគ្រប់គ្រងរបស់អ្នក</p>
     </body>
 </html>

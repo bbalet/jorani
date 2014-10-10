@@ -424,6 +424,48 @@ class Users_model extends CI_Model {
     }
     
     /**
+     * Load the profile of a user
+     * @param type $login user login
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function load_profile($login) {
+        $this->db->from('users');
+        $this->db->where('login', $login);
+        $query = $this->db->get();
+        $row = $query->row();
+        // Password does match stored password.
+        if (((int) $row->role & 1)) {
+            $is_admin = true;
+        } else {
+            $is_admin = false;
+        }
+
+        /*
+          00000001 1  Admin
+          00000100 8  HR Officier / Local HR Manager
+          00001000 16 HR Manager
+          = 00001101 25 Can access to HR functions
+         */
+        if (((int) $row->role & 25)) {
+            $is_hr = true;
+        } else {
+            $is_hr = false;
+        }
+
+        $newdata = array(
+            'login' => $row->login,
+            'id' => $row->id,
+            'firstname' => $row->firstname,
+            'lastname' => $row->lastname,
+            'is_admin' => $is_admin,
+            'is_hr' => $is_hr,
+            'manager' => $row->manager,
+            'logged_in' => TRUE
+        );
+        $this->session->set_userdata($newdata);
+    }
+
+    /**
      * Get the list of employees or one employee
      * @param int $id optional id of one user
      * @return array record of users

@@ -110,8 +110,24 @@ class Session extends CI_Controller {
             $len_salt = strlen($this->session->userdata('salt')) * (-1);
             $password = substr($password, 0, $len_salt);
             
-            //Hash the password passed through the login form and check if it matches the stored password
-            if (!$this->users_model->check_credentials($this->input->post('login'), $password)) {
+            $loggedin = FALSE;
+            if ($this->config->item('ldap_enabled')) {
+                $ldap = ldap_connect($this->config->item('ldap_host'), $this->config->item('ldap_port'));
+                ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
+                set_error_handler(function() { /* ignore errors */ });
+                $basedn = sprintf($this->config->item('ldap_basedn'), $this->input->post('login'));
+                $bind = ldap_bind($ldap, $basedn, $password);
+                restore_error_handler();
+                if ($bind) {
+                    $loggedin = TRUE; 
+                    $this->users_model->load_profile($this->input->post('login'));
+                }
+                ldap_close($ldap);
+            } else {
+                $loggedin = $this->users_model->check_credentials($this->input->post('login'), $password);
+            }
+            
+            if ($loggedin == FALSE) {
                 log_message('error', '{controllers/session/login} Invalid login id or password for user=' . $this->input->post('login'));
                 $this->session->set_flashdata('msg', lang('session_login_flash_bad_credentials'));
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);

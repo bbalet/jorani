@@ -396,6 +396,12 @@ $config['ga_send_userid'] = FALSE;
 
 //E-mail settings of the application are now stored into email.php file
 
+//LDAP configuration
+$config['ldap_enabled'] = FALSE;
+$config['ldap_host'] = '127.0.0.1';
+$config['ldap_port'] = 389;
+$config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';
+
 //Profiling options
 $config['enable_profiling'] = FALSE;
 $config['benchmarks'] = TRUE;

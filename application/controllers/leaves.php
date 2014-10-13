@@ -92,6 +92,7 @@ class Leaves extends CI_Controller {
         $data['summary'] = $this->leaves_model->get_user_leaves_summary($this->user_id);
 
         if (!is_null($data['summary'])) {
+            $this->expires_now();
             $data['title'] = lang('leaves_summary_title');
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
@@ -158,12 +159,16 @@ class Leaves extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $leave_id = $this->leaves_model->set_leaves();
+            $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
                 $this->sendMail($leave_id);
-            }            
-            $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
-            redirect('leaves');
+            }
+            if (isset($_GET['source'])) {
+                redirect($_GET['source']);
+            } else {
+                redirect('leaves');
+            }
         }
     }
     
@@ -214,11 +219,11 @@ class Leaves extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $leave_id = $this->leaves_model->update_leaves($id);
+            $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
                 $this->sendMail($id);
             }
-            $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
             } else {
@@ -228,57 +233,62 @@ class Leaves extends CI_Controller {
     }
     
     /**
-     * Send a leave request email to the manager
+     * Send a leave request email to the manager of the connected employee
      * @param int $id Leave request identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    private function sendMail($id)
-    {
+    private function sendMail($id) {
         $this->load->model('users_model');
         $this->load->model('settings_model');
         $this->load->model('types_model');
         $manager = $this->users_model->get_users($this->session->userdata('manager'));
-        $acceptUrl = base_url() . 'requests/accept/' . $id;
-        $rejectUrl = base_url() . 'requests/reject/' . $id;
 
-        //Send an e-mail to the manager
-        $this->load->library('email');
-        $this->load->library('language');
-        $usr_lang = $this->language->code2language($manager['language']);
-        $this->lang->load('email', $usr_lang);
+        //Test if the manager hasn't been deleted meanwhile
+        if (empty($manager['email'])) {
+            $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_error'));
+        } else {
+            $acceptUrl = base_url() . 'requests/accept/' . $id;
+            $rejectUrl = base_url() . 'requests/reject/' . $id;
 
-        $this->lang->load('global', $usr_lang);
-        $date = new DateTime($this->input->post('startdate'));
-        $startdate = $date->format(lang('global_date_format'));
-        $date = new DateTime($this->input->post('enddate'));
-        $enddate = $date->format(lang('global_date_format'));
-        
-        $this->load->library('parser');
-        $data = array(
-            'Title' => lang('email_leave_request_title'),
-            'Firstname' => $this->session->userdata('firstname'),
-            'Lastname' => $this->session->userdata('lastname'),
-            'StartDate' => $startdate,
-            'EndDate' => $enddate,
-            'Type' => $this->types_model->get_label($this->input->post('type')),
-            'Reason' => $this->input->post('cause'),
-            'UrlAccept' => $acceptUrl,
-            'UrlReject' => $rejectUrl
-        );
-        $message = $this->parser->parse('emails/' . $manager['language'] . '/request', $data, TRUE);
-        if ($this->email->mailer_engine== 'phpmailer') {
-            $this->email->phpmailer->Encoding = 'quoted-printable';
+            //Send an e-mail to the manager
+            $this->load->library('email');
+            $this->load->library('language');
+            $usr_lang = $this->language->code2language($manager['language']);
+            $this->lang->load('email', $usr_lang);
+
+            $this->lang->load('global', $usr_lang);
+            $date = new DateTime($this->input->post('startdate'));
+            $startdate = $date->format(lang('global_date_format'));
+            $date = new DateTime($this->input->post('enddate'));
+            $enddate = $date->format(lang('global_date_format'));
+
+            $this->load->library('parser');
+            $data = array(
+                'Title' => lang('email_leave_request_title'),
+                'Firstname' => $this->session->userdata('firstname'),
+                'Lastname' => $this->session->userdata('lastname'),
+                'StartDate' => $startdate,
+                'EndDate' => $enddate,
+                'Type' => $this->types_model->get_label($this->input->post('type')),
+                'Reason' => $this->input->post('cause'),
+                'UrlAccept' => $acceptUrl,
+                'UrlReject' => $rejectUrl
+            );
+            $message = $this->parser->parse('emails/' . $manager['language'] . '/request', $data, TRUE);
+            if ($this->email->mailer_engine == 'phpmailer') {
+                $this->email->phpmailer->Encoding = 'quoted-printable';
+            }
+
+            $this->email->from('do.not@reply.me', 'LMS');
+            $this->email->to($manager['email']);
+            $this->email->subject(lang('email_leave_request_subject') .
+                    $this->session->userdata('firstname') . ' ' .
+                    $this->session->userdata('lastname'));
+            $this->email->message($message);
+            $this->email->send();
         }
-
-        $this->email->from('do.not@reply.me', 'LMS');
-        $this->email->to($manager['email']);
-        $this->email->subject(lang('email_leave_request_subject') .
-        $this->session->userdata('firstname') . ' ' .
-        $this->session->userdata('lastname'));
-        $this->email->message($message);
-        $this->email->send();
     }
-    
+
     /**
      * Delete a leave request
      * @param int $id identifier of the leave request

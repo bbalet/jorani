@@ -39,7 +39,7 @@ $this->lang->load('global', $language);?>
 
     <label for="viz_startdate" required><?php echo lang('leaves_edit_field_start');?></label>
     <input type="input" name="viz_startdate" id="viz_startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" />
-    <input type="hidden" name="startdate" id="startdate" />
+    <input type="hidden" name="startdate" id="startdate" value="<?php echo $leave['startdate'];?>" />
     <select name="startdatetype" id="startdatetype">
         <option value="Morning"><?php echo lang('leaves_date_type_morning');?></option>
         <option value="Afternoon"><?php echo lang('leaves_date_type_afternoon');?></option>
@@ -47,7 +47,7 @@ $this->lang->load('global', $language);?>
     
     <label for="viz_enddate" required><?php echo lang('leaves_edit_field_end');?></label>
     <input type="input" name="viz_enddate" id="viz_enddate" value="<?php $date = new DateTime($leave['enddate']); echo $date->format(lang('global_date_format'));?>" />
-    <input type="hidden" name="enddate" id="enddate" />
+    <input type="hidden" name="enddate" id="enddate" value="<?php echo $leave['startdate'];?>" />
     <select name="enddatetype" id="enddatetype">
         <option value="Morning"><?php echo lang('leaves_date_type_morning');?></option>
         <option value="Afternoon"><?php echo lang('leaves_date_type_afternoon');?></option>

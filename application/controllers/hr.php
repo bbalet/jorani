@@ -152,6 +152,7 @@ class Hr extends CI_Controller {
         $data['summary'] = $this->leaves_model->get_user_leaves_summary($id);
         $data['user_id'] = $id;
         if (!is_null($data['summary'])) {
+            $this->expires_now();
             $data['title'] = lang('hr_summary_title');
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);

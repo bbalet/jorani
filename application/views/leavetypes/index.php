@@ -150,6 +150,14 @@ $(document).ready(function() {
     $('#frmDeleteLeaveType').on('hidden', function() {
         $(this).removeData('modal');
     });
+    
+    //Give focus on first field on opening modal forms
+    $('#frmAddLeaveType').on('shown', function () {
+        $('input:text:visible:first', this).focus();
+    });
+    $('#frmEditLeaveType').on('shown', function () {
+        $('input:text:visible:first', this).focus();
+    });
 });
 </script>
 

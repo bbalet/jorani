@@ -26,7 +26,7 @@ $this->lang->load('positions', $language);?>
 <?php echo form_open('positions/edit/' . $position['id']) ?>
 
     <label for="name"><?php echo lang('positions_edit_field_name');?></label>
-    <input type="input" name="name" id="name" value="<?php echo $position['name']; ?>" required /><br />
+    <input type="input" name="name" id="name" value="<?php echo $position['name']; ?>" autofocus required /><br />
 
     <label for="description"><?php echo lang('positions_edit_field_description');?></label>
     <textarea type="input" name="description" id="description" /><?php echo $position['description']; ?></textarea>

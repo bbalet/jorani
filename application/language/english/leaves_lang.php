@@ -58,6 +58,7 @@ $lang['leaves_create_field_status'] = 'Status';
 $lang['leaves_create_button_create'] = 'Request leave';
 $lang['leaves_create_button_cancel'] = 'Cancel';
 $lang['leaves_create_flash_msg_success'] = 'The leave request has been succesfully created';
+$lang['leaves_create_flash_msg_error'] = 'The leave request has been succesfully created or updated, but you don\'t have a manager.';
 
 $lang['leaves_edit_html_title'] = 'Edit a leave request';
 $lang['leaves_edit_title'] = 'Edit leave request #';

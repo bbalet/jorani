@@ -124,12 +124,16 @@ class Extra extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $extra_id = $this->overtime_model->set_extra();
+            $this->session->set_flashdata('msg', lang('extra_create_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
                 $this->sendMail($extra_id);
-            }            
-            $this->session->set_flashdata('msg', lang('extra_create_msg_success'));
-            redirect('extra');
+            }
+            if (isset($_GET['source'])) {
+                redirect($_GET['source']);
+            } else {
+                redirect('extra');
+            }
         }
     }
     
@@ -172,11 +176,11 @@ class Extra extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $extra_id = $this->overtime_model->update_extra($id);
+            $this->session->set_flashdata('msg', lang('extra_edit_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
                 $this->sendMail($id);
-            }            
-            $this->session->set_flashdata('msg', lang('extra_edit_msg_success'));
+            }
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
             } else {
@@ -186,54 +190,58 @@ class Extra extends CI_Controller {
     }
     
     /**
-     * Send a overtime request email to the manager
+     * Send a overtime request email to the manager of the connected employee
      * @param int $id Leave request identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    private function sendMail($id)
-    {
+    private function sendMail($id) {
         $this->load->model('users_model');
         $this->load->model('settings_model');
         $manager = $this->users_model->get_users($this->session->userdata('manager'));
-        $acceptUrl = base_url() . 'overtime/accept/' . $id;
-        $rejectUrl = base_url() . 'overtime/reject/' . $id;
 
-        //Send an e-mail to the manager
-        //See: http://www.codeigniter.fr/user_guide/libraries/email.html
-        $this->load->library('email');
-        $this->load->library('language');
-        $usr_lang = $this->language->code2language($manager['language']);
-        $this->lang->load('email', $usr_lang);
+        //Test if the manager hasn't been deleted meanwhile
+        if (empty($manager['email'])) {
+            $this->session->set_flashdata('msg', lang('extra_create_msg_error'));
+        } else {
+            $acceptUrl = base_url() . 'overtime/accept/' . $id;
+            $rejectUrl = base_url() . 'overtime/reject/' . $id;
 
-        $this->lang->load('global', $usr_lang);
-        $date = new DateTime($this->input->post('date'));
-        $startdate = $date->format(lang('global_date_format'));
-        
-        $this->load->library('parser');
-        $data = array(
-            'Title' => lang('email_extra_request_validation_title'),
-            'Firstname' => $this->session->userdata('firstname'),
-            'Lastname' => $this->session->userdata('lastname'),
-            'Date' => $startdate,
-            'Duration' => $this->input->post('duration'),
-            'Cause' => $this->input->post('cause'),
-            'UrlAccept' => $acceptUrl,
-            'UrlReject' => $rejectUrl
-        );
-        $message = $this->parser->parse('emails/' . $manager['language'] . '/overtime', $data, TRUE);
-        if ($this->email->mailer_engine== 'phpmailer') {
-            $this->email->phpmailer->Encoding = 'quoted-printable';
+            //Send an e-mail to the manager
+            $this->load->library('email');
+            $this->load->library('language');
+            $usr_lang = $this->language->code2language($manager['language']);
+            $this->lang->load('email', $usr_lang);
+
+            $this->lang->load('global', $usr_lang);
+            $date = new DateTime($this->input->post('date'));
+            $startdate = $date->format(lang('global_date_format'));
+
+            $this->load->library('parser');
+            $data = array(
+                'Title' => lang('email_extra_request_validation_title'),
+                'Firstname' => $this->session->userdata('firstname'),
+                'Lastname' => $this->session->userdata('lastname'),
+                'Date' => $startdate,
+                'Duration' => $this->input->post('duration'),
+                'Cause' => $this->input->post('cause'),
+                'UrlAccept' => $acceptUrl,
+                'UrlReject' => $rejectUrl
+            );
+            $message = $this->parser->parse('emails/' . $manager['language'] . '/overtime', $data, TRUE);
+            if ($this->email->mailer_engine == 'phpmailer') {
+                $this->email->phpmailer->Encoding = 'quoted-printable';
+            }
+
+            $this->email->from('do.not@reply.me', 'LMS');
+            $this->email->to($manager['email']);
+            $this->email->subject(lang('email_extra_request_reject_subject') .
+                    $this->session->userdata('firstname') . ' ' .
+                    $this->session->userdata('lastname'));
+            $this->email->message($message);
+            $this->email->send();
         }
-
-        $this->email->from('do.not@reply.me', 'LMS');
-        $this->email->to($manager['email']);
-        $this->email->subject(lang('email_extra_request_reject_subject') .
-                $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname'));
-        $this->email->message($message);
-        $this->email->send();
     }
-    
+
     /**
      * Delete a leave request
      * @param int $id identifier of the leave request

@@ -129,6 +129,7 @@ class Users extends CI_Controller {
         if (empty($data['user'])) {
             show_404();
         }
+        $this->expires_now();
         $data['title'] = lang('users_myprofile_html_title');
         $this->load->model('roles_model');
         $this->load->model('positions_model');

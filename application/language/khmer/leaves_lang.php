@@ -58,6 +58,7 @@ $lang['leaves_create_field_status'] = 'ស្ថានភាព';
 $lang['leaves_create_button_create'] = 'សំណើរសុំច្បាប់';
 $lang['leaves_create_button_cancel'] = 'បោះបង់';
 $lang['leaves_create_flash_msg_success'] = 'សំណើការឈប់សម្រាកនេះត្រូវបានបង្កើតដោយជោគជ័យ';
+$lang['leaves_create_flash_msg_error'] = 'The leave request has been succesfully created or updated, but you don\'t have a manager.';
 
 $lang['leaves_edit_html_title'] = 'Edit a leave request';
 $lang['leaves_edit_title'] = 'កែប្រែការសំុច្បាប់ លេខ#';

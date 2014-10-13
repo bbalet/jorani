@@ -41,6 +41,7 @@ $lang['extra_create_field_status'] = 'ស្ថានភាព';
 $lang['extra_create_button_create'] = 'ស្នើសំុកាងារបន្ថែមម៉ោង';
 $lang['extra_create_button_cancel'] = 'បោះបង់';
 $lang['extra_create_msg_success'] = 'ការស្នើសំុកាងារបន្ថែមម៉ោងត្រូវបានបង្កើតដោយជោគជ័យ';
+$lang['extra_create_msg_error'] = 'The overtime request has been succesfully created or updated, but you don\'t have a manager.';
 
 $lang['extra_edit_title'] = 'Edit overtime request #';
 $lang['extra_edit_hmtl_title'] = 'កែប្រែការកាងារបន្ថែមម៉ោង';

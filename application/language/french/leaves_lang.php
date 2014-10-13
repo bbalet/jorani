@@ -58,6 +58,7 @@ $lang['leaves_create_field_status'] = 'Statut';
 $lang['leaves_create_button_create'] = 'Créer la demande';
 $lang['leaves_create_button_cancel'] = 'Annuler';
 $lang['leaves_create_flash_msg_success'] = 'La demande d\'absence a été créée avec succès.';
+$lang['leaves_create_flash_msg_error'] = 'La demande d\'absence a été créée ou modifiée avec succès, mais vous n\'avez pas de manager.';
 
 $lang['leaves_edit_html_title'] = 'Modifier la demande';
 $lang['leaves_edit_title'] = 'Modifier la demande N°';

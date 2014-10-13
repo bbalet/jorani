@@ -159,7 +159,7 @@ for ($mC = 1; $mC <= 12; $mC++) {
             case 2: $image= "<img src='" . base_url() . "assets/images/morning.png' />"; break;
             case 3: $image= "<img src='" . base_url() . "assets/images/afternoon.png' />"; break;
         }
-        echo "<td class='" . $class . " days day" . date("N", $exactDT) . "' data-id='" . $exactDT . "'>" . $i . "<br/><span id='" . $exactDT . "' data-type='" . $type . "' title='" . $title . "'>" . $image . "</span></td>";
+        echo "<td class='" . $class . " days day" . date("N", $exactDT) . "' data-id='" . $exactDT . "'>" . $i . "<br/><span id='" . $exactDT . "' data-type='" . $type . "' title='" . htmlspecialchars($title, ENT_QUOTES) . "'>" . $image . "</span></td>";
     }
     echo InsertBlankTd($dDaysOnPage - $daysInMonth - date("N", $currentDT) + 1);
     echo "</tr>";
@@ -231,7 +231,10 @@ for ($mC = 1; $mC <= 12; $mC++) {
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<?php //Prevent HTTP-404 when localization isn't needed
+if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
+<?php } ?>
 <script type="text/javascript">
 
 var timestamp;
@@ -343,6 +346,11 @@ $(function() {
     //Prevent to load always the same content
     $('#frmAddDayOff').on('hidden', function() {
         $(this).removeData('modal');
+    });
+    
+    //Give focus on first field on opening add day off dialog
+    $('#frmAddDayOff').on('shown', function () {
+        $('input:text:visible:first', this).focus();
     });
 });
 </script>

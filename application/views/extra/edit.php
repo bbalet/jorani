@@ -32,11 +32,8 @@ $this->lang->load('global', $language);?>
 } ?>
 
     <label for="viz_date"><?php echo lang('extra_edit_field_date');?></label>
-    <input type="input" name="viz_date" id="viz_date" value="<?php 
-$date = new DateTime($extra['date']);
-echo $date->format(lang('global_date_format'));
-?>" required />
-    <input type="hidden" name="date" id="date" />
+    <input type="input" name="viz_date" id="viz_date" value="<?php $date = new DateTime($extra['date']); echo $date->format(lang('global_date_format'));?>" required />
+    <input type="hidden" name="date" id="date" value="<?php echo $extra['date']; ?>" />
     
     <label for="duration"><?php echo lang('extra_edit_field_duration');?></label>
     <input type="input" name="duration" id="duration" value="<?php echo $extra['duration']; ?>" required />

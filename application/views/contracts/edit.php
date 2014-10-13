@@ -31,7 +31,7 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
     <input type="hidden" name="id" value="<?php echo $contract['id']; ?>" required />
     
     <label for="name"><?php echo lang('contract_edit_field_name');?></label>
-    <input type="input" name="name" value="<?php echo $contract['name']; ?>" required /><br />
+    <input type="input" name="name" value="<?php echo $contract['name']; ?>" autofocus required /><br />
   
     <label for="startentdatemonth"><?php echo lang('contract_edit_field_start_month');?></label>
     <select name="startentdatemonth" required>

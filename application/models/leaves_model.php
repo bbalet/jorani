@@ -85,8 +85,8 @@ class Leaves_model extends CI_Model {
         $this->db->where('date >=', $start);
         $this->db->where('date <=', $end);
         $result = $this->db->get()->result_array();
-        $startTimeStamp = strtotime($start);
-        $endTimeStamp = strtotime($end);
+        $startTimeStamp = strtotime($start." UTC");
+        $endTimeStamp = strtotime($end." UTC");
         $timeDiff = abs($endTimeStamp - $startTimeStamp);
         $numberDays = $timeDiff / 86400;  // 86400 seconds in one day
         if (count($result) != 0) { //Test if some non working days are defined on a contract

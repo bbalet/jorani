@@ -561,7 +561,7 @@ CREATE TABLE IF NOT EXISTS `time` (
   KEY `activity` (`activity`,`employee`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Time spent by employees' AUTO_INCREMENT=1 ;
 
-- --------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `types`

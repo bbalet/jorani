@@ -27,6 +27,8 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Set your own contracts and leave types.
 * Calendars of leaves (individual, team, collaborators, etc.).
 * Describe your organization in a tree structure and attach employees to entities.
+* Non working days (weekends and day offs) can be defined on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
+* LDAP Authentication.
 * Available in English, French and Khmer (localization is in progress).
 
 ## Installation
@@ -40,7 +42,6 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Update the end of <code>/application/config/email.php</code> with your e-mails settings.
 * Update the end of <code>/application/config/config.php</code> if you want to change the default behaviour.
 * It is recommended to change the private and public RSA keys (in <code>assets/keys</code>).
-* Non working days (weekends and day offs) can be defined on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
 
 ## What's next ?
 

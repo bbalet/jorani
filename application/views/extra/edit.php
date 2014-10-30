@@ -71,5 +71,12 @@ $this->lang->load('global', $language);?>
             altFormat: "yy-mm-dd",
             altField: "#date"
         }, $.datepicker.regional['<?php echo $language_code;?>']);
+        
+        //Force decimal separator whatever the locale is
+        $( "#duration" ).keyup(function() {
+            var value = $("#duration").val();
+            value = value.replace(",", ".");
+            $("#duration").val(value);
+        });
     });
 </script>

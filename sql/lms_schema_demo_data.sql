@@ -20,11 +20,12 @@ SET time_zone = "+00:00";
 -- Base de données :  `lms`
 --
 
-DELIMITER $$
 --
 -- Fonctions
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `GetAncestry`(GivenID INT) RETURNS varchar(1024) CHARSET utf8
+DROP FUNCTION IF EXISTS `GetAncestry`;
+DELIMITER $$
+CREATE FUNCTION `GetAncestry`(GivenID INT) RETURNS varchar(1024) CHARSET utf8
     DETERMINISTIC
 BEGIN
     DECLARE rv VARCHAR(1024);
@@ -44,8 +45,11 @@ BEGIN
     END WHILE;
     RETURN rv;
 END$$
+DELIMITER ;
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `GetFamilyTree`(`GivenID` INT) RETURNS varchar(1024) CHARSET latin1
+DROP FUNCTION IF EXISTS `GetFamilyTree`;
+DELIMITER $$
+CREATE FUNCTION `GetFamilyTree`(`GivenID` INT) RETURNS varchar(1024) CHARSET utf8
     DETERMINISTIC
 BEGIN
 
@@ -89,12 +93,13 @@ BEGIN
             SET queue_length = LENGTH(queue) - LENGTH(REPLACE(queue,',','')) + 1;
         END IF;
     END WHILE;
-
     RETURN rv;
-
 END$$
+DELIMITER ;
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `GetParentIDByID`(GivenID INT) RETURNS int(11)
+DROP FUNCTION IF EXISTS `GetParentIDByID`;
+DELIMITER $$
+CREATE FUNCTION `GetParentIDByID`(GivenID INT) RETURNS int(11)
     DETERMINISTIC
 BEGIN
     DECLARE rv INT;
@@ -103,7 +108,6 @@ BEGIN
     (SELECT parent_id FROM organization WHERE id = GivenID) A;
     RETURN rv;
 END$$
-
 DELIMITER ;
 
 -- --------------------------------------------------------

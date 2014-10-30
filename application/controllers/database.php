@@ -114,31 +114,18 @@ class Database extends CI_Controller {
     public function purge() {
         $this->auth->check_is_granted('purge_database');
         $data = $this->getUserContext();
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $data['title'] = lang('contract_edit_title');
-        
-        $this->form_validation->set_rules('name', lang('contract_edit_field_name'), 'required|xss_clean');
-        $this->form_validation->set_rules('startentdatemonth', lang('contract_edit_field_start_month'), 'required|xss_clean');
-        $this->form_validation->set_rules('startentdateday', lang('contract_edit_field_start_day'), 'required|xss_clean');
-        $this->form_validation->set_rules('endentdatemonth', lang('contract_edit_field_end_month'), 'required|xss_clean');
-        $this->form_validation->set_rules('endentdateday', lang('contract_edit_field_end_day'), 'required|xss_clean');
+        $this->load->model('history_model');
 
-
-        $data['contract'] = $this->contracts_model->get_contracts($id);
-        if (empty($data['contract'])) {
-            show_404();
+        //Iterate through the selected tables to be purged
+        if (!empty($_POST['chkTable'])) {
+            foreach ($_POST['chkTable'] as $table) {
+                echo $table . '<br />';
+                //$this->history_model->purge_history($table, $_POST['chkTable']);
+            }
+            die();
         }
-
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('menu/index', $data);
-            $this->load->view('contracts/edit', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $this->contracts_model->update_contract();
-            $this->session->set_flashdata('msg', lang('database_purge_msg_success'));
-            redirect('contracts');
-        }
+        $this->session->set_flashdata('msg', lang('database_purge_msg_success'));
+        redirect('database');
     }
+
 }

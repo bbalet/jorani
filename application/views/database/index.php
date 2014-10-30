@@ -36,16 +36,11 @@ $(document).ready(function() {
 </script>
 <?php } ?>
 
-<h2><?php echo lang('database_index_title');?></h2>
+        <h2><?php echo lang('database_index_title');?></h2>
     </div>
 </div>
 
-<div class="row-fluid">
-    <div class="span12">
-        <h3><?php echo lang('database_index_title');?></h3>
-    </div>
-</div>
-
+<form id="formPurge" action="<?php echo base_url();?>database/purge" method="POST">
 <div class="row-fluid">
     <div class="span12">
         <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover" id="contracts" width="100%">
@@ -58,38 +53,38 @@ $(document).ready(function() {
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value="leaves"></td>
                     <td><?php echo $leaves_count; ?></td>
                     <td><?php echo lang('database_index_table_leaves_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value="overtime"></td>
                     <td><?php echo $overtime_count; ?></td>
                     <td><?php echo lang('database_index_table_overtime_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value="dayoffs"></td>
                     <td><?php echo $dayoffs_count; ?></td>
                     <td><?php echo lang('database_index_table_dayoffs_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value="entitleddays"></td>
                     <td><?php echo $entitleddays_count; ?></td>
                     <td><?php echo lang('database_index_table_entitleddays_desc');?></td>
                 </tr>
                 <?php if ($this->config->item('enable_time') == true) { ?>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value="activities_employee"></td>
                     <td><?php echo $activities_employee_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value="activities_history"></td>
                     <td><?php echo $activities_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value="time"></td>
                     <td><?php echo $time_count; ?></td>
                     <td><?php echo lang('database_index_table_time_desc');?></td>
                 </tr>
@@ -100,11 +95,6 @@ $(document).ready(function() {
 </div>
 
 <?php if ($this->config->item('enable_history') == true) { ?>
-<div class="row-fluid">
-    <div class="span12">
-        <h3><?php echo lang('database_index_title');?></h3>
-    </div>
-</div>
 
 <div class="row-fluid">
     <div class="span12">
@@ -118,48 +108,48 @@ $(document).ready(function() {
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value=""></td>
                     <td><?php echo $contracts_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value=""></td>
                     <td><?php echo $entitleddays_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value=""></td>
                     <td><?php echo $organization_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value=""></td>
                     <td><?php echo $overtime_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value=""></td>
                     <td><?php echo $positions_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value=""></td>
                     <td><?php echo $types_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value=""></td>
                     <td><?php echo $users_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
                 <?php if ($this->config->item('enable_time') == true) { ?>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value=""></td>
                     <td><?php echo $activities_employee_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" id="" name=""></td>
+                    <td><input type="checkbox" id="" name="chkTable[]" value=""></td>
                     <td><?php echo $activities_history_count; ?></td>
                     <td><?php echo lang('database_index_table_history_users_desc');?></td>
                 </tr>
@@ -169,6 +159,7 @@ $(document).ready(function() {
     </div>
 </div>
 <?php } ?>
+</form>
 
 <div class="row-fluid">
     <div class="span12">&nbsp;</div>
@@ -176,12 +167,12 @@ $(document).ready(function() {
 
 <div class="row-fluid">
     <div class="span5">
-      <label for="viz_todate">eeee<?php echo lang('users_create_field_lastname');?>
+      <label for="viz_todate"><?php echo lang('database_index_field_date');?>
       <input type="input" name="viz_todate" id="viz_todate" />
       <input type="hidden" name="todate" id="todate" /></label>
     </div>
     <div class="span3">
-      <a href="<?php echo base_url();?>database/purge" class="btn btn-danger"><i class="icon-trash icon-white"></i>&nbsp; <?php echo lang('database_index_button_purge');?></a>
+        <a href="#" id="cmdDelete" class="btn btn-danger"><i class="icon-trash icon-white"></i>&nbsp; <?php echo lang('database_index_button_purge');?></a>
     </div>
     <div class="span4">&nbsp;</div>
 </div>
@@ -190,6 +181,7 @@ $(document).ready(function() {
 <script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-langs.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <div id="frmConfirmPurge" class="modal hide fade">
     <div class="modal-header">
@@ -201,13 +193,25 @@ $(document).ready(function() {
         <p><?php echo lang('database_index_popup_purge_question');?></p>
     </div>
     <div class="modal-footer">
-        <a href="#" id="lnkPurgeDb" class="btn danger"><?php echo lang('database_index_popup_purge_button_yes');?></a>
-        <a href="#" onclick="$('#frmDeleteLeaveRequest').modal('hide');" class="btn secondary"><?php echo lang('database_index_popup_purge_button_no');?></a>
+        <a href="#" onclick="$('#formPurge').submit();" class="btn danger"><?php echo lang('database_index_popup_purge_button_yes');?></a>
+        <a href="#" onclick="$('#frmConfirmPurge').modal('hide');" class="btn secondary"><?php echo lang('database_index_popup_purge_button_no');?></a>
     </div>
 </div>
 
-
 <script type="text/javascript">
+    
+    function validate_form() {
+        result = false;
+        var fieldname = "";
+        if ($('#viz_todate').val() == "") fieldname = "<?php echo lang('database_index_field_date_desc');?>";
+        if (fieldname == "") {
+            return true;
+        } else {
+            bootbox.alert(<?php echo lang('database_purge_mandatory_js_msg');?>);
+            return false;
+        }
+    }    
+    
 $(document).ready(function() {
 
     $("#frmConfirmPurge").alert();
@@ -220,19 +224,10 @@ $(document).ready(function() {
     
     //var start = moment($('#startdate').val());
 
-    //On showing the confirmation pop-up, add the contract id at the end of the delete url action
-    $('#frmDeleteContract').on('show', function() {
-        var link = "<?php echo base_url();?>contracts/delete/" + $(this).data('id');
-        $("#lnkDeleteContract").attr('href', link);
+    //Display a modal pop-up so as to confirm the purge
+    $("#cmdDelete").on('click', function(){
+        $('#frmConfirmPurge').modal('show');
     });
 
-    //Display a modal pop-up so as to confirm if a contract has to be deleted or not
-    //We build a complex selector because datatable does horrible things on DOM...
-    //a simplier selector doesn't work when the delete is on page >1 
-    $("#contracts tbody").on('click', '.confirm-delete',  function(){
-        var id = $(this).data('id');
-        $('#frmDeleteContract').data('id', id).modal('show');
-    });
-    
 });
 </script>

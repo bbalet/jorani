@@ -56,7 +56,10 @@ class Auth {
             //Admin functions
             case 'purge_database' :
                 if ($this->CI->session->userdata('is_hr') == true)
-                    return true;
+                    if ($this->CI->config->item('enable_purge') == true)
+                        return true;
+                    else
+                        return false;
                 else
                     return false;
                 break;

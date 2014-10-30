@@ -130,13 +130,16 @@ class LeaveTypes extends CI_Controller {
     public function delete($id) {
         $this->auth->check_is_granted('leavetypes_delete');
         if ($id != 0) {
-            $this->types_model->delete_type($id);
-            $this->session->set_flashdata('msg', lang('hr_leaves_popup_delete_flash_msg'));
-            redirect('leavetypes');
+            if ($this->types_model->usage($id) > 0) {
+                $this->session->set_flashdata('msg', lang('hr_leaves_popup_delete_flash_forbidden'));
+            } else {
+                $this->types_model->delete_type($id);
+                $this->session->set_flashdata('msg', lang('hr_leaves_popup_delete_flash_msg'));
+            }
         } else {
             $this->session->set_flashdata('msg', lang('hr_leaves_popup_delete_flash_error'));
-            redirect('leavetypes');
         }
+        redirect('leavetypes');
     }
 
     /**

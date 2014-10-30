@@ -44,6 +44,7 @@ $lang['hr_leaves_popup_delete_button_yes'] = 'យល់ព្រម';
 $lang['hr_leaves_popup_delete_button_no'] = 'មិនយល់ព្រម';
 $lang['hr_leaves_popup_delete_flash_msg'] = 'ប្រភេទនៃការឈប់សម្រាកត្រួវបានលុបដោយជោគជ័យ';
 $lang['hr_leaves_popup_delete_flash_error'] = 'អ្នកមិនអាចលុបនួវទម្រង់ដើម';
+$lang['hr_leaves_popup_delete_flash_forbidden'] = 'You cannot delete a leave type that is used.';
 
 $lang['hr_leaves_type_export_title'] = 'ចាកចេញពីតម្រង់ដើម';
 $lang['hr_leaves_type_export_thead_id'] = 'ID';

@@ -87,5 +87,18 @@ class Types_model extends CI_Model {
         $this->db->where('id', $this->input->post('id'));
         return $this->db->update('types', $data);
     }
+    
+     /**
+     * Count the number of time a leave type is used into the database
+     * @param int $id identifier of the leave type record
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function usage($id) {
+        $this->db->select('COUNT(*)');
+        $this->db->from('leaves');
+        $this->db->where('type', $id);
+        $query = $this->db->get();
+        $result = $query->row_array();
+        return $result['COUNT(*)'];
+    }
 }
-	

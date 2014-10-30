@@ -43,7 +43,8 @@ $lang['hr_leaves_popup_delete_confirm'] = 'Do you want to proceed?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Yes';
 $lang['hr_leaves_popup_delete_button_no'] = 'No';
 $lang['hr_leaves_popup_delete_flash_msg'] = 'The leave type has been succesfully deleted.';
-$lang['hr_leaves_popup_delete_flash_error'] = 'You cannot delete a system leavetype.';
+$lang['hr_leaves_popup_delete_flash_error'] = 'You cannot delete a system leave type.';
+$lang['hr_leaves_popup_delete_flash_forbidden'] = 'You cannot delete a leave type that is used.';
 
 $lang['hr_leaves_type_export_title'] = 'Leave types';
 $lang['hr_leaves_type_export_thead_id'] = 'ID';

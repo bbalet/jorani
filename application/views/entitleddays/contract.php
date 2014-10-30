@@ -78,6 +78,7 @@ echo $date->format(lang('global_date_format'));
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">    
     function validate_form() {

@@ -44,6 +44,7 @@ $lang['hr_leaves_popup_delete_button_yes'] = 'Oui';
 $lang['hr_leaves_popup_delete_button_no'] = 'Non';
 $lang['hr_leaves_popup_delete_flash_msg'] = 'Le type d\'absence a été supprimé avec succès.';
 $lang['hr_leaves_popup_delete_flash_error'] = 'Vous ne pouvez pas supprimer un type d\'absence système.';
+$lang['hr_leaves_popup_delete_flash_forbidden'] = 'Vous ne pouvez pas supprimer un type d\'absence qui est utilisé.';
 
 $lang['hr_leaves_type_export_title'] = 'Types d\'absence';
 $lang['hr_leaves_type_export_thead_id'] = 'N°';

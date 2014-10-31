@@ -44,7 +44,7 @@ echo $date->format(lang('global_date_format'));
 $date = new DateTime($days['enddate']);
 echo $date->format(lang('global_date_format'));
 ?></td>
-      <td><span id="days<?php echo $days['id']; ?>"><?php echo $days['days']; ?></span> &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'decrease');"><i class="icon-minus"></i></a>
+      <td><span id="days<?php echo $days['id']; ?>" class="credit"><?php echo $days['days']; ?></span> &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'decrease');"><i class="icon-minus"></i></a>
                      &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'increase');"><i class="icon-plus"></i></a></td>
       <td><?php echo $days['type']; ?></td>
     </tr>
@@ -75,9 +75,23 @@ echo $date->format(lang('global_date_format'));
 <br /><br />
 <a href="<?php echo base_url();?>contracts" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
 
+<!--<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-header">
+            <h1>Processing...</h1>
+        </div>
+        <div class="modal-body">
+            <div class="progress progress-striped active">
+                <div class="bar" style="width: 100%;"></div>
+            </div>
+        </div>
+ </div>//-->
+
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<?php //Prevent HTTP-404 when localization isn't needed
+if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
+<?php } ?>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">    
@@ -182,5 +196,12 @@ echo $date->format(lang('global_date_format'));
             value = value.replace(",", ".");
             $("#days").val(value);
         });
+        
+        //Transform a text label into an editable text field, algo
+        //-On ESC or on click, transform all existing text field back to text label.
+        //-onclick on a TD with .credit class transform it into a text field
+        
+        //Handle dynamic update of credit field
+        
     });
 </script>

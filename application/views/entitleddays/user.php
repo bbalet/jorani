@@ -44,7 +44,7 @@ echo $date->format(lang('global_date_format'));
 $date = new DateTime($days['enddate']);
 echo $date->format(lang('global_date_format'));
 ?></td>
-      <td><span id="days<?php echo $days['id'] ?>"><?php echo $days['days']; ?></span> &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id'] ?>, 'decrease');"><i class="icon-minus"></i></a>
+      <td><span id="days<?php echo $days['id'] ?>" class="credit"><?php echo $days['days']; ?></span> &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id'] ?>, 'decrease');"><i class="icon-minus"></i></a>
              &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id'] ?>, 'increase');"><i class="icon-plus"></i></a></td>
       <td><?php echo $days['type']; ?></td>
     </tr>
@@ -73,6 +73,15 @@ echo $date->format(lang('global_date_format'));
 <input type="input" name="days" id="days" />
 <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_user_index_button_add');?></button>
 
+<div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
+        <div class="modal-header">
+            <h1><?php echo lang('global_msg_wait');?></h1>
+        </div>
+        <div class="modal-body">
+            <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
+        </div>
+ </div>
+
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
@@ -81,6 +90,9 @@ if ($language_code != 'en') { ?>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
+    //Current cell transformed in input box
+    var current_input = null;
+    var credit = 0;
     
     function validate_form() {
         result = false;
@@ -111,6 +123,8 @@ if ($language_code != 'en') { ?>
     
     //"increase" or "decrease" the number of entitled days of a given row
     function incdec(id, operation) {
+        $('#frmModalAjaxWait').modal('show');
+        text2td();
         $.ajax({
             url: "<?php echo base_url();?>entitleddays/ajax/incdec",
                             type: "POST",
@@ -118,11 +132,12 @@ if ($language_code != 'en') { ?>
                         operation: operation
                     }
           }).done(function() {
-              var days = parseInt($('#days' + id).text());
+              var days = parseFloat($('#days' + id).text());
               switch(operation) {
                   case "increase": days++; $('#days' + id).text(days.toFixed(2)); break;
                   case "decrease": days--; $('#days' + id).text(days.toFixed(2)); break;
               }
+              $('#frmModalAjaxWait').modal('hide');
           });
     }
     
@@ -145,14 +160,63 @@ if ($language_code != 'en') { ?>
                             '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_user_index_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>' +
                             '<td>' + $('#viz_startdate').val() + '</td>' +
                             '<td>' + $('#viz_enddate').val() + '</td>' +
-                            '<td><span id="days' + id + '">' + days + '</span> &nbsp; ' +
+                            '<td><span id="days' + id + '" class="credit">' + days.toFixed(2) + '</span> &nbsp; ' +
                             '<a href="#" onclick="Javascript:incdec(' + id + ', \'decrease\');"><i class="icon-minus"></i></a>' +
                             '&nbsp; <a href="#" onclick="Javascript:incdec(' + id + ', \'increase\');"><i class="icon-plus"></i></a></td>' +
                             '<td>' + $('#type option:selected').text() + '</td>' +
                         '</tr>';
                   $('#entitleddaysuser > tbody:last').append(myRow);
+                  $("#days" + id).on('click', spanClick);
             });
         }
+    }
+    
+     //Make an Ajax call to the backend so as to save entitled days amount
+    function saveInputByAjax(e) {
+        var code = e.keyCode || e.which;
+        if (code == 13) {
+            $('#frmModalAjaxWait').modal('show');
+            if ($("#txtCredit").val() == "") $("#txtCredit").val("0");
+            credit = parseFloat($("#txtCredit").val());
+            $.ajax({
+                url: "<?php echo base_url();?>entitleddays/ajax/incdec",
+                                type: "POST",
+                    data: { id: $("#txtCredit").closest( "tr" ).data( "id" ),
+                                operation: "credit",
+                                days: $("#txtCredit").val()
+                        }
+              }).done(function() {
+                  $('#frmModalAjaxWait').modal('hide');
+                  text2td();
+              });
+        } else {
+            //Force decimal separator whatever the locale is
+            var value = $("#txtCredit").val();
+            value = value.replace(",", ".");
+            $("#txtCredit").val(value);
+        }
+    }
+    
+    //Change back an input text box into the former readonly HTML element (e.g. SPAN or TD)
+    function text2td() {
+        if (current_input != null) {
+           current_input.html(credit.toFixed(2));
+           current_input.on('click', spanClick);
+           current_input = null;
+       }
+    }
+    
+    //Change a SPAN element into an input text box
+    function spanClick(){
+        var days = parseFloat($(this).text());
+        $(this).html("<input type='text' id='txtCredit' class='input-small' value='" + days + "'/>");
+        text2td();
+        current_input = $(this);
+        credit = days;
+        $(this).off("click");
+        $("#txtCredit").on('keyup', saveInputByAjax);
+        $("#txtCredit").focus();
+        $("#txtCredit").val($("#txtCredit").val());
     }
     
     $(function () {
@@ -182,6 +246,16 @@ if ($language_code != 'en') { ?>
             var value = $("#days").val();
             value = value.replace(",", ".");
             $("#days").val(value);
+        });
+        
+        //Transform a text label into an editable text field, algo
+        //- On ESC or on click, transform all existing text field back to text label.
+        //- onclick on a TD with .credit class transform it into a text field
+        //- Handle dynamic update of credit field
+        $(".credit").on('click', spanClick);
+        
+        $("body").on("keyup", function(e){
+            if (e.keyCode == 27) text2td();
         });
     });
 </script>

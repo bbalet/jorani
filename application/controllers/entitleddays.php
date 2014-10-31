@@ -199,6 +199,10 @@ class Entitleddays extends CI_Controller {
                     case "decrease":
                         $id = $this->entitleddays_model->dec_entitleddays($id);
                         break;
+                    case "credit":
+                        $days = $this->input->post('days', TRUE);
+                        $id = $this->entitleddays_model->update_days_entitleddays($id, $days);
+                        break;
                     default:
                         $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
                 }

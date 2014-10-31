@@ -18,7 +18,7 @@
 
 $lang['global_link_tooltip_documentation'] = 'តំណភ្ជាប់ទៅឯកសារ';
 $lang['global_msg_error_forbidden'] = 'ប្រតិបត្ដិការ (% s) គឺមិនត្រូវបានផ្តល់';
-
+$lang['global_msg_wait'] = 'Please wait';
 $lang['global_date_format'] = 'm/d/Y';
 
 //Links to documentation

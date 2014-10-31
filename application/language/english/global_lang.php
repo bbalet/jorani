@@ -18,7 +18,7 @@
 
 $lang['global_link_tooltip_documentation'] = 'Link to documentation';
 $lang['global_msg_error_forbidden'] = 'Operation (%s) is not granted';
-
+$lang['global_msg_wait'] = 'Please wait';
 $lang['global_date_format'] = 'm/d/Y';
 
 //Links to documentation

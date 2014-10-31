@@ -75,16 +75,14 @@ echo $date->format(lang('global_date_format'));
 <br /><br />
 <a href="<?php echo base_url();?>contracts" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
 
-<!--<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+<div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
         <div class="modal-header">
-            <h1>Processing...</h1>
+            <h1><?php echo lang('global_msg_wait');?></h1>
         </div>
         <div class="modal-body">
-            <div class="progress progress-striped active">
-                <div class="bar" style="width: 100%;"></div>
-            </div>
+            <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
         </div>
- </div>//-->
+ </div>
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
@@ -94,7 +92,11 @@ if ($language_code != 'en') { ?>
 <?php } ?>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
-<script type="text/javascript">    
+<script type="text/javascript">
+    //Current cell transformed in input box
+    var current_input = null;
+    var credit = 0;
+    
     function validate_form() {
         result = false;
         var fieldname = "";
@@ -124,6 +126,8 @@ if ($language_code != 'en') { ?>
 
     //"increase" or "decrease" the number of entitled days of a given row
     function incdec(id, operation) {
+        $('#frmModalAjaxWait').modal('show');
+        text2td();
         $.ajax({
             url: "<?php echo base_url();?>entitleddays/ajax/incdec",
                             type: "POST",
@@ -131,11 +135,12 @@ if ($language_code != 'en') { ?>
                         operation: operation
                     }
           }).done(function() {
-              var days = parseInt($('#days' + id).text());
+              var days = parseFloat($('#days' + id).text());
               switch(operation) {
                   case "increase": days++; $('#days' + id).text(days.toFixed(2)); break;
                   case "decrease": days--; $('#days' + id).text(days.toFixed(2)); break;
               }
+              $('#frmModalAjaxWait').modal('hide');
           });
     }
 
@@ -158,14 +163,63 @@ if ($language_code != 'en') { ?>
                             '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>' +
                             '<td>' + $('#viz_startdate').val() + '</td>' +
                             '<td>' + $('#viz_enddate').val() + '</td>' +
-                            '<td><span id="days' + id + '">' + days + '</span> &nbsp; ' +
+                            '<td><span id="days' + id + '" class="credit">' + days.toFixed(2) + '</span> &nbsp; ' +
                             '<a href="#" onclick="Javascript:incdec(' + id + ', \'decrease\');"><i class="icon-minus"></i></a>' +
                             '&nbsp; <a href="#" onclick="Javascript:incdec(' + id + ', \'increase\');"><i class="icon-plus"></i></a></td>' +
                             '<td>' + $('#type option:selected').text() + '</td>' +
                         '</tr>';
                   $('#entitleddayscontract > tbody:last').append(myRow);
+                  $("#days" + id).on('click', spanClick);
             });
         }
+    }
+    
+    //Make an Ajax call to the backend so as to save entitled days amount
+    function saveInputByAjax(e) {
+        var code = e.keyCode || e.which;
+        if (code == 13) {
+            $('#frmModalAjaxWait').modal('show');
+            if ($("#txtCredit").val() == "") $("#txtCredit").val("0");
+            credit = parseFloat($("#txtCredit").val());
+            $.ajax({
+                url: "<?php echo base_url();?>entitleddays/ajax/incdec",
+                                type: "POST",
+                    data: { id: $("#txtCredit").closest( "tr" ).data( "id" ),
+                                operation: "credit",
+                                days: $("#txtCredit").val()
+                        }
+              }).done(function() {
+                  $('#frmModalAjaxWait').modal('hide');
+                  text2td();
+              });
+        } else {
+            //Force decimal separator whatever the locale is
+            var value = $("#txtCredit").val();
+            value = value.replace(",", ".");
+            $("#txtCredit").val(value);
+        }
+    }
+    
+    //Change back an input text box into the former readonly HTML element (e.g. SPAN or TD)
+    function text2td() {
+        if (current_input != null) {
+           current_input.html(credit.toFixed(2));
+           current_input.on('click', spanClick);
+           current_input = null;
+       }
+    }
+    
+    //Change a SPAN element into an input text box
+    function spanClick(){
+        var days = parseFloat($(this).text());
+        $(this).html("<input type='text' id='txtCredit' class='input-small' value='" + days + "'/>");
+        text2td();
+        current_input = $(this);
+        credit = days;
+        $(this).off("click");
+        $("#txtCredit").on('keyup', saveInputByAjax);
+        $("#txtCredit").focus();
+        $("#txtCredit").val($("#txtCredit").val());
     }
     
     $(function () {
@@ -198,10 +252,13 @@ if ($language_code != 'en') { ?>
         });
         
         //Transform a text label into an editable text field, algo
-        //-On ESC or on click, transform all existing text field back to text label.
-        //-onclick on a TD with .credit class transform it into a text field
+        //- On ESC or on click, transform all existing text field back to text label.
+        //- onclick on a TD with .credit class transform it into a text field
+        //- Handle dynamic update of credit field
+        $(".credit").on('click', spanClick);
         
-        //Handle dynamic update of credit field
-        
+        $("body").on("keyup", function(e){
+            if (e.keyCode == 27) text2td();
+        });
     });
 </script>

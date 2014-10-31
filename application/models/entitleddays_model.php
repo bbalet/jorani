@@ -206,6 +206,19 @@ class Entitleddays_model extends CI_Model {
     }
     
     /**
+     * Modify the the amount of days for a given entitled days row
+     * @param int $id row identifier
+     * @param float $days credit in days
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function update_days_entitleddays($id, $days) {
+        $this->db->set('days', $days);
+        $this->db->where('id', $id);
+        return $this->db->update('entitleddays');
+    }
+    
+    /**
      * Purge the table by deleting the records prior $toDate
      * @param date $toDate 
      * @return int number of affected rows

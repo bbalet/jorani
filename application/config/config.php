@@ -366,6 +366,10 @@ $config['proxy_ips'] = '';
 | 
 |
 */
+//default email from
+$config['from_mail'] = 'do.not@reply.me';
+$config['from_name'] = 'LMS';
+
 //Password minimal length
 $config['password_length'] = 8;
 //Default role id (e.g. 2 for user)

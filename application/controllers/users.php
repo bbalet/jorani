@@ -326,7 +326,7 @@ class Users extends CI_Controller {
                     $this->email->phpmailer->Encoding = 'quoted-printable';
                 }
 
-                $this->email->from('do.not@reply.me', 'LMS');
+                $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
                 $this->email->to($user['email']);
                 $this->email->subject(lang('email_password_reset_subject'));
                 $this->email->message($message);
@@ -405,7 +405,7 @@ class Users extends CI_Controller {
                 $this->email->phpmailer->Encoding = 'quoted-printable';
             }
 
-            $this->email->from('do.not@reply.me', 'LMS');
+            $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
             $this->email->to($this->input->post('email'));
             $this->email->subject(lang('email_user_create_subject'));
             $this->email->message($message);

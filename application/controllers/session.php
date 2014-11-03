@@ -218,7 +218,7 @@ class Session extends CI_Controller {
                 $this->email->phpmailer->Encoding = 'quoted-printable';
             }
 
-            $this->email->from('do.not@reply.me', 'LMS');
+            $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
             $this->email->to($user->email);
             $this->email->subject(lang('email_password_forgotten_subject'));
             $this->email->message($message);

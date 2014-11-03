@@ -194,7 +194,11 @@ class Overtime extends CI_Controller {
         if ($this->email->mailer_engine== 'phpmailer') {
             $this->email->phpmailer->Encoding = 'quoted-printable';
         }
-        $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
+        if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
+            $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
+        } else {
+           $this->email->from('do.not@reply.me', 'LMS');
+        }
         $this->email->to($employee['email']);
         $this->email->message($message);
         $this->email->send();

@@ -113,12 +113,17 @@ class Leaves_model extends CI_Model {
         
         if (count($boundaries) != 0) {
             $startmonth = intval(substr($boundaries[0]['startentdate'], 2));
-            if ($startmonth < 6 ) {
+            if ($startmonth == 1 ) {
                 $startentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
                 $endentdate =  date("Y") . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
             } else {
-                $startentdate = date("Y", strtotime("-1 year")) . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
-                $endentdate = date("Y", strtotime("+1 year")) . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
+                if (intval(date('m')) < 6) {
+                    $startentdate = date("Y", strtotime("-1 year")) . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
+                    $endentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
+                } else {
+                    $startentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
+                    $endentdate = date("Y", strtotime("+1 year")) . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
+                }
             }
 
             //Fill a list of all existing leave types
@@ -149,7 +154,7 @@ class Leaves_model extends CI_Model {
             foreach ($taken_days as $taken) {
                 $summary[$taken['type']][0] = $taken['taken']; //Taken
             }
-
+            
             //Get the total of entitled days affected to a contract (between 2 dates)
             $this->db->select('types.name as type, entitleddays.days as entitled');
             $this->db->from('users');

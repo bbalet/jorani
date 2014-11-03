@@ -236,7 +236,6 @@ class Extra extends CI_Controller {
             } else {
                $this->email->from('do.not@reply.me', 'LMS');
             }
-            $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
             $this->email->to($manager['email']);
             $this->email->subject(lang('email_extra_request_reject_subject') .
                     $this->session->userdata('firstname') . ' ' .

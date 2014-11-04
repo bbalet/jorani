@@ -231,8 +231,11 @@ class Extra extends CI_Controller {
             if ($this->email->mailer_engine == 'phpmailer') {
                 $this->email->phpmailer->Encoding = 'quoted-printable';
             }
-
-            $this->email->from('do.not@reply.me', 'LMS');
+            if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
+                $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
+            } else {
+               $this->email->from('do.not@reply.me', 'LMS');
+            }
             $this->email->to($manager['email']);
             $this->email->subject(lang('email_extra_request_reject_subject') .
                     $this->session->userdata('firstname') . ' ' .

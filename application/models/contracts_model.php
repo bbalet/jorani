@@ -42,8 +42,8 @@ class Contracts_model extends CI_Model {
     
     /**
      * Get the label for a given contract id
-     * @param type $id
-     * @return string label
+     * @param int $id Unique identifier of a contract
+     * @return string label of the contract
      */
     public function get_label($id) {
         $record = $this->get_contracts($id);
@@ -57,7 +57,7 @@ class Contracts_model extends CI_Model {
     /**
      * Insert a new contract into the database. Inserted data are coming from an
      * HTML form
-     * @return type
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function set_contracts() {
@@ -87,7 +87,7 @@ class Contracts_model extends CI_Model {
     /**
      * Update a given contract in the database. Update data are coming from an
      * HTML form
-     * @return type
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function update_contract() {
@@ -105,4 +105,40 @@ class Contracts_model extends CI_Model {
         $this->db->where('id', $this->input->post('id'));
         return $this->db->update('contracts', $data);
     }
+    
+    /**
+     * Compute the boundaries (current leave period) of the contract of a user
+     * Modify the start and end dates passed as parameter
+     * @param int Unique identifier of a user
+     * @param &date start date of the current leave period 
+     * @param &date end date of the current leave period 
+     * @return bool TRUE means that the user has a contract, FALSE otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function getBoundaries($userId, &$startentdate, &$endentdate) {
+        $this->db->select('startentdate, endentdate');
+        $this->db->from('contracts');
+        $this->db->join('users', 'users.contract = contracts.id');
+        $this->db->where('users.id', $userId);
+        $boundaries = $this->db->get()->result_array();
+        
+        if (count($boundaries) != 0) {
+            $startmonth = intval(substr($boundaries[0]['startentdate'], 2));
+            if ($startmonth == 1 ) {
+                $startentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
+                $endentdate =  date("Y") . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
+            } else {
+                if (intval(date('m')) < 6) {
+                    $startentdate = date("Y", strtotime("-1 year")) . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
+                    $endentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
+                } else {
+                    $startentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
+                    $endentdate = date("Y", strtotime("+1 year")) . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
+                }
+            }
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }        
 }

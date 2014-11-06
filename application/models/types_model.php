@@ -42,8 +42,8 @@ class Types_model extends CI_Model {
     
     /**
      * Get the label of a given type id
-     * @param type $id
-     * @return string label
+     * @param int $id ID of the type
+     * @return string label of the type
      */
     public function get_label($id) {
         $type = $this->get_types($id);
@@ -53,7 +53,7 @@ class Types_model extends CI_Model {
     /**
      * Insert a new leave type
      * Inserted data are coming from an HTML form
-     * @return type
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function set_types() {
@@ -76,7 +76,7 @@ class Types_model extends CI_Model {
     /**
      * Update a given leave type in the database. Update data are coming from an
      * HTML form
-     * @return type
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function update_types() {
@@ -88,7 +88,7 @@ class Types_model extends CI_Model {
         return $this->db->update('types', $data);
     }
     
-     /**
+    /**
      * Count the number of time a leave type is used into the database
      * @param int $id identifier of the leave type record
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -100,5 +100,29 @@ class Types_model extends CI_Model {
         $query = $this->db->get();
         $result = $query->row_array();
         return $result['COUNT(*)'];
+    }
+    
+    /**
+     * Create an arry containing the list of all existing leave types
+     * Modify the name (key) of the compensate leave type name passed as parameter
+     * @param &$compensate_name compensate leave type name
+     * @return array Bi-dimensionnal array of types
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function allTypes(&$compensate_name) {
+        $summary = array();
+        $types = $this->db->get_where('types')->result_array();
+        foreach ($types as $type) {
+            $summary[$type['name']][0] = 0; //Taken
+            if ($type['id'] != 0) {
+                $summary[$type['name']][1] = 0; //Entitled
+                $summary[$type['name']][2] = ''; //Description is only filled for catch-up
+            } else {
+                $compensate_name = $type['name'];
+                $summary[$type['name']][1] = '-'; //Entitled for catch up
+                $summary[$type['name']][2] = ''; //Description is only filled for catch-up
+            }
+        }
+        return $summary;
     }
 }

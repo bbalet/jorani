@@ -65,16 +65,15 @@ class Leaves extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('list_leaves');
+        $this->expires_now();
         $data = $this->getUserContext();
         $data['leaves'] = $this->leaves_model->get_user_leaves($this->session->userdata('id'));
-        
         $this->load->model('status_model');
         $this->load->model('types_model');
         for ($i = 0; $i < count($data['leaves']); ++$i) {
             $data['leaves'][$i]['status_label'] = $this->status_model->get_label($data['leaves'][$i]['status']);
             $data['leaves'][$i]['type_label'] = $this->types_model->get_label($data['leaves'][$i]['type']);
         }
-        
         $data['title'] = lang('leaves_index_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -111,6 +110,7 @@ class Leaves extends CI_Controller {
      */
     public function view($id) {
         $this->auth->check_is_granted('view_leaves');
+        $this->expires_now();
         $data = $this->getUserContext();
         $data['leave'] = $this->leaves_model->get_leaves($id);
         $this->load->model('status_model');
@@ -122,7 +122,6 @@ class Leaves extends CI_Controller {
         $data['types'] = $this->types_model->get_types();
         $data['leave']['status_label'] = $this->status_model->get_label($data['leave']['status']);
         $data['leave']['type_label'] = $this->types_model->get_label($data['leave']['type']);
-        
         $data['title'] = lang('leaves_view_html_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -136,6 +135,7 @@ class Leaves extends CI_Controller {
      */
     public function create() {
         $this->auth->check_is_granted('create_leaves');
+        $this->expires_now();
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -178,6 +178,7 @@ class Leaves extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->check_is_granted('edit_leaves');
+        $this->expires_now();
         $data = $this->getUserContext();
         $data['leave'] = $this->leaves_model->get_leaves($id);
         //Check if exists

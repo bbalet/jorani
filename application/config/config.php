@@ -378,7 +378,7 @@ $config['default_role_id'] = 2;
 //Set this value to TRUE if you want to create leaves at status requested instead of planned
 $config['leave_status_requested'] = FALSE;
 
-$config['version'] = 'v0.1.2';
+$config['version'] = 'v0.1.4';
 
 //List of available languages
 $config['languages'] = 'en,fr,km';

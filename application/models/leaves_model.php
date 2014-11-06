@@ -104,44 +104,15 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_user_leaves_summary($id, $sum_extra = FALSE) {
-        //Compute the boundaries of the contract of the user
-        $this->db->select('startentdate, endentdate');
-        $this->db->from('contracts');
-        $this->db->join('users', 'users.contract = contracts.id');
-        $this->db->where('users.id', $id);
-        $boundaries = $this->db->get()->result_array();
-        
-        if (count($boundaries) != 0) {
-            $startmonth = intval(substr($boundaries[0]['startentdate'], 2));
-            if ($startmonth == 1 ) {
-                $startentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
-                $endentdate =  date("Y") . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
-            } else {
-                if (intval(date('m')) < 6) {
-                    $startentdate = date("Y", strtotime("-1 year")) . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
-                    $endentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
-                } else {
-                    $startentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
-                    $endentdate = date("Y", strtotime("+1 year")) . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
-                }
-            }
-
+        //Compute the current leave period and check if the user has a contract
+        $this->load->model('contracts_model');
+        $hasContract = $this->contracts_model->getBoundaries($id, $startentdate, $endentdate);
+        if ($hasContract) {
             //Fill a list of all existing leave types
-            $summary = array();
-            $compensate_name = '';
-            $types = $this->db->get_where('types')->result_array();
-            foreach ($types as $type) {
-                $summary[$type['name']][0] = 0; //Taken
-                if ($type['id'] != 0) {
-                    $summary[$type['name']][1] = 0; //Entitled
-                    $summary[$type['name']][2] = ''; //Description
-                } else {
-                    $compensate_name = $type['name'];
-                    $summary[$type['name']][1] = '-'; //Entitled for catch up
-                    $summary[$type['name']][2] = 'Entitled days vary according to validated overtime'; //Description
-                }
-            }
+            $this->load->model('types_model');
+            $summary = $this->types_model->allTypes($compensate_name);
             
+            //Get the total of taken leaves grouped by type
             $this->db->select('sum(leaves.duration) as taken, types.name as type');
             $this->db->from('leaves');
             $this->db->join('types', 'types.id = leaves.type');
@@ -166,7 +137,6 @@ class Leaves_model extends CI_Model {
             $this->db->where('entitleddays.enddate > CURDATE()');
             $this->db->group_by("entitleddays.type");
             $entitled_days = $this->db->get()->result_array();
-
             foreach ($entitled_days as $entitled) {
                 $summary[$entitled['type']][1] = $entitled['entitled']; //entitled
             }
@@ -188,13 +158,6 @@ class Leaves_model extends CI_Model {
                 //Most common use cases are 'special leave', 'maternity leave'...
                 $summary[$entitled['type']][1] += $entitled['entitled']; //entitled
             }
-
-            //Remove all lines having taken and entitled set to set to 0
-            foreach ($summary as $key => $value) {
-                if ($value[0]==0 && $value[1]==0) {
-                    unset($summary[$key]);
-                }
-            }
             
             //Add the validated catch up days
             //Employee must catch up in the year
@@ -210,9 +173,8 @@ class Leaves_model extends CI_Model {
                     $summary['Catch up for ' . $entitled['date']][0] = '-'; //taken
                     $summary['Catch up for ' . $entitled['date']][1] = $entitled['duration']; //entitled
                     $summary['Catch up for ' . $entitled['date']][2] = $entitled['cause']; //description
-                } else {
-                    $sum += $entitled['duration']; //entitled
                 }
+                $sum += $entitled['duration']; //entitled
             }
             if ($sum_extra == TRUE) {
                 $this->db->select('sum(leaves.duration) as taken');
@@ -228,8 +190,17 @@ class Leaves_model extends CI_Model {
                 } else {
                     $summary[$compensate_name][0] = 0; //taken
                 }
-                $summary[$compensate_name][1] = $sum; //entitled
-                $summary[$compensate_name][2] = '-'; //description
+            }
+            //Add the sum of validated catch up for the employee
+            if (array_key_exists($compensate_name, $summary)) {
+                $summary[$compensate_name][1] = $summary[$compensate_name][1] + $sum; //entitled
+            }
+            
+            //Remove all lines having taken and entitled set to set to 0
+            foreach ($summary as $key => $value) {
+                if ($value[0]==0 && $value[1]==0) {
+                    unset($summary[$key]);
+                }
             }
             return $summary;
         } else { //User attached to no contract

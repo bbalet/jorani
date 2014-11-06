@@ -84,6 +84,7 @@ class Users extends CI_Controller {
      */
     public function employees() {
         $this->auth->check_is_granted('employees_list');
+        $this->expires_now();
         $data = $this->getUserContext();
         $data['employees'] = $this->users_model->get_all_employees();
         $data['title'] = lang('employees_index_title');
@@ -97,6 +98,7 @@ class Users extends CI_Controller {
      */
     public function view($id) {
         $this->auth->check_is_granted('view_user');
+        $this->expires_now();
         $data = $this->getUserContext();
         $data['user'] = $this->users_model->get_users($id);
         if (empty($data['user'])) {
@@ -211,6 +213,7 @@ class Users extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->check_is_granted('edit_user');
+        $this->expires_now();
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -353,6 +356,7 @@ class Users extends CI_Controller {
      */
     public function create() {
         $this->auth->check_is_granted('create_user');
+        $this->expires_now();
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');

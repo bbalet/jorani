@@ -17,7 +17,7 @@
  */
 
 $CI =& get_instance();
-$CI->load->library('language');
+$CI->load->library('polyglot');
 $CI->load->helper('language');
 $this->lang->load('session', $language);
 $this->lang->load('global', $language);?>
@@ -43,7 +43,7 @@ $(document).ready(function() {
 <?php
 $attributes = array('id' => 'loginFrom');
 echo form_open('session/login', $attributes);
-$languages = $CI->language->nativelanguages($this->config->item('languages'));?>
+$languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
 
     <input type="hidden" name="last_page" value="session/login" />
     <?php if (count($languages) == 1) { ?>
@@ -83,10 +83,14 @@ $languages = $CI->language->nativelanguages($this->config->item('languages'));?>
     $(function () {
         //Memorize the last selected language with a cookie
         if($.cookie('language') != null) {
-            $('#language option[value="' + $.cookie('language') + '"]').attr('selected', 'selected');
+            var IsLangAvailable = 0 != $('#language option[value=' + $.cookie('language') + ']').length;
             if ($.cookie('language') != "<?php echo $language_code; ?>") {
-                $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
-                $('#loginFrom').submit();
+                //Test if the former selected language is into the list of available languages
+                if (IsLangAvailable) {
+                    $('#language option[value="' + $.cookie('language') + '"]').attr('selected', 'selected');
+                    $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
+                    $('#loginFrom').submit();
+                }
             }
         }
         

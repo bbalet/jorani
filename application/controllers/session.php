@@ -31,21 +31,13 @@ class Session extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        if($this->session->userdata('language')) {
-            $this->language = $this->session->userdata('language');
-            $this->language_code = $this->session->userdata('language_code');
-        } else {
+        $this->load->library('polyglot');
+        if ($this->session->userdata('language') == FALSE) {
             $this->session->set_userdata('language', $this->config->item('language'));
-            switch ($this->config->item('language')) {
-                case 'english' : $this->session->set_userdata('language_code', 'en'); break;
-                case 'french' : $this->session->set_userdata('language_code', 'fr'); break;
-                case 'khmer' : $this->session->set_userdata('language_code', 'km'); break;
-            }
+            $this->session->set_userdata('language_code', $this->polyglot->language2code($this->config->item('language')));
         }
-        $this->language_name = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
         $this->load->helper('language');
-        $this->lang->load('session', $this->language_name);
+        $this->lang->load('session', $this->session->userdata('language'));
     }
 
     /**
@@ -77,8 +69,8 @@ class Session extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
             $data['salt'] = $this->generateRandomString(rand(5, 20));
-            $data['language'] = $this->language_name;
-            $data['language_code'] = $this->language_code;
+            $data['language'] = $this->session->userdata('language');
+            $data['language_code'] = $this->session->userdata('language_code');
             $this->session->set_userdata('salt', $data['salt']);
             $this->load->view('templates/header', $data);
             $this->load->view('session/login', $data);
@@ -87,11 +79,7 @@ class Session extends CI_Controller {
             $this->load->model('users_model');
             //Set language
             $this->session->set_userdata('language_code', $this->input->post('language'));
-            switch ($this->input->post('language')) {
-                case "fr" : $this->session->set_userdata('language', 'french'); break;
-                case "en" : $this->session->set_userdata('language', 'english'); break;
-                case "km" : $this->session->set_userdata('language', 'khmer'); break;
-            }
+            $this->session->set_userdata('language', $this->polyglot->code2language($this->input->post('language')));
             
             //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
             set_include_path(get_include_path() . PATH_SEPARATOR . APPPATH . 'third_party/phpseclib');
@@ -132,8 +120,8 @@ class Session extends CI_Controller {
                 $this->session->set_flashdata('msg', lang('session_login_flash_bad_credentials'));
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
                 $data['salt'] = $this->generateRandomString(rand(5, 20));
-                $data['language'] = $this->language;
-                $data['language_code'] = $this->language_code;
+                $data['language'] = $this->session->userdata('language');
+                $data['language_code'] = $this->session->userdata('language_code');
                 $this->session->set_userdata('salt', $data['salt']);
                 $this->load->view('templates/header', $data);
                 $this->load->view('session/login', $data);
@@ -141,9 +129,7 @@ class Session extends CI_Controller {
             } else {
                 //If the user has a target page (e.g. link in an e-mail), redirect to this destination
                 $parsed_url = parse_url($this->session->userdata('last_page'));
-                //log_message('debug', '{controllers/session/login}  page=' . $parsed_url['path']);
                 if ($parsed_url['path'] == '/lms/index.php') {
-                    //log_message('debug', '{controllers/session/login}  page=' . $this->session->userdata('last_page'));
                     $this->session->set_userdata('last_page', '');
                 }
                 if ($this->session->userdata('last_page') != '') {
@@ -173,12 +159,8 @@ class Session extends CI_Controller {
      */
     public function language() {
         $this->load->helper('form');
-        switch ($this->input->post('language')) {
-            case "fr" : $this->session->set_userdata('language', 'french'); break;
-            case "en" : $this->session->set_userdata('language', 'english'); break;
-            case "km" : $this->session->set_userdata('language', 'khmer'); break;
-        }
         $this->session->set_userdata('language_code', $this->input->post('language'));
+        $this->session->set_userdata('language', $this->polyglot->code2language($this->input->post('language')));
         redirect($this->input->post('last_page'));
     }
     
@@ -197,8 +179,7 @@ class Session extends CI_Controller {
             //Send an email to the user with its login information
             $this->load->model('settings_model');
             $this->load->library('email');
-            $this->load->library('language');
-            $this->lang->load('email', $this->language_name);
+            $this->lang->load('email', $this->language);
             
             //Generate random password and store its hash into db
             $password = $this->users_model->resetClearPassword($user->id);

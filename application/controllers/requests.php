@@ -164,8 +164,8 @@ class Requests extends CI_Controller {
 
         //Send an e-mail to the employee
         $this->load->library('email');
-        $this->load->library('language');
-        $usr_lang = $this->language->code2language($employee['language']);
+        $this->load->library('polyglot');
+        $usr_lang = $this->polyglot->code2language($employee['language']);
         $this->lang->load('email', $usr_lang);
 
         $this->lang->load('global', $usr_lang);

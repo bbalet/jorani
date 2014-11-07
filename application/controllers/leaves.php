@@ -253,8 +253,8 @@ class Leaves extends CI_Controller {
 
             //Send an e-mail to the manager
             $this->load->library('email');
-            $this->load->library('language');
-            $usr_lang = $this->language->code2language($manager['language']);
+            $this->load->library('polyglot');
+            $usr_lang = $this->polyglot->code2language($manager['language']);
             $this->lang->load('email', $usr_lang);
 
             $this->lang->load('global', $usr_lang);

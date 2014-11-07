@@ -38,8 +38,6 @@ class Pages extends CI_Controller {
         $this->is_admin = $this->session->userdata('is_admin');
         $this->is_hr = $this->session->userdata('is_hr');
         $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
     }
     
     /**
@@ -53,8 +51,8 @@ class Pages extends CI_Controller {
         $data['is_admin'] = $this->is_admin;
         $data['is_hr'] = $this->is_hr;
         $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
+        $data['language'] = $this->session->userdata('language');
+        $data['language_code'] =  $this->session->userdata('language_code');
         return $data;
     }
 
@@ -66,7 +64,7 @@ class Pages extends CI_Controller {
      */
     public function view($page = 'home') {
         $data = $this->getUserContext();
-        $path = 'pages/' . $this->language_code . '/' . $page . '.php';
+        $path = 'pages/' . $this->session->userdata('language_code') . '/' . $page . '.php';
         if (!file_exists('application/views/' . $path)) {
             $path = 'pages/en/' . $page . '.php';
             if (!file_exists('application/views/' . $path)) { //fallback on default language

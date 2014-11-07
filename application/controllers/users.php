@@ -304,7 +304,6 @@ class Users extends CI_Controller {
             $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
             if ($this->form_validation->run() === FALSE) {
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
-                $this->load->view('templates/header', $data);
                 $this->load->view('users/reset', $data);
             } else {
                 $this->users_model->reset_password($id, $this->input->post('CipheredValue'));
@@ -314,8 +313,8 @@ class Users extends CI_Controller {
                 $this->load->model('settings_model');
                 $user = $this->users_model->get_users($id);
                 $this->load->library('email');
-                $this->load->library('language');
-                $usr_lang = $this->language->code2language($user['language']);
+                $this->load->library('polyglot');
+                $usr_lang = $this->polyglot->code2language($user['language']);
                 $this->lang->load('email', $usr_lang);
 
                 $this->load->library('parser');
@@ -394,8 +393,8 @@ class Users extends CI_Controller {
             //Send an e-mail to the user so as to inform that its account has been created
             $this->load->model('settings_model');
             $this->load->library('email');
-            $this->load->library('language');
-            $usr_lang = $this->language->code2language($this->input->post('language'));
+            $this->load->library('polyglot');
+            $usr_lang = $this->polyglot->code2language($this->input->post('language'));
             $this->lang->load('email', $usr_lang);
             
             $this->load->library('parser');

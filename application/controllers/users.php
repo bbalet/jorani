@@ -20,9 +20,6 @@ if (!defined('BASEPATH')) {
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
-
 class Users extends CI_Controller {
 
     /**
@@ -31,15 +28,13 @@ class Users extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //$this->output->enable_profiler($this->config->item('enable_profiling'));
         //Check if user is connected
         if (!$this->session->userdata('logged_in')) {
             $this->session->set_userdata('last_page', current_url());
             redirect('session/login');
         }
         $this->load->model('users_model');
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
+        $this->fullname = $this->session->userdata('firstname') . ' ' . $this->session->userdata('lastname');
         $this->is_hr = $this->session->userdata('is_hr');
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');

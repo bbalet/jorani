@@ -16,9 +16,10 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-CI_Controller::get_instance()->load->helper('language');
+$CI =& get_instance();
+$CI->load->library('polyglot');
+$CI->load->helper('language');
 $this->lang->load('users', $language);
-CI_Controller::get_instance()->load->library('language');
 $this->lang->load('global', $language);?>
 
 <h2><?php echo lang('users_view_title');?><?php echo $user['id']; ?></h2>
@@ -64,7 +65,7 @@ echo $date->format(lang('global_date_format')); ?>" readonly /><br />
     
     <label for="language"><?php echo lang('users_create_field_language');?></label>
     <select name="language" readonly>
-        <option><?php echo $this->language->code2nativelanguage($user['language']); ?></option>
+        <option><?php echo $CI->polyglot->code2nativelanguage($user['language']); ?></option>
     </select>
     
     <br /><br />

@@ -34,6 +34,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 ## Installation
 
 [See the installation instructions](docs/install/README.md) for advanced configuration. In a nutshell :
+* If you use Apache, *mod_rewrite must be activated and the config must allow overwriting settings with .htaccess file*.
 * Download or clone LMS.
 * Upload the content of this folder on your server (in <code>/var/www/...</code>).
 * Create a database with <code>/sql/lms.sql</code> script.
@@ -42,6 +43,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Update the end of <code>/application/config/email.php</code> with your e-mails settings.
 * Update the end of <code>/application/config/config.php</code> if you want to change the default behaviour.
 * It is recommended to change the private and public RSA keys (in <code>assets/keys</code>).
+* The default user is **bbalet** and password is **bbalet**.
 
 ## What's next ?
 
@@ -74,13 +76,12 @@ We thank the following open source projects for the components used by LMS:
 * BCRYPT password hasher https://github.com/dwightwatson/codeigniter-bcrypt
 * RSA Encryption in pure PHP https://github.com/phpseclib/phpseclib
 * Excel import/export https://github.com/PHPOffice/PHPExcel
-* TCPDF http://www.tcpdf.org/
 
 #### Frontend
 
 * bootstrap 2.3
 * JQuery 1.x and JQuery-UI
-* Calendar http://arshaw.com/fullcalendar/
+* FullCalendar http://arshaw.com/fullcalendar/
 * Datatable https://datatables.net/
 * RSA implementation https://github.com/travist/jsencrypt
 * Moment (JS dates lib) http://momentjs.com/

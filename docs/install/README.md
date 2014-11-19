@@ -6,7 +6,8 @@ However, please note that HHVM is still under development.
 
 ## General considerations
 
-The LMS application must have write privileges on <code>temp</code> and <code>application/logs</code> folders.
+The LMS application must have write privileges on <code>temp</code> and <code>application/logs</code> folders. 
+The default user is **bbalet** and password is **bbalet**.
 
 ## Database setup
 
@@ -21,13 +22,39 @@ You might need to change the code <code>CREATE DEFINER=`root`@`localhost`</code>
 
 ## E-mail setup
 
-LMS uses e-mail to notify users and managers. In order to setup e-mail modify the end of 
-<code>application/config/config.php</code> file according to your environment.
+LMS uses e-mail to notify users and their line managers. In order to setup e-mail modify 
+<code>/application/config/email.php</code> file according to your environment.
+
+### Example for GMail
+
+    $config['protocol'] = 'smtp';
+    $config['useragent'] = 'phpmailer';
+    $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+    $config['smtp_user'] = 'monad...@gmail.com';
+    $config['smtp_pass'] = 'monpwd';
+    $config['_smtp_auth'] = TRUE;
+    $config['smtp_port'] = '465';
+
+## LDAP
+
+In order to use LDAP, locate these lines of code into <code>application/config/config.php</code> :
+
+   $config['ldap_enabled'] = FALSE;
+   $config['ldap_host'] = '127.0.0.1';
+   $config['ldap_port'] = 389;
+   $config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';
+
+* Switch ldap_enabled to <code>TRUE</code>.
+* Change <code>ldap_host</code> and <code>ldap_port</code> according to your environement.
+* LMS tries to bind to LDAP according to the content of <code>ldap_basedn</code> in where <code>%s</code> is a placeholder for the user id to be checked into LDAP.
+* Contact your IT Admin in order to know more about how LDAP is configured into your organization. Change the value but <code>%s</code> must remain somewhere into this string.
+* The user id into LMS and LDAP must be the same. When LDAP is activated, LMS doesn't use anymore the password stored into the database.
+* LMS is designed for small organization, therefore it doesn't support complex authentication schemes.
 
 ## Apache
 
 LMS is a PHP/CI application using rewrite rules and .htaccess files. 
-So your Apache configuration must allow overwriting configuration by .htaccess files and mod_rewrite must be enabled.
+So your Apache configuration must *allow overwriting configuration by .htaccess files and mod_rewrite must be enabled*.
 
 ## nginx
 
@@ -62,15 +89,15 @@ If you get this error : <code>upstream sent too big header while reading respons
 
 Add this to your http {} of the nginx.conf file normally located at /etc/nginx/nginx.conf:
 
-proxy_buffer_size   128k;
-proxy_buffers   4 256k;
-proxy_busy_buffers_size   256k;
+    proxy_buffer_size   128k;
+    proxy_buffers   4 256k;
+    proxy_busy_buffers_size   256k;
 
 Then add this to your php location block, this will be located in your vhost file look for the block that begins with location ~ .php$ {
 
-fastcgi_buffer_size 128k;
-fastcgi_buffers 4 256k;
-fastcgi_busy_buffers_size 256k;
+    fastcgi_buffer_size 128k;
+    fastcgi_buffers 4 256k;
+    fastcgi_busy_buffers_size 256k;
 
 If you are running nginx, tune your configuration (see <code>/etc/nginx/nginx.conf</code>).
 

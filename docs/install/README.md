@@ -7,7 +7,7 @@ However, please note that HHVM is still under development.
 ## General considerations
 
 The LMS application must have write privileges on <code>temp</code> and <code>application/logs</code> folders. 
-The default user is **bbalet** and password is **bbalet**.
+The default user is *bbalet* and password is *bbalet*.
 
 ## Database setup
 
@@ -39,10 +39,10 @@ LMS uses e-mail to notify users and their line managers. In order to setup e-mai
 
 In order to use LDAP, locate these lines of code into <code>application/config/config.php</code> :
 
-   $config['ldap_enabled'] = FALSE;
-   $config['ldap_host'] = '127.0.0.1';
-   $config['ldap_port'] = 389;
-   $config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';
+    $config['ldap_enabled'] = FALSE;
+    $config['ldap_host'] = '127.0.0.1';
+    $config['ldap_port'] = 389;
+    $config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';
 
 * Switch ldap_enabled to <code>TRUE</code>.
 * Change <code>ldap_host</code> and <code>ldap_port</code> according to your environement.
@@ -54,7 +54,7 @@ In order to use LDAP, locate these lines of code into <code>application/config/c
 ## Apache
 
 LMS is a PHP/CI application using rewrite rules and .htaccess files. 
-So your Apache configuration must *allow overwriting configuration by .htaccess files and mod_rewrite must be enabled*.
+So your Apache configuration must **allow overwriting configuration by .htaccess files and mod_rewrite must be enabled**.
 
 ## nginx
 

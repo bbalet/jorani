@@ -34,7 +34,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 ## Installation
 
 [See the installation instructions](docs/install/README.md) for advanced configuration. In a nutshell :
-* If you use Apache, *mod_rewrite must be activated and the config must allow overwriting settings with .htaccess file*.
+* If you use Apache, **mod_rewrite must be activated and the config must allow overwriting settings with .htaccess file**.
 * Download or clone LMS.
 * Upload the content of this folder on your server (in <code>/var/www/...</code>).
 * Create a database with <code>/sql/lms.sql</code> script.
@@ -43,7 +43,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Update the end of <code>/application/config/email.php</code> with your e-mails settings.
 * Update the end of <code>/application/config/config.php</code> if you want to change the default behaviour.
 * It is recommended to change the private and public RSA keys (in <code>assets/keys</code>).
-* The default user is **bbalet** and password is **bbalet**.
+* The default user is *bbalet* and password is *bbalet*.
 
 ## What's next ?
 

@@ -75,6 +75,15 @@ $this->lang->load('global', $language);?>
 
 <div id='calendar'></div>
 
+<div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
+        <div class="modal-header">
+            <h1><?php echo lang('global_msg_wait');?></h1>
+        </div>
+        <div class="modal-body">
+            <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
+        </div>
+ </div>
+
 <link href="<?php echo base_url();?>assets/fullcalendar/fullcalendar.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lib/moment.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/fullcalendar.min.js"></script>
@@ -142,11 +151,18 @@ $this->lang->load('global', $language);?>
 
         //Create a calendar and fill it with AJAX events
         $('#calendar').fullCalendar({
-                header: {
+             header: {
                     left: "",
                     center: "title",
                     right: ""
-            }
+            },
+            loading: function(isLoading) {
+            if (isLoading) { //Display/Hide a pop-up showing an animated icon during the Ajax query.
+                $('#frmModalAjaxWait').modal('show');
+            } else {
+                $('#frmModalAjaxWait').modal('hide');
+            }    
+        }
         });
         
         //Toggle day offs displays

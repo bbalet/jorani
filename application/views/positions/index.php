@@ -51,9 +51,11 @@ $(document).ready(function() {
 <?php foreach ($positions as $position): ?>
     <tr>
         <td>
-            <a href="#" class="confirm-delete" data-id="<?php echo $position['id'];?>" title="<?php echo lang('positions_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>&nbsp; 
-            <a href="<?php echo base_url();?>positions/edit/<?php echo $position['id']; ?>" title="<?php echo lang('positions_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>&nbsp; 
             <?php echo $position['id'];?>
+            <div class="pull-right">
+                <a href="#" class="confirm-delete" data-id="<?php echo $position['id'];?>" title="<?php echo lang('positions_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>&nbsp; 
+                <a href="<?php echo base_url();?>positions/edit/<?php echo $position['id']; ?>" title="<?php echo lang('positions_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
+            </div>
         </td>
         <td><?php echo $position['name']; ?></td>
         <td><?php echo $position['description']; ?></td>

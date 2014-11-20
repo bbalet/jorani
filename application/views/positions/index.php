@@ -50,7 +50,7 @@ $(document).ready(function() {
     <tbody>
 <?php foreach ($positions as $position): ?>
     <tr>
-        <td>
+        <td data-order="<?php echo $position['id']; ?>">
             <?php echo $position['id'];?>
             <div class="pull-right">
                 <a href="#" class="confirm-delete" data-id="<?php echo $position['id'];?>" title="<?php echo lang('positions_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>&nbsp; 

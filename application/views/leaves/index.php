@@ -58,11 +58,13 @@ $(document).ready(function() {
     <tbody>
 <?php foreach ($leaves as $leaves_item): 
     $date = new DateTime($leaves_item['startdate']);
+    $tmpStartDate = $date->getTimestamp();
     $startdate = $date->format(lang('global_date_format'));
     $date = new DateTime($leaves_item['enddate']);
+    $tmpEndDate = $date->getTimestamp();
     $enddate = $date->format(lang('global_date_format'));?>
     <tr>
-        <td>
+        <td data-order="<?php echo $leaves_item['id']; ?>">
             <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><?php echo $leaves_item['id']; ?></a>
             &nbsp;
             <div class="pull-right">
@@ -75,8 +77,8 @@ $(document).ready(function() {
                 <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
             </div>
         </td>
-        <td><?php echo $startdate . ' (' . lang($leaves_item['startdatetype']). ')'; ?></td>
-        <td><?php echo $enddate . ' (' . lang($leaves_item['enddatetype']) . ')'; ?></td>
+        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leaves_item['startdatetype']). ')'; ?></td>
+        <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leaves_item['enddatetype']) . ')'; ?></td>
         <td><?php echo $leaves_item['cause']; ?></td>
         <td><?php echo $leaves_item['duration']; ?></td>
         <td><?php echo $leaves_item['type_label']; ?></td>

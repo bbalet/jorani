@@ -56,7 +56,7 @@ $(document).ready(function() {
     <tbody>
 <?php foreach ($users as $users_item): ?>
     <tr>
-        <td>
+        <td data-order="<?php echo $users_item['id']; ?>">
             <?php echo $users_item['id'] ?>
             <div class="pull-right">
                 &nbsp;

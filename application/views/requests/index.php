@@ -60,11 +60,13 @@ $(document).ready(function() {
     <tbody>
 <?php foreach ($requests as $requests_item):
     $date = new DateTime($requests_item['startdate']);
+    $tmpStartDate = $date->getTimestamp();
     $startdate = $date->format(lang('global_date_format'));
     $date = new DateTime($requests_item['enddate']);
+    $tmpEndDate = $date->getTimestamp();
     $enddate = $date->format(lang('global_date_format'));?>
     <tr>
-        <td>
+        <td data-order="<?php echo $requests_item['id']; ?>">
             <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
             &nbsp;
             <div class="pull-right">
@@ -76,8 +78,8 @@ $(document).ready(function() {
             </div>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
-        <td><?php echo $startdate . ' (' . lang($requests_item['startdatetype']). ')'; ?></td>
-        <td><?php echo $enddate . ' (' . lang($requests_item['enddatetype']) . ')'; ?></td>
+        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($requests_item['startdatetype']). ')'; ?></td>
+        <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($requests_item['enddatetype']) . ')'; ?></td>
         <td><?php echo $requests_item['duration']; ?></td>
         <td><?php echo $requests_item['type_label']; ?></td>
         

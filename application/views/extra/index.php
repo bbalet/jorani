@@ -29,7 +29,6 @@ $this->lang->load('global', $language);?>
 <div class="alert fade in" id="flashbox">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <?php echo $this->session->flashdata('msg'); ?>
- 
 </div>
  
 <script type="text/javascript">
@@ -55,7 +54,7 @@ $(document).ready(function() {
     <tbody>
 <?php foreach ($extras as $extra_item): ?>
     <tr>
-        <td>
+        <td data-order="<?php echo $extra_item['id']; ?>">
             <a href="<?php echo base_url();?>extra/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_view');?>"><?php echo $extra_item['id']; ?></a>
             &nbsp;
             <div class="pull-right">
@@ -68,10 +67,9 @@ $(document).ready(function() {
                 <?php } ?>
             </div>
         </td>
-        <td><?php 
-$date = new DateTime($extra_item['date']);
-echo $date->format(lang('global_date_format'));
-?></td>
+<?php $date = new DateTime($extra_item['date']);
+$tmpDate = $date->getTimestamp();?>
+        <td data-order="<?php echo $tmpDate; ?>"><?php echo $date->format(lang('global_date_format'));?></td>
         <td><?php echo $extra_item['duration']; ?></td>
         <td><?php echo $extra_item['cause']; ?></td>
         <td><?php echo lang($extra_item['status_label']); ?></td>

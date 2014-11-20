@@ -57,7 +57,7 @@ $(document).ready(function() {
     <tbody>
 <?php foreach ($users as $users_item): ?>
     <tr>
-        <td>
+        <td data-order="<?php echo $users_item['id']; ?>">
             <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_view');?>"><?php echo $users_item['id'] ?></a>
             &nbsp;
             <div class="pull-right">

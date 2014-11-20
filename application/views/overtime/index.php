@@ -57,7 +57,7 @@ $(document).ready(function() {
     <tbody>
 <?php foreach ($requests as $requests_item): ?>
     <tr>
-        <td>
+        <td data-order="<?php echo $requests_item['id'] ?>">
             <a href="<?php echo base_url();?>extra/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
             &nbsp;
             <a href="<?php echo base_url();?>extra/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
@@ -67,10 +67,9 @@ $(document).ready(function() {
             <a href="<?php echo base_url();?>overtime/reject/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
-        <td><?php 
-$date = new DateTime($requests_item['date']);
-echo $date->format(lang('global_date_format'));
-?></td>
+<?php $date = new DateTime($requests_item['date']);
+$tmpDate = $date->getTimestamp();?>
+        <td data-order="<?php echo $tmpDate; ?>"><?php echo $date->format(lang('global_date_format'));?></td>
         <td><?php echo $requests_item['duration']; ?></td>
         <td><?php echo lang($requests_item['status_label']); ?></td>
         

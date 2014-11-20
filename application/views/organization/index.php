@@ -96,11 +96,19 @@ $this->lang->load('treeview', $language);?>
     </div>
 </div>
 
+<div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
+        <div class="modal-header">
+            <h1><?php echo lang('global_msg_wait');?></h1>
+        </div>
+        <div class="modal-body">
+            <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
+        </div>
+ </div>
+
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
 <link rel="stylesheet" href='<?php echo base_url(); ?>assets/jsTree/themes/default/style.css' type="text/css" media="screen, projection" />
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/jsTree/jstree.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable.ajax.reload.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">
@@ -117,7 +125,11 @@ $this->lang->load('treeview', $language);?>
           })
           .done(function( msg ) {
             //Update table of users
-            oTable.fnReloadAjax("<?php echo base_url(); ?>organization/employees?id=" + entity);
+            $('#frmModalAjaxWait').modal('show');
+            oTable.ajax.url("<?php echo base_url(); ?>organization/employees?id=" + entity)
+            .load(function() {
+                    $("#frmModalAjaxWait").modal('hide');
+                }, true);
             $("#frmAddEmployee").modal('hide');
           });
     }
@@ -161,7 +173,11 @@ $this->lang->load('treeview', $language);?>
                       })
                       .done(function( msg ) {
                         //Update table of users
-                        oTable.fnReloadAjax("<?php echo base_url(); ?>organization/employees?id=" + entity);
+                        $('#frmModalAjaxWait').modal('show');
+                        oTable.ajax.url("<?php echo base_url(); ?>organization/employees?id=" + entity)
+                        .load(function() {
+                                $("#frmModalAjaxWait").modal('hide');
+                            }, true);
                     });
                 } else {
                     $("#lblError").text("<?php echo lang('organization_index_error_msg_select_entity');?>");
@@ -186,6 +202,41 @@ $this->lang->load('treeview', $language);?>
             $("#organization").jstree("search", $("#txtSearch").val());
         });
         
+        //Transform the HTML table in a fancy datatable
+        oTable = $('#collaborators').DataTable({
+            fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                //As the datatable is populated with Ajax we need to add a callback this way
+                $('td', nRow).on('click', function() {
+                    $("#collaborators tbody tr").removeClass('row_selected');
+                    $(nRow).addClass("row_selected");
+                });
+            },
+            "oLanguage": {
+                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                    "oPaginate": {
+                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                        "sLast":     "<?php echo lang('datatable_sLast');?>",
+                        "sNext":     "<?php echo lang('datatable_sNext');?>",
+                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                    },
+                    "oAria": {
+                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                    }
+                }
+        });
+        
+        //Initialize the tree of the organization
         $('#organization').jstree({
             contextmenu: {
                 items: function(n) {
@@ -269,42 +320,12 @@ $this->lang->load('treeview', $language);?>
         })
         .on('changed.jstree', function(e, data) {
             if (data && data.selected && data.selected.length) {
-                oTable.fnReloadAjax("<?php echo base_url(); ?>organization/employees?id=" + data.selected.join(':'));
+                $('#frmModalAjaxWait').modal('show');
+                oTable.ajax.url("<?php echo base_url(); ?>organization/employees?id=" + data.selected.join(':'))
+                    .load(function() {
+                            $("#frmModalAjaxWait").modal('hide');
+                        }, true);
             }
-        });
-
-        //Transform the HTML table in a fancy datatable
-        oTable = $('#collaborators').dataTable({
-            fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-                //As the datatable is populated with Ajax we need to add a callback this way
-                $('td', nRow).on('click', function() {
-                    $("#collaborators tbody tr").removeClass('row_selected');
-                    $(nRow).addClass("row_selected");
-                });
-            },
-            "oLanguage": {
-                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
-                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
-                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
-                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
-                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
-                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
-                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
-                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
-                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
-                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
-                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
-                    "oPaginate": {
-                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
-                        "sLast":     "<?php echo lang('datatable_sLast');?>",
-                        "sNext":     "<?php echo lang('datatable_sNext');?>",
-                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
-                    },
-                    "oAria": {
-                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
-                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
-                    }
-                }
         });
     });
 </script>

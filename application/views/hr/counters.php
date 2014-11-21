@@ -38,8 +38,8 @@ $this->lang->load('global', $language);?>
     <tr>
       <td><?php echo $key; ?></td>
       <td><?php echo ((float) $value[1] - (float) $value[0]); ?></td>
-      <td><?php echo (float) $value[0]; ?></td>
-      <td><?php echo (float) $value[1]; ?></td>
+      <td><?php if ($value[2] == '') { echo ((float) $value[0]); } else { echo '-'; } ?></td>
+      <td><?php if ($value[2] == '') { echo ((float) $value[1]); } else { echo '-'; } ?></td>
       <td><?php echo $value[2]; ?></td>
     </tr>
   <?php } ?>

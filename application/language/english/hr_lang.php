@@ -33,6 +33,13 @@ $lang['hr_employees_button_export'] = 'Export this list';
 $lang['hr_employees_popup_entitlment_title'] = 'Entitled days';
 $lang['hr_employees_popup_entitlment_button_cancel'] = 'Cancel';
 $lang['hr_employees_popup_entitlment_button_close'] = 'Close';
+$lang['hr_employees_button_select'] = 'Select';
+$lang['hr_employees_field_entity'] = 'Entity';
+$lang['hr_employees_popup_entity_title'] = 'Select an entity';
+$lang['hr_employees_popup_entity_button_ok'] = 'OK';
+$lang['hr_employees_popup_entity_button_cancel'] = 'Cancel';
+$lang['hr_employees_description'] = 'Right-click on an employee for contextual actions.';
+$lang['hr_employees_field_subdepts'] = 'Include sub-departments';
 
 $lang['hr_export_employees_title'] = 'List of employees';
 $lang['hr_export_employees_thead_id'] = 'ID';

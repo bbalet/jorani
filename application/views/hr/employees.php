@@ -42,6 +42,23 @@ $(document).ready(function() {
 <a href="<?php echo lang('global_link_doc_page_list_employees');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
 </h1>
 
+<div class="row-fluid">
+    <div class="span4">
+        <input type="hidden" name="entity" id="entity" />
+         <label for="txtEntity"><?php echo lang('hr_employees_field_entity');?></label>
+         <div class="input-append">
+             <input type="text" id="txtEntity" name="txtEntity" readonly />
+             <a id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('hr_employees_button_select');?></a>
+         </div>
+    </div>
+    <div class="span4">
+      <input type="checkbox" id="chkIncludeChildren" checked /> <?php echo lang('hr_employees_field_subdepts');?>
+    </div>
+    <div class="span4">
+      <?php echo lang('hr_employees_description');?>
+    </div>
+</div>
+
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
     <thead>
         <tr>
@@ -53,32 +70,8 @@ $(document).ready(function() {
             <th><?php echo lang('hr_employees_thead_manager');?></th>
         </tr>
     </thead>
-    <tbody>
-<?php foreach ($users as $users_item): ?>
-    <tr>
-        <td data-order="<?php echo $users_item['id']; ?>">
-            <?php echo $users_item['id'] ?>
-            <div class="pull-right">
-                &nbsp;
-                <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>?source=hr%2Femployees" title="<?php echo lang('hr_employees_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
-                &nbsp;
-                <a href="<?php echo base_url();?>entitleddays/user/<?php echo $users_item['id'] ?>" title="<?php echo lang('hr_employees_thead_tip_entitlment');?>"><i class="icon-edit"></i></a>
-                &nbsp;
-                <a href="<?php echo base_url();?>hr/leaves/<?php echo $users_item['id'] ?>" title="<?php echo lang('hr_employees_thead_link_leaves');?>"><i class="icon-list-alt"></i></a>
-                &nbsp;
-                <a href="<?php echo base_url();?>hr/overtime/<?php echo $users_item['id'] ?>" title="<?php echo lang('hr_employees_thead_link_extra');?>"><i class="icon-list-alt"></i></a>
-                &nbsp;
-                <a href="<?php echo base_url();?>hr/counters/<?php echo $users_item['id'] ?>" title="<?php echo lang('hr_employees_thead_link_balance');?>"><i class="icon-info-sign"></i></a>
-            </div>
-        </td>
-        <td><?php echo $users_item['firstname']; ?></td>
-        <td><?php echo $users_item['lastname']; ?></td>
-        <td><a href="mailto:<?php echo $users_item['email']; ?>"><?php echo $users_item['email']; ?></a></td>
-        <td><?php echo $users_item['contract']; ?></td>
-        <td><?php echo $users_item['manager_firstname'] . ' ' . $users_item['manager_lastname']; ?></td>
-    </tr>
-<?php endforeach ?>
-	</tbody>
+    <tbody class="context" data-toggle="context" data-target="#context-menu">
+    </tbody>
 </table>
 	</div>
 </div>
@@ -97,13 +90,104 @@ $(document).ready(function() {
     <div class="span8">&nbsp;</div>
 </div>
 
+<div id="frmSelectEntity" class="modal hide fade">
+    <div class="modal-header">
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="close">&times;</a>
+         <h3><?php echo lang('hr_employees_popup_entity_title');?></h3>
+    </div>
+    <div class="modal-body" id="frmSelectEntityBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="select_entity();" class="btn secondary"><?php echo lang('hr_employees_popup_entity_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('hr_employees_popup_entity_button_cancel');?></a>
+    </div>
+</div>
+
+<div id="context-menu">
+  <ul class="dropdown-menu" role="menu">
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>users/edit/{id}?source=hr%2Femployees"><i class="icon-pencil"></i>&nbsp;<?php echo lang('hr_employees_thead_tip_edit');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>entitleddays/user/{id}"><i class="icon-edit"></i>&nbsp;<?php echo lang('hr_employees_thead_tip_entitlment');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/leaves/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_leaves');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/overtime/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/counters/{id}"><i class="icon-info-sign"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a></li>
+  </ul>
+</div>
+
+<div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
+        <div class="modal-header">
+            <h1><?php echo lang('global_msg_wait');?></h1>
+        </div>
+        <div class="modal-body">
+            <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
+        </div>
+ </div>
+
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
-
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/context.menu.min.js"></script>
 <script type="text/javascript">
+var entity = 0; //Root of the tree by default
+var entityName = '';
+var contextObject;
+var oTable;
+
+//Handle choose of entity with the modal form "select an entity". Update cookie with selected values
+function select_entity() {
+    entity = $('#organization').jstree('get_selected')[0];
+    entityName = $('#organization').jstree().get_text(entity);
+    $('#entity').val(entity);
+    $('#txtEntity').val(entityName);
+    $.cookie('entity', entity);
+    $.cookie('entityName', entityName);
+    $("#frmSelectEntity").modal('hide');
+}
+
 $(function () {
+    //entity
+    //txtEntity
+    //Handle a context menu of the DataTable
+    $('.context').contextmenu({
+        before: function (e, element, target) {
+            e.preventDefault();
+            if (oTable.fnSettings().fnRecordsDisplay() != 0) {
+                contextObject = e.target;
+                return true;
+            } else {
+                return false;
+            }
+        },
+        onItem: function(context,e) {
+            var action = $(e.target).data("action");
+            var id = $(contextObject).closest("tr").find('td:eq(0)').text();
+            var url = action.replace("{id}", id.trim());
+            window.location = url;
+        }
+      });
+    
+        //Cookie has value ? take -1 by default
+        if($.cookie('entity') != null) {
+            entity = $.cookie('entity');
+            entityName = $.cookie('entityName');
+        } else { //Set default value
+            $.cookie('entity', entity);
+            $.cookie('entityName', entityName);
+        }
+  /*    statusCode: {
+    400: function() {
+      alert('400 status code! user error');
+    },
+    500: function() {
+      alert('500 status code! server error');
+    }
+    }*/
+    
+    
+    //$("#frmModalAjaxWait").modal('hide');
+    //$('#frmModalAjaxWait').modal('show');
     //Transform the HTML table in a fancy datatable
-    $('#users').dataTable({
+    oTable = $('#users').dataTable({
                     "iDisplayLength": 50,
                     "oLanguage": {
                         "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
@@ -130,6 +214,12 @@ $(function () {
                 }
             });
     $("#frmEntitledDays").alert();
+    
+    //Popup select entity
+    $("#cmdSelectEntity").click(function() {
+        $("#frmSelectEntity").modal('show');
+        $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
+    });
     
     //Prevent to load always the same content (refreshed each time)
     $('#frmEntitledDays').on('hidden', function() {

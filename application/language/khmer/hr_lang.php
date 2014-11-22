@@ -33,6 +33,13 @@ $lang['hr_employees_button_export'] = 'បញ្ជីនាំចេញ';
 $lang['hr_employees_popup_entitlment_title'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
 $lang['hr_employees_popup_entitlment_button_cancel'] = 'បោះបង់';
 $lang['hr_employees_popup_entitlment_button_close'] = 'បិទ';
+$lang['hr_employees_button_select'] = 'Select';
+$lang['hr_employees_field_entity'] = 'Entity';
+$lang['hr_employees_popup_entity_title'] = 'Select an entity';
+$lang['hr_employees_popup_entity_button_ok'] = 'OK';
+$lang['hr_employees_popup_entity_button_cancel'] = 'Cancel';
+$lang['hr_employees_description'] = 'Right-click on an employee for contextual actions';
+$lang['hr_employees_field_subdepts'] = 'Include sub-departments';
 
 $lang['hr_export_employees_title'] = 'បញ្ជីនៃបុគ្គលិក';
 $lang['hr_export_employees_thead_id'] = 'ID';

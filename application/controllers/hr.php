@@ -98,12 +98,39 @@ class Hr extends CI_Controller {
         $this->auth->check_is_granted('list_employees');
         $data = $this->getUserContext();
         $data['title'] = lang('hr_employees_title');
-        $this->load->model('users_model');
-        $data['users'] = $this->users_model->get_employees();
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/employees', $data);
         $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Returns the list of the employees attached to an entity
+     * Prints the table content in a JSON format expected by jQuery Datatable
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function employeesEntity($id = 0) {
+        header("Content-Type: application/json");
+        if ($this->auth->is_granted('list_employees') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $id = $this->input->get('id', TRUE);
+
+            $employees = $this->users_model->employees_entity($id);
+            $msg = '{"iTotalRecords":' . count($employees);
+            $msg .= ',"iTotalDisplayRecords":' . count($employees);
+            $msg .= ',"aaData":[';
+            foreach ($employees->result() as $employee) {
+                $msg .= '["' . $employee->id . '",';
+                $msg .= '"' . $employee->firstname . '",';
+                $msg .= '"' . $employee->lastname . '",';
+                $msg .= '"' . $employee->email . '"';
+                $msg .= '],';
+            }
+            $msg = rtrim($msg, ",");
+            $msg .= ']}';
+            echo $msg;
+        }
     }
 
     /**

@@ -498,6 +498,36 @@ class Users_model extends CI_Model {
     }
     
     /**
+     * Get the list of employees or one employee
+     * @param int $id optional id of the entity, all entities if 0
+     * @param bool $subEntities true : include sub entities, false otherwise
+     * @return array record of users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function employeesEntity($id = 0, $subEntities = TRUE) {
+        $this->load->model('organization_model');
+        $entities = null;
+        if ($subEntities) {
+            $entities = $this->organization_model->get_all_children($id);
+        } else {
+            $entities = array($id);
+        }
+        $this->db->select('users.id as id,'
+                    . ' users.firstname as firstname,'
+                    . ' users.lastname as lastname,'
+                    . ' users.email as email,'
+                    . ' contracts.name as contract,'
+                    . ' managers.firstname as manager_firstname,'
+                    . ' managers.lastname as manager_lastname');
+        $this->db->from('users');
+        $this->db->join('contracts', 'contracts.id = users.contract', 'left outer');
+        $this->db->join('users as managers', 'managers.id = users.manager', 'left outer');
+            
+            return $this->db->get()->result_array();
+
+    }
+    
+    /**
      * Update a given employee in the database with the contract ID. 
      * @return type
      * @author Benjamin BALET <benjamin.balet@gmail.com>

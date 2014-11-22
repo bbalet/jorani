@@ -109,7 +109,6 @@ class Auth {
             case 'create_contract' :
             case 'delete_contract' :
             case 'edit_contract' :
-                
             case 'delete_positions' :
             case 'edit_positions' :
             case 'create_positions' :

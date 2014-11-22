@@ -33,6 +33,13 @@ $lang['hr_employees_button_export'] = 'Exporter cette liste';
 $lang['hr_employees_popup_entitlment_title'] = 'Crédit congés';
 $lang['hr_employees_popup_entitlment_button_cancel'] = 'Annuler';
 $lang['hr_employees_popup_entitlment_button_close'] = 'Fermer';
+$lang['hr_employees_button_select'] = 'Selectionner';
+$lang['hr_employees_field_entity'] = 'Entitée';
+$lang['hr_employees_popup_entity_title'] = 'Selectionner une entitée';
+$lang['hr_employees_popup_entity_button_ok'] = 'OK';
+$lang['hr_employees_popup_entity_button_cancel'] = 'Annuler';
+$lang['hr_employees_description'] = 'Clic droit sur un employé pour les actions contextuelles.';
+$lang['hr_employees_field_subdepts'] = 'Inclure les sous-départments';
 
 $lang['hr_export_employees_title'] = 'Liste des employés';
 $lang['hr_export_employees_thead_id'] = 'N°';

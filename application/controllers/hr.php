@@ -107,24 +107,28 @@ class Hr extends CI_Controller {
     /**
      * Returns the list of the employees attached to an entity
      * Prints the table content in a JSON format expected by jQuery Datatable
+     * @param int $id optional id of the entity, all entities if 0
+     * @param bool $children true : include sub entities, false otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function employeesEntity($id = 0) {
+    public function employees_entity($id = 0, $children = TRUE) {
         header("Content-Type: application/json");
         if ($this->auth->is_granted('list_employees') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
-            $id = $this->input->get('id', TRUE);
-
-            $employees = $this->users_model->employees_entity($id);
+            $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
+            $this->load->model('users_model');
+            $employees = $this->users_model->employeesEntity($id, $children);
             $msg = '{"iTotalRecords":' . count($employees);
             $msg .= ',"iTotalDisplayRecords":' . count($employees);
             $msg .= ',"aaData":[';
-            foreach ($employees->result() as $employee) {
+            foreach ($employees as $employee) {
                 $msg .= '["' . $employee->id . '",';
                 $msg .= '"' . $employee->firstname . '",';
                 $msg .= '"' . $employee->lastname . '",';
-                $msg .= '"' . $employee->email . '"';
+                $msg .= '"' . $employee->email . '",';
+                $msg .= '"' . $employee->contract . '",';
+                $msg .= '"' . $employee->manager_name . '"';
                 $msg .= '],';
             }
             $msg = rtrim($msg, ",");

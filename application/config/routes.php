@@ -62,7 +62,7 @@ $route['database/purge'] = 'database/purge';
 //Human Resources Management
 $route['hr/index'] = 'hr/index';
 $route['hr/employees'] = 'hr/employees';
-$route['hr/employees/entity/(:num)'] = 'hr/employees/entity/$1';
+$route['hr/employees/entity/(:num)/(:any)'] = 'hr/employees_entity/$1/$2';
 $route['hr/employees/export'] = 'hr/export_employees';
 $route['hr/leaves/(:num)'] = 'hr/leaves/$1';
 $route['hr/leaves/export/(:num)'] = 'hr/export_leaves/$1';

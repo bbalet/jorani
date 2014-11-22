@@ -142,11 +142,11 @@ class Organization extends CI_Controller {
     public function employees() {
         header("Content-Type: application/json");
         $id = $this->input->get('id', TRUE);
-        $employees = $this->organization_model->employees($id);
+        $employees = $this->organization_model->employees($id)->result();
         $msg = '{"iTotalRecords":' . count($employees);
         $msg .= ',"iTotalDisplayRecords":' . count($employees);
         $msg .= ',"aaData":[';
-        foreach ($employees->result() as $employee) {
+        foreach ($employees as $employee) {
             $msg .= '["' . $employee->id . '",';
             $msg .= '"' . $employee->firstname . '",';
             $msg .= '"' . $employee->lastname . '",';

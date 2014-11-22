@@ -130,6 +130,7 @@ $(document).ready(function() {
 <script type="text/javascript">
 var entity = 0; //Root of the tree by default
 var entityName = '';
+var includeChildren = true;
 var contextObject;
 var oTable;
 
@@ -137,16 +138,22 @@ var oTable;
 function select_entity() {
     entity = $('#organization').jstree('get_selected')[0];
     entityName = $('#organization').jstree().get_text(entity);
+    includeChildren = $('#chkIncludeChildren').is(':checked');
     $('#entity').val(entity);
     $('#txtEntity').val(entityName);
     $.cookie('entity', entity);
     $.cookie('entityName', entityName);
+    $.cookie('includeChildren', includeChildren);
     $("#frmSelectEntity").modal('hide');
+    //Refresh datatable
+    $('#frmModalAjaxWait').modal('show');
+    oTable.api().ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren)
+        .load(function() {
+            $("#frmModalAjaxWait").modal('hide');
+        }, true);
 }
 
 $(function () {
-    //entity
-    //txtEntity
     //Handle a context menu of the DataTable
     $('.context').contextmenu({
         before: function (e, element, target) {
@@ -166,28 +173,22 @@ $(function () {
         }
       });
     
-        //Cookie has value ? take -1 by default
-        if($.cookie('entity') != null) {
-            entity = $.cookie('entity');
-            entityName = $.cookie('entityName');
-        } else { //Set default value
-            $.cookie('entity', entity);
-            $.cookie('entityName', entityName);
-        }
-  /*    statusCode: {
-    400: function() {
-      alert('400 status code! user error');
-    },
-    500: function() {
-      alert('500 status code! server error');
-    }
-    }*/
-    
-    
-    //$("#frmModalAjaxWait").modal('hide');
-    //$('#frmModalAjaxWait').modal('show');
+    //Cookie has value ? take -1 by default
+    if($.cookie('entity') != null) {
+        entity = $.cookie('entity');
+        entityName = $.cookie('entityName');
+        includeChildren = $.cookie('includeChildren');
+        $('#txtEntity').val(entityName);
+        $('#chkIncludeChildren').prop('checked', includeChildren);
+    } else { //Set default value
+        $.cookie('entity', entity);
+        $.cookie('entityName', entityName);
+        $.cookie('includeChildren', includeChildren);
+    }    
+
     //Transform the HTML table in a fancy datatable
     oTable = $('#users').dataTable({
+                    "ajax": '<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren,
                     "iDisplayLength": 50,
                     "oLanguage": {
                         "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
@@ -224,6 +225,17 @@ $(function () {
     //Prevent to load always the same content (refreshed each time)
     $('#frmEntitledDays').on('hidden', function() {
         $(this).removeData('modal');
+    });
+    
+    $("#chkIncludeChildren").on('change', function() {
+        includeChildren = $('#chkIncludeChildren').is(':checked');
+        $.cookie('includeChildren', includeChildren);
+        //Refresh datatable
+        $('#frmModalAjaxWait').modal('show');
+        oTable.api().ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren)
+            .load(function() {
+                $("#frmModalAjaxWait").modal('hide');
+            }, true);
     });
 });
 </script>

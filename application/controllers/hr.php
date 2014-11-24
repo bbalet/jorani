@@ -116,14 +116,11 @@ class Hr extends CI_Controller {
         if ($this->auth->is_granted('list_employees') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
-            //echo var_dump($children);
             $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
             $this->load->model('users_model');
             $employees = $this->users_model->employeesEntity($id, $children);
             $msg = '{"iTotalRecords":' . count($employees);
             $msg .= ',"iTotalDisplayRecords":' . count($employees);
-            $msg .= ',"id":' . $id;
-            //$msg .= ',"children":' . $children;
             $msg .= ',"aaData":[';
             foreach ($employees as $employee) {
                 $msg .= '["' . $employee->id . '",';
@@ -283,9 +280,10 @@ class Hr extends CI_Controller {
     
     /**
      * Action: export the list of all employees into an Excel file
-     * @param int $id employee id
+     * @param int $id optional id of the entity, all entities if 0
+     * @param bool $children true : include sub entities, false otherwise
      */
-    public function export_employees() {
+    public function export_employees($id = 0, $children = TRUE) {
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle(lang('hr_export_employees_title'));
@@ -298,17 +296,18 @@ class Hr extends CI_Controller {
         $this->excel->getActiveSheet()->getStyle('A1:F1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         
+        $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
         $this->load->model('users_model');
-        $users = $this->users_model->get_employees();
+        $employees = $this->users_model->employeesEntity($id, $children);
         
         $line = 2;
-        foreach ($users as $user) {
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $user['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $user['firstname']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $user['lastname']);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $user['email']);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, $user['contract']);
-            $this->excel->getActiveSheet()->setCellValue('F' . $line, $user['manager_firstname'] . ' ' . $user['manager_lastname']);
+        foreach ($employees as $employee) {
+            $this->excel->getActiveSheet()->setCellValue('A' . $line, $employee->id);
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, $employee->firstname);
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $employee->lastname);
+            $this->excel->getActiveSheet()->setCellValue('D' . $line, $employee->email);
+            $this->excel->getActiveSheet()->setCellValue('E' . $line, $employee->contract);
+            $this->excel->getActiveSheet()->setCellValue('F' . $line, $employee->manager_name);
             $line++;
         }
 

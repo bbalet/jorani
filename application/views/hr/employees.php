@@ -85,7 +85,7 @@ $(document).ready(function() {
       <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_create_user');?></a>
     </div>
     <div class="span2">
-      <a href="<?php echo base_url();?>hr/employees/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
+      <a href="#" id="cmdExportEmployees" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
     </div>
     <div class="span8">&nbsp;</div>
 </div>
@@ -243,6 +243,10 @@ $(function () {
             .load(function() {
                 $("#frmModalAjaxWait").modal('hide');
             }, true);
+    });
+    
+    $("#cmdExportEmployees").click(function() {
+        window.location = '<?php echo base_url();?>hr/employees/export/' + entity + '/' + includeChildren;
     });
 });
 </script>

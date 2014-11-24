@@ -517,13 +517,15 @@ class Users_model extends CI_Model {
         $this->db->join('users as managers', 'managers.id = users.manager', 'left outer');
 
         if ($id != 0) {
-            $this->db->join('organization', 'organization.id = users.organization', 'left outer');
+            $this->db->join('organization', 'organization.id = users.organization');
             if ($children == true) {
                 $this->load->model('organization_model');
                 $list = $this->organization_model->get_all_children($id);
                 $ids = array();
                 if (count($list) > 0) {
-                    $ids = explode(",", $list[0]['id']);
+                    if ($list[0]['id'] != '') {
+                        $ids = explode(",", $list[0]['id']);
+                    }
                 }
                 array_push($ids, $id);
                 $this->db->where_in('organization.id', $ids);

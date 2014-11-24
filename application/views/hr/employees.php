@@ -52,7 +52,7 @@ $(document).ready(function() {
          </div>
     </div>
     <div class="span4">
-      <input type="checkbox" id="chkIncludeChildren" checked /> <?php echo lang('hr_employees_field_subdepts');?>
+      <input type="checkbox" id="chkIncludeChildren" /> <?php echo lang('hr_employees_field_subdepts');?>
     </div>
     <div class="span4">
       <?php echo lang('hr_employees_description');?>
@@ -166,7 +166,12 @@ $(function () {
             }
         },
         onItem: function(context,e) {
-            var action = $(e.target).data("action");
+            var action = null;
+            if (e != "a") {
+                action = $(e.target).closest("a").data("action");
+            } else {
+                action = $(e.target).data("action");
+            }
             var id = $(contextObject).closest("tr").find('td:eq(0)').text();
             var url = action.replace("{id}", id.trim());
             window.location = url;
@@ -178,6 +183,8 @@ $(function () {
         entity = $.cookie('entity');
         entityName = $.cookie('entityName');
         includeChildren = $.cookie('includeChildren');
+        //Parse boolean value contained into the string
+        includeChildren = $.parseJSON(includeChildren.toLowerCase());
         $('#txtEntity').val(entityName);
         $('#chkIncludeChildren').prop('checked', includeChildren);
     } else { //Set default value

@@ -116,11 +116,14 @@ class Hr extends CI_Controller {
         if ($this->auth->is_granted('list_employees') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
+            //echo var_dump($children);
             $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
             $this->load->model('users_model');
             $employees = $this->users_model->employeesEntity($id, $children);
             $msg = '{"iTotalRecords":' . count($employees);
             $msg .= ',"iTotalDisplayRecords":' . count($employees);
+            $msg .= ',"id":' . $id;
+            //$msg .= ',"children":' . $children;
             $msg .= ',"aaData":[';
             foreach ($employees as $employee) {
                 $msg .= '["' . $employee->id . '",';

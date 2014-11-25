@@ -71,6 +71,7 @@ $this->lang->load('global', $language);?>
     <?php foreach ($contracts as $contract): ?>
         <option value="<?php echo $contract['id'] ?>" <?php if ($contract['id'] == $users_item['contract']) echo "selected"; ?>><?php echo $contract['name']; ?></option>
     <?php endforeach ?>
+        <option value="0" <?php if ($users_item['contract'] == 0 || is_null($users_item['contract'])) echo "selected"; ?>>&nbsp;</option>
     </select>
     
     <input type="hidden" name="entity" id="entity" value="<?php echo $users_item['organization']; ?>" /><br />

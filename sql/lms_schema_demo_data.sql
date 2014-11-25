@@ -1,15 +1,24 @@
--- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
+-- ---------------------------------------------------
+-- LMS Schema definition
+-- 
+-- This file is part of lms.
+-- 
+--  lms is free software: you can redistribute it and/or modify
+--  it under the terms of the GNU General Public License as published by
+--  the Free Software Foundation, either version 3 of the License, or
+--  (at your option) any later version.
+-- 
+--  lms is distributed in the hope that it will be useful,
+--  but WITHOUT ANY WARRANTY; without even the implied warranty of
+--  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+--  GNU General Public License for more details.
+-- 
+--  You should have received a copy of the GNU General Public License
+--  along with lms.  If not, see <http://www.gnu.org/licenses/>.
 --
--- Client :  127.0.0.1
--- Généré le :  Dim 07 Septembre 2014 à 11:43
--- Version du serveur :  5.6.17
--- Version de PHP :  5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -17,16 +26,14 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `lms`
---
-
---
--- Fonctions
+-- Functions
 --
 DROP FUNCTION IF EXISTS `GetAncestry`;
 DELIMITER $$
 CREATE FUNCTION `GetAncestry`(GivenID INT) RETURNS varchar(1024) CHARSET utf8
-    DETERMINISTIC
+    NOT DETERMINISTIC
+    READS SQL DATA
+    SQL SECURITY INVOKER
 BEGIN
     DECLARE rv VARCHAR(1024);
     DECLARE cm CHAR(1);
@@ -50,7 +57,9 @@ DELIMITER ;
 DROP FUNCTION IF EXISTS `GetFamilyTree`;
 DELIMITER $$
 CREATE FUNCTION `GetFamilyTree`(`GivenID` INT) RETURNS varchar(1024) CHARSET utf8
-    DETERMINISTIC
+    NOT DETERMINISTIC
+    READS SQL DATA
+    SQL SECURITY INVOKER
 BEGIN
 
     DECLARE rv,q,queue,queue_children VARCHAR(1024);
@@ -100,7 +109,9 @@ DELIMITER ;
 DROP FUNCTION IF EXISTS `GetParentIDByID`;
 DELIMITER $$
 CREATE FUNCTION `GetParentIDByID`(GivenID INT) RETURNS int(11)
-    DETERMINISTIC
+    NOT DETERMINISTIC
+    READS SQL DATA
+    SQL SECURITY INVOKER
 BEGIN
     DECLARE rv INT;
 
@@ -111,11 +122,9 @@ END$$
 DELIMITER ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `actions`
 --
-
 CREATE TABLE IF NOT EXISTS `actions` (
   `name` varchar(45) CHARACTER SET utf8 NOT NULL,
   `mask` bit(16) NOT NULL,
@@ -126,7 +135,6 @@ CREATE TABLE IF NOT EXISTS `actions` (
 --
 -- Contenu de la table `actions`
 --
-
 INSERT INTO `actions` (`name`, `mask`, `Description`) VALUES
 ('accept_requests', b'0011000100110010', 'Accept the request of my team members'),
 ('admin_menu', b'0011000100110010', 'View admin menu'),
@@ -152,11 +160,9 @@ INSERT INTO `actions` (`name`, `mask`, `Description`) VALUES
 ('view_user', b'0011000100110010', 'View user''s details');
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `activities`
 --
-
 CREATE TABLE IF NOT EXISTS `activities` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Activity unique identifier',
   `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Name of the activity (short)',
@@ -165,11 +171,9 @@ CREATE TABLE IF NOT EXISTS `activities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='List of activities' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `activities_employee`
 --
-
 CREATE TABLE IF NOT EXISTS `activities_employee` (
   `employee` int(11) NOT NULL COMMENT 'employee identifier',
   `activity` int(11) NOT NULL COMMENT 'activity identifier',
@@ -177,11 +181,9 @@ CREATE TABLE IF NOT EXISTS `activities_employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `activities_employee_history`
 --
-
 CREATE TABLE IF NOT EXISTS `activities_employee_history` (
   `employee` int(11) NOT NULL COMMENT 'employee identifier',
   `activity` int(11) NOT NULL COMMENT 'activity identifier',
@@ -195,11 +197,9 @@ CREATE TABLE IF NOT EXISTS `activities_employee_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `activities_history`
 --
-
 CREATE TABLE IF NOT EXISTS `activities_history` (
   `id` int(11) NOT NULL COMMENT 'Activity unique identifier',
   `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Name of the activity (short)',
@@ -214,11 +214,9 @@ CREATE TABLE IF NOT EXISTS `activities_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `contracts`
 --
-
 CREATE TABLE IF NOT EXISTS `contracts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) CHARACTER SET utf8 NOT NULL,
@@ -231,7 +229,6 @@ CREATE TABLE IF NOT EXISTS `contracts` (
 --
 -- Contenu de la table `contracts`
 --
-
 INSERT INTO `contracts` (`id`, `name`, `startentdate`, `endentdate`, `weekly_duration`) VALUES
 (1, 'PNF Regular', '06/01', '05/31', 0),
 (6, 'PNC Regular', '01/01', '12/31', 0),
@@ -239,11 +236,9 @@ INSERT INTO `contracts` (`id`, `name`, `startentdate`, `endentdate`, `weekly_dur
 (8, 'PNP Regular', '01/01', '12/31', 0);
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `contracts_history`
 --
-
 CREATE TABLE IF NOT EXISTS `contracts_history` (
   `id` int(11) NOT NULL,
   `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
@@ -259,11 +254,9 @@ CREATE TABLE IF NOT EXISTS `contracts_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `dayoffs`
 --
-
 CREATE TABLE IF NOT EXISTS `dayoffs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contract` int(11) NOT NULL COMMENT 'Contract id',
@@ -278,7 +271,6 @@ CREATE TABLE IF NOT EXISTS `dayoffs` (
 --
 -- Contenu de la table `dayoffs`
 --
-
 INSERT INTO `dayoffs` (`id`, `contract`, `date`, `type`, `title`) VALUES
 (71, 1, '2014-01-05', 1, 'sunday'),
 (72, 1, '2014-01-12', 1, 'sunday'),
@@ -495,11 +487,9 @@ INSERT INTO `dayoffs` (`id`, `contract`, `date`, `type`, `title`) VALUES
 (283, 6, '2014-12-28', 1, 'sun');
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `entitleddays`
 --
-
 CREATE TABLE IF NOT EXISTS `entitleddays` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contract` int(11) NOT NULL,
@@ -517,7 +507,6 @@ CREATE TABLE IF NOT EXISTS `entitleddays` (
 --
 -- Contenu de la table `entitleddays`
 --
-
 INSERT INTO `entitleddays` (`id`, `contract`, `employee`, `startdate`, `enddate`, `type`, `days`) VALUES
 (7, 5, 0, '2014-01-01', '2014-12-31', 1, '25.00'),
 (11, 6, 0, '2014-01-01', '2014-12-31', 1, '24.00'),
@@ -528,11 +517,9 @@ INSERT INTO `entitleddays` (`id`, `contract`, `employee`, `startdate`, `enddate`
 (19, 0, 34, '2013-06-01', '2014-05-31', 7, '-8.00');
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `entitleddays_history`
 --
-
 CREATE TABLE IF NOT EXISTS `entitleddays_history` (
   `id` int(11) NOT NULL,
   `contract` int(11) NOT NULL,
@@ -551,11 +538,9 @@ CREATE TABLE IF NOT EXISTS `entitleddays_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `leaves`
 --
-
 CREATE TABLE IF NOT EXISTS `leaves` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `startdate` date DEFAULT NULL,
@@ -575,7 +560,6 @@ CREATE TABLE IF NOT EXISTS `leaves` (
 --
 -- Contenu de la table `leaves`
 --
-
 INSERT INTO `leaves` (`id`, `startdate`, `enddate`, `status`, `employee`, `cause`, `startdatetype`, `enddatetype`, `duration`, `type`) VALUES
 (78, '2014-05-05', '2014-05-06', 3, 33, '', 'Morning', 'Morning', '2.00', 1),
 (79, '2014-05-07', '2014-05-07', 4, 33, 'test', 'Morning', 'Morning', '1.00', 1),
@@ -8086,11 +8070,9 @@ INSERT INTO `leaves` (`id`, `startdate`, `enddate`, `status`, `employee`, `cause
 (8483, '2014-04-11', '2014-04-11', 2, 1028, 'LR Test : 1443944', 'Morning', 'Morning', '1.00', 5);
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `leaves_history`
 --
-
 CREATE TABLE IF NOT EXISTS `leaves_history` (
   `id` int(11) NOT NULL,
   `startdate` date DEFAULT NULL,
@@ -8112,11 +8094,9 @@ CREATE TABLE IF NOT EXISTS `leaves_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `organization`
 --
-
 CREATE TABLE IF NOT EXISTS `organization` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
@@ -8127,7 +8107,6 @@ CREATE TABLE IF NOT EXISTS `organization` (
 --
 -- Contenu de la table `organization`
 --
-
 INSERT INTO `organization` (`id`, `name`, `parent_id`) VALUES
 (0, 'Passerelles numériques', -1),
 (40, 'PNP', 0),
@@ -8256,11 +8235,9 @@ INSERT INTO `organization` (`id`, `name`, `parent_id`) VALUES
 (1098, 'node-1098', 1023);
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `organization_history`
 --
-
 CREATE TABLE IF NOT EXISTS `organization_history` (
   `id` int(11) NOT NULL,
   `name` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -8275,11 +8252,9 @@ CREATE TABLE IF NOT EXISTS `organization_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `overtime`
 --
-
 CREATE TABLE IF NOT EXISTS `overtime` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `employee` int(11) NOT NULL,
@@ -8295,7 +8270,6 @@ CREATE TABLE IF NOT EXISTS `overtime` (
 --
 -- Contenu de la table `overtime`
 --
-
 INSERT INTO `overtime` (`id`, `employee`, `date`, `duration`, `cause`, `status`) VALUES
 (5, 33, '2014-05-08', '1.00', 'Selection process', 3),
 (6, 33, '2014-05-06', '1.00', 'test', 1),
@@ -9306,11 +9280,9 @@ INSERT INTO `overtime` (`id`, `employee`, `date`, `duration`, `cause`, `status`)
 (1999, 1999, '2013-11-15', '3.00', 'load test', 2);
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `overtime_history`
 --
-
 CREATE TABLE IF NOT EXISTS `overtime_history` (
   `id` int(11) NOT NULL,
   `employee` int(11) NOT NULL,
@@ -9328,11 +9300,9 @@ CREATE TABLE IF NOT EXISTS `overtime_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `positions`
 --
-
 CREATE TABLE IF NOT EXISTS `positions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -9343,7 +9313,6 @@ CREATE TABLE IF NOT EXISTS `positions` (
 --
 -- Contenu de la table `positions`
 --
-
 INSERT INTO `positions` (`id`, `name`, `description`) VALUES
 (2, 'Trainer', 'Teacher. Prepares and delivers trainings to students.'),
 (3, 'WEP Coordinator', 'Manages trainers'),
@@ -9357,11 +9326,9 @@ INSERT INTO `positions` (`id`, `name`, `description`) VALUES
 (11, 'S&L Officer', '');
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `positions_history`
 --
-
 CREATE TABLE IF NOT EXISTS `positions_history` (
   `id` int(11) NOT NULL,
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -9376,11 +9343,9 @@ CREATE TABLE IF NOT EXISTS `positions_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `roles`
 --
-
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL,
   `name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
@@ -9390,17 +9355,14 @@ CREATE TABLE IF NOT EXISTS `roles` (
 --
 -- Contenu de la table `roles`
 --
-
 INSERT INTO `roles` (`id`, `name`) VALUES
 (2, 'user'),
 (8, 'HR admin');
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `settings`
 --
-
 CREATE TABLE IF NOT EXISTS `settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
@@ -9411,11 +9373,9 @@ CREATE TABLE IF NOT EXISTS `settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `status`
 --
-
 CREATE TABLE IF NOT EXISTS `status` (
   `id` int(11) NOT NULL,
   `name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
@@ -9425,7 +9385,6 @@ CREATE TABLE IF NOT EXISTS `status` (
 --
 -- Contenu de la table `status`
 --
-
 INSERT INTO `status` (`id`, `name`) VALUES
 (1, 'Planned'),
 (2, 'Requested'),
@@ -9433,11 +9392,9 @@ INSERT INTO `status` (`id`, `name`) VALUES
 (4, 'Rejected');
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `tasks`
 --
-
 CREATE TABLE IF NOT EXISTS `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'unique identifier of the task',
   `employee` int(11) NOT NULL COMMENT 'assigned to',
@@ -9453,11 +9410,9 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `time`
 --
-
 CREATE TABLE IF NOT EXISTS `time` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'unique identifier of the time declaration',
   `datetime` datetime NOT NULL COMMENT 'date start',
@@ -9469,11 +9424,9 @@ CREATE TABLE IF NOT EXISTS `time` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Time spent by employees' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `types`
 --
-
 CREATE TABLE IF NOT EXISTS `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) CHARACTER SET utf8 NOT NULL,
@@ -9483,7 +9436,6 @@ CREATE TABLE IF NOT EXISTS `types` (
 --
 -- Contenu de la table `types`
 --
-
 INSERT INTO `types` (`id`, `name`) VALUES
 (0, 'compensate'),
 (1, 'paid leave'),
@@ -9503,11 +9455,9 @@ INSERT INTO `types` (`id`, `name`) VALUES
 (19, 'Calamity Leave');
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `types_history`
 --
-
 CREATE TABLE IF NOT EXISTS `types_history` (
   `id` int(11) NOT NULL,
   `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
@@ -9521,11 +9471,9 @@ CREATE TABLE IF NOT EXISTS `types_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `users`
 --
-
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
@@ -9552,7 +9500,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 -- Contenu de la table `users`
 --
-
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `login`, `email`, `password`, `role`, `manager`, `country`, `organization`, `contract`, `position`, `datehired`, `identifier`, `language`) VALUES
 (1, 'Benjamin', 'BALET', 'bbalet', 'benjamin.balet@gmail.com', '$2a$08$LeUbaGFqJjLSAN7to9URsuHB41zcmsMBgBhpZuFp2y2OTxtVcMQ.C', 8, 1, NULL, 65, 6, 3, '2013-10-28', 'PNC0025', 'fr'),
 (31, 'John', 'DOE', 'jdoe', 'jdoe@lms.org', '$2a$08$Rq88xJDk1UPiCDYdfoq1jeqr5.45KcI4dQXu1.NAtXoBjDE9L6vsa', 2, 1, NULL, 65, 6, 2, '2014-04-04', 'PNC0085', 'en'),
@@ -10566,11 +10513,9 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `login`, `email`, `password`
 (1999, 'firsname1999', 'lastname1999', 'login1999', 'test@test.org', '$2a$08$PE6H6iuboZ.A1gjUwlVLp.g8giUWBW9QDihq6H1hiv/JkxYZKh8Eq', 2, 1027, 0, 1027, 1, 1, '2014-07-26', 'TEST-1999', 'en');
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `users_history`
 --
-
 CREATE TABLE IF NOT EXISTS `users_history` (
   `id` int(11) NOT NULL,
   `firstname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,

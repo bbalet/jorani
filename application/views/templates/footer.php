@@ -24,7 +24,7 @@ $this->lang->load('footer', $language);?>
         <hr style="margin: 20px 0;">
         <div class="row-fluid">
             <div class="span5"><?php echo lang('footer_copyright_notice');?></div>
-            <div class="span3"><?php echo $this->config->item('version');?></div>
+            <div class="span3">v0.1.4</div>
             <div class="span4"><span class="pull-right"><a href="#"><?php echo lang('footer_link_go_top');?></a></span></div>
         </div>
       </footer>

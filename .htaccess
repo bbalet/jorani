@@ -1,8 +1,12 @@
+SetEnv ALLOW_OVERWRITE On
+
 <IfModule mod_rewrite.c>
     Options +FollowSymLinks
 
     RewriteEngine On
- 
+    # Tell PHP that the mod_rewrite module is ENABLED.
+    SetEnv HTTP_MOD_REWRITE On
+
     ### Canonicalize codeigniter URLs
     RewriteRule ^(welcome(/index)?|index(\.php)?)/?$ / [L,R=301]
     RewriteRule ^(.*)/index/?$ $1 [L,R=301]
@@ -39,5 +43,6 @@
  
 <IfModule !mod_rewrite.c> 
     # Without mod_rewrite, route 404's to the front controller
-    ErrorDocument 404 /index.php
+    SetEnv HTTP_MOD_REWRITE Off
+    ErrorDocument 404 "Error : Module rewrite is not available check your system with requirements.php"
  </IfModule>

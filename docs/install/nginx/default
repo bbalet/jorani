@@ -78,6 +78,9 @@ server {
 		#Alternatively, you can configure nginx/PHP with a backend
 		fastcgi_pass 127.0.0.1:9000;
 		fastcgi_index index.php;
+                                    fastcgi_param SERVER_SOFTWARE nginx;
+                                    fastcgi_param HTTP_MOD_REWRITE On; #Fake Apache
+                                    fastcgi_param ALLOW_OVERWRITE On; #Fake Apache
 		fastcgi_param SCRIPT_FILENAME
 			$document_root$fastcgi_script_name;
                 fastcgi_buffer_size 128k;

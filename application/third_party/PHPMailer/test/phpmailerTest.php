@@ -438,7 +438,7 @@ class PHPMailerTest extends PHPUnit_Framework_TestCase
             '"Test \"Fail\" Ing"@iana.org',
             'valid@about.museum',
             'shaitan@my-domain.thisisminekthx',
-            'foobar@192.168.0.1',
+            'lms@192.168.0.1',
             '"Joe\Blow"@iana.org',
             'HM2Kinsists@(that comments are allowed)this.is.ok',
             'user%uucp!path@berkeley.edu',

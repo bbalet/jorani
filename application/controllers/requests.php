@@ -148,6 +148,54 @@ class Requests extends CI_Controller {
         }
     }
     
+        /**
+     * Display the list of all requests submitted to you
+     * Status is submitted
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function collaborators() {
+        $this->auth->check_is_granted('list_collaborators');
+        $this->expires_now();
+        $data = $this->getUserContext();
+        $data['title'] = lang('requests_collaborators_title');
+        $this->load->model('users_model');
+        $data['collaborators'] = $this->users_model->get_employees_manager($this->user_id);
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('requests/collaborators', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Display the details of leaves taken/entitled for a given employee
+     * This page can be displayed only if the connected user is the manager of the employee
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function counters($id) {
+        $data = $this->getUserContext();
+        $this->load->model('users_model');
+        $employee = $this->users_model->get_users($id);
+        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to access to leave counter of employee #' . $id);
+            $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_forbidden'));
+            redirect('requests/collaborators');
+        } else {
+            $data['summary'] = $this->leaves_model->get_user_leaves_summary($id);
+            $data['user_id'] = $id;
+            if (!is_null($data['summary'])) {
+                $this->expires_now();
+                $data['title'] = lang('hr_summary_title');
+                $this->load->view('templates/header', $data);
+                $this->load->view('menu/index', $data);
+                $this->load->view('requests/counters', $data);
+                $this->load->view('templates/footer');
+            } else {
+                $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_error'));
+                redirect('requests/collaborators');
+            }
+        }
+    }
+
     /**
      * Send a leave request email to the employee that requested the leave
      * The method will check if the leave request wes accepted or rejected 
@@ -194,7 +242,6 @@ class Requests extends CI_Controller {
         if ($this->email->mailer_engine== 'phpmailer') {
             $this->email->phpmailer->Encoding = 'quoted-printable';
         }
-
         if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
            $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
         } else {
@@ -203,7 +250,6 @@ class Requests extends CI_Controller {
         $this->email->to($employee['email']);
         $this->email->message($message);
         $this->email->send();
-        //echo $this->email->print_debugger();
     }
     
     /**

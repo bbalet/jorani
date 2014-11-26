@@ -28,6 +28,24 @@ $lang['requests_index_thead_enddate'] = 'Date fin';
 $lang['requests_index_thead_duration'] = 'Durée';
 $lang['requests_index_thead_type'] = 'Type';
 
+$lang['requests_collaborators_title'] = 'Liste de mes collaborateurs';
+$lang['requests_collaborators_description'] = 'Cet écran liste vos collaborateurs. Si vous n\'êtes pas un manager, cette liste sera vide.';
+$lang['requests_collaborators_thead_id'] = 'ID';
+$lang['requests_collaborators_thead_link_balance'] = 'Etat des congés';
+$lang['requests_collaborators_thead_firstname'] = 'Prénom';
+$lang['requests_collaborators_thead_lastname'] = 'Nom';
+$lang['requests_collaborators_thead_email'] = 'E-mail';
+
+$lang['requests_summary_title'] = 'Etat des congés pour l\'utilisateur #';
+$lang['requests_summary_thead_type'] = 'Type de congé';
+$lang['requests_summary_thead_available'] = 'Disponible';
+$lang['requests_summary_thead_taken'] = 'Pris';
+$lang['requests_summary_thead_entitled'] = 'Acquis';
+$lang['requests_summary_thead_description'] = 'Description';
+$lang['requests_summary_flash_msg_error'] = 'Cet employé n\'a pas de contrat.';
+$lang['requests_summary_flash_msg_forbidden'] = 'Vous n\'êtes pas le supérieur hierarchique de cet employé.';
+$lang['requests_summary_button_list'] = 'Liste des collaborateurs';
+
 $lang['requests_index_button_export'] = 'Exporter cette liste';
 $lang['requests_index_button_show_all'] = 'Toutes les demandes';
 $lang['requests_index_button_show_pending'] = 'Demandes en cours';

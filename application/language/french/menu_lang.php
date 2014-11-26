@@ -47,6 +47,7 @@ $lang['menu_hr_reports_divider'] = 'Rapports';
 $lang['menu_hr_report_leave_balance'] = 'État des congés';
 
 $lang['menu_validation_title'] = 'Validation';
+$lang['menu_validation_collaborators'] = 'Mes collaborateurs';
 $lang['menu_validation_leaves'] = 'Absences';
 $lang['menu_validation_overtime'] = 'Heures supp.';
 

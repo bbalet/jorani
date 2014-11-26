@@ -97,6 +97,7 @@ $this->lang->load('menu', $language);?>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_validation_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
+                    <li><a href="<?php echo base_url();?>requests/collaborators"><?php echo lang('menu_validation_collaborators');?></a></li>
                     <li><a href="<?php echo base_url();?>requests"><?php echo lang('menu_validation_leaves');?></a></li>
                     <li><a href="<?php echo base_url();?>overtime"><?php echo lang('menu_validation_overtime');?></a></li>
                   </ul>

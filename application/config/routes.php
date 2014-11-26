@@ -145,6 +145,8 @@ $route['leaves/length'] = 'leaves/length';
 $route['leaves'] = 'leaves';
 
 //leave requests
+$route['requests/collaborators'] = 'requests/collaborators';
+$route['requests/counters/(:num)'] = 'requests/counters/$1';
 $route['requests/export/(:any)'] = 'requests/export/$1';
 $route['requests/accept/(:num)'] = 'requests/accept/$1';
 $route['requests/reject/(:num)'] = 'requests/reject/$1';

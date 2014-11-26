@@ -75,6 +75,16 @@ class Users_model extends CI_Model {
     }
     
     /**
+     * Get the list of employees that are the collaborators of the given user
+     * @param int $id identifier of the manager
+     * @return array record of users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_employees_manager($id = 0) {
+        $query = $this->db->get_where('users', array('manager' => $id));
+        return $query->result_array();
+    }
+    /**
      * Check if a login can be used before creating the user
      * @param type $login login identifier
      * @return bool true if available, false otherwise

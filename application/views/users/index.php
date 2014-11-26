@@ -179,7 +179,7 @@ $(document).ready(function() {
     $('#frmConfirmDelete').on('show', function() {
         var link = "<?php echo base_url();?>users/delete/" + $(this).data('id');
         $("#lnkDeleteUser").attr('href', link);
-    })
+    });
 
     //Display a modal pop-up so as to confirm if a user has to be deleted or not
     //We build a complex selector because datatable does horrible things on DOM...

@@ -43,6 +43,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Update the end of <code>/application/config/email.php</code> with your e-mails settings.
 * Update the end of <code>/application/config/config.php</code> if you want to change the default behaviour.
 * It is recommended to change the private and public RSA keys (in <code>assets/keys</code>).
+* Check your installation with the <code>requirements.php</code> page at the root of your installation (e.g. http://localhost/lms/requirements.php).
 * The default user is *bbalet* and password is *bbalet*.
 
 ## What's next ?
@@ -87,3 +88,4 @@ We thank the following open source projects for the components used by LMS:
 * Moment (JS dates lib) http://momentjs.com/
 
 Favicon was created by Dakirby309 - http://dakirby309.deviantart.com / License: Creative Commons (Attribution 3.0 Unported)
+Background image of login page by Kevin Dooley - https://www.flickr.com/photos/pagedooley/ / License: Creative Commons (Attribution 3.0 Unported)

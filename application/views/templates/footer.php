@@ -19,16 +19,13 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('footer', $language);?>
 
-<!-- FOOTER -->
-      <footer>		
-        <hr style="margin: 20px 0;">
-        <div class="row-fluid">
-            <div class="span5"><?php echo lang('footer_copyright_notice');?></div>
-            <div class="span3">v0.1.5</div>
-            <div class="span4"><span class="pull-right"><a href="#"><?php echo lang('footer_link_go_top');?></a></span></div>
-        </div>
-      </footer>
-
+        <div id="push"></div>
     </div><!-- /.container -->
+    <!-- FOOTER -->
+    <div class="row" id="footer">
+      <div class="span8"><?php echo lang('footer_copyright_notice');?></div>
+      <div class="span2">v0.1.5</div>
+      <div class="span2"><span class="pull-right"><a href="#"><?php echo lang('footer_link_go_top');?></a></span></div>
+    </div>
 </body>
 </html>

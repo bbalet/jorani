@@ -22,6 +22,33 @@ $CI->load->helper('language');
 $this->lang->load('session', $language);
 $this->lang->load('global', $language);?>
 
+<style>
+    body {
+        background-image:url('<?php echo base_url();?>assets/images/login-background.jpg');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    
+    .vertical-center {
+        min-height: 90%;  /* Fallback for browsers do NOT support vh unit */
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+      }
+      
+      .form-box {
+        padding: 20px;
+        border: 1px #e4e4e4 solid;
+        border-radius: 4px;
+        box-shadow: 0 0 6px #ccc;
+        background-color: #fff;
+      }
+</style>
+
+    <div class="row vertical-center">
+        <div class="span3">&nbsp;</div>
+        <div class="span6 form-box">
+
 <h2><?php echo lang('session_login_title');?> &nbsp;
 <a href="<?php echo lang('global_link_doc_page_login');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h2>
 
@@ -57,7 +84,7 @@ $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
     </select>
     <?php } ?>
     <label for="login"><?php echo lang('session_login_field_login');?></label>
-    <input type="input" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required /><br />
+    <input type="text" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required /><br />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
 </form>
     <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
@@ -67,7 +94,12 @@ $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
     <button id="send" class="btn btn-primary"><?php echo lang('session_login_button_login');?></button><br />
     <br />
     <button id="cmdForgetPassword" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
+    <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>
     
+        </div>
+        <div class="span3">&nbsp;</div>
+    </div>
+
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
@@ -133,5 +165,3 @@ $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
         });
     });
 </script>
-
-<textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>

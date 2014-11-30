@@ -28,11 +28,11 @@ $this->lang->load('global', $language);?>
 <?php echo form_open('extra/create') ?>
 
     <label for="viz_date" required><?php echo lang('extra_create_field_date');?></label>
-    <input type="input" name="viz_date" id="viz_date" value="<?php echo set_value('date'); ?>" />
+    <input type="text" name="viz_date" id="viz_date" value="<?php echo set_value('date'); ?>" />
     <input type="hidden" name="date" id="date" />
     
     <label for="duration" required><?php echo lang('extra_create_field_duration');?></label>
-    <input type="input" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" />
+    <input type="text" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" />
     
     <label for="cause"><?php echo lang('extra_create_field_cause');?></label>
     <textarea name="cause"><?php echo set_value('cause'); ?></textarea>
@@ -45,7 +45,7 @@ $this->lang->load('global', $language);?>
 
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('extra_create_button_create');?></button>
     &nbsp;
-    <a href="<?php echo base_url(); ?>leaves" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp; <?php echo lang('extra_create_button_cancel');?></a>
+    <a href="<?php echo base_url(); ?>extra" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp; <?php echo lang('extra_create_button_cancel');?></a>
 </form>
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">

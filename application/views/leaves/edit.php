@@ -38,7 +38,7 @@ $this->lang->load('global', $language);?>
 } ?>
 
     <label for="viz_startdate" required><?php echo lang('leaves_edit_field_start');?></label>
-    <input type="input" name="viz_startdate" id="viz_startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" />
+    <input type="text" name="viz_startdate" id="viz_startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" />
     <input type="hidden" name="startdate" id="startdate" value="<?php echo $leave['startdate'];?>" />
     <select name="startdatetype" id="startdatetype">
         <option value="Morning" <?php if ($leave['startdatetype'] == "Morning") {echo "selected";}?>><?php echo lang('leaves_date_type_morning');?></option>
@@ -46,7 +46,7 @@ $this->lang->load('global', $language);?>
     </select><br />
     
     <label for="viz_enddate" required><?php echo lang('leaves_edit_field_end');?></label>
-    <input type="input" name="viz_enddate" id="viz_enddate" value="<?php $date = new DateTime($leave['enddate']); echo $date->format(lang('global_date_format'));?>" />
+    <input type="text" name="viz_enddate" id="viz_enddate" value="<?php $date = new DateTime($leave['enddate']); echo $date->format(lang('global_date_format'));?>" />
     <input type="hidden" name="enddate" id="enddate" value="<?php echo $leave['startdate'];?>" />
     <select name="enddatetype" id="enddatetype">
         <option value="Morning" <?php if ($leave['enddatetype'] == "Morning") {echo "selected";}?>><?php echo lang('leaves_date_type_morning');?></option>
@@ -61,7 +61,7 @@ $this->lang->load('global', $language);?>
     </select><br />
     
     <label for="duration" required><?php echo lang('leaves_edit_field_duration');?></label>
-    <input type="input" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" />
+    <input type="text" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" />
     
     <div class="alert hide alert-error" id="lblCreditAlert">
         <button type="button" class="close">&times;</button>

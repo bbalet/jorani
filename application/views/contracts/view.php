@@ -23,7 +23,7 @@ $this->lang->load('calendar', $language);?>
 <h2><?php echo lang('contract_view_description');?> <?php echo $contract['id']; ?></h2>
 
     <label for="name"><?php echo lang('contract_view_field_name');?></label>
-    <input type="input" name="name" value="<?php echo $contract['name']; ?>" readonly /><br />
+    <input type="text" name="name" value="<?php echo $contract['name']; ?>" readonly /><br />
   
     <label for="startentdatemonth"><?php echo lang('contract_view_field_start_month');?></label>
     <select name="startentdatemonth" readonly>

@@ -29,7 +29,7 @@ $attributes = array('id' => 'target');
 echo form_open('contracts/create', $attributes); ?>
 
     <label for="name"><?php echo lang('contract_create_field_name');?></label>
-    <input type="input" name="name" id="name" autofocus required /><br />
+    <input type="text" name="name" id="name" autofocus required /><br />
 
     <label for="startentdatemonth"><?php echo lang('contract_create_field_start_month');?></label>
     <select name="startentdatemonth" id="startentdatemonth" required>

@@ -86,6 +86,7 @@ $this->lang->load('global', $language);?>
         $('#calendar').fullCalendar('removeEventSource', source);
         source = '<?php echo base_url();?>contracts/calendar/userdayoffs';
         if (toggleDayoffs) {
+            $('#calendar').fullCalendar('removeEventSource', source);
             $('#calendar').fullCalendar('addEventSource', source);
         } else {
             $('#calendar').fullCalendar('removeEventSource', source);

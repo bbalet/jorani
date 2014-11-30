@@ -33,7 +33,7 @@ $this->lang->load('global', $language);?>
 <?php echo form_open('leaves/create') ?>
 
     <label for="viz_startdate" required><?php echo lang('leaves_create_field_start');?></label>
-    <input type="input" name="viz_startdate" id="viz_startdate" value="<?php echo set_value('startdate'); ?>" />
+    <input type="text" name="viz_startdate" id="viz_startdate" value="<?php echo set_value('startdate'); ?>" />
     <input type="hidden" name="startdate" id="startdate" />
     <select name="startdatetype" id="startdatetype">
         <option value="Morning" selected><?php echo lang('leaves_date_type_morning');?></option>
@@ -41,7 +41,7 @@ $this->lang->load('global', $language);?>
     </select><br />
     
     <label for="viz_enddate" required><?php echo lang('leaves_create_field_end');?></label>
-    <input type="input" name="viz_enddate" id="viz_enddate" value="<?php echo set_value('enddate'); ?>" />
+    <input type="text" name="viz_enddate" id="viz_enddate" value="<?php echo set_value('enddate'); ?>" />
     <input type="hidden" name="enddate" id="enddate" />
     <select name="enddatetype" id="enddatetype">
         <option value="Morning"><?php echo lang('leaves_date_type_morning');?></option>
@@ -56,7 +56,7 @@ $this->lang->load('global', $language);?>
     </select><br />
     
     <label for="duration" required><?php echo lang('leaves_create_field_duration');?></label>
-    <input type="input" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" />
+    <input type="text" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" />
     
     <div class="alert hide alert-error" id="lblCreditAlert" onclick="$('#lblCreditAlert').hide();">
         <button type="button" class="close">&times;</button>

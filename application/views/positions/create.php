@@ -28,7 +28,7 @@ $attributes = array('id' => 'target');
 echo form_open('positions/create', $attributes); ?>
 
     <label for="name"><?php echo lang('positions_create_field_name');?></label>
-    <input type="input" name="name" id="name" autofocus required /><br />
+    <input type="text" name="name" id="name" autofocus required /><br />
 
     <label for="description"><?php echo lang('positions_create_field_description');?></label>
     <textarea type="input" name="description" id="description" /></textarea>

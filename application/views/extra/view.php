@@ -24,10 +24,10 @@ $this->lang->load('global', $language);?>
 <h2><?php echo lang('extra_view_title');?><?php echo $extra['id']; ?></h2>
 
     <label for="date" required><?php echo lang('extra_view_field_date');?></label>
-    <input type="input" name="date"  value="<?php $date = new DateTime($extra['date']); echo $date->format(lang('global_date_format'));?>" readonly />
+    <input type="text" name="date"  value="<?php $date = new DateTime($extra['date']); echo $date->format(lang('global_date_format'));?>" readonly />
     
     <label for="duration" required><?php echo lang('extra_view_field_duration');?></label>
-    <input type="input" name="duration"  value="<?php echo $extra['duration']; ?>" readonly />
+    <input type="text" name="duration"  value="<?php echo $extra['duration']; ?>" readonly />
     
     <label for="cause"><?php echo lang('extra_view_field_cause');?></label>
     <textarea name="cause" readonly><?php echo $extra['cause']; ?></textarea>

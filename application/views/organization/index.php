@@ -28,8 +28,9 @@ $this->lang->load('treeview', $language);?>
 <div class="row-fluid">
     <div class="span4">
         <div class="input-append">
-        <input type="text" placeholder="<?php echo lang('organization_index_field_search_placeholder');?>" id="txtSearch" />
-        <button id="cmdSearch" class="btn btn-primary"><?php echo lang('organization_index_button_search');?></button>
+            <input type="text" class="input-medium" placeholder="<?php echo lang('organization_index_field_search_placeholder');?>" id="txtSearch" />
+            <button id="cmdClearSearch" class="btn btn-primary"><i class="icon-remove icon-white"></i></button>
+            <button id="cmdSearch" class="btn btn-primary"><i class="icon-search icon-white"></i>&nbsp;<?php echo lang('organization_index_button_search');?></button>
         </div>
         <div style="text-align: left;" id="organization"></div>
     </div>
@@ -199,8 +200,20 @@ $this->lang->load('treeview', $language);?>
         
         //Search in the treeview
         $("#cmdSearch").click(function () {
-            $("#organization").jstree("search", $("#txtSearch").val());
+            $("#organization").jstree("search", $("#txtSearch").val(), true, true);
         });
+        $("#txtSearch").keyup(function(e) {
+            if (e.keyCode == 13) { $("#organization").jstree("search", $("#txtSearch").val(), true, true); }   // enter key
+        });
+        
+        //Clear the Search option in the treeview
+        $("#cmdClearSearch").click(function () {
+            $("#organization").jstree("clear_search");
+        });
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) { $("#organization").jstree("clear_search"); }   // escape key
+        });
+        
         
         //Transform the HTML table in a fancy datatable
         oTable = $('#collaborators').DataTable({

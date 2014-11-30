@@ -25,13 +25,13 @@ $this->lang->load('global', $language);?>
 <h2><?php echo lang('users_view_title');?><?php echo $user['id']; ?></h2>
 
     <label for="firstname"><?php echo lang('users_view_field_firstname');?></label>
-    <input type="input" name="firstname" value="<?php echo $user['firstname']; ?>" readonly /><br />
+    <input type="text" name="firstname" value="<?php echo $user['firstname']; ?>" readonly /><br />
 
     <label for="lastname"><?php echo lang('users_view_field_lastname');?></label>
-    <input type="input" name="lastname" value="<?php echo $user['lastname']; ?>" readonly /><br />
+    <input type="text" name="lastname" value="<?php echo $user['lastname']; ?>" readonly /><br />
 
     <label for="login"><?php echo lang('users_view_field_login');?></label>
-    <input type="input" name="login" value="<?php echo $user['login']; ?>" readonly /><br />
+    <input type="text" name="login" value="<?php echo $user['login']; ?>" readonly /><br />
 	
     <label for="email"><?php echo lang('users_view_field_email');?></label>
     <input type="email" name="email" value="<?php echo $user['email']; ?>" readonly /><br />

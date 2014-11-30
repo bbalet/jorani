@@ -70,8 +70,10 @@ echo $date->format(lang('global_date_format'));
 <?php endforeach ?> 
 </select>    
 <label for="days" required><?php echo lang('entitleddays_contract_index_field_days');?></label>
-<input type="input" name="days" id="days" />
-<button id="cmdAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_contract_index_button_add');?></button>
+<div class="input-append">
+    <input type="text" name="days" id="days" />
+    <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_contract_index_button_add');?></button>
+</div>
 <br /><br />
 <a href="<?php echo base_url();?>contracts" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
 

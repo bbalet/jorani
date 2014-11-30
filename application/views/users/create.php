@@ -35,10 +35,10 @@ echo form_open('users/create', $attributes); ?>
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
     
     <label for="firstname"><?php echo lang('users_create_field_firstname');?></label>
-    <input type="input" name="firstname" id="firstname" required /><br />
+    <input type="text" name="firstname" id="firstname" required /><br />
 
     <label for="lastname"><?php echo lang('users_create_field_lastname');?></label>
-    <input type="input" name="lastname" id="lastname" required /><br />
+    <input type="text" name="lastname" id="lastname" required /><br />
 
     <label for="role[]"><?php echo lang('users_create_field_role');?></label>
     <select name="role[]" multiple="multiple" size="2" required>
@@ -48,7 +48,7 @@ echo form_open('users/create', $attributes); ?>
     </select>
 
     <label for="login"><?php echo lang('users_create_field_login');?></label>
-    <input type="input" name="login" id="login" required /><br />
+    <input type="text" name="login" id="login" required /><br />
     <div class="alert hide alert-error" id="lblLoginAlert">
         <button type="button" class="close" onclick="$('#lblLoginAlert').hide();">&times;</button>
         <?php echo lang('users_create_flash_msg_error');?>

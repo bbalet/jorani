@@ -37,13 +37,13 @@ $this->lang->load('global', $language);?>
     <input type="hidden" name="id" value="<?php echo $users_item['id']; ?>" required /><br />
 
     <label for="firstname"><?php echo lang('users_edit_field_firstname');?></label>
-    <input type="input" name="firstname" value="<?php echo $users_item['firstname']; ?>" required /><br />
+    <input type="text" name="firstname" value="<?php echo $users_item['firstname']; ?>" required /><br />
 
     <label for="lastname"><?php echo lang('users_edit_field_lastname');?></label>
-    <input type="input" name="lastname" value="<?php echo $users_item['lastname']; ?>" required /><br />
+    <input type="text" name="lastname" value="<?php echo $users_item['lastname']; ?>" required /><br />
 
     <label for="login"><?php echo lang('users_edit_field_login');?></label>
-    <input type="input" name="login" value="<?php echo $users_item['login']; ?>" required /><br />
+    <input type="text" name="login" value="<?php echo $users_item['login']; ?>" required /><br />
 	
     <label for="email"><?php echo lang('users_edit_field_email');?></label>
     <input type="email" id="email" name="email" value="<?php echo $users_item['email']; ?>" required /><br />

@@ -66,9 +66,7 @@ $(document).ready(function() {
   </tbody>
 </table>
 
-<div class="row-fluid">
-	<div class="span12">&nbsp;</div>
-</div>
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div class="row-fluid">
     <div class="span3">
@@ -80,6 +78,8 @@ $(document).ready(function() {
     <div class="span6">&nbsp;</div>
 </div>
 
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
 <div id="frmAddLeaveType" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="close">&times;</a>
@@ -89,7 +89,7 @@ $(document).ready(function() {
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="btn secondary"><?php echo lang('hr_leaves_popup_create_button_cancel');?></a>
+        <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="btn secondary btn-danger"><?php echo lang('hr_leaves_popup_create_button_cancel');?></a>
     </div>
 </div>
 

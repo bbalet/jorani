@@ -216,7 +216,6 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `startentdate` varchar(5) CHARACTER SET utf8 NOT NULL,
   `endentdate` varchar(5) CHARACTER SET utf8 NOT NULL,
-  `weekly_duration` int(11) NOT NULL COMMENT 'Approximate duration of work per week and in minutes',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -256,8 +255,8 @@ CREATE TABLE IF NOT EXISTS `dayoffs` (
 --
 CREATE TABLE IF NOT EXISTS `entitleddays` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `contract` int(11) NOT NULL,
-  `employee` int(11) NOT NULL,
+  `contract` int(11) DEFAULT NULL,
+  `employee` int(11) DEFAULT NULL,
   `startdate` date DEFAULT NULL,
   `enddate` date DEFAULT NULL,
   `type` int(11) NOT NULL,

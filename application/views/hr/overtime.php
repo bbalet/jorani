@@ -114,7 +114,7 @@ $(document).ready(function() {
 $(function () {
     //Transform the HTML table in a fancy datatable
     var oTable = $('#extras').dataTable({
-                  "order": [[ 3, "desc" ]],
+                  "order": [[ 2, "desc" ]],
 	"oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",

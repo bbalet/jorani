@@ -104,7 +104,8 @@ $tmpDate = $date->getTimestamp();?>
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#overtime').dataTable({
-		"oLanguage": {
+                    "order": [[ 2, "desc" ]],
+                    "oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",
                     "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",

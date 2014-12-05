@@ -81,7 +81,11 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_employees_manager($id = 0) {
-        $query = $this->db->get_where('users', array('manager' => $id));
+        $this->db->from('users');
+        $this->db->order_by("lastname", "asc");
+        $this->db->order_by("firstname", "asc");
+        $this->db->where('manager', $id);
+        $query = $this->db->get();
         return $query->result_array();
     }
     /**

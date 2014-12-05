@@ -128,7 +128,8 @@ $(document).ready(function() {
     
     //Transform the HTML table in a fancy datatable
     $('#leaves').dataTable({
-		"oLanguage": {
+                  "order": [[ 1, "desc" ]],
+	"oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",
                     "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",

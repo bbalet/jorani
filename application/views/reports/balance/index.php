@@ -18,9 +18,6 @@
 
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('reports', $language);?>
-
-<div class="row-fluid">
-    <div class="span12">
         
 <h1><?php echo lang('reports_balance_title');?></h1>
 

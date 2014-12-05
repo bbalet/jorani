@@ -18,7 +18,8 @@
 
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('hr', $language);
-$this->lang->load('datatable', $language);?>
+$this->lang->load('datatable', $language);
+$this->lang->load('global', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -51,9 +52,15 @@ $(document).ready(function() {
         </tr>
     </thead>
     <tbody>
-<?php foreach ($leaves as $leave): ?>
+<?php foreach ($leaves as $leave):
+    $date = new DateTime($leave['startdate']);
+    $tmpStartDate = $date->getTimestamp();
+    $startdate = $date->format(lang('global_date_format'));
+    $date = new DateTime($leave['enddate']);
+    $tmpEndDate = $date->getTimestamp();
+    $enddate = $date->format(lang('global_date_format'));?>
     <tr>
-        <td>
+        <td data-order="<?php echo $leave['id']; ?>">
             <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_leaves_thead_tip_edit');?>"><?php echo $leave['id'] ?></a>
             <div class="pull-right">
                 &nbsp;
@@ -65,8 +72,8 @@ $(document).ready(function() {
             </div>
         </td>
         <td><?php echo $leave['status']; ?></td>
-        <td><?php echo $leave['startdate']; ?></td>
-        <td><?php echo $leave['enddate']; ?></td>
+        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate; ?></td>
+        <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate; ?></td>
         <td><?php echo $leave['duration']; ?></td>
         <td><?php echo $leave['type']; ?></td>
     </tr>
@@ -112,7 +119,8 @@ $(document).ready(function() {
 $(function () {
     //Transform the HTML table in a fancy datatable
     var oTable = $('#leaves').dataTable({
-		"oLanguage": {
+                    "order": [[ 3, "desc" ]],
+                    "oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",
                     "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",

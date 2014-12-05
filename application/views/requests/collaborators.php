@@ -77,6 +77,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#collaborators').dataTable({
+                "order": [[ 3, "asc" ], [ 2, "asc" ]],
                 "oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",

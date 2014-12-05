@@ -20,6 +20,9 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('entitleddays', $language);
 $this->lang->load('global', $language);?>
 
+<div class="row-fluid">
+    <div class="span12">
+
 <h2><?php echo lang('entitleddays_contract_index_title');?> <span class="muted"><?php echo $name; ?></span></h2>
 
 <table class="table table-bordered table-hover" id="entitleddayscontract">
@@ -76,6 +79,10 @@ echo $date->format(lang('global_date_format'));
 </div>
 <br /><br />
 <a href="<?php echo base_url();?>contracts" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
+
+    </div>
+</div>
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
         <div class="modal-header">

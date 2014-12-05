@@ -17,6 +17,7 @@
  */
 
 CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('global', $language);
 $this->lang->load('hr', $language);
 $this->lang->load('datatable', $language);?>
 
@@ -50,9 +51,12 @@ $(document).ready(function() {
         </tr>
     </thead>
     <tbody>
-<?php foreach ($extras as $extra): ?>
+<?php foreach ($extras as $extra): 
+    $date = new DateTime($extra['date']);
+    $tmpDate = $date->getTimestamp();
+    $date = $date->format(lang('global_date_format'));?>
     <tr>
-        <td>
+        <td data-order="<?php echo $extra['id']; ?>">
             <a href="<?php echo base_url();?>extra/edit/<?php echo $extra['id']; ?>?source=hr%2Fovertime%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_overtime_thead_tip_edit');?>"><?php echo $extra['id'] ?></a>
             <div class="pull-right">
                 &nbsp;
@@ -64,7 +68,7 @@ $(document).ready(function() {
             </div>
         </td>
         <td><?php echo $extra['status']; ?></td>
-        <td><?php echo $extra['date']; ?></td>
+        <td data-order="<?php echo $tmpDate; ?>"><?php echo $date; ?></td>
         <td><?php echo $extra['duration']; ?></td>
         <td><?php echo $extra['cause']; ?></td>
     </tr>
@@ -110,7 +114,8 @@ $(document).ready(function() {
 $(function () {
     //Transform the HTML table in a fancy datatable
     var oTable = $('#extras').dataTable({
-		"oLanguage": {
+                  "order": [[ 3, "desc" ]],
+	"oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",
                     "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",

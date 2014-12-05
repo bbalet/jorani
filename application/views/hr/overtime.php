@@ -139,7 +139,6 @@ $(function () {
                     }
                 }
             });
-    oTable.fnSort( [ [0,'desc'] ] );
 
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
     $('#frmDeleteExtraRequest').on('show', function() {

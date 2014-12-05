@@ -119,7 +119,7 @@ $(document).ready(function() {
 $(function () {
     //Transform the HTML table in a fancy datatable
     var oTable = $('#leaves').dataTable({
-                    "order": [[ 3, "desc" ]],
+                    "order": [[ 2, "desc" ]],
                     "oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",
@@ -144,7 +144,6 @@ $(function () {
                     }
                 }
             });
-    oTable.fnSort( [ [0,'desc'] ] );
 
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
     $('#frmDeleteLeaveRequest').on('show', function() {

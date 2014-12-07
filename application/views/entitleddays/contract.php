@@ -34,7 +34,7 @@ $this->lang->load('global', $language);?>
       <th><?php echo lang('entitleddays_contract_index_thead_end');?></th>
       <th><?php echo lang('entitleddays_contract_index_thead_days');?></th>
       <th><?php echo lang('entitleddays_contract_index_thead_type');?></th>
-      <th><?php echo lang('entitleddays_contract_index_thead_type');?></th>
+      <th><?php echo lang('entitleddays_contract_index_thead_description');?></th>
     </tr>
   </thead>
   <tbody>
@@ -62,7 +62,7 @@ $endDate = new DateTime($days['enddate']);?>
 <div id="frmAddEntitledDays" class="modal hide fade">
         <div class="modal-header">
             <a href="#" class="close" onclick="$('#frmAddEntitledDays').modal('hide');">&times;</a>
-            <h1><?php echo lang('global_msg_wait');?></h1>
+            <h1><?php echo lang('entitleddays_contract_popup_title');?></h1>
         </div>
         <div class="modal-body">
             <label for="viz_startdate"><?php echo lang('entitleddays_contract_index_field_start');?></label>
@@ -79,11 +79,12 @@ $endDate = new DateTime($days['enddate']);?>
             </select>    
             <label for="days" required><?php echo lang('entitleddays_contract_index_field_days');?></label>
             <input type="text" name="days" id="days" />
-            <label for="description"><?php echo lang('entitleddays_contract_index_field_days');?></label>
+            <label for="description"><?php echo lang('entitleddays_contract_index_field_description');?></label>
             <input type="text" name="description" id="description" />
-            <br />
+        </div>
+        <div class="modal-footer">
             <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_contract_index_button_add');?></button>
-            <button id="cmdAddEntitledDays" class="btn btn-danger" onclick="$('#frmAddEntitledDays').modal('hide');">Close</button>
+            <button id="cmdAddEntitledDays" class="btn btn-danger" onclick="$('#frmAddEntitledDays').modal('hide');"><?php echo lang('entitleddays_contract_index_button_cancel');?></button>
         </div>
  </div>
     

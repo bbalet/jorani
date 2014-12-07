@@ -181,7 +181,22 @@ class Requests extends CI_Controller {
             redirect('requests/collaborators');
         } else {
             $data['summary'] = $this->leaves_model->get_user_leaves_summary($id);
-            $data['user_id'] = $id;
+            $this->load->model('entitleddays_model');
+            $this->load->model('types_model');
+            $data['types'] = $this->types_model->get_types();
+            $this->load->model('users_model');
+            $data['employee_name'] = $this->users_model->get_label($id);
+            $user = $this->users_model->get_users($id);
+            $this->load->model('contracts_model');
+            $contract = $this->contracts_model->get_contracts($user['contract']);
+            $data['contract_name'] = $contract['name'];
+            $data['contract_start'] = $contract['startentdate'];
+            $data['contract_end'] = $contract['endentdate'];
+            $data['employee_id'] = $id;
+            $data['contract_id'] = $user['contract'];
+
+            $data['entitleddayscontract'] = $this->entitleddays_model->get_entitleddays_contract($user['contract']);
+            $data['entitleddaysemployee'] = $this->entitleddays_model->get_entitleddays_employee($id);
             if (!is_null($data['summary'])) {
                 $this->expires_now();
                 $data['title'] = lang('hr_summary_title');

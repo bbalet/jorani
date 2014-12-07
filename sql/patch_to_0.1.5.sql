@@ -8,7 +8,6 @@
 --      * Description of an entitled days
 DELIMITER $$
 CREATE PROCEDURE sp_add_new_col()
-    READS SQL DATA
     SQL SECURITY INVOKER
 BEGIN
         IF NOT EXISTS (
@@ -22,7 +21,7 @@ BEGIN
         IF NOT EXISTS (
                 SELECT NULL
                 FROM information_schema.columns
-                WHERE table_schema = DATABASE() AND table_name ='contracts' AND column_name = 'weekly_duration'
+                WHERE table_schema = DATABASE() AND table_name ='contracts' AND column_name = 'daily_duration'
         ) THEN
                 ALTER TABLE `contracts` ADD COLUMN `daily_duration` int(11) DEFAULT NULL COMMENT 'Approximate duration of work per day (in minutes)';
         END IF;

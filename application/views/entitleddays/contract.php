@@ -18,6 +18,7 @@
 
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('entitleddays', $language);
+$this->lang->load('datatable', $language);
 $this->lang->load('global', $language);?>
 
 <div class="row-fluid">
@@ -25,7 +26,7 @@ $this->lang->load('global', $language);?>
 
 <h2><?php echo lang('entitleddays_contract_index_title');?> <span class="muted"><?php echo $name; ?></span></h2>
 
-<table class="table table-bordered table-hover" id="entitleddayscontract">
+<table id="entitleddayscontract">
 <thead>
     <tr>
       <th>&nbsp;</th>
@@ -33,23 +34,21 @@ $this->lang->load('global', $language);?>
       <th><?php echo lang('entitleddays_contract_index_thead_end');?></th>
       <th><?php echo lang('entitleddays_contract_index_thead_days');?></th>
       <th><?php echo lang('entitleddays_contract_index_thead_type');?></th>
+      <th><?php echo lang('entitleddays_contract_index_thead_type');?></th>
     </tr>
   </thead>
   <tbody>
   <?php foreach ($entitleddays as $days) { ?>
     <tr data-id="<?php echo $days['id']; ?>">
       <td><a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>
-      <td><?php 
-$date = new DateTime($days['startdate']);
-echo $date->format(lang('global_date_format'));
-?></td>
-      <td><?php 
-$date = new DateTime($days['enddate']);
-echo $date->format(lang('global_date_format'));
-?></td>
+<?php $startDate = new DateTime($days['startdate']);
+$endDate = new DateTime($days['enddate']);?>
+      <td data-order="<?php echo $startDate->getTimestamp(); ?>"><?php echo $startDate->format(lang('global_date_format'));?></td>
+      <td data-order="<?php echo $endDate->getTimestamp(); ?>"><?php echo $endDate->format(lang('global_date_format'));?></td>
       <td><span id="days<?php echo $days['id']; ?>" class="credit"><?php echo $days['days']; ?></span> &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'decrease');"><i class="icon-minus"></i></a>
                      &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'increase');"><i class="icon-plus"></i></a></td>
       <td><?php echo $days['type']; ?></td>
+      <td><?php echo $days['description']; ?></td>
     </tr>
   <?php } ?>
   <?php if (count($entitleddays) == 0) { ?>
@@ -60,25 +59,37 @@ echo $date->format(lang('global_date_format'));
   </tbody>
 </table>
 
-<label for="viz_startdate"><?php echo lang('entitleddays_contract_index_field_start');?></label>
-<input type="text" id="viz_startdate" name="viz_startdate" required /><br />
-<input type="hidden" name="startdate" id="startdate" />
-<label for="viz_enddate"><?php echo lang('entitleddays_contract_index_field_end');?></label>
-<input type="text" id="viz_enddate" name="viz_enddate" required /><br />
-<input type="hidden" name="enddate" id="enddate" />
-<label for="type"><?php echo lang('entitleddays_contract_index_field_type');?></label>
-<select name="type" id="type" required>
-<?php foreach ($types as $types_item): ?>
-    <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 1) echo "selected" ?>><?php echo $types_item['name'] ?></option>
-<?php endforeach ?> 
-</select>    
-<label for="days" required><?php echo lang('entitleddays_contract_index_field_days');?></label>
-<div class="input-append">
-    <input type="text" name="days" id="days" />
-    <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_contract_index_button_add');?></button>
-</div>
+<div id="frmAddEntitledDays" class="modal hide fade">
+        <div class="modal-header">
+            <a href="#" class="close" onclick="$('#frmAddEntitledDays').modal('hide');">&times;</a>
+            <h1><?php echo lang('global_msg_wait');?></h1>
+        </div>
+        <div class="modal-body">
+            <label for="viz_startdate"><?php echo lang('entitleddays_contract_index_field_start');?></label>
+            <input type="text" id="viz_startdate" name="viz_startdate" required /><br />
+            <input type="hidden" name="startdate" id="startdate" />
+            <label for="viz_enddate"><?php echo lang('entitleddays_contract_index_field_end');?></label>
+            <input type="text" id="viz_enddate" name="viz_enddate" required /><br />
+            <input type="hidden" name="enddate" id="enddate" />
+            <label for="type"><?php echo lang('entitleddays_contract_index_field_type');?></label>
+            <select name="type" id="type" required>
+            <?php foreach ($types as $types_item): ?>
+                <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 1) echo "selected" ?>><?php echo $types_item['name'] ?></option>
+            <?php endforeach ?> 
+            </select>    
+            <label for="days" required><?php echo lang('entitleddays_contract_index_field_days');?></label>
+            <input type="text" name="days" id="days" />
+            <label for="description"><?php echo lang('entitleddays_contract_index_field_days');?></label>
+            <input type="text" name="description" id="description" />
+            <br />
+            <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_contract_index_button_add');?></button>
+            <button id="cmdAddEntitledDays" class="btn btn-danger" onclick="$('#frmAddEntitledDays').modal('hide');">Close</button>
+        </div>
+ </div>
+    
 <br /><br />
-<a href="<?php echo base_url();?>contracts" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
+<a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
+<button id="cmdAddEntitledDays" class="btn btn-primary" onclick="$('#frmAddEntitledDays').modal('show');"><i class="icon-plus-sign icon-white"></i> Add</button>
 
     </div>
 </div>
@@ -100,6 +111,9 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+
+<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
     //Current cell transformed in input box
@@ -162,7 +176,8 @@ if ($language_code != 'en') { ?>
                         startdate: $('#startdate').val(),
                         enddate: $('#enddate').val(),
                         days: $('#days').val(),
-                        type: $('#type').val()
+                        type: $('#type').val(),
+                        description: $("#description").val()
                     }
               }).done(function( msg ) {
                   id = parseInt(msg);
@@ -176,6 +191,7 @@ if ($language_code != 'en') { ?>
                             '<a href="#" onclick="Javascript:incdec(' + id + ', \'decrease\');"><i class="icon-minus"></i></a>' +
                             '&nbsp; <a href="#" onclick="Javascript:incdec(' + id + ', \'increase\');"><i class="icon-plus"></i></a></td>' +
                             '<td>' + $('#type option:selected').text() + '</td>' +
+                            '<td>' + $('#description').val() + '</td>' +
                         '</tr>';
                   $('#entitleddayscontract > tbody:last').append(myRow);
                   $("#days" + id).on('click', spanClick);
@@ -231,7 +247,7 @@ if ($language_code != 'en') { ?>
         $("#txtCredit").val($("#txtCredit").val());
     }
     
-    $(function () {
+    $(function () {        
         $("#viz_startdate").datepicker({
             changeMonth: true,
             changeYear: true,
@@ -269,5 +285,33 @@ if ($language_code != 'en') { ?>
         $("body").on("keyup", function(e){
             if (e.keyCode == 27) text2td();
         });
+        
+        //Transform the HTML table in a fancy datatable
+        var oTable = $('#entitleddayscontract').dataTable({
+                    "order": [[ 1, "desc" ]],
+                    "oLanguage": {
+                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                    "oPaginate": {
+                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                        "sLast":     "<?php echo lang('datatable_sLast');?>",
+                        "sNext":     "<?php echo lang('datatable_sNext');?>",
+                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                    },
+                    "oAria": {
+                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                    }
+                }
+            });
     });
 </script>

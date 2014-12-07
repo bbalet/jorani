@@ -166,10 +166,11 @@ class Entitleddays extends CI_Controller {
             $startdate = $this->input->post('startdate', TRUE);
             $enddate = $this->input->post('enddate', TRUE);
             $days = $this->input->post('days', TRUE);
-            $type = $this->input->post('type', TRUE);   
+            $type = $this->input->post('type', TRUE);
+            $description = $this->input->post('description', TRUE);
             if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($contract_id)) {
                 $this->output->set_content_type('text/plain');
-                $id = $this->entitleddays_model->insert_entitleddays_contract($contract_id, $startdate, $enddate, $days, $type);
+                $id = $this->entitleddays_model->insert_entitleddays_contract($contract_id, $startdate, $enddate, $days, $type, $description);
                 echo $id;
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");

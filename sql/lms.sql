@@ -263,6 +263,7 @@ CREATE TABLE IF NOT EXISTS `entitleddays` (
   `enddate` date DEFAULT NULL,
   `type` int(11) NOT NULL,
   `days` decimal(10,2) NOT NULL,
+  `description` text DEFAULT NULL COMMENT 'Description of a credit / debit',
   PRIMARY KEY (`id`),
   KEY `contract` (`contract`),
   KEY `employee` (`employee`),

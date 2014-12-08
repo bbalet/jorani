@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} ស្នើសុំចាកចេញមួយខាងក្រោមសេចក្ដីលម្អិត :
+        {Firstname} {Lastname} <a href="{UrlDetails}">ស្នើសុំចាកចេញមួយខាងក្រោមសេចក្ដីលម្អិត</a> :
         <table border="0">
             <tr>
                 <td>មកពី &nbsp;</td><td>{StartDate}</td>

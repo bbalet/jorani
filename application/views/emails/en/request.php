@@ -21,7 +21,7 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests a leave. Below, the details :
+        {Firstname} {Lastname} requests a leave. Below, the <a href="{UrlDetails}">details</a> :
         <table border="0">
             <tr>
                 <td>From &nbsp;</td><td>{StartDate}</td>

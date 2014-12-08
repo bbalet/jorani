@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} vous soumet une demande d'absence. Voici les détails :
+        {Firstname} {Lastname} vous soumet une demande d'absence. Voici les <a href="{UrlDetails}">détails</a> :
         <table border="0">
             <tr>
                 <td>Du &nbsp;</td><td>{StartDate}</td>

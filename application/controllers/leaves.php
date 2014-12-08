@@ -250,6 +250,7 @@ class Leaves extends CI_Controller {
         } else {
             $acceptUrl = base_url() . 'requests/accept/' . $id;
             $rejectUrl = base_url() . 'requests/reject/' . $id;
+            $detailUrl = base_url() . 'leaves/' . $id;
 
             //Send an e-mail to the manager
             $this->load->library('email');
@@ -273,7 +274,8 @@ class Leaves extends CI_Controller {
                 'Type' => $this->types_model->get_label($this->input->post('type')),
                 'Reason' => $this->input->post('cause'),
                 'UrlAccept' => $acceptUrl,
-                'UrlReject' => $rejectUrl
+                'UrlReject' => $rejectUrl,
+                'UrlDetails' => $detailUrl
             );
             $message = $this->parser->parse('emails/' . $manager['language'] . '/request', $data, TRUE);
             if ($this->email->mailer_engine == 'phpmailer') {

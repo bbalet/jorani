@@ -123,7 +123,7 @@ class Contracts_model extends CI_Model {
         $boundaries = $this->db->get()->result_array();
         
         if (count($boundaries) != 0) {
-            $startmonth = intval(substr($boundaries[0]['startentdate'], 2));
+            $startmonth = intval(substr($boundaries[0]['startentdate'], 3));
             if ($startmonth == 1 ) {
                 $startentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
                 $endentdate =  date("Y") . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);

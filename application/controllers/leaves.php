@@ -250,7 +250,7 @@ class Leaves extends CI_Controller {
         } else {
             $acceptUrl = base_url() . 'requests/accept/' . $id;
             $rejectUrl = base_url() . 'requests/reject/' . $id;
-            $detailUrl = base_url() . 'leaves/' . $id;
+            $detailUrl = base_url() . 'requests';
 
             //Send an e-mail to the manager
             $this->load->library('email');

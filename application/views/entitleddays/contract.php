@@ -51,11 +51,6 @@ $endDate = new DateTime($days['enddate']);?>
       <td><?php echo $days['description']; ?></td>
     </tr>
   <?php } ?>
-  <?php if (count($entitleddays) == 0) { ?>
-    <tr id="noentitleddays">
-        <td colspan="5"><?php echo lang('entitleddays_contract_index_no_data');?></td>
-    </tr>
-  <?php } ?>
   </tbody>
 </table>
 

@@ -75,7 +75,20 @@ class Entitleddays extends CI_Controller {
         $this->load->model('types_model');
         $data['types'] = $this->types_model->get_types();
         $this->load->model('users_model');
-        $data['name'] = $this->users_model->get_label($id);
+        $user = $this->users_model->get_users($id);
+        $data['employee_name'] = $this->users_model->get_label($id);
+        
+        if (!empty ($user['contract'])) {
+            $this->load->model('contracts_model');
+            $contract = $this->contracts_model->get_contracts($user['contract']);
+            $data['contract_name'] = $contract['name'];
+            $data['contract_start_month'] = intval(substr($contract['startentdate'], 0, 2));
+            $data['contract_start_day'] = intval(substr($contract['startentdate'], 3));
+            $data['contract_end_month'] = intval(substr($contract['endentdate'], 0, 2));
+            $data['contract_end_day'] = intval(substr($contract['endentdate'], 3));
+        } else {
+            $data['contract_name'] = '';
+        }
         
         $data['title'] = lang('entitleddays_user_index_title');
         $this->load->view('templates/header', $data);
@@ -98,7 +111,12 @@ class Entitleddays extends CI_Controller {
         $this->load->model('types_model');
         $data['types'] = $this->types_model->get_types();
         $this->load->model('contracts_model');
-        $data['name'] = $this->contracts_model->get_label($id);
+        $contract = $this->contracts_model->get_contracts($id);
+        $data['contract_name'] = $contract['name'];
+        $data['contract_start_month'] = intval(substr($contract['startentdate'], 0, 2));
+        $data['contract_start_day'] = intval(substr($contract['startentdate'], 3));
+        $data['contract_end_month'] = intval(substr($contract['endentdate'], 0, 2));
+        $data['contract_end_day'] = intval(substr($contract['endentdate'], 3));
         
         $data['title'] = lang('entitleddays_contract_index_title');
         $this->load->view('templates/header', $data);
@@ -143,10 +161,11 @@ class Entitleddays extends CI_Controller {
             $startdate = $this->input->post('startdate', TRUE);
             $enddate = $this->input->post('enddate', TRUE);
             $days = $this->input->post('days', TRUE);
-            $type = $this->input->post('type', TRUE);   
+            $type = $this->input->post('type', TRUE);
+            $description = $this->input->post('description', TRUE);
             if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($user_id)) {
                 $this->output->set_content_type('text/plain');
-                $id = $this->entitleddays_model->insert_entitleddays_employee($user_id, $startdate, $enddate, $days, $type);
+                $id = $this->entitleddays_model->insert_entitleddays_employee($user_id, $startdate, $enddate, $days, $type, $description);
                 echo $id;
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");

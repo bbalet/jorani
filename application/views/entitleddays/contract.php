@@ -24,7 +24,7 @@ $this->lang->load('global', $language);?>
 <div class="row-fluid">
     <div class="span12">
 
-<h2><?php echo lang('entitleddays_contract_index_title');?> <span class="muted"><?php echo $name; ?></span></h2>
+<h2><?php echo lang('entitleddays_contract_index_title');?> <span class="muted"><?php echo $contract_name; ?></span></h2>
 
 <table id="entitleddayscontract">
 <thead>
@@ -62,11 +62,14 @@ $endDate = new DateTime($days['enddate']);?>
 <div id="frmAddEntitledDays" class="modal hide fade">
         <div class="modal-header">
             <a href="#" class="close" onclick="$('#frmAddEntitledDays').modal('hide');">&times;</a>
-            <h1><?php echo lang('entitleddays_contract_popup_title');?></h1>
+            <h3><?php echo lang('entitleddays_contract_popup_title');?></h3>
         </div>
         <div class="modal-body">
             <label for="viz_startdate"><?php echo lang('entitleddays_contract_index_field_start');?></label>
-            <input type="text" id="viz_startdate" name="viz_startdate" required /><br />
+            <div class="input-append">
+                <input type="text" id="viz_startdate" name="viz_startdate" required />
+                <button class="btn" onclick="set_current_period();"><?php echo lang('entitleddays_contract_index_button_current');?></button>
+            </div><br />
             <input type="hidden" name="startdate" id="startdate" />
             <label for="viz_enddate"><?php echo lang('entitleddays_contract_index_field_end');?></label>
             <input type="text" id="viz_enddate" name="viz_enddate" required /><br />
@@ -78,9 +81,9 @@ $endDate = new DateTime($days['enddate']);?>
             <?php endforeach ?> 
             </select>    
             <label for="days" required><?php echo lang('entitleddays_contract_index_field_days');?></label>
-            <input type="text" name="days" id="days" />
+            <input type="text" class="input-mini" name="days" id="days" />
             <label for="description"><?php echo lang('entitleddays_contract_index_field_description');?></label>
-            <input type="text" name="description" id="description" />
+            <input type="text" class="input-xlarge" name="description" id="description" />
         </div>
         <div class="modal-footer">
             <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_contract_index_button_add');?></button>
@@ -112,14 +115,46 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
 
 <script type="text/javascript">
     //Current cell transformed in input box
     var current_input = null;
     var credit = 0;
+    var startMonth = <?php echo $contract_start_month;?>;
+    var startDay = <?php echo $contract_start_day;?>;
+    var endMonth = <?php echo $contract_end_month;?>;
+    var endDay = <?php echo $contract_end_day;?>;
+    var locale = '<?php echo $language_code;?>';
+    
+    function set_current_period() {
+        var now = moment();
+        var startEntDate = moment();//now
+        var endEntDate = moment();//now
+
+        //Compute boundaries
+        startEntDate.month(startMonth - 1);
+        startEntDate.date(startDay);
+        endEntDate.month(endMonth - 1);
+        endEntDate.date(endDay);
+        if (startMonth != 1 ) {
+                if (now.month() < 5) {//zero-based => june
+                        startEntDate.subtract(1, 'years');
+                } else {
+                        endEntDate.add(1, 'years');
+                }
+        }
+
+        //Presentation for DB and Human
+        startEntDate.locale(locale);
+        endEntDate.locale(locale);
+        $("#startdate").val(startEntDate.format("YYYY-MM-DD"));
+        $("#enddate").val(endEntDate.format("YYYY-MM-DD"));
+        $("#viz_startdate").val(startEntDate.format("L"));
+        $("#viz_enddate").val(endEntDate.format("L"));
+        }
     
     function validate_form() {
         result = false;
@@ -135,17 +170,23 @@ if ($language_code != 'en') { ?>
             return false;
         }
     }
-    
+
     function delete_entitleddays(id) {
-        $.ajax({
-            url: "<?php echo base_url();?>entitleddays/contractdelete/" + id
-          }).done(function() {
-              $('tr[data-id="' + id + '"]').remove();
-              var rowCount = $('#entitleddayscontract tbody tr').length;
-              if (rowCount == 0) {
-                  $('#entitleddayscontract > tbody:last').append('<tr id="noentitleddays"><td colspan="5"><?php echo lang('entitleddays_contract_index_no_data');?></td></tr>');
-              }
-          });
+        bootbox.confirm("<?php echo lang('entitleddays_contract_confirm_delete_message');?>",
+            "<?php echo lang('entitleddays_contract_confirm_delete_cancel');?>",
+            "<?php echo lang('entitleddays_contract_confirm_delete_yes');?>", function(result) {
+            if (result) {
+                $.ajax({
+                    url: "<?php echo base_url();?>entitleddays/contractdelete/" + id
+                  }).done(function() {
+                      $('tr[data-id="' + id + '"]').remove();
+                      var rowCount = $('#entitleddayscontract tbody tr').length;
+                      if (rowCount == 0) {
+                          $('#entitleddayscontract > tbody:last').append('<tr id="noentitleddays"><td colspan="5"><?php echo lang('entitleddays_contract_index_no_data');?></td></tr>');
+                      }
+                  });
+                }
+        });
     }
 
     //"increase" or "decrease" the number of entitled days of a given row

@@ -33,6 +33,15 @@ BEGIN
         ) THEN
                 ALTER TABLE `entitleddays` ADD COLUMN `description` text DEFAULT NULL COMMENT 'Description of a credit / debit';
         END IF;
+
+        IF NOT EXISTS (
+                SELECT NULL
+                FROM information_schema.columns
+                WHERE table_schema = DATABASE() AND table_name ='users' AND column_name = 'ldap_path'
+        ) THEN
+                ALTER TABLE `users` ADD COLUMN `ldap_path` varchar(1024) DEFAULT NULL COMMENT 'LDAP Path for complex authentication schemes';
+        END IF;
+
 END$$
 DELIMITER ;
 

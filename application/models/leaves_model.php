@@ -135,7 +135,6 @@ class Leaves_model extends CI_Model {
             $this->db->where('users.id', $id);
             $this->db->where('entitleddays.startdate < CURDATE()');
             $this->db->where('entitleddays.enddate > CURDATE()');
-            $this->db->group_by("entitleddays.type");
             $entitled_days = $this->db->get()->result_array();
             foreach ($entitled_days as $entitled) {
                 $summary[$entitled['type']][1] = $entitled['entitled']; //entitled
@@ -150,7 +149,6 @@ class Leaves_model extends CI_Model {
             $this->db->where('users.id', $id);
             $this->db->where('entitleddays.startdate < CURDATE()');
             $this->db->where('entitleddays.enddate > CURDATE()');
-            $this->db->group_by("entitleddays.type");
             $entitled_days = $this->db->get()->result_array();
 
             foreach ($entitled_days as $entitled) {

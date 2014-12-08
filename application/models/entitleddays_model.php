@@ -103,17 +103,19 @@ class Entitleddays_model extends CI_Model {
      * @param date $startdate Start Date
      * @param date $enddate End Date
      * @param int $days number of days to be added
-     * @param int $type Description
+     * @param int $type Leave type (of the entitled days line)
+     * @param int $description Description of the entitled days line
      * @return int last inserted id
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function insert_entitleddays_employee($user_id, $startdate, $enddate, $days, $type) {
+    public function insert_entitleddays_employee($user_id, $startdate, $enddate, $days, $type, $description) {
         $data = array(
             'employee' => $user_id,
             'startdate' => $startdate,
             'enddate' => $enddate,
             'days' => $days,
-            'type' => $type
+            'type' => $type,
+            'description' => $description
         );
         $this->db->insert('entitleddays', $data);
         return $this->db->insert_id();

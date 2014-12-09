@@ -89,7 +89,7 @@ $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
 </form>
     <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
     <label for="password"><?php echo lang('session_login_field_password');?></label>
-    <input type="password" name="password" id="password" required /><br />
+    <input type="password" name="password" id="password" /><br />
     <br />
     <button id="send" class="btn btn-primary"><?php echo lang('session_login_button_login');?></button><br />
     <br />

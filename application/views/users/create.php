@@ -113,10 +113,10 @@ echo form_open('users/create', $attributes); ?>
 </form>
 
     <label for="password"><?php echo lang('users_create_field_password');?></label>
-    <input type="password" name="password" id="password" required />&nbsp;
-    <a class="btn" id="cmdGeneratePassword">
-        <i class="icon-refresh"></i>&nbsp;<?php echo lang('users_create_button_generate_password');?>
-    </a>
+    <div class="input-append">
+        <input type="password" name="password" id="password" required />
+        <a class="btn" id="cmdGeneratePassword"><i class="icon-refresh"></i>&nbsp;<?php echo lang('users_create_button_generate_password');?></a>
+    </div>
     <br />
     
     <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('users_create_button_create');?></button>
@@ -164,8 +164,7 @@ echo form_open('users/create', $attributes); ?>
         <a href="#" onclick="$('#frmSelectPosition').modal('hide');" class="btn secondary"><?php echo lang('users_create_popup_position_button_cancel');?></a>
     </div>
 </div>
-    
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/lms.password.js"></script>
+
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
@@ -230,6 +229,32 @@ if ($language_code != 'en') { ?>
         var encrypted = encrypt.encrypt($('#password').val());
         $('#CipheredValue').val(encrypted);
         $('#target').submit();
+    }
+    
+    /**
+     * Generate a password of the specified length
+     * @param int len   length of password to be generated
+     * @returns string  generated password
+     */
+    function password_generator(len) {
+        var length = (len)?(len):(10);
+        var string = "abcdefghijklnopqrstuvwxyz";
+        var numeric = '0123456789';
+        var punctuation = '!@#$%;:?,./-=';
+        var password = "";
+        var character = "";
+        while(password.length < length) {
+            entity1 = Math.ceil(string.length * Math.random() * Math.random());
+            entity2 = Math.ceil(numeric.length * Math.random() * Math.random());
+            entity3 = Math.ceil(punctuation.length * Math.random() * Math.random());
+            hold = string.charAt(entity1);
+            hold = (entity1 % 2 == 0)?(hold.toUpperCase()):(hold);
+            character += hold;
+            character += numeric.charAt( entity2 );
+            character += punctuation.charAt( entity3 );
+            password = character;
+        }
+        return password;
     }
     
     $(function () {

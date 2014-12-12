@@ -110,6 +110,11 @@ echo form_open('users/create', $attributes); ?>
         <?php endforeach ?>
     </select>
 
+    <?php if ($this->config->item('ldap_basedn_db')) {?>
+    <label for="ldap_path"><?php echo lang('users_create_field_ldap_path');?></label>
+    <input type="text" class="input-xxlarge" name="ldap_path" />
+    <?php }?>
+    <br />   
 </form>
 
     <label for="password"><?php echo lang('users_create_field_password');?></label>

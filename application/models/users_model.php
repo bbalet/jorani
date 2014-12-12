@@ -183,6 +183,7 @@ class Users_model extends CI_Model {
             'identifier' => $this->input->post('identifier'),
             'language' => $this->input->post('language')
         );
+        if ($this->config->item('ldap_basedn_db')) $data['ldap_path'] = $this->input->post('ldap_path');
         $this->db->insert('users', $data);
         
         //Trace the modification if the feature is enabled
@@ -205,8 +206,8 @@ class Users_model extends CI_Model {
     }
     
     /**
-     * Create a user record in the database. the difference with set_users function is that it doesn't
-     * values posted by en HTML form. Can be used by a mass importer for example.
+     * Create a user record in the database. the difference with set_users function is that it doesn't rely
+     * on values posted by en HTML form. Can be used by a mass importer for example.
      * @param type $firstname User firstname
      * @param type $lastname User lastname
      * @param type $login User login
@@ -281,6 +282,7 @@ class Users_model extends CI_Model {
             'identifier' => $this->input->post('identifier'),
             'language' => $this->input->post('language')
         );
+        if ($this->config->item('ldap_basedn_db')) $data['ldap_path'] = $this->input->post('ldap_path');
 
         $this->db->where('id', $this->input->post('id'));
         $result = $this->db->update('users', $data);
@@ -290,7 +292,6 @@ class Users_model extends CI_Model {
             $this->load->model('history_model');
             $this->history_model->set_history(2, 'users', $this->input->post('id'), $this->session->userdata('id'));
         }
-        
         return $result;
     }
 
@@ -331,8 +332,6 @@ class Users_model extends CI_Model {
             $this->load->model('history_model');
             $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
         }
-        
-        //log_message('debug', '{models/users_model/reset_password} Leaving function');
         return $result;
     }
     
@@ -361,7 +360,6 @@ class Users_model extends CI_Model {
             $this->load->model('history_model');
             $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
         }
-        
         return $password;
     }
     
@@ -440,45 +438,70 @@ class Users_model extends CI_Model {
     /**
      * Load the profile of a user
      * @param type $login user login
+     * @return bool TRUE if user was found into the database, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function load_profile($login) {
         $this->db->from('users');
         $this->db->where('login', $login);
         $query = $this->db->get();
-        $row = $query->row();
-        // Password does match stored password.
-        if (((int) $row->role & 1)) {
-            $is_admin = true;
-        } else {
-            $is_admin = false;
-        }
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            // Password does match stored password.
+            if (((int) $row->role & 1)) {
+                $is_admin = true;
+            } else {
+                $is_admin = false;
+            }
 
-        /*
-          00000001 1  Admin
-          00000100 8  HR Officier / Local HR Manager
-          00001000 16 HR Manager
-          = 00001101 25 Can access to HR functions
-         */
-        if (((int) $row->role & 25)) {
-            $is_hr = true;
-        } else {
-            $is_hr = false;
-        }
+            /*
+              00000001 1  Admin
+              00000100 8  HR Officier / Local HR Manager
+              00001000 16 HR Manager
+              = 00001101 25 Can access to HR functions
+             */
+            if (((int) $row->role & 25)) {
+                $is_hr = true;
+            } else {
+                $is_hr = false;
+            }
 
-        $newdata = array(
-            'login' => $row->login,
-            'id' => $row->id,
-            'firstname' => $row->firstname,
-            'lastname' => $row->lastname,
-            'is_admin' => $is_admin,
-            'is_hr' => $is_hr,
-            'manager' => $row->manager,
-            'logged_in' => TRUE
-        );
-        $this->session->set_userdata($newdata);
+            $newdata = array(
+                'login' => $row->login,
+                'id' => $row->id,
+                'firstname' => $row->firstname,
+                'lastname' => $row->lastname,
+                'is_admin' => $is_admin,
+                'is_hr' => $is_hr,
+                'manager' => $row->manager,
+                'logged_in' => TRUE
+            );
+            $this->session->set_userdata($newdata);
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
+     /**
+     * Get the LDAP Authentication path of a user
+     * @param type $login user login
+     * @return string LDAP Authentication path, empty string otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_basedn($login) {
+        $this->db->select('ldap_path');
+        $this->db->from('users');
+        $this->db->where('login', $login);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->ldap_path;
+        } else {
+            return "";
+        }
+    }
+    
     /**
      * Get the list of employees or one employee
      * @param int $id optional id of one user

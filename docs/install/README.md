@@ -37,7 +37,8 @@ LMS uses e-mail to notify users and their line managers. In order to setup e-mai
 
 ## LDAP
 
-In order to use LDAP, locate these lines of code into <code>application/config/config.php</code> :
+You must activate PHP LDAP module prior using this feature.
+In order to configure LDAP, locate these lines of code into <code>application/config/config.php</code> :
 
     $config['ldap_enabled'] = FALSE;
     $config['ldap_host'] = '127.0.0.1';
@@ -46,10 +47,16 @@ In order to use LDAP, locate these lines of code into <code>application/config/c
 
 * Switch ldap_enabled to <code>TRUE</code>.
 * Change <code>ldap_host</code> and <code>ldap_port</code> according to your environement.
-* LMS tries to bind to LDAP according to the content of <code>ldap_basedn</code> in where <code>%s</code> is a placeholder for the user id to be checked into LDAP.
+* LMS tries to bind to LDAP according to the content of <code>ldap_basedn</code> in where <code>%s</code> is a placeholder for the user id to be checked into LDAP (e.g. <code>%s</code> will be replaced by the login from LMS db).
 * Contact your IT Admin in order to know more about how LDAP is configured into your organization. Change the value but <code>%s</code> must remain somewhere into this string.
 * The user id into LMS and LDAP must be the same. When LDAP is activated, LMS doesn't use anymore the password stored into the database.
 * LMS is designed for small organization, therefore it doesn't support complex authentication schemes.
+
+Since version 0.1.5, LMS supports complex LDAP authentication schemes. In order to use this feature :
+
+1. Set <code>ldap_basedn_db</code> to TRUE.
+2. The Base DN is not based on <code>ldap_basedn</code>, but read into the users table, column <code>ldap_path</code> (e.g. from database).
+3. The Base DN should look like <code>uid=bbalet,ou=people,dc=company,dc=com</code>. Note that this feature allows you to authenticate users from different OU.
 
 ## Apache
 

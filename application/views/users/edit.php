@@ -109,6 +109,11 @@ echo $date->format(lang('global_date_format'));
         <?php endforeach ?>
     </select>
     
+    <?php if ($this->config->item('ldap_basedn_db')) {?>
+    <label for="ldap_path"><?php echo lang('users_edit_field_ldap_path');?></label>
+    <input type="text" class="input-xxlarge" name="ldap_path" value="<?php echo $users_item['ldap_path']; ?>" />
+    <?php }?>
+    <br />
     <br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('users_edit_button_update');?></button>
     &nbsp;

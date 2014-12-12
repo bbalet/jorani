@@ -226,6 +226,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('datehired', lang('users_edit_field_hired'), 'xss_clean');
         $this->form_validation->set_rules('identifier', lang('users_edit_field_identifier'), 'xss_clean');
         $this->form_validation->set_rules('language', lang('users_edit_field_language'), 'xss_clean');
+        if ($this->config->item('ldap_basedn_db')) $this->form_validation->set_rules('ldap_path', lang('users_edit_field_ldap_path'), 'xss_clean');
         
         $data['users_item'] = $this->users_model->get_users($id);
         if (empty($data['users_item'])) {
@@ -375,6 +376,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('datehired', lang('users_create_field_hired'), 'xss_clean');
         $this->form_validation->set_rules('identifier', lang('users_create_field_identifier'), 'xss_clean');
         $this->form_validation->set_rules('language', lang('users_create_field_language'), 'xss_clean');
+        if ($this->config->item('ldap_basedn_db')) $this->form_validation->set_rules('ldap_path', lang('users_create_field_ldap_path'), 'xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);

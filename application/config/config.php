@@ -403,6 +403,7 @@ $config['ldap_enabled'] = FALSE;
 $config['ldap_host'] = '127.0.0.1';
 $config['ldap_port'] = 389;
 $config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';
+$config['ldap_basedn_db'] = FALSE;
 
 //Profiling options
 $config['enable_profiling'] = FALSE;

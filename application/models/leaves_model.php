@@ -123,7 +123,7 @@ class Leaves_model extends CI_Model {
             $this->db->group_by("leaves.type");
             $taken_days = $this->db->get()->result_array();
             foreach ($taken_days as $taken) {
-                $summary[$taken['type']][0] = $taken['taken']; //Taken
+                $summary[$taken['type']][0] = (float) $taken['taken']; //Taken
             }
             
             //Get the total of entitled days affected to a contract (between 2 dates)
@@ -137,7 +137,7 @@ class Leaves_model extends CI_Model {
             $this->db->where('entitleddays.enddate > CURDATE()');
             $entitled_days = $this->db->get()->result_array();
             foreach ($entitled_days as $entitled) {
-                $summary[$entitled['type']][1] = $entitled['entitled']; //entitled
+                $summary[$entitled['type']][1] = (float) $entitled['entitled']; //entitled
             }
 
             //Add entitled days of employee (number of entitled days can be negative)
@@ -154,7 +154,7 @@ class Leaves_model extends CI_Model {
             foreach ($entitled_days as $entitled) {
                 //Note: this is an addition to the entitled days attached to the contract
                 //Most common use cases are 'special leave', 'maternity leave'...
-                $summary[$entitled['type']][1] += $entitled['entitled']; //entitled
+                $summary[$entitled['type']][1] += (float) $entitled['entitled']; //entitled
             }
             
             //Add the validated catch up days
@@ -169,10 +169,10 @@ class Leaves_model extends CI_Model {
             foreach ($overtime_days as $entitled) {
                 if ($sum_extra == FALSE) {
                     $summary['Catch up for ' . $entitled['date']][0] = '-'; //taken
-                    $summary['Catch up for ' . $entitled['date']][1] = $entitled['duration']; //entitled
+                    $summary['Catch up for ' . $entitled['date']][1] = (float) $entitled['duration']; //entitled
                     $summary['Catch up for ' . $entitled['date']][2] = $entitled['cause']; //description
                 }
-                $sum += $entitled['duration']; //entitled
+                $sum += (float) $entitled['duration']; //entitled
             }
             if ($sum_extra == TRUE) {
                 $this->db->select('sum(leaves.duration) as taken');
@@ -184,14 +184,14 @@ class Leaves_model extends CI_Model {
                 $this->db->group_by("leaves.type");
                 $taken_days = $this->db->get()->result_array();
                 if (count($taken_days) > 0) {
-                    $summary[$compensate_name][0] = $taken_days[0]['taken']; //taken
+                    $summary[$compensate_name][0] = (float) $taken_days[0]['taken']; //taken
                 } else {
                     $summary[$compensate_name][0] = 0; //taken
                 }
             }
             //Add the sum of validated catch up for the employee
             if (array_key_exists($compensate_name, $summary)) {
-                $summary[$compensate_name][1] = $summary[$compensate_name][1] + $sum; //entitled
+                $summary[$compensate_name][1] = (float) $summary[$compensate_name][1] + $sum; //entitled
             }
             
             //Remove all lines having taken and entitled set to set to 0

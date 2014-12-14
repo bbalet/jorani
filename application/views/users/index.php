@@ -88,13 +88,13 @@ $(document).ready(function() {
 </div>
 
 <div class="row-fluid">
-    <div class="span2">
+    <div class="span3">
       <a href="<?php echo base_url();?>users/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('users_index_button_export');?></a>
     </div>
-    <div class="span2">
+    <div class="span3">
       <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('users_index_button_create_user');?></a>
     </div>
-    <div class="span2">
+    <div class="span6">
         &nbsp;
         <!--<a href="<?php echo base_url();?>users/import" class="btn btn-primary" data-target="#frmImportUsers" data-toggle="modal"><i class="icon-arrow-up icon-white"></i>&nbsp;<?php echo lang('users_index_button_import_user');?></a><//-->
     </div>

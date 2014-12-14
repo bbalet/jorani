@@ -17,4 +17,4 @@
  */
 
 $lang['footer_link_go_top'] = 'ទៅខាងលើ';
-$lang['footer_copyright_notice'] = '&copy; 2014 LMS Authors &middot; ប្រពន្ធ័គ្រប់គ្រងការសុំច្បាប់';
+$lang['footer_copyright_notice'] = '&copy; 2014 Jorani Authors';

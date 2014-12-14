@@ -47,8 +47,9 @@ $this->lang->load('global', $language);?>
 
     <div class="row vertical-center">
         <div class="span3">&nbsp;</div>
-        <div class="span6 form-box">
-
+            <div class="span6 form-box">
+                <div class="row-fluid">
+                    <div class="span6">
 <h2><?php echo lang('session_login_title');?> &nbsp;
 <a href="<?php echo lang('global_link_doc_page_login');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h2>
 
@@ -84,18 +85,20 @@ $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
     </select>
     <?php } ?>
     <label for="login"><?php echo lang('session_login_field_login');?></label>
-    <input type="text" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required /><br />
+    <input type="text" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
 </form>
     <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
     <label for="password"><?php echo lang('session_login_field_password');?></label>
     <input type="password" name="password" id="password" /><br />
     <br />
-    <button id="send" class="btn btn-primary"><?php echo lang('session_login_button_login');?></button><br />
+    <button id="send" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></button><br />
     <br />
     <button id="cmdForgetPassword" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
     <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>
-    
+                </div>
+                <div class="span6"><img src="<?php echo base_url();?>assets/images/jorani-vertical.png"></div>
+            </div>
         </div>
         <div class="span3">&nbsp;</div>
     </div>

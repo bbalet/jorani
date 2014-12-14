@@ -25,6 +25,10 @@ $lang['organization_index_thead_lastname'] = 'ឈ្មោះអ្នកប្�
 $lang['organization_index_thead_email'] = 'ម៉ែល';
 $lang['organization_index_button_add_employee'] = 'ភ្ជាប់ជាមួយបុគ្គលិក';
 $lang['organization_index_button_remove_employee'] = 'ផ្តាច់ចេញពីបុគ្គលិក';
+
+$lang['organization_index_popup_node_button_ok'] = 'OK';
+$lang['organization_index_popup_node_button_cancel'] = 'Cancel';
+
 $lang['organization_index_popup_delete_title'] = 'លុបអង្គភាព';
 $lang['organization_index_popup_delete_description'] = 'អ្នកលុបអង្គភាពមួយ​​  នេះជានីតិវិធីដែលមិនអាចថយក្រោយវិញបាន';
 $lang['organization_index_popup_delete_confirm'] = 'តើអ្នកចង់បន្ត?';

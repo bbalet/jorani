@@ -25,6 +25,10 @@ $lang['organization_index_thead_lastname'] = 'Nom';
 $lang['organization_index_thead_email'] = 'E-mail';
 $lang['organization_index_button_add_employee'] = 'Attacher un employé';
 $lang['organization_index_button_remove_employee'] = 'Détacher un employé';
+
+$lang['organization_index_popup_node_button_ok'] = 'OK';
+$lang['organization_index_popup_node_button_cancel'] = 'Annuler';
+
 $lang['organization_index_popup_delete_title'] = 'Supprimer entitée';
 $lang['organization_index_popup_delete_description'] = 'Vous êtes sur le point de supprimer une entité, cette procédure est irréversible.';
 $lang['organization_index_popup_delete_confirm'] = 'Voulez-vous continuer ?';

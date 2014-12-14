@@ -560,7 +560,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `datehired` date DEFAULT NULL COMMENT 'Date hired / Started',
   `identifier` varchar(64) CHARACTER SET utf8 NOT NULL COMMENT 'Internal/company identifier',
   `language` varchar(2) CHARACTER SET utf8 NOT NULL DEFAULT 'en',
-  `ldap_path` varchar(1024) DEFAULT NULL COMMENT 'LDAP Path for complex authentication schemes';
+  `ldap_path` varchar(1024) DEFAULT NULL COMMENT 'LDAP Path for complex authentication schemes',
+  `active` bool DEFAULT TRUE COMMENT 'Is user active',
   PRIMARY KEY (`id`),
   KEY `manager` (`manager`),
   KEY `organization` (`organization`),

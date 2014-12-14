@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Bienvenue dans LMS {Firstname} {Lastname}. Veuillez utiliser ces identifiants pour <a href="{BaseURL}">vous connecter à l'application</a> :
+        Bienvenue dans Jorani {Firstname} {Lastname}. Veuillez utiliser ces identifiants pour <a href="{BaseURL}">vous connecter à l'application</a> :
         <table border="0">
             <tr>
                 <td>Identifiant</td><td>{Login}</td>

@@ -49,15 +49,15 @@ padding-left:10px;
 }
 </style>
 
-<h2><?php echo lang('contract_calendar_title');?> <span class="muted"><?php echo $name; ?></span></h2>
+<h2><?php echo lang('contract_calendar_title');?> <span class="muted"><?php echo $contract_name; ?></span></h2>
 
 <div class="row-fluid">
     <div class="span6">
-        <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) - 1);?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo intval($year) - 1;?></a>
+        <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) - 1);?>" class="btn btn-primary" id="cmdPrevious"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo intval($year) - 1;?></a>
         &nbsp;
         <strong><?php echo $year;?></strong>
         &nbsp;
-        <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) + 1);?>" class="btn btn-primary"><?php echo intval($year) + 1;?>&nbsp; <i class="icon-arrow-right icon-white"></i></a>
+        <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) + 1);?>" class="btn btn-primary" id="cmdNext"><?php echo intval($year) + 1;?>&nbsp; <i class="icon-arrow-right icon-white"></i></a>
     </div>
     <div class="span3">
         <a href="<?php echo base_url() . 'contracts';?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_back');?></a>
@@ -193,10 +193,10 @@ for ($mC = 1; $mC <= 12; $mC++) {
 <div id="frmSetRangeDayOff" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="close">&times;</a>
-         <h3>Edit a series of day offs</h3>
+         <h3><?php echo lang('contract_calendar_popup_series_title');?></h3>
     </div>
     <div class="modal-body">
-        <label for="cboDayOffSeriesDay">Mark every</label>
+        <label for="cboDayOffSeriesDay"><?php echo lang('contract_calendar_popup_series_field_occurences');?></label>
         <select name="cboDayOffSeriesDay" id="cboDayOffSeriesDay">
             <option value="saturday" selected><?php echo lang('Saturday');?></option>
             <option value="sunday"><?php echo lang('Sunday');?></option>
@@ -206,26 +206,29 @@ for ($mC = 1; $mC <= 12; $mC++) {
             <option value="thursday"><?php echo lang('Thursday');?></option>
             <option value="friday"><?php echo lang('Friday');?></option>
         </select>
-        <label for="txtStartDate">From</label>
-        <input type="text" id="viz_startdate" name="viz_startdate" required /><br />
+        <label for="txtStartDate"><?php echo lang('contract_calendar_popup_series_field_from');?></label>
+        <div class="input-append">
+                <input type="text" id="viz_startdate" name="viz_startdate" required />
+                <button class="btn" onclick="set_current_period();"><?php echo lang('contract_calendar_popup_series_button_current');?></button>
+            </div><br />
         <input type="hidden" name="txtStartDate" id="txtStartDate" /><br />
-        <label for="txtEndDate">To</label>
+        <label for="txtEndDate"><?php echo lang('contract_calendar_popup_series_field_to');?></label>
         <input type="text" id="viz_enddate" name="viz_enddate" required /><br />
         <input type="hidden" name="txtEndDate" id="txtEndDate" /><br />
-        <label for="cboDayOffSeriesType">As a</label>
+        <label for="cboDayOffSeriesType"><?php echo lang('contract_calendar_popup_series_field_as');?></label>
         <select id="cboDayOffSeriesType" name="cboDayOffType">
-            <option value="0" selected>Working day</option>
-            <option value="1" selected>All day is off</option>
-            <option value="2">Morning is off</option>
-            <option value="3">Afternoon is off</option>
+            <option value="0" selected><?php echo lang('contract_calendar_popup_series_field_as_working');?></option>
+            <option value="1" selected><?php echo lang('contract_calendar_popup_series_field_as_off');?></option>
+            <option value="2"><?php echo lang('contract_calendar_popup_series_field_as_morning');?></option>
+            <option value="3"><?php echo lang('contract_calendar_popup_series_field_as_afternnon');?></option>
         </select>
         <br />
-        <label for="cboDayOffSeriesTitle">Title</label>
+        <label for="cboDayOffSeriesTitle"><?php echo lang('contract_calendar_popup_series_field_title');?></label>
         <input type="text" id="cboDayOffSeriesTitle" name="cboDayOffSeriesTitle" />
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="edit_series();" class="btn secondary">OK</a>
-        <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="btn secondary">Cancel</a>
+        <a href="#" onclick="edit_series();" class="btn secondary"><?php echo lang('contract_calendar_popup_series_button_ok');?></a>
+        <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="btn secondary"><?php echo lang('contract_calendar_popup_series_button_cancel');?></a>
     </div>
 </div>
 
@@ -235,9 +238,42 @@ for ($mC = 1; $mC <= 12; $mC++) {
 if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
 <script type="text/javascript">
 
 var timestamp;
+
+function set_current_period() {
+    var now = moment();
+    var startEntDate = moment();//now
+    var endEntDate = moment();//now
+    var startMonth = 1;
+    var startDay = 1;
+    var endMonth = 12;
+    var endDay = 31;
+    var locale = '<?php echo $language_code;?>';
+
+    //Compute boundaries
+    startEntDate.month(startMonth - 1);
+    startEntDate.date(startDay);
+    endEntDate.month(endMonth - 1);
+    endEntDate.date(endDay);
+    if (startMonth != 1 ) {
+            if (now.month() < 5) {//zero-based => june
+                    startEntDate.subtract(1, 'years');
+            } else {
+                    endEntDate.add(1, 'years');
+            }
+    }
+
+    //Presentation for DB and Human
+    startEntDate.locale(locale);
+    endEntDate.locale(locale);
+    $("#txtStartDate").val(startEntDate.format("YYYY-MM-DD"));
+    $("#txtEndDate").val(endEntDate.format("YYYY-MM-DD"));
+    $("#viz_startdate").val(startEntDate.format("L"));
+    $("#viz_enddate").val(endEntDate.format("L"));
+    }
 
 function add_day_off() {
     $("#cboType").val($('#' + timestamp).data("type"));
@@ -320,7 +356,6 @@ $(function() {
                 $( "#viz_startdate" ).datepicker( "option", "maxDate", selectedDate );
               }
     }, $.datepicker.regional['<?php echo $language_code;?>']);
-    
     
     //Display modal form that allow adding a day off
     $("#fullyear").on("click", "td", function() {

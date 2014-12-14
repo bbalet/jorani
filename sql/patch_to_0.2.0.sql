@@ -42,6 +42,14 @@ BEGIN
                 ALTER TABLE `users` ADD COLUMN `ldap_path` varchar(1024) DEFAULT NULL COMMENT 'LDAP Path for complex authentication schemes';
         END IF;
 
+        IF NOT EXISTS (
+                SELECT NULL
+                FROM information_schema.columns
+                WHERE table_schema = DATABASE() AND table_name ='users' AND column_name = 'active'
+        ) THEN
+                ALTER TABLE `users` ADD COLUMN `active` bool DEFAULT TRUE COMMENT 'Is user active';
+        END IF;
+
 END$$
 DELIMITER ;
 

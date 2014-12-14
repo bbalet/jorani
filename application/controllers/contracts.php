@@ -73,7 +73,6 @@ class Contracts extends CI_Controller {
         } else {
             $showAll = false;
         }
-        
         $data = $this->getUserContext();
         $data['filter'] = $filter;
         $data['title'] = lang('contract_index_title');
@@ -209,11 +208,17 @@ class Contracts extends CI_Controller {
         } else {
             $data['year'] = date("Y");
         }
+        $this->load->model('contracts_model');
+        $contract = $this->contracts_model->get_contracts($id);
         $data['contract_id'] = $id;
+        $data['contract_name'] = $contract['name'];
+        $data['contract_start_month'] = intval(substr($contract['startentdate'], 0, 2));
+        $data['contract_start_day'] = intval(substr($contract['startentdate'], 3));
+        $data['contract_end_month'] = intval(substr($contract['endentdate'], 0, 2));
+        $data['contract_end_day'] = intval(substr($contract['endentdate'], 3));
         $this->load->model('dayoffs_model');
         $data['dayoffs'] = $this->dayoffs_model->get_dayoffs($id, $data['year']);
         $this->load->model('contracts_model');
-        $data['name'] = $this->contracts_model->get_label($id);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('contracts/calendar', $data);

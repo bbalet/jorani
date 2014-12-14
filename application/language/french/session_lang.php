@@ -16,7 +16,7 @@
  * along with lms.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['session_login_title'] = 'Connexion à l\'application';
+$lang['session_login_title'] = 'Connexion';
 $lang['session_login_field_language'] = 'Langage';
 $lang['session_login_field_login'] = 'Identifiant';
 $lang['session_login_field_password'] = 'Mot de passe';

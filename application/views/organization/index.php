@@ -299,7 +299,9 @@ $this->lang->load('treeview', $language);?>
             }
         })
         .on('create_node.jstree', function (e, data) {
-            bootbox.prompt("<?php echo lang('organization_index_prompt_entity_name');?>", function(result) {                
+            bootbox.prompt("<?php echo lang('organization_index_prompt_entity_name');?>",
+                "<?php echo lang('organization_index_popup_node_button_cancel');?>",
+                "<?php echo lang('organization_index_popup_node_button_ok');?>", function(result) {
                 if (result === null) {
                 
                 } else {

@@ -23,9 +23,9 @@ $this->lang->load('footer', $language);?>
     </div><!-- /.container -->
     <!-- FOOTER -->
     <div class="row" id="footer">
-      <div class="span8"><?php echo lang('footer_copyright_notice');?></div>
-      <div class="span2">v0.1.5</div>
-      <div class="span2"><span class="pull-right"><a href="#"><?php echo lang('footer_link_go_top');?></a></span></div>
+      <div class="span4"><?php echo lang('footer_copyright_notice');?></div>
+      <div class="span4 offset2"><img src="<?php echo base_url();?>assets/images/jorani-horizontal-small.png" style="margin-top:-11px">&nbsp;&nbsp;v0.2.0</div>
+      <div class="span4"><span class="pull-right"><a href="#"><?php echo lang('footer_link_go_top');?></a></span></div>
     </div>
 </body>
 </html>

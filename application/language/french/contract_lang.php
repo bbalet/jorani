@@ -95,3 +95,17 @@ $lang['contract_calendar_popup_dayoff_type_afternoon'] = 'Après-midi  non trava
 $lang['contract_calendar_popup_dayoff_button_delete'] = 'Supprimer';
 $lang['contract_calendar_popup_dayoff_button_ok'] = 'OK';
 $lang['contract_calendar_popup_dayoff_button_cancel'] = 'Annuler';
+
+$lang['contract_calendar_popup_series_title'] = 'Modifier une série de jours non travaillés';
+$lang['contract_calendar_popup_series_field_occurences'] = 'Marquer tous les';
+$lang['contract_calendar_popup_series_field_from'] = 'Du';
+$lang['contract_calendar_popup_series_button_current'] = 'Courante';
+$lang['contract_calendar_popup_series_field_to'] = 'Au';
+$lang['contract_calendar_popup_series_field_as'] = 'En tant que';
+$lang['contract_calendar_popup_series_field_as_working'] = 'Jour travaillé';
+$lang['contract_calendar_popup_series_field_as_off'] = 'Jour non travaillé';
+$lang['contract_calendar_popup_series_field_as_morning'] = 'Matin non travaillé';
+$lang['contract_calendar_popup_series_field_as_afternnon'] = 'Après-midi non travaillé';
+$lang['contract_calendar_popup_series_field_title'] = 'Titre';
+$lang['contract_calendar_popup_series_button_ok'] = 'OK';
+$lang['contract_calendar_popup_series_button_cancel'] = 'Annuler';

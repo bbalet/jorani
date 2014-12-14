@@ -77,10 +77,6 @@ $(document).ready(function() {
 </div>
 
 <div class="row-fluid">
-    <div class="span12">&nbsp;</div>
-</div>
-
-<div class="row-fluid">
     <div class="span2">
       <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_create_user');?></a>
     </div>

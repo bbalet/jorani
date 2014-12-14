@@ -17,4 +17,4 @@
  */
 
 $lang['footer_link_go_top'] = 'Aller en haut';
-$lang['footer_copyright_notice'] = '&copy; 2014 Les auteurs de LMS &middot; Gestion des demandes de congés';
+$lang['footer_copyright_notice'] = '&copy; 2014 Les auteurs de Jorani';

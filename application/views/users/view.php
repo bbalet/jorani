@@ -22,7 +22,9 @@ $CI->load->helper('language');
 $this->lang->load('users', $language);
 $this->lang->load('global', $language);?>
 
-<h2><?php echo lang('users_view_title');?><?php echo $user['id']; ?></h2>
+<div class="row">
+    <div class="span12">
+    <h2><?php echo lang('users_view_title');?><?php echo $user['id']; ?></h2>
 
     <label for="firstname"><?php echo lang('users_view_field_firstname');?></label>
     <input type="text" name="firstname" value="<?php echo $user['firstname']; ?>" readonly /><br />
@@ -72,3 +74,7 @@ echo $date->format(lang('global_date_format')); ?>" readonly /><br />
     <a href="<?php echo base_url();?>users/edit/<?php echo $user['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;<?php echo lang('users_view_button_edit');?></a>
     &nbsp;
     <a href="<?php echo base_url();?>users" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('users_view_button_back');?></a>
+    <br /><br />
+    
+    </div>
+</div>

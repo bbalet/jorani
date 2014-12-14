@@ -95,37 +95,17 @@ $lang['contract_calendar_popup_dayoff_type_afternoon'] = 'Afternoon is off';
 $lang['contract_calendar_popup_dayoff_button_delete'] = 'Delete';
 $lang['contract_calendar_popup_dayoff_button_ok'] = 'OK';
 $lang['contract_calendar_popup_dayoff_button_cancel'] = 'Cancel';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_popup_series_'] = '';
-$lang['contract_calendar_'] = '';
-$lang['contract_calendar_'] = '';
-$lang['contract_calendar_'] = '';
-/*
- * frmSetRangeDayOff:
-Edit a series of day offs
-Mark every
-From
-To
-As a
-Working day
-All day is off
-Morning is off
-Afternoon is off
-Title
-Delete
-OK
-Cancel 
 
- * frmAddDayOff:*/
-
+$lang['contract_calendar_popup_series_title'] = 'Edit a series of day offs';
+$lang['contract_calendar_popup_series_field_occurences'] = 'Mark every';
+$lang['contract_calendar_popup_series_field_from'] = 'From';
+$lang['contract_calendar_popup_series_button_current'] = 'Current';
+$lang['contract_calendar_popup_series_field_to'] = 'To';
+$lang['contract_calendar_popup_series_field_as'] = 'As a';
+$lang['contract_calendar_popup_series_field_as_working'] = 'Working day';
+$lang['contract_calendar_popup_series_field_as_off'] = 'All day is off';
+$lang['contract_calendar_popup_series_field_as_morning'] = 'Morning is off';
+$lang['contract_calendar_popup_series_field_as_afternnon'] = 'Afternoon is off';
+$lang['contract_calendar_popup_series_field_title'] = 'Title';
+$lang['contract_calendar_popup_series_button_ok'] = 'OK';
+$lang['contract_calendar_popup_series_button_cancel'] = 'Cancel';

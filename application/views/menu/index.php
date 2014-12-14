@@ -88,7 +88,7 @@ $this->lang->load('menu', $language);?>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_hr_reports_divider');?></li>
                     <li><a href="<?php echo base_url();?>reports/balance"><?php echo lang('menu_hr_report_leave_balance');?></a></li>
-                    <li><a href="<?php echo base_url();?>reports/carried_over"><?php echo lang('menu_hr_report_leave_carried_over');?></a></li>
+                    <!--<li><a href="<?php echo base_url();?>reports/carried_over"><?php echo lang('menu_hr_report_leave_carried_over');?></a></li>//-->
                   </ul>
                 </li>
               </ul>

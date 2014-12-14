@@ -36,3 +36,35 @@ $lang['reports_balance_popup_entity_button_ok'] = 'យល់ព្រម';
 $lang['reports_balance_popup_entity_button_cancel'] = 'បោះបង់';
 
 $lang['reports_export_balance_title'] = 'តុល្យភាពនៃសំណើរ';
+
+$lang['reports_carried_over_title'] = 'Carried over leaves';
+$lang['reports_carried_over_field_entity'] = 'Select the entity';
+$lang['reports_carried_over_button_entity'] = 'Select';
+$lang['reports_carried_over_field_subdepts'] = 'Include sub-departments';
+$lang['reports_carried_over_button_launch'] = 'Launch';
+$lang['reports_carried_over_button_export'] = 'Export';
+$lang['reports_carried_over_popup_entity_title'] = 'Select an entity';
+$lang['reports_carried_over_popup_entity_button_ok'] = 'OK';
+$lang['reports_carried_over_popup_entity_button_cancel'] = 'Cancel';
+
+$lang['reports_export_carried_over_title'] = 'Carried over leaves';
+
+$lang['reports_history_title'] = 'History of changes';
+$lang['reports_history_field_modifiedby'] = 'Select the user';
+$lang['reports_history_field_startdate'] = 'Start date';
+$lang['reports_history_field_enddate'] = 'End date';
+$lang['reports_history_field_table'] = 'Table';
+$lang['reports_history_field_modification_type'] = 'Modification type';
+$lang['reports_history_field_modification_any'] = 'any';
+$lang['reports_history_field_modification_create'] = 'create';
+$lang['reports_history_field_modification_update'] = 'update';
+$lang['reports_history_field_modification_delete'] = 'delete';
+$lang['reports_history_button_select'] = 'Select';
+$lang['reports_history_button_launch'] = 'Launch';
+$lang['reports_history_button_export'] = 'Export';
+$lang['reports_history_popup_user_title'] = 'Select a user';
+$lang['reports_history_popup_user_button_clear'] = 'Clear';
+$lang['reports_history_popup_user_button_ok'] = 'OK';
+$lang['reports_history_popup_user_button_cancel'] = 'Cancel';
+
+$lang['reports_history_balance_title'] = 'History of changes';

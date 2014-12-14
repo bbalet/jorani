@@ -37,6 +37,18 @@ $lang['reports_balance_popup_entity_button_cancel'] = 'Cancel';
 
 $lang['reports_export_balance_title'] = 'Balance of leaves';
 
+$lang['reports_carried_over_title'] = 'Carried over leaves';
+$lang['reports_carried_over_field_entity'] = 'Select the entity';
+$lang['reports_carried_over_button_entity'] = 'Select';
+$lang['reports_carried_over_field_subdepts'] = 'Include sub-departments';
+$lang['reports_carried_over_button_launch'] = 'Launch';
+$lang['reports_carried_over_button_export'] = 'Export';
+$lang['reports_carried_over_popup_entity_title'] = 'Select an entity';
+$lang['reports_carried_over_popup_entity_button_ok'] = 'OK';
+$lang['reports_carried_over_popup_entity_button_cancel'] = 'Cancel';
+
+$lang['reports_export_carried_over_title'] = 'Carried over leaves';
+
 $lang['reports_history_title'] = 'History of changes';
 $lang['reports_history_field_modifiedby'] = 'Select the user';
 $lang['reports_history_field_startdate'] = 'Start date';

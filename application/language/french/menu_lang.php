@@ -45,6 +45,7 @@ $lang['menu_hr_leaves_type_divider'] = 'Absences';
 $lang['menu_hr_list_leaves_type'] = 'Liste des types';
 $lang['menu_hr_reports_divider'] = 'Rapports';
 $lang['menu_hr_report_leave_balance'] = 'État des congés';
+$lang['menu_hr_report_leave_carried_over'] = 'Report des congés';
 
 $lang['menu_validation_title'] = 'Validation';
 $lang['menu_validation_collaborators'] = 'Mes collaborateurs';

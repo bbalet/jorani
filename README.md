@@ -1,5 +1,5 @@
-LMS is a Leave Management System developed in PHP/MySQL under a GPL v3 licence.
-LMS is designed to provide simple leave and overtime request workflows for small organizations.
+<img align="left" src="https://raw.githubusercontent.com/bbalet/jorani/master/assets/images/jorani-vertical.png" alt="Jorani Logo"> Jorani is a Leave Management System developed in PHP/MySQL under a GPL v3 licence.
+Jorani is designed to provide simple leave and overtime request workflows for small organizations.
 
 ## Informations / getting help
 
@@ -35,7 +35,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 
 [See the installation instructions](docs/install/README.md) for advanced configuration. In a nutshell :
 * If you use Apache, **mod_rewrite must be activated and the config must allow overwriting settings with .htaccess file**.
-* Download or clone LMS.
+* Download or clone Jorani.
 * Upload the content of this folder on your server (in <code>/var/www/...</code>).
 * Create a database with <code>/sql/lms.sql</code> script.
 * Create a user with SELECT, INSERT, UPDATE, DELETE, EXECUTE permissions on the database.
@@ -68,7 +68,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 
 ### Third party libraries and components
 
-We thank the following open source projects for the components used by LMS:
+We thank the following open source projects for the components used by Jorani:
 
 #### Backend
 

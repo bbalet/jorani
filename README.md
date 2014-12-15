@@ -6,7 +6,7 @@ Jorani is designed to provide simple leave and overtime request workflows for sm
 ## Informations / getting help
 
 * Official website : http://www.leave-management-system.org/
-* Google group : https://groups.google.com/forum/?hl=en#!forum/lms-users
+* Google group : https://groups.google.com/forum/?hl=en#!forum/jorani
 * G+ : https://plus.google.com/+LeavemanagementsystemOrganization/posts
 * FB : https://www.facebook.com/lmsoss
 * Tweeter : https://twitter.com/LeaveMS

@@ -1,5 +1,7 @@
-<img align="right" src="https://raw.githubusercontent.com/bbalet/jorani/master/assets/images/jorani-vertical.png" alt="Jorani Logo"> Jorani is a Leave Management System developed in PHP/MySQL under a GPL v3 licence.
+Jorani is a Leave Management System developed in PHP/MySQL under a GPL v3 licence.
 Jorani is designed to provide simple leave and overtime request workflows for small organizations.
+
+![Jorani Logo](https://raw.githubusercontent.com/bbalet/jorani/master/assets/images/Jorani_Logo_horizontal-700.png)
 
 ## Informations / getting help
 
@@ -65,6 +67,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 ### Contributors
 
 * NGO Passerelles numériques, our first user http://passerellesnumeriques.org/en/
+* Github and Google groupe users for their ideas and tests.
 
 ### Third party libraries and components
 
@@ -86,5 +89,4 @@ We thank the following open source projects for the components used by Jorani:
 * RSA implementation https://github.com/travist/jsencrypt
 * Moment (JS dates lib) http://momentjs.com/
 
-Favicon was created by Dakirby309 - http://dakirby309.deviantart.com / License: Creative Commons (Attribution 3.0 Unported)
 Background image of login page by Kevin Dooley - https://www.flickr.com/photos/pagedooley/ / License: Creative Commons (Attribution 3.0 Unported)

@@ -1,5 +1,5 @@
 -- ---------------------------------------------------
--- LMS Schema upgrade to 0.1.5
+-- Jorani Schema upgrade to 0.1.5
 -- 
 
 -- New features

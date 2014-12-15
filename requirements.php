@@ -17,7 +17,7 @@
  */
 
 //MD5 hash table of the tables structure for every released version of LMS
-$signatures['090176a36afb8ed6c1f394ef047454bb'] = 'latest';        //actions
+/*$signatures['090176a36afb8ed6c1f394ef047454bb'] = 'latest';        //actions
 $signatures['ba852f157316c6c648c44e1be48bc8cd'] = 'latest';        //activities
 $signatures['4d61910d9105a31d5b965177b10fb874'] = 'latest';     //activities_employee
 $signatures['0c3fc9a0f779c75ec4b4c96341727104'] = 'latest';         //activities_employee_history
@@ -46,7 +46,7 @@ $signatures['705e271e745223739b914c8b76d107cf'] = 'latest';     //types_history
 $signatures['a2315fb06d5d24c1fd2e287ccf959141'] = 'latest';         //users
 
 $signatures['1731fe5490a1d9a111da01471928bcd7'] = 'v0.1.4';//contracts
-$signatures['547b7878e4287fdac66ec6d802afb621'] = 'v0.1.4';//entitleddays
+$signatures['547b7878e4287fdac66ec6d802afb621'] = 'v0.1.4';//entitleddays*/
 
 if (function_exists('apache_get_modules')) {
   $modules = apache_get_modules();
@@ -76,11 +76,11 @@ if ($configFileExists ) {
         if (@mysql_select_db($db['default']['database'], $dbConn)) {
             //Try to get the signature of the schema
             $dbExists = TRUE;
-            $sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
+            /*$sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
                         . " FROM information_schema.columns"
                         . " WHERE table_schema =  DATABASE()"
                         . " GROUP BY TABLE_NAME";
-            $rs = @mysql_query($sql, $dbConn);
+            $rs = @mysql_query($sql, $dbConn);*/
         }
     }
 }
@@ -184,6 +184,7 @@ if ($configFileExists ) {
                   </tbody>
             </table>
 
+            <?php /* ?>
             <h2>Schema</h2>
 
             <table class="table table-bordered table-hover">
@@ -211,6 +212,7 @@ if ($configFileExists ) {
                         <?php } ?>
                   </tbody>
             </table>
+            <?php */ ?>
         </div>
     </body>
 </html>

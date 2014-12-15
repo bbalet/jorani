@@ -470,6 +470,32 @@ class Leaves extends CI_Controller {
     }
     
     /**
+     * Prepares a 2 dimensions array
+     * TODO : to be implemented into v0.2.1
+     * @param int $id identifier of the entity
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function tabular($id=0, $month=0, $year=0) {
+        $this->auth->check_is_granted('organization_calendar');
+        
+        //date('M Y');
+        //where DAY(date) and MONTH(date) + order by
+        //$num = cal_days_in_month(CAL_GREGORIAN, 8, 2003);
+        //Itération between 2 dates
+        /*while ($iDateFrom<$iDateTo)
+        {
+            $iDateFrom+=86400; // add 24 hours
+            array_push($aryRange,date('Y-m-d',$iDateFrom));
+        }*/
+        $data = $this->getUserContext();
+        $data['title'] = lang('calendar_organization_title');
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('calendar/tabular', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
      * Internal utility function
      * make sure a resource is reloaded every time
      */

@@ -50,6 +50,30 @@ BEGIN
                 ALTER TABLE `users` ADD COLUMN `active` bool DEFAULT TRUE COMMENT 'Is user active';
         END IF;
 
+        IF NOT EXISTS (
+                SELECT NULL
+                FROM information_schema.columns
+                WHERE table_schema = DATABASE() AND table_name ='users' AND column_name = 'timezone'
+        ) THEN
+                ALTER TABLE `users` ADD COLUMN `timezone` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT 'Timezone of user';
+        END IF;
+
+        IF NOT EXISTS (
+                SELECT NULL
+                FROM information_schema.columns
+                WHERE table_schema = DATABASE() AND table_name ='users' AND column_name = 'calendar'
+        ) THEN
+                ALTER TABLE `users` ADD COLUMN `calendar` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT 'External Calendar address';
+        END IF;
+
+        IF NOT EXISTS (
+                SELECT NULL
+                FROM information_schema.columns
+                WHERE table_schema = DATABASE() AND table_name ='users' AND column_name = 'calendar'
+        ) THEN
+                ALTER TABLE `users` ADD COLUMN `exitdate` date DEFAULT NULL COMMENT 'Exit Date of employee';
+        END IF;
+
 END$$
 DELIMITER ;
 

@@ -558,7 +558,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `contract` int(11) DEFAULT NULL,
   `position` int(11) NOT NULL,
   `datehired` date DEFAULT NULL COMMENT 'Date hired / Started',
-  `exitdate` date DEFAULT NULL COMMENT 'Exit Date of employee',
   `identifier` varchar(64) CHARACTER SET utf8 NOT NULL COMMENT 'Internal/company identifier',
   `language` varchar(2) CHARACTER SET utf8 NOT NULL DEFAULT 'en',
   `ldap_path` varchar(1024) DEFAULT NULL COMMENT 'LDAP Path for complex authentication schemes',

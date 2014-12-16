@@ -47,7 +47,7 @@ $this->lang->load('global', $language);?>
     
     <label for="viz_enddate" required><?php echo lang('leaves_edit_field_end');?></label>
     <input type="text" name="viz_enddate" id="viz_enddate" value="<?php $date = new DateTime($leave['enddate']); echo $date->format(lang('global_date_format'));?>" />
-    <input type="hidden" name="enddate" id="enddate" value="<?php echo $leave['startdate'];?>" />
+    <input type="hidden" name="enddate" id="enddate" value="<?php echo $leave['enddate'];?>" />
     <select name="enddatetype" id="enddatetype">
         <option value="Morning" <?php if ($leave['enddatetype'] == "Morning") {echo "selected";}?>><?php echo lang('leaves_date_type_morning');?></option>
         <option value="Afternoon" <?php if ($leave['enddatetype'] == "Afternoon") {echo "selected";}?>><?php echo lang('leaves_date_type_afternoon');?></option>

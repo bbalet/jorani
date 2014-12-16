@@ -49,7 +49,7 @@ $this->lang->load('global', $language);?>
     
     <label for="status"><?php echo lang('leaves_view_field_status');?></label>
     <select name="status" readonly>
-        <option selected><?php echo $leave['status_label']; ?></option>
+        <option selected><?php echo lang($leave['status_label']); ?></option>
     </select><br />
 
     <br /><br />

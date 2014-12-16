@@ -1,5 +1,5 @@
 -- ---------------------------------------------------
--- LMS Schema definition
+-- Jorani Schema definition
 -- 
 -- This file is part of Jorani.
 -- 

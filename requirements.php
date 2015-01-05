@@ -76,11 +76,11 @@ if ($configFileExists ) {
         if (@mysql_select_db($db['default']['database'], $dbConn)) {
             //Try to get the signature of the schema
             $dbExists = TRUE;
-            /*$sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
+            $sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
                         . " FROM information_schema.columns"
                         . " WHERE table_schema =  DATABASE()"
                         . " GROUP BY TABLE_NAME";
-            $rs = @mysql_query($sql, $dbConn);*/
+            $rs = @mysql_query($sql, $dbConn);
         }
     }
 }

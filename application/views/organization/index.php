@@ -115,6 +115,8 @@ $this->lang->load('treeview', $language);?>
 <script type="text/javascript">
     //In order to manipulate datable object
     var oTable;
+    //Mutex to prevent rename the root node
+    var createMtx = false;
     
     function add_employee() {
         var id = $('#employees .row_selected td:first').text();
@@ -288,7 +290,6 @@ $this->lang->load('treeview', $language);?>
             plugins: ["contextmenu", "dnd", "search", "state", "sort", "unique"]
         })
         .on('delete_node.jstree', function (e, data) {
-            e.preventDefault();
             var id = data.node.id;
             if (id == 0) {
                 $("#lblError").text("<?php echo lang('organization_index_error_msg_delete_root');?>");
@@ -299,35 +300,42 @@ $this->lang->load('treeview', $language);?>
             }
         })
         .on('create_node.jstree', function (e, data) {
+            createMtx = true;
             bootbox.prompt("<?php echo lang('organization_index_prompt_entity_name');?>",
                 "<?php echo lang('organization_index_popup_node_button_cancel');?>",
                 "<?php echo lang('organization_index_popup_node_button_ok');?>", function(result) {
                 if (result === null) {
-                
+                    data.instance.refresh();
                 } else {
                     $.get('organization/create', { 'id' : data.node.parent, 'position' : data.position, 'text' : result })
                     .done(function (d) {
                         data.instance.set_id(data.node, d.id);
+                        createMtx = false;
                     })
                     .fail(function() {
                         data.instance.refresh();
+                        createMtx = false;
                     });
                 }
               });
         })
         .on('rename_node.jstree', function(e, data) {
-            $.get('organization/rename', {'id': data.node.id, 'text': data.text})
-                .fail(function() {
-                    data.instance.refresh();
-                });
+            if (!createMtx) {
+                $.get('organization/rename', {'id': data.node.id, 'text': data.text})
+                    .fail(function() {
+                        data.instance.refresh();
+                    });
+            }
         })
         .on('move_node.jstree', function(e, data) {
+            e.preventDefault();
             $.get('organization/move', {'id': data.node.id, 'parent': data.parent, 'position': data.position})
                 .fail(function() {
                     data.instance.refresh();
                 });
         })
         .on('copy_node.jstree', function(e, data) {
+            e.preventDefault();
             $.get('organization/copy', {'id': data.original.id, 'parent': data.parent, 'position': data.position})
                 .always(function() {
                     data.instance.refresh();

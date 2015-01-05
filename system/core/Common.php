@@ -253,7 +253,7 @@ if ( ! function_exists('get_config'))
 				}
 			}
 		}
-                                    //Patch for LMS to make CI working with PHP 5.6
+                                //Patch for Jorani to make CI working with PHP 5.6
 		$_config[0] =& $config;
                                     return $_config[0];
                                     //End of patch

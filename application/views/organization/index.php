@@ -50,6 +50,7 @@ $this->lang->load('treeview', $language);?>
         <br /><br />
         <button id="cmdAddEmployee" class="btn btn-primary"><?php echo lang('organization_index_button_add_employee');?></button>
         <button id="cmdRemoveEmployee" class="btn btn-primary"><?php echo lang('organization_index_button_remove_employee');?></button>
+        <br /><br />
     </div>
 </div>
 

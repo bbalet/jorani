@@ -1,6 +1,6 @@
-<h1>Leave Management System</h1>
+<h1>Leave and Overtime Management System</h1>
 
-<p>Welcome in LMS. If you are an employee, you could now :</p>
+<p>Welcome in Jorani. If you are an employee, you could now :</p>
 <ul>
     <li>See your <a href="<?php echo base_url();?>leaves/counters">leave balance</a>.</li>
     <li>See the <a href="<?php echo base_url();?>leaves">list of the leave requests you have submitted</a>.</li>

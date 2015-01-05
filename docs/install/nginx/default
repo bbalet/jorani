@@ -1,5 +1,5 @@
 # 
-# LMS nginx sample configuration file
+# Jorani nginx sample configuration file
 # If you are using HTTP protocol, don't forget to disable HTTPS in application/config/config.php
 # $_SERVER['HTTPS'] = 'off';
 #

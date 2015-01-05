@@ -1,6 +1,6 @@
-<h1>Leave Management System</h1>
+<h1>Gestion des congés et des heures supplémentaires</h1>
 
-<p>Bienvenue dans LMS. Si vous êtes un employé, vous pourriez maintenant :</p>
+<p>Bienvenue dans Jorani. Si vous êtes un employé, vous pourriez maintenant :</p>
 <ul>
     <li>Voir vos <a href="<?php echo base_url();?>leaves/counters">compteurs de congés</a>.</li>
     <li>Voir la <a href="<?php echo base_url();?>leaves">liste des demandes de congés que vous avez soumises</a>.</li>

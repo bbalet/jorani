@@ -1,8 +1,8 @@
 <?php
 /*
- * This file is part of lms.
+ * This file is part of Jorani.
  *
- * lms is free software: you can redistribute it and/or modify
+ * Jorani is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -13,7 +13,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 //MD5 hash table of the tables structure for every released version of LMS

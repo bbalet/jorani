@@ -1,17 +1,17 @@
 # Installation
 
-LMS has been tested with Apache and ngnix.
-LMS is compatible with HHVM as Codeigniter is 100% compatible with the VM. 
+Jorani has been tested with Apache and ngnix.
+Jorani is compatible with HHVM as Codeigniter is 100% compatible with the VM. 
 However, please note that HHVM is still under development.
 
 ## General considerations
 
-The LMS application must have write privileges on <code>temp</code> and <code>application/logs</code> folders. 
+The Jorani application must have write privileges on <code>temp</code> and <code>application/logs</code> folders. 
 The default user is *bbalet* and password is *bbalet*.
 
 ## Database setup
 
-LMS has been tested with MySQL and MariaDB (please note that functions are created in the schema). Please follow these steps :
+Jorani has been tested with MySQL and MariaDB (please note that functions are created in the schema). Please follow these steps :
 * Create a database.
 * Import <code>/sql/lms.sql</code>.
 * Change <code>application/config/database.php</code> according to your environment.
@@ -22,7 +22,7 @@ You might need to change the code <code>CREATE DEFINER=`root`@`localhost`</code>
 
 ## E-mail setup
 
-LMS uses e-mail to notify users and their line managers. In order to setup e-mail modify 
+Jorani uses e-mail to notify users and their line managers. In order to setup e-mail modify 
 <code>/application/config/email.php</code> file according to your environment.
 
 ### Example for GMail
@@ -47,12 +47,12 @@ In order to configure LDAP, locate these lines of code into <code>application/co
 
 * Switch ldap_enabled to <code>TRUE</code>.
 * Change <code>ldap_host</code> and <code>ldap_port</code> according to your environement.
-* LMS tries to bind to LDAP according to the content of <code>ldap_basedn</code> in where <code>%s</code> is a placeholder for the user id to be checked into LDAP (e.g. <code>%s</code> will be replaced by the login from LMS db).
+* Jorani tries to bind to LDAP according to the content of <code>ldap_basedn</code> in where <code>%s</code> is a placeholder for the user id to be checked into LDAP (e.g. <code>%s</code> will be replaced by the login from LMS db).
 * Contact your IT Admin in order to know more about how LDAP is configured into your organization. Change the value but <code>%s</code> must remain somewhere into this string.
-* The user id into LMS and LDAP must be the same. When LDAP is activated, LMS doesn't use anymore the password stored into the database.
-* LMS is designed for small organization, therefore it doesn't support complex authentication schemes.
+* The user id into Jorani and LDAP must be the same. When LDAP is activated, LMS doesn't use anymore the password stored into the database.
+* Jorani is designed for small organization, therefore it doesn't support complex authentication schemes.
 
-Since version 0.1.5, LMS supports complex LDAP authentication schemes. In order to use this feature :
+Since version 0.1.5, Jorani supports complex LDAP authentication schemes. In order to use this feature :
 
 1. Set <code>ldap_basedn_db</code> to TRUE.
 2. The Base DN is not based on <code>ldap_basedn</code>, but read into the users table, column <code>ldap_path</code> (e.g. from database).
@@ -60,7 +60,7 @@ Since version 0.1.5, LMS supports complex LDAP authentication schemes. In order 
 
 ## Apache
 
-LMS is a PHP/CI application using rewrite rules and .htaccess files. 
+Jorani is a PHP/CI application using rewrite rules and .htaccess files. 
 So your Apache configuration must **allow overwriting configuration by .htaccess files and mod_rewrite must be enabled**.
 
 ## nginx

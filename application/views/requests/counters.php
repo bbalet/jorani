@@ -26,6 +26,10 @@ $this->lang->load('global', $language);?>
         <h2><?php echo lang('hr_summary_title');?>&nbsp;<?php echo $employee_id; ?>&nbsp;<span class="muted"> (<?php echo $employee_name; ?>)</span> &nbsp; 
         <a href="<?php echo lang('global_link_doc_page_my_summary');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h2>
 
+        <p><?php echo lang('hr_summary_date_field');?>&nbsp;
+            <input type="text" id="refdate" value="<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>" />
+        </p>
+        
         <table class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -121,9 +125,25 @@ $this->lang->load('global', $language);?>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<?php //Prevent HTTP-404 when localization isn't needed
+if ($language_code != 'en') { ?>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
+<?php } ?>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    $(function () {       
+    $(function () {
+        
+        $('#refdate').datepicker({
+            onSelect: function(dateText, inst) {
+                    tmpUnix = moment($("#refdate").datepicker("getDate")).utc().unix();
+                    url = "<?php echo base_url();?>requests/counters/<?php echo $employee_id; ?>/" + tmpUnix;
+                    window.location = url;
+            }
+        });
+        
         //Transform the HTML table in a fancy datatable
         $('#entitleddayscontract').dataTable({
                     "order": [[ 0, "desc" ]],

@@ -20,8 +20,15 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('leaves', $language);
 $this->lang->load('global', $language);?>
 
-<h1><?php echo lang('leaves_summary_title');?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_my_summary');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h1>
+<div class="row-fluid">
+    <div class="span12">
+
+<h2><?php echo lang('leaves_summary_title');?> &nbsp;
+<a href="<?php echo lang('global_link_doc_page_my_summary');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h2>
+
+    <p><?php echo lang('leaves_summary_date_field');?>&nbsp;
+        <input type="text" id="refdate" value="<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>" />
+    </p>
 
 <table class="table table-bordered table-hover">
 <thead>
@@ -51,3 +58,29 @@ $this->lang->load('global', $language);?>
     <?php } ?>
   </tbody>
 </table>
+
+        </div>
+</div>
+
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<?php //Prevent HTTP-404 when localization isn't needed
+if ($language_code != 'en') { ?>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
+<?php } ?>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        
+        $('#refdate').datepicker({
+            onSelect: function(dateText, inst) {
+                    tmpUnix = moment($("#refdate").datepicker("getDate")).utc().unix();
+                    url = "<?php echo base_url();?>leaves/counters/" + tmpUnix;
+                    window.location = url;
+            }
+        });
+    });
+</script>

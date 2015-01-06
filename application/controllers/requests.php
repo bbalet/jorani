@@ -169,9 +169,10 @@ class Requests extends CI_Controller {
     /**
      * Display the details of leaves taken/entitled for a given employee
      * This page can be displayed only if the connected user is the manager of the employee
+     * @param string $refTmp Timestamp (reference date)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function counters($id) {
+    public function counters($id, $refTmp = NULL) {
         $data = $this->getUserContext();
         $this->load->model('users_model');
         $employee = $this->users_model->get_users($id);
@@ -180,7 +181,14 @@ class Requests extends CI_Controller {
             $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_forbidden'));
             redirect('requests/collaborators');
         } else {
-            $data['summary'] = $this->leaves_model->get_user_leaves_summary($id);
+            $refDate = date("Y-m-d");
+            if ($refTmp != NULL) {
+                $refDate = date("Y-m-d", $refTmp);
+            }
+
+            $data['refDate'] = $refDate;
+            $data['summary'] = $this->leaves_model->get_user_leaves_summary($id, FALSE, $refDate);
+            
             if (!is_null($data['summary'])) {
                 $this->load->model('entitleddays_model');
                 $this->load->model('types_model');

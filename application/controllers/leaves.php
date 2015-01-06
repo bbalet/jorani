@@ -83,12 +83,18 @@ class Leaves extends CI_Controller {
     
     /**
      * Display the details of leaves taken/entitled for the connected user
+     * @param string $refTmp Timestamp (reference date)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function counters() {
+    public function counters($refTmp = NULL) {
         $this->auth->check_is_granted('counters_leaves');
         $data = $this->getUserContext();
-        $data['summary'] = $this->leaves_model->get_user_leaves_summary($this->user_id);
+        $refDate = date("Y-m-d");
+        if ($refTmp != NULL) {
+            $refDate = date("Y-m-d", $refTmp);
+        }
+        $data['refDate'] = $refDate;
+        $data['summary'] = $this->leaves_model->get_user_leaves_summary($this->user_id, FALSE, $refDate);
 
         if (!is_null($data['summary'])) {
             $this->expires_now();

@@ -99,13 +99,19 @@ class Leaves_model extends CI_Model {
      * Compute the leave balance of an employee (used by report and counters)
      * @param int $id ID of the employee
      * @param bool $sum_extra TRUE: sum compensate summary
+     * @param string $refDate tmp of the Date of reference (or current date if NULL)
      * @return array computed aggregated taken/entitled leaves
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_user_leaves_summary($id, $sum_extra = FALSE) {
+    public function get_user_leaves_summary($id, $sum_extra = FALSE, $refDate = NULL) {
+        //Determine if we use current date or another date
+        if ($refDate == NULL) {
+            $refDate = date("Y-m-d");
+        }
+
         //Compute the current leave period and check if the user has a contract
         $this->load->model('contracts_model');
-        $hasContract = $this->contracts_model->getBoundaries($id, $startentdate, $endentdate);
+        $hasContract = $this->contracts_model->getBoundaries($id, $startentdate, $endentdate, $refDate);
         if ($hasContract) {
             //Fill a list of all existing leave types
             $this->load->model('types_model');
@@ -117,8 +123,8 @@ class Leaves_model extends CI_Model {
             $this->db->join('types', 'types.id = leaves.type');
             $this->db->where('leaves.employee', $id);
             $this->db->where('leaves.status', 3);
-            $this->db->where('leaves.startdate > ', $startentdate);
-            $this->db->where('leaves.enddate <', $endentdate);
+            $this->db->where('leaves.startdate >= ', $startentdate);
+            $this->db->where('leaves.enddate <=', $endentdate);
             $this->db->group_by("leaves.type");
             $taken_days = $this->db->get()->result_array();
             foreach ($taken_days as $taken) {
@@ -132,8 +138,8 @@ class Leaves_model extends CI_Model {
             $this->db->join('entitleddays', 'entitleddays.contract = users.contract', 'left outer');
             $this->db->join('types', 'types.id = entitleddays.type');
             $this->db->where('users.id', $id);
-            $this->db->where('entitleddays.startdate < CURDATE()');
-            $this->db->where('entitleddays.enddate > CURDATE()');
+            $this->db->where('entitleddays.startdate <= ', $refDate);
+            $this->db->where('entitleddays.enddate >= ', $refDate);
             $entitled_days = $this->db->get()->result_array();
             foreach ($entitled_days as $entitled) {
                 $summary[$entitled['type']][1] = (float) $entitled['entitled']; //entitled
@@ -146,8 +152,8 @@ class Leaves_model extends CI_Model {
             $this->db->join('entitleddays', 'entitleddays.employee = users.id', 'left outer');
             $this->db->join('types', 'types.id = entitleddays.type');
             $this->db->where('users.id', $id);
-            $this->db->where('entitleddays.startdate < CURDATE()');
-            $this->db->where('entitleddays.enddate > CURDATE()');
+            $this->db->where('entitleddays.startdate <= ', $refDate);
+            $this->db->where('entitleddays.enddate >= ', $refDate);
             $entitled_days = $this->db->get()->result_array();
 
             foreach ($entitled_days as $entitled) {
@@ -161,7 +167,7 @@ class Leaves_model extends CI_Model {
             $this->db->select('duration, date, cause');
             $this->db->from('overtime');
             $this->db->where('employee', $id);
-            $this->db->where('date >= DATE_SUB(NOW(),INTERVAL 1 YEAR)');
+            $this->db->where("date >= DATE_SUB(STR_TO_DATE(" . $refDate . ", '%Y-%m-%d'),INTERVAL 1 YEAR)");
             $this->db->where('status = 3'); //Accepted
             $overtime_days = $this->db->get()->result_array();
             $sum = 0;
@@ -179,7 +185,7 @@ class Leaves_model extends CI_Model {
                 $this->db->where('leaves.employee', $id);
                 $this->db->where('leaves.status', 3);
                 $this->db->where('leaves.type', 0);
-                $this->db->where('leaves.startdate >= DATE_SUB(NOW(),INTERVAL 1 YEAR)');
+                $this->db->where("leaves.startdate >= DATE_SUB(STR_TO_DATE(" . $refDate . ", '%Y-%m-%d'),INTERVAL 1 YEAR)");
                 $this->db->group_by("leaves.type");
                 $taken_days = $this->db->get()->result_array();
                 if (count($taken_days) > 0) {

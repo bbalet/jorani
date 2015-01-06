@@ -111,3 +111,4 @@ $lang['hr_summary_thead_entitled'] = 'Entitled';
 $lang['hr_summary_thead_description'] = 'Description';
 $lang['hr_summary_flash_msg_error'] = 'This employee has no contract.';
 $lang['hr_summary_button_list'] = 'List of employees';
+$lang['hr_summary_date_field'] = 'Date of report';

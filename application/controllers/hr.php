@@ -175,13 +175,20 @@ class Hr extends CI_Controller {
     
     /**
      * Display the details of leaves taken/entitled for a given employee
+     * @param string $refTmp Timestamp (reference date)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function counters($id) {
+    public function counters($id, $refTmp = NULL) {
         $this->auth->check_is_granted('list_employees');
         $data = $this->getUserContext();
-        $data['summary'] = $this->leaves_model->get_user_leaves_summary($id);
-
+        $refDate = date("Y-m-d");
+        if ($refTmp != NULL) {
+            $refDate = date("Y-m-d", $refTmp);
+        }
+        
+        $data['refDate'] = $refDate;
+        $data['summary'] = $this->leaves_model->get_user_leaves_summary($id, FALSE, $refDate);
+        //$this->output->enable_profiler(TRUE);
         if (!is_null($data['summary'])) {
             $this->load->model('entitleddays_model');
             $this->load->model('types_model');

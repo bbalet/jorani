@@ -111,3 +111,4 @@ $lang['hr_summary_thead_entitled'] = 'Acquis';
 $lang['hr_summary_thead_description'] = 'Description';
 $lang['hr_summary_flash_msg_error'] = 'Cet employée n\'a pas de contrat.';
 $lang['hr_summary_button_list'] = 'Liste des employés';
+$lang['hr_summary_date_field'] = 'Date du rapport';

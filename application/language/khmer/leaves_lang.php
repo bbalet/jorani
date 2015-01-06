@@ -24,6 +24,7 @@ $lang['leaves_summary_thead_entitled'] = 'សិទ្ធិទទួលបា�
 $lang['leaves_summary_thead_description'] = 'ព័ត៌មានលម្អិត';
 $lang['leaves_summary_tbody_empty'] = 'No entitled or taken days for this period. Please contact your HR Officer / Manager.';
 $lang['leaves_summary_flash_msg_error'] = 'វាហាក់ដូចជាអ្នកមានកិច្ចសន្យាទេ។ សូមទាក់ទងមន្រ្តីធនធានមនុស្ស / ប្រធានផ្នែករបស់អ្នក។';
+$lang['leaves_summary_date_field'] = 'Date of report';
 
 $lang['leaves_index_title'] = 'ការសុំច្បាប់របស់ខ្ញុំ';
 $lang['leaves_index_thead_tip_view'] = 'បង្ហាញ';

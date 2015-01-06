@@ -68,6 +68,7 @@ $route['hr/leaves/(:num)'] = 'hr/leaves/$1';
 $route['hr/leaves/export/(:num)'] = 'hr/export_leaves/$1';
 $route['hr/overtime/(:num)'] = 'hr/overtime/$1';
 $route['hr/counters/(:num)'] = 'hr/counters/$1';
+$route['hr/counters/(:num)/(:num)'] = 'hr/counters/$1/$2';
 $route['hr/overtime/export/(:num)'] = 'hr/export_overtime/$1';
 $route['hr/entitleddays/(:num)'] = 'hr/entitleddays/$1';
 $route['hr'] = 'hr';
@@ -136,6 +137,7 @@ $route['leaves/organization/(:num)'] = 'leaves/organization/$1';
 
 //My leave requests
 $route['leaves/counters'] = 'leaves/counters';
+$route['leaves/counters/(:num)'] = 'leaves/counters/$1';
 $route['leaves/export'] = 'leaves/export';
 $route['leaves/create'] = 'leaves/create';
 $route['leaves/credit'] = 'leaves/credit';
@@ -149,6 +151,7 @@ $route['leaves'] = 'leaves';
 //leave requests
 $route['requests/collaborators'] = 'requests/collaborators';
 $route['requests/counters/(:num)'] = 'requests/counters/$1';
+$route['requests/counters/(:num)/(:num)'] = 'requests/counters/$1/$2';
 $route['requests/export/(:any)'] = 'requests/export/$1';
 $route['requests/accept/(:num)'] = 'requests/accept/$1';
 $route['requests/reject/(:num)'] = 'requests/reject/$1';

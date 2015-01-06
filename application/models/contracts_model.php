@@ -112,28 +112,37 @@ class Contracts_model extends CI_Model {
      * @param int Unique identifier of a user
      * @param &date start date of the current leave period 
      * @param &date end date of the current leave period 
+     * @param string $refDate tmp of the Date of reference (or current date if NULL)
      * @return bool TRUE means that the user has a contract, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function getBoundaries($userId, &$startentdate, &$endentdate) {
+    public function getBoundaries($userId, &$startentdate, &$endentdate, $refDate = NULL) {
         $this->db->select('startentdate, endentdate');
         $this->db->from('contracts');
         $this->db->join('users', 'users.contract = contracts.id');
         $this->db->where('users.id', $userId);
         $boundaries = $this->db->get()->result_array();
         
+        if ($refDate == NULL) {
+            $refDate = date("Y-m-d");
+        }
+        $refYear = substr($refDate, 0, 4);
+        $refMonth = substr($refDate, 5, 2);
+        $nextYear = strval(intval($refYear) + 1);
+        $lastYear = strval(intval($refYear) - 1);
+        
         if (count($boundaries) != 0) {
-            $startmonth = intval(substr($boundaries[0]['startentdate'], 2));
+            $startmonth = intval(substr($boundaries[0]['startentdate'], 0, 2));
             if ($startmonth == 1 ) {
-                $startentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
-                $endentdate =  date("Y") . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
+                $startentdate = $refYear . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
+                $endentdate =  $refYear . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
             } else {
-                if (intval(date('m')) < 6) {
-                    $startentdate = date("Y", strtotime("-1 year")) . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
-                    $endentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
+                if (intval($refMonth) < 6) {
+                    $startentdate = $lastYear . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
+                    $endentdate = $refYear . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
                 } else {
-                    $startentdate = date("Y") . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
-                    $endentdate = date("Y", strtotime("+1 year")) . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
+                    $startentdate = $refYear . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
+                    $endentdate = $nextYear . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);
                 }
             }
             return TRUE;
@@ -159,7 +168,7 @@ class Contracts_model extends CI_Model {
         $boundaries = $this->db->get()->result_array();
         
         if (count($boundaries) != 0) {
-            $startmonth = intval(substr($boundaries[0]['startentdate'], 2));
+            $startmonth = intval(substr($boundaries[0]['startentdate'], 0, 2));
             if ($startmonth == 1 ) {
                 $startentdate = date("Y",strtotime("-1 year")) . "-" . str_replace("/", "-", $boundaries[0]['startentdate']);
                 $endentdate =  date("Y",strtotime("-1 year")) . "-" . str_replace("/", "-", $boundaries[0]['endentdate']);

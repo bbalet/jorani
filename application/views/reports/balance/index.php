@@ -18,18 +18,17 @@
 
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('reports', $language);
-$this->lang->load('leaves', $language);
 $this->lang->load('global', $language);?>
         
 <h1><?php echo lang('reports_balance_title');?></h1>
 
 <div class="row-fluid">
-	<div class="span4">
-		<label for="refdate"><?php echo lang('leaves_summary_date_field');?></label>
-		<div class="input-append">
-		<input type="text" name="refdate" id="refdate" value="<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>" />	
-		</div>
-	</div>
+    <div class="span4">
+        <label for="refdate"><?php echo lang('reports_balance_date_field');?></label>
+        <div class="input-append">
+        <input type="text" name="refdate" id="refdate" value="<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>" />	
+        </div>
+    </div>
     <div class="span4">	
         <label for="txtEntity"><?php echo lang('reports_balance_field_entity');?></label>
         <div class="input-append">
@@ -107,11 +106,13 @@ $(document).ready(function() {
     
     $('#cmdExportReport').click(function() {
         var rtpQuery = '<?php echo base_url();?>reports/balance/export';
+        var tmpUnix = moment($("#refdate").datepicker("getDate")).utc().unix();
         if (entity != -1) {
             rtpQuery += '?entity=' + entity;
         } else {
             rtpQuery += '?entity=0';
         }
+        rtpQuery += '&refDate=' + tmpUnix;
         if ($('#chkIncludeChildren').prop('checked') == true) {
             rtpQuery += '&children=true';
         } else {
@@ -123,12 +124,12 @@ $(document).ready(function() {
     $('#cmdLaunchReport').click(function() {
         var ajaxQuery = '<?php echo base_url();?>reports/balance/execute';
         var tmpUnix = moment($("#refdate").datepicker("getDate")).utc().unix();
-		if (entity != -1) {
+        if (entity != -1) {
             ajaxQuery += '?entity=' + entity;
         } else {
             ajaxQuery += '?entity=0';
         }
-		ajaxQuery += '&refDate=' + tmpUnix;
+        ajaxQuery += '&refDate=' + tmpUnix;
         if ($('#chkIncludeChildren').prop('checked') == true) {
             ajaxQuery += '&children=true';
         } else {

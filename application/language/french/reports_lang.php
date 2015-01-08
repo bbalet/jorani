@@ -24,6 +24,7 @@ $lang['reports_execute_title'] = 'Rapport';
 $lang['reports_execute_button_back_list'] = 'Retour à la liste des rapports';
 
 $lang['reports_balance_title'] = 'État des congés';
+$lang['reports_balance_date_field'] = 'Date du rapport';
 $lang['reports_balance_field_entity'] = 'Choisir l\'entité';
 $lang['reports_balance_button_entity'] = 'Choisir';
 $lang['reports_balance_field_subdepts'] = 'Inclure les sous-départments';
@@ -34,18 +35,6 @@ $lang['reports_balance_popup_entity_button_ok'] = 'OK';
 $lang['reports_balance_popup_entity_button_cancel'] = 'Annuler';
 
 $lang['reports_export_balance_title'] = 'État des congés';
-
-$lang['reports_carried_over_title'] = 'Report des congés';
-$lang['reports_carried_over_field_entity'] = 'Choisir l\'entité';
-$lang['reports_carried_over_button_entity'] = 'Choisir';
-$lang['reports_carried_over_field_subdepts'] = 'Inclure les sous-départments';
-$lang['reports_carried_over_button_launch'] = 'Exécuter';
-$lang['reports_carried_over_button_export'] = 'Exporter';
-$lang['reports_carried_over_popup_entity_title'] = 'Choisir une entité';
-$lang['reports_carried_over_popup_entity_button_ok'] = 'OK';
-$lang['reports_carried_over_popup_entity_button_cancel'] = 'Annuler';
-
-$lang['reports_export_carried_over_title'] = 'Report des congés';
 
 $lang['reports_history_title'] = 'Historique des changements';
 $lang['reports_history_field_modifiedby'] = 'Selectionner l\'utilisateur';

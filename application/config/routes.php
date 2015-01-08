@@ -189,10 +189,6 @@ $route['reports/balance'] = 'reports/balance';
 $route['reports/balance/execute'] = 'reports/balance_execute';
 $route['reports/balance/export'] = 'reports/balance_export';
 
-$route['reports/carried_over'] = 'reports/carried_over';
-$route['reports/carried_over/execute'] = 'reports/carried_over_execute';
-$route['reports/carried_over/export'] = 'reports/carried_over_export';
-
 //Admin: search into the history of modifications
 $route['reports/history'] = 'reports/history';
 $route['reports/history/execute'] = 'reports/history_execute';

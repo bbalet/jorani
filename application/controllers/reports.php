@@ -139,11 +139,10 @@ class Reports extends CI_Controller {
         $types = $this->types_model->get_types();
         $this->lang->load('global', $this->language);
 		
-		$refDate = date("Y-m-d");
+        $refDate = date("Y-m-d");
         if (isset($_GET['refDate']) && $_GET['refDate'] != NULL) {
             $refDate = date("Y-m-d", $_GET['refDate']);
         }
-        
         $include_children = filter_var($_GET['children'], FILTER_VALIDATE_BOOLEAN);
         $users = $this->organization_model->all_employees($_GET['entity'], $include_children);
         foreach ($users as $user) {
@@ -217,6 +216,10 @@ class Reports extends CI_Controller {
         $summary = array();
         $types = $this->types_model->get_types();
         
+        $refDate = date("Y-m-d");
+        if (isset($_GET['refDate']) && $_GET['refDate'] != NULL) {
+            $refDate = date("Y-m-d", $_GET['refDate']);
+        }
         $include_children = filter_var($_GET['children'], FILTER_VALIDATE_BOOLEAN);
         $users = $this->organization_model->all_employees($_GET['entity'], $include_children);
         foreach ($users as $user) {
@@ -232,7 +235,7 @@ class Reports extends CI_Controller {
                 $result[$user->id][$type['name']] = '';
             }
             
-            $summary = $this->leaves_model->get_user_leaves_summary($user->id, TRUE);
+            $summary = $this->leaves_model->get_user_leaves_summary($user->id, TRUE, $refDate);
             if (count($summary) > 0 ) {
                 foreach ($summary as $key => $value) {
                     $result[$user->id][$key] = $value[1] - $value[0];
@@ -260,7 +263,6 @@ class Reports extends CI_Controller {
         $colidx = $this->excel->column_name($max) . '1';
         $this->excel->getActiveSheet()->getStyle('A1:' . $colidx)->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:' . $colidx)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         
         $filename = 'leave_balance.xls';
         header('Content-Type: application/vnd.ms-excel');
@@ -269,162 +271,6 @@ class Reports extends CI_Controller {
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output');
     }
-    
-    /**
-     * Execute the shipped-in carried over report
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function carried_over() {
-        $this->auth->check_is_granted('native_report_balance');
-        $data = $this->getUserContext();
-        $data['title'] = lang('reports_carried_over_title');
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('reports/carried_over/index', $data);
-        $this->load->view('templates/footer');
-    }
-    
-    /**
-     * Ajax end-point : execute the carried over report
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function carried_over_execute() {
-        $this->auth->check_is_granted('native_report_balance');
-        $data = $this->getUserContext();
-        
-        $this->load->model('leaves_model');
-        $this->load->model('types_model');
-        $this->load->model('organization_model');
-        $result = array();
-        $types = $this->types_model->get_types();
-        $this->lang->load('global', $this->language);
-        
-        $include_children = filter_var($_GET['children'], FILTER_VALIDATE_BOOLEAN);
-        $users = $this->organization_model->all_employees($_GET['entity'], $include_children);
-        foreach ($users as $user) {
-            $result[$user->id]['identifier'] = $user->identifier;
-            $result[$user->id]['firstname'] = $user->firstname;
-            $result[$user->id]['lastname'] = $user->lastname;
-            $date = new DateTime($user->datehired);
-            $result[$user->id]['datehired'] = $date->format(lang('global_date_format'));
-            $result[$user->id]['department'] = $user->department;
-            $result[$user->id]['position'] = $user->position;
-            $result[$user->id]['contract'] = $user->contract;
-            //Init type columns
-            foreach ($types as $type) {
-                $result[$user->id][$type['name']] = '';
-            }
-            
-            $summary = $this->leaves_model->get_user_leaves_carried_over($user->id, TRUE);
-            if (count($summary) > 0 ) {
-                foreach ($summary as $key => $value) {
-                    $result[$user->id][$key] = $value[1] - $value[0];
-                }
-            }
-        }
-        
-        $table = '';
-        $thead = '';
-        $tbody = '';
-        $line = 2;
-        foreach ($result as $row) {
-            $index = 1;
-            $tbody .= '<tr>';
-            foreach ($row as $key => $value) {
-                if ($line == 2) {
-                    $thead .= '<th>' . $key . '</th>';
-                }
-                $tbody .= '<td>' . $value . '</td>';
-                $index++;
-            }
-            $tbody .= '</tr>';
-            $line++;
-        }
-        $table = '<table class="table table-bordered table-hover">' .
-                    '<thead>' .
-                        '<tr>' .
-                            $thead .
-                        '</tr>' .
-                    '</thead>' .
-                    '<tbody>' .
-                        $tbody .
-                    '</tbody>' .
-                '</table>';
-        
-        echo $table;
-    }
-    
-    /**
-     * Export the carried over report into Excel
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function carried_over_export() {
-        $this->auth->check_is_granted('native_report_balance');
-        $data = $this->getUserContext();
-        $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle(lang('reports_export_carried_over_title'));
-
-        $this->load->model('leaves_model');
-        $this->load->model('types_model');
-        $this->load->model('organization_model');
-        $result = array();
-        $summary = array();
-        $types = $this->types_model->get_types();
-        
-        $include_children = filter_var($_GET['children'], FILTER_VALIDATE_BOOLEAN);
-        $users = $this->organization_model->all_employees($_GET['entity'], $include_children);
-        foreach ($users as $user) {
-            $result[$user->id]['identifier'] = $user->identifier;
-            $result[$user->id]['firstname'] = $user->firstname;
-            $result[$user->id]['lastname'] = $user->lastname;
-            $result[$user->id]['datehired'] = $user->datehired;
-            $result[$user->id]['department'] = $user->department;
-            $result[$user->id]['position'] = $user->position;
-            $result[$user->id]['contract'] = $user->contract;
-            //Init type columns
-            foreach ($types as $type) {
-                $result[$user->id][$type['name']] = '';
-            }
-            
-            $summary = $this->leaves_model->get_user_leaves_carried_over($user->id, TRUE);
-            if (count($summary) > 0 ) {
-                foreach ($summary as $key => $value) {
-                    $result[$user->id][$key] = $value[1] - $value[0];
-                }
-            }
-        }
-        
-        $max = 0;
-        $line = 2;
-        foreach ($result as $row) {
-            $index = 1;
-            foreach ($row as $key => $value) {
-                if ($line == 2) {
-                    $colidx = $this->excel->column_name($index) . '1';
-                    $this->excel->getActiveSheet()->setCellValue($colidx, $key);
-                    $max++;
-                }
-                $colidx = $this->excel->column_name($index) . $line;
-                $this->excel->getActiveSheet()->setCellValue($colidx, $value);
-                $index++;
-            }
-            $line++;
-        }
-
-        $colidx = $this->excel->column_name($max) . '1';
-        $this->excel->getActiveSheet()->getStyle('A1:' . $colidx)->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:' . $colidx)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        
-        $filename = 'carried_over_leaves.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
-    }
-
     
     /**
      * Execute the shipped-in history report

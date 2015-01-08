@@ -133,6 +133,11 @@ class Reports extends CI_Controller {
         $result = array();
         $types = $this->types_model->get_types();
         $this->lang->load('global', $this->language);
+		
+		$refDate = date("Y-m-d");
+        if (isset($_GET['refDate']) && $_GET['refDate'] != NULL) {
+            $refDate = date("Y-m-d", $_GET['refDate']);
+        }
         
         $include_children = filter_var($_GET['children'], FILTER_VALIDATE_BOOLEAN);
         $users = $this->organization_model->all_employees($_GET['entity'], $include_children);
@@ -150,7 +155,7 @@ class Reports extends CI_Controller {
                 $result[$user->id][$type['name']] = '';
             }
             
-            $summary = $this->leaves_model->get_user_leaves_summary($user->id, TRUE);
+            $summary = $this->leaves_model->get_user_leaves_summary($user->id, TRUE, $refDate);
             if (count($summary) > 0 ) {
                 foreach ($summary as $key => $value) {
                     $result[$user->id][$key] = $value[1] - $value[0];

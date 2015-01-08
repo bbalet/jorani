@@ -109,9 +109,14 @@ class Reports extends CI_Controller {
      * Execute the shipped-in balance report
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function balance() {
+    public function balance($refTmp = NULL) {
         $this->auth->check_is_granted('native_report_balance');
         $data = $this->getUserContext();
+		$refDate = date("Y-m-d");
+        if ($refTmp != NULL) {
+            $refDate = date("Y-m-d", $refTmp);
+        }
+		$data['refDate'] = $refDate;
         $data['title'] = lang('reports_balance_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);

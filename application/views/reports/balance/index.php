@@ -17,19 +17,27 @@
  */
 
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('reports', $language);?>
+$this->lang->load('reports', $language);
+$this->lang->load('leaves', $language);
+$this->lang->load('global', $language);?>
         
 <h1><?php echo lang('reports_balance_title');?></h1>
 
 <div class="row-fluid">
-    <div class="span4">
+	<div class="span4">
+		<label for="refdate"><?php echo lang('leaves_summary_date_field');?></label>
+		<div class="input-append">
+		<input type="text" name="refdate" id="refdate" value="<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>" />	
+		</div>
+	</div>
+    <div class="span4">	
         <label for="txtEntity"><?php echo lang('reports_balance_field_entity');?></label>
         <div class="input-append">
         <input type="text" id="txtEntity" name="txtEntity" readonly />
         <button id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('reports_balance_button_entity');?></button>
         </div>
     </div>
-    <div class="span8">
+    <div class="span4">
         <div class="pull-right">    
             <label class="checkbox">
                 <input type="checkbox" id="chkIncludeChildren" checked /> <?php echo lang('reports_balance_field_subdepts');?>
@@ -69,6 +77,14 @@ $this->lang->load('reports', $language);?>
     </div>
 </div>
 
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
+<script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+<?php //Prevent HTTP-404 when localization isn't needed
+if ($language_code != 'en') { ?>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
+<?php } ?>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 
 var entity = -1; //Id of the selected entity
@@ -106,11 +122,13 @@ $(document).ready(function() {
     
     $('#cmdLaunchReport').click(function() {
         var ajaxQuery = '<?php echo base_url();?>reports/balance/execute';
-        if (entity != -1) {
+        var tmpUnix = moment($("#refdate").datepicker("getDate")).utc().unix();
+		if (entity != -1) {
             ajaxQuery += '?entity=' + entity;
         } else {
             ajaxQuery += '?entity=0';
         }
+		ajaxQuery += '&refDate=' + tmpUnix;
         if ($('#chkIncludeChildren').prop('checked') == true) {
             ajaxQuery += '&children=true';
         } else {
@@ -126,5 +144,7 @@ $(document).ready(function() {
         });
 
     });
+	
+    $('#refdate').datepicker();
 });
 </script>

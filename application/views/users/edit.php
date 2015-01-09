@@ -206,6 +206,7 @@ if ($language_code != 'en') { ?>
             altFormat: "yy-mm-dd",
             altField: "#datehired"
         }, $.datepicker.regional['<?php echo $language_code;?>']);
+		$("#viz_datehired").datepicker( "setDate", "<?php echo $date->format(lang('global_date_format'));?>");
         
         //Popup select position
         $("#cmdSelectManager").click(function() {

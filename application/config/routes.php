@@ -195,6 +195,26 @@ $route['reports/history/execute'] = 'reports/history_execute';
 $route['reports/history/export'] = 'reports/history_export';
 $route['reports/history/details/(:num)'] = 'reports/history_details/$1';
 
+//_______________________________________________
+//REST API
+$route['api/token'] = 'api/token';
+$route['api/contracts/(:num)'] = 'api/contracts/$1';
+$route['api/contracts'] = 'api/contracts';
+$route['api/entitleddayscontract/(:num)'] = 'api/entitleddayscontract/$1';
+$route['api/addentitleddayscontract/(:num)'] = 'api/addentitleddayscontract/$1';
+$route['api/entitleddaysemployee/(:num)'] = 'api/entitleddaysemployee/$1';
+$route['api/addentitleddaysemployee/(:num)'] = 'api/addentitleddaysemployee/$1';
+$route['api/leavessummary/(:num)/(:num)'] = 'api/leavessummary/$1/$2';
+$route['api/leavessummary/(:num)'] = 'api/leavessummary/$1';
+$route['api/leaves/(:num)/(:num)'] = 'api/leaves/$1/$2';
+$route['api/leavetypes'] = 'api/leavetypes';
+$route['api/positions'] = 'api/positions';
+$route['api/userdepartment/(:num)'] = 'api/userdepartment/$1';
+$route['api/userextras/(:num)'] = 'api/userextras/$1';
+$route['api/userleaves/(:num)'] = 'api/userleaves/$1';
+$route['api/users/(:num)'] = 'api/users/$1';
+$route['api/users'] = 'api/users';
+
 //Session management
 $route['session/login'] = 'session/login';
 $route['session/logout'] = 'session/logout';

@@ -26,7 +26,7 @@ class Dayoffs_model extends CI_Model {
     }
     
     /**
-     * Get the list of contracts or one contract
+     * Get the list of dayofs for a contract and a civil year (not to be confused with the yearly period)
      * @param int $contract identifier of the contract
      * @param string $year year to be displayed on the calendar
      * @return array record of contracts

@@ -212,78 +212,6 @@ class Leaves_model extends CI_Model {
     }
     
     /**
-     * Compute the carried over leaves of an employee (used by report). Overtime is not taken into account
-     * @param int $id ID of the employee
-     * @return array computed aggregated taken/entitled leaves
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function get_user_leaves_carried_over($id) {
-        //Compute the current leave period and check if the user has a contract
-        $this->load->model('contracts_model');
-        $hasContract = $this->contracts_model->getLastBoundaries($id, $startentdate, $endentdate);
-        if ($hasContract) {
-            //Fill a list of all existing leave types
-            $this->load->model('types_model');
-            $summary = $this->types_model->allTypes($compensate_name);
-            
-            //Get the total of taken leaves grouped by type
-            $this->db->select('sum(leaves.duration) as taken, types.name as type');
-            $this->db->from('leaves');
-            $this->db->join('types', 'types.id = leaves.type');
-            $this->db->where('leaves.employee', $id);
-            $this->db->where('leaves.status', 3);
-            $this->db->where('leaves.startdate > ', $startentdate);
-            $this->db->where('leaves.enddate <', $endentdate);
-            $this->db->group_by("leaves.type");
-            $taken_days = $this->db->get()->result_array();
-            foreach ($taken_days as $taken) {
-                $summary[$taken['type']][0] = (float) $taken['taken']; //Taken
-            }
-            
-            //Get the total of entitled days affected to a contract (between 2 dates)
-            $this->db->select('types.name as type, entitleddays.days as entitled');
-            $this->db->from('users');
-            $this->db->join('contracts', 'contracts.id = users.contract');
-            $this->db->join('entitleddays', 'entitleddays.contract = users.contract', 'left outer');
-            $this->db->join('types', 'types.id = entitleddays.type');
-            $this->db->where('users.id', $id);
-            $this->db->where('entitleddays.startdate < DATE_SUB(NOW(),INTERVAL 1 YEAR)');
-            $this->db->where('entitleddays.enddate > DATE_SUB(NOW(),INTERVAL 1 YEAR)');
-            $entitled_days = $this->db->get()->result_array();
-            foreach ($entitled_days as $entitled) {
-                $summary[$entitled['type']][1] = (float) $entitled['entitled']; //entitled
-            }
-
-            //Add entitled days of employee (number of entitled days can be negative)
-            $this->db->select('types.name as type, entitleddays.days as entitled');
-            $this->db->from('users');
-            $this->db->join('contracts', 'contracts.id = users.contract');
-            $this->db->join('entitleddays', 'entitleddays.employee = users.id', 'left outer');
-            $this->db->join('types', 'types.id = entitleddays.type');
-            $this->db->where('users.id', $id);
-            $this->db->where('entitleddays.startdate < DATE_SUB(NOW(),INTERVAL 1 YEAR)');
-            $this->db->where('entitleddays.enddate > DATE_SUB(NOW(),INTERVAL 1 YEAR)');
-            $entitled_days = $this->db->get()->result_array();
-
-            foreach ($entitled_days as $entitled) {
-                //Note: this is an addition to the entitled days attached to the contract
-                //Most common use cases are 'special leave', 'maternity leave'...
-                $summary[$entitled['type']][1] += (float) $entitled['entitled']; //entitled
-            }
-            
-            //Remove all lines having taken and entitled set to set to 0
-            foreach ($summary as $key => $value) {
-                if ($value[0]==0 && $value[1]==0) {
-                    unset($summary[$key]);
-                }
-            }
-            return $summary;
-        } else { //User attached to no contract
-            return null;
-        }        
-    }
-    
-    /**
      * Get the number of days a user can take for a given leave type
      * @param int $id employee id
      * @param int $type type of leave
@@ -388,7 +316,7 @@ class Leaves_model extends CI_Model {
         $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
                                   ' OR (leaves.startdate >= DATE(\'' . $start . '\') AND leaves.enddate <= DATE(\'' . $end . '\')) )');
         $this->db->order_by('startdate', 'desc');
-        $this->db->limit(255);  //Security limit
+        $this->db->limit(1024);  //Security limit
         $events = $this->db->get('leaves')->result();
         
         $jsonevents = array();
@@ -441,7 +369,7 @@ class Leaves_model extends CI_Model {
         $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
                                    ' OR (leaves.startdate >= DATE(\'' . $start . '\') AND leaves.enddate <= DATE(\'' . $end . '\')))');
         $this->db->order_by('startdate', 'desc');
-        $this->db->limit(255);  //Security limit
+        $this->db->limit(1024);  //Security limit
         $events = $this->db->get('leaves')->result();
         
         $jsonevents = array();
@@ -492,7 +420,7 @@ class Leaves_model extends CI_Model {
         $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
                                 ' OR (leaves.startdate >= DATE(\'' . $start . '\') AND leaves.enddate <= DATE(\'' . $end . '\')) )');
         $this->db->order_by('startdate', 'desc');
-        $this->db->limit(255);  //Security limit
+        $this->db->limit(1024);  //Security limit
         $events = $this->db->get('leaves')->result();
         
         $jsonevents = array();
@@ -637,5 +565,20 @@ class Leaves_model extends CI_Model {
         $this->db->from('leaves');
         $result = $this->db->get();
         return $result->row()->number;
+    }
+    
+    /**
+     * All leaves between two timestamps, no filters
+     * @param string $start Unix timestamp / Start date displayed on calendar
+     * @param string $end Unix timestamp / End date displayed on calendar
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function all($start, $end) {
+        $this->db->select("users.id as user_id, users.firstname, users.lastname, leaves.*", FALSE);
+        $this->db->join('users', 'users.id = leaves.employee');
+        $this->db->where('( (leaves.startdate <= FROM_UNIXTIME(\'' . $start . '\') AND leaves.enddate >= FROM_UNIXTIME(\'' . $start . '\'))' .
+                                   ' OR (leaves.startdate >= FROM_UNIXTIME(\'' . $start . '\') AND leaves.enddate <= FROM_UNIXTIME(\'' . $end . '\')))');
+        $this->db->order_by('startdate', 'desc');
+        return $this->db->get('leaves')->result();
     }
 }

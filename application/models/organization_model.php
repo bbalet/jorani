@@ -26,7 +26,7 @@ class Organization_model extends CI_Model {
     }
 
     /**
-     * Get the department details from the user's record
+     * Get the department details of a given user (label and ID)
      * @param int $user_id User identifier
      * @return array department details
      * @author Benjamin BALET <benjamin.balet@gmail.com>

@@ -159,7 +159,12 @@ class Leaves extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->model('types_model');
             $data['types'] = $this->types_model->get_types();
-            $data['credit'] = $this->leaves_model->get_user_leaves_credit($this->user_id, 0);
+            foreach ($data['types'] as $type) {
+                if ($type['id'] == 0) {
+                    $data['credit'] = $this->leaves_model->get_user_leaves_credit($this->user_id, $type['name']);
+                    break;
+                }
+            }
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('leaves/create');

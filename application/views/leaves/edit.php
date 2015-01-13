@@ -16,7 +16,6 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('leaves', $language);
 $this->lang->load('status', $language);
@@ -58,7 +57,7 @@ $this->lang->load('global', $language);?>
     <?php foreach ($types as $types_item): ?>
         <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == $leave['type']) echo "selected" ?>><?php echo $types_item['name'] ?></option>
     <?php endforeach ?>    
-    </select><br />
+    </select>(<span id="lblCredit"><?php echo $credit; ?></span>)<br />
     
     <label for="duration" required><?php echo lang('leaves_edit_field_duration');?></label>
     <input type="text" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" />
@@ -66,6 +65,11 @@ $this->lang->load('global', $language);?>
     <div class="alert hide alert-error" id="lblCreditAlert">
         <button type="button" class="close">&times;</button>
         <?php echo lang('leaves_edit_field_duration_message');?>
+    </div>
+    
+    <div class="alert hide alert-error" id="lblOverlappingAlert" onclick="$('#lblOverlappingAlert').hide();">
+        <button type="button" class="close">&times;</button>
+        <?php echo lang('leaves_create_field_overlapping_message');?>
     </div>
     
     <label for="cause"><?php echo lang('leaves_edit_field_cause');?></label>
@@ -97,6 +101,15 @@ $this->lang->load('global', $language);?>
     </div>
 </div>
 
+<div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
+        <div class="modal-header">
+            <h1><?php echo lang('global_msg_wait');?></h1>
+        </div>
+        <div class="modal-body">
+            <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
+        </div>
+ </div>
+
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
@@ -104,7 +117,7 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit.js" type="text/javascript"></script>
 <script type="text/javascript">
     var baseURL = '<?php echo base_url();?>';
     var userId = <?php echo $user_id; ?>;

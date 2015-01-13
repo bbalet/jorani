@@ -146,8 +146,6 @@ class Leaves extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('leaves_create_title');
-        $this->load->model('types_model');
-        $data['types'] = $this->types_model->get_types();
         
         $this->form_validation->set_rules('startdate', lang('leaves_create_field_start'), 'required|xss_clean');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
@@ -159,6 +157,9 @@ class Leaves extends CI_Controller {
         $this->form_validation->set_rules('status', lang('leaves_create_field_status'), 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
+            $this->load->model('types_model');
+            $data['types'] = $this->types_model->get_types();
+            $data['credit'] = $this->leaves_model->get_user_leaves_credit($this->user_id, 0);
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('leaves/create');
@@ -209,6 +210,12 @@ class Leaves extends CI_Controller {
         
         $this->load->model('types_model');  
         $data['types'] = $this->types_model->get_types();
+        foreach ($data['types'] as $type) {
+            if ($type['id'] == $data['leave']['type']) {
+                $data['credit'] = $this->leaves_model->get_user_leaves_credit($data['leave']['employee'], $type['name']);
+                break;
+            }
+        }
         
         $this->form_validation->set_rules('startdate', lang('leaves_edit_field_start'), 'required|xss_clean');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
@@ -339,23 +346,6 @@ class Leaves extends CI_Controller {
             redirect('leaves');
         }
     }
-    
-    /**
-     * Ajax endpoint : Try to calculate the length of the leave
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function length() {
-        $user_id = $this->input->post('user_id', TRUE);
-        $start = $this->input->post('start', TRUE);
-        $end = $this->input->post('end', TRUE);
-        if (isset($user_id) && isset($start) && isset($end)) {
-            $this->expires_now();
-            $this->output->set_content_type('text/plain');
-            echo $this->leaves_model->length($user_id, $start, $end);
-        } else {
-            $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
-        }
-    }
 
     /**
      * Action: export the list of all leaves into an Excel file
@@ -465,19 +455,36 @@ class Leaves extends CI_Controller {
     }
     
     /**
-     * Ajax endpoint : difference between the entitled and the taken days
+     * Ajax endpoint. Result varies according to input :
+     *  - difference between the entitled and the taken days
+     *  - try to calculate the duration of the leave
+     *  - try to detect overlapping leave requests
      */
-    public function credit() {
+    public function validate() {
         $this->expires_now();
         header("Content-Type: application/json");
-        echo $this->leaves_model->get_user_leaves_credit(
-                $this->input->post('id'),
-                $this->input->post('type'));
+        $id = $this->input->post('id', TRUE);
+        $type = $this->input->post('type', TRUE);
+        $startdate = $this->input->post('startdate', TRUE);
+        $enddate = $this->input->post('enddate', TRUE);
+        $startdatetype = $this->input->post('startdatetype', TRUE);
+        $enddatetype = $this->input->post('enddatetype', TRUE);
+        $leaveValidator = new stdClass;
+        if (isset($id) && isset($type)) {
+            $leaveValidator->credit = $this->leaves_model->get_user_leaves_credit($id, $type);
+        }
+        if (isset($id) && isset($startdate) && isset($enddate)) {
+            $leaveValidator->length = $this->leaves_model->length($id, $startdate, $enddate);
+            if (isset($startdatetype) && isset($enddatetype)) {
+                $leaveValidator->overlap = $this->leaves_model->detect_overlapping_leaves($id, $startdate, $enddate, $startdatetype, $enddatetype);
+            }
+        }
+        echo json_encode($leaveValidator);
     }
     
     /**
      * Prepares a 2 dimensions array
-     * TODO : to be implemented into v0.2.1
+     * TODO : to be implemented into v0.2.1 or later
      * @param int $id identifier of the entity
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */

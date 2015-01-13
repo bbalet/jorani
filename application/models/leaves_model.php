@@ -72,8 +72,8 @@ class Leaves_model extends CI_Model {
      * Try to calculate the lenght of a leave using the start and and date of the leave
      * and the non working days defined on a contract
      * @param int $employee
-     * @param date $start
-     * @param date $end
+     * @param date $start start date of the leave request
+     * @param date $end end date of the leave request
      * @return float length of leave
      */
     public function length($employee, $start, $end) {
@@ -207,20 +207,100 @@ class Leaves_model extends CI_Model {
             }
             return $summary;
         } else { //User attached to no contract
-            return null;
+            return NULL;
         }        
     }
     
     /**
      * Get the number of days a user can take for a given leave type
      * @param int $id employee id
-     * @param int $type type of leave
+     * @param string $type type of leave or NULL if the user has no contract/no
      * @return int number of days not taken
      */
     public function get_user_leaves_credit($id, $type) {
         $summary = $this->get_user_leaves_summary($id);
         //return entitled days - taken (for a given leave type)
-        return ($summary[$type][1] - $summary[$type][0]);
+        if (is_null($summary)) {
+            return NULL;
+        } else {
+            if (array_key_exists($type, $summary)) {
+                return ($summary[$type][1] - $summary[$type][0]);
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    /**
+     * Detect if the leave request overlaps with another request of the employee
+     * @param int $id employee id
+     * @param date $startdate start date of leave request being created
+     * @param date $enddate end date of leave request being created
+     * @param string $startdatetype start date type of leave request being created (Morning or Afternoon)
+     * @param string $enddatetype end date type of leave request being created (Morning or Afternoon)
+     * @return boolean TRUE if another leave request has been emmitted, FALSE otherwise
+     * @return int number of days not taken
+     */
+    public function detect_overlapping_leaves($id, $startdate, $enddate, $startdatetype, $enddatetype) {
+        $overlapping = FALSE;
+        $this->db->where('employee', $id);
+        $this->db->where('status != 4');
+        $this->db->where('(startdate <= DATE(\'' . $enddate . '\') AND enddate >= DATE(\'' . $startdate . '\'))');
+        $leaves = $this->db->get('leaves')->result();
+        foreach ($leaves as $leave) {
+            if (($leave->startdate != $startdate) && ($leave->enddate != $enddate)) {
+                //Leave request is exactly within another leave request
+                $overlapping = TRUE;
+            } else {
+                if (($leave->startdate == $startdate) && ($leave->enddate == $enddate)) {
+                    //Two leave requests of one day or exactly the same periods (possible duplicate)
+                    if (($leave->startdatetype == $startdatetype) || ($leave->enddatetype == $enddatetype)) $overlapping = TRUE;
+                } else {
+                    //Compute a pattern that is human readable
+                    $pattern = $leave->startdatetype . $leave->enddatetype . $startdatetype . $enddatetype;
+                    if ($startdate == $leave->startdate) {
+                        //Example of a leave request that starts the same day, but of one day
+                        switch ($pattern) {
+                            case'MorningMorningMorningMorning': $overlapping = TRUE; break;
+                            case'MorningMorningMorningAfternoon': $overlapping = TRUE; break;
+                            case'MorningMorningAfternoonAfternoon': $overlapping = TRUE; break;
+                            case'MorningAfternoonMorningAfternoon': $overlapping = TRUE; break;
+                            case'MorningAfternoonMorningMorning': $overlapping = TRUE; break;
+                            case'MorningAfternoonAfternoonAfternoon': $overlapping = TRUE; break;
+                            case'AfternoonAfternoonAfternoonAfternoon': $overlapping = TRUE; break;
+                            case'AfternoonAfternoonMorningAfternoon': $overlapping = TRUE; break;
+                            case'AfternoonMorningMorningAfternoon': $overlapping = TRUE; break;
+                            case'AfternoonMorningAfternoonAfternoon': $overlapping = TRUE; break;
+                        }
+                    }
+                    if ($startdate == $leave->enddate) {
+                        //Example of a leave request that starts the same day onother request ends, but of one day
+                        switch ($pattern) {
+                            case'MorningMorningMorningMorning': $overlapping = TRUE; break;
+                            case'MorningMorningMorningAfternoon': $overlapping = TRUE; break;
+                            case'MorningAfternoonMorningAfternoon': $overlapping = TRUE; break;
+                            case'MorningAfternoonMorningMorning': $overlapping = TRUE; break;
+                            case'MorningAfternoonAfternoonAfternoon': $overlapping = TRUE; break;
+                            case'AfternoonAfternoonAfternoonAfternoon': $overlapping = TRUE; break;
+                            case'AfternoonAfternoonMorningAfternoon': $overlapping = TRUE; break;
+                            case'AfternoonAfternoonMorningMorning': $overlapping = TRUE; break;
+                            case'AfternoonMorningMorningMorning': $overlapping = TRUE; break;
+                            case'AfternoonMorningMorningAfternoon': $overlapping = TRUE; break;
+                        }
+                    }
+                    if ($enddate == $leave->startdate) {
+                        //Example of a leave request that ends the same day onother request starts
+                        switch ($pattern) {
+                            case'AfternoonAfternoonMorningAfternoon': $overlapping = TRUE; break;
+                            case'AfternoonAfternoonAfternoonAfternoon': $overlapping = TRUE; break;
+                            case'AfternoonMorningMorningAfternoon': $overlapping = TRUE; break;
+                            case'AfternoonMorningAfternoonAfternoon': $overlapping = TRUE; break;
+                        }
+                    }
+                }
+            }
+        }
+        return $overlapping;
     }
     
     /**

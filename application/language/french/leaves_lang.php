@@ -54,6 +54,7 @@ $lang['leaves_create_field_end'] = 'Date de fin';
 $lang['leaves_create_field_type'] = 'Type de congés';
 $lang['leaves_create_field_duration'] = 'Durée';
 $lang['leaves_create_field_duration_message'] = 'Vous dépassez le nombre de jours permis';
+$lang['leaves_create_field_overlapping_message'] = 'Vous avez demandé une absence durant la même période.';
 $lang['leaves_create_field_cause'] = 'Cause (optionelle)';
 $lang['leaves_create_field_status'] = 'Statut';
 $lang['leaves_create_button_create'] = 'Créer la demande';

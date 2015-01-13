@@ -90,9 +90,7 @@ $(document).ready(function() {
 	</div>
 </div>
 
-<div class="row-fluid">
-	<div class="span12">&nbsp;</div>
-</div>
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div class="row-fluid">
     <div class="span2">
@@ -103,6 +101,8 @@ $(document).ready(function() {
     </div>
     <div class="span2">&nbsp;</div>
 </div>
+
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>

@@ -54,6 +54,7 @@ $lang['leaves_create_field_end'] = 'End Date';
 $lang['leaves_create_field_type'] = 'Leave type';
 $lang['leaves_create_field_duration'] = 'Duration';
 $lang['leaves_create_field_duration_message'] = 'You are exceeding your entitled days';
+$lang['leaves_create_field_overlapping_message'] = 'You have requested another leave request within the same dates.';
 $lang['leaves_create_field_cause'] = 'Cause (optional)';
 $lang['leaves_create_field_status'] = 'Status';
 $lang['leaves_create_button_create'] = 'Request leave';

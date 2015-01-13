@@ -15,12 +15,7 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
     
-var last_startDate = moment("Jan 1, 1970");
-var last_endDate = moment("Jan 1, 1970");
-var duration = 0;
-var last_duration = 0;
 var addDays = 0;
-var last_type = 0;
     
 //Try to calculate the length of the leave
 function getLeaveLength() {
@@ -31,25 +26,22 @@ function getLeaveLength() {
 
     if (start.isValid() && end.isValid()) {
         if (start.isSame(end)) {
-            addDays = 0;
             if (startType == "Morning" && endType == "Morning") {
-                duration = 0.5;
+                addDays = 0.5;
                 $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_1d_MM.png' />");
             }
             if (startType == "Afternoon" && endType == "Afternoon") {
-                duration = 0.5;
+                addDays = 0.5;
                 $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_1d_AA.png' />");
             }
             if (startType == "Morning" && endType == "Afternoon") {
-                duration = 1;
+                addDays = 1;
                 $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_1d_MA.png' />");
             }
             if (startType == "Afternoon" && endType == "Morning") {
                 //Error
                 $("#spnDayOff").html("<img src='" + baseURL + "assets/images/date_error.png' />");
             }
-            $('#duration').val(duration + addDays);
-            checkDuration();
         } else {
              if (start.isBefore(end)) {
                 if (startType == "Morning" && endType == "Morning") {
@@ -68,60 +60,50 @@ function getLeaveLength() {
                     $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_2d_AM.png' />");
                     addDays = 0;
                 }
-                //Prevent multiple triggers by UI components
-                if (!start.isSame(last_startDate) || !end.isSame(last_endDate)) {
-                    $.ajax({
-                        type: "POST",
-                        url: baseURL + "leaves/length",
-                        data: {
-                            user_id: userId,
-                            start: $('#startdate').val(),
-                            end: $('#enddate').val()
-                            }
-                        })
-                        .done(function(msg) {
-                            duration = parseFloat(msg);
-                            $('#duration').val(duration + addDays);
-                            checkDuration();
-                        });
-
-                }
-                else {
-                    $('#duration').val(duration + addDays);
-                    checkDuration();
-                }
-                last_startDate = start;
-                last_endDate = end;
-             } else {
-                //Error
              }
         }
-    }   //start and end dates are valid
+        getLeaveInfos(false);
+    }
 }
 
-//Check the entered duration of the leave
-function checkDuration() {
-    //Prevent multiple triggers by UI components
-    if ((duration != last_duration) || (last_type != $("#type option:selected").val())) {
-        if ($("#duration").val() != "") {
-            $.ajax({
-                type: "POST",
-                url: baseURL + "leaves/credit",
-                data: { id: userId, type: $("#type option:selected").text() }
-                })
-                .done(function(msg) {
-                    var credit = parseInt(msg);
-                    var duration = parseFloat($("#duration").val());
-                    if (duration > credit) {
-                        $("#lblCreditAlert").show();
-                    } else {
-                        $("#lblCreditAlert").hide();
-                    }
-                });
-         }
-     }
-     last_duration = duration;
-     last_type = $("#type option:selected").val();
+//Get the leave credit, duration and detect overlapping cases (Ajax request)
+function getLeaveInfos(preventDefault) {
+        $('#frmModalAjaxWait').modal('show');
+        $.ajax({
+        type: "POST",
+        url: baseURL + "leaves/validate",
+        data: {   id: userId,
+                    type: $("#type option:selected").text(),
+                    startdate: $('#startdate').val(),
+                    enddate: $('#enddate').val(),
+                    startdatetype: $('#startdatetype').val(),
+                    enddatetype: $('#enddatetype').val()
+                }
+        })
+        .done(function(leaveInfo) {
+            if (typeof leaveInfo.length !== 'undefined') {
+                var duration = parseFloat(leaveInfo.length)  + addDays;
+                if (!preventDefault) $('#duration').val(duration);
+            }
+            if (typeof leaveInfo.credit !== 'undefined') {
+                var credit = parseInt(leaveInfo.credit);
+                var duration = parseFloat($("#duration").val());
+                if (duration > credit) {
+                    $("#lblCreditAlert").show();
+                } else {
+                    $("#lblCreditAlert").hide();
+                }
+                $("#lblCredit").text(leaveInfo.credit);
+            }
+            if (typeof leaveInfo.overlap !== 'undefined') {
+                if (Boolean(leaveInfo.overlap)) {
+                    $("#lblOverlappingAlert").show();
+                } else {
+                    $("#lblOverlappingAlert").hide();
+                }
+            }
+            $('#frmModalAjaxWait').modal('hide');
+        });    
 }
 
 $(function () {
@@ -157,10 +139,8 @@ $(function () {
     $('#viz_enddate').change(function() {getLeaveLength();});
     $('#startdatetype').change(function() {getLeaveLength();});
     $('#enddatetype').change(function() {getLeaveLength();});
-    $('#type').change(function() {checkDuration();});
+    $('#type').change(function() {getLeaveInfos(false);});
 
     //Check if the user has not exceed the number of entitled days
-    $("#duration").keyup(function() {
-        checkDuration();
-    });
+    $("#duration").keyup(function() {getLeaveInfos(true);});
 });

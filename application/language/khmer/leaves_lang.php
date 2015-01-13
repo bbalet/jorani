@@ -54,6 +54,7 @@ $lang['leaves_create_field_end'] = 'កាលបរិច្ឆេទដែល�
 $lang['leaves_create_field_type'] = 'បែបផែននៃការចាកចេញ';
 $lang['leaves_create_field_duration'] = 'រយៈពេល';
 $lang['leaves_create_field_duration_message'] = 'អ្នកគឺកំពុងលើសថ្ងៃឈប់សម្រាករបស់អ្នកហើយ';
+$lang['leaves_create_field_overlapping_message'] = 'You have requested another leave request within the same dates.';
 $lang['leaves_create_field_cause'] = 'មូលហេតុ (optional)';
 $lang['leaves_create_field_status'] = 'ស្ថានភាព';
 $lang['leaves_create_button_create'] = 'សំណើរសុំច្បាប់';

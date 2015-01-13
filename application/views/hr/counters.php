@@ -19,7 +19,8 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('hr', $language);
 $this->lang->load('entitleddays', $language);
-$this->lang->load('global', $language);?>
+$this->lang->load('global', $language);
+$this->lang->load('datatable', $language);?>
 
 <div class="row-fluid">
     <div class="span12">

@@ -167,9 +167,10 @@ class Leaves_model extends CI_Model {
             $this->db->select('duration, date, cause');
             $this->db->from('overtime');
             $this->db->where('employee', $id);
-            $this->db->where("date >= DATE_SUB(STR_TO_DATE(" . $refDate . ", '%Y-%m-%d'),INTERVAL 1 YEAR)");
+            $this->db->where("date >= DATE_SUB(STR_TO_DATE('" . $refDate . "', '%Y-%m-%d'),INTERVAL 1 YEAR)");
             $this->db->where('status = 3'); //Accepted
             $overtime_days = $this->db->get()->result_array();
+            //$this->output->enable_profiler(TRUE);
             $sum = 0;
             foreach ($overtime_days as $entitled) {
                 if ($sum_extra == FALSE) {
@@ -185,7 +186,7 @@ class Leaves_model extends CI_Model {
                 $this->db->where('leaves.employee', $id);
                 $this->db->where('leaves.status', 3);
                 $this->db->where('leaves.type', 0);
-                $this->db->where("leaves.startdate >= DATE_SUB(STR_TO_DATE(" . $refDate . ", '%Y-%m-%d'),INTERVAL 1 YEAR)");
+                $this->db->where("leaves.startdate >= DATE_SUB(STR_TO_DATE('" . $refDate . "', '%Y-%m-%d'),INTERVAL 1 YEAR)");
                 $this->db->group_by("leaves.type");
                 $taken_days = $this->db->get()->result_array();
                 if (count($taken_days) > 0) {
@@ -216,6 +217,7 @@ class Leaves_model extends CI_Model {
      * @param int $id employee id
      * @param string $type type of leave or NULL if the user has no contract/no
      * @return int number of days not taken
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_user_leaves_credit($id, $type) {
         $summary = $this->get_user_leaves_summary($id);
@@ -239,7 +241,7 @@ class Leaves_model extends CI_Model {
      * @param string $startdatetype start date type of leave request being created (Morning or Afternoon)
      * @param string $enddatetype end date type of leave request being created (Morning or Afternoon)
      * @return boolean TRUE if another leave request has been emmitted, FALSE otherwise
-     * @return int number of days not taken
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function detect_overlapping_leaves($id, $startdate, $enddate, $startdatetype, $enddatetype) {
         $overlapping = FALSE;
@@ -325,9 +327,9 @@ class Leaves_model extends CI_Model {
     }
 
     /**
-     * Update a leave request in the database
-     * @param type $id
-     * @return type
+     * Update a leave request in the database with the values posted by an HTTP POST
+     * @param type $id of the leave request
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function update_leaves($id) {
         $data = array(
@@ -347,6 +349,7 @@ class Leaves_model extends CI_Model {
     /**
      * Accept a leave request
      * @param int $id leave request identifier
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function accept_leave($id) {
@@ -354,13 +357,13 @@ class Leaves_model extends CI_Model {
             'status' => 3
         );
         $this->db->where('id', $id);
-        $this->db->update('leaves', $data);
+        return $this->db->update('leaves', $data);
     }
 
     /**
      * Reject a leave request
      * @param int $id leave request identifier
-     * @return type
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reject_leave($id) {
@@ -374,7 +377,7 @@ class Leaves_model extends CI_Model {
     /**
      * Delete a leave from the database
      * @param int $id leave request identifier
-     * @return type
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_leave($id) {
@@ -382,7 +385,7 @@ class Leaves_model extends CI_Model {
     }
     
     /**
-     * All leave request of the user
+     * Leave requests of All leave request of the user (suitable for FullCalendar widget)
      * @param int $user_id connected user
      * @param string $start Unix timestamp / Start date displayed on calendar
      * @param string $end Unix timestamp / End date displayed on calendar
@@ -435,7 +438,7 @@ class Leaves_model extends CI_Model {
     }
 
     /**
-     * All users having the same manager
+     * Leave requests of All users having the same manager (suitable for FullCalendar widget)
      * @param int $user_id id of the manager
      * @param string $start Unix timestamp / Start date displayed on calendar
      * @param string $end Unix timestamp / End date displayed on calendar
@@ -487,7 +490,7 @@ class Leaves_model extends CI_Model {
     }
 
     /**
-     * All users having the same manager
+     * Leave requests of All users having the same manager (suitable for FullCalendar widget)
      * @param int $user_id id of the manager
      * @param string $start Unix timestamp / Start date displayed on calendar
      * @param string $end Unix timestamp / End date displayed on calendar
@@ -538,7 +541,7 @@ class Leaves_model extends CI_Model {
     }
     
     /**
-     * All leave request of the user
+     * Leave requests of All leave request of the user (suitable for FullCalendar widget)
      * @param int $entity_id Entity identifier (the department)
      * @param string $start Unix timestamp / Start date displayed on calendar
      * @param string $end Unix timestamp / End date displayed on calendar

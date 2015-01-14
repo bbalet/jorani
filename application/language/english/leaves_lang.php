@@ -17,6 +17,8 @@
  */
 
 $lang['leaves_summary_title'] = 'My summary';
+$lang['leaves_summary_title_overtime'] = 'Overtime details (added to compensate leaves)';
+$lang['leaves_summary_key_overtime'] = 'Catch up for';
 $lang['leaves_summary_thead_type'] = 'Leave type';
 $lang['leaves_summary_thead_available'] = 'Available';
 $lang['leaves_summary_thead_taken'] = 'Taken';

@@ -37,20 +37,52 @@ $this->lang->load('global', $language);?>
       <th><?php echo lang('leaves_summary_thead_available');?></th>
       <th><?php echo lang('leaves_summary_thead_taken');?></th>
       <th><?php echo lang('leaves_summary_thead_entitled');?></th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php if (count($summary) > 0) {
+  foreach ($summary as $key => $value) {
+      if ($value[2] == '') {?>
+    <tr>
+      <td><?php echo $key; ?></td>
+      <td><?php echo ((float) $value[1] - (float) $value[0]); ?></td>
+      <td><?php echo ((float) $value[0]); ?></td>
+      <td><?php echo ((float) $value[1]); ?></td>
+    </tr>
+  <?php }
+    }
+  } else {?>
+    <tr>
+      <td colspan="4"><?php echo lang('leaves_summary_tbody_empty');; ?></td>
+    </tr>
+    <?php } ?>
+  </tbody>
+</table>
+
+        </div>
+</div>
+
+<h4><?php echo lang('leaves_summary_title_overtime');?></h4>
+
+<table class="table table-bordered table-hover">
+<thead>
+    <tr>
+      <th><?php echo lang('leaves_summary_thead_type');?></th>
+      <th><?php echo lang('leaves_summary_thead_entitled');?></th>
       <th><?php echo lang('leaves_summary_thead_description');?></th>
     </tr>
   </thead>
   <tbody>
   <?php if (count($summary) > 0) {
-  foreach ($summary as $key => $value) { ?>
+  foreach ($summary as $key => $value) {
+      if ($value[2] != '') {?>
     <tr>
-      <td><?php echo $key; ?></td>
-      <td><?php echo ((float) $value[1] - (float) $value[0]); ?></td>
-      <td><?php if ($value[2] == '') { echo ((float) $value[0]); } else { echo '-'; } ?></td>
-      <td><?php if ($value[2] == '') { echo ((float) $value[1]); } else { echo '-'; } ?></td>
+      <td><?php echo str_replace("Catch up for", lang('leaves_summary_key_overtime'), $key); ?></td>
+      <td><?php echo (float) $value[1]; ?></td>
       <td><?php echo $value[2]; ?></td>
     </tr>
   <?php }
+    }
   } else {?>
     <tr>
       <td colspan="4"><?php echo lang('leaves_summary_tbody_empty');; ?></td>

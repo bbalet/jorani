@@ -17,6 +17,8 @@
  */
 
 $lang['leaves_summary_title'] = 'Mes compteurs';
+$lang['leaves_summary_title_overtime'] = 'Détail de la compensation (ajouté au repos compensatoire)';
+$lang['leaves_summary_key_overtime'] = 'Récupération du';
 $lang['leaves_summary_thead_type'] = 'Type d\'absence';
 $lang['leaves_summary_thead_available'] = 'Disponible';
 $lang['leaves_summary_thead_taken'] = 'Pris';

@@ -30,8 +30,8 @@ Jorani uses e-mail to notify users and their line managers. In order to setup e-
     $config['protocol'] = 'smtp';
     $config['useragent'] = 'phpmailer';
     $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-    $config['smtp_user'] = 'monad...@gmail.com';
-    $config['smtp_pass'] = 'monpwd';
+    $config['smtp_user'] = 'my.account.@gmail.com';
+    $config['smtp_pass'] = 'my password';
     $config['_smtp_auth'] = TRUE;
     $config['smtp_port'] = '465';
 
@@ -50,12 +50,11 @@ In order to configure LDAP, locate these lines of code into <code>application/co
 * Jorani tries to bind to LDAP according to the content of <code>ldap_basedn</code> in where <code>%s</code> is a placeholder for the user id to be checked into LDAP (e.g. <code>%s</code> will be replaced by the login from LMS db).
 * Contact your IT Admin in order to know more about how LDAP is configured into your organization. Change the value but <code>%s</code> must remain somewhere into this string.
 * The user id into Jorani and LDAP must be the same. When LDAP is activated, LMS doesn't use anymore the password stored into the database.
-* Jorani is designed for small organization, therefore it doesn't support complex authentication schemes.
 
-Since version 0.1.5, Jorani supports complex LDAP authentication schemes. In order to use this feature :
+Since version 0.1.5, Jorani supports complex LDAP authentication schemes (where users are in different loactions in the directory). In order to use this feature :
 
 1. Set <code>ldap_basedn_db</code> to TRUE.
-2. The Base DN is not based on <code>ldap_basedn</code>, but read into the users table, column <code>ldap_path</code> (e.g. from database).
+2. The Base DN is not based on <code>ldap_basedn</code>, but read from the users table, column <code>ldap_path</code> (e.g. from database).
 3. The Base DN should look like <code>uid=bbalet,ou=people,dc=company,dc=com</code>. Note that this feature allows you to authenticate users from different OU.
 
 ## Apache

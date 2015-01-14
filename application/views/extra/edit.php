@@ -36,7 +36,7 @@ $this->lang->load('global', $language);?>
     <input type="hidden" name="date" id="date" value="<?php echo $extra['date']; ?>" />
     
     <label for="duration"><?php echo lang('extra_edit_field_duration');?></label>
-    <input type="input" name="duration" id="duration" value="<?php echo $extra['duration']; ?>" required />
+    <input type="input" name="duration" id="duration" value="<?php echo $extra['duration']; ?>" required />&nbsp;<span><?php echo lang('extra_edit_field_duration_description');?></span>
     
     <label for="cause"><?php echo lang('extra_edit_field_cause');?></label>
     <textarea name="cause" required><?php echo $extra['cause']; ?></textarea>

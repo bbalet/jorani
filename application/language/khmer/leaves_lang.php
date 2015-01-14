@@ -17,6 +17,8 @@
  */
 
 $lang['leaves_summary_title'] = 'សេចក្តីសង្ខេបរបស់ខ្ញុំ';
+$lang['leaves_summary_title_overtime'] = 'Overtime details (added to compensate leaves)';
+$lang['leaves_summary_key_overtime'] = 'Catch up for';
 $lang['leaves_summary_thead_type'] = 'បែបផែននៃការចាកចេញ';
 $lang['leaves_summary_thead_available'] = 'Available';
 $lang['leaves_summary_thead_taken'] = ' បានយក';

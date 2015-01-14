@@ -115,10 +115,11 @@ $this->lang->load('global', $language);?>
         }
         if (toggleDayoffs) {
             $('#calendar').fullCalendar('addEventSource', source);
+            $('#calendar').fullCalendar('rerenderEvents');
+            $('#calendar').fullCalendar('removeEventSource', source);
         } else {
             $('#calendar').fullCalendar('removeEventSource', source);
         }
-        $('#calendar').fullCalendar('rerenderEvents');
     }
     
     function select_entity() {

@@ -299,4 +299,22 @@ class Dayoffs_model extends CI_Model {
         $result = $this->db->get();
         return $result->row()->number;
     }
+    
+    /**
+     * All day offs of a given employee and between two dates
+     * @param int $user_id connected user
+     * @param string $start Start date displayed on calendar
+     * @param string $end End date displayed on calendar
+     * @return array list of day offs
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function employee_all_dayoffs($id, $start, $end) {
+        $this->db->select('dayoffs.*');
+        $this->db->join('dayoffs', 'users.contract = dayoffs.contract');
+        $this->db->where('users.id', $id);
+        $this->db->where('date >= DATE(\'' . $start . '\')');
+        $this->db->where('date <= DATE(\'' . $end . '\')');
+        $dayoffs = $this->db->get('users')->result();
+        return $dayoffs;
+    }
 }

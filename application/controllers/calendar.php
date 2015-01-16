@@ -149,24 +149,21 @@ class Calendar extends CI_Controller {
     }
     
     /**
-     * Display a global tabularcalendar filtered by organization/entity
+     * Display a global tabular calendar filtered by organization/entity
      * TODO : to be implemented into v0.2.1
      * @param int $id identifier of the entity
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular($id=0, $month=0, $year=0) {
+    public function tabular($id=0, $month=0, $year=0, $children=TRUE) {
         $this->auth->check_is_granted('organization_calendar');
-        
-        //date('M Y');
-        //where DAY(date) and MONTH(date) + order by
-        //$num = cal_days_in_month(CAL_GREGORIAN, 8, 2003);
-        //Itération between 2 dates
-        /*while ($iDateFrom<$iDateTo)
-        {
-            $iDateFrom+=86400; // add 24 hours
-            array_push($aryRange,date('Y-m-d',$iDateFrom));
-        }*/
         $data = $this->getUserContext();
+        $this->load->model('leaves_model');
+        $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);
+        $data['entity'] = $id;
+        $data['month'] = $month;
+        $data['year'] = $year;
+        $data['children'] = $children;
+        //$this->output->enable_profiler(TRUE);
         $data['title'] = lang('calendar_organization_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -180,23 +177,22 @@ class Calendar extends CI_Controller {
      * @param int $id identifier of the entity
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function export($id=0, $month=0, $year=0) {
+    public function tabular_export($id=0, $month=0, $year=0, $children=TRUE) {
         $this->expires_now();
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
 
-        //date('M Y');
-        
+        $this->load->model('leaves_model');
+        $leaves = $this->leaves_model->tabular($id, $month, $year, $children);
+        $start = $year . '-' . $month . '1';    //first date of selected month
+        $lastDay = date("t", strtotime($start));    //last day of selected month
         $this->excel->getActiveSheet()->setTitle(lang('leaves_export_title'));
         $this->excel->getActiveSheet()->setCellValue('A1', lang('leaves_export_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B1', lang('leaves_export_thead_start_date'));
-        $this->excel->getActiveSheet()->setCellValue('C1', lang('leaves_export_thead_start_date_type'));
-        $this->excel->getActiveSheet()->setCellValue('D1', lang('leaves_export_thead_end_date'));
-        $this->excel->getActiveSheet()->setCellValue('E1', lang('leaves_export_thead_end_date_type'));
-        $this->excel->getActiveSheet()->setCellValue('F1', lang('leaves_export_thead_cause'));
-        $this->excel->getActiveSheet()->setCellValue('G1', lang('leaves_export_thead_duration'));
-        $this->excel->getActiveSheet()->setCellValue('H1', lang('leaves_export_thead_type'));
-        $this->excel->getActiveSheet()->setCellValue('I1', lang('leaves_export_thead_status'));
+        for ($ii = 1; $ii <= $lastDay; $ii++) {
+            $col = $this->excel->column_name($ii);
+            $this->excel->getActiveSheet()->setCellValue($col . '1', $ii);
+        }
+        
         $this->excel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
@@ -215,6 +211,18 @@ class Calendar extends CI_Controller {
             $this->excel->getActiveSheet()->setCellValue('G' . $line, $this->types_model->get_label($leave['type']));
             $this->excel->getActiveSheet()->setCellValue('H' . $line, $leave['cause']);
             $this->excel->getActiveSheet()->setCellValue('I' . $line, $this->status_model->get_label($leave['status']));
+            
+            //Change background color
+            $sheet->getStyle('A1')->applyFromArray(
+                array(
+                    'fill' => array(
+                        'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                        'color' => array('rgb' => 'FF0000')
+                    )
+                )
+            );
+            
+            
             $line++;
         }
 

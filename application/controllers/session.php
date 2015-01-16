@@ -135,7 +135,7 @@ class Session extends CI_Controller {
                 if ($parsed_url['path'] == '/lms/index.php') {
                     $this->session->set_userdata('last_page', '');
                 }
-                if ($this->session->userdata('last_page') != '') {
+                if ($this->session->userdata('last_page') != base_url().'index.php' && $this->session->userdata('last_page') != '') {
                     log_message('debug', '{controllers/session/login} Redirect to last page=' . $this->session->userdata('last_page'));
                     redirect($this->session->userdata('last_page'));
                 } else {

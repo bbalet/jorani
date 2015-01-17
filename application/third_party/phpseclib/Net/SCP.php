@@ -10,8 +10,8 @@
  * Here's a short example of how to use this library:
  * <code>
  * <?php
- *    include('Net/SCP.php');
- *    include('Net/SSH2.php');
+ *    include 'Net/SCP.php';
+ *    include 'Net/SSH2.php';
  *
  *    $ssh = new Net_SSH2('www.domain.tld');
  *    if (!$ssh->login('username', 'password')) {
@@ -83,7 +83,6 @@ define('NET_SCP_SSH2',  2);
  *
  * @package Net_SCP
  * @author  Jim Wigginton <terrafrost@php.net>
- * @version 0.1.0
  * @access  public
  */
 class Net_SCP
@@ -171,7 +170,7 @@ class Net_SCP
             return false;
         }
 
-        if (!$this->ssh->exec('scp -t ' . $remote_file, false)) { // -t = to
+        if (!$this->ssh->exec('scp -t "' . $remote_file . '"', false)) { // -t = to
             return false;
         }
 
@@ -216,7 +215,7 @@ class Net_SCP
             $sent+= strlen($temp);
 
             if (is_callable($callback)) {
-                $callback($sent);
+                call_user_func($callback, $sent);
             }
         }
         $this->_close();
@@ -246,7 +245,7 @@ class Net_SCP
             return false;
         }
 
-        if (!$this->ssh->exec('scp -f ' . $remote_file, false)) { // -f = from
+        if (!$this->ssh->exec('scp -f "' . $remote_file . '"', false)) { // -f = from
             return false;
         }
 

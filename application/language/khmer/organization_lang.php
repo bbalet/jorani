@@ -25,6 +25,13 @@ $lang['organization_index_thead_lastname'] = 'ឈ្មោះអ្នកប្�
 $lang['organization_index_thead_email'] = 'ម៉ែល';
 $lang['organization_index_button_add_employee'] = 'ភ្ជាប់ជាមួយបុគ្គលិក';
 $lang['organization_index_button_remove_employee'] = 'ផ្តាច់ចេញពីបុគ្គលិក';
+$lang['organization_index_button_select_supervisor'] = 'Select';
+$lang['organization_index_title_supervisor'] = 'Supervisor';
+$lang['organization_index_description_supervisor'] = 'If you select a supervisor, he will receive a copy of accepted and rejected leave requests submitted by employees of this entity.';
+
+$lang['organization_index_popup_supervisor_title'] = 'Select a Supervisor';
+$lang['organization_index_popup_supervisor_button_ok'] = 'OK';
+$lang['organization_index_popup_supervisor_button_cancel'] = 'Cancel';
 
 $lang['organization_index_popup_node_button_ok'] = 'OK';
 $lang['organization_index_popup_node_button_cancel'] = 'Cancel';

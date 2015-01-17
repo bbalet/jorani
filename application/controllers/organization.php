@@ -67,7 +67,6 @@ class Organization extends CI_Controller {
     public function index() {
         $this->auth->check_is_granted('organization_index');
         $data = $this->getUserContext();
-        
         $data['title'] = lang('organization_index_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -93,9 +92,13 @@ class Organization extends CI_Controller {
      */
     public function rename() {
         header("Content-Type: application/json");
-        $id = $this->input->get('id', TRUE);
-        $text = $this->input->get('text', TRUE);
-        $this->organization_model->rename($id, $text);
+        if ($this->auth->is_granted('edit_organization') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $id = $this->input->get('id', TRUE);
+            $text = $this->input->get('text', TRUE);
+            $this->organization_model->rename($id, $text);
+        }
     }
     
     /**
@@ -105,9 +108,13 @@ class Organization extends CI_Controller {
      */
     public function create() {
         header("Content-Type: application/json");
-        $id = $this->input->get('id', TRUE);
-        $text = $this->input->get('text', TRUE);
-        $this->organization_model->create($id, $text);
+        if ($this->auth->is_granted('edit_organization') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $id = $this->input->get('id', TRUE);
+            $text = $this->input->get('text', TRUE);
+            $this->organization_model->create($id, $text);
+        }
     }
     
     /**
@@ -117,9 +124,13 @@ class Organization extends CI_Controller {
      */
     public function move() {
         header("Content-Type: application/json");
-        $id = $this->input->get('id', TRUE);
-        $parent = $this->input->get('parent', TRUE);
-        $this->organization_model->move($id, $parent);
+        if ($this->auth->is_granted('edit_organization') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $id = $this->input->get('id', TRUE);
+            $parent = $this->input->get('parent', TRUE);
+            $this->organization_model->move($id, $parent);
+        }
     }
     
     /**
@@ -129,9 +140,13 @@ class Organization extends CI_Controller {
      */
     public function copy() {
         header("Content-Type: application/json");
-        $id = $this->input->get('id', TRUE);
-        $parent = $this->input->get('parent', TRUE);
-        $this->organization_model->copy($id, $parent);
+        if ($this->auth->is_granted('edit_organization') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $id = $this->input->get('id', TRUE);
+            $parent = $this->input->get('parent', TRUE);
+            $this->organization_model->copy($id, $parent);
+        }
     }
 
     /**
@@ -140,6 +155,7 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function employees() {
+        $this->expires_now();
         header("Content-Type: application/json");
         $id = $this->input->get('id', TRUE);
         $employees = $this->organization_model->employees($id)->result();
@@ -165,9 +181,13 @@ class Organization extends CI_Controller {
      */
     public function addemployee() {
         header("Content-Type: application/json");
-        $id = $this->input->get('user', TRUE);
-        $entity = $this->input->get('entity', TRUE);
-        echo json_encode($this->organization_model->add_employee($id, $entity));
+        if ($this->auth->is_granted('edit_organization') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $id = $this->input->get('user', TRUE);
+            $entity = $this->input->get('entity', TRUE);
+            echo json_encode($this->organization_model->add_employee($id, $entity));
+        }
     }   
     
     /**
@@ -177,8 +197,12 @@ class Organization extends CI_Controller {
      */
     public function delemployee() {
         header("Content-Type: application/json");
-        $id = $this->input->get('user', TRUE);
-        echo json_encode($this->organization_model->delete_employee($id));
+        if ($this->auth->is_granted('edit_organization') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $id = $this->input->get('user', TRUE);
+            echo json_encode($this->organization_model->delete_employee($id));
+        }
     } 
     
     /**
@@ -188,8 +212,12 @@ class Organization extends CI_Controller {
      */
     public function delete() {
         header("Content-Type: application/json");
-        $entity = $this->input->get('entity', TRUE);
-        echo json_encode($this->organization_model->delete($entity));
+        if ($this->auth->is_granted('edit_organization') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $entity = $this->input->get('entity', TRUE);
+            echo json_encode($this->organization_model->delete($entity));
+        }
     }
     
     /**
@@ -198,6 +226,7 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function root() {
+        $this->expires_now();
         header("Content-Type: application/json");
         $id = $this->input->get('id', TRUE);
         if ($id == "#") {
@@ -221,5 +250,57 @@ class Organization extends CI_Controller {
         $msg = rtrim($msg, ",");
         $msg .= ']';
         echo $msg;
+    }
+    
+    /**
+     * Returns the supervisor of an entity of the organization (string containing an id)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function getsupervisor() {
+        $this->expires_now();
+        $this->output->set_content_type('application/json');
+        $entity = $this->input->get('entity', TRUE);
+        if (isset($entity)) {
+            echo json_encode($this->organization_model->get_supervisor($entity));
+        } else {
+            $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+        }
+    }
+
+    /**
+     * Select the supervisor of an entity of the organization
+     * takes parameters by GET
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function setsupervisor() {
+        $this->expires_now();
+        $this->output->set_content_type('application/json');
+        if ($this->auth->is_granted('edit_organization') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            if ($this->input->get('user', TRUE) == "") {
+                $id = NULL;
+            } else {
+                $id = $this->input->get('user', TRUE);
+            }
+            $entity = $this->input->get('entity', TRUE);
+            echo json_encode($this->organization_model->set_supervisor($id, $entity));
+        }
+    }
+    
+    /**
+     * Internal utility function
+     * make sure a resource is reloaded every time
+     */
+    private function expires_now() {
+        // Date in the past
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        // always modified
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        // HTTP/1.1
+        header("Cache-Control: no-store, no-cache, must-revalidate");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        // HTTP/1.0
+        header("Pragma: no-cache");
     }
 }

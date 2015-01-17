@@ -35,6 +35,7 @@ $this->lang->load('treeview', $language);?>
         <div style="text-align: left;" id="organization"></div>
     </div>
     <div class="span8">
+        <h3>Employees attached to entity</h3>
         <table cellpadding="0" cellspacing="0" border="0" class="display" id="collaborators" width="100%">
             <thead>
                 <tr>
@@ -47,9 +48,17 @@ $this->lang->load('treeview', $language);?>
             <tbody>
             </tbody>
         </table>
-        <br /><br />
+        <br />
         <button id="cmdAddEmployee" class="btn btn-primary"><?php echo lang('organization_index_button_add_employee');?></button>
         <button id="cmdRemoveEmployee" class="btn btn-primary"><?php echo lang('organization_index_button_remove_employee');?></button>
+        <br />
+        <h3><?php echo lang('organization_index_title_supervisor');?></h3>
+        <p><?php echo lang('organization_index_description_supervisor');?></p>
+        <div class="input-append">
+            <input type="text" id="txtSupervisor" />
+            <button id="cmdDeleteSupervisor" class="btn btn-danger"><i class="icon-remove icon-white"></i></button>
+            <button id="cmdSelectSupervisor" class="btn btn-primary"><?php echo lang('organization_index_button_select_supervisor');?></button>
+        </div>
         <br /><br />
     </div>
 </div>
@@ -84,6 +93,20 @@ $this->lang->load('treeview', $language);?>
     <div class="modal-footer">
         <a href="#" onclick="add_employee();" class="btn secondary"><?php echo lang('organization_index_popup_add_button_ok');?></a>
         <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_add_button_cancel');?></a>
+    </div>
+</div>
+
+<div id="frmSelectSupervisor" class="modal hide fade">
+    <div class="modal-header">
+        <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="close">&times;</a>
+         <h3><?php echo lang('organization_index_popup_supervisor_title');?></h3>
+    </div>
+    <div class="modal-body" id="frmSelectSupervisorBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="select_supervisor();" class="btn secondary"><?php echo lang('organization_index_popup_supervisor_button_ok');?></a>
+        <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_supervisor_button_cancel');?></a>
     </div>
 </div>
 
@@ -127,7 +150,7 @@ $this->lang->load('treeview', $language);?>
             url: "<?php echo base_url(); ?>organization/addemployee",
             data: { 'user': id, 'entity': entity }
           })
-          .done(function( msg ) {
+          .done(function(msg) {
             //Update table of users
             $('#frmModalAjaxWait').modal('show');
             oTable.ajax.url("<?php echo base_url(); ?>organization/employees?id=" + entity)
@@ -135,6 +158,40 @@ $this->lang->load('treeview', $language);?>
                     $("#frmModalAjaxWait").modal('hide');
                 }, true);
             $("#frmAddEmployee").modal('hide');
+          });
+    }
+    
+    function select_supervisor() {
+        $("#frmSelectSupervisor").modal('hide');
+        $('#frmModalAjaxWait').modal('show');
+        var id = $('#employees .row_selected td:first').text();
+        var entity = $('#organization').jstree('get_selected')[0];
+        var text = $('#employees .row_selected td:eq(1)').text();
+        text += ' ' + $('#employees .row_selected td:eq(2)').text();
+        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url(); ?>organization/setsupervisor",
+            data: { 'user': id, 'entity': entity }
+          })
+          .done(function(msg) {
+            //Update field with the name of employee (the supervisor)
+            $('#txtSupervisor').val(text);
+            $('#frmModalAjaxWait').modal('hide');
+          });
+    }
+    
+    function delete_supervisor() {
+        $('#frmModalAjaxWait').modal('show');
+        var entity = $('#organization').jstree('get_selected')[0];
+        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url(); ?>organization/setsupervisor",
+            data: { 'user': null, 'entity': entity }
+          })
+          .done(function(msg) {
+            //Update field with the name of employee (the supervisor)
+            $('#txtSupervisor').val("");
+            $('#frmModalAjaxWait').modal('hide');
           });
     }
     
@@ -158,6 +215,27 @@ $this->lang->load('treeview', $language);?>
             if ($("#organization").jstree('get_selected').length == 1) {
                 $("#frmAddEmployee").modal('show');
                 $("#frmAddEmployeeBody").load('<?php echo base_url(); ?>users/employees');
+            } else {
+                $("#lblError").text("<?php echo lang('organization_index_error_msg_select_entity');?>");
+                $("#frmError").modal('show');
+            }
+        });
+
+        //Select the supervisor of the entity
+        $("#cmdSelectSupervisor").click(function() {
+            if ($("#organization").jstree('get_selected').length == 1) {
+                $("#frmSelectSupervisor").modal('show');
+                $("#frmSelectSupervisorBody").load('<?php echo base_url(); ?>users/employees');
+            } else {
+                $("#lblError").text("<?php echo lang('organization_index_error_msg_select_entity');?>");
+                $("#frmError").modal('show');
+            }
+        });
+        
+        //Delete the supervisor of the entity
+        $("#cmdDeleteSupervisor").click(function() {
+            if ($("#organization").jstree('get_selected').length == 1) {
+                delete_supervisor();
             } else {
                 $("#lblError").text("<?php echo lang('organization_index_error_msg_select_entity');?>");
                 $("#frmError").modal('show');
@@ -345,10 +423,29 @@ $this->lang->load('treeview', $language);?>
         .on('changed.jstree', function(e, data) {
             if (data && data.selected && data.selected.length) {
                 $('#frmModalAjaxWait').modal('show');
+                var isTableLoaded = false;
+                var isSupervisorLoaded = false;
                 oTable.ajax.url("<?php echo base_url(); ?>organization/employees?id=" + data.selected.join(':'))
                     .load(function() {
-                            $("#frmModalAjaxWait").modal('hide');
+                            isTableLoaded = true;
                         }, true);
+                $.ajax({
+                    type: "GET",
+                    url: "<?php echo base_url(); ?>organization/getsupervisor",
+                        data: { 'entity': data.selected.join(':') }
+                      })
+                    .done(function(data) {
+                        //Update field with the name of employee (the supervisor)
+                        if (data != null && typeof data === 'object') {
+                            $('#txtSupervisor').val(data.username);
+                        } else {
+                            $('#txtSupervisor').val("");
+                        }
+                        isSupervisorLoaded = true;
+                        $.when(isTableLoaded, isTableLoaded).done(function() { 
+                            $("#frmModalAjaxWait").modal('hide');
+                        });
+                  });
             }
         });
     });

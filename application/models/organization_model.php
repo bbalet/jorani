@@ -239,5 +239,37 @@ class Organization_model extends CI_Model {
         $this->db->order_by('firstname', 'asc');
         $employees = $this->db->get()->result();
         return $employees;
-    }    
+    }
+    
+    /**
+     * Add an employee into an entity of the organization
+     * @param int $id identifier of the employee
+     * @param int $entity identifier of the entity
+     * @return int result of the query
+     */
+    public function set_supervisor($id, $entity) {
+        $data = array(
+            'supervisor' => $id
+        );
+        $this->db->where('id', $entity);
+        return $this->db->update('organization', $data);
+    }
+    
+    /**
+     * Returns the supervisor of an entity
+     * @param int $entity identifier of the entity
+     * @return object identifier of supervisor
+     */
+    public function get_supervisor($entity) {
+        $this->db->select('users.id, CONCAT(users.firstname, \' \', users.lastname) as username, email', FALSE);
+        $this->db->from('organization');
+        $this->db->join('users', 'users.id = organization.supervisor');
+        $this->db->where('organization.id', $entity);
+        $result = $this->db->get()->result();
+        if (count($result) > 0) {
+            return $result[0];
+        } else {
+            return NULL;
+        }
+    }
 }

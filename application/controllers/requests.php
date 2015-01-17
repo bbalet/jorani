@@ -229,9 +229,12 @@ class Requests extends CI_Controller {
     private function sendMail($id)
     {
         $this->load->model('users_model');
+        $this->load->model('organization_model');
         $this->load->model('settings_model');
         $leave = $this->leaves_model->get_leaves($id);
+        //Load details about the employee (manager, supervisor of entity)
         $employee = $this->users_model->get_users($leave['employee']);
+        $supervisor = $this->organization_model->get_supervisor($employee['organization']);
 
         //Send an e-mail to the employee
         $this->load->library('email');
@@ -271,6 +274,9 @@ class Requests extends CI_Controller {
            $this->email->from('do.not@reply.me', 'LMS');
         }
         $this->email->to($employee['email']);
+        if (!is_null($supervisor)) {
+            $this->email->cc($supervisor->email);
+        }
         $this->email->message($message);
         $this->email->send();
     }

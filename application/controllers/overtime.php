@@ -159,9 +159,12 @@ class Overtime extends CI_Controller {
     private function sendMail($id)
     {
         $this->load->model('users_model');
+        $this->load->model('organization_model');
         $this->load->model('settings_model');
         $extra = $this->overtime_model->get_extra($id);
+        //Load details about the employee (manager, supervisor of entity)
         $employee = $this->users_model->get_users($extra['employee']);
+        $supervisor = $this->organization_model->get_supervisor($employee['organization']);
 
         //Send an e-mail to the employee
         $this->load->library('email');
@@ -200,6 +203,9 @@ class Overtime extends CI_Controller {
            $this->email->from('do.not@reply.me', 'LMS');
         }
         $this->email->to($employee['email']);
+        if (!is_null($supervisor)) {
+            $this->email->cc($supervisor->email);
+        }
         $this->email->message($message);
         $this->email->send();
         //echo $this->email->print_debugger();

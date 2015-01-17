@@ -114,7 +114,7 @@ class Auth {
             case 'create_positions' :
             case 'export_positions' :
             case 'list_positions' :
-                
+            case 'edit_organization' :
             case 'calendar_contract' :
             case 'adddayoff_contract' :
             case 'deletedayoff_contract' :

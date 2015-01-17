@@ -117,6 +117,8 @@ $route['organization/copy'] = 'organization/copy';
 $route['organization/employees'] = 'organization/employees';
 $route['organization/addemployee'] = 'organization/addemployee';
 $route['organization/delemployee'] = 'organization/delemployee';
+$route['organization/getsupervisor'] = 'organization/getsupervisor';
+$route['organization/setsupervisor'] = 'organization/setsupervisor';
 
 //Team leave requests (manager->team UNION team->manager)
 $route['calendar/individual'] = 'calendar/individual';

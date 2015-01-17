@@ -283,7 +283,48 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 </style>
     
 
-<h1>Test</h1>
+<h1><?php echo lang('calendar_tabular_title');?></h1>
+
+<div class="row-fluid">
+    <div class="span4">
+        <label for="txtEntity"><?php echo lang('calendar_organization_field_select_entity');?></label>
+        <div class="input-append">
+        <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
+        <button id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('calendar_tabular_button_select_entity');?></button>
+        
+        <label for="cboMonth"><?php echo lang('calendar_tabular_field_month');?></label>
+        <select name="cboMonth" id="cboMonth">
+            <?php for ($ii=1; $ii<13;$ii++) {
+                if ($ii == $month) {
+                    echo "<option val='" . $ii ."' selected>" . $ii ."</option>";
+                } else {
+                    echo "<option val='" . $ii ."'>" . $ii ."</option>";
+                }
+            }?>
+        </select>
+        
+        <label for="cboYear"><?php echo lang('calendar_tabular_field_year');?></label>
+        <select name="cboYear" id="cboYear">
+            <?php for ($ii=date('Y', strtotime('-6 year')); $ii<date('Y', strtotime('+2 year'));$ii++) {
+                if ($ii == $year) {
+                    echo "<option val='" . $ii ."' selected>" . $ii ."</option>";
+                } else {
+                    echo "<option val='" . $ii ."'>" . $ii ."</option>";
+                }
+            }?>
+        </select>
+        
+        </div>
+    </div>
+    <div class="span3">
+        <label class="checkbox">
+            <input type="checkbox" value="" id="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>
+        </label>
+    </div>
+    <div class="span5">
+        <button id="cmdExecute" class="btn btn-primary"><?php echo lang('calendar_tabular_button_execute');?></button>
+        <button id="cmdExport" class="btn btn-primary"><?php echo lang('calendar_tabular_button_export');?></button></div>
+</div>
 
 <div class="row-fluid">
     <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
@@ -299,9 +340,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 <table class="table table-bordered">
     <thead>
         <tr>
-            <td><b>Employee</b></td>
+            <td><b><?php echo lang('calendar_tabular_thead_employee');?></b></td>
             <?php
-                $start = $year . '-' . $month . '1';    //first date of selected month
+                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
                 $lastDay = date("t", strtotime($start));    //last day of selected month
                 for ($ii = 1; $ii <=$lastDay; $ii++) {
                     echo '<td><b>' . $ii . '</b></td>';
@@ -374,8 +415,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
     if ($repeater++>10) {
         $repeater = 0;?>
     <tr>
-        <td><b>Employee</b></td>
-        <?php for ($ii = 1; $ii <=$lastDay + 1; $ii++) echo '<td><b>' . $ii . '</b></td>';?>
+        <td><b><?php echo lang('calendar_tabular_thead_employee');?></b></td>
+        <?php for ($ii = 1; $ii <=$lastDay; $ii++) echo '<td><b>' . $ii . '</b></td>';?>
     </tr>
     <?php }
     }?>
@@ -383,18 +424,85 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 </table>
 <?php } ?>
 
-<button id="cmdExport" class="btn btn-primary"><?php echo lang('calendar_organization_button_select_entity');?></button>
+<div id="frmSelectEntity" class="modal hide fade">
+    <div class="modal-header">
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="close">&times;</a>
+         <h3><?php echo lang('calendar_tabular_popup_entity_title');?></h3>
+    </div>
+    <div class="modal-body" id="frmSelectEntityBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="select_entity();" class="btn secondary"><?php echo lang('calendar_tabular_popup_entity_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('calendar_tabular_popup_entity_button_cancel');?></a>
+    </div>
+</div>
 
+<script src="<?php echo base_url();?>assets/js/modernizr.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
+    var entity = -1; //Id of the selected entity
+    var text; //Label of the selected entity
+    var entity = <?php echo $entity;?>;
+    var month = <?php echo $month;?>;
+    var year = <?php echo $year;?>;
+    var children = '<?php echo $children;?>';
+    
+    function select_entity() {
+        entity = $('#organization').jstree('get_selected')[0];
+        text = $('#organization').jstree().get_text(entity);
+        $('#txtEntity').val(text);
+        $("#frmSelectEntity").modal('hide');
+    }
+
     $(document).ready(function() {
-        entity = <?php echo $entity;?>;
-        month = <?php echo $month;?>;
-        year = <?php echo $year;?>;
-        children = '<?php echo $children;?>';
+        //Select radio button depending on URL
+        if (children == '1') {
+            $("#chkIncludeChildren").prop("checked", true);
+        } else {
+            $("#chkIncludeChildren").prop("checked", false);
+        }
         
+        //Popup select entity
+        $("#cmdSelectEntity").click(function() {
+            $("#frmSelectEntity").modal('show');
+            $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
+        });
+
+        $('#cmdExecute').click(function() {
+            if (entity != -1) {
+                if ($('#chkIncludeChildren').prop('checked') == true) {
+                    children = 'true';
+                } else {
+                    children = 'false';
+                }
+                month = $('#cboMonth').val();
+                year = $('#cboYear').val();
+                url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children;
+                document.location.href = url;
+            }
+        });
+
         //Export the report into Excel
         $("#cmdExport").click(function() {
+            if (entity != -1) {
+                if ($('#chkIncludeChildren').prop('checked') == true) {
+                    children = 'true';
+                } else {
+                    children = 'false';
+                }
+                month = $('#cboMonth').val();
+                year = $('#cboYear').val();
             url = '<?php echo base_url(); ?>calendar/tabular/export/' + entity + '/'+ month + '/'+ year + '/'+ children;
-            location.href = url;
+            document.location.href  = url;
+            }
         });
+
+        //Load alert forms
+        $("#frmSelectEntity").alert();
+        //Prevent to load always the same content (refreshed each time)
+        $('#frmSelectEntity').on('hidden', function() {
+            $(this).removeData('modal');
+        });
+    });
 </script>

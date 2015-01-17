@@ -43,6 +43,19 @@ $lang['calendar_organization_popup_entity_title'] = 'Choisir l\'entité';
 $lang['calendar_organization_popup_entity_button_ok'] = 'OK';
 $lang['calendar_organization_popup_entity_button_cancel'] = 'Annuler';
 
+$lang['calendar_tabular_title'] = 'Calendrier tabulaire';
+$lang['calendar_tabular_field_select_entity'] = 'Choisir l\'entité';
+$lang['calendar_tabular_field_month'] = 'Mois';
+$lang['calendar_tabular_field_year'] = 'Année';
+$lang['calendar_tabular_button_select_entity'] = 'Choisir';
+$lang['calendar_tabular_button_execute'] = 'Exécuter';
+$lang['calendar_tabular_button_export'] = 'Exporter';
+$lang['calendar_tabular_check_include_subdept'] = 'Inclure les sous-entités';
+$lang['calendar_tabular_popup_entity_title'] = 'Choisir l\'entité';
+$lang['calendar_tabular_popup_entity_button_ok'] = 'OK';
+$lang['calendar_tabular_popup_entity_button_cancel'] = 'Annuler';
+$lang['calendar_tabular_thead_employee'] = 'Employé';
+
 $lang['calendar_component_monthNames'] = '\'Janvier\',\'Février\',\'Mars\',\'Avril\',\'Mai\',\'Juin\',\'Juillet\',\'Août\',\'Septembre\',\'Octobre\',\'Novembre\',\'Décembre\'';
 $lang['calendar_component_monthNamesShort'] = '\'janv.\',\'févr.\',\'mars\',\'avr.\',\'mai\',\'juin\',\'juil.\',\'août\',\'sept.\',\'oct.\',\'nov.\',\'déc.\'';
 $lang['calendar_component_dayNames'] = '\'Dimanche\',\'Lundi\',\'Mardi\',\'Mercredi\',\'Jeudi\',\'Vendredi\',\'Samedi\'';

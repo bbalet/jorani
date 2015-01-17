@@ -674,7 +674,7 @@ class Leaves_model extends CI_Model {
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular(&$entity=0, &$month=0, &$year=0, &$children=TRUE) {
+    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE) {
         //Mangage paramaters
         if ($month==0) $month = date("m");
         if ($year==0) $year = date("Y");
@@ -683,7 +683,7 @@ class Leaves_model extends CI_Model {
         $lastDay = date("t", strtotime($start));    //last day of selected month
         $end = $year . '-' . $month . '-' . $lastDay;    //last date of selected month
         //If no entity was selected, select the entity of the connected user or the root of the organization
-        if ($entity == 0) {
+        if ($entity == -1) {
             $this->load->model('users_model');
             $user = $this->users_model->get_users($this->session->userdata('id'));
             if (is_null($user['organization'])) {
@@ -700,6 +700,7 @@ class Leaves_model extends CI_Model {
         foreach ($employees as $employee) {
             $user = new stdClass;
             $user->name = $employee->firstname . ' ' . $employee->lastname;
+            $user->department = $employee->department;
             $user->days = array();
             
             //Init all day to working day
@@ -735,6 +736,8 @@ class Leaves_model extends CI_Model {
             $this->db->where('organization.id', $entity);
         }
         $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
+        $this->db->order_by('users.lastname', 'asc');
+        $this->db->order_by('users.firstname', 'asc');
         $this->db->order_by('startdate', 'asc');
         $this->db->limit(512);  //Security limit
         $events = $this->db->get()->result();
@@ -770,7 +773,8 @@ class Leaves_model extends CI_Model {
                 if (($startDate != $endDate) && ($iDate != $startDate) && ($iDate != $endDate)) $display = '1';
                 if (($startDate != $endDate) && ($iDate == $startDate) && ($entry->startdatetype == 'Morning')) $display = '1';
                 if (($startDate != $endDate) && ($iDate == $startDate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
-                if (($startDate != $endDate) && ($iDate == $endDate) && ($entry->startdatetype == 'Afternoon')) $display = '1';
+                if (($startDate != $endDate) && ($iDate == $endDate) && ($entry->enddatetype == 'Afternoon')) $display = '1';
+                if (($startDate != $endDate) && ($iDate == $endDate) && ($entry->enddatetype == 'Morning')) $display = '2';
                 
                 //Check if another leave was defined on this day
                 if ($tabular[$entry->uid]->days[$dayNum]->type != '') {

@@ -19,6 +19,7 @@
 $lang['organization_index_title'] = 'Organization';
 $lang['organization_index_field_search_placeholder'] = 'Search for an entity';
 $lang['organization_index_button_search'] = 'Search';
+$lang['organization_index_title_employees'] = 'Employees attached to entity';
 $lang['organization_index_thead_id'] = 'ID';
 $lang['organization_index_thead_firstname'] = 'Firstname';
 $lang['organization_index_thead_lastname'] = 'Lastname';

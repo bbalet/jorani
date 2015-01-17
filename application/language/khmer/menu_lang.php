@@ -68,3 +68,4 @@ $lang['menu_calendar_workmates'] = 'មិត្តរួមការងារ�
 $lang['menu_calendar_collaborators'] = 'អ្នកសហការជាមួយខ្ញុំ';
 $lang['menu_calendar_department'] = 'ផ្នែក ឬ អគារ';
 $lang['menu_calendar_organization'] = 'សាកល';
+$lang['menu_calendar_tabular'] = 'Tabular';

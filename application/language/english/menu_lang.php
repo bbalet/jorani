@@ -68,3 +68,4 @@ $lang['menu_calendar_workmates'] = 'My workmates';
 $lang['menu_calendar_collaborators'] = 'My collaborators';
 $lang['menu_calendar_department'] = 'Department';
 $lang['menu_calendar_organization'] = 'Global';
+$lang['menu_calendar_tabular'] = 'Tabular';

@@ -17,8 +17,9 @@
  */
 
 $lang['organization_index_title'] = 'Organisation';
-$lang['organization_index_field_search_placeholder'] = 'chercher une entitée';
+$lang['organization_index_field_search_placeholder'] = 'chercher une entité';
 $lang['organization_index_button_search'] = 'Chercher';
+$lang['organization_index_title_employees'] = 'Employés attachés à l\'entité';
 $lang['organization_index_thead_id'] = 'ID';
 $lang['organization_index_thead_firstname'] = 'Prénom';
 $lang['organization_index_thead_lastname'] = 'Nom';
@@ -27,7 +28,7 @@ $lang['organization_index_button_add_employee'] = 'Attacher un employé';
 $lang['organization_index_button_remove_employee'] = 'Détacher un employé';
 $lang['organization_index_button_select_supervisor'] = 'Selectionner';
 $lang['organization_index_title_supervisor'] = 'Superviseur';
-$lang['organization_index_description_supervisor'] = 'Si vous choisissez un superviseur, il recevra une copie de toutes les demandes acceptées et rejettées des employés de cette entitée.';
+$lang['organization_index_description_supervisor'] = 'Si vous choisissez un superviseur, il recevra une copie de toutes les demandes acceptées et rejetées des employés de cette entité.';
 
 $lang['organization_index_popup_supervisor_title'] = 'Selectionner un Superviseur';
 $lang['organization_index_popup_supervisor_button_ok'] = 'OK';
@@ -36,7 +37,7 @@ $lang['organization_index_popup_supervisor_button_cancel'] = 'Annuler';
 $lang['organization_index_popup_node_button_ok'] = 'OK';
 $lang['organization_index_popup_node_button_cancel'] = 'Annuler';
 
-$lang['organization_index_popup_delete_title'] = 'Supprimer entitée';
+$lang['organization_index_popup_delete_title'] = 'Supprimer entité';
 $lang['organization_index_popup_delete_description'] = 'Vous êtes sur le point de supprimer une entité, cette procédure est irréversible.';
 $lang['organization_index_popup_delete_confirm'] = 'Voulez-vous continuer ?';
 $lang['organization_index_popup_delete_button_yes'] = 'Oui';

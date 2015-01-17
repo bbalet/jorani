@@ -96,7 +96,7 @@ if ($configFileExists ) {
     
         <div class="container-fluid">
 
-            <h1>LMS Requirements</h1>
+            <h1>Jorani Requirements</h1>
             
             <h2>Web Server</h2>
 

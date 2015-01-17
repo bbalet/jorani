@@ -149,22 +149,25 @@ class Calendar extends CI_Controller {
     }
     
     /**
-     * Display a global tabular calendar filtered by organization/entity
-     * TODO : to be implemented into v0.2.1
+     * Display a global tabular calendar
      * @param int $id identifier of the entity
+     * @param int $month Month number
+     * @param int $year Year number
+     * @param bool $children If TRUE, includes children entity, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular($id=0, $month=0, $year=0, $children=TRUE) {
+    public function tabular($id=-1, $month=0, $year=0, $children=TRUE) {
         $this->auth->check_is_granted('organization_calendar');
         $data = $this->getUserContext();
         $this->load->model('leaves_model');
+        $this->load->model('organization_model');
         $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);
         $data['entity'] = $id;
         $data['month'] = $month;
         $data['year'] = $year;
         $data['children'] = $children;
-        //$this->output->enable_profiler(TRUE);
-        $data['title'] = lang('calendar_organization_title');
+        $data['department'] = $this->organization_model->get_label($id);
+        $data['title'] = lang('calendar_tabular_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/tabular', $data);
@@ -172,9 +175,11 @@ class Calendar extends CI_Controller {
     }
     
     /**
-     * Export a global tabularcalendar filtered by organization/entity
-     * TODO : to be implemented into v0.2.1
+     * Export a global tabular calendar
      * @param int $id identifier of the entity
+     * @param int $month Month number
+     * @param int $year Year number
+     * @param bool $children If TRUE, includes children entity, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function tabular_export($id=0, $month=0, $year=0, $children=TRUE) {
@@ -221,6 +226,14 @@ class Calendar extends CI_Controller {
                     )
                 )
             );
+            
+      /* //Diagonal gradient
+$worksheet->getStyle('A1')->getFill()
+    ->setFillType(PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR)
+    ->setStartColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_BLACK))
+    ->setEndColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_WHITE))
+    ->setRotation(45);
+         */
             
             
             $line++;

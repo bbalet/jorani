@@ -19,6 +19,7 @@
 $lang['organization_index_title'] = 'អង្គការ';
 $lang['organization_index_field_search_placeholder'] = 'ស្ចែងរកអង្គភាពមួយ';
 $lang['organization_index_button_search'] = 'ស្ចែងរក';
+$lang['organization_index_title_employees'] = 'Employees attached to entity';
 $lang['organization_index_thead_id'] = 'ID';
 $lang['organization_index_thead_firstname'] = 'នាមត្រកូលអ្នកប្រើប្រាស់';
 $lang['organization_index_thead_lastname'] = 'ឈ្មោះអ្នកប្រើប្រាស់';

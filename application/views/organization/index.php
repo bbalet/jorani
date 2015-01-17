@@ -35,7 +35,7 @@ $this->lang->load('treeview', $language);?>
         <div style="text-align: left;" id="organization"></div>
     </div>
     <div class="span8">
-        <h3>Employees attached to entity</h3>
+        <h3><?php echo lang('organization_index_title_employees');?></h3>
         <table cellpadding="0" cellspacing="0" border="0" class="display" id="collaborators" width="100%">
             <thead>
                 <tr>

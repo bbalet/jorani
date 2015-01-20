@@ -56,6 +56,13 @@ $lang['calendar_tabular_popup_entity_button_ok'] = 'OK';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'Annuler';
 $lang['calendar_tabular_thead_employee'] = 'Employé';
 
+$lang['calendar_tabular_export_title'] = 'Calendrier Tabulaire';
+$lang['calendar_tabular_export_param_entity'] = 'Entité';
+$lang['calendar_tabular_export_param_month'] = 'Mois';
+$lang['calendar_tabular_export_param_year'] = 'Année';
+$lang['calendar_tabular_export_param_children'] = 'Sous-entités';
+$lang['calendar_tabular_export_thead_employee'] = 'Employé';
+
 $lang['calendar_component_monthNames'] = '\'Janvier\',\'Février\',\'Mars\',\'Avril\',\'Mai\',\'Juin\',\'Juillet\',\'Août\',\'Septembre\',\'Octobre\',\'Novembre\',\'Décembre\'';
 $lang['calendar_component_monthNamesShort'] = '\'janv.\',\'févr.\',\'mars\',\'avr.\',\'mai\',\'juin\',\'juil.\',\'août\',\'sept.\',\'oct.\',\'nov.\',\'déc.\'';
 $lang['calendar_component_dayNames'] = '\'Dimanche\',\'Lundi\',\'Mardi\',\'Mercredi\',\'Jeudi\',\'Vendredi\',\'Samedi\'';

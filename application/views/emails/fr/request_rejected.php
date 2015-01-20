@@ -34,7 +34,13 @@
             </tr>
             <tr>
                 <td>Au &nbsp;</td><td>{EndDate}</td>
-            </tr>            
+            </tr>
+            <tr>
+                <td>Type &nbsp;</td><td>{Type}</td>
+            </tr>
+            <tr>
+                <td>Cause &nbsp;</td><td>{Cause}</td>
+            </tr>
         </table>
     </body>
 </html>

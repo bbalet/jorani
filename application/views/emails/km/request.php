@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} <a href="{UrlDetails}">ស្នើសុំចាកចេញមួយខាងក្រោមសេចក្ដីលម្អិត</a> :
+        {Firstname} {Lastname} <a href="{BaseUrl}leaves/{LeaveId}">ស្នើសុំចាកចេញមួយខាងក្រោមសេចក្ដីលម្អិត</a> :
         <table border="0">
             <tr>
                 <td>មកពី &nbsp;</td><td>{StartDate}</td>
@@ -39,8 +39,11 @@
             <tr>
                 <td>Reason &nbsp;</td><td>{Reason}</td>
             </tr>
+            <tr>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">ទទួលយកបាន</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">បដិសេធចោល</a></td>
+            </tr>
         </table>
-        <a href="{UrlAccept}">ទទួលយកបាន</a>
-        <a href="{UrlReject}">បដិសេធចោល</a>
+<br />
+You can check the <a href="{BaseUrl}requests/counters/{UserId}">leave balance</a> before validating the leave request.
     </body>
 </html>

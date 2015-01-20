@@ -21,7 +21,7 @@
 <html>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests a leave. Below, the <a href="{UrlDetails}">details</a> :
+        {Firstname} {Lastname} requests a leave. Below, the <a href="{BaseUrl}leaves/{LeaveId}">details</a> :
         <table border="0">
             <tr>
                 <td>From &nbsp;</td><td>{StartDate}</td>
@@ -35,8 +35,12 @@
             <tr>
                 <td>Reason &nbsp;</td><td>{Reason}</td>
             </tr>
+            <tr>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accept</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">Reject</a></td>
+            </tr>
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+<br />
+You can check the <a href="{BaseUrl}requests/counters/{UserId}">leave balance</a> before validating the leave request.
+
     </body>
 </html>

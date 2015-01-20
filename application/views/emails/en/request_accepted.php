@@ -30,7 +30,13 @@
             </tr>
             <tr>
                 <td>To &nbsp;</td><td>{EndDate}</td>
-            </tr>            
+            </tr>
+            <tr>
+                <td>Type &nbsp;</td><td>{Type}</td>
+            </tr>
+            <tr>
+                <td>Reason &nbsp;</td><td>{Cause}</td>
+            </tr>
         </table>
     </body>
 </html>

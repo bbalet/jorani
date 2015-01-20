@@ -55,6 +55,13 @@ $lang['calendar_tabular_popup_entity_button_ok'] = 'OK';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'Cancel';
 $lang['calendar_tabular_thead_employee'] = 'Employee';
 
+$lang['calendar_tabular_export_title'] = 'Calendar Tabular';
+$lang['calendar_tabular_export_param_entity'] = 'Entity';
+$lang['calendar_tabular_export_param_month'] = 'Month';
+$lang['calendar_tabular_export_param_year'] = 'Year';
+$lang['calendar_tabular_export_param_children'] = 'Sub-entities';
+$lang['calendar_tabular_export_thead_employee'] = 'Employee';
+
 $lang['calendar_component_monthNames'] = ' \'មករា\',\'កុម្ភៈ \',\' មីនា \',\' មេសា \',\' ឧសភា \',\' មិថុនា \',\' កក្កដា \',\' សីហា \',\' កញ្ញា \',\' តុលា \',\' វិច្ឆិកា \',\' ធ្នូ \'';
 $lang['calendar_component_monthNamesShort'] = ' \'មករា\',\'កុម្ភៈ \',\' មីនា \',\' មេសា \',\' ឧសភា \',\' មិថុនា \',\' កក្កដា \',\' សីហា \',\' កញ្ញា \',\' តុលា \',\' វិច្ឆិកា \',\' ធ្នូ \'';
 $lang['calendar_component_dayNames'] = '\'អាទិត្យ\',\'ចន្ទ័\',\'អង្គារ\',\'ពុុុធ\',\'ព្រហស្បត្តិ\',\'សុក្រ\',\'សៅរ៏\'';

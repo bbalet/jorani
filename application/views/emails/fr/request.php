@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} vous soumet une demande d'absence. Voici les <a href="{UrlDetails}">détails</a> :
+        {Firstname} {Lastname} vous soumet une demande d'absence. Voici les <a href="{BaseUrl}leaves/{LeaveId}">détails</a> :
         <table border="0">
             <tr>
                 <td>Du &nbsp;</td><td>{StartDate}</td>
@@ -39,8 +39,11 @@
             <tr>
                 <td>Cause &nbsp;</td><td>{Reason}</td>
             </tr>
+            <tr>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accepter</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">Refuser</a></td>
+            </tr>
         </table>
-        <a href="{UrlAccept}">Accepter</a>
-        <a href="{UrlReject}">Refuser</a>
+<br />
+Vous pouvez vérifier <a href="{BaseUrl}requests/counters/{UserId}">l'état des congés</a> avant de valider cette demande.
     </body>
 </html>

@@ -186,49 +186,128 @@ class Calendar extends CI_Controller {
         $this->expires_now();
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-
+        $this->lang->load('global', $this->language);
         $this->load->model('leaves_model');
-        $leaves = $this->leaves_model->tabular($id, $month, $year, $children);
-        $start = $year . '-' . $month . '1';    //first date of selected month
+        $this->load->model('organization_model');
+        
+        $tabular = $this->leaves_model->tabular($id, $month, $year, $children);
+        $start = $year . '-' . $month . '-' . '1';    //first date of selected month
         $lastDay = date("t", strtotime($start));    //last day of selected month
-        $this->excel->getActiveSheet()->setTitle(lang('leaves_export_title'));
-        $this->excel->getActiveSheet()->setCellValue('A1', lang('leaves_export_thead_id'));
-        for ($ii = 1; $ii <= $lastDay; $ii++) {
-            $col = $this->excel->column_name($ii);
-            $this->excel->getActiveSheet()->setCellValue($col . '1', $ii);
+        $this->excel->getActiveSheet()->setTitle(lang('calendar_tabular_export_title'));
+        
+        //Write parameters of execution
+        $this->excel->getActiveSheet()->setCellValue('A1', lang('calendar_tabular_export_param_entity'));
+        $this->excel->getActiveSheet()->setCellValue('B1', lang('calendar_tabular_export_param_month'));
+        $this->excel->getActiveSheet()->setCellValue('C1', lang('calendar_tabular_export_param_year'));
+        $this->excel->getActiveSheet()->setCellValue('D1', lang('calendar_tabular_export_param_children'));
+        $this->excel->getActiveSheet()->setCellValue('A2', $this->organization_model->get_label($id));
+        $this->excel->getActiveSheet()->setCellValue('B2', $month);
+        $this->excel->getActiveSheet()->setCellValue('C2', $year);
+        if ($children) {
+            $this->excel->getActiveSheet()->setCellValue('D2', lang('global_true'));
+        } else {
+            $this->excel->getActiveSheet()->setCellValue('D2', lang('global_false'));
         }
         
-        $this->excel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $leaves = $this->leaves_model->get_user_leaves($this->user_id);
-        $this->load->model('status_model');
-        $this->load->model('types_model');
+        //One column per day of the selected month, one line per employee
+        $this->excel->getActiveSheet()->setCellValue('A4', lang('calendar_tabular_export_thead_employee'));
+        for ($ii = 2; $ii <= $lastDay + 1; $ii++) {
+            $col = $this->excel->column_name($ii);
+            $this->excel->getActiveSheet()->setCellValue($col . '4', $ii - 1);
+        }
+        $this->excel->getActiveSheet()->getStyle('A4:' . $col . '4')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A4:' . $col . '4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         
-        $line = 2;
-        foreach ($leaves as $leave) {
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $leave['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $leave['startdate']);
+        $line = 5;
+        foreach ($tabular as $employee) {
+            $this->excel->getActiveSheet()->setCellValue('A' . $line, $employee->name);
+            
+            
+            foreach ($employee->days as $day) {
+                //Overlapping cases
+                if (strstr($day->display, ';')) {
+                    $periods = explode(";", $day->display);
+                    $statuses = explode(";", $day->status);
+                    switch ($statuses[0]) {
+                        case 1: $class = "planned";
+                            break;  // Planned
+                        case 2: $class = "requested";
+                            break;  // Requested
+                        case 3: $class = "accepted";
+                            break;  // Accepted
+                        case 4: $class = "rejected";
+                            break;  // Rejected
+                    }
+                    switch ($statuses[1]) {
+                        case 1: $class .= "planned";
+                            break;  // Planned
+                        case 2: $class .= "requested";
+                            break;  // Requested
+                        case 3: $class .= "accepted";
+                            break;  // Accepted
+                        case 4: $class .= "rejected";
+                            break;  // Rejected
+                    }
+                } else {    //No overlapping
+                    switch ($day->display) {
+                        case '0': //$this->XLSFillSolid('A30', ''); working day
+                            break;
+                        case '4': $this->XLSFillSolid('A30', '000000');
+                            break;
+                        case '1':
+                            switch ($day->status) {
+                                case 1: $this->XLSFillSolid('A30', '999000');
+                                    break;  // Planned
+                                case 2: $this->XLSFillSolid('A30', 'F89406');
+                                    break;  // Requested
+                                case 3: $this->XLSFillSolid('A30', '468847');
+                                    break;  // Accepted
+                                case 4: $this->XLSFillSolid('A30', 'FF0000');
+                                    break;  // Rejected
+                            }
+                            break;
+                        case '2':
+                            switch ($day->status) {
+                                case 1: $class = "amplanned";
+                                    break;  // Planned
+                                case 2: $class = "amrequested";
+                                    break;  // Requested
+                                case 3: $class = "amaccepted";
+                                    break;  // Accepted
+                                case 4: $class = "amrejected";
+                                    break;  // Rejected
+                            }
+                            break;
+                        case '3':
+                            switch ($day->status) {
+                                case 1: $class = "pmplanned";
+                                    break;  // Planned
+                                case 2: $class = "pmrequested";
+                                    break;  // Requested
+                                case 3: $class = "pmaccepted";
+                                    break;  // Accepted
+                                case 4: $class = "pmrejected";
+                                    break;  // Rejected
+                            }
+                            break;
+                    }
+                }
+            }
+
+            /*$this->excel->getActiveSheet()->setCellValue('B' . $line, $leave['startdate']);
             $this->excel->getActiveSheet()->setCellValue('C' . $line, $leave['startdatetype']);
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $leave['enddate']);
             $this->excel->getActiveSheet()->setCellValue('E' . $line, $leave['enddatetype']);
             $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['duration']);
             $this->excel->getActiveSheet()->setCellValue('G' . $line, $this->types_model->get_label($leave['type']));
             $this->excel->getActiveSheet()->setCellValue('H' . $line, $leave['cause']);
-            $this->excel->getActiveSheet()->setCellValue('I' . $line, $this->status_model->get_label($leave['status']));
-            
-            //Change background color
-            $sheet->getStyle('A1')->applyFromArray(
-                array(
-                    'fill' => array(
-                        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                        'color' => array('rgb' => 'FF0000')
-                    )
-                )
-            );
+            $this->excel->getActiveSheet()->setCellValue('I' . $line, $this->status_model->get_label($leave['status']));*/
+/*            
+
+*/
             
       /* //Diagonal gradient
-$worksheet->getStyle('A1')->getFill()
+        $worksheet->getStyle('A1')->getFill()
     ->setFillType(PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR)
     ->setStartColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_BLACK))
     ->setEndColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_WHITE))
@@ -239,12 +318,37 @@ $worksheet->getStyle('A1')->getFill()
             $line++;
         }
 
-        $filename = 'calendar.xls';
+        $filename = 'calendar-tabular.xls';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output');
+    }
+    
+    /**
+     * Internal utility function
+     * Set background color of an Excel cell (fill solid)
+     * @param string $cell XLS coordinate of the cell
+     * @param string $color RGB value of the color
+     */
+    private function XLSDiagonalGradient($cell, $color1, $color2) {
+        $this->excel->getActiveSheet()->getStyle($cell)->getFill()
+            ->setFillType(PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR)
+            ->setStartColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_BLACK))
+            ->setEndColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_WHITE))
+            ->setRotation(45);
+    }
+    
+    /**
+     * Internal utility function
+     * Set background color of an Excel cell (fill solid)
+     * @param string $cell XLS coordinate of the cell
+     * @param string $color RGB value of the color
+     */
+    private function XLSFillSolid($cell, $color) {
+        $this->excel->getActiveSheet()->getStyle($cell)->applyFromArray(
+                array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => $color))));
     }
     
     /**

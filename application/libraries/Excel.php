@@ -42,7 +42,7 @@ class Excel extends PHPExcel {
         if ($number < 27) {
             return substr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", $number - 1, 1);
         } else {
-            return substr("AAABACADAEAFAGAHAIAJAKALAMANAOAPAQARASATAUAVAWAXAYAZ", $number, 2);
+            return substr("AAABACADAEAFAGAHAIAJAKALAMANAOAPAQARASATAUAVAWAXAYAZ", (($number -27) * 2), 2);
         }
     }
 

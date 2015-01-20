@@ -20,6 +20,8 @@ $lang['global_link_tooltip_documentation'] = 'Lien vers la documentation';
 $lang['global_msg_error_forbidden'] = 'L\'opération (%s) n\'est pas autorisée';
 $lang['global_msg_wait'] = 'Veuillez patienter';
 $lang['global_date_format'] = 'd/m/Y';
+$lang['global_true'] = 'VRAI';
+$lang['global_false'] = 'FAUX';
 
 //Links to documentation
 $lang['global_link_doc_page_calendar_organization'] = 'http://www.leave-management-system.org/page-calendar-organization.html';

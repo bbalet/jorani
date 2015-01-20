@@ -231,15 +231,14 @@ class Requests extends CI_Controller {
         $this->load->model('users_model');
         $this->load->model('organization_model');
         $this->load->model('settings_model');
-        $leave = $this->leaves_model->get_leaves($id);
+        $leave = $this->leaves_model->get_leave_details($id);
         //Load details about the employee (manager, supervisor of entity)
-        $employee = $this->users_model->get_users($leave['employee']);
-        $supervisor = $this->organization_model->get_supervisor($employee['organization']);
+        $supervisor = $this->organization_model->get_supervisor($leave['organization']);
 
         //Send an e-mail to the employee
         $this->load->library('email');
         $this->load->library('polyglot');
-        $usr_lang = $this->polyglot->code2language($employee['language']);
+        $usr_lang = $this->polyglot->code2language($leave['language']);
         $this->lang->load('email', $usr_lang);
 
         $this->lang->load('global', $usr_lang);
@@ -251,18 +250,20 @@ class Requests extends CI_Controller {
         $this->load->library('parser');
         $data = array(
             'Title' => lang('email_leave_request_validation_title'),
-            'Firstname' => $employee['firstname'],
-            'Lastname' => $employee['lastname'],
+            'Firstname' => $leave['firstname'],
+            'Lastname' => $leave['lastname'],
             'StartDate' => $startdate,
-            'EndDate' => $enddate
+            'EndDate' => $enddate,
+            'Cause' => $leave['cause'],
+            'Type' => $leave['type']
         );
         
         $message = "";
         if ($leave['status'] == 3) {
-            $message = $this->parser->parse('emails/' . $employee['language'] . '/request_accepted', $data, TRUE);
+            $message = $this->parser->parse('emails/' . $leave['language'] . '/request_accepted', $data, TRUE);
             $this->email->subject(lang('email_leave_request_accept_subject'));
         } else {
-            $message = $this->parser->parse('emails/' . $employee['language'] . '/request_rejected', $data, TRUE);
+            $message = $this->parser->parse('emails/' . $leave['language'] . '/request_rejected', $data, TRUE);
             $this->email->subject(lang('email_leave_request_reject_subject'));
         }
         if ($this->email->mailer_engine== 'phpmailer') {
@@ -273,7 +274,7 @@ class Requests extends CI_Controller {
         } else {
            $this->email->from('do.not@reply.me', 'LMS');
         }
-        $this->email->to($employee['email']);
+        $this->email->to($leave['email']);
         if (!is_null($supervisor)) {
             $this->email->cc($supervisor->email);
         }

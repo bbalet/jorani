@@ -323,7 +323,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
     </div>
     <div class="span5">
         <button id="cmdExecute" class="btn btn-primary"><?php echo lang('calendar_tabular_button_execute');?></button>
-        <button id="cmdExport" class="btn btn-primary"><?php echo lang('calendar_tabular_button_export');?></button></div>
+        <!--<button id="cmdExport" class="btn btn-primary"><?php echo lang('calendar_tabular_button_export');?></button>//-->
+    </div>
 </div>
 
 <div class="row-fluid">

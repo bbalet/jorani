@@ -268,10 +268,6 @@ class Leaves extends CI_Controller {
         if (empty($manager['email'])) {
             $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_error'));
         } else {
-            $acceptUrl = base_url() . 'requests/accept/' . $id;
-            $rejectUrl = base_url() . 'requests/reject/' . $id;
-            $detailUrl = base_url() . 'requests';
-
             //Send an e-mail to the manager
             $this->load->library('email');
             $this->load->library('polyglot');
@@ -293,15 +289,14 @@ class Leaves extends CI_Controller {
                 'EndDate' => $enddate,
                 'Type' => $this->types_model->get_label($this->input->post('type')),
                 'Reason' => $this->input->post('cause'),
-                'UrlAccept' => $acceptUrl,
-                'UrlReject' => $rejectUrl,
-                'UrlDetails' => $detailUrl
+                'BaseUrl' => $this->config->base_url(),
+                'LeaveId' => $id,
+                'UserId' => $this->user_id
             );
             $message = $this->parser->parse('emails/' . $manager['language'] . '/request', $data, TRUE);
             if ($this->email->mailer_engine == 'phpmailer') {
                 $this->email->phpmailer->Encoding = 'quoted-printable';
             }
-
             if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
                 $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
             } else {

@@ -69,6 +69,25 @@ class Leaves_model extends CI_Model {
     }
     
     /**
+     * Get a leave request in a human readable format (Ids are replaced by label)
+     * @param int $id ID of the leave
+     * @return array list of records
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_leave_details($id) {
+        $this->db->select('leaves.id as leave_id, status, startdate, enddate, cause, duration, types.name as type');
+        $this->db->select('users.id as user_id, firstname, lastname, organization, language, email');
+        $this->db->from('leaves');
+        $this->db->join('status', 'leaves.status = status.id');
+        $this->db->join('types', 'leaves.type = types.id');
+        $this->db->join('users', 'leaves.employee = users.id');
+        $this->db->where('leaves.id', $id);
+        $result = $this->db->get()->result_array();
+        //Note : The caller has to verify if the leave requests exists or not
+        return $result[0];
+    }
+    
+    /**
      * Try to calculate the lenght of a leave using the start and and date of the leave
      * and the non working days defined on a contract
      * @param int $employee

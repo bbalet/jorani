@@ -187,12 +187,17 @@ class Overtime extends CI_Controller {
         );
         
         $message = "";
+        if ($this->config->item('subject_prefix') != FALSE) {
+            $subject = $this->config->item('subject_prefix');
+        } else {
+           $subject = '[Jorani] ';
+        }
         if ($extra['status'] == 3) {
             $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_accepted', $data, TRUE);
-            $this->email->subject(lang('email_overtime_request_accept_subject'));
+            $this->email->subject($subject . lang('email_overtime_request_accept_subject'));
         } else {
             $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_rejected', $data, TRUE);
-            $this->email->subject(lang('email_overtime_request_reject_subject'));
+            $this->email->subject($subject . lang('email_overtime_request_reject_subject'));
         }
         if ($this->email->mailer_engine== 'phpmailer') {
             $this->email->phpmailer->Encoding = 'quoted-printable';
@@ -208,7 +213,6 @@ class Overtime extends CI_Controller {
         }
         $this->email->message($message);
         $this->email->send();
-        //echo $this->email->print_debugger();
     }
     
     /**

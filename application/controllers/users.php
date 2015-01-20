@@ -329,7 +329,12 @@ class Users extends CI_Controller {
                     $this->email->from('do.not@reply.me', 'LMS');
                 }
                 $this->email->to($user['email']);
-                $this->email->subject(lang('email_password_reset_subject'));
+                if ($this->config->item('subject_prefix') != FALSE) {
+                    $subject = $this->config->item('subject_prefix');
+                } else {
+                   $subject = '[Jorani] ';
+                }
+                $this->email->subject($subject . lang('email_password_reset_subject'));
                 $this->email->message($message);
                 $this->email->send();
                 
@@ -414,7 +419,12 @@ class Users extends CI_Controller {
                $this->email->from('do.not@reply.me', 'LMS');
             }
             $this->email->to($this->input->post('email'));
-            $this->email->subject(lang('email_user_create_subject'));
+            if ($this->config->item('subject_prefix') != FALSE) {
+                $subject = $this->config->item('subject_prefix');
+            } else {
+               $subject = '[Jorani] ';
+            }
+            $this->email->subject($subject . lang('email_user_create_subject'));
             $this->email->message($message);
             $this->email->send();
             

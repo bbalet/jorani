@@ -307,7 +307,12 @@ class Leaves extends CI_Controller {
                $this->email->from('do.not@reply.me', 'LMS');
             }
             $this->email->to($manager['email']);
-            $this->email->subject(lang('email_leave_request_subject') .
+            if ($this->config->item('subject_prefix') != FALSE) {
+                $subject = $this->config->item('subject_prefix');
+            } else {
+               $subject = '[Jorani] ';
+            }
+            $this->email->subject($subject . lang('email_leave_request_subject') .
                     $this->session->userdata('firstname') . ' ' .
                     $this->session->userdata('lastname'));
             $this->email->message($message);

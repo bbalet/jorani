@@ -34,7 +34,7 @@ $this->lang->load('global', $language);?>
         <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
     </div>
     <div class="span2">
-        <button id="cmdDisplayDayOff" class="btn btn-primary"><i class="icon-calendar icon-white"></i><?php echo lang('calendar_individual_day_offs');?></button>
+        <button id="cmdDisplayDayOff" class="btn btn-primary"><i class="icon-calendar icon-white"></i>&nbsp;<?php echo lang('calendar_individual_day_offs');?></button>
     </div>
     <div class="span6">&nbsp;</div>
 </div>

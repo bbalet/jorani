@@ -368,7 +368,8 @@ $config['proxy_ips'] = '';
 */
 //default email from
 $config['from_mail'] = 'do.not@reply.me';
-$config['from_name'] = 'LMS';
+$config['from_name'] = 'Jorani';
+$config['subject_prefix'] = '[Jorani] ';
 
 //Password minimal length
 $config['password_length'] = 8;

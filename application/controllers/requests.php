@@ -259,12 +259,17 @@ class Requests extends CI_Controller {
         );
         
         $message = "";
+        if ($this->config->item('subject_prefix') != FALSE) {
+            $subject = $this->config->item('subject_prefix');
+        } else {
+           $subject = '[Jorani] ';
+        }
         if ($leave['status'] == 3) {
             $message = $this->parser->parse('emails/' . $leave['language'] . '/request_accepted', $data, TRUE);
-            $this->email->subject(lang('email_leave_request_accept_subject'));
+            $this->email->subject($subject . lang('email_leave_request_accept_subject'));
         } else {
             $message = $this->parser->parse('emails/' . $leave['language'] . '/request_rejected', $data, TRUE);
-            $this->email->subject(lang('email_leave_request_reject_subject'));
+            $this->email->subject($subject . lang('email_leave_request_reject_subject'));
         }
         if ($this->email->mailer_engine== 'phpmailer') {
             $this->email->phpmailer->Encoding = 'quoted-printable';

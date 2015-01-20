@@ -205,7 +205,12 @@ class Session extends CI_Controller {
                $this->email->from('do.not@reply.me', 'LMS');
             }
             $this->email->to($user->email);
-            $this->email->subject(lang('email_password_forgotten_subject'));
+            if ($this->config->item('subject_prefix') != FALSE) {
+                $subject = $this->config->item('subject_prefix');
+            } else {
+               $subject = '[Jorani] ';
+            }
+            $this->email->subject($subject . lang('email_password_forgotten_subject'));
             $this->email->message($message);
             $this->email->send();
             echo "OK";

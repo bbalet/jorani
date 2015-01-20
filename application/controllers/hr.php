@@ -149,6 +149,8 @@ class Hr extends CI_Controller {
         $data['user_id'] = $id;
         $this->load->model('leaves_model');
         $data['leaves'] = $this->leaves_model->get_employee_leaves($id);
+        $this->load->model('users_model');
+        $data['name'] = $this->users_model->get_label($id);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/leaves', $data);
@@ -167,6 +169,8 @@ class Hr extends CI_Controller {
         $data['user_id'] = $id;
         $this->load->model('overtime_model');
         $data['extras'] = $this->overtime_model->get_employee_extras($id);
+        $this->load->model('users_model');
+        $data['name'] = $this->users_model->get_label($id);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/overtime', $data);

@@ -95,6 +95,8 @@ class Extra extends CI_Controller {
         }
         $data['extra']['status_label'] = $this->status_model->get_label($data['extra']['status']);
         $data['title'] = lang('extra_view_hmtl_title');
+        $this->load->model('users_model');
+        $data['name'] = $this->users_model->get_label($data['extra']['employee']);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('extra/view', $data);
@@ -170,6 +172,8 @@ class Extra extends CI_Controller {
         $this->form_validation->set_rules('status', lang('extra_edit_field_status'), 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
+            $this->load->model('users_model');
+            $data['name'] = $this->users_model->get_label($data['extra']['employee']);
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('extra/edit', $data);

@@ -22,7 +22,7 @@ $this->lang->load('status', $language);
 $this->lang->load('calendar', $language);
 $this->lang->load('global', $language);?>
 
-<h2><?php echo lang('leaves_view_title');?><?php echo $leave['id']; ?></h2>
+<h2><?php echo lang('leaves_view_title');?><?php echo $leave['id']; ?>&nbsp;<span class="muted">(<?php echo $name ?>)</span></h2>
 
     <label for="startdate"><?php echo lang('leaves_view_field_start');?></label>
     <input type="text" name="startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" readonly />
@@ -53,9 +53,14 @@ $this->lang->load('global', $language);?>
     </select><br />
 
     <br /><br />
-    <?php if ($leave['status'] == 1) { ?>
+    <?php if (($leave['status'] == 1) || ($is_hr)) { ?>
     <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_edit');?></a>
     &nbsp;
     <?php } ?>
-    <a href="<?php echo base_url();?>leaves" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>
-
+    
+    <?php if (isset($_GET['source'])) {?>
+        <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>
+    <?php } else {?>
+        <a href="<?php echo base_url(); ?>leaves" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>
+    <?php } ?>
+    

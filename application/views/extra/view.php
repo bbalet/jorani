@@ -21,7 +21,7 @@ $this->lang->load('extra', $language);
 $this->lang->load('status', $language);
 $this->lang->load('global', $language);?>
 
-<h2><?php echo lang('extra_view_title');?><?php echo $extra['id']; ?></h2>
+<h2><?php echo lang('extra_view_title');?><?php echo $extra['id']; ?>&nbsp;<span class="muted">(<?php echo $name ?>)</span></h2>
 
     <label for="date" required><?php echo lang('extra_view_field_date');?></label>
     <input type="text" name="date"  value="<?php $date = new DateTime($extra['date']); echo $date->format(lang('global_date_format'));?>" readonly />
@@ -37,8 +37,13 @@ $this->lang->load('global', $language);?>
         <option selected><?php echo lang($extra['status_label']); ?></option>
     </select><br />
     <br /><br />
-    <?php if ($extra['status'] == 1) { ?>
+    <?php if (($extra['status'] == 1) || ($is_hr)) { ?>
     <a href="<?php echo base_url();?>extra/edit/<?php echo $extra['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;<?php echo lang('extra_view_button_edit');?></a>
     &nbsp;
     <?php } ?>
-    <a href="<?php echo base_url();?>extra" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('extra_view_button_back_list');?></a>
+    
+    <?php if (isset($_GET['source'])) {?>
+        <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('extra_view_button_back_list');?></a>
+    <?php } else {?>
+        <a href="<?php echo base_url();?>extra" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('extra_view_button_back_list');?></a>
+    <?php } ?>

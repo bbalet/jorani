@@ -58,9 +58,9 @@ $(document).ready(function() {
 <?php foreach ($requests as $requests_item): ?>
     <tr>
         <td data-order="<?php echo $requests_item['id'] ?>">
-            <a href="<?php echo base_url();?>extra/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
+            <a href="<?php echo base_url();?>extra/<?php echo $requests_item['id']; ?>?source=overtime" title="<?php echo lang('overtime_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
             &nbsp;
-            <a href="<?php echo base_url();?>extra/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
+            <a href="<?php echo base_url();?>extra/<?php echo $requests_item['id']; ?>?source=overtime" title="<?php echo lang('overtime_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
             &nbsp;
             <a href="<?php echo base_url();?>overtime/accept/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
             &nbsp;

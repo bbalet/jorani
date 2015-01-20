@@ -18,7 +18,6 @@
 
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('leaves', $language);
-$this->lang->load('status', $language);
 $this->lang->load('global', $language);?>
 
 <h2><?php echo lang('leaves_edit_title');?><?php echo $leave['id']; ?> &nbsp;

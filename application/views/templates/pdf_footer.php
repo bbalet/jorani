@@ -17,7 +17,7 @@
  */
 
 CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('footer', $language);?>
+$this->lang->load('global', $language);?>
 
     </div><!-- /.container -->
 </body>

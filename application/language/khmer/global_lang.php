@@ -16,12 +16,24 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//Global strings
 $lang['global_link_tooltip_documentation'] = 'តំណភ្ជាប់ទៅឯកសារ';
 $lang['global_msg_error_forbidden'] = 'ប្រតិបត្ដិការ (% s) គឺមិនត្រូវបានផ្តល់';
 $lang['global_msg_wait'] = 'Please wait';
+$lang['global_msg_old_browser'] = 'Internet Explorer 8 and older browser are not supported. Please upgrade to IE9 or use Firefox, Chrome, etc.';
 $lang['global_date_format'] = 'm/d/Y';
 $lang['global_true'] = 'TRUE';
 $lang['global_false'] = 'FALSE';
+
+//Footer
+$lang['footer_link_go_top'] = 'ទៅខាងលើ';
+$lang['footer_copyright_notice'] = '&copy; 2014 Jorani Authors';
+
+//Status
+$lang['Requested'] = 'បានស្នើសំុ';
+$lang['Planned'] = 'បានគ្រោងទុក';
+$lang['Accepted'] = 'ទទួលយកបាន';
+$lang['Rejected'] = 'បដិសេធចោល';
 
 //Links to documentation
 $lang['global_link_doc_page_calendar_organization'] = 'http://www.leave-management-system.org/page-calendar-organization.html';

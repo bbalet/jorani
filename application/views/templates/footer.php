@@ -15,10 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('footer', $language);?>
-
+?>
         <div id="push"></div>
     </div><!-- /.container -->
     <!-- FOOTER -->

@@ -6,6 +6,13 @@
     <meta charset="UTF-8">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+<?php CI_Controller::get_instance()->load->helper('language');
+$this->lang->load('global', $language);?>
+    <!--[if lte IE 8]>
+    <script type="text/javascript">
+    alert("<?php echo lang('global_msg_old_browser'); ?>");
+    </script>
+    <![endif]-->
     <!--[if lt IE 9]>
     <script src="<?php echo base_url();?>assets/js/html5shiv.min.js"></script>
     <![endif]-->

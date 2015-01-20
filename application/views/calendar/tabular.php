@@ -18,7 +18,6 @@
 
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('calendar', $language);
-$this->lang->load('status', $language);
 $this->lang->load('global', $language);?>
 
 <style>

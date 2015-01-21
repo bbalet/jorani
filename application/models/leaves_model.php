@@ -791,16 +791,18 @@ class Leaves_model extends CI_Model {
                     $tabular[$entry->uid]->days[$dayNum]->status = $entry->status;
                 }
                 $iDate->modify('+1 day');   //Next day
-            }
-            
-            //Force all day offs
-            $dayoffs = $this->dayoffs_model->employee_all_dayoffs($entry->uid, $start, $end);
+            }   
+        }
+        
+        //Force all day offs (mind the case of employees having no leave)
+        foreach ($employees as $employee) {
+            $dayoffs = $this->dayoffs_model->employee_all_dayoffs($employee->id, $start, $end);
             foreach ($dayoffs as $dayoff) {
                 $iDate = new DateTime($dayoff->date);
                 $dayNum = intval($iDate->format('d'));
-                $tabular[$entry->uid]->days[$dayNum]->display = '4';
-                $tabular[$entry->uid]->days[$dayNum]->type = $dayoff->title;
-            }
+                $tabular[$employee->id]->days[$dayNum]->display = '4';
+                $tabular[$employee->id]->days[$dayNum]->type = $dayoff->title;
+            }            
         }
         return $tabular;
     }

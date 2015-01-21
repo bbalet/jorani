@@ -107,5 +107,6 @@ if ($language_code != 'en') { ?>
 <script type="text/javascript">
     var baseURL = '<?php echo base_url();?>';
     var userId = <?php echo $user_id; ?>;
+    var leaveId = null;
     var languageCode = '<?php echo $language_code;?>';
 </script>

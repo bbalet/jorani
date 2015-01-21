@@ -190,6 +190,7 @@ class Leaves extends CI_Controller {
     
     /**
      * Edit a leave request
+     * @param int $id Identifier of the leave request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
@@ -497,6 +498,7 @@ class Leaves extends CI_Controller {
         $enddate = $this->input->post('enddate', TRUE);
         $startdatetype = $this->input->post('startdatetype', TRUE);
         $enddatetype = $this->input->post('enddatetype', TRUE);
+        $leave_id = $this->input->post('leave_id', TRUE);
         $leaveValidator = new stdClass;
         if (isset($id) && isset($type)) {
             $leaveValidator->credit = $this->leaves_model->get_user_leaves_credit($id, $type);
@@ -504,7 +506,11 @@ class Leaves extends CI_Controller {
         if (isset($id) && isset($startdate) && isset($enddate)) {
             $leaveValidator->length = $this->leaves_model->length($id, $startdate, $enddate);
             if (isset($startdatetype) && isset($enddatetype)) {
-                $leaveValidator->overlap = $this->leaves_model->detect_overlapping_leaves($id, $startdate, $enddate, $startdatetype, $enddatetype);
+                if (isset($leave_id)) {
+                    $leaveValidator->overlap = $this->leaves_model->detect_overlapping_leaves($id, $startdate, $enddate, $startdatetype, $enddatetype, $leave_id);
+                } else {
+                    $leaveValidator->overlap = $this->leaves_model->detect_overlapping_leaves($id, $startdate, $enddate, $startdatetype, $enddatetype);
+                }
             }
         }
         echo json_encode($leaveValidator);

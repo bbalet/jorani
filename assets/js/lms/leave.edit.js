@@ -77,7 +77,8 @@ function getLeaveInfos(preventDefault) {
                     startdate: $('#startdate').val(),
                     enddate: $('#enddate').val(),
                     startdatetype: $('#startdatetype').val(),
-                    enddatetype: $('#enddatetype').val()
+                    enddatetype: $('#enddatetype').val(),
+                    leave_id: leaveId
                 }
         })
         .done(function(leaveInfo) {

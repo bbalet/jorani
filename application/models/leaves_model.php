@@ -259,14 +259,18 @@ class Leaves_model extends CI_Model {
      * @param date $enddate end date of leave request being created
      * @param string $startdatetype start date type of leave request being created (Morning or Afternoon)
      * @param string $enddatetype end date type of leave request being created (Morning or Afternoon)
+     * @param int $leave_id When this function is used for editing a leave request, we must not collide with this leave request
      * @return boolean TRUE if another leave request has been emmitted, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function detect_overlapping_leaves($id, $startdate, $enddate, $startdatetype, $enddatetype) {
+    public function detect_overlapping_leaves($id, $startdate, $enddate, $startdatetype, $enddatetype, $leave_id=NULL) {
         $overlapping = FALSE;
         $this->db->where('employee', $id);
         $this->db->where('status != 4');
         $this->db->where('(startdate <= DATE(\'' . $enddate . '\') AND enddate >= DATE(\'' . $startdate . '\'))');
+        if (!is_null($leave_id)) {
+            $this->db->where('id != ', $leave_id);
+        }
         $leaves = $this->db->get('leaves')->result();
         
         if ($startdatetype == "Morning") {

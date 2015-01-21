@@ -120,6 +120,7 @@ if ($language_code != 'en') { ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit.js" type="text/javascript"></script>
 <script type="text/javascript">
     var baseURL = '<?php echo base_url();?>';
-    var userId = <?php echo $user_id; ?>;
+    var userId = <?php echo $leave['employee']; ?>;
+    var leaveId = <?php echo $leave['id']; ?>;
     var languageCode = '<?php echo $language_code;?>';
 </script>

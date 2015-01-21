@@ -449,6 +449,7 @@ class Users extends CI_Controller {
     
     /**
      * Ajax endpoint : check login duplication
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function check_login() {
         header("Content-Type: text/plain");
@@ -488,6 +489,11 @@ class Users extends CI_Controller {
             $line++;
         }
 
+        //Autofit
+        foreach(range('A', 'E') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+        }
+        
         $filename = 'users.xls';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
@@ -552,6 +558,7 @@ class Users extends CI_Controller {
     /**
      * Internal utility function
      * make sure a resource is reloaded every time
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function expires_now() {
         // Date in the past

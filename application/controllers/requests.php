@@ -44,6 +44,7 @@ class Requests extends CI_Controller {
         $this->language_code = $this->session->userdata('language_code');
         $this->load->helper('language');
         $this->lang->load('requests', $this->language);
+        $this->lang->load('global', $this->language);
     }
     
     /**
@@ -289,6 +290,7 @@ class Requests extends CI_Controller {
     
     /**
      * Action: export the list of all leave requests into an Excel file
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export($filter = 'requested') {
         $this->load->library('excel');
@@ -319,17 +321,26 @@ class Requests extends CI_Controller {
         
         $line = 2;
         foreach ($requests as $request) {
+            $date = new DateTime($request['startdate']);
+            $startdate = $date->format(lang('global_date_format'));
+            $date = new DateTime($request['enddate']);
+            $enddate = $date->format(lang('global_date_format'));
             $this->excel->getActiveSheet()->setCellValue('A' . $line, $request['id']);
             $this->excel->getActiveSheet()->setCellValue('B' . $line, $request['firstname'] . ' ' . $request['lastname']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $request['startdate']);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $request['startdatetype']);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, $request['enddate']);
-            $this->excel->getActiveSheet()->setCellValue('F' . $line, $request['enddatetype']);
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $startdate);
+            $this->excel->getActiveSheet()->setCellValue('D' . $line, lang($request['startdatetype']));
+            $this->excel->getActiveSheet()->setCellValue('E' . $line, $enddate);
+            $this->excel->getActiveSheet()->setCellValue('F' . $line, lang($request['enddatetype']));
             $this->excel->getActiveSheet()->setCellValue('G' . $line, $request['duration']);
             $this->excel->getActiveSheet()->setCellValue('H' . $line, $this->types_model->get_label($request['type']));
             $this->excel->getActiveSheet()->setCellValue('I' . $line, $request['cause']);
-            $this->excel->getActiveSheet()->setCellValue('J' . $line, $this->status_model->get_label($request['status']));
+            $this->excel->getActiveSheet()->setCellValue('J' . $line, lang($this->status_model->get_label($request['status'])));
             $line++;
+        }
+        
+        //Autofit
+        foreach(range('A', 'J') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'requests.xls';
@@ -343,6 +354,7 @@ class Requests extends CI_Controller {
     /**
      * Internal utility function
      * make sure a resource is reloaded every time
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function expires_now() {
         // Date in the past

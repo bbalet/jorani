@@ -42,6 +42,7 @@ class Extra extends CI_Controller {
         $this->language_code = $this->session->userdata('language_code');
         $this->load->helper('language');
         $this->lang->load('extra', $this->language);
+        $this->lang->load('global', $this->language);
     }
     
     /**
@@ -307,12 +308,19 @@ class Extra extends CI_Controller {
         
         $line = 2;
         foreach ($extras as $extra) {
+            $date = new DateTime($extra['date']);
+            $startdate = $date->format(lang('global_date_format'));
             $this->excel->getActiveSheet()->setCellValue('A' . $line, $extra['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $extra['date']);
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, $startdate);
             $this->excel->getActiveSheet()->setCellValue('C' . $line, $extra['duration']);
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $extra['cause']);
             $this->excel->getActiveSheet()->setCellValue('E' . $line, $this->status_model->get_label($extra['status']));
             $line++;
+        }
+        
+        //Autofit
+        foreach(range('A', 'E') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'extra.xls';

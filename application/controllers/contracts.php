@@ -44,6 +44,7 @@ class Contracts extends CI_Controller {
         $this->language_code = $this->session->userdata('language_code');
         $this->load->helper('language');
         $this->lang->load('contract', $this->language);
+        $this->load->model('contracts_model');
     }
     
     /**
@@ -76,7 +77,6 @@ class Contracts extends CI_Controller {
         $data = $this->getUserContext();
         $data['filter'] = $filter;
         $data['title'] = lang('contract_index_title');
-        $this->load->model('contracts_model');
         $data['contracts'] = $this->contracts_model->get_contracts();
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -92,7 +92,6 @@ class Contracts extends CI_Controller {
     public function view($id) {
         $this->auth->check_is_granted('view_contract');
         $data = $this->getUserContext();
-        $this->load->model('contracts_model');
         $data['contract'] = $this->contracts_model->get_contracts($id);
         if (empty($data['contract'])) {
             show_404();
@@ -122,7 +121,6 @@ class Contracts extends CI_Controller {
         $this->form_validation->set_rules('endentdatemonth', lang('contract_edit_field_end_month'), 'required|xss_clean');
         $this->form_validation->set_rules('endentdateday', lang('contract_edit_field_end_day'), 'required|xss_clean');
 
-        $this->load->model('contracts_model');
         $data['contract'] = $this->contracts_model->get_contracts($id);
         if (empty($data['contract'])) {
             show_404();
@@ -163,9 +161,7 @@ class Contracts extends CI_Controller {
             $this->load->view('contracts/create', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->load->model('contracts_model');
             $this->contracts_model->set_contracts();
-            log_message('info', 'contract ' . $this->input->post('name') . ' has been created by user #' . $this->session->userdata('id'));
             $this->session->set_flashdata('msg', lang('contract_create_msg_success'));
             redirect('contracts');
         }
@@ -178,16 +174,13 @@ class Contracts extends CI_Controller {
      */
     public function delete($id) {
         $this->auth->check_is_granted('delete_contract');
-        //Test if user exists
-        $this->load->model('contracts_model');
+        //Test if the contract exists
         $data['contract'] = $this->contracts_model->get_contracts($id);
         if (empty($data['contract'])) {
-            log_message('debug', '{controllers/contracts/delete} user not found');
             show_404();
         } else {
             $this->contracts_model->delete_contract($id);
         }
-        log_message('info', 'contract #' . $id . ' has been deleted by user #' . $this->session->userdata('id'));
         $this->session->set_flashdata('msg', lang('contract_delete_msg_success'));
         redirect('contracts');
     }
@@ -208,7 +201,6 @@ class Contracts extends CI_Controller {
         } else {
             $data['year'] = date("Y");
         }
-        $this->load->model('contracts_model');
         $contract = $this->contracts_model->get_contracts($id);
         $data['contract_id'] = $id;
         $data['contract_name'] = $contract['name'];
@@ -218,7 +210,6 @@ class Contracts extends CI_Controller {
         $data['contract_end_day'] = intval(substr($contract['endentdate'], 3));
         $this->load->model('dayoffs_model');
         $data['dayoffs'] = $this->dayoffs_model->get_dayoffs($id, $data['year']);
-        $this->load->model('contracts_model');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('contracts/calendar', $data);
@@ -362,6 +353,11 @@ class Contracts extends CI_Controller {
             $this->excel->getActiveSheet()->setCellValue('C' . $line, $user['startentdate']);
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $user['endentdate']);
             $line++;
+        }
+        
+        //Autofit
+        foreach(range('A', 'D') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'contracts.xls';

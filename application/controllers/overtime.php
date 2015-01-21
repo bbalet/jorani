@@ -44,6 +44,7 @@ class Overtime extends CI_Controller {
         $this->language_code = $this->session->userdata('language_code');
         $this->load->helper('language');
         $this->lang->load('overtime', $this->language);
+        $this->lang->load('global', $this->language);
     }
     
     /**
@@ -241,13 +242,20 @@ class Overtime extends CI_Controller {
         
         $line = 2;
         foreach ($requests as $request) {
+            $date = new DateTime($request['date']);
+            $startdate = $date->format(lang('global_date_format'));
             $this->excel->getActiveSheet()->setCellValue('A' . $line, $request['id']);
             $this->excel->getActiveSheet()->setCellValue('B' . $line, $request['firstname'] . ' ' . $request['lastname']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $request['date']);
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $startdate);
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $request['duration']);
             $this->excel->getActiveSheet()->setCellValue('E' . $line, $request['cause']);
-            $this->excel->getActiveSheet()->setCellValue('F' . $line, $this->status_model->get_label($request['status']));
+            $this->excel->getActiveSheet()->setCellValue('F' . $line, lang($this->status_model->get_label($request['status'])));
             $line++;
+        }
+        
+        //Autofit
+        foreach(range('A', 'F') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'overtime.xls';

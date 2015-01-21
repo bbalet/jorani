@@ -42,6 +42,7 @@ class Leaves extends CI_Controller {
         $this->language_code = $this->session->userdata('language_code');
         $this->load->helper('language');
         $this->lang->load('leaves', $this->language);
+        $this->lang->load('global', $this->language);
     }
     
     /**
@@ -359,7 +360,8 @@ class Leaves extends CI_Controller {
     }
 
     /**
-     * Action: export the list of all leaves into an Excel file
+     * Export the list of all leaves into an Excel file
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
         $this->expires_now();
@@ -372,10 +374,10 @@ class Leaves extends CI_Controller {
         $this->excel->getActiveSheet()->setCellValue('C1', lang('leaves_export_thead_start_date_type'));
         $this->excel->getActiveSheet()->setCellValue('D1', lang('leaves_export_thead_end_date'));
         $this->excel->getActiveSheet()->setCellValue('E1', lang('leaves_export_thead_end_date_type'));
-        $this->excel->getActiveSheet()->setCellValue('F1', lang('leaves_export_thead_cause'));
-        $this->excel->getActiveSheet()->setCellValue('G1', lang('leaves_export_thead_duration'));
-        $this->excel->getActiveSheet()->setCellValue('H1', lang('leaves_export_thead_type'));
-        $this->excel->getActiveSheet()->setCellValue('I1', lang('leaves_export_thead_status'));
+        $this->excel->getActiveSheet()->setCellValue('F1', lang('leaves_export_thead_duration'));
+        $this->excel->getActiveSheet()->setCellValue('G1', lang('leaves_export_thead_type'));
+        $this->excel->getActiveSheet()->setCellValue('H1', lang('leaves_export_thead_status'));
+        $this->excel->getActiveSheet()->setCellValue('I1', lang('leaves_export_thead_cause'));
         $this->excel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
@@ -385,16 +387,25 @@ class Leaves extends CI_Controller {
         
         $line = 2;
         foreach ($leaves as $leave) {
+            $date = new DateTime($leave['startdate']);
+            $startdate = $date->format(lang('global_date_format'));
+            $date = new DateTime($leave['enddate']);
+            $enddate = $date->format(lang('global_date_format'));
             $this->excel->getActiveSheet()->setCellValue('A' . $line, $leave['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $leave['startdate']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $leave['startdatetype']);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $leave['enddate']);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, $leave['enddatetype']);
-			$this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['cause']);
-            $this->excel->getActiveSheet()->setCellValue('G' . $line, $leave['duration']);
-            $this->excel->getActiveSheet()->setCellValue('H' . $line, $this->types_model->get_label($leave['type']));
-            $this->excel->getActiveSheet()->setCellValue('I' . $line, $this->status_model->get_label($leave['status']));
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, $startdate);
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, lang($leave['startdatetype']));
+            $this->excel->getActiveSheet()->setCellValue('D' . $line, $enddate);
+            $this->excel->getActiveSheet()->setCellValue('E' . $line, lang($leave['enddatetype']));
+            $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['duration']);
+            $this->excel->getActiveSheet()->setCellValue('G' . $line, $this->types_model->get_label($leave['type']));
+            $this->excel->getActiveSheet()->setCellValue('H' . $line, lang($this->status_model->get_label($leave['status'])));
+            $this->excel->getActiveSheet()->setCellValue('I' . $line, $leave['cause']);
             $line++;
+        }
+        
+        //Autofit
+        foreach(range('A', 'I') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'leaves.xls';
@@ -407,6 +418,7 @@ class Leaves extends CI_Controller {
 
     /**
      * Ajax endpoint : Send a list of fullcalendar events
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function individual() {
         $this->expires_now();
@@ -418,6 +430,7 @@ class Leaves extends CI_Controller {
 
     /**
      * Ajax endpoint : Send a list of fullcalendar events
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function workmates() {
         $this->expires_now();
@@ -429,6 +442,7 @@ class Leaves extends CI_Controller {
     
     /**
      * Ajax endpoint : Send a list of fullcalendar events
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function collaborators() {
         $this->expires_now();
@@ -441,6 +455,7 @@ class Leaves extends CI_Controller {
     /**
      * Ajax endpoint : Send a list of fullcalendar events
      * @param int $entity_id Entity identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function organization($entity_id) {
         $this->expires_now();
@@ -454,6 +469,7 @@ class Leaves extends CI_Controller {
 
     /**
      * Ajax endpoint : Send a list of fullcalendar events
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function department() {
         $this->expires_now();
@@ -470,6 +486,7 @@ class Leaves extends CI_Controller {
      *  - difference between the entitled and the taken days
      *  - try to calculate the duration of the leave
      *  - try to detect overlapping leave requests
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function validate() {
         $this->expires_now();
@@ -496,6 +513,7 @@ class Leaves extends CI_Controller {
     /**
      * Internal utility function
      * make sure a resource is reloaded every time
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function expires_now() {
         // Date in the past

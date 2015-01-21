@@ -119,6 +119,3 @@ $lang['September'] = 'Septembre';
 $lang['October'] = 'Octobre';
 $lang['November'] = 'Novembre';
 $lang['December'] = 'Décembre';
-
-$lang['Morning'] = 'Matin';
-$lang['Afternoon'] = 'Après-midi';

@@ -45,6 +45,7 @@ class Hr extends CI_Controller {
         $this->language_code = $this->session->userdata('language_code');
         $this->load->helper('language');
         $this->lang->load('hr', $this->language);
+        $this->lang->load('global', $this->language);
     }
     
     /**
@@ -248,13 +249,22 @@ class Hr extends CI_Controller {
         
         $line = 4;
         foreach ($leaves as $leave) {
+            $date = new DateTime($leave['startdate']);
+            $startdate = $date->format(lang('global_date_format'));
+            $date = new DateTime($leave['enddate']);
+            $enddate = $date->format(lang('global_date_format'));
             $this->excel->getActiveSheet()->setCellValue('A' . $line, $leave['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $leave['status']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $leave['startdate']);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $leave['enddate']);
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, lang($leave['status']));
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $startdate);
+            $this->excel->getActiveSheet()->setCellValue('D' . $line, $enddate);
             $this->excel->getActiveSheet()->setCellValue('E' . $line, $leave['duration']);
             $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['type']);
             $line++;
+        }
+        
+        //Autofit
+        foreach(range('A', 'F') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'leaves.xls';
@@ -289,14 +299,21 @@ class Hr extends CI_Controller {
         
         $line = 4;
         foreach ($requests as $request) {
+            $date = new DateTime($request['date']);
+            $startdate = $date->format(lang('global_date_format'));
             $this->excel->getActiveSheet()->setCellValue('A' . $line, $request['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $request['status']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $request['date']);
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, lang($request['status']));
+            $this->excel->getActiveSheet()->setCellValue('C' . $line, $startdate);
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $request['duration']);
             $this->excel->getActiveSheet()->setCellValue('E' . $line, $request['cause']);
             $line++;
         }
 
+        //Autofit
+        foreach(range('A', 'E') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+        }
+        
         $filename = 'overtime.xls';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
@@ -336,6 +353,11 @@ class Hr extends CI_Controller {
             $this->excel->getActiveSheet()->setCellValue('E' . $line, $employee->contract);
             $this->excel->getActiveSheet()->setCellValue('F' . $line, $employee->manager_name);
             $line++;
+        }
+        
+        //Autofit
+        foreach(range('A', 'F') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'employees.xls';

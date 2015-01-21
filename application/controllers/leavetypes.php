@@ -164,6 +164,11 @@ class LeaveTypes extends CI_Controller {
             $line++;
         }
 
+        //Autofit
+        foreach(range('A', 'B') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+        }
+        
         $filename = 'leave_types.xls';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '"');

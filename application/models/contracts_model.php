@@ -80,8 +80,10 @@ class Contracts_model extends CI_Model {
      */
     public function delete_contract($id) {
         $query = $this->db->delete('contracts', array('id' => $id));
+        $this->load->model('users_model');
         $this->load->model('entitleddays_model');
         $this->entitleddays_model->delete_entitleddays_cascade_contract($id);
+        $this->users_model->update_users_cascade_contract($id);
     }
     
     /**
@@ -91,7 +93,6 @@ class Contracts_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function update_contract() {
-        
         $startentdate = str_pad($this->input->post('startentdatemonth'), 2, "0", STR_PAD_LEFT) .
                 "/" . str_pad($this->input->post('startentdateday'), 2, "0", STR_PAD_LEFT);
         $endentdate = str_pad($this->input->post('endentdatemonth'), 2, "0", STR_PAD_LEFT) .
@@ -101,7 +102,6 @@ class Contracts_model extends CI_Model {
             'startentdate' => $startentdate,
             'endentdate' => $endentdate
         );
-
         $this->db->where('id', $this->input->post('id'));
         return $this->db->update('contracts', $data);
     }

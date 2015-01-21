@@ -175,6 +175,11 @@ class Positions extends CI_Controller {
             $this->excel->getActiveSheet()->setCellValue('C' . $line, $type['description']);
             $line++;
         }
+        
+        //Autofit
+        foreach(range('A', 'C') as $colD) {
+            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+        }
 
         $filename = 'positions.xls';
         header('Content-Type: application/vnd.ms-excel');

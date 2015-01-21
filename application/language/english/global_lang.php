@@ -47,3 +47,7 @@ $lang['global_link_doc_page_login'] = 'http://www.leave-management-system.org/pa
 $lang['global_link_doc_page_create_user'] = 'http://www.leave-management-system.org/page-create-a-new-user.html';
 $lang['global_link_doc_page_list_users'] = 'http://www.leave-management-system.org/page-list-of-users.html';
 $lang['global_link_doc_page_list_employees'] = 'http://www.leave-management-system.org/page-list-of-employees.html';
+
+//Calendar
+$lang['Morning'] = 'Morning';
+$lang['Afternoon'] = 'Afternoon';

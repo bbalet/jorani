@@ -575,7 +575,7 @@ class Users_model extends CI_Model {
 
     /**
      * Update a given employee in the database with the contract ID. 
-     * @return type
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function set_contract() {
@@ -583,6 +583,28 @@ class Users_model extends CI_Model {
             'contract' => $this->input->post('contract')
         );
         $this->db->where('id', $this->input->post('id'));
+        $result = $this->db->update('users', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
+        }
+        
+        return $result;
+    }
+    
+    /**
+     * Update all employees when a contract is deleted
+     * @param int $id Contract ID
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function update_users_cascade_contract($id) {
+        $data = array(
+            'contract' => NULL
+        );
+        $this->db->where('contract', $id);
         $result = $this->db->update('users', $data);
         
         //Trace the modification if the feature is enabled

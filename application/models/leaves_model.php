@@ -771,9 +771,15 @@ class Leaves_model extends CI_Model {
                 
                 //Check if another leave was defined on this day
                 if ($tabular[$entry->uid]->days[$dayNum]->type != '') {
-                    $tabular[$entry->uid]->days[$dayNum]->type .= ';' . $entry->type;
-                    $tabular[$entry->uid]->days[$dayNum]->display .= ';' . $display;
-                    $tabular[$entry->uid]->days[$dayNum]->status .= ';' . $entry->status;
+                    if ($tabular[$entry->uid]->days[$dayNum]->display == 2) { //Respect Morning/Afternoon order
+                        $tabular[$entry->uid]->days[$dayNum]->type .= ';' . $entry->type;
+                        $tabular[$entry->uid]->days[$dayNum]->display .= ';' . $display;
+                        $tabular[$entry->uid]->days[$dayNum]->status .= ';' . $entry->status;
+                    } else {
+                        $tabular[$entry->uid]->days[$dayNum]->type = $entry->type . ';' . $tabular[$entry->uid]->days[$dayNum]->type;
+                        $tabular[$entry->uid]->days[$dayNum]->display = $display . ';' . $tabular[$entry->uid]->days[$dayNum]->display;
+                        $tabular[$entry->uid]->days[$dayNum]->status = $entry->status . ';' . $tabular[$entry->uid]->days[$dayNum]->status;
+                    }
                 } else  {
                     $tabular[$entry->uid]->days[$dayNum]->type = $entry->type;
                     $tabular[$entry->uid]->days[$dayNum]->display = $display;

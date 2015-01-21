@@ -268,57 +268,31 @@ class Leaves_model extends CI_Model {
         $this->db->where('status != 4');
         $this->db->where('(startdate <= DATE(\'' . $enddate . '\') AND enddate >= DATE(\'' . $startdate . '\'))');
         $leaves = $this->db->get('leaves')->result();
+        
+        if ($startdatetype == "Morning") {
+            $startTmp = strtotime($startdate." 08:00:00 UTC");
+        } else {
+            $startTmp = strtotime($startdate." 12:01:00 UTC");
+        }
+        if ($enddatetype == "Morning") {
+            $endTmp = strtotime($enddate." 12:00:00 UTC");
+        } else {
+            $endTmp = strtotime($enddate." 18:00:00 UTC");
+        }
+        
         foreach ($leaves as $leave) {
-            if (($leave->startdate != $startdate) && ($leave->enddate != $enddate)) {
-                //Leave request is exactly within another leave request
-                $overlapping = TRUE;
+            if ($leave->startdatetype == "Morning") {
+                $startTmpDB = strtotime($leave->startdate." 08:00:00 UTC");
             } else {
-                if (($leave->startdate == $startdate) && ($leave->enddate == $enddate)) {
-                    //Two leave requests of one day or exactly the same periods (possible duplicate)
-                    if (($leave->startdatetype == $startdatetype) || ($leave->enddatetype == $enddatetype)) $overlapping = TRUE;
-                } else {
-                    //Compute a pattern that is human readable
-                    $pattern = $leave->startdatetype . $leave->enddatetype . $startdatetype . $enddatetype;
-                    if ($startdate == $leave->startdate) {
-                        //Example of a leave request that starts the same day, but of one day
-                        switch ($pattern) {
-                            case'MorningMorningMorningMorning': $overlapping = TRUE; break;
-                            case'MorningMorningMorningAfternoon': $overlapping = TRUE; break;
-                            case'MorningMorningAfternoonAfternoon': $overlapping = TRUE; break;
-                            case'MorningAfternoonMorningAfternoon': $overlapping = TRUE; break;
-                            case'MorningAfternoonMorningMorning': $overlapping = TRUE; break;
-                            case'MorningAfternoonAfternoonAfternoon': $overlapping = TRUE; break;
-                            case'AfternoonAfternoonAfternoonAfternoon': $overlapping = TRUE; break;
-                            case'AfternoonAfternoonMorningAfternoon': $overlapping = TRUE; break;
-                            case'AfternoonMorningMorningAfternoon': $overlapping = TRUE; break;
-                            case'AfternoonMorningAfternoonAfternoon': $overlapping = TRUE; break;
-                        }
-                    }
-                    if ($startdate == $leave->enddate) {
-                        //Example of a leave request that starts the same day onother request ends, but of one day
-                        switch ($pattern) {
-                            case'MorningMorningMorningMorning': $overlapping = TRUE; break;
-                            case'MorningMorningMorningAfternoon': $overlapping = TRUE; break;
-                            case'MorningAfternoonMorningAfternoon': $overlapping = TRUE; break;
-                            case'MorningAfternoonMorningMorning': $overlapping = TRUE; break;
-                            case'MorningAfternoonAfternoonAfternoon': $overlapping = TRUE; break;
-                            case'AfternoonAfternoonAfternoonAfternoon': $overlapping = TRUE; break;
-                            case'AfternoonAfternoonMorningAfternoon': $overlapping = TRUE; break;
-                            case'AfternoonAfternoonMorningMorning': $overlapping = TRUE; break;
-                            case'AfternoonMorningMorningMorning': $overlapping = TRUE; break;
-                            case'AfternoonMorningMorningAfternoon': $overlapping = TRUE; break;
-                        }
-                    }
-                    if ($enddate == $leave->startdate) {
-                        //Example of a leave request that ends the same day onother request starts
-                        switch ($pattern) {
-                            case'AfternoonAfternoonMorningAfternoon': $overlapping = TRUE; break;
-                            case'AfternoonAfternoonAfternoonAfternoon': $overlapping = TRUE; break;
-                            case'AfternoonMorningMorningAfternoon': $overlapping = TRUE; break;
-                            case'AfternoonMorningAfternoonAfternoon': $overlapping = TRUE; break;
-                        }
-                    }
-                }
+                $startTmpDB = strtotime($leave->startdate." 12:01:00 UTC");
+            }
+            if ($leave->enddatetype == "Morning") {
+                $endTmpDB = strtotime($leave->enddate." 12:00:00 UTC");
+            } else {
+                $endTmpDB = strtotime($leave->enddate." 18:00:00 UTC");
+            }
+            if (($startTmpDB <= $endTmp) && ($endTmpDB >= $startTmp)) {
+                $overlapping = TRUE;
             }
         }
         return $overlapping;

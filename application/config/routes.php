@@ -71,6 +71,7 @@ $route['hr/counters/(:num)'] = 'hr/counters/$1';
 $route['hr/counters/(:num)/(:num)'] = 'hr/counters/$1/$2';
 $route['hr/overtime/export/(:num)'] = 'hr/export_overtime/$1';
 $route['hr/entitleddays/(:num)'] = 'hr/entitleddays/$1';
+$route['hr/leaves/create/(:num)'] = 'hr/createleave/$1';
 $route['hr'] = 'hr';
 
 //HR edit leave types

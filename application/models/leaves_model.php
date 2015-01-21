@@ -304,10 +304,11 @@ class Leaves_model extends CI_Model {
     
     /**
      * Create a leave request
+     * @param int $id Identifier of the employee
      * @return int id of the leave request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_leaves() {
+    public function set_leaves($id) {
         $data = array(
             'startdate' => $this->input->post('startdate'),
             'startdatetype' => $this->input->post('startdatetype'),
@@ -317,7 +318,7 @@ class Leaves_model extends CI_Model {
             'type' => $this->input->post('type'),
             'cause' => $this->input->post('cause'),
             'status' => $this->input->post('status'),
-            'employee' => $this->session->userdata('id')
+            'employee' => $id
         );
         $this->db->insert('leaves', $data);
         return $this->db->insert_id();

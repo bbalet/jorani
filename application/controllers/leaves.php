@@ -174,7 +174,7 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/create');
             $this->load->view('templates/footer');
         } else {
-            $leave_id = $this->leaves_model->set_leaves();
+            $leave_id = $this->leaves_model->set_leaves($this->session->userdata('id'));
             $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {

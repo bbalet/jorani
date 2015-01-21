@@ -222,6 +222,53 @@ class Hr extends CI_Controller {
             redirect('hr/employees');
         }
     }
+    
+    /**
+     * Create a leave request in behalf of an employee
+     * @param int $id Identifier of the employee
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function createleave($id) {
+        $this->auth->check_is_granted('list_employees');
+        $this->expires_now();
+        $data = $this->getUserContext();
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $data['title'] = lang('hr_leaves_create_title');
+        $data['employee'] = $id;
+        
+        $this->form_validation->set_rules('startdate', lang('leaves_create_field_start'), 'required|xss_clean');
+        $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
+        $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|xss_clean');
+        $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean');
+        $this->form_validation->set_rules('duration', lang('leaves_create_field_duration'), 'required|xss_clean');
+        $this->form_validation->set_rules('type', lang('leaves_create_field_type'), 'required|xss_clean');
+        $this->form_validation->set_rules('cause', lang('leaves_create_field_cause'), 'xss_clean');
+        $this->form_validation->set_rules('status', lang('leaves_create_field_status'), 'required|xss_clean');
+
+        $data['credit'] = 0;
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->model('types_model');
+            $data['types'] = $this->types_model->get_types();
+            foreach ($data['types'] as $type) {
+                if ($type['id'] == 0) {
+                    $data['credit'] = $this->leaves_model->get_user_leaves_credit($id, $type['name']);
+                    break;
+                }
+            }
+            $this->load->model('users_model');
+            $data['name'] = $this->users_model->get_label($id);
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('hr/createleave');
+            $this->load->view('templates/footer');
+        } else {
+            $leave_id = $this->leaves_model->set_leaves($id);
+            $this->session->set_flashdata('msg', lang('hr_leaves_create_flash_msg_success'));
+            //No mail is sent, because the HR Officer would set the leave status to accepted
+            redirect('hr/employees');
+        }
+    }
         
     /**
      * Action: export the list of all leaves into an Excel file

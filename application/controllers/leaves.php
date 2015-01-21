@@ -390,9 +390,9 @@ class Leaves extends CI_Controller {
             $this->excel->getActiveSheet()->setCellValue('C' . $line, $leave['startdatetype']);
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $leave['enddate']);
             $this->excel->getActiveSheet()->setCellValue('E' . $line, $leave['enddatetype']);
-            $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['duration']);
-            $this->excel->getActiveSheet()->setCellValue('G' . $line, $this->types_model->get_label($leave['type']));
-            $this->excel->getActiveSheet()->setCellValue('H' . $line, $leave['cause']);
+			$this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['cause']);
+            $this->excel->getActiveSheet()->setCellValue('G' . $line, $leave['duration']);
+            $this->excel->getActiveSheet()->setCellValue('H' . $line, $this->types_model->get_label($leave['type']));
             $this->excel->getActiveSheet()->setCellValue('I' . $line, $this->status_model->get_label($leave['status']));
             $line++;
         }

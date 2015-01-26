@@ -100,6 +100,7 @@ class Leaves extends CI_Controller {
         if (!is_null($data['summary'])) {
             $this->expires_now();
             $data['title'] = lang('leaves_summary_title');
+            $data['help'] = $this->help->create_help_link('global_link_doc_page_my_summary');
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('leaves/counters', $data);
@@ -149,6 +150,7 @@ class Leaves extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('leaves_create_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_request_leave');
         
         $this->form_validation->set_rules('startdate', lang('leaves_create_field_start'), 'required|xss_clean');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
@@ -216,6 +218,7 @@ class Leaves extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('leaves_edit_html_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_request_leave');
         $data['id'] = $id;
         
         $data['credit'] = 0;

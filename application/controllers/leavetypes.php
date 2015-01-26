@@ -70,6 +70,7 @@ class LeaveTypes extends CI_Controller {
         $data = $this->getUserContext();
         $data['leavetypes'] = $this->types_model->get_types();
         $data['title'] = lang('hr_leaves_type_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_edit_leave_type');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leavetypes/index', $data);

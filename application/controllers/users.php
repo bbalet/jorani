@@ -67,6 +67,7 @@ class Users extends CI_Controller {
         $data = $this->getUserContext();
         $data['users'] = $this->users_model->get_users();
         $data['title'] = lang('users_index_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_list_users');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/index', $data);
@@ -213,6 +214,7 @@ class Users extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('users_edit_html_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_create_user');
         
         $this->form_validation->set_rules('firstname', lang('users_edit_field_firstname'), 'required|xss_clean');
         $this->form_validation->set_rules('lastname', lang('users_edit_field_lastname'), 'required|xss_clean');
@@ -361,6 +363,7 @@ class Users extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('users_create_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_create_user');
 
         $this->load->model('roles_model');
         $data['roles'] = $this->roles_model->get_roles();

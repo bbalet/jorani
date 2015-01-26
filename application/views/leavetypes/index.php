@@ -20,9 +20,7 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('global', $language);
 $this->lang->load('leavetypes', $language);?>
 
-<h1><?php echo lang('hr_leaves_type_title');?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_edit_leave_type');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
-</h1>
+<h1><?php echo lang('hr_leaves_type_title');?><?php echo $help;?></h1>
 
 <?php if($this->session->flashdata('msg')){ ?>
 <div class="alert fade in" id="flashbox">

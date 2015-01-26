@@ -79,6 +79,7 @@ class Requests extends CI_Controller {
         $data = $this->getUserContext();
         $data['filter'] = $filter;
         $data['title'] = lang('requests_index_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_validation');
         $data['requests'] = $this->leaves_model->requests($this->user_id, $showAll);
         
         $this->load->model('types_model');

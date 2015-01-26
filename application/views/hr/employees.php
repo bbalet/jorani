@@ -38,9 +38,7 @@ $(document).ready(function() {
 </script>
 <?php } ?>
         
-<h1><?php echo lang('hr_employees_title');?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_list_employees');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
-</h1>
+<h1><?php echo lang('hr_employees_title');?><?php echo $help;?></h1>
 
 <div class="row-fluid">
     <div class="span4">

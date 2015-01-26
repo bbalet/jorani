@@ -99,6 +99,7 @@ class Hr extends CI_Controller {
         $this->auth->check_is_granted('list_employees');
         $data = $this->getUserContext();
         $data['title'] = lang('hr_employees_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_list_employees');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/employees', $data);

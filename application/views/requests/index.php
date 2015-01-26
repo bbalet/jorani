@@ -40,9 +40,7 @@ $(document).ready(function() {
 </script>
 <?php } ?>
 
-<h1><?php echo lang('requests_index_title');?>&nbsp;
-<a href="<?php echo lang('global_link_doc_page_leave_validation');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
-</h2>
+<h1><?php echo lang('requests_index_title');?><?php echo $help;?></h2>
 
 <p><?php echo lang('requests_index_description');?></p>
 

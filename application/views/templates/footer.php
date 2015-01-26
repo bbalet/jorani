@@ -21,7 +21,7 @@
     <!-- FOOTER -->
     <div class="row" id="footer">
       <div class="span4"><?php echo lang('footer_copyright_notice');?></div>
-      <div class="span4 offset2"><img src="<?php echo base_url();?>assets/images/jorani-horizontal-small.png" style="margin-top:-11px">&nbsp;&nbsp;v0.3.0</div>
+      <div class="span4 offset2"><img src="<?php echo base_url();?>assets/images/jorani-horizontal-small.png" style="margin-top:-11px">&nbsp;&nbsp;v0.3.1</div>
       <div class="span4"><span class="pull-right"><a href="#"><?php echo lang('footer_link_go_top');?></a></span></div>
     </div>
 </body>

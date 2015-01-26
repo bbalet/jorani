@@ -20,8 +20,7 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('calendar', $language);
 $this->lang->load('global', $language);?>
 
-<h1><?php echo lang('calendar_organization_title');?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_calendar_organization');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h1>
+<h1><?php echo lang('calendar_organization_title');?><?php echo $help;?></h1>
 
 <div class="row-fluid">
     <div class="span4">

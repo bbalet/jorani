@@ -50,8 +50,7 @@ $this->lang->load('global', $language);?>
             <div class="span6 form-box">
                 <div class="row-fluid">
                     <div class="span6">
-<h2><?php echo lang('session_login_title');?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_login');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h2>
+<h2><?php echo lang('session_login_title');?><?php echo $help;?></h2>
 
 <?php if($this->session->flashdata('msg')){ ?>
 <div class="alert fade in" id="flashbox">

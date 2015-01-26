@@ -23,8 +23,7 @@ $this->lang->load('global', $language);?>
 <div class="row-fluid">
     <div class="span12">
 
-<h2><?php echo lang('leaves_summary_title');?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_my_summary');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h2>
+<h2><?php echo lang('leaves_summary_title');?><?php echo $help;?></h2>
 
     <p><?php echo lang('leaves_summary_date_field');?>&nbsp;
         <input type="text" id="refdate" value="<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>" />

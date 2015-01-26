@@ -20,10 +20,7 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('leaves', $language);
 $this->lang->load('global', $language);?>
 
-<h2><?php echo lang('leaves_edit_title');?><?php echo $leave['id']; ?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_request_leave');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
-&nbsp;<span class="muted">(<?php echo $name ?>)</span>
-</h2>
+<h2><?php echo lang('leaves_edit_title');?><?php echo $leave['id']; ?> <?php echo $help;?>&nbsp;<span class="muted">(<?php echo $name ?>)</span></h2>
 
 <div class="row-fluid">
     <div class="span8">

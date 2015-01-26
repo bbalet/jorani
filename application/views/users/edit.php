@@ -22,9 +22,7 @@ $CI->load->helper('language');
 $this->lang->load('users', $language);
 $this->lang->load('global', $language);?>
 
-<h2><?php echo lang('users_edit_title');?><?php echo $users_item['id']; ?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_create_user');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
-</h2>
+<h2><?php echo lang('users_edit_title');?><?php echo $users_item['id']; ?><?php echo $help;?></h2>
 
 <?php echo validation_errors(); ?>
 

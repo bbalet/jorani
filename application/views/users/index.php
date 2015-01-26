@@ -38,9 +38,7 @@ $(document).ready(function() {
 </script>
 <?php } ?>
         
-<h1><?php echo lang('users_index_title');?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_list_users');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
-</h1>
+<h1><?php echo lang('users_index_title');?><?php echo $help;?></h1>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
     <thead>

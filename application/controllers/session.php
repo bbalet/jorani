@@ -60,6 +60,7 @@ class Session extends CI_Controller {
      */
     public function login() {
         $data['title'] = lang('session_login_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_login');
         $this->load->helper('form');
         $this->load->library('form_validation');
         //Note that we don't receive the password as a clear string

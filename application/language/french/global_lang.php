@@ -36,17 +36,17 @@ $lang['Accepted'] = 'Acceptée';
 $lang['Rejected'] = 'Rejetée';
 
 //Links to documentation
-$lang['global_link_doc_page_calendar_organization'] = 'http://www.leave-management-system.org/page-calendar-organization.html';
-$lang['global_link_doc_page_my_summary'] = 'http://www.leave-management-system.org/page-my-summary.html';
-$lang['global_link_doc_page_request_leave'] = 'http://www.leave-management-system.org/how-to-request-a-leave.html';
-$lang['global_link_doc_page_edit_leave_type'] = 'http://www.leave-management-system.org/edit-leave-types.html';
-$lang['global_link_doc_page_hr_organization'] = 'http://www.leave-management-system.org/page-describe-organization.html';
-$lang['global_link_doc_page_reset_password'] = 'http://www.leave-management-system.org/how-to-change-my-password.html';
-$lang['global_link_doc_page_leave_validation'] = 'http://www.leave-management-system.org/page-leave-requests-validation.html';
-$lang['global_link_doc_page_login'] = 'http://www.leave-management-system.org/page-login-to-the-application.html';
-$lang['global_link_doc_page_create_user'] = 'http://www.leave-management-system.org/page-create-a-new-user.html';
-$lang['global_link_doc_page_list_users'] = 'http://www.leave-management-system.org/page-list-of-users.html';
-$lang['global_link_doc_page_list_employees'] = 'http://www.leave-management-system.org/page-list-of-employees.html';
+$lang['global_link_doc_page_calendar_organization'] = '';
+$lang['global_link_doc_page_my_summary'] = '';
+$lang['global_link_doc_page_request_leave'] = '';
+$lang['global_link_doc_page_edit_leave_type'] = 'http://fr.jorani.org/ecrans/gerer-liste-types-absence.html';
+$lang['global_link_doc_page_hr_organization'] = 'http://fr.jorani.org/ecrans/page-modeliser-organisation.html';
+$lang['global_link_doc_page_reset_password'] = '';
+$lang['global_link_doc_page_leave_validation'] = '';
+$lang['global_link_doc_page_login'] = 'http://fr.jorani.org/ecrans/page-ecran-de-connexion.html';
+$lang['global_link_doc_page_create_user'] = 'http://fr.jorani.org/ecrans/page-ajouter-un-utilisateur.html';
+$lang['global_link_doc_page_list_users'] = '';
+$lang['global_link_doc_page_list_employees'] = '';
 
 //Calendar
 $lang['Morning'] = 'Matin';

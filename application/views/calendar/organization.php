@@ -86,8 +86,11 @@ $this->lang->load('global', $language);?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lib/moment.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/fullcalendar.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo $language_code;?>.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript">
     var entity = -1; //Id of the selected entity
+    var entityName = '';
+    var includeChildren = true;
     var text; //Label of the selected entity
     var toggleDayoffs = false;
     
@@ -122,9 +125,12 @@ $this->lang->load('global', $language);?>
     
     function select_entity() {
         entity = $('#organization').jstree('get_selected')[0];
-        text = $('#organization').jstree().get_text(entity);
-        $('#txtEntity').val(text);
+        entityName = $('#organization').jstree().get_text(entity);
+        $('#txtEntity').val(entityName);
         refresh_calendar();
+        $.cookie('cal_entity', entity);
+        $.cookie('cal_entityName', entityName);
+        $.cookie('cal_includeChildren', includeChildren);
         $("#frmSelectEntity").modal('hide');
     }
 
@@ -138,6 +144,7 @@ $this->lang->load('global', $language);?>
 
         //On click the check box "include sub-department", refresh the content if a department was selected
         $('#chkIncludeChildren').click(function() {
+            $.cookie('cal_includeChildren', $('#chkIncludeChildren').prop('checked'));
             refresh_calendar();
         });
 
@@ -167,6 +174,7 @@ $this->lang->load('global', $language);?>
         //Toggle day offs displays
         $('#cmdDisplayDayOff').on('click', function() {
             toggleDayoffs = !toggleDayoffs;
+            $.cookie('cal_dayoffs', toggleDayoffs);
             refresh_calendar();
         });
         
@@ -184,6 +192,26 @@ $this->lang->load('global', $language);?>
             $('#calendar').fullCalendar('today');
             refresh_calendar();
         });
+        
+        //Cookie has value ? take -1 by default
+        if($.cookie('cal_entity') != null) {
+            entity = $.cookie('cal_entity');
+            entityName = $.cookie('cal_entityName');
+            includeChildren = $.cookie('cal_includeChildren');
+            toggleDayoffs = $.cookie('cal_dayoffs');
+            //Parse boolean values
+            includeChildren = $.parseJSON(includeChildren.toLowerCase());
+            toggleDayoffs = $.parseJSON(toggleDayoffs.toLowerCase());
+            $('#txtEntity').val(entityName);
+            $('#chkIncludeChildren').prop('checked', includeChildren);
+            //Load the calendar events
+            refresh_calendar();
+        } else { //Set default value
+            $.cookie('cal_entity', entity);
+            $.cookie('cal_entityName', entityName);
+            $.cookie('cal_includeChildren', includeChildren);
+            $.cookie('cal_dayoffs', toggleDayoffs);
+        }
     });
 </script>
 

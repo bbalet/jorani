@@ -20,7 +20,7 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('reports', $language);
 $this->lang->load('global', $language);?>
         
-<h1><?php echo lang('reports_balance_title');?></h1>
+<h1><?php echo lang('reports_balance_title');?> &nbsp;<?php echo $help;?></h1>
 
 <div class="row-fluid">
     <div class="span4">

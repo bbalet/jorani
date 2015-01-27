@@ -116,8 +116,9 @@ class Reports extends CI_Controller {
         if ($refTmp != NULL) {
             $refDate = date("Y-m-d", $refTmp);
         }
-		$data['refDate'] = $refDate;
+        $data['refDate'] = $refDate;
         $data['title'] = lang('reports_balance_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_balance_report');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('reports/balance/index', $data);

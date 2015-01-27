@@ -36,7 +36,13 @@ $lang['Accepted'] = 'ទទួលយកបាន';
 $lang['Rejected'] = 'បដិសេធចោល';
 
 //Links to documentation
-$lang['global_link_doc_page_calendar_organization'] = '';
+$lang['global_link_doc_page_calendar_individual'] = '';
+$lang['global_link_doc_page_calendar_workmates'] = '';
+$lang['global_link_doc_page_calendar_collaborators'] = '';
+$lang['global_link_doc_page_calendar_department'] = '';
+$lang['global_link_doc_page_calendar_organization'] = 'http://jorani.org/page-calendar-organization.html';
+$lang['global_link_doc_page_calendar_tabular'] = '';
+
 $lang['global_link_doc_page_my_summary'] = '';
 $lang['global_link_doc_page_request_leave'] = '';
 $lang['global_link_doc_page_edit_leave_type'] = '';
@@ -47,6 +53,8 @@ $lang['global_link_doc_page_login'] = '';
 $lang['global_link_doc_page_create_user'] = '';
 $lang['global_link_doc_page_list_users'] = '';
 $lang['global_link_doc_page_list_employees'] = '';
+
+$lang['global_link_doc_page_leave_balance_report'] = '';
 
 //Calendar
 $lang['Morning'] = 'Matin';

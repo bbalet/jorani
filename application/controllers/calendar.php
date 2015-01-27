@@ -69,6 +69,7 @@ class Calendar extends CI_Controller {
         $this->auth->check_is_granted('individual_calendar');
         $data = $this->getUserContext();
         $data['title'] = lang('calendar_individual_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_individual');
         $data['googleApi'] = false;
         $data['clientId'] = 'key';
         $data['apiKey'] = 'key';
@@ -88,6 +89,7 @@ class Calendar extends CI_Controller {
         $this->auth->check_is_granted('workmates_calendar');
         $data = $this->getUserContext();
         $data['title'] = lang('calendar_workmates_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_workmates');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/workmates', $data);
@@ -103,6 +105,7 @@ class Calendar extends CI_Controller {
         $this->auth->check_is_granted('collaborators_calendar');
         $data = $this->getUserContext();
         $data['title'] = lang('calendar_collaborators_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_collaborators');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/collaborators', $data);
@@ -119,6 +122,7 @@ class Calendar extends CI_Controller {
         $this->auth->check_is_granted('department_calendar');
         $data = $this->getUserContext();
         $data['title'] = lang('calendar_department_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_department');
         $this->load->model('organization_model');
         $department = $this->organization_model->get_department($this->user_id);
         if (empty($department)) {
@@ -169,6 +173,7 @@ class Calendar extends CI_Controller {
         $data['children'] = $children;
         $data['department'] = $this->organization_model->get_label($id);
         $data['title'] = lang('calendar_tabular_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_tabular');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/tabular', $data);

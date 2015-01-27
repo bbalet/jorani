@@ -36,9 +36,15 @@ $lang['Accepted'] = 'Acceptée';
 $lang['Rejected'] = 'Rejetée';
 
 //Links to documentation
+$lang['global_link_doc_page_calendar_individual'] = '';
+$lang['global_link_doc_page_calendar_workmates'] = '';
+$lang['global_link_doc_page_calendar_collaborators'] = '';
+$lang['global_link_doc_page_calendar_department'] = '';
 $lang['global_link_doc_page_calendar_organization'] = '';
+
+$lang['global_link_doc_page_calendar_tabular'] = '';
 $lang['global_link_doc_page_my_summary'] = '';
-$lang['global_link_doc_page_request_leave'] = '';
+$lang['global_link_doc_page_request_leave'] = 'http://fr.jorani.org/ecrans/page-creer-une-demande-de-conge.html';
 $lang['global_link_doc_page_edit_leave_type'] = 'http://fr.jorani.org/ecrans/gerer-liste-types-absence.html';
 $lang['global_link_doc_page_hr_organization'] = 'http://fr.jorani.org/ecrans/page-modeliser-organisation.html';
 $lang['global_link_doc_page_reset_password'] = '';
@@ -47,6 +53,8 @@ $lang['global_link_doc_page_login'] = 'http://fr.jorani.org/ecrans/page-ecran-de
 $lang['global_link_doc_page_create_user'] = 'http://fr.jorani.org/ecrans/page-ajouter-un-utilisateur.html';
 $lang['global_link_doc_page_list_users'] = '';
 $lang['global_link_doc_page_list_employees'] = '';
+
+$lang['global_link_doc_page_leave_balance_report'] = '';
 
 //Calendar
 $lang['Morning'] = 'Matin';

@@ -20,7 +20,7 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('calendar', $language);
 $this->lang->load('global', $language);?>
 
-<h1><?php echo lang('calendar_collaborators_title');?></h1>
+<h1><?php echo lang('calendar_collaborators_title');?> &nbsp;<?php echo $help;?></h1>
 
 <p><?php echo lang('calendar_collaborators_description');?></p>
 

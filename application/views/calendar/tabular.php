@@ -275,7 +275,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 </style>
     
 
-<h1><?php echo lang('calendar_tabular_title');?></h1>
+<h1><?php echo lang('calendar_tabular_title');?> &nbsp;<?php echo $help;?></h1>
 
 <div class="row-fluid">
     <div class="span4">

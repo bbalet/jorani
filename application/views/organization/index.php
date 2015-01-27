@@ -22,8 +22,7 @@ $this->lang->load('global', $language);
 $this->lang->load('datatable', $language);
 $this->lang->load('treeview', $language);?>
 
-<h1><?php echo lang('organization_index_title');?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_hr_organization');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a></h1>
+<h1><?php echo lang('organization_index_title');?> &nbsp;<?php echo $help;?></h1>
 
 <div class="row-fluid">
     <div class="span4">

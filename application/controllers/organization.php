@@ -68,6 +68,7 @@ class Organization extends CI_Controller {
         $this->auth->check_is_granted('organization_index');
         $data = $this->getUserContext();
         $data['title'] = lang('organization_index_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_hr_organization');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('organization/index', $data);

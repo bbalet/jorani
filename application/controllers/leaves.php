@@ -412,7 +412,7 @@ class Leaves extends CI_Controller {
             $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
-        $filename = 'leaves.xls';
+        $filename = lang('leaves_export_title').'.xls';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');

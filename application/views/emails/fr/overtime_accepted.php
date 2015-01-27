@@ -30,7 +30,7 @@
         La déclaration d'heures supplémentaires que vous avez soumise a été acceptée. Voici les détails :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{Date}</td>
+                <td>Date &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
                 <td>Durée &nbsp;</td><td>{Duration}</td>

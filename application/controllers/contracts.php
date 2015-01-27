@@ -77,6 +77,7 @@ class Contracts extends CI_Controller {
         $data = $this->getUserContext();
         $data['filter'] = $filter;
         $data['title'] = lang('contract_index_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_contracts_list');
         $data['contracts'] = $this->contracts_model->get_contracts();
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);

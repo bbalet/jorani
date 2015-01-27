@@ -36,13 +36,20 @@ $lang['Accepted'] = 'Acceptée';
 $lang['Rejected'] = 'Rejetée';
 
 //Links to documentation
-$lang['global_link_doc_page_calendar_individual'] = '';
-$lang['global_link_doc_page_calendar_workmates'] = '';
-$lang['global_link_doc_page_calendar_collaborators'] = '';
-$lang['global_link_doc_page_calendar_department'] = '';
-$lang['global_link_doc_page_calendar_organization'] = '';
+$lang['global_link_doc_page_calendar_individual'] = 'http://fr.jorani.org/ecrans/page-mon-calendrier.html';
+$lang['global_link_doc_page_calendar_workmates'] = 'http://fr.jorani.org/ecrans/page-calendrier-mes-collegues.html';
+$lang['global_link_doc_page_calendar_collaborators'] = 'http://fr.jorani.org/ecrans/page-calendrier-mes-collaborateurs.html';
+$lang['global_link_doc_page_calendar_department'] = 'http://fr.jorani.org/ecrans/page-calendrier-mon-service.html';
+$lang['global_link_doc_page_calendar_organization'] = 'http://fr.jorani.org/ecrans/page-calendrier-global.html';
+$lang['global_link_doc_page_calendar_tabular'] = 'http://fr.jorani.org/ecrans/page-calendrier-tabulaire.html';
 
-$lang['global_link_doc_page_calendar_tabular'] = '';
+$lang['global_link_doc_page_positions_list'] = 'http://fr.jorani.org/ecrans/page-liste-des-postes.html';
+$lang['global_link_doc_page_contracts_list'] = 'http://fr.jorani.org/ecrans/page-liste-des-contrats.html';
+$lang['global_link_doc_page_collaborators_list'] = 'http://fr.jorani.org/ecrans/page-liste-des-collaborateurs.html';
+$lang['global_link_doc_page_leave_requests_list'] = 'http://fr.jorani.org/ecrans/page-liste-demandes-conges.html';
+$lang['global_link_doc_page_leave_balance_collaborators'] = 'http://fr.jorani.org/ecrans/page-solde-des-conges-collaborateur.html';
+$lang['global_link_doc_page_create_overtime'] = 'http://fr.jorani.org/ecrans/page-declarer-heures-supplementaires.html';
+
 $lang['global_link_doc_page_my_summary'] = '';
 $lang['global_link_doc_page_request_leave'] = 'http://fr.jorani.org/ecrans/page-creer-une-demande-de-conge.html';
 $lang['global_link_doc_page_edit_leave_type'] = 'http://fr.jorani.org/ecrans/gerer-liste-types-absence.html';

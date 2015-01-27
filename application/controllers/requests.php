@@ -160,6 +160,7 @@ class Requests extends CI_Controller {
         $this->expires_now();
         $data = $this->getUserContext();
         $data['title'] = lang('requests_collaborators_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_collaborators_list');
         $this->load->model('users_model');
         $data['collaborators'] = $this->users_model->get_employees_manager($this->user_id);
         $this->load->view('templates/header', $data);
@@ -210,6 +211,7 @@ class Requests extends CI_Controller {
                 
                 $this->expires_now();
                 $data['title'] = lang('hr_summary_title');
+                $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_balance_collaborators');
                 $this->load->view('templates/header', $data);
                 $this->load->view('menu/index', $data);
                 $this->load->view('requests/counters', $data);

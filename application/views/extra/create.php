@@ -20,7 +20,7 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('extra', $language);
 $this->lang->load('global', $language);?>
 
-<h2><?php echo lang('extra_create_title');?></h2>
+<h2><?php echo lang('extra_create_title');?>&nbsp;<?php echo $help;?></h2>
 
 <?php echo validation_errors(); ?>
 

@@ -43,6 +43,13 @@ $lang['global_link_doc_page_calendar_department'] = '';
 $lang['global_link_doc_page_calendar_organization'] = 'http://jorani.org/page-calendar-organization.html';
 $lang['global_link_doc_page_calendar_tabular'] = '';
 
+$lang['global_link_doc_page_positions_list'] = '';
+$lang['global_link_doc_page_contracts_list'] = '';
+$lang['global_link_doc_page_collaborators_list'] = '';
+$lang['global_link_doc_page_leave_requests_list'] = '';
+$lang['global_link_doc_page_leave_balance_collaborators'] = '';
+$lang['global_link_doc_page_create_overtime'] = '';
+
 $lang['global_link_doc_page_my_summary'] = 'http://jorani.org/page-my-summary.html';
 $lang['global_link_doc_page_request_leave'] = 'http://jorani.org/how-to-request-a-leave.html';
 $lang['global_link_doc_page_edit_leave_type'] = 'http://jorani.org/edit-leave-types.html';

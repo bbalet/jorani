@@ -113,7 +113,6 @@ class Extra extends CI_Controller {
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = lang('extra_create_title');
         
         $this->form_validation->set_rules('date', lang('extra_create_field_date'), 'required|xss_clean');
         $this->form_validation->set_rules('duration', lang('extra_create_field_duration'), 'required|xss_clean');
@@ -121,6 +120,8 @@ class Extra extends CI_Controller {
         $this->form_validation->set_rules('status', lang('extra_create_field_status'), 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
+            $data['title'] = lang('extra_create_title');
+            $data['help'] = $this->help->create_help_link('global_link_doc_page_create_overtime');
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('extra/create');
@@ -165,14 +166,15 @@ class Extra extends CI_Controller {
         
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = lang('extra_edit_hmtl_title');
-        $data['id'] = $id;      
         $this->form_validation->set_rules('date', lang('extra_edit_field_date'), 'required|xss_clean');
         $this->form_validation->set_rules('duration', lang('extra_edit_field_duration'), 'required|xss_clean');
         $this->form_validation->set_rules('cause', lang('extra_edit_field_cause'), 'required|xss_clean');
         $this->form_validation->set_rules('status', lang('extra_edit_field_status'), 'required|xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
+            $data['title'] = lang('extra_edit_hmtl_title');
+            $data['help'] = $this->help->create_help_link('global_link_doc_page_create_overtime');
+            $data['id'] = $id;
             $this->load->model('users_model');
             $data['name'] = $this->users_model->get_label($data['extra']['employee']);
             $this->load->view('templates/header', $data);

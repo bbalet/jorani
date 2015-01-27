@@ -37,7 +37,7 @@ $(document).ready(function() {
 </script>
 <?php } ?>
         
-<h1><?php echo lang('positions_index_title');?></h1>
+<h1><?php echo lang('positions_index_title');?> &nbsp;<?php echo $help;?></h1>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="positions" width="100%">
     <thead>

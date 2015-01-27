@@ -391,6 +391,9 @@ $config['enable_purge'] = FALSE;
 //Enable time management module
 $config['enable_time'] = FALSE;
 
+//Set this value to TRUE if you want to hide the menu entries related to overtime
+$config['disable_overtime'] = FALSE;
+
 //Google analytics tracking code (if empty, the Javascript tracking code will be desactivated).
 //An option allows you to send the identifier of the connected user (a special configuration must be set in GA first).
 //See https://developers.google.com/analytics/devguides/collection/analyticsjs/user-id
@@ -405,19 +408,6 @@ $config['ldap_host'] = '127.0.0.1';
 $config['ldap_port'] = 389;
 $config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';
 $config['ldap_basedn_db'] = FALSE;
-
-//Profiling options
-$config['enable_profiling'] = FALSE;
-$config['benchmarks'] = TRUE;
-$config['config'] = FALSE;
-$config['controller_info'] = FALSE;
-$config['get'] = FALSE;
-$config['http_headers'] = FALSE;
-$config['memory_usage'] = FALSE;
-$config['post'] = FALSE;
-$config['queries'] = TRUE;
-$config['uri_string'] = FALSE;
-$config['query_toggle_count'] = FALSE;
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

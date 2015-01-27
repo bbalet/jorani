@@ -70,8 +70,9 @@ $this->lang->load('global', $language);?>
     
     <label for="status" required><?php echo lang('leaves_create_field_status');?></label>
     <select name="status">
-        <option value="1" selected><?php echo lang('Planned');?></option>
-        <option value="2"><?php echo lang('Requested');?></option>
+        
+        <option value="1" <?php if ($this->config->item('leave_status_requested') == FALSE) echo 'selected'; ?>><?php echo lang('Planned');?></option>
+        <option value="2" <?php if ($this->config->item('leave_status_requested') == TRUE) echo 'selected'; ?>><?php echo lang('Requested');?></option>
     </select><br />
 
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('leaves_create_button_create');?></button>

@@ -99,7 +99,9 @@ $this->lang->load('menu', $language);?>
                   <ul class="dropdown-menu">
                     <li><a href="<?php echo base_url();?>requests/collaborators"><?php echo lang('menu_validation_collaborators');?></a></li>
                     <li><a href="<?php echo base_url();?>requests"><?php echo lang('menu_validation_leaves');?></a></li>
+                    <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
                     <li><a href="<?php echo base_url();?>overtime"><?php echo lang('menu_validation_overtime');?></a></li>
+                    <?php } ?>
                   </ul>
                 </li>
               </ul>
@@ -112,10 +114,12 @@ $this->lang->load('menu', $language);?>
                     <li><a href="<?php echo base_url();?>leaves/counters"><?php echo lang('menu_leaves_counters');?></a></li>
                     <li><a href="<?php echo base_url();?>leaves"><?php echo lang('menu_leaves_list_requests');?></a></li>
                     <li><a href="<?php echo base_url();?>leaves/create"><?php echo lang('menu_leaves_create_request');?></a></li>
+                    <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_requests_overtime');?></li>
                     <li><a href="<?php echo base_url();?>extra"><?php echo lang('menu_requests_list_extras');?></a></li>
                     <li><a href="<?php echo base_url();?>extra/create"><?php echo lang('menu_requests_request_extra');?></a></li>
+                    <?php } ?>
                   </ul>
                 </li>
               </ul>

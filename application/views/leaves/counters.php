@@ -61,6 +61,7 @@ $this->lang->load('global', $language);?>
         </div>
 </div>
 
+<?php if ($this->config->item('disable_overtime') == FALSE) { ?>
 <h4><?php echo lang('leaves_summary_title_overtime');?></h4>
 
 <table class="table table-bordered table-hover">
@@ -89,6 +90,7 @@ $this->lang->load('global', $language);?>
     <?php } ?>
   </tbody>
 </table>
+<?php } ?>
 
         </div>
 </div>

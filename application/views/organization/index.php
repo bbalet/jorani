@@ -97,7 +97,7 @@ $this->lang->load('treeview', $language);?>
 
 <div id="frmSelectSupervisor" class="modal hide fade">
     <div class="modal-header">
-        <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="close">&times;</a>
+        <a href="#" onclick="$('#frmSelectSupervisor').modal('hide');" class="close">&times;</a>
          <h3><?php echo lang('organization_index_popup_supervisor_title');?></h3>
     </div>
     <div class="modal-body" id="frmSelectSupervisorBody">
@@ -105,7 +105,7 @@ $this->lang->load('treeview', $language);?>
     </div>
     <div class="modal-footer">
         <a href="#" onclick="select_supervisor();" class="btn secondary"><?php echo lang('organization_index_popup_supervisor_button_ok');?></a>
-        <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_supervisor_button_cancel');?></a>
+        <a href="#" onclick="$('#frmSelectSupervisor').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_supervisor_button_cancel');?></a>
     </div>
 </div>
 
@@ -275,6 +275,9 @@ $this->lang->load('treeview', $language);?>
         $("#frmAddEmployee").alert();
         //Prevent to load always the same content (refreshed each time)
         $('#frmAddEmployee').on('hidden', function() {
+            $(this).removeData('modal');
+        });
+        $('#frmSelectSupervisor').on('hidden', function() {
             $(this).removeData('modal');
         });
         

@@ -275,9 +275,11 @@ $this->lang->load('treeview', $language);?>
         $("#frmAddEmployee").alert();
         //Prevent to load always the same content (refreshed each time)
         $('#frmAddEmployee').on('hidden', function() {
+            $( "#employees" ).remove();
             $(this).removeData('modal');
         });
         $('#frmSelectSupervisor').on('hidden', function() {
+            $( "#employees" ).remove();
             $(this).removeData('modal');
         });
         

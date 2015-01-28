@@ -214,6 +214,7 @@ class Hr extends CI_Controller {
             
             $this->expires_now();
             $data['title'] = lang('hr_summary_title');
+            $data['help'] = $this->help->create_help_link('global_link_doc_page_my_summary');
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('hr/counters', $data);

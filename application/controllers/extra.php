@@ -291,7 +291,7 @@ class Extra extends CI_Controller {
     }
     
     /**
-     * Action: export the list of all leaves into an Excel file
+     * Action: export the list of all extra times into an Excel file
      */
     public function export() {
         $this->load->library('excel');
@@ -316,7 +316,7 @@ class Extra extends CI_Controller {
             $this->excel->getActiveSheet()->setCellValue('B' . $line, $startdate);
             $this->excel->getActiveSheet()->setCellValue('C' . $line, $extra['duration']);
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $extra['cause']);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, $this->status_model->get_label($extra['status']));
+            $this->excel->getActiveSheet()->setCellValue('E' . $line, lang($this->status_model->get_label($extra['status'])));
             $line++;
         }
         

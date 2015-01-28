@@ -291,7 +291,7 @@ class Extra extends CI_Controller {
     }
     
     /**
-     * Action: export the list of all leaves into an Excel file
+     * Action: export the list of all extras into an Excel file
      */
     public function export() {
         $this->load->library('excel');

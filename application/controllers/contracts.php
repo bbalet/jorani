@@ -197,6 +197,7 @@ class Contracts extends CI_Controller {
         $this->auth->check_is_granted('calendar_contract');
         $data = $this->getUserContext();
         $data['title'] = lang('contract_calendar_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_contracts_calendar');
         if ($year <> 0) {
             $data['year'] = $year;
         } else {

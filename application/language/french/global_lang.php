@@ -45,6 +45,7 @@ $lang['global_link_doc_page_calendar_tabular'] = 'http://fr.jorani.org/ecrans/pa
 
 $lang['global_link_doc_page_positions_list'] = 'http://fr.jorani.org/ecrans/page-liste-des-postes.html';
 $lang['global_link_doc_page_contracts_list'] = 'http://fr.jorani.org/ecrans/page-liste-des-contrats.html';
+$lang['global_link_doc_page_contracts_calendar'] = 'http://fr.jorani.org/ecrans/definir-jours-non-travailles-contrat.html';
 $lang['global_link_doc_page_collaborators_list'] = 'http://fr.jorani.org/ecrans/page-liste-des-collaborateurs.html';
 $lang['global_link_doc_page_leave_requests_list'] = 'http://fr.jorani.org/ecrans/page-liste-demandes-conges.html';
 $lang['global_link_doc_page_leave_balance_collaborators'] = 'http://fr.jorani.org/ecrans/page-solde-des-conges-collaborateur.html';

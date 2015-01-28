@@ -49,7 +49,7 @@ padding-left:10px;
 }
 </style>
 
-<h2><?php echo lang('contract_calendar_title');?> <span class="muted"><?php echo $contract_name; ?></span></h2>
+<h2><?php echo lang('contract_calendar_title');?> <span class="muted"><?php echo $contract_name; ?></span>&nbsp;<?php echo $help;?></h2>
 
 <div class="row-fluid">
     <div class="span6">

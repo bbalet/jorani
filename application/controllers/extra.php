@@ -272,7 +272,7 @@ class Extra extends CI_Controller {
             if ($this->is_hr) {
                 $can_delete = true;
             } else {
-                if ($leaves['status'] == 1 ) {
+                if ($extra['status'] == 1 ) {
                     $can_delete = true;
                 }
             }

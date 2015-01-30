@@ -40,7 +40,7 @@ $(document).ready(function() {
 </script>
 <?php } ?>
 
-<h1><?php echo lang('requests_index_title');?><?php echo $help;?></h2>
+<h1><?php echo lang('requests_index_title');?><?php echo $help;?></h1>
 
 <p><?php echo lang('requests_index_description');?></p>
 

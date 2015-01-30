@@ -18,7 +18,8 @@
 var addDays = 0;
     
 //Try to calculate the length of the leave
-function getLeaveLength() {
+function getLeaveLength(refreshInfos) {
+    refreshInfos = typeof refreshInfos !== 'undefined' ? refreshInfos : true;
     var start = moment($('#startdate').val());
     var end = moment($('#enddate').val());
     var startType = $('#startdatetype option:selected').val();
@@ -62,11 +63,12 @@ function getLeaveLength() {
                 }
              }
         }
-        getLeaveInfos(false);
+        if (refreshInfos) getLeaveInfos(false);
     }
 }
 
 //Get the leave credit, duration and detect overlapping cases (Ajax request)
+//Default behavour is to set the duration field. pass false if you want to disable this behaviour
 function getLeaveInfos(preventDefault) {
         $('#frmModalAjaxWait').modal('show');
         $.ajax({
@@ -87,14 +89,16 @@ function getLeaveInfos(preventDefault) {
                 if (!preventDefault) $('#duration').val(duration);
             }
             if (typeof leaveInfo.credit !== 'undefined') {
-                var credit = parseInt(leaveInfo.credit);
+                var credit = parseFloat(leaveInfo.credit);
                 var duration = parseFloat($("#duration").val());
                 if (duration > credit) {
                     $("#lblCreditAlert").show();
                 } else {
                     $("#lblCreditAlert").hide();
                 }
-                $("#lblCredit").text(leaveInfo.credit);
+                if (leaveInfo.credit != null) {
+                    $("#lblCredit").text('(' + leaveInfo.credit + ')');
+                }
             }
             if (typeof leaveInfo.overlap !== 'undefined') {
                 if (Boolean(leaveInfo.overlap)) {
@@ -108,6 +112,9 @@ function getLeaveInfos(preventDefault) {
 }
 
 $(function () {
+    //On openning leave/edit, init addDays variable
+    getLeaveLength(false);
+    
     $("#viz_startdate").datepicker({
         changeMonth: true,
         changeYear: true,

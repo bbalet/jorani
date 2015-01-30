@@ -54,7 +54,7 @@ $this->lang->load('global', $language);?>
     <?php foreach ($types as $types_item): ?>
         <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == $leave['type']) echo "selected" ?>><?php echo $types_item['name'] ?></option>
     <?php endforeach ?>    
-    </select>(<span id="lblCredit"><?php echo $credit; ?></span>)<br />
+    </select>&nbsp;<span id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span><br />
     
     <label for="duration" required><?php echo lang('leaves_edit_field_duration');?></label>
     <input type="text" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" />

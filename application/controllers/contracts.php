@@ -281,7 +281,7 @@ class Contracts extends CI_Controller {
                 $day = strtotime($this->input->post('day', TRUE), $start);
                 $list = '';
                 while ($day <= $end) {
-                    $list .= date("m/d/Y", $day) . ",";
+                    $list .= date("Y-m-d", $day) . ",";
                     $day = strtotime("+1 weeks", $day);
                 }
                 $list = rtrim($list, ",");

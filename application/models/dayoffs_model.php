@@ -72,7 +72,7 @@ class Dayoffs_model extends CI_Model {
     public function deletedayoffs($contract, $dateList) {
         $dates = explode(",", $dateList);
         $this->db->where('contract', $contract);
-        $this->db->where_in('date', $dates);
+        $this->db->where_in('DATE_FORMAT(date, \'%Y-%m-%d\')', $dates);
         return $this->db->delete('dayoffs');
     }
 

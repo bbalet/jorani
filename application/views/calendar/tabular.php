@@ -51,6 +51,28 @@ $this->lang->load('global', $language);?>
     color: #ffffff;
 }
 
+.amdayoff {
+background: #000000; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #000000 50%, #ffffff 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#000000), color-stop(50%,#ffffff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #000000 50%,#ffffff 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #000000 50%,#ffffff 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #000000 50%,#ffffff 50%); /* IE10+ */
+background: linear-gradient(135deg, #000000 50%,#ffffff 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.pmdayoff {
+background: #000000; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #ffffff 50%, #000000 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ffffff), color-stop(50%,#000000)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #ffffff 50%,#000000 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #ffffff 50%,#000000 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #ffffff 50%,#000000 50%); /* IE10+ */
+background: linear-gradient(135deg, #ffffff 50%,#000000 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
 .amplanned {
 background: #999; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #999 50%, #ffffff 50%); /* FF3.6+ */
@@ -333,6 +355,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 <table class="table table-bordered">
     <thead>
         <tr>
+            <td>&nbsp;</td>
+            <?php
+                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
+                $lastDay = date("t", strtotime($start));    //last day of selected month
+                for ($ii = 1; $ii <=$lastDay; $ii++) {
+                    $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
+                    switch ($dayNum)
+                    {
+                        case 1: echo '<td><b>' . lang('calendar_monday_short') . '</b></td>'; break;
+                        case 2: echo '<td><b>' . lang('calendar_tuesday_short') . '</b></td>'; break;
+                        case 3: echo '<td><b>' . lang('calendar_wednesday_short') . '</b></td>'; break;
+                        case 4: echo '<td><b>' . lang('calendar_thursday_short') . '</b></td>'; break;
+                        case 5: echo '<td><b>' . lang('calendar_friday_short') . '</b></td>'; break;
+                        case 6: echo '<td><b>' . lang('calendar_saturday_short') . '</b></td>'; break;
+                        case 7: echo '<td><b>' . lang('calendar_sunday_short') . '</b></td>'; break;
+                    }
+                }?>
+        </tr>
+        <tr>
             <td><b><?php echo lang('calendar_tabular_thead_employee');?></b></td>
             <?php
                 $start = $year . '-' . $month . '-' . '1';    //first date of selected month
@@ -371,6 +412,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
             switch ($day->display) {
                 case '0': $class="working"; break;
                 case '4': $class="dayoff"; break;
+                case '5': $class="amdayoff"; break;
+                case '6': $class="pmdayoff"; break;
                 case '1':
                       switch ($day->status)
                       {
@@ -405,8 +448,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
     <?php } ?>
           </tr>
     <?php      
-    if ($repeater++>10) {
+    if (++$repeater>=10) {
         $repeater = 0;?>
+        <tr>
+            <td>&nbsp;</td>
+            <?php
+                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
+                $lastDay = date("t", strtotime($start));    //last day of selected month
+                for ($ii = 1; $ii <=$lastDay; $ii++) {
+                    $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
+                    switch ($dayNum)
+                    {
+                        case 1: echo '<td><b>' . lang('calendar_monday_short') . '</b></td>'; break;
+                        case 2: echo '<td><b>' . lang('calendar_tuesday_short') . '</b></td>'; break;
+                        case 3: echo '<td><b>' . lang('calendar_wednesday_short') . '</b></td>'; break;
+                        case 4: echo '<td><b>' . lang('calendar_thursday_short') . '</b></td>'; break;
+                        case 5: echo '<td><b>' . lang('calendar_friday_short') . '</b></td>'; break;
+                        case 6: echo '<td><b>' . lang('calendar_saturday_short') . '</b></td>'; break;
+                        case 7: echo '<td><b>' . lang('calendar_sunday_short') . '</b></td>'; break;
+                    }
+                }?>
+        </tr>
     <tr>
         <td><b><?php echo lang('calendar_tabular_thead_employee');?></b></td>
         <?php for ($ii = 1; $ii <=$lastDay; $ii++) echo '<td><b>' . $ii . '</b></td>';?>

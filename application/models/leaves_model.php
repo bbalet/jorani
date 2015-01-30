@@ -761,7 +761,9 @@ class Leaves_model extends CI_Model {
                 //1 - All day           []
                 //2 - Morning        |\
                 //3 - Afternoon      /|
-                //4 - Day Off
+                //4 - All Day Off       []
+                //5 - Morning Day Off   |\
+                //6 - Afternoon Day Off /|
                 if (($startDate == $endDate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Afternoon')) $display = '1';
                 if (($startDate == $endDate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Morning')) $display = '2';
                 if (($startDate == $endDate) && ($entry->startdatetype == 'Afternoon') && ($entry->enddatetype == 'Afternoon')) $display = '3';
@@ -800,7 +802,11 @@ class Leaves_model extends CI_Model {
             foreach ($dayoffs as $dayoff) {
                 $iDate = new DateTime($dayoff->date);
                 $dayNum = intval($iDate->format('d'));
-                $tabular[$employee->id]->days[$dayNum]->display = '4';
+                switch ($dayoff->type) {
+                    case 1 : $tabular[$employee->id]->days[$dayNum]->display = '4'; break;
+                    case 2 : $tabular[$employee->id]->days[$dayNum]->display = '5'; break;
+                    case 3 : $tabular[$employee->id]->days[$dayNum]->display = '6'; break;
+                }
                 $tabular[$employee->id]->days[$dayNum]->type = $dayoff->title;
             }            
         }

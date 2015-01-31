@@ -83,17 +83,21 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript">
 
 var entity = -1; //Id of the selected entity
-var text; //Label of the selected entity
+var entityName = ''; //Label of the selected entity
+var includeChildren = true;
 
 function select_entity() {
     entity = $('#organization').jstree('get_selected')[0];
-    text = $('#organization').jstree().get_text(entity);
-    $('#txtEntity').val(text);
+    entityName = $('#organization').jstree().get_text(entity);
+    $('#txtEntity').val(entityName);
     $("#frmSelectEntity").modal('hide');
+    $.cookie('rep_entity', entity);
+    $.cookie('rep_entityName', entityName);
+    $.cookie('rep_includeChildren', includeChildren);
 }
 
 $(document).ready(function() {
@@ -145,7 +149,29 @@ $(document).ready(function() {
         });
 
     });
-	
+    
+    //Toggle day offs displays
+    $('#chkIncludeChildren').on('change', function() {
+        includeChildren = $('#chkIncludeChildren').prop('checked');
+        $.cookie('rep_includeChildren', includeChildren);
+    });
+
+    //Init datepicker widget
     $('#refdate').datepicker();
+    
+    //Cookie has value ? take -1 by default
+    if($.cookie('rep_entity') != null) {
+        entity = $.cookie('rep_entity');
+        entityName = $.cookie('rep_entityName');
+        includeChildren = $.cookie('rep_includeChildren');
+        //Parse boolean values
+        includeChildren = $.parseJSON(includeChildren.toLowerCase());
+        $('#txtEntity').val(entityName);
+        $('#chkIncludeChildren').prop('checked', includeChildren);
+    } else { //Set default value
+        $.cookie('rep_entity', entity);
+        $.cookie('rep_entityName', entityName);
+        $.cookie('rep_includeChildren', includeChildren);
+    }
 });
 </script>

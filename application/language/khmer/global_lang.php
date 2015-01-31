@@ -67,3 +67,11 @@ $lang['global_link_doc_page_leave_balance_report'] = '';
 //Calendar
 $lang['Morning'] = 'Matin';
 $lang['Afternoon'] = 'Après-midi';
+
+//Global strings
+$lang['identifier'] = 'identifier';
+$lang['firstname'] = 'firstname';
+$lang['lastname'] = 'lastname';
+$lang['datehired'] = 'datehired';
+$lang['department'] = 'department';
+$lang['contract'] = 'contract';

@@ -62,8 +62,16 @@ $lang['global_link_doc_page_create_user'] = 'http://fr.jorani.org/ecrans/page-aj
 $lang['global_link_doc_page_list_users'] = '';
 $lang['global_link_doc_page_list_employees'] = '';
 
-$lang['global_link_doc_page_leave_balance_report'] = '';
+$lang['global_link_doc_page_leave_balance_report'] = 'http://fr.jorani.org/ecrans/page-rapport-etat-des-conges.html';
 
 //Calendar
 $lang['Morning'] = 'Matin';
 $lang['Afternoon'] = 'Après-midi';
+
+//Global strings
+$lang['identifier'] = 'identifiant';
+$lang['firstname'] = 'prénom';
+$lang['lastname'] = 'nom';
+$lang['datehired'] = 'date embauche';
+$lang['department'] = 'service';
+$lang['contract'] = 'contrat';

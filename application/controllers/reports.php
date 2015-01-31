@@ -43,6 +43,7 @@ class Reports extends CI_Controller {
         $this->language_code = $this->session->userdata('language_code');
         $this->load->helper('language');
         $this->lang->load('reports', $this->language);
+        $this->lang->load('global', $this->language);
     }
     
     /**
@@ -177,7 +178,10 @@ class Reports extends CI_Controller {
             $tbody .= '<tr>';
             foreach ($row as $key => $value) {
                 if ($line == 2) {
-                    $thead .= '<th>' . $key . '</th>';
+                    if (lang($key) == '')
+                        $thead .= '<th>' . $key . '</th>';
+                    else
+                        $thead .= '<th>' . lang($key) . '</th>';
                 }
                 $tbody .= '<td>' . $value . '</td>';
                 $index++;
@@ -251,7 +255,10 @@ class Reports extends CI_Controller {
             foreach ($row as $key => $value) {
                 if ($line == 2) {
                     $colidx = $this->excel->column_name($index) . '1';
-                    $this->excel->getActiveSheet()->setCellValue($colidx, $key);
+                    if (lang($key) == '')
+                        $this->excel->getActiveSheet()->setCellValue($colidx, $key);
+                    else
+                        $this->excel->getActiveSheet()->setCellValue($colidx, lang($key));
                     $max++;
                 }
                 $colidx = $this->excel->column_name($index) . $line;

@@ -49,6 +49,7 @@ $lang['global_link_doc_page_contracts_calendar'] = '';
 $lang['global_link_doc_page_collaborators_list'] = '';
 $lang['global_link_doc_page_leave_requests_list'] = '';
 $lang['global_link_doc_page_leave_balance_collaborators'] = '';
+$lang['global_link_doc_page_leave_balance_employee'] = '';
 $lang['global_link_doc_page_create_overtime'] = '';
 
 $lang['global_link_doc_page_my_summary'] = 'http://jorani.org/page-my-summary.html';

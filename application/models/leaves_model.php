@@ -740,13 +740,16 @@ class Leaves_model extends CI_Model {
         $this->db->limit(512);  //Security limit
         $events = $this->db->get()->result();
         $limitDate = new DateTime($end);
+        $floorDate = new DateTime($start);
         
         $this->load->model('dayoffs_model');
         foreach ($events as $entry) {
                                         
-            $iDate = new DateTime($entry->startdate);
-            $endDate = new DateTime($entry->enddate);
             $startDate = new DateTime($entry->startdate);
+            if ($startDate < $floorDate) $startDate = $floorDate;
+            $iDate = $startDate;
+            $endDate = new DateTime($entry->enddate);
+            if ($endDate > $limitDate) $endDate = $limitDate;
 
             //Iteration between 2 dates
             while ($iDate <= $endDate)
@@ -764,17 +767,17 @@ class Leaves_model extends CI_Model {
                 //4 - All Day Off       []
                 //5 - Morning Day Off   |\
                 //6 - Afternoon Day Off /|
-                if (($startDate == $endDate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Afternoon')) $display = '1';
-                if (($startDate == $endDate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Morning')) $display = '2';
-                if (($startDate == $endDate) && ($entry->startdatetype == 'Afternoon') && ($entry->enddatetype == 'Afternoon')) $display = '3';
-                if (($startDate != $endDate) && ($entry->startdatetype == 'Morning')) $display = '1';
-                if (($startDate != $endDate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
-                if (($startDate != $endDate) && ($entry->enddatetype == 'Morning')) $display = '2';
-                if (($startDate != $endDate) && ($iDate != $startDate) && ($iDate != $endDate)) $display = '1';
-                if (($startDate != $endDate) && ($iDate == $startDate) && ($entry->startdatetype == 'Morning')) $display = '1';
-                if (($startDate != $endDate) && ($iDate == $startDate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
-                if (($startDate != $endDate) && ($iDate == $endDate) && ($entry->enddatetype == 'Afternoon')) $display = '1';
-                if (($startDate != $endDate) && ($iDate == $endDate) && ($entry->enddatetype == 'Morning')) $display = '2';
+                if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Afternoon')) $display = '1';
+                if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Morning')) $display = '2';
+                if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Afternoon') && ($entry->enddatetype == 'Afternoon')) $display = '3';
+                if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Morning')) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
+                if (($entry->startdate != $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';
+                if (($entry->startdate != $entry->enddate) && ($iDate != $entry->startdate) && ($iDate != $endDate)) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($iDate == $entry->startdate) && ($entry->startdatetype == 'Morning')) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($iDate == $entry->startdate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
+                if (($entry->startdate != $entry->enddate) && ($iDate == $entry->enddate) && ($entry->enddatetype == 'Afternoon')) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($iDate == $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';
                 
                 //Check if another leave was defined on this day
                 if ($tabular[$entry->uid]->days[$dayNum]->type != '') {

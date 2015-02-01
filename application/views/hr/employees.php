@@ -38,7 +38,7 @@ $(document).ready(function() {
 </script>
 <?php } ?>
         
-<h1><?php echo lang('hr_employees_title');?><?php echo $help;?></h1>
+<h1><?php echo lang('hr_employees_title');?>&nbsp;<?php echo $help;?></h1>
 
 <div class="row-fluid">
     <div class="span4">

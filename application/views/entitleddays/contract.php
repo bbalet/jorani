@@ -86,13 +86,14 @@ $endDate = new DateTime($days['enddate']);?>
         </div>
  </div>
     
-<br /><br />
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
 <a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
-<button id="cmdAddEntitledDays" class="btn btn-primary" onclick="$('#frmAddEntitledDays').modal('show');"><i class="icon-plus-sign icon-white"></i> Add</button>
+<button id="cmdAddEntitledDays" class="btn btn-primary" onclick="$('#frmAddEntitledDays').modal('show');"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_add');?></button>
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
     </div>
 </div>
-<div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
 
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
         <div class="modal-header">

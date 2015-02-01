@@ -21,7 +21,10 @@ $this->lang->load('entitleddays', $language);
 $this->lang->load('datatable', $language);
 $this->lang->load('global', $language);?>
 
-<h2><?php echo lang('entitleddays_user_index_title');?> <span class="muted"><?php echo $employee_name; ?></span></h2>
+<div class="row-fluid">
+    <div class="span12">
+
+<h2><?php echo lang('entitleddays_user_index_title');?> <span class="muted"><?php echo $employee_name; ?></span>&nbsp;<?php echo $help;?></h2>
 
 <table id="entitleddaysuser">
 <thead>
@@ -54,6 +57,16 @@ echo $date->format(lang('global_date_format'));
   <?php } ?>
   </tbody>
 </table>
+
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
+<a href="<?php echo base_url();?>hr/employees" class="btn btn-danger"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_user_index_button_back');?></a>
+<button id="cmdAddEntitledDays" class="btn btn-primary" onclick="$('#frmAddEntitledDays').modal('show');"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('entitleddays_user_index_button_add');?></button>
+
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
+        </div>
+</div>
 
 <div id="frmAddEntitledDays" class="modal hide fade">
         <div class="modal-header">
@@ -96,10 +109,6 @@ echo $date->format(lang('global_date_format'));
             <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
         </div>
  </div>
-
-<br /><br />
-<a href="<?php echo base_url();?>hr/employees" class="btn btn-danger"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_user_index_button_back');?></a>
-<button id="cmdAddEntitledDays" class="btn btn-primary" onclick="$('#frmAddEntitledDays').modal('show');"><i class="icon-plus-sign icon-white"></i> Add</button>
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>

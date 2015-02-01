@@ -91,6 +91,7 @@ class Entitleddays extends CI_Controller {
         }
         
         $data['title'] = lang('entitleddays_user_index_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_entitleddays_employee');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('entitleddays/user', $data);

@@ -52,6 +52,8 @@ $lang['global_link_doc_page_leave_balance_collaborators'] = '';
 $lang['global_link_doc_page_leave_balance_employee'] = '';
 $lang['global_link_doc_page_create_overtime'] = '';
 
+$lang['global_link_doc_page_entitleddays_employee'] = '';
+
 $lang['global_link_doc_page_my_summary'] = '';
 $lang['global_link_doc_page_request_leave'] = '';
 $lang['global_link_doc_page_edit_leave_type'] = '';

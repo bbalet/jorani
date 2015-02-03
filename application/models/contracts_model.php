@@ -82,7 +82,9 @@ class Contracts_model extends CI_Model {
         $query = $this->db->delete('contracts', array('id' => $id));
         $this->load->model('users_model');
         $this->load->model('entitleddays_model');
+        $this->load->model('dayoffs_model');
         $this->entitleddays_model->delete_entitleddays_cascade_contract($id);
+        $this->dayoffs_model->delete_dayoffs_cascade_contract($id);
         $this->users_model->update_users_cascade_contract($id);
     }
     

@@ -50,15 +50,40 @@ class Dayoffs_model extends CI_Model {
     }
     
     /**
+     * Get the list of dayofs for a contract (suitable fo ICS feed)
+     * @param int $contract identifier of the contract
+     * @return array record of contracts
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_all_dayoffs($contract) {
+        $this->db->where('contract', $contract);
+        $query = $this->db->get('dayoffs');
+        $dayoffs =array();
+        return $query->result();
+    }
+    
+    
+    /**
      * Delete a day off into the day offs table
      * @param int $contract Identifier of the contract
      * @param string $timestamp Date of the day off
-     * @return bool outcome of the query
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function deletedayoff($contract, $timestamp) {
         $this->db->where('contract', $contract);
         $this->db->where('date', date('Y/m/d', $timestamp));
+        return $this->db->delete('dayoffs');
+    } 
+    
+    /**
+     * Delete a day off into the day offs table
+     * @param int $contract Identifier of the contract
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delete_dayoffs_cascade_contract($contract) {
+        $this->db->where('contract', $contract);
         return $this->db->delete('dayoffs');
     }
     

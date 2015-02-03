@@ -31,9 +31,15 @@
                 <td>Identifiant</td><td>{Login}</td>
             </tr>
             <tr>
+                <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
                 <td>Mot de passe</td><td>{Password}</td>
+                <?php } else { ?>
+                <td>Mot de passe</td><td><i>Le mot de passe que vous utilisez pour ouvrir une session sur votre système d'exploitation (Windows , Linux , etc. ).</i></td>
+                <?php } ?>
             </tr>            
         </table>
+        <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
         Une fois connecté, vous pouvez modifier votre mot de passe comme expliqué <a href="http://fr.jorani.org/utilisation/comment-modifier-mon-mot-de-passe.html" title="Lien vers la documentation" target="_blank">dans cet article</a>.
+        <?php } ?>
     </body>
 </html>

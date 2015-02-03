@@ -27,9 +27,15 @@
                 <td>Login</td><td>{Login}</td>
             </tr>
             <tr>
+                <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
                 <td>Password</td><td>{Password}</td>
+                <?php } else { ?>
+                <td>Password</td><td><i>The password you use in order to open a session on your operating system (Windows, Linux, etc.).</i></td>
+                <?php } ?>
             </tr>            
         </table>
+        <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
         Once connected, you can change your password, as explained <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        <?php } ?>
     </body>
 </html>

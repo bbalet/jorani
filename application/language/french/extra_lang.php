@@ -43,6 +43,7 @@ $lang['extra_create_button_create'] = 'Déclarer heures supp.';
 $lang['extra_create_button_cancel'] = 'Annuler';
 $lang['extra_create_msg_success'] = 'La déclaration a été créée avec succès.';
 $lang['extra_create_msg_error'] = 'La déclaration a été créée ou modifié avec succès, mais vous n\'avez pas de manager.';
+$lang['extra_create_mandatory_js_msg'] = '"Le champ " + fieldname + " est obligatoire."';
 
 $lang['extra_edit_title'] = 'Modifier déclaration N°';
 $lang['extra_edit_hmtl_title'] = 'Modifier une déclaration';

@@ -93,7 +93,9 @@ $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
     <br />
     <button id="send" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></button><br />
     <br />
+    <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
     <button id="cmdForgetPassword" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
+    <?php } ?>
     <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>
                 </div>
                 <div class="span6"><img src="<?php echo base_url();?>assets/images/jorani-vertical.png"></div>

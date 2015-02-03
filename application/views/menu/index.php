@@ -26,7 +26,9 @@ $this->lang->load('menu', $language);?>
     <div class="span6 pull-right">
         <a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user"></i></a>
         &nbsp;
+        <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
         <a href="<?php echo base_url();?>users/reset/<?php echo $user_id; ?>" title="<?php echo lang('menu_banner_tip_reset');?>" data-target="#frmChangeMyPwd" data-toggle="modal"><i class="icon-lock"></i></a>
+        <?php } ?>
         &nbsp;
         <?php echo lang('menu_banner_welcome');?> <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout"><?php echo lang('menu_banner_logout');?></a>     
     </div>

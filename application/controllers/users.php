@@ -300,9 +300,9 @@ class Users extends CI_Controller {
             $this->load->helper('form');
             $this->load->library('form_validation');
             $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
-			$this->form_validation->set_rules('password', 'Mot de passe', 'required');
-			$this->form_validation->set_rules('passwordbis', 'Mot de passe', 'required');
-			$this->form_validation->set_rules('lastpassword', 'Ancien mot de passe', 'callback_samePassword|required');
+	    $this->form_validation->set_rules('password', lang('users_controller_password'), 'required');
+	    $this->form_validation->set_rules('passwordbis', lang('users_controller_password'), 'required');
+	    $this->form_validation->set_rules('lastpassword', lang('users_controller_lastpassword'), 'callback_samePassword|required');
             if ($this->form_validation->run() === FALSE) {
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
 				$this->load->view('templates/header', $data);

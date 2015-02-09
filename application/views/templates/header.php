@@ -4,6 +4,7 @@
     <title><?php echo $title ?> - Jorani</title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta charset="UTF-8">
+    <meta description="Jorani a free and open source leave management system. Workflow of approval; e-mail notifications; calendars; reports; export to Excel and more.">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 <?php CI_Controller::get_instance()->load->helper('language');

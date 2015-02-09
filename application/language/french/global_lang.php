@@ -53,6 +53,7 @@ $lang['global_link_doc_page_leave_balance_employee'] = 'http://fr.jorani.org/ecr
 $lang['global_link_doc_page_create_overtime'] = 'http://fr.jorani.org/ecrans/page-declarer-heures-supplementaires.html';
 
 $lang['global_link_doc_page_entitleddays_employee'] = 'http://fr.jorani.org/ecrans/page-credit-conges-employe.html';
+$lang['global_link_doc_page_entitleddays_contract'] = 'http://fr.jorani.org/ecrans/page-credit-conges-contrat.html';
 
 $lang['global_link_doc_page_my_summary'] = 'http://fr.jorani.org/ecrans/page-compteur-individuel.html';
 $lang['global_link_doc_page_request_leave'] = 'http://fr.jorani.org/ecrans/page-creer-une-demande-de-conge.html';

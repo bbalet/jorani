@@ -24,7 +24,7 @@ $this->lang->load('global', $language);?>
 <div class="row-fluid">
     <div class="span12">
 
-<h2><?php echo lang('entitleddays_contract_index_title');?> <span class="muted"><?php echo $contract_name; ?></span></h2>
+<h2><?php echo lang('entitleddays_contract_index_title');?> <span class="muted"><?php echo $contract_name; ?></span>&nbsp;<?php echo $help;?></h2>
 
 <table id="entitleddayscontract">
 <thead>

@@ -25,7 +25,7 @@ $lang['contract_index_tip_delete'] = 'supprimer contrat';
 $lang['contract_index_tip_view'] = 'Voir contrat';
 $lang['contract_index_tip_edit'] = 'Modifier contrat';
 $lang['contract_index_tip_entitled'] = 'Crédit congés';
-$lang['contract_index_tip_dayoffs'] = 'Jours chomés et weekends';
+$lang['contract_index_tip_dayoffs'] = 'Jours non travaillés';
 $lang['contract_index_button_export'] = 'Exporter cette liste';
 $lang['contract_index_button_create'] = 'Créer contrat';
 

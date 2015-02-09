@@ -136,7 +136,6 @@ $route['leaves/department'] = 'leaves/department';
 $route['leaves/organization/(:num)'] = 'leaves/organization/$1';
 $route['leaves/collaborators'] = 'leaves/collaborators';
 $route['leaves/team'] = 'leaves/team';
-$route['leaves/ical/(:num)'] = 'leaves/ical/$1';
 $route['leaves/organization/(:num)'] = 'leaves/organization/$1';
 
 //My leave requests
@@ -218,6 +217,11 @@ $route['api/userleaves/(:num)'] = 'api/userleaves/$1';
 $route['api/users/(:num)'] = 'api/users/$1';
 $route['api/users'] = 'api/users';
 
+//ICS Feeds
+$route['ics/individual/(:num)'] = 'ics/individual/$1';
+$route['ics/dayoffs/(:num)'] = 'ics/dayoffs/$1';
+$route['ics/ical/(:num)'] = 'ics/ical/$1';
+
 //Session management
 $route['session/login'] = 'session/login';
 $route['session/logout'] = 'session/logout';
@@ -226,7 +230,6 @@ $route['session/forgetpassword'] = 'session/forgetpassword';
 
 $route['default_controller'] = 'leaves';
 $route['(:any)'] = 'pages/view/$1';
-
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

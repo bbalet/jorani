@@ -135,6 +135,7 @@ class Users extends CI_Controller {
         $this->load->model('organization_model');
         $data['roles'] = $this->roles_model->get_roles();
         $data['manager_label'] = $this->users_model->get_label($data['user']['manager']);
+        $data['contract_id'] = intval($data['user']['contract']);
         $data['contract_label'] = $this->contracts_model->get_label($data['user']['contract']);
         $data['position_label'] = $this->positions_model->get_label($data['user']['position']);
         $data['organization_label'] = $this->organization_model->get_label($data['user']['organization']);
@@ -142,64 +143,6 @@ class Users extends CI_Controller {
         $this->load->view('menu/index', $data);
         $this->load->view('users/myprofile', $data);
         $this->load->view('templates/footer');
-    }
-
-    /**
-     * Export the details of the connected user (contract, line manager, etc.) to a PDF document
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function pdf_myprofile() {
-        $this->auth->check_is_granted('view_myprofile');
-        $data = $this->getUserContext();
-        $data['user'] = $this->users_model->get_users($this->user_id);
-        if (empty($data['user'])) {
-            show_404();
-        }
-        $data['title'] = lang('users_myprofile_html_title');
-        $this->load->model('roles_model');
-        $this->load->model('positions_model');
-        $this->load->model('contracts_model');
-        $this->load->model('organization_model');
-        $data['roles'] = $this->roles_model->get_roles();
-        $data['manager_label'] = $this->users_model->get_label($data['user']['manager']);
-        $data['contract_label'] = $this->contracts_model->get_label($data['user']['contract']);
-        $data['position_label'] = $this->positions_model->get_label($data['user']['position']);
-        $data['organization_label'] = $this->organization_model->get_label($data['user']['organization']);
-        $this->load->helper('pdf_helper');
-        
-        tcpdf();
-        $obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $obj_pdf->SetCreator(PDF_CREATOR);
-        $title = 'LMS  -  ' . lang('users_myprofile_html_title');
-        $obj_pdf->SetTitle($title);
-        $obj_pdf->SetAuthor($this->fullname);
-        $obj_pdf->SetSubject('LMS Report');
-        $obj_pdf->SetKeywords('lms, hr, hrm, employee, information, details, personnal, report');
-        $obj_pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $title, '');
-        $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-        $obj_pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-        //$obj_pdf->SetDefaultMonospacedFont('freeserif');
-        $obj_pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-        $obj_pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-        $obj_pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-        $obj_pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-        //$obj_pdf->SetFont('helvetica', '', 9);
-        //$obj_pdf->SetDefaultMonospacedFont('freemono');
-        $obj_pdf->SetDefaultMonospacedFont('khmeros');
-        $obj_pdf->SetFont('khmeros','',12);
-        $obj_pdf->setFontSubsetting(true);
-        $obj_pdf->AddPage();
-        ob_start();
-
-        $this->load->view('templates/pdf_header', $data);
-        $this->load->view('users/pdf_myprofile', $data);
-        $this->load->view('templates/pdf_footer');
-        $content = ob_get_contents();
-        //$content = iconv("UTF-8", "ISO-8859-1", $content);
-        
-        ob_end_clean();
-        $obj_pdf->writeHTML($content, true, false, true, false, '');
-        $obj_pdf->Output('lms_myprofile.pdf', 'I');
     }
     
     /**

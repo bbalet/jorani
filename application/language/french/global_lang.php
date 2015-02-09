@@ -79,3 +79,5 @@ $lang['lastname'] = 'nom';
 $lang['datehired'] = 'date embauche';
 $lang['department'] = 'service';
 $lang['contract'] = 'contrat';
+$lang['day off'] = 'jour non travaillé';
+$lang['leave'] = 'absence';

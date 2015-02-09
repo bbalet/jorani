@@ -39,10 +39,17 @@ $this->lang->load('global', $language);?>
 </div>
 
 <div class="row-fluid">
-    <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
-    <div class="span3"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
-    <div class="span3"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
-    <div class="span3"><span class="label label-important" style="background-color: #ff0000;"><?php echo lang('Rejected');?></span></div>
+    <div class="span2"><span class="label"><?php echo lang('Planned');?></span></div>
+    <div class="span2"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
+    <div class="span2"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
+    <div class="span2"><span class="label label-important" style="background-color: #ff0000;"><?php echo lang('Rejected');?></span></div>
+    <div class="span4">
+        <?php if ($this->config->item('ics_enabled') == FALSE) {?>
+        &nbsp;
+        <?php } else {?>
+        <span class="pull-right"><a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a></span>
+        <?php }?>        
+    </div>
 </div>
 
 <div id='calendar'></div>
@@ -74,6 +81,7 @@ $this->lang->load('global', $language);?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lib/moment.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/fullcalendar.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo $language_code;?>.js"></script>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
     var toggleDayoffs = false;
     
@@ -105,7 +113,7 @@ $(function () {
         },
         events: '<?php echo base_url();?>leaves/individual',
         eventClick: function(calEvent, jsEvent, view) {
-            var link = "<?php echo base_url();?>leaves/ical/" + calEvent.id;
+            var link = "<?php echo base_url();?>ics/ical/" + calEvent.id;
             $("#lnkDownloadCalEvnt").attr('href', link);
             $('#frmEvent').modal('show');
         },
@@ -142,6 +150,12 @@ $(function () {
     $('#cmdToday').click(function() {
         $('#calendar').fullCalendar('today');
         refresh_calendar();
+    });
+    
+    $('#lnkICS').click(function () {
+        bootbox.alert("ICS : <input type='text' class='input-xlarge' id='txtIcsUrl' \n\
+                    value='<?php echo base_url() . 'ics/individual/' . $user_id;?>'\n\
+                    onfocus='$(this).select();' />");
     });
 });
 </script>

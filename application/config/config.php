@@ -410,5 +410,8 @@ $config['ldap_port'] = 389;
 $config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';
 $config['ldap_basedn_db'] = FALSE;
 
+//Enable public ICS feeds
+$config['ics_enabled'] = TRUE;
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

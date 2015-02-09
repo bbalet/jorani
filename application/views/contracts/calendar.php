@@ -78,8 +78,15 @@ padding-left:10px;
 </div>
 
 <div class="row-fluid">
-    <div class="span12">
+    <div class="span6">
         <u><?php echo lang('contract_calendar_legend_title');?></u> <img src='<?php echo base_url();?>assets/images/day.png' /> <?php echo lang('contract_calendar_legend_allday');?>, <img src='<?php echo base_url();?>assets/images/morning.png' /> <?php echo lang('contract_calendar_legend_morning');?>, <img src='<?php echo base_url();?>assets/images/afternoon.png' /> <?php echo lang('contract_calendar_legend_afternoon');?>
+    </div>
+    <div class="span6">
+        <?php if ($this->config->item('ics_enabled') == FALSE) {?>
+        &nbsp;
+        <?php } else {?>
+        <span class="pull-right"><a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a></span>
+        <?php }?>
     </div>
 </div>
 
@@ -239,6 +246,7 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
 
 var timestamp;
@@ -386,6 +394,12 @@ $(function() {
     //Give focus on first field on opening add day off dialog
     $('#frmAddDayOff').on('shown', function () {
         $('input:text:visible:first', this).focus();
+    });
+
+    $('#lnkICS').click(function () {
+        bootbox.alert("ICS : <input type='text' class='input-xlarge' id='txtIcsUrl' \n\
+                    value='<?php echo base_url() . 'ics/dayoffs/' . $contract_id;?>'\n\
+                    onfocus='$(this).select();' />");
     });
 });
 </script>

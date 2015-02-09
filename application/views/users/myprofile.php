@@ -42,7 +42,12 @@ $this->lang->load('global', $language);?>
 
 <div class="row-fluid">
     <div class="span3"><strong><?php echo lang('users_myprofile_field_contract');?></strong></div>
-    <div class="span3"><?php echo $contract_label;?></div>
+    <div class="span3"><?php echo $contract_label;?>
+    <?php if (($this->config->item('ics_enabled') == TRUE) && ($contract_id != 0)) {?>
+    &nbsp;(<a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a>)</div>
+    <?php } else {?>
+    </div>
+    <?php }?>
     <div class="span6">&nbsp;</div>
 </div>
 
@@ -73,15 +78,15 @@ echo $date->format(lang('global_date_format'));
     <div class="span6">&nbsp;</div>
 </div>
 
-<div class="row-fluid">
-    <div class="span12">&nbsp;</div>
-</div>
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
-<!-- TCPDF has some problems with UTF-8 and Unicode. Further tests need to be done
-<div class="row-fluid">
-    <div class="span2">
-      <a href="<?php echo base_url();?>users/pdf_myprofile" class="btn btn-primary" target="_blank"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('users_myprofile_button_export');?></a>
-    </div>
-    <div class="span10">&nbsp;</div>
-</div>
-//-->
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('#lnkICS').click(function () {
+        bootbox.alert("ICS : <input type='text' class='input-xlarge' id='txtIcsUrl' \n\
+                    value='<?php echo base_url() . 'ics/dayoffs/' . $contract_id;?>'\n\
+                    onfocus='$(this).select();' />");
+    });
+});
+</script>

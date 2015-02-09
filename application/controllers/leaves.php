@@ -538,34 +538,4 @@ class Leaves extends CI_Controller {
         // HTTP/1.0
         header("Pragma: no-cache");
     }
-
-    /**
-     * Action : download an iCal event corresponding to a leave request
-     * @param int leave request id
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function ical($id) {
-        //$this->auth->check_is_granted('download_calendar');
-        $this->expires_now();
-        $leave = $this->leaves_model->get_leaves($id);
-        header('Content-type: text/calendar; charset=utf-8');
-        header('Content-Disposition: attachment; filename=leave.ics');
-        
-        $ical = "BEGIN:VCALENDAR\r\n" .
-                "VERSION:2.0\r\n" .
-                "PRODID:-//hacksw/handcal//NONSGML v1.0//EN\r\n" .
-                "CALSCALE:GREGORIAN\r\n" .
-                "BEGIN:VEVENT\r\n" .
-                "DTEND:" . date('Ymd\Tgis\Z',strtotime($leave['enddate'])) . "\r\n" .
-                "UID:" . md5(uniqid(mt_rand(), true)) . "\r\n" .
-                "DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "\r\n" .
-                "LOCATION:home\r\n" .
-                "DESCRIPTION:" . htmlspecialchars($leave['cause']) . "\r\n" .
-                "URL;VALUE=URI:" . htmlspecialchars(base_url() . "lms/leaves/" . $id) . "\r\n" .
-                "SUMMARY:leave request\r\n" .
-                "DTSTART:" . date('Ymd\Tgis\Z',strtotime($leave['startdate'])) . "\r\n" .
-                "END:VEVENT\r\n" .
-                "END:VCALENDAR\r\n";
-        echo $ical;
-    }
 }

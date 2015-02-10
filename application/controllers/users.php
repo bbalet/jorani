@@ -243,9 +243,15 @@ class Users extends CI_Controller {
             $this->load->helper('form');
             $this->load->library('form_validation');
             $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
+	    $this->form_validation->set_rules('password', lang('users_controller_password'), 'required');
+	    $this->form_validation->set_rules('passwordbis', lang('users_controller_password'), 'required');
+	    $this->form_validation->set_rules('lastpassword', lang('users_controller_lastpassword'), 'callback_samePassword|required');
             if ($this->form_validation->run() === FALSE) {
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
+				$this->load->view('templates/header', $data);
+				$this->load->view('menu/index', $data);
                 $this->load->view('users/reset', $data);
+				$this->load->view('templates/footer');
             } else {
                 $this->users_model->reset_password($id, $this->input->post('CipheredValue'));
                 log_message('info', 'Password of user #' . $id . ' has been modified by user #' . $this->session->userdata('id'));
@@ -294,6 +300,19 @@ class Users extends CI_Controller {
             }
         }
     }
+    
+    // personnal callback for the function : reset
+    public function samePassword($password) {
+
+		$loggedin = $this->users_model->check_credentials($this->session->userdata('login'), $password);
+		if ($loggedin) {
+			return true;
+		}
+		else {
+			$this->form_validation->set_message('samePassword', lang('users_different_password'));
+			return false;
+		}
+	}
 
     /**
      * Display the form / action Create a new user

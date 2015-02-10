@@ -63,7 +63,7 @@ class Users extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('list_users');
-        $this->expires_now();
+        expires_now();
         $data = $this->getUserContext();
         $data['users'] = $this->users_model->get_users();
         $data['title'] = lang('users_index_title');
@@ -80,7 +80,7 @@ class Users extends CI_Controller {
      */
     public function employees() {
         $this->auth->check_is_granted('employees_list');
-        $this->expires_now();
+        expires_now();
         $data = $this->getUserContext();
         $data['employees'] = $this->users_model->get_all_employees();
         $data['title'] = lang('employees_index_title');
@@ -94,7 +94,7 @@ class Users extends CI_Controller {
      */
     public function view($id) {
         $this->auth->check_is_granted('view_user');
-        $this->expires_now();
+        expires_now();
         $data = $this->getUserContext();
         $data['user'] = $this->users_model->get_users($id);
         if (empty($data['user'])) {
@@ -127,7 +127,7 @@ class Users extends CI_Controller {
         if (empty($data['user'])) {
             show_404();
         }
-        $this->expires_now();
+        expires_now();
         $data['title'] = lang('users_myprofile_html_title');
         $this->load->model('roles_model');
         $this->load->model('positions_model');
@@ -152,7 +152,7 @@ class Users extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->check_is_granted('edit_user');
-        $this->expires_now();
+        expires_now();
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -301,7 +301,7 @@ class Users extends CI_Controller {
      */
     public function create() {
         $this->auth->check_is_granted('create_user');
-        $this->expires_now();
+        expires_now();
         $data = $this->getUserContext();
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -412,6 +412,7 @@ class Users extends CI_Controller {
      */
     public function export() {
         $this->auth->check_is_granted('export_user');
+        expires_now();
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle(lang('users_export_title'));
@@ -499,22 +500,5 @@ class Users extends CI_Controller {
             
             //$this->load->view('upload_success', $data);
         }*/
-    }
-    
-    /**
-     * Internal utility function
-     * make sure a resource is reloaded every time
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function expires_now() {
-        // Date in the past
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        // always modified
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        // HTTP/1.1
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        // HTTP/1.0
-        header("Pragma: no-cache");
     }
 }

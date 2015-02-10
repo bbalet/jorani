@@ -156,7 +156,7 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function employees() {
-        $this->expires_now();
+        expires_now();
         header("Content-Type: application/json");
         $id = $this->input->get('id', TRUE);
         $employees = $this->organization_model->employees($id)->result();
@@ -227,7 +227,7 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function root() {
-        $this->expires_now();
+        expires_now();
         header("Content-Type: application/json");
         $id = $this->input->get('id', TRUE);
         if ($id == "#") {
@@ -258,7 +258,7 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function getsupervisor() {
-        $this->expires_now();
+        expires_now();
         $this->output->set_content_type('application/json');
         $entity = $this->input->get('entity', TRUE);
         if (isset($entity)) {
@@ -274,7 +274,7 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function setsupervisor() {
-        $this->expires_now();
+        expires_now();
         $this->output->set_content_type('application/json');
         if ($this->auth->is_granted('edit_organization') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
@@ -287,21 +287,5 @@ class Organization extends CI_Controller {
             $entity = $this->input->get('entity', TRUE);
             echo json_encode($this->organization_model->set_supervisor($id, $entity));
         }
-    }
-    
-    /**
-     * Internal utility function
-     * make sure a resource is reloaded every time
-     */
-    private function expires_now() {
-        // Date in the past
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        // always modified
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        // HTTP/1.1
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        // HTTP/1.0
-        header("Pragma: no-cache");
     }
 }

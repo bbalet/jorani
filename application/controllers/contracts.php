@@ -217,22 +217,6 @@ class Contracts extends CI_Controller {
         $this->load->view('contracts/calendar', $data);
         $this->load->view('templates/footer');
     }
-    
-    /**
-     * Internal utility function
-     * make sure a resource is reloaded every time
-     */
-    private function expires_now() {
-        // Date in the past
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        // always modified
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        // HTTP/1.1
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        // HTTP/1.0
-        header("Pragma: no-cache");
-    }
 
     /**
      * Ajax endpoint : add a day off to a contract
@@ -271,7 +255,7 @@ class Contracts extends CI_Controller {
             if ($this->input->post('day', TRUE) !=null && $this->input->post('type', TRUE) !=null &&
                     $this->input->post('start', TRUE) !=null && $this->input->post('end', TRUE) !=null
                      && $this->input->post('contract', TRUE) !=null) {
-                $this->expires_now();
+                expires_now();
                 header("Content-Type: text/plain");
 
                 //Build the list of dates to be marked
@@ -307,7 +291,7 @@ class Contracts extends CI_Controller {
      * @param int $entity_id Entity identifier
      */
     public function userDayoffs() {
-        $this->expires_now();
+        expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -321,7 +305,7 @@ class Contracts extends CI_Controller {
      * @param int $entity_id Entity identifier
      */
     public function allDayoffs() {
-        $this->expires_now();
+        expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -337,6 +321,7 @@ class Contracts extends CI_Controller {
      */
     public function export() {
         $this->auth->check_is_granted('export_contracts');
+        expires_now();
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle(lang('contract_index_title'));

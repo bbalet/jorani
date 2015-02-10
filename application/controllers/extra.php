@@ -66,7 +66,7 @@ class Extra extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('list_extra');
-        $this->expires_now();
+        expires_now();
         $data = $this->getUserContext();
         $data['extras'] = $this->overtime_model->get_user_extras($this->user_id);
         
@@ -292,8 +292,10 @@ class Extra extends CI_Controller {
     
     /**
      * Action: export the list of all extra times into an Excel file
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
+        expires_now();
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle(lang('extra_export_title'));
@@ -331,21 +333,5 @@ class Extra extends CI_Controller {
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output');
-    }
-    
-    /**
-     * Internal utility function
-     * make sure a resource is reloaded every time
-     */
-    private function expires_now() {
-        // Date in the past
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        // always modified
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        // HTTP/1.1
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        // HTTP/1.0
-        header("Pragma: no-cache");
     }
 }

@@ -189,7 +189,7 @@ class Calendar extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function tabular_export($id=0, $month=0, $year=0, $children=TRUE) {
-        $this->expires_now();
+        expires_now();
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
         $this->lang->load('global', $this->language);
@@ -355,21 +355,5 @@ class Calendar extends CI_Controller {
     private function XLSFillSolid($cell, $color) {
         $this->excel->getActiveSheet()->getStyle($cell)->applyFromArray(
                 array('fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => $color))));
-    }
-    
-    /**
-     * Internal utility function
-     * make sure a resource is reloaded every time
-     */
-    private function expires_now() {
-        // Date in the past
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        // always modified
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        // HTTP/1.1
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        // HTTP/1.0
-        header("Pragma: no-cache");
     }
 }

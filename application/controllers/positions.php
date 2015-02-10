@@ -159,6 +159,7 @@ class Positions extends CI_Controller {
      */
     public function export() {
         $this->auth->check_is_granted('export_positions');
+        expires_now();
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle(lang('positions_export_title'));

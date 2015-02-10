@@ -60,7 +60,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('contracts_model');
             $result = $this->contracts_model->get_contracts($id);
             if (empty($result)) {
@@ -80,7 +80,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('entitleddays_model');
             $result = $this->entitleddays_model->get_entitleddays_contract($id);
             if (empty($result)) {
@@ -100,7 +100,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('entitleddays_model');
             $startdate = $this->input->post('startdate');
             $enddate = $this->input->post('enddate');
@@ -125,7 +125,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('entitleddays_model');
             $result = $this->entitleddays_model->get_entitleddays_employee($id);
             if (empty($result)) {
@@ -145,7 +145,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('entitleddays_model');
             $startdate = $this->input->post('startdate');
             $enddate = $this->input->post('enddate');
@@ -171,7 +171,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('leaves_model');
             if ($refTmp != NULL) {
                 $refDate = date("Y-m-d", $refTmp);
@@ -197,7 +197,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('leaves_model');
             $result = $this->leaves_model->all($startTmp, $endTmp);
             if (empty($result)) {
@@ -216,7 +216,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('types_model');
             $result = $this->types_model->get_types();
             if (empty($result)) {
@@ -235,7 +235,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('positions_model');
             $result = $this->positions_model->get_positions();
             if (empty($result)) {
@@ -254,7 +254,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('organization_model');
             $result = $this->organization_model->get_department($id);
             if (empty($result)) {
@@ -274,7 +274,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('users_model');
             $result = $this->users_model->get_users($id);
             if (empty($result)) {
@@ -294,7 +294,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('overtime_model');
             $result = $this->overtime_model->get_user_extras($id);
             if (empty($result)) {
@@ -314,7 +314,7 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            $this->expires_now();
+            expires_now();
             $this->load->model('leaves_model');
             $result = $this->leaves_model->get_user_leaves($id);
             if (empty($result)) {
@@ -323,21 +323,5 @@ class Api extends CI_Controller {
                 echo json_encode($result);
             }
         }
-    }
-    
-    /**
-     * Internal utility function
-     * make sure a resource is reloaded every time
-     */
-    private function expires_now() {
-        // Date in the past
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        // always modified
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        // HTTP/1.1
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        // HTTP/1.0
-        header("Pragma: no-cache");
     }
 }

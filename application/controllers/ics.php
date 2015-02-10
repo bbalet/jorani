@@ -42,7 +42,7 @@ class Ics extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function dayoffs($id) {
-        $this->expires_now();
+        expires_now();
         if ($this->config->item('ics_enabled') == FALSE) {
             $this->output->set_header("HTTP/1.0 403 Forbidden");
         } else {
@@ -87,7 +87,7 @@ class Ics extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function individual($id) {
-        $this->expires_now();
+        expires_now();
         if ($this->config->item('ics_enabled') == FALSE) {
             $this->output->set_header("HTTP/1.0 403 Forbidden");
         } else {
@@ -125,7 +125,7 @@ class Ics extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function ical($id) {
-        $this->expires_now();
+        expires_now();
         header('Content-type: text/calendar; charset=utf-8');
         header('Content-Disposition: attachment; filename=leave.ics');
         $this->load->model('leaves_model');
@@ -141,21 +141,5 @@ class Ics extends CI_Controller {
             'URL' => base_url() . "leaves/" . $id,
         ]);
         echo $vcalendar->serialize();
-    }
-
-    /**
-     * Internal utility function
-     * make sure a resource is reloaded every time
-     */
-    private function expires_now() {
-        // Date in the past
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        // always modified
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        // HTTP/1.1
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        // HTTP/1.0
-        header("Pragma: no-cache");
     }
 }

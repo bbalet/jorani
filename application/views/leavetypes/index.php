@@ -20,7 +20,7 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('global', $language);
 $this->lang->load('leavetypes', $language);?>
 
-<h1><?php echo lang('hr_leaves_type_title');?><?php echo $help;?></h1>
+<h1><?php echo lang('leavetypes_type_title');?><?php echo $help;?></h1>
 
 <?php if($this->session->flashdata('msg')){ ?>
 <div class="alert fade in" id="flashbox">
@@ -40,8 +40,8 @@ $(document).ready(function() {
 <table class="table table-bordered table-hover">
 <thead>
     <tr>
-      <th><?php echo lang('hr_leaves_type_thead_id');?></th>
-      <th><?php echo lang('hr_leaves_type_thead_name');?></th>
+      <th><?php echo lang('leavetypes_type_thead_id');?></th>
+      <th><?php echo lang('leavetypes_type_thead_name');?></th>
     </tr>
   </thead>
   <tbody>
@@ -49,16 +49,16 @@ $(document).ready(function() {
     <tr>
       <td><?php echo $type['id'] ?> &nbsp; 
           <?php if ($type['id'] !=0 ) { ?>
-          <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="<?php echo lang('hr_leaves_type_thead_tip_delete');?>"><i class="icon-trash"></i></a></td>
+          <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="<?php echo lang('leavetypes_type_thead_tip_delete');?>"><i class="icon-trash"></i></a></td>
           <?php } ?>
       <td>
-          <a href="<?php echo base_url();?>leavetypes/edit/<?php echo $type['id'] ?>" data-target="#frmEditLeaveType" data-toggle="modal" title="<?php echo lang('hr_leaves_type_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
+          <a href="<?php echo base_url();?>leavetypes/edit/<?php echo $type['id'] ?>" data-target="#frmEditLeaveType" data-toggle="modal" title="<?php echo lang('leavetypes_type_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
           &nbsp; <?php echo $type['name']; ?></td>
     </tr>
   <?php } ?>
   <?php if (count($leavetypes) == 0) { ?>
     <tr>
-        <td colspan="5"><?php echo lang('hr_leaves_type_not_found');?></td>
+        <td colspan="5"><?php echo lang('leavetypes_type_not_found');?></td>
     </tr>
   <?php } ?>
   </tbody>
@@ -68,10 +68,10 @@ $(document).ready(function() {
 
 <div class="row-fluid">
     <div class="span3">
-      <a href="<?php echo base_url();?>leavetypes/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('hr_leaves_type_button_export');?></a>
+      <a href="<?php echo base_url();?>leavetypes/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('leavetypes_type_button_export');?></a>
     </div>
     <div class="span3">
-        <a href="<?php echo base_url();?>leavetypes/create" class="btn btn-primary" data-target="#frmAddLeaveType" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('hr_leaves_type_button_create');?></a>
+        <a href="<?php echo base_url();?>leavetypes/create" class="btn btn-primary" data-target="#frmAddLeaveType" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('leavetypes_type_button_create');?></a>
     </div>
     <div class="span6">&nbsp;</div>
 </div>
@@ -81,41 +81,41 @@ $(document).ready(function() {
 <div id="frmAddLeaveType" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="close">&times;</a>
-         <h3><?php echo lang('hr_leaves_popup_create_title');?></h3>
+         <h3><?php echo lang('leavetypes_popup_create_title');?></h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="btn secondary btn-danger"><?php echo lang('hr_leaves_popup_create_button_cancel');?></a>
+        <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="btn secondary btn-danger"><?php echo lang('leavetypes_popup_create_button_cancel');?></a>
     </div>
 </div>
 
 <div id="frmEditLeaveType" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmEditLeaveType').modal('hide');" class="close">&times;</a>
-         <h3><?php echo lang('hr_leaves_popup_update_title');?></h3>
+         <h3><?php echo lang('leavetypes_popup_update_title');?></h3>
     </div>
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmEditLeaveType').modal('hide');" class="btn secondary"><?php echo lang('hr_leaves_popup_update_button_cancel');?></a>
+        <a href="#" onclick="$('#frmEditLeaveType').modal('hide');" class="btn secondary"><?php echo lang('leavetypes_popup_update_button_cancel');?></a>
     </div>
 </div>
 
 <div id="frmDeleteLeaveType" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmDeleteLeaveType').modal('hide');" class="close">&times;</a>
-         <h3><?php echo lang('hr_leaves_popup_delete_title');?></h3>
+         <h3><?php echo lang('leavetypes_popup_delete_title');?></h3>
     </div>
     <div class="modal-body">
-        <p><?php echo lang('hr_leaves_popup_delete_description');?></p>
-        <p><?php echo lang('hr_leaves_popup_delete_confirm');?></p>
+        <p><?php echo lang('leavetypes_popup_delete_description');?></p>
+        <p><?php echo lang('leavetypes_popup_delete_confirm');?></p>
     </div>
     <div class="modal-footer">
-        <a href="#" id="lnkDeleteLeaveType" class="btn danger"><?php echo lang('hr_leaves_popup_delete_button_yes');?></a>
-        <a href="#" onclick="$('#frmDeleteLeaveType').modal('hide');" class="btn secondary"><?php echo lang('hr_leaves_popup_delete_button_no');?></a>
+        <a href="#" id="lnkDeleteLeaveType" class="btn danger"><?php echo lang('leavetypes_popup_delete_button_yes');?></a>
+        <a href="#" onclick="$('#frmDeleteLeaveType').modal('hide');" class="btn secondary"><?php echo lang('leavetypes_popup_delete_button_no');?></a>
     </div>
 </div>
 

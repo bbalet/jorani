@@ -17,10 +17,7 @@
  */
 
 $lang['menu_banner_slogan'] = 'Gestion des demandes de congés';
-$lang['menu_banner_welcome'] = 'Bienvenue %s';
-$lang['menu_banner_logout'] = 'Déconnexion';
 $lang['menu_banner_change_password'] = 'Changer le mot de passe';
-
 $lang['menu_banner_welcome'] = 'Bienvenue';
 $lang['menu_banner_logout'] = 'Déconnexion';
 $lang['menu_banner_tip_myprofile'] = 'Voir mes informations personelles';

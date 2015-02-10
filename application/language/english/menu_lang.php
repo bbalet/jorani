@@ -17,10 +17,7 @@
  */
 
 $lang['menu_banner_slogan'] = 'Leave Management System';
-$lang['menu_banner_welcome'] = 'Welcome %s';
-$lang['menu_banner_logout'] = 'Logout';
 $lang['menu_banner_change_password'] = 'Change password';
-
 $lang['menu_banner_welcome'] = 'Welcome';
 $lang['menu_banner_logout'] = 'Logout';
 $lang['menu_banner_tip_myprofile'] = 'View my personal information';

@@ -16,38 +16,6 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//MD5 hash table of the tables structure for every released version of LMS
-/*$signatures['090176a36afb8ed6c1f394ef047454bb'] = 'latest';        //actions
-$signatures['ba852f157316c6c648c44e1be48bc8cd'] = 'latest';        //activities
-$signatures['4d61910d9105a31d5b965177b10fb874'] = 'latest';     //activities_employee
-$signatures['0c3fc9a0f779c75ec4b4c96341727104'] = 'latest';         //activities_employee_history
-$signatures['8f58c1bb23216c29171d3838dd9a08f4'] = 'latest';       //activities_history
-$signatures['08d5d68aa1d0fc5f9cf73ac04a7b0057'] = 'latest';         //contracts
-$signatures['f3508b98f88cfaa881d334994c1b4d08'] = 'latest';        //contracts_history
-$signatures['26b43a360dc13a9760db648847a68010'] = 'latest';     //dayoffs
-$signatures['2ef1e76ae608e837f46d5715d9b7e18e'] = 'latest';        //entitleddays
-$signatures['8e35f873c983d4cf85ec1f1ffc59bae0'] = 'latest';            //entitleddays_history
-$signatures['4885d0aadb560a1846449ef89a9af045'] = 'latest';       //leaves
-$signatures['02353210d13510ff9994471589090b3a'] = 'latest';     //leaves_history
-$signatures['b056b80de22211ce5f0bd2898aae13b4'] = 'latest';      //organization
-$signatures['05532f48b5530b397a6b1b2a2c142ad1'] = 'latest';      //organization_history
-$signatures['6be565294dd5a041015d8ef92f4d9c75'] = 'latest';       //overtime
-$signatures['6bcf8d452d58c8b2b8ddadfb8cd25e52'] = 'latest';        //overtime_history
-$signatures['71840bdcd051b2431e76765d8af6a4c1'] = 'latest';       //positions
-$signatures['35d39862a5755abb1d76a745538518e2'] = 'latest';     //positions_history
-$signatures['a2fd495bedfe1e75ca0e1519c0e8c0e8'] = 'latest';         //roles
-$signatures['24c0a757bde1ab069a29d4a11f7e32b7'] = 'latest';         //settings
-$signatures['80cd57612b7b3b84006041ad45aad0bc'] = 'latest';     //status
-$signatures['450aa4f7d58b3299c351af9792884b53'] = 'latest';     //tasks
-$signatures['109b379aa2ccc978ea11e9313b8efe7e'] = 'latest';     //time
-$signatures['e44f7363fbcdec8b0a22c743acde4f90'] = 'latest';         //types
-$signatures['6d0ad9caace1ac137d98732d0d8dd7ce'] = 'latest';     //users_history
-$signatures['705e271e745223739b914c8b76d107cf'] = 'latest';     //types_history
-$signatures['a2315fb06d5d24c1fd2e287ccf959141'] = 'latest';         //users
-
-$signatures['1731fe5490a1d9a111da01471928bcd7'] = 'v0.1.4';//contracts
-$signatures['547b7878e4287fdac66ec6d802afb621'] = 'v0.1.4';//entitleddays*/
-
 if (function_exists('apache_get_modules')) {
   $modules = apache_get_modules();
   $mod_rewrite = in_array('mod_rewrite', $modules);
@@ -79,7 +47,8 @@ if ($configFileExists ) {
             $sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
                         . " FROM information_schema.columns"
                         . " WHERE table_schema =  DATABASE()"
-                        . " GROUP BY TABLE_NAME";
+                        . " GROUP BY TABLE_NAME"
+                        . " ORDER BY TABLE_NAME";
             $rs = @mysql_query($sql, $dbConn);
         }
     }
@@ -90,13 +59,44 @@ if ($configFileExists ) {
     <title>LMS Requirements</title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="assets/js/jquery-1.11.0.min.js"></script>
+    
+    <script type="text/javascript">
+        function export2csv() {
+        var content = "";
+        content += "Table;Description;Value\n";
+
+        $("#tblServer tr").each(function() {
+          $this = $(this)
+          content += "Server;" + $.trim($(this).find("td:eq(0)").text())
+                  + ";" + $(this).find("td:eq(1)").text()  + "\n";
+        });
+        $("#tblDatabase tr").each(function() {
+          $this = $(this)
+          content += "Database;" + $.trim($(this).find("td:eq(0)").text())
+                  + ";" + $(this).find("td:eq(1)").text()  + "\n";
+        });
+        $("#tblSchema tr").each(function() {
+          $this = $(this)
+          content += "Schema;" + $.trim($(this).find("td:eq(0)").text())
+                  + ";" + $(this).find("td:eq(1)").text()  + "\n";
+        });
+
+        // Build a data URI:
+        uri = "data:text/csv;charset=utf-8," + encodeURIComponent(content);
+        location.href = uri;
+    }
+    </script>
     </head>
     <body>
     
         <div class="container-fluid">
 
             <h1>Jorani Requirements</h1>
+            
+            <button class="btn btn-primary" onclick="export2csv();"><i class="icon-hdd icon-white"></i>&nbsp;Export to a CSV file</button>
             
             <h2>Web Server</h2>
 
@@ -107,7 +107,7 @@ if ($configFileExists ) {
                       <th>Value / Description</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tblServer">
                       <tr><td><i class="icon-info-sign"></i>&nbsp;Server software</td><td><?php echo $server_software; ?></td></tr>
 
                       <tr><td><?php if (strtolower($allow_overwrite) == "on") {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>
@@ -121,6 +121,16 @@ if ($configFileExists ) {
                       <?php } else { ?>
                       <tr><td><i class="icon-exclamation-sign"></i>&nbsp;openssl IS NOT LOADED.</td>
                       <?php } ?><td>PHP Extension openssl speeds up the log in page</td></tr>
+                      
+                      <?php if (defined('HHVM_VERSION')) {?>
+                       <tr><td><i class="icon-info-sign"></i>&nbsp;HHVM</td><td><?php echo HHVM_VERSION; ?></td></tr>
+                       <?php } ?>
+                      
+                      <?php if (version_compare(PHP_VERSION, '5.3.0') >= 0) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;PHP 5.3+</td>
+                      <?php } else { ?>
+                      <tr><td><i class="icon-remove-sign"></i>&nbsp;Old PHP version</td>
+                      <?php } ?><td>Ignore this message if you are running an exotic PHP runtime</td></tr>
                       
                       <?php if (extension_loaded('ldap')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;ldap is LOADED</td>
@@ -151,8 +161,6 @@ if ($configFileExists ) {
                       <?php } else { ?>
                       <tr><td><i class="icon-exclamation-sign"></i>&nbsp;mysqli IS NOT LOADED</td>
                       <?php } ?><td>mysqli is the recommended database driver.</td></tr>
-
-                      
                   </tbody>
             </table>
 
@@ -165,7 +173,7 @@ if ($configFileExists ) {
                       <th>Value / Description</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tblDatabase">
                       <?php if ($configFileExists) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Configuration file</td><td>Found</td></tr>
                       <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Configuration file</td><td>Not Found</td></tr>
                       <?php } ?>
@@ -184,7 +192,6 @@ if ($configFileExists ) {
                   </tbody>
             </table>
 
-            <?php /* ?>
             <h2>Schema</h2>
 
             <table class="table table-bordered table-hover">
@@ -194,25 +201,16 @@ if ($configFileExists ) {
                       <th>Value / Description</th>
                     </tr>
                   </thead>
-                  <tbody>                      
-                        <?php if ($rs) {
-                        while ($row = mysql_fetch_assoc($rs)) {
-                            if (array_key_exists($row['signature'], $signatures)) {
-                                if ($signatures[$row['signature']] != 'latest') { ?>
-                                <tr><td><i class="icon-remove-sign"></i>&nbsp;<?php echo $row['TABLE_NAME']; ?></td><td>is not patched at the latest version (<?php echo $signatures[$row['signature']]; ?>)</td></tr>
-                               <?php } else { ?>
-                                <tr><td><i class="icon-ok-sign"></i>&nbsp;<?php echo $row['TABLE_NAME']; ?></td><td>OK</td></tr>
-                                <?php } ?>
-                           <?php } else { ?>
-                                <tr><td><i class="icon-exclamation-sign"></i>&nbsp;<?php echo $row['TABLE_NAME']; ?></td><td>Modifications made to table structure</td></tr>
-                        <?php }
-                            }
-                        } else { ?>
-                                <tr><td colspan="2"><i>Impossible to query database</i></td></tr>
-                        <?php } ?>
+                  <tbody id="tblSchema">                      
+<?php if ($rs) {
+                while ($row = mysql_fetch_assoc($rs)) {  ?>
+                <tr><td><i class="icon-info-sign"></i>&nbsp;<?php echo $row['TABLE_NAME']; ?></td><td><?php echo $row['signature']; ?></td></tr>
+<?php       }
+           } else { ?>
+                <tr><td colspan="2"><i>Impossible to query database</i></td></tr>
+<?php } ?>
                   </tbody>
             </table>
-            <?php */ ?>
         </div>
     </body>
 </html>

@@ -94,6 +94,9 @@ class Leaves extends CI_Controller {
         $refDate = date("Y-m-d");
         if ($refTmp != NULL) {
             $refDate = date("Y-m-d", $refTmp);
+            $data['isDefault'] = 0;
+        } else {
+            $data['isDefault'] = 1;
         }
         $data['refDate'] = $refDate;
         $data['summary'] = $this->leaves_model->get_user_leaves_summary($this->user_id, FALSE, $refDate);

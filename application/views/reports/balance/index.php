@@ -26,7 +26,7 @@ $this->lang->load('global', $language);?>
     <div class="span4">
         <label for="refdate"><?php echo lang('reports_balance_date_field');?></label>
         <div class="input-append">
-        <input type="text" name="refdate" id="refdate" value="<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>" />	
+        <input type="text" name="refdate" id="refdate" />
         </div>
     </div>
     <div class="span4">	
@@ -48,19 +48,11 @@ $this->lang->load('global', $language);?>
     </div>
 </div>
 
-<div class="row-fluid">
-    <div class="span6">&nbsp;</div>
-    <div class="span3">
-        
-    </div>
-</div>
-
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div id="reportResult"></div>
 
-<div class="row-fluid">
-	<div class="span12">&nbsp;</div>
-</div>
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div id="frmSelectEntity" class="modal hide fade">
     <div class="modal-header">
@@ -101,6 +93,12 @@ function select_entity() {
 }
 
 $(document).ready(function() {
+    
+    //Init datepicker widget
+    moment.locale('<?php echo $language_code;?>');
+    $("#refdate").val(moment().format('L'));
+    $('#refdate').datepicker();    
+    
     $("#frmSelectEntity").alert();
     
     $("#cmdSelectEntity").click(function() {
@@ -155,9 +153,6 @@ $(document).ready(function() {
         includeChildren = $('#chkIncludeChildren').prop('checked');
         $.cookie('rep_includeChildren', includeChildren);
     });
-
-    //Init datepicker widget
-    $('#refdate').datepicker();
     
     //Cookie has value ? take -1 by default
     if($.cookie('rep_entity') != null) {

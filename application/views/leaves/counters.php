@@ -26,7 +26,7 @@ $this->lang->load('global', $language);?>
 <h2><?php echo lang('leaves_summary_title');?><?php echo $help;?></h2>
 
     <p><?php echo lang('leaves_summary_date_field');?>&nbsp;
-        <input type="text" id="refdate" value="<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>" />
+        <input type="text" id="refdate" />
     </p>
 
 <table class="table table-bordered table-hover">
@@ -104,10 +104,19 @@ if ($language_code != 'en') { ?>
 
 <script type="text/javascript">
     $(function () {
-        
+        //Init datepicker widget (it is complicated because we cannot based it on UTC)
+        isDefault = <?php echo $isDefault;?>;
+        moment.locale('<?php echo $language_code;?>');
+        reportDate = '<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>';
+        todayDate = moment().format('L');
+        if (isDefault == 1) {
+            $("#refdate").val(todayDate);
+        } else {
+            $("#refdate").val(reportDate);
+        }
         $('#refdate').datepicker({
             onSelect: function(dateText, inst) {
-                    tmpUnix = moment($("#refdate").datepicker("getDate")).utc().unix();
+                    tmpUnix = moment($("#refdate").datepicker("getDate")).unix();
                     url = "<?php echo base_url();?>leaves/counters/" + tmpUnix;
                     window.location = url;
             }

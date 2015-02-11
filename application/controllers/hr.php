@@ -297,8 +297,13 @@ class Hr extends CI_Controller {
         $employee = $this->users_model->get_users($id);
         $data['employee_name'] =  $employee['firstname'] . ' ' . $employee['lastname'];
         $contract = $this->contracts_model->get_contracts($employee['contract']);
-        $data['contract_id'] = $contract['id'];
-        $data['contract_name'] = $contract['name'];
+        if (!empty($contract)) {
+            $data['contract_id'] = $contract['id'];
+            $data['contract_name'] = $contract['name'];
+        } else {
+            $data['contract_id'] = '';
+            $data['contract_name'] = '';
+        }
         
         //Compute facts about dates and the selected month
         if ($month == 0) $month = date('m', strtotime('last month'));
@@ -318,10 +323,14 @@ class Hr extends CI_Controller {
         $data['opened_days'] = $opened_days;
         $data['non_working_days'] = $non_working_days;
         
+        //tabular view of the leaves
+        $data['linear'] = $this->leaves_model->linear($id, $month, $year);
+        
         //List of accepted leave requests taken into account
         $data['leaves'] = $this->leaves_model->get_accepted_leaves_in_dates($id, $start, $end);
         
         $this->load->view('templates/header', $data);
+        $this->load->view('templates/tabular_style', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/presence', $data);
         $this->load->view('templates/footer');

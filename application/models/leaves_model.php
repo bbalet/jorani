@@ -709,6 +709,7 @@ class Leaves_model extends CI_Model {
             }
         }
         $tabular = array();
+        $ids = array();
         
         //We must show all users of the departement
         $this->load->model('dayoffs_model');
@@ -729,17 +730,13 @@ class Leaves_model extends CI_Model {
                 $user->days[$ii] = $day;
             }
             $tabular[$employee->id] = $user;
+            array_push($ids, $employee->id);
             
             //Force all day offs (mind the case of employees having no leave)
             $dayoffs = $this->dayoffs_model->employee_all_dayoffs($employee->id, $start, $end);
             foreach ($dayoffs as $dayoff) {
                 $iDate = new DateTime($dayoff->date);
                 $dayNum = intval($iDate->format('d'));
-                /*switch ($dayoff->type) {
-                    case 1 : $tabular[$employee->id]->days[$dayNum]->display = '4'; break;
-                    case 2 : $tabular[$employee->id]->days[$dayNum]->display = '5'; break;
-                    case 3 : $tabular[$employee->id]->days[$dayNum]->display = '6'; break;
-                }*/
                 $tabular[$employee->id]->days[$dayNum]->display = (string) $dayoff->type + 3;
                 $tabular[$employee->id]->days[$dayNum]->status = (string) $dayoff->type + 3;
                 $tabular[$employee->id]->days[$dayNum]->type = $dayoff->title;
@@ -752,26 +749,13 @@ class Leaves_model extends CI_Model {
         $this->db->join('users', 'users.organization = organization.id');
         $this->db->join('leaves', 'leaves.employee  = users.id');
         $this->db->join('types', 'leaves.type = types.id');
-        $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
-                                    ' OR (leaves.startdate >= DATE(\'' . $start . '\') AND leaves.enddate <= DATE(\'' . $end . '\')) )');
-        
-        if ($children == true) {
-            $this->load->model('organization_model');
-            $list = $this->organization_model->get_all_children($entity);
-            $ids = array();
-            if (count($list) > 0) {
-                $ids = explode(",", $list[0]['id']);
-            }
-            array_push($ids, $entity);
-            $this->db->where_in('organization.id', $ids);
-        } else {
-            $this->db->where('organization.id', $entity);
-        }
+        $this->db->where("( startdate <= STR_TO_DATE('" . $end . "', '%Y-%m-%d') AND enddate >= STR_TO_DATE('" . $start . "', '%Y-%m-%d'))");
         $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
+        $this->db->where_in('users.id', $ids);
         $this->db->order_by('users.lastname', 'asc');
         $this->db->order_by('users.firstname', 'asc');
         $this->db->order_by('startdate', 'asc');
-        $this->db->limit(512);  //Security limit
+        $this->db->limit(1024);  //Security limit
         $events = $this->db->get()->result();
         $limitDate = new DateTime($end);
         $floorDate = new DateTime($start);
@@ -832,8 +816,118 @@ class Leaves_model extends CI_Model {
                     }
                 }
                 $iDate->modify('+1 day');   //Next day
-            }   
+            }
+            //echo var_dump($entry);
         }
         return $tabular;
     }
+    
+    
+    /**
+     * Leave requests of users of a department(s)
+     * TODO: to be merged/called with tabular
+     * @param int $employee Employee identifier
+     * @param int $month Month number
+     * @param int $year Year number
+     * @return array Array of objects containing leave details
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function linear($employee_id, $month, $year) {
+        $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
+        $lastDay = date("t", strtotime($start));    //last day of selected month
+        $end = $year . '-' . $month . '-' . $lastDay;    //last date of selected month
+        
+        //We must show all users of the departement
+        $this->load->model('dayoffs_model');
+        $this->load->model('users_model');
+        $employee = $this->users_model->get_users($employee_id);
+        $user = new stdClass;
+        $user->name = $employee['firstname'] . ' ' . $employee['lastname'];
+        $user->days = array();
+
+        //Init all day to working day
+        for ($ii = 1; $ii <= $lastDay; $ii++) {
+            $day = new stdClass;
+            $day->type = '';
+            $day->status = '';
+            $day->display = 0; //working day
+            $user->days[$ii] = $day;
+        }
+
+        //Force all day offs (mind the case of employees having no leave)
+        $dayoffs = $this->dayoffs_model->employee_all_dayoffs($employee_id, $start, $end);
+        foreach ($dayoffs as $dayoff) {
+            $iDate = new DateTime($dayoff->date);
+            $dayNum = intval($iDate->format('d'));
+            $user->days[$dayNum]->display = (string) $dayoff->type + 3;
+            $user->days[$dayNum]->status = (string) $dayoff->type + 3;
+            $user->days[$dayNum]->type = $dayoff->title;
+        }
+        
+        //Build the complex query for all leaves
+        $this->db->select('leaves.*, types.name as type');
+        $this->db->from('leaves');
+        $this->db->join('types', 'leaves.type = types.id');
+        $this->db->where("( startdate <= STR_TO_DATE('" . $end . "', '%Y-%m-%d') AND enddate >= STR_TO_DATE('" . $start . "', '%Y-%m-%d'))");
+        $this->db->where('leaves.status = ', 3);       //Only accepted requests
+        $this->db->where('leaves.employee = ', $employee_id);
+        $this->db->order_by('startdate', 'asc');
+        $events = $this->db->get()->result();
+        $limitDate = new DateTime($end);
+        $floorDate = new DateTime($start);
+        
+        $this->load->model('dayoffs_model');
+        foreach ($events as $entry) {
+            
+            $startDate = new DateTime($entry->startdate);
+            if ($startDate < $floorDate) $startDate = $floorDate;
+            $iDate = $startDate;
+            $endDate = new DateTime($entry->enddate);
+            if ($endDate > $limitDate) $endDate = $limitDate;
+
+            //Iteration between 2 dates
+            while ($iDate <= $endDate)
+            {
+                if ($iDate > $limitDate) break;     //The calendar displays the leaves on one month
+                if ($iDate < $startDate) continue;  //The leave starts before the first day of the calendar
+                $dayNum = intval($iDate->format('d'));
+                
+                //Display (different from contract/calendar)
+                if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Afternoon')) $display = '1';
+                if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Morning')) $display = '2';
+                if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Afternoon') && ($entry->enddatetype == 'Afternoon')) $display = '3';
+                if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Morning')) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
+                if (($entry->startdate != $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';
+                if (($entry->startdate != $entry->enddate) && ($iDate != $entry->startdate) && ($iDate != $endDate)) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($iDate == $entry->startdate) && ($entry->startdatetype == 'Morning')) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($iDate == $entry->startdate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
+                if (($entry->startdate != $entry->enddate) && ($iDate == $entry->enddate) && ($entry->enddatetype == 'Afternoon')) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($iDate == $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';
+                
+                //Check if another leave was defined on this day
+                if ($user->days[$dayNum]->display != '4') { //Except full day off
+                    if ($user->days[$dayNum]->type != '') { //Overlapping with a day off or another request
+                        if (($user->days[$dayNum]->display == 2) ||
+                                ($user->days[$dayNum]->display == 6)) { //Respect Morning/Afternoon order
+                            $user->days[$dayNum]->type .= ';' . $entry->type;
+                            $user->days[$dayNum]->display .= ';' . $display;
+                            $user->days[$dayNum]->status .= ';' . $entry->status;
+                        } else {
+                            $user->days[$dayNum]->type = $entry->type . ';' . $user->days[$dayNum]->type;
+                            $user->days[$dayNum]->display = $display . ';' . $user->days[$dayNum]->display;
+                            $user->days[$dayNum]->status = $entry->status . ';' . $user->days[$dayNum]->status;
+                        }
+                    } else  {   //All day entry
+                        $user->days[$dayNum]->type = $entry->type;
+                        $user->days[$dayNum]->display = $display;
+                        $user->days[$dayNum]->status = $entry->status;
+                    }
+                }
+                $iDate->modify('+1 day');   //Next day
+            }   
+        }
+        return $user;
+    }
+    
 }

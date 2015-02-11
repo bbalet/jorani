@@ -36,11 +36,18 @@ $this->lang->load('global', $language);?>
     <div class="span3">
         <br /><br />
         <p><?php echo lang('hr_presence_employee');?> : <b><?php echo $employee_name;?></b></p>
-        <p><?php echo lang('hr_presence_contract');?> : <b><a href="<?php echo base_url();?>contracts/<?php echo $contract_id; ?>"><?php echo $contract_name;?></a></b></p>
         <p><?php echo lang('hr_presence_month');?> : <b><?php echo lang($month_name);?>&nbsp;<?php echo $year;?></b></p>
         <p><?php echo lang('hr_presence_days');?> : <b><?php echo $total_days;?></b></p>
+        <?php if ($contract_id != '') { ?>
+        <p><?php echo lang('hr_presence_contract');?> : <b><a href="<?php echo base_url();?>contracts/<?php echo $contract_id; ?>"><?php echo $contract_name;?></a></b></p>
         <p><?php echo lang('hr_presence_working_days');?> : <b><?php echo $opened_days;?></b></p>
         <p><?php echo lang('hr_presence_non_working_days');?> : <b><a href="<?php echo base_url();?>contracts/<?php echo $contract_id; ?>/calendar"><?php echo $non_working_days;?></a></b></p>
+        <?php } else { ?>
+        <p><?php echo lang('hr_presence_contract');?> : <i class="icon-warning-sign"></i></p>
+        <p><?php echo lang('hr_presence_working_days');?> : <i class="icon-warning-sign"></i></p>
+        <p><?php echo lang('hr_presence_non_working_days');?> : <i class="icon-warning-sign"></i></p>
+
+        <?php } ?>
     </div>
     <div class="span3">
         <br /><br />
@@ -71,6 +78,105 @@ $this->lang->load('global', $language);?>
 <hr />
 
 <h3><?php echo lang('hr_presence_leaves_list_title');?></h3>
+
+<div class="row-fluid">
+    <div class="span12">
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+            <?php
+                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
+                $lastDay = date("t", strtotime($start));    //last day of selected month
+                for ($ii = 1; $ii <=$lastDay; $ii++) {
+                    $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
+                    switch ($dayNum)
+                    {
+                        case 1: echo '<td><b>' . lang('calendar_monday_short') . '</b></td>'; break;
+                        case 2: echo '<td><b>' . lang('calendar_tuesday_short') . '</b></td>'; break;
+                        case 3: echo '<td><b>' . lang('calendar_wednesday_short') . '</b></td>'; break;
+                        case 4: echo '<td><b>' . lang('calendar_thursday_short') . '</b></td>'; break;
+                        case 5: echo '<td><b>' . lang('calendar_friday_short') . '</b></td>'; break;
+                        case 6: echo '<td><b>' . lang('calendar_saturday_short') . '</b></td>'; break;
+                        case 7: echo '<td><b>' . lang('calendar_sunday_short') . '</b></td>'; break;
+                    }
+                }?>
+        </tr>
+        <tr>
+            <?php
+                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
+                $lastDay = date("t", strtotime($start));    //last day of selected month
+                for ($ii = 1; $ii <=$lastDay; $ii++) {
+                    echo '<td><b>' . $ii . '</b></td>';
+                }?>
+        </tr>
+    </thead>
+  <tbody>
+    <tr>
+      <?php foreach ($linear->days as $day) {
+          //Overlapping cases
+          if (strstr($day->display, ';')) {
+              $periods = explode(";", $day->display);
+              $statuses = explode(";", $day->status);
+                switch ($statuses[0])
+                {
+                    case 1: $class = "planned"; break;  // Planned
+                    case 2: $class = "requested"; break;  // Requested
+                    case 3: $class = "accepted"; break;  // Accepted
+                    case 4: $class = "rejected"; break;  // Rejected
+                    case '5': $class="dayoff"; break;
+                    case '6': $class="dayoff"; break;
+                }
+                switch ($statuses[1])
+                {
+                    case 1: $class .= "planned"; break;  // Planned
+                    case 2: $class .= "requested"; break;  // Requested
+                    case 3: $class .= "accepted"; break;  // Accepted
+                    case 4: $class .= "rejected"; break;  // Rejected
+                    case '5': $class .="dayoff"; break;
+                    case '6': $class .="dayoff"; break;
+                }
+          } else {
+            switch ($day->display) {
+                case '0': $class="working"; break;
+                case '4': $class="dayoff"; break;
+                case '5': $class="amdayoff"; break;
+                case '6': $class="pmdayoff"; break;
+                case '1':
+                      switch ($day->status)
+                      {
+                          case 1: $class = "allplanned"; break;  // Planned
+                          case 2: $class = "allrequested"; break;  // Requested
+                          case 3: $class = "allaccepted"; break;  // Accepted
+                          case 4: $class = "allrejected"; break;  // Rejected
+                      }
+                      break;
+                case '2':
+                    switch ($day->status)
+                      {
+                          case 1: $class = "amplanned"; break;  // Planned
+                          case 2: $class = "amrequested"; break;  // Requested
+                          case 3: $class = "amaccepted"; break;  // Accepted
+                          case 4: $class = "amrejected"; break;  // Rejected
+                      }
+                    break;
+                case '3':
+                    switch ($day->status)
+                      {
+                          case 1: $class = "pmplanned"; break;  // Planned
+                          case 2: $class = "pmrequested"; break;  // Requested
+                          case 3: $class = "pmaccepted"; break;  // Accepted
+                          case 4: $class = "pmrejected"; break;  // Rejected
+                      }
+                    break;
+            }
+          }
+            echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+     } ?>
+          </tr>
+  </tbody>
+</table>
+    </div>
+</div>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
     <thead>

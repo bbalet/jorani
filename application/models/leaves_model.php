@@ -76,12 +76,14 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_accepted_leaves_in_dates($id, $start, $end) {
+        $this->db->select('leaves.*, types.name as type');
+        $this->db->from('leaves');
+        $this->db->join('status', 'leaves.status = status.id');
+        $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('employee', $id);
         $this->db->where("(startdate <= STR_TO_DATE('" . $end . "', '%Y-%m-%d') AND enddate >= STR_TO_DATE('" . $start . "', '%Y-%m-%d'))");
-        //$this->db->where('(startdate <= DATE(\'' . $enddate . '\') AND enddate >= DATE(\'' . $startdate . '\'))');
-        
         $this->db->order_by('startdate', 'asc');
-        return $this->db->get('leaves')->result_array();
+        return $this->db->get()->result_array();
     }
     
     /**

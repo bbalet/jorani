@@ -94,8 +94,8 @@ $this->lang->load('global', $language);?>
         <td data-order="<?php echo $leave['id']; ?>">
             <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id']; ?>?source=hr%2Fpresence%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_presence_thead_tip_edit');?>"><?php echo $leave['id'] ?></a>
         </td>
-        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate; ?></td>
-        <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate; ?></td>
+        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leave['startdatetype']). ')'; ?></td>
+        <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leave['enddatetype']) . ')'; ?></td>
         <td><?php echo $leave['duration']; ?></td>
         <td><?php echo $leave['type']; ?></td>
     </tr>

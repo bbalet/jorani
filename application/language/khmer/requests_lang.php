@@ -27,6 +27,7 @@ $lang['requests_index_thead_startdate'] = 'កាលបរិច្ឆេទដ�
 $lang['requests_index_thead_enddate'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
 $lang['requests_index_thead_duration'] = 'រយៈពេល';
 $lang['requests_index_thead_type'] = 'ប្រភេទ';
+$lang['requests_index_thead_status'] = 'Status';
 
 $lang['requests_collaborators_title'] = 'List of my collaborators';
 $lang['requests_collaborators_description'] = 'This screen lists your collaborators. If you are not a manager, this list will always be empty.';

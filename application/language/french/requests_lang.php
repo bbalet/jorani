@@ -27,6 +27,7 @@ $lang['requests_index_thead_startdate'] = 'Date début';
 $lang['requests_index_thead_enddate'] = 'Date fin';
 $lang['requests_index_thead_duration'] = 'Durée';
 $lang['requests_index_thead_type'] = 'Type';
+$lang['requests_index_thead_status'] = 'Statut';
 
 $lang['requests_collaborators_title'] = 'Liste de mes collaborateurs';
 $lang['requests_collaborators_description'] = 'Cet écran liste vos collaborateurs. Si vous n\'êtes pas un manager, cette liste sera vide.';

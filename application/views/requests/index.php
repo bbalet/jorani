@@ -53,6 +53,7 @@ $(document).ready(function() {
             <th><?php echo lang('requests_index_thead_enddate');?></th>            
             <th><?php echo lang('requests_index_thead_duration');?></th>
             <th><?php echo lang('requests_index_thead_type');?></th>
+            <th><?php echo lang('requests_index_thead_status');?></th>
         </tr>
     </thead>
     <tbody>
@@ -80,7 +81,7 @@ $(document).ready(function() {
         <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($requests_item['enddatetype']) . ')'; ?></td>
         <td><?php echo $requests_item['duration']; ?></td>
         <td><?php echo $requests_item['type_label']; ?></td>
-        
+        <td><?php echo lang($requests_item['status_label']); ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>

@@ -693,6 +693,7 @@ class Leaves_model extends CI_Model {
         $tabular = array();
         
         //We must show all users of the departement
+        $this->load->model('dayoffs_model');
         $this->load->model('organization_model');
         $employees = $this->organization_model->all_employees($entity, $children);
         foreach ($employees as $employee) {
@@ -710,6 +711,21 @@ class Leaves_model extends CI_Model {
                 $user->days[$ii] = $day;
             }
             $tabular[$employee->id] = $user;
+            
+            //Force all day offs (mind the case of employees having no leave)
+            $dayoffs = $this->dayoffs_model->employee_all_dayoffs($employee->id, $start, $end);
+            foreach ($dayoffs as $dayoff) {
+                $iDate = new DateTime($dayoff->date);
+                $dayNum = intval($iDate->format('d'));
+                /*switch ($dayoff->type) {
+                    case 1 : $tabular[$employee->id]->days[$dayNum]->display = '4'; break;
+                    case 2 : $tabular[$employee->id]->days[$dayNum]->display = '5'; break;
+                    case 3 : $tabular[$employee->id]->days[$dayNum]->display = '6'; break;
+                }*/
+                $tabular[$employee->id]->days[$dayNum]->display = (string) $dayoff->type + 3;
+                $tabular[$employee->id]->days[$dayNum]->status = (string) $dayoff->type + 3;
+                $tabular[$employee->id]->days[$dayNum]->type = $dayoff->title;
+            }
         }
         
         //Build the complex query for all leaves
@@ -754,7 +770,6 @@ class Leaves_model extends CI_Model {
             //Iteration between 2 dates
             while ($iDate <= $endDate)
             {
-                
                 if ($iDate > $limitDate) break;     //The calendar displays the leaves on one month
                 if ($iDate < $startDate) continue;  //The leave starts before the first day of the calendar
                 $dayNum = intval($iDate->format('d'));
@@ -780,38 +795,26 @@ class Leaves_model extends CI_Model {
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';
                 
                 //Check if another leave was defined on this day
-                if ($tabular[$entry->uid]->days[$dayNum]->type != '') {
-                    if ($tabular[$entry->uid]->days[$dayNum]->display == 2) { //Respect Morning/Afternoon order
-                        $tabular[$entry->uid]->days[$dayNum]->type .= ';' . $entry->type;
-                        $tabular[$entry->uid]->days[$dayNum]->display .= ';' . $display;
-                        $tabular[$entry->uid]->days[$dayNum]->status .= ';' . $entry->status;
-                    } else {
-                        $tabular[$entry->uid]->days[$dayNum]->type = $entry->type . ';' . $tabular[$entry->uid]->days[$dayNum]->type;
-                        $tabular[$entry->uid]->days[$dayNum]->display = $display . ';' . $tabular[$entry->uid]->days[$dayNum]->display;
-                        $tabular[$entry->uid]->days[$dayNum]->status = $entry->status . ';' . $tabular[$entry->uid]->days[$dayNum]->status;
+                if ($tabular[$entry->uid]->days[$dayNum]->display != '4') { //Except full day off
+                    if ($tabular[$entry->uid]->days[$dayNum]->type != '') { //Overlapping with a day off or another request
+                        if (($tabular[$entry->uid]->days[$dayNum]->display == 2) ||
+                                ($tabular[$entry->uid]->days[$dayNum]->display == 6)) { //Respect Morning/Afternoon order
+                            $tabular[$entry->uid]->days[$dayNum]->type .= ';' . $entry->type;
+                            $tabular[$entry->uid]->days[$dayNum]->display .= ';' . $display;
+                            $tabular[$entry->uid]->days[$dayNum]->status .= ';' . $entry->status;
+                        } else {
+                            $tabular[$entry->uid]->days[$dayNum]->type = $entry->type . ';' . $tabular[$entry->uid]->days[$dayNum]->type;
+                            $tabular[$entry->uid]->days[$dayNum]->display = $display . ';' . $tabular[$entry->uid]->days[$dayNum]->display;
+                            $tabular[$entry->uid]->days[$dayNum]->status = $entry->status . ';' . $tabular[$entry->uid]->days[$dayNum]->status;
+                        }
+                    } else  {   //All day entry
+                        $tabular[$entry->uid]->days[$dayNum]->type = $entry->type;
+                        $tabular[$entry->uid]->days[$dayNum]->display = $display;
+                        $tabular[$entry->uid]->days[$dayNum]->status = $entry->status;
                     }
-                } else  {
-                    $tabular[$entry->uid]->days[$dayNum]->type = $entry->type;
-                    $tabular[$entry->uid]->days[$dayNum]->display = $display;
-                    $tabular[$entry->uid]->days[$dayNum]->status = $entry->status;
                 }
                 $iDate->modify('+1 day');   //Next day
             }   
-        }
-        
-        //Force all day offs (mind the case of employees having no leave)
-        foreach ($employees as $employee) {
-            $dayoffs = $this->dayoffs_model->employee_all_dayoffs($employee->id, $start, $end);
-            foreach ($dayoffs as $dayoff) {
-                $iDate = new DateTime($dayoff->date);
-                $dayNum = intval($iDate->format('d'));
-                switch ($dayoff->type) {
-                    case 1 : $tabular[$employee->id]->days[$dayNum]->display = '4'; break;
-                    case 2 : $tabular[$employee->id]->days[$dayNum]->display = '5'; break;
-                    case 3 : $tabular[$employee->id]->days[$dayNum]->display = '6'; break;
-                }
-                $tabular[$employee->id]->days[$dayNum]->type = $dayoff->title;
-            }            
         }
         return $tabular;
     }

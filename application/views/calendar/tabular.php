@@ -51,6 +51,8 @@ $this->lang->load('global', $language);?>
     color: #ffffff;
 }
 
+/*Day off*/
+
 .amdayoff {
 background: #000000; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #000000 50%, #ffffff 50%); /* FF3.6+ */
@@ -72,6 +74,97 @@ background: -ms-linear-gradient(-45deg, #ffffff 50%,#000000 50%); /* IE10+ */
 background: linear-gradient(135deg, #ffffff 50%,#000000 50%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+/*Day off and leave*/
+.planneddayoff {
+background: #999; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #999 50%, #000000 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#999), color-stop(50%,#000000)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #999 50%,#000000 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #999 50%,#000000 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #999 50%,#000000 50%); /* IE10+ */
+background: linear-gradient(135deg, #999 50%,#000000 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#999', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.requesteddayoff {
+background: #f89406; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #f89406 50%, #000000 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#f89406), color-stop(50%,#000000)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #f89406 50%,#000000 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #f89406 50%,#000000 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #f89406 50%,#000000 50%); /* IE10+ */
+background: linear-gradient(135deg, #f89406 50%,#000000 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f89406', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.accepteddayoff {
+background: #468847; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #468847 50%, #000000 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#468847), color-stop(50%,#000000)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #468847 50%,#000000 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #468847 50%,#000000 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #468847 50%,#000000 50%); /* IE10+ */
+background: linear-gradient(135deg, #468847 50%,#000000 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#468847', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.rejecteddayoff {
+background: #ff0000; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #ff0000 50%, #000000 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ff0000), color-stop(50%,#000000)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #ff0000 50%,#000000 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #ff0000 50%,#000000 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #ff0000 50%,#000000 50%); /* IE10+ */
+background: linear-gradient(135deg, #ff0000 50%,#000000 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.dayoffplanned {
+background: #999; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #000000 50%, #999 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#000000), color-stop(50%,#999)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #000000 50%,#999 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #000000 50%,#999 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #000000 50%,#999 50%); /* IE10+ */
+background: linear-gradient(135deg, #000000 50%,#999 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#999',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.dayoffrequested {
+background: #f89406; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #000000 50%, #f89406 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#000000), color-stop(50%,#f89406)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #000000 50%,#f89406 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #000000 50%,#f89406 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #000000 50%,#f89406 50%); /* IE10+ */
+background: linear-gradient(135deg, #000000 50%,#f89406 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#f89406',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.dayoffaccepted {
+background: #468847; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #000000 50%, #468847 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#000000), color-stop(50%,#468847)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #000000 50%,#468847 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #000000 50%,#468847 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #000000 50%,#468847 50%); /* IE10+ */
+background: linear-gradient(135deg, #000000 50%,#468847 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#468847',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.dayoffrejected {
+background: #ff0000; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #000000 50%, #ff0000 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#000000), color-stop(50%,#ff0000)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #000000 50%,#ff0000 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #000000 50%,#ff0000 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #000000 50%,#ff0000 50%); /* IE10+ */
+background: linear-gradient(135deg, #000000 50%,#ff0000 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ff0000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+/*Single day*/
 
 .amplanned {
 background: #999; /* Old browsers */
@@ -337,7 +430,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
     </div>
     <div class="span5">
         <button id="cmdExecute" class="btn btn-primary"><?php echo lang('calendar_tabular_button_execute');?></button>
-        <!--<button id="cmdExport" class="btn btn-primary"><?php echo lang('calendar_tabular_button_export');?></button>//-->
     </div>
 </div>
 
@@ -400,6 +492,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
                     case 2: $class = "requested"; break;  // Requested
                     case 3: $class = "accepted"; break;  // Accepted
                     case 4: $class = "rejected"; break;  // Rejected
+                    case '5': $class="dayoff"; break;
+                    case '6': $class="dayoff"; break;
                 }
                 switch ($statuses[1])
                 {
@@ -407,6 +501,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
                     case 2: $class .= "requested"; break;  // Requested
                     case 3: $class .= "accepted"; break;  // Accepted
                     case 4: $class .= "rejected"; break;  // Rejected
+                    case '5': $class .="dayoff"; break;
+                    case '6': $class .="dayoff"; break;
                 }
           } else {
             switch ($day->display) {

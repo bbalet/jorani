@@ -288,15 +288,16 @@ class Contracts extends CI_Controller {
     /**
      * Ajax endpoint : Send a list of fullcalendar events
      * List of day offs for the connected user
-     * @param int $entity_id Entity identifier
+     * @param int $id employee id or connected user (from session)
      */
-    public function userDayoffs() {
+    public function userDayoffs($id = 0) {
         expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
         $this->load->model('dayoffs_model');
-        echo $this->dayoffs_model->userDayoffs($this->user_id, $start, $end);
+        if ($id == 0) $id =$this->user_id;
+        echo $this->dayoffs_model->userDayoffs($id, $start, $end);
     }
     
     /**

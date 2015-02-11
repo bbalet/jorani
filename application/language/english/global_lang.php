@@ -66,6 +66,8 @@ $lang['global_link_doc_page_create_user'] = 'http://jorani.org/page-create-a-new
 $lang['global_link_doc_page_list_users'] = 'http://jorani.org/page-list-of-users.html';
 $lang['global_link_doc_page_list_employees'] = 'http://jorani.org/page-list-of-employees.html';
 
+$lang['global_link_doc_page_presence_report'] = '';
+
 $lang['global_link_doc_page_leave_balance_report'] = 'http://jorani.org/page-leave-balance-report.html';
 
 //Calendar

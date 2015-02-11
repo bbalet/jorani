@@ -66,6 +66,8 @@ $lang['global_link_doc_page_create_user'] = 'http://fr.jorani.org/ecrans/page-aj
 $lang['global_link_doc_page_list_users'] = '';
 $lang['global_link_doc_page_list_employees'] = 'http://fr.jorani.org/ecrans/page-liste-des-employes.html';
 
+$lang['global_link_doc_page_presence_report'] = '';
+
 $lang['global_link_doc_page_leave_balance_report'] = 'http://fr.jorani.org/ecrans/page-rapport-etat-des-conges.html';
 
 //Calendar

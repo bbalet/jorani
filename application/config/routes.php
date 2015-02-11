@@ -72,6 +72,8 @@ $route['hr/counters/(:num)/(:num)'] = 'hr/counters/$1/$2';
 $route['hr/overtime/export/(:num)'] = 'hr/export_overtime/$1';
 $route['hr/entitleddays/(:num)'] = 'hr/entitleddays/$1';
 $route['hr/leaves/create/(:num)'] = 'hr/createleave/$1';
+$route['hr/presence/(:num)'] = 'hr/presence/$1';
+$route['hr/presence/(:num)/(:num)/(:num)'] = 'hr/presence/$1/$2/$3';
 $route['hr'] = 'hr';
 
 //HR edit leave types
@@ -101,6 +103,7 @@ $route['contracts/(:num)/calendar/(:num)'] = 'contracts/calendar/$1/$2';
 $route['contracts/(:num)/calendar'] = 'contracts/calendar/$1';
 $route['contracts/calendar/edit'] = 'contracts/editdayoff';
 $route['contracts/calendar/series'] = 'contracts/series';
+$route['contracts/calendar/userdayoffs/(:num)'] = 'contracts/userDayoffs/$1';
 $route['contracts/calendar/userdayoffs'] = 'contracts/userDayoffs';
 $route['contracts/calendar/alldayoffs'] = 'contracts/allDayoffs';
 $route['contracts/(:num)'] = 'contracts/view/$1';
@@ -130,6 +133,7 @@ $route['calendar/department'] = 'calendar/department';
 $route['calendar/tabular'] = 'calendar/tabular';
 $route['calendar/tabular/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabular/$1/$2/$3/$4';
 $route['calendar/tabular/export/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabular_export/$1/$2/$3/$4';
+$route['leaves/individual/(:num)'] = 'leaves/individual/$1';
 $route['leaves/individual'] = 'leaves/individual';
 $route['leaves/workmates'] = 'leaves/workmates';
 $route['leaves/department'] = 'leaves/department';

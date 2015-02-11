@@ -428,14 +428,16 @@ class Leaves extends CI_Controller {
 
     /**
      * Ajax endpoint : Send a list of fullcalendar events
+     * @param int $id employee id or connected user (from session)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function individual() {
+    public function individual($id = 0) {
         expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
-        echo $this->leaves_model->individual($this->session->userdata('id'), $start, $end);
+        if ($id == 0) $id =$this->session->userdata('id');
+        echo $this->leaves_model->individual($id, $start, $end);
     }
 
     /**

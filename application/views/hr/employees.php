@@ -108,6 +108,7 @@ $(document).ready(function() {
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/leaves/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_leaves');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/overtime/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/counters/{id}"><i class="icon-info-sign"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/presence/{id}"><i class="icon-calendar"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a></li>
   </ul>
 </div>
 

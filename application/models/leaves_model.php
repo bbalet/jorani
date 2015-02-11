@@ -69,6 +69,22 @@ class Leaves_model extends CI_Model {
     }
     
     /**
+     * Accepted leaves between two dates and for a given employee
+     * @param int $id ID of the employee
+     * @param string $start Start date
+     * @param string $end End date
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function get_accepted_leaves_in_dates($id, $start, $end) {
+        $this->db->where('employee', $id);
+        $this->db->where("(startdate <= STR_TO_DATE('" . $end . "', '%Y-%m-%d') AND enddate >= STR_TO_DATE('" . $start . "', '%Y-%m-%d'))");
+        //$this->db->where('(startdate <= DATE(\'' . $enddate . '\') AND enddate >= DATE(\'' . $startdate . '\'))');
+        
+        $this->db->order_by('startdate', 'asc');
+        return $this->db->get('leaves')->result_array();
+    }
+    
+    /**
      * Get a leave request in a human readable format (Ids are replaced by label)
      * @param int $id ID of the leave
      * @return array list of records

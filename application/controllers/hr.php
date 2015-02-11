@@ -274,6 +274,58 @@ class Hr extends CI_Controller {
             redirect('hr/employees');
         }
     }
+    
+    /**
+     * Display presence details for a given employee
+     * @param int $id employee id
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function presence($id, $month=0, $year=0) {
+        $this->auth->check_is_granted('list_employees');
+        $data = $this->getUserContext();
+        
+        $data['title'] = lang('hr_presence_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_presence_report');
+        
+        $data['user_id'] = $id;
+        $this->load->model('leaves_model');
+        $this->load->model('users_model');
+        $this->load->model('dayoffs_model');
+        $this->load->model('contracts_model');
+        
+        //Details about the employee
+        $employee = $this->users_model->get_users($id);
+        $data['employee_name'] =  $employee['firstname'] . ' ' . $employee['lastname'];
+        $contract = $this->contracts_model->get_contracts($employee['contract']);
+        $data['contract_id'] = $contract['id'];
+        $data['contract_name'] = $contract['name'];
+        
+        //Compute facts about dates and the selected month
+        if ($month == 0) $month = date('m', strtotime('last month'));
+        if ($year == 0) $year = date('Y', strtotime('last month'));
+        $total_days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
+        $lastDay = date("t", strtotime($start));    //last day of selected month
+        $end = $year . '-' . $month . '-' . $lastDay;    //last date of selected month
+        //Number of non working days during the selected month
+        $non_working_days = $this->dayoffs_model->sumdayoffs($employee['contract'], $start, $end);
+        $opened_days = $total_days - $non_working_days;
+        $data['month'] = $month;
+        $data['month_name'] = date('F', strtotime($start));
+        $data['year'] = $year;
+        $data['default_date'] = $start;
+        $data['total_days'] = $total_days;
+        $data['opened_days'] = $opened_days;
+        $data['non_working_days'] = $non_working_days;
+        
+        //List of accepted leave requests taken into account
+        $data['leaves'] = $this->leaves_model->get_accepted_leaves_in_dates($id, $start, $end);
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('hr/presence', $data);
+        $this->load->view('templates/footer');
+    }
         
     /**
      * Action: export the list of all leaves into an Excel file

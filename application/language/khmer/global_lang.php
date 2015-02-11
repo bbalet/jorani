@@ -66,6 +66,8 @@ $lang['global_link_doc_page_create_user'] = '';
 $lang['global_link_doc_page_list_users'] = '';
 $lang['global_link_doc_page_list_employees'] = '';
 
+$lang['global_link_doc_page_presence_report'] = '';
+
 $lang['global_link_doc_page_leave_balance_report'] = '';
 
 //Calendar

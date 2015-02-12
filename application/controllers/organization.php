@@ -259,7 +259,7 @@ class Organization extends CI_Controller {
      */
     public function getsupervisor() {
         expires_now();
-        $this->output->set_content_type('application/json');
+        header("Content-Type: application/json");
         $entity = $this->input->get('entity', TRUE);
         if (isset($entity)) {
             echo json_encode($this->organization_model->get_supervisor($entity));
@@ -275,7 +275,7 @@ class Organization extends CI_Controller {
      */
     public function setsupervisor() {
         expires_now();
-        $this->output->set_content_type('application/json');
+        header("Content-Type: application/json");
         if ($this->auth->is_granted('edit_organization') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {

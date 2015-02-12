@@ -43,11 +43,12 @@ $this->lang->load('global', $language);?>
         <p><?php echo lang('hr_presence_working_days');?> : <b><?php echo $opened_days;?></b></p>
         <p><?php echo lang('hr_presence_non_working_days');?> : <b><a href="<?php echo base_url();?>contracts/<?php echo $contract_id; ?>/calendar"><?php echo $non_working_days;?></a></b></p>
         <?php } else { ?>
-        <p><?php echo lang('hr_presence_contract');?> : <i class="icon-warning-sign"></i></p>
-        <p><?php echo lang('hr_presence_working_days');?> : <i class="icon-warning-sign"></i></p>
-        <p><?php echo lang('hr_presence_non_working_days');?> : <i class="icon-warning-sign"></i></p>
-
+        <p><?php echo lang('hr_presence_contract');?> : <i class="icon-warning-sign"></i><?php echo lang('hr_presence_no_contract');?></p>
+        <p><?php echo lang('hr_presence_working_days');?> : <i class="icon-warning-sign"></i><?php echo lang('hr_presence_no_contract');?></p>
+        <p><?php echo lang('hr_presence_non_working_days');?> : <i class="icon-warning-sign"></i><?php echo lang('hr_presence_no_contract');?></p>
         <?php } ?>
+        <p><?php echo lang('hr_presence_leave_duration');?> : <b><?php echo $leave_duration;?></b>&nbsp;<i class="icon-hand-left"></i><?php echo lang('hr_presence_please_check');?></p>
+        <p><?php echo lang('hr_presence_work_duration');?> : <b><?php echo $work_duration;?></b>&nbsp;<i class="icon-hand-left"></i><?php echo lang('hr_presence_please_check');?></p>
     </div>
     <div class="span3">
         <br /><br />
@@ -117,23 +118,23 @@ $this->lang->load('global', $language);?>
           if (strstr($day->display, ';')) {
               $periods = explode(";", $day->display);
               $statuses = explode(";", $day->status);
-                switch ($statuses[0])
+                switch (intval($statuses[0]))
                 {
                     case 1: $class = "planned"; break;  // Planned
                     case 2: $class = "requested"; break;  // Requested
                     case 3: $class = "accepted"; break;  // Accepted
                     case 4: $class = "rejected"; break;  // Rejected
-                    case '5': $class="dayoff"; break;
-                    case '6': $class="dayoff"; break;
+                    case 5: $class="dayoff"; break;
+                    case 6: $class="dayoff"; break;
                 }
-                switch ($statuses[1])
+                switch (intval($statuses[1]))
                 {
                     case 1: $class .= "planned"; break;  // Planned
                     case 2: $class .= "requested"; break;  // Requested
                     case 3: $class .= "accepted"; break;  // Accepted
                     case 4: $class .= "rejected"; break;  // Rejected
-                    case '5': $class .="dayoff"; break;
-                    case '6': $class .="dayoff"; break;
+                    case 5: $class .="dayoff"; break;
+                    case 6: $class .="dayoff"; break;
                 }
           } else {
             switch ($day->display) {

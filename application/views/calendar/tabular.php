@@ -116,23 +116,23 @@ $this->lang->load('global', $language);?>
           if (strstr($day->display, ';')) {
               $periods = explode(";", $day->display);
               $statuses = explode(";", $day->status);
-                switch ($statuses[0])
+                switch (intval($statuses[0]))
                 {
                     case 1: $class = "planned"; break;  // Planned
                     case 2: $class = "requested"; break;  // Requested
                     case 3: $class = "accepted"; break;  // Accepted
                     case 4: $class = "rejected"; break;  // Rejected
-                    case '5': $class="dayoff"; break;
-                    case '6': $class="dayoff"; break;
+                    case 5: $class="dayoff"; break;
+                    case 6: $class="dayoff"; break;
                 }
-                switch ($statuses[1])
+                switch (intval($statuses[1]))
                 {
                     case 1: $class .= "planned"; break;  // Planned
                     case 2: $class .= "requested"; break;  // Requested
                     case 3: $class .= "accepted"; break;  // Accepted
                     case 4: $class .= "rejected"; break;  // Rejected
-                    case '5': $class .="dayoff"; break;
-                    case '6': $class .="dayoff"; break;
+                    case 5: $class .="dayoff"; break;
+                    case 6: $class .="dayoff"; break;
                 }
           } else {
             switch ($day->display) {

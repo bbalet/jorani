@@ -1,0 +1,1384 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Jorani\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Jorani <jorani@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+
+msgid "My calendar"
+msgstr ""
+
+msgid "Calendar of my leaves."
+msgstr ""
+
+msgid "Download an iCal file"
+msgstr ""
+
+msgid "(import the event into Outlook, Thunderbird, etc.)"
+msgstr ""
+
+msgid "Event details"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Day offs"
+msgstr ""
+
+msgid "Calendar of my workmates"
+msgstr ""
+
+msgid "Leaves of employees having the same line manager"
+msgstr ""
+
+msgid "Calendar of my collaborators"
+msgstr ""
+
+msgid "Leaves of my collaborators (will be empty if I'm not a manager)."
+msgstr ""
+
+msgid "Calendar of my department"
+msgstr ""
+
+msgid "Calendar of employees working in my department"
+msgstr ""
+
+msgid "It appears that you don't belong to any department. Please contact your HR Officer / Manager."
+msgstr ""
+
+msgid "Calendar of the organization"
+msgstr ""
+
+msgid "Global calendar with a filter on entity"
+msgstr ""
+
+msgid "Select the entity"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Include sub-departments"
+msgstr ""
+
+msgid "Select an entity"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Tabular Calendar"
+msgstr ""
+
+msgid "Month"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "Execute"
+msgstr ""
+
+msgid "Export"
+msgstr ""
+
+msgid "Employee"
+msgstr ""
+
+msgid "Calendar Tabular"
+msgstr ""
+
+msgid "Entity"
+msgstr ""
+
+msgid "Sub-entities"
+msgstr ""
+
+msgid "'January','February','March','April','May','June','July','August','September','October','November','December'"
+msgstr ""
+
+msgid "'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'"
+msgstr ""
+
+msgid "'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'"
+msgstr ""
+
+msgid "'Sun','Mon','Tue','Wed','Thu','Fri','Sat'"
+msgstr ""
+
+msgid "MMMM yyyy"
+msgstr ""
+
+msgid "MMM d[ yyyy]{ - [ MMM] d yyyy}"
+msgstr ""
+
+msgid "dddd, MMM d, yyyy"
+msgstr ""
+
+msgid "ddd"
+msgstr ""
+
+msgid "ddd M/d"
+msgstr ""
+
+msgid "dddd M/d"
+msgstr ""
+
+msgid "H:mm"
+msgstr ""
+
+msgid "h(:mm)t"
+msgstr ""
+
+msgid "H:mm{ - H:mm}"
+msgstr ""
+
+msgid "1"
+msgstr ""
+
+msgid "today"
+msgstr ""
+
+msgid "day"
+msgstr ""
+
+msgid "week"
+msgstr ""
+
+msgid "month"
+msgstr ""
+
+msgid "prev,next today"
+msgstr ""
+
+msgid "title"
+msgstr ""
+
+msgid "month,basicWeek,basicDay"
+msgstr ""
+
+msgid "Mo"
+msgstr ""
+
+msgid "Tu"
+msgstr ""
+
+msgid "We"
+msgstr ""
+
+msgid "Th"
+msgstr ""
+
+msgid "Fr"
+msgstr ""
+
+msgid "Sa"
+msgstr ""
+
+msgid "Su"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+msgid "March"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "List of contracts"
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Start period"
+msgstr ""
+
+msgid "End period"
+msgstr ""
+
+msgid "delete contract"
+msgstr ""
+
+msgid "View contract"
+msgstr ""
+
+msgid "edit contract"
+msgstr ""
+
+msgid "entitled days"
+msgstr ""
+
+msgid "day offs and weekends"
+msgstr ""
+
+msgid "Export this list"
+msgstr ""
+
+msgid "Create contract"
+msgstr ""
+
+msgid "Delete Contract"
+msgstr ""
+
+msgid "You are about to delete one contract, this procedure is irreversible."
+msgstr ""
+
+msgid "Do you want to proceed?"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Entitled days"
+msgstr ""
+
+msgid "Contract details"
+msgstr ""
+
+msgid "Details of contract #"
+msgstr ""
+
+msgid "Month / Start"
+msgstr ""
+
+msgid "Day / Start"
+msgstr ""
+
+msgid "Month / End"
+msgstr ""
+
+msgid "Day / End"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Back to list"
+msgstr ""
+
+msgid "Edit a contract"
+msgstr ""
+
+msgid "Edit contract #"
+msgstr ""
+
+msgid "Update contract"
+msgstr ""
+
+msgid "The contract has been succesfully updated"
+msgstr ""
+
+msgid "Create a new contract"
+msgstr ""
+
+msgid "The contract has been succesfully created"
+msgstr ""
+
+msgid "The contract has been succesfully deleted"
+msgstr ""
+
+msgid "Calendar of non working days"
+msgstr ""
+
+msgid "Day offs and weekends are not configured by default. Click on a day to edit it individually or use the button \"Series\"."
+msgstr ""
+
+msgid "Legend:"
+msgstr ""
+
+msgid "All day"
+msgstr ""
+
+msgid "Morning"
+msgstr ""
+
+msgid "Afternoon"
+msgstr ""
+
+msgid "Back to contracts"
+msgstr ""
+
+msgid "Series of non-working days"
+msgstr ""
+
+msgid "Edit day off"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Working day"
+msgstr ""
+
+msgid "All day is off"
+msgstr ""
+
+msgid "Morning is off"
+msgstr ""
+
+msgid "Afternoon is off"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Edit a series of day offs"
+msgstr ""
+
+msgid "Mark every"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "Current"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "As a"
+msgstr ""
+
+msgid "Database maintenance"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
+
+msgid "Table name"
+msgstr ""
+
+msgid "Table of days off"
+msgstr ""
+
+msgid "Table of history of changes in the table Users"
+msgstr ""
+
+msgid "Table of entitled days"
+msgstr ""
+
+msgid "Purge rows until (included)"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Purge data"
+msgstr ""
+
+msgid "Mass data deletion"
+msgstr ""
+
+msgid "You are about to delete a lot of data, this procedure is irreversible."
+msgstr ""
+
+msgid "The database has been purged successfully."
+msgstr ""
+
+msgid "\"The field \" + fieldname + \" is mandatory.\""
+msgstr ""
+
+msgid "No data available in table"
+msgstr ""
+
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr ""
+
+msgid "Showing 0 to 0 of 0 entries"
+msgstr ""
+
+msgid "(filtered from _MAX_ total entries)"
+msgstr ""
+
+msgid ","
+msgstr ""
+
+msgid "Show _MENU_ entries"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Processing..."
+msgstr ""
+
+msgid "Search:"
+msgstr ""
+
+msgid "No matching records found"
+msgstr ""
+
+msgid "First"
+msgstr ""
+
+msgid "Last"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid ": activate to sort column ascending"
+msgstr ""
+
+msgid ": activate to sort column descending"
+msgstr ""
+
+msgid "Your password has been reset"
+msgstr ""
+
+msgid "Your account has been created"
+msgstr ""
+
+msgid "Leave Request from "
+msgstr ""
+
+msgid "Leave Request"
+msgstr ""
+
+msgid "Your leave request has been accepted"
+msgstr ""
+
+msgid "Your leave request has been rejected"
+msgstr ""
+
+msgid "Your overtime request has been accepted"
+msgstr ""
+
+msgid "Your overtime request has been rejected"
+msgstr ""
+
+msgid "Overtime Request"
+msgstr ""
+
+msgid "Your overtime request from "
+msgstr ""
+
+msgid "Entitled days for contract"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "End"
+msgstr ""
+
+msgid "Days"
+msgstr ""
+
+msgid "Leave type"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "No entitled days attached to the contract."
+msgstr ""
+
+msgid "Add entitled days"
+msgstr ""
+
+msgid "Start Date"
+msgstr ""
+
+msgid "End Date"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Back to the list of contracts"
+msgstr ""
+
+msgid "Are you sure that you want to delete it?"
+msgstr ""
+
+msgid "Entitled days for employee"
+msgstr ""
+
+msgid "No entitled days attached to the user."
+msgstr ""
+
+msgid "Back to the list of employees"
+msgstr ""
+
+msgid "Entitled days to Contract #"
+msgstr ""
+
+msgid "Yearly leave period : "
+msgstr ""
+
+msgid "Entitled days to Employee"
+msgstr ""
+
+msgid "My overtime requests"
+msgstr ""
+
+msgid "view"
+msgstr ""
+
+msgid "edit"
+msgstr ""
+
+msgid "delete"
+msgstr ""
+
+msgid "Reason"
+msgstr ""
+
+msgid "Duration"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "New request"
+msgstr ""
+
+msgid "Delete overtime request"
+msgstr ""
+
+msgid "You are about to delete one overtime request, this procedure is irreversible."
+msgstr ""
+
+msgid "Submit an overtime request"
+msgstr ""
+
+msgid "In days or fraction of days (e.g. 0.13 for 1h if you work 8h/day)."
+msgstr ""
+
+msgid "Request overtime"
+msgstr ""
+
+msgid "The overtime request has been succesfully created"
+msgstr ""
+
+msgid "The overtime request has been succesfully created or updated, but you don't have a manager."
+msgstr ""
+
+msgid "Edit overtime request #"
+msgstr ""
+
+msgid "Edit a overtime request"
+msgstr ""
+
+msgid "In days or fraction of days (e.g. 0.125 for 1h if you work 8h/day)."
+msgstr ""
+
+msgid "Update overtime"
+msgstr ""
+
+msgid "You cannot edit an overtime request already submitted"
+msgstr ""
+
+msgid "The overtime request has been succesfully updated"
+msgstr ""
+
+msgid "The overtime request has been succesfully deleted"
+msgstr ""
+
+msgid "You can't delete this overtime request"
+msgstr ""
+
+msgid "View overtime request #"
+msgstr ""
+
+msgid "View overtime request"
+msgstr ""
+
+msgid "List of overtime requests"
+msgstr ""
+
+msgid "Link to documentation"
+msgstr ""
+
+msgid "Operation (%s) is not granted"
+msgstr ""
+
+msgid "Please wait"
+msgstr ""
+
+msgid "Internet Explorer 8 and older browser are not supported. Please upgrade to IE9 or use Firefox, Chrome, etc."
+msgstr ""
+
+msgid "m/d/Y"
+msgstr ""
+
+msgid "TRUE"
+msgstr ""
+
+msgid "FALSE"
+msgstr ""
+
+msgid "Go top"
+msgstr ""
+
+msgid "&copy; 2014 Jorani Authors"
+msgstr ""
+
+msgid "Requested"
+msgstr ""
+
+msgid "Planned"
+msgstr ""
+
+msgid "Accepted"
+msgstr ""
+
+msgid "Rejected"
+msgstr ""
+
+msgid "identifier"
+msgstr ""
+
+msgid "firstname"
+msgstr ""
+
+msgid "lastname"
+msgstr ""
+
+msgid "datehired"
+msgstr ""
+
+msgid "department"
+msgstr ""
+
+msgid "contract"
+msgstr ""
+
+msgid "day off"
+msgstr ""
+
+msgid "leave"
+msgstr ""
+
+msgid "List of employees"
+msgstr ""
+
+msgid "edit user"
+msgstr ""
+
+msgid "Leaves"
+msgstr ""
+
+msgid "Extras"
+msgstr ""
+
+msgid "Leave Balance"
+msgstr ""
+
+msgid "Create Leave Request"
+msgstr ""
+
+msgid "Presence report"
+msgstr ""
+
+msgid "Firstname"
+msgstr ""
+
+msgid "Lastname"
+msgstr ""
+
+msgid "E-mail"
+msgstr ""
+
+msgid "Contract"
+msgstr ""
+
+msgid "Manager"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Right-click on an employee for contextual actions."
+msgstr ""
+
+msgid "List of requested leaves"
+msgstr ""
+
+msgid "List of leaves for employee #"
+msgstr ""
+
+msgid "accept"
+msgstr ""
+
+msgid "reject"
+msgstr ""
+
+msgid "Delete leave request"
+msgstr ""
+
+msgid "You are about to delete one leave request, this procedure is irreversible."
+msgstr ""
+
+msgid "Submit a leave request"
+msgstr ""
+
+msgid "You are exceeding your entitled days"
+msgstr ""
+
+msgid "You have requested another leave request within the same dates."
+msgstr ""
+
+msgid "Cause (optional)"
+msgstr ""
+
+msgid "Request leave"
+msgstr ""
+
+msgid "The leave request has been succesfully created"
+msgstr ""
+
+msgid "The leave request has been succesfully created or updated, but you don't have a manager."
+msgstr ""
+
+msgid "List of overtime requests for employee #"
+msgstr ""
+
+msgid "Leave balance for user #"
+msgstr ""
+
+msgid "Available"
+msgstr ""
+
+msgid "Taken"
+msgstr ""
+
+msgid "Entitled"
+msgstr ""
+
+msgid "This employee has no contract."
+msgstr ""
+
+msgid "Date of report"
+msgstr ""
+
+msgid "By default this report shows the values for the last month. Please note that the list of leaves shows only the accepted leave requests."
+msgstr ""
+
+msgid "Number of days"
+msgstr ""
+
+msgid "Number of working days"
+msgstr ""
+
+msgid "Number of non-working days"
+msgstr ""
+
+msgid "Duration of leaves"
+msgstr ""
+
+msgid "Duration of presence"
+msgstr ""
+
+msgid "Overlapping detected"
+msgstr ""
+
+msgid "The employee has no contract"
+msgstr ""
+
+msgid "Please check"
+msgstr ""
+
+msgid "List of leaves in the month"
+msgstr ""
+
+msgid "My summary"
+msgstr ""
+
+msgid "Overtime details (added to compensate leaves)"
+msgstr ""
+
+msgid "Catch up for"
+msgstr ""
+
+msgid "No entitled or taken days for this period. Please contact your HR Officer / Manager."
+msgstr ""
+
+msgid "It appears you have no contract. Please contact your HR Officer / Manager."
+msgstr ""
+
+msgid "My leave requests"
+msgstr ""
+
+msgid "Edit a leave request"
+msgstr ""
+
+msgid "Edit leave request #"
+msgstr ""
+
+msgid "Update leave"
+msgstr ""
+
+msgid "You cannot edit a leave request already submitted"
+msgstr ""
+
+msgid "The leave request has been succesfully updated"
+msgstr ""
+
+msgid "You can't delete this leave request"
+msgstr ""
+
+msgid "The leave request has been succesfully deleted"
+msgstr ""
+
+msgid "View leave request #"
+msgstr ""
+
+msgid "View a leave request"
+msgstr ""
+
+msgid "List of leaves"
+msgstr ""
+
+msgid "Morning/Afternnon"
+msgstr ""
+
+msgid "Leave types"
+msgstr ""
+
+msgid "Create a new type"
+msgstr ""
+
+msgid "No leave type found into the database."
+msgstr ""
+
+msgid "Add a leave type"
+msgstr ""
+
+msgid "The leave type has been succesfully created."
+msgstr ""
+
+msgid "Edit a Leave type"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "The leave type has been succesfully updated."
+msgstr ""
+
+msgid "Delete Leave Type"
+msgstr ""
+
+msgid "You are about to delete one leave type, this procedure is irreversible."
+msgstr ""
+
+msgid "The leave type has been succesfully deleted."
+msgstr ""
+
+msgid "You cannot delete a system leave type."
+msgstr ""
+
+msgid "You cannot delete a leave type that is used."
+msgstr ""
+
+msgid "Leave Management System"
+msgstr ""
+
+msgid "Change password"
+msgstr ""
+
+msgid "Welcome"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "View my personal information"
+msgstr ""
+
+msgid "reset password"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "List of users"
+msgstr ""
+
+msgid "Create user"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "HR"
+msgstr ""
+
+msgid "Employees"
+msgstr ""
+
+msgid "Organization"
+msgstr ""
+
+msgid "Contracts"
+msgstr ""
+
+msgid "List of positions"
+msgstr ""
+
+msgid "List of types"
+msgstr ""
+
+msgid "Reports"
+msgstr ""
+
+msgid "Leave balance"
+msgstr ""
+
+msgid "Validation"
+msgstr ""
+
+msgid "My collaborators"
+msgstr ""
+
+msgid "Overtime"
+msgstr ""
+
+msgid "Requests"
+msgstr ""
+
+msgid "List of extras"
+msgstr ""
+
+msgid "Request an extra"
+msgstr ""
+
+msgid "My leaves"
+msgstr ""
+
+msgid "Counters"
+msgstr ""
+
+msgid "List of leave requests"
+msgstr ""
+
+msgid "Request a leave"
+msgstr ""
+
+msgid "Calendars"
+msgstr ""
+
+msgid "My workmates"
+msgstr ""
+
+msgid "Department"
+msgstr ""
+
+msgid "Global"
+msgstr ""
+
+msgid "Tabular"
+msgstr ""
+
+msgid "Search for an entity"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Employees attached to entity"
+msgstr ""
+
+msgid "Attach an Employee"
+msgstr ""
+
+msgid "Detach an Employee"
+msgstr ""
+
+msgid "Supervisor"
+msgstr ""
+
+msgid "If you select a supervisor, he will receive a copy of accepted and rejected leave requests submitted by employees of this entity."
+msgstr ""
+
+msgid "Select a Supervisor"
+msgstr ""
+
+msgid "Delete Entity"
+msgstr ""
+
+msgid "You are about to delete one entity, this procedure is irreversible."
+msgstr ""
+
+msgid "Add an Employee"
+msgstr ""
+
+msgid "An error occured"
+msgstr ""
+
+msgid "Name of the entity"
+msgstr ""
+
+msgid "Please select one entity in the organization (treeview on the right)."
+msgstr ""
+
+msgid "Please select one employee in the table of users belonging to the selected entity."
+msgstr ""
+
+msgid "You cannot delete the root entity."
+msgstr ""
+
+msgid "Overtime Requests submitted to me"
+msgstr ""
+
+msgid "This screen lists the overtime requests submitted to you. If you are not a manager, this list will always be empty."
+msgstr ""
+
+msgid "Fullname"
+msgstr ""
+
+msgid "All requests"
+msgstr ""
+
+msgid "Pending requests "
+msgstr ""
+
+msgid "You are not the line manager of this employee. You cannot reject this overtime request."
+msgstr ""
+
+msgid "The overtime request has been successfully rejected."
+msgstr ""
+
+msgid "You are not the line manager of this employee. You cannot accept this overtime request."
+msgstr ""
+
+msgid "The overtime request has been successfully accepted."
+msgstr ""
+
+msgid "List of overtime resquests"
+msgstr ""
+
+msgid "Create position"
+msgstr ""
+
+msgid "Delete Position"
+msgstr ""
+
+msgid "You are about to delete one position, this procedure is irreversible."
+msgstr ""
+
+msgid "Create a new position"
+msgstr ""
+
+msgid "The position has been succesfully created."
+msgstr ""
+
+msgid "Edit position #"
+msgstr ""
+
+msgid "Update position"
+msgstr ""
+
+msgid "The position has been succesfully updated."
+msgstr ""
+
+msgid "The position has been succesfully deleted."
+msgstr ""
+
+msgid "List of reports"
+msgstr ""
+
+msgid "Report"
+msgstr ""
+
+msgid "Back to list of reports"
+msgstr ""
+
+msgid "List of Report"
+msgstr ""
+
+msgid "Balance of leaves"
+msgstr ""
+
+msgid "Launch"
+msgstr ""
+
+msgid "History of changes"
+msgstr ""
+
+msgid "Select the user"
+msgstr ""
+
+msgid "Start date"
+msgstr ""
+
+msgid "End date"
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "Modification type"
+msgstr ""
+
+msgid "any"
+msgstr ""
+
+msgid "create"
+msgstr ""
+
+msgid "update"
+msgstr ""
+
+msgid "Select a user"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Leave Requests submitted to me"
+msgstr ""
+
+msgid "This screen lists the leave requests submitted to you. If you are not a manager, this list will always be empty."
+msgstr ""
+
+msgid "List of my collaborators"
+msgstr ""
+
+msgid "This screen lists your collaborators. If you are not a manager, this list will always be empty."
+msgstr ""
+
+msgid "Your are not the manager of this employee."
+msgstr ""
+
+msgid "List of collaborators"
+msgstr ""
+
+msgid "You are not the line manager of this employee. You cannot accept this leave request."
+msgstr ""
+
+msgid "The leave request has been successfully accepted."
+msgstr ""
+
+msgid "You are not the line manager of this employee. You cannot reject this leave request."
+msgstr ""
+
+msgid "The leave request has been successfully rejected."
+msgstr ""
+
+msgid "List of leave resquests"
+msgstr ""
+
+msgid "Morning/Afternoon"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Send me my password"
+msgstr ""
+
+msgid "Please fill the login field"
+msgstr ""
+
+msgid "Unknown login. Please contact your HR Officer / Manager."
+msgstr ""
+
+msgid "The password has been sent to your e-mail adress."
+msgstr ""
+
+msgid "Invalid login id or password"
+msgstr ""
+
+msgid "The language has been succesfully set to "
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Cut"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "View user details"
+msgstr ""
+
+msgid "edit user details"
+msgstr ""
+
+msgid "delete user"
+msgstr ""
+
+msgid "Role"
+msgstr ""
+
+msgid "Create a new user"
+msgstr ""
+
+msgid "Import users"
+msgstr ""
+
+msgid "Delete User"
+msgstr ""
+
+msgid "You are about to delete one user, this procedure is irreversible."
+msgstr ""
+
+msgid "Import Users"
+msgstr ""
+
+msgid "Filename"
+msgstr ""
+
+msgid "Details of user #"
+msgstr ""
+
+msgid "Details of a user"
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+msgid "Date hired/started"
+msgstr ""
+
+msgid "Internal/Company Identifier"
+msgstr ""
+
+msgid "My personal information"
+msgstr ""
+
+msgid "Edit user #"
+msgstr ""
+
+msgid "Edit user"
+msgstr ""
+
+msgid "No line manager."
+msgstr ""
+
+msgid "Self"
+msgstr ""
+
+msgid "LDAP Path"
+msgstr ""
+
+msgid "Select the manager"
+msgstr ""
+
+msgid "Select a position"
+msgstr ""
+
+msgid "Update user"
+msgstr ""
+
+msgid "The user has been succesfully updated"
+msgstr ""
+
+msgid "The user has been succesfully deleted"
+msgstr ""
+
+msgid "The password has been succesfully changed"
+msgstr ""
+
+msgid "If a user has no manager (itself), it can validate its leave requests."
+msgstr ""
+
+msgid "Generate password"
+msgstr ""
+
+msgid "It is recommanded to select a contract. Do you want to create the user without a contract?"
+msgstr ""
+
+msgid "The user has been succesfully created"
+msgstr ""
+
+msgid "Username already exists."
+msgstr ""
+
+msgid "This username is not available."
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+

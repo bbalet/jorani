@@ -18,7 +18,6 @@ Jorani has been tested with MySQL and MariaDB (please note that functions are cr
 * Change <code>application/config/config.php</code> according to your environment.
 
 Please note that the schema contains procedures, so the user created must have EXECUTE permission.
-You might need to change the code <code>CREATE DEFINER=`root`@`localhost`</code> of the <code>/sql/lms.sql</code> file if the db user you are using to create the schema is not the root user (e.g. on shared hosting).
 
 ## E-mail setup
 

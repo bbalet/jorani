@@ -96,7 +96,7 @@ if ($configFileExists ) {
 
             <h1>Jorani Requirements</h1>
             
-            <button class="btn btn-primary" onclick="export2csv();"><i class="icon-hdd icon-white"></i>&nbsp;Export to a CSV file</button>
+            <button class="btn btn-primary" onclick="export2csv();"><i class="icon-download-alt icon-white"></i>&nbsp;Export to a CSV file</button>
             
             <h2>Web Server</h2>
 

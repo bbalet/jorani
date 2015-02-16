@@ -24,6 +24,7 @@ $lang['hr_employees_thead_link_extra'] = 'Heures supp.';
 $lang['hr_employees_thead_link_balance'] = 'État des congés';
 $lang['hr_employees_thead_link_create_leave'] = 'Créer demande d\'absence';
 $lang['hr_employees_thead_link_presence'] = 'Rapport sur la présence';
+$lang['hr_employees_thead_link_delegation'] = 'Délégations';
 $lang['hr_employees_thead_id'] = 'N°';
 $lang['hr_employees_thead_firstname'] = 'Prénom';
 $lang['hr_employees_thead_lastname'] = 'Nom';

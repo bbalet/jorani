@@ -101,16 +101,14 @@ class Requests extends CI_Controller {
     public function accept($id) {
         $this->auth->check_is_granted('accept_requests');
         $this->load->model('users_model');
+        $this->load->model('delegations_model');
         $leave = $this->leaves_model->get_leaves($id);
         if (empty($leave)) {
             show_404();
         }
         $employee = $this->users_model->get_users($leave['employee']);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
-            log_message('error', 'User #' . $this->user_id . ' illegally tried to accept leave #' . $id);
-            $this->session->set_flashdata('msg', lang('requests_accept_flash_msg_error'));
-            redirect('home');
-        } else {
+        $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
+        if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
             $this->leaves_model->accept_leave($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg', lang('requests_accept_flash_msg_success'));
@@ -119,6 +117,10 @@ class Requests extends CI_Controller {
             } else {
                 redirect('requests');
             }
+        } else {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to accept leave #' . $id);
+            $this->session->set_flashdata('msg', lang('requests_accept_flash_msg_error'));
+            redirect('leaves');
         }
     }
 
@@ -130,16 +132,14 @@ class Requests extends CI_Controller {
     public function reject($id) {
         $this->auth->check_is_granted('reject_requests');
         $this->load->model('users_model');
+        $this->load->model('delegations_model');
         $leave = $this->leaves_model->get_leaves($id);
         if (empty($leave)) {
             show_404();
         }
         $employee = $this->users_model->get_users($leave['employee']);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
-            log_message('error', 'User #' . $this->user_id . ' illegally tried to reject leave #' . $id);
-            $this->session->set_flashdata('msg', lang('requests_reject_flash_msg_error'));
-            redirect('home');
-        } else {
+        $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
+        if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
             $this->leaves_model->reject_leave($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg',  lang('requests_reject_flash_msg_success'));
@@ -148,6 +148,10 @@ class Requests extends CI_Controller {
             } else {
                 redirect('requests');
             }
+        } else {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to reject leave #' . $id);
+            $this->session->set_flashdata('msg', lang('requests_reject_flash_msg_error'));
+            redirect('leaves');
         }
     }
     
@@ -168,6 +172,81 @@ class Requests extends CI_Controller {
         $this->load->view('menu/index', $data);
         $this->load->view('requests/collaborators', $data);
         $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Display the list of delegations
+     * @param int $id Identifier of the manager (from HR/Employee) or 0 if self
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delegations($id = 0) {
+        if ($id == 0) $id = $this->user_id;
+        //Self modification or by HR
+        if (($this->user_id == $id) || ($this->is_hr)) {
+            expires_now();
+            $data = $this->getUserContext();
+            $data['title'] = lang('requests_delegations_title');
+            $data['help'] = $this->help->create_help_link('global_link_doc_page_delegations');
+            $this->load->model('users_model');
+            $data['name'] = $this->users_model->get_label($id);
+            $data['id'] = $id;
+            $this->load->model('delegations_model');
+            $data['delegations'] = $this->delegations_model->get_delegates($id);
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('requests/delegations', $data);
+            $this->load->view('templates/footer');
+        } else {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to access to list_delegations');
+            $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'list_delegations'));
+            redirect('leaves');
+        }
+    }
+    
+    /**
+     * Ajax endpoint : Delete a delegation for a manager
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delegations_delete() {
+        $manager = $this->input->post('manager_id', TRUE);
+        $delegation = $this->input->post('delegation_id', TRUE);
+        if (($this->user_id != $manager) && ($this->is_hr == FALSE)) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            if (isset($manager) && isset($delegation)) {
+                $this->output->set_content_type('text/plain');
+                $this->load->model('delegations_model');
+                $id = $this->delegations_model->delete_delegation($delegation);
+                echo $id;
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            }
+        }
+    }
+    
+    /**
+     * Ajax endpoint : Add a delegation for a manager
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delegations_add() {
+        $manager = $this->input->post('manager_id', TRUE);
+        $delegate = $this->input->post('delegate_id', TRUE);
+        if (($this->user_id != $manager) && ($this->is_hr == FALSE)) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            if (isset($manager) && isset($delegate)) {
+                $this->output->set_content_type('text/plain');
+                $this->load->model('delegations_model');
+                if (!$this->delegations_model->IsDelegate($delegate, $manager)) {
+                    $id = $this->delegations_model->add_delegate($manager, $delegate);
+                    echo $id;
+                } else {
+                    echo 'null';
+                }
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            }
+        }
     }
     
     /**

@@ -276,6 +276,7 @@ class Leaves extends CI_Controller {
         $this->load->model('users_model');
         $this->load->model('settings_model');
         $this->load->model('types_model');
+        $this->load->model('delegations_model');
         $manager = $this->users_model->get_users($this->session->userdata('manager'));
 
         //Test if the manager hasn't been deleted meanwhile
@@ -322,6 +323,12 @@ class Leaves extends CI_Controller {
             } else {
                $subject = '[Jorani] ';
             }
+            //Copy to the delegates, if any
+            $delegates = $this->delegations_model->get_delegates_mails($manager['id']);
+            if ($delegates != '') {
+                $this->email->cc($delegates);
+            }
+            
             $this->email->subject($subject . lang('email_leave_request_subject') .
                     $this->session->userdata('firstname') . ' ' .
                     $this->session->userdata('lastname'));

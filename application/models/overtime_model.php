@@ -138,17 +138,25 @@ class Overtime_model extends CI_Model {
     }
         
     /**
-     * List all overtime requests submitted to the connected user or only those
-     * with the "Requested" status.
+     * List all overtime requests submitted to the connected user (or if delegate of a manager)
+     * Can be filtered with "Requested" status.
      * @param int $user_id connected user
      * @param bool $all true all requests, false otherwise
      * @return array Recordset (can be empty if no requests or not a manager)
      */
     public function requests($user_id, $all = false) {
+        $this->load->model('delegations_model');
+        $ids = $this->delegations_model->get_delegates_list($user_id);
         $this->db->select('overtime.id as id, users.*, overtime.*');
         $this->db->join('users', 'users.id = overtime.employee');
         $this->db->where('users.manager', $user_id);
-        if (!$all) {
+        if (count($ids) > 0) {
+            array_push($ids, $user_id);
+            $this->db->where_in('users.manager', $ids);
+        } else {
+            $this->db->where('users.manager', $user_id);
+        }
+        if ($all == FALSE) {
             $this->db->where('status', 2);
         }
         $this->db->order_by('date', 'desc');

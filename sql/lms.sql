@@ -606,6 +606,15 @@ CREATE TABLE IF NOT EXISTS `users_history` (
   KEY `modified_date` (`modified_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
+
+CREATE TABLE IF NOT EXISTS `delegations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id of delegation',
+  `manager_id` int(11) NOT NULL COMMENT 'Manager wanting to delegate',
+  `delegate_id` int(11) NOT NULL COMMENT 'Employee having the delegation',
+  PRIMARY KEY (`id`),
+  KEY `manager_id` (`manager_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Delegation of approval' AUTO_INCREMENT=1 ;
+
 -- Tables for OAuth2 server
 CREATE TABLE oauth_clients (client_id VARCHAR(80) NOT NULL, client_secret VARCHAR(80) NOT NULL, redirect_uri VARCHAR(2000) NOT NULL, grant_types VARCHAR(80), scope VARCHAR(100), user_id VARCHAR(80), CONSTRAINT clients_client_id_pk PRIMARY KEY (client_id));
 CREATE TABLE oauth_access_tokens (access_token VARCHAR(40) NOT NULL, client_id VARCHAR(80) NOT NULL, user_id VARCHAR(255), expires TIMESTAMP NOT NULL, scope VARCHAR(2000), CONSTRAINT access_token_pk PRIMARY KEY (access_token));

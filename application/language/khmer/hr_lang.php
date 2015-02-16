@@ -24,6 +24,7 @@ $lang['hr_employees_thead_link_extra'] = 'បន្ថែម';
 $lang['hr_employees_thead_link_balance'] = 'តុល្យភាពនៃការចាកចេញ';
 $lang['hr_employees_thead_link_create_leave'] = 'Create Leave Request';
 $lang['hr_employees_thead_link_presence'] = 'Presence report';
+$lang['hr_employees_thead_link_delegation'] = 'Delegations';
 $lang['hr_employees_thead_id'] = 'ID';
 $lang['hr_employees_thead_firstname'] = 'នាមត្រកូលអ្នកប្រើប្រាស់';
 $lang['hr_employees_thead_lastname'] = 'ឈ្មោះអ្នកប្រើប្រាស់';

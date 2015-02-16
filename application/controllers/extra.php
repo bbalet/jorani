@@ -203,6 +203,7 @@ class Extra extends CI_Controller {
     private function sendMail($id) {
         $this->load->model('users_model');
         $this->load->model('settings_model');
+        $this->load->model('delegations_model');
         $manager = $this->users_model->get_users($this->session->userdata('manager'));
 
         //Test if the manager hasn't been deleted meanwhile
@@ -247,6 +248,11 @@ class Extra extends CI_Controller {
                 $subject = $this->config->item('subject_prefix');
             } else {
                $subject = '[Jorani] ';
+            }
+            //Copy to the delegates, if any
+            $delegates = $this->delegations_model->get_delegates_mails($manager['id']);
+            if ($delegates != '') {
+                $this->email->cc($delegates);
             }
             $this->email->subject($subject . lang('email_extra_request_reject_subject') .
                     $this->session->userdata('firstname') . ' ' .

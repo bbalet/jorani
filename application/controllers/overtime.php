@@ -99,16 +99,14 @@ class Overtime extends CI_Controller {
     public function accept($id) {
         $this->auth->check_is_granted('accept_overtime');
         $this->load->model('users_model');
+        $this->load->model('delegations_model');
         $extra = $this->overtime_model->get_extra($id);
         if (empty($extra)) {
             show_404();
         }
         $employee = $this->users_model->get_users($extra['employee']);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
-            log_message('error', 'User #' . $this->user_id . ' illegally tried to accept leave #' . $id);
-            $this->session->set_flashdata('msg', lang('overtime_accept_flash_msg_error'));
-            redirect('home');
-        } else {
+        $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
+        if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
             $this->overtime_model->accept_extra($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg', lang('overtime_accept_flash_msg_success'));
@@ -117,6 +115,10 @@ class Overtime extends CI_Controller {
             } else {
                 redirect('overtime');
             }
+        } else {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to accept extra #' . $id);
+            $this->session->set_flashdata('msg', lang('overtime_accept_flash_msg_error'));
+            redirect('leaves');
         }
     }
 
@@ -128,16 +130,14 @@ class Overtime extends CI_Controller {
     public function reject($id) {
         $this->auth->check_is_granted('reject_overtime');
         $this->load->model('users_model');
+        $this->load->model('delegations_model');
         $extra = $this->overtime_model->get_extra($id);
         if (empty($extra)) {
             show_404();
         }
         $employee = $this->users_model->get_users($extra['employee']);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
-            log_message('error', 'User #' . $this->user_id . ' illegally tried to reject leave #' . $id);
-            $this->session->set_flashdata('msg', lang('overtime_reject_flash_msg_error'));
-            redirect('home');
-        } else {
+        $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
+        if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
             $this->overtime_model->reject_extra($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg', lang('overtime_reject_flash_msg_success'));
@@ -146,6 +146,10 @@ class Overtime extends CI_Controller {
             } else {
                 redirect('overtime');
             }
+        } else {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to reject extra #' . $id);
+            $this->session->set_flashdata('msg', lang('overtime_reject_flash_msg_error'));
+            redirect('leaves');
         }
     }
     

@@ -44,6 +44,7 @@ $lang['menu_hr_reports_divider'] = 'របាយការណ៍';
 $lang['menu_hr_report_leave_balance'] = 'តុល្យភាពនៃការចាកចេញ';
 
 $lang['menu_validation_title'] = 'ការរង្វាយតំលៃ';
+$lang['menu_validation_delegations'] = 'Delegations';
 $lang['menu_validation_collaborators'] = 'My collaborators';
 $lang['menu_validation_leaves'] = 'ស្លឹកឈើ';
 $lang['menu_validation_overtime'] = 'បន្ថែមម៉ោង';

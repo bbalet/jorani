@@ -24,6 +24,7 @@ $lang['hr_employees_thead_link_extra'] = 'Extras';
 $lang['hr_employees_thead_link_balance'] = 'Leave Balance';
 $lang['hr_employees_thead_link_create_leave'] = 'Create Leave Request';
 $lang['hr_employees_thead_link_presence'] = 'Presence report';
+$lang['hr_employees_thead_link_delegation'] = 'Delegations';
 $lang['hr_employees_thead_id'] = 'ID';
 $lang['hr_employees_thead_firstname'] = 'Firstname';
 $lang['hr_employees_thead_lastname'] = 'Lastname';

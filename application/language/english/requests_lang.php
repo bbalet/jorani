@@ -68,3 +68,15 @@ $lang['requests_export_thead_duration'] = 'Duration';
 $lang['requests_export_thead_type'] = 'Type';
 $lang['requests_export_thead_cause'] = 'Reason';
 $lang['requests_export_thead_status'] = 'Status';
+
+$lang['requests_delegations_title'] = 'List of delegations';
+$lang['requests_delegations_description'] = 'This is the list of employees who can accept or reject a request in your behalf.';
+$lang['requests_delegations_thead_employee'] = 'Employee';
+$lang['requests_delegations_thead_tip_delete'] = 'Revoke';
+$lang['requests_delegations_button_add'] = 'Add';
+$lang['requests_delegations_popup_delegate_title'] = 'Add a delegate';
+$lang['requests_delegations_popup_delegate_button_ok'] = 'OK';
+$lang['requests_delegations_popup_delegate_button_cancel'] = 'Cancel';
+$lang['requests_delegations_confirm_delete_message'] = 'Are you sure that you want to revoke this delegation?';
+$lang['requests_delegations_confirm_delete_cancel'] = 'Cancel';
+$lang['requests_delegations_confirm_delete_yes'] = 'Yes';

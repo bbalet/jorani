@@ -47,6 +47,7 @@ $lang['global_link_doc_page_positions_list'] = '';
 $lang['global_link_doc_page_contracts_list'] = '';
 $lang['global_link_doc_page_contracts_calendar'] = '';
 $lang['global_link_doc_page_collaborators_list'] = '';
+$lang['global_link_doc_page_delegations'] = '';
 $lang['global_link_doc_page_leave_requests_list'] = '';
 $lang['global_link_doc_page_leave_balance_collaborators'] = '';
 $lang['global_link_doc_page_leave_balance_employee'] = '';

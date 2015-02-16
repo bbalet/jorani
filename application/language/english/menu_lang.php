@@ -44,6 +44,7 @@ $lang['menu_hr_reports_divider'] = 'Reports';
 $lang['menu_hr_report_leave_balance'] = 'Leave balance';
 
 $lang['menu_validation_title'] = 'Validation';
+$lang['menu_validation_delegations'] = 'Delegations';
 $lang['menu_validation_collaborators'] = 'My collaborators';
 $lang['menu_validation_leaves'] = 'Leaves';
 $lang['menu_validation_overtime'] = 'Overtime';

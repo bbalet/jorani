@@ -16,7 +16,6 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$this->load->helper('language');
 $this->lang->load('calendar', $language);
 $this->lang->load('contract', $language);
 $this->lang->load('global', $language);

@@ -41,7 +41,7 @@ echo form_open('users/create', $attributes); ?>
     <label for="role[]"><?php echo lang('users_create_field_role');?></label>
     <select name="role[]" multiple="multiple" size="2" required>
     <?php foreach ($roles as $roles_item): ?>
-        <option value="<?php echo $roles_item['id'] ?>" <?php if ($roles_item['id'] == 2) echo "selected" ?>><?php echo $roles_item['name'] ?></option>
+        <option value="<?php echo $roles_item['id'] ?>" <?php if ($roles_item['id'] == 2) echo "selected"; ?>><?php echo $roles_item['name'] ?></option>
     <?php endforeach ?>
     </select>
 
@@ -69,7 +69,7 @@ echo form_open('users/create', $attributes); ?>
     <select name="contract">
     <?php $index = 0;
          foreach ($contracts as $contract) { ?>
-        <option value="<?php echo $contract['id'] ?>" <?php if ($index == 0) echo "selected" ?>><?php echo $contract['name'] ?></option>
+        <option value="<?php echo $contract['id'] ?>" <?php if ($index == 0) echo "selected"; ?>><?php echo $contract['name']; ?></option>
     <?php 
             $index++;
         } ?>
@@ -104,15 +104,27 @@ echo form_open('users/create', $attributes); ?>
          $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));
          $default_lang = $CI->polyglot->language2code($this->config->item('language'));
          foreach ($languages as $code => $language): ?>
-        <option value="<?php echo $code; ?>" <?php if ($code == $default_lang) echo "selected" ?>><?php echo $language; ?></option>
+        <option value="<?php echo $code; ?>" <?php if ($code == $default_lang) echo "selected"; ?>><?php echo $language; ?></option>
         <?php endforeach ?>
+    </select>
+    
+    <?php 
+    $tzdef = $this->config->item('default_timezone');
+    if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
+    $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);?>
+    <label for="timezone"><?php echo lang('users_create_field_timezone');?></label>
+    <select id="timezone" name="timezone" class="selectized input-xlarge" placeholder="Select a timezone...">
+    <?php foreach ($tzlist as $tz) { ?>
+        <option value="<?php echo $tz ?>" <?php if ($tz == $tzdef) echo "selected"; ?>><?php echo $tz; ?></option>
+    <?php 
+            $index++;
+        } ?>
     </select>
 
     <?php if ($this->config->item('ldap_basedn_db')) {?>
     <label for="ldap_path"><?php echo lang('users_create_field_ldap_path');?></label>
     <input type="text" class="input-xxlarge" name="ldap_path" />
     <?php }?>
-    <br />   
 </form>
 
     <label for="password"><?php echo lang('users_create_field_password');?></label>
@@ -176,6 +188,8 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <script type="text/javascript">
 
     function select_manager() {
@@ -268,6 +282,8 @@ if ($language_code != 'en') { ?>
             altField: "#datehired"
         }, $.datepicker.regional['<?php echo $language_code;?>']);
         $("#lblLoginAlert").alert();
+        
+        $('#timezone').selectize();
         
         $("#cmdGeneratePassword").click(function() {
             $("#password").val(password_generator(<?php echo $this->config->item('password_length');?>));

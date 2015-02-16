@@ -59,8 +59,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 ## Contribute
 
 * Suggest ideas, declare bugs with Github's issue tracking system.
-* Translate the software in your language.
-* Code enhancement requests declared in Github's issue tracking system.
+* Help me to translate the software in your language https://www.transifex.com/projects/p/jorani
 
 ## Credits
 
@@ -75,7 +74,7 @@ We thank the following open source projects for the components used by Jorani:
 
 #### Backend
 
-* CodeIgniter MVC framework http://ellislab.com/codeigniter
+* CodeIgniter MVC framework http://www.codeigniter.com/
 * BCRYPT password hasher https://github.com/dwightwatson/codeigniter-bcrypt
 * RSA Encryption in pure PHP https://github.com/phpseclib/phpseclib
 * Excel import/export https://github.com/PHPOffice/PHPExcel
@@ -89,5 +88,6 @@ We thank the following open source projects for the components used by Jorani:
 * Datatable https://datatables.net/
 * RSA implementation https://github.com/travist/jsencrypt
 * Moment (JS dates lib) http://momentjs.com/
+* Selectize https://github.com/brianreavis/selectize.js
 
 Background image of login page by Kevin Dooley - https://www.flickr.com/photos/pagedooley/ / License: Creative Commons (Attribution 3.0 Unported)

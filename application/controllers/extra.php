@@ -40,7 +40,6 @@ class Extra extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
-        $this->load->helper('language');
         $this->lang->load('extra', $this->language);
         $this->lang->load('global', $this->language);
     }

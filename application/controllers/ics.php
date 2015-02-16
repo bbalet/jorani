@@ -31,26 +31,41 @@ class Ics extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        $this->load->helper('language');
-        $this->lang->load('global', $this->config->item('language'));
+        //$this->load->helper('language');
+        //$this->lang->load('global', $this->config->item('language'));
+        $this->load->library('polyglot');
         require_once(APPPATH . 'third_party/VObjects/vendor/autoload.php');
     }
     
     /**
      * Get the list of dayoffs for a given contract identifier
-     * @param int $id identifier of a contract
+     * @param int $user identifier of the user wanting to view the list (mind timezone)
+     * @param int $contract identifier of a contract
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function dayoffs($id) {
+    public function dayoffs($user, $contract) {
         expires_now();
         if ($this->config->item('ics_enabled') == FALSE) {
             $this->output->set_header("HTTP/1.0 403 Forbidden");
         } else {
+            //Get timezone and language of the user
+            $this->load->model('users_model');
+            $employee = $this->users_model->get_users($user);
+            if (!is_null($employee['timezone'])) {
+                $tzdef = $employee['timezone'];
+            } else {
+                $tzdef = $this->config->item('default_timezone');
+                if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
+            }
+            $this->lang->load('global', $this->polyglot->code2language($employee['language']));
+            //Load the list of day off associated to the contract
             $this->load->model('dayoffs_model');
-            $result = $this->dayoffs_model->get_all_dayoffs($id);
+            $result = $this->dayoffs_model->get_all_dayoffs($contract);
             if (empty($result)) {
                 echo "";
             } else {
+                $tzold = date_default_timezone_get();
+                date_default_timezone_set($tzdef);
                 $vcalendar = new VObject\Component\VCalendar();
                 foreach ($result as $event) {
                     $startdate = new \DateTime($event->date);
@@ -77,6 +92,7 @@ class Ics extends CI_Controller {
                     ]);    
                 }
                 echo $vcalendar->serialize();
+                date_default_timezone_set($tzold);
             }
         }
     }
@@ -96,6 +112,19 @@ class Ics extends CI_Controller {
             if (empty($result)) {
                 echo "";
             } else {
+                //Get timezone and language of the user
+                $this->load->model('users_model');
+                $employee = $this->users_model->get_users($id);
+                if (!is_null($employee['timezone'])) {
+                    $tzdef = $employee['timezone'];
+                } else {
+                    $tzdef = $this->config->item('default_timezone');
+                    if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
+                }
+                $this->lang->load('global', $this->polyglot->code2language($employee['language']));
+                $tzold = date_default_timezone_get();
+                date_default_timezone_set($tzdef);
+                
                 $vcalendar = new VObject\Component\VCalendar();
                 foreach ($result as $event) {
                     $startdate = new \DateTime($event['startdate']);
@@ -115,6 +144,7 @@ class Ics extends CI_Controller {
                     ]);    
                 }
                 echo $vcalendar->serialize();
+                date_default_timezone_set($tzold);
             }
         }
     }
@@ -130,6 +160,19 @@ class Ics extends CI_Controller {
         header('Content-Disposition: attachment; filename=leave.ics');
         $this->load->model('leaves_model');
         $leave = $this->leaves_model->get_leaves($id);
+        //Get timezone and language of the user
+        $this->load->model('users_model');
+        $employee = $this->users_model->get_users($leave['employee']);
+        if (!is_null($employee['timezone'])) {
+            $tzdef = $employee['timezone'];
+        } else {
+            $tzdef = $this->config->item('default_timezone');
+            if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
+        }
+        $this->lang->load('global', $this->polyglot->code2language($employee['language']));
+        $tzold = date_default_timezone_get();
+        date_default_timezone_set($tzdef);
+        
         $vcalendar = new VObject\Component\VCalendar();
 
         $vcalendar->add('VEVENT', [

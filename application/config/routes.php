@@ -223,7 +223,7 @@ $route['api/users'] = 'api/users';
 
 //ICS Feeds
 $route['ics/individual/(:num)'] = 'ics/individual/$1';
-$route['ics/dayoffs/(:num)'] = 'ics/dayoffs/$1';
+$route['ics/dayoffs/(:num)/(:num)'] = 'ics/dayoffs/$1/$2';
 $route['ics/ical/(:num)'] = 'ics/ical/$1';
 
 //Session management

@@ -181,7 +181,8 @@ class Users_model extends CI_Model {
             'position' => $this->input->post('position'),
             'datehired' => $datehired,
             'identifier' => $this->input->post('identifier'),
-            'language' => $this->input->post('language')
+            'language' => $this->input->post('language'),
+            'timezone' => $this->input->post('timezone')
         );
         if ($this->config->item('ldap_basedn_db')) $data['ldap_path'] = $this->input->post('ldap_path');
         $this->db->insert('users', $data);
@@ -208,6 +209,7 @@ class Users_model extends CI_Model {
     /**
      * Create a user record in the database. the difference with set_users function is that it doesn't rely
      * on values posted by en HTML form. Can be used by a mass importer for example.
+     * TODO : still in use ? To be used by API ?
      * @param type $firstname User firstname
      * @param type $lastname User lastname
      * @param type $login User login
@@ -242,9 +244,8 @@ class Users_model extends CI_Model {
     }
 
     /**
-     * Update a given user in the database. Update data are coming from an
-     * HTML form
-     * @return type
+     * Update a given user in the database. Update data are coming from an HTML form
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function update_users() {
@@ -280,7 +281,8 @@ class Users_model extends CI_Model {
             'position' => $this->input->post('position'),
             'datehired' => $datehired,
             'identifier' => $this->input->post('identifier'),
-            'language' => $this->input->post('language')
+            'language' => $this->input->post('language'),
+            'timezone' => $this->input->post('timezone')
         );
         if ($this->config->item('ldap_basedn_db')) $data['ldap_path'] = $this->input->post('ldap_path');
 

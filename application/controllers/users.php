@@ -39,7 +39,6 @@ class Users extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
-        $this->load->helper('language');
         $this->lang->load('users', $this->language);
     }
 
@@ -171,6 +170,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('datehired', lang('users_edit_field_hired'), 'xss_clean');
         $this->form_validation->set_rules('identifier', lang('users_edit_field_identifier'), 'xss_clean');
         $this->form_validation->set_rules('language', lang('users_edit_field_language'), 'xss_clean');
+        $this->form_validation->set_rules('timezone', lang('users_edit_field_timezone'), 'xss_clean');
         if ($this->config->item('ldap_basedn_db')) $this->form_validation->set_rules('ldap_path', lang('users_edit_field_ldap_path'), 'xss_clean');
         
         $data['users_item'] = $this->users_model->get_users($id);
@@ -327,6 +327,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('datehired', lang('users_create_field_hired'), 'xss_clean');
         $this->form_validation->set_rules('identifier', lang('users_create_field_identifier'), 'xss_clean');
         $this->form_validation->set_rules('language', lang('users_create_field_language'), 'xss_clean');
+        $this->form_validation->set_rules('timezone', lang('users_create_field_timezone'), 'xss_clean');
         if ($this->config->item('ldap_basedn_db')) $this->form_validation->set_rules('ldap_path', lang('users_create_field_ldap_path'), 'xss_clean');
 
         if ($this->form_validation->run() === FALSE) {
@@ -383,6 +384,7 @@ class Users extends CI_Controller {
      * Form validation callback : prevent from login duplication
      * @param type $login
      * @return boolean true if the field is valid, false otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function login_check($login) {
         if (!$this->users_model->is_login_available($login)) {

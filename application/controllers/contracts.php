@@ -42,7 +42,6 @@ class Contracts extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
         $this->language = $this->session->userdata('language');
         $this->language_code = $this->session->userdata('language_code');
-        $this->load->helper('language');
         $this->lang->load('contract', $this->language);
         $this->load->model('contracts_model');
     }

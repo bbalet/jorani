@@ -103,8 +103,25 @@ echo $date->format(lang('global_date_format'));
          <?php 
          $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));
          foreach ($languages as $code => $language): ?>
-        <option value="<?php echo $code; ?>" <?php if ($code == $users_item['language']) echo "selected" ?>><?php echo $language; ?></option>
+        <option value="<?php echo $code; ?>" <?php if ($code == $users_item['language']) echo "selected"; ?>><?php echo $language; ?></option>
         <?php endforeach ?>
+    </select>
+    
+    <?php 
+        if (!is_null($users_item['timezone'])) {
+            $tzdef = $users_item['timezone'];
+        } else {
+            $tzdef = $this->config->item('default_timezone');
+            if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
+        }
+    $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);?>
+    <label for="timezone"><?php echo lang('users_edit_field_timezone');?></label>
+    <select id="timezone" name="timezone" class="selectized input-xlarge" placeholder="Select a timezone...">
+    <?php foreach ($tzlist as $tz) { ?>
+        <option value="<?php echo $tz ?>" <?php if ($tz == $tzdef) echo "selected"; ?>><?php echo $tz; ?></option>
+    <?php 
+            $index++;
+        } ?>
     </select>
     
     <?php if ($this->config->item('ldap_basedn_db')) {?>
@@ -170,6 +187,8 @@ echo $date->format(lang('global_date_format'));
 if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <script type="text/javascript">
     
     function select_manager() {
@@ -204,7 +223,9 @@ if ($language_code != 'en') { ?>
             altFormat: "yy-mm-dd",
             altField: "#datehired"
         }, $.datepicker.regional['<?php echo $language_code;?>']);
-		$("#viz_datehired").datepicker( "setDate", "<?php echo $date->format(lang('global_date_format'));?>");
+        $("#viz_datehired").datepicker( "setDate", "<?php echo $date->format(lang('global_date_format'));?>");
+        
+        $('#timezone').selectize();
         
         //Popup select position
         $("#cmdSelectManager").click(function() {

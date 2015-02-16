@@ -60,7 +60,7 @@ $this->lang->load('global', $language);?>
     <label for="datehired"><?php echo lang('users_view_field_hired');?></label>
     <input type="text" name="datehired" value="<?php 
     $date = new DateTime($user['datehired']);
-echo $date->format(lang('global_date_format')); ?>" readonly /><br />
+    echo $date->format(lang('global_date_format')); ?>" readonly /><br />
     
     <label for="identifier"><?php echo lang('users_view_field_identifier');?></label>
     <input type="text" name="identifier" value="<?php echo $user['identifier']; ?>" readonly /><br />
@@ -69,6 +69,14 @@ echo $date->format(lang('global_date_format')); ?>" readonly /><br />
     <select name="language" readonly>
         <option><?php echo $CI->polyglot->code2nativelanguage($user['language']); ?></option>
     </select>
+    
+    <label for="timezone"><?php echo lang('users_view_field_timezone');?></label>
+    <input type="text" name="timezone" value="<?php echo $user['timezone']; ?>" readonly /><br />
+    
+    <?php if ($this->config->item('ldap_basedn_db')) {?>
+    <label for="ldap_path"><?php echo lang('users_view_field_ldap_path');?></label>
+    <input type="text" class="input-xxlarge" name="ldap_path"  value="<?php echo $user['ldap_path']; ?>" readonly />
+    <?php }?>
     
     <br /><br />
     <a href="<?php echo base_url();?>users/edit/<?php echo $user['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;<?php echo lang('users_view_button_edit');?></a>

@@ -36,7 +36,6 @@ class Session extends CI_Controller {
             $this->session->set_userdata('language', $this->config->item('language'));
             $this->session->set_userdata('language_code', $this->polyglot->language2code($this->config->item('language')));
         }
-        $this->load->helper('language');
         $this->lang->load('session', $this->session->userdata('language'));
     }
 

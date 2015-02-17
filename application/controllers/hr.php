@@ -308,9 +308,9 @@ class Hr extends CI_Controller {
         if ($month == 0) $month = date('m', strtotime('last month'));
         if ($year == 0) $year = date('Y', strtotime('last month'));
         $total_days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-        $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
+        $start = sprintf('%d-%02d-01', $year, $month);
         $lastDay = date("t", strtotime($start));    //last day of selected month
-        $end = $year . '-' . $month . '-' . $lastDay;    //last date of selected month
+        $end = sprintf('%d-%02d-%02d', $year, $month, $lastDay);
         //Number of non working days during the selected month
         $non_working_days = $this->dayoffs_model->sumdayoffs($employee['contract'], $start, $end);
         $opened_days = $total_days - $non_working_days;

@@ -381,7 +381,7 @@ $config['leave_status_requested'] = FALSE;
 $config['default_leave_type'] = FALSE;
 
 //List of available languages
-$config['languages'] = 'en,fr';
+$config['languages'] = 'en,fr,es';
 
 //Enable history of changes. Warning: this will increase the volume of the database and impacts performance
 $config['enable_history'] = FALSE;

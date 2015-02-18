@@ -60,10 +60,11 @@ foreach ($files as $file) {
         for ($jj = 0; $jj < $lenI18N; $jj++) {
             for ($ii = 0; $ii < $lenPO; $ii++) {
                 $po2ci = str_replace('\"', '"', $messages[1][$ii]['msgid']);
+				$po2ci = str_replace("'", '\'', $po2ci);
                 if ($out[2][$jj] != '') {
-                    $po2ci = str_replace('\"', '"', $messages[1][$ii]['msgstr']);
-                    $po2ci = str_replace("'", '\'', $po2ci);
                     if (strcmp($po2ci, $out[2][$jj]) == 0) {
+					    $po2ci = str_replace('\"', '"', $messages[1][$ii]['msgstr']);
+						$po2ci = str_replace("'", '\'', $po2ci);
                         if ($messages[1][$ii]['msgstr'] != '') {
                             $out[2][$jj] = $po2ci;
                         }

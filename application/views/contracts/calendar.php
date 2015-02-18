@@ -149,7 +149,7 @@ function InsertBlankTd($numberOfTdsToAdd) {
 //This loop creates the calendar displayed on the page
 for ($mC = 1; $mC <= 12; $mC++) {
     $currentDT = mktime(0, 0, 0, $mC, $dDay, $year);
-    echo "<tr><td class='monthName'><div>" . date("F", $currentDT) . "</div></td>";
+    echo "<tr><td class='monthName'><div>" . lang(date("F", $currentDT)) . "</div></td>";
     $daysInMonth = date("t", $currentDT);
 
     echo InsertBlankTd(date("N", $currentDT) - 1);

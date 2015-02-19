@@ -397,7 +397,7 @@ $(function() {
 
     $('#lnkICS').click(function () {
         bootbox.alert("ICS : <input type='text' class='input-xlarge' id='txtIcsUrl' \n\
-                    value='<?php echo base_url() . 'ics/dayoffs/' . $contract_id;?>'\n\
+                    value='<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>'\n\
                     onfocus='$(this).select();' />");
     });
 });

@@ -18,7 +18,7 @@
 
     //You can change the content of this template
 ?>
-<html>
+<html lang="en">
     <body>
         <h3>{Title}</h3>
         Welcome to Jorani {Firstname} {Lastname}. Please use these credentials to <a href="{BaseURL}">login to the system</a> :
@@ -35,7 +35,7 @@
             </tr>            
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        Once connected, you can change your password, as explained <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        Once connected, you can change your password, as explained <a href="http:/jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
         <?php } ?>
     </body>
 </html>

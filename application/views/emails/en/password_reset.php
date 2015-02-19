@@ -18,7 +18,7 @@
 
     //You can change the content of this template
 ?>
-<html>
+<html lang="en">
     <body>
         <h3>{Title}</h3>
         <p>Dear {Firstname} {Lastname},</p>

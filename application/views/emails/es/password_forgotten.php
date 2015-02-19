@@ -18,18 +18,18 @@
 
     //You can change the content of this template
 ?>
-<html lang="en">
+<html lang="es">
     <body>
         <h3>{Title}</h3>
-        Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        Por favor utiliza estas credenciales para <a href="{BaseURL}">acceder al sistema</a> :
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>Usuario</td><td>{Login}</td>
             </tr>
             <tr>
-                <td>Password</td><td>{Password}</td>
+                <td>Contraseña</td><td>{Password}</td>
             </tr>            
         </table>
-        Once connected, you can change your password, as explained <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        na vez conectado, puede cambiar su contraseña, pulsando <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">aqui</a>.
     </body>
 </html>

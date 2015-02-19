@@ -31,7 +31,7 @@ $lang['requests_index_thead_type'] = 'Tipo';
 $lang['requests_index_thead_status'] = 'Estado';
 
 $lang['requests_collaborators_title'] = 'Lista de mis colaboradores';
-$lang['requests_collaborators_description'] = 'Esta pantalla muestra sus colaboradores. Si usted no es un gerente, esta listaSiempre va a estar vacía.';
+$lang['requests_collaborators_description'] = 'Esta pantalla muestra sus colaboradores. Si usted no es un gerente, esta lista siempre va a estar vacía.';
 $lang['requests_collaborators_thead_id'] = 'ID';
 $lang['requests_collaborators_thead_link_balance'] = 'Balance de permisos';
 $lang['requests_collaborators_thead_firstname'] = 'Nombre';
@@ -55,7 +55,7 @@ $lang['requests_index_button_show_pending'] = 'Pendientes de solicitud';
 $lang['requests_accept_flash_msg_error'] = 'Usted no es el responsable de este empleado. No se puede aceptar este permiso solicitud.';
 $lang['requests_accept_flash_msg_success'] = 'La solicitud del permiso se ha aceptado correctamente.';
 
-$lang['requests_reject_flash_msg_error'] = 'Usted no es el reponsable de este empleado. No se puede rechazar este permisosolicitud.';
+$lang['requests_reject_flash_msg_error'] = 'Usted no es el reponsable de este empleado. No se puede rechazar este permiso solicitud.';
 $lang['requests_reject_flash_msg_success'] = 'La solicitud de permiso se ha rechazado correctamente.';
 
 $lang['requests_export_title'] = 'Lista de solicitud de permisos';
@@ -70,14 +70,14 @@ $lang['requests_export_thead_type'] = 'Tipo';
 $lang['requests_export_thead_cause'] = 'Motivo';
 $lang['requests_export_thead_status'] = 'Estado';
 
-$lang['requests_delegations_title'] = 'List of delegations';
-$lang['requests_delegations_description'] = 'This is the list of employees who can accept or reject a request in your behalf.';
+$lang['requests_delegations_title'] = 'Lista de las delegaciones';
+$lang['requests_delegations_description'] = 'Esta es la lista de los empleados que pueden aceptar o rechazar una solicitud en su nombre.';
 $lang['requests_delegations_thead_employee'] = 'empleado';
-$lang['requests_delegations_thead_tip_delete'] = 'Revoke';
+$lang['requests_delegations_thead_tip_delete'] = 'revocar';
 $lang['requests_delegations_button_add'] = 'Añadir';
-$lang['requests_delegations_popup_delegate_title'] = 'Add a delegate';
+$lang['requests_delegations_popup_delegate_title'] = 'Añadir un delegado';
 $lang['requests_delegations_popup_delegate_button_ok'] = 'OK';
 $lang['requests_delegations_popup_delegate_button_cancel'] = 'Cancelar';
-$lang['requests_delegations_confirm_delete_message'] = 'Are you sure that you want to revoke this delegation?';
+$lang['requests_delegations_confirm_delete_message'] = '¿Seguro que desea revocar esta delegación ?';
 $lang['requests_delegations_confirm_delete_cancel'] = 'Cancelar';
 $lang['requests_delegations_confirm_delete_yes'] = 'Sí';

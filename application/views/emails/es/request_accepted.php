@@ -18,24 +18,24 @@
 
 //You can change the content of this template
 ?>
-<html>
+<html lang="es">
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        {Firstname} {Lastname}, <br />
         <br />
-        The leave you've requested has been accepted. Below, the details :
+        El permiso que usted ha solicitado ha sido aceptado. A continuación, el detalle :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}</td>
+                <td>Desde &nbsp;</td><td>{StartDate}</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}</td>
+                <td>Hasta &nbsp;</td><td>{EndDate}</td>
             </tr>
             <tr>
-                <td>Type &nbsp;</td><td>{Type}</td>
+                <td>Tipo &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Motivo &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
     </body>

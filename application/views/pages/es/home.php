@@ -1,16 +1,16 @@
-<h1>Leave and Overtime Management System</h1>
+<h1>Sistema de Gestión de permisos y horas extras</h1>
 
-<p>Welcome in Jorani. If you are an employee, you could now :</p>
+<p>Bienvenido a Jorani. Si usted es un empleado, usted podra:</p>
 <ul>
-    <li>See your <a href="<?php echo base_url();?>leaves/counters">leave balance</a>.</li>
-    <li>See the <a href="<?php echo base_url();?>leaves">list of the leave requests you have submitted</a>.</li>
-    <li>Request a <a href="<?php echo base_url();?>leaves/create">new leave</a>.</li>
+    <li>Consulte su <a href="<?php echo base_url();?>leaves/counters">balance de permisos</a>.</li>
+    <li>Ver el <a href="<?php echo base_url();?>leaves">listado de solicitudes de permisos</a>.</li>
+    <li>Pedir un <a href="<?php echo base_url();?>leaves/create">nuevo permiso</a>.</li>
 </ul>
 
 <br />
 
-<p>If your are the line manager of other employee(s), you could now :</p>
+<p>Si usted es responsable de otros empleados, usted podra:</p>
 <ul>
-    <li>Validate <a href="<?php echo base_url();?>requests">leave requests submitted to you</a>.</li>
-    <li>Validate <a href="<?php echo base_url();?>overtime">overtime requests submitted to you</a>.</li>
+    <li>Validar <a href="<?php echo base_url();?>requests">permisos.</a>.</li>
+    <li>Validar <a href="<?php echo base_url();?>overtime">horas extras</a>.</li>
 </ul>

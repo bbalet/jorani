@@ -18,29 +18,29 @@
 
     //You can change the content of this template
 ?>
-<html>
+<html lang="es">
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests a leave. Below, the <a href="{BaseUrl}leaves/{LeaveId}">details</a> :
+        {Firstname} {Lastname} solicitud de una licencia. A continuación, el <a href="{BaseUrl}leaves/{LeaveId}">detalle</a> :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}</td>
+                <td>Desde &nbsp;</td><td>{StartDate}</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}</td>
+                <td>Hasta &nbsp;</td><td>{EndDate}</td>
             </tr>
             <tr>
-                <td>Type &nbsp;</td><td>{Type}</td>
+                <td>Tipo &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Reason}</td>
+                <td>Motivo &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accept</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">Reject</a></td>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Aceptar</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">Rechazar</a></td>
             </tr>
         </table>
 <br />
-You can check the <a href="{BaseUrl}requests/counters/{UserId}">leave balance</a> before validating the leave request.
+Puede comprobar el <a href="{BaseUrl}requests/counters/{UserId}">balance de permisos</a> antes de la solicitud del permiso.
 
     </body>
 </html>

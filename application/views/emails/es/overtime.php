@@ -18,22 +18,22 @@
 
     //You can change the content of this template
 ?>
-<html>
+<html lang="es">
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests an overtime. Below, the details :
+        {Firstname} {Lastname} solicita horas extras. A continuación, los detalles:
         <table border="0">
             <tr>
-                <td>Date &nbsp;</td><td>{Date}</td>
+                <td>Fecha &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Duracion &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Motivo &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+        <a href="{UrlAccept}">Aceptar</a>
+        <a href="{UrlReject}">Rechazar</a>
     </body>
 </html>

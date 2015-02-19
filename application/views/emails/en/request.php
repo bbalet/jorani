@@ -18,7 +18,7 @@
 
     //You can change the content of this template
 ?>
-<html>
+<html lang="en">
     <body>
         <h3>{Title}</h3>
         {Firstname} {Lastname} requests a leave. Below, the <a href="{BaseUrl}leaves/{LeaveId}">details</a> :

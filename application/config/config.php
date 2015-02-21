@@ -408,7 +408,7 @@ $config['ldap_enabled'] = FALSE;
 $config['ldap_host'] = '127.0.0.1';
 $config['ldap_port'] = 389;
 $config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';
-$config['ldap_basedn_db'] = TRUE;
+$config['ldap_basedn_db'] = FALSE;
 
 //Enable public ICS feeds
 $config['ics_enabled'] = TRUE;

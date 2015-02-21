@@ -30,35 +30,10 @@ class Requests extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
+        setUserContext($this);
         $this->load->model('leaves_model');
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
         $this->lang->load('requests', $this->language);
         $this->lang->load('global', $this->language);
-    }
-    
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
     }
 
     /**
@@ -75,7 +50,7 @@ class Requests extends CI_Controller {
             $showAll = false;
         }
         
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['filter'] = $filter;
         $data['title'] = lang('requests_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_validation');
@@ -163,7 +138,7 @@ class Requests extends CI_Controller {
     public function collaborators() {
         $this->auth->check_is_granted('list_collaborators');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('requests_collaborators_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_collaborators_list');
         $this->load->model('users_model');
@@ -184,7 +159,7 @@ class Requests extends CI_Controller {
         //Self modification or by HR
         if (($this->user_id == $id) || ($this->is_hr)) {
             expires_now();
-            $data = $this->getUserContext();
+            $data = getUserContext($this);
             $data['title'] = lang('requests_delegations_title');
             $data['help'] = $this->help->create_help_link('global_link_doc_page_delegations');
             $this->load->model('users_model');
@@ -256,7 +231,7 @@ class Requests extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function counters($id, $refTmp = NULL) {
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->model('users_model');
         $employee = $this->users_model->get_users($id);
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {

@@ -28,34 +28,9 @@ class Organization extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
+        setUserContext($this);
         $this->load->model('organization_model');
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
         $this->lang->load('organization', $this->language);
-    }
-    
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
     }
 
     /**
@@ -65,7 +40,7 @@ class Organization extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('organization_index');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('organization_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_hr_organization');
         $this->load->view('templates/header', $data);
@@ -81,7 +56,7 @@ class Organization extends CI_Controller {
      */
     public function select() {
         $this->auth->check_is_granted('organization_select');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->view('organization/select', $data);
     }
     
@@ -233,7 +208,7 @@ class Organization extends CI_Controller {
             unset($id);
         }
         $this->auth->check_is_granted('organization_select');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         header("Content-Type: application/json");
         $entities = $this->organization_model->get_all_entities();
         $msg = '[';

@@ -28,37 +28,13 @@ class Leaves extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_hr = $this->session->userdata('is_hr');
+        setUserContext($this);
         $this->load->model('leaves_model');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
+        $this->load->model('types_model');
         $this->lang->load('leaves', $this->language);
         $this->lang->load('global', $this->language);
     }
     
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
-    }
-
     /**
      * Display the list of the leave requests of the connected user
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -66,10 +42,9 @@ class Leaves extends CI_Controller {
     public function index() {
         $this->auth->check_is_granted('list_leaves');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['leaves'] = $this->leaves_model->get_user_leaves($this->session->userdata('id'));
         $this->load->model('status_model');
-        $this->load->model('types_model');
         for ($i = 0; $i < count($data['leaves']); ++$i) {
             $data['leaves'][$i]['status_label'] = $this->status_model->get_label($data['leaves'][$i]['status']);
             $data['leaves'][$i]['type_label'] = $this->types_model->get_label($data['leaves'][$i]['type']);
@@ -89,7 +64,7 @@ class Leaves extends CI_Controller {
      */
     public function counters($refTmp = NULL) {
         $this->auth->check_is_granted('counters_leaves');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $refDate = date("Y-m-d");
         if ($refTmp != NULL) {
             $refDate = date("Y-m-d", $refTmp);
@@ -122,14 +97,12 @@ class Leaves extends CI_Controller {
     public function view($id) {
         $this->auth->check_is_granted('view_leaves');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->get_leaves($id);
         $this->load->model('status_model');
-        $this->load->model('types_model');
         if (empty($data['leave'])) {
             show_404();
         }
-        $this->load->model('types_model');
         $data['types'] = $this->types_model->get_types();
         $data['leave']['status_label'] = $this->status_model->get_label($data['leave']['status']);
         $data['leave']['type_label'] = $this->types_model->get_label($data['leave']['type']);
@@ -149,7 +122,7 @@ class Leaves extends CI_Controller {
     public function create() {
         $this->auth->check_is_granted('create_leaves');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('leaves_create_title');
@@ -168,7 +141,6 @@ class Leaves extends CI_Controller {
         $default_type = $this->config->item('default_leave_type');
         $default_type = $default_type == FALSE ? 0 : $default_type;
         if ($this->form_validation->run() === FALSE) {
-            $this->load->model('types_model');
             $data['types'] = $this->types_model->get_types();
             foreach ($data['types'] as $type) {
                 if ($type['id'] == $default_type) {
@@ -203,7 +175,7 @@ class Leaves extends CI_Controller {
     public function edit($id) {
         $this->auth->check_is_granted('edit_leaves');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->get_leaves($id);
         //Check if exists
         if (empty($data['leave'])) {
@@ -227,7 +199,6 @@ class Leaves extends CI_Controller {
         $data['id'] = $id;
         
         $data['credit'] = 0;
-        $this->load->model('types_model');  
         $data['types'] = $this->types_model->get_types();
         foreach ($data['types'] as $type) {
             if ($type['id'] == $data['leave']['type']) {
@@ -275,7 +246,6 @@ class Leaves extends CI_Controller {
     private function sendMail($id) {
         $this->load->model('users_model');
         $this->load->model('settings_model');
-        $this->load->model('types_model');
         $this->load->model('delegations_model');
         $manager = $this->users_model->get_users($this->session->userdata('manager'));
 
@@ -399,7 +369,6 @@ class Leaves extends CI_Controller {
 
         $leaves = $this->leaves_model->get_user_leaves($this->user_id);
         $this->load->model('status_model');
-        $this->load->model('types_model');
         
         $line = 2;
         foreach ($leaves as $leave) {

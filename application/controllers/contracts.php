@@ -30,18 +30,7 @@ class Contracts extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
+        setUserContext($this);
         $this->lang->load('contract', $this->language);
         $this->load->model('contracts_model');
     }
@@ -73,7 +62,7 @@ class Contracts extends CI_Controller {
         } else {
             $showAll = false;
         }
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['filter'] = $filter;
         $data['title'] = lang('contract_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_contracts_list');
@@ -91,7 +80,7 @@ class Contracts extends CI_Controller {
      */
     public function view($id) {
         $this->auth->check_is_granted('view_contract');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['contract'] = $this->contracts_model->get_contracts($id);
         if (empty($data['contract'])) {
             show_404();
@@ -110,7 +99,7 @@ class Contracts extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->check_is_granted('edit_contract');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('contract_edit_title');
@@ -144,7 +133,7 @@ class Contracts extends CI_Controller {
      */
     public function create() {
         $this->auth->check_is_granted('create_contract');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('contract_create_title');
@@ -194,7 +183,7 @@ class Contracts extends CI_Controller {
      */
     public function calendar($id, $year = 0) {
         $this->auth->check_is_granted('calendar_contract');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('contract_calendar_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_contracts_calendar');
         if ($year <> 0) {

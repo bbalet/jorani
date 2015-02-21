@@ -17,6 +17,46 @@
  */
 
 /**
+ * Check if user is connected, redirect to login form otherwise
+ * Set the user context by retrieving infos from session
+ * @param reference to CI Controller object
+ * @author Benjamin BALET <benjamin.balet@gmail.com>
+ */
+function setUserContext($controller)
+{
+        if (!$controller->session->userdata('logged_in')) {
+            $controller->session->set_userdata('last_page', current_url());
+            redirect('session/login');
+        }
+        $controller->fullname = $controller->session->userdata('firstname') . ' ' .
+                $controller->session->userdata('lastname');
+        $controller->is_manager = $controller->session->userdata('is_manager');
+        $controller->is_admin = $controller->session->userdata('is_admin');
+        $controller->is_hr = $controller->session->userdata('is_hr');
+        $controller->user_id = $controller->session->userdata('id');
+        $controller->language = $controller->session->userdata('language');
+        $controller->language_code = $controller->session->userdata('language_code');
+}
+
+/**
+ * Prepare an array containing information about the current user
+ * @param reference to CI Controller object
+ * @return array data to be passed to the view
+ * @author Benjamin BALET <benjamin.balet@gmail.com>
+ */
+function getUserContext($controller)
+{
+    $data['fullname'] = $controller->fullname;
+    $data['is_manager'] = $controller->is_manager;
+    $data['is_admin'] = $controller->is_admin;
+    $data['is_hr'] = $controller->is_hr;
+    $data['user_id'] =  $controller->user_id;
+    $data['language'] = $controller->session->userdata('language');
+    $data['language_code'] =  $controller->session->userdata('language_code');
+    return $data;
+}
+
+/**
  * Internal utility function
  * make sure a resource is reloaded every time
  * @author Benjamin BALET <benjamin.balet@gmail.com>

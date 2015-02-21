@@ -95,6 +95,7 @@ $this->lang->load('menu', $language);?>
               </ul>
               <?php } ?>
 
+             <?php if ($is_manager == TRUE) { ?>
              <ul class="nav">			  
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_validation_title');?> <b class="caret"></b></a>
@@ -108,6 +109,7 @@ $this->lang->load('menu', $language);?>
                   </ul>
                 </li>
               </ul>
+              <?php } ?>
               
               <ul class="nav">			  
                 <li class="dropdown">

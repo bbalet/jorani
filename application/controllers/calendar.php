@@ -28,35 +28,8 @@ class Calendar extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
+        setUserContext($this);
         $this->lang->load('calendar', $this->language);
-    }
-    
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
     }
 
     /**
@@ -66,7 +39,7 @@ class Calendar extends CI_Controller {
      */
     public function individual() {
         $this->auth->check_is_granted('individual_calendar');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('calendar_individual_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_individual');
         $data['googleApi'] = false;
@@ -86,7 +59,7 @@ class Calendar extends CI_Controller {
      */
     public function workmates() {
         $this->auth->check_is_granted('workmates_calendar');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('calendar_workmates_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_workmates');
         $this->load->view('templates/header', $data);
@@ -102,7 +75,7 @@ class Calendar extends CI_Controller {
      */
     public function collaborators() {
         $this->auth->check_is_granted('collaborators_calendar');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('calendar_collaborators_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_collaborators');
         $this->load->view('templates/header', $data);
@@ -119,7 +92,7 @@ class Calendar extends CI_Controller {
      */
     public function department() {
         $this->auth->check_is_granted('department_calendar');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('calendar_department_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_department');
         $this->load->model('organization_model');
@@ -143,7 +116,7 @@ class Calendar extends CI_Controller {
      */
     public function organization() {
         $this->auth->check_is_granted('organization_calendar');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('calendar_organization_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_organization');
         $this->load->view('templates/header', $data);
@@ -162,7 +135,7 @@ class Calendar extends CI_Controller {
      */
     public function tabular($id=-1, $month=0, $year=0, $children=TRUE) {
         $this->auth->check_is_granted('organization_calendar');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->model('leaves_model');
         $this->load->model('organization_model');
         $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);

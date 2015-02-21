@@ -28,32 +28,7 @@ class Pages extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-    }
-    
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->session->userdata('language');
-        $data['language_code'] =  $this->session->userdata('language_code');
-        return $data;
+        setUserContext($this);
     }
 
     /**
@@ -63,7 +38,7 @@ class Pages extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function view($page = 'home') {
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $path = 'pages/' . $this->session->userdata('language_code') . '/' . $page . '.php';
         if (!file_exists('application/views/' . $path)) {
             $path = 'pages/en/' . $page . '.php';
@@ -71,7 +46,6 @@ class Pages extends CI_Controller {
                 show_404();
             }
         }
-
         $data['title'] = ucfirst($page); // Capitalize the first letter
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);

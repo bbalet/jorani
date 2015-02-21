@@ -27,35 +27,7 @@ class Settings extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
-        //$this->load->model('leaves_model');
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
-    }
-    
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the menu view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
+        setUserContext($this);
     }
 
     /**
@@ -65,8 +37,7 @@ class Settings extends CI_Controller {
      */
     public function set() {
         $this->auth->check_is_granted('edit_settings');
-        $data = $this->getUserContext();
-        /*$data['leaves'] = $this->leaves_model->get_leaves();*/
+        $data = getUserContext($this);
         $data['title'] = 'Settings';
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);

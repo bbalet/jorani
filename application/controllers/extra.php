@@ -28,35 +28,10 @@ class Extra extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_hr = $this->session->userdata('is_hr');
+        setUserContext($this);
         $this->load->model('overtime_model');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
         $this->lang->load('extra', $this->language);
         $this->lang->load('global', $this->language);
-    }
-    
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
     }
 
     /**
@@ -66,7 +41,7 @@ class Extra extends CI_Controller {
     public function index() {
         $this->auth->check_is_granted('list_extra');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['extras'] = $this->overtime_model->get_user_extras($this->user_id);
         
         $this->load->model('status_model');
@@ -87,7 +62,7 @@ class Extra extends CI_Controller {
      */
     public function view($id) {
         $this->auth->check_is_granted('view_extra');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['extra'] = $this->overtime_model->get_extra($id);
         $this->load->model('status_model');
         if (empty($data['extra'])) {
@@ -109,7 +84,7 @@ class Extra extends CI_Controller {
      */
     public function create() {
         $this->auth->check_is_granted('create_extra');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
         
@@ -146,7 +121,7 @@ class Extra extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->check_is_granted('edit_extra');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['extra'] = $this->overtime_model->get_extra($id);
         //Check if exists
         if (empty($data['extra'])) {

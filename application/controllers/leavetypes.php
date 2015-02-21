@@ -28,36 +28,9 @@ class LeaveTypes extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
+        setUserContext($this);
         $this->load->model('types_model');
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
         $this->lang->load('leavetypes', $this->language);
-    }
-    
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
     }
 
     /**
@@ -67,7 +40,7 @@ class LeaveTypes extends CI_Controller {
     public function index() {
         $this->auth->check_is_granted('leavetypes_list');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['leavetypes'] = $this->types_model->get_types();
         $data['title'] = lang('leavetypes_type_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_edit_leave_type');
@@ -84,7 +57,7 @@ class LeaveTypes extends CI_Controller {
     public function create() {
         $this->auth->check_is_granted('leavetypes_create');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('leavetypes_popup_create_title');
@@ -107,7 +80,7 @@ class LeaveTypes extends CI_Controller {
     public function edit($id) {
         $this->auth->check_is_granted('leavetypes_edit');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('leavetypes_popup_update_title');

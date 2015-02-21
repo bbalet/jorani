@@ -28,37 +28,9 @@ class Reports extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //$this->output->enable_profiler($this->config->item('enable_profiling'));
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }      
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
+        setUserContext($this);
         $this->lang->load('reports', $this->language);
         $this->lang->load('global', $this->language);
-    }
-    
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
     }
 
     /**
@@ -67,7 +39,7 @@ class Reports extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('report_list');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         
         $reports = array();
         $files = glob(FCPATH . '/local/reports/*', GLOB_ONLYDIR);
@@ -95,7 +67,7 @@ class Reports extends CI_Controller {
      */
     public function execute($report, $action = "index.php") {
         $this->auth->check_is_granted('report_execute');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('reports_execute_title');
         $data['report'] = $report;
         $data['action'] = $action;
@@ -111,7 +83,7 @@ class Reports extends CI_Controller {
      */
     public function balance($refTmp = NULL) {
         $this->auth->check_is_granted('native_report_balance');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
 		$refDate = date("Y-m-d");
         if ($refTmp != NULL) {
             $refDate = date("Y-m-d", $refTmp);
@@ -131,7 +103,7 @@ class Reports extends CI_Controller {
      */
     public function balance_execute() {
         $this->auth->check_is_granted('native_report_balance');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         
         $this->load->model('leaves_model');
         $this->load->model('types_model');
@@ -208,7 +180,7 @@ class Reports extends CI_Controller {
      */
     public function balance_export() {
         $this->auth->check_is_granted('native_report_balance');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle(lang('reports_export_balance_title'));
@@ -285,7 +257,7 @@ class Reports extends CI_Controller {
      */
     public function history() {
         $this->auth->check_is_granted('native_report_history');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('reports_history_title');
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -299,7 +271,7 @@ class Reports extends CI_Controller {
      */
     public function history_execute() {
         $this->auth->check_is_granted('native_report_history');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->model('history_model');
         
         $table = $_GET['table'];

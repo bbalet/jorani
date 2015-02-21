@@ -28,36 +28,9 @@ class Entitleddays extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
+        setUserContext($this);
         $this->load->model('entitleddays_model');
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
         $this->lang->load('entitleddays', $this->language);
-    }
-    
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
     }
 
     /**
@@ -68,7 +41,7 @@ class Entitleddays extends CI_Controller {
      */
     public function user($id) {
         $this->auth->check_is_granted('entitleddays_user');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['id'] = $id;
         $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_employee($id);
         $this->load->model('types_model');
@@ -105,7 +78,7 @@ class Entitleddays extends CI_Controller {
      */
     public function contract($id) {
         $this->auth->check_is_granted('entitleddays_contract');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['id'] = $id;
         $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_contract($id);
         $this->load->model('types_model');

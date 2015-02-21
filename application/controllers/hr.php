@@ -30,37 +30,10 @@ class Hr extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
+        setUserContext($this);
         $this->load->model('leaves_model');
-        $this->fullname = $this->session->userdata('firstname') . ' ' .
-                $this->session->userdata('lastname');
-        $this->is_admin = $this->session->userdata('is_admin');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
         $this->lang->load('hr', $this->language);
         $this->lang->load('global', $this->language);
-    }
-    
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
     }
 
     /**
@@ -76,7 +49,7 @@ class Hr extends CI_Controller {
         } else {
             $showAll = false;
         }
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['filter'] = $filter;
         $data['title'] = lang('hr_leaves_title');
         $data['requests'] = $this->leaves_model->requests($this->user_id, $showAll);
@@ -96,7 +69,7 @@ class Hr extends CI_Controller {
      */
     public function employees() {
         $this->auth->check_is_granted('list_employees');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('hr_employees_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_employees');
         $this->load->view('templates/header', $data);
@@ -145,7 +118,7 @@ class Hr extends CI_Controller {
      */
     public function leaves($id) {
         $this->auth->check_is_granted('list_employees');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('hr_leaves_title');
         $data['user_id'] = $id;
         $this->load->model('leaves_model');
@@ -165,7 +138,7 @@ class Hr extends CI_Controller {
      */
     public function overtime($id) {
         $this->auth->check_is_granted('list_employees');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['title'] = lang('hr_overtime_title');
         $data['user_id'] = $id;
         $this->load->model('overtime_model');
@@ -185,7 +158,7 @@ class Hr extends CI_Controller {
      */
     public function counters($id, $refTmp = NULL) {
         $this->auth->check_is_granted('list_employees');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $refDate = date("Y-m-d");
         if ($refTmp != NULL) {
             $refDate = date("Y-m-d", $refTmp);
@@ -235,7 +208,7 @@ class Hr extends CI_Controller {
     public function createleave($id) {
         $this->auth->check_is_granted('list_employees');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('hr_leaves_create_title');
@@ -281,7 +254,7 @@ class Hr extends CI_Controller {
      */
     public function presence($id, $month=0, $year=0) {
         $this->auth->check_is_granted('list_employees');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         
         $data['title'] = lang('hr_presence_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_presence_report');

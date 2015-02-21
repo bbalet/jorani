@@ -27,16 +27,19 @@ $this->lang->load('global', $language);?>
 </div>
 
 <div class="row-fluid">
-    <div class="span4">
+    <div class="span6">
         <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
         <button id="cmdToday" class="btn btn-primary"><?php echo lang('calendar_component_buttonText_today');?></button>
         <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
     </div>
-    <div class="span2">
-        <button id="cmdDisplayDayOff" class="btn btn-primary"><i class="icon-calendar icon-white"></i>&nbsp;<?php echo lang('calendar_individual_day_offs');?></button>
+    <div class="span6">
+        <div class="pull-right">
+            <button id="cmdDisplayDayOff" class="btn btn-primary"><i class="icon-calendar icon-white"></i>&nbsp;<?php echo lang('calendar_individual_day_offs');?></button>
+        </div>
     </div>
-    <div class="span6">&nbsp;</div>
 </div>
+
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div class="row-fluid">
     <div class="span2"><span class="label"><?php echo lang('Planned');?></span></div>

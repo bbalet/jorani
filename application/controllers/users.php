@@ -28,32 +28,9 @@ class Users extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //Check if user is connected
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect('session/login');
-        }
+        setUserContext($this);
         $this->load->model('users_model');
-        $this->fullname = $this->session->userdata('firstname') . ' ' . $this->session->userdata('lastname');
-        $this->is_hr = $this->session->userdata('is_hr');
-        $this->user_id = $this->session->userdata('id');
-        $this->language = $this->session->userdata('language');
-        $this->language_code = $this->session->userdata('language_code');
         $this->lang->load('users', $this->language);
-    }
-
-    /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext() {
-        $data['fullname'] = $this->fullname;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] = $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
     }
 
     /**
@@ -63,7 +40,7 @@ class Users extends CI_Controller {
     public function index() {
         $this->auth->check_is_granted('list_users');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['users'] = $this->users_model->get_users();
         $data['title'] = lang('users_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_users');
@@ -80,7 +57,7 @@ class Users extends CI_Controller {
     public function employees() {
         $this->auth->check_is_granted('employees_list');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['employees'] = $this->users_model->get_all_employees();
         $data['title'] = lang('employees_index_title');
         $this->load->view('users/employees', $data);
@@ -94,7 +71,7 @@ class Users extends CI_Controller {
     public function view($id) {
         $this->auth->check_is_granted('view_user');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['user'] = $this->users_model->get_users($id);
         if (empty($data['user'])) {
             show_404();
@@ -121,7 +98,7 @@ class Users extends CI_Controller {
      */
     public function myprofile() {
         $this->auth->check_is_granted('view_myprofile');
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $data['user'] = $this->users_model->get_users($this->user_id);
         if (empty($data['user'])) {
             show_404();
@@ -152,7 +129,7 @@ class Users extends CI_Controller {
     public function edit($id) {
         $this->auth->check_is_granted('edit_user');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('users_edit_html_title');
@@ -238,7 +215,7 @@ class Users extends CI_Controller {
             log_message('debug', '{controllers/users/reset} user not found');
             show_404();
         } else {
-            $data = $this->getUserContext();
+            $data = getUserContext($this);
             $data['target_user_id'] = $id;
             $this->load->helper('form');
             $this->load->library('form_validation');
@@ -302,7 +279,7 @@ class Users extends CI_Controller {
     public function create() {
         $this->auth->check_is_granted('create_user');
         expires_now();
-        $data = $this->getUserContext();
+        $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('users_create_title');

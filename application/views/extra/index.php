@@ -76,21 +76,17 @@ $tmpDate = $date->getTimestamp();?>
 <?php endforeach ?>
 	</tbody>
 </table>
-	</div>
-</div>
-
-<div class="row-fluid">
-	<div class="span12">&nbsp;</div>
-</div>
-
-<div class="row-fluid">
-    <div class="span2">
-      <a href="<?php echo base_url();?>extra/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('extra_index_button_export');?></a>
     </div>
-    <div class="span2">
+</div>
+
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
+<div class="row-fluid">
+    <div class="span12">
+      <a href="<?php echo base_url();?>extra/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('extra_index_button_export');?></a>
+      &nbsp;
       <a href="<?php echo base_url();?>extra/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('extra_index_button_create');?></a>
     </div>
-    <div class="span2">&nbsp;</div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">

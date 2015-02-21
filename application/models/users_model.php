@@ -88,6 +88,7 @@ class Users_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+    
     /**
      * Check if a login can be used before creating the user
      * @param type $login login identifier
@@ -423,6 +424,7 @@ class Users_model extends CI_Model {
                     'id' => $row->id,
                     'firstname' => $row->firstname,
                     'lastname' => $row->lastname,
+                    'is_manager' => count($this->get_employees_manager($row->id)) > 0 ? TRUE : FALSE,
                     'is_admin' => $is_admin,
                     'is_hr' => $is_hr,
                     'manager' => $row->manager,
@@ -473,6 +475,7 @@ class Users_model extends CI_Model {
                 'id' => $row->id,
                 'firstname' => $row->firstname,
                 'lastname' => $row->lastname,
+                'is_manager' => count($this->get_employees_manager($row->id)) > 0 ? TRUE : FALSE,
                 'is_admin' => $is_admin,
                 'is_hr' => $is_hr,
                 'manager' => $row->manager,

@@ -127,11 +127,13 @@ echo form_open('users/create', $attributes); ?>
     <?php }?>
 </form>
 
+    <?php if (!$this->config->item('ldap_enabled')) {?>
     <label for="password"><?php echo lang('users_create_field_password');?></label>
     <div class="input-append">
         <input type="password" name="password" id="password" required />
         <a class="btn" id="cmdGeneratePassword"><i class="icon-refresh"></i>&nbsp;<?php echo lang('users_create_button_generate_password');?></a>
     </div>
+    <?php }?>
     <br />
     
     <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('users_create_button_create');?></button>

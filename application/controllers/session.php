@@ -177,7 +177,6 @@ class Session extends CI_Controller {
             echo "UNKNOWN";
         } else {
             //Send an email to the user with its login information
-            $this->load->model('settings_model');
             $this->load->library('email');
             $this->lang->load('email', $this->language);
             

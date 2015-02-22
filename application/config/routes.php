@@ -43,7 +43,6 @@ $route['users/myprofile'] = 'users/myprofile';
 $route['users/pdf_myprofile'] = 'users/pdf_myprofile';
 $route['users/employees'] = 'users/employees';
 $route['users/export'] = 'users/export';
-$route['users/import'] = 'users/import';
 $route['users/reset/(:num)'] = 'users/reset/$1';
 $route['users/create'] = 'users/create';
 $route['users/edit/(:num)'] = 'users/edit/$1';
@@ -51,13 +50,6 @@ $route['users/delete/(:num)'] = 'users/delete/$1';
 $route['users/(:num)'] = 'users/view/$1';
 $route['users/check/login'] = 'users/check_login';
 $route['users'] = 'users';
-
-//Admin : View and change settings
-$route['settings'] = 'settings/set';
-
-//Admin : purge database
-$route['database'] = 'database/index';
-$route['database/purge'] = 'database/purge';
 
 //Human Resources Management
 $route['hr/index'] = 'hr/index';
@@ -199,12 +191,6 @@ $route['reports/balance'] = 'reports/balance';
 $route['reports/balance/execute'] = 'reports/balance_execute';
 $route['reports/balance/export'] = 'reports/balance_export';
 
-//Admin: search into the history of modifications
-$route['reports/history'] = 'reports/history';
-$route['reports/history/execute'] = 'reports/history_execute';
-$route['reports/history/export'] = 'reports/history_export';
-$route['reports/history/details/(:num)'] = 'reports/history_details/$1';
-
 //_______________________________________________
 //REST API
 $route['api/token'] = 'api/token';
@@ -224,6 +210,9 @@ $route['api/userextras/(:num)'] = 'api/userextras/$1';
 $route['api/userleaves/(:num)'] = 'api/userleaves/$1';
 $route['api/users/(:num)'] = 'api/users/$1';
 $route['api/users'] = 'api/users';
+
+$route['api/monthlypresence/(:num)/(:num)/(:num)'] = 'api/monthlypresence/$1/$2/$3';
+//$route['api/deleteuser/(:num)'] = 'api/deleteuser/$1';
 
 //ICS Feeds
 $route['ics/individual/(:num)'] = 'ics/individual/$1';

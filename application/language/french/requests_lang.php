@@ -17,7 +17,7 @@
  */
 
 $lang['requests_index_title'] = 'Demandes d\'absence à valider';
-$lang['requests_index_description'] = 'Cet écran liste les demandes de congés qui m\'ont été soumises pour validation. Si vous n\'êtes pas un manager, cette liste sera vide.';
+$lang['requests_index_description'] = 'Cet écran liste les demandes de congé qui m\'ont été soumises pour validation. Si vous n\'êtes pas un manager, cette liste sera vide.';
 $lang['requests_index_thead_tip_view'] = 'voir';
 $lang['requests_index_thead_tip_accept'] = 'accepter';
 $lang['requests_index_thead_tip_reject'] = 'refuser';

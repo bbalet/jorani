@@ -16,7 +16,7 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['menu_banner_slogan'] = 'Gestion des demandes de congés';
+$lang['menu_banner_slogan'] = 'Gestion des demandes de congé';
 $lang['menu_banner_change_password'] = 'Changer le mot de passe';
 $lang['menu_banner_welcome'] = 'Bienvenue';
 $lang['menu_banner_logout'] = 'Déconnexion';
@@ -57,8 +57,8 @@ $lang['menu_requests_request_extra'] = 'Déclarer Heures supp.';
 
 $lang['menu_leaves_title'] = 'Mes demandes';
 $lang['menu_leaves_counters'] = 'Compteurs';
-$lang['menu_leaves_list_requests'] = 'Liste des demandes de congés';
-$lang['menu_leaves_create_request'] = 'Faire une demande de congés';
+$lang['menu_leaves_list_requests'] = 'Liste des demandes de congé';
+$lang['menu_leaves_create_request'] = 'Faire une demande de congé';
 
 $lang['menu_calendar_title'] = 'Calendriers';
 $lang['menu_calendar_individual'] = 'Mon calendrier';

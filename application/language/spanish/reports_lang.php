@@ -37,22 +37,3 @@ $lang['reports_balance_popup_entity_button_ok'] = 'OK';
 $lang['reports_balance_popup_entity_button_cancel'] = 'Cancelar';
 
 $lang['reports_export_balance_title'] = 'Balance de permisos';
-
-$lang['reports_history_title'] = 'Historial de cambios';
-$lang['reports_history_field_modifiedby'] = 'Seleccione el usuario';
-$lang['reports_history_field_startdate'] = 'Primera fecha';
-$lang['reports_history_field_enddate'] = 'Última fecha';
-$lang['reports_history_field_table'] = 'Tabla';
-$lang['reports_history_field_modification_type'] = 'Tipo de modificación';
-$lang['reports_history_field_modification_any'] = 'todos';
-$lang['reports_history_field_modification_create'] = 'crear';
-$lang['reports_history_field_modification_update'] = 'modificar';
-$lang['reports_history_field_modification_delete'] = 'suprimir';
-$lang['reports_history_button_select'] = 'Seleccionar ';
-$lang['reports_history_button_launch'] = 'Iniciar';
-$lang['reports_history_button_export'] = 'exportar';
-$lang['reports_history_popup_user_title'] = 'Seleccione un usuario';
-$lang['reports_history_popup_user_button_clear'] = 'Limpiar';
-$lang['reports_history_popup_user_button_ok'] = 'OK';
-$lang['reports_history_popup_user_button_cancel'] = 'Cancelar';
-$lang['reports_history_balance_title'] = 'Historial de cambios';

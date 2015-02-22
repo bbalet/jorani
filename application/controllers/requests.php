@@ -292,7 +292,6 @@ class Requests extends CI_Controller {
     {
         $this->load->model('users_model');
         $this->load->model('organization_model');
-        $this->load->model('settings_model');
         $leave = $this->leaves_model->get_leave_details($id);
         //Load details about the employee (manager, supervisor of entity)
         $supervisor = $this->organization_model->get_supervisor($leave['organization']);

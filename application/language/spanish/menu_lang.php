@@ -17,7 +17,7 @@
  * @author hnestar
  */
 
-$lang['menu_banner_slogan'] = 'Sistema de gestión de permisos.';
+$lang['menu_banner_slogan'] = 'Sistema de gestión de permisos';
 $lang['menu_banner_change_password'] = 'Modificar la contraseña';
 $lang['menu_banner_welcome'] = 'Bienvenido';
 $lang['menu_banner_logout'] = 'Cerrar sesión';

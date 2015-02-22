@@ -139,7 +139,6 @@ class Overtime extends CI_Controller {
     {
         $this->load->model('users_model');
         $this->load->model('organization_model');
-        $this->load->model('settings_model');
         $extra = $this->overtime_model->get_extra($id);
         //Load details about the employee (manager, supervisor of entity)
         $employee = $this->users_model->get_users($extra['employee']);

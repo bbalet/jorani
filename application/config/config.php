@@ -383,15 +383,6 @@ $config['default_leave_type'] = FALSE;
 //List of available languages
 $config['languages'] = 'en,fr,es';
 
-//Enable history of changes. Warning: this will increase the volume of the database and impacts performance
-$config['enable_history'] = FALSE;
-
-//Allow access to the purge new feature (mass deletion into database in order to save space)
-$config['enable_purge'] = FALSE;
-
-//Enable time management module
-$config['enable_time'] = FALSE;
-
 //Set this value to TRUE if you want to hide the menu entries related to overtime
 $config['disable_overtime'] = FALSE;
 

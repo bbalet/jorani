@@ -113,12 +113,6 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_user($id) {
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->set_history(3, 'users', $id, $this->session->userdata('id'));
-        }
-        
         $query = $this->db->delete('users', array('id' => $id));
         $this->load->model('entitleddays_model');
         $this->entitleddays_model->delete_entitleddays_cascade_user($id);
@@ -188,12 +182,6 @@ class Users_model extends CI_Model {
         if ($this->config->item('ldap_basedn_db')) $data['ldap_path'] = $this->input->post('ldap_path');
         $this->db->insert('users', $data);
         
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->set_history(1, 'users', $this->db->insert_id(), $this->session->userdata('id'));
-        }
-        
         //Deal with user having no line manager
         if ($this->input->post('manager') == -1) {
             $id = $this->db->insert_id();
@@ -203,47 +191,140 @@ class Users_model extends CI_Model {
             $this->db->where('id', $id);
             $this->db->update('users', $data);
         }
-        
         return $password;
     }
     
     /**
      * Create a user record in the database. the difference with set_users function is that it doesn't rely
      * on values posted by en HTML form. Can be used by a mass importer for example.
-     * TODO : still in use ? To be used by API ?
-     * @param type $firstname User firstname
-     * @param type $lastname User lastname
-     * @param type $login User login
-     * @param type $email User e-mail
-     * @param type $password User password
-     * @param int $role role mask
-     * @param int $manager Id of the manager or 0
+     * @param string $firstname User firstname
+     * @param string $lastname User lastname
+     * @param string $login User login
+     * @param string $email User e-mail
+     * @param string $password User password
+     * @param int $role role mask (2 for user or 8 for manager)
+     * @param int $manager Id of the manager or NULL
+     * @param int $organization Id of the organization or NULL
+     * @param int $contract Id of the contract or NULL
+     * @param int $position Id of the position or NULL
+     * @param date $datehired Date of hiring or NULL
+     * @param string $identifier Internal identifier or NULL
+     * @param string $language language code or NULL
+     * @param string $timezone timezone or NULL
+     * @param string $ldap_path ldap path or NULL
+     * @param bool $active Is user active or NULL
+     * @param string $country country of the employee or NULL
+     * @param string $calendar calendar path or NULL
      * @return int Inserted User Identifier
      */
-    public function insert_user($firstname, $lastname, $login, $email, $password, $role, $manager) {
+    public function insert_user_api($firstname, $lastname, $login, $email, $password, $role,
+            $manager = NULL,
+            $organization = NULL,
+            $contract = NULL,
+            $position = NULL,
+            $datehired = NULL,
+            $identifier = NULL,
+            $language = NULL,
+            $timezone = NULL,
+            $ldap_path = NULL,
+            $active = NULL,
+            $country = NULL,
+            $calendar = NULL) {
         //Hash the clear password using bcrypt
         $this->load->library('bcrypt');
         $hash = $this->bcrypt->hash_password($password);
-        $data = array(
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'login' => $login,
-            'email' => $email,
-            'password' => $hash,
-            'role' => $role,
-            'manager' => $manager
-        );
-        $this->db->insert('users', $data);
-        
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->set_history(1, 'users', $this->db->insert_id(), $this->session->userdata('id'));
-        }
-        
+        $this->db->set('firstname', $firstname);
+        $this->db->set('lastname', $lastname);
+        $this->db->set('login', $login);
+        $this->db->set('email', $email);
+        $this->db->set('password', $hash);
+        $this->db->set('role', $role);
+        if (isset($manager)) $this->db->set('manager', $manager);
+        if (isset($organization)) $this->db->set('organization', $organization);
+        if (isset($contract)) $this->db->set('contract', $contract);
+        if (isset($position)) $this->db->set('position', $position);
+        if (isset($datehired)) $this->db->set('datehired', $datehired);
+        if (isset($identifier)) $this->db->set('identifier', $identifier);
+        if (isset($language)) $this->db->set('language', $language);
+        if (isset($timezone)) $this->db->set('timezone', $timezone);
+        if (isset($ldap_path)) $this->db->set('ldap_path', $ldap_path);
+        if (isset($active)) $this->db->set('active', $active);
+        if (isset($country)) $this->db->set('country', $country);
+        if (isset($calendar)) $this->db->set('calendar', $calendar);
+        $this->db->insert('users');
         return $this->db->insert_id();
     }
 
+    /**
+     * Update a user record in the database. the difference with update_users function is that it doesn't rely
+     * on values posted by en HTML form. Can be used by a mass importer for example.
+     * @param int $id Id of the user
+     * @param string $firstname User firstname or NULL
+     * @param string $lastname User lastname or NULL
+     * @param string $login User login or NULL
+     * @param string $email User e-mail or NULL
+     * @param string $password User password or NULL
+     * @param int $role role mask (2 for user or 8 for manager) or NULL
+     * @param int $manager Id of the manager or NULL
+     * @param int $organization Id of the organization or NULL
+     * @param int $contract Id of the contract or NULL
+     * @param int $position Id of the position or NULL
+     * @param date $datehired Date of hiring or NULL
+     * @param string $identifier Internal identifier or NULL
+     * @param string $language language code or NULL
+     * @param string $timezone timezone or NULL
+     * @param string $ldap_path ldap path or NULL
+     * @param bool $active Is user active or NULL
+     * @param string $country country of the employee or NULL
+     * @param string $calendar calendar path or NULL
+     * @return int Number of affected rows
+     */
+    public function update_user_api($id,
+            $firstname = NULL,
+            $lastname = NULL,
+            $login = NULL,
+            $email = NULL,
+            $password = NULL,
+            $role = NULL,
+            $manager = NULL,
+            $organization = NULL,
+            $contract = NULL,
+            $position = NULL,
+            $datehired = NULL,
+            $identifier = NULL,
+            $language = NULL,
+            $timezone = NULL,
+            $ldap_path = NULL,
+            $active = NULL,
+            $country = NULL,
+            $calendar = NULL) {
+        if (isset($password)){
+             //Hash the clear password using bcrypt
+            $this->load->library('bcrypt');
+            $hash = $this->bcrypt->hash_password($password);
+            $this->db->set('password', $hash);
+        }
+        if (isset($firstname)) $this->db->set('firstname', $firstname);
+        if (isset($lastname)) $this->db->set('lastname', $lastname);
+        if (isset($login)) $this->db->set('login', $login);
+        if (isset($email)) $this->db->set('email', $email);
+        if (isset($role)) $this->db->set('role', $role);
+        if (isset($manager)) $this->db->set('manager', $manager);
+        if (isset($organization)) $this->db->set('organization', $organization);
+        if (isset($contract)) $this->db->set('contract', $contract);
+        if (isset($position)) $this->db->set('position', $position);
+        if (isset($datehired)) $this->db->set('datehired', $datehired);
+        if (isset($identifier)) $this->db->set('identifier', $identifier);
+        if (isset($language)) $this->db->set('language', $language);
+        if (isset($timezone)) $this->db->set('timezone', $timezone);
+        if (isset($ldap_path)) $this->db->set('ldap_path', $ldap_path);
+        if (isset($active)) $this->db->set('active', $active);
+        if (isset($country)) $this->db->set('country', $country);
+        if (isset($calendar)) $this->db->set('calendar', $calendar);
+        $this->db->where('id', $id);
+        return $this->db->update('users');
+    }
+    
     /**
      * Update a given user in the database. Update data are coming from an HTML form
      * @return int number of affected rows
@@ -289,12 +370,6 @@ class Users_model extends CI_Model {
 
         $this->db->where('id', $this->input->post('id'));
         $result = $this->db->update('users', $data);
-        
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->set_history(2, 'users', $this->input->post('id'), $this->session->userdata('id'));
-        }
         return $result;
     }
 
@@ -329,12 +404,6 @@ class Users_model extends CI_Model {
         );
         $this->db->where('id', $id);
         $result = $this->db->update('users', $data);
-        
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
-        }
         return $result;
     }
     
@@ -357,12 +426,6 @@ class Users_model extends CI_Model {
         );
         $this->db->where('id', $id);
         $this->db->update('users', $data);
-        
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
-        }
         return $password;
     }
     
@@ -580,23 +643,15 @@ class Users_model extends CI_Model {
 
     /**
      * Update a given employee in the database with the contract ID. 
+     * @param int $employee Identifier of employee
+     * @param int $manager Identifier of manager
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_contract() {
-        $data = array(
-            'contract' => $this->input->post('contract')
-        );
-        $this->db->where('id', $this->input->post('id'));
-        $result = $this->db->update('users', $data);
-        
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
-        }
-        
-        return $result;
+    public function set_contract($employee, $contract) {
+        $this->db->set('contract', $contract);
+        $this->db->where('id', $employee);
+        return $this->db->update('users', $data);
     }
     
     /**
@@ -606,40 +661,23 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function update_users_cascade_contract($id) {
-        $data = array(
-            'contract' => NULL
-        );
+        $this->db->set('contract', NULL);
         $this->db->where('contract', $id);
         $result = $this->db->update('users', $data);
-        
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
-        }
-        
         return $result;
     }
     
     /**
-     * Update a given employee in the database with the manager ID. 
-     * @return type
+     * Update a given employee in the database with the manager ID.
+     * @param int $employee Identifier of employee
+     * @param int $manager Identifier of manager
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_manager() {
-        $data = array(
-            'manager' => $this->input->post('manager')
-        );
-        $this->db->where('id', $this->input->post('id'));
-        $result = $this->db->update('users', $data);
-        
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->set_history(2, 'users', $id, $this->session->userdata('id'));
-        }
-        
-        return $result;
+    public function set_manager($employee, $manager) {
+        $this->db->set('manager', $manager);
+        $this->db->where('id', $employee);
+        return $this->db->update('users', $data);
     }
     
     /**

@@ -177,7 +177,6 @@ class Extra extends CI_Controller {
      */
     private function sendMail($id) {
         $this->load->model('users_model');
-        $this->load->model('settings_model');
         $this->load->model('delegations_model');
         $manager = $this->users_model->get_users($this->session->userdata('manager'));
 

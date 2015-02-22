@@ -37,23 +37,3 @@ $lang['reports_balance_popup_entity_button_ok'] = 'OK';
 $lang['reports_balance_popup_entity_button_cancel'] = 'Cancel';
 
 $lang['reports_export_balance_title'] = 'Balance of leaves';
-
-$lang['reports_history_title'] = 'History of changes';
-$lang['reports_history_field_modifiedby'] = 'Select the user';
-$lang['reports_history_field_startdate'] = 'Start date';
-$lang['reports_history_field_enddate'] = 'End date';
-$lang['reports_history_field_table'] = 'Table';
-$lang['reports_history_field_modification_type'] = 'Modification type';
-$lang['reports_history_field_modification_any'] = 'any';
-$lang['reports_history_field_modification_create'] = 'create';
-$lang['reports_history_field_modification_update'] = 'update';
-$lang['reports_history_field_modification_delete'] = 'delete';
-$lang['reports_history_button_select'] = 'Select';
-$lang['reports_history_button_launch'] = 'Launch';
-$lang['reports_history_button_export'] = 'Export';
-$lang['reports_history_popup_user_title'] = 'Select a user';
-$lang['reports_history_popup_user_button_clear'] = 'Clear';
-$lang['reports_history_popup_user_button_ok'] = 'OK';
-$lang['reports_history_popup_user_button_cancel'] = 'Cancel';
-
-$lang['reports_history_balance_title'] = 'History of changes';

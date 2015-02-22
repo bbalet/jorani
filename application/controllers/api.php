@@ -277,6 +277,13 @@ class Api extends CI_Controller {
             expires_now();
             $this->load->model('users_model');
             $result = $this->users_model->get_users($id);
+            foreach($result as $k1=>$q) {
+              foreach($q as $k2=>$r) {
+                if($k2 == 'password') {
+                  unset($result[$k1][$k2]);
+                }
+              }
+            }
             if (empty($result)) {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             } else {
@@ -324,4 +331,64 @@ class Api extends CI_Controller {
             }
         }
     }
+    
+    /*******************************************************************************************************************/
+    
+    /**
+     * Get the monthly presence stats for a given employee
+     * @param int $id Unique identifier of an employee
+     * @param int $month Month number [1-12]
+     * @param int $year Year number (XXXX)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function monthlypresence($id, $month, $year) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            expires_now();
+            $this->load->model('users_model');
+            $employee = $this->users_model->get_users($id);
+            if (!isset($employee['contract'])) {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            } else {
+                
+                $this->load->model('leaves_model');
+                $this->load->model('dayoffs_model');
+                $start = sprintf('%d-%02d-01', $year, $month);
+                $lastDay = date("t", strtotime($start));    //last day of selected month
+                $end = sprintf('%d-%02d-%02d', $year, $month, $lastDay);
+                $result = new stdClass();
+                $linear = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE);
+                $result->leaves = $this->leaves_model->monthly_leaves_duration($linear);
+                $result->dayoffs = $this->dayoffs_model->sumdayoffs($employee['contract'], $start, $end);
+                $result->total = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+                $result->start = $start;
+                $result->end = $end;
+                $result->open = $result->total - $result->dayoffs;
+                $result->work = $result->open - $result->leaves;
+                echo json_encode($result);
+            }
+        }
+    }
+
+    /**
+     * Delete an employee from the database
+     * @param int $id Unique identifier of an employee
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    /*public function deleteuser($id) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('users_model');
+            $employee = $this->users_model->get_users($id);
+            if (count($employee) > 0) {
+                $this->output->set_header("HTTP/1.1 404 Not Found");
+            } else {
+                $result = $this->users_model->delete($id);
+                echo json_encode($result);
+            }
+        }
+    }*/
+    
 }

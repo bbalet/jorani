@@ -90,14 +90,6 @@ class Auth {
                         return false;
                 }
                 break;
-                
-            //Configuration
-            case 'edit_settings' :
-                if ($this->CI->session->userdata('is_hr') == true)
-                    return true;
-                else
-                    return false;
-                break;
 
             //Configuration of HR objects
             case 'list_employees' :
@@ -124,7 +116,6 @@ class Auth {
                     return false;
                 break;
             
-            case 'native_report_history':
             case 'native_report_balance':
             case 'report_list' :
             case 'report_execute' :

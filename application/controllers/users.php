@@ -228,7 +228,6 @@ class Users extends CI_Controller {
                 log_message('info', 'Password of user #' . $id . ' has been modified by user #' . $this->session->userdata('id'));
                 
                 //Send an e-mail to the user so as to inform that its password has been changed
-                $this->load->model('settings_model');
                 $user = $this->users_model->get_users($id);
                 $this->load->library('email');
                 $this->load->library('polyglot');
@@ -295,7 +294,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('lastname', lang('users_create_field_lastname'), 'required|xss_clean');
         $this->form_validation->set_rules('login', lang('users_create_field_login'), 'required|callback_login_check|xss_clean');
         $this->form_validation->set_rules('email', lang('users_create_field_email'), 'required|xss_clean');
-        $this->form_validation->set_rules('CipheredValue', lang('users_create_field_password'), 'required');
+        if (!$this->config->item('ldap_enabled')) $this->form_validation->set_rules('CipheredValue', lang('users_create_field_password'), 'required');
         $this->form_validation->set_rules('role[]', lang('users_create_field_role'), 'required|xss_clean');
         $this->form_validation->set_rules('manager', lang('users_create_field_manager'), 'required|xss_clean');
         $this->form_validation->set_rules('contract', lang('users_create_field_contract'), 'xss_clean');
@@ -317,7 +316,6 @@ class Users extends CI_Controller {
             log_message('info', 'User ' . $this->input->post('login') . ' has been created by user #' . $this->session->userdata('id'));
             
             //Send an e-mail to the user so as to inform that its account has been created
-            $this->load->model('settings_model');
             $this->load->library('email');
             $this->load->library('polyglot');
             $usr_lang = $this->polyglot->code2language($this->input->post('language'));
@@ -426,58 +424,5 @@ class Users extends CI_Controller {
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output');
-    }
-
-    //TODO import a list of users from CSV or Excel
-    /**
-     * Action: export the list of all users into an Excel file
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function import() {
-        $this->auth->check_is_granted('import_user');
-        $this->load->view('users/import');
-        
-        //A : Firstname
-        //B : Lastname
-        //C : E-mail
-        //D : Role (2 for user if ommitted)
-        //E : optional login (first letter of firstname + lastname if ommitted
-        //F : manager optional (cell into this Worksheet, "self" or ID in database) : cell must preceed)
-        //G : optional password (automatically generated if ommitted)
-        //H : optional Identifier into the database if set, will update user
-        
-        //Filename <= uniqid($prefix);
-        
-        /*$config['upload_path'] = 'temp/';
-        $config['allowed_types'] = 'xls|csv|xlxs';
-        $config['max_size'] = '100';
-        $config['max_width'] = '1024';
-        $config['max_height'] = '768';
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload()) {
-            $error = array('error' => $this->upload->display_errors());
-
-            $this->load->view('upload_form', $error);
-        } else {
-            $this->load->library('excel');
-            $data = array('upload_data' => $this->upload->data());
-
-            //$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-            $objPHPExcel = PHPExcel_IOFactory::load($path);
-            $worksheet->getHighestRow();
-            
-            //First line contains an header with the names of columns
-            for ($row = 2; $row <= $highestRow; ++ $row) {
-                
-            }
-            //$cell = $worksheet->getCellByColumnAndRow($col, $row);
-            $val = $cell->getValue();
-            $line++;
-
-            
-            //$this->load->view('upload_success', $data);
-        }*/
     }
 }

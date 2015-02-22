@@ -34,6 +34,7 @@ $this->lang->load('menu', $language);?>
     </div>
 </div>
 
+<?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
 <div id="frmChangeMyPwd" class="modal hide fade">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -46,6 +47,13 @@ $this->lang->load('menu', $language);?>
         <button class="btn" data-dismiss="modal"><?php echo lang('menu_password_popup_button_cancel');?></button>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#frmChangeMyPwd').alert();
+    });
+</script>
+<?php } ?>
 
 <div class="navbar navbar-inverse">
       <div class="navbar-inner">
@@ -64,9 +72,6 @@ $this->lang->load('menu', $language);?>
                   <ul class="dropdown-menu">
                     <li><a href="<?php echo base_url();?>users"><?php echo lang('menu_admin_list_users');?></a></li>
                     <li><a href="<?php echo base_url();?>users/create"><?php echo lang('menu_admin_add_user');?></a></li>
-                    <!--<li class="divider"></li>
-                    <li class="nav-header"><?php echo lang('menu_admin_settings_divider');?></li>
-                    <li><a href="<?php echo base_url();?>settings"><?php echo lang('menu_admin_settings');?></a></li>//-->
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_hr_leaves_type_divider');?></li>
                     <li><a href="<?php echo base_url();?>leavetypes"><?php echo lang('menu_hr_list_leaves_type');?></a></li>
@@ -135,7 +140,9 @@ $this->lang->load('menu', $language);?>
                   <ul class="dropdown-menu">
                       <li><a href="<?php echo base_url();?>calendar/individual"><?php echo lang('menu_calendar_individual');?></a></li>
                       <li><a href="<?php echo base_url();?>calendar/workmates"><?php echo lang('menu_calendar_workmates');?></a></li>
+                      <?php if ($is_manager == TRUE) { ?>
                       <li><a href="<?php echo base_url();?>calendar/collaborators"><?php echo lang('menu_calendar_collaborators');?></a></li>
+                      <?php } ?>
                       <li><a href="<?php echo base_url();?>calendar/department"><?php echo lang('menu_calendar_department');?></a></li>
                       <li><a href="<?php echo base_url();?>calendar/organization"><?php echo lang('menu_calendar_organization');?></a></li>
                       <li><a href="<?php echo base_url();?>calendar/tabular"><?php echo lang('menu_calendar_tabular');?></a></li>
@@ -147,9 +154,3 @@ $this->lang->load('menu', $language);?>
         </div>
       </div>
     </div><!-- /.navbar -->
-
-    <script type="text/javascript">
-        $(function () {
-            $('#frmChangeMyPwd').alert();
-        });
-    </script>

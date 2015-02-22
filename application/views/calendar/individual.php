@@ -142,17 +142,17 @@ $(function () {
     
     $('#cmdNext').click(function() {
         $('#calendar').fullCalendar('next');
-        refresh_calendar();
+        if (toggleDayoffs) refresh_calendar();
     });
 
     $('#cmdPrevious').click(function() {
         $('#calendar').fullCalendar('prev');
-        refresh_calendar();
+        if (toggleDayoffs) refresh_calendar();
     });
 
     $('#cmdToday').click(function() {
         $('#calendar').fullCalendar('today');
-        refresh_calendar();
+        if (toggleDayoffs) refresh_calendar();
     });
     
     $('#lnkICS').click(function () {

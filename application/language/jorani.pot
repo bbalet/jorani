@@ -410,45 +410,6 @@ msgstr ""
 msgid "As a"
 msgstr ""
 
-msgid "Database maintenance"
-msgstr ""
-
-msgid "Rows"
-msgstr ""
-
-msgid "Table name"
-msgstr ""
-
-msgid "Table of days off"
-msgstr ""
-
-msgid "Table of history of changes in the table Users"
-msgstr ""
-
-msgid "Table of entitled days"
-msgstr ""
-
-msgid "Purge rows until (included)"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Purge data"
-msgstr ""
-
-msgid "Mass data deletion"
-msgstr ""
-
-msgid "You are about to delete a lot of data, this procedure is irreversible."
-msgstr ""
-
-msgid "The database has been purged successfully."
-msgstr ""
-
-msgid "\"The field \" + fieldname + \" is mandatory.\""
-msgstr ""
-
 msgid "No data available in table"
 msgstr ""
 
@@ -560,6 +521,9 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
+msgid "\"The field \" + fieldname + \" is mandatory.\""
+msgstr ""
+
 msgid "Back to the list of contracts"
 msgstr ""
 
@@ -594,6 +558,9 @@ msgid "edit"
 msgstr ""
 
 msgid "delete"
+msgstr ""
+
+msgid "Date"
 msgstr ""
 
 msgid "Reason"
@@ -746,6 +713,9 @@ msgstr ""
 msgid "Presence report"
 msgstr ""
 
+msgid "Delegations"
+msgstr ""
+
 msgid "Firstname"
 msgstr ""
 
@@ -764,7 +734,7 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-msgid "Right-click on an employee for contextual actions."
+msgid "Right-click / taphold on an employee for contextual actions."
 msgstr ""
 
 msgid "List of requested leaves"
@@ -1169,39 +1139,6 @@ msgstr ""
 msgid "Launch"
 msgstr ""
 
-msgid "History of changes"
-msgstr ""
-
-msgid "Select the user"
-msgstr ""
-
-msgid "Start date"
-msgstr ""
-
-msgid "End date"
-msgstr ""
-
-msgid "Table"
-msgstr ""
-
-msgid "Modification type"
-msgstr ""
-
-msgid "any"
-msgstr ""
-
-msgid "create"
-msgstr ""
-
-msgid "update"
-msgstr ""
-
-msgid "Select a user"
-msgstr ""
-
-msgid "Clear"
-msgstr ""
-
 msgid "Leave Requests submitted to me"
 msgstr ""
 
@@ -1236,6 +1173,21 @@ msgid "List of leave resquests"
 msgstr ""
 
 msgid "Morning/Afternoon"
+msgstr ""
+
+msgid "List of delegations"
+msgstr ""
+
+msgid "This is the list of employees who can accept or reject a request in your behalf."
+msgstr ""
+
+msgid "Revoke"
+msgstr ""
+
+msgid "Add a delegate"
+msgstr ""
+
+msgid "Are you sure that you want to revoke this delegation?"
 msgstr ""
 
 msgid "Login"
@@ -1322,6 +1274,12 @@ msgstr ""
 msgid "Date hired/started"
 msgstr ""
 
+msgid "Timezone"
+msgstr ""
+
+msgid "LDAP Path"
+msgstr ""
+
 msgid "Internal/Company Identifier"
 msgstr ""
 
@@ -1338,9 +1296,6 @@ msgid "No line manager."
 msgstr ""
 
 msgid "Self"
-msgstr ""
-
-msgid "LDAP Path"
 msgstr ""
 
 msgid "Select the manager"

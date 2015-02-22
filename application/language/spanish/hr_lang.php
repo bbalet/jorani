@@ -42,7 +42,7 @@ $lang['hr_employees_field_entity'] = 'entidad';
 $lang['hr_employees_popup_entity_title'] = 'Seleccionar una entidad';
 $lang['hr_employees_popup_entity_button_ok'] = 'OK';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Cancelar';
-$lang['hr_employees_description'] = 'Haga clic en el botón derecho sobre un empleado para mostrar el menú contextual.';
+$lang['hr_employees_description'] = 'Haga clic / taphold en el botón derecho sobre un empleado para mostrar el menú contextual.';
 $lang['hr_employees_field_subdepts'] = 'incluir las subentidades';
 
 $lang['hr_export_employees_title'] = 'Lista de empleados';

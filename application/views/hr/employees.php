@@ -113,6 +113,19 @@ $(document).ready(function() {
   </ul>
 </div>
 
+<div class="modal hide fade" id="frmContextMenu">
+    <div class="modal-body">
+        <a class="context-mobile" href="<?php echo base_url();?>hr/leaves/create/{id}"><i class="icon-plus"></i>&nbsp;<?php echo lang('hr_employees_thead_link_create_leave');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>users/edit/{id}?source=hr%2Femployees"><i class="icon-pencil"></i>&nbsp;<?php echo lang('hr_employees_thead_tip_edit');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>entitleddays/user/{id}"><i class="icon-edit"></i>&nbsp;<?php echo lang('hr_employees_thead_tip_entitlment');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>hr/leaves/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_leaves');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>hr/overtime/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>hr/counters/{id}"><i class="icon-info-sign"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>hr/presence/{id}"><i class="icon-calendar"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>requests/delegations/{id}"><i class="icon-share-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a>
+  </div>
+</div>
+
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
         <div class="modal-header">
             <h1><?php echo lang('global_msg_wait');?></h1>
@@ -126,6 +139,7 @@ $(document).ready(function() {
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/context.menu.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/toe.min.js"></script>
 <script type="text/javascript">
 var entity = 0; //Root of the tree by default
 var entityName = '';
@@ -152,6 +166,16 @@ function select_entity() {
         }, true);
 }
 
+//Prevent text selection after double click
+function clearSelection() {
+    if(document.selection && document.selection.empty) {
+        document.selection.empty();
+    } else if(window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+    }
+}
+
 $(function () {
     //Handle a context menu of the DataTable
     $('.context').contextmenu({
@@ -176,6 +200,38 @@ $(function () {
             window.location = url;
         }
       });
+        
+    //Taphold on mobile, display contextual menu as a popup
+    $(document).on('taphold', '.context', function(e){
+        id = $(e.target).closest("tr").find('td:eq(0)').text();
+        $("#frmContextMenu").modal('show');
+        $('.context-mobile').each(function() {
+            action =  $(this).attr( 'href');
+            var url = action.replace("{id}", id.trim());
+            $(this).attr( 'href', url);
+        });
+      });
+      
+    //On double click, display contextual menu as a popup
+    $(document).on('dblclick', '.context', function (e) {
+        clearSelection();
+        id = $(e.target).closest("tr").find('td:eq(0)').text();
+        $("#frmContextMenu").modal('show');
+        $('.context-mobile').each(function() {
+            action =  $(this).attr( 'href');
+            var url = action.replace("{id}", id.trim());
+            $(this).attr( 'href', url);
+        });
+    });
+    
+    //On keying ESC, hide context menu
+    $("body").on("keyup", function(e){
+        if (e.keyCode == 27) {
+            if ($('#frmContextMenu').hasClass('in')) {
+                $('#frmContextMenu').modal('hide');
+            }
+        }
+    });
     
     //Cookie has value ? take -1 by default
     if($.cookie('entity') != null) {

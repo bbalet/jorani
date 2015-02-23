@@ -35,33 +35,6 @@ class Hr extends CI_Controller {
         $this->lang->load('hr', $this->language);
         $this->lang->load('global', $this->language);
     }
-
-    /**
-     * Display the list of all requests submitted to you
-     * Status is submitted
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function index($filter = 'requested') {
-        $this->auth->check_is_granted('list_requests');
-        expires_now();
-        if ($filter == 'all') {
-            $showAll = true;
-        } else {
-            $showAll = false;
-        }
-        $data = getUserContext($this);
-        $data['filter'] = $filter;
-        $data['title'] = lang('hr_leaves_title');
-        $data['requests'] = $this->leaves_model->requests($this->user_id, $showAll);
-        $this->load->model('types_model');
-        for ($i = 0; $i < count($data['requests']); ++$i) {
-            $data['requests'][$i]['type_label'] = $this->types_model->get_label($data['requests'][$i]['type']);
-        }
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('hr/index', $data);
-        $this->load->view('templates/footer');
-    }
     
     /**
      * Display the list of all employees

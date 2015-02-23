@@ -59,7 +59,6 @@ class Requests extends CI_Controller {
         $this->load->model('types_model');
         $this->load->model('status_model');
         for ($i = 0; $i < count($data['requests']); ++$i) {
-            $data['requests'][$i]['type_label'] = $this->types_model->get_label($data['requests'][$i]['type']);
             $data['requests'][$i]['status_label'] = $this->status_model->get_label($data['requests'][$i]['status']);
         }
         $this->load->view('templates/header', $data);

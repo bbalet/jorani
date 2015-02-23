@@ -634,8 +634,9 @@ class Leaves_model extends CI_Model {
     public function requests($user_id, $all = FALSE) {
         $this->load->model('delegations_model');
         $ids = $this->delegations_model->get_delegates_list($user_id);
-        $this->db->select('leaves.id as id, users.*, leaves.*');
+        $this->db->select('leaves.id as id, users.*, leaves.*, types.name as type_label');
         $this->db->join('users', 'users.id = leaves.employee');
+        $this->db->join('types', 'types.id = leaves.type');
         if (count($ids) > 0) {
             array_push($ids, $user_id);
             $this->db->where_in('users.manager', $ids);

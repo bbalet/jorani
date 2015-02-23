@@ -20,7 +20,8 @@ $CI =& get_instance();
 $CI->load->library('polyglot');
 $CI->load->helper('language');
 $this->lang->load('session', $language);
-$this->lang->load('global', $language);?>
+$this->lang->load('global', $language);
+$this->lang->load('menu', $language);?>
 
 <style>
     body {
@@ -77,19 +78,19 @@ $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
     <input type="hidden" name="language" value="<?php echo $language_code; ?>" />
     <?php } else { ?>
     <label for="language"><?php echo lang('session_login_field_language');?></label>
-    <select name="language" id="language" onchange="Javascript:change_language();">
+    <select class="input-medium" name="language" id="language" onchange="Javascript:change_language();">
         <?php foreach ($languages as $lang_code => $lang_name) { ?>
         <option value="<?php echo $lang_code; ?>" <?php if ($language_code == $lang_code) echo 'selected'; ?>><?php echo $lang_name; ?></option>
         <?php }?>
     </select>
     <?php } ?>
     <label for="login"><?php echo lang('session_login_field_login');?></label>
-    <input type="text" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required />
+    <input type="text" class="input-medium" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
 </form>
     <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
     <label for="password"><?php echo lang('session_login_field_password');?></label>
-    <input type="password" name="password" id="password" /><br />
+    <input class="input-medium" type="password" name="password" id="password" /><br />
     <br />
     <button id="send" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></button><br />
     <br />
@@ -98,7 +99,19 @@ $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
     <?php } ?>
     <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>
                 </div>
-                <div class="span6"><img src="<?php echo base_url();?>assets/images/jorani-vertical.png"></div>
+                <div class="span6" style="height:100%;">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <img src="<?php echo base_url();?>assets/images/logo_simple.png">
+                        </div>
+                    </div>
+                    <div class="row-fluid"><div class="span12">&nbsp;</div></div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <span style="font-size: 250%; font-weight: bold; line-height: 100%;"><center><?php echo lang('menu_banner_slogan');?></center></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="span3">&nbsp;</div>
@@ -107,7 +120,6 @@ $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-
 <script type="text/javascript">
     //Refresh page language
     function change_language() {

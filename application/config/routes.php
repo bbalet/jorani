@@ -52,7 +52,6 @@ $route['users/check/login'] = 'users/check_login';
 $route['users'] = 'users';
 
 //Human Resources Management
-$route['hr/index'] = 'hr/index';
 $route['hr/employees'] = 'hr/employees';
 $route['hr/employees/entity/(:num)/(:any)'] = 'hr/employees_entity/$1/$2';
 $route['hr/employees/export/(:num)/(:any)'] = 'hr/export_employees/$1/$2';

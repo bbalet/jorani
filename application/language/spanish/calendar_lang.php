@@ -29,7 +29,7 @@ $lang['calendar_workmates_title'] = 'Calendario de mis compañeros de trabajo';
 $lang['calendar_workmates_description'] = 'Vacaciones de los empleados con el mismo administrador';
 
 $lang['calendar_collaborators_title'] = 'Calendario de mis colaboradores';
-$lang['calendar_collaborators_description'] = 'Leaves of my collaborators (will be empty if I\'m not a manager).';
+$lang['calendar_collaborators_description'] = 'Vacaciones de mis colaboradores Hojas(estará vacía si no soy un administrador)';
 
 $lang['calendar_department_title'] = 'Calendario de mi servicio';
 $lang['calendar_department_description'] = 'Calendario de los empleados de mi departamento';

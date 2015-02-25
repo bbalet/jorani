@@ -178,7 +178,7 @@ class Session extends CI_Controller {
         } else {
             //Send an email to the user with its login information
             $this->load->library('email');
-            $this->lang->load('email', $this->language);
+            $this->lang->load('email', $this->session->userdata('language'));
             
             //Generate random password and store its hash into db
             $password = $this->users_model->resetClearPassword($user->id);

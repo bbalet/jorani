@@ -71,6 +71,8 @@ function getLeaveLength(refreshInfos) {
 //Default behavour is to set the duration field. pass false if you want to disable this behaviour
 function getLeaveInfos(preventDefault) {
         $('#frmModalAjaxWait').modal('show');
+        var start = moment($('#startdate').val());
+        var end = moment($('#enddate').val());
         $.ajax({
         type: "POST",
         url: baseURL + "leaves/validate",
@@ -86,7 +88,12 @@ function getLeaveInfos(preventDefault) {
         .done(function(leaveInfo) {
             if (typeof leaveInfo.length !== 'undefined') {
                 var duration = parseFloat(leaveInfo.length)  + addDays;
-                if (!preventDefault) $('#duration').val(duration);
+                duration = Math.round(duration * 1000) / 1000;  //Round to 3 decimals only if necessary
+                if (!preventDefault) {
+                    if (start.isValid() && end.isValid()) {
+                        $('#duration').val(duration);
+                    }
+                }
             }
             if (typeof leaveInfo.credit !== 'undefined') {
                 var credit = parseFloat(leaveInfo.credit);
@@ -105,6 +112,18 @@ function getLeaveInfos(preventDefault) {
                     $("#lblOverlappingAlert").show();
                 } else {
                     $("#lblOverlappingAlert").hide();
+                }
+            }
+            //Check if the employee has a contract
+            if (leaveInfo.hasContract == false) {
+                bootbox.alert(noContractMsg);
+            } else {
+                //If the employee has a contract, check if the current leave request is not on two yearly leave periods
+                var limit = moment(leaveInfo.endentdate);
+                if (start.isValid() && end.isValid() && limit.isValid()) {
+                    if (start.isBefore(limit) && limit.isBefore(end)) {
+                        bootbox.alert(noTwoPeriodsMsg);
+                    }
                 }
             }
             $('#frmModalAjaxWait').modal('hide');
@@ -143,7 +162,7 @@ $(function () {
         $("#days").val(value);
     });
 
-    $('#viz_startdate').change(function() {getLeaveLength();});
+    $('#viz_startdate').change(function() {getLeaveLength(true);});
     $('#viz_enddate').change(function() {getLeaveLength();});
     $('#startdatetype').change(function() {getLeaveLength();});
     $('#enddatetype').change(function() {getLeaveLength();});
@@ -151,4 +170,13 @@ $(function () {
 
     //Check if the user has not exceed the number of entitled days
     $("#duration").keyup(function() {getLeaveInfos(true);});
+    
+    $("#frmLeaveForm").submit(function(e) {
+        if (validate_form()) {
+            return true; 
+        } else {
+            e.preventDefault();
+            return false; 
+        }
+    });
 });

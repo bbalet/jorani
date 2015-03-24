@@ -472,6 +472,7 @@ class Leaves extends CI_Controller {
      *  - difference between the entitled and the taken days
      *  - try to calculate the duration of the leave
      *  - try to detect overlapping leave requests
+     *  If the user is linked to a contract, returns end date of the yearly leave period or NULL
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function validate() {
@@ -486,7 +487,11 @@ class Leaves extends CI_Controller {
         $leave_id = $this->input->post('leave_id', TRUE);
         $leaveValidator = new stdClass;
         if (isset($id) && isset($type)) {
-            $leaveValidator->credit = $this->leaves_model->get_user_leaves_credit($id, $type);
+            if (isset($startdate) && $startdate !== "") {
+                $leaveValidator->credit = $this->leaves_model->get_user_leaves_credit($id, $type, $startdate);
+            } else {
+                $leaveValidator->credit = $this->leaves_model->get_user_leaves_credit($id, $type);
+            }
         }
         if (isset($id) && isset($startdate) && isset($enddate)) {
             $leaveValidator->length = $this->leaves_model->length($id, $startdate, $enddate);
@@ -498,6 +503,14 @@ class Leaves extends CI_Controller {
                 }
             }
         }
+        //Returns end date of the yearly leave period or NULL if the user is not linked to a contract
+        $this->load->model('contracts_model');
+        $startentdate = NULL;
+        $endentdate = NULL;
+        $hasContract = $this->contracts_model->getBoundaries($id, $startentdate, $endentdate);
+        $leaveValidator->startentdate = $startentdate;
+        $leaveValidator->endentdate = $endentdate;
+        $leaveValidator->hasContract = $hasContract;
         echo json_encode($leaveValidator);
     }
 }

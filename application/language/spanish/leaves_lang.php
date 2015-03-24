@@ -79,6 +79,10 @@ $lang['leaves_edit_button_cancel'] = 'Cancelar';
 $lang['leaves_edit_flash_msg_error'] = 'No se puede editar una solicitud de permiso ya enviada';
 $lang['leaves_edit_flash_msg_success'] = 'La solicitud de permiso se ha actualizado correctamente';
 
+$lang['leaves_validate_mandatory_js_msg'] = '"El campo" + fieldname + " es obligatorio."';
+$lang['leaves_validate_flash_msg_no_contract'] = 'Parece que no tiene contrato. Pongase en contacto con el administrador.';
+$lang['leaves_validate_flash_msg_overlap_period'] = 'No se puede crear una solicitud de vacaciones por dos períodos de vacaciones anuales. Por favor, cree dos solicitud de vacaciones diferent.';
+
 $lang['leaves_delete_flash_msg_error'] = 'No se puede eliminar esta solicitud de permiso';
 $lang['leaves_delete_flash_msg_success'] = 'La solicitud de permiso se ha eliminado correctamente';
 

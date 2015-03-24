@@ -27,10 +27,12 @@ $this->lang->load('global', $language);?>
 
 <?php echo validation_errors(); ?>
 
-<?php if (isset($_GET['source'])) {
-    echo form_open('leaves/edit/' . $id . '?source=' . $_GET['source']);
+<?php 
+$attributes = array('id' => 'frmLeaveForm');
+if (isset($_GET['source'])) {
+    echo form_open('leaves/edit/' . $id . '?source=' . $_GET['source'], $attributes);
 } else {
-    echo form_open('leaves/edit/' . $id);
+    echo form_open('leaves/edit/' . $id, $attributes);
 } ?>
 
     <label for="viz_startdate" required><?php echo lang('leaves_edit_field_start');?></label>
@@ -114,10 +116,28 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
     var baseURL = '<?php echo base_url();?>';
     var userId = <?php echo $leave['employee']; ?>;
     var leaveId = <?php echo $leave['id']; ?>;
     var languageCode = '<?php echo $language_code;?>';
+    
+    var noContractMsg = "<?php echo lang('leaves_validate_flash_msg_no_contract');?>";
+    var noTwoPeriodsMsg = "<?php echo lang('leaves_validate_flash_msg_overlap_period');?>";
+    
+function validate_form() {
+    result = false;
+    var fieldname = "";
+    if ($('#viz_startdate').val() == "") fieldname = "<?php echo lang('leaves_edit_field_start');?>";
+    if ($('#viz_enddate').val() == "") fieldname = "<?php echo lang('leaves_edit_field_end');?>";
+    if ($('#duration').val() == "") fieldname = "<?php echo lang('leaves_edit_field_duration');?>";
+    if (fieldname == "") {
+        return true;
+    } else {
+        bootbox.alert(<?php echo lang('leaves_validate_mandatory_js_msg');?>);
+        return false;
+    }
+}
 </script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit.js" type="text/javascript"></script>

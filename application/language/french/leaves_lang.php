@@ -78,6 +78,10 @@ $lang['leaves_edit_button_cancel'] = 'Annuler';
 $lang['leaves_edit_flash_msg_error'] = 'Vous ne pouvez pas modifier une demande déjà soumise.';
 $lang['leaves_edit_flash_msg_success'] = 'La demande d\'absence a été modifiée avec succès.';
 
+$lang['leaves_validate_mandatory_js_msg'] = '"Le champ " + fieldname + " est obligatoire."';
+$lang['leaves_validate_flash_msg_no_contract'] = 'Il semble que vous n\'ayez pas de contrat. Veuillez contacter un responsable des ressources humaines.';
+$lang['leaves_validate_flash_msg_overlap_period'] = 'Vous ne pouvez pas créer une demande de congé pour deux périodes annuelles de congé. Veuillez créer deux demandes différentes.';
+
 $lang['leaves_delete_flash_msg_error'] = 'Vous ne pouvez pas supprimer cette demande d\'absence.';
 $lang['leaves_delete_flash_msg_success'] = 'La demande d\'absence a été supprimée avec succès.';
 

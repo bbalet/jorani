@@ -78,6 +78,10 @@ $lang['leaves_edit_button_cancel'] = 'បោះបង់';
 $lang['leaves_edit_flash_msg_error'] = 'អ្នកមិនអាចកែសម្រួលសំណើការឈប់សម្រាកមួយដែលបានដាក់ជូនរួចទៅហើយ';
 $lang['leaves_edit_flash_msg_success'] = 'សំណើរការឈប់សំរាកនេះត្រូវបានគេធ្វើអោយទាន់សម័យដោយជោគជ័យ';
 
+$lang['leaves_validate_mandatory_js_msg'] = '"The field " + fieldname + " is mandatory."';
+$lang['leaves_validate_flash_msg_no_contract'] = 'It appears you have no contract. Please contact your HR Officer / Manager.';
+$lang['leaves_validate_flash_msg_overlap_period'] = 'You can\'t create a leave request for two yearly leave periods. Please create two diferent leave request.';
+
 $lang['leaves_delete_flash_msg_error'] = 'អ្នកមិនអាចលុបការចាកចេញពីការស្នើសំុបានទេ';
 $lang['leaves_delete_flash_msg_success'] = 'សំណើការឈប់សម្រាកនេះត្រូវបានគេលុបដោយជោគជ័យ';
 

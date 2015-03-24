@@ -251,13 +251,14 @@ class Leaves_model extends CI_Model {
     
     /**
      * Get the number of days a user can take for a given leave type
-     * @param int $id employee id
-     * @param string $type type of leave or NULL if the user has no contract/no
-     * @return int number of days not taken
+     * @param int $id employee identifier
+     * @param string $type type of leave request
+     * @param date $startdate Start date of leave request or null
+     * @return int number of available days or NULL if the user has no contract
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_user_leaves_credit($id, $type) {
-        $summary = $this->get_user_leaves_summary($id);
+    public function get_user_leaves_credit($id, $type, $startdate = NULL) {
+        $summary = $this->get_user_leaves_summary($id, FALSE, $startdate);
         //return entitled days - taken (for a given leave type)
         if (is_null($summary)) {
             return NULL;

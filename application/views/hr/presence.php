@@ -114,7 +114,7 @@ $this->lang->load('global', $language);?>
   <tbody>
     <tr>
       <?php foreach ($linear->days as $day) {
-          //Overlapping cases
+          $overlapping = FALSE;
           if (strstr($day->display, ';')) {
               $periods = explode(";", $day->display);
               $statuses = explode(";", $day->status);
@@ -171,7 +171,20 @@ $this->lang->load('global', $language);?>
                     break;
             }
           }
-            echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+          //Detect overlapping cases
+          switch ($class) {
+                    case "plannedplanned":
+                    case "requestedrequested":
+                    case "acceptedaccepted":
+                    case "rejectedrejected":
+                        $overlapping = TRUE;
+              break;
+          }
+            if ($overlapping) {
+                echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
+            } else {
+                echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+            }
      } ?>
           </tr>
   </tbody>

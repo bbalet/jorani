@@ -31,32 +31,44 @@ if ($mod_rewrite == "") $mod_rewrite = '<b>.htaccess not visited</b>';
 if ($allow_overwrite == "") $allow_overwrite = '<b>Off</b>';
 
 //Check if we can access to the configuration file
-$dbExists = FALSE;
-$rs = NULL;
 $pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'database.php')));
 $configFileExists = file_exists($pathConfigFile);
+$dbConnError = TRUE;
+$dbSelectDbError = TRUE;
+$dbQueryError = TRUE;
+
 if ($configFileExists ) {
     include $pathConfigFile;
     //Try to connect to database
-    $dbConn = @mysql_connect($db['default']['hostname'], $db['default']['username'], $db['default']['password']);
-    if ($dbConn) {
-        //Try to select LMS database
-        if (@mysql_select_db($db['default']['database'], $dbConn)) {
-            //Try to get the signature of the schema
-            $dbExists = TRUE;
-            $sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
-                        . " FROM information_schema.columns"
-                        . " WHERE table_schema =  DATABASE()"
-                        . " GROUP BY TABLE_NAME"
-                        . " ORDER BY TABLE_NAME";
-            $rs = @mysql_query($sql, $dbConn);
-        }
+	$dbConn = new mysqli($db['default']['hostname'], $db['default']['username'], $db['default']['password']);
+	$dbConnError = mysqli_connect_errno()?TRUE:FALSE;
+    if (!$dbConnError) {
+		$dbConn->select_db($db['default']['database']);
+		$dbSelectDbError = ($dbConn->errno > 0)?TRUE:FALSE;
+		//Try to get the signature of the schema
+		if (!$dbSelectDbError) {
+			$sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
+						. " FROM information_schema.columns"
+						. " WHERE table_schema =  DATABASE()"
+						. " GROUP BY TABLE_NAME"
+						. " ORDER BY TABLE_NAME";
+			$stmt = $dbConn->prepare($sql);
+			$dbQueryError = ($dbConn->errno > 0)?TRUE:FALSE;
+			if (!$dbQueryError) {
+				$stmt->execute();
+				$dbQueryError = ($dbConn->errno > 0)?TRUE:FALSE;
+			}
+			if (!$dbQueryError) {
+				$stmt->bind_result($table, $signature);
+				$dbQueryError = ($dbConn->errno > 0)?TRUE:FALSE;
+			}
+		}
     }
 }
 ?>
 <html>
     <head>
-    <title>LMS Requirements</title>
+    <title>Jorani Requirements</title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
@@ -178,15 +190,15 @@ if ($configFileExists ) {
                       <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Configuration file</td><td>Not Found</td></tr>
                       <?php } ?>
                       
-                      <?php if ($dbConn) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database connection</td><td>OK</td></tr>
+                      <?php if (!$dbConnError) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database connection</td><td>OK</td></tr>
                       <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Database connection</td><td>Error</td></tr>
                       <?php } ?>
                       
-                      <?php if ($dbExists) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database name</td><td>Found</td></tr>
+                      <?php if (!$dbSelectDbError) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database name</td><td>Found</td></tr>
                       <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Database name</td><td>Doesn't exist</td></tr>
                       <?php } ?>
 
-                      <?php if ($rs) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database query</td><td>OK</td></tr>
+                      <?php if (!$dbQueryError) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database query</td><td>OK</td></tr>
                       <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Database query</td><td>Error</td></tr>
                       <?php } ?>
                   </tbody>
@@ -202,11 +214,13 @@ if ($configFileExists ) {
                     </tr>
                   </thead>
                   <tbody id="tblSchema">                      
-<?php if ($rs) {
-                while ($row = mysql_fetch_assoc($rs)) {  ?>
-                <tr><td><i class="icon-info-sign"></i>&nbsp;<?php echo $row['TABLE_NAME']; ?></td><td><?php echo $row['signature']; ?></td></tr>
-<?php       }
-           } else { ?>
+<?php if (!$dbQueryError) {
+	while ($stmt->fetch()) {  ?>
+                <tr><td><i class="icon-info-sign"></i>&nbsp;<?php echo $table; ?></td><td><?php echo $signature; ?></td></tr>
+<?php }
+		$stmt->close();
+		if (!$dbConnError) $dbConn->close();
+        } else { ?>
                 <tr><td colspan="2"><i>Impossible to query database</i></td></tr>
 <?php } ?>
                   </tbody>

@@ -13,3 +13,14 @@ CREATE TABLE IF NOT EXISTS `delegations` (
   KEY `manager_id` (`manager_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Delegation of approval' AUTO_INCREMENT=1 ;
 
+-- History tables feature is given up into v0.40
+DROP TABLE IF EXISTS `activities_employee_history`;
+DROP TABLE IF EXISTS `activities_history`;
+DROP TABLE IF EXISTS `contracts_history`;
+DROP TABLE IF EXISTS `entitleddays_history`;
+DROP TABLE IF EXISTS `leaves_history`;
+DROP TABLE IF EXISTS `organization_history`;
+DROP TABLE IF EXISTS `overtime_history`;
+DROP TABLE IF EXISTS `positions_history`;
+DROP TABLE IF EXISTS `types_history`;
+DROP TABLE IF EXISTS `users_history`;

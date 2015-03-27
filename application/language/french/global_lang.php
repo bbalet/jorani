@@ -84,3 +84,5 @@ $lang['department'] = 'service';
 $lang['contract'] = 'contrat';
 $lang['day off'] = 'jour non travaillé';
 $lang['leave'] = 'absence';
+
+$lang['OK'] = 'OK';

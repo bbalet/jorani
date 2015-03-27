@@ -89,5 +89,6 @@ We thank the following open source projects for the components used by Jorani:
 * RSA implementation https://github.com/travist/jsencrypt
 * Moment (JS dates lib) http://momentjs.com/
 * Selectize https://github.com/brianreavis/selectize.js
+* Zero Clipboard https://github.com/zeroclipboard/zeroclipboard
 
 Background image of login page by Kevin Dooley - https://www.flickr.com/photos/pagedooley/ / License: Creative Commons (Attribution 3.0 Unported)

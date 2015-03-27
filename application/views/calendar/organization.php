@@ -35,7 +35,12 @@ $this->lang->load('global', $language);?>
             <input type="checkbox" value="" id="chkIncludeChildren"> <?php echo lang('calendar_organization_check_include_subdept');?>
         </label>
     </div>
+    <?php if ($this->config->item('ics_enabled') == TRUE) {?>
+    <div class="span5 pull-right"><a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a></div>
+    <?php } else {?>
     <div class="span5">&nbsp;</div>
+    <?php }?>
+    
 </div>
 
 <div class="row-fluid">
@@ -82,11 +87,30 @@ $this->lang->load('global', $language);?>
         </div>
  </div>
 
+<div id="frmLinkICS" class="modal hide fade">
+    <div class="modal-header">
+        <h3>ICS<a href="#" onclick="$('#frmLinkICS').modal('hide');" class="close">&times;</a></h3>
+    </div>
+    <div class="modal-body" id="frmSelectDelegateBody">
+        <div class='input-append'>
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                    value="" />
+                 <button id="cmdCopy" class="btn" data-clipboard-text="">
+                     <i class="icon-magnet"></i>
+                 </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="$('#frmLinkICS').modal('hide');" class="btn btn-primary"><?php echo lang('OK');?></a>
+    </div>
+</div>
+
 <link href="<?php echo base_url();?>assets/fullcalendar/fullcalendar.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lib/moment.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/fullcalendar.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo $language_code;?>.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 <script type="text/javascript">
     var entity = -1; //Id of the selected entity
     var entityName = '';
@@ -212,6 +236,19 @@ $this->lang->load('global', $language);?>
             $.cookie('cal_includeChildren', includeChildren);
             $.cookie('cal_dayoffs', toggleDayoffs);
         }
+        
+        //Copy/Paste ICS Feed
+        var client = new ZeroClipboard($("#cmdCopy"));
+        $('#lnkICS').click(function () {
+            if (entity == -1) {
+                var UrlICS = '<?php echo base_url(); ?>ics/entity/<?php echo $user_id; ?>/0/' + $('#chkIncludeChildren').prop('checked');
+            } else {
+                var UrlICS = '<?php echo base_url(); ?>ics/entity/<?php echo $user_id; ?>/' + entity + '/' + $('#chkIncludeChildren').prop('checked');
+            }
+            $('#txtIcsUrl').val(UrlICS);
+            ZeroClipboard.setData( "text/plain", UrlICS);
+            $("#frmLinkICS").modal('show');
+        });
     });
 </script>
 

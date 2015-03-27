@@ -80,11 +80,29 @@ $this->lang->load('global', $language);?>
         </div>
  </div>
 
+<div id="frmLinkICS" class="modal hide fade">
+    <div class="modal-header">
+        <h3>ICS<a href="#" onclick="$('#frmLinkICS').modal('hide');" class="close">&times;</a></h3>
+    </div>
+    <div class="modal-body" id="frmSelectDelegateBody">
+        <div class='input-append'>
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                    value="<?php echo base_url() . 'ics/individual/' . $user_id;?>" />
+                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/individual/' . $user_id;?>">
+                     <i class="icon-magnet"></i>
+                 </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="$('#frmLinkICS').modal('hide');" class="btn btn-primary"><?php echo lang('OK');?></a>
+    </div>
+</div>
+
 <link href="<?php echo base_url();?>assets/fullcalendar/fullcalendar.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lib/moment.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/fullcalendar.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo $language_code;?>.js"></script>
-<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 <script type="text/javascript">
     var toggleDayoffs = false;
     
@@ -155,92 +173,10 @@ $(function () {
         if (toggleDayoffs) refresh_calendar();
     });
     
+    //Copy/Paste ICS Feed
+    var client = new ZeroClipboard($("#cmdCopy"));
     $('#lnkICS').click(function () {
-        bootbox.alert("ICS : <input type='text' class='input-xlarge' id='txtIcsUrl' \n\
-                    value='<?php echo base_url() . 'ics/individual/' . $user_id;?>'\n\
-                    onfocus='$(this).select();' />");
+        $("#frmLinkICS").modal('show');
     });
 });
 </script>
-
-<?php if ($googleApi) { ?>
-<!--Add a button for the user to click to initiate auth sequence -->
-    <button id="authorize-button" style="visibility: hidden">Authorize</button>
-    <script type="text/javascript">
-
-      var clientId = '<?php echo $clientId;?>';
-
-      var apiKey = '<?php echo $apiKey;?>';
-
-      var scopes = 'https://www.googleapis.com/auth/plus.me';
-
-      function handleClientLoad() {
-        // Step 2: Reference the API key
-        gapi.client.setApiKey(apiKey);
-        window.setTimeout(checkAuth,1);
-      }
-
-      function checkAuth() {
-        gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
-      }
-
-      function handleAuthResult(authResult) {
-        var authorizeButton = document.getElementById('authorize-button');
-        if (authResult && !authResult.error) {
-          authorizeButton.style.visibility = 'hidden';
-          makeApiCall();
-        } else {
-          authorizeButton.style.visibility = '';
-          authorizeButton.onclick = handleAuthClick;
-        }
-      }
-
-      function handleAuthClick(event) {
-        // Step 3: get authorization to use private data
-        gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
-        return false;
-      }
-
-      // Load the API and make an API call.  Display the results on the screen.
-      function makeApiCall() {
-          
-          var resource = {
-                "summary": "Appointment",
-                "location": "Somewhere",
-                "start": {
-                  "dateTime": "2013-04-23T10:00:00.000-07:00"
-                },
-                "end": {
-                  "dateTime": "2013-04-23T10:25:00.000-07:00"
-                }
-              };
-              var request = gapi.client.calendar.events.insert({
-                'calendarId': 'primary',
-                'resource': resource
-              });
-              request.execute(function(resp) {
-                console.log(resp);
-              });
-
-        // Step 4: Load the Google+ API
-        gapi.client.load('plus', 'v1', function() {
-          // Step 5: Assemble the API request
-          var request = gapi.client.plus.people.get({
-            'userId': 'me'
-          });
-          // Step 6: Execute the API request
-          request.execute(function(resp) {
-            var heading = document.createElement('h4');
-            var image = document.createElement('img');
-            image.src = resp.image.url;
-            heading.appendChild(image);
-            heading.appendChild(document.createTextNode(resp.displayName));
-
-            document.getElementById('content').appendChild(heading);
-          });
-        });
-      }
-    </script>
-    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
-
-<?php } ?>

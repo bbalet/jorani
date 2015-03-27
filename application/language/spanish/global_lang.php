@@ -71,3 +71,5 @@ $lang['department'] = 'departamento';
 $lang['contract'] = 'contrato';
 $lang['day off'] = 'dias de descanso';
 $lang['leave'] = 'permiso';
+
+$lang['OK'] = 'OK';

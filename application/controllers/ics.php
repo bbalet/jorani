@@ -148,6 +148,60 @@ class Ics extends CI_Controller {
             }
         }
     }
+
+    /**
+     * Get the list of leaves for a group of employees attached to an entity
+     * @param int $user identifier of the user wanting to view the list (mind timezone)
+     * @param int $entity identifier of an entity
+     * @param bool $children TRUE include sub-entity, FALSE otherwise (default)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function entity($user, $entity, $children) {
+        expires_now();
+        if ($this->config->item('ics_enabled') == FALSE) {
+            $this->output->set_header("HTTP/1.0 403 Forbidden");
+        } else {
+            $this->load->model('leaves_model');
+            $result = $this->leaves_model->entity($entity, $children);
+            if (empty($result)) {
+                echo "";
+            } else {
+                //Get timezone and language of the user
+                $this->load->model('users_model');
+                $employee = $this->users_model->get_users($user);
+                if (!is_null($employee['timezone'])) {
+                    $tzdef = $employee['timezone'];
+                } else {
+                    $tzdef = $this->config->item('default_timezone');
+                    if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
+                }
+                $this->lang->load('global', $this->polyglot->code2language($employee['language']));
+                $tzold = date_default_timezone_get();
+                date_default_timezone_set($tzdef);
+                
+                $vcalendar = new VObject\Component\VCalendar();
+                foreach ($result as $event) {
+                    $startdate = new \DateTime($event['startdate']);
+                    $enddate = new \DateTime($event['enddate']);
+                    if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
+                    if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
+                    if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
+                    if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
+                    
+                    $vcalendar->add('VEVENT', [
+                        'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
+                        'CATEGORIES' => lang('leave'),
+                        'DTSTART' => $startdate,
+                        'DTEND' => $enddate,
+                        'DESCRIPTION' => $event['type'] . ($event['cause']!=''?(' / ' . $event['cause']):''),
+                        'URL' => base_url() . "leaves/" . $event['id'],
+                    ]);    
+                }
+                echo $vcalendar->serialize();
+                date_default_timezone_set($tzold);
+            }
+        }
+    }
     
     /**
      * Action : download an iCal event corresponding to a leave request

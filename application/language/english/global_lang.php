@@ -84,3 +84,5 @@ $lang['department'] = 'department';
 $lang['contract'] = 'contract';
 $lang['day off'] = 'day off';
 $lang['leave'] = 'leave';
+
+$lang['OK'] = 'OK';

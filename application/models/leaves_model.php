@@ -588,7 +588,7 @@ class Leaves_model extends CI_Model {
         }
         $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
         $this->db->order_by('startdate', 'desc');
-        $this->db->limit(512);  //Security limit
+        $this->db->limit(1024);  //Security limit
         $events = $this->db->get()->result();
         $jsonevents = array();
         foreach ($events as $entry) {
@@ -623,7 +623,39 @@ class Leaves_model extends CI_Model {
             );
         }
         return json_encode($jsonevents);
-    }    
+    }
+    
+    /**
+     * Leave requests of All users of an entity
+     * @param int $entity_id Entity identifier (the department)
+     * @param bool $children Include sub department in the query
+     * @return array List of leave requests (DB records)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function entity($entity_id, $children = false) {
+        $this->db->select('users.firstname, users.lastname,  leaves.*, types.name as type');
+        $this->db->from('organization');
+        $this->db->join('users', 'users.organization = organization.id');
+        $this->db->join('leaves', 'leaves.employee  = users.id');
+        $this->db->join('types', 'leaves.type = types.id');
+        if ($children == true) {
+            $this->load->model('organization_model');
+            $list = $this->organization_model->get_all_children($entity_id);
+            $ids = array();
+            if (count($list) > 0) {
+                $ids = explode(",", $list[0]['id']);
+            }
+            array_push($ids, $entity_id);
+            $this->db->where_in('organization.id', $ids);
+        } else {
+            $this->db->where('organization.id', $entity_id);
+        }
+        $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
+        $this->db->order_by('startdate', 'desc');
+        $this->db->limit(1024);  //Security limit
+        $events = $this->db->get()->result_array();
+        return $events;
+    }
     
     /**
      * List all leave requests submitted to the connected user (or if delegate of a manager)

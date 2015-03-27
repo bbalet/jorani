@@ -238,6 +238,24 @@ for ($mC = 1; $mC <= 12; $mC++) {
     </div>
 </div>
 
+<div id="frmLinkICS" class="modal hide fade">
+    <div class="modal-header">
+        <h3>ICS<a href="#" onclick="$('#frmLinkICS').modal('hide');" class="close">&times;</a></h3>
+    </div>
+    <div class="modal-body" id="frmSelectDelegateBody">
+        <div class='input-append'>
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                    value="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>" />
+                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>">
+                     <i class="icon-magnet"></i>
+                 </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="$('#frmLinkICS').modal('hide');" class="btn btn-primary"><?php echo lang('OK');?></a>
+    </div>
+</div>
+
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui-1.10.4.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
@@ -245,7 +263,7 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 <script type="text/javascript">
 
 var timestamp;
@@ -395,10 +413,10 @@ $(function() {
         $('input:text:visible:first', this).focus();
     });
 
+    //Copy/Paste ICS Feed
+    var client = new ZeroClipboard($("#cmdCopy"));
     $('#lnkICS').click(function () {
-        bootbox.alert("ICS : <input type='text' class='input-xlarge' id='txtIcsUrl' \n\
-                    value='<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>'\n\
-                    onfocus='$(this).select();' />");
+        $("#frmLinkICS").modal('show');
     });
 });
 </script>

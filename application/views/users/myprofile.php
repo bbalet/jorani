@@ -80,13 +80,31 @@ echo $date->format(lang('global_date_format'));
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
-<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+<div id="frmLinkICS" class="modal hide fade">
+    <div class="modal-header">
+        <h3>ICS<a href="#" onclick="$('#frmLinkICS').modal('hide');" class="close">&times;</a></h3>
+    </div>
+    <div class="modal-body" id="frmSelectDelegateBody">
+        <div class='input-append'>
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                    value="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>" />
+                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>">
+                     <i class="icon-magnet"></i>
+                 </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="$('#frmLinkICS').modal('hide');" class="btn btn-primary"><?php echo lang('OK');?></a>
+    </div>
+</div>
+
+<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 <script type="text/javascript">
 $(function() {
+    //Copy/Paste ICS Feed
+    var client = new ZeroClipboard($("#cmdCopy"));
     $('#lnkICS').click(function () {
-        bootbox.alert("ICS : <input type='text' class='input-xlarge' id='txtIcsUrl' \n\
-                    value='<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>'\n\
-                    onfocus='$(this).select();' />");
+        $("#frmLinkICS").modal('show');
     });
 });
 </script>

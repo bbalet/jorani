@@ -31,7 +31,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Describe your organization in a tree structure and attach employees to entities.
 * Non working days (weekends and day offs) can be defined on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
 * LDAP Authentication.
-* Available in English and French.
+* Available in English, French, Spanish and Dutch.
 
 ## Installation
 
@@ -67,6 +67,9 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 
 * NGO Passerelles numériques, our first user http://passerellesnumeriques.org/en/
 * Github and Google groupe users for their ideas and tests.
+* Hector NESTAR : Spanish Translation
+* Roger WOLFS : Dutch Translation
+* Christian SONNENBERG : German Translation
 
 ### Third party libraries and components
 

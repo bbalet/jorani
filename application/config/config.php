@@ -381,7 +381,7 @@ $config['leave_status_requested'] = FALSE;
 $config['default_leave_type'] = FALSE;
 
 //List of available languages
-$config['languages'] = 'en,fr,es';
+$config['languages'] = 'en,fr,es,nl';
 
 //Set this value to TRUE if you want to hide the menu entries related to overtime
 $config['disable_overtime'] = FALSE;

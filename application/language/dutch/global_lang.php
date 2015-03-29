@@ -28,7 +28,7 @@ $lang['global_false'] = 'NIET WAAR';
 $lang['footer_link_go_top'] = 'Ga naar boven';
 $lang['footer_copyright_notice'] = '&copy; 2014 Jorani Authors';
 
-$lang['Requested'] = 'Gevraagd';
+$lang['Requested'] = 'Aangevraagd';
 $lang['Planned'] = 'Gepland';
 $lang['Accepted'] = 'Geaccepteerd';
 $lang['Rejected'] = 'Afgewezen';

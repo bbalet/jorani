@@ -17,7 +17,7 @@
  * @author Roger WOLFS
  */
 
-$lang['leavetypes_type_title'] = 'Afwezigheidstypen';
+$lang['leavetypes_type_title'] = 'Soort afwezigheid';
 $lang['leavetypes_type_thead_id'] = 'ID';
 $lang['leavetypes_type_thead_name'] = 'Naam';
 $lang['leavetypes_type_thead_tip_delete'] = 'verwijderen';
@@ -45,6 +45,6 @@ $lang['leavetypes_popup_delete_flash_msg'] = 'Het afwezigheidstype is succesvol 
 $lang['leavetypes_popup_delete_flash_error'] = 'U kunt een systeemwaarde niet verwijderen.';
 $lang['leavetypes_popup_delete_flash_forbidden'] = 'U kunt een afwezigheidstype dat nog in gebruik is niet verwijderen.';
 
-$lang['leavetypes_type_export_title'] = 'Afwezigheidstypen';
+$lang['leavetypes_type_export_title'] = 'Soort afwezigheid';
 $lang['leavetypes_type_export_thead_id'] = 'ID';
 $lang['leavetypes_type_export_thead_name'] = 'Naam';

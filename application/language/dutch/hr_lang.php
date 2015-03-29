@@ -18,7 +18,7 @@
  */
 
 $lang['hr_employees_title'] = 'Lijst werknemers';
-$lang['hr_employees_thead_tip_edit'] = 'edit user';
+$lang['hr_employees_thead_tip_edit'] = 'bewerk gegevens';
 $lang['hr_employees_thead_tip_entitlment'] = 'Beschikbare dagen';
 $lang['hr_employees_thead_link_leaves'] = 'Afwezigheid';
 $lang['hr_employees_thead_link_extra'] = 'Overuren';
@@ -38,12 +38,12 @@ $lang['hr_employees_popup_entitlment_title'] = 'Beschikbare dagen';
 $lang['hr_employees_popup_entitlment_button_cancel'] = 'Annuleren';
 $lang['hr_employees_popup_entitlment_button_close'] = 'Sluiten';
 $lang['hr_employees_button_select'] = 'Selecteer';
-$lang['hr_employees_field_entity'] = 'Groep';
-$lang['hr_employees_popup_entity_title'] = 'Selecteer een groep';
+$lang['hr_employees_field_entity'] = 'Entiteit';
+$lang['hr_employees_popup_entity_title'] = 'Selecteer een entiteit';
 $lang['hr_employees_popup_entity_button_ok'] = 'OK';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Annuleren';
 $lang['hr_employees_description'] = 'Klik met de rechtermuisknop op een werknemer voor contextuele acties.';
-$lang['hr_employees_field_subdepts'] = 'Includeer onderliggende groepen';
+$lang['hr_employees_field_subdepts'] = 'Includeer onderliggende entiteiten';
 
 $lang['hr_export_employees_title'] = 'Lijst werknemers';
 $lang['hr_export_employees_thead_id'] = 'ID';

@@ -29,7 +29,7 @@ $lang['menu_password_popup_button_cancel'] = 'Annuleren';
 
 $lang['menu_admin_title'] = 'Admin';
 $lang['menu_admin_list_users'] = 'Lijst gebruikers';
-$lang['menu_admin_add_user'] = 'Maak een gebruiker aan';
+$lang['menu_admin_add_user'] = 'Maak gebruiker aan';
 $lang['menu_admin_settings_divider'] = 'Settings';
 $lang['menu_admin_settings'] = 'Settings';
 
@@ -55,7 +55,7 @@ $lang['menu_requests_title'] = 'Verzoeken';
 $lang['menu_requests_leaves'] = 'Afwezigheid';
 $lang['menu_requests_overtime'] = 'Overuren';
 $lang['menu_requests_list_extras'] = 'Lijst van overuren';
-$lang['menu_requests_request_extra'] = 'Aanmelding overtijd';
+$lang['menu_requests_request_extra'] = 'Aanmelding overuren';
 
 $lang['menu_leaves_title'] = 'Mijn afwezigheid';
 $lang['menu_leaves_counters'] = 'Tellers';

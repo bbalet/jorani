@@ -81,7 +81,7 @@ $lang['leaves_edit_flash_msg_success'] = 'Het afwezigheidsverzoek is succesvol b
 
 $lang['leaves_validate_mandatory_js_msg'] = '"Het veld" + fieldname + "is verplicht."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'Geen contract gegevens gevonden. Neem contact op met uw HR Officer / manager.';
-$lang['leaves_validate_flash_msg_overlap_period'] = 'You can\'t create a leave request for two yearly leave periods. Please create two diferent leave request.';
+$lang['leaves_validate_flash_msg_overlap_period'] = 'U kunt een verlofaanvraag voor twee jaar durend verlof niet maken. Maak twee verschillende verlofaanvragen.';
 
 $lang['leaves_delete_flash_msg_error'] = 'U kunt dit afwezigheidsverzoek niet verwijderen';
 $lang['leaves_delete_flash_msg_success'] = 'Het afwezigheidsverzoek is succesvol verwijderd';

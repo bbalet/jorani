@@ -28,12 +28,12 @@ $lang['reports_native_title'] = 'List of Report';
 
 $lang['reports_balance_title'] = 'Saldo afwezigheid';
 $lang['reports_balance_date_field'] = 'Datum rapport';
-$lang['reports_balance_field_entity'] = 'Selecteer groep';
+$lang['reports_balance_field_entity'] = 'Selecteer entiteit';
 $lang['reports_balance_button_entity'] = 'Selecteer';
-$lang['reports_balance_field_subdepts'] = 'Includeer onderliggende groepen';
+$lang['reports_balance_field_subdepts'] = 'Includeer onderliggende entiteiten';
 $lang['reports_balance_button_launch'] = 'Uitvoeren';
 $lang['reports_balance_button_export'] = 'Exporteren';
-$lang['reports_balance_popup_entity_title'] = 'Selecteer een groep';
+$lang['reports_balance_popup_entity_title'] = 'Selecteer een entiteit';
 $lang['reports_balance_popup_entity_button_ok'] = 'OK';
 $lang['reports_balance_popup_entity_button_cancel'] = 'Annuleren';
 

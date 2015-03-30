@@ -1,6 +1,6 @@
 # Installation
 
-Jorani has been tested with Apache and ngnix.
+Jorani has been tested with Apache, ngnix and lighttpd.
 Jorani is compatible with HHVM as Codeigniter is 100% compatible with the VM. 
 However, please note that HHVM is still under development.
 
@@ -61,7 +61,12 @@ Since version 0.1.5, Jorani supports complex LDAP authentication schemes (where 
 Jorani is a PHP/CI application using rewrite rules and .htaccess files. 
 So your Apache configuration must **allow overwriting configuration by .htaccess files and mod_rewrite must be enabled**.
 
-## nginx
+## Other webservers
+
+nginx or lighttpd in conjunction with fpm-php are for advanced users because they are more complicated to tune than Apache (see troubleshooting section of this document).
+We recommend to validate your production environement with a load test prior going live.
+
+### nginx
 
 For your convinience, a sample ngnix configuration file is provided in this folder
 <code>/docs/install/ngnix/default</code>
@@ -75,8 +80,11 @@ Other parameters should be considered carefully (in <code>/etc/nginx/nginx.conf<
 * http.keepalive_timeout
 The values depend on your environment and the load that you are expecting.
 
-IMPORTANT : nginx in conjunction with fpm-php is for advanced users and is more complicated to tune than Apache (see troubleshooting section of this document).
-We recommend to validate your production environement with a load test prior going live.
+### lighttpd
+
+To enable PHP5 in lighttpd, you must modify your php.ini and uncomment the line <code>cgi.fix_pathinfo=1</code>.
+
+For your convinience, a sample lighttpd configuration file is provided in this folder <code>/docs/install/lighttpd/lighttpd.conf</code>
 
 # Troubleshooting
 

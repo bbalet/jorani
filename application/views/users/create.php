@@ -346,7 +346,7 @@ if ($language_code != 'en') { ?>
             }
         });
         
-        //Popup select position
+        //Popup select manager
         $("#cmdSelectManager").click(function() {
             $("#frmSelectManager").modal('show');
             $("#frmSelectManagerBody").load('<?php echo base_url(); ?>users/employees');

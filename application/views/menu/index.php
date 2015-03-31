@@ -27,7 +27,7 @@ $this->lang->load('menu', $language);?>
         <a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user"></i></a>
         &nbsp;
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        <a href="<?php echo base_url();?>users/reset/<?php echo $user_id; ?>" title="<?php echo lang('menu_banner_tip_reset');?>" data-target="#frmChangeMyPwd" data-toggle="modal"><i class="icon-lock"></i></a>
+        <a href="#" title="<?php echo lang('menu_banner_tip_reset');?>" id="cmdChangePassword"><i class="icon-lock"></i></a>
         <?php } ?>
         &nbsp;
         <?php echo lang('menu_banner_welcome');?> <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout"><?php echo lang('menu_banner_logout');?></a>     
@@ -40,7 +40,7 @@ $this->lang->load('menu', $language);?>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
          <h3><?php echo lang('menu_password_popup_title');?></h3>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" id="frmChangeMyPwdBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
@@ -50,7 +50,12 @@ $this->lang->load('menu', $language);?>
 
 <script type="text/javascript">
     $(function () {
-        $('#frmChangeMyPwd').alert();
+        //Popup change password
+        $("#cmdChangePassword").click(function() {
+            $("#frmChangeMyPwd").modal('show');
+            $("#frmChangeMyPwdBody").load('<?php echo base_url();?>users/reset/<?php echo $user_id; ?>');
+        });
+        
     });
 </script>
 <?php } ?>

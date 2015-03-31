@@ -64,7 +64,7 @@ class Session extends CI_Controller {
         $this->load->library('form_validation');
         //Note that we don't receive the password as a clear string
         $this->form_validation->set_rules('login', lang('session_login_field_login'), 'required');
-        $this->form_validation->set_rules('CipheredValue', lang('session_login_field_password'), 'required');
+        //$this->form_validation->set_rules('CipheredValue', lang('session_login_field_password'), 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);

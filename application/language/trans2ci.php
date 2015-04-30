@@ -19,7 +19,7 @@
 
 //Utility script that converts a PO file to PHP array i18n files
 require("POParser.php");
-$target = "dutch";
+$target = "german";
 
 $copyright = "<?php
 /*

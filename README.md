@@ -5,7 +5,7 @@ Jorani is designed to provide simple leave and overtime request workflows for sm
 
 ## Informations / getting help
 
-* Official website : http://www.leave-management-system.org/
+* Official website : http://jorani.org/
 * Google group : https://groups.google.com/forum/?hl=en#!forum/jorani
 * G+ : https://plus.google.com/+LeavemanagementsystemOrganization/posts
 * FB : https://www.facebook.com/lmsoss
@@ -58,8 +58,8 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 
 ## Contribute
 
-* Suggest ideas, declare bugs with Github's issue tracking system.
-* Help me to translate the software in your language https://www.transifex.com/projects/p/jorani
+* Suggest ideas, declare bugs with Github's issue tracking system or Google group.
+* Help us to translate the software in your language https://www.transifex.com/projects/p/jorani
 
 ## Credits
 
@@ -93,5 +93,3 @@ We thank the following open source projects for the components used by Jorani:
 * Moment (JS dates lib) http://momentjs.com/
 * Selectize https://github.com/brianreavis/selectize.js
 * Zero Clipboard https://github.com/zeroclipboard/zeroclipboard
-
-Background image of login page by Kevin Dooley - https://www.flickr.com/photos/pagedooley/ / License: Creative Commons (Attribution 3.0 Unported)

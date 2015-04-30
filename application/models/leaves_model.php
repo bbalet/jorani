@@ -179,7 +179,7 @@ class Leaves_model extends CI_Model {
             $this->db->where('entitleddays.enddate >= ', $refDate);
             $entitled_days = $this->db->get()->result_array();
             foreach ($entitled_days as $entitled) {
-                $summary[$entitled['type']][1] = (float) $entitled['entitled']; //entitled
+                $summary[$entitled['type']][1] += (float) $entitled['entitled']; //entitled
             }
 
             //Add entitled days of employee (number of entitled days can be negative)

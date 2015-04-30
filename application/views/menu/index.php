@@ -23,14 +23,16 @@ $this->lang->load('menu', $language);?>
     <div class="span6">
         <h3><a href="<?php echo base_url();?>" style="text-decoration:none; color:black;"><img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;<?php echo lang('menu_banner_slogan');?></a>
     </div>
-    <div class="span6 pull-right">
-        <a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user"></i></a>
-        &nbsp;
-        <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        <a href="#" title="<?php echo lang('menu_banner_tip_reset');?>" id="cmdChangePassword"><i class="icon-lock"></i></a>
-        <?php } ?>
-        &nbsp;
-        <?php echo lang('menu_banner_welcome');?> <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout"><?php echo lang('menu_banner_logout');?></a>     
+    <div class="span6">
+        <div class="pull-right">
+            <a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user"></i></a>
+            &nbsp;
+            <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
+            <a href="#" title="<?php echo lang('menu_banner_tip_reset');?>" id="cmdChangePassword"><i class="icon-lock"></i></a>
+            <?php } ?>
+            &nbsp;
+            <?php echo lang('menu_banner_welcome');?> <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout"><?php echo lang('menu_banner_logout');?></a>     
+        </div>
     </div>
 </div>
 

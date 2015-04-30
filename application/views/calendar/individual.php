@@ -127,6 +127,7 @@ $(function () {
     $("#frmEvent").alert();
 
     $('#calendar').fullCalendar({
+        timeFormat: ' ', /*Trick to remove the start time of the event*/
         header: {
             left: "",
             center: "title",

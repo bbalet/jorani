@@ -181,6 +181,7 @@ $this->lang->load('global', $language);?>
 
         //Create a calendar and fill it with AJAX events
         $('#calendar').fullCalendar({
+            timeFormat: ' ', /*Trick to remove the start time of the event*/
              header: {
                     left: "",
                     center: "title",

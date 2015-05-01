@@ -81,18 +81,12 @@ class Session extends CI_Controller {
             $this->session->set_userdata('language_code', $this->input->post('language'));
             $this->session->set_userdata('language', $this->polyglot->code2language($this->input->post('language')));
             
-            //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
-            set_include_path(get_include_path() . PATH_SEPARATOR . APPPATH . 'third_party/phpseclib');
-            include(APPPATH . '/third_party/phpseclib/Crypt/RSA.php');
-            if(extension_loaded('openssl') && file_exists(CRYPT_RSA_OPENSSL_CONFIG)) {
-                define("CRYPT_RSA_MODE", CRYPT_RSA_MODE_OPENSSL);
-            } else {
-                define("CRYPT_RSA_MODE", CRYPT_RSA_MODE_INTERNAL);
-            }            
+            //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt) and remove the salt!
+            require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
+            $rsa = new phpseclib\Crypt\RSA();
             $private_key = file_get_contents('./assets/keys/private.pem', true);
-            $rsa = new Crypt_RSA();
-            $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
-            $rsa->loadKey($private_key, CRYPT_RSA_PRIVATE_FORMAT_PKCS1);
+            $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
+            $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
             $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
             //Remove the salt
             $len_salt = strlen($this->session->userdata('salt')) * (-1);

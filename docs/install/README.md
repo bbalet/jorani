@@ -2,7 +2,7 @@
 
 Jorani has been tested with Apache, ngnix and lighttpd.
 Jorani is compatible with HHVM as Codeigniter is 100% compatible with the VM. 
-However, please note that HHVM is still under development.
+Jorani is compatible with PHP 7.0 (starting from v0.4.0) except for Excel exports (on May, 1st 2015)
 
 ## General considerations
 
@@ -85,6 +85,17 @@ The values depend on your environment and the load that you are expecting.
 To enable PHP5 in lighttpd, you must modify your php.ini and uncomment the line <code>cgi.fix_pathinfo=1</code>.
 
 For your convinience, a sample lighttpd configuration file is provided in this folder <code>/docs/install/lighttpd/lighttpd.conf</code>
+
+## HHVM
+
+You must activate the Zend Compatibility Layer as PHP function cal_days_in_month is not yet implemented (in /etc/hhvm/php.ini) :
+
+    hhvm.enable_zend_compat = true
+
+See:
+* http://docs.hhvm.com/manual/en/function.cal-days-in-month.php
+* http://docs.hhvm.com/manual/en/configuration.zend.compat.php
+
 
 # Troubleshooting
 

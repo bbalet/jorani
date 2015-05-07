@@ -82,9 +82,17 @@ The values depend on your environment and the load that you are expecting.
 
 ### lighttpd
 
-To enable PHP5 in lighttpd, you must modify your php.ini and uncomment the line <code>cgi.fix_pathinfo=1</code>.
+To enable PHP in lighttpd, you must modify your php.ini and uncomment the line <code>cgi.fix_pathinfo=1</code>.
 
 For your convinience, a sample lighttpd configuration file is provided in this folder <code>/docs/install/lighttpd/lighttpd.conf</code>
+
+### IIS7
+
+To enable PHP in IIS7, you must follow the instructions provided on the official IIS website : http://www.iis.net/learn/application-frameworks/install-and-configure-php-applications-on-iis/using-fastcgi-to-host-php-applications-on-iis
+
+Jorani uses rewriting techniques, so you must install the rewriting module prior using Jorani http://www.iis.net/downloads/microsoft/url-rewrite
+
+For your convinience, a sample IIS7 configuration file is provided in this folder <code>/docs/install/iis7/web.config</code>. You need to copy this file at the root of your Jorani installation and to adapt it to your needs.
 
 ## HHVM
 

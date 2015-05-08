@@ -85,6 +85,7 @@ $lang['users_edit_field_email'] = 'E-mail';
 $lang['users_edit_field_role'] = 'Role';
 $lang['users_edit_field_manager'] = 'Manager';
 $lang['users_edit_field_manager_alt'] = 'No line manager.';
+$lang['users_edit_field_manager_description'] = 'If a user has no manager (itself), it can validate its leave requests.';
 $lang['users_edit_button_self'] = 'Self';
 $lang['users_edit_button_select'] = 'Select';
 $lang['users_edit_field_contract'] = 'Contract';

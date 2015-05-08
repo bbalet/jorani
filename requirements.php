@@ -16,6 +16,8 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+define('BASEPATH','.');//Make this script works with nginx
+
 if (function_exists('apache_get_modules')) {
   $modules = apache_get_modules();
   $mod_rewrite = in_array('mod_rewrite', $modules);
@@ -123,20 +125,10 @@ if ($configFileExists ) {
                       <tr><td><i class="icon-info-sign"></i>&nbsp;Server software</td><td><?php echo $server_software; ?></td></tr>
 
                       <tr><td><?php if (strtolower($allow_overwrite) == "on") {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>
-                      &nbsp;Allow overwrite (.htaccess files)</td><td><?php echo $allow_overwrite; ?> (used for cool URLs).</td></tr>
+                      &nbsp;Allow overwrite (.htaccess files)</td><td><?php echo $allow_overwrite; ?> (used for cool URLs) Ignore this message if you are running something else than Apache.</td></tr>
 
                       <tr><td><?php if (strtolower($mod_rewrite) == "on") {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>
-                      &nbsp;Apache module rewrite (mod_rewrite)</td><td><?php echo $mod_rewrite; ?> (used for cool URLs).</td></tr>
-
-                      <?php if (extension_loaded('openssl')) {?>
-                      <tr><td><i class="icon-ok-sign"></i>&nbsp;openssl is LOADED</td>
-                      <?php } else { ?>
-                      <tr><td><i class="icon-exclamation-sign"></i>&nbsp;openssl IS NOT LOADED.</td>
-                      <?php } ?><td>PHP Extension openssl speeds up the log in page</td></tr>
-                      
-                      <?php if (defined('HHVM_VERSION')) {?>
-                       <tr><td><i class="icon-info-sign"></i>&nbsp;HHVM</td><td><?php echo HHVM_VERSION; ?></td></tr>
-                       <?php } ?>
+                      &nbsp;Apache module rewrite (mod_rewrite)</td><td><?php echo $mod_rewrite; ?> (used for cool URLs) Ignore this message if you are running something else than Apache.</td></tr>
                       
                       <?php if (version_compare(PHP_VERSION, '5.3.0') >= 0) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;PHP 5.3+</td>
@@ -144,6 +136,18 @@ if ($configFileExists ) {
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;Old PHP version</td>
                       <?php } ?><td>Ignore this message if you are running an exotic PHP runtime</td></tr>
                       
+                      <?php if (defined('HHVM_VERSION')) {?>
+                       <tr><td><i class="icon-info-sign"></i>&nbsp;HHVM</td><td><?php echo HHVM_VERSION; ?></td></tr>
+                       <?php } else { ?>
+                       <tr><td><i class="icon-info-sign"></i>&nbsp;PHP</td><td><?php echo PHP_VERSION; ?></td></tr>
+                       <?php } ?>
+                      
+                      <?php if (extension_loaded('openssl')) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;openssl is LOADED</td>
+                      <?php } else { ?>
+                      <tr><td><i class="icon-exclamation-sign"></i>&nbsp;openssl IS NOT LOADED.</td>
+                      <?php } ?><td>PHP Extension openssl speeds up the log in page</td></tr>
+                       
                       <?php if (extension_loaded('ldap')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;ldap is LOADED</td>
                       <?php } else { ?>

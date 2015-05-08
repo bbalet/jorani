@@ -36,22 +36,6 @@ class Contracts extends CI_Controller {
     }
     
     /**
-     * Prepare an array containing information about the current user
-     * @return array data to be passed to the view
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function getUserContext()
-    {
-        $data['fullname'] = $this->fullname;
-        $data['is_admin'] = $this->is_admin;
-        $data['is_hr'] = $this->is_hr;
-        $data['user_id'] =  $this->user_id;
-        $data['language'] = $this->language;
-        $data['language_code'] =  $this->language_code;
-        return $data;
-    }
-
-    /**
      * Display the list of all contracts defined in the system
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */

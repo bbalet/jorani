@@ -402,6 +402,15 @@ class Leaves_model extends CI_Model {
     }
     
     /**
+     * Delete leaves attached to a user
+     * @param int $id identifier of an employee
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delete_leaves_cascade_user($id) {
+        $query = $this->db->delete('leaves', array('employee' => $id));
+    }
+    
+    /**
      * Leave requests of All leave request of the user (suitable for FullCalendar widget)
      * @param int $user_id connected user
      * @param string $start Unix timestamp / Start date displayed on calendar

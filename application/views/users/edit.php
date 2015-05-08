@@ -65,7 +65,7 @@ $this->lang->load('global', $language);?>
     <br /><br />
 
     <label for="contract"><?php echo lang('users_edit_field_contract');?></label>
-    <select name="contract">
+    <select name="contract" id="contract" class="selectized input-xlarge">
     <?php foreach ($contracts as $contract): ?>
         <option value="<?php echo $contract['id'] ?>" <?php if ($contract['id'] == $users_item['contract']) echo "selected"; ?>><?php echo $contract['name']; ?></option>
     <?php endforeach ?>
@@ -116,12 +116,10 @@ echo $date->format(lang('global_date_format'));
         }
     $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);?>
     <label for="timezone"><?php echo lang('users_edit_field_timezone');?></label>
-    <select id="timezone" name="timezone" class="selectized input-xlarge" placeholder="Select a timezone...">
+    <select id="timezone" name="timezone" class="selectized input-xlarge">
     <?php foreach ($tzlist as $tz) { ?>
         <option value="<?php echo $tz ?>" <?php if ($tz == $tzdef) echo "selected"; ?>><?php echo $tz; ?></option>
-    <?php 
-            $index++;
-        } ?>
+    <?php } ?>
     </select>
     
     <?php if ($this->config->item('ldap_basedn_db')) {?>
@@ -226,6 +224,7 @@ if ($language_code != 'en') { ?>
         $("#viz_datehired").datepicker( "setDate", "<?php echo $date->format(lang('global_date_format'));?>");
         
         $('#timezone').selectize();
+        $('#contract').selectize();
         
         //Popup select position
         $("#cmdSelectManager").click(function() {

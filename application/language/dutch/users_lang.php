@@ -85,6 +85,7 @@ $lang['users_edit_field_email'] = 'E-mail';
 $lang['users_edit_field_role'] = 'Rol';
 $lang['users_edit_field_manager'] = 'Manager';
 $lang['users_edit_field_manager_alt'] = 'Geen manager.';
+$lang['users_edit_field_manager_description'] = 'Als een gebruiker geen manager heeft dan kan ze zijn eigen verzoeken valideren!';
 $lang['users_edit_button_self'] = 'Zelf';
 $lang['users_edit_button_select'] = 'Selecteer';
 $lang['users_edit_field_contract'] = 'Contract';

@@ -84,6 +84,7 @@ $lang['users_edit_field_email'] = 'E-Mail';
 $lang['users_edit_field_role'] = 'Rolle';
 $lang['users_edit_field_manager'] = 'Vorgesetzter';
 $lang['users_edit_field_manager_alt'] = 'Kein Vorgesetzter';
+$lang['users_edit_field_manager_description'] = 'Wenn ein User sein eigener Vorgesetzter / Manager ist (selbst) kann er sich seine Urlaubs- und Überstundenanfragen selbst genehmigen.';
 $lang['users_edit_button_self'] = 'Selbst';
 $lang['users_edit_button_select'] = 'Auswahl';
 $lang['users_edit_field_contract'] = 'Vertrag';

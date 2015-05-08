@@ -85,6 +85,7 @@ $lang['users_edit_field_email'] = 'E-mail';
 $lang['users_edit_field_role'] = 'Rol';
 $lang['users_edit_field_manager'] = 'Gestor';
 $lang['users_edit_field_manager_alt'] = 'Sin responsable.';
+$lang['users_edit_field_manager_description'] = 'Si un usuario no tiene responsable (es el mismo), se puede validar sus solicitudes de permisos.';
 $lang['users_edit_button_self'] = 'Sí mismo';
 $lang['users_edit_button_select'] = 'Seleccionar ';
 $lang['users_edit_field_contract'] = 'Contrato';

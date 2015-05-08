@@ -136,6 +136,15 @@ class Overtime_model extends CI_Model {
     public function delete_extra($id) {
         return $this->db->delete('overtime', array('id' => $id));
     }
+    
+    /**
+     * Delete overtimes attached to a user
+     * @param int $id identifier of an employee
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function delete_extras_cascade_user($id) {
+        $query = $this->db->delete('overtime', array('employee' => $id));
+    }
         
     /**
      * List all overtime requests submitted to the connected user (or if delegate of a manager)

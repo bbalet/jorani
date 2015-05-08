@@ -66,7 +66,7 @@ echo form_open('users/create', $attributes); ?>
     <br /><br />
 
     <label for="contract"><?php echo lang('users_create_field_contract');?></label>
-    <select name="contract">
+    <select name="contract" id="contract" class="selectized input-xlarge">
     <?php $index = 0;
          foreach ($contracts as $contract) { ?>
         <option value="<?php echo $contract['id'] ?>" <?php if ($index == 0) echo "selected"; ?>><?php echo $contract['name']; ?></option>
@@ -113,7 +113,7 @@ echo form_open('users/create', $attributes); ?>
     if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
     $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);?>
     <label for="timezone"><?php echo lang('users_create_field_timezone');?></label>
-    <select id="timezone" name="timezone" class="selectized input-xlarge" placeholder="Select a timezone...">
+    <select id="timezone" name="timezone" class="selectized input-xlarge">
     <?php foreach ($tzlist as $tz) { ?>
         <option value="<?php echo $tz ?>" <?php if ($tz == $tzdef) echo "selected"; ?>><?php echo $tz; ?></option>
     <?php 
@@ -286,6 +286,7 @@ if ($language_code != 'en') { ?>
         $("#lblLoginAlert").alert();
         
         $('#timezone').selectize();
+        $('#contract').selectize();
         
         $("#cmdGeneratePassword").click(function() {
             $("#password").val(password_generator(<?php echo $this->config->item('password_length');?>));

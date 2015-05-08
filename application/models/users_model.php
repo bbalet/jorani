@@ -115,7 +115,11 @@ class Users_model extends CI_Model {
     public function delete_user($id) {
         $query = $this->db->delete('users', array('id' => $id));
         $this->load->model('entitleddays_model');
+        $this->load->model('leaves_model');
+        $this->load->model('overtime_model');
         $this->entitleddays_model->delete_entitleddays_cascade_user($id);
+        $this->leaves_model->delete_leaves_cascade_user($id);
+        $this->overtime_model->delete_extras_cascade_user($id);
         //Cascade delete line manager role
         $data = array(
             'manager' => NULL
@@ -253,70 +257,18 @@ class Users_model extends CI_Model {
      * Update a user record in the database. the difference with update_users function is that it doesn't rely
      * on values posted by en HTML form. Can be used by a mass importer for example.
      * @param int $id Id of the user
-     * @param string $firstname User firstname or NULL
-     * @param string $lastname User lastname or NULL
-     * @param string $login User login or NULL
-     * @param string $email User e-mail or NULL
-     * @param string $password User password or NULL
-     * @param int $role role mask (2 for user or 8 for manager) or NULL
-     * @param int $manager Id of the manager or NULL
-     * @param int $organization Id of the organization or NULL
-     * @param int $contract Id of the contract or NULL
-     * @param int $position Id of the position or NULL
-     * @param date $datehired Date of hiring or NULL
-     * @param string $identifier Internal identifier or NULL
-     * @param string $language language code or NULL
-     * @param string $timezone timezone or NULL
-     * @param string $ldap_path ldap path or NULL
-     * @param bool $active Is user active or NULL
-     * @param string $country country of the employee or NULL
-     * @param string $calendar calendar path or NULL
+     * @param array $data Associative array of fields to be updated
      * @return int Number of affected rows
      */
-    public function update_user_api($id,
-            $firstname = NULL,
-            $lastname = NULL,
-            $login = NULL,
-            $email = NULL,
-            $password = NULL,
-            $role = NULL,
-            $manager = NULL,
-            $organization = NULL,
-            $contract = NULL,
-            $position = NULL,
-            $datehired = NULL,
-            $identifier = NULL,
-            $language = NULL,
-            $timezone = NULL,
-            $ldap_path = NULL,
-            $active = NULL,
-            $country = NULL,
-            $calendar = NULL) {
+    public function update_user_api($id, $data) {
         if (isset($password)){
              //Hash the clear password using bcrypt
             $this->load->library('bcrypt');
             $hash = $this->bcrypt->hash_password($password);
             $this->db->set('password', $hash);
         }
-        if (isset($firstname)) $this->db->set('firstname', $firstname);
-        if (isset($lastname)) $this->db->set('lastname', $lastname);
-        if (isset($login)) $this->db->set('login', $login);
-        if (isset($email)) $this->db->set('email', $email);
-        if (isset($role)) $this->db->set('role', $role);
-        if (isset($manager)) $this->db->set('manager', $manager);
-        if (isset($organization)) $this->db->set('organization', $organization);
-        if (isset($contract)) $this->db->set('contract', $contract);
-        if (isset($position)) $this->db->set('position', $position);
-        if (isset($datehired)) $this->db->set('datehired', $datehired);
-        if (isset($identifier)) $this->db->set('identifier', $identifier);
-        if (isset($language)) $this->db->set('language', $language);
-        if (isset($timezone)) $this->db->set('timezone', $timezone);
-        if (isset($ldap_path)) $this->db->set('ldap_path', $ldap_path);
-        if (isset($active)) $this->db->set('active', $active);
-        if (isset($country)) $this->db->set('country', $country);
-        if (isset($calendar)) $this->db->set('calendar', $calendar);
         $this->db->where('id', $id);
-        return $this->db->update('users');
+        return $this->db->update('users', $data);
     }
     
     /**
@@ -427,7 +379,7 @@ class Users_model extends CI_Model {
      * @return string generated password
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    private function randomPassword($length) {
+    public function randomPassword($length) {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $password = substr( str_shuffle( $chars ), 0, $length );
         return $password;
@@ -643,7 +595,7 @@ class Users_model extends CI_Model {
     public function set_contract($employee, $contract) {
         $this->db->set('contract', $contract);
         $this->db->where('id', $employee);
-        return $this->db->update('users', $data);
+        return $this->db->update('users');
     }
     
     /**
@@ -655,7 +607,7 @@ class Users_model extends CI_Model {
     public function update_users_cascade_contract($id) {
         $this->db->set('contract', NULL);
         $this->db->where('contract', $id);
-        $result = $this->db->update('users', $data);
+        $result = $this->db->update('users');
         return $result;
     }
     
@@ -669,7 +621,7 @@ class Users_model extends CI_Model {
     public function set_manager($employee, $manager) {
         $this->db->set('manager', $manager);
         $this->db->where('id', $employee);
-        return $this->db->update('users', $data);
+        return $this->db->update('users');
     }
     
     /**

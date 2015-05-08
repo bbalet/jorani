@@ -327,13 +327,13 @@ class AuthorizeController implements AuthorizeControllerInterface
      *
      * @see http://tools.ietf.org/html/rfc6749#section-3.1.2
      */
-    private function validateRedirectUri($inputUri, $registeredUriString)
+    protected function validateRedirectUri($inputUri, $registeredUriString)
     {
         if (!$inputUri || !$registeredUriString) {
             return false; // if either one is missing, assume INVALID
         }
 
-        $registered_uris = explode(' ', $registeredUriString);
+        $registered_uris = preg_split('/\s+/', $registeredUriString);
         foreach ($registered_uris as $registered_uri) {
             if ($this->config['require_exact_redirect_uri']) {
                 // the input uri is validated against the registered uri using exact match

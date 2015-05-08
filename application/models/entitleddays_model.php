@@ -150,7 +150,7 @@ class Entitleddays_model extends CI_Model {
     }
 
     /**
-     * Delete a entitled days attached to a user
+     * Delete entitled days attached to a user
      * @param int $id identifier of an employee
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */

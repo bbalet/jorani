@@ -85,6 +85,7 @@ $lang['users_edit_field_email'] = 'ម៉ែល';
 $lang['users_edit_field_role'] = 'ច្បាប់';
 $lang['users_edit_field_manager'] = 'អ្នកគ្រប់គ្រង';
 $lang['users_edit_field_manager_alt'] = 'No line manager.';
+$lang['users_edit_field_manager_description'] = 'បើសិនអ្នកប្រើមិនមានអ្នកគ្រប់គ្រង​​ (ខ្លួនផ្ទាល់),អ្នកអាចបញ្ជាក់សុំការអនុញ្ញាតិចាកចេញអោយបានត្រឹមត្រូវ';
 $lang['users_edit_button_self'] = 'ខ្លួនឯង';
 $lang['users_edit_button_select'] = 'ជ្រើសរើស';
 $lang['users_edit_field_contract'] = 'ខសន្យា';

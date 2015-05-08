@@ -209,9 +209,12 @@ $route['api/userextras/(:num)'] = 'api/userextras/$1';
 $route['api/userleaves/(:num)'] = 'api/userleaves/$1';
 $route['api/users/(:num)'] = 'api/users/$1';
 $route['api/users'] = 'api/users';
-
+//v0.4.0
 $route['api/monthlypresence/(:num)/(:num)/(:num)'] = 'api/monthlypresence/$1/$2/$3';
-//$route['api/deleteuser/(:num)'] = 'api/deleteuser/$1';
+$route['api/deleteuser/(:num)'] = 'api/deleteuser/$1';
+$route['api/updateuser/(:num)'] = 'api/updateuser/$1';
+$route['api/createuser/(:any)'] = 'api/createuser/$1';
+$route['api/createuser'] = 'api/createuser';
 
 //ICS Feeds
 $route['ics/individual/(:num)'] = 'ics/individual/$1';

@@ -83,7 +83,6 @@ class VEvent extends VObject\Component {
 
     }
 
-
     /**
      * A simple list of validation rules.
      *
@@ -95,6 +94,7 @@ class VEvent extends VObject\Component {
      *   * 1 - Must appear exactly once.
      *   * + - Must appear at least once.
      *   * * - Can appear any number of times.
+     *   * ? - May appear, but not more than once.
      *
      * @var array
      */
@@ -109,7 +109,7 @@ class VEvent extends VObject\Component {
             'CREATED' => '?',
             'DESCRIPTION' => '?',
             'GEO' => '?',
-            'LAST-MODIFICATION' => '?',
+            'LAST-MODIFIED' => '?',
             'LOCATION' => '?',
             'ORGANIZER' => '?',
             'PRIORITY' => '?',

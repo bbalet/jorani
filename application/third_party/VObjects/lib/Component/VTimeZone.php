@@ -41,6 +41,7 @@ class VTimeZone extends VObject\Component {
      *   * 1 - Must appear exactly once.
      *   * + - Must appear at least once.
      *   * * - Can appear any number of times.
+     *   * ? - May appear, but not more than once.
      *
      * @var array
      */
@@ -49,7 +50,7 @@ class VTimeZone extends VObject\Component {
         return array(
             'TZID' => 1,
 
-            'LAST-MODIFICATION' => '?',
+            'LAST-MODIFIED' => '?',
             'TZURL' => '?',
 
             // At least 1 STANDARD or DAYLIGHT must appear, or more. But both

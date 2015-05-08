@@ -58,6 +58,7 @@ class Dayoffs_model extends CI_Model {
     public function get_all_dayoffs($contract) {
         $this->db->where('contract', $contract);
         $query = $this->db->get('dayoffs');
+        $this->db->where("date >= DATE_SUB(NOW(),INTERVAL 2 YEAR"); //Security/performance limit
         $dayoffs =array();
         return $query->result();
     }

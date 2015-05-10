@@ -215,6 +215,7 @@ $route['api/deleteuser/(:num)'] = 'api/deleteuser/$1';
 $route['api/updateuser/(:num)'] = 'api/updateuser/$1';
 $route['api/createuser/(:any)'] = 'api/createuser/$1';
 $route['api/createuser'] = 'api/createuser';
+$route['api/createleave'] = 'api/createleave';
 
 //ICS Feeds
 $route['ics/individual/(:num)'] = 'ics/individual/$1';

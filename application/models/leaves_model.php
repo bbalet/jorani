@@ -324,7 +324,7 @@ class Leaves_model extends CI_Model {
     /**
      * Create a leave request
      * @param int $id Identifier of the employee
-     * @return int id of the leave request into the db
+     * @return int id of the newly acreated leave request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function set_leaves($id) {
@@ -343,6 +343,39 @@ class Leaves_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    /**
+     * Create a leave request (suitable for API use)
+     * @param string $startdate Start date (MySQL format YYYY-MM-DD)
+     * @param string $enddate End date (MySQL format YYYY-MM-DD)
+     * @param int $status Status of leave (see table status or doc)
+     * @param int $employee Identifier of the employee
+     * @param string $cause Optional reason of the leave
+     * @param string $startdatetype Start date type (Morning/Afternoon)
+     * @param string $enddatetype End date type (Morning/Afternoon)
+     * @param int $duration Length of the leave request
+     * @param int $type Type of leave (except compensate, fully customizable by user)
+     * @return int id of the newly acreated leave request into the db
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function add_leaves_api($startdate, $enddate, $status, $employee, $cause,
+            $startdatetype, $enddatetype, $duration, $type) {
+        
+        $data = array(
+            'startdate' => $startdate,
+            'enddate' => $enddate,
+            'status' => $status,
+            'employee' => $employee,
+            'cause' => $cause,
+            'startdatetype' => $startdatetype,
+            'enddatetype' => $enddatetype,
+            'duration' => $duration,
+            'type' => $type
+        );
+        $this->db->insert('leaves', $data);
+        return $this->db->insert_id();
+    }
+    
+    
     /**
      * Update a leave request in the database with the values posted by an HTTP POST
      * @param type $id of the leave request

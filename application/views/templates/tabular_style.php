@@ -50,7 +50,6 @@
 /*Day off*/
 
 .amdayoff {
-background: #000000; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #000000 50%, #ffffff 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#000000), color-stop(50%,#ffffff)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #000000 50%,#ffffff 50%); /* Chrome10+,Safari5.1+ */
@@ -61,7 +60,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 }
 
 .pmdayoff {
-background: #000000; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #ffffff 50%, #000000 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ffffff), color-stop(50%,#000000)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #ffffff 50%,#000000 50%); /* Chrome10+,Safari5.1+ */
@@ -73,7 +71,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 /*Day off and leave*/
 .planneddayoff {
-background: #999; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #999 50%, #000000 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#999), color-stop(50%,#000000)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #999 50%,#000000 50%); /* Chrome10+,Safari5.1+ */
@@ -84,7 +81,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#999', endCol
 }
 
 .requesteddayoff {
-background: #f89406; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #f89406 50%, #000000 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#f89406), color-stop(50%,#000000)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #f89406 50%,#000000 50%); /* Chrome10+,Safari5.1+ */
@@ -95,7 +91,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f89406', end
 }
 
 .accepteddayoff {
-background: #468847; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #468847 50%, #000000 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#468847), color-stop(50%,#000000)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #468847 50%,#000000 50%); /* Chrome10+,Safari5.1+ */
@@ -106,7 +101,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#468847', end
 }
 
 .rejecteddayoff {
-background: #ff0000; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #ff0000 50%, #000000 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ff0000), color-stop(50%,#000000)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #ff0000 50%,#000000 50%); /* Chrome10+,Safari5.1+ */
@@ -117,7 +111,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 }
 
 .dayoffplanned {
-background: #999; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #000000 50%, #999 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#000000), color-stop(50%,#999)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #000000 50%,#999 50%); /* Chrome10+,Safari5.1+ */
@@ -128,7 +121,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 }
 
 .dayoffrequested {
-background: #f89406; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #000000 50%, #f89406 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#000000), color-stop(50%,#f89406)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #000000 50%,#f89406 50%); /* Chrome10+,Safari5.1+ */
@@ -139,7 +131,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 }
 
 .dayoffaccepted {
-background: #468847; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #000000 50%, #468847 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#000000), color-stop(50%,#468847)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #000000 50%,#468847 50%); /* Chrome10+,Safari5.1+ */
@@ -150,7 +141,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 }
 
 .dayoffrejected {
-background: #ff0000; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #000000 50%, #ff0000 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#000000), color-stop(50%,#ff0000)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #000000 50%,#ff0000 50%); /* Chrome10+,Safari5.1+ */
@@ -163,7 +153,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 /*Single day*/
 
 .amplanned {
-background: #999; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #999 50%, #ffffff 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#999), color-stop(50%,#ffffff)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #999 50%,#ffffff 50%); /* Chrome10+,Safari5.1+ */
@@ -174,7 +163,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#999', endCol
 }
 
 .amrequested {
-background: #f89406; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #f89406 50%, #ffffff 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#f89406), color-stop(50%,#ffffff)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #f89406 50%,#ffffff 50%); /* Chrome10+,Safari5.1+ */
@@ -185,7 +173,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f89406', end
 }
 
 .amaccepted {
-background: #468847; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #468847 50%, #ffffff 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#468847), color-stop(50%,#ffffff)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #468847 50%,#ffffff 50%); /* Chrome10+,Safari5.1+ */
@@ -196,7 +183,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#468847', end
 }
 
 .amrejected {
-background: #ff0000; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #ff0000 50%, #ffffff 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ff0000), color-stop(50%,#ffffff)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #ff0000 50%,#ffffff 50%); /* Chrome10+,Safari5.1+ */
@@ -207,7 +193,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 }
 
 .pmplanned {
-background: #999; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #ffffff 50%, #999 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ffffff), color-stop(50%,#999)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #ffffff 50%,#999 50%); /* Chrome10+,Safari5.1+ */
@@ -218,7 +203,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .pmrequested {
-background: #f89406; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #ffffff 50%, #f89406 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ffffff), color-stop(50%,#f89406)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #ffffff 50%,#f89406 50%); /* Chrome10+,Safari5.1+ */
@@ -229,7 +213,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .pmaccepted {
-background: #468847; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #ffffff 50%, #468847 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ffffff), color-stop(50%,#468847)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #ffffff 50%,#468847 50%); /* Chrome10+,Safari5.1+ */
@@ -240,7 +223,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .pmrejected {
-background: #ff0000; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #ffffff 50%, #ff0000 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ffffff), color-stop(50%,#ff0000)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #ffffff 50%,#ff0000 50%); /* Chrome10+,Safari5.1+ */
@@ -252,7 +234,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 /*Overlapping*/
 .plannedrequested {
-background: #999; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #999 50%, #f89406 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#999), color-stop(50%,#f89406)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #999 50%,#f89406 50%); /* Chrome10+,Safari5.1+ */
@@ -263,7 +244,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#999', endCol
 }
 
 .plannedaccepted {
-background: #999; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #999 50%, #468847 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#999), color-stop(50%,#468847)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #999 50%,#468847 50%); /* Chrome10+,Safari5.1+ */
@@ -274,7 +254,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#999', endCol
 }
 
 .plannedrejected {
-background: #999; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #999 50%, #ff0000 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#999), color-stop(50%,#ff0000)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #999 50%,#ff0000 50%); /* Chrome10+,Safari5.1+ */
@@ -285,7 +264,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#999', endCol
 }
 
 .requestedplanned {
-background: #f89406; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #f89406 50%, #999 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#f89406), color-stop(50%,#999)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #f89406 50%,#999 50%); /* Chrome10+,Safari5.1+ */
@@ -296,7 +274,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f89406', end
 }
 
 .requestedaccepted {
-background: #f89406; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #f89406 50%, #468847 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#f89406), color-stop(50%,#468847)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #f89406 50%,#468847 50%); /* Chrome10+,Safari5.1+ */
@@ -307,7 +284,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f89406', end
 }
 
 .requestedrejected {
-background: #f89406; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #f89406 50%, #ff0000 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#f89406), color-stop(50%,#ff0000)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #f89406 50%,#ff0000 50%); /* Chrome10+,Safari5.1+ */
@@ -318,7 +294,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f89406', end
 }
 
 .acceptedplanned {
-background: #468847; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #468847 50%, #999 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#468847), color-stop(50%,#999)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #468847 50%,#999 50%); /* Chrome10+,Safari5.1+ */
@@ -329,7 +304,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#468847', end
 }
 
 .acceptedrequested {
-background: #468847; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #468847 50%, #f89406 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#468847), color-stop(50%,#f89406)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #468847 50%,#f89406 50%); /* Chrome10+,Safari5.1+ */
@@ -340,7 +314,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#468847', end
 }
 
 .acceptedrejected {
-background: #468847; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #468847 50%, #ff0000 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#468847), color-stop(50%,#ff0000)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #468847 50%,#ff0000 50%); /* Chrome10+,Safari5.1+ */
@@ -351,7 +324,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#468847', end
 }
 
 .rejectedplanned {
-background: #ff0000; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #ff0000 50%, #999 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ff0000), color-stop(50%,#999)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #ff0000 50%,#999 50%); /* Chrome10+,Safari5.1+ */
@@ -362,7 +334,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 }
 
 .rejectedrequested {
-background: #ff0000; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #ff0000 50%, #f89406 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ff0000), color-stop(50%,#f89406)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #ff0000 50%,#f89406 50%); /* Chrome10+,Safari5.1+ */
@@ -373,7 +344,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 }
 
 .rejectedaccepted {
-background: #ff0000; /* Old browsers */
 background: -moz-linear-gradient(-45deg, #ff0000 50%, #468847 50%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#ff0000), color-stop(50%,#468847)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(-45deg, #ff0000 50%,#468847 50%); /* Chrome10+,Safari5.1+ */
@@ -382,5 +352,4 @@ background: -ms-linear-gradient(-45deg, #ff0000 50%,#468847 50%); /* IE10+ */
 background: linear-gradient(135deg, #ff0000 50%,#468847 50%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#468847',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
-
 </style>

@@ -158,7 +158,6 @@ class Overtime_model extends CI_Model {
         $ids = $this->delegations_model->get_delegates_list($user_id);
         $this->db->select('overtime.id as id, users.*, overtime.*');
         $this->db->join('users', 'users.id = overtime.employee');
-        $this->db->where('users.manager', $user_id);
         if (count($ids) > 0) {
             array_push($ids, $user_id);
             $this->db->where_in('users.manager', $ids);

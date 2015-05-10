@@ -426,12 +426,21 @@ class Users_model extends CI_Model {
                     $is_hr = false;
                 }
                 
+                //Determine if the connected user is a manager or if he has any delegation
+                $isManager = FALSE;
+                if (count($this->get_employees_manager($row->id)) > 0) {
+                    $isManager = TRUE;
+                } else {
+                    $this->load->model('delegations_model');
+                    if ($this->delegations_model->HasDelegation($row->id)) $isManager = TRUE;
+                }
+                
                 $newdata = array(
                     'login' => $row->login,
                     'id' => $row->id,
                     'firstname' => $row->firstname,
                     'lastname' => $row->lastname,
-                    'is_manager' => count($this->get_employees_manager($row->id)) > 0 ? TRUE : FALSE,
+                    'is_manager' =>$isManager,
                     'is_admin' => $is_admin,
                     'is_hr' => $is_hr,
                     'manager' => $row->manager,
@@ -476,13 +485,22 @@ class Users_model extends CI_Model {
             } else {
                 $is_hr = false;
             }
-
+            
+            //Determine if the connected user is a manager or if he has any delegation
+            $isManager = FALSE;
+            if (count($this->get_employees_manager($row->id)) > 0) {
+                $isManager = TRUE;
+            } else {
+                $this->load->model('delegations_model');
+                if ($this->delegations_model->HasDelegation($row->id)) $isManager = TRUE;
+            }
+            
             $newdata = array(
                 'login' => $row->login,
                 'id' => $row->id,
                 'firstname' => $row->firstname,
                 'lastname' => $row->lastname,
-                'is_manager' => count($this->get_employees_manager($row->id)) > 0 ? TRUE : FALSE,
+                'is_manager' => $isManager,
                 'is_admin' => $is_admin,
                 'is_hr' => $is_hr,
                 'manager' => $row->manager,

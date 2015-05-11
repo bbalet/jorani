@@ -73,3 +73,4 @@ $lang['day off'] = 'dias de descanso';
 $lang['leave'] = 'permiso';
 
 $lang['OK'] = 'OK';
+$lang['copied'] = 'copiado';

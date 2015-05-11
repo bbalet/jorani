@@ -20,6 +20,8 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] Add a field explaining why a request is rejected. Validation E-mail will redirect to a form is this option is activated ?
 - [ ] Anticipated leaves (entitled days of next yearly period). Today we can deal with it manually because LMS doesn't forbid to 
 request a leave even if your credit is negative and because leave balance reports can be executed with a past/future date.
+- [ ] Setup assistant.
+- [ ] Mass importer of users (from CSV, LDAP ?).
 
 ## Post v1.0
 

@@ -20,6 +20,7 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('calendar', $language);
 $this->lang->load('global', $language);?>
 
+<link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css">
 <h1><?php echo lang('calendar_organization_title');?><?php echo $help;?></h1>
 
 <div class="row-fluid">
@@ -96,8 +97,9 @@ $this->lang->load('global', $language);?>
                 <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
                     value="" />
                  <button id="cmdCopy" class="btn" data-clipboard-text="">
-                     <i class="icon-magnet"></i>
+                     <i class="fa fa-clipboard"></i>
                  </button>
+                <a href="#" id="tipCopied" data-toggle="tooltip" title="copied" data-placement="right" data-container="#cmdCopy"></a>
         </div>
     </div>
     <div class="modal-footer">
@@ -241,6 +243,9 @@ $this->lang->load('global', $language);?>
         //Copy/Paste ICS Feed
         var client = new ZeroClipboard($("#cmdCopy"));
         $('#lnkICS').click(function () {
+            if (!('ZeroClipboard' in window)) {
+                alert('e');
+            }
             if (entity == -1) {
                 var UrlICS = '<?php echo base_url(); ?>ics/entity/<?php echo $user_id; ?>/0/' + $('#chkIncludeChildren').prop('checked');
             } else {
@@ -249,6 +254,10 @@ $this->lang->load('global', $language);?>
             $('#txtIcsUrl').val(UrlICS);
             ZeroClipboard.setData( "text/plain", UrlICS);
             $("#frmLinkICS").modal('show');
+        });
+        client.on( "aftercopy", function( event ) {
+            $('#tipCopied').tooltip('show');
+            setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
         });
     });
 </script>

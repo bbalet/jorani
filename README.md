@@ -48,14 +48,6 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Check your installation with the <code>requirements.php</code> page at the root of your installation (e.g. http://localhost/lms/requirements.php).
 * The default user is *bbalet* and password is *bbalet*.
 
-## What's next ?
-
-* More HR management features (time, tasks, employee record, etc.).
-* History of changes
-* Purge data.
-* Mass importer of users.
-* Setup assistant.
-
 ## Contribute
 
 * Suggest ideas, declare bugs with Github's issue tracking system or Google group.

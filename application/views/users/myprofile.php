@@ -20,6 +20,7 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('users', $language);
 $this->lang->load('global', $language);?>
 
+<link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css">
 <h1><?php echo lang('users_myprofile_title');?></h1>
 
 <div class="row-fluid">
@@ -89,8 +90,9 @@ echo $date->format(lang('global_date_format'));
                 <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
                     value="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>" />
                  <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>">
-                     <i class="icon-magnet"></i>
+                     <i class="fa fa-clipboard"></i>
                  </button>
+                <a href="#" id="tipCopied" data-toggle="tooltip" title="copied" data-placement="right" data-container="#cmdCopy"></a>
         </div>
     </div>
     <div class="modal-footer">
@@ -105,6 +107,10 @@ $(function() {
     var client = new ZeroClipboard($("#cmdCopy"));
     $('#lnkICS').click(function () {
         $("#frmLinkICS").modal('show');
+    });
+    client.on( "aftercopy", function( event ) {
+        $('#tipCopied').tooltip('show');
+        setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });
 });
 </script>

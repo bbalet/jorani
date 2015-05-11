@@ -71,4 +71,6 @@ $lang['department'] = 'Abteilung';
 $lang['contract'] = 'Vertrag';
 $lang['day off'] = 'freier Tag';
 $lang['leave'] = 'Urlaub';
+
 $lang['OK'] = 'OK';
+$lang['copied'] = 'kopiert';

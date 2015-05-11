@@ -64,12 +64,10 @@ class Ics extends CI_Controller {
             if (empty($result)) {
                 echo "";
             } else {
-                $tzold = date_default_timezone_get();
-                date_default_timezone_set($tzdef);
                 $vcalendar = new VObject\Component\VCalendar();
                 foreach ($result as $event) {
-                    $startdate = new \DateTime($event->date);
-                    $enddate = new \DateTime($event->date);
+                    $startdate = new \DateTime($event->date, new \DateTimeZone($tzdef));
+                    $enddate = new \DateTime($event->date, new \DateTimeZone($tzdef));
                     switch ($event->type) {
                         case 1: 
                             $startdate->setTime(0, 0);
@@ -92,7 +90,6 @@ class Ics extends CI_Controller {
                     ]);    
                 }
                 echo $vcalendar->serialize();
-                date_default_timezone_set($tzold);
             }
         }
     }
@@ -122,13 +119,11 @@ class Ics extends CI_Controller {
                     if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
                 }
                 $this->lang->load('global', $this->polyglot->code2language($employee['language']));
-                $tzold = date_default_timezone_get();
-                date_default_timezone_set($tzdef);
                 
                 $vcalendar = new VObject\Component\VCalendar();
                 foreach ($result as $event) {
-                    $startdate = new \DateTime($event['startdate']);
-                    $enddate = new \DateTime($event['enddate']);
+                    $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
+                    $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
                     if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
                     if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
                     if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
@@ -144,7 +139,6 @@ class Ics extends CI_Controller {
                     ]);    
                 }
                 echo $vcalendar->serialize();
-                date_default_timezone_set($tzold);
             }
         }
     }
@@ -176,14 +170,12 @@ class Ics extends CI_Controller {
                     if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
                 }
                 $this->lang->load('global', $this->polyglot->code2language($employee['language']));
-                $tzold = date_default_timezone_get();
-                date_default_timezone_set($tzdef);
                 
                 $vcalendar = new VObject\Component\VCalendar();
                 foreach ($result as $event) {
-                    $startdate = new \DateTime($event['startdate']);
-                    $enddate = new \DateTime($event['enddate']);
-                    if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
+                    $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
+                    $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
+                    if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 1);
                     if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
                     if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
                     if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
@@ -198,7 +190,6 @@ class Ics extends CI_Controller {
                     ]);    
                 }
                 echo $vcalendar->serialize();
-                date_default_timezone_set($tzold);
             }
         }
     }
@@ -224,17 +215,14 @@ class Ics extends CI_Controller {
             if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
         }
         $this->lang->load('global', $this->polyglot->code2language($employee['language']));
-        $tzold = date_default_timezone_get();
-        date_default_timezone_set($tzdef);
         
         $vcalendar = new VObject\Component\VCalendar();
-
         $vcalendar->add('VEVENT', [
             'SUMMARY' => lang('leave'),
             'CATEGORIES' => lang('leave'),
             'DESCRIPTION' => $leave['cause'],
-            'DTSTART' => new \DateTime($leave['startdate']),
-            'DTEND' => new \DateTime($leave['enddate']),
+            'DTSTART' => new \DateTime($leave['startdate'], new \DateTimeZone($tzdef)),
+            'DTEND' => new \DateTime($leave['enddate'], new \DateTimeZone($tzdef)),
             'URL' => base_url() . "leaves/" . $id,
         ]);
         echo $vcalendar->serialize();

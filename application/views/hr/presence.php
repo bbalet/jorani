@@ -22,6 +22,7 @@ $this->lang->load('calendar', $language);
 $this->lang->load('datatable', $language);
 $this->lang->load('global', $language);?>
 
+<link href="<?php echo base_url();?>assets/css/tabular.css" rel="stylesheet">
 <div class="row-fluid">
     <div class="span12">
 
@@ -72,7 +73,9 @@ $this->lang->load('global', $language);?>
                 }
             }?>
         </select><br />
+        <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
         <button id="cmdExecute" class="btn btn-primary"><?php echo lang('hr_presence_button_execute');?></button>
+        <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
      </div>
 </div>
 
@@ -262,34 +265,35 @@ $(function () {
     
     //Transform the HTML table in a fancy datatable
     var oTable = $('#leaves').dataTable({
-                    "order": [[ 1, "asc" ]],
-                    "oLanguage": {
-                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
-                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
-                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
-                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
-                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
-                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
-                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
-                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
-                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
-                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
-                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
-                    "oPaginate": {
-                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
-                        "sLast":     "<?php echo lang('datatable_sLast');?>",
-                        "sNext":     "<?php echo lang('datatable_sNext');?>",
-                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
-                    },
-                    "oAria": {
-                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
-                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
-                    }
+                "order": [[ 1, "asc" ]],
+                "oLanguage": {
+                "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                "oPaginate": {
+                    "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                    "sLast":     "<?php echo lang('datatable_sLast');?>",
+                    "sNext":     "<?php echo lang('datatable_sNext');?>",
+                    "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                },
+                "oAria": {
+                    "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                    "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
                 }
-            });
+            }
+        });
         
         //Load a tiny calendar
         $('#calendar').fullCalendar({
+            timeFormat: ' ', /*Trick to remove the start time of the event*/
             height: 300,
             defaultDate: moment('<?php echo $default_date;?>'),
             header: {
@@ -310,6 +314,23 @@ $(function () {
         $('#cmdExecute').click(function() {
             var month = $('#cboMonth').val();
             var year = $('#cboYear').val();
+            var url = '<?php echo base_url();?>hr/presence/' + employee + '/' + month+ '/' + year;
+            document.location.href = url;
+        });
+<?php $datePrev = date_create($year . '-' . $month . '-01');
+$dateNext = clone $datePrev;
+date_add($dateNext, date_interval_create_from_date_string('1 month'));
+date_sub($datePrev, date_interval_create_from_date_string('1 month'));?>
+        //Previous/Next
+        $('#cmdPrevious').click(function() {
+            month = <?php echo $datePrev->format('m'); ?>;
+            year = <?php echo $datePrev->format('Y'); ?>;
+            var url = '<?php echo base_url();?>hr/presence/' + employee + '/' + month+ '/' + year;
+            document.location.href = url;
+        });
+        $('#cmdNext').click(function() {
+            month = <?php echo $dateNext->format('m'); ?>;
+            year = <?php echo $dateNext->format('Y'); ?>;
             var url = '<?php echo base_url();?>hr/presence/' + employee + '/' + month+ '/' + year;
             document.location.href = url;
         });

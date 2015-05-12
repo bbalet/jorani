@@ -20,6 +20,7 @@ CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('calendar', $language);
 $this->lang->load('global', $language);?>
 
+<link href="<?php echo base_url();?>assets/css/tabular.css" rel="stylesheet">
 <h1><?php echo lang('calendar_tabular_title');?> &nbsp;<?php echo $help;?></h1>
 
 <div class="row-fluid">
@@ -59,7 +60,9 @@ $this->lang->load('global', $language);?>
         </label>
     </div>
     <div class="span5">
-        <button id="cmdExecute" class="btn btn-primary"><?php echo lang('calendar_tabular_button_execute');?></button>
+        <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
+        <button id="cmdExecute" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('calendar_tabular_button_execute');?></button>
+        <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
     </div>
 </div>
 
@@ -249,7 +252,24 @@ $this->lang->load('global', $language);?>
         $('#txtEntity').val(text);
         $("#frmSelectEntity").modal('hide');
     }
-
+    
+    function includeChildren() {
+        if ($('#chkIncludeChildren').prop('checked') == true) {
+            return 'true';
+        } else {
+            return 'false';
+        }
+    }
+    
+    //Execute the report
+    //Target : execution in the page or export to Excel
+    function executeReport(month, year, children, target) {
+        if (entity != -1) {
+            url = '<?php echo base_url();?>calendar/' + target + '/' + entity + '/' + month+ '/' + year+ '/' + children;
+            document.location.href = url;
+        }
+    }
+    
     $(document).ready(function() {
         //Select radio button depending on URL
         if (children == '1') {
@@ -264,35 +284,42 @@ $this->lang->load('global', $language);?>
             $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
         });
 
+        //Execute the report
         $('#cmdExecute').click(function() {
-            if (entity != -1) {
-                if ($('#chkIncludeChildren').prop('checked') == true) {
-                    children = 'true';
-                } else {
-                    children = 'false';
-                }
-                month = $('#cboMonth').val();
-                year = $('#cboYear').val();
-                url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children;
-                document.location.href = url;
-            }
+            month = $('#cboMonth').val();
+            year = $('#cboYear').val();
+            children = includeChildren();
+            executeReport(month, year, children, 'tabular');
         });
 
         //Export the report into Excel
         $("#cmdExport").click(function() {
-            if (entity != -1) {
-                if ($('#chkIncludeChildren').prop('checked') == true) {
-                    children = 'true';
-                } else {
-                    children = 'false';
-                }
-                month = $('#cboMonth').val();
-                year = $('#cboYear').val();
-            url = '<?php echo base_url(); ?>calendar/tabular/export/' + entity + '/'+ month + '/'+ year + '/'+ children;
-            document.location.href  = url;
-            }
+            month = $('#cboMonth').val();
+            year = $('#cboYear').val();
+            children = includeChildren();
+            executeReport(month, year, children, 'tabular/export');
         });
 
+<?php $datePrev = date_create($year . '-' . $month . '-01');
+$dateNext = clone $datePrev;
+date_add($dateNext, date_interval_create_from_date_string('1 month'));
+date_sub($datePrev, date_interval_create_from_date_string('1 month'));?>
+        //Previous/Next
+        $('#cmdPrevious').click(function() {
+            month = <?php echo $datePrev->format('m'); ?>;
+            year = <?php echo $datePrev->format('Y'); ?>;
+            children = includeChildren();
+            url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children;
+            document.location.href = url;
+        });
+        $('#cmdNext').click(function() {
+            month = <?php echo $dateNext->format('m'); ?>;
+            year = <?php echo $dateNext->format('Y'); ?>;
+            children = includeChildren();
+            url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children;
+            document.location.href = url;
+        });
+        
         //Load alert forms
         $("#frmSelectEntity").alert();
         //Prevent to load always the same content (refreshed each time)

@@ -277,7 +277,6 @@ class Hr extends CI_Controller {
         $data['leaves'] = $this->leaves_model->get_accepted_leaves_in_dates($id, $start, $end);
         
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/tabular_style', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/presence', $data);
         $this->load->view('templates/footer');

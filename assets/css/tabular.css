@@ -1,4 +1,3 @@
-<?php
 /*
  * This file is part of Jorani.
  *
@@ -14,9 +13,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- */?>
+ */
 
-<style>
 .allplanned {
     background-color: #999;
     color: #ffffff;
@@ -352,4 +350,3 @@ background: -ms-linear-gradient(-45deg, #ff0000 50%,#468847 50%); /* IE10+ */
 background: linear-gradient(135deg, #ff0000 50%,#468847 50%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#468847',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
-</style>

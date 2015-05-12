@@ -175,12 +175,18 @@ $this->lang->load('global', $language);?>
           
           //Detect overlapping cases
           switch ($class) {
-                    case "plannedplanned":
-                    case "requestedrequested":
-                    case "acceptedaccepted":
-                    case "rejectedrejected":
-                        $overlapping = TRUE;
-              break;
+            case "plannedplanned":
+                if ($day->display == 4) {$overlapping = TRUE;} else {$class = "allplanned";}
+                break;
+            case "requestedrequested":
+                if ($day->display == 4) {$overlapping = TRUE;} else {$class = "allrequested";}
+                break;
+            case "acceptedaccepted":
+                if ($day->display == 4) {$overlapping = TRUE;} else {$class = "allaccepted";}
+                break;
+            case "rejectedrejected":
+                if ($day->display == 4) {$overlapping = TRUE;} else {$class = "allrejected";}
+                break;
           }
             if ($overlapping) {
                 echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';

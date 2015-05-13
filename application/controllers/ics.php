@@ -82,12 +82,12 @@ class Ics extends CI_Controller {
                             $enddate->setTime(23, 59);
                             break;
                     }                    
-                    $vcalendar->add('VEVENT', [
+                    $vcalendar->add('VEVENT', Array(
                         'SUMMARY' => $event->title,
                         'CATEGORIES' => lang('day off'),
                         'DTSTART' => $startdate,
                         'DTEND' => $enddate
-                    ]);    
+                    ));    
                 }
                 echo $vcalendar->serialize();
             }
@@ -129,14 +129,14 @@ class Ics extends CI_Controller {
                     if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
                     if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
                     
-                    $vcalendar->add('VEVENT', [
+                    $vcalendar->add('VEVENT', Array(
                         'SUMMARY' => lang('leave'),
                         'CATEGORIES' => lang('leave'),
                         'DTSTART' => $startdate,
                         'DTEND' => $enddate,
                         'DESCRIPTION' => $event['cause'],
                         'URL' => base_url() . "leaves/" . $event['id'],
-                    ]);    
+                    ));    
                 }
                 echo $vcalendar->serialize();
             }
@@ -180,14 +180,14 @@ class Ics extends CI_Controller {
                     if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
                     if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
                     
-                    $vcalendar->add('VEVENT', [
+                    $vcalendar->add('VEVENT', Array(
                         'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
                         'CATEGORIES' => lang('leave'),
                         'DTSTART' => $startdate,
                         'DTEND' => $enddate,
                         'DESCRIPTION' => $event['type'] . ($event['cause']!=''?(' / ' . $event['cause']):''),
                         'URL' => base_url() . "leaves/" . $event['id'],
-                    ]);    
+                    ));    
                 }
                 echo $vcalendar->serialize();
             }
@@ -217,14 +217,14 @@ class Ics extends CI_Controller {
         $this->lang->load('global', $this->polyglot->code2language($employee['language']));
         
         $vcalendar = new VObject\Component\VCalendar();
-        $vcalendar->add('VEVENT', [
+        $vcalendar->add('VEVENT', Array(
             'SUMMARY' => lang('leave'),
             'CATEGORIES' => lang('leave'),
             'DESCRIPTION' => $leave['cause'],
             'DTSTART' => new \DateTime($leave['startdate'], new \DateTimeZone($tzdef)),
             'DTEND' => new \DateTime($leave['enddate'], new \DateTimeZone($tzdef)),
             'URL' => base_url() . "leaves/" . $id,
-        ]);
+        ));
         echo $vcalendar->serialize();
     }
 }

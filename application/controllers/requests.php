@@ -61,6 +61,7 @@ class Requests extends CI_Controller {
         for ($i = 0; $i < count($data['requests']); ++$i) {
             $data['requests'][$i]['status_label'] = $this->status_model->get_label($data['requests'][$i]['status']);
         }
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('requests/index', $data);

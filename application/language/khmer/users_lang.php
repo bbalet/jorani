@@ -18,7 +18,6 @@
 
 //Index view
 $lang['users_index_title'] = 'បញ្ជីនៃអ្នកប្រើប្រាស់';
-$lang['users_index_thead_tip_view'] = 'មើលពត៏មានលំអិតនៃនាក់ប្រើប្រាស់';
 $lang['users_index_thead_tip_edit'] = 'កែប្រែឈ្មោះអ្នកប្រើប្រាស់';
 $lang['users_index_thead_tip_delete'] = 'លុប';
 $lang['users_index_thead_tip_reset'] = 'ផ្លាស់ប្តូរពាក្យសម្ងាត់';
@@ -44,25 +43,6 @@ $lang['users_index_popup_field_filename'] = 'ឈ្មោះឯកសារ';
 $lang['users_index_popup_import_button_cancel'] = 'បោះបង់';
 
 $lang['employees_index_title'] = 'បញ្ជីនៃបុគ្គលិក';
-
-$lang['users_view_title'] = 'ព័ត៌មានលម្អិតរបស់អ្នកប្រើប្រាស់ #';
-$lang['users_view_html_title'] = 'ព័ត៌មានលម្អិតរបស់អ្នកប្រើប្រាស់ម្នាក់';
-$lang['users_view_field_firstname'] = 'នាមត្រកូលអ្នកប្រើប្រាស់';
-$lang['users_view_field_lastname'] = 'ឈ្មោះអ្នកប្រើប្រាស់';
-$lang['users_view_field_login'] = 'ឈ្មោះ';
-$lang['users_view_field_email'] = 'ម៉ែល';
-$lang['users_view_field_role'] = 'ច្បាប់';
-$lang['users_view_field_manager'] = 'អ្នកគ្រប់គ្រង';
-$lang['users_view_field_contract'] = 'ខសន្យា';
-$lang['users_view_field_position'] = 'តំណែង';
-$lang['users_view_field_entity'] = 'អង្គភាព';
-$lang['users_view_field_hired'] = 'កាលបរិច្ឆេទជួល / បានចាប់ផ្តើ';
-$lang['users_view_field_timezone'] = 'Timezone';
-$lang['users_view_field_ldap_path'] = 'LDAP Path';
-$lang['users_view_field_identifier'] = 'អ្នកកំណត់អត្តសញ្ញាណ';
-$lang['users_view_field_language'] = 'ភាសា';
-$lang['users_view_button_edit'] = 'កែសម្រួល';
-$lang['users_view_button_back'] = 'ត្រឡប់ទៅបញ្ជីឈ្មោះ';
 
 $lang['users_myprofile_title'] = 'My personal information';
 $lang['users_myprofile_html_title'] = 'My personal information';

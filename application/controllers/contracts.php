@@ -56,25 +56,6 @@ class Contracts extends CI_Controller {
         $this->load->view('contracts/index', $data);
         $this->load->view('templates/footer');
     }
-
-    /**
-     * Display details of a given contract
-     * @param int $id contract identifier
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function view($id) {
-        $this->auth->check_is_granted('view_contract');
-        $data = getUserContext($this);
-        $data['contract'] = $this->contracts_model->get_contracts($id);
-        if (empty($data['contract'])) {
-            show_404();
-        }        
-        $data['title'] = lang('contract_view_title');
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('contracts/view', $data);
-        $this->load->view('templates/footer');
-    }
     
     /**
      * Display a form that allows updating a given contract

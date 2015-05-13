@@ -22,7 +22,6 @@ $lang['contract_index_thead_name'] = 'Name';
 $lang['contract_index_thead_start'] = 'Start period';
 $lang['contract_index_thead_end'] = 'End period';
 $lang['contract_index_tip_delete'] = 'delete contract';
-$lang['contract_index_tip_view'] = 'View contract';
 $lang['contract_index_tip_edit'] = 'edit contract';
 $lang['contract_index_tip_entitled'] = 'entitled days';
 $lang['contract_index_tip_dayoffs'] = 'day offs and weekends';
@@ -37,16 +36,6 @@ $lang['contract_index_popup_delete_button_no'] = 'No';
 $lang['contract_index_popup_entitled_title'] = 'Entitled days';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Cancel';
 $lang['contract_index_popup_entitled_button_close'] = 'Close';
-
-$lang['contract_view_title'] = 'Contract details';
-$lang['contract_view_description'] = 'Details of contract #';
-$lang['contract_view_field_name'] = 'Name';
-$lang['contract_view_field_start_month'] = 'Month / Start';
-$lang['contract_view_field_start_day'] = 'Day / Start';
-$lang['contract_view_field_end_month'] = 'Month / End';
-$lang['contract_view_field_end_day'] = 'Day / End';
-$lang['contract_view_button_edit'] = 'Edit';
-$lang['contract_view_button_cancel'] = 'Back to list';
 
 $lang['contract_edit_title'] = 'Edit a contract';
 $lang['contract_edit_description'] = 'Edit contract #';

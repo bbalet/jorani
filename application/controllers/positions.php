@@ -43,6 +43,7 @@ class Positions extends CI_Controller {
         $data['positions'] = $this->positions_model->get_positions();
         $data['title'] = lang('positions_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_positions_list');
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('positions/index', $data);

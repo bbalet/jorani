@@ -24,19 +24,7 @@ $this->lang->load('datatable', $language);?>
 <div class="row-fluid">
     <div class="span12">
 
-<?php if($this->session->flashdata('msg')){ ?>
-<div class="alert fade in" id="flashbox">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <?php echo $this->session->flashdata('msg'); ?>
-</div>
- 
-<script type="text/javascript">
-//Flash message
-$(document).ready(function() {
-    $("#flashbox").alert();
-});
-</script>
-<?php } ?>
+<?php echo $flash_partial_view;?>
         
 <h2><?php echo lang('hr_overtime_html_title');?><?php echo $user_id; ?>&nbsp;<span class="muted">(<?php echo $name ?>)</span></h2>
 

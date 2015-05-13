@@ -17,7 +17,6 @@
  */
 
 $lang['users_index_title'] = 'Liste der User';
-$lang['users_index_thead_tip_view'] = 'Userdetails anzeigen';
 $lang['users_index_thead_tip_edit'] = 'Userdetails bearbeiten';
 $lang['users_index_thead_tip_delete'] = 'User löschen';
 $lang['users_index_thead_tip_reset'] = 'Passwort zurücksetzen';
@@ -43,25 +42,6 @@ $lang['users_index_popup_field_filename'] = 'Dateiname';
 $lang['users_index_popup_import_button_cancel'] = 'Abbrechen';
 
 $lang['employees_index_title'] = 'Liste der Angestellten';
-
-$lang['users_view_title'] = 'Details von User #';
-$lang['users_view_html_title'] = 'Details eines Users';
-$lang['users_view_field_firstname'] = 'Vorname';
-$lang['users_view_field_lastname'] = 'Nachname';
-$lang['users_view_field_login'] = 'Login';
-$lang['users_view_field_email'] = 'E-Mail';
-$lang['users_view_field_role'] = 'Rolle';
-$lang['users_view_field_manager'] = 'Vorgesetzter';
-$lang['users_view_field_contract'] = 'Vertrag';
-$lang['users_view_field_position'] = 'Position';
-$lang['users_view_field_entity'] = 'Gruppe';
-$lang['users_view_field_hired'] = 'Anmeldedatum';
-$lang['users_view_field_timezone'] = 'Zeitzone';
-$lang['users_view_field_ldap_path'] = 'LDAP Pfad';
-$lang['users_view_field_identifier'] = 'Interner Identifikator';
-$lang['users_view_field_language'] = 'Sprache';
-$lang['users_view_button_edit'] = 'Bearbeiten';
-$lang['users_view_button_back'] = 'Zurück zur Liste';
 
 $lang['users_myprofile_title'] = 'Meine persönlichen Informationen';
 $lang['users_myprofile_html_title'] = 'Meine persönlichen Informationen';

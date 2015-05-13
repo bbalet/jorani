@@ -22,7 +22,6 @@ $lang['contract_index_thead_name'] = 'ឈ្មោះ';
 $lang['contract_index_thead_start'] = 'ពេលចាប់ផ្តើម';
 $lang['contract_index_thead_end'] = 'ពេលបញ្ចប់';
 $lang['contract_index_tip_delete'] = 'លុបកិច្ចសន្យា';
-$lang['contract_index_tip_view'] = 'មើលកិច្ចសន្យា';
 $lang['contract_index_tip_edit'] = 'កែកិច្ចសន្យា';
 $lang['contract_index_tip_entitled'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
 $lang['contract_index_tip_dayoffs'] = 'ថ្ងៃឈប់សម្រាកនិងថ្ងៃចុងសបា្ដហ៏';
@@ -37,16 +36,6 @@ $lang['contract_index_popup_delete_button_no'] = 'មិនយល់ព្រម
 $lang['contract_index_popup_entitled_title'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
 $lang['contract_index_popup_entitled_button_cancel'] = 'បោះបង់';
 $lang['contract_index_popup_entitled_button_close'] = 'បិទ';
-
-$lang['contract_view_title'] = 'រៀបរាប់កិច្ចសន្យា';
-$lang['contract_view_description'] = 'ការរៀបរាប់នៃកិច្ចសន្យា#';
-$lang['contract_view_field_name'] = 'ឈ្មោះ';
-$lang['contract_view_field_start_month'] = 'ខែ/ចាប់ផ្តើម';
-$lang['contract_view_field_start_day'] = 'ថ្ងៃ/ចាប់ផ្តើម';
-$lang['contract_view_field_end_month'] = 'ខែ/បញ្ចប់';
-$lang['contract_view_field_end_day'] = 'ថ្ងៃ/បញ្ចប់';
-$lang['contract_view_button_edit'] = 'កែសម្រួល';
-$lang['contract_view_button_cancel'] = 'ត្រឡប់ទៅបញ្ជីឈ្មោះ';
 
 $lang['contract_edit_title'] = 'កែប្រែកិច្ចសន្យា';
 $lang['contract_edit_description'] = 'កែប្រែកិច្ចសន្យា#';

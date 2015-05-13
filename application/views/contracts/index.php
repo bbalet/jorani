@@ -57,8 +57,6 @@ $(document).ready(function() {
             <div class="pull-right">
                 <a href="#" class="confirm-delete" data-id="<?php echo $contracts_item['id'];?>" title="<?php echo lang('contract_index_tip_delete');?>"><i class="icon-trash"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>" title="<?php echo lang('contract_index_tip_view');?>"><i class="icon-eye-open"></i></a>
-                &nbsp;
                 <a href="<?php echo base_url();?>contracts/edit/<?php echo $contracts_item['id'] ?>" title="<?php echo lang('contract_index_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;
                 <a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contracts_item['id'] ?>" title="<?php echo lang('contract_index_tip_entitled');?>"><i class="icon-edit"></i></a>

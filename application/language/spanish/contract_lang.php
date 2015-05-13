@@ -23,12 +23,12 @@ $lang['contract_index_thead_name'] = 'Nombre';
 $lang['contract_index_thead_start'] = 'Inicio de período';
 $lang['contract_index_thead_end'] = 'Fin de período';
 $lang['contract_index_tip_delete'] = 'suprimir contrato';
-$lang['contract_index_tip_view'] = 'ver contrato';
 $lang['contract_index_tip_edit'] = 'modificar contrato';
 $lang['contract_index_tip_entitled'] = 'Autorizar días';
 $lang['contract_index_tip_dayoffs'] = 'Días libres y fines de semana.';
 $lang['contract_index_button_export'] = 'Exporta a listado';
 $lang['contract_index_button_create'] = 'Crear contrato';
+
 $lang['contract_index_popup_delete_title'] = 'Suprimir contrato';
 $lang['contract_index_popup_delete_description'] = 'Estas seguro de borrar el contrato, la acción no se puede desacer.';
 $lang['contract_index_popup_delete_confirm'] = '¿Quieres continuar?';
@@ -37,16 +37,6 @@ $lang['contract_index_popup_delete_button_no'] = 'No';
 $lang['contract_index_popup_entitled_title'] = 'Autorizar días';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Cancelar';
 $lang['contract_index_popup_entitled_button_close'] = 'Cerrar';
-
-$lang['contract_view_title'] = 'Detalles del contrato';
-$lang['contract_view_description'] = 'Detalles del contrato';
-$lang['contract_view_field_name'] = 'Nombre';
-$lang['contract_view_field_start_month'] = 'Mes / Inicio';
-$lang['contract_view_field_start_day'] = 'Día / Inicio';
-$lang['contract_view_field_end_month'] = 'Mes / Fin';
-$lang['contract_view_field_end_day'] = 'Día / Fin';
-$lang['contract_view_button_edit'] = 'Modificar';
-$lang['contract_view_button_cancel'] = 'Vuelta a la lista';
 
 $lang['contract_edit_title'] = 'Modificar contrato';
 $lang['contract_edit_description'] = 'Modificar contrato n°';

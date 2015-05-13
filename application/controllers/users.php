@@ -44,6 +44,7 @@ class Users extends CI_Controller {
         $data['users'] = $this->users_model->get_users();
         $data['title'] = lang('users_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_users');
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/index', $data);
@@ -61,35 +62,6 @@ class Users extends CI_Controller {
         $data['employees'] = $this->users_model->get_all_employees();
         $data['title'] = lang('employees_index_title');
         $this->load->view('users/employees', $data);
-    }
-    
-    /**
-     * Display details of a given user
-     * @param int $id User identifier
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function view($id) {
-        $this->auth->check_is_granted('view_user');
-        expires_now();
-        $data = getUserContext($this);
-        $data['user'] = $this->users_model->get_users($id);
-        if (empty($data['user'])) {
-            show_404();
-        }
-        $data['title'] = lang('users_view_html_title');
-        $this->load->model('roles_model');
-        $this->load->model('positions_model');
-        $this->load->model('contracts_model');
-        $this->load->model('organization_model');
-        $data['roles'] = $this->roles_model->get_roles();
-        $data['manager_label'] = $this->users_model->get_label($data['user']['manager']);
-        $data['contract_label'] = $this->contracts_model->get_label($data['user']['contract']);
-        $data['position_label'] = $this->positions_model->get_label($data['user']['position']);
-        $data['organization_label'] = $this->organization_model->get_label($data['user']['organization']);
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('users/view', $data);
-        $this->load->view('templates/footer');
     }
 
     /**

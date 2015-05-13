@@ -40,14 +40,12 @@
 
 //Admin : user management
 $route['users/myprofile'] = 'users/myprofile';
-$route['users/pdf_myprofile'] = 'users/pdf_myprofile';
 $route['users/employees'] = 'users/employees';
 $route['users/export'] = 'users/export';
 $route['users/reset/(:num)'] = 'users/reset/$1';
 $route['users/create'] = 'users/create';
 $route['users/edit/(:num)'] = 'users/edit/$1';
 $route['users/delete/(:num)'] = 'users/delete/$1';
-$route['users/(:num)'] = 'users/view/$1';
 $route['users/check/login'] = 'users/check_login';
 $route['users'] = 'users';
 
@@ -97,7 +95,6 @@ $route['contracts/calendar/series'] = 'contracts/series';
 $route['contracts/calendar/userdayoffs/(:num)'] = 'contracts/userDayoffs/$1';
 $route['contracts/calendar/userdayoffs'] = 'contracts/userDayoffs';
 $route['contracts/calendar/alldayoffs'] = 'contracts/allDayoffs';
-$route['contracts/(:num)'] = 'contracts/view/$1';
 $route['contracts'] = 'contracts';
 
 //HR Organization

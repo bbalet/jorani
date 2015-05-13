@@ -40,7 +40,7 @@ $this->lang->load('global', $language);?>
         <p><?php echo lang('hr_presence_month');?> : <b><?php echo lang($month_name);?>&nbsp;<?php echo $year;?></b></p>
         <p><?php echo lang('hr_presence_days');?> : <b><?php echo $total_days;?></b></p>
         <?php if ($contract_id != '') { ?>
-        <p><?php echo lang('hr_presence_contract');?> : <b><a href="<?php echo base_url();?>contracts/<?php echo $contract_id; ?>"><?php echo $contract_name;?></a></b></p>
+        <p><?php echo lang('hr_presence_contract');?> : <b><?php echo $contract_name;?></b></p>
         <p><?php echo lang('hr_presence_working_days');?> : <b><?php echo $opened_days;?></b></p>
         <p><?php echo lang('hr_presence_non_working_days');?> : <b><a href="<?php echo base_url();?>contracts/<?php echo $contract_id; ?>/calendar"><?php echo $non_working_days;?></a></b></p>
         <?php } else { ?>

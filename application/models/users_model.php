@@ -32,11 +32,14 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_users($id = 0) {
+        $this->db->select('users.*');
+        $this->db->select('roles.name as role_name');
+        $this->db->join('roles', 'roles.id = users.role');
         if ($id === 0) {
             $query = $this->db->get('users');
             return $query->result_array();
         }
-        $query = $this->db->get_where('users', array('id' => $id));
+        $query = $this->db->get_where('users', array('users.id' => $id));
         return $query->row_array();
     }
 

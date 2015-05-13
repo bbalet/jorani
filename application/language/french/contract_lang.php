@@ -22,7 +22,6 @@ $lang['contract_index_thead_name'] = 'Nom';
 $lang['contract_index_thead_start'] = 'Début période';
 $lang['contract_index_thead_end'] = 'Fin période';
 $lang['contract_index_tip_delete'] = 'supprimer contrat';
-$lang['contract_index_tip_view'] = 'Voir contrat';
 $lang['contract_index_tip_edit'] = 'Modifier contrat';
 $lang['contract_index_tip_entitled'] = 'Crédit congés';
 $lang['contract_index_tip_dayoffs'] = 'Jours non travaillés';
@@ -37,16 +36,6 @@ $lang['contract_index_popup_delete_button_no'] = 'Non';
 $lang['contract_index_popup_entitled_title'] = 'Crédit congés';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Annuler';
 $lang['contract_index_popup_entitled_button_close'] = 'Fermer';
-
-$lang['contract_view_title'] = 'Détails du contrat';
-$lang['contract_view_description'] = 'Détails du contrat n°';
-$lang['contract_view_field_name'] = 'Nom';
-$lang['contract_view_field_start_month'] = 'Mois / Début';
-$lang['contract_view_field_start_day'] = 'Jour / Début';
-$lang['contract_view_field_end_month'] = 'Mois / Fin';
-$lang['contract_view_field_end_day'] = 'Jour / Fin';
-$lang['contract_view_button_edit'] = 'Modifier';
-$lang['contract_view_button_cancel'] = 'Retourner à la liste';
 
 $lang['contract_edit_title'] = 'Modifier un contrat';
 $lang['contract_edit_description'] = 'Modifier le contrat n°';

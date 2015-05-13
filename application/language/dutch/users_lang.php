@@ -18,7 +18,6 @@
  */
 
 $lang['users_index_title'] = 'Lijst gebruikers';
-$lang['users_index_thead_tip_view'] = 'Bekijk gebruikersdetails';
 $lang['users_index_thead_tip_edit'] = 'Edit gebruikersdetails';
 $lang['users_index_thead_tip_delete'] = 'Verwijder gebruiker';
 $lang['users_index_thead_tip_reset'] = 'Reset wachtwoord';
@@ -44,25 +43,6 @@ $lang['users_index_popup_field_filename'] = 'Bestandsnaam';
 $lang['users_index_popup_import_button_cancel'] = 'Annuleren';
 
 $lang['employees_index_title'] = 'Lijst werknemers';
-
-$lang['users_view_title'] = 'Details van gebruiker #';
-$lang['users_view_html_title'] = 'Detail van een gebruiker';
-$lang['users_view_field_firstname'] = 'Voornaam';
-$lang['users_view_field_lastname'] = 'Achternaam';
-$lang['users_view_field_login'] = 'Login';
-$lang['users_view_field_email'] = 'E-mail';
-$lang['users_view_field_role'] = 'Rol';
-$lang['users_view_field_manager'] = 'Manager';
-$lang['users_view_field_contract'] = 'Contract';
-$lang['users_view_field_position'] = 'Functie';
-$lang['users_view_field_entity'] = 'Entiteit';
-$lang['users_view_field_hired'] = 'Datum start aanstelling';
-$lang['users_view_field_timezone'] = 'Tijd zone';
-$lang['users_view_field_ldap_path'] = 'LDAP pad';
-$lang['users_view_field_identifier'] = 'Interne identifier';
-$lang['users_view_field_language'] = 'Taal';
-$lang['users_view_button_edit'] = 'Edit';
-$lang['users_view_button_back'] = 'Terug naar overzicht';
 
 $lang['users_myprofile_title'] = 'Mijn persoonlijke info';
 $lang['users_myprofile_html_title'] = 'Mijn persoonlijke info';

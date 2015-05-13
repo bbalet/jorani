@@ -22,7 +22,6 @@ $lang['contract_index_thead_name'] = 'Name';
 $lang['contract_index_thead_start'] = 'Anfangsdatum';
 $lang['contract_index_thead_end'] = 'Enddatum';
 $lang['contract_index_tip_delete'] = 'Vertrag löschen';
-$lang['contract_index_tip_view'] = 'Vertrag anzeigen';
 $lang['contract_index_tip_edit'] = 'Vertrag bearbeiten';
 $lang['contract_index_tip_entitled'] = 'bezugsberechtigte Tage';
 $lang['contract_index_tip_dayoffs'] = 'Tag offs und Wochenenden';
@@ -36,16 +35,6 @@ $lang['contract_index_popup_delete_button_no'] = 'Nein';
 $lang['contract_index_popup_entitled_title'] = 'Bezugsberechtigte Tage';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Abbrechen';
 $lang['contract_index_popup_entitled_button_close'] = 'Schließen';
-
-$lang['contract_view_title'] = 'Vertragsdetails';
-$lang['contract_view_description'] = 'Details Vertrag Nummer #';
-$lang['contract_view_field_name'] = 'Name';
-$lang['contract_view_field_start_month'] = 'Monat / Anfang';
-$lang['contract_view_field_start_day'] = 'Tag / Anfang';
-$lang['contract_view_field_end_month'] = 'Monat / Ende';
-$lang['contract_view_field_end_day'] = 'Tag / Ende';
-$lang['contract_view_button_edit'] = 'Bearbeiten';
-$lang['contract_view_button_cancel'] = 'Zurück zur Liste';
 
 $lang['contract_edit_title'] = 'Einen Vertrag bearbeiten';
 $lang['contract_edit_description'] = 'Vertrag mit Nummer # bearbeiten';

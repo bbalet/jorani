@@ -72,6 +72,7 @@ class Session extends CI_Controller {
             $data['language'] = $this->session->userdata('language');
             $data['language_code'] = $this->session->userdata('language_code');
             $this->session->set_userdata('salt', $data['salt']);
+            $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
             $this->load->view('templates/header', $data);
             $this->load->view('session/login', $data);
             $this->load->view('templates/footer');
@@ -120,6 +121,7 @@ class Session extends CI_Controller {
                 $data['language'] = $this->session->userdata('language');
                 $data['language_code'] = $this->session->userdata('language_code');
                 $this->session->set_userdata('salt', $data['salt']);
+                $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
                 $this->load->view('templates/header', $data);
                 $this->load->view('session/login', $data);
                 $this->load->view('templates/footer');

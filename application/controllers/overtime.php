@@ -54,12 +54,11 @@ class Overtime extends CI_Controller {
         $data['filter'] = $filter;
         $data['title'] = lang('overtime_index_title');
         $data['requests'] = $this->overtime_model->requests($this->user_id, $showAll);
-        
         $this->load->model('status_model');
         for ($i = 0; $i < count($data['requests']); ++$i) {
             $data['requests'][$i]['status_label'] = $this->status_model->get_label($data['requests'][$i]['status']);
         }
-        
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('overtime/index', $data);

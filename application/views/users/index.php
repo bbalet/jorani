@@ -24,19 +24,7 @@ $this->lang->load('global', $language);?>
 <div class="row-fluid">
     <div class="span12">
 
-<?php if($this->session->flashdata('msg')){ ?>
-<div class="alert fade in" id="flashbox">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <?php echo $this->session->flashdata('msg'); ?>
-</div>
- 
-<script type="text/javascript">
-//Flash message
-$(document).ready(function() {
-    $("#flashbox").alert();
-});
-</script>
-<?php } ?>
+<?php echo $flash_partial_view;?>
         
 <h1><?php echo lang('users_index_title');?><?php echo $help;?></h1>
 
@@ -59,8 +47,6 @@ $(document).ready(function() {
             <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_view');?>"><?php echo $users_item['id'] ?></a>
             &nbsp;
             <div class="pull-right">
-                <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
-                &nbsp;
                 <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;
                 <a href="#" class="confirm-delete" data-id="<?php echo $users_item['id'];?>" title="<?php echo lang('users_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
@@ -72,7 +58,7 @@ $(document).ready(function() {
         <td><?php echo $users_item['lastname'] ?></td>
         <td><?php echo $users_item['login'] ?></td>
         <td><a href="mailto:<?php echo $users_item['email']; ?>"><?php echo $users_item['email']; ?></a></td>
-        <td><?php echo $users_item['role'] ?></td>
+        <td><?php echo $users_item['role_name'] ?></td>
         <td><?php echo $users_item['manager'] ?></td>
     </tr>
 <?php endforeach ?>
@@ -84,15 +70,12 @@ $(document).ready(function() {
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div class="row-fluid">
-    <div class="span3">
+    <div class="span12">
       <a href="<?php echo base_url();?>users/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('users_index_button_export');?></a>
-    </div>
-    <div class="span3">
+      &nbsp;
       <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('users_index_button_create_user');?></a>
-    </div>
-    <div class="span6">
-        &nbsp;
-        <!--<a href="<?php echo base_url();?>users/import" class="btn btn-primary" data-target="#frmImportUsers" data-toggle="modal"><i class="icon-arrow-up icon-white"></i>&nbsp;<?php echo lang('users_index_button_import_user');?></a><//-->
+      &nbsp;
+      <!--<a href="<?php echo base_url();?>users/import" class="btn btn-primary" data-target="#frmImportUsers" data-toggle="modal"><i class="icon-arrow-up icon-white"></i>&nbsp;<?php echo lang('users_index_button_import_user');?></a><//-->
     </div>
 </div>
 

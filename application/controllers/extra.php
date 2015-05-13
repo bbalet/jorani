@@ -43,12 +43,12 @@ class Extra extends CI_Controller {
         expires_now();
         $data = getUserContext($this);
         $data['extras'] = $this->overtime_model->get_user_extras($this->user_id);
-        
         $this->load->model('status_model');
         for ($i = 0; $i < count($data['extras']); ++$i) {
             $data['extras'][$i]['status_label'] = $this->status_model->get_label($data['extras'][$i]['status']);
         }
         $data['title'] = lang('extra_index_title');
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('extra/index', $data);

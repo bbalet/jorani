@@ -25,20 +25,7 @@ $this->lang->load('global', $language);?>
 <div class="row-fluid">
     <div class="span12">
 
-<?php if($this->session->flashdata('msg')){ ?>
-<div class="alert fade in" id="flashbox">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <?php echo $this->session->flashdata('msg'); ?>
- 
-</div>
- 
-<script type="text/javascript">
-//Flash message
-$(document).ready(function() {
-                $(".alert").alert();
-});
-</script>
-<?php } ?>
+<?php echo $flash_partial_view;?>
 
 <h1><?php echo lang('requests_index_title');?><?php echo $help;?></h1>
 

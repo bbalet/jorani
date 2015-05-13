@@ -23,12 +23,12 @@ $lang['contract_index_thead_name'] = 'Naam';
 $lang['contract_index_thead_start'] = 'Start datum';
 $lang['contract_index_thead_end'] = 'Eind datum';
 $lang['contract_index_tip_delete'] = 'Verwijder contract';
-$lang['contract_index_tip_view'] = 'Bekijk contract';
 $lang['contract_index_tip_edit'] = 'Bewerk contract';
 $lang['contract_index_tip_entitled'] = 'Beschikbare dagen';
 $lang['contract_index_tip_dayoffs'] = 'Vrije dagen en weekends';
 $lang['contract_index_button_export'] = 'Exporteer dit overzicht';
 $lang['contract_index_button_create'] = 'Maak contract aan';
+
 $lang['contract_index_popup_delete_title'] = 'Verwijder contract';
 $lang['contract_index_popup_delete_description'] = 'U staat op het punt een contact te verwijderen; dit kan niet ongedaan gemaakt worden.';
 $lang['contract_index_popup_delete_confirm'] = 'Wilt u verder gaan?';
@@ -37,16 +37,6 @@ $lang['contract_index_popup_delete_button_no'] = 'Nee';
 $lang['contract_index_popup_entitled_title'] = 'Beschikbare dagen';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Annuleren';
 $lang['contract_index_popup_entitled_button_close'] = 'Sluiten';
-
-$lang['contract_view_title'] = 'Contract gegevens';
-$lang['contract_view_description'] = 'Details mbt contract #';
-$lang['contract_view_field_name'] = 'Naam';
-$lang['contract_view_field_start_month'] = 'Maand / Start';
-$lang['contract_view_field_start_day'] = 'Dag / Start';
-$lang['contract_view_field_end_month'] = 'Maand / Einde';
-$lang['contract_view_field_end_day'] = 'Dag / Einde';
-$lang['contract_view_button_edit'] = 'Edit';
-$lang['contract_view_button_cancel'] = 'Terug naar overzicht';
 
 $lang['contract_edit_title'] = 'Bewerk een contract';
 $lang['contract_edit_description'] = 'Bewerk contract #';

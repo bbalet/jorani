@@ -16,13 +16,16 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 ?>
-        <div id="push"></div>
-    </div><!-- /.container -->
-    <!-- FOOTER -->
-    <div class="row" id="footer">
-      <div class="span4"><?php echo lang('footer_copyright_notice');?></div>
-      <div class="span6 offset2"><img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;&nbsp;<b>Jorani</b>&nbsp;&nbsp;v0.4.1</div>
-      <div class="span2">&nbsp;</div>
-    </div>
-</body>
-</html>
+<?php if($this->session->flashdata('msg')){ ?>
+<div class="alert fade in" id="flashbox">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <?php echo $this->session->flashdata('msg'); ?>
+</div>
+ 
+<script type="text/javascript">
+//Flash message
+$(document).ready(function() {
+    $("#flashbox").alert();
+});
+</script>
+<?php } ?>

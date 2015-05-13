@@ -268,7 +268,7 @@ class Requests extends CI_Controller {
                 $data['entitleddaysemployee'] = $this->entitleddays_model->get_entitleddays_employee($id);
                 
                 expires_now();
-                $data['title'] = lang('hr_summary_title');
+                $data['title'] = lang('requests_summary_title');
                 $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_balance_collaborators');
                 $this->load->view('templates/header', $data);
                 $this->load->view('menu/index', $data);

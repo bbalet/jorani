@@ -118,6 +118,13 @@ $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
     }
     
     $(function () {
+<?php if ($this->config->item('csrf_protection') == TRUE) {?>
+    $.ajaxSetup({
+        data: {
+            <?php echo $this->security->get_csrf_token_name();?>: "<?php echo $this->security->get_csrf_hash();?>",
+        }
+    });
+<?php }?>
         //Memorize the last selected language with a cookie
         if($.cookie('language') != null) {
             var IsLangAvailable = 0 != $('#language option[value=' + $.cookie('language') + ']').length;

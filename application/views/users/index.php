@@ -44,8 +44,7 @@ $this->lang->load('global', $language);?>
 <?php foreach ($users as $users_item): ?>
     <tr>
         <td data-order="<?php echo $users_item['id']; ?>">
-            <a href="<?php echo base_url();?>users/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_view');?>"><?php echo $users_item['id'] ?></a>
-            &nbsp;
+            <?php echo $users_item['id'] ?>&nbsp;
             <div class="pull-right">
                 <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;

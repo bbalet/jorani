@@ -134,6 +134,13 @@ $this->lang->load('global', $language);?>
     
     
     $(function () {
+<?php if ($this->config->item('csrf_protection') == TRUE) {?>
+    $.ajaxSetup({
+        data: {
+            <?php echo $this->security->get_csrf_token_name();?>: "<?php echo $this->security->get_csrf_hash();?>",
+        }
+    });
+<?php }?>
         
         //Transform the HTML table in a fancy datatable
         oTable = $('#delegations').DataTable({

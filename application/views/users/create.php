@@ -277,6 +277,13 @@ if ($language_code != 'en') { ?>
     }
     
     $(function () {
+<?php if ($this->config->item('csrf_protection') == TRUE) {?>
+    $.ajaxSetup({
+        data: {
+            <?php echo $this->security->get_csrf_token_name();?>: "<?php echo $this->security->get_csrf_hash();?>",
+        }
+    });
+<?php }?>
         $("#viz_datehired").datepicker({
             changeMonth: true,
             changeYear: true,

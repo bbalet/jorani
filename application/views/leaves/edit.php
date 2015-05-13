@@ -139,5 +139,15 @@ function validate_form() {
         return false;
     }
 }
+
+<?php if ($this->config->item('csrf_protection') == TRUE) {?>
+$(function () {
+    $.ajaxSetup({
+        data: {
+            <?php echo $this->security->get_csrf_token_name();?>: "<?php echo $this->security->get_csrf_hash();?>",
+        }
+    });
+});
+<?php }?>
 </script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit.js" type="text/javascript"></script>

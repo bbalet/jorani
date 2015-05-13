@@ -286,7 +286,14 @@ if ($language_code != 'en') { ?>
         $("#txtCredit").focus();
     }
     
-    $(function () {        
+    $(function () {
+<?php if ($this->config->item('csrf_protection') == TRUE) {?>
+    $.ajaxSetup({
+        data: {
+            <?php echo $this->security->get_csrf_token_name();?>: "<?php echo $this->security->get_csrf_hash();?>",
+        }
+    });
+<?php }?>
         $("#viz_startdate").datepicker({
             changeMonth: true,
             changeYear: true,

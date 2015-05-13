@@ -293,9 +293,23 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_cookie_name' = The cookie name
 | 'csrf_expire' = The number in seconds the token should expire.
 */
-$config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_test_name';
-$config['csrf_cookie_name'] = 'csrf_cookie_name';
+if (isset($_SERVER["REQUEST_URI"])) 
+{
+    if(stripos($_SERVER["REQUEST_URI"],'/api/') === FALSE)
+    {
+        $config['csrf_protection'] = TRUE;
+    }
+    else
+    {
+        $config['csrf_protection'] = FALSE;
+    } 
+} 
+else 
+{
+    $config['csrf_protection'] = TRUE;
+}
+$config['csrf_token_name'] = 'csrf_test_jorani';
+$config['csrf_cookie_name'] = 'csrf_cookie_jorani';
 $config['csrf_expire'] = 7200;
 
 /*

@@ -42,10 +42,6 @@ $this->lang->load('global', $language);?>
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div class="row-fluid">
-    <div class="span2"><span class="label"><?php echo lang('Planned');?></span></div>
-    <div class="span2"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
-    <div class="span2"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
-    <div class="span2"><span class="label label-important" style="background-color: #ff0000;"><?php echo lang('Rejected');?></span></div>
     <div class="span4">
         <?php if ($this->config->item('ics_enabled') == FALSE) {?>
         &nbsp;

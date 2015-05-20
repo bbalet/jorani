@@ -22,21 +22,20 @@ $this->lang->load('global', $language);?>
 
 <link href="<?php echo base_url();?>assets/css/tabular.css" rel="stylesheet">
 <h1><?php echo lang('calendar_tabular_title');?> &nbsp;<?php echo $help;?></h1>
-
 <div class="row-fluid">
     <div class="span4">
         <label for="txtEntity"><?php echo lang('calendar_organization_field_select_entity');?></label>
         <div class="input-append">
         <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
         <button id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('calendar_tabular_button_select_entity');?></button>
-        
+	<?php $listMonth = array(lang('January'), lang('February'), lang('March'), lang('April'), lang('May'), lang('June'), lang('July'), lang('August'), lang('September'), lang('October'), lang('November'), lang('December')); ?>        
         <label for="cboMonth"><?php echo lang('calendar_tabular_field_month');?></label>
         <select name="cboMonth" id="cboMonth">
             <?php for ($ii=1; $ii<13;$ii++) {
                 if ($ii == $month) {
-                    echo "<option val='" . $ii ."' selected>" . $ii ."</option>";
+                    echo "<option value=" . $ii ." selected>" . $listMonth[$ii -1] . "</option>";
                 } else {
-                    echo "<option val='" . $ii ."'>" . $ii ."</option>";
+                    echo "<option value=" . $ii .">" . $listMonth[$ii -1] . "</option>";
                 }
             }?>
         </select>
@@ -45,13 +44,12 @@ $this->lang->load('global', $language);?>
         <select name="cboYear" id="cboYear">
             <?php for ($ii=date('Y', strtotime('-6 year')); $ii<date('Y', strtotime('+2 year'));$ii++) {
                 if ($ii == $year) {
-                    echo "<option val='" . $ii ."' selected>" . $ii ."</option>";
+                    echo "<option value='" . $ii ."' selected>" . $ii ."</option>";
                 } else {
-                    echo "<option val='" . $ii ."'>" . $ii ."</option>";
+                    echo "<option value='" . $ii ."'>" . $ii ."</option>";
                 }
             }?>
         </select>
-        
         </div>
     </div>
     <div class="span3">
@@ -60,60 +58,115 @@ $this->lang->load('global', $language);?>
         </label>
     </div>
     <div class="span5">
-        <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
-        <button id="cmdExecute" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('calendar_tabular_button_execute');?></button>
-        <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
+        <button id="cmdExecute" class="btn btn-primary"><?php echo lang('calendar_tabular_button_execute');?></button>
+	<br />
+	<br />
+	<?php
+	foreach ($leavetypes as $type)
+	{
+	  echo '<div style="height: 100%; width: 50%; padding: 5px; background-color: ' . $type['color'] . ' !important; -webkit-print-color-adjust: exact"></div>' . $type['name'] . '';
+	  echo '<br />';
+	}
+	?>
     </div>
 </div>
-
-<div class="row-fluid">
-    <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
-    <div class="span3"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
-    <div class="span3"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
-    <div class="span3">&nbsp;</div>
-</div>
-
+<button id="cmdPrev" class="btn btn-primary"><</button>
+<button id="cmdToday" class="btn btn-primary"><?php echo lang('calendar_component_buttonText_today');?></button>
+<button id="cmdNext" class="btn btn-primary">></button>
+<button id="cmdPrint" class="btn btn-primary">Print calendar</button>
+<br />
+<br />
 <?php if (count($tabular) == 0) {
-     echo lang('leaves_summary_tbody_empty');
+      echo lang('leaves_summary_tbody_empty');
 } else {
 ?>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <td>&nbsp;</td>
-            <?php
-                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
-                $lastDay = date("t", strtotime($start));    //last day of selected month
-                for ($ii = 1; $ii <=$lastDay; $ii++) {
-                    $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
+<?php
+		$maxDay = 45; //day displayed in the tabular
+		$headerDay = "";
+		$headerDayNum = "";
+		$headerMonth = "";
+		$lastMonth = "";
+		$now = date("Y-m-d");
+		$date = $year . '-' . $month . '-' . '1';
+		if (date('m')-0 == $month && $firstDay == "true")
+		{
+		   $DateStart = new DateTime($now);
+		   $DateEnd = new DateTime($now);
+		}
+		else
+		{
+		   $DateStart = new DateTime($date);
+		   $DateEnd = new DateTime($date);
+		}
+		$DateEnd->modify('+ ' . $maxDay . ' day');
+		while ($DateStart <= $DateEnd){
+                    $dayNum = $DateStart->format('w');
+		    $ii = $DateStart->format('d');
                     switch ($dayNum)
                     {
-                        case 1: echo '<td><b>' . lang('calendar_monday_short') . '</b></td>'; break;
-                        case 2: echo '<td><b>' . lang('calendar_tuesday_short') . '</b></td>'; break;
-                        case 3: echo '<td><b>' . lang('calendar_wednesday_short') . '</b></td>'; break;
-                        case 4: echo '<td><b>' . lang('calendar_thursday_short') . '</b></td>'; break;
-                        case 5: echo '<td><b>' . lang('calendar_friday_short') . '</b></td>'; break;
-                        case 6: echo '<td><b>' . lang('calendar_saturday_short') . '</b></td>'; break;
-                        case 7: echo '<td><b>' . lang('calendar_sunday_short') . '</b></td>'; break;
+                        case 1: $headerDay .= "<td><b>" . lang('calendar_monday_short') . "</b></td>"; break;
+                        case 2: $headerDay .= "<td><b>" . lang('calendar_tuesday_short') . "</b></td>"; break;
+                        case 3: $headerDay .= "<td><b>" . lang('calendar_wednesday_short') . "</b></td>"; break;
+                        case 4: $headerDay .= "<td><b>" . lang('calendar_thursday_short') . "</b></td>"; break;
+                        case 5: $headerDay .= "<td><b>" . lang('calendar_friday_short') . "</b></td>"; break;
+                        case 6: $headerDay .= "<td><b>" . lang('calendar_saturday_short') . "</b></td>"; break;
+                        case 0: $headerDay .= "<td><b>" . lang('calendar_sunday_short') . "</b></td>"; break;
                     }
-                }?>
+		    $test = $DateStart->format('Y-m-d');
+		    if (in_array($test, $dayoffs)) //$dayoffs are dates in DayInfo Table, it can be scolare holiday
+		    {
+			if ($test == $now)
+			$headerDayNum .= "<td style='border: solid; border-color: red; background-color: #5A5B78 !important; -webkit-print-color-adjust: exact'><b>" . $ii . "</b></td>";
+			else
+			$headerDayNum .= "<td  style='background-color: #5A5B78 !important; -webkit-print-color-adjust: exact'><b>" . $ii . "</b></td>";
+		    }
+		    else
+		    {
+			if ($test == $now)
+			   $headerDayNum .= "<td style='border: solid; border-color: red'><b>" . $ii . "</b></td>";
+			else
+			   $headerDayNum .= "<td><b>" . $ii . "</b></td>";
+		    }
+		    if ($lastMonth != $DateStart->format('m')) //display month
+		    {
+			$lastMonth = $DateStart->format('m');
+			$tmpLastDay = date("t", strtotime($DateStart->format('Y-m-d'))) - $DateStart->format('d') + 1;    //last day of selected month
+			if ($tmpLastDay > $maxDay)
+			   $tmpLastDay = $maxDay + 1;
+			$headerMonth .= "<td colspan=" . $tmpLastDay . "><b>" . $listMonth[$lastMonth - 1] . "</b></td>";
+		    }
+		  $DateStart->modify('+1 day'); //Next day
+		  $maxDay = $maxDay - 1;
+		}
+		?>
+<table class="table table-bordered" style="border: solid" id="printTable" border="1" cellpadding="3">
+    <thead>
+	<tr>
+	 <td>&nbsp;</td>
+	 <?php echo $headerMonth; ?>
+	</tr>
+        <tr>
+            <td>&nbsp;</td>
+            <?php echo $headerDay; ?>
         </tr>
         <tr>
             <td><b><?php echo lang('calendar_tabular_thead_employee');?></b></td>
-            <?php
-                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
-                $lastDay = date("t", strtotime($start));    //last day of selected month
-                for ($ii = 1; $ii <=$lastDay; $ii++) {
-                    echo '<td><b>' . $ii . '</b></td>';
-                }?>
+            <?php echo $headerDayNum; ?>
         </tr>
     </thead>
   <tbody>
   <?php
   $repeater = 0;
+  $organisation = "";
+  $display = "";
   foreach ($tabular as $employee) {?>
-    <tr>
-      <td><?php echo $employee->name; ?></td>
+  	  <?php
+	  if ($employee->org != $organisation) // Delimite services
+    	     echo '<tr style="border-top: solid">';
+	  else
+	     echo '<tr>';
+	  ?>
+	<td><?php echo $employee->name; ?></td>
       <?php foreach ($employee->days as $day) {
           $overlapping = FALSE;
           if (strstr($day->display, ';')) {
@@ -139,60 +192,49 @@ $this->lang->load('global', $language);?>
                 }
           } else {
             switch ($day->display) {
-                case '0': $class="working"; break;
-                case '4': $class="dayoff"; break;
+                case '0': $display = "<td title='$day->type' style='background-color: $day->color !important; -webkit-print-color-adjust: exact'>&nbsp;</td>"; break;
+                case '4': $display = "<td title='$day->type' style='background-color: $day->color !important; -webkit-print-color-adjust: exact'>&nbsp;</td>"; break;
                 case '5': $class="amdayoff"; break;
                 case '6': $class="pmdayoff"; break;
-                case '1':
-                      switch ($day->status)
-                      {
-                          case 1: $class = "allplanned"; break;  // Planned
-                          case 2: $class = "allrequested"; break;  // Requested
-                          case 3: $class = "allaccepted"; break;  // Accepted
-                          case 4: $class = "allrejected"; break;  // Rejected
-                      }
-                      break;
-                case '2':
-                    switch ($day->status)
+                case '1': 
+		     switch ($day->status) //toute la journée
                       {
                           case 1: $class = "amplanned"; break;  // Planned
-                          case 2: $class = "amrequested"; break;  // Requested
-                          case 3: $class = "amaccepted"; break;  // Accepted
+			  case 2: $display = "<td title='$day->type' style='background: repeating-linear-gradient(45deg,#000000,#000000 5px,$day->color 5px,$day->color 10px)!important; -webkit-print-color-adjust: exact'>&nbsp;</td>"; break; // Requested
+                          case 3: $display = "<td title='$day->type' style='background-color: $day->color !important; -webkit-print-color-adjust: exact'>&nbsp;</td>"; break;  // Accepted
+                          case 4: $class = "amrejected"; break;  // Rejected
+                      }
+                    break;
+                case '2':
+                    switch ($day->status) //matin seulement
+                      {
+			  case 2: $display = "<td title='$day->type' style='background: repeating-linear-gradient(45deg,#000000,#000000 5px,$day->color 5px,$day->color 10px) !important;  border: 1px solid #ccc; padding: 0; width: 40px; height: 30px; -webkit-print-color-adjust: exact'><div style='background: -webkit-linear-gradient(-45deg, transparent 50%, #ffffff 50%) !important; height: 100%; width: 100%; margin: 0; padding: 0; -webkit-print-color-adjust: exact'></div></td>"; break; // Requested
+			  case 3: $display = "<td title='$day->type' style='background: -webkit-linear-gradient(-45deg, $day->color 50%,#ffffff 50%) !important; -webkit-print-color-adjust: exact'>&nbsp;</td>"; break; // Accepted
                           case 4: $class = "amrejected"; break;  // Rejected
                       }
                     break;
                 case '3':
-                    switch ($day->status)
+                    switch ($day->status) //apres-midi seulement
                       {
                           case 1: $class = "pmplanned"; break;  // Planned
-                          case 2: $class = "pmrequested"; break;  // Requested
-                          case 3: $class = "pmaccepted"; break;  // Accepted
-                          case 4: $class = "pmrejected"; break;  // Rejected
+                          case 2: $display = "<td title='$day->type' style='background: repeating-linear-gradient(45deg,#000000,#000000 5px,$day->color 5px,$day->color 10px) !important; border: 1px solid #ccc; padding: 0; width: 80px; height: 35px; -webkit-print-color-adjust: exact'><div style='background: -webkit-linear-gradient(-45deg, #ffffff 50%, transparent 50%) !important; height: 100%; width: 100%; margin: 0; padding: 0; -webkit-print-color-adjust: exact'></div></td>"; break; // Requested
+                          case 3: $display = "<td title='$day->type' style='background: -webkit-linear-gradient(-45deg, #ffffff 50%,$day->color 50%) !important; -webkit-print-color-adjust: exact'>&nbsp;</td>"; break; // Accepted
+			  case 4: $class = "pmrejected"; break;  // Rejected
                       }
                     break;
             }
           }
-          
           //Detect overlapping cases
-          switch ($class) {
-            case "plannedplanned":
-                if ($day->display == 4) {$overlapping = TRUE;} else {$class = "allplanned";}
-                break;
-            case "requestedrequested":
-                if ($day->display == 4) {$overlapping = TRUE;} else {$class = "allrequested";}
-                break;
-            case "acceptedaccepted":
-                if ($day->display == 4) {$overlapping = TRUE;} else {$class = "allaccepted";}
-                break;
-            case "rejectedrejected":
-                if ($day->display == 4) {$overlapping = TRUE;} else {$class = "allrejected";}
-                break;
-          }
-            if ($overlapping) {
-                echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
-            } else {
-                echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
-            }
+          //switch ($class) {
+            //        case "plannedplanned":
+            //        case "requestedrequested":
+            //        case "acceptedaccepted":
+            //        case "rejectedrejected":
+            //            $overlapping = TRUE;
+            //  break;
+         // }
+	    echo $display;
+	    $organisation = $employee->org;
             ?>
     <?php } ?>
           </tr>
@@ -227,7 +269,6 @@ $this->lang->load('global', $language);?>
   </tbody>
 </table>
 <?php } ?>
-
 <div id="frmSelectEntity" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="close">&times;</a>
@@ -241,7 +282,6 @@ $this->lang->load('global', $language);?>
         <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('calendar_tabular_popup_entity_button_cancel');?></a>
     </div>
 </div>
-
 <script src="<?php echo base_url();?>assets/js/modernizr.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
@@ -251,31 +291,25 @@ $this->lang->load('global', $language);?>
     var month = <?php echo $month;?>;
     var year = <?php echo $year;?>;
     var children = '<?php echo $children;?>';
-    
+    var firstDay = false;
+
     function select_entity() {
         entity = $('#organization').jstree('get_selected')[0];
         text = $('#organization').jstree().get_text(entity);
         $('#txtEntity').val(text);
         $("#frmSelectEntity").modal('hide');
     }
-    
-    function includeChildren() {
-        if ($('#chkIncludeChildren').prop('checked') == true) {
-            return 'true';
-        } else {
-            return 'false';
-        }
-    }
-    
-    //Execute the report
-    //Target : execution in the page or export to Excel
-    function executeReport(month, year, children, target) {
-        if (entity != -1) {
-            url = '<?php echo base_url();?>calendar/' + target + '/' + entity + '/' + month+ '/' + year+ '/' + children;
-            document.location.href = url;
-        }
-    }
-    
+
+    $('#cmdPrint').click(function() {
+     var printContents = document.getElementById("printTable").outerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+     window.print();
+     document.body.innerHTML = originalContents;
+     window.location.reload();
+        });
+
     $(document).ready(function() {
         //Select radio button depending on URL
         if (children == '1') {
@@ -290,42 +324,104 @@ $this->lang->load('global', $language);?>
             $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
         });
 
-        //Execute the report
-        $('#cmdExecute').click(function() {
-            month = $('#cboMonth').val();
-            year = $('#cboYear').val();
-            children = includeChildren();
-            executeReport(month, year, children, 'tabular');
+        $('#cmdNext').click(function() {
+            if (entity != -1) {
+                if ($('#chkIncludeChildren').prop('checked') == true) {
+                    children = 'true';
+                } else {
+                    children = 'false';
+                }
+                month = $('#cboMonth').val();
+                year = $('#cboYear').val(); 
+		var tmpMonth = parseInt(month);
+		var tmpYear = parseInt(year);
+		if (tmpMonth == 12)
+		{
+		   tmpMonth = 1;
+		   tmpYear++;
+		}
+		else
+		{
+		  tmpMonth++;
+		}
+		firstDay = false;
+                url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + tmpMonth + '/' + tmpYear + '/' + children + '/' + firstDay;
+                document.location.href = url;
+            }
+        });
+
+	$('#cmdPrev').click(function() {
+            if (entity != -1) {
+                if ($('#chkIncludeChildren').prop('checked') == true) {
+                    children = 'true';
+                } else {
+                    children = 'false';
+                }
+                month = $('#cboMonth').val();
+                year = $('#cboYear').val(); 
+		var tmpMonth = parseInt(month);
+		var tmpYear = parseInt(year);
+		if (tmpMonth == 1)
+		{
+		   tmpMonth = 12;
+		   tmpYear--;
+		}
+		else
+		{
+		  tmpMonth--;
+		}
+		firstDay = false;
+                url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + tmpMonth + '/' + tmpYear + '/' + children + '/' + firstDay;
+                document.location.href = url;
+            }
+        });
+
+	$('#cmdToday').click(function() {
+            if (entity != -1) {
+                if ($('#chkIncludeChildren').prop('checked') == true) {
+                    children = 'true';
+                } else {
+                    children = 'false';
+                }
+		firstDay = false;
+		var d = new Date();
+		var m = d.getMonth() + 1;
+		var y = d.getFullYear();
+                url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + m+ '/' + y+ '/' + children + '/' + firstDay;
+                document.location.href = url;
+            }
+        });
+
+	$('#cmdExecute').click(function() {
+            if (entity != -1) {
+                if ($('#chkIncludeChildren').prop('checked') == true) {
+                    children = 'true';
+                } else {
+                    children = 'false';
+                }
+                month = $('#cboMonth').val();
+                year = $('#cboYear').val();
+		firstDay = false;
+                url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children + '/' + firstDay;
+                document.location.href = url;
+            }
         });
 
         //Export the report into Excel
         $("#cmdExport").click(function() {
-            month = $('#cboMonth').val();
-            year = $('#cboYear').val();
-            children = includeChildren();
-            executeReport(month, year, children, 'tabular/export');
+            if (entity != -1) {
+                if ($('#chkIncludeChildren').prop('checked') == true) {
+                    children = 'true';
+                } else {
+                    children = 'false';
+                }
+                month = $('#cboMonth').val();
+                year = $('#cboYear').val();
+            url = '<?php echo base_url(); ?>calendar/tabular/export/' + entity + '/'+ month + '/'+ year + '/'+ children;
+            document.location.href  = url;
+            }
         });
 
-<?php $datePrev = date_create($year . '-' . $month . '-01');
-$dateNext = clone $datePrev;
-date_add($dateNext, date_interval_create_from_date_string('1 month'));
-date_sub($datePrev, date_interval_create_from_date_string('1 month'));?>
-        //Previous/Next
-        $('#cmdPrevious').click(function() {
-            month = <?php echo $datePrev->format('m'); ?>;
-            year = <?php echo $datePrev->format('Y'); ?>;
-            children = includeChildren();
-            url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children;
-            document.location.href = url;
-        });
-        $('#cmdNext').click(function() {
-            month = <?php echo $dateNext->format('m'); ?>;
-            year = <?php echo $dateNext->format('Y'); ?>;
-            children = includeChildren();
-            url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children;
-            document.location.href = url;
-        });
-        
         //Load alert forms
         $("#frmSelectEntity").alert();
         //Prevent to load always the same content (refreshed each time)

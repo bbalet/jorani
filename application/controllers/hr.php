@@ -240,7 +240,9 @@ class Hr extends CI_Controller {
         $this->load->model('users_model');
         $this->load->model('dayoffs_model');
         $this->load->model('contracts_model');
-        
+
+        $data['dayoffs'] = $this->dayoffs_model->get_day_info();
+
         //Details about the employee
         $employee = $this->users_model->get_users($id);
         $data['employee_name'] =  $employee['firstname'] . ' ' . $employee['lastname'];

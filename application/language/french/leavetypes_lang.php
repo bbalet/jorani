@@ -19,6 +19,7 @@
 $lang['leavetypes_type_title'] = 'Types d\'absence';
 $lang['leavetypes_type_thead_id'] = 'N°';
 $lang['leavetypes_type_thead_name'] = 'Nom';
+$lang['leavetypes_type_thead_color'] = 'Couleur';
 $lang['leavetypes_type_thead_tip_delete'] = 'supprimer';
 $lang['leavetypes_type_thead_tip_edit'] = 'modifier';
 $lang['leavetypes_type_button_export'] = 'Exporter cette liste';

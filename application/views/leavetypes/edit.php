@@ -23,6 +23,8 @@ $this->lang->load('leavetypes', $language);?>
     <input type="hidden" name="id" value="<?php echo $id; ?>" />
     <label for="name"><?php echo lang('leavetypes_popup_update_field_name');?></label>
     <input type="text" name="name" value="<?php echo $type_name; ?>" />
+    <label for"color"><?php echo lang('leavetypes_type_thead_color');?></label>
+    <input name="color" type="color" id="html5colorpicker" class="form-control" onchange="clickColor(0, -1, -1, 5)" value="<?php echo $type['color']; ?>">
     <br />
     <button id="send" class="btn btn-primary"><?php echo lang('leavetypes_popup_update_button_update');?></button>
 </form>

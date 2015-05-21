@@ -142,6 +142,7 @@ class Calendar extends CI_Controller {
         $data = getUserContext($this);
         $this->load->model('leaves_model');
         $this->load->model('organization_model');
+	$this->load->model('types_model');
         $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children, $firstDay);
 	$data['dayoffs'] = $this->dayoffs_model->get_day_info();
 	$data['leavetypes'] = $this->types_model->get_types();

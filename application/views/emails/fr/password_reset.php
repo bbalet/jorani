@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>Cher {Firstname} {Lastname},</p>
+        <p>Cher/Chère {Firstname} {Lastname},</p>
         <p>Si vous n'êtes pas à l'origine de cette action, veuillez contacter l'administrateur.</p>
     </body>
 </html>

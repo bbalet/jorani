@@ -60,8 +60,10 @@ class Calendar extends CI_Controller {
     public function workmates() {
         $this->auth->check_is_granted('workmates_calendar');
         $data = getUserContext($this);
+	$this->load->model('types_model');
         $data['title'] = lang('calendar_workmates_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_workmates');
+	$data['leavetypes'] = $this->types_model->get_types();
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/workmates', $data);
@@ -76,8 +78,10 @@ class Calendar extends CI_Controller {
     public function collaborators() {
         $this->auth->check_is_granted('collaborators_calendar');
         $data = getUserContext($this);
+	$this->load->model('types_model');
         $data['title'] = lang('calendar_collaborators_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_collaborators');
+	$data['leavetypes'] = $this->types_model->get_types();
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('calendar/collaborators', $data);
@@ -133,15 +137,19 @@ class Calendar extends CI_Controller {
      * @param bool $children If TRUE, includes children entity, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular($id=-1, $month=0, $year=0, $children=TRUE) {
+    public function tabular($id=-1, $month=0, $year=0, $children=TRUE, $firstDay=FALSE) {
         $this->auth->check_is_granted('organization_calendar');
         $data = getUserContext($this);
         $this->load->model('leaves_model');
         $this->load->model('organization_model');
-        $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);
+	$this->load->model('types_model');
+        $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children, $firstDay);
+	$data['dayoffs'] = $this->dayoffs_model->get_day_info();
+	$data['leavetypes'] = $this->types_model->get_types();
         $data['entity'] = $id;
         $data['month'] = $month;
         $data['year'] = $year;
+	$data['firstDay'] = $firstDay;
         $data['children'] = $children;
         $data['department'] = $this->organization_model->get_label($id);
         $data['title'] = lang('calendar_tabular_title');

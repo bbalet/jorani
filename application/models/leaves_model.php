@@ -179,7 +179,7 @@ class Leaves_model extends CI_Model {
             $this->db->where('entitleddays.enddate >= ', $refDate);
             $entitled_days = $this->db->get()->result_array();
             foreach ($entitled_days as $entitled) {
-                $summary[$entitled['type']][1] += (float) $entitled['entitled']; //entitled
+                $summary[$entitled['type']][1] = (float) $entitled['entitled']; //entitled
             }
 
             //Add entitled days of employee (number of entitled days can be negative)
@@ -324,7 +324,7 @@ class Leaves_model extends CI_Model {
     /**
      * Create a leave request
      * @param int $id Identifier of the employee
-     * @return int id of the newly acreated leave request into the db
+     * @return int id of the leave request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function set_leaves($id) {
@@ -343,39 +343,6 @@ class Leaves_model extends CI_Model {
         return $this->db->insert_id();
     }
 
-    /**
-     * Create a leave request (suitable for API use)
-     * @param string $startdate Start date (MySQL format YYYY-MM-DD)
-     * @param string $enddate End date (MySQL format YYYY-MM-DD)
-     * @param int $status Status of leave (see table status or doc)
-     * @param int $employee Identifier of the employee
-     * @param string $cause Optional reason of the leave
-     * @param string $startdatetype Start date type (Morning/Afternoon)
-     * @param string $enddatetype End date type (Morning/Afternoon)
-     * @param int $duration Length of the leave request
-     * @param int $type Type of leave (except compensate, fully customizable by user)
-     * @return int id of the newly acreated leave request into the db
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function add_leaves_api($startdate, $enddate, $status, $employee, $cause,
-            $startdatetype, $enddatetype, $duration, $type) {
-        
-        $data = array(
-            'startdate' => $startdate,
-            'enddate' => $enddate,
-            'status' => $status,
-            'employee' => $employee,
-            'cause' => $cause,
-            'startdatetype' => $startdatetype,
-            'enddatetype' => $enddatetype,
-            'duration' => $duration,
-            'type' => $type
-        );
-        $this->db->insert('leaves', $data);
-        return $this->db->insert_id();
-    }
-    
-    
     /**
      * Update a leave request in the database with the values posted by an HTTP POST
      * @param type $id of the leave request
@@ -435,15 +402,6 @@ class Leaves_model extends CI_Model {
     }
     
     /**
-     * Delete leaves attached to a user
-     * @param int $id identifier of an employee
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function delete_leaves_cascade_user($id) {
-        $query = $this->db->delete('leaves', array('employee' => $id));
-    }
-    
-    /**
      * Leave requests of All leave request of the user (suitable for FullCalendar widget)
      * @param int $user_id connected user
      * @param string $start Unix timestamp / Start date displayed on calendar
@@ -452,7 +410,7 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function individual($user_id, $start = "", $end = "") {
-        $this->db->select('leaves.*, types.name as type');
+        $this->db->select('leaves.*, types.name as type, types.color');
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('employee', $user_id);
         $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
@@ -476,14 +434,18 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
             
-            switch ($entry->status)
-            {
-                case 1: $color = '#999'; break;     // Planned
-                case 2: $color = '#f89406'; break;  // Requested
-                case 3: $color = '#468847'; break;  // Accepted
-                case 4: $color = '#ff0000'; break;  // Rejected
-            }
-            
+            //switch ($entry->status)
+            //{
+             //   case 1: $color = '#999'; break;     // Planned
+              //  case 2: $color = '#f89406'; break;  // Requested
+               // case 3: $color = '#468847'; break;  // Accepted
+                //case 4: $color = '#ff0000'; break;  // Rejected
+            //}
+	    if ($entry->status == 3)
+	       $color = $entry->color;
+	    else
+		$color = '#ffffff';
+
             $jsonevents[] = array(
                 'id' => $entry->id,
                 'title' => $entry->type,
@@ -505,7 +467,9 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function workmates($user_id, $start = "", $end = "") {
+    	$this->db->select('leaves.*, users.*,  types.color');
         $this->db->join('users', 'users.id = leaves.employee');
+	$this->db->join('types', 'leaves.type = types.id');
         $this->db->where('users.manager', $user_id);
         $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
         $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
@@ -528,14 +492,18 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
             
-            switch ($entry->status)
-            {
-                case 1: $color = '#999'; break;     // Planned
-                case 2: $color = '#f89406'; break;  // Requested
-                case 3: $color = '#468847'; break;  // Accepted
-                case 4: $color = '#ff0000'; break;  // Rejected
-            }
-            
+            //switch ($entry->status)
+            //{
+                //case 1: $color = '#999'; break;     // Planned
+                //case 2: $color = '#f89406'; break;  // Requested
+                //case 3: $color = '#468847'; break;  // Accepted
+                //case 4: $color = '#ff0000'; break;  // Rejected
+            //}
+	    if ($entry->status == 3)
+	       $color = $entry->color;
+	    else
+		$color = '#ffffff';            
+
             $jsonevents[] = array(
                 'id' => $entry->id,
                 'title' => $entry->firstname .' ' . $entry->lastname,
@@ -557,7 +525,9 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function collaborators($user_id, $start = "", $end = "") {
+    	$this->db->select('leaves.*, users.*,  types.color');
         $this->db->join('users', 'users.id = leaves.employee');
+	$this->db->join('types', 'leaves.type = types.id');
         $this->db->where('users.manager', $user_id);
         $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
                                 ' OR (leaves.startdate >= DATE(\'' . $start . '\') AND leaves.enddate <= DATE(\'' . $end . '\')) )');
@@ -579,14 +549,17 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
             
-            switch ($entry->status)
-            {
-                case 1: $color = '#999'; break;     // Planned
-                case 2: $color = '#f89406'; break;  // Requested
-                case 3: $color = '#468847'; break;  // Accepted
-                case 4: $color = '#ff0000'; break;  // Rejected
-            }
-            
+            //switch ($entry->status)
+            //{
+                //case 1: $color = '#999'; break;     // Planned
+                //case 2: $color = '#f89406'; break;  // Requested
+                //case 3: $color = '#468847'; break;  // Accepted
+                //case 4: $color = '#ff0000'; break;  // Rejected
+            //}
+            if ($entry->status == 3)
+	       $color = $entry->color;
+	    else
+		$color = '#ffffff';
             $jsonevents[] = array(
                 'id' => $entry->id,
                 'title' => $entry->firstname .' ' . $entry->lastname,
@@ -609,7 +582,7 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function department($entity_id, $start = "", $end = "", $children = false) {
-        $this->db->select('users.firstname, users.lastname,  leaves.*, types.name as type');
+        $this->db->select('users.firstname, users.lastname,  leaves.*, types.name as type, types.color as color');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
         $this->db->join('leaves', 'leaves.employee  = users.id');
@@ -647,14 +620,19 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
             
-            switch ($entry->status)
-            {
-                case 1: $color = '#999'; break;     // Planned
-                case 2: $color = '#f89406'; break;  // Requested
-                case 3: $color = '#468847'; break;  // Accepted
-                case 4: $color = '#ff0000'; break;  // Rejected
-            }
-            
+            //switch ($entry->status)
+            //{
+                //case 1: $color = '#999'; break;     // Planned
+                //case 2: $color = '#f89406'; break;  // Requested
+                //case 3: $color = '#468847'; break;  // Accepted
+                //case 4: $color = '#ff0000'; break;  // Rejected
+            //}
+
+            if ($entry->status == 3)
+	       $color = $entry->color;
+	    else
+		$color = '#ffffff';
+
             $jsonevents[] = array(
                 'id' => $entry->id,
                 'title' => $entry->firstname .' ' . $entry->lastname,
@@ -773,7 +751,7 @@ class Leaves_model extends CI_Model {
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE) {
+    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE, &$firstDay=FALSE) {
         //Mangage paramaters
         if ($month==0) $month = date("m");
         if ($year==0) $year = date("Y");
@@ -799,7 +777,7 @@ class Leaves_model extends CI_Model {
         $this->load->model('organization_model');
         $employees = $this->organization_model->all_employees($entity, $children);
         foreach ($employees as $employee) {
-            $tabular[$employee->id] = $this->linear($employee->id, $month, $year, TRUE, TRUE, TRUE, FALSE);
+            $tabular[$employee->id] = $this->linear($employee->id, $month, $year, TRUE, TRUE, TRUE, FALSE, $firstDay);
         }
         return $tabular;
     }
@@ -810,9 +788,14 @@ class Leaves_model extends CI_Model {
      * @param type $linear linear calendar for one employee
      * @return int total of leaves duration
      */
-    public function monthly_leaves_duration($linear) {
+    public function monthly_leaves_duration($linear, $lastDay = FALSE) {
         $total = 0;
+	$numDay = 1;
         foreach ($linear->days as $day) {
+	if ($numDay > $lastDay)
+	{
+	  return $total;
+	}
           if (strstr($day->display, ';')) {
               $display = explode(";", $day->display);
               if ($display[0] == '2') $total += 0.5;
@@ -824,6 +807,7 @@ class Leaves_model extends CI_Model {
               if ($day->display == 3) $total += 0.5;
               if ($day->display == 1) $total += 1;
           }
+	  $numDay++;
         }
         return $total;
     }
@@ -837,40 +821,67 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function linear($employee_id, $month, $year, 
-            $planned = FALSE, $requested = FALSE, $accepted = FALSE, $rejected = FALSE) {
-        $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
-        $lastDay = date("t", strtotime($start));    //last day of selected month
-        $end = $year . '-' . $month . '-' . $lastDay;    //last date of selected month
-        
-        //We must show all users of the departement
+            $planned = FALSE, $requested = FALSE, $accepted = FALSE, $rejected = FALSE, $firstDay=FALSE) {
+	$now = date("Y-m-d");
+	$date = $year . '-' . $month . '-' . '1';
+	if (date('m')-0 == $month && $firstDay == "true")
+	   {	
+	   	$DateStart = new DateTime($now);
+		$DateEnd = new DateTime($now);
+	   }
+	else
+	   {
+		$DateStart = new DateTime($date);
+		$DateEnd = new DateTime($date);
+	   }
+	$DateEnd->modify('+45 day');
+	$start = $DateStart->format('Y-m-d');
+	$end = $DateEnd->format('Y-m-d');
+
+	//We must show all users of the departement
         $this->load->model('dayoffs_model');
         $this->load->model('users_model');
+	$this->load->model('types_model');
+	$types = $this->types_model->get_types();
         $employee = $this->users_model->get_users($employee_id);
         $user = new stdClass;
-        $user->name = $employee['firstname'] . ' ' . $employee['lastname'];
+        //$user->name = $employee['firstname'] . ' ' . $employee['lastname'];
+	$user->name = $employee['login'];
+	$user->org = $employee['organization'];
         $user->days = array();
-
         //Init all day to working day
-        for ($ii = 1; $ii <= $lastDay; $ii++) {
+        for ($ii = 1; $ii <= 46; $ii++) {
             $day = new stdClass;
             $day->type = '';
             $day->status = '';
             $day->display = 0; //working day
+	    $day->color = "#ffffff";
             $user->days[$ii] = $day;
         }
-
-        //Force all day offs (mind the case of employees having no leave)
+	//Force all day offs (mind the case of employees having no leave)
         $dayoffs = $this->dayoffs_model->employee_all_dayoffs($employee_id, $start, $end);
         foreach ($dayoffs as $dayoff) {
             $iDate = new DateTime($dayoff->date);
             $dayNum = intval($iDate->format('d'));
-            $user->days[$dayNum]->display = (string) $dayoff->type + 3;
+	    if ($iDate->format('m') != $DateStart->format('m'))
+	       {
+		 while ($DateStart->format('m') != $iDate->format('m'))
+		 {
+		  $iDate->modify('-1 month');
+		  $dayNum = $dayNum + date("t", strtotime($iDate->format('Y-m-d')));
+		 }
+		 $dayNum = $dayNum  - $DateStart->format('d') + 1;
+	       }
+	    else
+		$dayNum = $dayNum - $DateStart->format('d') + 1;   
+	    $user->days[$dayNum]->display = (string) $dayoff->type + 3;
             $user->days[$dayNum]->status = (string) $dayoff->type + 3;
             $user->days[$dayNum]->type = $dayoff->title;
+	    $user->days[$dayNum]->color = "#000000";
         }
-        
+
         //Build the complex query for all leaves
-        $this->db->select('leaves.*, types.name as type');
+        $this->db->select('leaves.*, types.name as type, types.color as color');
         $this->db->from('leaves');
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where("( startdate <= STR_TO_DATE('" . $end . "', '%Y-%m-%d') AND enddate >= STR_TO_DATE('" . $start . "', '%Y-%m-%d'))");
@@ -900,7 +911,19 @@ class Leaves_model extends CI_Model {
                 if ($iDate > $limitDate) break;     //The calendar displays the leaves on one month
                 if ($iDate < $startDate) continue;  //The leave starts before the first day of the calendar
                 $dayNum = intval($iDate->format('d'));
-                
+	    	$tmpDate = new DateTime($iDate->format('Y-m-d'));
+	    	if ($tmpDate->format('m') != $DateStart->format('m'))
+	    	   {
+			while ($DateStart->format('m') != $tmpDate->format('m'))
+		 	{
+			  $tmpDate->modify('-1 month');
+		  	  $dayNum = $dayNum + date("t", strtotime($tmpDate->format('Y-m-d')));
+		 	}
+		     $dayNum = $dayNum  - $DateStart->format('d') + 1;
+	       	   }
+	    	else
+		  $dayNum = $dayNum - $DateStart->format('d') + 1;
+
                 //Display (different from contract/calendar)
                 //0 - Working day  _
                 //1 - All day           []
@@ -912,9 +935,9 @@ class Leaves_model extends CI_Model {
                 if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Afternoon')) $display = '1';
                 if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Morning')) $display = '2';
                 if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Afternoon') && ($entry->enddatetype == 'Afternoon')) $display = '3';
-                /*if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Morning')) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Morning')) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
-                if (($entry->startdate != $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';*/
+                if (($entry->startdate != $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';
                 if (($entry->startdate != $entry->enddate) && ($iDate != $entry->startdate) && ($iDate != $endDate)) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->startdate) && ($entry->startdatetype == 'Morning')) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->startdate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
@@ -927,15 +950,18 @@ class Leaves_model extends CI_Model {
                         if (($user->days[$dayNum]->display == 2) ||
                                 ($user->days[$dayNum]->display == 6)) { //Respect Morning/Afternoon order
                             $user->days[$dayNum]->type .= ';' . $entry->type;
+			    $user->days[$dayNum]->color .= ';' . $entry->color;
                             $user->days[$dayNum]->display .= ';' . $display;
                             $user->days[$dayNum]->status .= ';' . $entry->status;
                         } else {
                             $user->days[$dayNum]->type = $entry->type . ';' . $user->days[$dayNum]->type;
+			    $user->days[$dayNum]->color = $entry->color . ';' . $user->days[$dayNum]->color;
                             $user->days[$dayNum]->display = $display . ';' . $user->days[$dayNum]->display;
                             $user->days[$dayNum]->status = $entry->status . ';' . $user->days[$dayNum]->status;
                         }
                     } else  {   //All day entry
                         $user->days[$dayNum]->type = $entry->type;
+			$user->days[$dayNum]->color = $entry->color;
                         $user->days[$dayNum]->display = $display;
                         $user->days[$dayNum]->status = $entry->status;
                     }

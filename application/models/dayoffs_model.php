@@ -63,6 +63,26 @@ class Dayoffs_model extends CI_Model {
         return $query->result();
     }
     
+
+ /**
+ * Get the list of dates in DayInfo table (scolare holiday)
+ *
+ * @return array of day info
+ * @author Alexandre LALLIARD
+ */
+ public function get_day_info() {
+ 	$this->db->select('DAY(date) as d, MONTH(date) as m, YEAR(date) as y');
+	$this->db->from('DayInfo');
+	$this->db->where('DayInfo.id !=', 0);
+	$result = $this->db->get()->result_array();
+	$day_info = array();
+	foreach($result as $row)
+	 {
+	   $date = $row['y'] . '-0' . $row['m'] . '-0' . $row['d'];
+	   array_push($day_info, $date);
+	 }
+    	return $day_info;
+  }
     
     /**
      * Delete a day off into the day offs table

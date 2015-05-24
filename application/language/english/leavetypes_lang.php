@@ -19,6 +19,7 @@
 $lang['leavetypes_type_title'] = 'Leave types';
 $lang['leavetypes_type_thead_id'] = 'ID';
 $lang['leavetypes_type_thead_name'] = 'Name';
+$lang['leavetypes_type_thead_color'] = 'Color';
 $lang['leavetypes_type_thead_tip_delete'] = 'delete';
 $lang['leavetypes_type_thead_tip_edit'] = 'edit';
 $lang['leavetypes_type_button_export'] = 'Export this list';

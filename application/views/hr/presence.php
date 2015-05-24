@@ -22,7 +22,6 @@ $this->lang->load('calendar', $language);
 $this->lang->load('datatable', $language);
 $this->lang->load('global', $language);?>
 
-<link href="<?php echo base_url();?>assets/css/tabular.css" rel="stylesheet">
 <div class="row-fluid">
     <div class="span12">
 
@@ -40,7 +39,7 @@ $this->lang->load('global', $language);?>
         <p><?php echo lang('hr_presence_month');?> : <b><?php echo lang($month_name);?>&nbsp;<?php echo $year;?></b></p>
         <p><?php echo lang('hr_presence_days');?> : <b><?php echo $total_days;?></b></p>
         <?php if ($contract_id != '') { ?>
-        <p><?php echo lang('hr_presence_contract');?> : <b><?php echo $contract_name;?></b></p>
+        <p><?php echo lang('hr_presence_contract');?> : <b><a href="<?php echo base_url();?>contracts/<?php echo $contract_id; ?>"><?php echo $contract_name;?></a></b></p>
         <p><?php echo lang('hr_presence_working_days');?> : <b><?php echo $opened_days;?></b></p>
         <p><?php echo lang('hr_presence_non_working_days');?> : <b><a href="<?php echo base_url();?>contracts/<?php echo $contract_id; ?>/calendar"><?php echo $non_working_days;?></a></b></p>
         <?php } else { ?>
@@ -53,13 +52,14 @@ $this->lang->load('global', $language);?>
     </div>
     <div class="span3">
         <br /><br />
+	<?php $listMonth = array(lang('January'), lang('February'), lang('March'), lang('April'), lang('May'), lang('June'), lang('July'), lang('August'), lang('September'), lang('October'), lang('November'), lang('December')); ?>
         <label for="cboMonth"><?php echo lang('calendar_tabular_field_month');?></label>
         <select name="cboMonth" id="cboMonth">
             <?php for ($ii=1; $ii<13;$ii++) {
                 if ($ii == $month) {
-                    echo "<option val='" . $ii ."' selected>" . $ii ."</option>";
+                    echo "<option value='" . $ii ."' selected>" . $ii ."</option>";
                 } else {
-                    echo "<option val='" . $ii ."'>" . $ii ."</option>";
+                    echo "<option value='" . $ii ."'>" . $ii ."</option>";
                 }
             }?>
         </select>
@@ -67,15 +67,13 @@ $this->lang->load('global', $language);?>
         <select name="cboYear" id="cboYear">
             <?php for ($ii=date('Y', strtotime('-6 year')); $ii<= date('Y'); $ii++) {
                 if ($ii == $year) {
-                    echo "<option val='" . $ii ."' selected>" . $ii ."</option>";
+                    echo "<option value='" . $ii ."' selected>" . $ii ."</option>";
                 } else {
-                    echo "<option val='" . $ii ."'>" . $ii ."</option>";
+                    echo "<option value='" . $ii ."'>" . $ii ."</option>";
                 }
             }?>
         </select><br />
-        <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
         <button id="cmdExecute" class="btn btn-primary"><?php echo lang('hr_presence_button_execute');?></button>
-        <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
      </div>
 </div>
 
@@ -85,33 +83,64 @@ $this->lang->load('global', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
+<?php
+	$maxDay = 45;
+	$headerDay = "";
+	$headerDayNum = "";
+	$headerMonth = "";
+	$lastMonth = "";
+	$now = date("Y-m-d");
+	$date = $year . '-' . $month . '-' . '1';
+	$DateStart = new DateTime($date);
+	$DateEnd = new DateTime($date);
+	$DateEnd->modify('+ ' . $maxDay . ' day');													                	        while ($DateStart <= $DateEnd){																	                $dayNum = $DateStart->format('w');
+	  $ii = $DateStart->format('d');
+	  switch ($dayNum)																				   {
+	  	 case 1: $headerDay .= "<td><b>" . lang('calendar_monday_short') . "</b></td>"; break;
+		 case 2: $headerDay .= "<td><b>" . lang('calendar_tuesday_short') . "</b></td>"; break;
+		 case 3: $headerDay .= "<td><b>" . lang('calendar_wednesday_short') . "</b></td>"; break;
+		 case 4: $headerDay .= "<td><b>" . lang('calendar_thursday_short') . "</b></td>"; break;
+		 case 5: $headerDay .= "<td><b>" . lang('calendar_friday_short') . "</b></td>"; break;
+		 case 6: $headerDay .= "<td><b>" . lang('calendar_saturday_short') . "</b></td>"; break;
+		 case 0: $headerDay .= "<td><b>" . lang('calendar_sunday_short') . "</b></td>"; break;
+	   }
+	$test = $DateStart->format('Y-m-d');
+	if (in_array($test, $dayoffs))
+	   {
+		$headerDayNum .= "<td bgcolor = '#5A5B78'><b>" . $ii . "</b></td>";
+	   }
+	else
+	   {
+		$headerDayNum .= "<td><b>" . $ii . "</b></td>";
+	   }
+	   if ($lastMonth != $DateStart->format('m'))
+	      {
+		$lastMonth = $DateStart->format('m');
+		$tmpLastDay = date("t", strtotime($DateStart->format('Y-m-d'))) - $DateStart->format('d') + 1;    //last day of selected month
+		if ($tmpLastDay > $maxDay)
+		   $tmpLastDay = $maxDay;
+		$headerMonth .= "<td colspan=" . $tmpLastDay . "><b>" . $listMonth[$lastMonth - 1] . "</b></td>";
+	      }
+	$DateStart->modify('+1 day'); //Next day
+	$maxDay = $maxDay - 1;
+	}
+	?>
         <table class="table table-bordered">
     <thead>
+	<tr>
+		<?php
+		echo $headerMonth
+		?>
+	</tr>
         <tr>
             <?php
-                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
-                $lastDay = date("t", strtotime($start));    //last day of selected month
-                for ($ii = 1; $ii <=$lastDay; $ii++) {
-                    $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
-                    switch ($dayNum)
-                    {
-                        case 1: echo '<td><b>' . lang('calendar_monday_short') . '</b></td>'; break;
-                        case 2: echo '<td><b>' . lang('calendar_tuesday_short') . '</b></td>'; break;
-                        case 3: echo '<td><b>' . lang('calendar_wednesday_short') . '</b></td>'; break;
-                        case 4: echo '<td><b>' . lang('calendar_thursday_short') . '</b></td>'; break;
-                        case 5: echo '<td><b>' . lang('calendar_friday_short') . '</b></td>'; break;
-                        case 6: echo '<td><b>' . lang('calendar_saturday_short') . '</b></td>'; break;
-                        case 7: echo '<td><b>' . lang('calendar_sunday_short') . '</b></td>'; break;
-                    }
-                }?>
+		echo $headerDay;    
+            ?>
         </tr>
         <tr>
             <?php
-                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
-                $lastDay = date("t", strtotime($start));    //last day of selected month
-                for ($ii = 1; $ii <=$lastDay; $ii++) {
-                    echo '<td><b>' . $ii . '</b></td>';
-                }?>
+		echo $headerDayNum;    
+            ?>
         </tr>
     </thead>
   <tbody>
@@ -159,7 +188,7 @@ $this->lang->load('global', $language);?>
                       {
                           case 1: $class = "amplanned"; break;  // Planned
                           case 2: $class = "amrequested"; break;  // Requested
-                          case 3: $class = "amaccepted"; break;  // Accepted
+                          case 3: $day->color =  ";background: -webkit-linear-gradient(-45deg, $day->color 50%,#ffffff 50%)"; break;  // Accepted
                           case 4: $class = "amrejected"; break;  // Rejected
                       }
                     break;
@@ -168,7 +197,7 @@ $this->lang->load('global', $language);?>
                       {
                           case 1: $class = "pmplanned"; break;  // Planned
                           case 2: $class = "pmrequested"; break;  // Requested
-                          case 3: $class = "pmaccepted"; break;  // Accepted
+                          case 3: $day->color = ";background: -webkit-linear-gradient(-45deg, #ffffff 50%,$day->color 50%)"; break;  // Accepted
                           case 4: $class = "pmrejected"; break;  // Rejected
                       }
                     break;
@@ -186,7 +215,7 @@ $this->lang->load('global', $language);?>
             if ($overlapping) {
                 echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
             } else {
-                echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+                echo '<td title="' . $day->type . '" style="background-color: ' . $day->color . '">&nbsp;</td>';
             }
      } ?>
           </tr>
@@ -265,35 +294,34 @@ $(function () {
     
     //Transform the HTML table in a fancy datatable
     var oTable = $('#leaves').dataTable({
-                "order": [[ 1, "asc" ]],
-                "oLanguage": {
-                "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
-                "sInfo":           "<?php echo lang('datatable_sInfo');?>",
-                "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
-                "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
-                "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
-                "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
-                "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
-                "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
-                "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
-                "sSearch":         "<?php echo lang('datatable_sSearch');?>",
-                "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
-                "oPaginate": {
-                    "sFirst":    "<?php echo lang('datatable_sFirst');?>",
-                    "sLast":     "<?php echo lang('datatable_sLast');?>",
-                    "sNext":     "<?php echo lang('datatable_sNext');?>",
-                    "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
-                },
-                "oAria": {
-                    "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
-                    "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                    "order": [[ 1, "asc" ]],
+                    "oLanguage": {
+                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                    "oPaginate": {
+                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                        "sLast":     "<?php echo lang('datatable_sLast');?>",
+                        "sNext":     "<?php echo lang('datatable_sNext');?>",
+                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                    },
+                    "oAria": {
+                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                    }
                 }
-            }
-        });
+            });
         
         //Load a tiny calendar
         $('#calendar').fullCalendar({
-            timeFormat: ' ', /*Trick to remove the start time of the event*/
             height: 300,
             defaultDate: moment('<?php echo $default_date;?>'),
             header: {
@@ -314,23 +342,6 @@ $(function () {
         $('#cmdExecute').click(function() {
             var month = $('#cboMonth').val();
             var year = $('#cboYear').val();
-            var url = '<?php echo base_url();?>hr/presence/' + employee + '/' + month+ '/' + year;
-            document.location.href = url;
-        });
-<?php $datePrev = date_create($year . '-' . $month . '-01');
-$dateNext = clone $datePrev;
-date_add($dateNext, date_interval_create_from_date_string('1 month'));
-date_sub($datePrev, date_interval_create_from_date_string('1 month'));?>
-        //Previous/Next
-        $('#cmdPrevious').click(function() {
-            month = <?php echo $datePrev->format('m'); ?>;
-            year = <?php echo $datePrev->format('Y'); ?>;
-            var url = '<?php echo base_url();?>hr/presence/' + employee + '/' + month+ '/' + year;
-            document.location.href = url;
-        });
-        $('#cmdNext').click(function() {
-            month = <?php echo $dateNext->format('m'); ?>;
-            year = <?php echo $dateNext->format('Y'); ?>;
             var url = '<?php echo base_url();?>hr/presence/' + employee + '/' + month+ '/' + year;
             document.location.href = url;
         });

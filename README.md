@@ -74,6 +74,7 @@ We thank the following open source projects for the components used by Jorani:
 * RSA Encryption in pure PHP https://github.com/phpseclib/phpseclib
 * Excel import/export https://github.com/PHPOffice/PHPExcel
 * Oauth2 Server https://github.com/bshaffer/oauth2-server-php
+* Sabre/VObject https://github.com/fruux/sabre-vobject
 
 #### Frontend
 

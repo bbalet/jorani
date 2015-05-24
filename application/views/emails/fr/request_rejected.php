@@ -25,7 +25,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Cher {Firstname} {Lastname}, <br />
+        Cher/Chère {Firstname} {Lastname}, <br />
         <br />
         La demande d'absence que vous avez soumise a été refusée. Voici les détails :
         <table border="0">

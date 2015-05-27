@@ -135,9 +135,11 @@ $(function () {
         },
         events: '<?php echo base_url();?>leaves/individual',
         eventClick: function(calEvent, jsEvent, view) {
-            var link = "<?php echo base_url();?>ics/ical/" + calEvent.id;
-            $("#lnkDownloadCalEvnt").attr('href', link);
-            $('#frmEvent').modal('show');
+            if (calEvent.color != '#000000') {
+                var link = "<?php echo base_url();?>ics/ical/" + calEvent.id;
+                $("#lnkDownloadCalEvnt").attr('href', link);
+                $('#frmEvent').modal('show');
+            }
         },
         loading: function(isLoading) {
             if (isLoading) { //Display/Hide a pop-up showing an animated icon during the Ajax query.

@@ -315,6 +315,8 @@ class Requests extends CI_Controller {
             'Lastname' => $leave['lastname'],
             'StartDate' => $startdate,
             'EndDate' => $enddate,
+            'StartDateType' => lang($leave['startdatetype']),
+            'EndDateType' => lang($leave['enddatetype']),
             'Cause' => $leave['cause'],
             'Type' => $leave['type']
         );

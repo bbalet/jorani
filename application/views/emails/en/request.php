@@ -24,10 +24,10 @@
         {Firstname} {Lastname} requests a leave. Below, the <a href="{BaseUrl}leaves/{LeaveId}">details</a> :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}</td>
+                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}</td>
+                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
                 <td>Type &nbsp;</td><td>{Type}</td>

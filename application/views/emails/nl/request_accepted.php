@@ -30,10 +30,10 @@
         Het afwezigheidsverzoek dat u heeft ingediend is geaccepteerd. Hieronder vindt u de details :
         <table border="0">
             <tr>
-                <td>Van &nbsp;</td><td>{StartDate}</td>
+                <td>Van &nbsp;</td><td>{StartDate}}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>Tot &nbsp;</td><td>{EndDate}</td>
+                <td>Tot &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
                 <td>Type &nbsp;</td><td>{Type}</td>

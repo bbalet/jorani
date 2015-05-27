@@ -272,6 +272,8 @@ class Leaves extends CI_Controller {
                 'Lastname' => $this->session->userdata('lastname'),
                 'StartDate' => $startdate,
                 'EndDate' => $enddate,
+                'StartDateType' => lang($this->input->post('startdatetype')),
+                'EndDateType' => lang($this->input->post('startdatetype')),
                 'Type' => $this->types_model->get_label($this->input->post('type')),
                 'Reason' => $this->input->post('cause'),
                 'BaseUrl' => $this->config->base_url(),

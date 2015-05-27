@@ -26,10 +26,10 @@
         The leave you've requested has been rejected. Below, the details :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}</td>
+                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}</td>
+                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
                 <td>Type &nbsp;</td><td>{Type}</td>

@@ -93,7 +93,7 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_leave_details($id) {
-        $this->db->select('leaves.id as leave_id, status, startdate, enddate, cause, duration, types.name as type');
+        $this->db->select('leaves.*, leaves.id as leave_id, types.name as type');
         $this->db->select('users.id as user_id, firstname, lastname, organization, language, email');
         $this->db->from('leaves');
         $this->db->join('status', 'leaves.status = status.id');

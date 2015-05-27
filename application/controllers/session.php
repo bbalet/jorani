@@ -174,7 +174,12 @@ class Session extends CI_Controller {
         } else {
             //Send an email to the user with its login information
             $this->load->library('email');
-            $this->lang->load('email', $this->session->userdata('language'));
+            
+            //We need to instance an different object as the languages of connected user may differ from the UI lang
+            $lang_mail = new CI_Lang();
+            $usr_lang = $this->polyglot->code2language($user->language);
+            $lang_mail->load('email', $usr_lang);
+            $lang_mail->load('global', $usr_lang);
             
             //Generate random password and store its hash into db
             $password = $this->users_model->resetClearPassword($user->id);
@@ -182,7 +187,7 @@ class Session extends CI_Controller {
             //Send an e-mail to the user requesting a new password
             $this->load->library('parser');
             $data = array(
-                'Title' => lang('email_password_forgotten_title'),
+                'Title' => $lang_mail->line('email_password_forgotten_title'),
                 'BaseURL' => base_url(),
                 'Firstname' => $user->firstname,
                 'Lastname' => $user->lastname,
@@ -205,7 +210,7 @@ class Session extends CI_Controller {
             } else {
                $subject = '[Jorani] ';
             }
-            $this->email->subject($subject . lang('email_password_forgotten_subject'));
+            $this->email->subject($subject . $lang_mail->line('email_password_forgotten_subject'));
             $this->email->message($message);
             $this->email->send();
             echo "OK";

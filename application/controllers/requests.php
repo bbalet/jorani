@@ -300,23 +300,26 @@ class Requests extends CI_Controller {
         $this->load->library('email');
         $this->load->library('polyglot');
         $usr_lang = $this->polyglot->code2language($leave['language']);
-        $this->lang->load('email', $usr_lang);
-
-        $this->lang->load('global', $usr_lang);
+        
+        //We need to instance an different object as the languages of connected user may differ from the UI lang
+        $lang_mail = new CI_Lang();
+        $lang_mail->load('email', $usr_lang);
+        $lang_mail->load('global', $usr_lang);
+        
         $date = new DateTime($leave['startdate']);
-        $startdate = $date->format(lang('global_date_format'));
+        $startdate = $date->format($lang_mail->line('global_date_format'));
         $date = new DateTime($leave['enddate']);
-        $enddate = $date->format(lang('global_date_format'));
+        $enddate = $date->format($lang_mail->line('global_date_format'));
 
         $this->load->library('parser');
         $data = array(
-            'Title' => lang('email_leave_request_validation_title'),
+            'Title' => $lang_mail->line('email_leave_request_validation_title'),
             'Firstname' => $leave['firstname'],
             'Lastname' => $leave['lastname'],
             'StartDate' => $startdate,
             'EndDate' => $enddate,
-            'StartDateType' => lang($leave['startdatetype']),
-            'EndDateType' => lang($leave['enddatetype']),
+            'StartDateType' => $lang_mail->line($leave['startdatetype']),
+            'EndDateType' => $lang_mail->line($leave['enddatetype']),
             'Cause' => $leave['cause'],
             'Type' => $leave['type']
         );
@@ -329,10 +332,10 @@ class Requests extends CI_Controller {
         }
         if ($leave['status'] == 3) {
             $message = $this->parser->parse('emails/' . $leave['language'] . '/request_accepted', $data, TRUE);
-            $this->email->subject($subject . lang('email_leave_request_accept_subject'));
+            $this->email->subject($subject . $lang_mail->line('email_leave_request_accept_subject'));
         } else {
             $message = $this->parser->parse('emails/' . $leave['language'] . '/request_rejected', $data, TRUE);
-            $this->email->subject($subject . lang('email_leave_request_reject_subject'));
+            $this->email->subject($subject . $lang_mail->line('email_leave_request_reject_subject'));
         }
         if ($this->email->mailer_engine== 'phpmailer') {
             $this->email->phpmailer->Encoding = 'quoted-printable';

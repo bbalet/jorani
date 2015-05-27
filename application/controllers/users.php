@@ -204,11 +204,13 @@ class Users extends CI_Controller {
                 $this->load->library('email');
                 $this->load->library('polyglot');
                 $usr_lang = $this->polyglot->code2language($user['language']);
-                $this->lang->load('email', $usr_lang);
+                //We need to instance an different object as the languages of connected user may differ from the UI lang
+                $lang_mail = new CI_Lang();
+                $lang_mail->load('email', $usr_lang);
 
                 $this->load->library('parser');
                 $data = array(
-                    'Title' => lang('email_password_reset_title'),
+                    'Title' => $lang_mail->line('email_password_reset_title'),
                     'Firstname' => $user['firstname'],
                     'Lastname' => $user['lastname']
                 );
@@ -227,7 +229,7 @@ class Users extends CI_Controller {
                 } else {
                    $subject = '[Jorani] ';
                 }
-                $this->email->subject($subject . lang('email_password_reset_subject'));
+                $this->email->subject($subject . $lang_mail->line('email_password_reset_subject'));
                 $this->email->message($message);
                 $this->email->send();
                 
@@ -291,11 +293,13 @@ class Users extends CI_Controller {
             $this->load->library('email');
             $this->load->library('polyglot');
             $usr_lang = $this->polyglot->code2language($this->input->post('language'));
-            $this->lang->load('email', $usr_lang);
+            //We need to instance an different object as the languages of connected user may differ from the UI lang
+            $lang_mail = new CI_Lang();
+            $lang_mail->load('email', $usr_lang);
             
             $this->load->library('parser');
             $data = array(
-                'Title' => lang('email_user_create_title'),
+                'Title' => $lang_mail->line('email_user_create_title'),
                 'BaseURL' => base_url(),
                 'Firstname' => $this->input->post('firstname'),
                 'Lastname' => $this->input->post('lastname'),
@@ -318,7 +322,7 @@ class Users extends CI_Controller {
             } else {
                $subject = '[Jorani] ';
             }
-            $this->email->subject($subject . lang('email_user_create_subject'));
+            $this->email->subject($subject . $lang_mail->line('email_user_create_subject'));
             $this->email->message($message);
             $this->email->send();
             

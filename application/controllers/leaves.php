@@ -257,23 +257,26 @@ class Leaves extends CI_Controller {
             $this->load->library('email');
             $this->load->library('polyglot');
             $usr_lang = $this->polyglot->code2language($manager['language']);
-            $this->lang->load('email', $usr_lang);
-
-            $this->lang->load('global', $usr_lang);
+            
+            //We need to instance an different object as the languages of connected user may differ from the UI lang
+            $lang_mail = new CI_Lang();
+            $lang_mail->load('email', $usr_lang);
+            $lang_mail->load('global', $usr_lang);
+            
             $date = new DateTime($this->input->post('startdate'));
-            $startdate = $date->format(lang('global_date_format'));
+            $startdate = $date->format($lang_mail->line('global_date_format'));
             $date = new DateTime($this->input->post('enddate'));
-            $enddate = $date->format(lang('global_date_format'));
+            $enddate = $date->format($lang_mail->line('global_date_format'));
 
             $this->load->library('parser');
             $data = array(
-                'Title' => lang('email_leave_request_title'),
+                'Title' => $lang_mail->line('email_leave_request_title'),
                 'Firstname' => $this->session->userdata('firstname'),
                 'Lastname' => $this->session->userdata('lastname'),
                 'StartDate' => $startdate,
                 'EndDate' => $enddate,
-                'StartDateType' => lang($this->input->post('startdatetype')),
-                'EndDateType' => lang($this->input->post('startdatetype')),
+                'StartDateType' => $lang_mail->line($this->input->post('startdatetype')),
+                'EndDateType' => $lang_mail->line($this->input->post('enddatetype')),
                 'Type' => $this->types_model->get_label($this->input->post('type')),
                 'Reason' => $this->input->post('cause'),
                 'BaseUrl' => $this->config->base_url(),
@@ -301,7 +304,7 @@ class Leaves extends CI_Controller {
                 $this->email->cc($delegates);
             }
             
-            $this->email->subject($subject . lang('email_leave_request_subject') .
+            $this->email->subject($subject . $lang_mail->line('email_leave_request_subject') .
                     $this->session->userdata('firstname') . ' ' .
                     $this->session->userdata('lastname'));
             $this->email->message($message);

@@ -191,15 +191,17 @@ class Extra extends CI_Controller {
             $this->load->library('email');
             $this->load->library('polyglot');
             $usr_lang = $this->polyglot->code2language($manager['language']);
-            $this->lang->load('email', $usr_lang);
+            //We need to instance an different object as the languages of connected user may differ from the UI lang
+            $lang_mail = new CI_Lang();
+            $lang_mail->load('email', $usr_lang);
+            $lang_mail->load('global', $usr_lang);
 
-            $this->lang->load('global', $usr_lang);
             $date = new DateTime($this->input->post('date'));
-            $startdate = $date->format(lang('global_date_format'));
+            $startdate = $date->format($lang_mail->line('global_date_format'));
 
             $this->load->library('parser');
             $data = array(
-                'Title' => lang('email_extra_request_validation_title'),
+                'Title' => $lang_mail->line('email_extra_request_validation_title'),
                 'Firstname' => $this->session->userdata('firstname'),
                 'Lastname' => $this->session->userdata('lastname'),
                 'Date' => $startdate,
@@ -228,7 +230,7 @@ class Extra extends CI_Controller {
             if ($delegates != '') {
                 $this->email->cc($delegates);
             }
-            $this->email->subject($subject . lang('email_extra_request_reject_subject') .
+            $this->email->subject($subject . $lang_mail->line('email_extra_request_reject_subject') .
                     $this->session->userdata('firstname') . ' ' .
                     $this->session->userdata('lastname'));
             $this->email->message($message);

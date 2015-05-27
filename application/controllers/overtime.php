@@ -147,15 +147,18 @@ class Overtime extends CI_Controller {
         $this->load->library('email');
         $this->load->library('polyglot');
         $usr_lang = $this->polyglot->code2language($employee['language']);
-        $this->lang->load('email', $usr_lang);
         
-        $this->lang->load('global', $usr_lang);
+        //We need to instance an different object as the languages of connected user may differ from the UI lang
+        $lang_mail = new CI_Lang();
+        $lang_mail->load('email', $usr_lang);
+        $lang_mail->load('global', $usr_lang);
+        
         $date = new DateTime($extra['startdate']);
-        $startdate = $date->format(lang('global_date_format'));
+        $startdate = $date->format($lang_mail->line('global_date_format'));
 
         $this->load->library('parser');
         $data = array(
-            'Title' => lang('email_overtime_request_validation_title'),
+            'Title' => $lang_mail->line('email_overtime_request_validation_title'),
             'Firstname' => $employee['firstname'],
             'Lastname' => $employee['lastname'],
             'Date' => $startdate,
@@ -171,10 +174,10 @@ class Overtime extends CI_Controller {
         }
         if ($extra['status'] == 3) {
             $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_accepted', $data, TRUE);
-            $this->email->subject($subject . lang('email_overtime_request_accept_subject'));
+            $this->email->subject($subject . $lang_mail->line('email_overtime_request_accept_subject'));
         } else {
             $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_rejected', $data, TRUE);
-            $this->email->subject($subject . lang('email_overtime_request_reject_subject'));
+            $this->email->subject($subject . $lang_mail->line('email_overtime_request_reject_subject'));
         }
         if ($this->email->mailer_engine== 'phpmailer') {
             $this->email->phpmailer->Encoding = 'quoted-printable';

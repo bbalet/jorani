@@ -133,6 +133,36 @@ class Leaves_model extends CI_Model {
     }
     
     /**
+     * Get all entitled days applicable to the reference date (to contract and employee)
+     * Compute Min and max date by type
+     * @param type $employee Employee identifier
+     * @param type $contract contract identifier
+     * @param type $refDate Date of execution
+     * @return array Array of entitled days associated to the key type id
+     */
+    public function getSumEntitledDays($employee, $contract, $refDate) {
+        $this->db->select('types.id as type_id, types.name as type_name');
+        $this->db->select('SUM(entitleddays.days) as entitled');
+        $this->db->select('MIN(startdate) as min_date');
+        $this->db->select('MAX(enddate) as max_date');
+        $this->db->from('entitleddays');
+        $this->db->join('types', 'types.id = entitleddays.type');
+        $this->db->group_by('types.id');
+        $this->db->where('entitleddays.startdate <= ', $refDate);
+        $this->db->where('entitleddays.enddate >= ', $refDate);
+        $where = ' (entitleddays.contract=' . $contract . 
+                       ' OR entitleddays.employee=' . $employee . ')';
+        $this->db->where($where, NULL, FALSE);   //Not very safe, but can't do otherwise
+        $results = $this->db->get()->result_array();
+        //Create an associated array have the leave type as key
+        $entitled_days = array();
+        foreach ($results as $result) {
+            $entitled_days[$result['type_id']] = $result;
+        }
+        return $entitled_days;
+    }
+    
+    /**
      * Compute the leave balance of an employee (used by report and counters)
      * @param int $id ID of the employee
      * @param bool $sum_extra TRUE: sum compensate summary
@@ -150,53 +180,32 @@ class Leaves_model extends CI_Model {
         $this->load->model('contracts_model');
         $hasContract = $this->contracts_model->getBoundaries($id, $startentdate, $endentdate, $refDate);
         if ($hasContract) {
-            //Fill a list of all existing leave types
             $this->load->model('types_model');
+            $this->load->model('users_model');
+            //Fill a list of all existing leave types
             $summary = $this->types_model->allTypes($compensate_name);
+            //Get the sum of entitled days
+            $user = $this->users_model->get_users($id);
+            $entitlements = $this->getSumEntitledDays($id, $user['contract'], $refDate);
             
-            //Get the total of taken leaves grouped by type
-            $this->db->select('sum(leaves.duration) as taken, types.name as type');
-            $this->db->from('leaves');
-            $this->db->join('types', 'types.id = leaves.type');
-            $this->db->where('leaves.employee', $id);
-            $this->db->where('leaves.status', 3);
-            $this->db->where('leaves.startdate >= ', $startentdate);
-            $this->db->where('leaves.enddate <=', $endentdate);
-            $this->db->group_by("leaves.type");
-            $taken_days = $this->db->get()->result_array();
-            foreach ($taken_days as $taken) {
-                $summary[$taken['type']][0] = (float) $taken['taken']; //Taken
-            }
-            
-            //Get the total of entitled days affected to a contract (between 2 dates)
-            $this->db->select('types.name as type, entitleddays.days as entitled');
-            $this->db->from('users');
-            $this->db->join('contracts', 'contracts.id = users.contract');
-            $this->db->join('entitleddays', 'entitleddays.contract = users.contract', 'left outer');
-            $this->db->join('types', 'types.id = entitleddays.type');
-            $this->db->where('users.id', $id);
-            $this->db->where('entitleddays.startdate <= ', $refDate);
-            $this->db->where('entitleddays.enddate >= ', $refDate);
-            $entitled_days = $this->db->get()->result_array();
-            foreach ($entitled_days as $entitled) {
-                $summary[$entitled['type']][1] += (float) $entitled['entitled']; //entitled
-            }
-
-            //Add entitled days of employee (number of entitled days can be negative)
-            $this->db->select('types.name as type, entitleddays.days as entitled');
-            $this->db->from('users');
-            $this->db->join('contracts', 'contracts.id = users.contract');
-            $this->db->join('entitleddays', 'entitleddays.employee = users.id', 'left outer');
-            $this->db->join('types', 'types.id = entitleddays.type');
-            $this->db->where('users.id', $id);
-            $this->db->where('entitleddays.startdate <= ', $refDate);
-            $this->db->where('entitleddays.enddate >= ', $refDate);
-            $entitled_days = $this->db->get()->result_array();
-
-            foreach ($entitled_days as $entitled) {
-                //Note: this is an addition to the entitled days attached to the contract
-                //Most common use cases are 'special leave', 'maternity leave'...
-                $summary[$entitled['type']][1] += (float) $entitled['entitled']; //entitled
+            foreach ($entitlements as $entitlement) {
+                //Get the total of taken leaves grouped by type
+                $this->db->select('SUM(leaves.duration) as taken, types.name as type');
+                $this->db->from('leaves');
+                $this->db->join('types', 'types.id = leaves.type');
+                $this->db->where('leaves.employee', $id);
+                $this->db->where('leaves.status', 3);
+                $this->db->where('leaves.startdate >= ', $entitlement['min_date']);
+                $this->db->where('leaves.enddate <=', $entitlement['max_date']);
+                $this->db->where('leaves.type', $entitlement['type_id']);
+                $this->db->group_by("leaves.type");
+                $taken_days = $this->db->get()->result_array();
+                //Count the number of taken days
+                foreach ($taken_days as $taken) {
+                    $summary[$taken['type']][0] = (float) $taken['taken']; //Taken
+                }
+                //Report the number of available days
+                $summary[$entitlement['type_name']][1] = (float) $entitlement['entitled'];
             }
             
             //Add the validated catch up days

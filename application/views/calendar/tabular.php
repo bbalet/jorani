@@ -52,7 +52,7 @@ $this->lang->load('global', $language);?>
                 }
             }?>
         </select>
-	 <label for="textNbJour">Nombre de jours</label>
+	 <label for="textNbJour"><?php echo lang('calendar_tabular_nb_days');?></label>
         <input type="text" id="textNbJour" name="textNbJour" value="<?php echo $cal_day; ?>" />
         </div>
     </div>

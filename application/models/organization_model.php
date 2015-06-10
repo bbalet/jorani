@@ -235,8 +235,7 @@ class Organization_model extends CI_Model {
         } else {
             $this->db->where('organization.id', $id);
         }
-        $this->db->order_by('lastname', 'asc'); 
-        $this->db->order_by('firstname', 'asc');
+        $this->db->order_by('department', 'asc'); 
         $employees = $this->db->get()->result();
         return $employees;
     }

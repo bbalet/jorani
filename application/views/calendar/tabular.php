@@ -29,29 +29,31 @@ $this->lang->load('global', $language);?>
         <div class="input-append">
         <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
         <button id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('calendar_tabular_button_select_entity');?></button>
-        
+	<?php $listMonth = array(lang('January'), lang('February'), lang('March'), lang('April'), lang('May'), lang('June'), lang('July'), lang('August'), lang('September'), lang('October'), lang('November'), lang('December')); ?>
         <label for="cboMonth"><?php echo lang('calendar_tabular_field_month');?></label>
         <select name="cboMonth" id="cboMonth">
             <?php for ($ii=1; $ii<13;$ii++) {
                 if ($ii == $month) {
-                    echo "<option val='" . $ii ."' selected>" . $ii ."</option>";
+                    echo "<option value=" . $ii ." selected>" . $listMonth[$ii -1] . "</option>";
                 } else {
-                    echo "<option val='" . $ii ."'>" . $ii ."</option>";
+                    echo "<option value=" . $ii .">" . $listMonth[$ii -1] . "</option>";
                 }
             }?>
         </select>
+
         
         <label for="cboYear"><?php echo lang('calendar_tabular_field_year');?></label>
         <select name="cboYear" id="cboYear">
             <?php for ($ii=date('Y', strtotime('-6 year')); $ii<date('Y', strtotime('+2 year'));$ii++) {
                 if ($ii == $year) {
-                    echo "<option val='" . $ii ."' selected>" . $ii ."</option>";
+                    echo "<option value='" . $ii ."' selected>" . $ii ."</option>";
                 } else {
-                    echo "<option val='" . $ii ."'>" . $ii ."</option>";
+                    echo "<option value='" . $ii ."'>" . $ii ."</option>";
                 }
             }?>
         </select>
-        
+	 <label for="textNbJour">Nombre de jours</label>
+        <input type="text" id="textNbJour" name="textNbJour" value="<?php echo $cal_day; ?>" />
         </div>
     </div>
     <div class="span3">
@@ -77,42 +79,102 @@ $this->lang->load('global', $language);?>
      echo lang('leaves_summary_tbody_empty');
 } else {
 ?>
-<table class="table table-bordered">
+<?php
+                $headerDay = "";
+                $headerDayNum = "";
+                $headerMonth = "";
+                $headerWeek = "";
+                $lastMonth = "";
+                $week_count = 0;
+                $now = date("Y-m-d");
+                $date = $year . '-' . $month . '-' . '1';
+                if (date('m')-0 == $month && $firstDay == "true")
+                {
+                   $DateStart = new DateTime($now);
+                   $DateEnd = new DateTime($now);
+                }
+                else
+                {
+                   $DateStart = new DateTime($date);
+                   $DateEnd = new DateTime($date);
+                }
+                $tmpWeek = date("W", strtotime($DateStart->format('Y-m-d')));
+                if ($cal_day > 31)
+                   $maxDay = $cal_day; //day displayed in the tabular
+                else
+                   $maxDay = date("t", strtotime($DateStart->format('Y-m-d'))) - 1;
+                $cal_day = $maxDay;
+                $DateEnd->modify('+ ' . $maxDay . ' day');
+                while ($DateStart <= $DateEnd){
+                    $dayNum = $DateStart->format('w');
+                    $ii = $DateStart->format('d');
+		    switch ($dayNum)
+                    {
+                        case 1: $headerDay .= "<td><b>" . lang('calendar_monday_short') . "</b></td>"; break;
+                        case 2: $headerDay .= "<td><b>" . lang('calendar_tuesday_short') . "</b></td>"; break;
+                        case 3: $headerDay .= "<td><b>" . lang('calendar_wednesday_short') . "</b></td>"; break;
+                        case 4: $headerDay .= "<td><b>" . lang('calendar_thursday_short') . "</b></td>"; break;
+                        case 5: $headerDay .= "<td><b>" . lang('calendar_friday_short') . "</b></td>"; break;
+                        case 6: $headerDay .= "<td><b>" . lang('calendar_saturday_short') . "</b></td>"; break;
+                        case 0: $headerDay .= "<td><b>" . lang('calendar_sunday_short') . "</b></td>"; break;
+                    }
+                    $week = date("W", strtotime($DateStart->format('Y-m-d')));
+                    if ($week != $tmpWeek)
+                    {
+                       $headerWeek .= "<td colspan=" . $week_count . "><b>" . $tmpWeek . "</b></td>";
+                       $week_count = 1;
+                    }
+                    else
+                        $week_count = $week_count + 1;
+                    $test = $DateStart->format('Y-m-d');
+                    if ($test == $now)
+                       $headerDayNum .= "<td style='border: solid; border-color: red'><b>" . $ii . "</b></td>";
+                    else
+                       $headerDayNum .= "<td><b>" . $ii . "</b></td>";
+                    if ($lastMonth != $DateStart->format('m')) //display month
+                    {
+                        $lastMonth = $DateStart->format('m');
+                        $tmpLastDay = date("t", strtotime($DateStart->format('Y-m-d'))) - $DateStart->format('d') + 1;    //last day of selected month
+                        if ($tmpLastDay > $maxDay)
+                           $tmpLastDay = $maxDay + 1;
+                        $headerMonth .= "<td colspan=" . $tmpLastDay . "><b>" . $listMonth[$lastMonth - 1] . "</b></td>";
+                    }
+                  $tmpWeek = $DateStart->format('W');
+                  $DateStart->modify('+1 day'); //Next day
+                  $maxDay = $maxDay - 1;
+                }
+                $headerWeek .= "<td colspan=" . $week_count . "><b>" . $tmpWeek . "</b></td>";
+?>
+<table class="table table-bordered" style="border: solid" border="1" cellpadding="3">
     <thead>
         <tr>
+         <td>&nbsp;</td>
+         <?php echo $headerMonth; ?>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        <?php echo $headerWeek; ?>
+        </tr>
+        <tr>
             <td>&nbsp;</td>
-            <?php
-                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
-                $lastDay = date("t", strtotime($start));    //last day of selected month
-                for ($ii = 1; $ii <=$lastDay; $ii++) {
-                    $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
-                    switch ($dayNum)
-                    {
-                        case 1: echo '<td><b>' . lang('calendar_monday_short') . '</b></td>'; break;
-                        case 2: echo '<td><b>' . lang('calendar_tuesday_short') . '</b></td>'; break;
-                        case 3: echo '<td><b>' . lang('calendar_wednesday_short') . '</b></td>'; break;
-                        case 4: echo '<td><b>' . lang('calendar_thursday_short') . '</b></td>'; break;
-                        case 5: echo '<td><b>' . lang('calendar_friday_short') . '</b></td>'; break;
-                        case 6: echo '<td><b>' . lang('calendar_saturday_short') . '</b></td>'; break;
-                        case 7: echo '<td><b>' . lang('calendar_sunday_short') . '</b></td>'; break;
-                    }
-                }?>
+            <?php echo $headerDay; ?>
         </tr>
         <tr>
             <td><b><?php echo lang('calendar_tabular_thead_employee');?></b></td>
-            <?php
-                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
-                $lastDay = date("t", strtotime($start));    //last day of selected month
-                for ($ii = 1; $ii <=$lastDay; $ii++) {
-                    echo '<td><b>' . $ii . '</b></td>';
-                }?>
+            <?php echo $headerDayNum; ?>
         </tr>
     </thead>
   <tbody>
   <?php
   $repeater = 0;
+  $organisation = "";
   foreach ($tabular as $employee) {?>
-    <tr>
+     <?php
+          if ($employee->org != $organisation) // Delimite services
+             echo '<tr title=' . $employee->org . ' style="border-top: solid">';
+	  else
+             echo '<tr title=' . $employee->org . '>';
+          ?>
       <td><?php echo $employee->name; ?></td>
       <?php foreach ($employee->days as $day) {
           $overlapping = FALSE;
@@ -193,11 +255,12 @@ $this->lang->load('global', $language);?>
             } else {
                 echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
             }
+	    $organisation = $employee->org;
             ?>
     <?php } ?>
           </tr>
     <?php      
-    if (++$repeater>=10) {
+    if (++$repeater>=20) {
         $repeater = 0;?>
         <tr>
             <td>&nbsp;</td>
@@ -251,7 +314,8 @@ $this->lang->load('global', $language);?>
     var month = <?php echo $month;?>;
     var year = <?php echo $year;?>;
     var children = '<?php echo $children;?>';
-    
+    var firstDay = false;
+    var maxDay = 0;  
     function select_entity() {
         entity = $('#organization').jstree('get_selected')[0];
         text = $('#organization').jstree().get_text(entity);
@@ -271,7 +335,9 @@ $this->lang->load('global', $language);?>
     //Target : execution in the page or export to Excel
     function executeReport(month, year, children, target) {
         if (entity != -1) {
-            url = '<?php echo base_url();?>calendar/' + target + '/' + entity + '/' + month+ '/' + year+ '/' + children;
+	    firstDay = false;
+	    maxDay = $('#textNbJour').val();
+            url = '<?php echo base_url();?>calendar/' + target + '/' + entity + '/' + month+ '/' + year+ '/' + children + '/' + firstDay + '/' + maxDay;
             document.location.href = url;
         }
     }
@@ -315,14 +381,18 @@ date_sub($datePrev, date_interval_create_from_date_string('1 month'));?>
             month = <?php echo $datePrev->format('m'); ?>;
             year = <?php echo $datePrev->format('Y'); ?>;
             children = includeChildren();
-            url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children;
+	    firstDay = false;
+	    maxDay = $('#textNbJour').val();
+            url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children + '/' + firstDay + '/' + maxDay;
             document.location.href = url;
         });
         $('#cmdNext').click(function() {
             month = <?php echo $dateNext->format('m'); ?>;
             year = <?php echo $dateNext->format('Y'); ?>;
             children = includeChildren();
-            url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children;
+	    firstDay = false;
+	    maxDay = $('#textNbJour').val();
+            url = '<?php echo base_url();?>calendar/tabular/' + entity + '/' + month+ '/' + year+ '/' + children + '/' + firstDay + '/' + maxDay;
             document.location.href = url;
         });
         

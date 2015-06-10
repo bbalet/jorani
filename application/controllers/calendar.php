@@ -133,16 +133,20 @@ class Calendar extends CI_Controller {
      * @param bool $children If TRUE, includes children entity, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular($id=-1, $month=0, $year=0, $children=TRUE) {
+    public function tabular($id=-1, $month=0, $year=0, $children=TRUE, $firstDay=FALSE, $maxDay=30) {
         $this->auth->check_is_granted('organization_calendar');
         $data = getUserContext($this);
         $this->load->model('leaves_model');
         $this->load->model('organization_model');
-        $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);
+        $this->load->model('types_model');
+        $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children, $firstDay, $maxDay);
+        $data['leavetypes'] = $this->types_model->get_types();
         $data['entity'] = $id;
         $data['month'] = $month;
         $data['year'] = $year;
+        $data['firstDay'] = $firstDay;
         $data['children'] = $children;
+        $data['cal_day'] = $maxDay;
         $data['department'] = $this->organization_model->get_label($id);
         $data['title'] = lang('calendar_tabular_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_tabular');

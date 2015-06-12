@@ -899,6 +899,7 @@ class Leaves_model extends CI_Model {
          foreach ($dayoffs as $dayoff) {
             $iDate = new DateTime($dayoff->date);
             $dayNum = intval($iDate->format('d'));
+	    $iDate = new DateTime($iDate->format('Y') . '-' . $iDate->format('m') . '-' . 1);
             if ($iDate->format('m') != $DateStart->format('m'))
                {
                  while ($DateStart->format('m') != $iDate->format('m'))
@@ -934,7 +935,6 @@ class Leaves_model extends CI_Model {
         
         $this->load->model('dayoffs_model');
         foreach ($events as $entry) {
-            
             $startDate = new DateTime($entry->startdate);
             if ($startDate < $floorDate) $startDate = $floorDate;
             $iDate = $startDate;
@@ -947,7 +947,7 @@ class Leaves_model extends CI_Model {
                 if ($iDate > $limitDate) break;     //The calendar displays the leaves on one month
                 if ($iDate < $startDate) continue;  //The leave starts before the first day of the calendar
                 $dayNum = intval($iDate->format('d'));
-                $tmpDate = new DateTime($iDate->format('Y-m-d'));
+                $tmpDate = new DateTime($iDate->format('Y') . '-' . $iDate->format('m') . '-' . 1);
                 if ($tmpDate->format('m') != $DateStart->format('m'))
                    {
                         while ($DateStart->format('m') != $tmpDate->format('m'))
@@ -971,15 +971,15 @@ class Leaves_model extends CI_Model {
                 if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Afternoon')) $display = '1';
                 if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Morning')) $display = '2';
                 if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Afternoon') && ($entry->enddatetype == 'Afternoon')) $display = '3';
-                /*if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Morning')) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Morning')) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
-                if (($entry->startdate != $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';*/
+                if (($entry->startdate != $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';
                 if (($entry->startdate != $entry->enddate) && ($iDate != $entry->startdate) && ($iDate != $endDate)) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->startdate) && ($entry->startdatetype == 'Morning')) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->startdate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->enddate) && ($entry->enddatetype == 'Afternoon')) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';
-                
+
                 //Check if another leave was defined on this day
                 if ($user->days[$dayNum]->display != '4') { //Except full day off
                     if ($user->days[$dayNum]->type != '') { //Overlapping with a day off or another request

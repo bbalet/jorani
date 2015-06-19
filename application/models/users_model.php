@@ -33,7 +33,7 @@ class Users_model extends CI_Model {
      */
      public function get_users($id = 0) {
         if ($id === 0) {
-           $this->db->select('users.*, roles.name, manager.login as managerLogin');
+           $this->db->select('users.*, roles.name as role_name, manager.login as managerLogin');
            $this->db->from('users');
            $this->db->join('users as manager', 'manager.id = users.manager');
            $this->db->join('roles', 'roles.id = users.role');

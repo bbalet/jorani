@@ -1,0 +1,17 @@
+languages:
+  Ruby: false
+  JavaScript: true
+  PHP: true
+  Python: false
+exclude_paths:
+ - "assets"
+ - "docs"
+ - "local"
+ - "nbproject"
+ - "setup"
+ - "sql"
+ - "system"
+ - "tests"
+ - "application/third_party"
+ - "application/language"
+ - "application/logs"

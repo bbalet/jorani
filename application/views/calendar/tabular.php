@@ -191,7 +191,10 @@ $this->lang->load('global', $language);?>
             if ($overlapping) {
                 echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
             } else {
-                echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+                $calendar_cell_content = '&nbsp;';
+                if(strlen($day->type_abbreviation) > 0)
+                    $calendar_cell_content = $day->type_abbreviation;
+                echo '<td title="' . $day->type . '" class="' . $class . '">' . $calendar_cell_content . '</td>';
             }
             ?>
     <?php } ?>

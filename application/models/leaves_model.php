@@ -879,7 +879,7 @@ class Leaves_model extends CI_Model {
         }
         
         //Build the complex query for all leaves
-        $this->db->select('leaves.*, types.name as type');
+        $this->db->select('leaves.*, types.name as type, types.abbreviation as type_abbreviation');
         $this->db->from('leaves');
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where("( startdate <= STR_TO_DATE('" . $end . "', '%Y-%m-%d') AND enddate >= STR_TO_DATE('" . $start . "', '%Y-%m-%d'))");
@@ -936,6 +936,7 @@ class Leaves_model extends CI_Model {
                         if (($user->days[$dayNum]->display == 2) ||
                                 ($user->days[$dayNum]->display == 6)) { //Respect Morning/Afternoon order
                             $user->days[$dayNum]->type .= ';' . $entry->type;
+                            $user->days[$dayNum]->type_abbreviation .= ';' . $entry->type_abbreviation;
                             $user->days[$dayNum]->display .= ';' . $display;
                             $user->days[$dayNum]->status .= ';' . $entry->status;
                         } else {

@@ -51,6 +51,16 @@ class Types_model extends CI_Model {
     }
     
     /**
+     * Get the label of a given type id
+     * @param int $id ID of the type
+     * @return string label of the type
+     */
+    public function get_abbreviation($id) {
+        $type = $this->get_types($id);
+        return $type['abbreviation'];
+    }
+
+    /**
      * Insert a new leave type
      * Inserted data are coming from an HTML form
      * @return int number of affected rows
@@ -59,7 +69,8 @@ class Types_model extends CI_Model {
     public function set_types() {
         
         $data = array(
-            'name' => $this->input->post('name')
+            'name' => $this->input->post('name'),
+            'abbreviation' => $this->input->post('abbreviation')
         );
         return $this->db->insert('types', $data);
     }
@@ -81,7 +92,8 @@ class Types_model extends CI_Model {
      */
     public function update_types() {
         $data = array(
-            'name' => $this->input->post('name')
+            'name' => $this->input->post('name'),
+            'abbreviation' => $this->input->post('abbreviation')
         );
 
         $this->db->where('id', $this->input->post('id'));

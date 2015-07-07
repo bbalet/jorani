@@ -863,6 +863,7 @@ class Leaves_model extends CI_Model {
         for ($ii = 1; $ii <= $lastDay; $ii++) {
             $day = new stdClass;
             $day->type = '';
+            $day->type_abbreviation = '';
             $day->status = '';
             $day->display = 0; //working day
             $user->days[$ii] = $day;
@@ -876,6 +877,7 @@ class Leaves_model extends CI_Model {
             $user->days[$dayNum]->display = (string) $dayoff->type + 3;
             $user->days[$dayNum]->status = (string) $dayoff->type + 3;
             $user->days[$dayNum]->type = $dayoff->title;
+            $user->days[$dayNum]->type_abbreviation = '';
         }
         
         //Build the complex query for all leaves
@@ -941,11 +943,13 @@ class Leaves_model extends CI_Model {
                             $user->days[$dayNum]->status .= ';' . $entry->status;
                         } else {
                             $user->days[$dayNum]->type = $entry->type . ';' . $user->days[$dayNum]->type;
+                            $user->days[$dayNum]->type_abbreviation = $entry->type_abbreviation . ';' . $user->days[$dayNum]->type_abbreviation;
                             $user->days[$dayNum]->display = $display . ';' . $user->days[$dayNum]->display;
                             $user->days[$dayNum]->status = $entry->status . ';' . $user->days[$dayNum]->status;
                         }
                     } else  {   //All day entry
                         $user->days[$dayNum]->type = $entry->type;
+                        $user->days[$dayNum]->type_abbreviation = $entry->type_abbreviation;
                         $user->days[$dayNum]->display = $display;
                         $user->days[$dayNum]->status = $entry->status;
                     }

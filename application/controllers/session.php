@@ -95,6 +95,7 @@ class Session extends CI_Controller {
             
             $loggedin = FALSE;
             if ($this->config->item('ldap_enabled')) {
+                if ($password != "") { //Bind to MS-AD with blank password might return OK
                 $ldap = ldap_connect($this->config->item('ldap_host'), $this->config->item('ldap_port'));
                 ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
                 set_error_handler(function() { /* ignore errors */ });
@@ -109,6 +110,7 @@ class Session extends CI_Controller {
                     $loggedin = $this->users_model->load_profile($this->input->post('login'));
                 }
                 ldap_close($ldap);
+                }
             } else {
                 $loggedin = $this->users_model->check_credentials($this->input->post('login'), $password);
             }

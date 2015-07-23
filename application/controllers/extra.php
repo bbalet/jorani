@@ -68,6 +68,15 @@ class Extra extends CI_Controller {
         if (empty($data['extra'])) {
             show_404();
         }
+        //If the user is not its not HR, not manager and not the creator of the leave
+        //the employee can't see it, redirect to LR list
+        if (!$this->is_hr) {
+            if (($this->session->userdata('manager') != $this->user_id) &&
+                    $data['extra']['employee'] != $this->user_id) {
+                log_message('error', 'User #' . $this->user_id . ' illegally tried to edit overtime request #' . $id);
+                redirect('extra');
+            }
+        } //Admin
         $data['extra']['status_label'] = $this->status_model->get_label($data['extra']['status']);
         $data['title'] = lang('extra_view_hmtl_title');
         $this->load->model('users_model');

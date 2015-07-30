@@ -50,10 +50,13 @@ $this->lang->load('global', $language);?>
     
     <label for="type" required><?php echo lang('hr_leaves_create_field_type');?></label>
     <select name="type" id="type">
-    <?php foreach ($types as $types_item): ?>
-        <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 0) echo "selected" ?>><?php echo $types_item['name'] ?></option>
+    <?php
+    $default_type = $this->config->item('default_leave_type');
+    $default_type = $default_type == FALSE ? 0 : $default_type;
+    foreach ($types as $types_item): ?>
+        <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == $default_type) echo "selected" ?>><?php echo $types_item['name'] ?></option>
     <?php endforeach ?>
-    </select> (<span id="lblCredit"><?php echo $credit; ?></span>)<br />
+    </select>&nbsp;(<span id="lblCredit"><?php echo $credit; ?></span>)<br />
     
     <label for="duration" required><?php echo lang('hr_leaves_create_field_duration');?></label>
     <input type="text" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" />

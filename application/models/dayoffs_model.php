@@ -335,8 +335,8 @@ class Dayoffs_model extends CI_Model {
         $this->db->select('dayoffs.*');
         $this->db->join('dayoffs', 'users.contract = dayoffs.contract');
         $this->db->where('users.id', $id);
-        $this->db->where('date >= DATE(\'' . $start . '\')');
-        $this->db->where('date <= DATE(\'' . $end . '\')');
+        $this->db->where('date >= DATE(' . $this->db->escape($start) . ')');
+        $this->db->where('date <= DATE(' . $this->db->escape($end) . ')');
         $dayoffs = $this->db->get('users')->result();
         return $dayoffs;
     }

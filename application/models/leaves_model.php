@@ -464,8 +464,8 @@ class Leaves_model extends CI_Model {
         $this->db->select('leaves.*, types.name as type');
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('employee', $user_id);
-        $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
-                                  ' OR (leaves.startdate >= DATE(\'' . $start . '\') AND leaves.enddate <= DATE(\'' . $end . '\')) )');
+        $this->db->where('( (leaves.startdate <= DATE(' . $this->db->escape($start) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))' .
+                                  ' OR (leaves.startdate >= DATE(' . $this->db->escape($start) . ') AND leaves.enddate <= DATE(' . $this->db->escape($end) . ')) )');
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(1024);  //Security limit
         $events = $this->db->get('leaves')->result();
@@ -517,8 +517,8 @@ class Leaves_model extends CI_Model {
         $this->db->join('users', 'users.id = leaves.employee');
         $this->db->where('users.manager', $user_id);
         $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
-        $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
-                                   ' OR (leaves.startdate >= DATE(\'' . $start . '\') AND leaves.enddate <= DATE(\'' . $end . '\')))');
+        $this->db->where('( (leaves.startdate <= DATE(' . $this->db->escape($start) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))' .
+                                   ' OR (leaves.startdate >= DATE(' . $this->db->escape($start) . ') AND leaves.enddate <= DATE(' . $this->db->escape($end) . ')))');
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(1024);  //Security limit
         $events = $this->db->get('leaves')->result();
@@ -568,8 +568,8 @@ class Leaves_model extends CI_Model {
     public function collaborators($user_id, $start = "", $end = "") {
         $this->db->join('users', 'users.id = leaves.employee');
         $this->db->where('users.manager', $user_id);
-        $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
-                                ' OR (leaves.startdate >= DATE(\'' . $start . '\') AND leaves.enddate <= DATE(\'' . $end . '\')) )');
+        $this->db->where('( (leaves.startdate <= DATE(' . $this->db->escape($start) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))' .
+                                ' OR (leaves.startdate >= DATE(' . $this->db->escape($start) . ') AND leaves.enddate <= DATE(' . $this->db->escape($end) . ')) )');
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(1024);  //Security limit
         $events = $this->db->get('leaves')->result();
@@ -623,8 +623,8 @@ class Leaves_model extends CI_Model {
         $this->db->join('users', 'users.organization = organization.id');
         $this->db->join('leaves', 'leaves.employee  = users.id');
         $this->db->join('types', 'leaves.type = types.id');
-        $this->db->where('( (leaves.startdate <= DATE(\'' . $start . '\') AND leaves.enddate >= DATE(\'' . $start . '\'))' .
-                                    ' OR (leaves.startdate >= DATE(\'' . $start . '\') AND leaves.enddate <= DATE(\'' . $end . '\')) )');
+        $this->db->where('( (leaves.startdate <= DATE(' . $this->db->escape($start) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))' .
+                                    ' OR (leaves.startdate >= DATE(' . $this->db->escape($start) . ') AND leaves.enddate <= DATE(' . $this->db->escape($end) . ')) )');
         if ($children == true) {
             $this->load->model('organization_model');
             $list = $this->organization_model->get_all_children($entity_id);
@@ -767,8 +767,8 @@ class Leaves_model extends CI_Model {
     public function all($start, $end) {
         $this->db->select("users.id as user_id, users.firstname, users.lastname, leaves.*", FALSE);
         $this->db->join('users', 'users.id = leaves.employee');
-        $this->db->where('( (leaves.startdate <= FROM_UNIXTIME(\'' . $start . '\') AND leaves.enddate >= FROM_UNIXTIME(\'' . $start . '\'))' .
-                                   ' OR (leaves.startdate >= FROM_UNIXTIME(\'' . $start . '\') AND leaves.enddate <= FROM_UNIXTIME(\'' . $end . '\')))');
+        $this->db->where('( (leaves.startdate <= FROM_UNIXTIME(' . $this->db->escape($start) . ') AND leaves.enddate >= FROM_UNIXTIME(' . $this->db->escape($start) . '))' .
+                                   ' OR (leaves.startdate >= FROM_UNIXTIME(' . $this->db->escape($start) . ') AND leaves.enddate <= FROM_UNIXTIME(' . $this->db->escape($end) . ')))');
         $this->db->order_by('startdate', 'desc');
         return $this->db->get('leaves')->result();
     }
@@ -882,7 +882,7 @@ class Leaves_model extends CI_Model {
         $this->db->select('leaves.*, types.name as type');
         $this->db->from('leaves');
         $this->db->join('types', 'leaves.type = types.id');
-        $this->db->where("( startdate <= STR_TO_DATE('" . $end . "', '%Y-%m-%d') AND enddate >= STR_TO_DATE('" . $start . "', '%Y-%m-%d'))");
+        $this->db->where("( startdate <= STR_TO_DATE(" . $this->db->escape($end) . ", '%Y-%m-%d') AND enddate >= STR_TO_DATE(" . $this->db->escape($start) . ", '%Y-%m-%d'))");
         if (!$planned) $this->db->where('leaves.status != ', 1);
         if (!$requested) $this->db->where('leaves.status != ', 2);
         if (!$accepted) $this->db->where('leaves.status != ', 3);

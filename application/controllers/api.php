@@ -63,11 +63,7 @@ class Api extends CI_Controller {
             expires_now();
             $this->load->model('contracts_model');
             $result = $this->contracts_model->get_contracts($id);
-            if (empty($result)) {
-                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
-            } else {
-                echo json_encode($result);
-            }
+            echo json_encode($result);
         }
     }
     
@@ -83,11 +79,7 @@ class Api extends CI_Controller {
             expires_now();
             $this->load->model('entitleddays_model');
             $result = $this->entitleddays_model->get_entitleddays_contract($id);
-            if (empty($result)) {
-                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
-            } else {
-                echo json_encode($result);
-            }
+            echo json_encode($result);
         }
     }
     
@@ -128,11 +120,7 @@ class Api extends CI_Controller {
             expires_now();
             $this->load->model('entitleddays_model');
             $result = $this->entitleddays_model->get_entitleddays_employee($id);
-            if (empty($result)) {
-                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
-            } else {
-                echo json_encode($result);
-            }
+            echo json_encode($result);
         }
     }
     
@@ -219,11 +207,7 @@ class Api extends CI_Controller {
             expires_now();
             $this->load->model('types_model');
             $result = $this->types_model->get_types();
-            if (empty($result)) {
-                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
-            } else {
-                echo json_encode($result);
-            }
+            echo json_encode($result);
         }
     }
     
@@ -238,11 +222,7 @@ class Api extends CI_Controller {
             expires_now();
             $this->load->model('positions_model');
             $result = $this->positions_model->get_positions();
-            if (empty($result)) {
-                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
-            } else {
-                echo json_encode($result);
-            }
+            echo json_encode($result);
         }
     }
     
@@ -284,11 +264,7 @@ class Api extends CI_Controller {
                 }
               }
             }
-            if (empty($result)) {
-                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
-            } else {
-                echo json_encode($result);
-            }
+            echo json_encode($result);
         }
     }
 
@@ -304,11 +280,7 @@ class Api extends CI_Controller {
             expires_now();
             $this->load->model('overtime_model');
             $result = $this->overtime_model->get_user_extras($id);
-            if (empty($result)) {
-                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
-            } else {
-                echo json_encode($result);
-            }
+            echo json_encode($result);
         }
     }
     
@@ -324,15 +296,11 @@ class Api extends CI_Controller {
             expires_now();
             $this->load->model('leaves_model');
             $result = $this->leaves_model->get_user_leaves($id);
-            if (empty($result)) {
-                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
-            } else {
-                echo json_encode($result);
-            }
+            echo json_encode($result);
         }
     }
     
-    /*******************************************************************************************************************/
+    //From this line on, we are in API v2
     
     /**
      * Get the monthly presence stats for a given employee

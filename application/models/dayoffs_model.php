@@ -128,6 +128,30 @@ class Dayoffs_model extends CI_Model {
     }
     
     /**
+     * Copy a list of days off of a source contract to a destination contract (for a given civil year)
+     * @param int $source identifier of the source contract
+     * @param int $destination identifier of the destination contract
+     * @param string $year civil year (and not yearly period)
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function copy_dayoffs($source, $destination, $year) {
+        //Delete all previous days off defined on the destination contract (avoid duplicated data)
+        $this->db->where('contract', $destination);
+        $this->db->where('YEAR(date)', $year);
+        $this->db->delete('dayoffs');
+        
+        //Copy source->destination days off
+        $sql = 'INSERT dayoffs(contract, date, type, title) ' .
+                ' SELECT ' . $this->db->escape($destination) . ', date, type, title ' .
+                ' FROM dayoffs ' .
+                ' WHERE contract = ' . $this->db->escape($source) .
+                ' AND YEAR(date) = ' . $this->db->escape($year);
+        $query = $this->db->query($sql);
+        return $query;
+    }
+    
+    /**
      * Get the sum of day offs between two dates for a given contract
      * @param int $contract contract identifier
      * @param date $start start date

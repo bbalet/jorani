@@ -98,3 +98,7 @@ $lang['contract_calendar_popup_series_field_as_afternnon'] = 'Tarde libre';
 $lang['contract_calendar_popup_series_field_title'] = 'Título';
 $lang['contract_calendar_popup_series_button_ok'] = 'OK';
 $lang['contract_calendar_popup_series_button_cancel'] = 'Cancelar';
+
+$lang['contract_calendar_button_copy'] = 'Copy';
+$lang['contract_calendar_copy_destination_js_msg'] = 'You must select a contract.';
+$lang['contract_calendar_copy_msg_success'] = 'Data has been copied successfully.';

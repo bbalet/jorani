@@ -156,6 +156,16 @@ class Contracts extends CI_Controller {
         } else {
             $data['year'] = date("Y");
         }
+        
+        //Load the list of contracts (select destination contract / copy dayoff feature)
+        $data['contracts'] = $this->contracts_model->get_contracts();
+        //Remove the contract being displayed (source)
+        foreach ($data['contracts'] as $key => $value) {
+            if ($value['id'] == $id) {
+                unset($data['contracts'][$key]);
+                break;
+            }
+        }
         $contract = $this->contracts_model->get_contracts($id);
         $data['contract_id'] = $id;
         $data['contract_name'] = $contract['name'];
@@ -165,10 +175,28 @@ class Contracts extends CI_Controller {
         $data['contract_end_day'] = intval(substr($contract['endentdate'], 3));
         $this->load->model('dayoffs_model');
         $data['dayoffs'] = $this->dayoffs_model->get_dayoffs($id, $data['year']);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('contracts/calendar', $data);
         $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Copy the days off defined on a souce contract to another contract
+     * for the civil year being displayed
+     * @param type $source source contract identifier
+     * @param type $destination destination contract identifier
+     * @param type $year year number (4 digits)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function copydayoff($source, $destination, $year) {
+        $this->auth->check_is_granted('calendar_contract');
+        $this->load->model('dayoffs_model');
+        $result = $this->dayoffs_model->copy_dayoffs($source, $destination, $year);
+        //Redirect to the contract where we've just copied the days off
+        $this->session->set_flashdata('msg', lang('contract_calendar_copy_msg_success'));
+        redirect('contracts/' . $destination . '/calendar/' . $year);
     }
 
     /**

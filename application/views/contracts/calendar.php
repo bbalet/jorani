@@ -46,13 +46,21 @@ vertical-align:middle;
 .monthName div {
 padding-left:10px;
 }
-</style>
 
+.selectize-control {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+</style>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css">
+
+<?php echo $flash_partial_view;?>
+
 <h2><?php echo lang('contract_calendar_title');?> <span class="muted"><?php echo $contract_name; ?></span>&nbsp;<?php echo $help;?></h2>
 
 <div class="row-fluid">
-    <div class="span6">
+    <div class="span3">
         <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) - 1);?>" class="btn btn-primary" id="cmdPrevious"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo intval($year) - 1;?></a>
         &nbsp;
         <strong><?php echo $year;?></strong>
@@ -64,6 +72,16 @@ padding-left:10px;
     </div>
     <div class="span3">
         <a href="#frmSetRangeDayOff" class="btn btn-primary" data-toggle="modal"><i class="icon-retweet icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_series');?></a>
+    </div>
+    <div class="span3">
+        <?php if (!empty($contracts)) { ?>
+        <select name="contract" id="contract" class="selectized input-large">
+        <?php foreach ($contracts as $contract): ?>
+            <option value="<?php echo $contract['id'] ?>"><?php echo $contract['name']; ?></option>
+        <?php endforeach ?>
+        </select>
+        <button id="cmdContractCopy" class="btn btn-primary"><i class="fa fa-copy"></i>&nbsp; <?php echo lang('contract_calendar_button_copy');?></button>
+        <?php } ?>
     </div>
 </div>
 
@@ -174,6 +192,8 @@ for ($mC = 1; $mC <= 12; $mC++) {
 ?>
 </table>
 
+<div class="row-fluid"><div class="span12"></div></div>
+
 <div id="frmAddDayOff" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmAddDayOff').modal('hide');" class="close">&times;</a>
@@ -265,6 +285,9 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 <script type="text/javascript">
 
@@ -369,6 +392,7 @@ $(function() {
 <?php }?>
     $("#frmAddDayOff").alert();
     $("#frmSetRangeDayOff").alert();
+    $('#contract').selectize();
     
         $("#viz_startdate").datepicker({
         changeMonth: true,
@@ -420,6 +444,15 @@ $(function() {
     //Give focus on first field on opening add day off dialog
     $('#frmAddDayOff').on('shown', function () {
         $('input:text:visible:first', this).focus();
+    });
+    
+    //Copy a contract (if a source contract was selected
+    $("#cmdContractCopy").on("click", function() {
+        if ((!$("#contract option:selected").length) || ($("#contract option:selected").text() == '')) {
+            bootbox.alert('<?php echo lang('contract_calendar_copy_destination_js_msg');?>');
+        } else {
+            document.location = '<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . $year . '/copy/';?>' + $("#contract").val();
+        }
     });
 
     //Copy/Paste ICS Feed

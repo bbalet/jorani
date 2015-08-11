@@ -289,42 +289,33 @@ if ($language_code != 'en') { ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
-<script type="text/javascript">
 
+<script type="text/javascript">
 var timestamp;
 
+//Compute the end and start dates of the civil year being displayed
 function set_current_period() {
-    var now = moment();
-    var startEntDate = moment();//now
-    var endEntDate = moment();//now
-    var startMonth = 1;
-    var startDay = 1;
-    var endMonth = 12;
-    var endDay = 31;
-    var locale = '<?php echo $language_code;?>';
+    var startEntDate = moment();
+    var endEntDate = moment();
 
     //Compute boundaries
-    startEntDate.month(startMonth - 1);
-    startEntDate.date(startDay);
-    endEntDate.month(endMonth - 1);
-    endEntDate.date(endDay);
-    if (startMonth != 1 ) {
-            if (now.month() < 5) {//zero-based => june
-                    startEntDate.subtract(1, 'years');
-            } else {
-                    endEntDate.add(1, 'years');
-            }
-    }
+    startEntDate.year(<?php echo $year;?>);
+    startEntDate.month(0);
+    startEntDate.date(1);
+    endEntDate.year(<?php echo $year;?>);
+    endEntDate.month(11);
+    endEntDate.date(31);
 
     //Presentation for DB and Human
-    startEntDate.locale(locale);
-    endEntDate.locale(locale);
+    startEntDate.locale('<?php echo $language_code;?>');
+    endEntDate.locale('<?php echo $language_code;?>');
     $("#txtStartDate").val(startEntDate.format("YYYY-MM-DD"));
     $("#txtEndDate").val(endEntDate.format("YYYY-MM-DD"));
     $("#viz_startdate").val(startEntDate.format("L"));
     $("#viz_enddate").val(endEntDate.format("L"));
-    }
+}
 
+//Add a day off by an Ajax query
 function add_day_off() {
     $("#cboType").val($('#' + timestamp).data("type"));
     $.ajax({
@@ -348,6 +339,7 @@ function add_day_off() {
         });
 }
 
+//Delete a day off by an Ajax query
 function delete_day_off() {
     $.ajax({
         url: "<?php echo base_url();?>contracts/calendar/edit",
@@ -364,6 +356,7 @@ function delete_day_off() {
         });
 }
 
+//Edit a serie of days off by an Ajax query
 function edit_series() {
     $("#cboType").val($('#' + timestamp).data("type"));
     $.ajax({
@@ -382,6 +375,7 @@ function edit_series() {
         });
 }
 
+//On load
 $(function() {
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
     $.ajaxSetup({
@@ -446,7 +440,7 @@ $(function() {
         $('input:text:visible:first', this).focus();
     });
     
-    //Copy a contract (if a source contract was selected
+    //Copy a contract (if a source contract was selected)
     $("#cmdContractCopy").on("click", function() {
         if ((!$("#contract option:selected").length) || ($("#contract option:selected").text() == '')) {
             bootbox.alert('<?php echo lang('contract_calendar_copy_destination_js_msg');?>');

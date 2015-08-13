@@ -882,7 +882,8 @@ class Leaves_model extends CI_Model {
         $this->db->select('leaves.*, types.name as type');
         $this->db->from('leaves');
         $this->db->join('types', 'leaves.type = types.id');
-        $this->db->where("( startdate <= STR_TO_DATE(" . $this->db->escape($end) . ", '%Y-%m-%d') AND enddate >= STR_TO_DATE(" . $this->db->escape($start) . ", '%Y-%m-%d'))");
+        $this->db->where('( (leaves.startdate <= DATE(' . $this->db->escape($start) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))' .
+                                    ' OR (leaves.startdate >= DATE(' . $this->db->escape($start) . ') AND leaves.enddate <= DATE(' . $this->db->escape($end) . ')) )');
         if (!$planned) $this->db->where('leaves.status != ', 1);
         if (!$requested) $this->db->where('leaves.status != ', 2);
         if (!$accepted) $this->db->where('leaves.status != ', 3);

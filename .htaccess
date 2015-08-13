@@ -24,6 +24,10 @@ SetEnv HTTP_MOD_GZIP Off
 <IfModule mod_expires.c>
     ExpiresActive on
     ExpiresDefault "access plus 1 month"
+    <FilesMatch "\.(php)$">
+    ExpiresDefault A0
+    Header append Cache-Control "public"
+    </FilesMatch>
 </IfModule>
 
 <IfModule mod_deflate.c>

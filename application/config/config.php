@@ -380,42 +380,56 @@ $config['proxy_ips'] = '';
 | 
 |
 */
+
+//____________________________________________________________________________
 //default email from
 $config['from_mail'] = 'do.not@reply.me';
 $config['from_name'] = 'Jorani';
 $config['subject_prefix'] = '[Jorani] ';
 
+//____________________________________________________________________________
 //Password minimal length
 $config['password_length'] = 8;
 //Default role id (e.g. 2 for user)
 $config['default_role_id'] = 2;
 
+//____________________________________________________________________________
 //Set this value to TRUE if you want to create leaves at status requested instead of planned
 $config['leave_status_requested'] = FALSE;
-$config['default_leave_type'] = FALSE;
+$config['default_leave_type'] = FALSE;      //Set this value with the default leave type identifier (integer).
 
-//List of available languages
+//____________________________________________________________________________
+//Set this value to TRUE if you want to allow manager to create leave requests in behalf of their collaborators
+$config['requests_by_manager'] = FALSE;
+
+//____________________________________________________________________________
+//List of available languages. If you limit this list to one language, the list of available languages will be hidden from the login form
 $config['languages'] = 'en,fr,es,nl,de,it';
 
+//____________________________________________________________________________
 //Set this value to TRUE if you want to hide the menu entries related to overtime
 $config['disable_overtime'] = FALSE;
 
+//____________________________________________________________________________
 //Google analytics tracking code (if empty, the Javascript tracking code will be desactivated).
 //An option allows you to send the identifier of the connected user (a special configuration must be set in GA first).
 //See https://developers.google.com/analytics/devguides/collection/analyticsjs/user-id
 $config['ga_code'] = '';
 $config['ga_send_userid'] = FALSE;
 
-//E-mail settings of the application are now stored into email.php file
+//____________________________________________________________________________
+//E-mail settings of the application are stored into email.php file
 
+//____________________________________________________________________________
 //LDAP configuration
 $config['ldap_enabled'] = FALSE;
 $config['ldap_host'] = '127.0.0.1';
 $config['ldap_port'] = 389;
-$config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';
-$config['ldap_basedn_db'] = FALSE;
+$config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';  //Change the pattern, but let %s that symbolizes the user identifier
+$config['ldap_basedn_db'] = FALSE;      //It TRUE, ldap path is taken from user table
 
-//Enable public ICS feeds
+//____________________________________________________________________________
+//Enable public ICS feeds (global calendar, contract, personal information)
 $config['ics_enabled'] = TRUE;
 $config['default_timezone'] = 'Europe/Paris';
 

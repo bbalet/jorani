@@ -3,7 +3,8 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 ## v0.5.0 or later
 
-- [ ] Copy contract/calendar (definition of non-working days for a yearly period).
+- [X] Copy contract/calendar (definition of non-working days for a yearly period).
+- [X] A manager can create a leave request in behalf of a collaborator.
 - [ ] Better entitled days editor (contract / employee).
 - [ ] Report carried-over leaves (Semi-auto / wizard), employee by employee (or mass ?).
 - [ ] Notification by e-mail : Request deleted / modified.
@@ -22,6 +23,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 request a leave even if your credit is negative and because leave balance reports can be executed with a past/future date.
 - [ ] Setup assistant.
 - [ ] Mass importer of users (from CSV, LDAP ?).
+- [ ] Multitenancy (add global filter / Additionnal field on all tables). Allow access to the same instance for multiple tenants.
 
 ## Post v1.0
 

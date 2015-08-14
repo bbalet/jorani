@@ -23,7 +23,9 @@ $this->lang->load('global', $language);?>
 
 <div class="row-fluid">
     <div class="span12">
-        
+
+<?php echo $flash_partial_view;?>
+
 <h1><?php echo lang('requests_collaborators_title');?>  &nbsp;<?php echo $help;?></h1>
 
 <p><?php echo lang('requests_collaborators_description');?></p>
@@ -41,8 +43,11 @@ $this->lang->load('global', $language);?>
 <?php foreach ($collaborators as $collaborator): ?>
     <tr>
         <td data-order="<?php echo $collaborator['id']; ?>">
-            <?php echo $collaborator['id'] ?>
+            <?php echo $collaborator['id']; ?>
             <div class="pull-right">
+                <?php if ($this->config->item('requests_by_manager') == TRUE) { ?>
+                <a href="<?php echo base_url();?>requests/createleave/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_create_leave');?>"><i class="icon-plus"></i></a>
+                <?php } ?>
                 <a href="<?php echo base_url();?>requests/counters/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_balance');?>"><i class="icon-info-sign"></i></a>
             </div>
         </td>

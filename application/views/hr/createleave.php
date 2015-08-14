@@ -30,7 +30,7 @@ $this->lang->load('global', $language);?>
 
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('hr/leaves/create/' . $employee) ?>
+<?php echo form_open($form_action) ?>
 
     <label for="viz_startdate" required><?php echo lang('hr_leaves_create_field_start');?></label>
     <input type="text" name="viz_startdate" id="viz_startdate" value="<?php echo set_value('startdate'); ?>" />
@@ -84,7 +84,7 @@ $this->lang->load('global', $language);?>
 
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('hr_leaves_create_button_create');?></button>
     &nbsp;
-    <a href="<?php echo base_url(); ?>hr/employees" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp; <?php echo lang('hr_leaves_create_button_cancel');?></a>
+    <a href="<?php echo base_url() . $source; ?>" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp; <?php echo lang('hr_leaves_create_button_cancel');?></a>
 </form>
 
     </div>

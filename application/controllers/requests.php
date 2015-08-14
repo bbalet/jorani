@@ -49,7 +49,6 @@ class Requests extends CI_Controller {
         } else {
             $showAll = false;
         }
-        
         $data = getUserContext($this);
         $data['filter'] = $filter;
         $data['title'] = lang('requests_index_title');
@@ -143,6 +142,7 @@ class Requests extends CI_Controller {
         $data['help'] = $this->help->create_help_link('global_link_doc_page_collaborators_list');
         $this->load->model('users_model');
         $data['collaborators'] = $this->users_model->get_employees_manager($this->user_id);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('requests/collaborators', $data);
@@ -224,6 +224,62 @@ class Requests extends CI_Controller {
         }
     }
     
+    /**
+     * Create a leave request in behalf of a collaborator
+     * @param int $id Identifier of the employee
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function createleave($id) {
+        $this->lang->load('hr', $this->language);
+        $this->load->model('users_model');
+        $employee = $this->users_model->get_users($id);
+        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to access to collaborators/leave/create  #' . $id);
+            $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_forbidden'));
+            redirect('requests/collaborators');
+        } else {
+            $data = getUserContext($this);
+            $this->load->helper('form');
+            $this->load->library('form_validation');
+            $data['title'] = lang('hr_leaves_create_title');
+            $data['form_action'] = 'requests/createleave/' . $id;
+            $data['source'] = 'requests/collaborators';
+            $data['employee'] = $id;
+
+            $this->form_validation->set_rules('startdate', lang('hr_leaves_create_field_start'), 'required|xss_clean');
+            $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
+            $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|xss_clean');
+            $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean');
+            $this->form_validation->set_rules('duration', lang('hr_leaves_create_field_duration'), 'required|xss_clean');
+            $this->form_validation->set_rules('type', lang('hr_leaves_create_field_type'), 'required|xss_clean');
+            $this->form_validation->set_rules('cause', lang('hr_leaves_create_field_cause'), 'xss_clean');
+            $this->form_validation->set_rules('status', lang('hr_leaves_create_field_status'), 'required|xss_clean');
+
+            $data['credit'] = 0;
+            if ($this->form_validation->run() === FALSE) {
+                $this->load->model('types_model');
+                $data['types'] = $this->types_model->get_types();
+                foreach ($data['types'] as $type) {
+                    if ($type['id'] == 0) {
+                        $data['credit'] = $this->leaves_model->get_user_leaves_credit($id, $type['name']);
+                        break;
+                    }
+                }
+                $this->load->model('users_model');
+                $data['name'] = $this->users_model->get_label($id);
+                $this->load->view('templates/header', $data);
+                $this->load->view('menu/index', $data);
+                $this->load->view('hr/createleave');
+                $this->load->view('templates/footer');
+            } else {
+                $leave_id = $this->leaves_model->set_leaves($id);
+                $this->session->set_flashdata('msg', lang('hr_leaves_create_flash_msg_success'));
+                //No mail is sent, because the manager would set the leave status to accepted
+                redirect('requests/collaborators');
+            }
+        }
+    }
+
     /**
      * Display the details of leaves taken/entitled for a given employee
      * This page can be displayed only if the connected user is the manager of the employee

@@ -33,6 +33,7 @@ $lang['requests_collaborators_title'] = 'Liste de mes collaborateurs';
 $lang['requests_collaborators_description'] = 'Cet écran liste vos collaborateurs. Si vous n\'êtes pas un manager, cette liste sera vide.';
 $lang['requests_collaborators_thead_id'] = 'ID';
 $lang['requests_collaborators_thead_link_balance'] = 'Etat des congés';
+$lang['requests_collaborators_thead_link_create_leave'] = 'Créer une demande de congé pour ce collaborateur';
 $lang['requests_collaborators_thead_firstname'] = 'Prénom';
 $lang['requests_collaborators_thead_lastname'] = 'Nom';
 $lang['requests_collaborators_thead_email'] = 'E-mail';

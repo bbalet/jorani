@@ -188,6 +188,8 @@ class Hr extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('hr_leaves_create_title');
+        $data['form_action'] = 'hr/leaves/create/' . $id;
+        $data['source'] = 'hr/employees';
         $data['employee'] = $id;
         
         $this->form_validation->set_rules('startdate', lang('hr_leaves_create_field_start'), 'required|xss_clean');

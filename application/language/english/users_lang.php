@@ -18,6 +18,8 @@
 
 //Index view
 $lang['users_index_title'] = 'List of users';
+$lang['users_index_thead_tip_active'] = 'Active';
+$lang['users_index_thead_tip_inactive'] = 'Inactive';
 $lang['users_index_thead_tip_edit'] = 'edit user details';
 $lang['users_index_thead_tip_delete'] = 'delete user';
 $lang['users_index_thead_tip_reset'] = 'reset password';

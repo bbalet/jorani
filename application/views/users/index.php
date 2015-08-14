@@ -46,6 +46,12 @@ $this->lang->load('global', $language);?>
         <td data-order="<?php echo $users_item['id']; ?>">
             <?php echo $users_item['id'] ?>&nbsp;
             <div class="pull-right">
+                <?php if ($users_item['active']) { ?>
+                <a href="<?php echo base_url();?>users/disable/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_active');?>"><i class="icon-ok"></i></a>
+                <?php } else { ?>
+                <a href="<?php echo base_url();?>users/enable/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_inactive');?>"><i class="icon-remove"></i></a>
+                <?php } ?>
+                &nbsp;
                 <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;
                 <a href="#" class="confirm-delete" data-id="<?php echo $users_item['id'];?>" title="<?php echo lang('users_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
@@ -53,12 +59,12 @@ $this->lang->load('global', $language);?>
                 <a href="<?php echo base_url();?>users/reset/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_reset');?>" data-target="#frmResetPwd" data-toggle="modal"><i class="icon-lock"></i></a>
             </div>
         </td>
-        <td><?php echo $users_item['firstname'] ?></td>
-        <td><?php echo $users_item['lastname'] ?></td>
-        <td><?php echo $users_item['login'] ?></td>
+        <td><?php echo $users_item['firstname']; ?></td>
+        <td><?php echo $users_item['lastname']; ?></td>
+        <td><?php echo $users_item['login']; ?></td>
         <td><a href="mailto:<?php echo $users_item['email']; ?>"><?php echo $users_item['email']; ?></a></td>
-        <td><?php echo $users_item['role_name'] ?></td>
-        <td><?php echo $users_item['manager'] ?></td>
+        <td><?php echo $users_item['role_name']; ?></td>
+        <td><?php echo $users_item['manager']; ?></td>
     </tr>
 <?php endforeach ?>
             </tbody>

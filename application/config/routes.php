@@ -47,6 +47,8 @@ $route['users/create'] = 'users/create';
 $route['users/edit/(:num)'] = 'users/edit/$1';
 $route['users/delete/(:num)'] = 'users/delete/$1';
 $route['users/check/login'] = 'users/check_login';
+$route['users/enable/(:num)'] = 'users/enable/$1';
+$route['users/disable/(:num)'] = 'users/disable/$1';
 $route['users'] = 'users';
 
 //Human Resources Management

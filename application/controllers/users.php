@@ -50,6 +50,37 @@ class Users extends CI_Controller {
         $this->load->view('users/index', $data);
         $this->load->view('templates/footer');
     }
+    
+    /**
+     * Set a user as active (TRUE) or inactive (FALSE)
+     * @param int $id User identifier
+     * @param bool $active active (TRUE) or inactive (FALSE)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function active($id, $active) {
+        $this->auth->check_is_granted('list_users');
+        $data['users'] = $this->users_model->set_active($id, $active);
+        $this->session->set_flashdata('msg', lang('users_edit_flash_msg_success'));
+        redirect('users');
+    }
+    
+    /**
+     * Enable a user 
+     * @param int $id User identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function enable($id) {
+        $this->active($id, TRUE);
+    }
+    
+    /**
+     * Disable a user 
+     * @param int $id User identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function disable($id) {
+        $this->active($id, FALSE);
+    }
 
     /**
      * Display the modal pop-up content of the list of employees

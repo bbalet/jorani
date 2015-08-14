@@ -400,6 +400,7 @@ class Users_model extends CI_Model {
         $this->load->library('bcrypt');
         $this->db->from('users');
         $this->db->where('login', $login);
+        $this->db->where('active = TRUE');
         $query = $this->db->get();
 
         if ($query->num_rows() == 0) {
@@ -642,6 +643,19 @@ class Users_model extends CI_Model {
     public function set_manager($employee, $manager) {
         $this->db->set('manager', $manager);
         $this->db->where('id', $employee);
+        return $this->db->update('users');
+    }
+    
+    /**
+     * Set a user as active (TRUE) or inactive (FALSE)
+     * @param int $id User identifier
+     * @param bool $active active (TRUE) or inactive (FALSE)
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function set_active($id, $active) {
+        $this->db->set('active', $active);
+        $this->db->where('id', $id);
         return $this->db->update('users');
     }
     

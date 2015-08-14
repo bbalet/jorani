@@ -17,6 +17,8 @@
  */
 
 $lang['users_index_title'] = 'Liste des utilisateurs';
+$lang['users_index_thead_tip_active'] = 'Actif';
+$lang['users_index_thead_tip_inactive'] = 'Inactif';
 $lang['users_index_thead_tip_edit'] = 'Modifier la fiche utilisateur';
 $lang['users_index_thead_tip_delete'] = 'supprimer l\'utilisateur';
 $lang['users_index_thead_tip_reset'] = 'réinitialiser le mot de passe';

@@ -18,6 +18,8 @@
 
 //Index view
 $lang['users_index_title'] = 'បញ្ជីនៃអ្នកប្រើប្រាស់';
+$lang['users_index_thead_tip_active'] = 'Active';
+$lang['users_index_thead_tip_inactive'] = 'Inactive';
 $lang['users_index_thead_tip_edit'] = 'កែប្រែឈ្មោះអ្នកប្រើប្រាស់';
 $lang['users_index_thead_tip_delete'] = 'លុប';
 $lang['users_index_thead_tip_reset'] = 'ផ្លាស់ប្តូរពាក្យសម្ងាត់';

@@ -33,7 +33,7 @@ echo form_open('contracts/create', $attributes); ?>
 
     <label for="startentdatemonth"><?php echo lang('contract_create_field_start_month');?></label>
     <select name="startentdatemonth" id="startentdatemonth" required>
-        <option value="1"><?php echo lang('January');?></option>
+        <option value="1" selected><?php echo lang('January');?></option>
         <option value="2"><?php echo lang('February');?></option>
         <option value="3"><?php echo lang('March');?></option>
         <option value="4"><?php echo lang('April');?></option>
@@ -49,7 +49,7 @@ echo form_open('contracts/create', $attributes); ?>
     
     <label for="startentdateday"><?php echo lang('contract_create_field_start_day');?></label>
     <select name="startentdateday" id="startentdateday" required>
-        <option value='1'>1</option>
+        <option value='1' selected>1</option>
         <option value='2'>2</option>
         <option value='3'>3</option>
         <option value='4'>4</option>
@@ -97,7 +97,7 @@ echo form_open('contracts/create', $attributes); ?>
         <option value="9"><?php echo lang('September');?></option>
         <option value="10"><?php echo lang('October');?></option>
         <option value="11"><?php echo lang('November');?></option>
-        <option value="12"><?php echo lang('December');?></option>
+        <option value="12" selected><?php echo lang('December');?></option>
     </select>
     
     <label for="endentdateday"><?php echo lang('contract_create_field_end_day');?></label>
@@ -132,7 +132,7 @@ echo form_open('contracts/create', $attributes); ?>
         <option value='28'>28</option>
         <option value='29'>29</option>
         <option value='30'>30</option>
-        <option value='31'>31</option>
+        <option value='31' selected>31</option>
     </select>
 
     <br /><br />

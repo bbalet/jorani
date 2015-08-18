@@ -782,7 +782,7 @@ class Leaves_model extends CI_Model {
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE) {
+    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE, &$firstDay=FALSE, &$maxDay=30) {
         //Mangage paramaters
         if ($month==0) $month = date("m");
         if ($year==0) $year = date("Y");
@@ -808,7 +808,7 @@ class Leaves_model extends CI_Model {
         $this->load->model('organization_model');
         $employees = $this->organization_model->all_employees($entity, $children);
         foreach ($employees as $employee) {
-            $tabular[$employee->id] = $this->linear($employee->id, $month, $year, TRUE, TRUE, TRUE, FALSE);
+            $tabular[$employee->id] = $this->linear($employee->id, $month, $year, TRUE, TRUE, TRUE, FALSE, $firstDay, $maxDay);
         }
         return $tabular;
     }
@@ -819,9 +819,14 @@ class Leaves_model extends CI_Model {
      * @param type $linear linear calendar for one employee
      * @return int total of leaves duration
      */
-    public function monthly_leaves_duration($linear) {
+    public function monthly_leaves_duration($linear, $lastDay) {
         $total = 0;
+        $numDay = 1;
         foreach ($linear->days as $day) {
+        if ($numDay > $lastDay)
+        {
+          return $total;
+        }
           if (strstr($day->display, ';')) {
               $display = explode(";", $day->display);
               if ($display[0] == '2') $total += 0.5;
@@ -846,36 +851,70 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function linear($employee_id, $month, $year, 
-            $planned = FALSE, $requested = FALSE, $accepted = FALSE, $rejected = FALSE) {
-        $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
-        $lastDay = date("t", strtotime($start));    //last day of selected month
-        $end = $year . '-' . $month . '-' . $lastDay;    //last date of selected month
-        
+            $planned = FALSE, $requested = FALSE, $accepted = FALSE, $rejected = FALSE, $firstDay=FALSE, $maxDay=30) {
+	$now = date("Y-m-d");
+        $date = $year . '-' . $month . '-' . '1';
+        if (date('m')-0 == $month && $firstDay == "true")
+           {
+                $DateStart = new DateTime($now);
+                $DateEnd = new DateTime($now);
+           }
+        else
+           {
+                $DateStart = new DateTime($date);
+                $DateEnd = new DateTime($date);
+           }
+        if ($maxDay <= 31)
+           $maxDay = date("t", strtotime($DateStart->format('Y-m-d'))) - 1;
+        $DateEnd->modify('+ ' . $maxDay . ' day');
+        $start = $DateStart->format('Y-m-d');
+        $end = $DateEnd->format('Y-m-d');
+
         //We must show all users of the departement
         $this->load->model('dayoffs_model');
         $this->load->model('users_model');
+        $this->load->model('types_model');
+        $types = $this->types_model->get_types();
         $employee = $this->users_model->get_users($employee_id);
         $user = new stdClass;
-        $user->name = $employee['firstname'] . ' ' . $employee['lastname'];
+        //$user->name = $employee['firstname'] . ' ' . $employee['lastname'];
+        $user->name = $employee['login'];
+	$user->org = $employee['organization_name'];
         $user->days = array();
-
+        $dateNow = new DateTime($DateStart->format('Y-m-d'));
+	
         //Init all day to working day
-        for ($ii = 1; $ii <= $lastDay; $ii++) {
+        for ($ii = 1; $ii <= $maxDay + 1; $ii++) {
             $day = new stdClass;
             $day->type = '';
             $day->status = '';
             $day->display = 0; //working day
+            $day->date = $dateNow->format('Y-m-d');
             $user->days[$ii] = $day;
+            $dateNow->modify('+1 day');   //Next day
         }
-
+        
         //Force all day offs (mind the case of employees having no leave)
         $dayoffs = $this->dayoffs_model->employee_all_dayoffs($employee_id, $start, $end);
-        foreach ($dayoffs as $dayoff) {
+         foreach ($dayoffs as $dayoff) {
             $iDate = new DateTime($dayoff->date);
             $dayNum = intval($iDate->format('d'));
+	    $iDate = new DateTime($iDate->format('Y') . '-' . $iDate->format('m') . '-' . 1);
+            if ($iDate->format('m') != $DateStart->format('m'))
+               {
+                 while ($DateStart->format('m') != $iDate->format('m'))
+                 {
+                  $iDate->modify('-1 month');
+                  $dayNum = $dayNum + date("t", strtotime($iDate->format('Y-m-d')));
+                 }
+                 $dayNum = $dayNum  - $DateStart->format('d') + 1;
+               }
+            else
+                $dayNum = $dayNum - $DateStart->format('d') + 1;
             $user->days[$dayNum]->display = (string) $dayoff->type + 3;
             $user->days[$dayNum]->status = (string) $dayoff->type + 3;
             $user->days[$dayNum]->type = $dayoff->title;
+            $user->days[$dayNum]->date = $dayoff->date;
         }
         
         //Build the complex query for all leaves
@@ -897,7 +936,6 @@ class Leaves_model extends CI_Model {
         
         $this->load->model('dayoffs_model');
         foreach ($events as $entry) {
-            
             $startDate = new DateTime($entry->startdate);
             if ($startDate < $floorDate) $startDate = $floorDate;
             $iDate = $startDate;
@@ -910,7 +948,19 @@ class Leaves_model extends CI_Model {
                 if ($iDate > $limitDate) break;     //The calendar displays the leaves on one month
                 if ($iDate < $startDate) continue;  //The leave starts before the first day of the calendar
                 $dayNum = intval($iDate->format('d'));
-                
+                $tmpDate = new DateTime($iDate->format('Y') . '-' . $iDate->format('m') . '-' . 1);
+                if ($tmpDate->format('m') != $DateStart->format('m'))
+                   {
+                        while ($DateStart->format('m') != $tmpDate->format('m'))
+                        {
+                          $tmpDate->modify('-1 month');
+                          $dayNum = $dayNum + date("t", strtotime($tmpDate->format('Y-m-d')));
+                        }
+                     $dayNum = $dayNum  - $DateStart->format('d') + 1;
+                   }
+                else
+                  $dayNum = $dayNum - $DateStart->format('d') + 1;
+
                 //Display (different from contract/calendar)
                 //0 - Working day  _
                 //1 - All day           []
@@ -922,15 +972,15 @@ class Leaves_model extends CI_Model {
                 if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Afternoon')) $display = '1';
                 if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Morning') && ($entry->enddatetype == 'Morning')) $display = '2';
                 if (($entry->startdate == $entry->enddate) && ($entry->startdatetype == 'Afternoon') && ($entry->enddatetype == 'Afternoon')) $display = '3';
-                /*if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Morning')) $display = '1';
+                if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Morning')) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
-                if (($entry->startdate != $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';*/
+                if (($entry->startdate != $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';
                 if (($entry->startdate != $entry->enddate) && ($iDate != $entry->startdate) && ($iDate != $endDate)) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->startdate) && ($entry->startdatetype == 'Morning')) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->startdate) && ($entry->startdatetype == 'Afternoon')) $display = '3';
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->enddate) && ($entry->enddatetype == 'Afternoon')) $display = '1';
                 if (($entry->startdate != $entry->enddate) && ($iDate == $entry->enddate) && ($entry->enddatetype == 'Morning')) $display = '2';
-                
+
                 //Check if another leave was defined on this day
                 if ($user->days[$dayNum]->display != '4') { //Except full day off
                     if ($user->days[$dayNum]->type != '') { //Overlapping with a day off or another request
@@ -939,15 +989,18 @@ class Leaves_model extends CI_Model {
                             $user->days[$dayNum]->type .= ';' . $entry->type;
                             $user->days[$dayNum]->display .= ';' . $display;
                             $user->days[$dayNum]->status .= ';' . $entry->status;
+			    $user->days[$dayNum]->date .= ';' . $iDate->format('Y-m-d');
                         } else {
                             $user->days[$dayNum]->type = $entry->type . ';' . $user->days[$dayNum]->type;
                             $user->days[$dayNum]->display = $display . ';' . $user->days[$dayNum]->display;
                             $user->days[$dayNum]->status = $entry->status . ';' . $user->days[$dayNum]->status;
+			    $user->days[$dayNum]->date = $iDate->format('Y-m-d') . ';' . $user->days[$dayNum]->date;
                         }
                     } else  {   //All day entry
                         $user->days[$dayNum]->type = $entry->type;
                         $user->days[$dayNum]->display = $display;
                         $user->days[$dayNum]->status = $entry->status;
+			$user->days[$dayNum]->date = $iDate->format('Y-m-d');
                     }
                 }
                 $iDate->modify('+1 day');   //Next day

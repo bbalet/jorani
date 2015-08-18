@@ -275,7 +275,7 @@ class Hr extends CI_Controller {
         
         //tabular view of the leaves
         $data['linear'] = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE);
-        $data['leave_duration'] = $this->leaves_model->monthly_leaves_duration($data['linear']);
+        $data['leave_duration'] = $this->leaves_model->monthly_leaves_duration($data['linear'], 30);
         $data['work_duration'] = $opened_days - $data['leave_duration'];
         
         //List of accepted leave requests taken into account

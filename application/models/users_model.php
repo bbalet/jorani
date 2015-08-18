@@ -31,16 +31,22 @@ class Users_model extends CI_Model {
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_users($id = 0) {
-        $this->db->select('users.*');
-        $this->db->select('roles.name as role_name');
-        $this->db->join('roles', 'roles.id = users.role');
+     public function get_users($id = 0) {
         if ($id === 0) {
-            $query = $this->db->get('users');
-            return $query->result_array();
+           $this->db->select('users.*, roles.name as role_name, manager.login as managerLogin');
+           $this->db->from('users');
+           $this->db->join('users as manager', 'manager.id = users.manager');
+           $this->db->join('roles', 'roles.id = users.role');
+           $this->db->order_by("organization", "asc");
+
+            return $this->db->get()->result_array();
         }
-        $query = $this->db->get_where('users', array('users.id' => $id));
-        return $query->row_array();
+        $this->db->select('users.*, organization.name as organization_name');
+        $this->db->from('users');
+        $this->db->join('organization', 'organization.id = users.organization');
+        $this->db->where('users.id', $id);
+
+        return $this->db->get()->row_array();
     }
 
     /**

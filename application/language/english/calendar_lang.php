@@ -55,6 +55,7 @@ $lang['calendar_tabular_popup_entity_title'] = 'Select an entity';
 $lang['calendar_tabular_popup_entity_button_ok'] = 'OK';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'Cancel';
 $lang['calendar_tabular_thead_employee'] = 'Employee';
+$lang['calendar_tabular_nb_days'] = 'Number of days';
 
 $lang['calendar_tabular_export_title'] = 'Calendar Tabular';
 $lang['calendar_tabular_export_param_entity'] = 'Entity';

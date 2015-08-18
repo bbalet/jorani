@@ -106,6 +106,8 @@ $lang['Thursday'] = 'Donderdag';
 $lang['Friday'] = 'Vrijdag';
 $lang['Saturday'] = 'Zaterdag';
 $lang['Sunday'] = 'Zondag';
+$lang['All days'] = 'All days';
+
 $lang['January'] = 'Januari';
 $lang['February'] = 'Februari';
 $lang['March'] = 'Maart';

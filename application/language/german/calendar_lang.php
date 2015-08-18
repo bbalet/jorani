@@ -84,6 +84,7 @@ $lang['calendar_component_buttonText_month'] = 'Monat';
 $lang['calendar_component_header_left'] = 'prev,next today';
 $lang['calendar_component_header_center'] = 'Titel';
 $lang['calendar_component_header_right'] = 'month,basicWeek,basicDay';
+
 $lang['calendar_monday_short'] = 'Mo';
 $lang['calendar_tuesday_short'] = 'Di';
 $lang['calendar_wednesday_short'] = 'Mi';
@@ -91,6 +92,7 @@ $lang['calendar_thursday_short'] = 'Do';
 $lang['calendar_friday_short'] = 'Fr';
 $lang['calendar_saturday_short'] = 'Sa';
 $lang['calendar_sunday_short'] = 'So';
+
 $lang['Monday'] = 'Montag';
 $lang['Tuesday'] = 'Dienstag';
 $lang['Wednesday'] = 'Mittwoch';
@@ -98,6 +100,8 @@ $lang['Thursday'] = 'Donnerstag';
 $lang['Friday'] = 'Freitag';
 $lang['Saturday'] = 'Samstag';
 $lang['Sunday'] = 'Sonntag';
+$lang['All days'] = 'All days';
+
 $lang['January'] = 'Januar';
 $lang['February'] = 'Februar';
 $lang['March'] = 'März';

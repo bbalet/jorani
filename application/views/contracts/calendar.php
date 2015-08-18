@@ -232,6 +232,7 @@ for ($mC = 1; $mC <= 12; $mC++) {
             <option value="wednesday"><?php echo lang('Wednesday');?></option>
             <option value="thursday"><?php echo lang('Thursday');?></option>
             <option value="friday"><?php echo lang('Friday');?></option>
+            <option value="all"><?php echo lang('All days');?></option>
         </select>
         <label for="txtStartDate"><?php echo lang('contract_calendar_popup_series_field_from');?></label>
         <div class="input-append">

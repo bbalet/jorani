@@ -97,6 +97,7 @@ $lang['calendar_thursday_short'] = 'ព្រ';
 $lang['calendar_friday_short'] = 'សុ';
 $lang['calendar_saturday_short'] = 'ស';
 $lang['calendar_sunday_short'] = 'អ';
+$lang['All days'] = 'All days';
 	
 $lang['January'] = 'ខែមករា';
 $lang['February'] = 'ខែកុម្ផ:';

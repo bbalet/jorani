@@ -243,11 +243,21 @@ class Contracts extends CI_Controller {
                 $start = strtotime($this->input->post('start', TRUE));
                 $end = strtotime($this->input->post('end', TRUE));
                 $type = $this->input->post('type', TRUE);
-                $day = strtotime($this->input->post('day', TRUE), $start);
+                $freq = $this->input->post('day', TRUE);
+                if ($freq == "all") {
+                    $day = $start;
+                } else {
+                    $day = strtotime($freq, $start);
+                }
+                
                 $list = '';
                 while ($day <= $end) {
                     $list .= date("Y-m-d", $day) . ",";
-                    $day = strtotime("+1 weeks", $day);
+                    if ($freq == "all") {
+                        $day = strtotime("+1 day", $day);
+                    } else {
+                        $day = strtotime("+1 weeks", $day);
+                    }
                 }
                 $list = rtrim($list, ",");
                 $contract = $this->input->post('contract', TRUE);

@@ -73,4 +73,5 @@ $lang['day off'] = 'freier Tag';
 $lang['leave'] = 'Urlaub';
 
 $lang['OK'] = 'OK';
+$lang['Cancel'] = 'Cancel';
 $lang['copied'] = 'kopiert';

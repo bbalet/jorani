@@ -84,6 +84,8 @@ $lang['contract_calendar_popup_dayoff_type_afternoon'] = 'Afternoon is off';
 $lang['contract_calendar_popup_dayoff_button_delete'] = 'Delete';
 $lang['contract_calendar_popup_dayoff_button_ok'] = 'OK';
 $lang['contract_calendar_popup_dayoff_button_cancel'] = 'Cancel';
+$lang['contract_calendar_button_import'] = 'Import iCal';
+$lang['contract_calendar_prompt_import'] = 'URL of non-working days iCal file';
 
 $lang['contract_calendar_popup_series_title'] = 'Edit a series of day offs';
 $lang['contract_calendar_popup_series_field_occurences'] = 'Mark every';

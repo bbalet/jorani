@@ -84,6 +84,8 @@ $lang['contract_calendar_popup_dayoff_type_afternoon'] = 'Après-midi  non trava
 $lang['contract_calendar_popup_dayoff_button_delete'] = 'Supprimer';
 $lang['contract_calendar_popup_dayoff_button_ok'] = 'OK';
 $lang['contract_calendar_popup_dayoff_button_cancel'] = 'Annuler';
+$lang['contract_calendar_button_import'] = 'Importer iCal';
+$lang['contract_calendar_prompt_import'] = 'URL du fichier iCal des jours non travaillés';
 
 $lang['contract_calendar_popup_series_title'] = 'Modifier une série de jours non travaillés';
 $lang['contract_calendar_popup_series_field_occurences'] = 'Marquer tous les';

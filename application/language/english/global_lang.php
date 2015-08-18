@@ -86,4 +86,5 @@ $lang['day off'] = 'day off';
 $lang['leave'] = 'leave';
 
 $lang['OK'] = 'OK';
+$lang['Cancel'] = 'Cancel';
 $lang['copied'] = 'copied';

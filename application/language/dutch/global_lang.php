@@ -76,4 +76,5 @@ $lang['day off'] = 'vrije dag';
 $lang['leave'] = 'afwezigheid';
 
 $lang['OK'] = 'OK';
+$lang['Cancel'] = 'Cancel';
 $lang['copied'] = 'gekopieerd';

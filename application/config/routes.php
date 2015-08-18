@@ -95,6 +95,7 @@ $route['contracts/(:num)/calendar'] = 'contracts/calendar/$1';
 $route['contracts/(:num)/calendar/(:num)/copy/(:num)'] = 'contracts/copydayoff/$1/$3/$2';
 $route['contracts/calendar/edit'] = 'contracts/editdayoff';
 $route['contracts/calendar/series'] = 'contracts/series';
+$route['contracts/calendar/import'] = 'contracts/import';
 $route['contracts/calendar/userdayoffs/(:num)'] = 'contracts/userDayoffs/$1';
 $route['contracts/calendar/userdayoffs'] = 'contracts/userDayoffs';
 $route['contracts/calendar/alldayoffs'] = 'contracts/allDayoffs';

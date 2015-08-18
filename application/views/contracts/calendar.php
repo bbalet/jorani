@@ -67,10 +67,11 @@ padding-left:10px;
         &nbsp;
         <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) + 1);?>" class="btn btn-primary" id="cmdNext"><?php echo intval($year) + 1;?>&nbsp; <i class="icon-arrow-right icon-white"></i></a>
     </div>
-    <div class="span3">
+    <div class="span2">
         <a href="<?php echo base_url() . 'contracts';?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_back');?></a>
     </div>
-    <div class="span3">
+    <div class="span4">
+        <button id="cmdImportCalendar" class="btn btn-primary"><i class="icon-calendar icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_import');?></button>&nbsp;
         <a href="#frmSetRangeDayOff" class="btn btn-primary" data-toggle="modal"><i class="icon-retweet icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_series');?></a>
     </div>
     <div class="span3">
@@ -290,7 +291,7 @@ if ($language_code != 'en') { ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
-
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript">
 var timestamp;
 
@@ -448,6 +449,45 @@ $(function() {
         } else {
             document.location = '<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . $year . '/copy/';?>' + $("#contract").val();
         }
+    });
+    
+    //Import an iCalendar feed by using its URL
+    $("#cmdImportCalendar").on("click", function() {
+        var last_imported = '';
+        if($.cookie('import_ical_url') != null) {
+            last_imported = $.cookie('import_ical_url');
+        }
+        bootbox.prompt(
+        "<?php echo lang('contract_calendar_prompt_import');?>",
+        "<?php echo lang('Cancel');?>",
+        "<?php echo lang('OK');?>",
+        function(result) {
+            if (result === null) {
+              //NOP
+              alert('nop');
+            } else {
+              //http://localhost/import.ics
+              //Ajax call to ics import function (using SabreDAV/VObject
+              $.ajax({
+                  url: "<?php echo base_url(); ?>contracts/calendar/import",
+                  type: "POST",
+                  data: { 
+                          contract: <?php echo $contract_id; ?>,
+                          url: result
+                      }
+                }).done(function( msg ) {
+                      //If no error, reload the page and save last used URL
+                      if (msg == "") {
+                          $.cookie('import_ical_url', result);
+                          location.reload(true);
+                      } else {
+                          bootbox.alert(msg);
+                      }
+                  });
+            }
+          },
+          last_imported
+        );
     });
 
     //Copy/Paste ICS Feed

@@ -275,6 +275,31 @@ class Contracts extends CI_Controller {
             }
         }
     }
+
+    /**
+     * Ajax endpoint : Import non-working days by using an external ICS feed
+     * POST: contract id
+     * POST: URL of ICS feed
+     */
+    public function import() {
+        expires_now();
+        header("Content-Type: plain/text");
+        $contract = $this->input->post('contract', TRUE);
+        $url = $this->input->post('url', TRUE);
+        //Check validity of URL and if the endpoint is reachable
+        if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+            $headers = @get_headers($url);
+            if(strpos($headers[0],'200')===false) { //Anything else than HTTP 200 OK
+                echo("$url was not found or distant server is not reachable");
+            }
+            else {
+                $this->load->model('dayoffs_model');
+                $this->dayoffs_model->import_ics($contract, $url);
+            }
+        } else {
+            echo("$url is not a valid URL");
+        }
+    }
     
     /**
      * Ajax endpoint : Send a list of fullcalendar events

@@ -97,6 +97,8 @@ $lang['contract_calendar_popup_series_field_as_afternnon'] = 'Chiusura pomeridia
 $lang['contract_calendar_popup_series_field_title'] = 'Titolo';
 $lang['contract_calendar_popup_series_button_ok'] = 'OK';
 $lang['contract_calendar_popup_series_button_cancel'] = 'Annulla';
+$lang['contract_calendar_button_import'] = 'Import iCal';
+$lang['contract_calendar_prompt_import'] = 'URL of non-working days iCal file';
 
 $lang['contract_calendar_button_copy'] = 'Copy';
 $lang['contract_calendar_copy_destination_js_msg'] = 'You must select a contract.';

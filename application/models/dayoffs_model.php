@@ -16,6 +16,8 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+use Sabre\VObject;
+
 class Dayoffs_model extends CI_Model {
 
     /**
@@ -199,6 +201,34 @@ class Dayoffs_model extends CI_Model {
                 'title' => $title
             );
             return $this->db->insert('dayoffs', $data);
+        }
+    }
+    
+    /**
+     * Import an ICS feed containing days off (all events are considered as non-working days)
+     * This first version is very basic, it supports only full days off
+     * @param int $contract Identifier of the contract
+     * @param string $url URL of the source ICS feed
+     * @return string error message or empty string
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function import_ics($contract, $url) {
+        require_once(APPPATH . 'third_party/VObjects/vendor/autoload.php');
+        $ical = VObject\Reader::read(fopen($url,'r'), VObject\Reader::OPTION_FORGIVING);
+        foreach($ical->VEVENT as $event) {
+            $start = new DateTime($event->DTSTART);
+            $end = new DateTime($event->DTEND);
+            $interval = $start->diff($end);
+            //TODO: Make a more complicated version that supports half days
+            $length = $interval->d;
+            $day = $start;
+            for ($ii = 0; $ii < $length; $ii++) {
+                $tmp = $day->format('U');
+                $this->deletedayoff($contract, $tmp);
+                $this->adddayoff($contract, $tmp, 1, strval($event->SUMMARY));
+                
+                $day->add(new DateInterval('P1D'));
+            }
         }
     }
     

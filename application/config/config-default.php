@@ -433,6 +433,9 @@ $config['ldap_basedn_db'] = FALSE;      //It TRUE, ldap path is taken from user 
 $config['ics_enabled'] = TRUE;
 $config['default_timezone'] = 'Europe/Paris';
 
+//____________________________________________________________________________
+//Enable public access for tabular and global calendar
+$config['public_calendar'] = FALSE;
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

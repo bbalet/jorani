@@ -464,7 +464,6 @@ $(function() {
         function(result) {
             if (result === null) {
               //NOP
-              alert('nop');
             } else {
               //http://localhost/import.ics
               //Ajax call to ics import function (using SabreDAV/VObject

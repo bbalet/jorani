@@ -36,7 +36,7 @@ $this->lang->load('global', $language);?>
             <input type="checkbox" value="" id="chkIncludeChildren"> <?php echo lang('calendar_organization_check_include_subdept');?>
         </label>
     </div>
-    <?php if ($this->config->item('ics_enabled') == TRUE) {?>
+    <?php if (($this->config->item('ics_enabled') == TRUE) && ($logged_in == TRUE)) {?>
     <div class="span5 pull-right"><a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a></div>
     <?php } else {?>
     <div class="span5">&nbsp;</div>
@@ -123,7 +123,11 @@ $this->lang->load('global', $language);?>
     //Refresh the calendar if data is available
     function refresh_calendar() {
         if (entity != -1) {
+            <?php if ($logged_in == TRUE) {?>
             var source = '<?php echo base_url();?>leaves/organization/' + entity;
+            <?php } else {?>
+            var source = '<?php echo base_url();?>leaves/public/organization/' + entity;
+            <?php }?>
             if ($('#chkIncludeChildren').prop('checked') == true) {
                 source += '?children=true';
             } else {
@@ -134,7 +138,11 @@ $this->lang->load('global', $language);?>
             $('#calendar').fullCalendar('rerenderEvents');
             $('#calendar').fullCalendar('removeEventSource', source);
         }
+        <?php if ($logged_in == TRUE) {?>
         source = '<?php echo base_url();?>contracts/calendar/alldayoffs?entity=' + entity;
+        <?php } else {?>
+        source = '<?php echo base_url();?>contracts/public/calendar/alldayoffs?entity=' + entity;
+        <?php }?>
         if ($('#chkIncludeChildren').prop('checked') == true) {
             source += '&children=true';
         } else {
@@ -240,6 +248,7 @@ $this->lang->load('global', $language);?>
             $.cookie('cal_dayoffs', toggleDayoffs);
         }
         
+        <?php if ($logged_in == TRUE) { ?>
         //Copy/Paste ICS Feed
         var client = new ZeroClipboard($("#cmdCopy"));
         $('#lnkICS').click(function () {
@@ -258,7 +267,8 @@ $this->lang->load('global', $language);?>
         client.on( "aftercopy", function( event ) {
             $('#tipCopied').tooltip('show');
             setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
-        });
+        })
+        <?php } ?>;
     });
 </script>
 

@@ -6,32 +6,29 @@ Jorani is designed to provide simple leave and overtime request workflows for sm
 ## Informations / getting help
 
 * Official website : http://jorani.org/
-* Google group : https://groups.google.com/forum/?hl=en#!forum/jorani
-* G+ : https://plus.google.com/+LeavemanagementsystemOrganization/posts
-* FB : https://www.facebook.com/lmsoss
-* Tweeter : https://twitter.com/LeaveMS
+* User group : https://groups.google.com/forum/?hl=en#!forum/jorani
 
 ## Status
 
 This project is stable and ready for production. An online demo is available here : http://demo.jorani.org/
-Use bbalet / bbalet for login / password. Be nice and don't screw up the data of the demo.
+Use bbalet / bbalet for login / password.
 
 ## Features
 
-* Comprehensive online documentation.
-* User management.
+* Comprehensive online documentation (French and English).
 * Notifications by e-mail (requested, accepted, rejected and new user).
-* Leave request approval workflow.
-* Overtime request approval workflow.
+* Leave request approval workflow (1 validator).
+* Overtime request approval workflow (1 validator).
 * Leave balance report (filtered by department).
 * Export to Excel in a click.
 * HR users can edit any leave or overtime request.
 * Set your own contracts and leave types.
 * Calendars of leaves (individual, team, collaborators, etc.).
-* Describe your organization in a tree structure and attach employees to entities.
+* Describe your organization in a tree structure and attach employees to entities, define a supervisor per entity.
 * Non working days (weekends and day offs) can be defined on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
-* LDAP Authentication.
-* Available in English, French, Spanish and Dutch.
+* REST API (OAuth2) fully documented and examples with PHP clients.
+* LDAP Authentication (OpenLDAP, AD, etc.).
+* Available in English, French, Spanish, Italian, German and Dutch.
 
 ## Installation
 
@@ -62,6 +59,7 @@ Use bbalet / bbalet for login / password. Be nice and don't screw up the data of
 * Hector NESTAR : Spanish Translation
 * Roger WOLFS : Dutch Translation
 * Christian SONNENBERG : German Translation
+* Dario BRIGNONE : Italian Translation
 
 ### Third party libraries and components
 
@@ -76,10 +74,11 @@ We thank the following open source projects for the components used by Jorani:
 * Oauth2 Server https://github.com/bshaffer/oauth2-server-php
 * Sabre/VObject https://github.com/fruux/sabre-vobject
 * PHPMailer https://github.com/PHPMailer/PHPMailer
+* PHPMailer CI wrapper https://github.com/ivantcholakov/codeigniter-phpmailer
 
 #### Frontend
 
-* bootstrap 2.3, bootbox
+* bootstrap 2.3, bootbox and Font Awesome
 * JQuery 1.x and JQuery-UI
 * FullCalendar http://arshaw.com/fullcalendar/
 * Datatable https://datatables.net/

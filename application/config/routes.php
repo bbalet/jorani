@@ -125,6 +125,8 @@ $route['calendar/department'] = 'calendar/department';
 $route['calendar/tabular'] = 'calendar/tabular';
 $route['calendar/tabular/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabular/$1/$2/$3/$4';
 $route['calendar/tabular/export/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabular_export/$1/$2/$3/$4';
+
+//private Fullcalendar feeds
 $route['leaves/individual/(:num)'] = 'leaves/individual/$1';
 $route['leaves/individual'] = 'leaves/individual';
 $route['leaves/workmates'] = 'leaves/workmates';
@@ -132,7 +134,10 @@ $route['leaves/department'] = 'leaves/department';
 $route['leaves/organization/(:num)'] = 'leaves/organization/$1';
 $route['leaves/collaborators'] = 'leaves/collaborators';
 $route['leaves/team'] = 'leaves/team';
-$route['leaves/organization/(:num)'] = 'leaves/organization/$1';
+
+//public Fullcalendar feeds (available when public calendars are activated)
+$route['leaves/public/organization/(:num)'] = 'calendar/public_organization/$1';
+$route['contracts/public/calendar/alldayoffs'] = 'calendar/public_dayoffs';
 
 //My leave requests
 $route['leaves/counters'] = 'leaves/counters';

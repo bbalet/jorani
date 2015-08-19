@@ -461,7 +461,6 @@ class Leaves extends CI_Controller {
     public function organization($entity_id) {
         expires_now();
         header("Content-Type: application/json");
-        $this->load->model('organization_model');
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
         $children = filter_var($this->input->get('children', TRUE), FILTER_VALIDATE_BOOLEAN);

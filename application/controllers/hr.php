@@ -192,14 +192,14 @@ class Hr extends CI_Controller {
         $data['source'] = 'hr/employees';
         $data['employee'] = $id;
         
-        $this->form_validation->set_rules('startdate', lang('hr_leaves_create_field_start'), 'required|xss_clean');
-        $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
-        $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|xss_clean');
-        $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean');
-        $this->form_validation->set_rules('duration', lang('hr_leaves_create_field_duration'), 'required|xss_clean');
-        $this->form_validation->set_rules('type', lang('hr_leaves_create_field_type'), 'required|xss_clean');
-        $this->form_validation->set_rules('cause', lang('hr_leaves_create_field_cause'), 'xss_clean');
-        $this->form_validation->set_rules('status', lang('hr_leaves_create_field_status'), 'required|xss_clean');
+        $this->form_validation->set_rules('startdate', lang('hr_leaves_create_field_start'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('duration', lang('hr_leaves_create_field_duration'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('type', lang('hr_leaves_create_field_type'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('cause', lang('hr_leaves_create_field_cause'), 'xss_clean|strip_tags');
+        $this->form_validation->set_rules('status', lang('hr_leaves_create_field_status'), 'required|xss_clean|strip_tags');
 
         $data['credit'] = 0;
         if ($this->form_validation->run() === FALSE) {

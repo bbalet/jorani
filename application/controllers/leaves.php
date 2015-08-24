@@ -133,14 +133,14 @@ class Leaves extends CI_Controller {
         $data['title'] = lang('leaves_create_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_request_leave');
         
-        $this->form_validation->set_rules('startdate', lang('leaves_create_field_start'), 'required|xss_clean');
-        $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
-        $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|xss_clean');
-        $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean');
-        $this->form_validation->set_rules('duration', lang('leaves_create_field_duration'), 'required|xss_clean');
-        $this->form_validation->set_rules('type', lang('leaves_create_field_type'), 'required|xss_clean');
-        $this->form_validation->set_rules('cause', lang('leaves_create_field_cause'), 'xss_clean');
-        $this->form_validation->set_rules('status', lang('leaves_create_field_status'), 'required|xss_clean');
+        $this->form_validation->set_rules('startdate', lang('leaves_create_field_start'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('duration', lang('leaves_create_field_duration'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('type', lang('leaves_create_field_type'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('cause', lang('leaves_create_field_cause'), 'xss_clean|strip_tags');
+        $this->form_validation->set_rules('status', lang('leaves_create_field_status'), 'required|xss_clean|strip_tags');
 
         $data['credit'] = 0;
         $default_type = $this->config->item('default_leave_type');
@@ -212,14 +212,14 @@ class Leaves extends CI_Controller {
             }
         }
         
-        $this->form_validation->set_rules('startdate', lang('leaves_edit_field_start'), 'required|xss_clean');
-        $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean');
-        $this->form_validation->set_rules('enddate', lang('leaves_edit_field_end'), 'required|xss_clean');
-        $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean');
-        $this->form_validation->set_rules('duration', lang('leaves_edit_field_duration'), 'required|xss_clean');
-        $this->form_validation->set_rules('type', lang('leaves_edit_field_type'), 'required|xss_clean');
-        $this->form_validation->set_rules('cause', lang('leaves_edit_field_cause'), 'xss_clean');
-        $this->form_validation->set_rules('status', lang('leaves_edit_field_status'), 'required|xss_clean');
+        $this->form_validation->set_rules('startdate', lang('leaves_edit_field_start'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('enddate', lang('leaves_edit_field_end'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('duration', lang('leaves_edit_field_duration'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('type', lang('leaves_edit_field_type'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('cause', lang('leaves_edit_field_cause'), 'xss_clean|strip_tags');
+        $this->form_validation->set_rules('status', lang('leaves_edit_field_status'), 'required|xss_clean|strip_tags');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->model('users_model');

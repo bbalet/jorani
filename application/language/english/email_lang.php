@@ -33,7 +33,7 @@ $lang['email_overtime_request_accept_subject'] = 'Your overtime request has been
 $lang['email_overtime_request_reject_subject'] = 'Your overtime request has been rejected';
 $lang['email_overtime_request_validation_title'] = 'Overtime Request';
 
-$lang['email_extra_request_reject_subject'] = 'Your overtime request from ';
+$lang['email_extra_request_reject_subject'] = 'Overtime request from ';
 $lang['email_extra_request_validation_title'] = 'Overtime Request';
 
 $lang['email_password_forgotten_subject'] = 'Your password has been reset';

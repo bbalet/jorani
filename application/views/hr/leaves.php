@@ -59,11 +59,11 @@ $this->lang->load('global', $language);?>
                 <a href="#" class="confirm-delete" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('hr_leaves_thead_tip_delete');?>"><i class="icon-trash"></i></a>
             </div>
         </td>
-        <td><?php echo lang($leave['status']); ?></td>
+        <td><?php echo lang($leave['status_name']); ?></td>
         <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate; ?></td>
         <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate; ?></td>
         <td><?php echo $leave['duration']; ?></td>
-        <td><?php echo $leave['type']; ?></td>
+        <td><?php echo $leave['type_name']; ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>

@@ -318,11 +318,11 @@ class Hr extends CI_Controller {
             $date = new DateTime($leave['enddate']);
             $enddate = $date->format(lang('global_date_format'));
             $this->excel->getActiveSheet()->setCellValue('A' . $line, $leave['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, lang($leave['status']));
+            $this->excel->getActiveSheet()->setCellValue('B' . $line, lang($leave['status_name']));
             $this->excel->getActiveSheet()->setCellValue('C' . $line, $startdate);
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $enddate);
             $this->excel->getActiveSheet()->setCellValue('E' . $line, $leave['duration']);
-            $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['type']);
+            $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['type_name']);
             $line++;
         }
         

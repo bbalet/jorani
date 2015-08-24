@@ -43,12 +43,7 @@ class Leaves extends CI_Controller {
         $this->auth->check_is_granted('list_leaves');
         expires_now();
         $data = getUserContext($this);
-        $data['leaves'] = $this->leaves_model->get_user_leaves($this->session->userdata('id'));
-        $this->load->model('status_model');
-        for ($i = 0; $i < count($data['leaves']); ++$i) {
-            $data['leaves'][$i]['status_label'] = $this->status_model->get_label($data['leaves'][$i]['status']);
-            $data['leaves'][$i]['type_label'] = $this->types_model->get_label($data['leaves'][$i]['type']);
-        }
+        $data['leaves'] = $this->leaves_model->get_employee_leaves($this->session->userdata('id'));
         $data['title'] = lang('leaves_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_requests_list');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
@@ -381,8 +376,7 @@ class Leaves extends CI_Controller {
         $this->excel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $leaves = $this->leaves_model->get_user_leaves($this->user_id);
-        $this->load->model('status_model');
+        $leaves = $this->leaves_model->get_employee_leaves($this->user_id);
         
         $line = 2;
         foreach ($leaves as $leave) {
@@ -396,8 +390,8 @@ class Leaves extends CI_Controller {
             $this->excel->getActiveSheet()->setCellValue('D' . $line, $enddate);
             $this->excel->getActiveSheet()->setCellValue('E' . $line, lang($leave['enddatetype']));
             $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['duration']);
-            $this->excel->getActiveSheet()->setCellValue('G' . $line, $this->types_model->get_label($leave['type']));
-            $this->excel->getActiveSheet()->setCellValue('H' . $line, lang($this->status_model->get_label($leave['status'])));
+            $this->excel->getActiveSheet()->setCellValue('G' . $line, $leave['type_name']);
+            $this->excel->getActiveSheet()->setCellValue('H' . $line, lang($leave['status_name']));
             $this->excel->getActiveSheet()->setCellValue('I' . $line, $leave['cause']);
             $line++;
         }

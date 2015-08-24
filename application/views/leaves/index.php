@@ -67,8 +67,8 @@ $this->lang->load('global', $language);?>
         <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leaves_item['enddatetype']) . ')'; ?></td>
         <td><?php echo $leaves_item['cause']; ?></td>
         <td><?php echo $leaves_item['duration']; ?></td>
-        <td><?php echo $leaves_item['type_label']; ?></td>
-        <td><?php echo lang($leaves_item['status_label']); ?></td>
+        <td><?php echo $leaves_item['type_name']; ?></td>
+        <td><?php echo lang($leaves_item['status_name']); ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>

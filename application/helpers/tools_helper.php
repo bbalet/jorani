@@ -25,8 +25,13 @@
 function setUserContext($controller)
 {
         if (!$controller->session->userdata('logged_in')) {
-            $controller->session->set_userdata('last_page', current_url());
-            redirect('session/login');
+            //Test if the expired session was detected while responding to an Ajax request
+            if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest') {
+                $controller->output->set_status_header('401');
+            } else {
+                $controller->session->set_userdata('last_page', current_url());
+                redirect('session/login');
+            }
         }
         $controller->fullname = $controller->session->userdata('firstname') . ' ' .
                 $controller->session->userdata('lastname');

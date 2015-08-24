@@ -15,10 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('calendar', $language);
-$this->lang->load('global', $language);?>
+?>
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css">
 <h1><?php echo lang('calendar_organization_title');?><?php echo $help;?></h1>
@@ -113,6 +110,7 @@ $this->lang->load('global', $language);?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo $language_code;?>.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
     var entity = -1; //Id of the selected entity
     var entityName = '';
@@ -169,6 +167,19 @@ $this->lang->load('global', $language);?>
     }
 
     $(document).ready(function() {
+        
+        //Global Ajax error handling mainly used for session expiration
+        $( document ).ajaxError(function(event, jqXHR, settings, errorThrown) {
+            $('#frmModalAjaxWait').modal('hide');
+            if (jqXHR.status == 401) {
+                bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
+                    //After the login page, we'll be redirected to the current page 
+                   location.reload();
+                });
+            } else { //Oups
+                bootbox.alert("<?php echo lang('global_ajax_error');?>");
+            }
+          });
 
         //Popup select entity
         $("#cmdSelectEntity").click(function() {

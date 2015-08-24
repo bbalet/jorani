@@ -88,3 +88,6 @@ $lang['leave'] = 'absence';
 $lang['OK'] = 'OK';
 $lang['Cancel'] = 'Annuler';
 $lang['copied'] = 'copié';
+
+$lang['global_ajax_timeout'] = 'Votre session a expiré, veuillez vous reconnecter';
+$lang['global_ajax_error'] = 'Erreur Ajax inattendue';

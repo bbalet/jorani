@@ -78,3 +78,6 @@ $lang['leave'] = 'afwezigheid';
 $lang['OK'] = 'OK';
 $lang['Cancel'] = 'Cancel';
 $lang['copied'] = 'gekopieerd';
+
+$lang['global_ajax_timeout'] = 'Your session has expired please login again';
+$lang['global_ajax_error'] = 'Unexpected Ajax Error';

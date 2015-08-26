@@ -58,7 +58,11 @@ echo form_open('leaves/create', $attributes) ?>
     </select>&nbsp;<span id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span><br />
     
     <label for="duration" required><?php echo lang('leaves_create_field_duration');?></label>
+    <?php if ($this->config->item('disable_edit_leave_duration') == TRUE) { ?>
+    <input type="text" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" readonly />
+    <?php } else { ?>
     <input type="text" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" />
+    <?php } ?>
     
     <div class="alert hide alert-error" id="lblCreditAlert" onclick="$('#lblCreditAlert').hide();">
         <button type="button" class="close">&times;</button>

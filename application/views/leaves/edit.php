@@ -59,7 +59,13 @@ if (isset($_GET['source'])) {
     </select>&nbsp;<span id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span><br />
     
     <label for="duration" required><?php echo lang('leaves_edit_field_duration');?></label>
+    
+    <label for="duration" required><?php echo lang('leaves_create_field_duration');?></label>
+    <?php if ($this->config->item('disable_edit_leave_duration') == TRUE) { ?>
+    <input type="text" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" readonly />
+    <?php } else { ?>
     <input type="text" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" />
+    <?php } ?>
     
     <div class="alert hide alert-error" id="lblCreditAlert">
         <button type="button" class="close">&times;</button>

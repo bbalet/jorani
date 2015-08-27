@@ -630,7 +630,7 @@ class Leaves_model extends CI_Model {
             $this->load->model('organization_model');
             $list = $this->organization_model->get_all_children($entity_id);
             $ids = array();
-            if (count($list) > 0) {
+            if ($list[0]['id'] != '') {
                 $ids = explode(",", $list[0]['id']);
             }
             array_push($ids, $entity_id);

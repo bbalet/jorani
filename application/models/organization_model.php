@@ -227,11 +227,13 @@ class Organization_model extends CI_Model {
             $this->load->model('organization_model');
             $list = $this->organization_model->get_all_children($id);
             $ids = array();
-            if (count($list) > 0) {
+            if ($list[0]['id'] != '') {
                 $ids = explode(",", $list[0]['id']);
+                array_push($ids, $id);
+                $this->db->where_in('organization.id', $ids);
+            } else {
+                $this->db->where('organization.id', $id);
             }
-            array_push($ids, $id);
-            $this->db->where_in('organization.id', $ids);
         } else {
             $this->db->where('organization.id', $id);
         }

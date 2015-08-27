@@ -33,6 +33,8 @@ $mod_gzip = getenv('HTTP_MOD_GZIP');
 if ($mod_rewrite == "") $mod_rewrite = '<b>.htaccess not visited</b>';
 if ($allow_overwrite == "") $allow_overwrite = '<b>Off</b>';
 
+$tmz = @date_default_timezone_get();
+
 //Check if we can access to the configuration file
 $pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'database.php')));
 $configFileExists = file_exists($pathConfigFile);
@@ -110,8 +112,11 @@ if ($configFileExists ) {
         <div class="container-fluid">
 
             <h1>Jorani Requirements</h1>
-            
-            <button class="btn btn-primary" onclick="export2csv();"><i class="icon-download-alt icon-white"></i>&nbsp;Export to a CSV file</button>
+
+            <noscript>
+                Javascript is disabled. Jorani requires Javascript to be enabled.
+            </noscript>
+            <button class="btn btn-primary" onclick="export2csv();"><i class="icon-download-alt icon-white"></i>&nbsp;Export to a CSV file</button>            
             
             <h2>Web Server</h2>
 
@@ -145,7 +150,13 @@ if ($configFileExists ) {
                        <?php } else { ?>
                        <tr><td><i class="icon-info-sign"></i>&nbsp;PHP</td><td><?php echo PHP_VERSION; ?></td></tr>
                        <?php } ?>
-                      
+                       
+                      <?php if ($tmz != 'UTC') {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;Timezone defined</td>
+                      <?php } else { ?>
+                      <tr><td><i class="icon-remove-sign"></i>&nbsp;Timezone undefined</td>
+                      <?php } ?><td>If error, please check date.timezone into PHP.ini.</td></tr>
+                       
                       <?php if (extension_loaded('openssl')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;openssl is LOADED</td>
                       <?php } else { ?>
@@ -212,13 +223,21 @@ if ($configFileExists ) {
                   </tbody>
             </table>
 
+            <h2>Additional configuration</h2>
+            
+            <p>You can test the following settings, but you need to edit the corresponding PHP scripts :</p>
+            <ul>
+                <li><a href="testmail.php" target="_blank">E-mail settings</a></li>
+                <li><a href="testldap.php" target="_blank">LDAP settings</a></li>
+            </ul>
+            
             <h2>Schema</h2>
 
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                      <th>Requirement</th>
-                      <th>Value / Description</th>
+                      <th>Table</th>
+                      <th>Signature</th>
                     </tr>
                   </thead>
                   <tbody id="tblSchema">                      

@@ -632,9 +632,11 @@ class Leaves_model extends CI_Model {
             $ids = array();
             if ($list[0]['id'] != '') {
                 $ids = explode(",", $list[0]['id']);
+                array_push($ids, $entity_id);
+                $this->db->where_in('organization.id', $ids);
+            } else {
+                $this->db->where('organization.id', $id);
             }
-            array_push($ids, $entity_id);
-            $this->db->where_in('organization.id', $ids);
         } else {
             $this->db->where('organization.id', $entity_id);
         }

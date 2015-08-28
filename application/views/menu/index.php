@@ -64,16 +64,12 @@ $this->lang->load('menu', $language);?>
 
 <div class="navbar navbar-inverse">
       <div class="navbar-inner">
-        <div class="container">
-              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </a>
-            <div class="nav-collapse">
+            <div class="nav-responsive">
+                <ul class="nav">
+                    <li><a href="<?php echo base_url();?>home"><i class="icon-home icon-white"></i></a></li>
+                    <li><a href="<?php echo base_url();?>leaves"><i class="icon-list icon-white"></i></a></li>
                 
               <?php if ($is_hr == TRUE) { ?>
-              <ul class="nav">			  
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_admin_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -84,11 +80,9 @@ $this->lang->load('menu', $language);?>
                     <li><a href="<?php echo base_url();?>leavetypes"><?php echo lang('menu_hr_list_leaves_type');?></a></li>
                   </ul>
                 </li>
-              </ul>
               <?php } ?>
 
               <?php if ($is_hr == TRUE) { ?>
-              <ul class="nav">			  
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_hr_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -104,11 +98,9 @@ $this->lang->load('menu', $language);?>
                     <li><a href="<?php echo base_url();?>reports/balance"><?php echo lang('menu_hr_report_leave_balance');?></a></li>
                   </ul>
                 </li>
-              </ul>
               <?php } ?>
 
              <?php if ($is_manager == TRUE) { ?>
-             <ul class="nav">			  
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_validation_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -120,10 +112,8 @@ $this->lang->load('menu', $language);?>
                     <?php } ?>
                   </ul>
                 </li>
-              </ul>
               <?php } ?>
               
-              <ul class="nav">			  
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_requests_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -139,9 +129,7 @@ $this->lang->load('menu', $language);?>
                     <?php } ?>
                   </ul>
                 </li>
-              </ul>
          
-              <ul class="nav">			  
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_calendar_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -157,7 +145,6 @@ $this->lang->load('menu', $language);?>
                 </li>
               </ul>
                 
-            </div>		   
-        </div>
+            </div>
       </div>
     </div><!-- /.navbar -->

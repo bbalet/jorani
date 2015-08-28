@@ -18,7 +18,7 @@
 
     //You can change the content of this template
 ?>
-<html lang="it">
+<html lang="en">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -31,17 +31,17 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>Veuillez utiliser ces identifiants pour <a href="{BaseURL}">vous connecter à l'application</a> :</p>
-        <table>
+        Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        <table border="0">
             <tr>
-                <td>Identifiant</td><td>{Login}</td>
+                <td>Login</td><td>{Login}</td>
             </tr>
             <tr>
-                <td>Mot de passe</td><td>{Password}</td>
+                <td>Password</td><td>{Password}</td>
             </tr>            
         </table>
-        <p>Une fois connecté, vous pouvez modifier votre mot de passe comme expliqué <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Lien vers la documentation" target="_blank">dans cet article (en anglais)</a>.</p>
+        Once connected, you can change your password, as explained <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
         <hr>
-        <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
+        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
     </body>
 </html>

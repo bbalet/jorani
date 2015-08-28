@@ -18,7 +18,7 @@
 
     //You can change the content of this template
 ?>
-<html lang="it">
+<html lang="en">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -31,28 +31,27 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>{Firstname} {Lastname} vous soumet une demande d'absence. Voici les <a href="{BaseUrl}leaves/{LeaveId}">détails</a> :</p>
-        <table>
+        {Firstname} {Lastname} requests a leave. Below, the <a href="{BaseUrl}leaves/{LeaveId}">details</a> :
+        <table border="0">
             <tr>
-                <td>Du &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>Au &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
                 <td>Type &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Cause &nbsp;</td><td>{Reason}</td>
+                <td>Reason &nbsp;</td><td>{Reason}</td>
+            </tr>
+            <tr>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accept</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">Reject</a></td>
             </tr>
         </table>
         <br />
-        <p>
-            <a href="{BaseUrl}requests/accept/{LeaveId}">Accepter</a>&nbsp;
-            <a href="{BaseUrl}requests/reject/{LeaveId}">Refuser</a>
-        </p>
-        <p>Vous pouvez vérifier <a href="{BaseUrl}requests/counters/{UserId}">l'état des congés</a> avant de valider cette demande.</p>
+        You can check the <a href="{BaseUrl}requests/counters/{UserId}">leave balance</a> before validating the leave request.
         <hr>
-        <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
+        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
     </body>
 </html>

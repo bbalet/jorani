@@ -18,7 +18,7 @@
 
 //You can change the content of this template
 ?>
-<html lang="it">
+<html lang="en">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -31,23 +31,24 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>Bonjour {Firstname} {Lastname},</p>
-        <p>La demande d'absence que vous avez soumise a été acceptée. Voici les détails :</p>
-        <table>
+        Dear {Firstname} {Lastname}, <br />
+        <br />
+        The leave you've requested has been accepted. Below, the details :
+        <table border="0">
             <tr>
-                <td>Du &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>Au &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
                 <td>Type &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Cause &nbsp;</td><td>{Cause}</td>
+                <td>Reason &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
         <hr>
-        <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
+        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
     </body>
 </html>

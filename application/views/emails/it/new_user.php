@@ -18,7 +18,7 @@
 
     //You can change the content of this template
 ?>
-<html lang="it">
+<html lang="en">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -31,23 +31,23 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>Bienvenue dans Jorani {Firstname} {Lastname}. Veuillez utiliser ces identifiants pour <a href="{BaseURL}">vous connecter à l'application</a> :</p>
-        <table>
+        Welcome to Jorani {Firstname} {Lastname}. Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        <table border="0">
             <tr>
-                <td>Identifiant</td><td>{Login}</td>
+                <td>Login</td><td>{Login}</td>
             </tr>
             <tr>
                 <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-                <td>Mot de passe</td><td>{Password}</td>
+                <td>Password</td><td>{Password}</td>
                 <?php } else { ?>
-                <td>Mot de passe</td><td><i>Le mot de passe que vous utilisez pour ouvrir une session sur votre système d'exploitation (Windows , Linux , etc. ).</i></td>
+                <td>Password</td><td><i>The password you use in order to open a session on your operating system (Windows, Linux, etc.).</i></td>
                 <?php } ?>
             </tr>            
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        <p>Une fois connecté, vous pouvez modifier votre mot de passe comme expliqué <a href="http://fr.jorani.org/utilisation/comment-modifier-mon-mot-de-passe.html" title="Lien vers la documentation" target="_blank">dans cet article</a>.</p>
+        Once connected, you can change your password, as explained <a href="http:/jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
         <?php } ?>
         <hr>
-        <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
+        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
     </body>
 </html>

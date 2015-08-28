@@ -18,7 +18,7 @@
 
 //You can change the content of this template
 ?>
-<html lang="it">
+<html lang="en">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -31,20 +31,21 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>Bonjour {Firstname} {Lastname},</p>
-        <p>La déclaration d'heures supplémentaires que vous avez soumise a été refusée. Voici les détails :</p>
-        <table>
+        Dear {Firstname} {Lastname}, <br />
+        <br />
+        The overtime you've requested has been rejected. Below, the details :
+        <table border="0">
             <tr>
                 <td>Date &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>Durée &nbsp;</td><td>{Duration}</td>
+                <td>Duration &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Raison &nbsp;</td><td>{Cause}</td>
+                <td>Reason &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
         <hr>
-        <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
+        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
     </body>
 </html>

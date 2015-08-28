@@ -395,8 +395,15 @@ class SFTP extends SSH2
 
         $this->window_size_server_to_client[self::CHANNEL] = $this->window_size;
 
-        $packet = pack('CNa*N3',
-            NET_SSH2_MSG_CHANNEL_OPEN, strlen('session'), 'session', self::CHANNEL, $this->window_size, 0x4000);
+        $packet = pack(
+            'CNa*N3',
+            NET_SSH2_MSG_CHANNEL_OPEN,
+            strlen('session'),
+            'session',
+            self::CHANNEL,
+            $this->window_size,
+            0x4000
+        );
 
         if (!$this->_send_binary_packet($packet)) {
             return false;
@@ -409,8 +416,16 @@ class SFTP extends SSH2
             return false;
         }
 
-        $packet = pack('CNNa*CNa*',
-            NET_SSH2_MSG_CHANNEL_REQUEST, $this->server_channels[self::CHANNEL], strlen('subsystem'), 'subsystem', 1, strlen('sftp'), 'sftp');
+        $packet = pack(
+            'CNNa*CNa*',
+            NET_SSH2_MSG_CHANNEL_REQUEST,
+            $this->server_channels[self::CHANNEL],
+            strlen('subsystem'),
+            'subsystem',
+            1,
+            strlen('sftp'),
+            'sftp'
+        );
         if (!$this->_send_binary_packet($packet)) {
             return false;
         }
@@ -425,8 +440,16 @@ class SFTP extends SSH2
                        "exec sftp-server";
             // we don't do $this->exec($command, false) because exec() operates on a different channel and plus the SSH_MSG_CHANNEL_OPEN that exec() does
             // is redundant
-            $packet = pack('CNNa*CNa*',
-                NET_SSH2_MSG_CHANNEL_REQUEST, $this->server_channels[self::CHANNEL], strlen('exec'), 'exec', 1, strlen($command), $command);
+            $packet = pack(
+                'CNNa*CNa*',
+                NET_SSH2_MSG_CHANNEL_REQUEST,
+                $this->server_channels[self::CHANNEL],
+                strlen('exec'),
+                'exec',
+                1,
+                strlen($command),
+                $command
+            );
             if (!$this->_send_binary_packet($packet)) {
                 return false;
             }
@@ -767,7 +790,7 @@ class SFTP extends SSH2
 
         static $depth = 0;
 
-        foreach ($files as $key=>$value) {
+        foreach ($files as $key => $value) {
             if ($depth != 0 && $key == '..') {
                 unset($files[$key]);
                 continue;
@@ -862,7 +885,7 @@ class SFTP extends SSH2
                             } else {
                                 $temp = $dir . '/' . $shortname;
                             }
-                            $this->_update_stat_cache($temp, (object) $attributes);
+                            $this->_update_stat_cache($temp, (object) array('lstat' => $attributes));
                         }
                         // SFTPv6 has an optional boolean end-of-list field, but we'll ignore that, since the
                         // final SSH_FXP_STATUS packet should tell us that, already.
@@ -1023,16 +1046,34 @@ class SFTP extends SSH2
      */
     function _update_stat_cache($path, $value)
     {
+        if ($this->use_stat_cache === false) {
+            return;
+        }
+
         // preg_replace('#^/|/(?=/)|/$#', '', $dir) == str_replace('//', '/', trim($path, '/'))
         $dirs = explode('/', preg_replace('#^/|/(?=/)|/$#', '', $path));
 
         $temp = &$this->stat_cache;
         $max = count($dirs) - 1;
-        foreach ($dirs as $i=>$dir) {
+        foreach ($dirs as $i => $dir) {
+            // if $temp is an object that means one of two things.
+            //  1. a file was deleted and changed to a directory behind phpseclib's back
+            //  2. it's a symlink. when lstat is done it's unclear what it's a symlink to
+            if (is_object($temp)) {
+                $temp = array();
+            }
             if (!isset($temp[$dir])) {
                 $temp[$dir] = array();
             }
             if ($i === $max) {
+                if (is_object($temp[$dir])) {
+                    if (!isset($value->stat) && isset($temp[$dir]->stat)) {
+                        $value->stat = $temp[$dir]->stat;
+                    }
+                    if (!isset($value->lstat) && isset($temp[$dir]->lstat)) {
+                        $value->lstat = $temp[$dir]->lstat;
+                    }
+                }
                 $temp[$dir] = $value;
                 break;
             }
@@ -1053,7 +1094,7 @@ class SFTP extends SSH2
 
         $temp = &$this->stat_cache;
         $max = count($dirs) - 1;
-        foreach ($dirs as $i=>$dir) {
+        foreach ($dirs as $i => $dir) {
             if ($i === $max) {
                 unset($temp[$dir]);
                 return true;
@@ -1110,11 +1151,11 @@ class SFTP extends SSH2
 
         if ($this->use_stat_cache) {
             $result = $this->_query_stat_cache($filename);
-            if (is_array($result) && isset($result['.'])) {
-                return (array) $result['.'];
+            if (is_array($result) && isset($result['.']) && isset($result['.']->stat)) {
+                return $result['.']->stat;
             }
-            if (is_object($result)) {
-                return (array) $result;
+            if (is_object($result) && isset($result->stat)) {
+                return $result->stat;
             }
         }
 
@@ -1127,7 +1168,7 @@ class SFTP extends SSH2
             if ($stat['type'] == NET_SFTP_TYPE_DIRECTORY) {
                 $filename.= '/.';
             }
-            $this->_update_stat_cache($filename, (object) $stat);
+            $this->_update_stat_cache($filename, (object) array('stat' => $stat));
             return $stat;
         }
 
@@ -1140,7 +1181,7 @@ class SFTP extends SSH2
         if ($stat['type'] == NET_SFTP_TYPE_DIRECTORY) {
             $filename.= '/.';
         }
-        $this->_update_stat_cache($filename, (object) $stat);
+        $this->_update_stat_cache($filename, (object) array('stat' => $stat));
 
         return $stat;
     }
@@ -1167,11 +1208,11 @@ class SFTP extends SSH2
 
         if ($this->use_stat_cache) {
             $result = $this->_query_stat_cache($filename);
-            if (is_array($result) && isset($result['.'])) {
-                return (array) $result['.'];
+            if (is_array($result) && isset($result['.']) && isset($result['.']->lstat)) {
+                return $result['.']->lstat;
             }
-            if (is_object($result)) {
-                return (array) $result;
+            if (is_object($result) && isset($result->lstat)) {
+                return $result->lstat;
             }
         }
 
@@ -1184,7 +1225,7 @@ class SFTP extends SSH2
             if ($lstat['type'] == NET_SFTP_TYPE_DIRECTORY) {
                 $filename.= '/.';
             }
-            $this->_update_stat_cache($filename, (object) $lstat);
+            $this->_update_stat_cache($filename, (object) array('lstat' => $lstat));
             return $lstat;
         }
 
@@ -1192,7 +1233,7 @@ class SFTP extends SSH2
 
         if ($lstat != $stat) {
             $lstat = array_merge($lstat, array('type' => NET_SFTP_TYPE_SYMLINK));
-            $this->_update_stat_cache($filename, (object) $lstat);
+            $this->_update_stat_cache($filename, (object) array('lstat' => $lstat));
             return $stat;
         }
 
@@ -1205,7 +1246,7 @@ class SFTP extends SSH2
         if ($lstat['type'] == NET_SFTP_TYPE_DIRECTORY) {
             $filename.= '/.';
         }
-        $this->_update_stat_cache($filename, (object) $lstat);
+        $this->_update_stat_cache($filename, (object) array('lstat' => $lstat));
 
         return $lstat;
     }
@@ -1483,7 +1524,7 @@ class SFTP extends SSH2
         }
 
         unset($entries['.'], $entries['..']);
-        foreach ($entries as $filename=>$props) {
+        foreach ($entries as $filename => $props) {
             if (!isset($props['type'])) {
                 return false;
             }
@@ -1752,12 +1793,12 @@ class SFTP extends SSH2
      * @param optional Integer $mode
      * @param optional Integer $start
      * @param optional Integer $local_start
-     * @param optional callable|null $callback
+     * @param optional callable|null $progressCallback
      * @return Boolean
      * @access public
      * @internal ASCII mode for SFTPv4/5/6 can be supported by adding a new function - \phpseclib\Net\SFTP::setMode().
      */
-    function put($remote_file, $data, $mode = self::SOURCE_STRING, $start = -1, $local_start = -1, $callback = null)
+    function put($remote_file, $data, $mode = self::SOURCE_STRING, $start = -1, $local_start = -1, $progressCallback = null)
     {
         if (!($this->bitmap & SSH2::MASK_LOGIN)) {
             return false;
@@ -1805,13 +1846,13 @@ class SFTP extends SSH2
         }
 
         // http://tools.ietf.org/html/draft-ietf-secsh-filexfer-13#section-8.2.3
-        $callback = false;
+        $dataCallback = false;
         switch (true) {
-            case $mode & self::SOURCE_CALLBACK;
+            case $mode & self::SOURCE_CALLBACK:
                 if (!is_callable($data)) {
                     user_error("\$data should be is_callable() if you specify SOURCE_CALLBACK flag");
                 }
-                $callback = $data;
+                $dataCallback = $data;
                 // do nothing
                 break;
             case is_resource($data):
@@ -1840,7 +1881,7 @@ class SFTP extends SSH2
             } else {
                 fseek($fp, $offset);
             }
-        } elseif ($callback) {
+        } elseif ($dataCallback) {
             $size = 0;
         } else {
             $size = strlen($data);
@@ -1853,9 +1894,9 @@ class SFTP extends SSH2
         // make the SFTP packet be exactly 4096 bytes by including the bytes in the NET_SFTP_WRITE packets "header"
         $sftp_packet_size-= strlen($handle) + 25;
         $i = 0;
-        while ($callback || $sent < $size) {
-            if ($callback) {
-                $temp = call_user_func($callback, $sftp_packet_size);
+        while ($dataCallback || $sent < $size) {
+            if ($dataCallback) {
+                $temp = call_user_func($dataCallback, $sftp_packet_size);
                 if (is_null($temp)) {
                     break;
                 }
@@ -1871,8 +1912,8 @@ class SFTP extends SSH2
                 return false;
             }
             $sent+= strlen($temp);
-            if (is_callable($callback)) {
-                call_user_func($callback, $sent);
+            if (is_callable($progressCallback)) {
+                call_user_func($progressCallback, $sent);
             }
 
             $i++;
@@ -2155,7 +2196,7 @@ class SFTP extends SSH2
         }
 
         unset($entries['.'], $entries['..']);
-        foreach ($entries as $filename=>$props) {
+        foreach ($entries as $filename => $props) {
             if (!isset($props['type'])) {
                 return false;
             }
@@ -2169,6 +2210,7 @@ class SFTP extends SSH2
                 if (!$this->_send_sftp_packet(NET_SFTP_REMOVE, pack('Na*', strlen($temp), $temp))) {
                     return false;
                 }
+                $this->_remove_from_stat_cache($temp);
 
                 $i++;
 
@@ -2179,12 +2221,12 @@ class SFTP extends SSH2
                     $i = 0;
                 }
             }
-            $this->_remove_from_stat_cache($path);
         }
 
         if (!$this->_send_sftp_packet(NET_SFTP_RMDIR, pack('Na*', strlen($path), $path))) {
             return false;
         }
+        $this->_remove_from_stat_cache($path);
 
         $i++;
 
@@ -2262,7 +2304,7 @@ class SFTP extends SSH2
      */
     function is_link($path)
     {
-        $result = $this->_get_stat_cache_prop($path, 'type');
+        $result = $this->_get_lstat_cache_prop($path, 'type');
         if ($result === false) {
             return false;
         }
@@ -2356,13 +2398,20 @@ class SFTP extends SSH2
         }
 
         switch ($type) {
-            case NET_SFTP_TYPE_BLOCK_DEVICE: return 'block';
-            case NET_SFTP_TYPE_CHAR_DEVICE: return 'char';
-            case NET_SFTP_TYPE_DIRECTORY: return 'dir';
-            case NET_SFTP_TYPE_FIFO: return 'fifo';
-            case NET_SFTP_TYPE_REGULAR: return 'file';
-            case NET_SFTP_TYPE_SYMLINK: return 'link';
-            default: return false;
+            case NET_SFTP_TYPE_BLOCK_DEVICE:
+                return 'block';
+            case NET_SFTP_TYPE_CHAR_DEVICE:
+                return 'char';
+            case NET_SFTP_TYPE_DIRECTORY:
+                return 'dir';
+            case NET_SFTP_TYPE_FIFO:
+                return 'fifo';
+            case NET_SFTP_TYPE_REGULAR:
+                return 'file';
+            case NET_SFTP_TYPE_SYMLINK:
+                return 'link';
+            default:
+                return false;
         }
     }
 
@@ -2378,17 +2427,47 @@ class SFTP extends SSH2
      */
     function _get_stat_cache_prop($path, $prop)
     {
+        return $this->_get_xstat_cache_prop($path, $prop, 'stat');
+    }
+
+    /**
+     * Return an lstat properity
+     *
+     * Uses cache if appropriate.
+     *
+     * @param String $path
+     * @param String $prop
+     * @return Mixed
+     * @access private
+     */
+    function _get_lstat_cache_prop($path, $prop)
+    {
+        return $this->_get_xstat_cache_prop($path, $prop, 'lstat');
+    }
+
+    /**
+     * Return a stat or lstat properity
+     *
+     * Uses cache if appropriate.
+     *
+     * @param String $path
+     * @param String $prop
+     * @return Mixed
+     * @access private
+     */
+    function _get_xstat_cache_prop($path, $prop, $type)
+    {
         if ($this->use_stat_cache) {
             $path = $this->_realpath($path);
 
             $result = $this->_query_stat_cache($path);
 
-            if (is_object($result) && isset($result->$prop)) {
-                return $result->$prop;
+            if (is_object($result) && isset($result->$type)) {
+                return $result->{$type}[$prop];
             }
         }
 
-        $result = $this->stat($path);
+        $result = $this->$type($path);
 
         if ($result === false || !isset($result[$prop])) {
             return false;

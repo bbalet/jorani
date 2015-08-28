@@ -262,14 +262,17 @@ class Stream
         if ($this->size === false) {
             if ($this->mode[0] == 'r') {
                 return false;
+            } else {
+                $this->sftp->touch($path);
+                $this->size = 0;
             }
         } else {
             switch ($this->mode[0]) {
                 case 'x':
                     return false;
                 case 'w':
-                case 'c':
                     $this->sftp->truncate($path, 0);
+                    $this->size = 0;
             }
         }
 
@@ -493,7 +496,7 @@ class Stream
 
         $path_from = $this->_parse_path($path_from);
         $path_to = parse_url($path_to);
-        if ($path_from == false) {
+        if ($path_from === false) {
             return false;
         }
 

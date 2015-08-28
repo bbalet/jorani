@@ -1,12 +1,15 @@
 /*!
- * FullCalendar v2.2.6 Google Calendar Plugin
- * Docs & License: http://arshaw.com/fullcalendar/
- * (c) 2013 Adam Shaw
+ * FullCalendar v2.4.0 Google Calendar Plugin
+ * Docs & License: http://fullcalendar.io/
+ * (c) 2015 Adam Shaw
  */
  
 (function(factory) {
 	if (typeof define === 'function' && define.amd) {
 		define([ 'jquery' ], factory);
+	}
+	else if (typeof exports === 'object') { // Node/CommonJS
+		module.exports = factory(require('jquery'));
 	}
 	else {
 		factory(jQuery);
@@ -29,7 +32,7 @@ fc.sourceNormalizers.push(function(sourceOptions) {
 
 		// detect if the ID was specified as a single string.
 		// will match calendars like "asdf1234@calendar.google.com" in addition to person email calendars.
-		if ((match = /^[^\/]+@([^\/\.]+\.)*(google|googlemail|gmail)\.com$/.test(url))) {
+		if (/^[^\/]+@([^\/\.]+\.)*(google|googlemail|gmail)\.com$/.test(url)) {
 			googleCalendarId = url;
 		}
 		// try to scrape it out of a V1 or V3 API feed URL
@@ -77,17 +80,13 @@ function transformOptions(sourceOptions, start, end, timezone, calendar) {
 
 	function reportError(message, apiErrorObjs) {
 		var errorObjs = apiErrorObjs || [ { message: message } ]; // to be passed into error handlers
-		var consoleObj = window.console;
-		var consoleWarnFunc = consoleObj ? (consoleObj.warn || consoleObj.log) : null;
 
 		// call error handlers
 		(sourceOptions.googleCalendarError || $.noop).apply(calendar, errorObjs);
 		(calendar.options.googleCalendarError || $.noop).apply(calendar, errorObjs);
 
 		// print error to debug console
-		if (consoleWarnFunc) {
-			consoleWarnFunc.apply(consoleObj, [ message ].concat(apiErrorObjs || []));
-		}
+		fc.warn.apply(null, [ message ].concat(apiErrorObjs || []));
 	}
 
 	if (!apiKey) {

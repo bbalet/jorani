@@ -54,12 +54,22 @@ $this->lang->load('global', $language);?>
             <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><?php echo $leaves_item['id']; ?></a>
             &nbsp;
             <div class="pull-right">
-                <?php if ($leaves_item['status'] == 1) { ?>
+                <?php
+                $show_delete = FALSE;
+                $show_edit = FALSE;
+                if ($leaves_item['status'] == 1) $show_delete = TRUE;
+                if ($leaves_item['status'] == 1) $show_edit = TRUE;
+                if (($leaves_item['status'] == 4) && ($this->config->item('delete_rejected_requests') == TRUE))  $show_delete = TRUE;
+                if (($leaves_item['status'] == 4) && ($this->config->item('edit_rejected_requests') == TRUE))  $show_edit = TRUE;    
+                ?>
+                <?php if ($show_edit == TRUE) { ?>
                 <a href="<?php echo base_url();?>leaves/edit/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;
-                <a href="#" class="confirm-delete" data-id="<?php echo $leaves_item['id'];?>" title="<?php echo lang('leaves_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
                 <?php } ?>
+                <?php if ($show_delete == TRUE) { ?>
+                <a href="#" class="confirm-delete" data-id="<?php echo $leaves_item['id'];?>" title="<?php echo lang('leaves_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
                 &nbsp;
+                <?php } ?>
                 <a href="<?php echo base_url();?>leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
             </div>
         </td>

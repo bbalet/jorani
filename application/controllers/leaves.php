@@ -191,9 +191,12 @@ class Leaves extends CI_Controller {
         if (!$this->is_hr) {
             if (($this->session->userdata('manager') != $this->user_id) &&
                     $data['leave']['status'] != 1) {
-                log_message('error', 'User #' . $this->user_id . ' illegally tried to edit leave #' . $id);
-                $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_error'));
-                redirect('leaves');
+                if ($this->config->item('edit_rejected_requests') == FALSE ||
+                    $data['leave']['status'] != 4) {//Configuration switch that allows editing the rejected leave requests
+                    log_message('error', 'User #' . $this->user_id . ' illegally tried to edit leave #' . $id);
+                    $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_error'));
+                    redirect('leaves');
+                 }
             }
         } //Admin
         
@@ -332,6 +335,10 @@ class Leaves extends CI_Controller {
                 $can_delete = true;
             } else {
                 if ($leaves['status'] == 1 ) {
+                    $can_delete = true;
+                }
+                if ($this->config->item('delete_rejected_requests') == TRUE ||
+                    $leaves['status'] == 4) {
                     $can_delete = true;
                 }
             }

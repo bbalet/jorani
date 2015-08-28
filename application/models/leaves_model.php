@@ -635,7 +635,7 @@ class Leaves_model extends CI_Model {
                 array_push($ids, $entity_id);
                 $this->db->where_in('organization.id', $ids);
             } else {
-                $this->db->where('organization.id', $id);
+                $this->db->where('organization.id', $entity_id);
             }
         } else {
             $this->db->where('organization.id', $entity_id);

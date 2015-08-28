@@ -85,7 +85,7 @@ class Organization extends CI_Controller {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $id = $this->input->get('id', TRUE);
-            $text = $this->input->get('text', TRUE);
+            $text = sanitize($this->input->get('text', TRUE));
             $this->load->model('organization_model');
             $this->organization_model->rename($id, $text);
         }
@@ -103,7 +103,7 @@ class Organization extends CI_Controller {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $id = $this->input->get('id', TRUE);
-            $text = $this->input->get('text', TRUE);
+            $text = sanitize($this->input->get('text', TRUE));
             $this->load->model('organization_model');
             $this->organization_model->create($id, $text);
         }

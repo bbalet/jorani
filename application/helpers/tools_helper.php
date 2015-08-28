@@ -77,3 +77,18 @@ function expires_now() {
     // HTTP/1.0
     header("Pragma: no-cache");
 }
+
+/**
+ * Sanitizes an input (GET/POST) coming from outside a form (eg Ajax request)
+ * @param string $value value to be cleansed from characters that prevent Jorani to work
+ * @return string value where problematic characters have been removed
+ * @author Benjamin BALET <benjamin.balet@gmail.com>
+ */
+function sanitize($value){
+    $value = trim($value);
+    $value = str_replace('\\','',$value);
+    $value = strtr($value,array_flip(get_html_translation_table(HTML_ENTITIES)));
+    $value = strip_tags($value);
+    $value = htmlspecialchars($value);
+    return $value;
+}

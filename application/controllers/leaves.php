@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 class Leaves extends CI_Controller {
@@ -43,6 +45,7 @@ class Leaves extends CI_Controller {
         $this->auth->check_is_granted('list_leaves');
         expires_now();
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['leaves'] = $this->leaves_model->get_employee_leaves($this->session->userdata('id'));
         $data['title'] = lang('leaves_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_requests_list');

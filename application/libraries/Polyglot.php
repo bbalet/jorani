@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 class Polyglot {
@@ -491,7 +493,7 @@ class Polyglot {
             case 'cr' : return 'ᓀᐦᐃᔭᐍᐏᐣ'; break;
             case 'hr' : return 'hrvatski'; break;
             case 'cs' : return 'česky'; break;
-            case 'da' : return 'dansk'; break;
+            case 'da' : return 'Dansk'; break;
             case 'dv' : return 'ދިވެހި'; break;
             case 'nl' : return 'Nederlands'; break;
             case 'en' : return 'English'; break;
@@ -501,7 +503,7 @@ class Polyglot {
             case 'fo' : return 'føroyskt'; break;
             case 'fj' : return 'vosa Vakaviti'; break;
             case 'fi' : return 'suomi'; break;
-            case 'fr' : return 'français'; break;
+            case 'fr' : return 'Français'; break;
             case 'ff' : return 'Fulfulde'; break;
             case 'gl' : return 'Galego'; break;
             case 'ka' : return 'ქართული'; break;
@@ -592,7 +594,7 @@ class Polyglot {
             case 'sc' : return 'sardu'; break;
             case 'sd' : return 'सिन्धी'; break;
             case 'se' : return 'Davvisámegiella'; break;
-            case 'sm' : return 'gagana faa Samoa'; break;
+            case 'sm' : return 'Gagana faa Samoa'; break;
             case 'sg' : return 'yângâ tî sängö'; break;
             case 'sr' : return 'српски језик'; break;
             case 'gd' : return 'Gàidhlig'; break;
@@ -602,7 +604,7 @@ class Polyglot {
             case 'sl' : return 'slovenščina'; break;
             case 'so' : return 'Soomaaliga'; break;
             case 'st' : return 'Sesotho'; break;
-            case 'es' : return 'español'; break;
+            case 'es' : return 'Español'; break;
             case 'su' : return 'Basa Sunda'; break;
             case 'sw' : return 'Kiswahili'; break;
             case 'ss' : return 'SiSwati'; break;
@@ -637,7 +639,7 @@ class Polyglot {
             case 'yi' : return 'ייִדיש'; break;
             case 'yo' : return 'Yorùbá'; break;
             case 'za' : return 'nativeName'; break;
-            default: return 'english'; break;
+            default: return 'English'; break;
         }
     }
 

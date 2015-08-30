@@ -71,6 +71,7 @@ $lang['firstname'] = 'voornaam';
 $lang['lastname'] = 'achternaam';
 $lang['datehired'] = 'Datum aanstelling';
 $lang['department'] = 'afdeling';
+$lang['position'] = 'position';
 $lang['contract'] = 'contract';
 $lang['day off'] = 'vrije dag';
 $lang['leave'] = 'afwezigheid';

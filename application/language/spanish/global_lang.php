@@ -68,6 +68,7 @@ $lang['firstname'] = 'nombre';
 $lang['lastname'] = 'apellido';
 $lang['datehired'] = 'Fechas de contratación';
 $lang['department'] = 'departamento';
+$lang['position'] = 'position';
 $lang['contract'] = 'contrato';
 $lang['day off'] = 'dias de descanso';
 $lang['leave'] = 'permiso';

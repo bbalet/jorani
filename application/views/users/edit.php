@@ -14,13 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
-
-$CI =& get_instance();
-$CI->load->library('polyglot');
-$CI->load->helper('language');
-$this->lang->load('users', $language);
-$this->lang->load('global', $language);?>
+?>
 
 <h2><?php echo lang('users_edit_title');?><?php echo $users_item['id']; ?><?php echo $help;?></h2>
 
@@ -101,7 +98,7 @@ echo $date->format(lang('global_date_format'));
     <label for="language"><?php echo lang('users_edit_field_language');?></label>
     <select name="language">
          <?php 
-         $languages = $CI->polyglot->nativelanguages($this->config->item('languages'));
+         $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
          foreach ($languages as $code => $language): ?>
         <option value="<?php echo $code; ?>" <?php if ($code == $users_item['language']) echo "selected"; ?>><?php echo $language; ?></option>
         <?php endforeach ?>

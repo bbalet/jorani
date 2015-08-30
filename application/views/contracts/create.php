@@ -14,11 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
-
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('contract', $language);
-$this->lang->load('calendar', $language);?>
+?>
 
 <h2><?php echo lang('contract_create_title');?></h2>
 

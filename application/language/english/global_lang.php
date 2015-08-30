@@ -14,6 +14,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 //Global strings
@@ -79,8 +81,9 @@ $lang['Afternoon'] = 'Afternoon';
 $lang['identifier'] = 'identifier';
 $lang['firstname'] = 'firstname';
 $lang['lastname'] = 'lastname';
-$lang['datehired'] = 'datehired';
+$lang['datehired'] = 'date hired';
 $lang['department'] = 'department';
+$lang['position'] = 'position';
 $lang['contract'] = 'contract';
 $lang['day off'] = 'day off';
 $lang['leave'] = 'leave';

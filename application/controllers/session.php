@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 if (!defined('BASEPATH'))
@@ -37,6 +39,7 @@ class Session extends CI_Controller {
             $this->session->set_userdata('language_code', $this->polyglot->language2code($this->config->item('language')));
         }
         $this->lang->load('session', $this->session->userdata('language'));
+        $this->lang->load('global', $this->session->userdata('language'));
     }
 
     /**
@@ -58,6 +61,7 @@ class Session extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function login() {
+        $this->lang->load('menu', $this->session->userdata('language'));
         $data['title'] = lang('session_login_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_login');
         $this->load->helper('form');

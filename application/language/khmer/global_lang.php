@@ -81,6 +81,7 @@ $lang['firstname'] = 'firstname';
 $lang['lastname'] = 'lastname';
 $lang['datehired'] = 'datehired';
 $lang['department'] = 'department';
+$lang['position'] = 'position';
 $lang['contract'] = 'contract';
 $lang['day off'] = 'day off';
 $lang['leave'] = 'leave';

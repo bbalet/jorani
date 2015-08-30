@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 class Users extends CI_Controller {
@@ -41,6 +43,7 @@ class Users extends CI_Controller {
         $this->auth->check_is_granted('list_users');
         expires_now();
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['users'] = $this->users_model->get_users();
         $data['title'] = lang('users_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_users');
@@ -90,6 +93,7 @@ class Users extends CI_Controller {
         $this->auth->check_is_granted('employees_list');
         expires_now();
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['employees'] = $this->users_model->get_all_employees();
         $data['title'] = lang('employees_index_title');
         $this->load->view('users/employees', $data);
@@ -135,6 +139,7 @@ class Users extends CI_Controller {
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->load->library('polyglot');
         $data['title'] = lang('users_edit_html_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_create_user');
         
@@ -286,6 +291,7 @@ class Users extends CI_Controller {
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->load->library('polyglot');
         $data['title'] = lang('users_create_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_create_user');
 
@@ -322,7 +328,6 @@ class Users extends CI_Controller {
             
             //Send an e-mail to the user so as to inform that its account has been created
             $this->load->library('email');
-            $this->load->library('polyglot');
             $usr_lang = $this->polyglot->code2language($this->input->post('language'));
             //We need to instance an different object as the languages of connected user may differ from the UI lang
             $lang_mail = new CI_Lang();

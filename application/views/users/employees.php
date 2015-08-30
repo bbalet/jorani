@@ -14,11 +14,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
+?>
 
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('users', $language);
-$this->lang->load('datatable', $language);?>
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="employees" width="100%">
     <thead>
         <tr>

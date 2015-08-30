@@ -14,11 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
-
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('organization', $language);
-$this->lang->load('treeview', $language);?>
+?>
 
 <div class="input-append">
 <input type="text" placeholder="<?php echo lang('organization_select_field_search_placeholder');?>" id="txtSearch" />

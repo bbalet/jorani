@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 //This CI custom library is just a wrapper around PHPExcel library
@@ -37,6 +39,7 @@ class Excel extends PHPExcel {
      * Return the excel column name for a given column index
      * @param type $number
      * @return string
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function column_name($number) {
         if ($number < 27) {

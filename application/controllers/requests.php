@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
@@ -50,6 +52,8 @@ class Requests extends CI_Controller {
             $showAll = false;
         }
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
+        //$this->lang->load('calendar', $this->language);
         $data['filter'] = $filter;
         $data['title'] = lang('requests_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_validation');
@@ -138,6 +142,7 @@ class Requests extends CI_Controller {
         $this->auth->check_is_granted('list_collaborators');
         expires_now();
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['title'] = lang('requests_collaborators_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_collaborators_list');
         $this->load->model('users_model');
@@ -160,6 +165,7 @@ class Requests extends CI_Controller {
         if (($this->user_id == $id) || ($this->is_hr)) {
             expires_now();
             $data = getUserContext($this);
+            $this->lang->load('datatable', $this->language);
             $data['title'] = lang('requests_delegations_title');
             $data['help'] = $this->help->create_help_link('global_link_doc_page_delegations');
             $this->load->model('users_model');
@@ -288,6 +294,9 @@ class Requests extends CI_Controller {
      */
     public function counters($id, $refTmp = NULL) {
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
+        $this->lang->load('entitleddays', $this->language);
+        $this->lang->load('hr', $this->language);
         $this->load->model('users_model');
         $employee = $this->users_model->get_users($id);
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {

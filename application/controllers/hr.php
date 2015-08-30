@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
@@ -43,6 +45,7 @@ class Hr extends CI_Controller {
     public function employees() {
         $this->auth->check_is_granted('list_employees');
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['title'] = lang('hr_employees_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_employees');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
@@ -93,6 +96,7 @@ class Hr extends CI_Controller {
     public function leaves($id) {
         $this->auth->check_is_granted('list_employees');
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['title'] = lang('hr_leaves_title');
         $data['user_id'] = $id;
         $this->load->model('leaves_model');
@@ -114,6 +118,7 @@ class Hr extends CI_Controller {
     public function overtime($id) {
         $this->auth->check_is_granted('list_employees');
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['title'] = lang('hr_overtime_title');
         $data['user_id'] = $id;
         $this->load->model('overtime_model');
@@ -135,6 +140,8 @@ class Hr extends CI_Controller {
     public function counters($id, $refTmp = NULL) {
         $this->auth->check_is_granted('list_employees');
         $data = getUserContext($this);
+        $this->lang->load('entitleddays', $this->language);
+        $this->lang->load('datatable', $this->language);
         $refDate = date("Y-m-d");
         if ($refTmp != NULL) {
             $refDate = date("Y-m-d", $refTmp);
@@ -194,7 +201,7 @@ class Hr extends CI_Controller {
         
         $this->form_validation->set_rules('startdate', lang('hr_leaves_create_field_start'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('enddate', lang('hr_leaves_create_field_end'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('duration', lang('hr_leaves_create_field_duration'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('type', lang('hr_leaves_create_field_type'), 'required|xss_clean|strip_tags');
@@ -233,7 +240,8 @@ class Hr extends CI_Controller {
     public function presence($id, $month=0, $year=0) {
         $this->auth->check_is_granted('list_employees');
         $data = getUserContext($this);
-        
+        $this->lang->load('datatable', $this->language);
+        $this->lang->load('calendar', $this->language);
         $data['title'] = lang('hr_presence_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_presence_report');
         

@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 class Positions extends CI_Controller {
@@ -40,6 +42,7 @@ class Positions extends CI_Controller {
     public function index() {
         $this->auth->check_is_granted('list_positions');
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['positions'] = $this->positions_model->get_positions();
         $data['title'] = lang('positions_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_positions_list');
@@ -57,6 +60,7 @@ class Positions extends CI_Controller {
     public function select() {
         $this->auth->check_is_granted('list_positions');
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['positions'] = $this->positions_model->get_positions();
         $this->load->view('positions/select', $data);
     }

@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 class Reports extends CI_Controller {
@@ -144,15 +146,17 @@ class Reports extends CI_Controller {
         $thead = '';
         $tbody = '';
         $line = 2;
+        $i18n = array("identifier", "firstname", "lastname", "datehired", "department", "position", "contract");
         foreach ($result as $row) {
             $index = 1;
             $tbody .= '<tr>';
             foreach ($row as $key => $value) {
                 if ($line == 2) {
-                    if (lang($key) == '')
-                        $thead .= '<th>' . $key . '</th>';
-                    else
+                    if (in_array($key, $i18n)) {
                         $thead .= '<th>' . lang($key) . '</th>';
+                    } else {
+                        $thead .= '<th>' . $key . '</th>';
+                    }
                 }
                 $tbody .= '<td>' . $value . '</td>';
                 $index++;

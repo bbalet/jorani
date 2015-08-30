@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
@@ -41,6 +43,7 @@ class Contracts extends CI_Controller {
      */
     public function index($filter = 'requested') {
         $this->auth->check_is_granted('list_contracts');
+        $this->lang->load('datatable', $this->language);
         if ($filter == 'all') {
             $showAll = true;
         } else {
@@ -67,6 +70,7 @@ class Contracts extends CI_Controller {
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->lang->load('calendar', $this->language);
         $data['title'] = lang('contract_edit_title');
         
         $this->form_validation->set_rules('name', lang('contract_edit_field_name'), 'required|xss_clean|strip_tags');
@@ -101,6 +105,7 @@ class Contracts extends CI_Controller {
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->lang->load('calendar', $this->language);
         $data['title'] = lang('contract_create_title');
 
         $this->form_validation->set_rules('name', lang('contract_create_field_name'), 'required|xss_clean|strip_tags');
@@ -149,6 +154,7 @@ class Contracts extends CI_Controller {
     public function calendar($id, $year = 0) {
         $this->auth->check_is_granted('calendar_contract');
         $data = getUserContext($this);
+        $this->lang->load('calendar', $this->language);
         $data['title'] = lang('contract_calendar_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_contracts_calendar');
         if ($year <> 0) {

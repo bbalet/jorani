@@ -16,9 +16,6 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$this->lang->load('calendar', $language);
-$this->lang->load('contract', $language);
-$this->lang->load('global', $language);
 $dDaysOnPage = 37;
 $dDay = 1;
 ?>

@@ -14,11 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
-
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('hr', $language);
-$this->lang->load('global', $language);?>
+?>
 
 <h2><?php echo lang('hr_leaves_create_title');?> &nbsp;
 <a href="<?php echo lang('global_link_doc_page_request_leave');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>

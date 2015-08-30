@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 class Organization extends CI_Controller {
@@ -42,6 +44,8 @@ class Organization extends CI_Controller {
         $this->auth->check_is_granted('organization_index');
         $data = getUserContext($this);
         $this->lang->load('organization', $this->language);
+        $this->lang->load('datatable', $this->language);
+        $this->lang->load('treeview', $this->language);
         $data['title'] = lang('organization_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_hr_organization');
         $this->load->view('templates/header', $data);
@@ -61,6 +65,7 @@ class Organization extends CI_Controller {
             $data['language'] = $this->config->item('language');
             $data['language_code'] = $this->polyglot->language2code($data['language']);
             $this->lang->load('organization', $data['language']);
+            $this->lang->load('treeview', $data['language']);
             $data['help'] = '';
             $data['logged_in'] = FALSE;
             $this->load->view('organization/select', $data);
@@ -69,6 +74,7 @@ class Organization extends CI_Controller {
             $this->auth->check_is_granted('organization_select');
             $data = getUserContext($this);
             $this->lang->load('organization', $this->language);
+            $this->lang->load('treeview', $this->language);
             $this->load->view('organization/select', $data);
         }
     }

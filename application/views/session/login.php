@@ -14,14 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
-
-$CI =& get_instance();
-$CI->load->library('polyglot');
-$CI->load->helper('language');
-$this->lang->load('session', $language);
-$this->lang->load('global', $language);
-$this->lang->load('menu', $language);?>
+?>
 
 <style>
     body {
@@ -60,7 +56,7 @@ $this->lang->load('menu', $language);?>
 <?php
 $attributes = array('id' => 'loginFrom');
 echo form_open('session/login', $attributes);
-$languages = $CI->polyglot->nativelanguages($this->config->item('languages'));?>
+$languages = $this->polyglot->nativelanguages($this->config->item('languages'));?>
 
     <input type="hidden" name="last_page" value="session/login" />
     <?php if (count($languages) == 1) { ?>

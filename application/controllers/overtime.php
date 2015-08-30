@@ -18,6 +18,8 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
@@ -51,6 +53,7 @@ class Overtime extends CI_Controller {
         }
         
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['filter'] = $filter;
         $data['title'] = lang('overtime_index_title');
         $data['requests'] = $this->overtime_model->requests($this->user_id, $showAll);

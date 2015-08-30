@@ -14,12 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
-
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('leaves', $language);
-$this->lang->load('calendar', $language);
-$this->lang->load('global', $language);?>
+?>
 
 <h2><?php echo lang('leaves_view_title');?><?php echo $leave['id']; ?>&nbsp;<span class="muted">(<?php echo $name ?>)</span></h2>
 

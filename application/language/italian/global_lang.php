@@ -70,6 +70,7 @@ $lang['firstname'] = 'nome';
 $lang['lastname'] = 'cognome';
 $lang['datehired'] = 'data assunzione';
 $lang['department'] = 'reparto';
+$lang['position'] = 'position';
 $lang['contract'] = 'contratto';
 $lang['day off'] = 'giorno libero';
 $lang['leave'] = 'ferie';

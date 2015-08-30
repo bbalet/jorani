@@ -14,10 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
-
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('leavetypes', $language);?>
+?>
 
 <?php $attributes = array('id' => 'frmCreateLeaveType');
 echo form_open('leavetypes/create', $attributes); ?>

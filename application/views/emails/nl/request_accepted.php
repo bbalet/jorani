@@ -30,7 +30,7 @@
         Het afwezigheidsverzoek dat u heeft ingediend is geaccepteerd. Hieronder vindt u de details :
         <table border="0">
             <tr>
-                <td>Van &nbsp;</td><td>{StartDate}}&nbsp;({StartDateType})</td>
+                <td>Van &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
                 <td>Tot &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>

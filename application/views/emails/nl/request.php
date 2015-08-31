@@ -28,7 +28,7 @@
         Afwezigheidsverzoek van {Firstname} {Lastname}. Hieronder de <a href="{BaseUrl}leaves/{LeaveId}">details</a> :
         <table border="0">
             <tr>
-                <td>Van &nbsp;</td><td>{StartDate}}&nbsp;({StartDateType})</td>
+                <td>Van &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
                 <td>Tot &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>

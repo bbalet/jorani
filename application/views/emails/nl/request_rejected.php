@@ -30,7 +30,7 @@
         Het afwezigheidsverzoek dat U heeft ingediend is afgewezen. Hieronder vindt U de details :
         <table border="0">
             <tr>
-                <td>Van</td><td>{StartDate}}&nbsp;({StartDateType})</td>
+                <td>Van</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
                 <td>Tot &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>

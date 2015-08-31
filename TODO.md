@@ -1,9 +1,19 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
+## v0.4.1
+
+- [ ] Bug when editing a LR from HR/Employee => e-mail is messy (reload the LR from DB in leaves:sendMail)
+- [ ] Bug : if <<edit_rejected_requests>> is TRUE then we take into account <<leave_status_requested>> when editing rejected LR.
+- [ ] ER report duration and balance into request e-mail.
+- [ ] ER in entitled days editor : possibility to copy a line.
+- [ ] Translate e-mails in italian.
+- [ ] Update jorani.pot in transifex and warn translators/update strings.
+- [ ] Check HR/Monthly report for overlapping. Report this overlapping feature to calendar/tabular.
+
 ## v0.5.0 or later
 
-- [X] Copy contract/calendar (definition of non-working days for a yearly period).
+- [X] Copy contract/calendar (definition of non-working days for a civil year).
 - [X] A manager can create a leave request in behalf of a collaborator.
 - [X] Check Ajax return (e.g. calendar views) to redirect to login in case of disconnection.
 - [ ] Better entitled days editor (contract / employee).
@@ -16,6 +26,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 ## Not a priority
 
 - [ ] Better LDAP integration.
+- [ ] Mobile-optimized views (limited to few pages : simple user and validation).
 - [ ] Implement a kind of heritage in HR/organization for supervisors (child entities).
 - [X] Inactive employees (put them into an archive entity in HR/organization so as to exclude them from reports).
 - [ ] HR officers of a part of the organization (defined in HR/organization), for future functions when they'll be CCed.
@@ -31,7 +42,7 @@ request a leave even if your credit is negative and because leave balance report
 
 - [ ] Simplified time tracking. Not sure because Jorani is specialized in LMS. Maybe a side project ?
 
-## Will not be implemented
+## Might not be implemented
 
 - [ ] Requests are validated by two users (opens the door to a wkf engine, too complicated for targeted users).
 - [ ] PDF Export (no serious OSS PDF lib dealing correctly with Unicode / Modern browsers can print as PDF).

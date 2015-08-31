@@ -216,7 +216,7 @@ class Contracts extends CI_Controller {
             $contract = $this->input->post('contract', TRUE);
             $timestamp = $this->input->post('timestamp', TRUE);
             $type = $this->input->post('type', TRUE);
-            $title = $this->input->post('title', TRUE);
+            $title = sanitize($this->input->post('title', TRUE));
             if (isset($contract) && isset($timestamp) && isset($type) && isset($title)) {
                 $this->load->model('dayoffs_model');
                 $this->output->set_content_type('text/plain');
@@ -267,7 +267,7 @@ class Contracts extends CI_Controller {
                 }
                 $list = rtrim($list, ",");
                 $contract = $this->input->post('contract', TRUE);
-                $title = $this->input->post('title', TRUE);
+                $title = sanitize($this->input->post('title', TRUE));
                 $this->load->model('dayoffs_model');
                 $this->dayoffs_model->deletedayoffs($contract, $list);
                 if ($type != 0) {
@@ -284,8 +284,10 @@ class Contracts extends CI_Controller {
 
     /**
      * Ajax endpoint : Import non-working days by using an external ICS feed
+     * This is an experimental feature that doesn't work with half days
      * POST: contract id
      * POST: URL of ICS feed
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function import() {
         expires_now();
@@ -311,6 +313,7 @@ class Contracts extends CI_Controller {
      * Ajax endpoint : Send a list of fullcalendar events
      * List of day offs for the connected user
      * @param int $id employee id or connected user (from session)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function userDayoffs($id = 0) {
         expires_now();
@@ -326,6 +329,7 @@ class Contracts extends CI_Controller {
      * Ajax endpoint : Send a list of fullcalendar events
      * List of all possible day offs
      * @param int $entity_id Entity identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function allDayoffs() {
         expires_now();

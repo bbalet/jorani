@@ -138,7 +138,7 @@ class Entitleddays extends CI_Controller {
             $enddate = $this->input->post('enddate', TRUE);
             $days = $this->input->post('days', TRUE);
             $type = $this->input->post('type', TRUE);
-            $description = $this->input->post('description', TRUE);
+            $description = sanitize($this->input->post('description', TRUE));
             if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($user_id)) {
                 $this->output->set_content_type('text/plain');
                 $id = $this->entitleddays_model->insert_entitleddays_employee($user_id, $startdate, $enddate, $days, $type, $description);
@@ -162,7 +162,7 @@ class Entitleddays extends CI_Controller {
             $enddate = $this->input->post('enddate', TRUE);
             $days = $this->input->post('days', TRUE);
             $type = $this->input->post('type', TRUE);
-            $description = $this->input->post('description', TRUE);
+            $description = sanitize($this->input->post('description', TRUE));
             if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($contract_id)) {
                 $this->output->set_content_type('text/plain');
                 $id = $this->entitleddays_model->insert_entitleddays_contract($contract_id, $startdate, $enddate, $days, $type, $description);

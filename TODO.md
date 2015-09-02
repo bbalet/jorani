@@ -3,19 +3,25 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 ## v0.4.1
 
+- [X] Copy contract/calendar (definition of non-working days for a civil year).
+- [X] A manager can create a leave request in behalf of a collaborator.
+- [X] Check Ajax return (e.g. calendar views) to redirect to login in case of session expiration.
+- [X] Inactive employees (put them into an archive entity in HR/organization so as to exclude them from reports).
+- [X] Experimental : import day offs from an ICS/CalDAV feed.
+- [X] Public Global and Tabular calendar in an embeddable view.
+- [X] Add an option to switch the duration field in readonly.
+- [X] Allow user to delete/edit rejected leave requests
 - [ ] Bug when editing a LR from HR/Employee => e-mail is messy (reload the LR from DB in leaves:sendMail)
-- [ ] Bug : if <<edit_rejected_requests>> is TRUE then we take into account <<leave_status_requested>> when editing rejected LR.
-- [ ] ER report duration and balance into request e-mail.
-- [ ] ER in entitled days editor : possibility to copy a line.
+- [ ] If edit_rejected_requests is TRUE then we take into account leave_status_requested when editing rejected LR.
+- [ ] Report duration and balance into request e-mail.
+- [ ] Entitled days editor : possibility to copy a line.
+- [ ] Entitled days editor : a field allows to set the step for inc/dec (saved in a cookie).
 - [ ] Translate e-mails in italian.
 - [ ] Update jorani.pot in transifex and warn translators/update strings.
 - [ ] Check HR/Monthly report for overlapping. Report this overlapping feature to calendar/tabular.
 
 ## v0.5.0 or later
 
-- [X] Copy contract/calendar (definition of non-working days for a civil year).
-- [X] A manager can create a leave request in behalf of a collaborator.
-- [X] Check Ajax return (e.g. calendar views) to redirect to login in case of disconnection.
 - [ ] Better entitled days editor (contract / employee).
 - [ ] Report carried-over leaves (Semi-auto / wizard), employee by employee (or mass ?).
 - [ ] Notification by e-mail : Request deleted / modified.
@@ -28,7 +34,6 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] Better LDAP integration.
 - [ ] Mobile-optimized views (limited to few pages : simple user and validation).
 - [ ] Implement a kind of heritage in HR/organization for supervisors (child entities).
-- [X] Inactive employees (put them into an archive entity in HR/organization so as to exclude them from reports).
 - [ ] HR officers of a part of the organization (defined in HR/organization), for future functions when they'll be CCed.
 - [ ] Add a field explaining why a request is rejected. Validation E-mail will redirect to a form is this option is activated ?
 - [ ] Anticipated leaves (entitled days of next yearly period). Today we can deal with it manually because LMS doesn't forbid to 

@@ -138,26 +138,26 @@ class Positions extends CI_Controller {
         $this->auth->check_is_granted('export_positions');
         expires_now();
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle(lang('positions_export_title'));
-        $this->excel->getActiveSheet()->setCellValue('A1', lang('positions_export_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B1', lang('positions_export_thead_name'));
-        $this->excel->getActiveSheet()->setCellValue('C1', lang('positions_export_thead_description'));
-        $this->excel->getActiveSheet()->getStyle('A1:C1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(lang('positions_export_title'));
+        $sheet->setCellValue('A1', lang('positions_export_thead_id'));
+        $sheet->setCellValue('B1', lang('positions_export_thead_name'));
+        $sheet->setCellValue('C1', lang('positions_export_thead_description'));
+        $sheet->getStyle('A1:C1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $types = $this->positions_model->get_positions();
         $line = 2;
         foreach ($types as $type) {
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $type['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $type['name']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $type['description']);
+            $sheet->setCellValue('A' . $line, $type['id']);
+            $sheet->setCellValue('B' . $line, $type['name']);
+            $sheet->setCellValue('C' . $line, $type['description']);
             $line++;
         }
         
         //Autofit
         foreach(range('A', 'C') as $colD) {
-            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'positions.xls';

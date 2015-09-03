@@ -371,20 +371,19 @@ class Leaves extends CI_Controller {
     public function export() {
         expires_now();
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-
-        $this->excel->getActiveSheet()->setTitle(lang('leaves_export_title'));
-        $this->excel->getActiveSheet()->setCellValue('A1', lang('leaves_export_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B1', lang('leaves_export_thead_start_date'));
-        $this->excel->getActiveSheet()->setCellValue('C1', lang('leaves_export_thead_start_date_type'));
-        $this->excel->getActiveSheet()->setCellValue('D1', lang('leaves_export_thead_end_date'));
-        $this->excel->getActiveSheet()->setCellValue('E1', lang('leaves_export_thead_end_date_type'));
-        $this->excel->getActiveSheet()->setCellValue('F1', lang('leaves_export_thead_duration'));
-        $this->excel->getActiveSheet()->setCellValue('G1', lang('leaves_export_thead_type'));
-        $this->excel->getActiveSheet()->setCellValue('H1', lang('leaves_export_thead_status'));
-        $this->excel->getActiveSheet()->setCellValue('I1', lang('leaves_export_thead_cause'));
-        $this->excel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(lang('leaves_export_title'));
+        $sheet->setCellValue('A1', lang('leaves_export_thead_id'));
+        $sheet->setCellValue('B1', lang('leaves_export_thead_start_date'));
+        $sheet->setCellValue('C1', lang('leaves_export_thead_start_date_type'));
+        $sheet->setCellValue('D1', lang('leaves_export_thead_end_date'));
+        $sheet->setCellValue('E1', lang('leaves_export_thead_end_date_type'));
+        $sheet->setCellValue('F1', lang('leaves_export_thead_duration'));
+        $sheet->setCellValue('G1', lang('leaves_export_thead_type'));
+        $sheet->setCellValue('H1', lang('leaves_export_thead_status'));
+        $sheet->setCellValue('I1', lang('leaves_export_thead_cause'));
+        $sheet->getStyle('A1:I1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $leaves = $this->leaves_model->get_employee_leaves($this->user_id);
         
@@ -394,21 +393,21 @@ class Leaves extends CI_Controller {
             $startdate = $date->format(lang('global_date_format'));
             $date = new DateTime($leave['enddate']);
             $enddate = $date->format(lang('global_date_format'));
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $leave['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $startdate);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, lang($leave['startdatetype']));
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $enddate);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, lang($leave['enddatetype']));
-            $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['duration']);
-            $this->excel->getActiveSheet()->setCellValue('G' . $line, $leave['type_name']);
-            $this->excel->getActiveSheet()->setCellValue('H' . $line, lang($leave['status_name']));
-            $this->excel->getActiveSheet()->setCellValue('I' . $line, $leave['cause']);
+            $sheet->setCellValue('A' . $line, $leave['id']);
+            $sheet->setCellValue('B' . $line, $startdate);
+            $sheet->setCellValue('C' . $line, lang($leave['startdatetype']));
+            $sheet->setCellValue('D' . $line, $enddate);
+            $sheet->setCellValue('E' . $line, lang($leave['enddatetype']));
+            $sheet->setCellValue('F' . $line, $leave['duration']);
+            $sheet->setCellValue('G' . $line, $leave['type_name']);
+            $sheet->setCellValue('H' . $line, lang($leave['status_name']));
+            $sheet->setCellValue('I' . $line, $leave['cause']);
             $line++;
         }
         
         //Autofit
         foreach(range('A', 'I') as $colD) {
-            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'leaves.xls';

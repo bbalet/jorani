@@ -301,23 +301,23 @@ class Hr extends CI_Controller {
      */
     public function export_leaves($id) {
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle(lang('hr_export_leaves_title'));
-        $this->excel->getActiveSheet()->setCellValue('A3', lang('hr_export_leaves_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B3', lang('hr_export_leaves_thead_status'));
-        $this->excel->getActiveSheet()->setCellValue('C3', lang('hr_export_leaves_thead_start'));
-        $this->excel->getActiveSheet()->setCellValue('D3', lang('hr_export_leaves_thead_end'));
-        $this->excel->getActiveSheet()->setCellValue('E3', lang('hr_export_leaves_thead_duration'));
-        $this->excel->getActiveSheet()->setCellValue('F3', lang('hr_export_leaves_thead_type'));
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(lang('hr_export_leaves_title'));
+        $sheet->setCellValue('A3', lang('hr_export_leaves_thead_id'));
+        $sheet->setCellValue('B3', lang('hr_export_leaves_thead_status'));
+        $sheet->setCellValue('C3', lang('hr_export_leaves_thead_start'));
+        $sheet->setCellValue('D3', lang('hr_export_leaves_thead_end'));
+        $sheet->setCellValue('E3', lang('hr_export_leaves_thead_duration'));
+        $sheet->setCellValue('F3', lang('hr_export_leaves_thead_type'));
         
-        $this->excel->getActiveSheet()->getStyle('A3:F3')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A3:F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A3:F3')->getFont()->setBold(true);
+        $sheet->getStyle('A3:F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $this->load->model('leaves_model');
         $leaves = $this->leaves_model->get_employee_leaves($id);
         $this->load->model('users_model');
         $fullname = $this->users_model->get_label($id);
-        $this->excel->getActiveSheet()->setCellValue('A1', $fullname);
+        $sheet->setCellValue('A1', $fullname);
         
         $line = 4;
         foreach ($leaves as $leave) {
@@ -325,18 +325,18 @@ class Hr extends CI_Controller {
             $startdate = $date->format(lang('global_date_format'));
             $date = new DateTime($leave['enddate']);
             $enddate = $date->format(lang('global_date_format'));
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $leave['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, lang($leave['status_name']));
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $startdate);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $enddate);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, $leave['duration']);
-            $this->excel->getActiveSheet()->setCellValue('F' . $line, $leave['type_name']);
+            $sheet->setCellValue('A' . $line, $leave['id']);
+            $sheet->setCellValue('B' . $line, lang($leave['status_name']));
+            $sheet->setCellValue('C' . $line, $startdate);
+            $sheet->setCellValue('D' . $line, $enddate);
+            $sheet->setCellValue('E' . $line, $leave['duration']);
+            $sheet->setCellValue('F' . $line, $leave['type_name']);
             $line++;
         }
         
         //Autofit
         foreach(range('A', 'F') as $colD) {
-            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'leaves.xls';
@@ -353,37 +353,37 @@ class Hr extends CI_Controller {
      */
     public function export_overtime($id) {
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle(lang('hr_export_overtime_title'));
-        $this->excel->getActiveSheet()->setCellValue('A3', lang('hr_export_overtime_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B3', lang('hr_export_overtime_thead_status'));
-        $this->excel->getActiveSheet()->setCellValue('C3', lang('hr_export_overtime_thead_date'));
-        $this->excel->getActiveSheet()->setCellValue('D3', lang('hr_export_overtime_thead_duration'));
-        $this->excel->getActiveSheet()->setCellValue('E3', lang('hr_export_overtime_thead_cause'));
-        $this->excel->getActiveSheet()->getStyle('A3:E3')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A3:E3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(lang('hr_export_overtime_title'));
+        $sheet->setCellValue('A3', lang('hr_export_overtime_thead_id'));
+        $sheet->setCellValue('B3', lang('hr_export_overtime_thead_status'));
+        $sheet->setCellValue('C3', lang('hr_export_overtime_thead_date'));
+        $sheet->setCellValue('D3', lang('hr_export_overtime_thead_duration'));
+        $sheet->setCellValue('E3', lang('hr_export_overtime_thead_cause'));
+        $sheet->getStyle('A3:E3')->getFont()->setBold(true);
+        $sheet->getStyle('A3:E3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $this->load->model('overtime_model');
         $requests = $this->overtime_model->get_employee_extras($id);
         $this->load->model('users_model');
         $fullname = $this->users_model->get_label($id);
-        $this->excel->getActiveSheet()->setCellValue('A1', $fullname);
+        $sheet->setCellValue('A1', $fullname);
         
         $line = 4;
         foreach ($requests as $request) {
             $date = new DateTime($request['date']);
             $startdate = $date->format(lang('global_date_format'));
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $request['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, lang($request['status']));
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $startdate);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $request['duration']);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, $request['cause']);
+            $sheet->setCellValue('A' . $line, $request['id']);
+            $sheet->setCellValue('B' . $line, lang($request['status']));
+            $sheet->setCellValue('C' . $line, $startdate);
+            $sheet->setCellValue('D' . $line, $request['duration']);
+            $sheet->setCellValue('E' . $line, $request['cause']);
             $line++;
         }
 
         //Autofit
         foreach(range('A', 'E') as $colD) {
-            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
         
         $filename = 'overtime.xls';
@@ -402,15 +402,15 @@ class Hr extends CI_Controller {
     public function export_employees($id = 0, $children = TRUE) {
         $this->load->library('excel');
         $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle(lang('hr_export_employees_title'));
-        $this->excel->getActiveSheet()->setCellValue('A1', lang('hr_export_employees_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B1', lang('hr_export_employees_thead_firstname'));
-        $this->excel->getActiveSheet()->setCellValue('C1', lang('hr_export_employees_thead_lastname'));
-        $this->excel->getActiveSheet()->setCellValue('D1', lang('hr_export_employees_thead_email'));
-        $this->excel->getActiveSheet()->setCellValue('E1', lang('hr_export_employees_thead_contract'));
-        $this->excel->getActiveSheet()->setCellValue('F1', lang('hr_export_employees_thead_manager'));
-        $this->excel->getActiveSheet()->getStyle('A1:F1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->setTitle(lang('hr_export_employees_title'));
+        $sheet->setCellValue('A1', lang('hr_export_employees_thead_id'));
+        $sheet->setCellValue('B1', lang('hr_export_employees_thead_firstname'));
+        $sheet->setCellValue('C1', lang('hr_export_employees_thead_lastname'));
+        $sheet->setCellValue('D1', lang('hr_export_employees_thead_email'));
+        $sheet->setCellValue('E1', lang('hr_export_employees_thead_contract'));
+        $sheet->setCellValue('F1', lang('hr_export_employees_thead_manager'));
+        $sheet->getStyle('A1:F1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         
         $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
         $this->load->model('users_model');
@@ -418,18 +418,18 @@ class Hr extends CI_Controller {
         
         $line = 2;
         foreach ($employees as $employee) {
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $employee->id);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $employee->firstname);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $employee->lastname);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $employee->email);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, $employee->contract);
-            $this->excel->getActiveSheet()->setCellValue('F' . $line, $employee->manager_name);
+            $sheet->setCellValue('A' . $line, $employee->id);
+            $sheet->setCellValue('B' . $line, $employee->firstname);
+            $sheet->setCellValue('C' . $line, $employee->lastname);
+            $sheet->setCellValue('D' . $line, $employee->email);
+            $sheet->setCellValue('E' . $line, $employee->contract);
+            $sheet->setCellValue('F' . $line, $employee->manager_name);
             $line++;
         }
         
         //Autofit
         foreach(range('A', 'F') as $colD) {
-            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'employees.xls';

@@ -129,24 +129,24 @@ class LeaveTypes extends CI_Controller {
         $this->auth->check_is_granted('leavetypes_export');
         expires_now();
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle(lang('leavetypes_type_export_title'));
-        $this->excel->getActiveSheet()->setCellValue('A1', lang('leavetypes_type_export_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B1', lang('leavetypes_type_export_thead_name'));
-        $this->excel->getActiveSheet()->getStyle('A1:B1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(lang('leavetypes_type_export_title'));
+        $sheet->setCellValue('A1', lang('leavetypes_type_export_thead_id'));
+        $sheet->setCellValue('B1', lang('leavetypes_type_export_thead_name'));
+        $sheet->getStyle('A1:B1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $types = $this->types_model->get_types();
         $line = 2;
         foreach ($types as $type) {
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $type['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $type['name']);
+            $sheet->setCellValue('A' . $line, $type['id']);
+            $sheet->setCellValue('B' . $line, $type['name']);
             $line++;
         }
 
         //Autofit
         foreach(range('A', 'B') as $colD) {
-            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
         
         $filename = 'leave_types.xls';

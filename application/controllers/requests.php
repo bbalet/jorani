@@ -424,21 +424,20 @@ class Requests extends CI_Controller {
      */
     public function export($filter = 'requested') {
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-
-        $this->excel->getActiveSheet()->setTitle(lang('requests_export_title'));
-        $this->excel->getActiveSheet()->setCellValue('A1', lang('requests_export_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B1', lang('requests_export_thead_fullname'));
-        $this->excel->getActiveSheet()->setCellValue('C1', lang('requests_export_thead_startdate'));
-        $this->excel->getActiveSheet()->setCellValue('D1', lang('requests_export_thead_startdate_type'));
-        $this->excel->getActiveSheet()->setCellValue('E1', lang('requests_export_thead_enddate'));
-        $this->excel->getActiveSheet()->setCellValue('F1', lang('requests_export_thead_enddate_type'));
-        $this->excel->getActiveSheet()->setCellValue('G1', lang('requests_export_thead_duration'));
-        $this->excel->getActiveSheet()->setCellValue('H1', lang('requests_export_thead_type'));
-        $this->excel->getActiveSheet()->setCellValue('I1', lang('requests_export_thead_cause'));
-        $this->excel->getActiveSheet()->setCellValue('J1', lang('requests_export_thead_status'));
-        $this->excel->getActiveSheet()->getStyle('A1:J1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:J1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(lang('requests_export_title'));
+        $sheet->setCellValue('A1', lang('requests_export_thead_id'));
+        $sheet->setCellValue('B1', lang('requests_export_thead_fullname'));
+        $sheet->setCellValue('C1', lang('requests_export_thead_startdate'));
+        $sheet->setCellValue('D1', lang('requests_export_thead_startdate_type'));
+        $sheet->setCellValue('E1', lang('requests_export_thead_enddate'));
+        $sheet->setCellValue('F1', lang('requests_export_thead_enddate_type'));
+        $sheet->setCellValue('G1', lang('requests_export_thead_duration'));
+        $sheet->setCellValue('H1', lang('requests_export_thead_type'));
+        $sheet->setCellValue('I1', lang('requests_export_thead_cause'));
+        $sheet->setCellValue('J1', lang('requests_export_thead_status'));
+        $sheet->getStyle('A1:J1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:J1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         if ($filter == 'all') {
             $showAll = true;
@@ -455,22 +454,22 @@ class Requests extends CI_Controller {
             $startdate = $date->format(lang('global_date_format'));
             $date = new DateTime($request['enddate']);
             $enddate = $date->format(lang('global_date_format'));
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $request['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $request['firstname'] . ' ' . $request['lastname']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $startdate);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, lang($request['startdatetype']));
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, $enddate);
-            $this->excel->getActiveSheet()->setCellValue('F' . $line, lang($request['enddatetype']));
-            $this->excel->getActiveSheet()->setCellValue('G' . $line, $request['duration']);
-            $this->excel->getActiveSheet()->setCellValue('H' . $line, $this->types_model->get_label($request['type']));
-            $this->excel->getActiveSheet()->setCellValue('I' . $line, $request['cause']);
-            $this->excel->getActiveSheet()->setCellValue('J' . $line, lang($this->status_model->get_label($request['status'])));
+            $sheet->setCellValue('A' . $line, $request['id']);
+            $sheet->setCellValue('B' . $line, $request['firstname'] . ' ' . $request['lastname']);
+            $sheet->setCellValue('C' . $line, $startdate);
+            $sheet->setCellValue('D' . $line, lang($request['startdatetype']));
+            $sheet->setCellValue('E' . $line, $enddate);
+            $sheet->setCellValue('F' . $line, lang($request['enddatetype']));
+            $sheet->setCellValue('G' . $line, $request['duration']);
+            $sheet->setCellValue('H' . $line, $this->types_model->get_label($request['type']));
+            $sheet->setCellValue('I' . $line, $request['cause']);
+            $sheet->setCellValue('J' . $line, lang($this->status_model->get_label($request['status'])));
             $line++;
         }
         
         //Autofit
         foreach(range('A', 'J') as $colD) {
-            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'requests.xls';

@@ -289,15 +289,15 @@ class Extra extends CI_Controller {
     public function export() {
         expires_now();
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle(lang('extra_export_title'));
-        $this->excel->getActiveSheet()->setCellValue('A1', lang('extra_export_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B1', lang('extra_export_thead_date'));
-        $this->excel->getActiveSheet()->setCellValue('C1', lang('extra_export_thead_duration'));
-        $this->excel->getActiveSheet()->setCellValue('D1', lang('extra_export_thead_cause'));
-        $this->excel->getActiveSheet()->setCellValue('E1', lang('extra_export_thead_status'));
-        $this->excel->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(lang('extra_export_title'));
+        $sheet->setCellValue('A1', lang('extra_export_thead_id'));
+        $sheet->setCellValue('B1', lang('extra_export_thead_date'));
+        $sheet->setCellValue('C1', lang('extra_export_thead_duration'));
+        $sheet->setCellValue('D1', lang('extra_export_thead_cause'));
+        $sheet->setCellValue('E1', lang('extra_export_thead_status'));
+        $sheet->getStyle('A1:E1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $extras = $this->overtime_model->get_user_extras($this->user_id);
         $this->load->model('status_model');
@@ -306,17 +306,17 @@ class Extra extends CI_Controller {
         foreach ($extras as $extra) {
             $date = new DateTime($extra['date']);
             $startdate = $date->format(lang('global_date_format'));
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $extra['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $startdate);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $extra['duration']);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $extra['cause']);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, lang($this->status_model->get_label($extra['status'])));
+            $sheet->setCellValue('A' . $line, $extra['id']);
+            $sheet->setCellValue('B' . $line, $startdate);
+            $sheet->setCellValue('C' . $line, $extra['duration']);
+            $sheet->setCellValue('D' . $line, $extra['cause']);
+            $sheet->setCellValue('E' . $line, lang($this->status_model->get_label($extra['status'])));
             $line++;
         }
         
         //Autofit
         foreach(range('A', 'E') as $colD) {
-            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'extra.xls';

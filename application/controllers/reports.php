@@ -186,8 +186,8 @@ class Reports extends CI_Controller {
         $this->auth->check_is_granted('native_report_balance');
         $data = getUserContext($this);
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle(lang('reports_export_balance_title'));
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(lang('reports_export_balance_title'));
 
         $this->load->model('leaves_model');
         $this->load->model('types_model');
@@ -225,27 +225,35 @@ class Reports extends CI_Controller {
         
         $max = 0;
         $line = 2;
+        $i18n = array("identifier", "firstname", "lastname", "datehired", "department", "position", "contract");
         foreach ($result as $row) {
             $index = 1;
             foreach ($row as $key => $value) {
                 if ($line == 2) {
                     $colidx = $this->excel->column_name($index) . '1';
-                    if (lang($key) == '')
-                        $this->excel->getActiveSheet()->setCellValue($colidx, $key);
-                    else
-                        $this->excel->getActiveSheet()->setCellValue($colidx, lang($key));
+                    if (in_array($key, $i18n)) {
+                        $sheet->setCellValue($colidx, lang($key));
+                    } else {
+                        $sheet->setCellValue($colidx, $key);
+                    }
                     $max++;
                 }
                 $colidx = $this->excel->column_name($index) . $line;
-                $this->excel->getActiveSheet()->setCellValue($colidx, $value);
+                $sheet->setCellValue($colidx, $value);
                 $index++;
             }
             $line++;
         }
 
         $colidx = $this->excel->column_name($max) . '1';
-        $this->excel->getActiveSheet()->getStyle('A1:' . $colidx)->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:' . $colidx)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A1:' . $colidx)->getFont()->setBold(true);
+        $sheet->getStyle('A1:' . $colidx)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        //Autofit
+        for ($ii=1; $ii <$max; $ii++) {
+            $col = $this->excel->column_name($ii);
+            $sheet->getColumnDimension($col)->setAutoSize(TRUE);
+        }
         
         $filename = 'leave_balance.xls';
         header('Content-Type: application/vnd.ms-excel');

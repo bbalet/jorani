@@ -350,28 +350,28 @@ class Contracts extends CI_Controller {
         $this->auth->check_is_granted('export_contracts');
         expires_now();
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle(lang('contract_index_title'));
-        $this->excel->getActiveSheet()->setCellValue('A1', lang('contract_export_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B1', lang('contract_export_thead_name'));
-        $this->excel->getActiveSheet()->setCellValue('C1', lang('contract_export_thead_start'));
-        $this->excel->getActiveSheet()->setCellValue('D1', lang('contract_export_thead_end'));
-        $this->excel->getActiveSheet()->getStyle('A1:D1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(lang('contract_index_title'));
+        $sheet->setCellValue('A1', lang('contract_export_thead_id'));
+        $sheet->setCellValue('B1', lang('contract_export_thead_name'));
+        $sheet->setCellValue('C1', lang('contract_export_thead_start'));
+        $sheet->setCellValue('D1', lang('contract_export_thead_end'));
+        $sheet->getStyle('A1:D1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $users = $this->contracts_model->get_contracts();
         $line = 2;
         foreach ($users as $user) {
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $user['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $user['name']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $user['startentdate']);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $user['endentdate']);
+            $sheet->setCellValue('A' . $line, $user['id']);
+            $sheet->setCellValue('B' . $line, $user['name']);
+            $sheet->setCellValue('C' . $line, $user['startentdate']);
+            $sheet->setCellValue('D' . $line, $user['endentdate']);
             $line++;
         }
         
         //Autofit
         foreach(range('A', 'D') as $colD) {
-            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 
         $filename = 'contracts.xls';

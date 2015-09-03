@@ -403,31 +403,31 @@ class Users extends CI_Controller {
         $this->auth->check_is_granted('export_user');
         expires_now();
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle(lang('users_export_title'));
-        $this->excel->getActiveSheet()->setCellValue('A1', lang('users_export_thead_id'));
-        $this->excel->getActiveSheet()->setCellValue('B1', lang('users_export_thead_firstname'));
-        $this->excel->getActiveSheet()->setCellValue('C1', lang('users_export_thead_lastname'));
-        $this->excel->getActiveSheet()->setCellValue('D1', lang('users_export_thead_email'));
-        $this->excel->getActiveSheet()->setCellValue('E1', lang('users_export_thead_manager'));
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(lang('users_export_title'));
+        $sheet->setCellValue('A1', lang('users_export_thead_id'));
+        $sheet->setCellValue('B1', lang('users_export_thead_firstname'));
+        $sheet->setCellValue('C1', lang('users_export_thead_lastname'));
+        $sheet->setCellValue('D1', lang('users_export_thead_email'));
+        $sheet->setCellValue('E1', lang('users_export_thead_manager'));
         
-        $this->excel->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A1:E1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $users = $this->users_model->get_users();
         $line = 2;
         foreach ($users as $user) {
-            $this->excel->getActiveSheet()->setCellValue('A' . $line, $user['id']);
-            $this->excel->getActiveSheet()->setCellValue('B' . $line, $user['firstname']);
-            $this->excel->getActiveSheet()->setCellValue('C' . $line, $user['lastname']);
-            $this->excel->getActiveSheet()->setCellValue('D' . $line, $user['email']);
-            $this->excel->getActiveSheet()->setCellValue('E' . $line, $user['manager']);
+            $sheet->setCellValue('A' . $line, $user['id']);
+            $sheet->setCellValue('B' . $line, $user['firstname']);
+            $sheet->setCellValue('C' . $line, $user['lastname']);
+            $sheet->setCellValue('D' . $line, $user['email']);
+            $sheet->setCellValue('E' . $line, $user['manager']);
             $line++;
         }
 
         //Autofit
         foreach(range('A', 'E') as $colD) {
-            $this->excel->getActiveSheet()->getColumnDimension($colD)->setAutoSize(TRUE);
+            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
         
         $filename = 'users.xls';

@@ -322,6 +322,19 @@ class Calendar extends CI_Controller {
             )
           );
         
+        $dayBox =  array(
+            'borders' => array(
+                'left' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_DASHDOT,
+                    'rgb' => '808080'
+                ),
+                'right' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_DASHDOT,
+                    'rgb' => '808080'
+                )
+            )
+         );
+        
         //Background colors for the calendar according to the type of leave
         $styleBgPlanned = array(
             'fill' => array(
@@ -353,8 +366,6 @@ class Calendar extends CI_Controller {
                 'color' => array('rgb' => '000000')
             )
         );
-        
-        //$sheet->getComment('E1')->getText()->createTextRun(lang('Requested'));
         
         $line = 10;
         //Iterate on all employees of the selected entity
@@ -414,7 +425,7 @@ class Calendar extends CI_Controller {
                                     // 3 : 'Accepted';
                                     // 4 : 'Rejected';
                                     case 1: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgPlanned); break;  // Planned
-                                    case 2: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgRequested);            // Requested
+                                    case 2: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgRequested); break; // Requested
                                     case 3: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgAccepted); break;  // Accepted
                                     case 4: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Rejected
                                 }
@@ -461,6 +472,7 @@ class Calendar extends CI_Controller {
         //Autofit for all column containing the days
         for ($ii = 1; $ii <=$lastDay; $ii++) {
             $col = $this->excel->column_name($ii + 3);
+            $sheet->getStyle($col . '8:' . $col . ($line - 1))->applyFromArray($dayBox);
             $sheet->getColumnDimension($col)->setAutoSize(TRUE);
         }
         $sheet->getColumnDimension('A')->setAutoSize(TRUE);

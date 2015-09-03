@@ -62,9 +62,20 @@ $this->lang->load('global', $language);?>
         </label>
     </div>
     <div class="span5">
-        <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
-        <button id="cmdExecute" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('calendar_tabular_button_execute');?></button>
-        <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
+        <div class="row-fluid">
+            <div class="span12">
+                <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
+                <button id="cmdExecute" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('calendar_tabular_button_execute');?></button>
+                <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
+            </div>
+        </div>
+        <div class="row-fluid"><div class="span12">&nbsp;</div></div>
+        <div class="row-fluid">
+            <div class="span12">
+                <button id="cmdExport" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('calendar_tabular_button_export');?></button>
+            </div>
+        </div>
+
     </div>
 </div>
 

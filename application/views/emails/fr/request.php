@@ -43,6 +43,12 @@
                 <td>Type &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
+                <td>Durée &nbsp;</td><td>{Duration}</td>
+            </tr>
+            <tr>
+                <td>Crédit &nbsp;</td><td>{Balance}</td>
+            </tr>
+            <tr>
                 <td>Cause &nbsp;</td><td>{Reason}</td>
             </tr>
         </table>

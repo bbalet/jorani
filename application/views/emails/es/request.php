@@ -24,13 +24,19 @@
         {Firstname} {Lastname} solicitud de una licencia. A continuación, el <a href="{BaseUrl}leaves/{LeaveId}">detalle</a> :
         <table border="0">
             <tr>
-                <td>Desde &nbsp;</td><td>{StartDate}</td>
+                <td>Desde &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>Hasta &nbsp;</td><td>{EndDate}</td>
+                <td>Hasta &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
                 <td>Tipo &nbsp;</td><td>{Type}</td>
+            </tr>
+            <tr>
+                <td>Duration &nbsp;</td><td>{Duration}</td>
+            </tr>
+            <tr>
+                <td>Balance &nbsp;</td><td>{Balance}</td>
             </tr>
             <tr>
                 <td>Motivo &nbsp;</td><td>{Reason}</td>

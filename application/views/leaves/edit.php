@@ -34,6 +34,13 @@ if (isset($_GET['source'])) {
     echo form_open('leaves/edit/' . $id, $attributes);
 } ?>
 
+    <label for="type" required><?php echo lang('leaves_edit_field_type');?></label>
+    <select name="type" id="type">
+    <?php foreach ($types as $types_item): ?>
+        <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == $leave['type']) echo "selected" ?>><?php echo $types_item['name'] ?></option>
+    <?php endforeach ?>    
+    </select>&nbsp;<span id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span><br />
+        
     <label for="viz_startdate" required><?php echo lang('leaves_edit_field_start');?></label>
     <input type="text" name="viz_startdate" id="viz_startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" />
     <input type="hidden" name="startdate" id="startdate" value="<?php echo $leave['startdate'];?>" />
@@ -49,14 +56,7 @@ if (isset($_GET['source'])) {
         <option value="Morning" <?php if ($leave['enddatetype'] == "Morning") {echo "selected";}?>><?php echo lang('leaves_date_type_morning');?></option>
         <option value="Afternoon" <?php if ($leave['enddatetype'] == "Afternoon") {echo "selected";}?>><?php echo lang('leaves_date_type_afternoon');?></option>
     </select><br />
-    
-    <label for="type" required><?php echo lang('leaves_edit_field_type');?></label>
-    <select name="type" id="type">
-    <?php foreach ($types as $types_item): ?>
-        <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == $leave['type']) echo "selected" ?>><?php echo $types_item['name'] ?></option>
-    <?php endforeach ?>    
-    </select>&nbsp;<span id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span><br />
-    
+
     <label for="duration" required><?php echo lang('leaves_edit_field_duration');?></label>
     
     <label for="duration" required><?php echo lang('leaves_create_field_duration');?></label>

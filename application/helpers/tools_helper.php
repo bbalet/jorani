@@ -41,6 +41,7 @@ function setUserContext($controller)
         $controller->is_admin = $controller->session->userdata('is_admin');
         $controller->is_hr = $controller->session->userdata('is_hr');
         $controller->user_id = $controller->session->userdata('id');
+        $controller->manager = $controller->session->userdata('manager');
         $controller->language = $controller->session->userdata('language');
         $controller->language_code = $controller->session->userdata('language_code');
 }

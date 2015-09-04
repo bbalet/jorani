@@ -24,13 +24,19 @@
         {Firstname} {Lastname} beantragt Urlaub. Hierzu die <a href="{BaseUrl}leaves/{LeaveId}">Details</a> :
         <table border="0">
             <tr>
-                <td>Von &nbsp;</td><td>{StartDate}</td>
+                <td>Von &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>Bis &nbsp;</td><td>{EndDate}</td>
+                <td>Bis &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
                 <td>Art &nbsp;</td><td>{Type}</td>
+            </tr>
+            <tr>
+                <td>Duration &nbsp;</td><td>{Duration}</td>
+            </tr>
+            <tr>
+                <td>Balance &nbsp;</td><td>{Balance}</td>
             </tr>
             <tr>
                 <td>Begründung &nbsp;</td><td>{Reason}</td>

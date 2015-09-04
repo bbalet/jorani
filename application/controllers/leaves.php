@@ -256,8 +256,13 @@ class Leaves extends CI_Controller {
      */
     private function sendMail($id) {
         $this->load->model('users_model');
+        $this->load->model('types_model');
         $this->load->model('delegations_model');
-        $manager = $this->users_model->get_users($this->session->userdata('manager'));
+        //We load everything from DB as the LR can be edited from HR/Employees
+        $leave = $this->leaves_model->get_leaves($id);
+        $user = $this->users_model->get_users($leave['employee']);
+        $manager = $this->users_model->get_users($user['manager']);
+        $type_label = $this->types_model->get_label($leave['type']);
 
         //Test if the manager hasn't been deleted meanwhile
         if (empty($manager['email'])) {
@@ -273,22 +278,24 @@ class Leaves extends CI_Controller {
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
             
-            $date = new DateTime($this->input->post('startdate'));
+            $date = new DateTime($leave['startdate']);
             $startdate = $date->format($lang_mail->line('global_date_format'));
-            $date = new DateTime($this->input->post('enddate'));
+            $date = new DateTime($leave['enddate']);
             $enddate = $date->format($lang_mail->line('global_date_format'));
 
             $this->load->library('parser');
             $data = array(
                 'Title' => $lang_mail->line('email_leave_request_title'),
-                'Firstname' => $this->session->userdata('firstname'),
-                'Lastname' => $this->session->userdata('lastname'),
+                'Firstname' => $user['firstname'],
+                'Lastname' => $user['lastname'],
                 'StartDate' => $startdate,
                 'EndDate' => $enddate,
-                'StartDateType' => $lang_mail->line($this->input->post('startdatetype')),
-                'EndDateType' => $lang_mail->line($this->input->post('enddatetype')),
-                'Type' => $this->types_model->get_label($this->input->post('type')),
-                'Reason' => $this->input->post('cause'),
+                'StartDateType' => $lang_mail->line($leave['startdatetype']),
+                'EndDateType' => $lang_mail->line($leave['enddatetype']),
+                'Type' => $this->types_model->get_label($leave['type']),
+                'Duration' => $leave['duration'],
+                'Balance' => $this->leaves_model->get_user_leaves_credit($leave['employee'] , $type_label, $leave['startdate']),
+                'Reason' => $leave['cause'],
                 'BaseUrl' => $this->config->base_url(),
                 'LeaveId' => $id,
                 'UserId' => $this->user_id

@@ -28,13 +28,19 @@
         {Firstname} {Lastname} <a href="{BaseUrl}leaves/{LeaveId}">ស្នើសុំចាកចេញមួយខាងក្រោមសេចក្ដីលម្អិត</a> :
         <table border="0">
             <tr>
-                <td>មកពី &nbsp;</td><td>{StartDate}</td>
+                <td>មកពី &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>ទៅកាន់ &nbsp;</td><td>{EndDate}</td>
+                <td>ទៅកាន់ &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
                 <td>Type &nbsp;</td><td>{Type}</td>
+            </tr>
+            <tr>
+                <td>Duration &nbsp;</td><td>{Duration}</td>
+            </tr>
+            <tr>
+                <td>Balance &nbsp;</td><td>{Balance}</td>
             </tr>
             <tr>
                 <td>Reason &nbsp;</td><td>{Reason}</td>

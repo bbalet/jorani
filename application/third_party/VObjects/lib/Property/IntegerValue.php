@@ -6,7 +6,7 @@ use
     Sabre\VObject\Property;
 
 /**
- * Integer property
+ * Integer property.
  *
  * This object represents INTEGER values. These are always a single integer.
  * They may be preceeded by either + or -.
@@ -15,7 +15,7 @@ use
  * @author Evert Pot (http://evertpot.com/)
  * @license http://sabre.io/license/ Modified BSD License
  */
-class Integer extends Property {
+class IntegerValue extends Property {
 
     /**
      * Sets a raw value coming from a mimedir (iCalendar/vCard) file.
@@ -24,9 +24,10 @@ class Integer extends Property {
      * not yet done, but parameters are not included.
      *
      * @param string $val
+     *
      * @return void
      */
-    public function setRawMimeDirValue($val) {
+    function setRawMimeDirValue($val) {
 
         $this->setValue((int)$val);
 
@@ -37,7 +38,7 @@ class Integer extends Property {
      *
      * @return string
      */
-    public function getRawMimeDirValue() {
+    function getRawMimeDirValue() {
 
         return $this->value;
 
@@ -51,9 +52,9 @@ class Integer extends Property {
      *
      * @return string
      */
-    public function getValueType() {
+    function getValueType() {
 
-        return "INTEGER";
+        return 'INTEGER';
 
     }
 
@@ -64,9 +65,24 @@ class Integer extends Property {
      *
      * @return array
      */
-    public function getJsonValue() {
+    function getJsonValue() {
 
-        return array((int)$this->getValue());
+        return [(int)$this->getValue()];
+
+    }
+
+    /**
+     * Hydrate data from a XML subtree, as it would appear in a xCard or xCal
+     * object.
+     *
+     * @param array $value
+     *
+     * @return void
+     */
+    function setXmlValue(array $value) {
+
+        $value = array_map('intval', $value);
+        parent::setXmlValue($value);
 
     }
 }

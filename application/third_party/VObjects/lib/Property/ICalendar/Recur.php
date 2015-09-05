@@ -2,12 +2,11 @@
 
 namespace Sabre\VObject\Property\ICalendar;
 
-use
-    Sabre\VObject\Property,
-    Sabre\VObject\Parser\MimeDir;
+use Sabre\VObject\Property;
+use Sabre\Xml;
 
 /**
- * Recur property
+ * Recur property.
  *
  * This object represents RECUR properties.
  * These values are just used for RRULE and the now deprecated EXRULE.
@@ -31,9 +30,10 @@ class Recur extends Property {
      * This may be either a single, or multiple strings in an array.
      *
      * @param string|array $value
+     *
      * @return void
      */
-    public function setValue($value) {
+    function setValue($value) {
 
         // If we're getting the data from json, we'll be receiving an object
         if ($value instanceof \StdClass) {
@@ -41,14 +41,14 @@ class Recur extends Property {
         }
 
         if (is_array($value)) {
-            $newVal = array();
-            foreach($value as $k=>$v) {
+            $newVal = [];
+            foreach ($value as $k => $v) {
 
                 if (is_string($v)) {
                     $v = strtoupper($v);
 
                     // The value had multiple sub-values
-                    if (strpos($v,',')!==false) {
+                    if (strpos($v, ',') !== false) {
                         $v = explode(',', $v);
                     }
                 } else {
@@ -77,13 +77,13 @@ class Recur extends Property {
      *
      * @return string
      */
-    public function getValue() {
+    function getValue() {
 
-        $out = array();
-        foreach($this->value as $key=>$value) {
-            $out[] = $key . '=' . (is_array($value)?implode(',', $value):$value);
+        $out = [];
+        foreach ($this->value as $key => $value) {
+            $out[] = $key . '=' . (is_array($value) ? implode(',', $value) : $value);
         }
-        return strtoupper(implode(';',$out));
+        return strtoupper(implode(';', $out));
 
     }
 
@@ -91,9 +91,10 @@ class Recur extends Property {
      * Sets a multi-valued property.
      *
      * @param array $parts
+     *
      * @return void
      */
-    public function setParts(array $parts) {
+    function setParts(array $parts) {
 
         $this->setValue($parts);
 
@@ -107,7 +108,7 @@ class Recur extends Property {
      *
      * @return array
      */
-    public function getParts() {
+    function getParts() {
 
         return $this->value;
 
@@ -120,9 +121,10 @@ class Recur extends Property {
      * not yet done, but parameters are not included.
      *
      * @param string $val
+     *
      * @return void
      */
-    public function setRawMimeDirValue($val) {
+    function setRawMimeDirValue($val) {
 
         $this->setValue($val);
 
@@ -133,7 +135,7 @@ class Recur extends Property {
      *
      * @return string
      */
-    public function getRawMimeDirValue() {
+    function getRawMimeDirValue() {
 
         return $this->getValue();
 
@@ -147,9 +149,9 @@ class Recur extends Property {
      *
      * @return string
      */
-    public function getValueType() {
+    function getValueType() {
 
-        return "RECUR";
+        return 'RECUR';
 
     }
 
@@ -160,13 +162,31 @@ class Recur extends Property {
      *
      * @return array
      */
-    public function getJsonValue() {
+    function getJsonValue() {
 
-        $values = array();
-        foreach($this->getParts() as $k=>$v) {
+        $values = [];
+        foreach ($this->getParts() as $k => $v) {
             $values[strtolower($k)] = $v;
         }
-        return array($values);
+        return [$values];
+
+    }
+
+    /**
+     * This method serializes only the value of a property. This is used to
+     * create xCard or xCal documents.
+     *
+     * @param Xml\Writer $writer  XML writer.
+     *
+     * @return void
+     */
+    protected function xmlSerializeValue(Xml\Writer $writer) {
+
+        $valueType = strtolower($this->getValueType());
+
+        foreach ($this->getJsonValue() as $value) {
+            $writer->writeElement($valueType, $value);
+        }
 
     }
 
@@ -174,13 +194,14 @@ class Recur extends Property {
      * Parses an RRULE value string, and turns it into a struct-ish array.
      *
      * @param string $value
+     *
      * @return array
      */
     static function stringToArray($value) {
 
         $value = strtoupper($value);
-        $newValue = array();
-        foreach(explode(';', $value) as $part) {
+        $newValue = [];
+        foreach (explode(';', $value) as $part) {
 
             // Skipping empty parts.
             if (empty($part)) {
@@ -189,8 +210,8 @@ class Recur extends Property {
             list($partName, $partValue) = explode('=', $part);
 
             // The value itself had multiple values..
-            if (strpos($partValue,',')!==false) {
-                $partValue=explode(',', $partValue);
+            if (strpos($partValue, ',') !== false) {
+                $partValue = explode(',', $partValue);
             }
             $newValue[$partName] = $partValue;
 

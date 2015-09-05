@@ -6,7 +6,7 @@ use
     Sabre\VObject\Property;
 
 /**
- * Boolean property
+ * Boolean property.
  *
  * This object represents BOOLEAN values. These are always the case-insenstive
  * string TRUE or FALSE.
@@ -26,11 +26,12 @@ class Boolean extends Property {
      * not yet done, but parameters are not included.
      *
      * @param string $val
+     *
      * @return void
      */
-    public function setRawMimeDirValue($val) {
+    function setRawMimeDirValue($val) {
 
-        $val = strtoupper($val)==='TRUE'?true:false;
+        $val = strtoupper($val) === 'TRUE' ? true : false;
         $this->setValue($val);
 
     }
@@ -40,9 +41,9 @@ class Boolean extends Property {
      *
      * @return string
      */
-    public function getRawMimeDirValue() {
+    function getRawMimeDirValue() {
 
-        return $this->value?'TRUE':'FALSE';
+        return $this->value ? 'TRUE' : 'FALSE';
 
     }
 
@@ -54,9 +55,29 @@ class Boolean extends Property {
      *
      * @return string
      */
-    public function getValueType() {
+    function getValueType() {
 
         return 'BOOLEAN';
+
+    }
+
+    /**
+     * Hydrate data from a XML subtree, as it would appear in a xCard or xCal
+     * object.
+     *
+     * @param array $value
+     *
+     * @return void
+     */
+    function setXmlValue(array $value) {
+
+        $value = array_map(
+            function($value) {
+                return 'true' === $value;
+            },
+            $value
+        );
+        parent::setXmlValue($value);
 
     }
 

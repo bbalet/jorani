@@ -3,7 +3,7 @@
 namespace Sabre\VObject\Property;
 
 /**
- * UtcOffset property
+ * UtcOffset property.
  *
  * This object encodes UTC-OFFSET values.
  *
@@ -29,9 +29,49 @@ class UtcOffset extends Text {
      *
      * @return string
      */
-    public function getValueType() {
+    function getValueType() {
 
-        return "UTC-OFFSET";
+        return 'UTC-OFFSET';
+
+    }
+
+    /**
+     * Sets the JSON value, as it would appear in a jCard or jCal object.
+     *
+     * The value must always be an array.
+     *
+     * @param array $value
+     *
+     * @return void
+     */
+    function setJsonValue(array $value) {
+
+        $value = array_map(
+            function($value) {
+                return str_replace(':', '', $value);
+            },
+            $value
+        );
+        parent::setJsonValue($value);
+
+    }
+
+    /**
+     * Returns the value, in the format it should be encoded for JSON.
+     *
+     * This method must always return an array.
+     *
+     * @return array
+     */
+    function getJsonValue() {
+
+        return array_map(
+            function($value) {
+                return substr($value, 0, -2) . ':' .
+                       substr($value, -2);
+            },
+            parent::getJsonValue()
+        );
 
     }
 }

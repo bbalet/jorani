@@ -5,7 +5,7 @@ namespace Sabre\VObject\Property;
 use Sabre\VObject\Property;
 
 /**
- * URI property
+ * URI property.
  *
  * This object encodes URI values. vCard 2.1 calls these URL.
  *
@@ -31,9 +31,9 @@ class Uri extends Text {
      *
      * @return string
      */
-    public function getValueType() {
+    function getValueType() {
 
-        return "URI";
+        return 'URI';
 
     }
 
@@ -44,9 +44,10 @@ class Uri extends Text {
      * not yet done, but parameters are not included.
      *
      * @param string $val
+     *
      * @return void
      */
-    public function setRawMimeDirValue($val) {
+    function setRawMimeDirValue($val) {
 
         // Normally we don't need to do any type of unescaping for these
         // properties, however.. we've noticed that Google Contacts
@@ -60,19 +61,19 @@ class Uri extends Text {
             $regex = '#  (?: (\\\\ (?: \\\\ | : ) ) ) #x';
             $matches = preg_split($regex, $val, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
             $newVal = '';
-            foreach($matches as $match) {
-                switch($match) {
+            foreach ($matches as $match) {
+                switch ($match) {
                     case '\:' :
-                        $newVal.=':';
+                        $newVal .= ':';
                         break;
                     default :
-                        $newVal.=$match;
+                        $newVal .= $match;
                         break;
                 }
             }
             $this->value = $newVal;
         } else {
-            $this->value = $val;
+            $this->value = strtr($val, ['\,' => ',']);
         }
 
     }
@@ -82,13 +83,15 @@ class Uri extends Text {
      *
      * @return string
      */
-    public function getRawMimeDirValue() {
+    function getRawMimeDirValue() {
 
         if (is_array($this->value)) {
-            return $this->value[0];
+            $value = $this->value[0];
         } else {
-            return $this->value;
+            $value = $this->value;
         }
+
+        return strtr($value, [',' => '\,']);
 
     }
 

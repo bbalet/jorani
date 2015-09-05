@@ -2,13 +2,11 @@
 
 namespace Sabre\VObject\Parser;
 
-use
-    Sabre\VObject\ParseException,
-    Sabre\VObject\EofException,
-    Sabre\VObject\Component,
-    Sabre\VObject\Property,
-    Sabre\VObject\Component\VCalendar,
-    Sabre\VObject\Component\VCard;
+use Sabre\VObject\ParseException;
+use Sabre\VObject\EofException;
+use Sabre\VObject\Component;
+use Sabre\VObject\Component\VCalendar;
+use Sabre\VObject\Component\VCard;
 
 /**
  * MimeDir parser.
@@ -33,32 +31,34 @@ class MimeDir extends Parser {
     protected $input;
 
     /**
-     * Root component
+     * Root component.
      *
      * @var Component
      */
     protected $root;
 
     /**
-     * Parses an iCalendar or vCard file
+     * Parses an iCalendar or vCard file.
      *
      * Pass a stream or a string. If null is parsed, the existing buffer is
      * used.
      *
      * @param string|resource|null $input
-     * @param int|null $options
-     * @return array
+     * @param int $options
+     *
+     * @return Sabre\VObject\Document
      */
-    public function parse($input = null, $options = null) {
+    function parse($input = null, $options = 0) {
 
         $this->root = null;
+
         if (!is_null($input)) {
-
             $this->setInput($input);
-
         }
 
-        if (!is_null($options)) $this->options = $options;
+        if (0 !== $options) {
+            $this->options = $options;
+        }
 
         $this->parseDocument();
 
@@ -70,9 +70,10 @@ class MimeDir extends Parser {
      * Sets the input buffer. Must be a string or stream.
      *
      * @param resource|string $input
+     *
      * @return void
      */
-    public function setInput($input) {
+    function setInput($input) {
 
         // Resetting the parser
         $this->lineIndex = 0;
@@ -103,14 +104,14 @@ class MimeDir extends Parser {
 
         // BOM is ZERO WIDTH NO-BREAK SPACE (U+FEFF).
         // It's 0xEF 0xBB 0xBF in UTF-8 hex.
-        if (   3 <= strlen($line)
+        if (3 <= strlen($line)
             && ord($line[0]) === 0xef
             && ord($line[1]) === 0xbb
             && ord($line[2]) === 0xbf) {
             $line = substr($line, 3);
         }
 
-        switch(strtoupper($line)) {
+        switch (strtoupper($line)) {
             case 'BEGIN:VCALENDAR' :
                 $class = isset(VCalendar::$componentMap['VCALENDAR'])
                     ? VCalendar::$componentMap[$name]
@@ -125,13 +126,13 @@ class MimeDir extends Parser {
                 throw new ParseException('This parser only supports VCARD and VCALENDAR files');
         }
 
-        $this->root = new $class(array(), false);
+        $this->root = new $class([], false);
 
-        while(true) {
+        while (true) {
 
             // Reading until we hit END:
             $line = $this->readLine();
-            if (strtoupper(substr($line,0,4)) === 'END:') {
+            if (strtoupper(substr($line, 0, 4)) === 'END:') {
                 break;
             }
             $result = $this->parseLine($line);
@@ -142,7 +143,7 @@ class MimeDir extends Parser {
         }
 
         $name = strtoupper(substr($line, 4));
-        if ($name!==$this->root->name) {
+        if ($name !== $this->root->name) {
             throw new ParseException('Invalid MimeDir file. expected: "END:' . $this->root->name . '" got: "END:' . $name . '"');
         }
 
@@ -150,9 +151,10 @@ class MimeDir extends Parser {
 
     /**
      * Parses a line, and if it hits a component, it will also attempt to parse
-     * the entire component
+     * the entire component.
      *
      * @param string $line Unfolded line
+     *
      * @return Node
      */
     protected function parseLine($line) {
@@ -160,13 +162,13 @@ class MimeDir extends Parser {
         // Start of a new component
         if (strtoupper(substr($line, 0, 6)) === 'BEGIN:') {
 
-            $component = $this->root->createComponent(substr($line,6), array(), false);
+            $component = $this->root->createComponent(substr($line, 6), [], false);
 
-            while(true) {
+            while (true) {
 
                 // Reading until we hit END:
                 $line = $this->readLine();
-                if (strtoupper(substr($line,0,4)) === 'END:') {
+                if (strtoupper(substr($line, 0, 4)) === 'END:') {
                     break;
                 }
                 $result = $this->parseLine($line);
@@ -177,7 +179,7 @@ class MimeDir extends Parser {
             }
 
             $name = strtoupper(substr($line, 4));
-            if ($name!==$component->name) {
+            if ($name !== $component->name) {
                 throw new ParseException('Invalid MimeDir file. expected: "END:' . $component->name . '" got: "END:' . $name . '"');
             }
 
@@ -233,6 +235,7 @@ class MimeDir extends Parser {
      * This method strips any newlines and also takes care of unfolding.
      *
      * @throws \Sabre\VObject\EofException
+     *
      * @return string
      */
     protected function readLine() {
@@ -246,7 +249,7 @@ class MimeDir extends Parser {
 
                 $rawLine = fgets($this->input);
 
-                if ($eof || (feof($this->input) && $rawLine===false)) {
+                if ($eof || (feof($this->input) && $rawLine === false)) {
                     throw new EofException('End of document reached prematurely');
                 }
                 if ($rawLine === false) {
@@ -315,11 +318,11 @@ class MimeDir extends Parser {
         //echo $regex, "\n"; die();
         preg_match_all($regex, $line, $matches,  PREG_SET_ORDER);
 
-        $property = array(
-            'name' => null,
-            'parameters' => array(),
-            'value' => null
-        );
+        $property = [
+            'name'       => null,
+            'parameters' => [],
+            'value'      => null
+        ];
 
         $lastParam = null;
 
@@ -330,7 +333,7 @@ class MimeDir extends Parser {
          * sub-pattern matched, the subsequent named patterns will not show up
          * in the result.
          */
-        foreach($matches as $match) {
+        foreach ($matches as $match) {
 
             if (isset($match['paramValue'])) {
                 if ($match['paramValue'] && $match['paramValue'][0] === '"') {
@@ -341,15 +344,18 @@ class MimeDir extends Parser {
 
                 $value = $this->unescapeParam($value);
 
+                if (is_null($lastParam)) {
+                    throw new ParseException('Invalid Mimedir file. Line starting at ' . $this->startLine . ' did not follow iCalendar/vCard conventions');
+                }
                 if (is_null($property['parameters'][$lastParam])) {
                     $property['parameters'][$lastParam] = $value;
                 } elseif (is_array($property['parameters'][$lastParam])) {
                     $property['parameters'][$lastParam][] = $value;
                 } else {
-                    $property['parameters'][$lastParam] = array(
+                    $property['parameters'][$lastParam] = [
                         $property['parameters'][$lastParam],
                         $value
-                    );
+                    ];
                 }
                 continue;
             }
@@ -390,10 +396,10 @@ class MimeDir extends Parser {
         //
         // Our parser will get those as parameters without a value instead, so
         // we're filtering these parameters out first.
-        $namedParameters = array();
-        $namelessParameters = array();
+        $namedParameters = [];
+        $namelessParameters = [];
 
-        foreach($property['parameters'] as $name=>$value) {
+        foreach ($property['parameters'] as $name => $value) {
             if (!is_null($value)) {
                 $namedParameters[$name] = $value;
             } else {
@@ -403,7 +409,7 @@ class MimeDir extends Parser {
 
         $propObj = $this->root->createProperty($property['name'], null, $namedParameters);
 
-        foreach($namelessParameters as $namelessParameter) {
+        foreach ($namelessParameters as $namelessParameter) {
             $propObj->add(null, $namelessParameter);
         }
 
@@ -476,9 +482,10 @@ class MimeDir extends Parser {
      *
      * @param string $input
      * @param string $delimiter
+     *
      * @return string|string[]
      */
-    static public function unescapeValue($input, $delimiter = ';') {
+    static function unescapeValue($input, $delimiter = ';') {
 
         $regex = '#  (?: (\\\\ (?: \\\\ | N | n | ; | , ) )';
         if ($delimiter) {
@@ -488,24 +495,24 @@ class MimeDir extends Parser {
 
         $matches = preg_split($regex, $input, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
-        $resultArray = array();
+        $resultArray = [];
         $result = '';
 
-        foreach($matches as $match) {
+        foreach ($matches as $match) {
 
             switch ($match) {
                 case '\\\\' :
-                    $result .='\\';
+                    $result .= '\\';
                     break;
                 case '\N' :
                 case '\n' :
-                    $result .="\n";
+                    $result .= "\n";
                     break;
                 case '\;' :
-                    $result .=';';
+                    $result .= ';';
                     break;
                 case '\,' :
-                    $result .=',';
+                    $result .= ',';
                     break;
                 case $delimiter :
                     $resultArray[] = $result;
@@ -555,6 +562,7 @@ class MimeDir extends Parser {
      *   * " is encoded as ^'
      *
      * @param string $input
+     *
      * @return void
      */
     private function unescapeParam($input) {
@@ -563,7 +571,7 @@ class MimeDir extends Parser {
             preg_replace_callback(
                 '#(\^(\^|n|\'))#',
                 function($matches) {
-                    switch($matches[2]) {
+                    switch ($matches[2]) {
                         case 'n' :
                             return "\n";
                         case '^' :
@@ -613,11 +621,11 @@ class MimeDir extends Parser {
         // missing a whitespace. So if 'forgiving' is turned on, we will take
         // those as well.
         if ($this->options & self::OPTION_FORGIVING) {
-            while(substr($value,-1) === '=') {
+            while (substr($value, -1) === '=') {
                 // Reading the line
                 $this->readLine();
                 // Grabbing the raw form
-                $value.="\n" . $this->rawLine;
+                $value .= "\n" . $this->rawLine;
             }
         }
 

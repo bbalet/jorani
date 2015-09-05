@@ -3,7 +3,7 @@
 namespace Sabre\VObject;
 
 /**
- * iCalendar/vCard/jCal/jCard reader object.
+ * iCalendar/vCard/jCal/jCard/xCal/xCard reader object.
  *
  * This object provides a few (static) convenience methods to quickly access
  * the parsers.
@@ -36,9 +36,10 @@ class Reader {
      *
      * @param string|resource $data
      * @param int $options
+     *
      * @return Document
      */
-    static public function read($data, $options = 0) {
+    static function read($data, $options = 0) {
 
         $parser = new Parser\MimeDir();
         $result = $parser->parse($data, $options);
@@ -59,11 +60,34 @@ class Reader {
      *
      * @param string|resource|array $data
      * @param int $options
-     * @return Node
+     *
+     * @return Document
      */
-    static public function readJson($data, $options = 0) {
+    static function readJson($data, $options = 0) {
 
         $parser = new Parser\Json();
+        $result = $parser->parse($data, $options);
+
+        return $result;
+
+    }
+
+    /**
+     * Parses a xCard or xCal object, and returns the top component.
+     *
+     * The options argument is a bitfield. Pass any of the OPTIONS constant to
+     * alter the parsers' behaviour.
+     *
+     * You can either supply a string, or a readable stream for input.
+     *
+     * @param string|resource $data
+     * @param int $options
+     *
+     * @return Document
+     */
+    static function readXML($data, $options = 0) {
+
+        $parser = new Parser\XML();
         $result = $parser->parse($data, $options);
 
         return $result;

@@ -10,9 +10,8 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Experimental : import day offs from an ICS/CalDAV feed.
 - [X] Public Global and Tabular calendar in an embeddable view.
 - [X] Add an option to switch the duration field in readonly.
-- [X] Allow user to delete/edit rejected leave requests
+- [X] Allow user to delete/edit rejected leave requests (take into account leave_status_requested).
 - [X] Bug when editing a LR from HR/Employee => e-mail is messy (reload the LR from DB in leaves:sendMail)
-- [ ] If edit_rejected_requests is TRUE then we take into account leave_status_requested when editing rejected LR.
 - [X] Report duration and balance into request e-mail.
 - [X] Entitled days editor : possibility to copy a line.
 - [X] Entitled days editor : a field allows to set the step for inc/dec (saved in a cookie).

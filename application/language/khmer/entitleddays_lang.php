@@ -38,6 +38,7 @@ $lang['entitleddays_contract_index_button_back'] = 'Back to the list of contract
 $lang['entitleddays_contract_confirm_delete_message'] = 'Are you sure that you want to delete it?';
 $lang['entitleddays_contract_confirm_delete_yes'] = 'Yes';
 $lang['entitleddays_contract_confirm_delete_cancel'] = 'Cancel';
+$lang['entitleddays_contract_index_field_step'] = 'Step';
 
 $lang['entitleddays_user_index_title'] = 'Entitled days for employee';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'លុប';
@@ -60,6 +61,7 @@ $lang['entitleddays_user_index_button_back'] = 'Back to the list of employees';
 $lang['entitleddays_user_confirm_delete_message'] = 'Are you sure that you want to delete it?';
 $lang['entitleddays_user_confirm_delete_yes'] = 'Yes';
 $lang['entitleddays_user_confirm_delete_cancel'] = 'Cancel';
+$lang['entitleddays_user_index_field_step'] = 'Step';
 
 $lang['entitleddays_counters_title_contract'] = 'Entitled days to Contract #';
 $lang['entitleddays_counters_description_contract'] = 'Yearly leave period : ';

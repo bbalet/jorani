@@ -40,6 +40,7 @@ $lang['entitleddays_contract_index_button_back'] = 'Retour à la liste des contr
 $lang['entitleddays_contract_confirm_delete_message'] = 'Etes-vous sûr de vouloir le supprimer?';
 $lang['entitleddays_contract_confirm_delete_yes'] = 'Oui';
 $lang['entitleddays_contract_confirm_delete_cancel'] = 'Annuler';
+$lang['entitleddays_contract_index_field_step'] = 'Incrément';
 
 $lang['entitleddays_user_index_title'] = 'Crédits d\'absence pour l\'employé(e)';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Supprimer';
@@ -62,6 +63,7 @@ $lang['entitleddays_user_index_button_back'] = 'Retour à la liste des employés
 $lang['entitleddays_user_confirm_delete_message'] = 'Etes-vous sûr de vouloir le supprimer?';
 $lang['entitleddays_user_confirm_delete_yes'] = 'Oui';
 $lang['entitleddays_user_confirm_delete_cancel'] = 'Annuler';
+$lang['entitleddays_user_index_field_step'] = 'Incrément';
 
 $lang['entitleddays_counters_title_contract'] = 'Crédit d\'absence pour le contrat n°';
 $lang['entitleddays_counters_description_contract'] = 'Période annuelle des congés : ';

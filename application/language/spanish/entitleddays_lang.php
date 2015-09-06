@@ -39,6 +39,7 @@ $lang['entitleddays_contract_index_button_back'] = 'Vuelta a la lista de contrat
 $lang['entitleddays_contract_confirm_delete_message'] = '¿Seguro que quieres borrarlo?';
 $lang['entitleddays_contract_confirm_delete_yes'] = 'Sí';
 $lang['entitleddays_contract_confirm_delete_cancel'] = 'Cancelar';
+$lang['entitleddays_contract_index_field_step'] = 'Step';
 
 $lang['entitleddays_user_index_title'] = 'Días asociados por empleado.';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Suprimir';
@@ -61,6 +62,7 @@ $lang['entitleddays_user_index_button_back'] = 'Volver a la lista de empleados';
 $lang['entitleddays_user_confirm_delete_message'] = '¿Seguro que quieres borrarlo?';
 $lang['entitleddays_user_confirm_delete_yes'] = 'Sí';
 $lang['entitleddays_user_confirm_delete_cancel'] = 'Cancelar';
+$lang['entitleddays_user_index_field_step'] = 'Step';
 
 $lang['entitleddays_counters_title_contract'] = 'Dias asociados al contrato #';
 $lang['entitleddays_counters_description_contract'] = 'Perido de permiso anual: ';

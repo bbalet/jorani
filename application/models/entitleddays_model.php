@@ -188,11 +188,13 @@ class Entitleddays_model extends CI_Model {
     /**
      * Increase an entitled days row
      * @param int $id row identifier
+     * @param float $days increment step
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function inc_entitleddays($id) {
-        $this->db->set('days', 'days + 1', FALSE);
+    public function inc_entitleddays($id, $days) {
+        if (!is_numeric($days)) $days = 1;
+        $this->db->set('days', 'days + ' . $days, FALSE);
         $this->db->where('id', $id);
         return $this->db->update('entitleddays');
     }
@@ -200,11 +202,13 @@ class Entitleddays_model extends CI_Model {
     /**
      * Decrease an entitled days row
      * @param int $id row identifier
+     * @param float $days increment step
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function dec_entitleddays($id) {
-        $this->db->set('days', 'days - 1', FALSE);
+    public function dec_entitleddays($id, $days) {
+        if (!is_numeric($days)) $days = 1;
+        $this->db->set('days', 'days - ' . $days, FALSE);
         $this->db->where('id', $id);
         return $this->db->update('entitleddays');
     }
@@ -217,6 +221,7 @@ class Entitleddays_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function update_days_entitleddays($id, $days) {
+        if (!is_numeric($days)) $days = 1;
         $this->db->set('days', $days);
         $this->db->where('id', $id);
         return $this->db->update('entitleddays');

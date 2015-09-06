@@ -38,6 +38,7 @@ $lang['entitleddays_contract_index_button_back'] = 'Zurück zur Liste der Vertr�
 $lang['entitleddays_contract_confirm_delete_message'] = 'Wollen Sie wirklich löschen?';
 $lang['entitleddays_contract_confirm_delete_yes'] = 'Ja';
 $lang['entitleddays_contract_confirm_delete_cancel'] = 'Abbrechen';
+$lang['entitleddays_contract_index_field_step'] = 'Step';
 
 $lang['entitleddays_user_index_title'] = 'Bezugsberechtigte Tag für Angestellten';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Löschen';
@@ -60,6 +61,7 @@ $lang['entitleddays_user_index_button_back'] = 'Zurück zur Angestelltenübersic
 $lang['entitleddays_user_confirm_delete_message'] = 'Wollen Sie wirklich löschen?';
 $lang['entitleddays_user_confirm_delete_yes'] = 'Ja';
 $lang['entitleddays_user_confirm_delete_cancel'] = 'Abbrechen';
+$lang['entitleddays_user_index_field_step'] = 'Step';
 
 $lang['entitleddays_counters_title_contract'] = 'Bezugsberechtigte Tage Vertrag #';
 $lang['entitleddays_counters_description_contract'] = 'Jährlicher Urlaubszeitraum : ';

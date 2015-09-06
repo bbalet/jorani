@@ -39,6 +39,7 @@ $lang['entitleddays_contract_index_button_back'] = 'Terug naar overzicht contrac
 $lang['entitleddays_contract_confirm_delete_message'] = 'Weet u zeker dat u dit wil verwijderen?';
 $lang['entitleddays_contract_confirm_delete_yes'] = 'Ja';
 $lang['entitleddays_contract_confirm_delete_cancel'] = 'Annuleren';
+$lang['entitleddays_contract_index_field_step'] = 'Step';
 
 $lang['entitleddays_user_index_title'] = 'Beschikbare dagen voor werknemer';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Verwijder';
@@ -61,6 +62,7 @@ $lang['entitleddays_user_index_button_back'] = 'Terug naar overzicht werknemers'
 $lang['entitleddays_user_confirm_delete_message'] = 'Weet u zeker dat u dit wil verwijderen?';
 $lang['entitleddays_user_confirm_delete_yes'] = 'Ja';
 $lang['entitleddays_user_confirm_delete_cancel'] = 'Annuleren';
+$lang['entitleddays_user_index_field_step'] = 'Step';
 
 $lang['entitleddays_counters_title_contract'] = 'Beschikbare dagen voor Contract #';
 $lang['entitleddays_counters_description_contract'] = 'Jaarlijkse afwezigheid tijdvak:';

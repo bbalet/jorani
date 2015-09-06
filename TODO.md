@@ -15,8 +15,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] If edit_rejected_requests is TRUE then we take into account leave_status_requested when editing rejected LR.
 - [X] Report duration and balance into request e-mail.
 - [ ] Entitled days editor : possibility to copy a line.
-- [ ] Entitled days editor : a field allows to set the step for inc/dec (saved in a cookie).
-- [ ] Translate e-mails in italian.
+- [X] Entitled days editor : a field allows to set the step for inc/dec (saved in a cookie).
 - [ ] Update jorani.pot in transifex and warn translators/update strings.
 - [ ] Check HR/Monthly report for overlapping. Report this overlapping feature to calendar/tabular.
 

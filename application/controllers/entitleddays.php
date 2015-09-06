@@ -44,6 +44,7 @@ class Entitleddays extends CI_Controller {
     public function user($id) {
         $this->auth->check_is_granted('entitleddays_user');
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['id'] = $id;
         $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_employee($id);
         $this->load->model('types_model');
@@ -81,6 +82,7 @@ class Entitleddays extends CI_Controller {
     public function contract($id) {
         $this->auth->check_is_granted('entitleddays_contract');
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $data['id'] = $id;
         $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_contract($id);
         $this->load->model('types_model');
@@ -188,15 +190,15 @@ class Entitleddays extends CI_Controller {
             $operation = $this->input->post('operation', TRUE);   
             if (isset($id) && isset($operation)) {
                 $this->output->set_content_type('text/plain');
+                $days = $this->input->post('days', TRUE);
                 switch ($operation) {
                     case  "increase":
-                        $id = $this->entitleddays_model->inc_entitleddays($id);
+                        $id = $this->entitleddays_model->inc_entitleddays($id, $days);
                         break;
                     case "decrease":
-                        $id = $this->entitleddays_model->dec_entitleddays($id);
+                        $id = $this->entitleddays_model->dec_entitleddays($id, $days);
                         break;
                     case "credit":
-                        $days = $this->input->post('days', TRUE);
                         $id = $this->entitleddays_model->update_days_entitleddays($id, $days);
                         break;
                     default:

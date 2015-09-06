@@ -17,11 +17,7 @@
  * 
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
-
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('entitleddays', $language);
-$this->lang->load('datatable', $language);
-$this->lang->load('global', $language);?>
+?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -89,13 +85,24 @@ $endDate = new DateTime($days['enddate']);?>
  </div>
     
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
-<a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
-<button id="cmdAddEntitledDays" class="btn btn-primary" onclick="$('#frmAddEntitledDays').modal('show');"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_add');?></button>
+
+<div class="row-fluid">
+    <div class="span6">
+        <a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
+        <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="$('#frmAddEntitledDays').modal('show');"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_add');?></button>
+    </div>
+    <div class="span6">
+        <div class="pull-right">
+            <label for="txtStep"><?php echo lang('entitleddays_contract_index_field_step');?></label>
+            <input type="text" class="input-mini" id="txtStep" name="txtStep" value="1">
+        </div>
+    </div>
+</div>
+
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
     </div>
 </div>
-
 
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
         <div class="modal-header">
@@ -116,7 +123,7 @@ if ($language_code != 'en') { ?>
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
-
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript">
     //Current cell transformed in input box
     var current_input = null;
@@ -127,6 +134,7 @@ if ($language_code != 'en') { ?>
     var endDay = <?php echo $contract_end_day;?>;
     var locale = '<?php echo $language_code;?>';
     var oTable;     //datatable
+    var step = 1;
     
     function set_current_period() {
         var now = moment();
@@ -194,13 +202,14 @@ if ($language_code != 'en') { ?>
             url: "<?php echo base_url();?>entitleddays/ajax/incdec",
                             type: "POST",
                 data: { id: id,
-                        operation: operation
+                        operation: operation,
+                        days: step
                     }
           }).done(function() {
               var days = parseFloat($('#days' + id).text());
               switch(operation) {
-                  case "increase": days++; $('#days' + id).text(days.toFixed(2)); break;
-                  case "decrease": days--; $('#days' + id).text(days.toFixed(2)); break;
+                  case "increase": days+=step; $('#days' + id).text(days.toFixed(2)); break;
+                  case "decrease": days-=step; $('#days' + id).text(days.toFixed(2)); break;
               }
               $('#frmModalAjaxWait').modal('hide');
           });
@@ -331,6 +340,19 @@ if ($language_code != 'en') { ?>
                 } else {
                     text2td();
                 }
+            }
+        });
+        
+        //On load, try to get stepping value from a cookie
+        if($.cookie('ent_contract_step') != null) {
+            step = parseFloat($.cookie('ent_contract_step'));
+            $("#txtStep").val(step);
+        }//Default to 1
+        //Update step value if it is a number
+        $("#txtStep").change(function() {
+            if (!isNaN($("#txtStep").val())) {
+                $.cookie('ent_contract_step', $("#txtStep").val());
+                step = parseFloat($("#txtStep").val());
             }
         });
         

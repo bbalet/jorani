@@ -157,6 +157,12 @@ if ($configFileExists ) {
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;Timezone undefined</td>
                       <?php } ?><td>If error, please check date.timezone into PHP.ini.</td></tr>
                        
+                      <?php if (extension_loaded('mcrypt')) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;mcrypt is LOADED</td>
+                      <?php } else { ?>
+                      <tr><td><i class="icon-exclamation-sign"></i>&nbsp;mcrypt IS NOT LOADED.</td>
+                      <?php } ?><td>PHP Extension mcrypt is required for the security features</td></tr>
+                      
                       <?php if (extension_loaded('openssl')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;openssl is LOADED</td>
                       <?php } else { ?>

@@ -18,7 +18,7 @@
 
     //You can change the content of this template
 ?>
-<html lang="en">
+<html lang="it">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -31,10 +31,10 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        Si prega di utilizzare queste credenziali per <a href="{BaseURL}">accedere al sistema</a>:
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>Entra</td><td>{Login}</td>
             </tr>
             <tr>
                 <td>Password</td><td>{Password}</td>
@@ -42,6 +42,6 @@
         </table>
         Once connected, you can change your password, as explained <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Questo è un messaggio generato automaticamente, si prega di non rispondere a questo messaggio ***</h5>
     </body>
 </html>

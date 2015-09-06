@@ -18,7 +18,7 @@
 
     //You can change the content of this template
 ?>
-<html lang="en">
+<html lang="it">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -31,23 +31,23 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Welcome to Jorani {Firstname} {Lastname}. Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        Benvenuti a Jorani {Firstname} {Lastname}. Si prega di utilizzare queste credenziali per <a href="{BaseURL}">accedere al sistema</a> :
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>Entra</td><td>{Login}</td>
             </tr>
             <tr>
                 <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
                 <td>Password</td><td>{Password}</td>
                 <?php } else { ?>
-                <td>Password</td><td><i>The password you use in order to open a session on your operating system (Windows, Linux, etc.).</i></td>
+                <td>Password</td><td><i>La password da utilizzare per aprire una sessione del sistema operativo (Windows, Linux, ecc).</i></td>
                 <?php } ?>
             </tr>            
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        Once connected, you can change your password, as explained <a href="http:/jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        Una volta connessi, è possibile modificare la password, come spiegato <a href="http:/jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">qui</a>.
         <?php } ?>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Questo è un messaggio generato automaticamente, si prega di non rispondere a questo messaggio ***</h5>
     </body>
 </html>

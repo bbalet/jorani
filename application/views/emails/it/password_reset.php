@@ -18,7 +18,7 @@
 
     //You can change the content of this template
 ?>
-<html lang="en">
+<html lang="it">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -31,9 +31,9 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>Dear {Firstname} {Lastname},</p>
-        <p>If you didn't perform this operation, please contact your administrator.</p>
+        <p>{Firstname} {Lastname},</p>
+        <p>Se non si esegue questa operazione, si prega di contattare l'amministratore.</p>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Questo è un messaggio generato automaticamente, si prega di non rispondere a questo messaggio ***</h5>
     </body>
 </html>

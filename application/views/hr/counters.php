@@ -75,7 +75,7 @@
               <td data-order="<?php echo $startDate->getTimestamp(); ?>"><?php echo $startDate->format(lang('global_date_format'));?></td>
               <td data-order="<?php echo $endDate->getTimestamp(); ?>"><?php echo $endDate->format(lang('global_date_format'));?></td>
               <td><?php echo $days['days']; ?></td>
-              <td><?php echo $days['type']; ?></td>
+              <td><?php echo $days['type_name']; ?></td>
               <td><?php echo $days['description']; ?></td>
             </tr>
           <?php } ?>
@@ -109,7 +109,7 @@
         echo $date->format(lang('global_date_format'));
         ?></td>
               <td><?php echo $days['days']; ?></td>
-              <td><?php echo $days['type']; ?></td>
+              <td><?php echo $days['type_name']; ?></td>
               <td><?php echo $days['description']; ?></td>
             </tr>
           <?php } ?>

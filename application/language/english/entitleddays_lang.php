@@ -20,6 +20,7 @@
 
 $lang['entitleddays_contract_index_title'] = 'Entitled days for contract';
 $lang['entitleddays_contract_index_thead_tip_delete'] = 'Delete';
+$lang['entitleddays_contract_index_thead_tip_copy'] = 'Copy';
 $lang['entitleddays_contract_index_thead_start'] = 'Start';
 $lang['entitleddays_contract_index_thead_end'] = 'End';
 $lang['entitleddays_contract_index_thead_days'] = 'Days';
@@ -44,6 +45,7 @@ $lang['entitleddays_contract_index_field_step'] = 'Step';
 
 $lang['entitleddays_user_index_title'] = 'Entitled days for employee';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Delete';
+$lang['entitleddays_user_index_thead_tip_copy'] = 'Copy';
 $lang['entitleddays_user_index_thead_start'] = 'Start';
 $lang['entitleddays_user_index_thead_end'] = 'End';
 $lang['entitleddays_user_index_thead_days'] = 'Days';

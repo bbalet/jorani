@@ -19,6 +19,7 @@
 
 $lang['entitleddays_contract_index_title'] = 'Días por contrato';
 $lang['entitleddays_contract_index_thead_tip_delete'] = 'Suprimir';
+$lang['entitleddays_contract_index_thead_tip_copy'] = 'Copy';
 $lang['entitleddays_contract_index_thead_start'] = 'Comienzo';
 $lang['entitleddays_contract_index_thead_end'] = 'Fin';
 $lang['entitleddays_contract_index_thead_days'] = 'Días';
@@ -43,6 +44,7 @@ $lang['entitleddays_contract_index_field_step'] = 'Step';
 
 $lang['entitleddays_user_index_title'] = 'Días asociados por empleado.';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Suprimir';
+$lang['entitleddays_user_index_thead_tip_copy'] = 'Copy';
 $lang['entitleddays_user_index_thead_start'] = 'Comienzo';
 $lang['entitleddays_user_index_thead_end'] = 'Fin';
 $lang['entitleddays_user_index_thead_days'] = 'Días';

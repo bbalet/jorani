@@ -19,6 +19,7 @@
 
 $lang['entitleddays_contract_index_title'] = 'Beschikbare dagen voor contract';
 $lang['entitleddays_contract_index_thead_tip_delete'] = 'Verwijder';
+$lang['entitleddays_contract_index_thead_tip_copy'] = 'Copy';
 $lang['entitleddays_contract_index_thead_start'] = 'Start';
 $lang['entitleddays_contract_index_thead_end'] = 'Einde';
 $lang['entitleddays_contract_index_thead_days'] = 'Dagen';
@@ -43,6 +44,7 @@ $lang['entitleddays_contract_index_field_step'] = 'Step';
 
 $lang['entitleddays_user_index_title'] = 'Beschikbare dagen voor werknemer';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Verwijder';
+$lang['entitleddays_user_index_thead_tip_copy'] = 'Copy';
 $lang['entitleddays_user_index_thead_start'] = 'Start';
 $lang['entitleddays_user_index_thead_end'] = 'Einde';
 $lang['entitleddays_user_index_thead_days'] = 'Dagen';

@@ -19,6 +19,7 @@
 
 $lang['entitleddays_contract_index_title'] = 'Giorni spettanti per contratto';
 $lang['entitleddays_contract_index_thead_tip_delete'] = 'Elimina';
+$lang['entitleddays_contract_index_thead_tip_copy'] = 'Copy';
 $lang['entitleddays_contract_index_thead_start'] = 'Inizio';
 $lang['entitleddays_contract_index_thead_end'] = 'Fine';
 $lang['entitleddays_contract_index_thead_days'] = 'Giorni';
@@ -43,6 +44,7 @@ $lang['entitleddays_contract_index_field_step'] = 'Step';
 
 $lang['entitleddays_user_index_title'] = 'Giorni spettanti per dipendente';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Elimina';
+$lang['entitleddays_user_index_thead_tip_copy'] = 'Copy';
 $lang['entitleddays_user_index_thead_start'] = 'Inizio';
 $lang['entitleddays_user_index_thead_end'] = 'Fine';
 $lang['entitleddays_user_index_thead_days'] = 'Giorni';

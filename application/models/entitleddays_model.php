@@ -32,7 +32,7 @@ class Entitleddays_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_entitleddays_contract($contract) {
-        $this->db->select('entitleddays.*, types.name as type');
+        $this->db->select('entitleddays.*, types.name as type_name');
         $this->db->from('entitleddays');
         $this->db->join('types', 'types.id = entitleddays.type');
         $this->db->order_by("startdate", "desc");
@@ -47,7 +47,7 @@ class Entitleddays_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_entitleddays_employee($employee) {
-        $this->db->select('entitleddays.*, types.name as type');
+        $this->db->select('entitleddays.*, types.name as type_name');
         $this->db->from('entitleddays');
         $this->db->join('types', 'types.id = entitleddays.type');
         $this->db->order_by("startdate", "desc");

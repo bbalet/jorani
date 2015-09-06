@@ -50,7 +50,6 @@ padding-left:10px;
 }
 
 </style>
-<link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css">
 
 <?php echo $flash_partial_view;?>
 

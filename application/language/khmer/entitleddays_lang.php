@@ -18,6 +18,7 @@
 
 $lang['entitleddays_contract_index_title'] = 'Entitled days for contract';
 $lang['entitleddays_contract_index_thead_tip_delete'] = 'លុប';
+$lang['entitleddays_contract_index_thead_tip_copy'] = 'Copy';
 $lang['entitleddays_contract_index_thead_start'] = 'ចាប់ផ្តើម';
 $lang['entitleddays_contract_index_thead_end'] = 'បញ្ចប់';
 $lang['entitleddays_contract_index_thead_days'] = 'ច្រើនថ្ងៃ';
@@ -42,6 +43,7 @@ $lang['entitleddays_contract_index_field_step'] = 'Step';
 
 $lang['entitleddays_user_index_title'] = 'Entitled days for employee';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'លុប';
+$lang['entitleddays_user_index_thead_tip_copy'] = 'Copy';
 $lang['entitleddays_user_index_thead_start'] = 'ចាប់ផ្តើម';
 $lang['entitleddays_user_index_thead_end'] = 'បញ្ចប់';
 $lang['entitleddays_user_index_thead_days'] = 'ច្រើនថ្ងៃ';

@@ -19,7 +19,6 @@
  */
 ?>
 
-<link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css">
 <h1><?php echo lang('calendar_organization_title');?><?php echo $help;?></h1>
 
 <div class="row-fluid">

@@ -38,7 +38,8 @@
   <tbody>
   <?php foreach ($entitleddays as $days) { ?>
     <tr data-id="<?php echo $days['id'] ?>">
-      <td><a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>
+      <td><a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_delete');?>"><i class="icon-remove"></i></a>
+      &nbsp;<a href="#" onclick="copy_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_copy');?>"><i class="fa fa-copy" style="color:black;"></i></a></td>
       <td><?php 
 $date = new DateTime($days['startdate']);
 echo $date->format(lang('global_date_format'));
@@ -49,7 +50,7 @@ echo $date->format(lang('global_date_format'));
 ?></td>
       <td data-order="<?php echo $days['days']; ?>"><span id="days<?php echo $days['id']; ?>" class="credit"><?php echo $days['days']; ?></span> &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'decrease');"><i class="icon-minus"></i></a>
                      &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'increase');"><i class="icon-plus"></i></a></td>
-      <td><?php echo $days['type']; ?></td>
+      <td data-id="<?php echo $days['type']; ?>"><?php echo $days['type_name']; ?></td>
       <td><?php echo $days['description']; ?></td>
     </tr>
   <?php } ?>
@@ -225,38 +226,61 @@ if ($language_code != 'en') { ?>
           });
     }
     
+        //copy a line of entitleddays
+    function copy_entitleddays(id) {
+        startdate = $("tr[data-id='" + id + "']>td:eq(1)").data('order');
+        startdate = moment(startdate, 'X').format("YYYY-MM-DD");
+        viz_startdate = $("tr[data-id='" + id + "']>td:eq(1)").text();
+        enddate = $("tr[data-id='" + id + "']>td:eq(2)").data('order');
+        enddate = moment(enddate, 'X').format("YYYY-MM-DD");
+        viz_enddate = $("tr[data-id='" + id + "']>td:eq(2)").text();
+        days = parseFloat($("tr[data-id='" + id + "']>td:eq(3)").text());
+        type = $("tr[data-id='" + id + "']>td:eq(4)").data('id');
+        type_name = $("tr[data-id='" + id + "']>td:eq(4)").text();
+        description = $("tr[data-id='" + id + "']>td:eq(5)").text();
+        create_entitleddays(startdate, viz_startdate, enddate, viz_enddate, days, type, type_name, description);
+    }
+
     function add_entitleddays() {
         $('#frmAddEntitledDays').modal('hide');
-        $('#frmModalAjaxWait').modal('show');
         if (validate_form()) {
-            $.ajax({
-                url: "<?php echo base_url();?>entitleddays/ajax/user",
-                type: "POST",
-                data: { user_id: <?php echo $id; ?>,
-                        startdate: $('#startdate').val(),
-                        enddate: $('#enddate').val(),
-                        days: $('#days').val(),
-                        type: $('#type').val(),
-                        description: $('#description').val()
-                    }
-              }).done(function( msg ) {
-                  id = parseInt(msg);
-                  days = parseFloat($('#days').val());
-                  htmlRow = '<tr data-id="' + id + '">' +
-                            '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>' +
-                            '<td data-order="' + moment.utc($('#startdate').val(), "YYYY-MM-DD") + '">' + $('#viz_startdate').val() + '</td>' +
-                            '<td data-order="' + moment.utc($('#enddate').val(), "YYYY-MM-DD") + '">' + $('#viz_enddate').val() + '</td>' +
-                            '<td data-order="' + days.toFixed(2) + '"><span id="days' + id + '" class="credit">' + days.toFixed(2) + '</span> &nbsp; ' +
-                            '<a href="#" onclick="Javascript:incdec(' + id + ', \'decrease\');"><i class="icon-minus"></i></a>' +
-                            '&nbsp; <a href="#" onclick="Javascript:incdec(' + id + ', \'increase\');"><i class="icon-plus"></i></a></td>' +
-                            '<td>' + $('#type option:selected').text() + '</td>' +
-                            '<td>' + $('#description').val() + '</td>' +
-                        '</tr>';
-                    objRow=$(htmlRow);
-                    oTable.row.add(objRow).draw();
-                  $('#frmModalAjaxWait').modal('hide');
-            });
+            create_entitleddays($('#startdate').val(), $('#viz_startdate').val(),
+                                        $('#enddate').val(), $('#viz_enddate').val(),
+                                        parseFloat($('#days').val()), $('#type').val(),
+                                        $('#type option:selected').text(),
+                                        $("#description").val());
         }
+    }
+
+    function create_entitleddays(startdate, viz_startdate, enddate, viz_enddate, days, type, type_name, description) {
+        $('#frmModalAjaxWait').modal('show');
+        $.ajax({
+            url: "http://localhost/jorani/entitleddays/ajax/user",
+            type: "POST",
+            data: { user_id: <?php echo $id; ?>,
+                    startdate: startdate,
+                    enddate: enddate,
+                    days: days,
+                    type: type,
+                    description: description
+                }
+          }).done(function( msg ) {
+              id = parseInt(msg);
+              htmlRow = '<tr data-id="' + id + '">' +
+                        '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="Supprimer"><i class="icon-remove"></i></a>' +
+                        '&nbsp;&nbsp;<a href="#" onclick="copy_entitleddays(' + id + ');" title="Copier"><i class="fa fa-copy" style="color:black;"></i></a></td>' +
+                        '<td data-order="' + moment.utc(startdate, "YYYY-MM-DD").unix() + '">' + viz_startdate + '</td>' +
+                        '<td data-order="' + moment.utc(enddate, "YYYY-MM-DD").unix() + '">' + viz_enddate + '</td>' +
+                        '<td data-order="' + days.toFixed(2) + '"><span id="days' + id + '" class="credit">' + days.toFixed(2) + '</span> &nbsp; ' +
+                        '<a href="#" onclick="Javascript:incdec(' + id + ', \'decrease\');"><i class="icon-minus"></i></a>' +
+                        '&nbsp; <a href="#" onclick="Javascript:incdec(' + id + ', \'increase\');"><i class="icon-plus"></i></a></td>' +
+                        '<td data-id="' + type + '">' + type_name + '</td>' +
+                        '<td>' + description + '</td>' +
+                    '</tr>';
+                objRow=$(htmlRow);
+                oTable.row.add(objRow).draw();
+              $('#frmModalAjaxWait').modal('hide');
+        });
     }
     
      //Make an Ajax call to the backend so as to save entitled days amount

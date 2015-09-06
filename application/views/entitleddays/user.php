@@ -255,7 +255,7 @@ if ($language_code != 'en') { ?>
     function create_entitleddays(startdate, viz_startdate, enddate, viz_enddate, days, type, type_name, description) {
         $('#frmModalAjaxWait').modal('show');
         $.ajax({
-            url: "http://localhost/jorani/entitleddays/ajax/user",
+            url: "<?php echo base_url();?>entitleddays/ajax/user",
             type: "POST",
             data: { user_id: <?php echo $id; ?>,
                     startdate: startdate,

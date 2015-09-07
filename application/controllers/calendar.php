@@ -313,7 +313,7 @@ class Calendar extends CI_Controller {
         
 
         //Print the header with the values of the export parameters
-        $sheet->setTitle(lang('calendar_tabular_export_title'));
+        $sheet->setTitle(mb_strimwidth(lang('calendar_tabular_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
         $sheet->setCellValue('A1', lang('calendar_tabular_export_param_entity'));
         $sheet->setCellValue('A2', lang('calendar_tabular_export_param_month'));
         $sheet->setCellValue('A3', lang('calendar_tabular_export_param_year'));

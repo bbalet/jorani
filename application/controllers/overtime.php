@@ -200,11 +200,12 @@ class Overtime extends CI_Controller {
     
     /**
      * Action: export the list of all overtime requests into an Excel file
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export($filter = 'requested') {
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(lang('overtime_export_title'));
+        $sheet->setTitle(mb_strimwidth(lang('overtime_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
         $sheet->setCellValue('A1', lang('overtime_export_thead_id'));
         $sheet->setCellValue('B1', lang('overtime_export_thead_fullname'));
         $sheet->setCellValue('C1', lang('overtime_export_thead_date'));

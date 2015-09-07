@@ -404,7 +404,7 @@ class Users extends CI_Controller {
         expires_now();
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(lang('users_export_title'));
+        $sheet->setTitle(mb_strimwidth(lang('users_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
         $sheet->setCellValue('A1', lang('users_export_thead_id'));
         $sheet->setCellValue('B1', lang('users_export_thead_firstname'));
         $sheet->setCellValue('C1', lang('users_export_thead_lastname'));

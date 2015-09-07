@@ -302,7 +302,7 @@ class Hr extends CI_Controller {
     public function export_leaves($id) {
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(lang('hr_export_leaves_title'));
+        $sheet->setTitle(mb_strimwidth(lang('hr_export_leaves_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
         $sheet->setCellValue('A3', lang('hr_export_leaves_thead_id'));
         $sheet->setCellValue('B3', lang('hr_export_leaves_thead_status'));
         $sheet->setCellValue('C3', lang('hr_export_leaves_thead_start'));
@@ -354,7 +354,7 @@ class Hr extends CI_Controller {
     public function export_overtime($id) {
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(lang('hr_export_overtime_title'));
+        $sheet->setTitle(mb_strimwidth(lang('hr_export_overtime_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
         $sheet->setCellValue('A3', lang('hr_export_overtime_thead_id'));
         $sheet->setCellValue('B3', lang('hr_export_overtime_thead_status'));
         $sheet->setCellValue('C3', lang('hr_export_overtime_thead_date'));
@@ -401,8 +401,8 @@ class Hr extends CI_Controller {
      */
     public function export_employees($id = 0, $children = TRUE) {
         $this->load->library('excel');
-        $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(lang('hr_export_employees_title'));
+        $sheet = $this->excel->setActiveSheetIndex(0);
+        $sheet->setTitle(mb_strimwidth(lang('hr_export_employees_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
         $sheet->setCellValue('A1', lang('hr_export_employees_thead_id'));
         $sheet->setCellValue('B1', lang('hr_export_employees_thead_firstname'));
         $sheet->setCellValue('C1', lang('hr_export_employees_thead_lastname'));

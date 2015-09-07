@@ -321,7 +321,7 @@ class Leaves extends CI_Controller {
                 $this->email->cc($delegates);
             }
             
-            $this->email->subject($subject . $lang_mail->line('email_leave_request_subject') .
+            $this->email->subject($subject . $lang_mail->line('email_leave_request_subject') . ' ' .
                     $this->session->userdata('firstname') . ' ' .
                     $this->session->userdata('lastname'));
             $this->email->message($message);

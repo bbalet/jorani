@@ -241,7 +241,7 @@ class Extra extends CI_Controller {
             if ($delegates != '') {
                 $this->email->cc($delegates);
             }
-            $this->email->subject($subject . $lang_mail->line('email_extra_request_reject_subject') .
+            $this->email->subject($subject . $lang_mail->line('email_extra_request_reject_subject') . ' ' .
                     $this->session->userdata('firstname') . ' ' .
                     $this->session->userdata('lastname'));
             $this->email->message($message);

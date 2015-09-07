@@ -62,6 +62,7 @@ $lang['menu_leaves_list_requests'] = 'Liste der Abwesenheitsanfragen';
 $lang['menu_leaves_create_request'] = 'Abwesenheit beantragen';
 
 $lang['menu_calendar_title'] = 'Kalender';
+$lang['menu_calendar_year'] = 'Yearly calendar';
 $lang['menu_calendar_individual'] = 'Mein Kalender';
 $lang['menu_calendar_workmates'] = 'Meine Kollegen';
 $lang['menu_calendar_collaborators'] = 'Meine Mitarbeiter';

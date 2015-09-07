@@ -23,6 +23,7 @@ $lang['hr_employees_thead_link_leaves'] = 'Urlaube';
 $lang['hr_employees_thead_link_extra'] = 'Extras';
 $lang['hr_employees_thead_link_balance'] = 'Urlaubsstatistik';
 $lang['hr_employees_thead_link_create_leave'] = 'Urlaubsanfrage erstellen';
+$lang['hr_employees_thead_link_calendar'] = 'Yearly calendar';
 $lang['hr_employees_thead_link_presence'] = 'Anwesenheitsstatistik';
 $lang['hr_employees_thead_link_delegation'] = 'Delegationen';
 $lang['hr_employees_thead_id'] = 'ID';

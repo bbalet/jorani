@@ -16,6 +16,8 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+$lang['calendar_year_title'] = 'Yearly calendar';
+
 $lang['calendar_individual_title'] = 'Mein Kalender';
 $lang['calendar_individual_description'] = 'Urlaubskalender';
 $lang['calendar_individual_popup_event_link_ical'] = 'iCal Datei herunterladen';

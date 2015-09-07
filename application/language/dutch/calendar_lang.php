@@ -17,6 +17,8 @@
  * @author Roger WOLFS
  */
 
+$lang['calendar_year_title'] = 'Yearly calendar';
+
 $lang['calendar_individual_title'] = 'Mijn agenda';
 $lang['calendar_individual_description'] = 'Agenda van mijn afwezigheid';
 $lang['calendar_individual_popup_event_link_ical'] = 'Download een iCal bestand';

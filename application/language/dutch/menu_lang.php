@@ -63,6 +63,7 @@ $lang['menu_leaves_list_requests'] = 'Overzicht van afwezigheidsverzoeken';
 $lang['menu_leaves_create_request'] = 'Vraag afwezigheid aan';
 
 $lang['menu_calendar_title'] = 'Agenda\'s';
+$lang['menu_calendar_year'] = 'Yearly calendar';
 $lang['menu_calendar_individual'] = 'Mijn agenda';
 $lang['menu_calendar_workmates'] = 'Mijn collega\'s';
 $lang['menu_calendar_collaborators'] = 'Mijn medewerkers';

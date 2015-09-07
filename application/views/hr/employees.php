@@ -97,6 +97,7 @@
         <?php } ?>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/counters/{id}"><i class="icon-info-sign"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/presence/{id}"><i class="icon-calendar"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>calendar/year/{id}"><i class="icon-calendar"></i>&nbsp;<?php echo lang('hr_employees_thead_link_calendar');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>requests/delegations/{id}"><i class="icon-share-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a></li>
   </ul>
 </div>
@@ -112,6 +113,7 @@
         <?php } ?>
         <a class="context-mobile" href="<?php echo base_url();?>hr/counters/{id}"><i class="icon-info-sign"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a><br />
         <a class="context-mobile" href="<?php echo base_url();?>hr/presence/{id}"><i class="icon-calendar"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>calendar/year/{id}"><i class="icon-calendar"></i>&nbsp;<?php echo lang('hr_employees_thead_link_calendar');?></a><br />
         <a class="context-mobile" href="<?php echo base_url();?>requests/delegations/{id}"><i class="icon-share-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a>
   </div>
 </div>

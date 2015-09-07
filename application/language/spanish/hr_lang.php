@@ -24,6 +24,7 @@ $lang['hr_employees_thead_link_leaves'] = 'Permisos';
 $lang['hr_employees_thead_link_extra'] = 'Extras';
 $lang['hr_employees_thead_link_balance'] = 'Balance de permisos';
 $lang['hr_employees_thead_link_create_leave'] = 'Crear una solicitud de permiso';
+$lang['hr_employees_thead_link_calendar'] = 'Yearly calendar';
 $lang['hr_employees_thead_link_presence'] = 'Informe de asistencia';
 $lang['hr_employees_thead_link_delegation'] = 'Delegaciones';
 $lang['hr_employees_thead_id'] = 'ID';

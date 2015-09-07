@@ -64,6 +64,7 @@ $lang['menu_leaves_list_requests'] = 'Lista de solicitudes de permisos';
 $lang['menu_leaves_create_request'] = 'Solicitar un permiso';
 
 $lang['menu_calendar_title'] = 'Calendario';
+$lang['menu_calendar_year'] = 'Yearly calendar';
 $lang['menu_calendar_individual'] = 'Mi calendario';
 $lang['menu_calendar_workmates'] = 'Mis compañeros de trabajo';
 $lang['menu_calendar_collaborators'] = 'Mis colaboradores';

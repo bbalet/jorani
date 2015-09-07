@@ -23,6 +23,7 @@ $lang['hr_employees_thead_link_leaves'] = 'ស្លឹកឈើ';
 $lang['hr_employees_thead_link_extra'] = 'បន្ថែម';
 $lang['hr_employees_thead_link_balance'] = 'តុល្យភាពនៃការចាកចេញ';
 $lang['hr_employees_thead_link_create_leave'] = 'Create Leave Request';
+$lang['hr_employees_thead_link_calendar'] = 'Yearly calendar';
 $lang['hr_employees_thead_link_presence'] = 'Presence report';
 $lang['hr_employees_thead_link_delegation'] = 'Delegations';
 $lang['hr_employees_thead_id'] = 'ID';

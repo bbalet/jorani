@@ -62,6 +62,7 @@ $lang['menu_leaves_list_requests'] = 'Elenco richieste di ferie';
 $lang['menu_leaves_create_request'] = 'Richiedi ferie';
 
 $lang['menu_calendar_title'] = 'Calendari';
+$lang['menu_calendar_year'] = 'Yearly calendar';
 $lang['menu_calendar_individual'] = 'Il mio calendario';
 $lang['menu_calendar_workmates'] = 'I miei colleghi';
 $lang['menu_calendar_collaborators'] = 'I miei collaboratori';

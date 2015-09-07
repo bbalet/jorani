@@ -17,6 +17,8 @@
  * @author dario brignone <brignone@unitec.it>
  */
 
+$lang['calendar_year_title'] = 'Yearly calendar';
+
 $lang['calendar_individual_title'] = 'Il mio calendario';
 $lang['calendar_individual_description'] = 'Calendario delle mie assenze';
 $lang['calendar_individual_popup_event_link_ical'] = 'Scarica in formato iCal';

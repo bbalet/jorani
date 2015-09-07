@@ -136,6 +136,7 @@ $this->lang->load('menu', $language);?>
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_calendar_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                       <li><a href="<?php echo base_url();?>calendar/individual"><?php echo lang('menu_calendar_individual');?></a></li>
+                      <li><a href="<?php echo base_url();?>calendar/year"><?php echo lang('menu_calendar_year');?></a></li>
                       <li><a href="<?php echo base_url();?>calendar/workmates"><?php echo lang('menu_calendar_workmates');?></a></li>
                       <?php if ($is_manager == TRUE) { ?>
                       <li><a href="<?php echo base_url();?>calendar/collaborators"><?php echo lang('menu_calendar_collaborators');?></a></li>

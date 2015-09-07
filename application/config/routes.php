@@ -116,7 +116,7 @@ $route['organization/delemployee'] = 'organization/delemployee';
 $route['organization/getsupervisor'] = 'organization/getsupervisor';
 $route['organization/setsupervisor'] = 'organization/setsupervisor';
 
-//Team leave requests (manager->team UNION team->manager)
+//Various calendars
 $route['calendar/individual'] = 'calendar/individual';
 $route['calendar/workmates'] = 'calendar/workmates';
 $route['calendar/collaborators'] = 'calendar/collaborators';
@@ -125,6 +125,9 @@ $route['calendar/department'] = 'calendar/department';
 $route['calendar/tabular'] = 'calendar/tabular';
 $route['calendar/tabular/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabular/$1/$2/$3/$4';
 $route['calendar/tabular/export/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabular_export/$1/$2/$3/$4';
+$route['calendar/year/(:num)/(:num)'] = 'calendar/year/$1/$2';
+$route['calendar/year/(:num)'] = 'calendar/year/$1';
+$route['calendar/year'] = 'calendar/year';
 
 //private Fullcalendar feeds
 $route['leaves/individual/(:num)'] = 'leaves/individual/$1';

@@ -24,6 +24,7 @@ $lang['hr_employees_thead_link_leaves'] = 'Ferie';
 $lang['hr_employees_thead_link_extra'] = 'Extra';
 $lang['hr_employees_thead_link_balance'] = 'Saldo ferie';
 $lang['hr_employees_thead_link_create_leave'] = 'Inserisci una richiesta di ferie';
+$lang['hr_employees_thead_link_calendar'] = 'Yearly calendar';
 $lang['hr_employees_thead_link_presence'] = 'Report presenze';
 $lang['hr_employees_thead_link_delegation'] = 'Deleghe';
 $lang['hr_employees_thead_id'] = 'ID';

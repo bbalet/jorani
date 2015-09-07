@@ -61,6 +61,7 @@ $lang['menu_leaves_list_requests'] = 'បញ្ជីនៃសំណើឈប់
 $lang['menu_leaves_create_request'] = 'ស្នើសំុឈប់សំរាក';
 
 $lang['menu_calendar_title'] = 'ប្រតិទិន';
+$lang['menu_calendar_year'] = 'Yearly calendar';
 $lang['menu_calendar_individual'] = 'ប្រតិទិនរបស់ខ្ញុំ';
 $lang['menu_calendar_workmates'] = 'មិត្តរួមការងាររបស់ខ្ញុំ';
 $lang['menu_calendar_collaborators'] = 'អ្នកសហការជាមួយខ្ញុំ';

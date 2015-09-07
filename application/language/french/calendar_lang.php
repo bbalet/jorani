@@ -18,6 +18,8 @@
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
+$lang['calendar_year_title'] = 'calendrier annuel';
+
 $lang['calendar_individual_title'] = 'Mon calendrier';
 $lang['calendar_individual_description'] = 'Calendrier de mes absences.';
 $lang['calendar_individual_popup_event_link_ical'] = 'Télécharger le fichier iCal';

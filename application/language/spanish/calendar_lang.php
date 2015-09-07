@@ -17,6 +17,8 @@
  * @author hnestar
  */
 
+$lang['calendar_year_title'] = 'Yearly calendar';
+
 $lang['calendar_individual_title'] = 'Mi calendario';
 $lang['calendar_individual_description'] = 'Calendario de mis vacaciones.';
 $lang['calendar_individual_popup_event_link_ical'] = 'Descargar fichero con formato iCal';

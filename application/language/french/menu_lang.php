@@ -63,6 +63,7 @@ $lang['menu_leaves_list_requests'] = 'Liste des demandes de congé';
 $lang['menu_leaves_create_request'] = 'Faire une demande de congé';
 
 $lang['menu_calendar_title'] = 'Calendriers';
+$lang['menu_calendar_year'] = 'Calendrier annuel';
 $lang['menu_calendar_individual'] = 'Mon calendrier';
 $lang['menu_calendar_workmates'] = 'Mes collègues';
 $lang['menu_calendar_collaborators'] = 'Mes collaborateurs';

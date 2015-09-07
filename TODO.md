@@ -15,8 +15,8 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Report duration and balance into request e-mail.
 - [X] Entitled days editor : possibility to copy a line.
 - [X] Entitled days editor : a field allows to set the step for inc/dec (saved in a cookie).
-- [ ] Sum of leave grouped by type in presence report.
-- [ ] Yearly individual calendar.
+- [X] Sum of leave grouped by type in presence report.
+- [X] Yearly individual calendar.
 - [ ] Update jorani.pot in transifex and warn translators/update strings.
 - [ ] Check HR/Monthly report for overlapping. Report this overlapping feature to calendar/tabular.
 

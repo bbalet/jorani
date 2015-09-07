@@ -83,6 +83,7 @@ class Leaves_model extends CI_Model {
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('employee', $id);
         $this->db->where("(startdate <= STR_TO_DATE('" . $end . "', '%Y-%m-%d') AND enddate >= STR_TO_DATE('" . $start . "', '%Y-%m-%d'))");
+        $this->db->where('leaves.status', 3);   //Accepted
         $this->db->order_by('startdate', 'asc');
         return $this->db->get()->result_array();
     }
@@ -817,8 +818,7 @@ class Leaves_model extends CI_Model {
     }
     
     /**
-     * Try to count the total duration of leaves for the month
-     * So it means that only accepted leaves are taken into account
+     * Count the total duration of leaves for the month. Only accepted leaves are taken into account
      * @param type $linear linear calendar for one employee
      * @return int total of leaves duration
      */
@@ -838,6 +838,33 @@ class Leaves_model extends CI_Model {
           }
         }
         return $total;
+    }
+    
+    /**
+     * Count the total duration of leaves for the month, grouped by leave type.
+     * Only accepted leaves are taken into account.
+     * @param type $linear linear calendar for one employee
+     * @return array key/value array (k:leave type label, v:sum for the month)
+     */
+    public function monthly_leaves_by_type($linear) {
+        //echo var_dump($linear);
+        $total = 0;
+        $by_types = array();
+        foreach ($linear->days as $day) {
+          if (strstr($day->display, ';')) {
+              $display = explode(";", $day->display);
+              $type = explode(";", $day->type);
+              if ($display[0] == '2') array_key_exists($type, $by_types) ? $by_types[$type] += 0.5: $by_types[$type] = 0.5;
+              if ($display[0] == '3') array_key_exists($type, $by_types) ? $by_types[$type] += 0.5: $by_types[$type] = 0.5;
+              if ($display[1] == '2') array_key_exists($type, $by_types) ? $by_types[$type] += 0.5: $by_types[$type] = 0.5;
+              if ($display[1] == '3') array_key_exists($type, $by_types) ? $by_types[$type] += 0.5: $by_types[$type] = 0.5;
+          } else {
+              if ($day->display == 2) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5: $by_types[$day->type] = 0.5;
+              if ($day->display == 3) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5: $by_types[$day->type] = 0.5;
+              if ($day->display == 1) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 1: $by_types[$day->type] = 1;
+          }
+        }
+        return $by_types;
     }
     
     /**
@@ -895,8 +922,8 @@ class Leaves_model extends CI_Model {
         $this->db->where('leaves.employee = ', $employee_id);
         $this->db->order_by('startdate', 'asc');
         $events = $this->db->get()->result();
-        $limitDate = new DateTime($end);
-        $floorDate = new DateTime($start);
+        $limitDate = DateTime::createFromFormat('Y-m-d', $end);
+        $floorDate = DateTime::createFromFormat('Y-m-d', $start);
         
         $this->load->model('dayoffs_model');
         foreach ($events as $entry) {
@@ -906,7 +933,7 @@ class Leaves_model extends CI_Model {
             $iDate = clone $startDate;
             $endDate = DateTime::createFromFormat('Y-m-d', $entry->enddate);
             if ($endDate > $limitDate) $endDate = $limitDate;
-
+            
             //Iteration between 2 dates
             while ($iDate <= $endDate)
             {

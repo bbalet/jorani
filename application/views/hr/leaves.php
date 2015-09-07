@@ -58,8 +58,8 @@
             </div>
         </td>
         <td><?php echo lang($leave['status_name']); ?></td>
-        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate; ?></td>
-        <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate; ?></td>
+        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leave['startdatetype']). ')'; ?></td>
+        <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leave['enddatetype']) . ')'; ?></td>
         <td><?php echo $leave['duration']; ?></td>
         <td><?php echo $leave['type_name']; ?></td>
     </tr>

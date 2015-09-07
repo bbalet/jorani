@@ -17,21 +17,26 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Entitled days editor : a field allows to set the step for inc/dec (saved in a cookie).
 - [X] Sum of leave grouped by type in presence report.
 - [X] Yearly individual calendar.
+- [ ] Display entity name in list of HR/Employees (maybe or report to 0.5.0).
 - [ ] Update jorani.pot in transifex and warn translators/update strings.
 - [ ] Check HR/Monthly report for overlapping. Report this overlapping feature to calendar/tabular.
+- [X] Fix Deprecation warning: moment.lang is deprecated. Use moment.locale instead (technical migration of FullCalendar).
 
 ## v0.5.0 or later
 
+Following naming convention, this version will need a DB patch.
+
+- [ ] DB optimization on leave table.
 - [ ] Better entitled days editor (contract / employee).
+- [ ] Possibility to sort the leave types (optionally attached to contract ?). NEEDS DB PATCH (maybe).
 - [ ] Report carried-over leaves (Semi-auto / wizard), employee by employee (or mass ?).
 - [ ] Notification by e-mail : Request deleted / modified.
-- [ ] Delete/Edit a rejected leave request (option).
 - [ ] Provide an example of a REST client (seniority leaves, carry over, LDAP sync...) in PHP (cron) or go (service).
-- [ ] Fix Deprecation warning: moment.lang is deprecated. Use moment.locale instead.
 
 ## Not a priority
 
 - [ ] Better LDAP integration.
+- [ ] Investigation for a CAS/SSO integration.
 - [ ] Mobile-optimized views (limited to few pages : simple user and validation).
 - [ ] Implement a kind of heritage in HR/organization for supervisors (child entities).
 - [ ] HR officers of a part of the organization (defined in HR/organization), for future functions when they'll be CCed.

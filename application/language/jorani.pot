@@ -11,6 +11,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: en\n"
 
+msgid "Yearly calendar"
+msgstr ""
+
 msgid "My calendar"
 msgstr ""
 
@@ -209,6 +212,9 @@ msgstr ""
 msgid "Sunday"
 msgstr ""
 
+msgid "All days"
+msgstr ""
+
 msgid "January"
 msgstr ""
 
@@ -263,9 +269,6 @@ msgstr ""
 msgid "delete contract"
 msgstr ""
 
-msgid "View contract"
-msgstr ""
-
 msgid "edit contract"
 msgstr ""
 
@@ -299,10 +302,10 @@ msgstr ""
 msgid "Entitled days"
 msgstr ""
 
-msgid "Contract details"
+msgid "Edit a contract"
 msgstr ""
 
-msgid "Details of contract #"
+msgid "Edit contract #"
 msgstr ""
 
 msgid "Month / Start"
@@ -315,18 +318,6 @@ msgid "Month / End"
 msgstr ""
 
 msgid "Day / End"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Back to list"
-msgstr ""
-
-msgid "Edit a contract"
-msgstr ""
-
-msgid "Edit contract #"
 msgstr ""
 
 msgid "Update contract"
@@ -392,6 +383,12 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+msgid "Import iCal"
+msgstr ""
+
+msgid "URL of non-working days iCal file"
+msgstr ""
+
 msgid "Edit a series of day offs"
 msgstr ""
 
@@ -408,6 +405,15 @@ msgid "To"
 msgstr ""
 
 msgid "As a"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "You must select a contract."
+msgstr ""
+
+msgid "Data has been copied successfully."
 msgstr ""
 
 msgid "No data available in table"
@@ -464,7 +470,7 @@ msgstr ""
 msgid "Your account has been created"
 msgstr ""
 
-msgid "Leave Request from "
+msgid "Leave Request from"
 msgstr ""
 
 msgid "Leave Request"
@@ -485,7 +491,7 @@ msgstr ""
 msgid "Overtime Request"
 msgstr ""
 
-msgid "Your overtime request from "
+msgid "Overtime request from"
 msgstr ""
 
 msgid "Entitled days for contract"
@@ -528,6 +534,9 @@ msgid "Back to the list of contracts"
 msgstr ""
 
 msgid "Are you sure that you want to delete it?"
+msgstr ""
+
+msgid "Step"
 msgstr ""
 
 msgid "Entitled days for employee"
@@ -626,6 +635,12 @@ msgstr ""
 msgid "View overtime request"
 msgstr ""
 
+msgid "Edit"
+msgstr ""
+
+msgid "Back to list"
+msgstr ""
+
 msgid "List of overtime requests"
 msgstr ""
 
@@ -677,10 +692,13 @@ msgstr ""
 msgid "lastname"
 msgstr ""
 
-msgid "datehired"
+msgid "date hired"
 msgstr ""
 
 msgid "department"
+msgstr ""
+
+msgid "position"
 msgstr ""
 
 msgid "contract"
@@ -690,6 +708,15 @@ msgid "day off"
 msgstr ""
 
 msgid "leave"
+msgstr ""
+
+msgid "copied"
+msgstr ""
+
+msgid "Your session has expired please login again"
+msgstr ""
+
+msgid "Unexpected Ajax Error"
 msgstr ""
 
 msgid "List of employees"
@@ -858,6 +885,9 @@ msgid "You cannot edit a leave request already submitted"
 msgstr ""
 
 msgid "The leave request has been succesfully updated"
+msgstr ""
+
+msgid "You can't create a leave request for two yearly leave periods. Please create two different leave requests."
 msgstr ""
 
 msgid "You can't delete this leave request"
@@ -1151,6 +1181,9 @@ msgstr ""
 msgid "This screen lists your collaborators. If you are not a manager, this list will always be empty."
 msgstr ""
 
+msgid "Create a leave request in behalf of this collaborator"
+msgstr ""
+
 msgid "Your are not the manager of this employee."
 msgstr ""
 
@@ -1223,16 +1256,16 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-msgid "Copy"
-msgstr ""
-
 msgid "Cut"
 msgstr ""
 
 msgid "Paste"
 msgstr ""
 
-msgid "View user details"
+msgid "Active"
+msgstr ""
+
+msgid "Inactive"
 msgstr ""
 
 msgid "edit user details"
@@ -1262,10 +1295,7 @@ msgstr ""
 msgid "Filename"
 msgstr ""
 
-msgid "Details of user #"
-msgstr ""
-
-msgid "Details of a user"
+msgid "My personal information"
 msgstr ""
 
 msgid "Position"
@@ -1274,16 +1304,7 @@ msgstr ""
 msgid "Date hired/started"
 msgstr ""
 
-msgid "Timezone"
-msgstr ""
-
-msgid "LDAP Path"
-msgstr ""
-
 msgid "Internal/Company Identifier"
-msgstr ""
-
-msgid "My personal information"
 msgstr ""
 
 msgid "Edit user #"
@@ -1295,7 +1316,16 @@ msgstr ""
 msgid "No line manager."
 msgstr ""
 
+msgid "If a user has no manager (itself), it can validate its leave requests."
+msgstr ""
+
 msgid "Self"
+msgstr ""
+
+msgid "Timezone"
+msgstr ""
+
+msgid "LDAP Path"
 msgstr ""
 
 msgid "Select the manager"
@@ -1314,9 +1344,6 @@ msgid "The user has been succesfully deleted"
 msgstr ""
 
 msgid "The password has been succesfully changed"
-msgstr ""
-
-msgid "If a user has no manager (itself), it can validate its leave requests."
 msgstr ""
 
 msgid "Generate password"

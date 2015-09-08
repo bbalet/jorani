@@ -18,8 +18,8 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Sum of leave grouped by type in presence report.
 - [X] Yearly individual calendar.
 - [X] Display entity name in list of HR/Employees.
-- [ ] Update jorani.pot in transifex and warn translators/update strings.
-- [ ] Check HR/Monthly report for overlapping. Report this overlapping feature to calendar/tabular.
+- [X] Update jorani.pot in transifex and warn translators/update strings.
+- [X] Check HR/Monthly report for overlapping. Report this overlapping feature to calendar/tabular.
 - [X] Fix Deprecation warning: moment.lang is deprecated. Use moment.locale instead (technical migration of FullCalendar).
 
 ## v0.5.0 or later

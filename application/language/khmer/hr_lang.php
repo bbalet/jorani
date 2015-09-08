@@ -30,6 +30,7 @@ $lang['hr_employees_thead_id'] = 'ID';
 $lang['hr_employees_thead_firstname'] = 'នាមត្រកូលអ្នកប្រើប្រាស់';
 $lang['hr_employees_thead_lastname'] = 'ឈ្មោះអ្នកប្រើប្រាស់';
 $lang['hr_employees_thead_email'] = 'ម៉ែល';
+$lang['hr_employees_thead_entity'] = 'Entity';
 $lang['hr_employees_thead_contract'] = 'ខសន្យា';
 $lang['hr_employees_thead_manager'] = 'អ្នកគ្រប់គ្រង';
 $lang['hr_employees_button_create_user'] = 'Create';
@@ -50,6 +51,7 @@ $lang['hr_export_employees_thead_id'] = 'ID';
 $lang['hr_export_employees_thead_firstname'] = 'នាមត្រកូលអ្នកប្រើប្រាស់';
 $lang['hr_export_employees_thead_lastname'] = 'ឈ្មោះអ្នកប្រើប្រាស់';
 $lang['hr_export_employees_thead_email'] = 'ម៉ែល';
+$lang['hr_export_employees_thead_entity'] = 'Entity';
 $lang['hr_export_employees_thead_contract'] = 'ខសន្យា';
 $lang['hr_export_employees_thead_manager'] = 'អ្នកគ្រប់គ្រង';
 

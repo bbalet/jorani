@@ -31,6 +31,7 @@ $lang['hr_employees_thead_id'] = 'ID';
 $lang['hr_employees_thead_firstname'] = 'Nombre';
 $lang['hr_employees_thead_lastname'] = 'Apellido';
 $lang['hr_employees_thead_email'] = 'E-mail';
+$lang['hr_employees_thead_entity'] = 'Entidad';
 $lang['hr_employees_thead_contract'] = 'Contrato';
 $lang['hr_employees_thead_manager'] = 'Gestor';
 $lang['hr_employees_button_create_user'] = 'Crear';
@@ -51,6 +52,7 @@ $lang['hr_export_employees_thead_id'] = 'ID';
 $lang['hr_export_employees_thead_firstname'] = 'Nombre';
 $lang['hr_export_employees_thead_lastname'] = 'Apellido';
 $lang['hr_export_employees_thead_email'] = 'E-mail';
+$lang['hr_export_employees_thead_entity'] = 'Entidad';
 $lang['hr_export_employees_thead_contract'] = 'Contrato';
 $lang['hr_export_employees_thead_manager'] = 'Gestor';
 

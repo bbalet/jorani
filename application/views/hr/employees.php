@@ -50,6 +50,7 @@
             <th><?php echo lang('hr_employees_thead_firstname');?></th>
             <th><?php echo lang('hr_employees_thead_lastname');?></th>
             <th><?php echo lang('hr_employees_thead_email');?></th>
+            <th><?php echo lang('hr_employees_thead_entity');?></th>
             <th><?php echo lang('hr_employees_thead_contract');?></th>
             <th><?php echo lang('hr_employees_thead_manager');?></th>
         </tr>
@@ -57,7 +58,7 @@
     <tbody class="context" data-toggle="context" data-target="#context-menu">
     </tbody>
 </table>
-	</div>
+    </div>
 </div>
 
 <div class="row-fluid">

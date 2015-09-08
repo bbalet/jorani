@@ -17,7 +17,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Entitled days editor : a field allows to set the step for inc/dec (saved in a cookie).
 - [X] Sum of leave grouped by type in presence report.
 - [X] Yearly individual calendar.
-- [ ] Display entity name in list of HR/Employees (maybe or report to 0.5.0).
+- [X] Display entity name in list of HR/Employees.
 - [ ] Update jorani.pot in transifex and warn translators/update strings.
 - [ ] Check HR/Monthly report for overlapping. Report this overlapping feature to calendar/tabular.
 - [X] Fix Deprecation warning: moment.lang is deprecated. Use moment.locale instead (technical migration of FullCalendar).

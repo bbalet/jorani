@@ -78,6 +78,7 @@ class Hr extends CI_Controller {
                 $msg .= '"' . $employee->firstname . '",';
                 $msg .= '"' . $employee->lastname . '",';
                 $msg .= '"' . $employee->email . '",';
+                $msg .= '"' . $employee->entity . '",';
                 $msg .= '"' . $employee->contract . '",';
                 $msg .= '"' . $employee->manager_name . '"';
                 $msg .= '],';
@@ -407,10 +408,11 @@ class Hr extends CI_Controller {
         $sheet->setCellValue('B1', lang('hr_export_employees_thead_firstname'));
         $sheet->setCellValue('C1', lang('hr_export_employees_thead_lastname'));
         $sheet->setCellValue('D1', lang('hr_export_employees_thead_email'));
-        $sheet->setCellValue('E1', lang('hr_export_employees_thead_contract'));
-        $sheet->setCellValue('F1', lang('hr_export_employees_thead_manager'));
-        $sheet->getStyle('A1:F1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->setCellValue('E1', lang('hr_export_employees_thead_entity'));
+        $sheet->setCellValue('F1', lang('hr_export_employees_thead_contract'));
+        $sheet->setCellValue('G1', lang('hr_export_employees_thead_manager'));
+        $sheet->getStyle('A1:G1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         
         $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
         $this->load->model('users_model');
@@ -422,13 +424,14 @@ class Hr extends CI_Controller {
             $sheet->setCellValue('B' . $line, $employee->firstname);
             $sheet->setCellValue('C' . $line, $employee->lastname);
             $sheet->setCellValue('D' . $line, $employee->email);
-            $sheet->setCellValue('E' . $line, $employee->contract);
-            $sheet->setCellValue('F' . $line, $employee->manager_name);
+            $sheet->setCellValue('E' . $line, $employee->entity);
+            $sheet->setCellValue('F' . $line, $employee->contract);
+            $sheet->setCellValue('G' . $line, $employee->manager_name);
             $line++;
         }
         
         //Autofit
-        foreach(range('A', 'F') as $colD) {
+        foreach(range('A', 'G') as $colD) {
             $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
         }
 

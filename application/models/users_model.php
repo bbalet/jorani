@@ -581,6 +581,7 @@ class Users_model extends CI_Model {
                 . ' users.firstname as firstname,'
                 . ' users.lastname as lastname,'
                 . ' users.email as email,'
+                . ' organization.name as entity,'
                 . ' contracts.name as contract,'
                 . ' CONCAT_WS(\' \',managers.firstname,  managers.lastname) as manager_name', FALSE);
         $this->db->from('users');
@@ -603,6 +604,8 @@ class Users_model extends CI_Model {
             } else {
                 $this->db->where('organization.id', $id);
             }
+        } else {
+            $this->db->join('organization', 'organization.id = users.organization', 'left outer');
         }
         return $this->db->get()->result();
     }

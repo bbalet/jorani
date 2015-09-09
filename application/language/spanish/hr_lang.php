@@ -156,3 +156,4 @@ $lang['hr_presence_overlapping_detected'] = 'Coincidencia detectada';
 $lang['hr_presence_no_contract'] = 'El empleado no tiene contrato';
 $lang['hr_presence_please_check'] = 'Por favor, verificar ';
 $lang['hr_presence_leaves_list_title'] = 'Lista de permisos durante el mes';
+$lang['hr_presence_button_export'] = 'Exporta';

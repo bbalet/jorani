@@ -156,3 +156,4 @@ $lang['hr_presence_overlapping_detected'] = 'Rilevata sovrapposizione';
 $lang['hr_presence_no_contract'] = 'Il dipendente non ha un contratto';
 $lang['hr_presence_please_check'] = 'Si prega di controllare';
 $lang['hr_presence_leaves_list_title'] = 'Elenco ferie nel mese';
+$lang['hr_presence_button_export'] = 'Esporta';

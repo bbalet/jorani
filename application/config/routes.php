@@ -65,6 +65,7 @@ $route['hr/entitleddays/(:num)'] = 'hr/entitleddays/$1';
 $route['hr/leaves/create/(:num)'] = 'hr/createleave/$1';
 $route['hr/presence/(:num)'] = 'hr/presence/$1';
 $route['hr/presence/(:num)/(:num)/(:num)'] = 'hr/presence/$1/$2/$3';
+$route['hr/presence/export/(:num)/(:num)/(:num)'] = 'hr/export_presence/$1/$2/$3';
 $route['hr'] = 'hr';
 
 //HR edit leave types

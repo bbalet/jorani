@@ -157,3 +157,4 @@ $lang['hr_presence_overlapping_detected'] = 'Chevauchement detecté';
 $lang['hr_presence_no_contract'] = 'L\'employé n\'a pas de contrat';
 $lang['hr_presence_please_check'] = 'Veuillez vérifier';
 $lang['hr_presence_leaves_list_title'] = 'Liste des absences du mois';
+$lang['hr_presence_button_export'] = 'Exporter';

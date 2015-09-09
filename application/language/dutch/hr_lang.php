@@ -156,3 +156,4 @@ $lang['hr_presence_overlapping_detected'] = 'Overlap geconstateerd';
 $lang['hr_presence_no_contract'] = 'Deze werknemer heeft geen contract';
 $lang['hr_presence_please_check'] = 'AUB controleren';
 $lang['hr_presence_leaves_list_title'] = 'Overzicht afwezigheid in de maand';
+$lang['hr_presence_button_export'] = 'Exporteren';

@@ -155,3 +155,4 @@ $lang['hr_presence_overlapping_detected'] = 'Überlappungen entdeckt';
 $lang['hr_presence_no_contract'] = 'Der Mitarbeiter hat keinen Vertrag';
 $lang['hr_presence_please_check'] = 'Bitte überprüfen';
 $lang['hr_presence_leaves_list_title'] = 'Liste der Urlaube im Monat';
+$lang['hr_presence_button_export'] = 'Exportieren';

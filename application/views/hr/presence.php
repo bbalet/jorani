@@ -80,6 +80,8 @@
         <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
         <button id="cmdExecute" class="btn btn-primary"><?php echo lang('hr_presence_button_execute');?></button>
         <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
+        <br /><br />
+        <a href="<?php echo base_url() . 'hr/presence/export/' . $user_id . '/' . $month . '/' . $year;?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('hr_presence_button_export');?></a>
      </div>
 </div>
 

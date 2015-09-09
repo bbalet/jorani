@@ -529,6 +529,13 @@ class Calendar extends CI_Controller {
         $sheet->getColumnDimension('B')->setAutoSize(TRUE);
         $sheet->getColumnDimension('C')->setWidth(40);
         
+        //Set layout to landscape and make the Excel sheet fit to the page
+        $sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        $sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
+        $sheet->getPageSetup()->setFitToPage(true);
+        $sheet->getPageSetup()->setFitToWidth(1);
+        $sheet->getPageSetup()->setFitToHeight(0);
+        
         $filename = 'tabular.xlsx';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');

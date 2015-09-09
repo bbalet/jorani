@@ -17,7 +17,7 @@
  * @author Roger WOLFS
  */
 
-$lang['calendar_year_title'] = 'Yearly calendar';
+$lang['calendar_year_title'] = 'jaarkalender';
 
 $lang['calendar_individual_title'] = 'Mijn agenda';
 $lang['calendar_individual_description'] = 'Agenda van mijn afwezigheid';
@@ -108,7 +108,7 @@ $lang['Thursday'] = 'Donderdag';
 $lang['Friday'] = 'Vrijdag';
 $lang['Saturday'] = 'Zaterdag';
 $lang['Sunday'] = 'Zondag';
-$lang['All days'] = 'All days';
+$lang['All days'] = 'Alle dagen';
 
 $lang['January'] = 'Januari';
 $lang['February'] = 'Februari';

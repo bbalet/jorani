@@ -97,9 +97,9 @@ $lang['contract_calendar_popup_series_field_as_afternnon'] = 'Middag vrij';
 $lang['contract_calendar_popup_series_field_title'] = 'Titel';
 $lang['contract_calendar_popup_series_button_ok'] = 'OK';
 $lang['contract_calendar_popup_series_button_cancel'] = 'Annuleren';
-$lang['contract_calendar_button_import'] = 'Import iCal';
-$lang['contract_calendar_prompt_import'] = 'URL of non-working days iCal file';
+$lang['contract_calendar_button_import'] = 'Importeer iCal';
+$lang['contract_calendar_prompt_import'] = 'URL van vrije dagen - iCal bestand';
 
-$lang['contract_calendar_button_copy'] = 'Copy';
-$lang['contract_calendar_copy_destination_js_msg'] = 'You must select a contract.';
-$lang['contract_calendar_copy_msg_success'] = 'Data has been copied successfully.';
+$lang['contract_calendar_button_copy'] = 'Kopieren';
+$lang['contract_calendar_copy_destination_js_msg'] = 'Het is verplicht een contract te selecteren';
+$lang['contract_calendar_copy_msg_success'] = 'Gegevens zijn succesvol gekopieerd.';

@@ -69,16 +69,16 @@ $lang['Afternoon'] = 'Middag';
 $lang['identifier'] = 'identifier';
 $lang['firstname'] = 'voornaam';
 $lang['lastname'] = 'achternaam';
-$lang['datehired'] = 'Datum aanstelling';
+$lang['datehired'] = 'datum ingehuurd';
 $lang['department'] = 'afdeling';
-$lang['position'] = 'position';
+$lang['position'] = 'positie';
 $lang['contract'] = 'contract';
 $lang['day off'] = 'vrije dag';
 $lang['leave'] = 'afwezigheid';
 
 $lang['OK'] = 'OK';
-$lang['Cancel'] = 'Cancel';
+$lang['Cancel'] = 'Annuleren';
 $lang['copied'] = 'gekopieerd';
 
-$lang['global_ajax_timeout'] = 'Your session has expired please login again';
-$lang['global_ajax_error'] = 'Unexpected Ajax Error';
+$lang['global_ajax_timeout'] = 'Uw sessie is verlopen, u dient opnieuw in te loggen';
+$lang['global_ajax_error'] = 'Onverwachte Ajax fout';

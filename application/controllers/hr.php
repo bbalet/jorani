@@ -153,7 +153,6 @@ class Hr extends CI_Controller {
         
         $data['refDate'] = $refDate;
         $data['summary'] = $this->leaves_model->get_user_leaves_summary($id, FALSE, $refDate);
-        //$this->output->enable_profiler(TRUE);
         if (!is_null($data['summary'])) {
             $this->load->model('entitleddays_model');
             $this->load->model('types_model');
@@ -287,8 +286,15 @@ class Hr extends CI_Controller {
         $data['leave_duration'] = $this->leaves_model->monthly_leaves_duration($data['linear']);
         $data['work_duration'] = $opened_days - $data['leave_duration'];
         $data['leaves_detail'] = $this->leaves_model->monthly_leaves_by_type($data['linear']);
-        //List of accepted leave requests taken into account
+        
+        //List of accepted leave requests
         $data['leaves'] = $this->leaves_model->get_accepted_leaves_in_dates($id, $start, $end);
+        
+        //Leave balance of the employee
+        $data['employee_id'] = $id;
+        $refDate = new DateTime($end);
+        $data['refDate'] = $refDate->format(lang('global_date_format'));
+        $data['summary'] = $this->leaves_model->get_user_leaves_summary($id, FALSE, $end);
         
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);

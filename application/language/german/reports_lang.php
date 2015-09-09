@@ -27,12 +27,12 @@ $lang['reports_native_title'] = 'Reportliste';
 
 $lang['reports_balance_title'] = 'Abwesenheitsstatistik';
 $lang['reports_balance_date_field'] = 'Datum des Reports';
-$lang['reports_balance_field_entity'] = 'Gruppe wählen';
+$lang['reports_balance_field_entity'] = 'Einheit auswählen';
 $lang['reports_balance_button_entity'] = 'Auswahl';
 $lang['reports_balance_field_subdepts'] = 'Unterabteilungen inkludieren';
 $lang['reports_balance_button_launch'] = 'Start';
 $lang['reports_balance_button_export'] = 'Export';
-$lang['reports_balance_popup_entity_title'] = 'Gruppe auswählen';
+$lang['reports_balance_popup_entity_title'] = 'Einheit auswählen';
 $lang['reports_balance_popup_entity_button_ok'] = 'OK';
 $lang['reports_balance_popup_entity_button_cancel'] = 'Abbrechen';
 

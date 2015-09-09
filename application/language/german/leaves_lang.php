@@ -24,8 +24,8 @@ $lang['leaves_summary_thead_available'] = 'Verfügbar';
 $lang['leaves_summary_thead_taken'] = 'Belegt';
 $lang['leaves_summary_thead_entitled'] = 'Bezugsberechtigt';
 $lang['leaves_summary_thead_description'] = 'Beschreibung';
-$lang['leaves_summary_tbody_empty'] = 'Keine bezugsberechtigten oder bezogenen Urlaubstage für diese Periode gefunden. Bitte wenden Sie sich an Ihre Personalabteilung oder Ihren direkten Vorgesetzten.';
-$lang['leaves_summary_flash_msg_error'] = 'Es sieht so aus als hätten Sie keinen Vertrag. Bitte kontaktieren Sie Ihre Personalabteilung oder Ihren direkten Vorgesetzten.';
+$lang['leaves_summary_tbody_empty'] = 'Keine bezugsberechtigten oder bezogenen Urlaubstage für diesen Zeitraum gefunden. Bitte wenden Sie sich an Ihre Personalabteilung oder Ihren Vorgesetzten.';
+$lang['leaves_summary_flash_msg_error'] = 'Es scheint als hätten Sie keinen Vertrag. Bitte kontaktieren Sie Ihre Personalabteilung oder Ihren Vorgesetzten.';
 $lang['leaves_summary_date_field'] = 'Datum des Reports';
 
 $lang['leaves_index_title'] = 'Meine Urlaubsanfragen';
@@ -79,7 +79,7 @@ $lang['leaves_edit_flash_msg_error'] = 'Bereits übermittelte Urlaubsanfragen k�
 $lang['leaves_edit_flash_msg_success'] = 'Urlaubsanfrage erfolgreich aktualisiert';
 
 $lang['leaves_validate_mandatory_js_msg'] = '"Das Feld " + fieldname + " ist zwingend erforderlich."';
-$lang['leaves_validate_flash_msg_no_contract'] = 'Es sieht so aus als hätten Sie keinen Vertrag. Bitte kontaktieren Sie Ihre Personalabteilung oder Ihren direkten Vorgesetzten.';
+$lang['leaves_validate_flash_msg_no_contract'] = 'Es scheint als hätten Sie keinen Vertrag. Bitte kontaktieren Sie Ihre Personalabteilung oder Ihren Vorgesetzten.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'Sie können einen Urlaubsantrag für zwei jährliche Urlaubszeiten nicht zu schaffen. Bitte erstellen Sie zwei verschiedene Urlaubsanträge.';
 
 $lang['leaves_delete_flash_msg_error'] = 'Diese Urlaubsanfrage kann nicht gelöscht werden';

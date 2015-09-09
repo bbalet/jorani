@@ -32,7 +32,7 @@ $lang['menu_admin_add_user'] = 'User erstellen';
 $lang['menu_admin_settings_divider'] = 'Einstellungen';
 $lang['menu_admin_settings'] = 'Einstellungen';
 
-$lang['menu_hr_title'] = 'HR';
+$lang['menu_hr_title'] = 'Personal';
 $lang['menu_hr_employees_divider'] = 'Angestellte';
 $lang['menu_hr_list_organization'] = 'Organisation';
 $lang['menu_hr_list_employees'] = 'Liste der Angestellten';
@@ -45,7 +45,7 @@ $lang['menu_hr_reports_divider'] = 'Reporte';
 $lang['menu_hr_report_leave_balance'] = 'Urlaubsstatistik';
 
 $lang['menu_validation_title'] = 'Kontrolle';
-$lang['menu_validation_delegations'] = 'Delegationen';
+$lang['menu_validation_delegations'] = 'Bevollmächtigungen';
 $lang['menu_validation_collaborators'] = 'Meine Mitarbeiter';
 $lang['menu_validation_leaves'] = 'Urlaube';
 $lang['menu_validation_overtime'] = 'Überstunden';

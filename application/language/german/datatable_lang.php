@@ -17,12 +17,12 @@
  */
 
 $lang['datatable_sEmptyTable'] = 'Keine Daten in Tabelle';
-$lang['datatable_sInfo'] = 'Zeige _START_ zu _END_ von _TOTAL_ Einträge';
+$lang['datatable_sInfo'] = 'Zeige _START_ bis _END_ von insgesamt _TOTAL_ Einträgen';
 $lang['datatable_sInfoEmpty'] = 'Zeige 0 bis 0 von 0 Einträgen';
-$lang['datatable_sInfoFiltered'] = '(von insgesamt _MAX_ Einträge gefiltert)';
+$lang['datatable_sInfoFiltered'] = '(Gefiltert aus _MAX_ von allen Einträgen)';
 $lang['datatable_sInfoPostFix'] = '';
 $lang['datatable_sInfoThousands'] = ',';
-$lang['datatable_sLengthMenu'] = 'Zeigen _MENU_ Einträge';
+$lang['datatable_sLengthMenu'] = 'Zeige _MENU_ Einträge';
 $lang['datatable_sLoadingRecords'] = 'Laden...';
 $lang['datatable_sProcessing'] = 'Verarbeite...';
 $lang['datatable_sSearch'] = 'Suche:';

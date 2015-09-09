@@ -45,17 +45,17 @@ $lang['requests_summary_thead_taken'] = 'Belegt';
 $lang['requests_summary_thead_entitled'] = 'Bezugsberechtigt';
 $lang['requests_summary_thead_description'] = 'Beschreibung';
 $lang['requests_summary_flash_msg_error'] = 'Dieser Mitarbeiter hat keinen Vertrag.';
-$lang['requests_summary_flash_msg_forbidden'] = 'Sie sind nicht Vorgesetzter dieses Mitarbeiters.';
+$lang['requests_summary_flash_msg_forbidden'] = 'Sie sind kein Vorgesetzter dieses Mitarbeiters.';
 $lang['requests_summary_button_list'] = 'Liste der Mitarbeiter';
 
 $lang['requests_index_button_export'] = 'Diese Liste exportieren';
 $lang['requests_index_button_show_all'] = 'Alle Anfragen';
 $lang['requests_index_button_show_pending'] = 'Ausstehende Anfragen';
 
-$lang['requests_accept_flash_msg_error'] = 'Sie sind nicht dazu berechtigt die Urlaubsanfragen dieses Mitarbeiters zu genehmigen. Grund: fehlende Vorgesetzten-Rolle';
+$lang['requests_accept_flash_msg_error'] = 'Sie sind kein Vorgesetzter dieses Mitarbeiters. Sie können diesen Antrag auf Abwesenheit nicht akzeptieren.';
 $lang['requests_accept_flash_msg_success'] = 'Abwesenheitsanfrage erfolgreich genehmigt.';
 
-$lang['requests_reject_flash_msg_error'] = 'Sie sind nicht dazu berechtigt die Urlaubsanfragen dieses Mitarbeiters abzulehnen. Grund: fehlende Vorgesetzten-Rolle';
+$lang['requests_reject_flash_msg_error'] = 'Sie sind kein Vorgesetzter dieses Mitarbeiters. Sie können diesen Antrag auf Abwesenheit nicht ablehnen.';
 $lang['requests_reject_flash_msg_success'] = 'Abwesenheitsanfrage erfolgreich abgelehnt.';
 
 $lang['requests_export_title'] = 'Liste der Abwesenheitsanfragen';

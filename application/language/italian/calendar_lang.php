@@ -17,7 +17,7 @@
  * @author dario brignone <brignone@unitec.it>
  */
 
-$lang['calendar_year_title'] = 'Yearly calendar';
+$lang['calendar_year_title'] = 'Calendario annuale';
 
 $lang['calendar_individual_title'] = 'Il mio calendario';
 $lang['calendar_individual_description'] = 'Calendario delle mie assenze';
@@ -98,7 +98,7 @@ $lang['Thursday'] = 'Giovedì';
 $lang['Friday'] = 'Venerdì';
 $lang['Saturday'] = 'Sabato';
 $lang['Sunday'] = 'Domenica';
-$lang['All days'] = 'All days';
+$lang['All days'] = 'Tutti i giorni';
 
 $lang['January'] = 'Gennaio';
 $lang['February'] = 'Febbraio';

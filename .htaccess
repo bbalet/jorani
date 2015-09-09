@@ -21,12 +21,10 @@ SetEnv HTTP_MOD_GZIP Off
     ErrorDocument 404 "Error : Module rewrite is not available check your system with requirements.php"
  </IfModule>
 
-<IfModule mod_expires.c>
-    ExpiresActive on
-    ExpiresDefault "access plus 1 month"
-    <FilesMatch "\.(php)$">
-    ExpiresDefault A0
-    Header append Cache-Control "public"
+<IfModule mod_headers.c>
+    <FilesMatch "\.(php|xls|xlsx)$">
+        Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform, must-revalidate"
+        Header set Pragma "no-cache"
     </FilesMatch>
 </IfModule>
 
@@ -40,8 +38,10 @@ SetEnv HTTP_MOD_GZIP Off
 
 <IfModule mod_headers.c>
     <IfModule mod_deflate.c>
-        SetOutputFilter DEFLATE
-        AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript
+        <IfModule mod_filter.c>
+            SetOutputFilter DEFLATE
+            AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript
+        </IfModule>
     </IfModule>
 </IfModule>
 

@@ -187,6 +187,7 @@ $this->lang->load('global', $language);?>
           }
           
           //Detect overlapping cases
+          if (substr_count($day->display, ";") > 1) $overlapping = TRUE;
           switch ($class) {
                     case "plannedplanned":
                     case "requestedrequested":
@@ -196,7 +197,7 @@ $this->lang->load('global', $language);?>
               break;
           }
             if ($overlapping) {
-                echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
+                echo '<td title="' . $day->type . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
             } else {
                 echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
             }

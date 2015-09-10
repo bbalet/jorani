@@ -74,13 +74,11 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span2">
+    <div class="span12">
       <a href="<?php echo base_url();?>hr/leaves/export/<?php echo $user_id; ?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('hr_leaves_button_export');?></a>
-    </div>
-    <div class="span3">
+      &nbsp;&nbsp;
       <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_leaves_button_list');?></a>
     </div>
-    <div class="span7">&nbsp;</div>
 </div>
 
 <div class="row-fluid">

@@ -76,16 +76,13 @@
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div class="row-fluid">
-    <div class="span3">
-      <a href="<?php echo base_url();?>requests/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('requests_index_button_export');?></a>
+    <div class="span12">
+        <a href="<?php echo base_url();?>requests/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('requests_index_button_export');?></a>
+        &nbsp;&nbsp;
+        <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_all');?></a>
+        &nbsp;&nbsp;
+        <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_pending');?></a>
     </div>
-     <div class="span3">
-      <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_all');?></a>
-    </div>
-    <div class="span3">
-      <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_pending');?></a>
-    </div>
-    <div class="span3">&nbsp;</div>
 </div>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>

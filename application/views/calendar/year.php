@@ -25,7 +25,8 @@
     <div class="span6">
         <span class="label"><?php echo lang('Planned');?></span>&nbsp;
         <span class="label label-success"><?php echo lang('Accepted');?></span>&nbsp;
-        <span class="label label-warning"><?php echo lang('Requested');?></span>
+        <span class="label label-warning"><?php echo lang('Requested');?></span>&nbsp;
+        <span class="label label-important" style="background-color: #ff0000;"><?php echo lang('Rejected');?></span>
     </div>
     <div class="span6">
         <div class="pull-right">

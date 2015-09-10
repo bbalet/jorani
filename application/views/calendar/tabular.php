@@ -86,10 +86,7 @@ $this->lang->load('global', $language);?>
     <div class="span3">&nbsp;</div>
 </div>
 
-<?php if (count($tabular) == 0) {
-     echo lang('leaves_summary_tbody_empty');
-} else {
-?>
+<?php if (count($tabular) > 0) {?>
 <table class="table table-bordered">
     <thead>
         <tr>

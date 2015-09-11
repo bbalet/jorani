@@ -1,37 +1,24 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
-## v0.4.1
+## v0.4.2
 
-- [X] Copy contract/calendar (definition of non-working days for a civil year).
-- [X] A manager can create a leave request in behalf of a collaborator.
-- [X] Check Ajax return (e.g. calendar views) to redirect to login in case of session expiration.
-- [X] Inactive employees (put them into an archive entity in HR/organization so as to exclude them from reports).
-- [X] Experimental : import day offs from an ICS/CalDAV feed.
-- [X] Public Global and Tabular calendar in an embeddable view.
-- [X] Add an option to switch the duration field in readonly.
-- [X] Allow user to delete/edit rejected leave requests (take into account leave_status_requested).
-- [X] Bug when editing a LR from HR/Employee => e-mail is messy (reload the LR from DB in leaves:sendMail)
-- [X] Report duration and balance into request e-mail.
-- [X] Entitled days editor : possibility to copy a line.
-- [X] Entitled days editor : a field allows to set the step for inc/dec (saved in a cookie).
-- [X] Sum of leave grouped by type in presence report.
-- [X] Yearly individual calendar.
-- [X] Display entity name in list of HR/Employees.
-- [X] Update jorani.pot in transifex and warn translators/update strings.
-- [X] Check HR/Monthly report for overlapping. Report this overlapping feature to calendar/tabular.
-- [X] Fix Deprecation warning: moment.lang is deprecated. Use moment.locale instead (technical migration of FullCalendar).
+- [ ] Fix issue in tabular view.
+- [ ] Update load test and its dataset.
+- [ ] Update install doc (feedback with e-mail problems, Opcache, TLS, etc.).
+- [ ] Prevent double-click in validation/leaves.
+- [ ] Better entitled days editor (contract / employee).
+- [ ] Experiment a simple way to display abbreviation of leave types in tabular calendar (without a new DB field).
+- [ ] Provide an example of a REST client (seniority leaves, carry over, LDAP sync...) in PHP (cron) or go (service).
 
 ## v0.5.0 or later
 
 Following naming convention, this version will need a DB patch.
 
 - [ ] DB optimization on leave table.
-- [ ] Better entitled days editor (contract / employee).
 - [ ] Possibility to sort the leave types (optionally attached to contract ?). NEEDS DB PATCH (maybe).
 - [ ] Report carried-over leaves (Semi-auto / wizard), employee by employee (or mass ?).
 - [ ] Notification by e-mail : Request deleted / modified.
-- [ ] Provide an example of a REST client (seniority leaves, carry over, LDAP sync...) in PHP (cron) or go (service).
 
 ## Not a priority
 

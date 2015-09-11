@@ -371,19 +371,20 @@ CREATE TABLE IF NOT EXISTS `time` (
 CREATE TABLE IF NOT EXISTS `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `abbreviation` char(1) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Content of table `types`
 --
-INSERT INTO `types` (`id`, `name`) VALUES
-(0, 'compensate'),
-(1, 'paid leave'),
-(2, 'maternity leave'),
-(3, 'paternity leave'),
-(4, 'special leave'),
-(5, 'Sick leave');
+INSERT INTO `types` (`id`, `name`, `abbreviation`) VALUES
+(0, 'compensate', 'C'),
+(1, 'paid leave', 'P'),
+(2, 'maternity leave', 'M'),
+(3, 'paternity leave', 'Y'),
+(4, 'special leave', 'X'),
+(5, 'Sick leave', 'S');
 
 --
 -- Structure of table `users`

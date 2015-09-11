@@ -28,6 +28,7 @@
     <tr>
       <th><?php echo lang('leavetypes_type_thead_id');?></th>
       <th><?php echo lang('leavetypes_type_thead_name');?></th>
+      <th><?php echo lang('leavetypes_type_thead_abbreviation');?></th>
     </tr>
   </thead>
   <tbody>
@@ -40,6 +41,7 @@
       <td>
           <a href="<?php echo base_url();?>leavetypes/edit/<?php echo $type['id'] ?>" data-target="#frmEditLeaveType" data-toggle="modal" title="<?php echo lang('leavetypes_type_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
           &nbsp; <?php echo $type['name']; ?></td>
+      <td><?php echo $type['abbreviation']; ?></td>
     </tr>
   <?php } ?>
   <?php if (count($leavetypes) == 0) { ?>

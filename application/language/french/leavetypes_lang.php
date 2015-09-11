@@ -21,6 +21,7 @@
 $lang['leavetypes_type_title'] = 'Types d\'absence';
 $lang['leavetypes_type_thead_id'] = 'N°';
 $lang['leavetypes_type_thead_name'] = 'Nom';
+$lang['leavetypes_type_thead_abbreviation'] = 'Abréviation';
 $lang['leavetypes_type_thead_tip_delete'] = 'supprimer';
 $lang['leavetypes_type_thead_tip_edit'] = 'modifier';
 $lang['leavetypes_type_button_export'] = 'Exporter cette liste';
@@ -31,12 +32,14 @@ $lang['leavetypes_popup_create_title'] = 'Ajouter un type d\'absence';
 $lang['leavetypes_popup_create_button_cancel'] = 'Annuler';
 $lang['leavetypes_popup_create_button_create'] = 'Créer';
 $lang['leavetypes_popup_create_field_name'] = 'Nom';
+$lang['leavetypes_popup_create_field_abbreviation'] = 'Abréviation';
 $lang['leavetypes_popup_create_flash_msg'] = 'Le type d\'absence a été créé avec succès.';
 
 $lang['leavetypes_popup_update_title'] = 'Modifier un type d\'absence';
 $lang['leavetypes_popup_update_button_cancel'] = 'Annuler';
 $lang['leavetypes_popup_update_button_update'] = 'Modifier';
 $lang['leavetypes_popup_update_field_name'] = 'Nom';
+$lang['leavetypes_popup_update_field_abbreviation'] = 'Abréviation';
 $lang['leavetypes_popup_update_flash_msg'] = 'Le type d\'absence a été modifié avec succès.';
 
 $lang['leavetypes_popup_delete_title'] = 'Supprimer un type d\'absence';

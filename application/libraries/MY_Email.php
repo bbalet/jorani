@@ -554,7 +554,7 @@ class MY_Email extends CI_Email {
                     // If your system uses class autoloading feature,
                     // then the following require statement would not be needed.
                     if (!class_exists('PHPMailer', false)) {
-                        require_once APPPATH.'third_party/phpmailer/PHPMailerAutoload.php';
+                        require_once APPPATH.'third_party/PHPMailer/PHPMailerAutoload.php';
                     }
                     //
 

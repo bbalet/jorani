@@ -222,9 +222,8 @@ class Extra extends CI_Controller {
                 'UrlReject' => $rejectUrl
             );
             $message = $this->parser->parse('emails/' . $manager['language'] . '/overtime', $data, TRUE);
-            if ($this->email->mailer_engine == 'phpmailer') {
-                $this->email->phpmailer->Encoding = 'quoted-printable';
-            }
+            $this->email->set_encoding('quoted-printable');
+            
             if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
                 $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
             } else {

@@ -41,13 +41,16 @@ define('EMAIL_ADDRESS', '');
 
 <?php
 //Check if we can access to the configuration file
+$pathCIConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'config.php')));
 $pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'email.php')));
+$configCIFileExists = file_exists($pathCIConfigFile);
 $configFileExists = file_exists($pathConfigFile);
 
 if (EMAIL_ADDRESS == '') {
     echo '<b>ERROR:</b> Please provide a valid e-mail address in testmail.php.<br />' . PHP_EOL;
 } else {
-    if ($configFileExists) {
+    if ($configFileExists && $configCIFileExists) {
+        include $pathCIConfigFile;
         include $pathConfigFile;
         try {
             //Include shipped PHPMailer library

@@ -402,9 +402,8 @@ class Requests extends CI_Controller {
             $message = $this->parser->parse('emails/' . $leave['language'] . '/request_rejected', $data, TRUE);
             $this->email->subject($subject . $lang_mail->line('email_leave_request_reject_subject'));
         }
-        if ($this->email->mailer_engine== 'phpmailer') {
-            $this->email->phpmailer->Encoding = 'quoted-printable';
-        }
+        $this->email->set_encoding('quoted-printable');
+        
         if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
            $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
         } else {

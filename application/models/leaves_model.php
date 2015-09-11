@@ -854,10 +854,10 @@ class Leaves_model extends CI_Model {
           if (strstr($day->display, ';')) {
               $display = explode(";", $day->display);
               $type = explode(";", $day->type);
-              if ($display[0] == '2') array_key_exists($type, $by_types) ? $by_types[$type] += 0.5: $by_types[$type] = 0.5;
-              if ($display[0] == '3') array_key_exists($type, $by_types) ? $by_types[$type] += 0.5: $by_types[$type] = 0.5;
-              if ($display[1] == '2') array_key_exists($type, $by_types) ? $by_types[$type] += 0.5: $by_types[$type] = 0.5;
-              if ($display[1] == '3') array_key_exists($type, $by_types) ? $by_types[$type] += 0.5: $by_types[$type] = 0.5;
+              if ($display[0] == '2') array_key_exists($type[0], $by_types) ? $by_types[$type[0]] += 0.5: $by_types[$type[0]] = 0.5;
+              if ($display[0] == '3') array_key_exists($type[0], $by_types) ? $by_types[$type[0]] += 0.5: $by_types[$type[0]] = 0.5;
+              if ($display[1] == '2') array_key_exists($type[1], $by_types) ? $by_types[$type[1]] += 0.5: $by_types[$type[1]] = 0.5;
+              if ($display[1] == '3') array_key_exists($type[1], $by_types) ? $by_types[$type[1]] += 0.5: $by_types[$type[1]] = 0.5;
           } else {
               if ($day->display == 2) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5: $by_types[$day->type] = 0.5;
               if ($day->display == 3) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5: $by_types[$day->type] = 0.5;

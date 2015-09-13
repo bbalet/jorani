@@ -6,10 +6,11 @@ Jorani is compatible with PHP 7.0 (starting from v0.4.0) except for Excel export
 
 ## General considerations
 
-* The Jorani application must have write privileges on <code>temp</code> and <code>application/logs</code> folders.
+* The Jorani application must have write privileges on <code>application/logs</code> folder.
 * Some PHP extensions are required (e.g. mcrypt, mysqli, xml, zip, gd). 
 * The default user is *bbalet* and password is *bbalet*.
 * A script at the root of the installation (requirements.php) allows you to check your system.
+* Change <code>application/config/config.php</code> in order to modify the default behavior of Jorani.
 
 ## Database setup
 
@@ -17,7 +18,6 @@ Jorani has been tested with MySQL and MariaDB (please note that functions are cr
 * Create a database.
 * Import <code>/sql/lms.sql</code>.
 * Change <code>application/config/database.php</code> according to your environment.
-* Change <code>application/config/config.php</code> according to your environment.
 
 Please note that the schema contains procedures, so the user created must have EXECUTE permission.
 
@@ -25,6 +25,7 @@ Please note that the schema contains procedures, so the user created must have E
 
 Jorani uses e-mail to notify users and their line managers. In order to setup e-mail modify 
 <code>/application/config/email.php</code> file according to your environment.
+Please use the script <code>testmail.php</code> at the root of your installation if you want to debug and read the troubleshooting section of this script for additional hints.
 
 ### Example for GMail
 
@@ -39,6 +40,7 @@ Jorani uses e-mail to notify users and their line managers. In order to setup e-
 ## LDAP
 
 You must activate PHP LDAP module prior using this feature.
+Please use the script <code>testldap.php</code> at the root of your installation if you want to debug.
 In order to configure LDAP, locate these lines of code into <code>application/config/config.php</code> :
 
     $config['ldap_enabled'] = FALSE;
@@ -139,7 +141,9 @@ If you are running nginx, tune your configuration (see <code>/etc/nginx/nginx.co
 
 * Raspbian ARM - Apache + PHP
 * Raspbian ARM - ngnix + php-fpm
+* Windows 10 / 64 - WAMP
+* Windows 8 / 64 - WAMP
 * Windows 7 / 64 - WAMP
 * Windows XP / 32 - WAMP
 * Centos - Apache + PHP
-* Ubuntu 13.10 x86_64 - ngnix + php-fpm or HHVM
+* Ubuntu 13.10 to 15.01 x86_64 - ngnix + php-fpm or HHVM

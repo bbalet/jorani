@@ -3,22 +3,29 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 ## v0.4.2
 
-- [ ] Fix issue in tabular view.
+- [X] Fix issue in tabular view.
+- [X] Upgrade PHPMailer and its wrapper to support PHP7.
+- [ ] Selectize on login page.
+- [ ] HR/Employees, bug when selecting root entity and opting-out "include sub-entities".
 - [ ] Update load test and its dataset.
 - [ ] Update install doc (feedback with e-mail problems, Opcache, TLS, etc.).
 - [ ] Prevent double-click in validation/leaves.
 - [ ] Better entitled days editor (contract / employee).
-- [ ] Experiment a simple way to display abbreviation of leave types in tabular calendar (without a new DB field).
-- [ ] Provide an example of a REST client (seniority leaves, carry over, LDAP sync...) in PHP (cron) or go (service).
 
 ## v0.5.0 or later
 
 Following naming convention, this version will need a DB patch.
 
-- [ ] DB optimization on leave table.
-- [ ] Possibility to sort the leave types (optionally attached to contract ?). NEEDS DB PATCH (maybe).
+- [ ] Possible DB optimization on leave table ALTER TABLE `leaves` ADD INDEX(`startdate`); ALTER TABLE `leaves` ADD INDEX(`enddate`);.
+- [ ] Possibility to sort the leave types. NEEDS DB PATCH (maybe). Cookie or DB ? Entity scope ?
+- [ ] Possibility to optionally exclude leave types to a contract. NEEDS DB PATCH (maybe). Impact leave request, should impact a dynamic build of leave balance report. 
 - [ ] Report carried-over leaves (Semi-auto / wizard), employee by employee (or mass ?).
 - [ ] Notification by e-mail : Request deleted / modified.
+
+## Ideas
+
+- [ ] Provide examples of REST clients (seniority leaves, carry over, LDAP sync...) in PHP (cron) or go (service).
+- [ ] PHP scripts of migration from OrangeHRM, PHP_Conges, LiberTempo, etc.
 
 ## Not a priority
 
@@ -26,13 +33,13 @@ Following naming convention, this version will need a DB patch.
 - [ ] Investigation for a CAS/SSO integration.
 - [ ] Mobile-optimized views (limited to few pages : simple user and validation).
 - [ ] Implement a kind of heritage in HR/organization for supervisors (child entities).
-- [ ] HR officers of a part of the organization (defined in HR/organization), for future functions when they'll be CCed.
+- [ ] HR officers of a part of the organization (defined in HR/organization), for future functions when they'll be CCed. and/or ...
+- [ ] ... Multitenancy (add global filter / Additionnal field on all tables). Allow access to the same instance for multiple tenants.
 - [ ] Add a field explaining why a request is rejected. Validation E-mail will redirect to a form is this option is activated ?
 - [ ] Anticipated leaves (entitled days of next yearly period). Today we can deal with it manually because LMS doesn't forbid to 
 request a leave even if your credit is negative and because leave balance reports can be executed with a past/future date.
 - [ ] Setup assistant (with links to requirements, testldap and testmail scripts).
 - [ ] Mass importer of users (from CSV, LDAP ?). From GUI or a side tool using the REST API ?
-- [ ] Multitenancy (add global filter / Additionnal field on all tables). Allow access to the same instance for multiple tenants.
 - [ ] Alternative overtime module. It will be separated from the LMS, accepted extra time will not be added as a compensate entitled days but compensation will have its own wkf.
 
 ## Post v1.0

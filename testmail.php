@@ -14,6 +14,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
 define('BASEPATH', '.'); //Make this script works with nginx
@@ -128,9 +130,22 @@ if (EMAIL_ADDRESS == '') {
                 <ul>
                     <li>Check the configuration with your IT Admin team.</li>
                     <li>If you are using GMAIL, please read <a target="_blank" href="https://support.google.com/mail/answer/78775?hl=en">this article</a>.</li>
-                    <li>The STMP port may be blocked by your organization/server's security policy.</li>
-                    <li>Some antivirus block STMP port.</li>
-                    <li>Some SMTP server require the application server (eg Jorani) to be whitelisted.</li>
+                    <li>The STMP port may be blocked by your organization/server's security policy (firewall, etc.).</li>
+                    <li>When running SELinux, the webserver is blocked by default (it cannot send e-mails or open a network connection). Please consider unblocking it:
+                        <p>
+<pre>
+$ setsebool -P httpd_can_sendmail 1
+$ setsebool -P httpd_can_network_connect 1
+</pre>
+                        </p>
+                    </li>
+                    <li>Some e-mail servers (eg Office 360) require to set a valid sender e-mail. Update <tt>config/config.php</tt>
+                        <p>
+                            <code>$config['from_mail'] = 'do.not@reply.me';</code>
+                        </p>
+                    </li>
+                    <li>Some antivirus block STMP port by default.</li>
+                    <li>Some SMTP server require the application server sending emails (i.e. Jorani) to be whitelisted (on the SMTP server).</li>
                     <li>Your webhosting company may forbid email functions.</li>
                     <li>Maybe that the emails are sent but put into SPAM folder.</li>
                 </ul>

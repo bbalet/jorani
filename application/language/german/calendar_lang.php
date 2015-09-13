@@ -102,7 +102,7 @@ $lang['Thursday'] = 'Donnerstag';
 $lang['Friday'] = 'Freitag';
 $lang['Saturday'] = 'Samstag';
 $lang['Sunday'] = 'Sonntag';
-$lang['All days'] = 'All days';
+$lang['All days'] = 'Täglich';
 
 $lang['January'] = 'Januar';
 $lang['February'] = 'Februar';

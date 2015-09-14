@@ -55,9 +55,9 @@
             <div class="pull-right">
                 <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>?source=requests" title="<?php echo lang('requests_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>requests/accept/<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
+                <a href="#" class="lnkAccept" data-id="<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>requests/reject/<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
+                <a href="#" class="lnkReject" data-id="<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
             </div>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
@@ -91,34 +91,51 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
+var clicked = false;
+    
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#leaves').dataTable({
-                    "order": [[ 2, "desc" ]],
-                    "oLanguage": {
-                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
-                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
-                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
-                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
-                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
-                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
-                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
-                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
-                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
-                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
-                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
-                    "oPaginate": {
-                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
-                        "sLast":     "<?php echo lang('datatable_sLast');?>",
-                        "sNext":     "<?php echo lang('datatable_sNext');?>",
-                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
-                    },
-                    "oAria": {
-                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
-                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
-                    }
+                "order": [[ 2, "desc" ]],
+                "oLanguage": {
+                "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
+                "sInfo":           "<?php echo lang('datatable_sInfo');?>",
+                "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
+                "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
+                "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
+                "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
+                "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
+                "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
+                "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
+                "sSearch":         "<?php echo lang('datatable_sSearch');?>",
+                "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
+                "oPaginate": {
+                    "sFirst":    "<?php echo lang('datatable_sFirst');?>",
+                    "sLast":     "<?php echo lang('datatable_sLast');?>",
+                    "sNext":     "<?php echo lang('datatable_sNext');?>",
+                    "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+                },
+                "oAria": {
+                    "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
+                    "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
                 }
-            });	
+            }
+        });
 
+     //Prevent double click on accept and reject buttons
+     $(".lnkAccept").on('click', function (event) {
+        event.preventDefault();
+        if (!clicked) {
+            clicked = true;
+            window.location.href = "<?php echo base_url();?>requests/accept/" + $(this).data("id");
+        }
+     });
+     $(".lnkReject").on('click', function (event) {
+        event.preventDefault();
+        if (!clicked) {
+            clicked = true;
+            window.location.href = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
+        }
+     });
 });
 </script>

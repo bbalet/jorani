@@ -5,11 +5,12 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 - [X] Fix issue in tabular view.
 - [X] Upgrade PHPMailer and its wrapper to support PHP7.
-- [ ] Selectize on login page.
+- [X] Selectize on login page.
+- [X] Update install doc (feedback with e-mail problems, Opcache, TLS, etc.).
+- [X] Prevent double-click in validation/leaves.
+- [X] Excel export of the yearly calendar.
 - [ ] HR/Employees, bug when selecting root entity and opting-out "include sub-entities".
 - [ ] Update load test and its dataset.
-- [ ] Update install doc (feedback with e-mail problems, Opcache, TLS, etc.).
-- [ ] Prevent double-click in validation/leaves.
 - [ ] Better entitled days editor (contract / employee).
 
 ## v0.5.0 or later

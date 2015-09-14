@@ -22,13 +22,16 @@
 <h1><?php echo lang('calendar_year_title');?>&nbsp;<span class="muted">(<?php echo $employee_name;?>)</span>&nbsp;<?php echo $help;?></h1>
 
 <div class="row-fluid">
-    <div class="span6">
+    <div class="span4">
         <span class="label"><?php echo lang('Planned');?></span>&nbsp;
         <span class="label label-success"><?php echo lang('Accepted');?></span>&nbsp;
         <span class="label label-warning"><?php echo lang('Requested');?></span>&nbsp;
         <span class="label label-important" style="background-color: #ff0000;"><?php echo lang('Rejected');?></span>
     </div>
-    <div class="span6">
+    <div class="span4">
+        <a href="<?php echo base_url();?>calendar/year/export/<?php echo $user_id;?>/<?php echo ($year);?>" class="btn btn-primary"><i class="icon-file icon-white"></i><?php echo lang('calendar_tabular_button_export');?></a>
+    </div>
+    <div class="span4">
         <div class="pull-right">
             <a href="<?php echo base_url();?>calendar/year/<?php echo $user_id;?>/<?php echo ($year - 1);?>" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></a>
             <?php echo $year;?>

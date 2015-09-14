@@ -18,6 +18,7 @@
  */
 
 $lang['calendar_year_title'] = 'jaarkalender';
+$lang['calendar_year_button_export'] = 'Exporteren';
 
 $lang['calendar_individual_title'] = 'Mijn agenda';
 $lang['calendar_individual_description'] = 'Agenda van mijn afwezigheid';

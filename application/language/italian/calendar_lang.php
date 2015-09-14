@@ -18,6 +18,7 @@
  */
 
 $lang['calendar_year_title'] = 'Calendario annuale';
+$lang['calendar_year_button_export'] = 'Esporta';
 
 $lang['calendar_individual_title'] = 'Il mio calendario';
 $lang['calendar_individual_description'] = 'Calendario delle mie assenze';

@@ -129,6 +129,7 @@ $route['calendar/tabular/export/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabula
 $route['calendar/year/(:num)/(:num)'] = 'calendar/year/$1/$2';
 $route['calendar/year/(:num)'] = 'calendar/year/$1';
 $route['calendar/year'] = 'calendar/year';
+$route['calendar/year/export/(:num)/(:num)'] = 'calendar/year_export/$1/$2';
 
 //private Fullcalendar feeds
 $route['leaves/individual/(:num)'] = 'leaves/individual/$1';

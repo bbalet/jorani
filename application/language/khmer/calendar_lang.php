@@ -17,6 +17,7 @@
  */
 
 $lang['calendar_year_title'] = 'Yearly calendar';
+$lang['calendar_year_button_export'] = 'Export';
 
 $lang['calendar_individual_title'] = 'ប្រតិទិនរបស់ខ្ញុំ';
 $lang['calendar_individual_description'] = 'ប្រតិទិនការឈប់សម្រាក់របស់ខ្ញុំ.';

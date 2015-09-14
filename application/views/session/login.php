@@ -70,7 +70,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     </select>
     <?php } ?>
     <label for="login"><?php echo lang('session_login_field_login');?></label>
-    <input type="text" class="input-medium" name="login" id="login" value="<?php echo set_value('login'); ?>" autofocus required />
+    <input type="text" class="input-medium" name="login" id="login" value="<?php echo set_value('login'); ?>" required />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
 </form>
     <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
@@ -102,14 +102,20 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         <div class="span3">&nbsp;</div>
     </div>
 
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 <script type="text/javascript">
-    //Refresh page language
-    function change_language() {
-        $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
-        $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
+    
+    //Encrypt the password using RSA and send the ciphered value into the form
+    function submit_form() {
+        var encrypt = new JSEncrypt();
+        encrypt.setPublicKey($('#pubkey').val());
+        //Encrypt the concatenation of the password and the salt
+        var encrypted = encrypt.encrypt($('#password').val() + $('#salt').val());
+        $('#CipheredValue').val(encrypted);
         $('#loginFrom').submit();
     }
     
@@ -134,13 +140,21 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
             }
         }
         
+        //Refresh page language
+        $('#language').selectize({
+            onChange: function (value) {
+                if (value != '') {
+                    $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
+                    $('#loginFrom').prop('action', '<?php echo base_url();?>connection/language');
+                    $('#loginFrom').submit();
+                }
+            }
+        });
+        
+        $('#login').focus();
+        
         $('#send').click(function() {
-            var encrypt = new JSEncrypt();
-            encrypt.setPublicKey($('#pubkey').val());
-            //Encrypt the concatenation of the password and the salt
-            var encrypted = encrypt.encrypt($('#password').val() + $('#salt').val());
-            $('#CipheredValue').val(encrypted);
-            $('#loginFrom').submit();
+            submit_form();
         });
         
         //If the user has forgotten his password, send an e-mail
@@ -169,7 +183,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         //Validate the form if the user press enter key in password field
         $('#password').keypress(function(e){
             if(e.keyCode==13)
-            $('#send').click();
+            submit_form();
         });
     });
 </script>

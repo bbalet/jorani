@@ -493,7 +493,7 @@ class MY_Email extends CI_Email {
 
             if ($result) {
 
-                $this->_set_error_message('lang:email_sent', $this->_get_protocol());
+                $this->_set_error_message('email_sent', $this->_get_protocol());
 
                 if ($auto_clear) {
                     $this->clear();

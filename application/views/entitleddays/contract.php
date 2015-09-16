@@ -206,7 +206,7 @@ if ($language_code != 'en') { ?>
         $('#frmAddEntitledDays').modal('show');
         $("#cmdFrmAddEntitledDays").hide();
         $("#cmdFrmSaveEntitledDays").show();
-        $("#frmAddEntitledDaysTitle").html('<?php echo lang('entitleddays_contract_index_title');?>');
+        $("#frmAddEntitledDaysTitle").html("<?php echo lang('entitleddays_contract_index_title');?>");
         
         startdate = $("tr[data-id='" + id + "']>td:eq(1)").data('order');
         startdate = moment(startdate, 'X').format("YYYY-MM-DD");

@@ -44,6 +44,7 @@ $route['users/employees'] = 'users/employees';
 $route['users/export'] = 'users/export';
 $route['users/reset/(:num)'] = 'users/reset/$1';
 $route['users/create'] = 'users/create';
+$route['users/import'] = 'users/import';
 $route['users/edit/(:num)'] = 'users/edit/$1';
 $route['users/delete/(:num)'] = 'users/delete/$1';
 $route['users/check/login'] = 'users/check_login';

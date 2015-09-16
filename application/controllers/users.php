@@ -434,4 +434,77 @@ class Users extends CI_Controller {
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output');
     }
+
+	/**
+	 * Action Import users from ldap
+	 * @author Julien Ducro <julien@ducro.fr>
+	 */
+	public function import() {
+		$this->auth->check_is_granted('create_user');
+		expires_now();
+
+		$ldap = ldap_connect($this->config->item('ldap_host'), $this->config->item('ldap_port'));
+		ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
+		set_error_handler(function() { /* ignore errors */ });
+		$bind = ldap_bind($ldap, $this->config->item('ldap_user'), $this->config->item('ldap_pass'));
+		if ($bind) {
+			$deleted = 0;
+			$created = 0;
+			if ($this->config->item('ldap_basedn_db')) {
+				$basedn = $this->users_model->get_basedn($this->input->post('login'));
+			} else {
+				$basedn = sprintf($this->config->item('ldap_basedn'), $this->input->post('login'));
+			}
+			$result = ldap_search($ldap, $basedn, '(&(mail=*)(|(useraccountcontrol=514)(useraccountcontrol=546)))') or die ("Error in search query: ".ldap_error($ldap));
+			$ldap_data = ldap_get_entries($ldap, $result);
+			for ($i = 0; $i < $ldap_data['count']; $i++) {
+				$email = $ldap_data[$i]['mail'][0];
+				if ($user = $this->users_model->getUserByLogin($email)) {
+					if ($user->active) {
+						$deleted++;
+						$this->users_model->set_active($user->id, false);
+					}
+				}
+			}
+			$result = ldap_search($ldap, $basedn, '(&(mail=*)(&(!(useraccountcontrol=514))(!(useraccountcontrol=546))))') or die ("Error in search query: ".ldap_error($ldap));
+			$ldap_data = ldap_get_entries($ldap, $result);
+			for ($i = 0; $i < $ldap_data['count']; $i++) {
+				$email = $ldap_data[$i]['mail'][0];
+				if (!$this->users_model->getUserByLogin($email)) {
+					$ldap_user = $ldap_data[$i];
+					$firstname = $ldap_user['givenname'][0];
+					$lastname = $ldap_user['sn'][0];
+					$login = $email;
+					$password = '';
+					// @TODO get default role
+					$role = 2;
+					$manager = NULL;
+					$organization = 0;
+					$contract = NULL;
+					$timezone = NULL;
+					$position = NULL;
+					$identifier = NULL;
+					$datehired = NULL;
+					$ldap_path = NULL;
+					$language = 'fr';
+					$country = NULL;
+					$calendar = NULL;
+					if ($this->users_model->insert_user_api($firstname, $lastname, $login, $email, $password, $role,
+						$manager, $organization, $contract, $position, $datehired, $identifier, $language, $timezone,
+						$ldap_path, TRUE, $country, $calendar)) {
+						$created++;
+					}
+				}
+			}
+			if ($deleted || $created) {
+				$this->session->set_flashdata('msg', lang('users_import_flash_msg_success') . ' - ' . $deleted . ', + ' . $created);
+			} else {
+				$this->session->set_flashdata('msg', lang('users_import_flash_msg_no_change'));
+			}
+		}
+		restore_error_handler();
+		ldap_close($ldap);
+
+		redirect('users');
+	}
 }

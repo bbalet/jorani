@@ -21,6 +21,7 @@
 $lang['entitleddays_contract_index_title'] = 'Crédits d\'absence pour le contrat';
 $lang['entitleddays_contract_index_thead_tip_delete'] = 'Supprimer';
 $lang['entitleddays_contract_index_thead_tip_copy'] = 'Copier';
+$lang['entitleddays_contract_index_thead_tip_edit'] = 'Edit';
 $lang['entitleddays_contract_index_thead_start'] = 'Début';
 $lang['entitleddays_contract_index_thead_end'] = 'Fin';
 $lang['entitleddays_contract_index_thead_days'] = 'Jours';
@@ -46,6 +47,7 @@ $lang['entitleddays_contract_index_field_step'] = 'Incrément';
 $lang['entitleddays_user_index_title'] = 'Crédits d\'absence pour l\'employé(e)';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Supprimer';
 $lang['entitleddays_user_index_thead_tip_copy'] = 'Copier';
+$lang['entitleddays_user_index_thead_tip_edit'] = 'Edit';
 $lang['entitleddays_user_index_thead_start'] = 'Début';
 $lang['entitleddays_user_index_thead_end'] = 'Fin';
 $lang['entitleddays_user_index_thead_days'] = 'Jours';

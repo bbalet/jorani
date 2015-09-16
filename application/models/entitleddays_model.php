@@ -170,20 +170,26 @@ class Entitleddays_model extends CI_Model {
     }
     
     /**
-     * Update a given contract in the database. Update data are coming from an
-     * HTML form
-     * @return type
+     * Update a line of entitled days
+     * @param int $id line of entitled days identifier (row id)
+     * @param date $startdate Start Date
+     * @param date $enddate End Date
+     * @param int $days number of days to be added
+     * @param int $type Leave type (of the entitled days line)
+     * @param int $description Description of the entitled days line
+     * @return number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function update_entitleddays() {
-        
+    public function update_entitleddays($id, $startdate, $enddate, $days, $type, $description) {
         $data = array(
-            'name' => $this->input->post('name'),
-            'startdate' => $this->input->post('startdate'),
-            'enddate' => $this->input->post('enddate')
+            'startdate' => $startdate,
+            'enddate' => $enddate,
+            'days' => $days,
+            'type' => $type,
+            'description' => $description
         );
 
-        $this->db->where('id', $this->input->post('id'));
+        $this->db->where('id', $id);
         return $this->db->update('entitleddays', $data);
     }
     

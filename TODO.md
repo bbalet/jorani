@@ -9,14 +9,16 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Update install doc (feedback with e-mail problems, Opcache, TLS, etc.).
 - [X] Prevent double-click in validation/leaves.
 - [X] Excel export of the yearly calendar.
-- [ ] HR/Employees, bug when selecting root entity and opting-out "include sub-entities".
-- [ ] Update load test and its dataset.
-- [ ] Better entitled days editor (contract / employee).
+- [X] Better entitled days editor (contract / employee).
+- [ ] Round values in HR/counters, Manager/counters, Self/counters and leave balance report.
+- [ ] Regresion test on leave balance report (negative value / no credit).
+- [ ] Regresion test on HR/counters, Manager/counters, Self/counters (cuurent date vs. yesterday).
 
 ## v0.5.0 or later
 
 Following naming convention, this version will need a DB patch.
 
+- [ ] Update load test and its dataset.
 - [ ] Possible DB optimization on leave table ALTER TABLE `leaves` ADD INDEX(`startdate`); ALTER TABLE `leaves` ADD INDEX(`enddate`);.
 - [ ] Possibility to sort the leave types. NEEDS DB PATCH (maybe). Cookie or DB ? Entity scope ?
 - [ ] Possibility to optionally exclude leave types to a contract. NEEDS DB PATCH (maybe). Impact leave request, should impact a dynamic build of leave balance report. 
@@ -30,6 +32,7 @@ Following naming convention, this version will need a DB patch.
 
 ## Not a priority
 
+- [ ] Supporting docs (upload attachments into local folder).
 - [ ] Better LDAP integration.
 - [ ] Investigation for a CAS/SSO integration.
 - [ ] Mobile-optimized views (limited to few pages : simple user and validation).

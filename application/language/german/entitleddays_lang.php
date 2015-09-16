@@ -19,6 +19,7 @@
 $lang['entitleddays_contract_index_title'] = 'Bezugsberechtigte Tage für Vertrag';
 $lang['entitleddays_contract_index_thead_tip_delete'] = 'Löschen';
 $lang['entitleddays_contract_index_thead_tip_copy'] = 'Kopieren';
+$lang['entitleddays_contract_index_thead_tip_edit'] = 'Bearbeiten';
 $lang['entitleddays_contract_index_thead_start'] = 'Anfang';
 $lang['entitleddays_contract_index_thead_end'] = 'Ende';
 $lang['entitleddays_contract_index_thead_days'] = 'Tage';
@@ -44,6 +45,7 @@ $lang['entitleddays_contract_index_field_step'] = 'Zuwachs';
 $lang['entitleddays_user_index_title'] = 'Bezugsberechtigte Tag für Angestellten';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Löschen';
 $lang['entitleddays_user_index_thead_tip_copy'] = 'Kopieren';
+$lang['entitleddays_user_index_thead_tip_edit'] = 'Bearbeiten';
 $lang['entitleddays_user_index_thead_start'] = 'Anfang';
 $lang['entitleddays_user_index_thead_end'] = 'Ende';
 $lang['entitleddays_user_index_thead_days'] = 'Tage';

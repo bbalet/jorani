@@ -176,13 +176,15 @@ class Entitleddays extends CI_Controller {
     }
     
     /**
-     * Ajax endpoint : Increase or decrease by one an entitled days row 
+     * Ajax endpoint : Update an entitled days row 
      * on a contract of an employee (as the both are stored into the same table)
      * id : row identifier into the database
      * operation : "increase" or "decrease" by 1 (the number can be negative).
+     *                  "credit" modify the value of the credit
+     *                  "update" update all the value of the credit line
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function ajax_incdec() {
+    public function ajax_update() {
         if ($this->auth->is_granted('entitleddays_user') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
@@ -200,6 +202,13 @@ class Entitleddays extends CI_Controller {
                         break;
                     case "credit":
                         $id = $this->entitleddays_model->update_days_entitleddays($id, $days);
+                        break;
+                    case "update":
+                        $startdate = $this->input->post('startdate', TRUE);
+                        $enddate = $this->input->post('enddate', TRUE);
+                        $type = $this->input->post('type', TRUE);
+                        $description = sanitize($this->input->post('description', TRUE));
+                        $id = $this->entitleddays_model->update_entitleddays($id, $startdate, $enddate, $days, $type, $description);
                         break;
                     default:
                         $this->output->set_header("HTTP/1.1 422 Unprocessable entity");

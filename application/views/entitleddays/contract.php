@@ -38,13 +38,16 @@
   <tbody>
   <?php foreach ($entitleddays as $days) { ?>
     <tr data-id="<?php echo $days['id']; ?>">
-      <td><a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a>
-          &nbsp;<a href="#" onclick="copy_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_copy');?>"><i class="fa fa-copy" style="color:black;"></i></a></td>
+        <td>
+          <a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a>
+          &nbsp;<a href="#" onclick="copy_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_copy');?>"><i class="fa fa-copy" style="color:black;"></i></a>
+          &nbsp;<a href="#" onclick="show_edit_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
+        </td>
 <?php $startDate = new DateTime($days['startdate']);
 $endDate = new DateTime($days['enddate']);?>
       <td data-order="<?php echo $startDate->getTimestamp(); ?>"><?php echo $startDate->format(lang('global_date_format'));?></td>
       <td data-order="<?php echo $endDate->getTimestamp(); ?>"><?php echo $endDate->format(lang('global_date_format'));?></td>
-      <td data-order="<?php echo $days['days']; ?>"><span id="days<?php echo $days['id']; ?>" class="credit"><?php echo $days['days']; ?></span> &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'decrease');"><i class="icon-minus"></i></a>
+      <td data-order="<?php echo $days['days']; ?>"><span id="days<?php echo $days['id']; ?>"><?php echo $days['days']; ?></span> &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'decrease');"><i class="icon-minus"></i></a>
                      &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'increase');"><i class="icon-plus"></i></a></td>
       <td data-id="<?php echo $days['type']; ?>"><?php echo $days['type_name']; ?></td>
       <td><?php echo $days['description']; ?></td>
@@ -52,11 +55,31 @@ $endDate = new DateTime($days['enddate']);?>
   <?php } ?>
   </tbody>
 </table>
+    
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
+<div class="row-fluid">
+    <div class="span6">
+        <a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
+        <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="show_add_entitleddays();"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_add');?></button>
+    </div>
+    <div class="span6">
+        <div class="pull-right">
+            <label for="txtStep"><?php echo lang('entitleddays_contract_index_field_step');?></label>
+            <input type="text" class="input-mini" id="txtStep" name="txtStep" value="1">
+        </div>
+    </div>
+</div>
+
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
+    </div>
+</div>
 
 <div id="frmAddEntitledDays" class="modal hide fade">
         <div class="modal-header">
             <a href="#" class="close" onclick="$('#frmAddEntitledDays').modal('hide');">&times;</a>
-            <h3><?php echo lang('entitleddays_contract_popup_title');?></h3>
+            <h3 id="frmAddEntitledDaysTitle"><?php echo lang('entitleddays_contract_popup_title');?></h3>
         </div>
         <div class="modal-body">
             <label for="viz_startdate"><?php echo lang('entitleddays_contract_index_field_start');?></label>
@@ -80,30 +103,11 @@ $endDate = new DateTime($days['enddate']);?>
             <input type="text" class="input-xlarge" name="description" id="description" />
         </div>
         <div class="modal-footer">
-            <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_contract_index_button_add');?></button>
-            <button id="cmdAddEntitledDays" class="btn btn-danger" onclick="$('#frmAddEntitledDays').modal('hide');"><?php echo lang('entitleddays_contract_index_button_cancel');?></button>
+            <button id="cmdFrmSaveEntitledDays" class="btn btn-primary" onclick="edit_entitleddays();" ><?php echo lang('OK');?></button>
+            <button id="cmdFrmAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_contract_index_button_add');?></button>
+            <button class="btn btn-danger" onclick="$('#frmAddEntitledDays').modal('hide');"><?php echo lang('entitleddays_contract_index_button_cancel');?></button>
         </div>
  </div>
-    
-<div class="row-fluid"><div class="span12">&nbsp;</div></div>
-
-<div class="row-fluid">
-    <div class="span6">
-        <a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_back');?></a>
-        <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="$('#frmAddEntitledDays').modal('show');"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('entitleddays_contract_index_button_add');?></button>
-    </div>
-    <div class="span6">
-        <div class="pull-right">
-            <label for="txtStep"><?php echo lang('entitleddays_contract_index_field_step');?></label>
-            <input type="text" class="input-mini" id="txtStep" name="txtStep" value="1">
-        </div>
-    </div>
-</div>
-
-<div class="row-fluid"><div class="span12">&nbsp;</div></div>
-
-    </div>
-</div>
 
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
         <div class="modal-header">
@@ -136,6 +140,7 @@ if ($language_code != 'en') { ?>
     var locale = '<?php echo $language_code;?>';
     var oTable;     //datatable
     var step = 1;
+    var current_id = 1;
     
     function set_current_period() {
         var now = moment();
@@ -194,13 +199,81 @@ if ($language_code != 'en') { ?>
                 }
         });
     }
+    
+    //Open the pop-up (edit mode), load its fields with the content of the fields
+    //of the selected row in the datatable
+    function show_edit_entitleddays(id) {
+        $('#frmAddEntitledDays').modal('show');
+        $("#cmdFrmAddEntitledDays").hide();
+        $("#cmdFrmSaveEntitledDays").show();
+        $("#frmAddEntitledDaysTitle").html('<?php echo lang('entitleddays_contract_index_title');?>');
+        
+        startdate = $("tr[data-id='" + id + "']>td:eq(1)").data('order');
+        startdate = moment(startdate, 'X').format("YYYY-MM-DD");
+        enddate = $("tr[data-id='" + id + "']>td:eq(2)").data('order');
+        enddate = moment(enddate, 'X').format("YYYY-MM-DD");
+        days = parseFloat($("tr[data-id='" + id + "']>td:eq(3)").text());
+        type = $("tr[data-id='" + id + "']>td:eq(4)").data('id');
+        type_name = $("tr[data-id='" + id + "']>td:eq(4)").text();
+        description = $("tr[data-id='" + id + "']>td:eq(5)").text();
+        
+        $('#viz_startdate').datepicker('setDate', new Date(startdate));
+        $('#viz_enddate').datepicker('setDate', new Date(enddate));
+        $("#type").val(type);
+        $("#days").val(days);
+        $("#description").val(description);
+        current_id = id;
+    }
+    
+    //Remote Ajax call for saving the modified values, update of the datatable
+    function edit_entitleddays() {
+        $('#frmAddEntitledDays').modal('hide');
+        $('#frmModalAjaxWait').modal('show');
+        $.ajax({
+            url: "<?php echo base_url();?>entitleddays/ajax/update",
+                            type: "POST",
+                data: { id: current_id,
+                        operation: "update",
+                        startdate: $("#startdate").val(),
+                        enddate: $("#enddate").val(),
+                        days: parseFloat($('#days').val()),
+                        type: $("#type").val(),
+                        description: $("#description").val(),
+                    }
+          })
+   
+        //Start date
+        startdate = moment($("#startdate").val(), "YYYY-MM-DD").unix();
+        $("tr[data-id='" + current_id + "'] td:eq(1)").data('order', startdate);
+        cell = oTable.cell("tr[data-id='" + current_id + "'] td:eq(1)");
+        cell.data($("#viz_startdate").val()).draw();
+        //End date
+        enddate = moment($("#enddate").val(), "YYYY-MM-DD").unix();
+        $("tr[data-id='" + current_id + "'] td:eq(2)").data('order', enddate);
+        cell = oTable.cell("tr[data-id='" + current_id + "'] td:eq(2)");
+        cell.data($("#viz_enddate").val()).draw();
+        //Days (mind +/- icons)
+        days = parseFloat($('#days').val());
+        cell_val = '<td data-order="' + days.toFixed(2) + '"><span id="days' + current_id + '">' + days.toFixed(2) + '</span> &nbsp; ' +
+                        '<a href="#" onclick="Javascript:incdec(' + current_id + ', \'decrease\');"><i class="icon-minus"></i></a>' +
+                        '&nbsp; <a href="#" onclick="Javascript:incdec(' + current_id + ', \'increase\');"><i class="icon-plus"></i></a></td>';
+        cell = oTable.cell("tr[data-id='" + current_id + "'] td:eq(3)");
+        cell.data(cell_val).draw();
+        //Type of leave
+        $("tr[data-id='" + current_id + "'] td:eq(4)").data('id', $("#type").val());
+        cell = oTable.cell("tr[data-id='" + current_id + "'] td:eq(4)");
+        cell.data($("#type option:selected").text()).draw();
+        //Description
+        cell = oTable.cell("tr[data-id='" + current_id + "'] td:eq(5)");
+        cell.data($("#description").val()).draw();
+        $('#frmModalAjaxWait').modal('hide');
+    }
 
     //"increase" or "decrease" the number of entitled days of a given row
     function incdec(id, operation) {
         $('#frmModalAjaxWait').modal('show');
-        text2td();
         $.ajax({
-            url: "<?php echo base_url();?>entitleddays/ajax/incdec",
+            url: "<?php echo base_url();?>entitleddays/ajax/update",
                             type: "POST",
                 data: { id: id,
                         operation: operation,
@@ -242,6 +315,13 @@ if ($language_code != 'en') { ?>
         }
     }
 
+    function show_add_entitleddays() {
+        $('#frmAddEntitledDays').modal('show');
+        $("#cmdFrmAddEntitledDays").show();
+        $("#cmdFrmSaveEntitledDays").hide();
+        $("#frmAddEntitledDaysTitle").html('<?php echo lang('entitleddays_contract_popup_title');?>');
+    }
+
     function create_entitleddays(startdate, viz_startdate, enddate, viz_enddate, days, type, type_name, description) {
         $('#frmModalAjaxWait').modal('show');
         $.ajax({
@@ -257,8 +337,9 @@ if ($language_code != 'en') { ?>
           }).done(function( msg ) {
               id = parseInt(msg);
               htmlRow = '<tr data-id="' + id + '">' +
-                        '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="Supprimer"><i class="icon-remove"></i></a>' +
-                        '&nbsp;&nbsp;<a href="#" onclick="copy_entitleddays(' + id + ');" title="Copier"><i class="fa fa-copy" style="color:black;"></i></a></td>' +
+                        '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a>' +
+                        '&nbsp;&nbsp;<a href="#" onclick="copy_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_copy');?>"><i class="fa fa-copy" style="color:black;"></i></a>' +
+                        '&nbsp;&nbsp;<a href="#" onclick="show_edit_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a></td>' +
                         '<td data-order="' + moment.utc(startdate, "YYYY-MM-DD").unix() + '">' + viz_startdate + '</td>' +
                         '<td data-order="' + moment.utc(enddate, "YYYY-MM-DD").unix() + '">' + viz_enddate + '</td>' +
                         '<td data-order="' + days.toFixed(2) + '"><span id="days' + id + '" class="credit">' + days.toFixed(2) + '</span> &nbsp; ' +
@@ -272,55 +353,7 @@ if ($language_code != 'en') { ?>
               $('#frmModalAjaxWait').modal('hide');
         });
     }
-    
-    //Make an Ajax call to the backend so as to save entitled days amount
-    function saveInputByAjax(e) {
-        var code = e.keyCode || e.which;
-        if (code == 13) {
-            $('#frmModalAjaxWait').modal('show');
-            if ($("#txtCredit").val() == "") $("#txtCredit").val("0");
-            credit = parseFloat($("#txtCredit").val());
-            $.ajax({
-                url: "<?php echo base_url();?>entitleddays/ajax/incdec",
-                                type: "POST",
-                    data: { id: $("#txtCredit").closest( "tr" ).data( "id" ),
-                                operation: "credit",
-                                days: $("#txtCredit").val()
-                        }
-              }).done(function() {
-                  $('#frmModalAjaxWait').modal('hide');
-                  text2td();
-              });
-        } else {
-            //Force decimal separator whatever the locale is
-            var value = $("#txtCredit").val();
-            value = value.replace(",", ".");
-            $("#txtCredit").val(value);
-        }
-    }
-    
-    //Change back an input text box into the former readonly HTML element (e.g. SPAN or TD)
-    function text2td() {
-        if (current_input != null) {
-           $("txtCredit").off('keyup');
-           current_input.html(credit.toFixed(2));
-           $(".credit").on('click', spanClick);
-           current_input = null;
-       }
-    }
-    
-    //Change a SPAN element into an input text box
-    function spanClick(){
-        var days = parseFloat($(this).text());
-        $(this).html("<input type='text' id='txtCredit' class='input-small' value='" + days + "'/>");
-        text2td();
-        current_input = $(this);
-        credit = days;
-        $(".credit").off('click');
-        $("#txtCredit").on('keyup', saveInputByAjax);       //If enter key, save by ajax, otherwise force decimal
-        $("#txtCredit").focus();
-    }
-    
+
     $(function () {
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
     $.ajaxSetup({
@@ -329,6 +362,20 @@ if ($language_code != 'en') { ?>
         }
     });
 <?php }?>
+
+        //Global Ajax error handling mainly used for session expiration
+        $( document ).ajaxError(function(event, jqXHR, settings, errorThrown) {
+            $('#frmModalAjaxWait').modal('hide');
+            if (jqXHR.status == 401) {
+                bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
+                    //After the login page, we'll be redirected to the current page 
+                   location.reload();
+                });
+            } else { //Oups
+                bootbox.alert("<?php echo lang('global_ajax_error');?>");
+            }
+          });
+      
         $("#viz_startdate").datepicker({
             changeMonth: true,
             changeYear: true,
@@ -361,8 +408,6 @@ if ($language_code != 'en') { ?>
             if (e.keyCode == 27) {
                 if ($('#frmAddEntitledDays').hasClass('in')) {
                     $('#frmAddEntitledDays').modal('hide');
-                } else {
-                    text2td();
                 }
             }
         });
@@ -405,14 +450,7 @@ if ($language_code != 'en') { ?>
                         "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
                         "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
                     }
-                },
-                    "drawCallback": function() {
-                        //Transform a text label into an editable text field, algo
-                        //- On ESC or on click, transform all existing text field back to text label.
-                        //- onclick on a TD with .credit class transform it into a text field
-                        //- Handle dynamic update of credit field
-                        $(".credit").on('click', spanClick);
-                    }
+                }
             });
     });
 </script>

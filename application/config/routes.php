@@ -66,7 +66,7 @@ $route['hr/leaves/create/(:num)'] = 'hr/createleave/$1';
 $route['hr/presence/(:num)'] = 'hr/presence/$1';
 $route['hr/presence/(:num)/(:num)/(:num)'] = 'hr/presence/$1/$2/$3';
 $route['hr/presence/export/(:num)/(:num)/(:num)'] = 'hr/export_presence/$1/$2/$3';
-$route['hr'] = 'hr';
+$route['hr'] = 'hr/employees';
 
 //HR edit leave types
 $route['leavetypes/delete/(:num)'] = 'leavetypes/delete/$1';
@@ -103,7 +103,6 @@ $route['contracts/calendar/alldayoffs'] = 'contracts/allDayoffs';
 $route['contracts'] = 'contracts';
 
 //HR Organization
-$route['organization'] = 'organization';
 $route['organization/select'] = 'organization/select';
 $route['organization/root'] = 'organization/root';
 $route['organization/delete'] = 'organization/delete';
@@ -116,6 +115,7 @@ $route['organization/addemployee'] = 'organization/addemployee';
 $route['organization/delemployee'] = 'organization/delemployee';
 $route['organization/getsupervisor'] = 'organization/getsupervisor';
 $route['organization/setsupervisor'] = 'organization/setsupervisor';
+$route['organization'] = 'organization';
 
 //Various calendars
 $route['calendar/individual'] = 'calendar/individual';
@@ -130,6 +130,7 @@ $route['calendar/year/(:num)/(:num)'] = 'calendar/year/$1/$2';
 $route['calendar/year/(:num)'] = 'calendar/year/$1';
 $route['calendar/year'] = 'calendar/year';
 $route['calendar/year/export/(:num)/(:num)'] = 'calendar/year_export/$1/$2';
+$route['calendar'] = 'calendar/individual';
 
 //private Fullcalendar feeds
 $route['leaves/individual/(:num)'] = 'leaves/individual/$1';
@@ -201,6 +202,7 @@ $route['entitleddays/ajax/update'] = 'entitleddays/ajax_update';
 $route['reports/balance'] = 'reports/balance';
 $route['reports/balance/execute'] = 'reports/balance_execute';
 $route['reports/balance/export'] = 'reports/balance_export';
+$route['reports'] = 'reports/balance';
 
 //_______________________________________________
 //REST API

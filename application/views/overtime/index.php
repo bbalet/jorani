@@ -70,7 +70,7 @@ $tmpDate = $date->getTimestamp();?>
 
 <div class="row-fluid">
     <div class="span12">
-      <a href="<?php echo base_url();?>overtime/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_export');?></a>
+      <a href="<?php echo base_url();?>overtime/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('overtime_index_button_export');?></a>
       &nbsp;&nbsp;
       <a href="<?php echo base_url();?>overtime/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_show_all');?></a>
       &nbsp;&nbsp;

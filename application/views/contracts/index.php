@@ -77,7 +77,7 @@ $(document).ready(function() {
 
 <div class="row-fluid">
     <div class="span12">
-        <a href="<?php echo base_url();?>contracts/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('contract_index_button_export');?></a>
+        <a href="<?php echo base_url();?>contracts/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('contract_index_button_export');?></a>
         &nbsp;
         <a href="<?php echo base_url();?>contracts/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('contract_index_button_create');?></a>
     </div>

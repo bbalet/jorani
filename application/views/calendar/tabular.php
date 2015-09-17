@@ -72,7 +72,7 @@ $this->lang->load('global', $language);?>
         <div class="row-fluid"><div class="span12">&nbsp;</div></div>
         <div class="row-fluid">
             <div class="span12">
-                <button id="cmdExport" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('calendar_tabular_button_export');?></button>
+                <button id="cmdExport" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('calendar_tabular_button_export');?></button>
             </div>
         </div>
 

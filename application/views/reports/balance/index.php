@@ -42,7 +42,7 @@
             </label>
             &nbsp;
             <button class="btn btn-primary" id="cmdLaunchReport"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('reports_balance_button_launch');?></button>
-            <button class="btn btn-primary" id="cmdExportReport"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('reports_balance_button_export');?></button>
+            <button class="btn btn-primary" id="cmdExportReport"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('reports_balance_button_export');?></button>
         </div>
     </div>
 </div>

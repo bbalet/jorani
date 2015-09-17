@@ -54,7 +54,7 @@
 
 <div class="row-fluid">
     <div class="span3">
-      <a href="<?php echo base_url();?>leavetypes/export" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('leavetypes_type_button_export');?></a>
+      <a href="<?php echo base_url();?>leavetypes/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('leavetypes_type_button_export');?></a>
     </div>
     <div class="span3">
         <a href="<?php echo base_url();?>leavetypes/create" class="btn btn-primary" data-target="#frmAddLeaveType" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('leavetypes_type_button_create');?></a>

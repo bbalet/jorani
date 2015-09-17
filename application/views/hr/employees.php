@@ -66,7 +66,7 @@
       <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_create_user');?></a>
     </div>
     <div class="span2">
-      <a href="#" id="cmdExportEmployees" class="btn btn-primary"><i class="icon-file icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
+      <a href="#" id="cmdExportEmployees" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
     </div>
     <div class="span8">&nbsp;</div>
 </div>
@@ -97,7 +97,7 @@
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/overtime/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a></li>
         <?php } ?>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/counters/{id}"><i class="icon-info-sign"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a></li>
-        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/presence/{id}"><i class="icon-calendar"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/presence/{id}"><i class="fa fa-pie-chart"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>calendar/year/{id}"><i class="icon-calendar"></i>&nbsp;<?php echo lang('hr_employees_thead_link_calendar');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>requests/delegations/{id}"><i class="icon-share-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a></li>
   </ul>
@@ -113,7 +113,7 @@
         <a class="context-mobile" href="<?php echo base_url();?>hr/overtime/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a><br />
         <?php } ?>
         <a class="context-mobile" href="<?php echo base_url();?>hr/counters/{id}"><i class="icon-info-sign"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a><br />
-        <a class="context-mobile" href="<?php echo base_url();?>hr/presence/{id}"><i class="icon-calendar"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>hr/presence/{id}"><i class="fa fa-pie-chart"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a><br />
         <a class="context-mobile" href="<?php echo base_url();?>calendar/year/{id}"><i class="icon-calendar"></i>&nbsp;<?php echo lang('hr_employees_thead_link_calendar');?></a><br />
         <a class="context-mobile" href="<?php echo base_url();?>requests/delegations/{id}"><i class="icon-share-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a>
   </div>

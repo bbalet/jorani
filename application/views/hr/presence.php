@@ -39,7 +39,11 @@
         <?php if ($contract_id != '') { ?>
         <p><?php echo lang('hr_presence_contract');?> : <b><?php echo $contract_name;?></b></p>
         <p><?php echo lang('hr_presence_working_days');?> : <b><?php echo $opened_days;?></b></p>
+        <?php if ($source == 'collaborators') {?>
+        <p><?php echo lang('hr_presence_non_working_days');?> : <b><?php echo $non_working_days;?></b></p>
+        <?php } else { ?>
         <p><?php echo lang('hr_presence_non_working_days');?> : <b><a href="<?php echo base_url();?>contracts/<?php echo $contract_id; ?>/calendar"><?php echo $non_working_days;?></a></b></p>
+        <?php } ?>
         <?php } else { ?>
         <p><?php echo lang('hr_presence_contract');?> : <i class="icon-warning-sign"></i><?php echo lang('hr_presence_no_contract');?></p>
         <p><?php echo lang('hr_presence_working_days');?> : <i class="icon-warning-sign"></i><?php echo lang('hr_presence_no_contract');?></p>
@@ -81,7 +85,7 @@
         <button id="cmdExecute" class="btn btn-primary"><?php echo lang('hr_presence_button_execute');?></button>
         <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
         <br /><br />
-        <a href="<?php echo base_url() . 'hr/presence/export/' . $user_id . '/' . $month . '/' . $year;?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_presence_button_export');?></a>
+        <a href="<?php echo base_url() . 'hr/presence/export/' . $source . '/' . $user_id . '/' . $month . '/' . $year;?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_presence_button_export');?></a>
      </div>
 </div>
 
@@ -232,6 +236,8 @@
 	</tbody>
 </table>
 
+<hr />
+
 <div class="row-fluid">
     <div class="span12">
         <h3><?php echo lang('hr_summary_title');?>&nbsp;<?php echo $employee_id; ?>&nbsp;<span class="muted"> (<?php echo $employee_name; ?>)</span>&nbsp;<?php echo $help;?></h3>
@@ -265,14 +271,15 @@
     </div>
 </div>
 
-
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
+<?php if ($source == 'employees') {?>
 <div class="row-fluid">
     <div class="span12">
       <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_presence_button_list');?></a>
     </div>
 </div>
+<?php } ?>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
@@ -356,7 +363,7 @@ $(function () {
         $('#cmdExecute').click(function() {
             var month = $('#cboMonth').val();
             var year = $('#cboYear').val();
-            var url = '<?php echo base_url();?>hr/presence/' + employee + '/' + month+ '/' + year;
+            var url = '<?php echo base_url();?>hr/presence/<?php echo $source;?>/' + employee + '/' + month+ '/' + year;
             document.location.href = url;
         });
 <?php $datePrev = date_create($year . '-' . $month . '-01');
@@ -367,13 +374,13 @@ date_sub($datePrev, date_interval_create_from_date_string('1 month'));?>
         $('#cmdPrevious').click(function() {
             month = <?php echo $datePrev->format('m'); ?>;
             year = <?php echo $datePrev->format('Y'); ?>;
-            var url = '<?php echo base_url();?>hr/presence/' + employee + '/' + month+ '/' + year;
+            var url = '<?php echo base_url();?>hr/presence/<?php echo $source;?>/' + employee + '/' + month+ '/' + year;
             document.location.href = url;
         });
         $('#cmdNext').click(function() {
             month = <?php echo $dateNext->format('m'); ?>;
             year = <?php echo $dateNext->format('Y'); ?>;
-            var url = '<?php echo base_url();?>hr/presence/' + employee + '/' + month+ '/' + year;
+            var url = '<?php echo base_url();?>hr/presence/<?php echo $source;?>/' + employee + '/' + month+ '/' + year;
             document.location.href = url;
         });
         

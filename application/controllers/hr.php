@@ -234,12 +234,18 @@ class Hr extends CI_Controller {
     
     /**
      * Display presence details for a given employee
+     * @param string $source page calling the report (employees, collaborators)
      * @param int $id employee id
+     * @param int $month Month number or 0 for last month (default)
+     * @param int $year Year number or 0 for current year (default)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function presence($id, $month=0, $year=0) {
-        $this->auth->check_is_granted('list_employees');
+    public function presence($source, $id, $month=0, $year=0) {
+        if ($source == 'collaborators') { $this->auth->check_is_granted('list_collaborators'); }
+        if ($source == 'employees') { $this->auth->check_is_granted('list_employees'); }
         $data = getUserContext($this);
+        if ($source == 'collaborators') { $data['source'] = 'collaborators'; }
+        if ($source == 'employees') { $data['source'] = 'employees'; }
         $this->lang->load('datatable', $this->language);
         $this->lang->load('calendar', $this->language);
         $data['title'] = lang('hr_presence_title');
@@ -253,6 +259,11 @@ class Hr extends CI_Controller {
         
         //Details about the employee
         $employee = $this->users_model->get_users($id);
+        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to access to hr/presence  #' . $id);
+            $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'hr/presence'));
+            redirect('leaves');
+        }
         $data['employee_name'] =  $employee['firstname'] . ' ' . $employee['lastname'];
         $contract = $this->contracts_model->get_contracts($employee['contract']);
         if (!empty($contract)) {
@@ -454,11 +465,15 @@ class Hr extends CI_Controller {
     
     /**
      * Action: export the presence details for a given employee
+     * @param string $source page calling the report (employees, collaborators)
      * @param int $id employee id
+     * @param int $month Month number or 0 for last month (default)
+     * @param int $year Year number or 0 for current year (default)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function export_presence($id, $month=0, $year=0) {
-        $this->auth->check_is_granted('list_employees');
+    public function export_presence($source,$id, $month=0, $year=0) {
+        if ($source == 'collaborators') { $this->auth->check_is_granted('list_collaborators'); }
+        if ($source == 'employees') { $this->auth->check_is_granted('list_employees'); }
         setUserContext($this);
         expires_now();
         
@@ -471,6 +486,11 @@ class Hr extends CI_Controller {
         
         //Details about the employee
         $employee = $this->users_model->get_users($id);
+        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to access to hr/presence  #' . $id);
+            $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'hr/presence'));
+            redirect('leaves');
+        }
         $employee_name =  $employee['firstname'] . ' ' . $employee['lastname'];
         $contract = $this->contracts_model->get_contracts($employee['contract']);
         if (!empty($contract)) {
@@ -489,7 +509,7 @@ class Hr extends CI_Controller {
         //Number of non working days during the selected month
         $non_working_days = $this->dayoffs_model->sumdayoffs($employee['contract'], $start, $end);
         $opened_days = $total_days - $non_working_days;
-        $month_name = date('F', strtotime($start));
+        $month_name = lang(date('F', strtotime($start)));
         
         //tabular view of the leaves
         $linear = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE);

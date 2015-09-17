@@ -63,9 +63,9 @@ $route['hr/counters/(:num)/(:num)'] = 'hr/counters/$1/$2';
 $route['hr/overtime/export/(:num)'] = 'hr/export_overtime/$1';
 $route['hr/entitleddays/(:num)'] = 'hr/entitleddays/$1';
 $route['hr/leaves/create/(:num)'] = 'hr/createleave/$1';
-$route['hr/presence/(:num)'] = 'hr/presence/$1';
-$route['hr/presence/(:num)/(:num)/(:num)'] = 'hr/presence/$1/$2/$3';
-$route['hr/presence/export/(:num)/(:num)/(:num)'] = 'hr/export_presence/$1/$2/$3';
+$route['hr/presence/([^/]+)/(:num)'] = 'hr/presence/$1/$2';
+$route['hr/presence/([^/]+)/(:num)/(:num)/(:num)'] = 'hr/presence/$1/$2/$3/$4';
+$route['hr/presence/export/([^/]+)/(:num)/(:num)/(:num)'] = 'hr/export_presence/$1/$2/$3/$4';
 $route['hr'] = 'hr/employees';
 
 //HR edit leave types
@@ -157,7 +157,7 @@ $route['leaves/(:num)'] = 'leaves/view/$1';
 $route['leaves/validate'] = 'leaves/validate';
 $route['leaves'] = 'leaves';
 
-//leave requests
+//leave requests (submitted to the line manager)
 $route['requests/collaborators'] = 'requests/collaborators';
 $route['requests/createleave/(:num)'] = 'requests/createleave/$1';
 $route['requests/counters/(:num)'] = 'requests/counters/$1';

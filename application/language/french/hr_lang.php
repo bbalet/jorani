@@ -125,7 +125,7 @@ $lang['hr_export_overtime_thead_date'] = 'Date';
 $lang['hr_export_overtime_thead_duration'] = 'Durée';
 $lang['hr_export_overtime_thead_cause'] = 'Cause';
 
-$lang['hr_summary_title'] = 'Compteur de congés pour l\'employée #';
+$lang['hr_summary_title'] = 'Compteur de congés pour l\'employé #';
 $lang['hr_summary_thead_type'] = 'Type de congés';
 $lang['hr_summary_thead_available'] = 'Disponible';
 $lang['hr_summary_thead_taken'] = 'Pris';
@@ -144,7 +144,7 @@ $lang['hr_presence_thead_end'] = 'Date de fin';
 $lang['hr_presence_thead_duration'] = 'Durée';
 $lang['hr_presence_thead_type'] = 'Type';
 $lang['hr_presence_button_execute'] = 'Exécuter';
-$lang['hr_presence_button_list'] = 'Liste des employeés';
+$lang['hr_presence_button_list'] = 'Liste des employés';
 $lang['hr_presence_employee'] = 'Employé';
 $lang['hr_presence_contract'] = 'Contrat';
 $lang['hr_presence_month'] = 'Mois';

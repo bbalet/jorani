@@ -133,9 +133,8 @@ class Requests extends CI_Controller {
         }
     }
     
-        /**
-     * Display the list of all requests submitted to you
-     * Status is submitted
+    /**
+     * Display the list of all requests submitted to the line manager (Status is submitted)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function collaborators() {
@@ -153,7 +152,7 @@ class Requests extends CI_Controller {
         $this->load->view('requests/collaborators', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Display the list of delegations
      * @param int $id Identifier of the manager (from HR/Employee) or 0 if self
@@ -242,7 +241,7 @@ class Requests extends CI_Controller {
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to collaborators/leave/create  #' . $id);
             $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_forbidden'));
-            redirect('requests/collaborators');
+            redirect('leaves');
         } else {
             $data = getUserContext($this);
             $this->load->helper('form');

@@ -47,7 +47,8 @@
                 <a href="<?php echo base_url();?>requests/createleave/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_create_leave');?>"><i class="icon-plus"></i></a>
                 <?php } ?>
                 <a href="<?php echo base_url();?>requests/counters/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_balance');?>"><i class="icon-info-sign"></i></a>
-                &nbsp;<a href="<?php echo base_url();?>calendar/year/<?php echo $collaborator['id'] ?>"><i class="icon-calendar"></i></a>
+                &nbsp;<a href="<?php echo base_url();?>hr/presence/collaborators/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_presence');?>"><i class="fa fa-pie-chart" style="color:black;"></i></a>
+                &nbsp;<a href="<?php echo base_url();?>calendar/year/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_year');?>"><i class="icon-calendar"></i></a>
             </div>
         </td>
         <td><?php echo $collaborator['firstname'] ?></td>

@@ -5,6 +5,8 @@ Jorani is designed to provide simple leave and overtime request workflows for sm
 
 ## Informations / getting help
 
+[![Join the chat at https://gitter.im/bbalet/jorani](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bbalet/jorani?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 * Official website : http://jorani.org/
 * User group : https://groups.google.com/forum/?hl=en#!forum/jorani
 

@@ -43,7 +43,7 @@
       if ($value[2] == '') {?>
     <tr>
       <td><?php echo $key; ?></td>
-      <td><?php echo ((float) $value[1] - (float) $value[0]); ?></td>
+      <td><?php echo round(((float) $value[1] - (float) $value[0]), 3, PHP_ROUND_HALF_DOWN); ?></td>
       <td><?php echo ((float) $value[0]); ?></td>
       <td><?php echo ((float) $value[1]); ?></td>
     </tr>

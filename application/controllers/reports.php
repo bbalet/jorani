@@ -137,7 +137,7 @@ class Reports extends CI_Controller {
             $summary = $this->leaves_model->get_user_leaves_summary($user->id, TRUE, $refDate);
             if (count($summary) > 0 ) {
                 foreach ($summary as $key => $value) {
-                    $result[$user->id][$key] = $value[1] - $value[0];
+                    $result[$user->id][$key] = round($value[1] - $value[0], 3, PHP_ROUND_HALF_DOWN);
                 }
             }
         }
@@ -219,7 +219,7 @@ class Reports extends CI_Controller {
             $summary = $this->leaves_model->get_user_leaves_summary($user->id, TRUE, $refDate);
             if (count($summary) > 0 ) {
                 foreach ($summary as $key => $value) {
-                    $result[$user->id][$key] = $value[1] - $value[0];
+                    $result[$user->id][$key] = round($value[1] - $value[0], 3, PHP_ROUND_HALF_DOWN);
                 }
             }
         }

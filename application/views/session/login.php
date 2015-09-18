@@ -145,7 +145,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
             onChange: function (value) {
                 if (value != '') {
                     $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
-                    $('#loginFrom').prop('action', '<?php echo base_url();?>connection/language');
+                    $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
                     $('#loginFrom').submit();
                 }
             }

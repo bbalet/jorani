@@ -27,7 +27,7 @@ $lang['calendar_individual_popup_event_link_ical'] = 'Download an iCal file';
 $lang['calendar_individual_popup_event_link_ical_description'] = '(import the event into Outlook, Thunderbird, etc.)';
 $lang['calendar_individual_popup_event_title'] = 'Event details';
 $lang['calendar_individual_popup_event_button_close'] = 'Close';
-$lang['calendar_individual_day_offs'] = 'Day offs';
+$lang['calendar_individual_day_offs'] = 'Days off';
 
 $lang['calendar_workmates_title'] = 'Calendar of my workmates';
 $lang['calendar_workmates_description'] = 'Leaves of employees having the same line manager';

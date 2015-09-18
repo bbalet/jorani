@@ -38,7 +38,7 @@ $lang['overtime_reject_flash_msg_success'] = 'The overtime request has been succ
 $lang['overtime_accept_flash_msg_error'] = 'You are not the line manager of this employee. You cannot accept this overtime request.';
 $lang['overtime_accept_flash_msg_success'] = 'The overtime request has been successfully accepted.';
 
-$lang['overtime_export_title'] = 'List of overtime resquests';
+$lang['overtime_export_title'] = 'List of overtime requests';
 $lang['overtime_export_thead_id'] = 'ID';
 $lang['overtime_export_thead_fullname'] = 'Fullname';
 $lang['overtime_export_thead_date'] = 'Date';

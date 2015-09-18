@@ -62,7 +62,7 @@ $lang['requests_accept_flash_msg_success'] = 'The leave request has been success
 $lang['requests_reject_flash_msg_error'] = 'You are not the line manager of this employee. You cannot reject this leave request.';
 $lang['requests_reject_flash_msg_success'] = 'The leave request has been successfully rejected.';
 
-$lang['requests_export_title'] = 'List of leave resquests';
+$lang['requests_export_title'] = 'List of leave requests';
 $lang['requests_export_thead_id'] = 'ID';
 $lang['requests_export_thead_fullname'] = 'Fullname';
 $lang['requests_export_thead_startdate'] = 'Start Date';

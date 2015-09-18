@@ -10,9 +10,8 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Prevent double-click in validation/leaves.
 - [X] Excel export of the yearly calendar.
 - [X] Better entitled days editor (contract / employee).
-- [ ] Round values in HR/counters, Manager/counters, Self/counters and leave balance report.
-- [ ] Regresion test on leave balance report (negative value / no credit).
-- [ ] Regresion test on HR/counters, Manager/counters, Self/counters (cuurent date vs. yesterday).
+- [X] Round values in HR/counters, Manager/counters, Self/counters and leave balance report.
+- [ ] Regresion test on HR/counters, Manager/counters, Self/counters (current date vs. yesterday).
 
 ## v0.5.0 or later
 

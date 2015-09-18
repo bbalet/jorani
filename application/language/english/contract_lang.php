@@ -26,7 +26,7 @@ $lang['contract_index_thead_end'] = 'End period';
 $lang['contract_index_tip_delete'] = 'delete contract';
 $lang['contract_index_tip_edit'] = 'edit contract';
 $lang['contract_index_tip_entitled'] = 'entitled days';
-$lang['contract_index_tip_dayoffs'] = 'day offs and weekends';
+$lang['contract_index_tip_dayoffs'] = 'days off and weekends';
 $lang['contract_index_button_export'] = 'Export this list';
 $lang['contract_index_button_create'] = 'Create contract';
 
@@ -69,7 +69,7 @@ $lang['contract_export_thead_start'] = 'Start period';
 $lang['contract_export_thead_end'] = 'End period';
 
 $lang['contract_calendar_title'] = 'Calendar of non working days';
-$lang['contract_calendar_description'] = 'Day offs and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".';
+$lang['contract_calendar_description'] = 'Days off and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".';
 $lang['contract_calendar_legend_title'] = 'Legend:';
 $lang['contract_calendar_legend_allday'] = 'All day';
 $lang['contract_calendar_legend_morning'] = 'Morning';
@@ -89,7 +89,7 @@ $lang['contract_calendar_popup_dayoff_button_cancel'] = 'Cancel';
 $lang['contract_calendar_button_import'] = 'Import iCal';
 $lang['contract_calendar_prompt_import'] = 'URL of non-working days iCal file';
 
-$lang['contract_calendar_popup_series_title'] = 'Edit a series of day offs';
+$lang['contract_calendar_popup_series_title'] = 'Edit a series of days off';
 $lang['contract_calendar_popup_series_field_occurences'] = 'Mark every';
 $lang['contract_calendar_popup_series_field_from'] = 'From';
 $lang['contract_calendar_popup_series_button_current'] = 'Current';

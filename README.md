@@ -60,6 +60,7 @@ Use bbalet / bbalet for login / password.
 * Roger WOLFS : Dutch Translation
 * Christian SONNENBERG : German Translation
 * Dario BRIGNONE : Italian Translation
+* Oleg KOPTEV : Russian Translation
 
 ### Third party libraries and components
 

@@ -178,7 +178,7 @@ class CI_Session {
 		// Decrypt the cookie data
 		if ($this->sess_encrypt_cookie == TRUE)
 		{
-			$session = $this->CI->encrypt->decode($session);
+			$session = $this->CI->encrypt->decrypt($session);
 		}
 
 		// Unserialize the session array
@@ -671,7 +671,7 @@ class CI_Session {
 
 		if ($this->sess_encrypt_cookie == TRUE)
 		{
-			$cookie_data = $this->CI->encrypt->encode($cookie_data);
+			$cookie_data = $this->CI->encrypt->encrypt($cookie_data);
 		}
 
 		$cookie_data .= hash_hmac('sha1', $cookie_data, $this->encryption_key);

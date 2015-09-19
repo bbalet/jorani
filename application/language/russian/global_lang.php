@@ -18,6 +18,7 @@
  * @author Oleg Koptev
  */
 
+$lang['Leave Management System'] = 'отпуск системы управления';
 $lang['global_link_tooltip_documentation'] = 'Ссылка на документацию';
 $lang['global_msg_error_forbidden'] = 'Выполнение данного действия (%s) недоступно.';
 $lang['global_msg_wait'] = 'Подождите';
@@ -67,6 +68,7 @@ $lang['global_link_doc_page_leave_balance_report'] = 'http://jorani.org/page-lea
 
 $lang['Morning'] = 'Утро';
 $lang['Afternoon'] = 'После полудня';
+$lang['today'] = 'сегодня';
 
 $lang['identifier'] = 'идентификатор';
 $lang['firstname'] = 'имя';

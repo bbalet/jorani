@@ -18,7 +18,6 @@
  * @author Oleg Koptev
  */
 
-$lang['menu_banner_slogan'] = 'отпуск системы управления';
 $lang['menu_banner_change_password'] = 'Изменить пароль';
 $lang['menu_banner_welcome'] = 'Добро пожаловать';
 $lang['menu_banner_logout'] = 'Выйти';

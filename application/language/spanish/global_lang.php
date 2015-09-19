@@ -17,15 +17,19 @@
  * @author hnestar
  */
 
+$lang['Leave Management System'] = 'Sistema de gestión de permisos';
 $lang['global_link_tooltip_documentation'] = 'Enlace a la documentación';
 $lang['global_msg_error_forbidden'] = 'Operación (%s) no aceptada';
 $lang['global_msg_wait'] = 'Por favor espera';
 $lang['global_msg_old_browser'] = 'El navegador Internet Explorer 8 o anteriores no estan soportado. Por favor actuliza IE9 o usa Firefox, Chrome, etc.';
+
 $lang['global_date_format'] = 'd/m/Y';
 $lang['global_true'] = 'Verdadero';
 $lang['global_false'] = 'Falso';
+
 $lang['footer_link_go_top'] = 'Ir arriba';
 $lang['footer_copyright_notice'] = '&copy; 2014 los autores de Jorani';
+
 $lang['Requested'] = 'Solicitado';
 $lang['Planned'] = 'Planificado';
 $lang['Accepted'] = 'Aceptado';
@@ -63,6 +67,8 @@ $lang['global_link_doc_page_leave_balance_report'] = '';
 
 $lang['Morning'] = 'Mañana';
 $lang['Afternoon'] = 'Tarde';
+$lang['today'] = 'hoy';
+
 $lang['identifier'] = 'identificación';
 $lang['firstname'] = 'nombre';
 $lang['lastname'] = 'apellido';

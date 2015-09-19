@@ -23,7 +23,7 @@ $this->lang->load('menu', $language);?>
 
 <div class="row-fluid">
     <div class="span6">
-        <h3><a href="<?php echo base_url();?>" style="text-decoration:none; color:black;"><img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;<?php echo lang('menu_banner_slogan');?></a>
+        <h3><a href="<?php echo base_url();?>" style="text-decoration:none; color:black;"><img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;<?php echo lang('Leave Management System');?></a>
     </div>
     <div class="span6">
         <div class="pull-right">

@@ -45,7 +45,7 @@
 <div class="row-fluid">
     <div class="span6">
         <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
-        <button id="cmdToday" class="btn btn-primary"><?php echo lang('calendar_component_buttonText_today');?></button>
+        <button id="cmdToday" class="btn btn-primary"><?php echo lang('today');?></button>
         <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
     </div>
     <div class="span6">

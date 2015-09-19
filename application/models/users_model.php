@@ -577,7 +577,7 @@ class Users_model extends CI_Model {
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function employeesEntity($id = 0, $children = TRUE) {
+    public function employees_of_entity($id = 0, $children = TRUE) {
         $entities = null;
         $this->db->select('users.id as id,'
                 . ' users.firstname as firstname,'
@@ -589,26 +589,23 @@ class Users_model extends CI_Model {
         $this->db->from('users');
         $this->db->join('contracts', 'contracts.id = users.contract', 'left outer');
         $this->db->join('users as managers', 'managers.id = users.manager', 'left outer');
+        $this->db->join('organization', 'organization.id = users.organization', 'left outer');
 
-        if ($id != 0) {
-            $this->db->join('organization', 'organization.id = users.organization');
-            if ($children == true) {
-                $this->load->model('organization_model');
-                $list = $this->organization_model->get_all_children($id);
-                $ids = array();
-                if (count($list) > 0) {
-                    if ($list[0]['id'] != '') {
-                        $ids = explode(",", $list[0]['id']);
-                    }
+        if ($children == TRUE) {
+            $this->load->model('organization_model');
+            $list = $this->organization_model->get_all_children($id);
+            $ids = array();
+            if (count($list) > 0) {
+                if ($list[0]['id'] != '') {
+                    $ids = explode(",", $list[0]['id']);
                 }
-                array_push($ids, $id);
-                $this->db->where_in('organization.id', $ids);
-            } else {
-                $this->db->where('organization.id', $id);
             }
+            array_push($ids, $id);
+            $this->db->where_in('organization.id', $ids);
         } else {
-            $this->db->join('organization', 'organization.id = users.organization', 'left outer');
+            $this->db->where('users.organization', $id);
         }
+
         return $this->db->get()->result();
     }
 

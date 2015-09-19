@@ -17,7 +17,6 @@
  * @author Roger WOLFS
  */
 
-$lang['menu_banner_slogan'] = 'Afwezigheid Management Systeem';
 $lang['menu_banner_change_password'] = 'Nieuw wachtwoord';
 $lang['menu_banner_welcome'] = 'Welkom';
 $lang['menu_banner_logout'] = 'Uitloggen';

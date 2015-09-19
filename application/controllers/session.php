@@ -61,7 +61,6 @@ class Session extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function login() {
-        $this->lang->load('menu', $this->session->userdata('language'));
         $data['title'] = lang('session_login_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_login');
         $this->load->helper('form');

@@ -20,7 +20,8 @@ Use bbalet / bbalet for login / password.
 * Leave request approval workflow (1 validator).
 * Overtime request approval workflow (1 validator).
 * Leave balance report (filtered by department).
-* Export to Excel in a click.
+* Monthly presence report.
+* Export to Excel in a click (almost all pages of the application).
 * HR users can edit any leave or overtime request.
 * Set your own contracts and leave types.
 * Calendars of leaves (individual, team, collaborators, etc.).
@@ -28,7 +29,7 @@ Use bbalet / bbalet for login / password.
 * Non working days (weekends and day offs) can be defined on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
 * REST API (OAuth2) fully documented and examples with PHP clients.
 * LDAP Authentication (OpenLDAP, AD, etc.).
-* Available in English, French, Spanish, Italian, German and Dutch.
+* Available in English, French, Spanish, Italian, German, Dutch and Russian.
 
 ## Installation
 
@@ -47,8 +48,9 @@ Use bbalet / bbalet for login / password.
 
 ## Contribute
 
-* Suggest ideas, declare bugs with Github's issue tracking system or Google group.
 * Help us to translate the software in your language https://www.transifex.com/projects/p/jorani
+* Suggest ideas, declare bugs with Github's issue tracking system or Google group.
+* [Read the TODO list](TODO.md) if you want to know what are the priorities.
 
 ## Credits
 
@@ -56,11 +58,7 @@ Use bbalet / bbalet for login / password.
 
 * NGO Passerelles numériques, our first user http://passerellesnumeriques.org/en/
 * Github and Google groupe users for their ideas and tests.
-* Hector NESTAR : Spanish Translation
-* Roger WOLFS : Dutch Translation
-* Christian SONNENBERG : German Translation
-* Dario BRIGNONE : Italian Translation
-* Oleg KOPTEV : Russian Translation
+* Translation : Hector NESTAR (Spanish), Roger WOLFS (Dutch), Christian SONNENBERG (German), Dario BRIGNONE (Italian), Oleg KOPTEV (Russian) and all participants of the Transifex project.
 
 ### Third party libraries and components
 

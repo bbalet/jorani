@@ -19,6 +19,7 @@
  */
 
 //Global strings
+$lang['Leave Management System'] = 'Leave Management System';
 $lang['global_link_tooltip_documentation'] = 'Link to documentation';
 $lang['global_msg_error_forbidden'] = 'Operation (%s) is not granted';
 $lang['global_msg_wait'] = 'Please wait';
@@ -76,6 +77,7 @@ $lang['global_link_doc_page_leave_balance_report'] = 'http://jorani.org/page-lea
 //Calendar
 $lang['Morning'] = 'Morning';
 $lang['Afternoon'] = 'Afternoon';
+$lang['today'] = 'today';
 
 //Global strings
 $lang['identifier'] = 'identifier';

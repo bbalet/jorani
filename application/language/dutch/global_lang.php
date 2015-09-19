@@ -17,6 +17,7 @@
  * @author Roger WOLFS
  */
 
+$lang['Leave Management System'] = 'Afwezigheid Management Systeem';
 $lang['global_link_tooltip_documentation'] = 'Link naar documentatie';
 $lang['global_msg_error_forbidden'] = 'Deze handeling (%s) is niet toegestaan';
 $lang['global_msg_wait'] = 'Een ogenblik geduld aub';
@@ -65,6 +66,7 @@ $lang['global_link_doc_page_leave_balance_report'] = 'http://jorani.org/page-lea
 
 $lang['Morning'] = 'Ochtend';
 $lang['Afternoon'] = 'Middag';
+$lang['today'] = 'vandaag';
 
 $lang['identifier'] = 'identifier';
 $lang['firstname'] = 'voornaam';

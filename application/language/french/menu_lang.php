@@ -18,7 +18,6 @@
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
-$lang['menu_banner_slogan'] = 'Gestion des demandes de congé';
 $lang['menu_banner_change_password'] = 'Changer le mot de passe';
 $lang['menu_banner_welcome'] = 'Bienvenue';
 $lang['menu_banner_logout'] = 'Déconnexion';

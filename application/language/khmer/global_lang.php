@@ -17,6 +17,7 @@
  */
 
 //Global strings
+$lang['Leave Management System'] = 'ប្រពន្ធ័គ្រប់គ្រងការសុំច្បាប់';
 $lang['global_link_tooltip_documentation'] = 'តំណភ្ជាប់ទៅឯកសារ';
 $lang['global_msg_error_forbidden'] = 'ប្រតិបត្ដិការ (% s) គឺមិនត្រូវបានផ្តល់';
 $lang['global_msg_wait'] = 'Please wait';
@@ -74,6 +75,7 @@ $lang['global_link_doc_page_leave_balance_report'] = '';
 //Calendar
 $lang['Morning'] = 'Matin';
 $lang['Afternoon'] = 'Après-midi';
+$lang['today'] = 'ថ្ងៃនេះ';
 
 //Global strings
 $lang['identifier'] = 'identifier';

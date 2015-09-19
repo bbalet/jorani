@@ -65,34 +65,6 @@ $lang['calendar_tabular_export_param_year'] = 'Year';
 $lang['calendar_tabular_export_param_children'] = 'Sub-entities';
 $lang['calendar_tabular_export_thead_employee'] = 'Employee';
 
-$lang['calendar_component_monthNames'] = ' \'មករា\',\'កុម្ភៈ \',\' មីនា \',\' មេសា \',\' ឧសភា \',\' មិថុនា \',\' កក្កដា \',\' សីហា \',\' កញ្ញា \',\' តុលា \',\' វិច្ឆិកា \',\' ធ្នូ \'';
-$lang['calendar_component_monthNamesShort'] = ' \'មករា\',\'កុម្ភៈ \',\' មីនា \',\' មេសា \',\' ឧសភា \',\' មិថុនា \',\' កក្កដា \',\' សីហា \',\' កញ្ញា \',\' តុលា \',\' វិច្ឆិកា \',\' ធ្នូ \'';
-$lang['calendar_component_dayNames'] = '\'អាទិត្យ\',\'ចន្ទ័\',\'អង្គារ\',\'ពុុុធ\',\'ព្រហស្បត្តិ\',\'សុក្រ\',\'សៅរ៏\'';
-$lang['calendar_component_dayNamesShort'] = '\'អា\',\'ច\',\'អ\',\'ព\',\'ព្រ\',\'សុ\',\'សៅ\'';
-
-$lang['calendar_component_titleFormat_month'] = 'MMMM yyyy';
-$lang['calendar_component_titleFormat_week'] = 'MMM d[ yyyy]{ - [ MMM] d yyyy}';
-$lang['calendar_component_titleFormat_day'] = 'dddd, MMM d, yyyy';
-
-$lang['calendar_component_columnFormat_month'] = 'ddd';
-$lang['calendar_component_columnFormat_week'] = 'ddd M/d';
-$lang['calendar_component_columnFormat_day'] = 'dddd M/d';
-
-$lang['calendar_component_axisFormat'] = 'H:mm';
-$lang['calendar_component_timeFormat'] = 'h(:mm)t';
-$lang['calendar_component_timeFormat_agenda'] = 'H:mm{ - H:mm}';
-
-$lang['calendar_component_firstDay'] = '1';
-		
-$lang['calendar_component_buttonText_today'] = 'ថ្ងៃនេះ';
-$lang['calendar_component_buttonText_day'] = 'ថ្ងៃ';
-$lang['calendar_component_buttonText_week'] = 'សប្តាហ៍';
-$lang['calendar_component_buttonText_month'] = 'ខែ';
-        
-$lang['calendar_component_header_left'] = 'prev,next today';
-$lang['calendar_component_header_center'] = 'title';
-$lang['calendar_component_header_right'] = 'month,basicWeek,basicDay';
-	
 $lang['calendar_monday_short'] = 'ច';
 $lang['calendar_tuesday_short'] = 'អ';
 $lang['calendar_wednesday_short'] = 'ព';

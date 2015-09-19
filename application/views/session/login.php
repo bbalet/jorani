@@ -93,7 +93,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
                     <div class="row-fluid"><div class="span12">&nbsp;</div></div>
                     <div class="row-fluid">
                         <div class="span12">
-                            <span style="font-size: 250%; font-weight: bold; line-height: 100%;"><center><?php echo lang('menu_banner_slogan');?></center></span>
+                            <span style="font-size: 250%; font-weight: bold; line-height: 100%;"><center><?php echo lang('Leave Management System');?></center></span>
                         </div>
                     </div>
                 </div>

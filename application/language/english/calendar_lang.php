@@ -68,34 +68,6 @@ $lang['calendar_tabular_export_param_year'] = 'Year';
 $lang['calendar_tabular_export_param_children'] = 'Sub-entities';
 $lang['calendar_tabular_export_thead_employee'] = 'Employee';
 
-$lang['calendar_component_monthNames'] = '\'January\',\'February\',\'March\',\'April\',\'May\',\'June\',\'July\',\'August\',\'September\',\'October\',\'November\',\'December\'';
-$lang['calendar_component_monthNamesShort'] = '\'Jan\',\'Feb\',\'Mar\',\'Apr\',\'May\',\'Jun\',\'Jul\',\'Aug\',\'Sep\',\'Oct\',\'Nov\',\'Dec\'';
-$lang['calendar_component_dayNames'] = '\'Sunday\',\'Monday\',\'Tuesday\',\'Wednesday\',\'Thursday\',\'Friday\',\'Saturday\'';
-$lang['calendar_component_dayNamesShort'] = '\'Sun\',\'Mon\',\'Tue\',\'Wed\',\'Thu\',\'Fri\',\'Sat\'';
-
-$lang['calendar_component_titleFormat_month'] = 'MMMM yyyy';
-$lang['calendar_component_titleFormat_week'] = 'MMM d[ yyyy]{ - [ MMM] d yyyy}';
-$lang['calendar_component_titleFormat_day'] = 'dddd, MMM d, yyyy';
-
-$lang['calendar_component_columnFormat_month'] = 'ddd';
-$lang['calendar_component_columnFormat_week'] = 'ddd M/d';
-$lang['calendar_component_columnFormat_day'] = 'dddd M/d';
-
-$lang['calendar_component_axisFormat'] = 'H:mm';
-$lang['calendar_component_timeFormat'] = 'h(:mm)t';
-$lang['calendar_component_timeFormat_agenda'] = 'H:mm{ - H:mm}';
-
-$lang['calendar_component_firstDay'] = '1';
-
-$lang['calendar_component_buttonText_today'] = 'today';
-$lang['calendar_component_buttonText_day'] = 'day';
-$lang['calendar_component_buttonText_week'] = 'week';
-$lang['calendar_component_buttonText_month'] = 'month';
-        
-$lang['calendar_component_header_left'] = 'prev,next today';
-$lang['calendar_component_header_center'] = 'title';
-$lang['calendar_component_header_right'] = 'month,basicWeek,basicDay';
-
 $lang['calendar_monday_short'] = 'Mo';
 $lang['calendar_tuesday_short'] = 'Tu';
 $lang['calendar_wednesday_short'] = 'We';

@@ -3,15 +3,15 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 ## v0.4.2
 
-- [X] Fix issue in tabular view.
+- [X] Fix issue in tabular view (last day of month).
+- [X] Fix issue on HR/list of employees (select root, but no sub-entities).
+- [X] Round values in HR/counters, Manager/counters, Self/counters and leave balance report.
+- [X] Prevent double-click in validation/leaves.
 - [X] Upgrade PHPMailer and its wrapper to support PHP7.
 - [X] Selectize on login page.
 - [X] Update install doc (feedback with e-mail problems, Opcache, TLS, etc.).
-- [X] Prevent double-click in validation/leaves.
 - [X] Excel export of the yearly calendar.
 - [X] Better entitled days editor (contract / employee).
-- [X] Round values in HR/counters, Manager/counters, Self/counters and leave balance report.
-- [ ] Regresion test on HR/counters, Manager/counters, Self/counters (current date vs. yesterday).
 
 ## v0.5.0 or later
 
@@ -51,6 +51,7 @@ request a leave even if your credit is negative and because leave balance report
 
 ## Might not be implemented
 
-- [ ] Requests are validated by two users (opens the door to a wkf engine, too complicated for targeted users).
+- [ ] Requests are validated by two users (too complicated for targeted users).
+- [ ] Different colors for each leave type. Requesters often don't know that you can get the list of leaves elsewhere.
 - [ ] PDF Export (no serious OSS PDF lib dealing correctly with Unicode / Modern browsers can print as PDF).
 - [ ] Migration to CI 3.0.0 (we don't rely too much on the library, so it has no interrest and it is slower than v2).

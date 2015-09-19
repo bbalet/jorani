@@ -384,7 +384,7 @@
             bootbox.prompt("<?php echo lang('organization_index_prompt_entity_name');?>",
                 "<?php echo lang('organization_index_popup_node_button_cancel');?>",
                 "<?php echo lang('organization_index_popup_node_button_ok');?>", function(result) {
-                if (result === null) {
+                if ((result === null) || (result == '')) {  //NULL or empty string has no effect
                     data.instance.refresh();
                 } else {
                     $.get('organization/create', { 'id' : data.node.parent, 'position' : data.position, 'text' : result })
@@ -425,7 +425,6 @@
             if (data && data.selected && data.selected.length) {
                 $('#frmModalAjaxWait').modal('show');
                 var isTableLoaded = false;
-                var isSupervisorLoaded = false;
                 oTable.ajax.url("<?php echo base_url(); ?>organization/employees?id=" + data.selected.join(':'))
                     .load(function() {
                             isTableLoaded = true;
@@ -442,7 +441,6 @@
                         } else {
                             $('#txtSupervisor').val("");
                         }
-                        isSupervisorLoaded = true;
                         $.when(isTableLoaded, isTableLoaded).done(function() { 
                             $("#frmModalAjaxWait").modal('hide');
                         });

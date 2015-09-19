@@ -582,14 +582,14 @@ class Polyglot {
 //            case 'pa' : return 'nativeName'; break;
 //            case 'pi' : return 'पाऴि'; break;
 //            case 'fa' : return 'فارسی'; break;
-            case 'pl' : return 'polski'; break;
+            case 'pl' : return 'Polski'; break;
 //            case 'ps' : return 'nativeName'; break;
 //            case 'pt' : return 'Português'; break;
 //            case 'qu' : return 'Runa Simi'; break;
 //            case 'rm' : return 'rumantsch grischun'; break;
 //            case 'rn' : return 'kiRundi'; break;
 //            case 'ro' : return ' Moldovan'; break;
-            case 'ru' : return 'русский язык'; break;
+            case 'ru' : return 'Pусский язык'; break;
 //            case 'sa' : return 'संस्कृतम्'; break;
 //            case 'sc' : return 'sardu'; break;
 //            case 'sd' : return 'सिन्धी'; break;
@@ -783,7 +783,7 @@ class Polyglot {
 //            case 'rumantsch grischun' : return 'rm'; break;
 //            case 'kiRundi' : return 'rn'; break;
 //            case ' Moldovan' : return 'ro'; break;
-            case 'русский язык' : return 'ru'; break;
+            case 'Pусский язык' : return 'ru'; break;
 //            case 'संस्कृतम्' : return 'sa'; break;
 //            case 'sardu' : return 'sc'; break;
 //            case 'सिन्धी' : return 'sd'; break;

@@ -17,6 +17,7 @@
  * @author dario brignone <brignone@unitec.it>
  */
 
+$lang['Leave Management System'] = 'Gestire Richieste di Ferie';
 $lang['global_link_tooltip_documentation'] = 'Documentazione';
 $lang['global_msg_error_forbidden'] = 'L\'operazione (%s) non è garantita';
 $lang['global_msg_wait'] = 'Attendere prego';
@@ -65,6 +66,8 @@ $lang['global_link_doc_page_leave_balance_report'] = 'http://jorani.org/page-lea
 
 $lang['Morning'] = 'Mattina';
 $lang['Afternoon'] = 'Pomeriggio';
+$lang['today'] = 'oggi';
+
 $lang['identifier'] = 'identificatore';
 $lang['firstname'] = 'nome';
 $lang['lastname'] = 'cognome';

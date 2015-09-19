@@ -16,6 +16,7 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+$lang['Leave Management System'] = 'Urlaubs Management System';
 $lang['global_link_tooltip_documentation'] = 'Link zur Dokumentation';
 $lang['global_msg_error_forbidden'] = 'Operation (%s) ist nicht genehmigt';
 $lang['global_msg_wait'] = 'Bitte warten';
@@ -63,6 +64,8 @@ $lang['global_link_doc_page_leave_balance_report'] = 'http://jorani.org/page-lea
 
 $lang['Morning'] = 'Vormittag';
 $lang['Afternoon'] = 'Nachmittag';
+$lang['today'] = 'Heute';
+
 $lang['identifier'] = 'Identifikator';
 $lang['firstname'] = 'Vorname';
 $lang['lastname'] = 'Nachname';

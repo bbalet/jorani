@@ -19,6 +19,7 @@
  */
 
 //Global strings
+$lang['Leave Management System'] = 'Gestion des demandes de congé';
 $lang['global_link_tooltip_documentation'] = 'Lien vers la documentation';
 $lang['global_msg_error_forbidden'] = 'L\'opération (%s) n\'est pas autorisée';
 $lang['global_msg_wait'] = 'Veuillez patienter';
@@ -76,6 +77,7 @@ $lang['global_link_doc_page_leave_balance_report'] = 'http://fr.jorani.org/ecran
 //Calendar
 $lang['Morning'] = 'Matin';
 $lang['Afternoon'] = 'Après-midi';
+$lang['today'] = 'aujourd\'hui';
 
 //Global strings
 $lang['identifier'] = 'identifiant';

@@ -17,7 +17,6 @@
  * @author dario brignone <brignone@unitec.it>
  */
 
-$lang['menu_banner_slogan'] = 'Gestire Richieste di Ferie';
 $lang['menu_banner_change_password'] = 'Cambio password';
 $lang['menu_banner_welcome'] = 'Benvenuto/a';
 $lang['menu_banner_logout'] = 'Uscita';

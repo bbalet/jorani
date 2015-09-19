@@ -16,7 +16,6 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['menu_banner_slogan'] = 'ប្រពន្ធ័គ្រប់គ្រងការសុំច្បាប់';
 $lang['menu_banner_change_password'] = 'ផ្លាស់ប្តូរពាក្យសម្ងាត់';
 $lang['menu_banner_welcome'] = 'សូមស្វាគមន៏';
 $lang['menu_banner_logout'] = 'ចាកចេញពីប្រពន្ធ័';

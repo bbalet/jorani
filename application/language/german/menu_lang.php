@@ -16,7 +16,6 @@
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$lang['menu_banner_slogan'] = 'Urlaubs Management System';
 $lang['menu_banner_change_password'] = 'Passwort ändern';
 $lang['menu_banner_welcome'] = 'Willkommen';
 $lang['menu_banner_logout'] = 'Abmelden';

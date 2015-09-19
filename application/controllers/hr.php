@@ -69,7 +69,7 @@ class Hr extends CI_Controller {
         } else {
             $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
             $this->load->model('users_model');
-            $employees = $this->users_model->employeesEntity($id, $children);
+            $employees = $this->users_model->employees_of_entity($id, $children);
             $msg = '{"iTotalRecords":' . count($employees);
             $msg .= ',"iTotalDisplayRecords":' . count($employees);
             $msg .= ',"aaData":[';
@@ -436,7 +436,7 @@ class Hr extends CI_Controller {
         
         $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
         $this->load->model('users_model');
-        $employees = $this->users_model->employeesEntity($id, $children);
+        $employees = $this->users_model->employees_of_entity($id, $children);
         
         $line = 2;
         foreach ($employees as $employee) {

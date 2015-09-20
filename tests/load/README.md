@@ -6,8 +6,11 @@ If you get a lot of connection errors, please read this page https://wiki.apache
 ## Prepare the load test environnement
 
 The script use the dataset provided into "Dataset.xlsx" Excel file. Inject the data by using the SQL queries prior starting the load test.
-* All users are attached to a contract with an id = 1
+* All users are attached to a contract with an id = 1 (you may need to create it).
 * All users have a position with an id = 1
+* The Benchmark load test requires the OAuth2 server to be activated :
+    INSERT INTO oauth_clients (client_id, client_secret, redirect_uri) VALUES ("testclient", "testpass", "http://fake/");
+
 Please check that you have those two object created into the system prior starting the load test.
 
 The load test make use of an agent to collect system metric. You can get this agent here :

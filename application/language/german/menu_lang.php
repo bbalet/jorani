@@ -55,7 +55,6 @@ $lang['menu_requests_overtime'] = 'Überstunden';
 $lang['menu_requests_list_extras'] = 'Stundenliste';
 $lang['menu_requests_request_extra'] = 'Stunden anfragen';
 
-$lang['menu_leaves_title'] = 'Meine Urlaube';
 $lang['menu_leaves_counters'] = 'Zähler';
 $lang['menu_leaves_list_requests'] = 'Liste der Abwesenheitsanfragen';
 $lang['menu_leaves_create_request'] = 'Abwesenheit beantragen';

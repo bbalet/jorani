@@ -56,7 +56,6 @@ $lang['menu_requests_overtime'] = 'Overtime';
 $lang['menu_requests_list_extras'] = 'List of extras';
 $lang['menu_requests_request_extra'] = 'Request an extra';
 
-$lang['menu_leaves_title'] = 'My leaves';
 $lang['menu_leaves_counters'] = 'Counters';
 $lang['menu_leaves_list_requests'] = 'List of leave requests';
 $lang['menu_leaves_create_request'] = 'Request a leave';

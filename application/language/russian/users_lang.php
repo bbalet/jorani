@@ -57,7 +57,6 @@ $lang['users_myprofile_field_position'] = 'Должность';
 $lang['users_myprofile_field_entity'] = 'Объект';
 $lang['users_myprofile_field_hired'] = 'дата принятия на работу';
 $lang['users_myprofile_field_identifier'] = 'идентификатор';
-$lang['users_myprofile_button_export'] = 'Экспорт';
 
 $lang['users_edit_title'] = 'Редактировать пользователя №';
 $lang['users_edit_html_title'] = 'Редактировать пользователя';

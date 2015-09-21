@@ -37,7 +37,7 @@ $lang['calendar_collaborators_description'] = 'Leaves of my collaborators (will 
 
 $lang['calendar_department_title'] = 'Calendar of my department';
 $lang['calendar_department_description'] = 'Calendar of employees working in my department';
-$lang['contract_department_msg_error'] = 'It appears that you don\'t belong to any department. Please contact your HR Officer / Manager.';
+$lang['calendar_department_msg_error'] = 'It appears that you don\'t belong to any department. Please contact your HR Officer / Manager.';
 
 $lang['calendar_organization_title'] = 'Calendar of the organization';
 $lang['calendar_organization_description'] = 'Global calendar with a filter on entity';

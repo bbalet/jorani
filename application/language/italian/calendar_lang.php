@@ -27,13 +27,17 @@ $lang['calendar_individual_popup_event_link_ical_description'] = '(importa l\'ev
 $lang['calendar_individual_popup_event_title'] = 'Dettagli evento';
 $lang['calendar_individual_popup_event_button_close'] = 'Chiudi';
 $lang['calendar_individual_day_offs'] = 'Giorni festivi';
+
 $lang['calendar_workmates_title'] = 'Calendario dei miei colleghi';
 $lang['calendar_workmates_description'] = 'Ferie dei dipendenti aventi lo stesso manager';
+
 $lang['calendar_collaborators_title'] = 'Calendario dei miei collaboratori';
 $lang['calendar_collaborators_description'] = 'Ferie dei miei collaboratori (sarà vuoto se non sono un manager).';
+
 $lang['calendar_department_title'] = 'Calendario del mio reparto';
 $lang['calendar_department_description'] = 'Calendario dei dipendenti che lavorano nel mio reparto';
-$lang['contract_department_msg_error'] = 'Sembra che tu non appartenga a nessun reparto. Sei pregato di contattare il tuo Responsabile delle Risorse Umane o manager';
+$lang['calendar_department_msg_error'] = 'Sembra che tu non appartenga a nessun reparto. Sei pregato di contattare il tuo Responsabile delle Risorse Umane o manager';
+
 $lang['calendar_organization_title'] = 'Calendario dell\'organizzazione';
 $lang['calendar_organization_description'] = 'Calendario globale con un filtro in base all\'entità';
 $lang['calendar_organization_field_select_entity'] = 'Seleziona l\'entità';

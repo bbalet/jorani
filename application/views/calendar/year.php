@@ -29,7 +29,7 @@
         <span class="label label-important" style="background-color: #ff0000;"><?php echo lang('Rejected');?></span>
     </div>
     <div class="span4">
-        <a href="<?php echo base_url();?>calendar/year/export/<?php echo $user_id;?>/<?php echo ($year);?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('calendar_tabular_button_export');?></a>
+        <a href="<?php echo base_url();?>calendar/year/export/<?php echo $user_id;?>/<?php echo ($year);?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('calendar_year_button_export');?></a>
     </div>
     <div class="span4">
         <div class="pull-right">

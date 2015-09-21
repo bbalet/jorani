@@ -56,7 +56,6 @@ $lang['menu_requests_overtime'] = 'Overuren';
 $lang['menu_requests_list_extras'] = 'Lijst van overuren';
 $lang['menu_requests_request_extra'] = 'Aanmelding overuren';
 
-$lang['menu_leaves_title'] = 'Mijn afwezigheid';
 $lang['menu_leaves_counters'] = 'Tellers';
 $lang['menu_leaves_list_requests'] = 'Overzicht van afwezigheidsverzoeken';
 $lang['menu_leaves_create_request'] = 'Vraag afwezigheid aan';

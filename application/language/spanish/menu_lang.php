@@ -57,7 +57,6 @@ $lang['menu_requests_overtime'] = 'Horas extras';
 $lang['menu_requests_list_extras'] = 'Lista de horas extras';
 $lang['menu_requests_request_extra'] = 'Solicitud de horas extras';
 
-$lang['menu_leaves_title'] = 'Mis permisos';
 $lang['menu_leaves_counters'] = 'Contadores';
 $lang['menu_leaves_list_requests'] = 'Lista de solicitudes de permisos';
 $lang['menu_leaves_create_request'] = 'Solicitar un permiso';

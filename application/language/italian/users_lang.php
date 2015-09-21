@@ -55,7 +55,6 @@ $lang['users_myprofile_field_position'] = 'Posizione';
 $lang['users_myprofile_field_entity'] = 'Entità';
 $lang['users_myprofile_field_hired'] = 'Data di assunzione/inizio';
 $lang['users_myprofile_field_identifier'] = 'Matricola interna/aziendale';
-$lang['users_myprofile_button_export'] = 'Esporta';
 
 $lang['users_edit_title'] = 'Modifica utente #';
 $lang['users_edit_html_title'] = 'Modifica utente';

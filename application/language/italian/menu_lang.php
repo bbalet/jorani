@@ -55,7 +55,6 @@ $lang['menu_requests_overtime'] = 'Straordinario';
 $lang['menu_requests_list_extras'] = 'Elenco extra';
 $lang['menu_requests_request_extra'] = 'Richiedi extra';
 
-$lang['menu_leaves_title'] = 'Mie ferie';
 $lang['menu_leaves_counters'] = 'Contatori';
 $lang['menu_leaves_list_requests'] = 'Elenco richieste di ferie';
 $lang['menu_leaves_create_request'] = 'Richiedi ferie';

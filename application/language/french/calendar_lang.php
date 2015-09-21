@@ -37,7 +37,7 @@ $lang['calendar_collaborators_description'] = 'Demandes de congé de mes collabo
 
 $lang['calendar_department_title'] = 'Calendrier de mon service';
 $lang['calendar_department_description'] = 'Calendrier des employés travaillant dans mon service';
-$lang['contract_department_msg_error'] = 'Vous n\'appartenez à aucun service. Veuillez contacter le service des ressources humaines.';
+$lang['calendar_department_msg_error'] = 'Vous n\'appartenez à aucun service. Veuillez contacter le service des ressources humaines.';
 
 $lang['calendar_organization_title'] = 'Calendrier de l\'organisation';
 $lang['calendar_organization_description'] = 'Calendrier global avec un filtre sur les entités';

@@ -56,7 +56,6 @@ $lang['users_myprofile_field_position'] = 'Categoria';
 $lang['users_myprofile_field_entity'] = 'entidad';
 $lang['users_myprofile_field_hired'] = 'Fecha de contratación';
 $lang['users_myprofile_field_identifier'] = 'Identificador interno en la empresa';
-$lang['users_myprofile_button_export'] = 'exportar';
 
 $lang['users_edit_title'] = 'Modificar usario n°';
 $lang['users_edit_html_title'] = 'Modificar el usario';

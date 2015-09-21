@@ -36,7 +36,7 @@ $lang['calendar_collaborators_description'] = 'Abwesenheit meiner Mitarbeiter (b
 $lang['calendar_department_title'] = 'Kalender meiner Abteilung';
 $lang['calendar_department_description'] = 'Kalender der Angestellten in meiner Abteilung';
 
-$lang['contract_department_msg_error'] = 'Es scheint Sie gehören keiner Abteilung an. Bitte melden Sie sich bei Ihrer Personalabteilung oder Ihrem Vorgesetzten.';
+$lang['calendar_department_msg_error'] = 'Es scheint Sie gehören keiner Abteilung an. Bitte melden Sie sich bei Ihrer Personalabteilung oder Ihrem Vorgesetzten.';
 
 $lang['calendar_organization_title'] = 'Kalender der Organisation';
 $lang['calendar_organization_description'] = 'Globaler Kalender gefiltert nach Dienststelle(n)';

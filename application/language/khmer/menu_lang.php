@@ -54,7 +54,6 @@ $lang['menu_requests_overtime'] = 'បន្ថែមម៉ោង';
 $lang['menu_requests_list_extras'] = 'បញ្ជីនៃបន្ថែម';
 $lang['menu_requests_request_extra'] = 'ស្នើសុំបន្ថែមមួយ';
 
-$lang['menu_leaves_title'] = 'ស្លឹករបស់ខ្ញុំ';
 $lang['menu_leaves_counters'] = 'ចំនួនសរុបនៃការឈប់';
 $lang['menu_leaves_list_requests'] = 'បញ្ជីនៃសំណើឈប់សំរាក';
 $lang['menu_leaves_create_request'] = 'ស្នើសំុឈប់សំរាក';

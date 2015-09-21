@@ -57,7 +57,6 @@ $lang['menu_requests_overtime'] = 'на сверхурочные';
 $lang['menu_requests_list_extras'] = 'Список запросов на сверхурочную работу';
 $lang['menu_requests_request_extra'] = 'Запрос на сверхурочную работу';
 
-$lang['menu_leaves_title'] = 'Мои отпуска';
 $lang['menu_leaves_counters'] = 'Счетчики';
 $lang['menu_leaves_list_requests'] = 'Список заявлений на отпуск';
 $lang['menu_leaves_create_request'] = 'Создать заявление об отпуске';

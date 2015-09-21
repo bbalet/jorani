@@ -36,7 +36,7 @@ $lang['calendar_collaborators_description'] = 'Afwezigheid van mijn medewerkers 
 
 $lang['calendar_department_title'] = 'Agenda van mijn afdeling';
 $lang['calendar_department_description'] = 'Agenda van medewerkers van mijn afdeling';
-$lang['contract_department_msg_error'] = 'Het lijkt erop dat u niet behoort tot een afdeling. Neem contact op met uw HR Officer / Manager.';
+$lang['calendar_department_msg_error'] = 'Het lijkt erop dat u niet behoort tot een afdeling. Neem contact op met uw HR Officer / Manager.';
 
 $lang['calendar_organization_title'] = 'Agenda van uw organisatie';
 $lang['calendar_organization_description'] = 'Algemene agenda met filter mogelijkheid per entiteit';

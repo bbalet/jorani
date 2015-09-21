@@ -157,7 +157,7 @@ class Calendar extends CI_Controller {
         $this->load->model('organization_model');
         $department = $this->organization_model->get_department($this->user_id);
         if (empty($department)) {
-            $this->session->set_flashdata('msg', lang('contract_department_msg_error'));
+            $this->session->set_flashdata('msg', lang('calendar_department_msg_error'));
             redirect('leaves');
         } else {
             $data['department'] = $department[0]['name'];

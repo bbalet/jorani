@@ -34,7 +34,7 @@ $lang['calendar_collaborators_description'] = 'ការសុំបញ្ឈប
 
 $lang['calendar_department_title'] = 'កាលបរិច្ឆេទរបស់ក្រុមរួមការងារ';
 $lang['calendar_department_description'] = 'ប្រតិទិនសំរាប់បុគ្គលិកធ្វុើការងារក្នុងផ្នែករបស់ខ្ញុុំ';
-$lang['contract_department_msg_error'] = 'វាមិនស្ថិតក្នុងផ្នែកណាមួយទេ។សូមទំនាក់ទំនងទៅកាន់ផ្នែកHRឬប្រធានផ្នែកគ្រប់គ្រង';
+$lang['calendar_department_msg_error'] = 'វាមិនស្ថិតក្នុងផ្នែកណាមួយទេ។សូមទំនាក់ទំនងទៅកាន់ផ្នែកHRឬប្រធានផ្នែកគ្រប់គ្រង';
 		
 $lang['calendar_organization_title'] = 'ប្រតិទិនរបស់អង្គការ';
 $lang['calendar_organization_description'] = 'ប្រតិទិនសកល';

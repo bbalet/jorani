@@ -36,7 +36,7 @@ $lang['calendar_collaborators_description'] = 'Vacaciones de mis colaboradores H
 
 $lang['calendar_department_title'] = 'Calendario de mi servicio';
 $lang['calendar_department_description'] = 'Calendario de los empleados de mi departamento';
-$lang['contract_department_msg_error'] = 'Parece que usted no pertenece a ningún departamento. Por favor, póngase en contacto con administrador.';
+$lang['calendar_department_msg_error'] = 'Parece que usted no pertenece a ningún departamento. Por favor, póngase en contacto con administrador.';
 
 $lang['calendar_organization_title'] = 'Calendario de la organización';
 $lang['calendar_organization_description'] = 'Calendario Global con filtro de entidad';

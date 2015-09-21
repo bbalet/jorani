@@ -56,7 +56,6 @@ $lang['menu_requests_overtime'] = 'Heures supplémentaires';
 $lang['menu_requests_list_extras'] = 'Liste heures supp.';
 $lang['menu_requests_request_extra'] = 'Déclarer Heures supp.';
 
-$lang['menu_leaves_title'] = 'Mes demandes';
 $lang['menu_leaves_counters'] = 'Compteurs';
 $lang['menu_leaves_list_requests'] = 'Liste des demandes de congé';
 $lang['menu_leaves_create_request'] = 'Faire une demande de congé';

@@ -100,13 +100,13 @@ $endDate = new DateTime($days['enddate']);?>
             </select>    
             <label for="days" required><?php echo lang('entitleddays_user_index_field_days');?></label>
             <input type="text" class="input-mini" name="days" id="days" />
-            <label for="description"><?php echo lang('entitleddays_contract_index_field_description');?></label>
+            <label for="description"><?php echo lang('entitleddays_user_index_field_description');?></label>
             <input type="text" class="input-xlarge" name="description" id="description" />
         </div>
         <div class="modal-footer">
             <button id="cmdFrmSaveEntitledDays" class="btn btn-primary" onclick="edit_entitleddays();" ><?php echo lang('OK');?></button>
-            <button id="cmdFrmAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_contract_index_button_add');?></button>
-            <button class="btn btn-danger" onclick="$('#frmAddEntitledDays').modal('hide');"><?php echo lang('entitleddays_contract_index_button_cancel');?></button>
+            <button id="cmdFrmAddEntitledDays" class="btn btn-primary" onclick="add_entitleddays();"><?php echo lang('entitleddays_user_index_button_add');?></button>
+            <button class="btn btn-danger" onclick="$('#frmAddEntitledDays').modal('hide');"><?php echo lang('entitleddays_user_index_button_cancel');?></button>
         </div>
  </div>
 

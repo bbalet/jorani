@@ -67,6 +67,7 @@ class Auth {
                 break;
             
             //User management
+            case 'list_settings' :
             case 'list_users' :
             case 'create_user' :
             case 'delete_user' :

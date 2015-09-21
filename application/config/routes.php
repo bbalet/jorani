@@ -38,6 +38,10 @@
 |
 */
 
+//Admin : global features
+$route['admin/settings'] = 'admin/settings';
+$route['admin'] = 'admin/settings';
+
 //Admin : user management
 $route['users/myprofile'] = 'users/myprofile';
 $route['users/employees'] = 'users/employees';

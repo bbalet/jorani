@@ -80,6 +80,9 @@ $this->lang->load('menu', $language);?>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_hr_leaves_type_divider');?></li>
                     <li><a href="<?php echo base_url();?>leavetypes"><?php echo lang('menu_hr_list_leaves_type');?></a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header"><?php echo lang('menu_admin_settings_divider');?></li>
+                    <li><a href="<?php echo base_url();?>admin/settings"><?php echo lang('menu_admin_settings');?></a></li>
                   </ul>
                 </li>
               <?php } ?>

@@ -104,13 +104,17 @@ class Leaves extends CI_Controller {
         }
         //If the user is not its not HR, not manager and not the creator of the leave
         //the employee can't see it, redirect to LR list
-        if (!$this->is_hr) {
-            if (($this->session->userdata('manager') != $this->user_id) &&
-                    $data['leave']['employee'] != $this->user_id) {
-                log_message('error', 'User #' . $this->user_id . ' illegally tried to edit leave #' . $id);
-                redirect('leaves');
-            }
-        } //Admin
+        if ($data['leave']['employee'] != $this->user_id) {
+            if ((!$this->is_hr)) {
+                $this->load->model('users_model');
+                $employee = $this->users_model->get_users($data['leave']['employee']);
+                if ($employee['manager'] != $this->user_id) {
+                    log_message('error', 'User #' . $this->user_id . ' illegally tried to view leave #' . $id);
+                    redirect('leaves');
+                }
+            } //Admin
+        } //Current employee
+        
         $data['types'] = $this->types_model->get_types();
         $data['leave']['status_label'] = $this->status_model->get_label($data['leave']['status']);
         $data['leave']['type_label'] = $this->types_model->get_label($data['leave']['type']);

@@ -37,7 +37,7 @@ class Extra extends CI_Controller {
     }
 
     /**
-     * Display the list of the leave requests of the connected user
+     * Display the list of the overtime requests of the connected user
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
@@ -58,7 +58,7 @@ class Extra extends CI_Controller {
     }
     
     /**
-     * Display a leave request
+     * Display an overtime request
      * @param int $id identifier of the leave request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -70,15 +70,20 @@ class Extra extends CI_Controller {
         if (empty($data['extra'])) {
             show_404();
         }
-        //If the user is not its not HR, not manager and not the creator of the leave
+        
+        //If the user is not its not HR, not manager and not the creator of the overtime
         //the employee can't see it, redirect to LR list
-        if (!$this->is_hr) {
-            if (($this->session->userdata('manager') != $this->user_id) &&
-                    $data['extra']['employee'] != $this->user_id) {
-                log_message('error', 'User #' . $this->user_id . ' illegally tried to edit overtime request #' . $id);
-                redirect('extra');
-            }
-        } //Admin
+        if ($data['extra']['employee'] != $this->user_id) {
+            if ((!$this->is_hr)) {
+                $this->load->model('users_model');
+                $employee = $this->users_model->get_users($data['extra']['employee']);
+                if ($employee['manager'] != $this->user_id) {
+                    log_message('error', 'User #' . $this->user_id . ' illegally tried to view overtime #' . $id);
+                    redirect('extra');
+                }
+            } //Admin
+        } //Current employee
+        
         $data['extra']['status_label'] = $this->status_model->get_label($data['extra']['status']);
         $data['title'] = lang('extra_view_hmtl_title');
         $this->load->model('users_model');
@@ -90,7 +95,7 @@ class Extra extends CI_Controller {
     }
 
     /**
-     * Create a leave request
+     * Create an overtime request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function create() {
@@ -127,7 +132,7 @@ class Extra extends CI_Controller {
     }
     
     /**
-     * Edit a leave request
+     * Edit an overtime request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
@@ -138,7 +143,7 @@ class Extra extends CI_Controller {
         if (empty($data['extra'])) {
             show_404();
         }
-        //If the user is not its own manager and if the leave is 
+        //If the user is not its own manager and if the overtime is 
         //already requested, the employee can't modify it
         if (!$this->is_hr) {
             if (($this->session->userdata('manager') != $this->user_id) &&
@@ -183,7 +188,7 @@ class Extra extends CI_Controller {
     
     /**
      * Send a overtime request email to the manager of the connected employee
-     * @param int $id Leave request identifier
+     * @param int $id overtime request identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function sendMail($id) {
@@ -249,13 +254,13 @@ class Extra extends CI_Controller {
     }
 
     /**
-     * Delete a leave request
-     * @param int $id identifier of the leave request
+     * Delete an overtime request
+     * @param int $id identifier of the overtime request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
         $can_delete = false;
-        //Test if the leave request exists
+        //Test if the overtime request exists
         $extra = $this->overtime_model->get_extra($id);
         if (empty($extra)) {
             show_404();

@@ -23,7 +23,7 @@
     <!-- FOOTER -->
     <div class="row" id="footer">
       <div class="span4"><?php echo lang('footer_copyright_notice');?></div>
-      <div class="span6 offset2"><img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;&nbsp;<b>Jorani</b>&nbsp;&nbsp;v0.4.2</div>
+      <div class="span6 offset2"><img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;&nbsp;<b>Jorani</b>&nbsp;&nbsp;v0.4.3</div>
       <div class="span2">&nbsp;</div>
     </div>
 </body>

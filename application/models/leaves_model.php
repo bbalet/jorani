@@ -224,7 +224,6 @@ class Leaves_model extends CI_Model {
             $this->db->where("date >= DATE_SUB(STR_TO_DATE('" . $refDate . "', '%Y-%m-%d'),INTERVAL 1 YEAR)");
             $this->db->where('status = 3'); //Accepted
             $overtime_days = $this->db->get()->result_array();
-            //$this->output->enable_profiler(TRUE);
             $sum = 0;
             foreach ($overtime_days as $entitled) {
                 if ($sum_extra == FALSE) {
@@ -457,7 +456,7 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_leaves_cascade_user($id) {
-        $query = $this->db->delete('leaves', array('employee' => $id));
+        return $this->db->delete('leaves', array('employee' => $id));
     }
     
     /**
@@ -799,7 +798,6 @@ class Leaves_model extends CI_Model {
         $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
         $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
         $lastDay = date("t", strtotime($start));    //last day of selected month
-        $end = $year . '-' . $month . '-' . $lastDay;    //last date of selected month
         //If no entity was selected, select the entity of the connected user or the root of the organization
         if ($entity == -1) {
             $this->load->model('users_model');
@@ -811,7 +809,6 @@ class Leaves_model extends CI_Model {
             }
         }
         $tabular = array();
-        $ids = array();
         
         //We must show all users of the departement
         $this->load->model('dayoffs_model');
@@ -853,8 +850,6 @@ class Leaves_model extends CI_Model {
      * @return array key/value array (k:leave type label, v:sum for the month)
      */
     public function monthly_leaves_by_type($linear) {
-        //echo var_dump($linear);
-        $total = 0;
         $by_types = array();
         foreach ($linear->days as $day) {
           if (strstr($day->display, ';')) {

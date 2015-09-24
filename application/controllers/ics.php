@@ -33,8 +33,6 @@ class Ics extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        //$this->load->helper('language');
-        //$this->lang->load('global', $this->config->item('language'));
         $this->load->library('polyglot');
         require_once(APPPATH . 'third_party/VObjects/vendor/autoload.php');
     }
@@ -46,7 +44,6 @@ class Ics extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function dayoffs($user, $contract) {
-        expires_now();
         if ($this->config->item('ics_enabled') == FALSE) {
             $this->output->set_header("HTTP/1.0 403 Forbidden");
         } else {
@@ -102,7 +99,6 @@ class Ics extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function individual($id) {
-        expires_now();
         if ($this->config->item('ics_enabled') == FALSE) {
             $this->output->set_header("HTTP/1.0 403 Forbidden");
         } else {
@@ -153,7 +149,6 @@ class Ics extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function entity($user, $entity, $children) {
-        expires_now();
         if ($this->config->item('ics_enabled') == FALSE) {
             $this->output->set_header("HTTP/1.0 403 Forbidden");
         } else {
@@ -202,7 +197,6 @@ class Ics extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function ical($id) {
-        expires_now();
         header('Content-type: text/calendar; charset=utf-8');
         header('Content-Disposition: attachment; filename=leave.ics');
         $this->load->model('leaves_model');

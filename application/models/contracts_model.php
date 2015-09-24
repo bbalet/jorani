@@ -57,8 +57,7 @@ class Contracts_model extends CI_Model {
     }
     
     /**
-     * Insert a new contract into the database. Inserted data are coming from an
-     * HTML form
+     * Insert a new contract into the database. Inserted data are coming from an HTML form
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -81,7 +80,7 @@ class Contracts_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_contract($id) {
-        $query = $this->db->delete('contracts', array('id' => $id));
+        $this->db->delete('contracts', array('id' => $id));
         $this->load->model('users_model');
         $this->load->model('entitleddays_model');
         $this->load->model('dayoffs_model');
@@ -91,8 +90,7 @@ class Contracts_model extends CI_Model {
     }
     
     /**
-     * Update a given contract in the database. Update data are coming from an
-     * HTML form
+     * Update a given contract in the database. Update data are coming from an HTML form
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */

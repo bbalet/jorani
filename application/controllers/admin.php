@@ -44,7 +44,7 @@ class Admin extends CI_Controller {
         $this->auth->check_is_granted('list_settings');
         $data = getUserContext($this);
         $data['title'] = 'application/config/config.php';
-        $data['help'] = ''; //$this->help->create_help_link('global_link_doc_page_contracts_list');
+        $data['help'] = ''; //create_help_link
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('admin/settings', $data);

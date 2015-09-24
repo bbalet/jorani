@@ -62,7 +62,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('contracts_model');
             $result = $this->contracts_model->get_contracts($id);
             echo json_encode($result);
@@ -78,7 +77,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('entitleddays_model');
             $result = $this->entitleddays_model->get_entitleddays_contract($id);
             echo json_encode($result);
@@ -94,7 +92,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('entitleddays_model');
             $startdate = $this->input->post('startdate');
             $enddate = $this->input->post('enddate');
@@ -119,7 +116,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('entitleddays_model');
             $result = $this->entitleddays_model->get_entitleddays_employee($id);
             echo json_encode($result);
@@ -135,7 +131,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('entitleddays_model');
             $startdate = $this->input->post('startdate');
             $enddate = $this->input->post('enddate');
@@ -161,7 +156,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('leaves_model');
             if ($refTmp != NULL) {
                 $refDate = date("Y-m-d", $refTmp);
@@ -187,7 +181,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('leaves_model');
             $result = $this->leaves_model->all($startTmp, $endTmp);
             if (empty($result)) {
@@ -206,7 +199,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('types_model');
             $result = $this->types_model->get_types();
             echo json_encode($result);
@@ -221,7 +213,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('positions_model');
             $result = $this->positions_model->get_positions();
             echo json_encode($result);
@@ -236,7 +227,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('organization_model');
             $result = $this->organization_model->get_department($id);
             if (empty($result)) {
@@ -256,7 +246,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('users_model');
             $result = $this->users_model->get_users($id);
             foreach($result as $k1=>$q) {
@@ -279,7 +268,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('overtime_model');
             $result = $this->overtime_model->get_user_extras($id);
             echo json_encode($result);
@@ -295,7 +283,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('leaves_model');
             $result = $this->leaves_model->get_user_leaves($id);
             echo json_encode($result);
@@ -315,7 +302,6 @@ class Api extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
-            expires_now();
             $this->load->model('users_model');
             $employee = $this->users_model->get_users($id);
             if (!isset($employee['contract'])) {
@@ -519,16 +505,6 @@ class Api extends CI_Controller {
             $enddatetype = $this->input->post('enddatetype');
             $duration = $this->input->post('duration');
             $type = $this->input->post('type');
-            
-            $debug1 = var_export($startdate, true);
-            $debug2 = var_export($enddate, true);
-            $debug3 = var_export($status, true);
-            $debug4 = var_export($employee, true);
-            $debug5 = var_export($cause, true);
-            $debug6 = var_export($startdatetype, true);
-            $debug7 = var_export($enddatetype, true);
-            $debug8 = var_export($duration, true);
-            $debug9 = var_export($type, true);
 
             //Prevent misinterpretation of content
             if ($cause == FALSE) {$cause = NULL;}

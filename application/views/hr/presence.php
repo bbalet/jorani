@@ -73,7 +73,8 @@
         </select>
         <label for="cboYear"><?php echo lang('calendar_tabular_field_year');?></label>
         <select name="cboYear" id="cboYear">
-            <?php for ($ii=date('Y', strtotime('-6 year')); $ii<= date('Y'); $ii++) {
+            <?php $len =  date('Y');
+            for ($ii=date('Y', strtotime('-6 year')); $ii<= $len; $ii++) {
                 if ($ii == $year) {
                     echo "<option val='" . $ii ."' selected>" . $ii ."</option>";
                 } else {

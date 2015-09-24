@@ -105,7 +105,6 @@ class Reports extends CI_Controller {
      */
     public function balance_execute() {
         $this->auth->check_is_granted('native_report_balance');
-        $data = getUserContext($this);
         
         $this->load->model('leaves_model');
         $this->load->model('types_model');
@@ -184,7 +183,6 @@ class Reports extends CI_Controller {
      */
     public function balance_export() {
         $this->auth->check_is_granted('native_report_balance');
-        $data = getUserContext($this);
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
         $sheet->setTitle(lang('reports_export_balance_title'));

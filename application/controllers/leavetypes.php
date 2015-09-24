@@ -41,7 +41,6 @@ class LeaveTypes extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('leavetypes_list');
-        expires_now();
         $data = getUserContext($this);
         $data['leavetypes'] = $this->types_model->get_types();
         $data['title'] = lang('leavetypes_type_title');
@@ -59,7 +58,6 @@ class LeaveTypes extends CI_Controller {
      */
     public function create() {
         $this->auth->check_is_granted('leavetypes_create');
-        expires_now();
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -82,7 +80,6 @@ class LeaveTypes extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->check_is_granted('leavetypes_edit');
-        expires_now();
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -127,7 +124,6 @@ class LeaveTypes extends CI_Controller {
      */
     public function export() {
         $this->auth->check_is_granted('leavetypes_export');
-        expires_now();
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
         $sheet->setTitle(mb_strimwidth(lang('leavetypes_type_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.

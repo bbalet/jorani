@@ -136,7 +136,6 @@ class Positions extends CI_Controller {
      */
     public function export() {
         $this->auth->check_is_granted('export_positions');
-        expires_now();
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
         $sheet->setTitle(mb_strimwidth(lang('positions_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.

@@ -19,14 +19,12 @@
  */
 
 define('BASEPATH', '.'); //Make this script works with nginx
-
-//Uncomment if you want to test the speed of Internal mode (without OpenSSL)
-//define('CRYPT_RSA_MODE', 1);
-
 define('KEY_SIZE', 1024);   //Change the RSA key size
 
-//define('CRYPT_RSA_EXPONENT', 65537);
-//define('CRYPT_RSA_SMALLEST_PRIME', 64); // makes it so multi-prime RSA is used
+//You can define additionnal constants (please read phpseclib doc), for example:
+//CRYPT_RSA_MODE to 1 if you want to test the speed of Internal mode (without OpenSSL)
+//CRYPT_RSA_EXPONENT to 65537
+//CRYPT_RSA_SMALLEST_PRIME to 64 and multi-prime RSA is used
 
 //-----------------------------------------------------------------
 ?>
@@ -78,7 +76,8 @@ ob_end_clean();
 preg_match_all('#OpenSSL (Header|Library) Version(.*)#im', $content, $matches);
 $versions = array();
 if (!empty($matches[1])) {
-    for ($i = 0; $i < count($matches[1]); $i++) {
+    $len = count($matches[1]);
+    for ($i = 0; $i < $len; $i++) {
         $fullVersion = trim(str_replace('=>', '', strip_tags($matches[2][$i])));
         // Remove letter part in OpenSSL version
         if (!preg_match('/(\d+\.\d+\.\d+)/i', $fullVersion, $m)) {

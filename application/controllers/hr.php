@@ -169,8 +169,6 @@ class Hr extends CI_Controller {
             $data['contract_id'] = $user['contract'];
             $data['entitleddayscontract'] = $this->entitleddays_model->get_entitleddays_contract($user['contract']);
             $data['entitleddaysemployee'] = $this->entitleddays_model->get_entitleddays_employee($id);
-            
-            expires_now();
             $data['title'] = lang('hr_summary_title');
             $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_balance_employee');
             $this->load->view('templates/header', $data);
@@ -190,7 +188,6 @@ class Hr extends CI_Controller {
      */
     public function createleave($id) {
         $this->auth->check_is_granted('list_employees');
-        expires_now();
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -475,7 +472,6 @@ class Hr extends CI_Controller {
         if ($source == 'collaborators') { $this->auth->check_is_granted('list_collaborators'); }
         if ($source == 'employees') { $this->auth->check_is_granted('list_employees'); }
         setUserContext($this);
-        expires_now();
         
         $this->lang->load('calendar', $this->language);
         $this->load->model('leaves_model');

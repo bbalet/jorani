@@ -77,12 +77,11 @@ class Help {
             $defaut['global_link_doc_page_create_user'] = 'http://jorani.org/page-create-a-new-user.html';
             $defaut['global_link_doc_page_list_users'] = 'http://jorani.org/page-list-of-users.html';
             $defaut['global_link_doc_page_list_employees'] = 'http://jorani.org/page-list-of-employees.html';
-            /*if (array_key_exists($page, $defaut)) {
+            if (array_key_exists($page, $defaut)) {
                 return "";
             } else {
                 return "http://jorani.org/";
             }
-             */            
         }
     }
 

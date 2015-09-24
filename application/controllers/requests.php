@@ -39,13 +39,11 @@ class Requests extends CI_Controller {
     }
 
     /**
-     * Display the list of all requests submitted to you
-     * Status is submitted
+     * Display the list of all requests submitted to you (Status is submitted)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index($filter = 'requested') {
         $this->auth->check_is_granted('list_requests');
-        expires_now();
         if ($filter == 'all') {
             $showAll = true;
         } else {
@@ -53,7 +51,6 @@ class Requests extends CI_Controller {
         }
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
-        //$this->lang->load('calendar', $this->language);
         $data['filter'] = $filter;
         $data['title'] = lang('requests_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_validation');
@@ -61,7 +58,8 @@ class Requests extends CI_Controller {
         
         $this->load->model('types_model');
         $this->load->model('status_model');
-        for ($i = 0; $i < count($data['requests']); ++$i) {
+        $len = count($data['requests']);
+        for ($i = 0; $i < $len; ++$i) {
             $data['requests'][$i]['status_label'] = $this->status_model->get_label($data['requests'][$i]['status']);
         }
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
@@ -139,7 +137,6 @@ class Requests extends CI_Controller {
      */
     public function collaborators() {
         $this->auth->check_is_granted('list_collaborators');
-        expires_now();
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['title'] = lang('requests_collaborators_title');
@@ -162,7 +159,6 @@ class Requests extends CI_Controller {
         if ($id == 0) $id = $this->user_id;
         //Self modification or by HR
         if (($this->user_id == $id) || ($this->is_hr)) {
-            expires_now();
             $data = getUserContext($this);
             $this->lang->load('datatable', $this->language);
             $data['title'] = lang('requests_delegations_title');
@@ -277,7 +273,7 @@ class Requests extends CI_Controller {
                 $this->load->view('hr/createleave');
                 $this->load->view('templates/footer');
             } else {
-                $leave_id = $this->leaves_model->set_leaves($id);
+                $this->leaves_model->set_leaves($id);       //We don't use the return value
                 $this->session->set_flashdata('msg', lang('hr_leaves_create_flash_msg_success'));
                 //No mail is sent, because the manager would set the leave status to accepted
                 redirect('requests/collaborators');
@@ -330,8 +326,6 @@ class Requests extends CI_Controller {
                 $data['contract_id'] = $user['contract'];
                 $data['entitleddayscontract'] = $this->entitleddays_model->get_entitleddays_contract($user['contract']);
                 $data['entitleddaysemployee'] = $this->entitleddays_model->get_entitleddays_employee($id);
-                
-                expires_now();
                 $data['title'] = lang('requests_summary_title');
                 $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_balance_collaborators');
                 $this->load->view('templates/header', $data);

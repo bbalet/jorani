@@ -67,7 +67,6 @@ class Session extends CI_Controller {
         $this->load->library('form_validation');
         //Note that we don't receive the password as a clear string
         $this->form_validation->set_rules('login', lang('session_login_field_login'), 'required');
-        //$this->form_validation->set_rules('CipheredValue', lang('session_login_field_password'), 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
@@ -154,8 +153,7 @@ class Session extends CI_Controller {
     }
 
     /**
-     * Change the language and redirect to last page (i.e. page that submit the
-     * language form)
+     * Change the language and redirect to last page (i.e. page that submit the language form)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function language() {
@@ -167,9 +165,9 @@ class Session extends CI_Controller {
     
     /**
      * Send the password by e-mail to a user requesting it
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function forgetpassword() {
-        expires_now();
         $this->output->set_content_type('text/plain');
         $login = $this->input->post('login');
         $this->load->model('users_model');

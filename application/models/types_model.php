@@ -72,7 +72,7 @@ class Types_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_type($id) {
-        $query = $this->db->delete('types', array('id' => $id));
+        $this->db->delete('types', array('id' => $id));
     }
     
     /**

@@ -42,11 +42,11 @@ class Extra extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('list_extra');
-        expires_now();
         $data = getUserContext($this);
         $data['extras'] = $this->overtime_model->get_user_extras($this->user_id);
         $this->load->model('status_model');
-        for ($i = 0; $i < count($data['extras']); ++$i) {
+        $len = count($data['extras']);
+        for ($i = 0; $i < $len; ++$i) {
             $data['extras'][$i]['status_label'] = $this->status_model->get_label($data['extras'][$i]['status']);
         }
         $data['title'] = lang('extra_index_title');
@@ -172,7 +172,7 @@ class Extra extends CI_Controller {
             $this->load->view('extra/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $extra_id = $this->overtime_model->update_extra($id);
+            $this->overtime_model->update_extra($id);       //We don't use the return value
             $this->session->set_flashdata('msg', lang('extra_edit_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
@@ -291,7 +291,6 @@ class Extra extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
-        expires_now();
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
         $sheet->setTitle(mb_strimwidth(lang('extra_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.

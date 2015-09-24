@@ -45,7 +45,9 @@ $this->lang->load('global', $language);?>
         
         <label for="cboYear"><?php echo lang('calendar_tabular_field_year');?></label>
         <select name="cboYear" id="cboYear">
-            <?php for ($ii=date('Y', strtotime('-6 year')); $ii<date('Y', strtotime('+2 year'));$ii++) {
+            <?php 
+            $len = date('Y', strtotime('+2 year'));
+            for ($ii=date('Y', strtotime('-6 year')); $ii<$len;$ii++) {
                 if ($ii == $year) {
                     echo "<option val='" . $ii ."' selected>" . $ii ."</option>";
                 } else {

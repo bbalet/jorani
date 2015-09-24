@@ -52,7 +52,7 @@ function setUserContext($controller)
  * @return array data to be passed to the view
  * @author Benjamin BALET <benjamin.balet@gmail.com>
  */
-function getUserContext($controller)
+function getUserContext(CI_Controller $controller)
 {
     $data['fullname'] = $controller->fullname;
     $data['is_manager'] = $controller->is_manager;
@@ -62,23 +62,6 @@ function getUserContext($controller)
     $data['language'] = $controller->session->userdata('language');
     $data['language_code'] =  $controller->session->userdata('language_code');
     return $data;
-}
-
-/**
- * Internal utility function
- * make sure a resource is reloaded every time
- * @author Benjamin BALET <benjamin.balet@gmail.com>
- */
-function expires_now() {
-    // Date in the past
-    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-    // always modified
-    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-    // HTTP/1.1
-    header("Cache-Control: no-store, no-cache, must-revalidate");
-    header("Cache-Control: post-check=0, pre-check=0", false);
-    // HTTP/1.0
-    header("Pragma: no-cache");
 }
 
 /**

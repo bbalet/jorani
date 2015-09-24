@@ -45,7 +45,6 @@ class Overtime extends CI_Controller {
      */
     public function index($filter = 'requested') {
         $this->auth->check_is_granted('list_overtime');
-        expires_now();
         if ($filter == 'all') {
             $showAll = true;
         } else {
@@ -58,7 +57,8 @@ class Overtime extends CI_Controller {
         $data['title'] = lang('overtime_index_title');
         $data['requests'] = $this->overtime_model->requests($this->user_id, $showAll);
         $this->load->model('status_model');
-        for ($i = 0; $i < count($data['requests']); ++$i) {
+        $len = count($data['requests']);
+        for ($i = 0; $i < $len; ++$i) {
             $data['requests'][$i]['status_label'] = $this->status_model->get_label($data['requests'][$i]['status']);
         }
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);

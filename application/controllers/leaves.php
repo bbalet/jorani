@@ -43,7 +43,6 @@ class Leaves extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('list_leaves');
-        expires_now();
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['leaves'] = $this->leaves_model->get_employee_leaves($this->session->userdata('id'));
@@ -75,7 +74,6 @@ class Leaves extends CI_Controller {
         $data['summary'] = $this->leaves_model->get_user_leaves_summary($this->user_id, FALSE, $refDate);
 
         if (!is_null($data['summary'])) {
-            expires_now();
             $data['title'] = lang('leaves_summary_title');
             $data['help'] = $this->help->create_help_link('global_link_doc_page_my_summary');
             $this->load->view('templates/header', $data);
@@ -96,7 +94,6 @@ class Leaves extends CI_Controller {
      */
     public function view($source, $id) {
         $this->auth->check_is_granted('view_leaves');
-        expires_now();
         $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->get_leaves($id);
         $this->load->model('status_model');
@@ -135,7 +132,6 @@ class Leaves extends CI_Controller {
      */
     public function create() {
         $this->auth->check_is_granted('create_leaves');
-        expires_now();
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -188,7 +184,6 @@ class Leaves extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->check_is_granted('edit_leaves');
-        expires_now();
         $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->get_leaves($id);
         //Check if exists
@@ -241,7 +236,7 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $leave_id = $this->leaves_model->update_leaves($id);
+            $this->leaves_model->update_leaves($id);       //We don't use the return value
             $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
@@ -381,7 +376,6 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
-        expires_now();
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
         $sheet->setTitle(mb_strimwidth(lang('leaves_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
@@ -436,7 +430,6 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function individual($id = 0) {
-        expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -449,7 +442,6 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function workmates() {
-        expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -461,7 +453,6 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function collaborators() {
-        expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -474,7 +465,6 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function organization($entity_id) {
-        expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -487,7 +477,6 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function department() {
-        expires_now();
         header("Content-Type: application/json");
         $this->load->model('organization_model');
         $department = $this->organization_model->get_department($this->user_id);
@@ -505,7 +494,6 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function validate() {
-        expires_now();
         header("Content-Type: application/json");
         $id = $this->input->post('id', TRUE);
         $type = $this->input->post('type', TRUE);

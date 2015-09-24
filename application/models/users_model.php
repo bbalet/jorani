@@ -118,7 +118,7 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_user($id) {
-        $query = $this->db->delete('users', array('id' => $id));
+        $this->db->delete('users', array('id' => $id));
         $this->load->model('entitleddays_model');
         $this->load->model('leaves_model');
         $this->load->model('overtime_model');
@@ -331,7 +331,6 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reset_password($id, $CipheredNewPassword) {
-        //log_message('debug', '{models/users_model/reset_password} Entering function id=' . $id . ' / Ciphered password=' . $CipheredNewPassword);
         //Load password hasher for create/update functions
         $this->load->library('bcrypt');
         
@@ -578,7 +577,6 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function employees_of_entity($id = 0, $children = TRUE) {
-        $entities = null;
         $this->db->select('users.id as id,'
                 . ' users.firstname as firstname,'
                 . ' users.lastname as lastname,'

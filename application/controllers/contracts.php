@@ -44,11 +44,6 @@ class Contracts extends CI_Controller {
     public function index($filter = 'requested') {
         $this->auth->check_is_granted('list_contracts');
         $this->lang->load('datatable', $this->language);
-        if ($filter == 'all') {
-            $showAll = true;
-        } else {
-            $showAll = false;
-        }
         $data = getUserContext($this);
         $data['filter'] = $filter;
         $data['title'] = lang('contract_index_title');
@@ -199,7 +194,7 @@ class Contracts extends CI_Controller {
     public function copydayoff($source, $destination, $year) {
         $this->auth->check_is_granted('calendar_contract');
         $this->load->model('dayoffs_model');
-        $result = $this->dayoffs_model->copy_dayoffs($source, $destination, $year);
+        $this->dayoffs_model->copy_dayoffs($source, $destination, $year);
         //Redirect to the contract where we've just copied the days off
         $this->session->set_flashdata('msg', lang('contract_calendar_copy_msg_success'));
         redirect('contracts/' . $destination . '/calendar/' . $year);
@@ -242,7 +237,6 @@ class Contracts extends CI_Controller {
             if ($this->input->post('day', TRUE) !=null && $this->input->post('type', TRUE) !=null &&
                     $this->input->post('start', TRUE) !=null && $this->input->post('end', TRUE) !=null
                      && $this->input->post('contract', TRUE) !=null) {
-                expires_now();
                 header("Content-Type: text/plain");
 
                 //Build the list of dates to be marked
@@ -290,7 +284,6 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function import() {
-        expires_now();
         header("Content-Type: plain/text");
         $contract = $this->input->post('contract', TRUE);
         $url = $this->input->post('url', TRUE);
@@ -316,7 +309,6 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function userDayoffs($id = 0) {
-        expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -332,7 +324,6 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function allDayoffs() {
-        expires_now();
         header("Content-Type: application/json");
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
@@ -348,7 +339,6 @@ class Contracts extends CI_Controller {
      */
     public function export() {
         $this->auth->check_is_granted('export_contracts');
-        expires_now();
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
         $sheet->setTitle(mb_strimwidth(lang('contract_index_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.

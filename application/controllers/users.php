@@ -41,7 +41,6 @@ class Users extends CI_Controller {
      */
     public function index() {
         $this->auth->check_is_granted('list_users');
-        expires_now();
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['users'] = $this->users_model->get_users();
@@ -62,7 +61,7 @@ class Users extends CI_Controller {
      */
     public function active($id, $active) {
         $this->auth->check_is_granted('list_users');
-        $data['users'] = $this->users_model->set_active($id, $active);
+        $this->users_model->set_active($id, $active);
         $this->session->set_flashdata('msg', lang('users_edit_flash_msg_success'));
         redirect('users');
     }
@@ -91,7 +90,6 @@ class Users extends CI_Controller {
      */
     public function employees() {
         $this->auth->check_is_granted('employees_list');
-        expires_now();
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['employees'] = $this->users_model->get_all_employees();
@@ -110,7 +108,6 @@ class Users extends CI_Controller {
         if (empty($data['user'])) {
             show_404();
         }
-        expires_now();
         $data['title'] = lang('users_myprofile_html_title');
         $this->load->model('roles_model');
         $this->load->model('positions_model');
@@ -135,7 +132,6 @@ class Users extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->check_is_granted('edit_user');
-        expires_now();
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -286,7 +282,6 @@ class Users extends CI_Controller {
      */
     public function create() {
         $this->auth->check_is_granted('create_user');
-        expires_now();
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -398,7 +393,6 @@ class Users extends CI_Controller {
      */
     public function export() {
         $this->auth->check_is_granted('export_user');
-        expires_now();
         $this->load->library('excel');
         $sheet = $this->excel->setActiveSheetIndex(0);
         $sheet->setTitle(mb_strimwidth(lang('users_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.

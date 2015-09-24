@@ -207,7 +207,6 @@ class Calendar extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function public_organization($entity_id) {
-        expires_now();
         header("Content-Type: application/json");
         if ($this->config->item('public_calendar') == TRUE) {
             $this->load->model('leaves_model');
@@ -226,7 +225,6 @@ class Calendar extends CI_Controller {
      * @param int $entity_id Entity identifier
      */
     public function public_dayoffs() {
-        expires_now();
         header("Content-Type: application/json");
         if ($this->config->item('public_calendar') == TRUE) {
             $start = $this->input->get('start', TRUE);
@@ -293,9 +291,7 @@ class Calendar extends CI_Controller {
      * We'll get one line for the morning and one line for the afternoon
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular_export($id=-1, $month=0, $year=0, $children=TRUE) {
-        expires_now();
-        
+    public function tabular_export($id=-1, $month=0, $year=0, $children=TRUE) {        
         //Load the language file (the loaded language depends if it was called from the public view)
         if (($this->config->item('public_calendar') == TRUE) && (!$this->session->userdata('logged_in'))) {
             $this->load->library('polyglot');;
@@ -548,7 +544,6 @@ class Calendar extends CI_Controller {
      */
     public function year_export($employee = 0, $year = 0) {
         setUserContext($this);
-        expires_now();
         $this->lang->load('calendar', $this->language);
         $this->auth->check_is_granted('organization_calendar');
         if ($year==0) $year = date("Y");
@@ -791,5 +786,4 @@ class Calendar extends CI_Controller {
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
         $objWriter->save('php://output');
     }
-
 }

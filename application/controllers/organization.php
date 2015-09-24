@@ -157,7 +157,6 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function employees() {
-        expires_now();
         header("Content-Type: application/json");
         setUserContext($this);
         $id = $this->input->get('id', TRUE);
@@ -236,14 +235,12 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function root() {
-        expires_now();
         header("Content-Type: application/json");
         if (($this->config->item('public_calendar') == TRUE) && (!$this->session->userdata('logged_in'))) {
             //nop
         } else {
             setUserContext($this);
             $this->auth->check_is_granted('organization_select');
-            $data = getUserContext($this);
         }
         
         $id = $this->input->get('id', TRUE);
@@ -274,7 +271,6 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function getsupervisor() {
-        expires_now();
         header("Content-Type: application/json");
         setUserContext($this);
         $entity = $this->input->get('entity', TRUE);
@@ -292,7 +288,6 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function setsupervisor() {
-        expires_now();
         header("Content-Type: application/json");
         setUserContext($this);
         if ($this->auth->is_granted('edit_organization') == FALSE) {

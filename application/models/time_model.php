@@ -81,7 +81,7 @@ class Time_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_activity($id) {
-        $query = $this->db->delete('activities', array('id' => $id));
+        $this->db->delete('activities', array('id' => $id));
         $this->load->model('entitleddays_model');
         $this->entitleddays_model->delete_entitleddays_cascade_contract($id);
     }

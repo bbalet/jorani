@@ -145,7 +145,7 @@ class Overtime_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_extras_cascade_user($id) {
-        $query = $this->db->delete('overtime', array('employee' => $id));
+        $this->db->delete('overtime', array('employee' => $id));
     }
         
     /**

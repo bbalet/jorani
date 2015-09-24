@@ -137,7 +137,7 @@ class Delegations_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_delegation($id) {
-        $query = $this->db->delete('delegations', array('id' => $id));
+        $this->db->delete('delegations', array('id' => $id));
     }
 
 }

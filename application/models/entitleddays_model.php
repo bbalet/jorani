@@ -157,7 +157,7 @@ class Entitleddays_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_entitleddays_cascade_user($id) {
-        $query = $this->db->delete('entitleddays', array('employee' => $id));
+        $this->db->delete('entitleddays', array('employee' => $id));
     }
     
     /**
@@ -166,7 +166,7 @@ class Entitleddays_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_entitleddays_cascade_contract($id) {
-        $query = $this->db->delete('entitleddays', array('contract' => $id));
+        $this->db->delete('entitleddays', array('contract' => $id));
     }
     
     /**

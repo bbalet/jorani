@@ -44,32 +44,32 @@ $dbConnError = TRUE;
 $dbSelectDbError = TRUE;
 $dbQueryError = TRUE;
 
-if ($configFileExists ) {
+if ($configFileExists) {
     include $pathConfigFile;
     //Try to connect to database
-	$dbConn = new mysqli($db['default']['hostname'], $db['default']['username'], $db['default']['password']);
-	$dbConnError = mysqli_connect_errno()?TRUE:FALSE;
+    $dbConn = new mysqli($db['default']['hostname'], $db['default']['username'], $db['default']['password']);
+    $dbConnError = mysqli_connect_errno() ? TRUE : FALSE;
     if (!$dbConnError) {
-		$dbConn->select_db($db['default']['database']);
-		$dbSelectDbError = ($dbConn->errno > 0)?TRUE:FALSE;
-		//Try to get the signature of the schema
-		if (!$dbSelectDbError) {
-			$sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
-						. " FROM information_schema.columns"
-						. " WHERE table_schema =  DATABASE()"
-						. " GROUP BY TABLE_NAME"
-						. " ORDER BY TABLE_NAME";
-			$stmt = $dbConn->prepare($sql);
-			$dbQueryError = ($dbConn->errno > 0)?TRUE:FALSE;
-			if (!$dbQueryError) {
-				$stmt->execute();
-				$dbQueryError = ($dbConn->errno > 0)?TRUE:FALSE;
-			}
-			if (!$dbQueryError) {
-				$stmt->bind_result($table, $signature);
-				$dbQueryError = ($dbConn->errno > 0)?TRUE:FALSE;
-			}
-		}
+        $dbConn->select_db($db['default']['database']);
+        $dbSelectDbError = ($dbConn->errno > 0) ? TRUE : FALSE;
+        //Try to get the signature of the schema
+        if (!$dbSelectDbError) {
+            $sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
+                    . " FROM information_schema.columns"
+                    . " WHERE table_schema =  DATABASE()"
+                    . " GROUP BY TABLE_NAME"
+                    . " ORDER BY TABLE_NAME";
+            $stmt = $dbConn->prepare($sql);
+            $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
+            if (!$dbQueryError) {
+                $stmt->execute();
+                $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
+            }
+            if (!$dbQueryError) {
+                $stmt->bind_result($table, $signature);
+                $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
+            }
+        }
     }
 }
 ?>
@@ -118,11 +118,11 @@ if ($configFileExists ) {
             <noscript>
                 Javascript is disabled. Jorani requires Javascript to be enabled.
             </noscript>
-            <button class="btn btn-primary" onclick="export2csv();"><i class="icon-download-alt icon-white"></i>&nbsp;Export to a CSV file</button>            
+            <button class="btn btn-primary" onclick="export2csv();"><i class="icon-download-alt icon-white"></i>&nbsp;Export to a CSV file</button>
             
             <h2>Web Server</h2>
 
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover table-condensed">
                 <thead>
                     <tr>
                       <th>Requirement</th>
@@ -211,7 +211,7 @@ if ($configFileExists ) {
 
             <h2>Database</h2>
 
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover table-condensed">
                 <thead>
                     <tr>
                       <th>Requirement</th>
@@ -241,14 +241,15 @@ if ($configFileExists ) {
             
             <p>You can test the following settings, but you need to edit the corresponding PHP scripts :</p>
             <ul>
-                <li><a href="testmail.php" target="_blank">E-mail settings</a></li>
-                <li><a href="testldap.php" target="_blank">LDAP settings</a></li>
-                <li><a href="opcache.php" target="_blank">OPCache tester</a></li>
+                <li><a href="testssl.php" target="_blank">SSL Configuration and Utility</a></li>
+                <li><a href="testmail.php" target="_blank">E-mail Settings</a></li>
+                <li><a href="testldap.php" target="_blank">LDAP Settings</a></li>
+                <li><a href="opcache.php" target="_blank">OPCache Tester</a></li>
             </ul>
             
             <h2>Schema</h2>
 
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover table-condensed">
                 <thead>
                     <tr>
                       <th>Table</th>

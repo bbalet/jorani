@@ -50,10 +50,10 @@
     $enddate = $date->format(lang('global_date_format'));?>
     <tr>
         <td data-order="<?php echo $requests_item['id']; ?>">
-            <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>?source=requests" title="<?php echo lang('requests_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
+            <a href="<?php echo base_url();?>leaves/requests/<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
             &nbsp;
             <div class="pull-right">
-                <a href="<?php echo base_url();?>leaves/<?php echo $requests_item['id']; ?>?source=requests" title="<?php echo lang('requests_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
+                <a href="<?php echo base_url();?>leaves/requests/<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
                 &nbsp;
                 <a href="#" class="lnkAccept" data-id="<?php echo $requests_item['id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
                 &nbsp;

@@ -19,7 +19,7 @@
  */
 ?>
 
-<h2><?php echo lang('leaves_view_title');?><?php echo $leave['id']; ?>&nbsp;<span class="muted">(<?php echo $name ?>)</span></h2>
+<h2><?php echo lang('leaves_view_title');?><?php echo $leave['id']; if ($name != "") {?>&nbsp;<span class="muted">(<?php echo $name; ?>)</span><?php } ?></h2>
 
     <label for="startdate"><?php echo lang('leaves_view_field_start');?></label>
     <input type="text" name="startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" readonly />
@@ -38,7 +38,7 @@
     
     <label for="type"><?php echo lang('leaves_view_field_type');?></label>
     <select name="type" readonly>
-        <option selected><?php echo $leave['type_label']; ?></option>
+        <option selected><?php echo $leave['type_name']; ?></option>
     </select><br />
     
     <label for="cause"><?php echo lang('leaves_view_field_cause');?></label>
@@ -46,7 +46,7 @@
     
     <label for="status"><?php echo lang('leaves_view_field_status');?></label>
     <select name="status" readonly>
-        <option selected><?php echo lang($leave['status_label']); ?></option>
+        <option selected><?php echo lang($leave['status_name']); ?></option>
     </select><br />
 
     <br /><br />
@@ -55,9 +55,5 @@
     &nbsp;
     <?php } ?>
     
-    <?php if (isset($_GET['source'])) {?>
-        <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>
-    <?php } else {?>
-        <a href="<?php echo base_url(); ?>leaves" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>
-    <?php } ?>
+   <a href="<?php echo base_url() . $source; ?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>
     

@@ -157,7 +157,7 @@ $route['leaves/create'] = 'leaves/create';
 $route['leaves/edit/(:num)'] = 'leaves/edit/$1';
 $route['leaves/update'] = 'leaves/update';
 $route['leaves/delete/(:num)'] = 'leaves/delete/$1';
-$route['leaves/(:num)'] = 'leaves/view/$1';
+$route['leaves/([^/]+)/(:num)'] = 'leaves/view/$1/$2';
 $route['leaves/validate'] = 'leaves/validate';
 $route['leaves'] = 'leaves';
 

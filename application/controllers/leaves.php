@@ -90,10 +90,11 @@ class Leaves extends CI_Controller {
 
     /**
      * Display a leave request
+     * @param string $source Page source (leaves, requests) (self, manager)
      * @param int $id identifier of the leave request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function view($id) {
+    public function view($source, $id) {
         $this->auth->check_is_granted('view_leaves');
         expires_now();
         $data = getUserContext($this);
@@ -114,13 +115,14 @@ class Leaves extends CI_Controller {
                 }
             } //Admin
         } //Current employee
-        
-        $data['types'] = $this->types_model->get_types();
-        $data['leave']['status_label'] = $this->status_model->get_label($data['leave']['status']);
-        $data['leave']['type_label'] = $this->types_model->get_label($data['leave']['type']);
+        $data['source'] = $source;
         $data['title'] = lang('leaves_view_html_title');
         $this->load->model('users_model');
-        $data['name'] = $this->users_model->get_label($data['leave']['employee']);
+        if ($source == 'requests') {
+            $data['name'] = $this->users_model->get_label($data['leave']['employee']);
+        } else {
+            $data['name'] = '';
+        }
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leaves/view', $data);

@@ -4,7 +4,6 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 ## v0.4.3
 
 - [X] Fix regression issue in accessing the detail of a leave/overtime request when connected as manager.
-- [ ] A manager can access to a list of leave requests for an employee (maybe). Duplicated with All + filter on employee ?
 - [ ] Big recap of all leave requests for a month and an entity. Need to check if useful (maybe).
 - [ ] Get rid of $_GET['source'] bad practice. Not a risk for XSS attack but not clean (see 'hr/presence/([^/]+)/(:num)').
 - [ ] Get rid of status_model->get_label and similar calls ($this->types_model->get_types()). It is a SQL query that can be spared by a join. Read only combos ! in views.

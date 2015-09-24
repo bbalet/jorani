@@ -300,7 +300,6 @@ class Calendar extends CI_Controller {
         if (($this->config->item('public_calendar') == TRUE) && (!$this->session->userdata('logged_in'))) {
             $this->load->library('polyglot');;
             $language = $this->config->item('language');
-            //$language_code =  $this->polyglot->language2code($language);
         } else {
             setUserContext($this);
             $language = $this->language;
@@ -431,9 +430,7 @@ class Calendar extends CI_Controller {
             foreach ($employee->days as $day) {
                 $dayNum++;
                 $col = $this->excel->column_name(3 + $dayNum);
-                $overlapping = FALSE;
                 if (strstr($day->display, ';')) {//Two statuses in the cell
-                    $periods = explode(";", $day->display);
                     $statuses = explode(";", $day->status);
                     $types = explode(";", $day->type);
                         //0 - Working day  _
@@ -677,9 +674,7 @@ class Calendar extends CI_Controller {
             foreach ($month->days as $day) {
                 $dayNum++;
                 $col = $this->excel->column_name(3 + $dayNum);
-                $overlapping = FALSE;
                 if (strstr($day->display, ';')) {//Two statuses in the cell
-                    $periods = explode(";", $day->display);
                     $statuses = explode(";", $day->status);
                     $types = explode(";", $day->type);
                         //0 - Working day  _

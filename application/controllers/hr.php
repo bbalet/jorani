@@ -225,7 +225,7 @@ class Hr extends CI_Controller {
             $this->load->view('hr/createleave');
             $this->load->view('templates/footer');
         } else {
-            $leave_id = $this->leaves_model->set_leaves($id);
+            $this->leaves_model->set_leaves($id);   //Return not used
             $this->session->set_flashdata('msg', lang('hr_leaves_create_flash_msg_success'));
             //No mail is sent, because the HR Officer would set the leave status to accepted
             redirect('hr/employees');
@@ -259,7 +259,7 @@ class Hr extends CI_Controller {
         
         //Details about the employee
         $employee = $this->users_model->get_users($id);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
+        if (($this->user_id != $employee['manager']) && ($this->is_hr === false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to hr/presence  #' . $id);
             $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'hr/presence'));
             redirect('leaves');
@@ -486,7 +486,7 @@ class Hr extends CI_Controller {
         
         //Details about the employee
         $employee = $this->users_model->get_users($id);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
+        if (($this->user_id != $employee['manager']) && ($this->is_hr === false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to hr/presence  #' . $id);
             $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'hr/presence'));
             redirect('leaves');
@@ -516,8 +516,6 @@ class Hr extends CI_Controller {
         $leave_duration = $this->leaves_model->monthly_leaves_duration($linear);
         $work_duration = $opened_days - $leave_duration;
         $leaves_detail = $this->leaves_model->monthly_leaves_by_type($linear);
-        //List of accepted leave requests
-        //$leaves = $this->leaves_model->get_accepted_leaves_in_dates($id, $start, $end);
         //Leave balance of the employee
         $summary = $this->leaves_model->get_user_leaves_summary($id, FALSE, $end);
         
@@ -574,9 +572,6 @@ class Hr extends CI_Controller {
                 case 7: $sheet->setCellValue($col . '10', lang('calendar_sunday_short')); break;
             }
         }
-        //Label for employee name
-        //$sheet->setCellValue('C8', lang('calendar_tabular_export_thead_employee'));
-        //$sheet->mergeCells('C8:C9');
         //The header is horizontally aligned
         $col = $this->excel->column_name(3 + $lastDay);
         $sheet->getStyle('C8:' . $col . '9')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -647,9 +642,7 @@ class Hr extends CI_Controller {
         foreach ($linear->days as $day) {
             $dayNum++;
             $col = $this->excel->column_name(3 + $dayNum);
-            $overlapping = FALSE;
             if (strstr($day->display, ';')) {//Two statuses in the cell
-                $periods = explode(";", $day->display);
                 $statuses = explode(";", $day->status);
                 $types = explode(";", $day->type);
                     //0 - Working day  _

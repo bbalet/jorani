@@ -148,3 +148,7 @@ $lang['users_export_thead_firstname'] = 'Firstname';
 $lang['users_export_thead_lastname'] = 'Lastname';
 $lang['users_export_thead_email'] = 'E-mail';
 $lang['users_export_thead_manager'] = 'Manager';
+
+$lang['users_import_flash_msg_success'] = 'New users import succeeded';
+$lang['users_import_flash_msg_no_change'] = 'No update';
+$lang['users_import_button_import'] = 'Importer from LDAP';

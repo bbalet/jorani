@@ -102,22 +102,32 @@ class Session extends CI_Controller {
                 $ldap = ldap_connect($this->config->item('ldap_host'), $this->config->item('ldap_port'));
                 ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
                 set_error_handler(function() { /* ignore errors */ });
-                if ($this->config->item('ldap_basedn_db')) {
-                    $basedn = $this->users_model->get_basedn($this->input->post('login'));
-                } else {
-                    $basedn = sprintf($this->config->item('ldap_basedn'), $this->input->post('login'));
-                }
-                $bind = ldap_bind($ldap, $basedn, $password);
-                restore_error_handler();
-                if ($bind) {
-                    $loggedin = $this->users_model->load_profile($this->input->post('login'));
-                }
-                ldap_close($ldap);
-                }
+					$bind = ldap_bind($ldap, $this->config->item('ldap_user'), $this->config->item('ldap_pass'));
+					if ($bind) {
+						if ($this->config->item('ldap_basedn_db')) {
+							$basedn = $this->users_model->get_basedn($this->input->post('login'));
+						} else {
+							$basedn = sprintf($this->config->item('ldap_basedn'), $this->input->post('login'));
+						}
+						$ldap_filter = str_replace('%%USER%%', $this->input->post('login'), $this->config->item('ldap_filter'));
+						$result = ldap_search($ldap, $basedn, $ldap_filter) or die ("Error in search query: ".ldap_error($ldap));
+						$ldap_data = ldap_get_entries($ldap, $result);
+						if ($ldap_data['count']) {
+							$email = $ldap_data[0]['mail'][0];
+							$bind_user = ldap_bind($ldap, $ldap_data[0]['userprincipalname'][0], $password);
+
+							if ($bind_user && $email) {
+								$loggedin = $this->users_model->load_profile($email);
+							}
+						}
+					}
+					restore_error_handler();
+					ldap_close($ldap);
+				}
             } else {
                 $loggedin = $this->users_model->check_credentials($this->input->post('login'), $password);
             }
-            
+
             if ($loggedin == FALSE) {
                 log_message('error', '{controllers/session/login} Invalid login id or password for user=' . $this->input->post('login'));
                 $this->session->set_flashdata('msg', lang('session_login_flash_bad_credentials'));

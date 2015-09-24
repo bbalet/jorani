@@ -435,6 +435,9 @@ $config['ga_send_userid'] = FALSE;
 $config['ldap_enabled'] = FALSE;
 $config['ldap_host'] = '127.0.0.1';
 $config['ldap_port'] = 389;
+$config['ldap_user'] = ''; // Agent user to find users by email address
+$config['ldap_pass'] = ''; // Agent password
+$config['ldap_filter'] = '(|(userprincipalname=%%USER%%)(mail=%%USER%%)(samaccountname=%%USER%%))';
 $config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';  //Change the pattern, but let %s that symbolizes the user identifier
 $config['ldap_basedn_db'] = FALSE;      //It TRUE, ldap path is taken from user table
 

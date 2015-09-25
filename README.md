@@ -67,7 +67,6 @@ We thank the following open source projects for the components used by Jorani:
 #### Backend
 
 * CodeIgniter MVC framework http://www.codeigniter.com/
-* BCRYPT password hasher https://github.com/dwightwatson/codeigniter-bcrypt
 * RSA Encryption in pure PHP https://github.com/phpseclib/phpseclib
 * Excel import/export https://github.com/PHPOffice/PHPExcel
 * Oauth2 Server https://github.com/bshaffer/oauth2-server-php

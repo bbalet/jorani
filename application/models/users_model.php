@@ -140,9 +140,6 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function set_users() {
-        //Load password hasher for create/update functions
-        $this->load->library('bcrypt');
-        
         //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
         require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
         $rsa = new phpseclib\Crypt\RSA();
@@ -151,8 +148,9 @@ class Users_model extends CI_Model {
         $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
         $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
         
-        //Hash the clear password using bcrypt
-        $hash = $this->bcrypt->hash_password($password);
+        //Hash the clear password using bcrypt (8 iterations)
+        $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
+        $hash = crypt($password, $salt);
         
         //Role field is a binary mask
         $role = 0;
@@ -233,9 +231,10 @@ class Users_model extends CI_Model {
             $active = NULL,
             $country = NULL,
             $calendar = NULL) {
-        //Hash the clear password using bcrypt
-        $this->load->library('bcrypt');
-        $hash = $this->bcrypt->hash_password($password);
+
+        //Hash the clear password using bcrypt (8 iterations)
+        $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
+        $hash = crypt($password, $salt);
         $this->db->set('firstname', $firstname);
         $this->db->set('lastname', $lastname);
         $this->db->set('login', $login);
@@ -267,9 +266,9 @@ class Users_model extends CI_Model {
      */
     public function update_user_api($id, $data) {
         if (isset($password)){
-             //Hash the clear password using bcrypt
-            $this->load->library('bcrypt');
-            $hash = $this->bcrypt->hash_password($password);
+            //Hash the clear password using bcrypt (8 iterations)
+            $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
+            $hash = crypt($password, $salt);
             $this->db->set('password', $hash);
         }
         $this->db->where('id', $id);
@@ -325,15 +324,11 @@ class Users_model extends CI_Model {
     }
 
     /**
-     * Update a given user in the database. Update data are coming from an
-     * HTML form
+     * Update a given user in the database. Update data are coming from an HTML form
      * @return type
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reset_password($id, $CipheredNewPassword) {
-        //Load password hasher for create/update functions
-        $this->load->library('bcrypt');
-        
         //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
         require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
         $rsa = new phpseclib\Crypt\RSA();
@@ -343,10 +338,9 @@ class Users_model extends CI_Model {
         $password = $rsa->decrypt(base64_decode($CipheredNewPassword));
         log_message('debug', '{models/users_model/reset_password} Password=' . $password);
         
-        //Hash the clear password using bcrypt
-        $hash = $this->bcrypt->hash_password($password);
-        log_message('debug', '{models/users_model/reset_password} Hash=' . $hash);
-        
+        //Hash the clear password using bcrypt (8 iterations)
+        $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
+        $hash = crypt($password, $salt);
         $data = array(
             'password' => $hash
         );
@@ -362,12 +356,11 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function resetClearPassword($id) {
-        //Load password hasher for create/update functions
-        $this->load->library('bcrypt');
         //generate a random password of length 10
         $password = $this->randomPassword(10);
-        //Hash the clear password using bcrypt
-        $hash = $this->bcrypt->hash_password($password);
+        //Hash the clear password using bcrypt (8 iterations)
+        $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
+        $hash = crypt($password, $salt);
         //Store the new password into db
         $data = array(
             'password' => $hash
@@ -397,8 +390,6 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function check_credentials($login, $password) {
-        //Load password hasher for create/update functions
-        $this->load->library('bcrypt');
         $this->db->from('users');
         $this->db->where('login', $login);
         $this->db->where('active = TRUE');
@@ -409,7 +400,8 @@ class Users_model extends CI_Model {
             return false;
         } else {
             $row = $query->row();
-            if ($this->bcrypt->check_password($password, $row->password)) {
+            $hash = crypt($password, $row->password);
+            if ($hash == $row->password) {
                 // Password does match stored password.
                 if (((int) $row->role & 1)) {
                     $is_admin = true;
@@ -674,5 +666,35 @@ class Users_model extends CI_Model {
         } else {
             return $query->row();
         }
+    }
+    
+    /**
+     * Generate some random bytes by using openssl, dev/urandom or random
+     * @param int $count length of the random string
+     * @return string
+     */
+    protected function getRandomBytes($length) {
+        if(function_exists('openssl_random_pseudo_bytes')) {
+          $rnd = openssl_random_pseudo_bytes($length, $strong);
+          if ($strong === TRUE)
+            return $rnd;
+        }
+        $sha =''; $rnd ='';
+        if (file_exists('/dev/urandom')) {
+          $fp = fopen('/dev/urandom', 'rb');
+          if ($fp) {
+              if (function_exists('stream_set_read_buffer')) {
+                  stream_set_read_buffer($fp, 0);
+              }
+              $sha = fread($fp, $length);
+              fclose($fp);
+          }
+        }
+        for ($i=0; $i<$length; $i++) {
+          $sha  = hash('sha256',$sha.mt_rand());
+          $char = mt_rand(0,62);
+          $rnd .= chr(hexdec($sha[$char].$sha[$char+1]));
+        }
+        return $rnd;
     }
 }

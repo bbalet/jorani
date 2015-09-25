@@ -110,9 +110,14 @@ if ($configFileExists) {
     </script>
     </head>
     <body>
-    
         <div class="container-fluid">
-
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#">Requirements</a></li>
+                <li><a href="testmail.php">Email</a></li>
+                <li><a href="testldap.php">LDAP</a></li>
+                <li><a href="testssl.php">SSL</a></li>
+                <li><a href="opcache.php">Opcache</a></li>
+              </ul>
             <h1>Jorani Requirements</h1>
 
             <noscript>

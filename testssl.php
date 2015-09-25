@@ -38,9 +38,14 @@ define('KEY_SIZE', 1024);   //Change the RSA key size
         <script type="text/javascript" src="assets/js/jquery-1.11.0.min.js"></script>
     </head>
     <body>
-
         <div class="container-fluid">
-
+            <ul class="nav nav-pills">
+                <li><a href="requirements.php">Requirements</a></li>
+                <li><a href="testmail.php">Email</a></li>
+                <li><a href="testldap.php">LDAP</a></li>
+                <li class="active"><a href="#">SSL</a></li>
+                <li><a href="opcache.php">Opcache</a></li>
+              </ul>
             <h1>Test of your OpenSSL setup</h1>
 
             <p>This page will help you to check your OpenSSL setup and to generate a <a href="#pair">private and public key pair</a>.</p>

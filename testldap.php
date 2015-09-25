@@ -38,9 +38,14 @@ define('LDAP_PASSWORD', '');  //This is the password we will use to bind to LDAP
         <script type="text/javascript" src="assets/js/jquery-1.11.0.min.js"></script>
     </head>
     <body>
-
         <div class="container-fluid">
-
+            <ul class="nav nav-pills">
+                <li><a href="requirements.php">Requirements</a></li>
+                <li><a href="testmail.php">Email</a></li>
+                <li class="active"><a href="#">LDAP</a></li>
+                <li><a href="testssl.php">SSL</a></li>
+                <li><a href="opcache.php">Opcache</a></li>
+              </ul>
             <h1>Test of your LDAP configuration</h1>
 
 <?php

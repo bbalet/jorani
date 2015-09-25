@@ -36,9 +36,14 @@ define('EMAIL_ADDRESS', '');
         <script type="text/javascript" src="assets/js/jquery-1.11.0.min.js"></script>
     </head>
     <body>
-
         <div class="container-fluid">
-
+            <ul class="nav nav-pills">
+                <li><a href="requirements.php">Requirements</a></li>
+                <li class="active"><a href="#">Email</a></li>
+                <li><a href="testldap.php">LDAP</a></li>
+                <li><a href="testssl.php">SSL</a></li>
+                <li><a href="opcache.php">Opcache</a></li>
+              </ul>
             <h1>Test of your e-mail configuration</h1>
 
 <?php

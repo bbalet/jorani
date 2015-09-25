@@ -33,38 +33,30 @@ class Overtime_model extends CI_Model {
      * @return array list of records
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_extra($id = 0) {
+    public function getExtras($id = 0) {
+        $this->db->select('overtime.*');
+        $this->db->select('status.name as status_name');
+        $this->db->from('overtime');
+        $this->db->join('status', 'overtime.status = status.id');
         if ($id === 0) {
-            $query = $this->db->get('overtime');
-            return $query->result_array();
+            return $this->db->get()->result_array();
         }
-        $query = $this->db->get_where('overtime', array('id' => $id));
-        return $query->row_array();
+        $this->db->where('overtime.id', $id);
+        return $this->db->get()->row_array();
     }
 
     /**
      * Get the the list of overtime requested by a given employee
-     * @param int $id ID of the employee
+     * @param int $employee ID of the employee
      * @return array list of records
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_user_extras($id) {
-        $query = $this->db->get_where('overtime', array('employee' => $id));
-        return $query->result_array();
-    }
-    
-    /**
-     * Get the the list of overtime requested for a given employee
-     * Ids are replaced by label
-     * @param int $id ID of the employee
-     * @return array list of records
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function get_employee_extras($id) {
-        $this->db->select('overtime.id, status.name as status, overtime.date, overtime.duration, overtime.cause');
+    public function getExtrasOfEmployee($employee) {
+        $this->db->select('overtime.*');
+        $this->db->select('status.name as status_name');
         $this->db->from('overtime');
         $this->db->join('status', 'overtime.status = status.id');
-        $this->db->where('overtime.employee', $id);
+        $this->db->where('overtime.employee', $employee);
         $this->db->order_by('overtime.id', 'desc');
         return $this->db->get()->result_array();
     }
@@ -159,6 +151,8 @@ class Overtime_model extends CI_Model {
         $this->load->model('delegations_model');
         $ids = $this->delegations_model->get_delegates_list($user_id);
         $this->db->select('overtime.id as id, users.*, overtime.*');
+        $this->db->select('status.name as status_name');
+        $this->db->join('status', 'overtime.status = status.id');
         $this->db->join('users', 'users.id = overtime.employee');
         if (count($ids) > 0) {
             array_push($ids, $user_id);
@@ -180,7 +174,7 @@ class Overtime_model extends CI_Model {
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function purge_overtime($toDate) {
+    public function purgeOvertime($toDate) {
         $this->db->where(' <= ', $toDate);
         return $this->db->delete('overtime');
     }

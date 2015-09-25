@@ -39,8 +39,7 @@ class Overtime extends CI_Controller {
     }
 
     /**
-     * Display the list of all overtime requests submitted to you
-     * Status is submitted
+     * Display the list of all overtime requests submitted to you (Status is submitted)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index($filter = 'requested') {
@@ -56,11 +55,6 @@ class Overtime extends CI_Controller {
         $data['filter'] = $filter;
         $data['title'] = lang('overtime_index_title');
         $data['requests'] = $this->overtime_model->requests($this->user_id, $showAll);
-        $this->load->model('status_model');
-        $len = count($data['requests']);
-        for ($i = 0; $i < $len; ++$i) {
-            $data['requests'][$i]['status_label'] = $this->status_model->get_label($data['requests'][$i]['status']);
-        }
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -77,7 +71,7 @@ class Overtime extends CI_Controller {
         $this->auth->check_is_granted('accept_overtime');
         $this->load->model('users_model');
         $this->load->model('delegations_model');
-        $extra = $this->overtime_model->get_extra($id);
+        $extra = $this->overtime_model->getExtras($id);
         if (empty($extra)) {
             show_404();
         }
@@ -108,7 +102,7 @@ class Overtime extends CI_Controller {
         $this->auth->check_is_granted('reject_overtime');
         $this->load->model('users_model');
         $this->load->model('delegations_model');
-        $extra = $this->overtime_model->get_extra($id);
+        $extra = $this->overtime_model->getExtras($id);
         if (empty($extra)) {
             show_404();
         }
@@ -141,7 +135,7 @@ class Overtime extends CI_Controller {
     {
         $this->load->model('users_model');
         $this->load->model('organization_model');
-        $extra = $this->overtime_model->get_extra($id);
+        $extra = $this->overtime_model->getExtras($id);
         //Load details about the employee (manager, supervisor of entity)
         $employee = $this->users_model->get_users($extra['employee']);
         $supervisor = $this->organization_model->get_supervisor($employee['organization']);
@@ -220,8 +214,6 @@ class Overtime extends CI_Controller {
             $showAll = false;
         }
         $requests = $this->overtime_model->requests($this->user_id, $showAll);
-        $this->load->model('status_model');
-        
         $line = 2;
         foreach ($requests as $request) {
             $date = new DateTime($request['date']);
@@ -231,7 +223,7 @@ class Overtime extends CI_Controller {
             $sheet->setCellValue('C' . $line, $startdate);
             $sheet->setCellValue('D' . $line, $request['duration']);
             $sheet->setCellValue('E' . $line, $request['cause']);
-            $sheet->setCellValue('F' . $line, lang($this->status_model->get_label($request['status'])));
+            $sheet->setCellValue('F' . $line, lang($request['status_name']));
             $line++;
         }
         

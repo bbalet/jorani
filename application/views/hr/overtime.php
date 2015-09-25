@@ -53,7 +53,7 @@
                 <a href="#" class="confirm-delete" data-id="<?php echo $extra['id'];?>" title="<?php echo lang('hr_overtime_thead_tip_delete');?>"><i class="icon-trash"></i></a>
             </div>
         </td>
-        <td><?php echo lang($extra['status']); ?></td>
+        <td><?php echo lang($extra['status_name']); ?></td>
         <td data-order="<?php echo $tmpDate; ?>"><?php echo $date; ?></td>
         <td><?php echo $extra['duration']; ?></td>
         <td><?php echo $extra['cause']; ?></td>

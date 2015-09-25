@@ -37,18 +37,14 @@ class Extra extends CI_Controller {
     }
 
     /**
-     * Display the list of the overtime requests of the connected user
+     * Display the list of the overtime requests by the connected user
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
         $this->auth->check_is_granted('list_extra');
         $data = getUserContext($this);
-        $data['extras'] = $this->overtime_model->get_user_extras($this->user_id);
-        $this->load->model('status_model');
-        $len = count($data['extras']);
-        for ($i = 0; $i < $len; ++$i) {
-            $data['extras'][$i]['status_label'] = $this->status_model->get_label($data['extras'][$i]['status']);
-        }
+        $this->lang->load('datatable', $this->language);
+        $data['extras'] = $this->overtime_model->getExtrasOfEmployee($this->user_id);
         $data['title'] = lang('extra_index_title');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
@@ -59,14 +55,14 @@ class Extra extends CI_Controller {
     
     /**
      * Display an overtime request
+     * @param string $source Page source (extra, overtime) (self, manager)
      * @param int $id identifier of the leave request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function view($id) {
+    public function view($source, $id) {
         $this->auth->check_is_granted('view_extra');
         $data = getUserContext($this);
-        $data['extra'] = $this->overtime_model->get_extra($id);
-        $this->load->model('status_model');
+        $data['extra'] = $this->overtime_model->getExtras($id);
         if (empty($data['extra'])) {
             show_404();
         }
@@ -84,10 +80,14 @@ class Extra extends CI_Controller {
             } //Admin
         } //Current employee
         
-        $data['extra']['status_label'] = $this->status_model->get_label($data['extra']['status']);
         $data['title'] = lang('extra_view_hmtl_title');
-        $this->load->model('users_model');
-        $data['name'] = $this->users_model->get_label($data['extra']['employee']);
+        $data['source'] = $source;
+        if ($source == 'overtime') {
+            $this->load->model('users_model');
+            $data['name'] = $this->users_model->get_label($data['extra']['employee']);
+        } else {
+            $data['name'] = '';
+        }
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('extra/view', $data);
@@ -138,7 +138,7 @@ class Extra extends CI_Controller {
     public function edit($id) {
         $this->auth->check_is_granted('edit_extra');
         $data = getUserContext($this);
-        $data['extra'] = $this->overtime_model->get_extra($id);
+        $data['extra'] = $this->overtime_model->getExtras($id);
         //Check if exists
         if (empty($data['extra'])) {
             show_404();
@@ -261,7 +261,7 @@ class Extra extends CI_Controller {
     public function delete($id) {
         $can_delete = false;
         //Test if the overtime request exists
-        $extra = $this->overtime_model->get_extra($id);
+        $extra = $this->overtime_model->getExtras($id);
         if (empty($extra)) {
             show_404();
         } else {
@@ -302,8 +302,7 @@ class Extra extends CI_Controller {
         $sheet->getStyle('A1:E1')->getFont()->setBold(true);
         $sheet->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $extras = $this->overtime_model->get_user_extras($this->user_id);
-        $this->load->model('status_model');
+        $extras = $this->overtime_model->getExtrasOfEmployee($this->user_id);
         
         $line = 2;
         foreach ($extras as $extra) {
@@ -313,7 +312,7 @@ class Extra extends CI_Controller {
             $sheet->setCellValue('B' . $line, $startdate);
             $sheet->setCellValue('C' . $line, $extra['duration']);
             $sheet->setCellValue('D' . $line, $extra['cause']);
-            $sheet->setCellValue('E' . $line, lang($this->status_model->get_label($extra['status'])));
+            $sheet->setCellValue('E' . $line, lang($extra['status_name']));
             $line++;
         }
         

@@ -133,7 +133,7 @@ class Hr extends CI_Controller {
         $data['title'] = lang('hr_overtime_title');
         $data['user_id'] = $id;
         $this->load->model('overtime_model');
-        $data['extras'] = $this->overtime_model->get_employee_extras($id);
+        $data['extras'] = $this->overtime_model->getExtrasOfEmployee($id);
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -389,7 +389,7 @@ class Hr extends CI_Controller {
         $sheet->getStyle('A3:E3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $this->load->model('overtime_model');
-        $requests = $this->overtime_model->get_employee_extras($id);
+        $requests = $this->overtime_model->getExtrasOfEmployee($id);
         $this->load->model('users_model');
         $fullname = $this->users_model->get_label($id);
         $sheet->setCellValue('A1', $fullname);
@@ -399,7 +399,7 @@ class Hr extends CI_Controller {
             $date = new DateTime($request['date']);
             $startdate = $date->format(lang('global_date_format'));
             $sheet->setCellValue('A' . $line, $request['id']);
-            $sheet->setCellValue('B' . $line, lang($request['status']));
+            $sheet->setCellValue('B' . $line, lang($request['status_name']));
             $sheet->setCellValue('C' . $line, $startdate);
             $sheet->setCellValue('D' . $line, $request['duration']);
             $sheet->setCellValue('E' . $line, $request['cause']);

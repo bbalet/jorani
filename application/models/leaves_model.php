@@ -345,7 +345,7 @@ class Leaves_model extends CI_Model {
      * @return int id of the newly acreated leave request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function CreateLeaveByApi($startdate, $enddate, $status, $employee, $cause,
+    public function createLeaveByApi($startdate, $enddate, $status, $employee, $cause,
             $startdatetype, $enddatetype, $duration, $type) {
         
         $data = array(

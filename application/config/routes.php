@@ -180,9 +180,8 @@ $route['requests'] = 'requests/index/requested';
 $route['extra/export'] = 'extra/export';
 $route['extra/create'] = 'extra/create';
 $route['extra/edit/(:num)'] = 'extra/edit/$1';
-$route['extra/view/(:num)'] = 'extra/view/$1';
 $route['extra/delete/(:num)'] = 'extra/delete/$1';
-$route['extra/(:num)'] = 'extra/view/$1';
+$route['extra/([^/]+)/(:num)'] = 'extra/view/$1/$2';
 $route['extra'] = 'extra';
 
 //overtime validation

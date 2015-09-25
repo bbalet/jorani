@@ -4,10 +4,16 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 ## v0.4.3
 
 - [X] Fix regression issue in accessing the detail of a leave/overtime request when connected as manager.
-- [ ] Big recap of all leave requests for a month and an entity. Need to check if useful (maybe).
-- [ ] Get rid of $_GET['source'] bad practice. Not a risk for XSS attack but not clean (see 'hr/presence/([^/]+)/(:num)').
-- [ ] Get rid of status_model->get_label and similar calls ($this->types_model->get_types()). It is a SQL query that can be spared by a join. Read only combos ! in views.
-- [ ] Investigate on OpenSSL not used on some servers (.cnf not found ?). Acheck to be added into requirements.php.
+- [X] Get rid of status_model->get_label and similar calls ($this->types_model->get_types()).
+- [X] New diagnostic page for OpenSSL. Allow to easily create a pair of public/private RSA keys.
+- [ ] Get rid of $_GET['source'] for redirection. Not a risk for XSS attack but not clean (see 'hr/presence/([^/]+)/(:num)')....
+- [ ] Optimize overtime/leave request edit view the same as we did for view (for self viwe, no need to display name).
+- [ ] Merge HR/Counters with Validation/counters, this will reduce the basecode.
+- [ ] Duplicate code for tabular/hr presence and Excel for linear calendar. Can we do something?
+- [ ] Custom JS triggers for validation and before submit. Called from local (maybe). Editor (from settings)?
+- [ ] Custom reports. Called from local (maybe).
+- [ ] Report carried-over leaves wizard : select an entity (change date), opt-in/out employees, check suggested report and go.
+- [ ] Notification by e-mail : Request deleted / modified (maybe or report v0.5.0). We should maybe have basic objects to pass...
 
 ## v0.5.0 or later
 
@@ -17,8 +23,6 @@ Following naming convention, this version will need a DB patch.
 - [ ] Possible DB optimization on leave table ALTER TABLE `leaves` ADD INDEX(`startdate`); ALTER TABLE `leaves` ADD INDEX(`enddate`);.
 - [ ] Possibility to sort the leave types. NEEDS DB PATCH (maybe). Cookie or DB ? Entity scope ?
 - [ ] Possibility to optionally exclude leave types to a contract. NEEDS DB PATCH (maybe). Impact leave request, should impact a dynamic build of leave balance report. 
-- [ ] Report carried-over leaves (Semi-auto / wizard), employee by employee (or mass ?).
-- [ ] Notification by e-mail : Request deleted / modified.
 
 ## Ideas
 

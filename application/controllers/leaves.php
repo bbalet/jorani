@@ -96,7 +96,6 @@ class Leaves extends CI_Controller {
         $this->auth->check_is_granted('view_leaves');
         $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->getLeaves($id);
-        $this->load->model('status_model');
         if (empty($data['leave'])) {
             show_404();
         }
@@ -114,8 +113,8 @@ class Leaves extends CI_Controller {
         } //Current employee
         $data['source'] = $source;
         $data['title'] = lang('leaves_view_html_title');
-        $this->load->model('users_model');
         if ($source == 'requests') {
+            $this->load->model('users_model');
             $data['name'] = $this->users_model->get_label($data['leave']['employee']);
         } else {
             $data['name'] = '';

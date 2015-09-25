@@ -269,7 +269,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('overtime_model');
-            $result = $this->overtime_model->get_user_extras($id);
+            $result = $this->overtime_model->getExtrasOfEmployee($id);
             echo json_encode($result);
         }
     }
@@ -515,7 +515,7 @@ class Api extends CI_Controller {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
                 log_message('error', 'Mandatory fields are missing.');
             } else {
-                    $result = $this->leaves_model->CreateLeaveByApi($startdate, $enddate, $status, $employee, $cause,
+                    $result = $this->leaves_model->createLeaveByApi($startdate, $enddate, $status, $employee, $cause,
                                                                                                 $startdatetype, $enddatetype, $duration, $type);
                     echo json_encode($result);
             }

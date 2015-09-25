@@ -17,11 +17,7 @@
  * 
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
-
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('extra', $language);
-$this->lang->load('datatable', $language);
-$this->lang->load('global', $language);?>
+?>
 
 <div class="row-fluid">
     <div class="span12">
@@ -44,10 +40,10 @@ $this->lang->load('global', $language);?>
 <?php foreach ($extras as $extra_item): ?>
     <tr>
         <td data-order="<?php echo $extra_item['id']; ?>">
-            <a href="<?php echo base_url();?>extra/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_view');?>"><?php echo $extra_item['id']; ?></a>
+            <a href="<?php echo base_url();?>extra/extra/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_view');?>"><?php echo $extra_item['id']; ?></a>
             &nbsp;
             <div class="pull-right">
-                <a href="<?php echo base_url();?>extra/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
+                <a href="<?php echo base_url();?>extra/extra/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
                 &nbsp;
                 <?php if ($extra_item['status'] == 1) { ?>
                 <a href="<?php echo base_url();?>extra/edit/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
@@ -61,7 +57,7 @@ $tmpDate = $date->getTimestamp();?>
         <td data-order="<?php echo $tmpDate; ?>"><?php echo $date->format(lang('global_date_format'));?></td>
         <td><?php echo $extra_item['duration']; ?></td>
         <td><?php echo $extra_item['cause']; ?></td>
-        <td><?php echo lang($extra_item['status_label']); ?></td>
+        <td><?php echo lang($extra_item['status_name']); ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>

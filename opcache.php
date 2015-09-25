@@ -196,7 +196,6 @@ define('THOUSAND_SEPARATOR', true);
         }
     </style>
     <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="assets/js/jquery-1.11.0.min.js"></script>
     <script src="assets/js/d3.min.js"></script>
     
@@ -219,13 +218,6 @@ define('THOUSAND_SEPARATOR', true);
 
 <body>
     <div id="container">
-            <ul class="nav nav-pills">
-                <li><a href="requirements.php">Requirements</a></li>
-                <li><a href="testmail.php">Email</a></li>
-                <li><a href="testldap.php">LDAP</a></li>
-                <li><a href="testssl.php">SSL</a></li>
-                <li class="active"><a href="#">Opcache</a></li>
-              </ul>
 
 <?php
 if (constant("OPCACHE_TESTER") == FALSE) {

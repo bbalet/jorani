@@ -445,6 +445,3 @@ $config['default_timezone'] = 'Europe/Paris';
 //Enable public access for tabular and global calendar
 //As the user won't choose the language of the web ui, please set <<language>>
 $config['public_calendar'] = FALSE;
-
-/* End of file config.php */
-/* Location: ./application/config/config.php */

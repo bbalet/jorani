@@ -133,7 +133,7 @@ class Reports extends CI_Controller {
                 $result[$user->id][$type['name']] = '';
             }
             
-            $summary = $this->leaves_model->get_user_leaves_summary($user->id, TRUE, $refDate);
+            $summary = $this->leaves_model->getLeaveBalanceForEmployee($user->id, TRUE, $refDate);
             if (count($summary) > 0 ) {
                 foreach ($summary as $key => $value) {
                     $result[$user->id][$key] = round($value[1] - $value[0], 3, PHP_ROUND_HALF_DOWN);
@@ -214,7 +214,7 @@ class Reports extends CI_Controller {
                 $result[$user->id][$type['name']] = '';
             }
             
-            $summary = $this->leaves_model->get_user_leaves_summary($user->id, TRUE, $refDate);
+            $summary = $this->leaves_model->getLeaveBalanceForEmployee($user->id, TRUE, $refDate);
             if (count($summary) > 0 ) {
                 foreach ($summary as $key => $value) {
                     $result[$user->id][$key] = round($value[1] - $value[0], 3, PHP_ROUND_HALF_DOWN);

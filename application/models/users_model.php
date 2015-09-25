@@ -123,7 +123,7 @@ class Users_model extends CI_Model {
         $this->load->model('leaves_model');
         $this->load->model('overtime_model');
         $this->entitleddays_model->delete_entitleddays_cascade_user($id);
-        $this->leaves_model->delete_leaves_cascade_user($id);
+        $this->leaves_model->deleteLeavesCascadeUser($id);
         $this->overtime_model->delete_extras_cascade_user($id);
         //Cascade delete line manager role
         $data = array(

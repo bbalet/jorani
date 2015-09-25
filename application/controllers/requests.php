@@ -44,25 +44,14 @@ class Requests extends CI_Controller {
      */
     public function index($filter = 'requested') {
         $this->auth->check_is_granted('list_requests');
-        if ($filter == 'all') {
-            $showAll = true;
-        } else {
-            $showAll = false;
-        }
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['filter'] = $filter;
         $data['title'] = lang('requests_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_validation');
-        $data['requests'] = $this->leaves_model->requests($this->user_id, $showAll);
-        
-        $this->load->model('types_model');
-        $this->load->model('status_model');
-        $len = count($data['requests']);
-        for ($i = 0; $i < $len; ++$i) {
-            $data['requests'][$i]['status_label'] = $this->status_model->get_label($data['requests'][$i]['status']);
-        }
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        ($filter == 'all')? $showAll = TRUE : $showAll = FALSE;
+        $data['requests'] = $this->leaves_model->getLeavesRequestedToManager($this->user_id, $showAll);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('requests/index', $data);
@@ -78,14 +67,14 @@ class Requests extends CI_Controller {
         $this->auth->check_is_granted('accept_requests');
         $this->load->model('users_model');
         $this->load->model('delegations_model');
-        $leave = $this->leaves_model->get_leaves($id);
+        $leave = $this->leaves_model->getLeaves($id);
         if (empty($leave)) {
             show_404();
         }
         $employee = $this->users_model->get_users($leave['employee']);
         $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
-            $this->leaves_model->accept_leave($id);
+            $this->leaves_model->acceptLeave($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg', lang('requests_accept_flash_msg_success'));
             if (isset($_GET['source'])) {
@@ -109,14 +98,14 @@ class Requests extends CI_Controller {
         $this->auth->check_is_granted('reject_requests');
         $this->load->model('users_model');
         $this->load->model('delegations_model');
-        $leave = $this->leaves_model->get_leaves($id);
+        $leave = $this->leaves_model->getLeaves($id);
         if (empty($leave)) {
             show_404();
         }
         $employee = $this->users_model->get_users($leave['employee']);
         $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
-            $this->leaves_model->reject_leave($id);
+            $this->leaves_model->rejectLeave($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg',  lang('requests_reject_flash_msg_success'));
             if (isset($_GET['source'])) {
@@ -262,7 +251,7 @@ class Requests extends CI_Controller {
                 $data['types'] = $this->types_model->get_types();
                 foreach ($data['types'] as $type) {
                     if ($type['id'] == 0) {
-                        $data['credit'] = $this->leaves_model->get_user_leaves_credit($id, $type['name']);
+                        $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($id, $type['name']);
                         break;
                     }
                 }
@@ -273,7 +262,7 @@ class Requests extends CI_Controller {
                 $this->load->view('hr/createleave');
                 $this->load->view('templates/footer');
             } else {
-                $this->leaves_model->set_leaves($id);       //We don't use the return value
+                $this->leaves_model->setLeaves($id);       //We don't use the return value
                 $this->session->set_flashdata('msg', lang('hr_leaves_create_flash_msg_success'));
                 //No mail is sent, because the manager would set the leave status to accepted
                 redirect('requests/collaborators');
@@ -308,7 +297,7 @@ class Requests extends CI_Controller {
             }
 
             $data['refDate'] = $refDate;
-            $data['summary'] = $this->leaves_model->get_user_leaves_summary($id, FALSE, $refDate);
+            $data['summary'] = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $refDate);
             
             if (!is_null($data['summary'])) {
                 $this->load->model('entitleddays_model');
@@ -341,7 +330,7 @@ class Requests extends CI_Controller {
 
     /**
      * Send a leave request email to the employee that requested the leave
-     * The method will check if the leave request wes accepted or rejected 
+     * The method will check if the leave request was accepted or rejected 
      * before sending the e-mail
      * @param int $id Leave request identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -350,14 +339,14 @@ class Requests extends CI_Controller {
     {
         $this->load->model('users_model');
         $this->load->model('organization_model');
-        $leave = $this->leaves_model->get_leave_details($id);
-        //Load details about the employee (manager, supervisor of entity)
-        $supervisor = $this->organization_model->get_supervisor($leave['organization']);
+        $leave = $this->leaves_model->getLeaves($id);
+        $employee = $this->users_model->get_users($leave['employee']);
+        $supervisor = $this->organization_model->get_supervisor($employee['organization']);
 
         //Send an e-mail to the employee
         $this->load->library('email');
         $this->load->library('polyglot');
-        $usr_lang = $this->polyglot->code2language($leave['language']);
+        $usr_lang = $this->polyglot->code2language($employee['language']);
         
         //We need to instance an different object as the languages of connected user may differ from the UI lang
         $lang_mail = new CI_Lang();
@@ -372,8 +361,8 @@ class Requests extends CI_Controller {
         $this->load->library('parser');
         $data = array(
             'Title' => $lang_mail->line('email_leave_request_validation_title'),
-            'Firstname' => $leave['firstname'],
-            'Lastname' => $leave['lastname'],
+            'Firstname' => $employee['firstname'],
+            'Lastname' => $employee['lastname'],
             'StartDate' => $startdate,
             'EndDate' => $enddate,
             'StartDateType' => $lang_mail->line($leave['startdatetype']),
@@ -388,11 +377,11 @@ class Requests extends CI_Controller {
         } else {
            $subject = '[Jorani] ';
         }
-        if ($leave['status'] == 3) {
-            $message = $this->parser->parse('emails/' . $leave['language'] . '/request_accepted', $data, TRUE);
+        if ($leave['status'] == 3) {    //accepted
+            $message = $this->parser->parse('emails/' . $employee['language'] . '/request_accepted', $data, TRUE);
             $this->email->subject($subject . $lang_mail->line('email_leave_request_accept_subject'));
-        } else {
-            $message = $this->parser->parse('emails/' . $leave['language'] . '/request_rejected', $data, TRUE);
+        } else {    //rejected
+            $message = $this->parser->parse('emails/' . $employee['language'] . '/request_rejected', $data, TRUE);
             $this->email->subject($subject . $lang_mail->line('email_leave_request_reject_subject'));
         }
         $this->email->set_encoding('quoted-printable');
@@ -402,7 +391,7 @@ class Requests extends CI_Controller {
         } else {
            $this->email->from('do.not@reply.me', 'LMS');
         }
-        $this->email->to($leave['email']);
+        $this->email->to($employee['email']);
         if (!is_null($supervisor)) {
             $this->email->cc($supervisor->email);
         }
@@ -431,15 +420,8 @@ class Requests extends CI_Controller {
         $sheet->getStyle('A1:J1')->getFont()->setBold(true);
         $sheet->getStyle('A1:J1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        if ($filter == 'all') {
-            $showAll = true;
-        } else {
-            $showAll = false;
-        }
-        $requests = $this->leaves_model->requests($this->user_id, $showAll);
-        $this->load->model('status_model');
-        $this->load->model('types_model');
-        
+        ($filter == 'all')? $showAll = TRUE : $showAll = FALSE;
+        $requests = $this->leaves_model->getLeavesRequestedToManager($this->user_id, $showAll);
         $line = 2;
         foreach ($requests as $request) {
             $date = new DateTime($request['startdate']);
@@ -453,9 +435,9 @@ class Requests extends CI_Controller {
             $sheet->setCellValue('E' . $line, $enddate);
             $sheet->setCellValue('F' . $line, lang($request['enddatetype']));
             $sheet->setCellValue('G' . $line, $request['duration']);
-            $sheet->setCellValue('H' . $line, $this->types_model->get_label($request['type']));
+            $sheet->setCellValue('H' . $line, $request['type_name']);
             $sheet->setCellValue('I' . $line, $request['cause']);
-            $sheet->setCellValue('J' . $line, lang($this->status_model->get_label($request['status'])));
+            $sheet->setCellValue('J' . $line, lang($request['status_name']));
             $line++;
         }
         

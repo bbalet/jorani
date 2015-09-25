@@ -23,6 +23,3 @@ $config['iteration_count'] = 8;
 |
 */
 $config['portable_hashes'] = FALSE;
-
-/* End of file bcrypt.php */
-/* Location: ./system/application/config/bcrypt.php */

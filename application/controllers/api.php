@@ -162,7 +162,7 @@ class Api extends CI_Controller {
             } else {
                 $refDate = date("Y-m-d");
             }
-            $result = $this->leaves_model->get_user_leaves_summary($id, FALSE, $refDate);
+            $result = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $refDate);
             if (empty($result)) {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             } else {
@@ -284,7 +284,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('leaves_model');
-            $result = $this->leaves_model->get_user_leaves($id);
+            $result = $this->leaves_model->getLeavesOfEmployee($id);
             echo json_encode($result);
         }
     }
@@ -314,7 +314,7 @@ class Api extends CI_Controller {
                 $end = sprintf('%d-%02d-%02d', $year, $month, $lastDay);
                 $result = new stdClass();
                 $linear = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE);
-                $result->leaves = $this->leaves_model->monthly_leaves_duration($linear);
+                $result->leaves = $this->leaves_model->monthlyLeavesDuration($linear);
                 $result->dayoffs = $this->dayoffs_model->sumdayoffs($employee['contract'], $start, $end);
                 $result->total = cal_days_in_month(CAL_GREGORIAN, $month, $year);
                 $result->start = $start;
@@ -515,7 +515,7 @@ class Api extends CI_Controller {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
                 log_message('error', 'Mandatory fields are missing.');
             } else {
-                    $result = $this->leaves_model->add_leaves_api($startdate, $enddate, $status, $employee, $cause,
+                    $result = $this->leaves_model->CreateLeaveByApi($startdate, $enddate, $status, $employee, $cause,
                                                                                                 $startdatetype, $enddatetype, $duration, $type);
                     echo json_encode($result);
             }

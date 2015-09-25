@@ -45,7 +45,7 @@ class Leaves extends CI_Controller {
         $this->auth->check_is_granted('list_leaves');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
-        $data['leaves'] = $this->leaves_model->get_employee_leaves($this->session->userdata('id'));
+        $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($this->session->userdata('id'));
         $data['title'] = lang('leaves_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_requests_list');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
@@ -71,7 +71,7 @@ class Leaves extends CI_Controller {
             $data['isDefault'] = 1;
         }
         $data['refDate'] = $refDate;
-        $data['summary'] = $this->leaves_model->get_user_leaves_summary($this->user_id, FALSE, $refDate);
+        $data['summary'] = $this->leaves_model->getLeaveBalanceForEmployee($this->user_id, FALSE, $refDate);
 
         if (!is_null($data['summary'])) {
             $data['title'] = lang('leaves_summary_title');
@@ -95,7 +95,7 @@ class Leaves extends CI_Controller {
     public function view($source, $id) {
         $this->auth->check_is_granted('view_leaves');
         $data = getUserContext($this);
-        $data['leave'] = $this->leaves_model->get_leaves($id);
+        $data['leave'] = $this->leaves_model->getLeaves($id);
         $this->load->model('status_model');
         if (empty($data['leave'])) {
             show_404();
@@ -154,7 +154,7 @@ class Leaves extends CI_Controller {
             $data['types'] = $this->types_model->get_types();
             foreach ($data['types'] as $type) {
                 if ($type['id'] == $default_type) {
-                    $data['credit'] = $this->leaves_model->get_user_leaves_credit($this->user_id, $type['name']);
+                    $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($this->user_id, $type['name']);
                     break;
                 }
             }
@@ -163,7 +163,7 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/create');
             $this->load->view('templates/footer');
         } else {
-            $leave_id = $this->leaves_model->set_leaves($this->session->userdata('id'));
+            $leave_id = $this->leaves_model->setLeaves($this->session->userdata('id'));
             $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
@@ -185,7 +185,7 @@ class Leaves extends CI_Controller {
     public function edit($id) {
         $this->auth->check_is_granted('edit_leaves');
         $data = getUserContext($this);
-        $data['leave'] = $this->leaves_model->get_leaves($id);
+        $data['leave'] = $this->leaves_model->getLeaves($id);
         //Check if exists
         if (empty($data['leave'])) {
             show_404();
@@ -214,7 +214,7 @@ class Leaves extends CI_Controller {
         $data['types'] = $this->types_model->get_types();
         foreach ($data['types'] as $type) {
             if ($type['id'] == $data['leave']['type']) {
-                $data['credit'] = $this->leaves_model->get_user_leaves_credit($data['leave']['employee'], $type['name']);
+                $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($data['leave']['employee'], $type['name']);
                 break;
             }
         }
@@ -236,7 +236,7 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->leaves_model->update_leaves($id);       //We don't use the return value
+            $this->leaves_model->updateLeaves($id);       //We don't use the return value
             $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
@@ -260,10 +260,9 @@ class Leaves extends CI_Controller {
         $this->load->model('types_model');
         $this->load->model('delegations_model');
         //We load everything from DB as the LR can be edited from HR/Employees
-        $leave = $this->leaves_model->get_leaves($id);
+        $leave = $this->leaves_model->getLeaves($id);
         $user = $this->users_model->get_users($leave['employee']);
         $manager = $this->users_model->get_users($user['manager']);
-        $type_label = $this->types_model->get_label($leave['type']);
 
         //Test if the manager hasn't been deleted meanwhile
         if (empty($manager['email'])) {
@@ -295,7 +294,7 @@ class Leaves extends CI_Controller {
                 'EndDateType' => $lang_mail->line($leave['enddatetype']),
                 'Type' => $this->types_model->get_label($leave['type']),
                 'Duration' => $leave['duration'],
-                'Balance' => $this->leaves_model->get_user_leaves_credit($leave['employee'] , $type_label, $leave['startdate']),
+                'Balance' => $this->leaves_model->getLeavesTypeBalanceForEmployee($leave['employee'] , $leave['type_name'], $leave['startdate']),
                 'Reason' => $leave['cause'],
                 'BaseUrl' => $this->config->base_url(),
                 'LeaveId' => $id,
@@ -337,7 +336,7 @@ class Leaves extends CI_Controller {
     public function delete($id) {
         $can_delete = false;
         //Test if the leave request exists
-        $leaves = $this->leaves_model->get_leaves($id);
+        $leaves = $this->leaves_model->getLeaves($id);
         if (empty($leaves)) {
             show_404();
         } else {
@@ -353,7 +352,7 @@ class Leaves extends CI_Controller {
                 }
             }
             if ($can_delete == true) {
-                $this->leaves_model->delete_leave($id);
+                $this->leaves_model->deleteLeave($id);
             } else {
                 $this->session->set_flashdata('msg', lang('leaves_delete_flash_msg_error'));
                 if (isset($_GET['source'])) {
@@ -391,8 +390,7 @@ class Leaves extends CI_Controller {
         $sheet->getStyle('A1:I1')->getFont()->setBold(true);
         $sheet->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $leaves = $this->leaves_model->get_employee_leaves($this->user_id);
-        
+        $leaves = $this->leaves_model->getLeavesOfEmployee($this->user_id);
         $line = 2;
         foreach ($leaves as $leave) {
             $date = new DateTime($leave['startdate']);
@@ -505,18 +503,18 @@ class Leaves extends CI_Controller {
         $leaveValidator = new stdClass;
         if (isset($id) && isset($type)) {
             if (isset($startdate) && $startdate !== "") {
-                $leaveValidator->credit = $this->leaves_model->get_user_leaves_credit($id, $type, $startdate);
+                $leaveValidator->credit = $this->leaves_model->getLeavesTypeBalanceForEmployee($id, $type, $startdate);
             } else {
-                $leaveValidator->credit = $this->leaves_model->get_user_leaves_credit($id, $type);
+                $leaveValidator->credit = $this->leaves_model->getLeavesTypeBalanceForEmployee($id, $type);
             }
         }
         if (isset($id) && isset($startdate) && isset($enddate)) {
             $leaveValidator->length = $this->leaves_model->length($id, $startdate, $enddate);
             if (isset($startdatetype) && isset($enddatetype)) {
                 if (isset($leave_id)) {
-                    $leaveValidator->overlap = $this->leaves_model->detect_overlapping_leaves($id, $startdate, $enddate, $startdatetype, $enddatetype, $leave_id);
+                    $leaveValidator->overlap = $this->leaves_model->detectOverlappingLeaves($id, $startdate, $enddate, $startdatetype, $enddatetype, $leave_id);
                 } else {
-                    $leaveValidator->overlap = $this->leaves_model->detect_overlapping_leaves($id, $startdate, $enddate, $startdatetype, $enddatetype);
+                    $leaveValidator->overlap = $this->leaves_model->detectOverlappingLeaves($id, $startdate, $enddate, $startdatetype, $enddatetype);
                 }
             }
         }

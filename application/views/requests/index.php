@@ -64,8 +64,8 @@
         <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($requests_item['startdatetype']). ')'; ?></td>
         <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($requests_item['enddatetype']) . ')'; ?></td>
         <td><?php echo $requests_item['duration']; ?></td>
-        <td><?php echo $requests_item['type_label']; ?></td>
-        <td><?php echo lang($requests_item['status_label']); ?></td>
+        <td><?php echo $requests_item['type_name']; ?></td>
+        <td><?php echo lang($requests_item['status_name']); ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>

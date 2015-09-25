@@ -97,13 +97,17 @@ class Hr extends CI_Controller {
     public function leaves($id) {
         $this->auth->check_is_granted('list_employees');
         $data = getUserContext($this);
+        $this->load->model('users_model');
+        $data['name'] = $this->users_model->get_label($id);
+        //Check if exists
+        if ($data['name'] == "") {
+            show_404();
+        }
         $this->lang->load('datatable', $this->language);
         $data['title'] = lang('hr_leaves_title');
         $data['user_id'] = $id;
         $this->load->model('leaves_model');
-        $data['leaves'] = $this->leaves_model->get_employee_leaves($id);
-        $this->load->model('users_model');
-        $data['name'] = $this->users_model->get_label($id);
+        $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($id);
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -119,13 +123,17 @@ class Hr extends CI_Controller {
     public function overtime($id) {
         $this->auth->check_is_granted('list_employees');
         $data = getUserContext($this);
+        $this->load->model('users_model');
+        $data['name'] = $this->users_model->get_label($id);
+        //Check if exists
+        if ($data['name'] == "") {
+            show_404();
+        }
         $this->lang->load('datatable', $this->language);
         $data['title'] = lang('hr_overtime_title');
         $data['user_id'] = $id;
         $this->load->model('overtime_model');
         $data['extras'] = $this->overtime_model->get_employee_extras($id);
-        $this->load->model('users_model');
-        $data['name'] = $this->users_model->get_label($id);
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -152,7 +160,7 @@ class Hr extends CI_Controller {
         }
         
         $data['refDate'] = $refDate;
-        $data['summary'] = $this->leaves_model->get_user_leaves_summary($id, FALSE, $refDate);
+        $data['summary'] = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $refDate);
         if (!is_null($data['summary'])) {
             $this->load->model('entitleddays_model');
             $this->load->model('types_model');
@@ -211,7 +219,7 @@ class Hr extends CI_Controller {
             $data['types'] = $this->types_model->get_types();
             foreach ($data['types'] as $type) {
                 if ($type['id'] == 0) {
-                    $data['credit'] = $this->leaves_model->get_user_leaves_credit($id, $type['name']);
+                    $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($id, $type['name']);
                     break;
                 }
             }
@@ -222,7 +230,7 @@ class Hr extends CI_Controller {
             $this->load->view('hr/createleave');
             $this->load->view('templates/footer');
         } else {
-            $this->leaves_model->set_leaves($id);   //Return not used
+            $this->leaves_model->setLeaves($id);   //Return not used
             $this->session->set_flashdata('msg', lang('hr_leaves_create_flash_msg_success'));
             //No mail is sent, because the HR Officer would set the leave status to accepted
             redirect('hr/employees');
@@ -291,18 +299,18 @@ class Hr extends CI_Controller {
         
         //tabular view of the leaves
         $data['linear'] = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE);
-        $data['leave_duration'] = $this->leaves_model->monthly_leaves_duration($data['linear']);
+        $data['leave_duration'] = $this->leaves_model->monthlyLeavesDuration($data['linear']);
         $data['work_duration'] = $opened_days - $data['leave_duration'];
-        $data['leaves_detail'] = $this->leaves_model->monthly_leaves_by_type($data['linear']);
+        $data['leaves_detail'] = $this->leaves_model->monthlyLeavesByType($data['linear']);
         
         //List of accepted leave requests
-        $data['leaves'] = $this->leaves_model->get_accepted_leaves_in_dates($id, $start, $end);
+        $data['leaves'] = $this->leaves_model->getAcceptedLeavesBetweenDates($id, $start, $end);
         
         //Leave balance of the employee
         $data['employee_id'] = $id;
         $refDate = new DateTime($end);
         $data['refDate'] = $refDate->format(lang('global_date_format'));
-        $data['summary'] = $this->leaves_model->get_user_leaves_summary($id, FALSE, $end);
+        $data['summary'] = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $end);
         
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -330,7 +338,7 @@ class Hr extends CI_Controller {
         $sheet->getStyle('A3:F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $this->load->model('leaves_model');
-        $leaves = $this->leaves_model->get_employee_leaves($id);
+        $leaves = $this->leaves_model->getLeavesOfEmployee($id);
         $this->load->model('users_model');
         $fullname = $this->users_model->get_label($id);
         $sheet->setCellValue('A1', $fullname);
@@ -509,11 +517,11 @@ class Hr extends CI_Controller {
         
         //tabular view of the leaves
         $linear = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE);
-        $leave_duration = $this->leaves_model->monthly_leaves_duration($linear);
+        $leave_duration = $this->leaves_model->monthlyLeavesDuration($linear);
         $work_duration = $opened_days - $leave_duration;
-        $leaves_detail = $this->leaves_model->monthly_leaves_by_type($linear);
+        $leaves_detail = $this->leaves_model->monthlyLeavesByType($linear);
         //Leave balance of the employee
-        $summary = $this->leaves_model->get_user_leaves_summary($id, FALSE, $end);
+        $summary = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $end);
         
         //Print the header with the facts of the presence report
         $sheet = $this->excel->setActiveSheetIndex(0);

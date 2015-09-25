@@ -249,6 +249,3 @@ $route['session/forgetpassword'] = 'session/forgetpassword';
 
 $route['default_controller'] = 'leaves';
 $route['(:any)'] = 'pages/view/$1';
-
-/* End of file routes.php */
-/* Location: ./application/config/routes.php */

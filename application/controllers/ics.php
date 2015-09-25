@@ -103,7 +103,7 @@ class Ics extends CI_Controller {
             $this->output->set_header("HTTP/1.0 403 Forbidden");
         } else {
             $this->load->model('leaves_model');
-            $result = $this->leaves_model->get_user_leaves($id);
+            $result = $this->leaves_model->getLeavesOfEmployee($id);
             if (empty($result)) {
                 echo "";
             } else {
@@ -200,7 +200,7 @@ class Ics extends CI_Controller {
         header('Content-type: text/calendar; charset=utf-8');
         header('Content-Disposition: attachment; filename=leave.ics');
         $this->load->model('leaves_model');
-        $leave = $this->leaves_model->get_leaves($id);
+        $leave = $this->leaves_model->getLeaves($id);
         //Get timezone and language of the user
         $this->load->model('users_model');
         $employee = $this->users_model->get_users($leave['employee']);

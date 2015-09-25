@@ -24,7 +24,7 @@
  * @param reference to CI Controller object
  * @author Benjamin BALET <benjamin.balet@gmail.com>
  */
-function setUserContext($controller)
+function setUserContext(CI_Controller $controller)
 {
         if (!$controller->session->userdata('logged_in')) {
             //Test if the expired session was detected while responding to an Ajax request

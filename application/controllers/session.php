@@ -43,18 +43,34 @@ class Session extends CI_Controller {
     }
 
     /**
-     * Generate a random string by picking randomly in letters and numbers
+     * Generate a random string by using openssl, dev/urandom or random
      * @param int $length optional length of the string
      * @return string random string
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function generateRandomString($length = 10) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        if(function_exists('openssl_random_pseudo_bytes')) {
+          $rnd = openssl_random_pseudo_bytes($length, $strong);
+          if ($strong === TRUE)
+            return base64_encode($rnd);
         }
-        return $randomString;
+        $sha =''; $rnd ='';
+        if (file_exists('/dev/urandom')) {
+          $fp = fopen('/dev/urandom', 'rb');
+          if ($fp) {
+              if (function_exists('stream_set_read_buffer')) {
+                  stream_set_read_buffer($fp, 0);
+              }
+              $sha = fread($fp, $length);
+              fclose($fp);
+          }
+        }
+        for ($i=0; $i<$length; $i++) {
+          $sha  = hash('sha256',$sha.mt_rand());
+          $char = mt_rand(0,62);
+          $rnd .= chr(hexdec($sha[$char].$sha[$char+1]));
+        }
+        return base64_encode($rnd);
     }
     /**
      * Login form

@@ -4,7 +4,7 @@
 ?>
 <h2><?php echo lang('Leave Management System');?></h2>
 
-<p>This is a sample report showing the total number of leave taken this year and grouped by type.</p>
+<p>Exemple de rapport montrant la répartition des congés pris (regroupés par type).</p>
 
 <div class="row-fluid">
     <div class="span6">
@@ -26,14 +26,14 @@
                         }
                     }?>
                 </select></label><br />
-                <label for="txtEntity">Entity
+                <label for="txtEntity">Entité
                 <div class="input-append">
                 <input type="text" id="txtEntity" name="txtEntity" readonly />
-                <button type="button" id="cmdSelectEntity" class="btn btn-primary">Select</button>
+                <button type="button" id="cmdSelectEntity" class="btn btn-primary">Choisir</button>
                 </div></label>
                 <input type="hidden" id="txtEntityID" name="txtEntityID" />
                 <label for="chkIncludeChildren">
-                <input type="checkbox" id="chkIncludeChildren" name="chkIncludeChildren" checked />&nbsp;Include children</label><br />
+                <input type="checkbox" id="chkIncludeChildren" name="chkIncludeChildren" checked />&nbsp;Inclure les sous entitées</label><br />
             <input type="submit" class="btn btn-primary" />
         </form>
     </div>
@@ -46,14 +46,14 @@
 <div id="frmSelectEntity" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="close">&times;</a>
-         <h3>Select the entity</h3>
+         <h3>Choisir l'entité</h3>
     </div>
     <div class="modal-body" id="frmSelectEntityBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
         <a href="#" onclick="select_entity();" class="btn secondary">OK</a>
-        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary">Cancel</a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary">Annuler</a>
     </div>
 </div>
 
@@ -170,9 +170,9 @@ arcs.append("svg:text").attr("transform", function(d){
             <table class="table table-bordered table-hover table-condensed">
                 <thead>
                     <tr>
-                      <th>Leave type</th>
-                      <th>Number of days</th>
-                      <th>Percentage</th>
+                      <th>Type de congé</th>
+                      <th>Nombre de jours</th>
+                      <th>Pourcentage</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -185,5 +185,3 @@ arcs.append("svg:text").attr("transform", function(d){
             </table>
     </div>
 </div>
-
-<a href="<?php echo base_url();?>sample-page">Back to the form</a><br />

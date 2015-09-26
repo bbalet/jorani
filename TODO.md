@@ -6,23 +6,26 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Fix regression issue in accessing the detail of a leave/overtime request when connected as manager.
 - [X] Get rid of status_model->get_label and similar calls ($this->types_model->get_types()).
 - [X] New diagnostic page for OpenSSL. Allow to easily create a pair of public/private RSA keys.
+- [X] Possibility to overwrite any page. Custom reports called from local, etc.
+- [X] PHP and JS triggers for leave/extra creation and modification. Called from local.
+- [ ] Clean the code we've created to experiment custom reports or list all custom pages for current lang ? INI file was a good idea.
 - [ ] Get rid of $_GET['source'] for redirection. Not a risk for XSS attack but not clean (see 'hr/presence/([^/]+)/(:num)')....
-- [ ] Optimize overtime/leave request edit view the same as we did for view (for self viwe, no need to display name).
+- [ ] Optimize overtime/leave request edit view the same as we did for view (for self view, no need to display name).
 - [ ] Merge HR/Counters with Validation/counters, this will reduce the basecode.
+- [ ] Improve code quality, adopt PSR1 for function names.
 - [ ] Duplicate code for tabular/hr presence and Excel for linear calendar. Can we do something?
-- [ ] Custom JS triggers for validation and before submit. Called from local (maybe). Editor (from settings)?
-- [ ] Custom reports. Called from local (maybe).
 - [ ] Report carried-over leaves wizard : select an entity (change date), opt-in/out employees, check suggested report and go.
-- [ ] Notification by e-mail : Request deleted / modified (maybe or report v0.5.0). We should maybe have basic objects to pass...
 
 ## v0.5.0 or later
 
 Following naming convention, this version will need a DB patch.
 
 - [ ] Update load test and its dataset.
+- [ ] Add a table to log the execution of services using the API (eg cron tasks) + a sample page in local to display them.
 - [ ] Possible DB optimization on leave table ALTER TABLE `leaves` ADD INDEX(`startdate`); ALTER TABLE `leaves` ADD INDEX(`enddate`);.
 - [ ] Possibility to sort the leave types. NEEDS DB PATCH (maybe). Cookie or DB ? Entity scope ?
 - [ ] Possibility to optionally exclude leave types to a contract. NEEDS DB PATCH (maybe). Impact leave request, should impact a dynamic build of leave balance report. 
+- [ ] Notification by e-mail : Request deleted / modified (maybe or report v0.5.0). We should maybe have basic objects to pass...
 
 ## Ideas
 

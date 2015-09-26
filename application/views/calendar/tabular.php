@@ -59,8 +59,8 @@ $this->lang->load('global', $language);?>
         </div>
     </div>
     <div class="span3">
-        <label class="checkbox">
-            <input type="checkbox" value="" id="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>
+        <label for="chkIncludeChildren">
+            <input type="checkbox" value="" id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>
         </label>
     </div>
     <div class="span5">

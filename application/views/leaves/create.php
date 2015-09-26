@@ -111,6 +111,9 @@ if ($language_code != 'en') { ?>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+
+<?php require_once dirname(BASEPATH) . "/local/triggers/leave_view.php"; ?>
+
 <script type="text/javascript">
     var baseURL = '<?php echo base_url();?>';
     var userId = <?php echo $user_id; ?>;
@@ -121,8 +124,13 @@ if ($language_code != 'en') { ?>
     var noTwoPeriodsMsg = "<?php echo lang('leaves_validate_flash_msg_overlap_period');?>";
     
 function validate_form() {
-    result = false;
     var fieldname = "";
+    
+    //Call custom trigger defined into local/triggers/leave.js
+    if (typeof triggerValidateCreateForm == 'function') { 
+       if (triggerValidateCreateForm() == false) return false;
+    }
+    
     if ($('#viz_startdate').val() == "") fieldname = "<?php echo lang('leaves_create_field_start');?>";
     if ($('#viz_enddate').val() == "") fieldname = "<?php echo lang('leaves_create_field_end');?>";
     if ($('#duration').val() == "") fieldname = "<?php echo lang('leaves_create_field_duration');?>";

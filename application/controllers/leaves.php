@@ -22,6 +22,8 @@ if (!defined('BASEPATH')) {
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
+require_once dirname(BASEPATH) . "/local/triggers/leave.php";
+
 class Leaves extends CI_Controller {
     
     /**
@@ -162,6 +164,9 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/create');
             $this->load->view('templates/footer');
         } else {
+            if (function_exists('triggerCreateLeaveRequest')) {
+                triggerCreateLeaveRequest($this);
+            }
             $leave_id = $this->leaves_model->setLeaves($this->session->userdata('id'));
             $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
             //If the status is requested, send an email to the manager

@@ -37,8 +37,8 @@
     </div>
     <div class="span4">
         <div class="pull-right">    
-            <label class="checkbox">
-                <input type="checkbox" id="chkIncludeChildren" checked /> <?php echo lang('reports_balance_field_subdepts');?>
+            <label for="chkIncludeChildren">
+                <input type="checkbox" id="chkIncludeChildren" name="chkIncludeChildren" checked /> <?php echo lang('reports_balance_field_subdepts');?>
             </label>
             &nbsp;
             <button class="btn btn-primary" id="cmdLaunchReport"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('reports_balance_button_launch');?></button>

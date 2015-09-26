@@ -788,7 +788,7 @@ class Leaves_model extends CI_Model {
         //We must show all users of the departement
         $this->load->model('dayoffs_model');
         $this->load->model('organization_model');
-        $employees = $this->organization_model->all_employees($entity, $children);
+        $employees = $this->organization_model->allEmployees($entity, $children);
         foreach ($employees as $employee) {
             $tabular[$employee->id] = $this->linear($employee->id, $month, $year, TRUE, TRUE, TRUE, FALSE);
         }

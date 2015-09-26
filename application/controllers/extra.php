@@ -22,6 +22,8 @@ if (!defined('BASEPATH')) {
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
+require_once dirname(BASEPATH) . "/local/triggers/extra.php";
+
 class Extra extends CI_Controller {
     
     /**
@@ -117,6 +119,9 @@ class Extra extends CI_Controller {
             $this->load->view('extra/create');
             $this->load->view('templates/footer');
         } else {
+            if (function_exists('triggerCreateExtraRequest')) {
+                triggerCreateExtraRequest($this);
+            }
             $extra_id = $this->overtime_model->set_extra();
             $this->session->set_flashdata('msg', lang('extra_create_msg_success'));
             //If the status is requested, send an email to the manager

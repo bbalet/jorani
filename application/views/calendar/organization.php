@@ -30,8 +30,8 @@
         </div>
     </div>
     <div class="span3">
-        <label class="checkbox">
-            <input type="checkbox" value="" id="chkIncludeChildren"> <?php echo lang('calendar_organization_check_include_subdept');?>
+        <label for="chkIncludeChildren">
+            <input type="checkbox" value="" id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_organization_check_include_subdept');?>
         </label>
     </div>
     <?php if (($this->config->item('ics_enabled') == TRUE) && ($logged_in == TRUE)) {?>

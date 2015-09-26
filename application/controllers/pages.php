@@ -41,17 +41,22 @@ class Pages extends CI_Controller {
      */
     public function view($page = 'home') {
         $data = getUserContext($this);
-        $path = 'pages/' . $this->session->userdata('language_code') . '/' . $page . '.php';
-        if (!file_exists('application/views/' . $path)) {
-            $path = 'pages/en/' . $page . '.php';
-            if (!file_exists('application/views/' . $path)) { //fallback on default language
-                show_404();
-            }
-        }
-        $data['title'] = ucfirst($page); // Capitalize the first letter
+        $trans = array("-" => " ", "_" => " ", "." => " ");
+        $data['title'] = ucfirst(strtr($page, $trans)); // Capitalize the first letter
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
-        $this->load->view($path, $data);
+        $view = 'pages/' . $this->language_code .'/' . $page . '.php';
+        $pathCI = APPPATH . 'views/';
+        $pathLocal = dirname(BASEPATH) .'/local/';
+        //Check if we have a user-defined view
+        if (file_exists($pathLocal . $view)) {
+            $this->load->ext_view($pathLocal, $view, $data);
+        } else {//Load the page from the default location (CI views folder)
+            if (!file_exists($pathCI . $view)) {
+                    show_404();
+            }
+            $this->load->view($view, $data);
+        }
         $this->load->view('templates/footer', $data);
     }
 

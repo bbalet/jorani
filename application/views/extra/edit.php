@@ -23,10 +23,12 @@
 
 <?php echo validation_errors(); ?>
 
-<?php if (isset($_GET['source'])) {
-    echo form_open('extra/edit/' . $id . '?source=' . $_GET['source']);
+<?php
+$attributes = array('id' => 'frmEditExtra');
+if (isset($_GET['source'])) {
+    echo form_open('extra/edit/' . $id . '?source=' . $_GET['source'], $attributes);
 } else {
-    echo form_open('extra/edit/' . $id);
+    echo form_open('extra/edit/' . $id, $attributes);
 } ?>
 
     <label for="viz_date"><?php echo lang('extra_edit_field_date');?></label>
@@ -48,15 +50,21 @@
         <option value="4" <?php if ($extra['status'] == 4) echo 'selected'; ?>><?php echo lang('Rejected');?></option>        
         <?php } ?>
     </select><br />
-
-    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('extra_edit_button_update');?></button>
-    &nbsp;
+</form>
+    
+    <div class="row-fluid"><div class="span12">&nbsp;</div></div>
+    <div class="row-fluid"><div class="span12">
+        <button id="cmdEditExtra" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('extra_edit_button_update');?></button>
+        &nbsp;
     <?php if (isset($_GET['source'])) {?>
         <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('extra_edit_button_cancel');?></a>
     <?php } else {?>
         <a href="<?php echo base_url(); ?>extra" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('extra_edit_button_cancel');?></a>
     <?php } ?>
-</form>
+    </div></div>
+    <div class="row-fluid"><div class="span12">&nbsp;</div></div>
+    </div>
+</div>
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
@@ -64,7 +72,31 @@
 if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+
+<?php require_once dirname(BASEPATH) . "/local/triggers/extra_view.php"; ?>
+
 <script type="text/javascript">
+    
+    function validate_form() {
+        var fieldname = "";
+        
+        //Call custom trigger defined into local/triggers/leave.js
+        if (typeof triggerValidateEditForm == 'function') { 
+           if (triggerValidateEditForm() == false) return false;
+        }
+        
+        if ($('#viz_date').val() == "") fieldname = "<?php echo lang('extra_edit_field_date');?>";
+        if ($('#duration').val() == "") fieldname = "<?php echo lang('extra_edit_field_duration');?>";
+        if ($('#cause').val() == "") fieldname = "<?php echo lang('extra_edit_field_cause');?>";
+        if (fieldname == "") {
+            return true;
+        } else {
+            bootbox.alert(<?php echo lang('extra_create_mandatory_js_msg');?>);
+            return false;
+        }
+    }
+    
     $(function () {
         $("#viz_date").datepicker({
             changeMonth: true,
@@ -78,6 +110,12 @@ if ($language_code != 'en') { ?>
             var value = $("#duration").val();
             value = value.replace(",", ".");
             $("#duration").val(value);
+        });
+        
+        $("#cmdEditExtra").click(function() {
+            if (validate_form()) {
+                $("#frmEditExtra").submit();
+            }
         });
     });
 </script>

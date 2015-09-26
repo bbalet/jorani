@@ -118,7 +118,7 @@ class Reports extends CI_Controller {
             $refDate = date("Y-m-d", $_GET['refDate']);
         }
         $include_children = filter_var($_GET['children'], FILTER_VALIDATE_BOOLEAN);
-        $users = $this->organization_model->all_employees($_GET['entity'], $include_children);
+        $users = $this->organization_model->allEmployees($_GET['entity'], $include_children);
         foreach ($users as $user) {
             $result[$user->id]['identifier'] = $user->identifier;
             $result[$user->id]['firstname'] = $user->firstname;
@@ -200,7 +200,7 @@ class Reports extends CI_Controller {
             $refDate = date("Y-m-d", $_GET['refDate']);
         }
         $include_children = filter_var($_GET['children'], FILTER_VALIDATE_BOOLEAN);
-        $users = $this->organization_model->all_employees($_GET['entity'], $include_children);
+        $users = $this->organization_model->allEmployees($_GET['entity'], $include_children);
         foreach ($users as $user) {
             $result[$user->id]['identifier'] = $user->identifier;
             $result[$user->id]['firstname'] = $user->firstname;

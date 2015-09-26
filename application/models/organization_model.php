@@ -92,6 +92,7 @@ class Organization_model extends CI_Model {
      * @param int $id identifier of the entity
      * @param type $parent_id new parent of the entity
      * @return type result of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function move($id, $parent_id) {
         $data = array(
@@ -106,6 +107,7 @@ class Organization_model extends CI_Model {
      * @param int $id identifier of the employee
      * @param int $entity identifier of the entity
      * @return type result of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function add_employee($id, $entity) {
         $data = array(
@@ -119,6 +121,7 @@ class Organization_model extends CI_Model {
      * Cascade delete children and set employees' org to NULL
      * @param int $entity identifier of the entity
      * @return type result of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($entity) {
         $list = $this->get_all_children($entity);
@@ -143,6 +146,7 @@ class Organization_model extends CI_Model {
      * Delete an employee from an entity of the organization
      * @param int $id identifier of the employee
      * @return type result of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete_employee($id) {
         $data = array(
@@ -157,6 +161,7 @@ class Organization_model extends CI_Model {
      * @param int $id identifier of the entity
      * @param string $text new text of the entity
      * @return type result of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function rename($id, $text) {
         $data = array(
@@ -171,6 +176,7 @@ class Organization_model extends CI_Model {
      * @param int $parent_id identifier of the parent entity
      * @param string $text name of the new entity
      * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function create($parent_id, $text) {
         $data = array(
@@ -185,6 +191,7 @@ class Organization_model extends CI_Model {
      * @param int $id identifier of the source entity
      * @param int $parent_id identifier of the new parent entity
      * @return type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function copy($id, $parent_id) {
         $this->db->from('organization');
@@ -201,7 +208,8 @@ class Organization_model extends CI_Model {
     /**
      * Returns the list of the employees attached to an entity
      * @param int $id identifier of the entity
-     * @return type
+     * @return array Result of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function employees($id) {
         $this->db->select('id, firstname, lastname, email');
@@ -216,9 +224,10 @@ class Organization_model extends CI_Model {
      * Returns the list of the employees attached to an entity
      * @param int $id identifier of the entity
      * @param bool $children Include sub department in the query
-     * @return type
+     * @return  array Result of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function all_employees($id, $children = false) {
+    public function allEmployees($id, $children = false) {
         $this->db->select('users.id, users.identifier, users.firstname, users.lastname, users.datehired');
         $this->db->select('organization.name as department, positions.name as position, contracts.name as contract');
         $this->db->from('organization');
@@ -252,6 +261,7 @@ class Organization_model extends CI_Model {
      * @param int $id identifier of the employee
      * @param int $entity identifier of the entity
      * @return int result of the query
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function set_supervisor($id, $entity) {
         $data = array(
@@ -265,6 +275,7 @@ class Organization_model extends CI_Model {
      * Returns the supervisor of an entity
      * @param int $entity identifier of the entity
      * @return object identifier of supervisor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function get_supervisor($entity) {
         $this->db->select('users.id, CONCAT(users.firstname, \' \', users.lastname) as username, email', FALSE);

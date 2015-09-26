@@ -65,10 +65,18 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+
+<?php require_once dirname(BASEPATH) . "/local/triggers/extra_view.php"; ?>
+
 <script type="text/javascript">
     function validate_form() {
-        result = false;
         var fieldname = "";
+        
+        //Call custom trigger defined into local/triggers/leave.js
+        if (typeof triggerValidateCreateForm == 'function') { 
+           if (triggerValidateCreateForm() == false) return false;
+        }
+        
         if ($('#viz_date').val() == "") fieldname = "<?php echo lang('extra_create_field_date');?>";
         if ($('#duration').val() == "") fieldname = "<?php echo lang('extra_create_field_duration');?>";
         if ($('#cause').val() == "") fieldname = "<?php echo lang('extra_create_field_cause');?>";

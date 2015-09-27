@@ -36,21 +36,28 @@ class Reports extends CI_Controller {
     }
 
     /**
-     * List the available reports (all folders into local/reports
+     * List the available custom reports (provided they are discribed into local/reports/*.ini)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
         $this->auth->check_is_granted('report_list');
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         
         $reports = array();
-        $files = glob(FCPATH . '/local/reports/*', GLOB_ONLYDIR);
+        //List all the available reports
+        $files = glob(FCPATH . '/local/reports/*.ini');
         foreach($files as $file) {
-            $ini_array = parse_ini_file($file . '/report.ini', true);
-            $reports[$ini_array[$this->language_code]['name']] = array(
-                basename($file),
-                $ini_array[$this->language_code]['description']
+            $ini_array = parse_ini_file($file, true);
+            //Test if the report is available for the language being used
+            if (array_key_exists($this->language_code, $ini_array)) {
+                //If available, push the report into the list to be displayed with a description
+                $reports[$ini_array[$this->language_code]['name']] = array(
+                    basename($file),
+                    $ini_array[$this->language_code]['description'],
+                    $ini_array['configuration']['path'],
                 );
+            }
         }
         
         $data['title'] = lang('reports_index_title');
@@ -61,26 +68,9 @@ class Reports extends CI_Controller {
         $this->load->view('templates/footer'); 
     }
 
-    /**
-     * Execute a report
-     * @param string $report Name of the folder containing the report
-     * @param string $action PHP file to be executed
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function execute($report, $action = "index.php") {
-        $this->auth->check_is_granted('report_execute');
-        $data = getUserContext($this);
-        $data['title'] = lang('reports_execute_title');
-        $data['report'] = $report;
-        $data['action'] = $action;
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('reports/execute', $data);
-        $this->load->view('templates/footer');
-    }
     
     /**
-     * Execute the shipped-in balance report
+     * Landing page of the shipped-in balance report
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function balance($refTmp = NULL) {

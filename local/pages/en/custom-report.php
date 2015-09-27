@@ -2,7 +2,7 @@
 //This is a sample page showing how to create a custom report
 //We can get access to all the framework, so you can do anything with the instance of the current controller ($this)
 ?>
-<h2><?php echo lang('Leave Management System');?></h2>
+<h2>Leave distribution</h2>
 
 <p>This is a sample report showing the total number of leave taken this year and grouped by type.</p>
 
@@ -12,6 +12,7 @@
                 <label for="cboYear">Year
                 <select name="cboYear">
                     <?php
+                    $entity_name = $this->input->get('txtEntity', TRUE);
                     if ($this->input->get('cboYear', TRUE) === FALSE) {
                         $year =  date('Y');
                     } else {
@@ -28,7 +29,7 @@
                 </select></label><br />
                 <label for="txtEntity">Entity
                 <div class="input-append">
-                <input type="text" id="txtEntity" name="txtEntity" readonly />
+                <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $entity_name; ?>" readonly />
                 <button type="button" id="cmdSelectEntity" class="btn btn-primary">Select</button>
                 </div></label>
                 <input type="hidden" id="txtEntityID" name="txtEntityID" />
@@ -94,11 +95,11 @@ if ($include_children) {
 } else {
     echo '$(\'#chkIncludeChildren\').prop(\'checked\', false);';
 }
+$entity = ($this->input->get('txtEntityID', TRUE) !== FALSE)? $this->input->get('txtEntityID', TRUE) : 0;
 if ($this->input->get('txtEntity', TRUE) !== FALSE) {
     echo '$(\'#txtEntity\').val(\'' . $this->input->get('txtEntity', TRUE) .'\');';
 }
 
-log_message('error', '$entity=' . $entity);
 $users = $ci->organization_model->allEmployees($entity, $include_children);
 $ids = array(0);
 foreach ($users as $user) {
@@ -165,7 +166,7 @@ arcs.append("svg:text").attr("transform", function(d){
 </script>
 
 <div class="row-fluid">
-    <div class="span6"></div>
+    <div class="span6">&nbsp;</div>
     <div class="span6">
             <table class="table table-bordered table-hover table-condensed">
                 <thead>
@@ -186,4 +187,15 @@ arcs.append("svg:text").attr("transform", function(d){
     </div>
 </div>
 
-<a href="<?php echo base_url();?>sample-page">Back to the form</a><br />
+<?php 
+$url_export = base_url() . 'excel-export' .
+        '?cboYear=' . $year . 
+        '&txtEntity=' . urlencode($entity_name) . 
+        '&txtEntityID=' . $entity . 
+        '&chkIncludeChildren=' . $include_children;
+ ?>
+
+<a href="<?php echo base_url();?>sample-page" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;Back to the form</a>
+<a href="<?php echo $url_export; ?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; Export to Excel</a>
+
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>

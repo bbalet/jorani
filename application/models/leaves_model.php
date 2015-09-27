@@ -772,7 +772,6 @@ class Leaves_model extends CI_Model {
         if ($year==0) $year = date("Y");
         $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
         $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
-        $lastDay = date("t", strtotime($start));    //last day of selected month
         //If no entity was selected, select the entity of the connected user or the root of the organization
         if ($entity == -1) {
             $this->load->model('users_model');

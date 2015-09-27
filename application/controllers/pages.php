@@ -43,8 +43,11 @@ class Pages extends CI_Controller {
         $data = getUserContext($this);
         $trans = array("-" => " ", "_" => " ", "." => " ");
         $data['title'] = ucfirst(strtr($page, $trans)); // Capitalize the first letter
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
+        //The page containing export in their name are returning another MIMETYPE
+        if (strpos($page,'export') === false) {//Don't include header and menu
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+        }
         $view = 'pages/' . $this->language_code .'/' . $page . '.php';
         $pathCI = APPPATH . 'views/';
         $pathLocal = dirname(BASEPATH) .'/local/';
@@ -57,7 +60,9 @@ class Pages extends CI_Controller {
             }
             $this->load->view($view, $data);
         }
-        $this->load->view('templates/footer', $data);
+        if (strpos($page,'export') === false) {
+            $this->load->view('templates/footer', $data);
+        }
     }
 
 }

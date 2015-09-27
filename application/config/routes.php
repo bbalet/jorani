@@ -205,7 +205,7 @@ $route['entitleddays/ajax/update'] = 'entitleddays/ajax_update';
 $route['reports/balance'] = 'reports/balance';
 $route['reports/balance/execute'] = 'reports/executeBalanceReport';
 $route['reports/balance/export'] = 'reports/exportBalanceReport';
-$route['reports'] = 'reports/balance';
+$route['reports'] = 'reports';
 
 //_______________________________________________
 //REST API

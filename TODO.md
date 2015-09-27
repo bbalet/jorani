@@ -8,12 +8,16 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] New diagnostic page for OpenSSL. Allow to easily create a pair of public/private RSA keys.
 - [X] Possibility to overwrite any page. Custom reports called from local, etc.
 - [X] PHP and JS triggers for leave/extra creation and modification. Called from local.
+- [X] Migrate the Excel exports from controllers to views (where they belong in MVC model).
+- [ ] Choose a simpler JS chart library than d3.js...
+- [ ] Try to optimize the calls to users_model->get_label (if employee already loaded, concat first and lastname).
+- [ ] Optimize overtime/leave request edit view the same as we did for view (for self view, no need to display name).
 - [ ] Clean the code we've created to experiment custom reports or list all custom pages for current lang ? INI file was a good idea.
 - [ ] Get rid of $_GET['source'] for redirection. Not a risk for XSS attack but not clean (see 'hr/presence/([^/]+)/(:num)')....
-- [ ] Optimize overtime/leave request edit view the same as we did for view (for self view, no need to display name).
 - [ ] Merge HR/Counters with Validation/counters, this will reduce the basecode.
 - [ ] Improve code quality, adopt PSR1 for function names.
 - [ ] Duplicate code for tabular/hr presence and Excel for linear calendar. Can we do something?
+- [ ] Duplicate code for e-mail preparation.
 - [ ] Report carried-over leaves wizard : select an entity (change date), opt-in/out employees, check suggested report and go.
 
 ## v0.5.0 or later

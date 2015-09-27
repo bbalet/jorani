@@ -43,7 +43,7 @@ class Users extends CI_Controller {
         $this->auth->check_is_granted('list_users');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
-        $data['users'] = $this->users_model->get_users();
+        $data['users'] = $this->users_model->getUsers();
         $data['title'] = lang('users_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_users');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
@@ -101,10 +101,10 @@ class Users extends CI_Controller {
      * Display details of the connected user (contract, line manager, etc.)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function myprofile() {
+    public function myProfile() {
         $this->auth->check_is_granted('view_myprofile');
         $data = getUserContext($this);
-        $data['user'] = $this->users_model->get_users($this->user_id);
+        $data['user'] = $this->users_model->getUsers($this->user_id);
         if (empty($data['user'])) {
             show_404();
         }
@@ -114,11 +114,11 @@ class Users extends CI_Controller {
         $this->load->model('contracts_model');
         $this->load->model('organization_model');
         $data['roles'] = $this->roles_model->get_roles();
-        $data['manager_label'] = $this->users_model->get_label($data['user']['manager']);
+        $data['manager_label'] = $this->users_model->getName($data['user']['manager']);
         $data['contract_id'] = intval($data['user']['contract']);
-        $data['contract_label'] = $this->contracts_model->get_label($data['user']['contract']);
-        $data['position_label'] = $this->positions_model->get_label($data['user']['position']);
-        $data['organization_label'] = $this->organization_model->get_label($data['user']['organization']);
+        $data['contract_label'] = $this->contracts_model->getName($data['user']['contract']);
+        $data['position_label'] = $this->positions_model->getName($data['user']['position']);
+        $data['organization_label'] = $this->organization_model->getName($data['user']['organization']);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/myprofile', $data);
@@ -154,7 +154,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('timezone', lang('users_edit_field_timezone'), 'xss_clean|strip_tags');
         if ($this->config->item('ldap_basedn_db')) $this->form_validation->set_rules('ldap_path', lang('users_edit_field_ldap_path'), 'xss_clean|strip_tags');
         
-        $data['users_item'] = $this->users_model->get_users($id);
+        $data['users_item'] = $this->users_model->getUsers($id);
         if (empty($data['users_item'])) {
             show_404();
         }
@@ -164,10 +164,10 @@ class Users extends CI_Controller {
             $this->load->model('positions_model');
             $this->load->model('organization_model');
             $this->load->model('contracts_model');
-            $data['contracts'] = $this->contracts_model->get_contracts();
-            $data['manager_label'] = $this->users_model->get_label($data['users_item']['manager']);
-            $data['position_label'] = $this->positions_model->get_label($data['users_item']['position']);
-            $data['organization_label'] = $this->organization_model->get_label($data['users_item']['organization']);
+            $data['contracts'] = $this->contracts_model->getContracts();
+            $data['manager_label'] = $this->users_model->getName($data['users_item']['manager']);
+            $data['position_label'] = $this->positions_model->getName($data['users_item']['position']);
+            $data['organization_label'] = $this->organization_model->getName($data['users_item']['organization']);
             $data['roles'] = $this->roles_model->get_roles();
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
@@ -192,7 +192,7 @@ class Users extends CI_Controller {
     public function delete($id) { 
         $this->auth->check_is_granted('delete_user');
         //Test if user exists
-        $data['users_item'] = $this->users_model->get_users($id);
+        $data['users_item'] = $this->users_model->getUsers($id);
         if (empty($data['users_item'])) {
             log_message('debug', '{controllers/users/delete} user not found');
             show_404();
@@ -214,7 +214,7 @@ class Users extends CI_Controller {
         $this->auth->check_is_granted('change_password', $id);
 
         //Test if user exists
-        $data['users_item'] = $this->users_model->get_users($id);
+        $data['users_item'] = $this->users_model->getUsers($id);
         if (empty($data['users_item'])) {
             log_message('debug', '{controllers/users/reset} user not found');
             show_404();
@@ -232,7 +232,7 @@ class Users extends CI_Controller {
                 log_message('info', 'Password of user #' . $id . ' has been modified by user #' . $this->session->userdata('id'));
                 
                 //Send an e-mail to the user so as to inform that its password has been changed
-                $user = $this->users_model->get_users($id);
+                $user = $this->users_model->getUsers($id);
                 $this->load->library('email');
                 $this->load->library('polyglot');
                 $usr_lang = $this->polyglot->code2language($user['language']);
@@ -292,12 +292,12 @@ class Users extends CI_Controller {
         $this->load->model('roles_model');
         $data['roles'] = $this->roles_model->get_roles();
         $this->load->model('contracts_model');
-        $data['contracts'] = $this->contracts_model->get_contracts();
+        $data['contracts'] = $this->contracts_model->getContracts();
         $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
 
         $this->form_validation->set_rules('firstname', lang('users_create_field_firstname'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('lastname', lang('users_create_field_lastname'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('login', lang('users_create_field_login'), 'required|callback_login_check|xss_clean|strip_tags');
+        $this->form_validation->set_rules('login', lang('users_create_field_login'), 'required|callback_checkLogin|xss_clean|strip_tags');
         $this->form_validation->set_rules('email', lang('users_create_field_email'), 'required|xss_clean|strip_tags');
         if (!$this->config->item('ldap_enabled')) $this->form_validation->set_rules('CipheredValue', lang('users_create_field_password'), 'required');
         $this->form_validation->set_rules('role[]', lang('users_create_field_role'), 'required|xss_clean|strip_tags');
@@ -365,9 +365,9 @@ class Users extends CI_Controller {
      * @return boolean true if the field is valid, false otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function login_check($login) {
+    public function checkLogin($login) {
         if (!$this->users_model->is_login_available($login)) {
-            $this->form_validation->set_message('login_check', lang('users_create_login_check'));
+            $this->form_validation->set_message('checkLogin', lang('users_create_checkLogin'));
             return false;
         } else {
             return true;
@@ -378,7 +378,7 @@ class Users extends CI_Controller {
      * Ajax endpoint : check login duplication
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function check_login() {
+    public function checkLoginByAjax() {
         header("Content-Type: text/plain");
         if ($this->users_model->is_login_available($this->input->post('login'))) {
             echo 'true';
@@ -394,38 +394,6 @@ class Users extends CI_Controller {
     public function export() {
         $this->auth->check_is_granted('export_user');
         $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('users_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A1', lang('users_export_thead_id'));
-        $sheet->setCellValue('B1', lang('users_export_thead_firstname'));
-        $sheet->setCellValue('C1', lang('users_export_thead_lastname'));
-        $sheet->setCellValue('D1', lang('users_export_thead_email'));
-        $sheet->setCellValue('E1', lang('users_export_thead_manager'));
-        
-        $sheet->getStyle('A1:E1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $users = $this->users_model->get_users();
-        $line = 2;
-        foreach ($users as $user) {
-            $sheet->setCellValue('A' . $line, $user['id']);
-            $sheet->setCellValue('B' . $line, $user['firstname']);
-            $sheet->setCellValue('C' . $line, $user['lastname']);
-            $sheet->setCellValue('D' . $line, $user['email']);
-            $sheet->setCellValue('E' . $line, $user['manager']);
-            $line++;
-        }
-
-        //Autofit
-        foreach(range('A', 'E') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-        
-        $filename = 'users.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $this->load->view('users/export');
     }
 }

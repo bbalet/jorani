@@ -63,7 +63,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('contracts_model');
-            $result = $this->contracts_model->get_contracts($id);
+            $result = $this->contracts_model->getContracts($id);
             echo json_encode($result);
         }
     }
@@ -200,7 +200,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('types_model');
-            $result = $this->types_model->get_types();
+            $result = $this->types_model->getTypes();
             echo json_encode($result);
         }
     }
@@ -214,7 +214,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('positions_model');
-            $result = $this->positions_model->get_positions();
+            $result = $this->positions_model->getPositions();
             echo json_encode($result);
         }
     }
@@ -247,7 +247,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('users_model');
-            $result = $this->users_model->get_users($id);
+            $result = $this->users_model->getUsers($id);
             foreach($result as $k1=>$q) {
               foreach($q as $k2=>$r) {
                 if($k2 == 'password') {
@@ -303,7 +303,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('users_model');
-            $employee = $this->users_model->get_users($id);
+            $employee = $this->users_model->getUsers($id);
             if (!isset($employee['contract'])) {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             } else {
@@ -337,7 +337,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('users_model');
-            $employee = $this->users_model->get_users($id);
+            $employee = $this->users_model->getUsers($id);
             if (count($employee) == 0) {
                 $this->output->set_header("HTTP/1.1 404 Not Found");
             } else {

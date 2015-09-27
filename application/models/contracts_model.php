@@ -22,6 +22,7 @@ class Contracts_model extends CI_Model {
 
     /**
      * Default constructor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
         
@@ -30,10 +31,10 @@ class Contracts_model extends CI_Model {
     /**
      * Get the list of contracts or one contract
      * @param int $id optional id of a contract
-     * @return array record of contracts
+     * @return array records of contracts
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_contracts($id = 0) {
+    public function getContracts($id = 0) {
         if ($id === 0) {
             $query = $this->db->get('contracts');
             return $query->result_array();
@@ -43,12 +44,13 @@ class Contracts_model extends CI_Model {
     }
     
     /**
-     * Get the label for a given contract id
+     * Get the name of a given contract
      * @param int $id Unique identifier of a contract
-     * @return string label of the contract
+     * @return string name of the contract
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_label($id) {
-        $record = $this->get_contracts($id);
+    public function getName($id) {
+        $record = $this->getContracts($id);
         if (count($record) > 0) {
             return $record['name'];
         } else {
@@ -61,7 +63,7 @@ class Contracts_model extends CI_Model {
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_contracts() {
+    public function setContracts() {
         $startentdate = str_pad($this->input->post('startentdatemonth'), 2, "0", STR_PAD_LEFT) .
                 "/" . str_pad($this->input->post('startentdateday'), 2, "0", STR_PAD_LEFT);
         $endentdate = str_pad($this->input->post('endentdatemonth'), 2, "0", STR_PAD_LEFT) .
@@ -79,7 +81,7 @@ class Contracts_model extends CI_Model {
      * @param int $id identifier of the contract
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_contract($id) {
+    public function deleteContract($id) {
         $this->db->delete('contracts', array('id' => $id));
         $this->load->model('users_model');
         $this->load->model('entitleddays_model');
@@ -94,7 +96,7 @@ class Contracts_model extends CI_Model {
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function update_contract() {
+    public function updateContract() {
         $startentdate = str_pad($this->input->post('startentdatemonth'), 2, "0", STR_PAD_LEFT) .
                 "/" . str_pad($this->input->post('startentdateday'), 2, "0", STR_PAD_LEFT);
         $endentdate = str_pad($this->input->post('endentdatemonth'), 2, "0", STR_PAD_LEFT) .

@@ -49,7 +49,7 @@ class Ics extends CI_Controller {
         } else {
             //Get timezone and language of the user
             $this->load->model('users_model');
-            $employee = $this->users_model->get_users($user);
+            $employee = $this->users_model->getUsers($user);
             if (!is_null($employee['timezone'])) {
                 $tzdef = $employee['timezone'];
             } else {
@@ -109,7 +109,7 @@ class Ics extends CI_Controller {
             } else {
                 //Get timezone and language of the user
                 $this->load->model('users_model');
-                $employee = $this->users_model->get_users($id);
+                $employee = $this->users_model->getUsers($id);
                 if (!is_null($employee['timezone'])) {
                     $tzdef = $employee['timezone'];
                 } else {
@@ -159,7 +159,7 @@ class Ics extends CI_Controller {
             } else {
                 //Get timezone and language of the user
                 $this->load->model('users_model');
-                $employee = $this->users_model->get_users($user);
+                $employee = $this->users_model->getUsers($user);
                 if (!is_null($employee['timezone'])) {
                     $tzdef = $employee['timezone'];
                 } else {
@@ -203,7 +203,7 @@ class Ics extends CI_Controller {
         $leave = $this->leaves_model->getLeaves($id);
         //Get timezone and language of the user
         $this->load->model('users_model');
-        $employee = $this->users_model->get_users($leave['employee']);
+        $employee = $this->users_model->getUsers($leave['employee']);
         if (!is_null($employee['timezone'])) {
             $tzdef = $employee['timezone'];
         } else {

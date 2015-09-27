@@ -165,7 +165,7 @@ class Leaves_model extends CI_Model {
             //Fill a list of all existing leave types
             $summary = $this->types_model->allTypes($compensate_name);
             //Get the sum of entitled days
-            $user = $this->users_model->get_users($id);
+            $user = $this->users_model->getUsers($id);
             $entitlements = $this->getSumEntitledDays($id, $user['contract'], $refDate);
             
             foreach ($entitlements as $entitlement) {
@@ -776,7 +776,7 @@ class Leaves_model extends CI_Model {
         //If no entity was selected, select the entity of the connected user or the root of the organization
         if ($entity == -1) {
             $this->load->model('users_model');
-            $user = $this->users_model->get_users($this->session->userdata('id'));
+            $user = $this->users_model->getUsers($this->session->userdata('id'));
             if (is_null($user['organization'])) {
                 $entity = 0;
             } else {
@@ -862,7 +862,7 @@ class Leaves_model extends CI_Model {
         //We must show all users of the departement
         $this->load->model('dayoffs_model');
         $this->load->model('users_model');
-        $employee = $this->users_model->get_users($employee_id);
+        $employee = $this->users_model->getUsers($employee_id);
         $user = new stdClass;
         $user->name = $employee['firstname'] . ' ' . $employee['lastname'];
         $user->days = array();

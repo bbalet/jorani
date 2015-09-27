@@ -43,14 +43,14 @@ $route['admin/settings'] = 'admin/settings';
 $route['admin'] = 'admin/settings';
 
 //Admin : user management
-$route['users/myprofile'] = 'users/myprofile';
+$route['users/myprofile'] = 'users/myProfile';
 $route['users/employees'] = 'users/employees';
 $route['users/export'] = 'users/export';
 $route['users/reset/(:num)'] = 'users/reset/$1';
 $route['users/create'] = 'users/create';
 $route['users/edit/(:num)'] = 'users/edit/$1';
 $route['users/delete/(:num)'] = 'users/delete/$1';
-$route['users/check/login'] = 'users/check_login';
+$route['users/check/login'] = 'users/checkLoginByAjax';
 $route['users/enable/(:num)'] = 'users/enable/$1';
 $route['users/disable/(:num)'] = 'users/disable/$1';
 $route['users'] = 'users';
@@ -58,18 +58,18 @@ $route['users'] = 'users';
 //Human Resources Management
 $route['hr/employees'] = 'hr/employees';
 $route['hr/employees/entity/(:num)/(:any)'] = 'hr/employees_entity/$1/$2';
-$route['hr/employees/export/(:num)/(:any)'] = 'hr/export_employees/$1/$2';
+$route['hr/employees/export/(:num)/(:any)'] = 'hr/exportEmployees/$1/$2';
 $route['hr/leaves/(:num)'] = 'hr/leaves/$1';
-$route['hr/leaves/export/(:num)'] = 'hr/export_leaves/$1';
+$route['hr/leaves/export/(:num)'] = 'hr/exportLeaves/$1';
 $route['hr/overtime/(:num)'] = 'hr/overtime/$1';
 $route['hr/counters/(:num)'] = 'hr/counters/$1';
 $route['hr/counters/(:num)/(:num)'] = 'hr/counters/$1/$2';
-$route['hr/overtime/export/(:num)'] = 'hr/export_overtime/$1';
+$route['hr/overtime/export/(:num)'] = 'hr/exportOvertime/$1';
 $route['hr/entitleddays/(:num)'] = 'hr/entitleddays/$1';
 $route['hr/leaves/create/(:num)'] = 'hr/createleave/$1';
 $route['hr/presence/([^/]+)/(:num)'] = 'hr/presence/$1/$2';
 $route['hr/presence/([^/]+)/(:num)/(:num)/(:num)'] = 'hr/presence/$1/$2/$3/$4';
-$route['hr/presence/export/([^/]+)/(:num)/(:num)/(:num)'] = 'hr/export_presence/$1/$2/$3/$4';
+$route['hr/presence/export/([^/]+)/(:num)/(:num)/(:num)'] = 'hr/exportPresence/$1/$2/$3/$4';
 $route['hr'] = 'hr/employees';
 
 //HR edit leave types
@@ -129,11 +129,11 @@ $route['calendar/organization'] = 'calendar/organization';
 $route['calendar/department'] = 'calendar/department';
 $route['calendar/tabular'] = 'calendar/tabular';
 $route['calendar/tabular/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabular/$1/$2/$3/$4';
-$route['calendar/tabular/export/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabular_export/$1/$2/$3/$4';
+$route['calendar/tabular/export/(:num)/(:num)/(:num)/(:any)'] = 'calendar/exportTabular/$1/$2/$3/$4';
 $route['calendar/year/(:num)/(:num)'] = 'calendar/year/$1/$2';
 $route['calendar/year/(:num)'] = 'calendar/year/$1';
 $route['calendar/year'] = 'calendar/year';
-$route['calendar/year/export/(:num)/(:num)'] = 'calendar/year_export/$1/$2';
+$route['calendar/year/export/(:num)/(:num)'] = 'calendar/exportYear/$1/$2';
 $route['calendar'] = 'calendar/individual';
 
 //private Fullcalendar feeds
@@ -146,8 +146,8 @@ $route['leaves/collaborators'] = 'leaves/collaborators';
 $route['leaves/team'] = 'leaves/team';
 
 //public Fullcalendar feeds (available when public calendars are activated)
-$route['leaves/public/organization/(:num)'] = 'calendar/public_organization/$1';
-$route['contracts/public/calendar/alldayoffs'] = 'calendar/public_dayoffs';
+$route['leaves/public/organization/(:num)'] = 'calendar/publicOrganization/$1';
+$route['contracts/public/calendar/alldayoffs'] = 'calendar/publicDayoffs';
 
 //My leave requests
 $route['leaves/counters'] = 'leaves/counters';
@@ -203,8 +203,8 @@ $route['entitleddays/ajax/update'] = 'entitleddays/ajax_update';
 //_______________________________________________
 //Reports
 $route['reports/balance'] = 'reports/balance';
-$route['reports/balance/execute'] = 'reports/balance_execute';
-$route['reports/balance/export'] = 'reports/balance_export';
+$route['reports/balance/execute'] = 'reports/executeBalanceReport';
+$route['reports/balance/export'] = 'reports/exportBalanceReport';
 $route['reports'] = 'reports/balance';
 
 //_______________________________________________

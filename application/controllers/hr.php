@@ -98,7 +98,7 @@ class Hr extends CI_Controller {
         $this->auth->check_is_granted('list_employees');
         $data = getUserContext($this);
         $this->load->model('users_model');
-        $data['name'] = $this->users_model->get_label($id);
+        $data['name'] = $this->users_model->getName($id);
         //Check if exists
         if ($data['name'] == "") {
             show_404();
@@ -124,7 +124,7 @@ class Hr extends CI_Controller {
         $this->auth->check_is_granted('list_employees');
         $data = getUserContext($this);
         $this->load->model('users_model');
-        $data['name'] = $this->users_model->get_label($id);
+        $data['name'] = $this->users_model->getName($id);
         //Check if exists
         if ($data['name'] == "") {
             show_404();
@@ -163,13 +163,11 @@ class Hr extends CI_Controller {
         $data['summary'] = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $refDate);
         if (!is_null($data['summary'])) {
             $this->load->model('entitleddays_model');
-            $this->load->model('types_model');
-            $data['types'] = $this->types_model->get_types();
             $this->load->model('users_model');
-            $data['employee_name'] = $this->users_model->get_label($id);
-            $user = $this->users_model->get_users($id);
+            $user = $this->users_model->getUsers($id);
+            $data['employee_name'] = $user['firstname'] . ' ' . $user['lastname'];
             $this->load->model('contracts_model');
-            $contract = $this->contracts_model->get_contracts($user['contract']); 
+            $contract = $this->contracts_model->getContracts($user['contract']); 
             $data['contract_name'] = $contract['name'];
             $data['contract_start'] = $contract['startentdate'];
             $data['contract_end'] = $contract['endentdate'];
@@ -216,7 +214,7 @@ class Hr extends CI_Controller {
         $data['credit'] = 0;
         if ($this->form_validation->run() === FALSE) {
             $this->load->model('types_model');
-            $data['types'] = $this->types_model->get_types();
+            $data['types'] = $this->types_model->getTypes();
             foreach ($data['types'] as $type) {
                 if ($type['id'] == 0) {
                     $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($id, $type['name']);
@@ -224,7 +222,7 @@ class Hr extends CI_Controller {
                 }
             }
             $this->load->model('users_model');
-            $data['name'] = $this->users_model->get_label($id);
+            $data['name'] = $this->users_model->getName($id);
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('hr/createleave');
@@ -263,14 +261,14 @@ class Hr extends CI_Controller {
         $this->load->model('contracts_model');
         
         //Details about the employee
-        $employee = $this->users_model->get_users($id);
+        $employee = $this->users_model->getUsers($id);
         if (($this->user_id != $employee['manager']) && ($this->is_hr === false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to hr/presence  #' . $id);
             $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'hr/presence'));
             redirect('leaves');
         }
         $data['employee_name'] =  $employee['firstname'] . ' ' . $employee['lastname'];
-        $contract = $this->contracts_model->get_contracts($employee['contract']);
+        $contract = $this->contracts_model->getContracts($employee['contract']);
         if (!empty($contract)) {
             $data['contract_id'] = $contract['id'];
             $data['contract_name'] = $contract['name'];
@@ -319,153 +317,43 @@ class Hr extends CI_Controller {
     }
         
     /**
-     * Action: export the list of all leaves into an Excel file
+     * Export the list of all leave requests of an employee into an Excel file
      * @param int $id employee id
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function export_leaves($id) {
+    public function exportLeaves($id) {
         $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('hr_export_leaves_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A3', lang('hr_export_leaves_thead_id'));
-        $sheet->setCellValue('B3', lang('hr_export_leaves_thead_status'));
-        $sheet->setCellValue('C3', lang('hr_export_leaves_thead_start'));
-        $sheet->setCellValue('D3', lang('hr_export_leaves_thead_end'));
-        $sheet->setCellValue('E3', lang('hr_export_leaves_thead_duration'));
-        $sheet->setCellValue('F3', lang('hr_export_leaves_thead_type'));
-        
-        $sheet->getStyle('A3:F3')->getFont()->setBold(true);
-        $sheet->getStyle('A3:F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->load->model('leaves_model');
-        $leaves = $this->leaves_model->getLeavesOfEmployee($id);
         $this->load->model('users_model');
-        $fullname = $this->users_model->get_label($id);
-        $sheet->setCellValue('A1', $fullname);
-        
-        $line = 4;
-        foreach ($leaves as $leave) {
-            $date = new DateTime($leave['startdate']);
-            $startdate = $date->format(lang('global_date_format'));
-            $date = new DateTime($leave['enddate']);
-            $enddate = $date->format(lang('global_date_format'));
-            $sheet->setCellValue('A' . $line, $leave['id']);
-            $sheet->setCellValue('B' . $line, lang($leave['status_name']));
-            $sheet->setCellValue('C' . $line, $startdate);
-            $sheet->setCellValue('D' . $line, $enddate);
-            $sheet->setCellValue('E' . $line, $leave['duration']);
-            $sheet->setCellValue('F' . $line, $leave['type_name']);
-            $line++;
-        }
-        
-        //Autofit
-        foreach(range('A', 'F') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-
-        $filename = 'leaves.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $data['id'] = $id;
+        $this->load->view('hr/export_leaves', $data);
     }
     
     /**
-     * Action: export the list of all overtime requests into an Excel file
+     * Export the list of all overtime requests of an employee into an Excel file
      * @param int $id employee id
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function export_overtime($id) {
+    public function exportOvertime($id) {
         $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('hr_export_overtime_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A3', lang('hr_export_overtime_thead_id'));
-        $sheet->setCellValue('B3', lang('hr_export_overtime_thead_status'));
-        $sheet->setCellValue('C3', lang('hr_export_overtime_thead_date'));
-        $sheet->setCellValue('D3', lang('hr_export_overtime_thead_duration'));
-        $sheet->setCellValue('E3', lang('hr_export_overtime_thead_cause'));
-        $sheet->getStyle('A3:E3')->getFont()->setBold(true);
-        $sheet->getStyle('A3:E3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->load->model('overtime_model');
-        $requests = $this->overtime_model->getExtrasOfEmployee($id);
         $this->load->model('users_model');
-        $fullname = $this->users_model->get_label($id);
-        $sheet->setCellValue('A1', $fullname);
-        
-        $line = 4;
-        foreach ($requests as $request) {
-            $date = new DateTime($request['date']);
-            $startdate = $date->format(lang('global_date_format'));
-            $sheet->setCellValue('A' . $line, $request['id']);
-            $sheet->setCellValue('B' . $line, lang($request['status_name']));
-            $sheet->setCellValue('C' . $line, $startdate);
-            $sheet->setCellValue('D' . $line, $request['duration']);
-            $sheet->setCellValue('E' . $line, $request['cause']);
-            $line++;
-        }
-
-        //Autofit
-        foreach(range('A', 'E') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-        
-        $filename = 'overtime.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $data['id'] = $id;
+        $this->load->view('hr/export_overtime', $data);
     }
     
     /**
-     * Action: export the list of all employees into an Excel file
+     * Export the list of all employees into an Excel file
      * @param int $id optional id of the entity, all entities if 0
      * @param bool $children true : include sub entities, false otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function export_employees($id = 0, $children = TRUE) {
-        $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('hr_export_employees_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A1', lang('hr_export_employees_thead_id'));
-        $sheet->setCellValue('B1', lang('hr_export_employees_thead_firstname'));
-        $sheet->setCellValue('C1', lang('hr_export_employees_thead_lastname'));
-        $sheet->setCellValue('D1', lang('hr_export_employees_thead_email'));
-        $sheet->setCellValue('E1', lang('hr_export_employees_thead_entity'));
-        $sheet->setCellValue('F1', lang('hr_export_employees_thead_contract'));
-        $sheet->setCellValue('G1', lang('hr_export_employees_thead_manager'));
-        $sheet->getStyle('A1:G1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        
-        $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
+    public function exportEmployees($id = 0, $children = TRUE) {
         $this->load->model('users_model');
-        $employees = $this->users_model->employees_of_entity($id, $children);
-        
-        $line = 2;
-        foreach ($employees as $employee) {
-            $sheet->setCellValue('A' . $line, $employee->id);
-            $sheet->setCellValue('B' . $line, $employee->firstname);
-            $sheet->setCellValue('C' . $line, $employee->lastname);
-            $sheet->setCellValue('D' . $line, $employee->email);
-            $sheet->setCellValue('E' . $line, $employee->entity);
-            $sheet->setCellValue('F' . $line, $employee->contract);
-            $sheet->setCellValue('G' . $line, $employee->manager_name);
-            $line++;
-        }
-        
-        //Autofit
-        foreach(range('A', 'G') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-
-        $filename = 'employees.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $this->load->library('excel');
+        $data['id'] = $id;
+        $data['children'] = filter_var($children, FILTER_VALIDATE_BOOLEAN);
+        $this->load->view('hr/export_employees', $data);
     }
     
     /**
@@ -476,320 +364,28 @@ class Hr extends CI_Controller {
      * @param int $year Year number or 0 for current year (default)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function export_presence($source,$id, $month=0, $year=0) {
+    public function exportPresence($source,$id, $month=0, $year=0) {
         if ($source == 'collaborators') { $this->auth->check_is_granted('list_collaborators'); }
         if ($source == 'employees') { $this->auth->check_is_granted('list_employees'); }
         setUserContext($this);
-        
         $this->lang->load('calendar', $this->language);
         $this->load->model('leaves_model');
         $this->load->model('users_model');
         $this->load->model('dayoffs_model');
         $this->load->model('contracts_model');
-        $this->load->library('excel');
         
-        //Details about the employee
-        $employee = $this->users_model->get_users($id);
+        $employee = $this->users_model->getUsers($id);
         if (($this->user_id != $employee['manager']) && ($this->is_hr === false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to hr/presence  #' . $id);
             $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'hr/presence'));
             redirect('leaves');
         }
-        $employee_name =  $employee['firstname'] . ' ' . $employee['lastname'];
-        $contract = $this->contracts_model->get_contracts($employee['contract']);
-        if (!empty($contract)) {
-            $contract_name = $contract['name'];
-        } else {
-            $contract_name = '';
-        }
         
-        //Compute facts about dates and the selected month
-        if ($month == 0) $month = date('m', strtotime('last month'));
-        if ($year == 0) $year = date('Y', strtotime('last month'));
-        $total_days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-        $start = sprintf('%d-%02d-01', $year, $month);
-        $lastDay = date("t", strtotime($start));    //last day of selected month
-        $end = sprintf('%d-%02d-%02d', $year, $month, $lastDay);
-        //Number of non working days during the selected month
-        $non_working_days = $this->dayoffs_model->sumdayoffs($employee['contract'], $start, $end);
-        $opened_days = $total_days - $non_working_days;
-        $month_name = lang(date('F', strtotime($start)));
-        
-        //tabular view of the leaves
-        $linear = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE);
-        $leave_duration = $this->leaves_model->monthlyLeavesDuration($linear);
-        $work_duration = $opened_days - $leave_duration;
-        $leaves_detail = $this->leaves_model->monthlyLeavesByType($linear);
-        //Leave balance of the employee
-        $summary = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $end);
-        
-        //Print the header with the facts of the presence report
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('hr_presence_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        
-        $sheet->setCellValue('A1', lang('hr_presence_employee'));
-        $sheet->setCellValue('A2', lang('hr_presence_month'));
-        $sheet->setCellValue('A3', lang('hr_presence_days'));
-        $sheet->setCellValue('A4', lang('hr_presence_contract'));
-        $sheet->setCellValue('A5', lang('hr_presence_working_days'));
-        $sheet->setCellValue('A6', lang('hr_presence_non_working_days'));
-        $sheet->setCellValue('A7', lang('hr_presence_work_duration'));
-        $sheet->setCellValue('A8', lang('hr_presence_leave_duration'));
-        $sheet->getStyle('A1:A8')->getFont()->setBold(true);
-        
-        $sheet->setCellValue('B1', $employee_name);
-        $sheet->setCellValue('B2', $month_name);
-        $sheet->setCellValue('B3', $total_days);
-        $sheet->setCellValue('B4', $contract_name);
-        $sheet->setCellValue('B5', $opened_days);
-        $sheet->setCellValue('B6', $non_working_days);
-        $sheet->setCellValue('B7', $work_duration);
-        $sheet->setCellValue('B8', $leave_duration);
-        
-        if (count($leaves_detail) > 0) {
-            $line = 9;
-            foreach ($leaves_detail as $leaves_type_name => $leaves_type_sum) {
-                $sheet->setCellValue('A' . $line, $leaves_type_name);
-                $sheet->setCellValue('B' . $line, $leaves_type_sum);
-                $sheet->getStyle('A' . $line)->getAlignment()->setIndent(2);
-                $line++;
-            }
-        }
-
-        //Print two lines : the short name of all days for the selected month (horizontally aligned)
-        $start = $year . '-' . $month . '-' . '1';    //first date of selected month
-        $lastDay = date("t", strtotime($start));    //last day of selected month
-        for ($ii = 1; $ii <=$lastDay; $ii++) {
-            $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
-            $col = $this->excel->column_name(3 + $ii);
-            //Print day number
-            $sheet->setCellValue($col . '11', $ii);
-            //Print short name of the day
-            switch ($dayNum)
-            {
-                case 1: $sheet->setCellValue($col . '10', lang('calendar_monday_short')); break;
-                case 2: $sheet->setCellValue($col . '10', lang('calendar_tuesday_short')); break;
-                case 3: $sheet->setCellValue($col . '10', lang('calendar_wednesday_short')); break;
-                case 4: $sheet->setCellValue($col . '10', lang('calendar_thursday_short')); break;
-                case 5: $sheet->setCellValue($col . '10', lang('calendar_friday_short')); break;
-                case 6: $sheet->setCellValue($col . '10', lang('calendar_saturday_short')); break;
-                case 7: $sheet->setCellValue($col . '10', lang('calendar_sunday_short')); break;
-            }
-        }
-        //The header is horizontally aligned
-        $col = $this->excel->column_name(3 + $lastDay);
-        $sheet->getStyle('C8:' . $col . '9')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        
-        //Box around the lines for each employee
-        $styleBox = array(
-            'borders' => array(
-                'top' => array(
-                    'style' => PHPExcel_Style_Border::BORDER_THIN
-                ),
-                'bottom' => array(
-                    'style' => PHPExcel_Style_Border::BORDER_THIN
-                )
-            )
-          );
-        
-        $dayBox =  array(
-            'borders' => array(
-                'left' => array(
-                    'style' => PHPExcel_Style_Border::BORDER_DASHDOT,
-                    'rgb' => '808080'
-                ),
-                'right' => array(
-                    'style' => PHPExcel_Style_Border::BORDER_DASHDOT,
-                    'rgb' => '808080'
-                )
-            )
-         );
-        
-        //Background colors for the calendar according to the type of leave
-        $styleBgPlanned = array(
-            'fill' => array(
-                'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                'color' => array('rgb' => 'DDD')
-            )
-        );
-        $styleBgRequested = array(
-            'fill' => array(
-                'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                'color' => array('rgb' => 'F89406')
-            )
-        );
-        $styleBgAccepted = array(
-            'fill' => array(
-                'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                'color' => array('rgb' => '468847')
-            )
-        );
-        $styleBgRejected = array(
-            'fill' => array(
-                'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                'color' => array('rgb' => 'FF0000')
-            )
-        );
-        $styleBgDayOff = array(
-            'fill' => array(
-                'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                'color' => array('rgb' => '000000')
-            )
-        );
-        
-        $line = 12;
-        $col = $this->excel->column_name($lastDay + 3);
-        $sheet->getStyle('D' . $line . ':' . $col . ($line + 1))->applyFromArray($styleBox);
-
-        //Iterate on all days of the selected month
-        $dayNum = 0;
-        foreach ($linear->days as $day) {
-            $dayNum++;
-            $col = $this->excel->column_name(3 + $dayNum);
-            if (strstr($day->display, ';')) {//Two statuses in the cell
-                $statuses = explode(";", $day->status);
-                $types = explode(";", $day->type);
-                    //0 - Working day  _
-                    //1 - All day           []
-                    //2 - Morning        |\
-                    //3 - Afternoon      /|
-                    //4 - All Day Off       []
-                    //5 - Morning Day Off   |\
-                    //6 - Afternoon Day Off /|
-                  $sheet->getComment($col . $line)->getText()->createTextRun($types[0]);
-                  $sheet->getComment($col . ($line + 1))->getText()->createTextRun($types[1]);
-                  switch (intval($statuses[0]))
-                  {
-                    case 1: $sheet->getStyle($col . $line)->applyFromArray($styleBgPlanned); break;  // Planned
-                    case 2: $sheet->getStyle($col . $line)->applyFromArray($styleBgRequested); break;  // Requested
-                    case 3: $sheet->getStyle($col . $line)->applyFromArray($styleBgAccepted); break;  // Accepted
-                    case 4: $sheet->getStyle($col . $line)->applyFromArray($styleBgRejected); break;  // Rejected
-                    case '5': $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
-                    case '6': $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
-                  }
-                  switch (intval($statuses[1]))
-                  {
-                    case 1: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgPlanned); break;  // Planned
-                    case 2: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRequested); break;  // Requested
-                    case 3: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgAccepted); break;  // Accepted
-                    case 4: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Rejected
-                    case '5': $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff); break;    //Day off
-                    case '6': $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff); break;    //Day off
-                  }//Two statuses in the cell
-            } else {//Only one status in the cell
-                switch ($day->display) {
-                    case '1':   //All day
-                            $sheet->getComment($col . $line)->getText()->createTextRun($day->type);
-                            $sheet->getComment($col . ($line + 1))->getText()->createTextRun($day->type);
-                            switch ($day->status)
-                            {
-                                // 1 : 'Planned';
-                                // 2 : 'Requested';
-                                // 3 : 'Accepted';
-                                // 4 : 'Rejected';
-                                case 1: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgPlanned); break;  // Planned
-                                case 2: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgRequested); break; // Requested
-                                case 3: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgAccepted); break;  // Accepted
-                                case 4: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Rejected
-                            }
-                            break;
-                    case '2':   //AM
-                        $sheet->getComment($col . $line)->getText()->createTextRun($day->type);
-                        switch ($day->status)
-                          {
-                              case 1: $sheet->getStyle($col . $line)->applyFromArray($styleBgPlanned); break;  // Planned
-                              case 2: $sheet->getStyle($col . $line)->applyFromArray($styleBgRequested); break;  // Requested
-                              case 3: $sheet->getStyle($col . $line)->applyFromArray($styleBgAccepted); break;  // Accepted
-                              case 4: $sheet->getStyle($col . $line)->applyFromArray($styleBgRejected); break;  // Rejected
-                          }
-                        break;
-                    case '3':   //PM
-                        $sheet->getComment($col . ($line + 1))->getText()->createTextRun($day->type);
-                        switch ($day->status)
-                          {
-                              case 1: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgPlanned); break;  // Planned
-                              case 2: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRequested); break;  // Requested
-                              case 3: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgAccepted); break;  // Accepted
-                              case 4: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Rejected
-                          }
-                        break;
-                    case '4': //Full day off
-                        $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgDayOff);
-                        $sheet->getComment($col . $line)->getText()->createTextRun($day->type);
-                        $sheet->getComment($col . ($line + 1))->getText()->createTextRun($day->type);
-                        break;
-                    case '5':  //AM off
-                        $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff);
-                        $sheet->getComment($col . $line)->getText()->createTextRun($day->type);
-                        break;
-                    case '6':   //PM off
-                        $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff);
-                        $sheet->getComment($col . ($line + 1))->getText()->createTextRun($day->type);
-                        break;
-                }
-              }//Only one status in the cell
-        }//day
-        
-        //Autofit for all column containing the days
-        for ($ii = 1; $ii <=$lastDay; $ii++) {
-            $col = $this->excel->column_name($ii + 3);
-            $sheet->getStyle($col . '10:' . $col . '13')->applyFromArray($dayBox);
-            $sheet->getColumnDimension($col)->setAutoSize(TRUE);
-        }
-        $sheet->getColumnDimension('A')->setAutoSize(TRUE);
-        $sheet->getColumnDimension('B')->setAutoSize(TRUE);
-        
-        //Leave Balance
-        $sheet->setCellValue('C16', lang('hr_summary_thead_type'));
-        $sheet->setCellValue('J16', lang('hr_summary_thead_available'));
-        $sheet->setCellValue('P16', lang('hr_summary_thead_taken'));
-        $sheet->setCellValue('V16', lang('hr_summary_thead_entitled'));
-        $sheet->setCellValue('AB16', lang('hr_summary_thead_description'));
-        $sheet->getStyle('C16:AH16')->getFont()->setBold(true);
-        $sheet->mergeCells('C16:I16');
-        $sheet->mergeCells('J16:O16');
-        $sheet->mergeCells('P16:U16');
-        $sheet->mergeCells('V16:AA16');
-        $sheet->mergeCells('AB16:AK16');
-        
-        $line = 17;
-        foreach ($summary as $key => $value) {
-            $sheet->setCellValue('C' . $line, $key);
-            $sheet->setCellValue('J' . $line, ((float) $value[1] - (float) $value[0]));
-            if ($value[2] == '') {
-                $sheet->setCellValue('P' . $line, ((float) $value[0]));
-            } else {
-                $sheet->setCellValue('P' . $line, '-');
-            }
-            if ($value[2] == '') {
-                $sheet->setCellValue('V' . $line, ((float) $value[1]));
-            } else {
-                $sheet->setCellValue('V' . $line, '-');
-            }
-            $sheet->setCellValue('AB' . $line, $value[2]);
-
-            $sheet->getStyle('C' . $line . ':AK' . $line)->applyFromArray($styleBox);
-            $sheet->mergeCells('C' . $line . ':I' . $line);
-            $sheet->mergeCells('J' . $line . ':O' . $line);
-            $sheet->mergeCells('P' . $line . ':U' . $line);
-            $sheet->mergeCells('V' . $line . ':AA' . $line);
-            $sheet->mergeCells('AB' . $line . ':AK' . $line);
-
-            $line++;
-        }
-
-        //Set layout to landscape and make the Excel sheet fit to the page
-        $sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
-        $sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
-        $sheet->getPageSetup()->setFitToPage(true);
-        $sheet->getPageSetup()->setFitToWidth(1);
-        $sheet->getPageSetup()->setFitToHeight(0);
-        
-        $filename = 'presence.xlsx';
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
-        $objWriter->save('php://output');
+        $this->load->library('excel');       
+        $data['employee'] = $employee;
+        $data['month'] = $month;
+        $data['year'] = $year;
+        $data['id'] = $id;
+        $this->load->view('hr/export_presence', $data);
     }
 }

@@ -33,7 +33,7 @@ class Users_model extends CI_Model {
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_users($id = 0) {
+    public function getUsers($id = 0) {
         $this->db->select('users.*');
         $this->db->select('roles.name as role_name');
         $this->db->join('roles', 'roles.id = users.role');
@@ -61,8 +61,8 @@ class Users_model extends CI_Model {
      * @param type $id
      * @return string label
      */
-    public function get_label($id) {
-        $record = $this->get_users($id);
+    public function getName($id) {
+        $record = $this->getUsers($id);
         if (count($record) > 0) {
             return $record['firstname'] . ' ' . $record['lastname'];
         }

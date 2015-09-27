@@ -71,7 +71,7 @@ class Requests extends CI_Controller {
         if (empty($leave)) {
             show_404();
         }
-        $employee = $this->users_model->get_users($leave['employee']);
+        $employee = $this->users_model->getUsers($leave['employee']);
         $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
             $this->leaves_model->acceptLeave($id);
@@ -102,7 +102,7 @@ class Requests extends CI_Controller {
         if (empty($leave)) {
             show_404();
         }
-        $employee = $this->users_model->get_users($leave['employee']);
+        $employee = $this->users_model->getUsers($leave['employee']);
         $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
             $this->leaves_model->rejectLeave($id);
@@ -153,7 +153,7 @@ class Requests extends CI_Controller {
             $data['title'] = lang('requests_delegations_title');
             $data['help'] = $this->help->create_help_link('global_link_doc_page_delegations');
             $this->load->model('users_model');
-            $data['name'] = $this->users_model->get_label($id);
+            $data['name'] = $this->users_model->getName($id);
             $data['id'] = $id;
             $this->load->model('delegations_model');
             $data['delegations'] = $this->delegations_model->get_delegates($id);
@@ -222,7 +222,7 @@ class Requests extends CI_Controller {
     public function createleave($id) {
         $this->lang->load('hr', $this->language);
         $this->load->model('users_model');
-        $employee = $this->users_model->get_users($id);
+        $employee = $this->users_model->getUsers($id);
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to collaborators/leave/create  #' . $id);
             $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_forbidden'));
@@ -248,7 +248,7 @@ class Requests extends CI_Controller {
             $data['credit'] = 0;
             if ($this->form_validation->run() === FALSE) {
                 $this->load->model('types_model');
-                $data['types'] = $this->types_model->get_types();
+                $data['types'] = $this->types_model->getTypes();
                 foreach ($data['types'] as $type) {
                     if ($type['id'] == 0) {
                         $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($id, $type['name']);
@@ -256,7 +256,7 @@ class Requests extends CI_Controller {
                     }
                 }
                 $this->load->model('users_model');
-                $data['name'] = $this->users_model->get_label($id);
+                $data['name'] = $this->users_model->getName($id);
                 $this->load->view('templates/header', $data);
                 $this->load->view('menu/index', $data);
                 $this->load->view('hr/createleave');
@@ -282,7 +282,7 @@ class Requests extends CI_Controller {
         $this->lang->load('entitleddays', $this->language);
         $this->lang->load('hr', $this->language);
         $this->load->model('users_model');
-        $employee = $this->users_model->get_users($id);
+        $employee = $this->users_model->getUsers($id);
         if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to leave counter of employee #' . $id);
             $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_forbidden'));
@@ -302,12 +302,12 @@ class Requests extends CI_Controller {
             if (!is_null($data['summary'])) {
                 $this->load->model('entitleddays_model');
                 $this->load->model('types_model');
-                $data['types'] = $this->types_model->get_types();
+                $data['types'] = $this->types_model->getTypes();
                 $this->load->model('users_model');
-                $data['employee_name'] = $this->users_model->get_label($id);
-                $user = $this->users_model->get_users($id);
+                $data['employee_name'] = $this->users_model->getName($id);
+                $user = $this->users_model->getUsers($id);
                 $this->load->model('contracts_model');
-                $contract = $this->contracts_model->get_contracts($user['contract']);
+                $contract = $this->contracts_model->getContracts($user['contract']);
                 $data['contract_name'] = $contract['name'];
                 $data['contract_start'] = $contract['startentdate'];
                 $data['contract_end'] = $contract['endentdate'];
@@ -340,7 +340,7 @@ class Requests extends CI_Controller {
         $this->load->model('users_model');
         $this->load->model('organization_model');
         $leave = $this->leaves_model->getLeaves($id);
-        $employee = $this->users_model->get_users($leave['employee']);
+        $employee = $this->users_model->getUsers($leave['employee']);
         $supervisor = $this->organization_model->get_supervisor($employee['organization']);
 
         //Send an e-mail to the employee
@@ -400,57 +400,12 @@ class Requests extends CI_Controller {
     }
     
     /**
-     * Action: export the list of all leave requests into an Excel file
+     * Export the list of all leave requests (sent to the connected user) into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export($filter = 'requested') {
         $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('requests_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A1', lang('requests_export_thead_id'));
-        $sheet->setCellValue('B1', lang('requests_export_thead_fullname'));
-        $sheet->setCellValue('C1', lang('requests_export_thead_startdate'));
-        $sheet->setCellValue('D1', lang('requests_export_thead_startdate_type'));
-        $sheet->setCellValue('E1', lang('requests_export_thead_enddate'));
-        $sheet->setCellValue('F1', lang('requests_export_thead_enddate_type'));
-        $sheet->setCellValue('G1', lang('requests_export_thead_duration'));
-        $sheet->setCellValue('H1', lang('requests_export_thead_type'));
-        $sheet->setCellValue('I1', lang('requests_export_thead_cause'));
-        $sheet->setCellValue('J1', lang('requests_export_thead_status'));
-        $sheet->getStyle('A1:J1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:J1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        ($filter == 'all')? $showAll = TRUE : $showAll = FALSE;
-        $requests = $this->leaves_model->getLeavesRequestedToManager($this->user_id, $showAll);
-        $line = 2;
-        foreach ($requests as $request) {
-            $date = new DateTime($request['startdate']);
-            $startdate = $date->format(lang('global_date_format'));
-            $date = new DateTime($request['enddate']);
-            $enddate = $date->format(lang('global_date_format'));
-            $sheet->setCellValue('A' . $line, $request['id']);
-            $sheet->setCellValue('B' . $line, $request['firstname'] . ' ' . $request['lastname']);
-            $sheet->setCellValue('C' . $line, $startdate);
-            $sheet->setCellValue('D' . $line, lang($request['startdatetype']));
-            $sheet->setCellValue('E' . $line, $enddate);
-            $sheet->setCellValue('F' . $line, lang($request['enddatetype']));
-            $sheet->setCellValue('G' . $line, $request['duration']);
-            $sheet->setCellValue('H' . $line, $request['type_name']);
-            $sheet->setCellValue('I' . $line, $request['cause']);
-            $sheet->setCellValue('J' . $line, lang($request['status_name']));
-            $line++;
-        }
-        
-        //Autofit
-        foreach(range('A', 'J') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-
-        $filename = 'requests.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $data['filter'] = $filter;
+        $this->load->view('requests/export', $data);
     }
 }

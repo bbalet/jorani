@@ -43,7 +43,7 @@ class Positions extends CI_Controller {
         $this->auth->check_is_granted('list_positions');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
-        $data['positions'] = $this->positions_model->get_positions();
+        $data['positions'] = $this->positions_model->getPositions();
         $data['title'] = lang('positions_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_positions_list');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
@@ -61,7 +61,7 @@ class Positions extends CI_Controller {
         $this->auth->check_is_granted('list_positions');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
-        $data['positions'] = $this->positions_model->get_positions();
+        $data['positions'] = $this->positions_model->getPositions();
         $this->load->view('positions/select', $data);
     }
     
@@ -85,14 +85,14 @@ class Positions extends CI_Controller {
             $this->load->view('positions/create', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->positions_model->set_positions();
+            $this->positions_model->setPositions($this->input->post('name'), $this->input->post('description'));
             $this->session->set_flashdata('msg', lang('positions_create_flash_msg'));
             redirect('positions');
         }
     }
 
     /**
-     * Display a form that allows editing a leave type
+     * Display a form that allows to edit a position
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
@@ -101,7 +101,7 @@ class Positions extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('positions_edit_title');
-        $data['position'] = $this->positions_model->get_positions($id);
+        $data['position'] = $this->positions_model->getPositions($id);
         
         $this->form_validation->set_rules('name', lang('positions_edit_field_name'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('description', lang('positions_edit_field_description'), 'xss_clean|strip_tags');
@@ -112,58 +112,31 @@ class Positions extends CI_Controller {
             $this->load->view('positions/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->positions_model->update_positions($id);
+            $this->positions_model->updatePositions($id, $this->input->post('name'), $this->input->post('description'));
             $this->session->set_flashdata('msg', lang('positions_edit_flash_msg'));
             redirect('positions');
         }
     }
     
     /**
-     * Action : delete a positions
+     * Delete a position
      * @param int $id position identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
         $this->auth->check_is_granted('delete_positions');
-        $this->positions_model->delete_position($id);
+        $this->positions_model->deletePosition($id);
         $this->session->set_flashdata('msg', lang('positions_delete_flash_msg'));
         redirect('positions');
     }
 
     /**
-     * Action: export the list of all positions into an Excel file
+     * Export the list of all positions into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
         $this->auth->check_is_granted('export_positions');
         $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('positions_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A1', lang('positions_export_thead_id'));
-        $sheet->setCellValue('B1', lang('positions_export_thead_name'));
-        $sheet->setCellValue('C1', lang('positions_export_thead_description'));
-        $sheet->getStyle('A1:C1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $types = $this->positions_model->get_positions();
-        $line = 2;
-        foreach ($types as $type) {
-            $sheet->setCellValue('A' . $line, $type['id']);
-            $sheet->setCellValue('B' . $line, $type['name']);
-            $sheet->setCellValue('C' . $line, $type['description']);
-            $line++;
-        }
-        
-        //Autofit
-        foreach(range('A', 'C') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-
-        $filename = 'positions.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $this->load->view('positions/export');
     }
 }

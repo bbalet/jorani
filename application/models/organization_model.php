@@ -48,7 +48,7 @@ class Organization_model extends CI_Model {
      * @param type $id
      * @return string label
      */
-    public function get_label($id) {
+    public function getName($id) {
         $this->db->from('organization');
         $this->db->where("id", $id); 
         $query = $this->db->get();

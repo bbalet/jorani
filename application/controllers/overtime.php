@@ -75,7 +75,7 @@ class Overtime extends CI_Controller {
         if (empty($extra)) {
             show_404();
         }
-        $employee = $this->users_model->get_users($extra['employee']);
+        $employee = $this->users_model->getUsers($extra['employee']);
         $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
             $this->overtime_model->accept_extra($id);
@@ -106,7 +106,7 @@ class Overtime extends CI_Controller {
         if (empty($extra)) {
             show_404();
         }
-        $employee = $this->users_model->get_users($extra['employee']);
+        $employee = $this->users_model->getUsers($extra['employee']);
         $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
             $this->overtime_model->reject_extra($id);
@@ -137,7 +137,7 @@ class Overtime extends CI_Controller {
         $this->load->model('organization_model');
         $extra = $this->overtime_model->getExtras($id);
         //Load details about the employee (manager, supervisor of entity)
-        $employee = $this->users_model->get_users($extra['employee']);
+        $employee = $this->users_model->getUsers($extra['employee']);
         $supervisor = $this->organization_model->get_supervisor($employee['organization']);
 
         //Send an e-mail to the employee
@@ -192,51 +192,12 @@ class Overtime extends CI_Controller {
     }
     
     /**
-     * Action: export the list of all overtime requests into an Excel file
+     * Export the list of all overtime requests (sent to the connected user) into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export($filter = 'requested') {
         $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('overtime_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A1', lang('overtime_export_thead_id'));
-        $sheet->setCellValue('B1', lang('overtime_export_thead_fullname'));
-        $sheet->setCellValue('C1', lang('overtime_export_thead_date'));
-        $sheet->setCellValue('D1', lang('overtime_export_thead_duration'));
-        $sheet->setCellValue('E1', lang('overtime_export_thead_cause'));
-        $sheet->setCellValue('F1', lang('overtime_export_thead_status'));
-        $sheet->getStyle('A1:F1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        if ($filter == 'all') {
-            $showAll = true;
-        } else {
-            $showAll = false;
-        }
-        $requests = $this->overtime_model->requests($this->user_id, $showAll);
-        $line = 2;
-        foreach ($requests as $request) {
-            $date = new DateTime($request['date']);
-            $startdate = $date->format(lang('global_date_format'));
-            $sheet->setCellValue('A' . $line, $request['id']);
-            $sheet->setCellValue('B' . $line, $request['firstname'] . ' ' . $request['lastname']);
-            $sheet->setCellValue('C' . $line, $startdate);
-            $sheet->setCellValue('D' . $line, $request['duration']);
-            $sheet->setCellValue('E' . $line, $request['cause']);
-            $sheet->setCellValue('F' . $line, lang($request['status_name']));
-            $line++;
-        }
-        
-        //Autofit
-        foreach(range('A', 'F') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-
-        $filename = 'overtime.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $data['filter'] = $filter;
+        $this->load->view('overtime/export', $data);
     }
 }

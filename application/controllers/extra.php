@@ -74,7 +74,7 @@ class Extra extends CI_Controller {
         if ($data['extra']['employee'] != $this->user_id) {
             if ((!$this->is_hr)) {
                 $this->load->model('users_model');
-                $employee = $this->users_model->get_users($data['extra']['employee']);
+                $employee = $this->users_model->getUsers($data['extra']['employee']);
                 if ($employee['manager'] != $this->user_id) {
                     log_message('error', 'User #' . $this->user_id . ' illegally tried to view overtime #' . $id);
                     redirect('extra');
@@ -85,8 +85,12 @@ class Extra extends CI_Controller {
         $data['title'] = lang('extra_view_hmtl_title');
         $data['source'] = $source;
         if ($source == 'overtime') {
-            $this->load->model('users_model');
-            $data['name'] = $this->users_model->get_label($data['extra']['employee']);
+            if (empty($employee)) {
+                $this->load->model('users_model');
+                $data['name'] = $this->users_model->getName($data['extra']['employee']);
+            } else {
+                $data['name'] = $employee['firstname'] . ' ' . $employee['lastname'];
+            }
         } else {
             $data['name'] = '';
         }
@@ -171,7 +175,7 @@ class Extra extends CI_Controller {
             $data['help'] = $this->help->create_help_link('global_link_doc_page_create_overtime');
             $data['id'] = $id;
             $this->load->model('users_model');
-            $data['name'] = $this->users_model->get_label($data['extra']['employee']);
+            $data['name'] = $this->users_model->getName($data['extra']['employee']);
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('extra/edit', $data);
@@ -199,7 +203,7 @@ class Extra extends CI_Controller {
     private function sendMail($id) {
         $this->load->model('users_model');
         $this->load->model('delegations_model');
-        $manager = $this->users_model->get_users($this->session->userdata('manager'));
+        $manager = $this->users_model->getUsers($this->session->userdata('manager'));
 
         //Test if the manager hasn't been deleted meanwhile
         if (empty($manager['email'])) {
@@ -292,45 +296,11 @@ class Extra extends CI_Controller {
     }
     
     /**
-     * Action: export the list of all extra times into an Excel file
+     * Export the list of all ovetime requests of the connected user into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
         $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('extra_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A1', lang('extra_export_thead_id'));
-        $sheet->setCellValue('B1', lang('extra_export_thead_date'));
-        $sheet->setCellValue('C1', lang('extra_export_thead_duration'));
-        $sheet->setCellValue('D1', lang('extra_export_thead_cause'));
-        $sheet->setCellValue('E1', lang('extra_export_thead_status'));
-        $sheet->getStyle('A1:E1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $extras = $this->overtime_model->getExtrasOfEmployee($this->user_id);
-        
-        $line = 2;
-        foreach ($extras as $extra) {
-            $date = new DateTime($extra['date']);
-            $startdate = $date->format(lang('global_date_format'));
-            $sheet->setCellValue('A' . $line, $extra['id']);
-            $sheet->setCellValue('B' . $line, $startdate);
-            $sheet->setCellValue('C' . $line, $extra['duration']);
-            $sheet->setCellValue('D' . $line, $extra['cause']);
-            $sheet->setCellValue('E' . $line, lang($extra['status_name']));
-            $line++;
-        }
-        
-        //Autofit
-        foreach(range('A', 'E') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-
-        $filename = 'extra.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $this->load->view('extra/export');
     }
 }

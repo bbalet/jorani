@@ -36,13 +36,13 @@ class LeaveTypes extends CI_Controller {
     }
 
     /**
-     * Display list of leave types
+     * Display the list of leave types
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
         $this->auth->check_is_granted('leavetypes_list');
         $data = getUserContext($this);
-        $data['leavetypes'] = $this->types_model->get_types();
+        $data['leavetypes'] = $this->types_model->getTypes();
         $data['title'] = lang('leavetypes_type_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_edit_leave_type');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
@@ -68,7 +68,7 @@ class LeaveTypes extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/create', $data);
         } else {
-            $this->types_model->set_types();
+            $this->types_model->setTypes($this->input->post('name'));
             $this->session->set_flashdata('msg', lang('leavetypes_popup_create_flash_msg'));
             redirect('leavetypes');
         }
@@ -85,14 +85,14 @@ class LeaveTypes extends CI_Controller {
         $this->load->library('form_validation');
         $data['title'] = lang('leavetypes_popup_update_title');
         $data['id'] = $id;
-        $data['type_name'] = $this->types_model->get_label($id);
+        $data['type_name'] = $this->types_model->getName($id);
         
         $this->form_validation->set_rules('name', lang('leavetypes_popup_update_field_name'), 'required|xss_clean|strip_tags');        
         
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/edit', $data);
         } else {
-            $this->types_model->update_types();
+            $this->types_model->updateTypes($id, $this->input->post('name'));
             $this->session->set_flashdata('msg', lang('leavetypes_popup_update_flash_msg'));
             redirect('leavetypes');
         }
@@ -109,7 +109,7 @@ class LeaveTypes extends CI_Controller {
             if ($this->types_model->usage($id) > 0) {
                 $this->session->set_flashdata('msg', lang('leavetypes_popup_delete_flash_forbidden'));
             } else {
-                $this->types_model->delete_type($id);
+                $this->types_model->deleteType($id);
                 $this->session->set_flashdata('msg', lang('leavetypes_popup_delete_flash_msg'));
             }
         } else {
@@ -125,31 +125,6 @@ class LeaveTypes extends CI_Controller {
     public function export() {
         $this->auth->check_is_granted('leavetypes_export');
         $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('leavetypes_type_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A1', lang('leavetypes_type_export_thead_id'));
-        $sheet->setCellValue('B1', lang('leavetypes_type_export_thead_name'));
-        $sheet->getStyle('A1:B1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $types = $this->types_model->get_types();
-        $line = 2;
-        foreach ($types as $type) {
-            $sheet->setCellValue('A' . $line, $type['id']);
-            $sheet->setCellValue('B' . $line, $type['name']);
-            $line++;
-        }
-
-        //Autofit
-        foreach(range('A', 'B') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-        
-        $filename = 'leave_types.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $this->load->view('leavetypes/export');
     }
 }

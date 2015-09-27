@@ -106,7 +106,7 @@ class Leaves extends CI_Controller {
         if ($data['leave']['employee'] != $this->user_id) {
             if ((!$this->is_hr)) {
                 $this->load->model('users_model');
-                $employee = $this->users_model->get_users($data['leave']['employee']);
+                $employee = $this->users_model->getUsers($data['leave']['employee']);
                 if ($employee['manager'] != $this->user_id) {
                     log_message('error', 'User #' . $this->user_id . ' illegally tried to view leave #' . $id);
                     redirect('leaves');
@@ -116,8 +116,12 @@ class Leaves extends CI_Controller {
         $data['source'] = $source;
         $data['title'] = lang('leaves_view_html_title');
         if ($source == 'requests') {
-            $this->load->model('users_model');
-            $data['name'] = $this->users_model->get_label($data['leave']['employee']);
+            if (empty($employee)) {
+                $this->load->model('users_model');
+                $data['name'] = $this->users_model->getName($data['leave']['employee']);
+            } else {
+                $data['name'] = $employee['firstname'] . ' ' . $employee['lastname'];
+            }
         } else {
             $data['name'] = '';
         }
@@ -152,7 +156,7 @@ class Leaves extends CI_Controller {
         $default_type = $this->config->item('default_leave_type');
         $default_type = $default_type == FALSE ? 0 : $default_type;
         if ($this->form_validation->run() === FALSE) {
-            $data['types'] = $this->types_model->get_types();
+            $data['types'] = $this->types_model->getTypes();
             foreach ($data['types'] as $type) {
                 if ($type['id'] == $default_type) {
                     $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($this->user_id, $type['name']);
@@ -215,7 +219,7 @@ class Leaves extends CI_Controller {
         $data['id'] = $id;
         
         $data['credit'] = 0;
-        $data['types'] = $this->types_model->get_types();
+        $data['types'] = $this->types_model->getTypes();
         foreach ($data['types'] as $type) {
             if ($type['id'] == $data['leave']['type']) {
                 $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($data['leave']['employee'], $type['name']);
@@ -234,7 +238,7 @@ class Leaves extends CI_Controller {
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->model('users_model');
-            $data['name'] = $this->users_model->get_label($data['leave']['employee']);
+            $data['name'] = $this->users_model->getName($data['leave']['employee']);
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('leaves/edit', $data);
@@ -265,8 +269,8 @@ class Leaves extends CI_Controller {
         $this->load->model('delegations_model');
         //We load everything from DB as the LR can be edited from HR/Employees
         $leave = $this->leaves_model->getLeaves($id);
-        $user = $this->users_model->get_users($leave['employee']);
-        $manager = $this->users_model->get_users($user['manager']);
+        $user = $this->users_model->getUsers($leave['employee']);
+        $manager = $this->users_model->getUsers($user['manager']);
 
         //Test if the manager hasn't been deleted meanwhile
         if (empty($manager['email'])) {
@@ -296,7 +300,7 @@ class Leaves extends CI_Controller {
                 'EndDate' => $enddate,
                 'StartDateType' => $lang_mail->line($leave['startdatetype']),
                 'EndDateType' => $lang_mail->line($leave['enddatetype']),
-                'Type' => $this->types_model->get_label($leave['type']),
+                'Type' => $this->types_model->getName($leave['type']),
                 'Duration' => $leave['duration'],
                 'Balance' => $this->leaves_model->getLeavesTypeBalanceForEmployee($leave['employee'] , $leave['type_name'], $leave['startdate']),
                 'Reason' => $leave['cause'],
@@ -380,50 +384,7 @@ class Leaves extends CI_Controller {
      */
     public function export() {
         $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('leaves_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A1', lang('leaves_export_thead_id'));
-        $sheet->setCellValue('B1', lang('leaves_export_thead_start_date'));
-        $sheet->setCellValue('C1', lang('leaves_export_thead_start_date_type'));
-        $sheet->setCellValue('D1', lang('leaves_export_thead_end_date'));
-        $sheet->setCellValue('E1', lang('leaves_export_thead_end_date_type'));
-        $sheet->setCellValue('F1', lang('leaves_export_thead_duration'));
-        $sheet->setCellValue('G1', lang('leaves_export_thead_type'));
-        $sheet->setCellValue('H1', lang('leaves_export_thead_status'));
-        $sheet->setCellValue('I1', lang('leaves_export_thead_cause'));
-        $sheet->getStyle('A1:I1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $leaves = $this->leaves_model->getLeavesOfEmployee($this->user_id);
-        $line = 2;
-        foreach ($leaves as $leave) {
-            $date = new DateTime($leave['startdate']);
-            $startdate = $date->format(lang('global_date_format'));
-            $date = new DateTime($leave['enddate']);
-            $enddate = $date->format(lang('global_date_format'));
-            $sheet->setCellValue('A' . $line, $leave['id']);
-            $sheet->setCellValue('B' . $line, $startdate);
-            $sheet->setCellValue('C' . $line, lang($leave['startdatetype']));
-            $sheet->setCellValue('D' . $line, $enddate);
-            $sheet->setCellValue('E' . $line, lang($leave['enddatetype']));
-            $sheet->setCellValue('F' . $line, $leave['duration']);
-            $sheet->setCellValue('G' . $line, $leave['type_name']);
-            $sheet->setCellValue('H' . $line, lang($leave['status_name']));
-            $sheet->setCellValue('I' . $line, $leave['cause']);
-            $line++;
-        }
-        
-        //Autofit
-        foreach(range('A', 'I') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-
-        $filename = 'leaves.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $this->load->view('leaves/export');
     }
 
     /**

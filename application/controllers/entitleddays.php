@@ -48,14 +48,14 @@ class Entitleddays extends CI_Controller {
         $data['id'] = $id;
         $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_employee($id);
         $this->load->model('types_model');
-        $data['types'] = $this->types_model->get_types();
+        $data['types'] = $this->types_model->getTypes();
         $this->load->model('users_model');
-        $user = $this->users_model->get_users($id);
-        $data['employee_name'] = $this->users_model->get_label($id);
+        $user = $this->users_model->getUsers($id);
+        $data['employee_name'] = $user['firstname'] . ' ' . $user['lastname'];
         
         if (!empty ($user['contract'])) {
             $this->load->model('contracts_model');
-            $contract = $this->contracts_model->get_contracts($user['contract']);
+            $contract = $this->contracts_model->getContracts($user['contract']);
             $data['contract_name'] = $contract['name'];
             $data['contract_start_month'] = intval(substr($contract['startentdate'], 0, 2));
             $data['contract_start_day'] = intval(substr($contract['startentdate'], 3));
@@ -86,9 +86,9 @@ class Entitleddays extends CI_Controller {
         $data['id'] = $id;
         $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_contract($id);
         $this->load->model('types_model');
-        $data['types'] = $this->types_model->get_types();
+        $data['types'] = $this->types_model->getTypes();
         $this->load->model('contracts_model');
-        $contract = $this->contracts_model->get_contracts($id);
+        $contract = $this->contracts_model->getContracts($id);
         $data['contract_name'] = $contract['name'];
         $data['contract_start_month'] = intval(substr($contract['startentdate'], 0, 2));
         $data['contract_start_day'] = intval(substr($contract['startentdate'], 3));

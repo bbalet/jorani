@@ -47,7 +47,7 @@ class Time_model extends CI_Model {
      * @param type $id
      * @return string label
      */
-    public function get_label($id) {
+    public function getName($id) {
         $record = $this->get_activities($id);
         if (count($record) > 0) {
             return $record['name'];

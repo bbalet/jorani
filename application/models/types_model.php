@@ -22,6 +22,7 @@ class Types_model extends CI_Model {
 
     /**
      * Default constructor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
         
@@ -33,7 +34,7 @@ class Types_model extends CI_Model {
      * @return array record of types
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_types($id = 0) {
+    public function getTypes($id = 0) {
         if ($id === 0) {
             $query = $this->db->get('types');
             return $query->result_array();
@@ -43,23 +44,23 @@ class Types_model extends CI_Model {
     }
     
     /**
-     * Get the label of a given type id
+     * Get the name of a given type id
      * @param int $id ID of the type
      * @return string label of the type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_label($id) {
-        $type = $this->get_types($id);
+    public function getName($id) {
+        $type = $this->getTypes($id);
         return $type['name'];
     }
     
     /**
      * Insert a new leave type
-     * Inserted data are coming from an HTML form
+     * @param string $name name of the type
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_types() {
-        
+    public function setTypes($name) {
         $data = array(
             'name' => $this->input->post('name')
         );
@@ -68,25 +69,25 @@ class Types_model extends CI_Model {
     
     /**
      * Delete a leave type from the database
-     * @param int $id identifier of the leave type record
+     * @param int $id identifier of the leave type
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_type($id) {
+    public function deleteType($id) {
         $this->db->delete('types', array('id' => $id));
     }
     
     /**
-     * Update a given leave type in the database. Update data are coming from an
-     * HTML form
+     * Update a given leave type in the database.
+     * @param int $id identifier of the leave type
+     * @param string $name name of the type
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function update_types() {
+    public function updateTypes($id, $name) {
         $data = array(
-            'name' => $this->input->post('name')
+            'name' => $name
         );
-
-        $this->db->where('id', $this->input->post('id'));
+        $this->db->where('id', $id);
         return $this->db->update('types', $data);
     }
     

@@ -22,6 +22,7 @@ class Positions_model extends CI_Model {
 
     /**
      * Default constructor
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
         
@@ -30,10 +31,10 @@ class Positions_model extends CI_Model {
     /**
      * Get the list of positions or one position
      * @param int $id optional id of a position
-     * @return array record of types
+     * @return array record of positions
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_positions($id = 0) {
+    public function getPositions($id = 0) {
         if ($id === 0) {
             $query = $this->db->get('positions');
             return $query->result_array();
@@ -43,30 +44,27 @@ class Positions_model extends CI_Model {
     }
     
     /**
-     * Get the label of a given position id
-     * @param type $id
-     * @return string label
+     * Get the name of a position
+     * @param int $id Identifier of the postion
+     * @return string Name of the position
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_label($id) {
-        $record = $this->get_positions($id);
-        if (count($record) > 0) {
-            return $record['name'];
-        } else {
-            return '';
-        }
+    public function getName($id) {
+        $record = $this->getPositions($id);
+        return $record['name'];
     }
     
     /**
      * Insert a new position
-     * Inserted data are coming from an HTML form
-     * @return type
+     * @param string $name Name of the postion
+     * @param string $description Description of the postion
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_positions() {
-        
+    public function setPositions($name, $description) {
         $data = array(
-            'name' => $this->input->post('name'),
-            'description' => $this->input->post('description')
+            'name' => $name,
+            'description' => $description
         );
         return $this->db->insert('positions', $data);
     }
@@ -75,9 +73,10 @@ class Positions_model extends CI_Model {
      * Delete a position from the database
      * Cascade update all users having this postion (filled with 0)
      * @param int $id identifier of the position record
+     * @return bool TRUE if the operation was successful, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_position($id) {
+    public function deletePosition($id) {
         $delete = $this->db->delete('positions', array('id' => $id));
         $data = array(
             'position' => 0
@@ -88,18 +87,18 @@ class Positions_model extends CI_Model {
     }
     
     /**
-     * Update a given position in the database. Update data are coming from an
-     * HTML form
+     * Update a given position in the database.
      * @param int $id Identifier of the database
+     * @param string $name Name of the postion
+     * @param string $description Description of the postion
      * @return type
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function update_positions($id) {
+    public function updatePositions($id, $name, $description) {
         $data = array(
-            'name' => $this->input->post('name'),
-            'description' => $this->input->post('description')
+            'name' => $name,
+            'description' => $description
         );
-
         $this->db->where('id', $id);
         return $this->db->update('positions', $data);
     }

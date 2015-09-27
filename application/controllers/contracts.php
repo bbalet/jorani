@@ -48,7 +48,7 @@ class Contracts extends CI_Controller {
         $data['filter'] = $filter;
         $data['title'] = lang('contract_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_contracts_list');
-        $data['contracts'] = $this->contracts_model->get_contracts();
+        $data['contracts'] = $this->contracts_model->getContracts();
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('contracts/index', $data);
@@ -56,7 +56,7 @@ class Contracts extends CI_Controller {
     }
     
     /**
-     * Display a form that allows updating a given contract
+     * Display a form that allows to update a contract
      * @param int $id Contract identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -74,7 +74,7 @@ class Contracts extends CI_Controller {
         $this->form_validation->set_rules('endentdatemonth', lang('contract_edit_field_end_month'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('endentdateday', lang('contract_edit_field_end_day'), 'required|xss_clean|strip_tags');
 
-        $data['contract'] = $this->contracts_model->get_contracts($id);
+        $data['contract'] = $this->contracts_model->getContracts($id);
         if (empty($data['contract'])) {
             show_404();
         }
@@ -85,7 +85,7 @@ class Contracts extends CI_Controller {
             $this->load->view('contracts/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->contracts_model->update_contract();
+            $this->contracts_model->updateContract();
             $this->session->set_flashdata('msg', lang('contract_edit_msg_success'));
             redirect('contracts');
         }
@@ -115,7 +115,7 @@ class Contracts extends CI_Controller {
             $this->load->view('contracts/create', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->contracts_model->set_contracts();
+            $this->contracts_model->setContracts();
             $this->session->set_flashdata('msg', lang('contract_create_msg_success'));
             redirect('contracts');
         }
@@ -129,11 +129,11 @@ class Contracts extends CI_Controller {
     public function delete($id) {
         $this->auth->check_is_granted('delete_contract');
         //Test if the contract exists
-        $data['contract'] = $this->contracts_model->get_contracts($id);
+        $data['contract'] = $this->contracts_model->getContracts($id);
         if (empty($data['contract'])) {
             show_404();
         } else {
-            $this->contracts_model->delete_contract($id);
+            $this->contracts_model->deleteContract($id);
         }
         $this->session->set_flashdata('msg', lang('contract_delete_msg_success'));
         redirect('contracts');
@@ -159,7 +159,7 @@ class Contracts extends CI_Controller {
         }
         
         //Load the list of contracts (select destination contract / copy dayoff feature)
-        $data['contracts'] = $this->contracts_model->get_contracts();
+        $data['contracts'] = $this->contracts_model->getContracts();
         //Remove the contract being displayed (source)
         foreach ($data['contracts'] as $key => $value) {
             if ($value['id'] == $id) {
@@ -167,7 +167,7 @@ class Contracts extends CI_Controller {
                 break;
             }
         }
-        $contract = $this->contracts_model->get_contracts($id);
+        $contract = $this->contracts_model->getContracts($id);
         $data['contract_id'] = $id;
         $data['contract_name'] = $contract['name'];
         $data['contract_start_month'] = intval(substr($contract['startentdate'], 0, 2));
@@ -340,35 +340,6 @@ class Contracts extends CI_Controller {
     public function export() {
         $this->auth->check_is_granted('export_contracts');
         $this->load->library('excel');
-        $sheet = $this->excel->setActiveSheetIndex(0);
-        $sheet->setTitle(mb_strimwidth(lang('contract_index_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
-        $sheet->setCellValue('A1', lang('contract_export_thead_id'));
-        $sheet->setCellValue('B1', lang('contract_export_thead_name'));
-        $sheet->setCellValue('C1', lang('contract_export_thead_start'));
-        $sheet->setCellValue('D1', lang('contract_export_thead_end'));
-        $sheet->getStyle('A1:D1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $users = $this->contracts_model->get_contracts();
-        $line = 2;
-        foreach ($users as $user) {
-            $sheet->setCellValue('A' . $line, $user['id']);
-            $sheet->setCellValue('B' . $line, $user['name']);
-            $sheet->setCellValue('C' . $line, $user['startentdate']);
-            $sheet->setCellValue('D' . $line, $user['endentdate']);
-            $line++;
-        }
-        
-        //Autofit
-        foreach(range('A', 'D') as $colD) {
-            $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
-        }
-
-        $filename = 'contracts.xls';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $objWriter->save('php://output');
+        $this->load->view('contracts/export');
     }
 }

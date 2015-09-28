@@ -246,7 +246,7 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function getLeavesTypeBalanceForEmployee($id, $type, $startdate = NULL) {
-        $summary = $this->getLeaveBalanceForEmployee($id, FALSE, $startdate);
+        $summary = $this->getLeaveBalanceForEmployee($id, TRUE, $startdate);
         //return entitled days - taken (for a given leave type)
         if (is_null($summary)) {
             return NULL;

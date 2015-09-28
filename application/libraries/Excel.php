@@ -37,8 +37,8 @@ class Excel extends PHPExcel {
     
     /**
      * Return the excel column name for a given column index
-     * @param type $number
-     * @return string
+     * @param int $number Column index
+     * @return string Excel representation of the column index
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function column_name($number) {

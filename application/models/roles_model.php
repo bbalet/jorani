@@ -42,7 +42,7 @@ class Roles_model extends CI_Model {
      * @return array record of roles
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_roles($id = 0) {
+    public function getRoles($id = 0) {
         if ($id === 0) {
             $query = $this->db->get('roles');
             return $query->result_array();

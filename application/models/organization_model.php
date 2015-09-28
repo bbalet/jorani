@@ -45,8 +45,8 @@ class Organization_model extends CI_Model {
     
     /**
      * Get the label of a given entity id
-     * @param type $id
-     * @return string label
+     * @param int $id Identifier of the entity
+     * @return string name of the entity
      */
     public function getName($id) {
         $this->db->from('organization');
@@ -90,7 +90,7 @@ class Organization_model extends CI_Model {
     /**
      * Move an entity into the organization
      * @param int $id identifier of the entity
-     * @param type $parent_id new parent of the entity
+     * @param int $parent_id new parent id of the entity
      * @return type result of the query
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -227,14 +227,14 @@ class Organization_model extends CI_Model {
      * @return  array Result of the query
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function allEmployees($id, $children = false) {
+    public function allEmployees($id, $children = FALSE) {
         $this->db->select('users.id, users.identifier, users.firstname, users.lastname, users.datehired');
         $this->db->select('organization.name as department, positions.name as position, contracts.name as contract');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
         $this->db->join('positions', 'positions.id  = users.position', 'left');
         $this->db->join('contracts', 'contracts.id  = users.contract', 'left');
-        if ($children == true) {
+        if ($children === TRUE) {
             $this->load->model('organization_model');
             $list = $this->organization_model->get_all_children($id);
             $ids = array();

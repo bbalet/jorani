@@ -45,9 +45,9 @@ class Overtime extends CI_Controller {
     public function index($filter = 'requested') {
         $this->auth->checkIfOperationIsAllowed('list_overtime');
         if ($filter == 'all') {
-            $showAll = true;
+            $showAll = TRUE;
         } else {
-            $showAll = false;
+            $showAll = FALSE;
         }
         
         $data = getUserContext($this);
@@ -55,7 +55,7 @@ class Overtime extends CI_Controller {
         $data['filter'] = $filter;
         $data['title'] = lang('overtime_index_title');
         $data['requests'] = $this->overtime_model->requests($this->user_id, $showAll);
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('overtime/index', $data);
@@ -76,9 +76,9 @@ class Overtime extends CI_Controller {
             show_404();
         }
         $employee = $this->users_model->getUsers($extra['employee']);
-        $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
+        $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
-            $this->overtime_model->accept_extra($id);
+            $this->overtime_model->acceptExtra($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg', lang('overtime_accept_flash_msg_success'));
             if (isset($_GET['source'])) {
@@ -107,9 +107,9 @@ class Overtime extends CI_Controller {
             show_404();
         }
         $employee = $this->users_model->getUsers($extra['employee']);
-        $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
+        $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
-            $this->overtime_model->reject_extra($id);
+            $this->overtime_model->rejectExtra($id);
             $this->sendMail($id);
             $this->session->set_flashdata('msg', lang('overtime_reject_flash_msg_success'));
             if (isset($_GET['source'])) {

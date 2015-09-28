@@ -57,7 +57,7 @@ $route['users'] = 'users';
 
 //Human Resources Management
 $route['hr/employees'] = 'hr/employees';
-$route['hr/employees/entity/(:num)/(:any)'] = 'hr/employees_entity/$1/$2';
+$route['hr/employees/entity/(:num)/(:any)'] = 'hr/employeesOfEntity/$1/$2';
 $route['hr/employees/export/(:num)/(:any)'] = 'hr/exportEmployees/$1/$2';
 $route['hr/leaves/(:num)'] = 'hr/leaves/$1';
 $route['hr/leaves/export/(:num)'] = 'hr/exportLeaves/$1';
@@ -171,8 +171,8 @@ $route['requests/accept/(:num)'] = 'requests/accept/$1';
 $route['requests/reject/(:num)'] = 'requests/reject/$1';
 $route['requests/delegations/(:num)'] = 'requests/delegations/$1';
 $route['requests/delegations'] = 'requests/delegations';
-$route['requests/ajax/delegations/delete'] = 'requests/delegations_delete';
-$route['requests/ajax/delegations/add'] = 'requests/delegations_add';
+$route['requests/ajax/delegations/delete'] = 'requests/deleteDelegations';
+$route['requests/ajax/delegations/add'] = 'requests/addDelegations';
 $route['requests/(:any)'] = 'requests/index/$1';
 $route['requests'] = 'requests/index/requested';
 

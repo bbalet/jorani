@@ -72,7 +72,7 @@ class Requests extends CI_Controller {
             show_404();
         }
         $employee = $this->users_model->getUsers($leave['employee']);
-        $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
+        $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
             $this->leaves_model->acceptLeave($id);
             $this->sendMail($id);
@@ -103,7 +103,7 @@ class Requests extends CI_Controller {
             show_404();
         }
         $employee = $this->users_model->getUsers($leave['employee']);
-        $is_delegate = $this->delegations_model->IsDelegate($this->user_id, $employee['manager']);
+        $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
             $this->leaves_model->rejectLeave($id);
             $this->sendMail($id);
@@ -132,7 +132,7 @@ class Requests extends CI_Controller {
         $data['help'] = $this->help->create_help_link('global_link_doc_page_collaborators_list');
         $this->load->model('users_model');
         $data['collaborators'] = $this->users_model->getCollaboratorsOfManager($this->user_id);
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('requests/collaborators', $data);
@@ -156,7 +156,7 @@ class Requests extends CI_Controller {
             $data['name'] = $this->users_model->getName($id);
             $data['id'] = $id;
             $this->load->model('delegations_model');
-            $data['delegations'] = $this->delegations_model->get_delegates($id);
+            $data['delegations'] = $this->delegations_model->listDelegationsForManager($id);
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('requests/delegations', $data);
@@ -172,7 +172,7 @@ class Requests extends CI_Controller {
      * Ajax endpoint : Delete a delegation for a manager
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delegations_delete() {
+    public function deleteDelegations() {
         $manager = $this->input->post('manager_id', TRUE);
         $delegation = $this->input->post('delegation_id', TRUE);
         if (($this->user_id != $manager) && ($this->is_hr == FALSE)) {
@@ -181,7 +181,7 @@ class Requests extends CI_Controller {
             if (isset($manager) && isset($delegation)) {
                 $this->output->set_content_type('text/plain');
                 $this->load->model('delegations_model');
-                $id = $this->delegations_model->delete_delegation($delegation);
+                $id = $this->delegations_model->deleteDelegation($delegation);
                 echo $id;
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
@@ -193,17 +193,17 @@ class Requests extends CI_Controller {
      * Ajax endpoint : Add a delegation for a manager
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delegations_add() {
+    public function addDelegations() {
         $manager = $this->input->post('manager_id', TRUE);
         $delegate = $this->input->post('delegate_id', TRUE);
-        if (($this->user_id != $manager) && ($this->is_hr == FALSE)) {
+        if (($this->user_id != $manager) && ($this->is_hr === FALSE)) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             if (isset($manager) && isset($delegate)) {
                 $this->output->set_content_type('text/plain');
                 $this->load->model('delegations_model');
-                if (!$this->delegations_model->IsDelegate($delegate, $manager)) {
-                    $id = $this->delegations_model->add_delegate($manager, $delegate);
+                if (!$this->delegations_model->isDelegateOfManager($delegate, $manager)) {
+                    $id = $this->delegations_model->addDelegate($manager, $delegate);
                     echo $id;
                 } else {
                     echo 'null';
@@ -223,7 +223,7 @@ class Requests extends CI_Controller {
         $this->lang->load('hr', $this->language);
         $this->load->model('users_model');
         $employee = $this->users_model->getUsers($id);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
+        if (($this->user_id != $employee['manager']) && ($this->is_hr === FALSE)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to collaborators/leave/create  #' . $id);
             $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_forbidden'));
             redirect('leaves');
@@ -283,7 +283,7 @@ class Requests extends CI_Controller {
         $this->lang->load('hr', $this->language);
         $this->load->model('users_model');
         $employee = $this->users_model->getUsers($id);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr == false)) {
+        if (($this->user_id != $employee['manager']) && ($this->is_hr === FALSE)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to leave counter of employee #' . $id);
             $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_forbidden'));
             redirect('requests/collaborators');
@@ -313,8 +313,8 @@ class Requests extends CI_Controller {
                 $data['contract_end'] = $contract['endentdate'];
                 $data['employee_id'] = $id;
                 $data['contract_id'] = $user['contract'];
-                $data['entitleddayscontract'] = $this->entitleddays_model->get_entitleddays_contract($user['contract']);
-                $data['entitleddaysemployee'] = $this->entitleddays_model->get_entitleddays_employee($id);
+                $data['entitleddayscontract'] = $this->entitleddays_model->getEntitledDaysForContract($user['contract']);
+                $data['entitleddaysemployee'] = $this->entitleddays_model->getEntitledDaysForEmployee($id);
                 $data['title'] = lang('requests_summary_title');
                 $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_balance_collaborators');
                 $this->load->view('templates/header', $data);

@@ -36,7 +36,7 @@ class Dayoffs_model extends CI_Model {
      * @return array record of contracts
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_dayoffs($contract, $year) {
+    public function getDaysOffForCivilYear($contract, $year) {
         $this->db->select('DAY(date) as d, MONTH(date) as m, YEAR(date) as y, type, title');
         $this->db->where('contract', $contract);
         $this->db->where('YEAR(date)', $year);
@@ -59,7 +59,7 @@ class Dayoffs_model extends CI_Model {
      * @return array record of contracts
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_all_dayoffs($contract) {
+    public function getDaysOffForContract($contract) {
         $this->db->where('contract', $contract);
         $query = $this->db->get('dayoffs');
         $this->db->where("date >= DATE_SUB(NOW(),INTERVAL 2 YEAR"); //Security/performance limit
@@ -74,7 +74,7 @@ class Dayoffs_model extends CI_Model {
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function deletedayoff($contract, $timestamp) {
+    public function deleteDayOff($contract, $timestamp) {
         $this->db->where('contract', $contract);
         $this->db->where('date', date('Y/m/d', $timestamp));
         return $this->db->delete('dayoffs');
@@ -86,7 +86,7 @@ class Dayoffs_model extends CI_Model {
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_dayoffs_cascade_contract($contract) {
+    public function deleteDaysOffCascadeContract($contract) {
         $this->db->where('contract', $contract);
         return $this->db->delete('dayoffs');
     }
@@ -98,7 +98,7 @@ class Dayoffs_model extends CI_Model {
      * @return bool outcome of the query
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function deletedayoffs($contract, $dateList) {
+    public function deleteListOfDaysOff($contract, $dateList) {
         $dates = explode(",", $dateList);
         $this->db->where('contract', $contract);
         $this->db->where_in('DATE_FORMAT(date, \'%Y-%m-%d\')', $dates);
@@ -114,7 +114,7 @@ class Dayoffs_model extends CI_Model {
      * @return bool outcome of the query
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function adddayoffs($contract, $type, $title, $dateList) {
+    public function addListOfDaysOff($contract, $type, $title, $dateList) {
         //Prepare a command in order to insert multiple rows with one query MySQL
         $dates = explode(",", $dateList);
         $data = array();
@@ -138,7 +138,7 @@ class Dayoffs_model extends CI_Model {
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function copy_dayoffs($source, $destination, $year) {
+    public function copyListOfDaysOff($source, $destination, $year) {
         //Delete all previous days off defined on the destination contract (avoid duplicated data)
         $this->db->where('contract', $destination);
         $this->db->where('YEAR(date)', $year);
@@ -155,13 +155,13 @@ class Dayoffs_model extends CI_Model {
     }
     
     /**
-     * Get the sum of day offs between two dates for a given contract
+     * Get the length of days off between two dates for a given contract
      * @param int $contract contract identifier
      * @param date $start start date
      * @param date $end end date
      * @return int number of day offs
      */
-    public function sumdayoffs($contract, $start, $end) {
+    public function lengthDaysOffBetweenDates($contract, $start, $end) {
         $this->db->select('sum(CASE `type` WHEN 1 THEN 1 WHEN 2 THEN 0.5 WHEN 3 THEN 0.5 END) as days');
         $this->db->where('contract', $contract);
         $this->db->where('date >=', $start);
@@ -180,8 +180,7 @@ class Dayoffs_model extends CI_Model {
      * @return bool outcome of the query
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function adddayoff($contract, $timestamp, $type, $title) {
-
+    public function addDayOff($contract, $timestamp, $type, $title) {
         $this->db->select('id');
         $this->db->where('contract', $contract);
         $this->db->where('date', date('Y/m/d', $timestamp));
@@ -213,14 +212,14 @@ class Dayoffs_model extends CI_Model {
      * @return string error message or empty string
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function import_ics($contract, $url) {
+    public function importDaysOffFromICS($contract, $url) {
         require_once(APPPATH . 'third_party/VObjects/vendor/autoload.php');
         $ical = VObject\Reader::read(fopen($url,'r'), VObject\Reader::OPTION_FORGIVING);
         foreach($ical->VEVENT as $event) {
             $start = new DateTime($event->DTSTART);
             $end = new DateTime($event->DTEND);
             $interval = $start->diff($end);
-            //TODO: Make a more complicated version that supports half days
+            //Make a more complicated version that supports half days
             $length = $interval->d;
             $day = $start;
             for ($ii = 0; $ii < $length; $ii++) {
@@ -258,19 +257,19 @@ class Dayoffs_model extends CI_Model {
                     $title = $entry->title;
                     $startdate = $entry->date . 'T07:00:00';
                     $enddate = $entry->date . 'T18:00:00';
-                    $allDay = true;
+                    $allDay = TRUE;
                     break;
                 case 2:
                     $title = lang('Morning') . ': ' . $entry->title;
                     $startdate = $entry->date . 'T07:00:00';
                     $enddate = $entry->date . 'T12:00:00';
-                    $allDay = false;
+                    $allDay = FALSE;
                     break;
                 case 3:
                     $title = lang('Afternoon') . ': ' . $entry->title;
                     $startdate = $entry->date . 'T12:00:00';
                     $enddate = $entry->date . 'T18:00:00';
-                    $allDay = false;
+                    $allDay = FALSE;
                     break;
             }
             $jsonevents[] = array(
@@ -305,7 +304,7 @@ class Dayoffs_model extends CI_Model {
         $this->db->where('date >=', $start);
         $this->db->where('date <=', $end);
         
-        if ($children == true) {
+        if ($children === TRUE) {
             $this->load->model('organization_model');
             $list = $this->organization_model->get_all_children($entity_id);
             $ids = array();
@@ -328,19 +327,19 @@ class Dayoffs_model extends CI_Model {
                     $title = $entry->title;
                     $startdate = $entry->date . 'T07:00:00';
                     $enddate = $entry->date . 'T18:00:00';
-                    $allDay = true;
+                    $allDay = TRUE;
                     break;
                 case 2:
                     $title = lang('Morning') . ': ' . $entry->title;
                     $startdate = $entry->date . 'T07:00:00';
                     $enddate = $entry->date . 'T12:00:00';
-                    $allDay = false;
+                    $allDay = FALSE;
                     break;
                 case 3:
                     $title = lang('Afternoon') . ': ' . $entry->title;
                     $startdate = $entry->date . 'T12:00:00';
                     $enddate = $entry->date . 'T18:00:00';
-                    $allDay = false;
+                    $allDay = FALSE;
                     break;
             }
             $jsonevents[] = array(
@@ -361,7 +360,7 @@ class Dayoffs_model extends CI_Model {
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function purge_dayoffs($toDate) {
+    public function purgeDaysoff($toDate) {
         $this->db->where('date <= ', $toDate);
         return $this->db->delete('entitleddays');
     }
@@ -386,7 +385,7 @@ class Dayoffs_model extends CI_Model {
      * @return array list of day offs
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function employee_all_dayoffs($id, $start, $end) {
+    public function lengthDaysOffBetweenDatesForEmployee($id, $start, $end) {
         $this->db->select('dayoffs.*');
         $this->db->join('dayoffs', 'users.contract = dayoffs.contract');
         $this->db->where('users.id', $id);

@@ -41,4 +41,3 @@
     &nbsp;
     <?php } ?>
     <a href="<?php echo base_url() . $source; ?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('extra_view_button_back_list');?></a>
-    

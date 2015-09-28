@@ -85,12 +85,12 @@ class Session extends CI_Controller {
         $this->form_validation->set_rules('login', lang('session_login_field_login'), 'required');
 
         if ($this->form_validation->run() === FALSE) {
-            $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
+            $data['public_key'] = file_get_contents('./assets/keys/public.pem', TRUE);
             $data['salt'] = $this->generateRandomString(rand(5, 20));
             $data['language'] = $this->session->userdata('language');
             $data['language_code'] = $this->session->userdata('language_code');
             $this->session->set_userdata('salt', $data['salt']);
-            $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+            $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
             $this->load->view('templates/header', $data);
             $this->load->view('session/login', $data);
             $this->load->view('templates/footer');
@@ -103,7 +103,7 @@ class Session extends CI_Controller {
             //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt) and remove the salt!
             require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
             $rsa = new phpseclib\Crypt\RSA();
-            $private_key = file_get_contents('./assets/keys/private.pem', true);
+            $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
             $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
             $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
             $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
@@ -125,7 +125,7 @@ class Session extends CI_Controller {
                 $bind = ldap_bind($ldap, $basedn, $password);
                 restore_error_handler();
                 if ($bind) {
-                    $loggedin = $this->users_model->loadProfile($this->input->post('login'));
+                    $loggedin = $this->users_model->checkCredentialsLDAP($this->input->post('login'));
                 }
                 ldap_close($ldap);
                 }
@@ -136,12 +136,12 @@ class Session extends CI_Controller {
             if ($loggedin == FALSE) {
                 log_message('error', '{controllers/session/login} Invalid login id or password for user=' . $this->input->post('login'));
                 $this->session->set_flashdata('msg', lang('session_login_flash_bad_credentials'));
-                $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
+                $data['public_key'] = file_get_contents('./assets/keys/public.pem', TRUE);
                 $data['salt'] = $this->generateRandomString(rand(5, 20));
                 $data['language'] = $this->session->userdata('language');
                 $data['language_code'] = $this->session->userdata('language_code');
                 $this->session->set_userdata('salt', $data['salt']);
-                $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+                $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
                 $this->load->view('templates/header', $data);
                 $this->load->view('session/login', $data);
                 $this->load->view('templates/footer');
@@ -180,7 +180,9 @@ class Session extends CI_Controller {
     }
     
     /**
-     * Send the password by e-mail to a user requesting it
+     * Ajax : Send the password by e-mail to a user requesting it
+     * POST: string login Login of the user
+     * RETURN: UNKNOWN if the login was not found, OK otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function forgetpassword() {
@@ -191,19 +193,14 @@ class Session extends CI_Controller {
         if (is_null($user)) {
             echo "UNKNOWN";
         } else {
-            //Send an email to the user with its login information
-            $this->load->library('email');
-            
             //We need to instance an different object as the languages of connected user may differ from the UI lang
             $lang_mail = new CI_Lang();
             $usr_lang = $this->polyglot->code2language($user->language);
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-            
             //Generate random password and store its hash into db
             $password = $this->users_model->resetClearPassword($user->id);
-            
-            //Send an e-mail to the user requesting a new password
+            //Prepare the e-mail content by parsing a view
             $this->load->library('parser');
             $data = array(
                 'Title' => $lang_mail->line('email_password_forgotten_title'),
@@ -214,22 +211,12 @@ class Session extends CI_Controller {
                 'Password' => $password
             );
             $message = $this->parser->parse('emails/' . $user->language . '/password_forgotten', $data, TRUE);
-            $this->email->set_encoding('quoted-printable');
-
-            if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
-                $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
-            } else {
-               $this->email->from('do.not@reply.me', 'LMS');
-            }
-            $this->email->to($user->email);
-            if ($this->config->item('subject_prefix') != FALSE) {
-                $subject = $this->config->item('subject_prefix');
-            } else {
-               $subject = '[Jorani] ';
-            }
-            $this->email->subject($subject . $lang_mail->line('email_password_forgotten_subject'));
-            $this->email->message($message);
-            $this->email->send();
+            //Send the e-mail
+            sendMailByWrapper($this,
+                    $lang_mail->line('email_password_forgotten_subject'),
+                    $message,
+                    $user->email);
+            //Tell to the frontend that we've found the login and sent the email
             echo "OK";
         }
     }

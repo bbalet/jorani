@@ -78,7 +78,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('entitleddays_model');
-            $result = $this->entitleddays_model->get_entitleddays_contract($id);
+            $result = $this->entitleddays_model->getEntitledDaysForContract($id);
             echo json_encode($result);
         }
     }
@@ -98,7 +98,7 @@ class Api extends CI_Controller {
             $days = $this->input->post('days');
             $type = $this->input->post('type');
             $description = $this->input->post('description');
-            $result = $this->entitleddays_model->insert_entitleddays_contract($id, $startdate, $enddate, $days, $type, $description);
+            $result = $this->entitleddays_model->addEntitledDaysToContract($id, $startdate, $enddate, $days, $type, $description);
             if (empty($result)) {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             } else {
@@ -117,7 +117,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('entitleddays_model');
-            $result = $this->entitleddays_model->get_entitleddays_employee($id);
+            $result = $this->entitleddays_model->getEntitledDaysForEmployee($id);
             echo json_encode($result);
         }
     }
@@ -137,7 +137,7 @@ class Api extends CI_Controller {
             $days = $this->input->post('days');
             $type = $this->input->post('type');
             $description = $this->input->post('description');
-            $result = $this->entitleddays_model->insert_entitleddays_employee($id, $startdate, $enddate, $days, $type, $description);
+            $result = $this->entitleddays_model->addEntitledDaysToEmployee($id, $startdate, $enddate, $days, $type, $description);
             if (empty($result)) {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             } else {
@@ -315,7 +315,7 @@ class Api extends CI_Controller {
                 $result = new stdClass();
                 $linear = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE);
                 $result->leaves = $this->leaves_model->monthlyLeavesDuration($linear);
-                $result->dayoffs = $this->dayoffs_model->sumdayoffs($employee['contract'], $start, $end);
+                $result->dayoffs = $this->dayoffs_model->lengthDaysOffBetweenDates($employee['contract'], $start, $end);
                 $result->total = cal_days_in_month(CAL_GREGORIAN, $month, $year);
                 $result->start = $start;
                 $result->end = $end;
@@ -437,7 +437,7 @@ class Api extends CI_Controller {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
                 log_message('error', 'Mandatory fields are missing.');
             } else {
-                if ($this->users_model->is_login_available($login)) {
+                if ($this->users_model->isLoginAvailable($login)) {
                     $result = $this->users_model->insertUserByApi($firstname, $lastname, $login, $email, $password, $role,
                         $manager, $organization, $contract, $position, $datehired, $identifier, $language, $timezone,
                         $ldap_path, TRUE, $country, $calendar);

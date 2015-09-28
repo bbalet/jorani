@@ -59,7 +59,7 @@ class Ics extends CI_Controller {
             $this->lang->load('global', $this->polyglot->code2language($employee['language']));
             //Load the list of day off associated to the contract
             $this->load->model('dayoffs_model');
-            $result = $this->dayoffs_model->get_all_dayoffs($contract);
+            $result = $this->dayoffs_model->getDaysOffForContract($contract);
             if (empty($result)) {
                 echo "";
             } else {

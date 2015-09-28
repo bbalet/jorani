@@ -46,7 +46,7 @@ class Entitleddays extends CI_Controller {
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['id'] = $id;
-        $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_employee($id);
+        $data['entitleddays'] = $this->entitleddays_model->getEntitledDaysForEmployee($id);
         $this->load->model('types_model');
         $data['types'] = $this->types_model->getTypes();
         $this->load->model('users_model');
@@ -84,7 +84,7 @@ class Entitleddays extends CI_Controller {
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['id'] = $id;
-        $data['entitleddays'] = $this->entitleddays_model->get_entitleddays_contract($id);
+        $data['entitleddays'] = $this->entitleddays_model->getEntitledDaysForContract($id);
         $this->load->model('types_model');
         $data['types'] = $this->types_model->getTypes();
         $this->load->model('contracts_model');
@@ -112,7 +112,7 @@ class Entitleddays extends CI_Controller {
     public function userdelete($id) {
         $this->auth->checkIfOperationIsAllowed('entitleddays_user_delete');
         $this->output->set_content_type('text/plain');
-        echo $this->entitleddays_model->delete_entitleddays($id);
+        echo $this->entitleddays_model->deleteEntitledDays($id);
     }
     
     /**
@@ -124,7 +124,7 @@ class Entitleddays extends CI_Controller {
     public function contractdelete($id) {
         $this->auth->checkIfOperationIsAllowed('entitleddays_contract_delete');
         $this->output->set_content_type('text/plain');
-        echo $this->entitleddays_model->delete_entitleddays($id);
+        echo $this->entitleddays_model->deleteEntitledDays($id);
     }
     
     /**
@@ -143,7 +143,7 @@ class Entitleddays extends CI_Controller {
             $description = sanitize($this->input->post('description', TRUE));
             if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($user_id)) {
                 $this->output->set_content_type('text/plain');
-                $id = $this->entitleddays_model->insert_entitleddays_employee($user_id, $startdate, $enddate, $days, $type, $description);
+                $id = $this->entitleddays_model->addEntitledDaysToEmployee($user_id, $startdate, $enddate, $days, $type, $description);
                 echo $id;
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
@@ -167,7 +167,7 @@ class Entitleddays extends CI_Controller {
             $description = sanitize($this->input->post('description', TRUE));
             if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($contract_id)) {
                 $this->output->set_content_type('text/plain');
-                $id = $this->entitleddays_model->insert_entitleddays_contract($contract_id, $startdate, $enddate, $days, $type, $description);
+                $id = $this->entitleddays_model->addEntitledDaysToContract($contract_id, $startdate, $enddate, $days, $type, $description);
                 echo $id;
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
@@ -195,20 +195,20 @@ class Entitleddays extends CI_Controller {
                 $days = $this->input->post('days', TRUE);
                 switch ($operation) {
                     case  "increase":
-                        $id = $this->entitleddays_model->inc_entitleddays($id, $days);
+                        $id = $this->entitleddays_model->increase($id, $days);
                         break;
                     case "decrease":
-                        $id = $this->entitleddays_model->dec_entitleddays($id, $days);
+                        $id = $this->entitleddays_model->decrease($id, $days);
                         break;
                     case "credit":
-                        $id = $this->entitleddays_model->update_days_entitleddays($id, $days);
+                        $id = $this->entitleddays_model->updateNbOfDaysOfEntitledDaysRecord($id, $days);
                         break;
                     case "update":
                         $startdate = $this->input->post('startdate', TRUE);
                         $enddate = $this->input->post('enddate', TRUE);
                         $type = $this->input->post('type', TRUE);
                         $description = sanitize($this->input->post('description', TRUE));
-                        $id = $this->entitleddays_model->update_entitleddays($id, $startdate, $enddate, $days, $type, $description);
+                        $id = $this->entitleddays_model->updateEntitledDays($id, $startdate, $enddate, $days, $type, $description);
                         break;
                     default:
                         $this->output->set_header("HTTP/1.1 422 Unprocessable entity");

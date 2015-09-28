@@ -32,7 +32,7 @@ class Polyglot {
     /**
      * Explodes a string containing a comma separated list of language codes into an associative array
      * You can pass the config object $this->config->item('languages') as a parameter
-     * @param type $languages_list comma separated list of language codes
+     * @param string $languages_list comma separated list of language codes
      * @return array associative array (language code => english language name)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -48,7 +48,7 @@ class Polyglot {
     /**
      * Explodes a string containing a comma separated list of language codes into an associative array
      * You can pass the config object $this->config->item('languages') as a parameter
-     * @param type $languages_list comma separated list of language codes
+     * @param string $languages_list comma separated list of language codes
      * @return array associative array (language code => language native name)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */

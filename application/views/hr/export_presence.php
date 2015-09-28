@@ -35,7 +35,7 @@ $start = sprintf('%d-%02d-01', $year, $month);
 $lastDay = date("t", strtotime($start));    //last day of selected month
 $end = sprintf('%d-%02d-%02d', $year, $month, $lastDay);
 //Number of non working days during the selected month
-$non_working_days = $this->dayoffs_model->sumdayoffs($employee['contract'], $start, $end);
+$non_working_days = $this->dayoffs_model->lengthDaysOffBetweenDates($employee['contract'], $start, $end);
 $opened_days = $total_days - $non_working_days;
 $month_name = lang(date('F', strtotime($start)));
 

@@ -48,7 +48,7 @@ class Reports extends CI_Controller {
         //List all the available reports
         $files = glob(FCPATH . '/local/reports/*.ini');
         foreach($files as $file) {
-            $ini_array = parse_ini_file($file, true);
+            $ini_array = parse_ini_file($file, TRUE);
             //Test if the report is available for the language being used
             if (array_key_exists($this->language_code, $ini_array)) {
                 //If available, push the report into the list to be displayed with a description

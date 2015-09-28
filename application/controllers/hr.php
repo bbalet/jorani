@@ -48,7 +48,7 @@ class Hr extends CI_Controller {
         $this->lang->load('datatable', $this->language);
         $data['title'] = lang('hr_employees_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_employees');
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/employees', $data);
@@ -59,10 +59,10 @@ class Hr extends CI_Controller {
      * Returns the list of the employees attached to an entity
      * Prints the table content in a JSON format expected by jQuery Datatable
      * @param int $id optional id of the entity, all entities if 0
-     * @param bool $children true : include sub entities, false otherwise
+     * @param bool $children TRUE : include sub entities, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function employees_entity($id = 0, $children = TRUE) {
+    public function employeesOfEntity($id = 0, $children = TRUE) {
         header("Content-Type: application/json");
         if ($this->auth->isAllowed('list_employees') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
@@ -108,7 +108,7 @@ class Hr extends CI_Controller {
         $data['user_id'] = $id;
         $this->load->model('leaves_model');
         $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($id);
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/leaves', $data);
@@ -134,7 +134,7 @@ class Hr extends CI_Controller {
         $data['user_id'] = $id;
         $this->load->model('overtime_model');
         $data['extras'] = $this->overtime_model->getExtrasOfEmployee($id);
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/overtime', $data);
@@ -173,8 +173,8 @@ class Hr extends CI_Controller {
             $data['contract_end'] = $contract['endentdate'];
             $data['employee_id'] = $id;
             $data['contract_id'] = $user['contract'];
-            $data['entitleddayscontract'] = $this->entitleddays_model->get_entitleddays_contract($user['contract']);
-            $data['entitleddaysemployee'] = $this->entitleddays_model->get_entitleddays_employee($id);
+            $data['entitleddayscontract'] = $this->entitleddays_model->getEntitledDaysForContract($user['contract']);
+            $data['entitleddaysemployee'] = $this->entitleddays_model->getEntitledDaysForEmployee($id);
             $data['title'] = lang('hr_summary_title');
             $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_balance_employee');
             $this->load->view('templates/header', $data);
@@ -262,7 +262,7 @@ class Hr extends CI_Controller {
         
         //Details about the employee
         $employee = $this->users_model->getUsers($id);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr === false)) {
+        if (($this->user_id != $employee['manager']) && ($this->is_hr === FALSE)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to hr/presence  #' . $id);
             $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'hr/presence'));
             redirect('leaves');
@@ -285,7 +285,7 @@ class Hr extends CI_Controller {
         $lastDay = date("t", strtotime($start));    //last day of selected month
         $end = sprintf('%d-%02d-%02d', $year, $month, $lastDay);
         //Number of non working days during the selected month
-        $non_working_days = $this->dayoffs_model->sumdayoffs($employee['contract'], $start, $end);
+        $non_working_days = $this->dayoffs_model->lengthDaysOffBetweenDates($employee['contract'], $start, $end);
         $opened_days = $total_days - $non_working_days;
         $data['month'] = $month;
         $data['month_name'] = date('F', strtotime($start));
@@ -345,7 +345,7 @@ class Hr extends CI_Controller {
     /**
      * Export the list of all employees into an Excel file
      * @param int $id optional id of the entity, all entities if 0
-     * @param bool $children true : include sub entities, false otherwise
+     * @param bool $children TRUE : include sub entities, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function exportEmployees($id = 0, $children = TRUE) {
@@ -375,7 +375,7 @@ class Hr extends CI_Controller {
         $this->load->model('contracts_model');
         
         $employee = $this->users_model->getUsers($id);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr === false)) {
+        if (($this->user_id != $employee['manager']) && ($this->is_hr === FALSE)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to hr/presence  #' . $id);
             $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'hr/presence'));
             redirect('leaves');

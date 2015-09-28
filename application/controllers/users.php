@@ -46,7 +46,7 @@ class Users extends CI_Controller {
         $data['users'] = $this->users_model->getUsers();
         $data['title'] = lang('users_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_users');
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/index', $data);
@@ -113,7 +113,7 @@ class Users extends CI_Controller {
         $this->load->model('positions_model');
         $this->load->model('contracts_model');
         $this->load->model('organization_model');
-        $data['roles'] = $this->roles_model->get_roles();
+        $data['roles'] = $this->roles_model->getRoles();
         $data['manager_label'] = $this->users_model->getName($data['user']['manager']);
         $data['contract_id'] = intval($data['user']['contract']);
         $data['contract_label'] = $this->contracts_model->getName($data['user']['contract']);
@@ -168,7 +168,7 @@ class Users extends CI_Controller {
             $data['manager_label'] = $this->users_model->getName($data['users_item']['manager']);
             $data['position_label'] = $this->positions_model->getName($data['users_item']['position']);
             $data['organization_label'] = $this->organization_model->getName($data['users_item']['organization']);
-            $data['roles'] = $this->roles_model->get_roles();
+            $data['roles'] = $this->roles_model->getRoles();
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('users/edit', $data);
@@ -224,7 +224,7 @@ class Users extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('CipheredValue', 'Password', 'required');
             if ($this->form_validation->run() === FALSE) {
-                $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
+                $data['public_key'] = file_get_contents('./assets/keys/public.pem', TRUE);
                 $this->load->view('users/reset', $data);
             } else {
                 $this->users_model->resetPassword($id, $this->input->post('CipheredValue'));
@@ -288,10 +288,10 @@ class Users extends CI_Controller {
         $data['help'] = $this->help->create_help_link('global_link_doc_page_create_user');
 
         $this->load->model('roles_model');
-        $data['roles'] = $this->roles_model->get_roles();
+        $data['roles'] = $this->roles_model->getRoles();
         $this->load->model('contracts_model');
         $data['contracts'] = $this->contracts_model->getContracts();
-        $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
+        $data['public_key'] = file_get_contents('./assets/keys/public.pem', TRUE);
 
         $this->form_validation->set_rules('firstname', lang('users_create_field_firstname'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('lastname', lang('users_create_field_lastname'), 'required|xss_clean|strip_tags');
@@ -358,16 +358,16 @@ class Users extends CI_Controller {
    
     /**
      * Form validation callback : prevent from login duplication
-     * @param type $login
-     * @return boolean true if the field is valid, false otherwise
+     * @param string $login Login
+     * @return boolean TRUE if the field is valid, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function checkLogin($login) {
-        if (!$this->users_model->is_login_available($login)) {
+        if (!$this->users_model->isLoginAvailable($login)) {
             $this->form_validation->set_message('checkLogin', lang('users_create_checkLogin'));
-            return false;
+            return FALSE;
         } else {
-            return true;
+            return TRUE;
         }
     }
     
@@ -377,7 +377,7 @@ class Users extends CI_Controller {
      */
     public function checkLoginByAjax() {
         header("Content-Type: text/plain");
-        if ($this->users_model->is_login_available($this->input->post('login'))) {
+        if ($this->users_model->isLoginAvailable($this->input->post('login'))) {
             echo 'true';
         } else {
             echo 'false';

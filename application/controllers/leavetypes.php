@@ -45,7 +45,7 @@ class LeaveTypes extends CI_Controller {
         $data['leavetypes'] = $this->types_model->getTypes();
         $data['title'] = lang('leavetypes_type_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_edit_leave_type');
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leavetypes/index', $data);

@@ -78,3 +78,34 @@ function sanitize($value){
     $value = htmlspecialchars($value);
     return $value;
 }
+
+/**
+ * Wrapper between the controller and the e-mail library
+ * @param reference to CI Controller object
+ * @param string $subject Subject of the e-mail
+ * @param string $message Message of the e-mail
+ * @param string $to Recipient of the e-mail
+ * @param string $cc (optional) Copied to recipients
+ * @author Benjamin BALET <benjamin.balet@gmail.com>
+ */
+function sendMailByWrapper(CI_Controller $controller, $subject, $message, $to, $cc = NULL)
+{
+    $controller->load->library('email');
+    if ($controller->config->item('subject_prefix') != FALSE) {
+        $controller->email->subject($controller->config->item('subject_prefix') . ' ' . $subject);
+    } else {
+       $controller->email->subject('[Jorani] ' . $subject);
+    }
+    $controller->email->set_encoding('quoted-printable');
+    if ($controller->config->item('from_mail') != FALSE && $controller->config->item('from_name') != FALSE ) {
+        $controller->email->from($controller->config->item('from_mail'), $controller->config->item('from_name'));
+    } else {
+       $controller->email->from('do.not@reply.me', 'LMS');
+    }
+    $controller->email->to($to);
+    if (!is_null($cc)) {
+        $controller->email->cc($cc);
+    }
+    $controller->email->message($message);
+    $controller->email->send();
+}

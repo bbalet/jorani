@@ -48,7 +48,7 @@ class Extra extends CI_Controller {
         $this->lang->load('datatable', $this->language);
         $data['extras'] = $this->overtime_model->getExtrasOfEmployee($this->user_id);
         $data['title'] = lang('extra_index_title');
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('extra/index', $data);
@@ -126,7 +126,7 @@ class Extra extends CI_Controller {
             if (function_exists('triggerCreateExtraRequest')) {
                 triggerCreateExtraRequest($this);
             }
-            $extra_id = $this->overtime_model->set_extra();
+            $extra_id = $this->overtime_model->setExtra();
             $this->session->set_flashdata('msg', lang('extra_create_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
@@ -181,7 +181,7 @@ class Extra extends CI_Controller {
             $this->load->view('extra/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->overtime_model->update_extra($id);       //We don't use the return value
+            $this->overtime_model->updateExtra($id);       //We don't use the return value
             $this->session->set_flashdata('msg', lang('extra_edit_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
@@ -250,7 +250,7 @@ class Extra extends CI_Controller {
                $subject = '[Jorani] ';
             }
             //Copy to the delegates, if any
-            $delegates = $this->delegations_model->get_delegates_mails($manager['id']);
+            $delegates = $this->delegations_model->listMailsOfDelegates($manager['id']);
             if ($delegates != '') {
                 $this->email->cc($delegates);
             }
@@ -268,21 +268,21 @@ class Extra extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
-        $can_delete = false;
+        $can_delete = FALSE;
         //Test if the overtime request exists
         $extra = $this->overtime_model->getExtras($id);
         if (empty($extra)) {
             show_404();
         } else {
             if ($this->is_hr) {
-                $can_delete = true;
+                $can_delete = TRUE;
             } else {
                 if ($extra['status'] == 1 ) {
-                    $can_delete = true;
+                    $can_delete = TRUE;
                 }
             }
-            if ($can_delete == true) {
-                $this->overtime_model->delete_extra($id);
+            if ($can_delete === TRUE) {
+                $this->overtime_model->deleteExtra($id);
                 $this->session->set_flashdata('msg', lang('extra_delete_msg_success'));
             } else {
                 $this->session->set_flashdata('msg', lang('extra_delete_msg_error'));

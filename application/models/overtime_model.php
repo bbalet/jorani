@@ -62,11 +62,11 @@ class Overtime_model extends CI_Model {
     }
     
     /**
-     * Create an overtime request
+     * Create an overtime request. Data are coming from an HTTP POSTed form
      * @return int id of the overtime request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_extra() {
+    public function setExtra() {
         $data = array(
             'date' => $this->input->post('date'),
             'employee' => $this->session->userdata('id'),
@@ -79,11 +79,11 @@ class Overtime_model extends CI_Model {
     }
 
     /**
-     * Update an overtime request in the database
-     * @param type $id overtime request identifier
-     * @return type
+     * Update an overtime request in the database. Data are coming from an HTTP POSTed form
+     * @param int $id overtime request identifier
+     * @return bool result of update in database
      */
-    public function update_extra($id) {
+    public function updateExtra($id) {
         $data = array(
             'date' => $this->input->post('date'),
             'duration' => $this->input->post('duration'),
@@ -99,7 +99,7 @@ class Overtime_model extends CI_Model {
      * @param int $id overtime request identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function accept_extra($id) {
+    public function acceptExtra($id) {
         $data = array(
             'status' => 3
         );
@@ -110,10 +110,10 @@ class Overtime_model extends CI_Model {
     /**
      * Reject an overtime request
      * @param int $id overtime request identifier
-     * @return type
+     * @return bool result of update in database
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function reject_extra($id) {
+    public function rejectExtra($id) {
         $data = array(
             'status' => 4
         );
@@ -122,21 +122,21 @@ class Overtime_model extends CI_Model {
     }
     
     /**
-     * Delete an overtime from the database
+     * Delete an overtime request from the database
      * @param int $id overtime request identifier
-     * @return type
+     * @return bool result of update in database
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_extra($id) {
+    public function deleteExtra($id) {
         return $this->db->delete('overtime', array('id' => $id));
     }
     
     /**
-     * Delete overtimes attached to a user
+     * Delete overtime rquests attached to a user (when it is deleted)
      * @param int $id identifier of an employee
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_extras_cascade_user($id) {
+    public function deleteExtrasCascadeUser($id) {
         $this->db->delete('overtime', array('employee' => $id));
     }
         
@@ -144,12 +144,12 @@ class Overtime_model extends CI_Model {
      * List all overtime requests submitted to the connected user (or if delegate of a manager)
      * Can be filtered with "Requested" status.
      * @param int $user_id connected user
-     * @param bool $all true all requests, false otherwise
+     * @param bool $all TRUE all requests, FALSE otherwise
      * @return array Recordset (can be empty if no requests or not a manager)
      */
-    public function requests($user_id, $all = false) {
+    public function requests($user_id, $all = FALSE) {
         $this->load->model('delegations_model');
-        $ids = $this->delegations_model->get_delegates_list($user_id);
+        $ids = $this->delegations_model->listManagersGivingDelegation($user_id);
         $this->db->select('overtime.id as id, users.*, overtime.*');
         $this->db->select('status.name as status_name');
         $this->db->join('status', 'overtime.status = status.id');

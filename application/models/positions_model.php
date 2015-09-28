@@ -103,4 +103,3 @@ class Positions_model extends CI_Model {
         return $this->db->update('positions', $data);
     }
 }
-	

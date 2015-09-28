@@ -28,15 +28,15 @@ class Delegations_model extends CI_Model {
     }
 
     /**
-     * Get the list of delegations of a manager
-     * @param int $id id of manager
+     * Get the list of delegations for a manager
+     * @param int $manager id of manager
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_delegates($id) {
+    public function listDelegationsForManager($manager) {
         $this->db->select('delegations.*, CONCAT(firstname, \' \', lastname) as delegate_name', FALSE);
         $this->db->join('users', 'delegations.delegate_id = users.id');
-        $query = $this->db->get_where('delegations', array('manager_id' => $id));
+        $query = $this->db->get_where('delegations', array('manager_id' => $manager));
         return $query->result_array();
     }
     
@@ -47,7 +47,7 @@ class Delegations_model extends CI_Model {
      * @return bool is delegate
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function IsDelegate($employee, $manager) {
+    public function isDelegateOfManager($employee, $manager) {
         $this->db->from('delegations');
         $this->db->where('delegate_id', $employee);
         $this->db->where('manager_id', $manager);
@@ -65,7 +65,7 @@ class Delegations_model extends CI_Model {
      * @return bool has delegation
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function HasDelegation($employee) {
+    public function hasDelegation($employee) {
         $this->db->from('delegations');
         $this->db->where('delegate_id', $employee);
         $results = $this->db->get()->row_array();
@@ -82,7 +82,7 @@ class Delegations_model extends CI_Model {
      * @return array of employee identifiers
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_delegates_list($id) {
+    public function listManagersGivingDelegation($id) {
         $this->db->select("manager_id");
         $this->db->from('delegations');
         $this->db->where('delegate_id', $id);
@@ -100,7 +100,7 @@ class Delegations_model extends CI_Model {
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_delegates_mails($id) {
+    public function listMailsOfDelegates($id) {
         $this->db->select("GROUP_CONCAT(email SEPARATOR ',') as list", FALSE);
         $this->db->from('delegations');
         $this->db->join('users', 'delegations.delegate_id = users.id');
@@ -116,13 +116,13 @@ class Delegations_model extends CI_Model {
     }
     
     /**
-     * Insert a list of day offs into the day offs table
-     * @param int $contract Identifier of the contract
-     * @param int $type 1:day, 2:morning, 3:afternoon
+     * Give a delegation to an employee
+     * @param int $manager id of a manager giving the delegation
+     * @param int $delegate id of a employee to whom the delegation is given
      * @return bool outcome of the query
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function add_delegate($manager, $delegate) {
+    public function addDelegate($manager, $delegate) {
         $data = array(
             'manager_id' => $manager,
             'delegate_id' => $delegate
@@ -136,8 +136,7 @@ class Delegations_model extends CI_Model {
      * @param int $id identifier of the delegation
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_delegation($id) {
+    public function deleteDelegation($id) {
         $this->db->delete('delegations', array('id' => $id));
     }
-
 }

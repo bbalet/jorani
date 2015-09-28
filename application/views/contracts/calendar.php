@@ -150,9 +150,9 @@ padding-left:10px;
 <?php
 
 /**
- * Insert a blank cell for a working day
- * @param type $numberOfTdsToAdd
- * @return string
+ * Insert blank cells into a table row
+ * @param int $numberOfTdsToAdd number of cells
+ * @return string HTML code for empty cells
  */
 function InsertBlankTd($numberOfTdsToAdd) {
     $tdString = '';

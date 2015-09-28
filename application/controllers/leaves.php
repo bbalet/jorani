@@ -50,7 +50,7 @@ class Leaves extends CI_Controller {
         $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($this->session->userdata('id'));
         $data['title'] = lang('leaves_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_requests_list');
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leaves/index', $data);
@@ -323,7 +323,7 @@ class Leaves extends CI_Controller {
                $subject = '[Jorani] ';
             }
             //Copy to the delegates, if any
-            $delegates = $this->delegations_model->get_delegates_mails($manager['id']);
+            $delegates = $this->delegations_model->listMailsOfDelegates($manager['id']);
             if ($delegates != '') {
                 $this->email->cc($delegates);
             }
@@ -342,24 +342,24 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
-        $can_delete = false;
+        $can_delete = FALSE;
         //Test if the leave request exists
         $leaves = $this->leaves_model->getLeaves($id);
         if (empty($leaves)) {
             show_404();
         } else {
             if ($this->is_hr) {
-                $can_delete = true;
+                $can_delete = TRUE;
             } else {
                 if ($leaves['status'] == 1 ) {
-                    $can_delete = true;
+                    $can_delete = TRUE;
                 }
                 if ($this->config->item('delete_rejected_requests') == TRUE ||
                     $leaves['status'] == 4) {
-                    $can_delete = true;
+                    $can_delete = TRUE;
                 }
             }
-            if ($can_delete == true) {
+            if ($can_delete === TRUE) {
                 $this->leaves_model->deleteLeave($id);
             } else {
                 $this->session->set_flashdata('msg', lang('leaves_delete_flash_msg_error'));

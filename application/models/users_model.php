@@ -85,19 +85,19 @@ class Users_model extends CI_Model {
     
     /**
      * Check if a login can be used before creating the user
-     * @param type $login login identifier
-     * @return bool true if available, false otherwise
+     * @param string $login login identifier
+     * @return bool TRUE if available, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function is_login_available($login) {
+    public function isLoginAvailable($login) {
         $this->db->from('users');
         $this->db->where('login', $login);
         $query = $this->db->get();
 
         if ($query->num_rows() == 0) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
     
@@ -111,9 +111,9 @@ class Users_model extends CI_Model {
         $this->load->model('entitleddays_model');
         $this->load->model('leaves_model');
         $this->load->model('overtime_model');
-        $this->entitleddays_model->delete_entitleddays_cascade_user($id);
+        $this->entitleddays_model->deleteEntitledDaysCascadeUser($id);
         $this->leaves_model->deleteLeavesCascadeUser($id);
-        $this->overtime_model->delete_extras_cascade_user($id);
+        $this->overtime_model->deleteExtrasCascadeUser($id);
         //Cascade delete line manager role
         $data = array(
             'manager' => NULL
@@ -131,7 +131,7 @@ class Users_model extends CI_Model {
         //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
         require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
         $rsa = new phpseclib\Crypt\RSA();
-        $private_key = file_get_contents('./assets/keys/private.pem', true);
+        $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
         $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
         $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
         $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
@@ -322,7 +322,7 @@ class Users_model extends CI_Model {
         //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
         require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
         $rsa = new phpseclib\Crypt\RSA();
-        $private_key = file_get_contents('./assets/keys/private.pem', true);
+        $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
         $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
         $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
         $password = $rsa->decrypt(base64_decode($CipheredNewPassword));
@@ -371,7 +371,54 @@ class Users_model extends CI_Model {
     }
     
     /**
-     * Check the provided credentials
+     * Load the profile of a user from the database to the session variables
+     * @param array $row database record of a user
+     */
+    private function loadProfile($row) {
+        if (((int) $row->role & 1)) {
+            $is_admin = TRUE;
+        } else {
+            $is_admin = FALSE;
+        }
+
+        /*
+          00000001 1  Admin
+          00000100 8  HR Officier / Local HR Manager
+          00001000 16 HR Manager
+          = 00001101 25 Can access to HR functions
+         */
+        if (((int) $row->role & 25)) {
+            $is_hr = TRUE;
+        } else {
+            $is_hr = FALSE;
+        }
+
+        //Determine if the connected user is a manager or if he has any delegation
+        $isManager = FALSE;
+        if (count($this->getCollaboratorsOfManager($row->id)) > 0) {
+            $isManager = TRUE;
+        } else {
+            $this->load->model('delegations_model');
+            if ($this->delegations_model->hasDelegation($row->id))
+                $isManager = TRUE;
+        }
+
+        $newdata = array(
+            'login' => $row->login,
+            'id' => $row->id,
+            'firstname' => $row->firstname,
+            'lastname' => $row->lastname,
+            'is_manager' => $isManager,
+            'is_admin' => $is_admin,
+            'is_hr' => $is_hr,
+            'manager' => $row->manager,
+            'logged_in' => TRUE
+        );
+        $this->session->set_userdata($newdata);
+    }
+
+    /**
+     * Check the provided credentials and load user's profile if they are correct
      * @param string $login user login
      * @param string $password password
      * @return bool TRUE if the user is succesfully authenticated, FALSE otherwise
@@ -391,47 +438,7 @@ class Users_model extends CI_Model {
             $hash = crypt($password, $row->password);
             if ($hash == $row->password) {
                 // Password does match stored password.
-                if (((int) $row->role & 1)) {
-                    $is_admin = TRUE;
-                }
-                else {
-                    $is_admin = FALSE;
-                }
-                
-               /*
-                00000001 1  Admin
-                00000100 8  HR Officier / Local HR Manager
-                00001000 16 HR Manager
-              = 00001101 25 Can access to HR functions
-                */
-                if (((int) $row->role & 25)) {
-                    $is_hr = TRUE;
-                }
-                else {
-                    $is_hr = FALSE;
-                }
-                
-                //Determine if the connected user is a manager or if he has any delegation
-                $isManager = FALSE;
-                if (count($this->getCollaboratorsOfManager($row->id)) > 0) {
-                    $isManager = TRUE;
-                } else {
-                    $this->load->model('delegations_model');
-                    if ($this->delegations_model->HasDelegation($row->id)) $isManager = TRUE;
-                }
-                
-                $newdata = array(
-                    'login' => $row->login,
-                    'id' => $row->id,
-                    'firstname' => $row->firstname,
-                    'lastname' => $row->lastname,
-                    'is_manager' =>$isManager,
-                    'is_admin' => $is_admin,
-                    'is_hr' => $is_hr,
-                    'manager' => $row->manager,
-                    'logged_in' => TRUE
-                );                
-                $this->session->set_userdata($newdata);
+                $this->loadProfile($row);
                 return TRUE;
             } else {
                 // Password does not match stored password.
@@ -441,57 +448,20 @@ class Users_model extends CI_Model {
     }
     
     /**
-     * Load the profile of a user into the session variables
+     * Check the provided credentials and load user's profile if they are correct
+     * It is the LDAP binding operation that checks if Password is correct.
      * @param string $login user login
      * @return bool TRUE if user was found into the database, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function loadProfile($login) {
+    public function checkCredentialsLDAP($login) {
         $this->db->from('users');
         $this->db->where('login', $login);
+        $this->db->where('active = TRUE');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $row = $query->row();
-            // Password does match stored password.
-            if (((int) $row->role & 1)) {
-                $is_admin = TRUE;
-            } else {
-                $is_admin = FALSE;
-            }
-
-            /*
-              00000001 1  Admin
-              00000100 8  HR Officier / Local HR Manager
-              00001000 16 HR Manager
-              = 00001101 25 Can access to HR functions
-             */
-            if (((int) $row->role & 25)) {
-                $is_hr = TRUE;
-            } else {
-                $is_hr = FALSE;
-            }
-            
-            //Determine if the connected user is a manager or if he has any delegation
-            $isManager = FALSE;
-            if (count($this->getCollaboratorsOfManager($row->id)) > 0) {
-                $isManager = TRUE;
-            } else {
-                $this->load->model('delegations_model');
-                if ($this->delegations_model->HasDelegation($row->id)) $isManager = TRUE;
-            }
-            
-            $profile = array(
-                'login' => $row->login,
-                'id' => $row->id,
-                'firstname' => $row->firstname,
-                'lastname' => $row->lastname,
-                'is_manager' => $isManager,
-                'is_admin' => $is_admin,
-                'is_hr' => $is_hr,
-                'manager' => $row->manager,
-                'logged_in' => TRUE
-            );
-            $this->session->set_userdata($profile);
+            $this->loadProfile($row);
             return TRUE;
         } else {
             return FALSE;
@@ -520,7 +490,7 @@ class Users_model extends CI_Model {
     /**
      * Get the list of employees or one employee
      * @param int $id optional id of the entity, all entities if 0
-     * @param bool $children true : include sub entities, false otherwise
+     * @param bool $children TRUE : include sub entities, FALSE otherwise
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -556,12 +526,12 @@ class Users_model extends CI_Model {
     }
     
     /**
-     * Update all employees when a contract is deleted
+     * Update all employees when a contract is deleted (set the field to NULL)
      * @param int $id Contract ID
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function update_users_cascade_contract($id) {
+    public function updateUsersCascadeContract($id) {
         $this->db->set('contract', NULL);
         $this->db->where('contract', $id);
         $result = $this->db->update('users');
@@ -583,7 +553,7 @@ class Users_model extends CI_Model {
     
     /**
      * Try to return the user information from the login field
-     * @param type $login
+     * @param string $login Login
      * @return User data row or null if no user was found
      */
     public function getUserByLogin($login) {
@@ -601,7 +571,7 @@ class Users_model extends CI_Model {
     /**
      * Generate some random bytes by using openssl, dev/urandom or random
      * @param int $count length of the random string
-     * @return string
+     * @return string a string of pseudo-random bytes (must be encoded)
      */
     protected function getRandomBytes($length) {
         if(function_exists('openssl_random_pseudo_bytes')) {

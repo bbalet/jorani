@@ -95,7 +95,7 @@ class Calendar extends CI_Controller {
         $data = getUserContext($this);
         $data['title'] = lang('calendar_individual_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_individual');
-        $data['googleApi'] = false;
+        $data['googleApi'] = FALSE;
         $data['clientId'] = 'key';
         $data['apiKey'] = 'key';
         $this->load->view('templates/header', $data);

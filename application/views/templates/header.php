@@ -64,4 +64,3 @@ $this->lang->load('global', $language);?>
 </head>
 <body>
     <div class="container-fluid" id="wrap">
-	

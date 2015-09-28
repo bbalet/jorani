@@ -36,7 +36,7 @@ class Pages extends CI_Controller {
     /**
      * Display a static web page. We try to find if a filename matches with the
      * views available in views/pages/ folder
-     * @param type $page
+     * @param string $page Name of the view (and of the corresponding PHP file)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function view($page = 'home') {
@@ -44,7 +44,7 @@ class Pages extends CI_Controller {
         $trans = array("-" => " ", "_" => " ", "." => " ");
         $data['title'] = ucfirst(strtr($page, $trans)); // Capitalize the first letter
         //The page containing export in their name are returning another MIMETYPE
-        if (strpos($page,'export') === false) {//Don't include header and menu
+        if (strpos($page,'export') === FALSE) {//Don't include header and menu
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
         }
@@ -60,7 +60,7 @@ class Pages extends CI_Controller {
             }
             $this->load->view($view, $data);
         }
-        if (strpos($page,'export') === false) {
+        if (strpos($page,'export') === FALSE) {
             $this->load->view('templates/footer', $data);
         }
     }

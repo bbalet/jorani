@@ -114,9 +114,9 @@ class Leaves_model extends CI_Model {
     /**
      * Get all entitled days applicable to the reference date (to contract and employee)
      * Compute Min and max date by type
-     * @param type $employee Employee identifier
-     * @param type $contract contract identifier
-     * @param type $refDate Date of execution
+     * @param int $employee Employee identifier
+     * @param int $contract contract identifier
+     * @param string $refDate Date of execution
      * @return array Array of entitled days associated to the key type id
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -363,7 +363,7 @@ class Leaves_model extends CI_Model {
     
     /**
      * Update a leave request in the database with the values posted by an HTTP POST
-     * @param type $id of the leave request
+     * @param int $id of the leave request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function updateLeaves($id) {
@@ -474,7 +474,7 @@ class Leaves_model extends CI_Model {
                 'title' => $entry->type,
                 'start' => $startdate,
                 'color' => $color,
-                'allDay' => false,
+                'allDay' => FALSE,
                 'end' => $enddate
             );
         }
@@ -526,7 +526,7 @@ class Leaves_model extends CI_Model {
                 'title' => $entry->firstname .' ' . $entry->lastname,
                 'start' => $startdate,
                 'color' => $color,
-                'allDay' => false,
+                'allDay' => FALSE,
                 'end' => $enddate
             );
         }
@@ -577,7 +577,7 @@ class Leaves_model extends CI_Model {
                 'title' => $entry->firstname .' ' . $entry->lastname,
                 'start' => $startdate,
                 'color' => $color,
-                'allDay' => false,
+                'allDay' => FALSE,
                 'end' => $enddate
             );
         }
@@ -593,7 +593,7 @@ class Leaves_model extends CI_Model {
      * @return string JSON encoded list of full calendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function department($entity_id, $start = "", $end = "", $children = false) {
+    public function department($entity_id, $start = "", $end = "", $children = FALSE) {
         $this->db->select('users.firstname, users.lastname,  leaves.*, types.name as type');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
@@ -601,7 +601,7 @@ class Leaves_model extends CI_Model {
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('( (leaves.startdate <= DATE(' . $this->db->escape($start) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))' .
                                     ' OR (leaves.startdate >= DATE(' . $this->db->escape($start) . ') AND leaves.enddate <= DATE(' . $this->db->escape($end) . ')) )');
-        if ($children == true) {
+        if ($children === TRUE) {
             $this->load->model('organization_model');
             $list = $this->organization_model->get_all_children($entity_id);
             $ids = array();
@@ -647,7 +647,7 @@ class Leaves_model extends CI_Model {
                 'title' => $entry->firstname .' ' . $entry->lastname,
                 'start' => $startdate,
                 'color' => $color,
-                'allDay' => false,
+                'allDay' => FALSE,
                 'end' => $enddate
             );
         }
@@ -661,13 +661,13 @@ class Leaves_model extends CI_Model {
      * @return array List of leave requests (DB records)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function entity($entity_id, $children = false) {
+    public function entity($entity_id, $children = FALSE) {
         $this->db->select('users.firstname, users.lastname,  leaves.*, types.name as type');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
         $this->db->join('leaves', 'leaves.employee  = users.id');
         $this->db->join('types', 'leaves.type = types.id');
-        if ($children == true) {
+        if ($children === TRUE) {
             $this->load->model('organization_model');
             $list = $this->organization_model->get_all_children($entity_id);
             $ids = array();
@@ -690,13 +690,13 @@ class Leaves_model extends CI_Model {
      * List all leave requests submitted to the connected user (or if delegate of a manager)
      * Can be filtered with "Requested" status.
      * @param int $manager connected user
-     * @param bool $all true all requests, false otherwise
+     * @param bool $all TRUE all requests, FALSE otherwise
      * @return array Recordset (can be empty if no requests or not a manager)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function getLeavesRequestedToManager($manager, $all = FALSE) {
         $this->load->model('delegations_model');
-        $ids = $this->delegations_model->get_delegates_list($manager);
+        $ids = $this->delegations_model->listManagersGivingDelegation($manager);
         $this->db->select('leaves.id as id, users.*, leaves.*, types.name as type_label');
         $this->db->select('status.name as status_name, types.name as type_name');
         $this->db->join('status', 'leaves.status = status.id');
@@ -793,7 +793,7 @@ class Leaves_model extends CI_Model {
     
     /**
      * Count the total duration of leaves for the month. Only accepted leaves are taken into account
-     * @param type $linear linear calendar for one employee
+     * @param array $linear linear calendar for one employee
      * @return int total of leaves duration
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -818,7 +818,7 @@ class Leaves_model extends CI_Model {
     /**
      * Count the total duration of leaves for the month, grouped by leave type.
      * Only accepted leaves are taken into account.
-     * @param type $linear linear calendar for one employee
+     * @param array $linear linear calendar for one employee
      * @return array key/value array (k:leave type label, v:sum for the month)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -873,7 +873,7 @@ class Leaves_model extends CI_Model {
         }
 
         //Force all day offs (mind the case of employees having no leave)
-        $dayoffs = $this->dayoffs_model->employee_all_dayoffs($employee_id, $start, $end);
+        $dayoffs = $this->dayoffs_model->lengthDaysOffBetweenDatesForEmployee($employee_id, $start, $end);
         foreach ($dayoffs as $dayoff) {
             $iDate = new DateTime($dayoff->date);
             $dayNum = intval($iDate->format('d'));

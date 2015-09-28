@@ -65,4 +65,3 @@ header('Content-Disposition: attachment;filename="' . $filename . '"');
 header('Cache-Control: max-age=0');
 $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
 $objWriter->save('php://output');
-        

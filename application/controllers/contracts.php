@@ -142,8 +142,8 @@ class Contracts extends CI_Controller {
     /**
      * Display an interactive calendar that allows to dynamically set the days
      * off, bank holidays, etc. for a given contract
-     * @param type $id contract identifier
-     * @param type $year optional year number (4 digits), current year if empty
+     * @param int $id contract identifier
+     * @param int $year optional year number (4 digits), current year if empty
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function calendar($id, $year = 0) {
@@ -175,8 +175,8 @@ class Contracts extends CI_Controller {
         $data['contract_end_month'] = intval(substr($contract['endentdate'], 0, 2));
         $data['contract_end_day'] = intval(substr($contract['endentdate'], 3));
         $this->load->model('dayoffs_model');
-        $data['dayoffs'] = $this->dayoffs_model->get_dayoffs($id, $data['year']);
-        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
+        $data['dayoffs'] = $this->dayoffs_model->getDaysOffForCivilYear($id, $data['year']);
+        $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('contracts/calendar', $data);
@@ -186,15 +186,15 @@ class Contracts extends CI_Controller {
     /**
      * Copy the days off defined on a souce contract to another contract
      * for the civil year being displayed
-     * @param type $source source contract identifier
-     * @param type $destination destination contract identifier
-     * @param type $year year number (4 digits)
+     * @param int $source source contract identifier
+     * @param int $destination destination contract identifier
+     * @param int $year year number (4 digits)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function copydayoff($source, $destination, $year) {
         $this->auth->checkIfOperationIsAllowed('calendar_contract');
         $this->load->model('dayoffs_model');
-        $this->dayoffs_model->copy_dayoffs($source, $destination, $year);
+        $this->dayoffs_model->copyListOfDaysOff($source, $destination, $year);
         //Redirect to the contract where we've just copied the days off
         $this->session->set_flashdata('msg', lang('contract_calendar_copy_msg_success'));
         redirect('contracts/' . $destination . '/calendar/' . $year);
@@ -205,7 +205,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function editdayoff() {
-        if ($this->auth->isAllowed('adddayoff_contract') == FALSE) {
+        if ($this->auth->isAllowed('adddayoff_contract') === FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $contract = $this->input->post('contract', TRUE);
@@ -216,9 +216,9 @@ class Contracts extends CI_Controller {
                 $this->load->model('dayoffs_model');
                 $this->output->set_content_type('text/plain');
                 if ($type == 0) {
-                    echo $this->dayoffs_model->deletedayoff($contract, $timestamp);
+                    echo $this->dayoffs_model->deleteDayOff($contract, $timestamp);
                 } else {
-                    echo $this->dayoffs_model->adddayoff($contract, $timestamp, $type, $title);
+                    echo $this->dayoffs_model->addDayOff($contract, $timestamp, $type, $title);
                 }
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
@@ -231,12 +231,12 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function series() {
-        if ($this->auth->isAllowed('adddayoff_contract') == FALSE) {
+        if ($this->auth->isAllowed('adddayoff_contract') === FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
-            if ($this->input->post('day', TRUE) !=null && $this->input->post('type', TRUE) !=null &&
-                    $this->input->post('start', TRUE) !=null && $this->input->post('end', TRUE) !=null
-                     && $this->input->post('contract', TRUE) !=null) {
+            if (($this->input->post('day', TRUE) != NULL) && ($this->input->post('type', TRUE) != NULL) &&
+                    ($this->input->post('start', TRUE) != NULL) && ($this->input->post('end', TRUE) != NULL)
+                     && ($this->input->post('contract', TRUE) != NULL)) {
                 header("Content-Type: text/plain");
 
                 //Build the list of dates to be marked
@@ -263,9 +263,9 @@ class Contracts extends CI_Controller {
                 $contract = $this->input->post('contract', TRUE);
                 $title = sanitize($this->input->post('title', TRUE));
                 $this->load->model('dayoffs_model');
-                $this->dayoffs_model->deletedayoffs($contract, $list);
+                $this->dayoffs_model->deleteListOfDaysOff($contract, $list);
                 if ($type != 0) {
-                    $this->dayoffs_model->adddayoffs($contract, $type, $title, $list);
+                    $this->dayoffs_model->addListOfDaysOff($contract, $type, $title, $list);
                     echo 'updated';
                 } else {
                     echo 'deleted';
@@ -288,14 +288,14 @@ class Contracts extends CI_Controller {
         $contract = $this->input->post('contract', TRUE);
         $url = $this->input->post('url', TRUE);
         //Check validity of URL and if the endpoint is reachable
-        if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+        if (!filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
             $headers = @get_headers($url);
-            if(strpos($headers[0],'200')===false) { //Anything else than HTTP 200 OK
+            if(strpos($headers[0],'200') === FALSE) { //Anything else than HTTP 200 OK
                 echo("$url was not found or distant server is not reachable");
             }
             else {
                 $this->load->model('dayoffs_model');
-                $this->dayoffs_model->import_ics($contract, $url);
+                $this->dayoffs_model->importDaysOffFromICS($contract, $url);
             }
         } else {
             echo("$url is not a valid URL");

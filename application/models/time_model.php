@@ -24,7 +24,7 @@ class Time_model extends CI_Model {
      * Default constructor
      */
     public function __construct() {
-        
+        //This class will be used in a coming version of Jorani.
     }
 
     /**
@@ -33,7 +33,7 @@ class Time_model extends CI_Model {
      * @return array record of contracts
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_activities($id = 0) {
+    public function getActivities($id = 0) {
         if ($id === 0) {
             $query = $this->db->get('activities');
             return $query->result_array();
@@ -43,12 +43,12 @@ class Time_model extends CI_Model {
     }
     
     /**
-     * Get the label for a given contract id
-     * @param type $id
-     * @return string label
+     * Get the name for a given identifier of an Activity
+     * @param int $id Identifier of an activity
+     * @return string name of the activity
      */
     public function getName($id) {
-        $record = $this->get_activities($id);
+        $record = $this->getActivities($id);
         if (count($record) > 0) {
             return $record['name'];
         } else {
@@ -57,12 +57,11 @@ class Time_model extends CI_Model {
     }
     
     /**
-     * Insert a new activity into the database. Inserted data are coming from an
-     * HTML form
-     * @return type
+     * Insert a new activity into the database. Inserted data are coming from an HTML form
+     * @return bool Status of last DB operation
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_activities() {
+    public function setActivities() {
         $startentdate = str_pad($this->input->post('startentdatemonth'), 2, "0", STR_PAD_LEFT) .
                 "/" . str_pad($this->input->post('startentdateday'), 2, "0", STR_PAD_LEFT);
         $endentdate = str_pad($this->input->post('endentdatemonth'), 2, "0", STR_PAD_LEFT) .
@@ -80,19 +79,17 @@ class Time_model extends CI_Model {
      * @param int $id identifier of the contract
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_activity($id) {
+    public function deleteActivity($id) {
         $this->db->delete('activities', array('id' => $id));
-        $this->load->model('entitleddays_model');
-        $this->entitleddays_model->delete_entitleddays_cascade_contract($id);
+        //Maybe a cascade deletion here
     }
     
     /**
-     * Update a given activity in the database. Update data are coming from an
-     * HTML form
+     * Update a given activity in the database. Update data are coming from an HTML form
      * @return type
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function update_activity() {
+    public function updateActivity() {
         
         $startentdate = str_pad($this->input->post('startentdatemonth'), 2, "0", STR_PAD_LEFT) .
                 "/" . str_pad($this->input->post('startentdateday'), 2, "0", STR_PAD_LEFT);
@@ -114,7 +111,7 @@ class Time_model extends CI_Model {
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function purge_time($toDate) {
+    public function purgeActivities($toDate) {
         $this->db->where('DATE(datetime) <= ', $toDate);
         return $this->db->delete('activities');
     }

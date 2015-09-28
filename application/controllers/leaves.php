@@ -44,7 +44,7 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
-        $this->auth->check_is_granted('list_leaves');
+        $this->auth->checkIfOperationIsAllowed('list_leaves');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($this->session->userdata('id'));
@@ -63,7 +63,7 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function counters($refTmp = NULL) {
-        $this->auth->check_is_granted('counters_leaves');
+        $this->auth->checkIfOperationIsAllowed('counters_leaves');
         $data = getUserContext($this);
         $refDate = date("Y-m-d");
         if ($refTmp != NULL) {
@@ -95,7 +95,7 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function view($source, $id) {
-        $this->auth->check_is_granted('view_leaves');
+        $this->auth->checkIfOperationIsAllowed('view_leaves');
         $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->getLeaves($id);
         if (empty($data['leave'])) {
@@ -136,7 +136,7 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function create() {
-        $this->auth->check_is_granted('create_leaves');
+        $this->auth->checkIfOperationIsAllowed('create_leaves');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -191,7 +191,7 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
-        $this->auth->check_is_granted('edit_leaves');
+        $this->auth->checkIfOperationIsAllowed('edit_leaves');
         $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->getLeaves($id);
         //Check if exists

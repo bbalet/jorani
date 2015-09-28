@@ -43,7 +43,7 @@ class Overtime extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index($filter = 'requested') {
-        $this->auth->check_is_granted('list_overtime');
+        $this->auth->checkIfOperationIsAllowed('list_overtime');
         if ($filter == 'all') {
             $showAll = true;
         } else {
@@ -68,7 +68,7 @@ class Overtime extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function accept($id) {
-        $this->auth->check_is_granted('accept_overtime');
+        $this->auth->checkIfOperationIsAllowed('accept_overtime');
         $this->load->model('users_model');
         $this->load->model('delegations_model');
         $extra = $this->overtime_model->getExtras($id);
@@ -99,7 +99,7 @@ class Overtime extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reject($id) {
-        $this->auth->check_is_granted('reject_overtime');
+        $this->auth->checkIfOperationIsAllowed('reject_overtime');
         $this->load->model('users_model');
         $this->load->model('delegations_model');
         $extra = $this->overtime_model->getExtras($id);

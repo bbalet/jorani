@@ -40,7 +40,7 @@ class Reports extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
-        $this->auth->check_is_granted('report_list');
+        $this->auth->checkIfOperationIsAllowed('report_list');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         
@@ -74,7 +74,7 @@ class Reports extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function balance($refTmp = NULL) {
-        $this->auth->check_is_granted('native_report_balance');
+        $this->auth->checkIfOperationIsAllowed('native_report_balance');
         $data = getUserContext($this);
 		$refDate = date("Y-m-d");
         if ($refTmp != NULL) {
@@ -94,7 +94,7 @@ class Reports extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function executeBalanceReport() {
-        $this->auth->check_is_granted('native_report_balance');
+        $this->auth->checkIfOperationIsAllowed('native_report_balance');
         
         $this->load->model('leaves_model');
         $this->load->model('types_model');
@@ -172,7 +172,7 @@ class Reports extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function exportBalanceReport() {
-        $this->auth->check_is_granted('native_report_balance');
+        $this->auth->checkIfOperationIsAllowed('native_report_balance');
         $this->load->model('leaves_model');
         $this->load->model('types_model');
         $this->load->model('organization_model');

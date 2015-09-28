@@ -118,19 +118,19 @@ class Session extends CI_Controller {
                 ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
                 set_error_handler(function() { /* ignore errors */ });
                 if ($this->config->item('ldap_basedn_db')) {
-                    $basedn = $this->users_model->get_basedn($this->input->post('login'));
+                    $basedn = $this->users_model->getBaseDN($this->input->post('login'));
                 } else {
                     $basedn = sprintf($this->config->item('ldap_basedn'), $this->input->post('login'));
                 }
                 $bind = ldap_bind($ldap, $basedn, $password);
                 restore_error_handler();
                 if ($bind) {
-                    $loggedin = $this->users_model->load_profile($this->input->post('login'));
+                    $loggedin = $this->users_model->loadProfile($this->input->post('login'));
                 }
                 ldap_close($ldap);
                 }
             } else {
-                $loggedin = $this->users_model->check_credentials($this->input->post('login'), $password);
+                $loggedin = $this->users_model->checkCredentials($this->input->post('login'), $password);
             }
             
             if ($loggedin == FALSE) {

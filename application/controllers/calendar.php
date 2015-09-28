@@ -42,7 +42,7 @@ class Calendar extends CI_Controller {
     public function year($employee = 0, $year = 0) {
             setUserContext($this);
             $this->lang->load('calendar', $this->language);
-            $this->auth->check_is_granted('organization_calendar');
+            $this->auth->checkIfOperationIsAllowed('organization_calendar');
             $data = getUserContext($this);
             if ($year==0) $year = date("Y");
             //Either self access, Manager or HR
@@ -91,7 +91,7 @@ class Calendar extends CI_Controller {
     public function individual() {
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
-        $this->auth->check_is_granted('individual_calendar');
+        $this->auth->checkIfOperationIsAllowed('individual_calendar');
         $data = getUserContext($this);
         $data['title'] = lang('calendar_individual_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_individual');
@@ -113,7 +113,7 @@ class Calendar extends CI_Controller {
     public function workmates() {
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
-        $this->auth->check_is_granted('workmates_calendar');
+        $this->auth->checkIfOperationIsAllowed('workmates_calendar');
         $data = getUserContext($this);
         $data['title'] = lang('calendar_workmates_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_workmates');
@@ -131,7 +131,7 @@ class Calendar extends CI_Controller {
     public function collaborators() {
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
-        $this->auth->check_is_granted('collaborators_calendar');
+        $this->auth->checkIfOperationIsAllowed('collaborators_calendar');
         $data = getUserContext($this);
         $data['title'] = lang('calendar_collaborators_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_collaborators');
@@ -150,7 +150,7 @@ class Calendar extends CI_Controller {
     public function department() {
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
-        $this->auth->check_is_granted('department_calendar');
+        $this->auth->checkIfOperationIsAllowed('department_calendar');
         $data = getUserContext($this);
         $data['title'] = lang('calendar_department_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_department');
@@ -188,7 +188,7 @@ class Calendar extends CI_Controller {
         } else {
             setUserContext($this);
             $this->lang->load('calendar', $this->language);
-            $this->auth->check_is_granted('organization_calendar');
+            $this->auth->checkIfOperationIsAllowed('organization_calendar');
             $data = getUserContext($this);
             $data['logged_in'] = TRUE;
             $data['title'] = lang('calendar_organization_title');
@@ -267,7 +267,7 @@ class Calendar extends CI_Controller {
         } else {
             setUserContext($this);
             $this->lang->load('calendar', $this->language);
-            $this->auth->check_is_granted('organization_calendar');
+            $this->auth->checkIfOperationIsAllowed('organization_calendar');
             $data = getUserContext($this);
             $this->load->model('leaves_model');
             $this->load->model('organization_model');
@@ -320,7 +320,7 @@ class Calendar extends CI_Controller {
     public function exportYear($employee = 0, $year = 0) {
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
-        $this->auth->check_is_granted('organization_calendar');
+        $this->auth->checkIfOperationIsAllowed('organization_calendar');
         if ($year == 0) {
             $year = date("Y");
         }

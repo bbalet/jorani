@@ -40,7 +40,7 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
-        $this->auth->check_is_granted('list_users');
+        $this->auth->checkIfOperationIsAllowed('list_users');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['users'] = $this->users_model->getUsers();
@@ -60,8 +60,8 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function active($id, $active) {
-        $this->auth->check_is_granted('list_users');
-        $this->users_model->set_active($id, $active);
+        $this->auth->checkIfOperationIsAllowed('list_users');
+        $this->users_model->setActive($id, $active);
         $this->session->set_flashdata('msg', lang('users_edit_flash_msg_success'));
         redirect('users');
     }
@@ -89,10 +89,10 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function employees() {
-        $this->auth->check_is_granted('employees_list');
+        $this->auth->checkIfOperationIsAllowed('employees_list');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
-        $data['employees'] = $this->users_model->get_all_employees();
+        $data['employees'] = $this->users_model->getAllEmployees();
         $data['title'] = lang('employees_index_title');
         $this->load->view('users/employees', $data);
     }
@@ -102,7 +102,7 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function myProfile() {
-        $this->auth->check_is_granted('view_myprofile');
+        $this->auth->checkIfOperationIsAllowed('view_myprofile');
         $data = getUserContext($this);
         $data['user'] = $this->users_model->getUsers($this->user_id);
         if (empty($data['user'])) {
@@ -131,7 +131,7 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
-        $this->auth->check_is_granted('edit_user');
+        $this->auth->checkIfOperationIsAllowed('edit_user');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -174,7 +174,7 @@ class Users extends CI_Controller {
             $this->load->view('users/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->users_model->update_users();
+            $this->users_model->updateUsers();
             $this->session->set_flashdata('msg', lang('users_edit_flash_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
@@ -185,21 +185,20 @@ class Users extends CI_Controller {
     }
 
     /**
-     * Delete a given user
+     * Delete a user. Log it as an error.
      * @param int $id User identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) { 
-        $this->auth->check_is_granted('delete_user');
+        $this->auth->checkIfOperationIsAllowed('delete_user');
         //Test if user exists
         $data['users_item'] = $this->users_model->getUsers($id);
         if (empty($data['users_item'])) {
-            log_message('debug', '{controllers/users/delete} user not found');
             show_404();
         } else {
-            $this->users_model->delete_user($id);
+            $this->users_model->deleteUser($id);
         }
-        log_message('info', 'User #' . $id . ' has been deleted by user #' . $this->session->userdata('id'));
+        log_message('error', 'User #' . $id . ' has been deleted by user #' . $this->session->userdata('id'));
         $this->session->set_flashdata('msg', lang('users_delete_flash_msg_success'));
         redirect('users');
     }
@@ -211,7 +210,7 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reset($id) {
-        $this->auth->check_is_granted('change_password', $id);
+        $this->auth->checkIfOperationIsAllowed('change_password', $id);
 
         //Test if user exists
         $data['users_item'] = $this->users_model->getUsers($id);
@@ -228,8 +227,7 @@ class Users extends CI_Controller {
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', true);
                 $this->load->view('users/reset', $data);
             } else {
-                $this->users_model->reset_password($id, $this->input->post('CipheredValue'));
-                log_message('info', 'Password of user #' . $id . ' has been modified by user #' . $this->session->userdata('id'));
+                $this->users_model->resetPassword($id, $this->input->post('CipheredValue'));
                 
                 //Send an e-mail to the user so as to inform that its password has been changed
                 $user = $this->users_model->getUsers($id);
@@ -281,7 +279,7 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function create() {
-        $this->auth->check_is_granted('create_user');
+        $this->auth->checkIfOperationIsAllowed('create_user');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -317,8 +315,7 @@ class Users extends CI_Controller {
             $this->load->view('users/create', $data);
             $this->load->view('templates/footer');
         } else {
-            $password = $this->users_model->set_users();
-            log_message('info', 'User ' . $this->input->post('login') . ' has been created by user #' . $this->session->userdata('id'));
+            $password = $this->users_model->setUsers();
             
             //Send an e-mail to the user so as to inform that its account has been created
             $this->load->library('email');
@@ -392,7 +389,7 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
-        $this->auth->check_is_granted('export_user');
+        $this->auth->checkIfOperationIsAllowed('export_user');
         $this->load->library('excel');
         $this->load->view('users/export');
     }

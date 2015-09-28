@@ -51,8 +51,7 @@ class Auth {
      * @return bool true if the user is granted, false otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function is_granted($operation, $object_id = 0) {
-        //log_message('debug', '{librairies/auth/is_granted} Entering method with Operation=' . $operation . ' / object_id=' . $object_id);
+    public function isAllowed($operation, $object_id = 0) {
         switch ($operation) {
             
             //Admin functions
@@ -212,14 +211,14 @@ class Auth {
 
     /**
      * Check if the current user can perform a given action on the system.
-     * @use is_granted
+     * @use isAllowed
      * @param string $operation Operation attempted by the user
      * @param int $id  optional object identifier of the operation (e.g. user id)
      * @return bool true if the user is granted, false otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function check_is_granted($operation, $object_id = 0) {
-        if (!$this->is_granted($operation, $object_id)) {
+    public function checkIfOperationIsAllowed($operation, $object_id = 0) {
+        if (!$this->isAllowed($operation, $object_id)) {
             $this->CI->load->helper('url');
             $this->CI->load->helper('language');
             $this->CI->lang->load('global', $this->CI->session->userdata('language'));
@@ -227,9 +226,5 @@ class Auth {
             $this->CI->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), $operation));
             redirect('forbidden');
         }
-        else {
-            //log_message('debug', '{libraries/auth/check_is_granted} User #' . $this->CI->session->userdata('id') . ' granted access to ' . $operation);
-        }
     }
-
 }

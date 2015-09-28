@@ -43,7 +43,7 @@ class Extra extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
-        $this->auth->check_is_granted('list_extra');
+        $this->auth->checkIfOperationIsAllowed('list_extra');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['extras'] = $this->overtime_model->getExtrasOfEmployee($this->user_id);
@@ -62,7 +62,7 @@ class Extra extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function view($source, $id) {
-        $this->auth->check_is_granted('view_extra');
+        $this->auth->checkIfOperationIsAllowed('view_extra');
         $data = getUserContext($this);
         $data['extra'] = $this->overtime_model->getExtras($id);
         if (empty($data['extra'])) {
@@ -105,7 +105,7 @@ class Extra extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function create() {
-        $this->auth->check_is_granted('create_extra');
+        $this->auth->checkIfOperationIsAllowed('create_extra');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -145,7 +145,7 @@ class Extra extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
-        $this->auth->check_is_granted('edit_extra');
+        $this->auth->checkIfOperationIsAllowed('edit_extra');
         $data = getUserContext($this);
         $data['extra'] = $this->overtime_model->getExtras($id);
         //Check if exists

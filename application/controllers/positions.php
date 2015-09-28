@@ -40,7 +40,7 @@ class Positions extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
-        $this->auth->check_is_granted('list_positions');
+        $this->auth->checkIfOperationIsAllowed('list_positions');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['positions'] = $this->positions_model->getPositions();
@@ -58,7 +58,7 @@ class Positions extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function select() {
-        $this->auth->check_is_granted('list_positions');
+        $this->auth->checkIfOperationIsAllowed('list_positions');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['positions'] = $this->positions_model->getPositions();
@@ -70,7 +70,7 @@ class Positions extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function create() {
-        $this->auth->check_is_granted('create_positions');
+        $this->auth->checkIfOperationIsAllowed('create_positions');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -96,7 +96,7 @@ class Positions extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
-        $this->auth->check_is_granted('edit_positions');
+        $this->auth->checkIfOperationIsAllowed('edit_positions');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -124,7 +124,7 @@ class Positions extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
-        $this->auth->check_is_granted('delete_positions');
+        $this->auth->checkIfOperationIsAllowed('delete_positions');
         $this->positions_model->deletePosition($id);
         $this->session->set_flashdata('msg', lang('positions_delete_flash_msg'));
         redirect('positions');
@@ -135,7 +135,7 @@ class Positions extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
-        $this->auth->check_is_granted('export_positions');
+        $this->auth->checkIfOperationIsAllowed('export_positions');
         $this->load->library('excel');
         $this->load->view('positions/export');
     }

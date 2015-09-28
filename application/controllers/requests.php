@@ -43,7 +43,7 @@ class Requests extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index($filter = 'requested') {
-        $this->auth->check_is_granted('list_requests');
+        $this->auth->checkIfOperationIsAllowed('list_requests');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['filter'] = $filter;
@@ -64,7 +64,7 @@ class Requests extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function accept($id) {
-        $this->auth->check_is_granted('accept_requests');
+        $this->auth->checkIfOperationIsAllowed('accept_requests');
         $this->load->model('users_model');
         $this->load->model('delegations_model');
         $leave = $this->leaves_model->getLeaves($id);
@@ -95,7 +95,7 @@ class Requests extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reject($id) {
-        $this->auth->check_is_granted('reject_requests');
+        $this->auth->checkIfOperationIsAllowed('reject_requests');
         $this->load->model('users_model');
         $this->load->model('delegations_model');
         $leave = $this->leaves_model->getLeaves($id);
@@ -125,13 +125,13 @@ class Requests extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function collaborators() {
-        $this->auth->check_is_granted('list_collaborators');
+        $this->auth->checkIfOperationIsAllowed('list_collaborators');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['title'] = lang('requests_collaborators_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_collaborators_list');
         $this->load->model('users_model');
-        $data['collaborators'] = $this->users_model->get_employees_manager($this->user_id);
+        $data['collaborators'] = $this->users_model->getCollaboratorsOfManager($this->user_id);
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, true);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);

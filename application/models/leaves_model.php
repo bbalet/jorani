@@ -321,7 +321,7 @@ class Leaves_model extends CI_Model {
             'startdatetype' => $this->input->post('startdatetype'),
             'enddate' => $this->input->post('enddate'),
             'enddatetype' => $this->input->post('enddatetype'),
-            'duration' => $this->input->post('duration'),
+            'duration' => abs($this->input->post('duration')),
             'type' => $this->input->post('type'),
             'cause' => $this->input->post('cause'),
             'status' => $this->input->post('status'),
@@ -356,7 +356,7 @@ class Leaves_model extends CI_Model {
             'cause' => $cause,
             'startdatetype' => $startdatetype,
             'enddatetype' => $enddatetype,
-            'duration' => $duration,
+            'duration' => abs($duration),
             'type' => $type
         );
         $this->db->insert('leaves', $data);
@@ -374,7 +374,7 @@ class Leaves_model extends CI_Model {
             'startdatetype' => $this->input->post('startdatetype'),
             'enddate' => $this->input->post('enddate'),
             'enddatetype' => $this->input->post('enddatetype'),
-            'duration' => $this->input->post('duration'),
+            'duration' => abs($this->input->post('duration')),
             'type' => $this->input->post('type'),
             'cause' => $this->input->post('cause'),
             'status' => $this->input->post('status')
@@ -771,7 +771,6 @@ class Leaves_model extends CI_Model {
         if ($month==0) $month = date("m");
         if ($year==0) $year = date("Y");
         $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
-        $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
         //If no entity was selected, select the entity of the connected user or the root of the organization
         if ($entity == -1) {
             $this->load->model('users_model');

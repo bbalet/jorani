@@ -43,7 +43,7 @@ class Hr extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function employees() {
-        $this->auth->check_is_granted('list_employees');
+        $this->auth->checkIfOperationIsAllowed('list_employees');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['title'] = lang('hr_employees_title');
@@ -64,12 +64,12 @@ class Hr extends CI_Controller {
      */
     public function employees_entity($id = 0, $children = TRUE) {
         header("Content-Type: application/json");
-        if ($this->auth->is_granted('list_employees') == FALSE) {
+        if ($this->auth->isAllowed('list_employees') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
             $this->load->model('users_model');
-            $employees = $this->users_model->employees_of_entity($id, $children);
+            $employees = $this->users_model->employeesOfEntity($id, $children);
             $msg = '{"iTotalRecords":' . count($employees);
             $msg .= ',"iTotalDisplayRecords":' . count($employees);
             $msg .= ',"aaData":[';
@@ -95,7 +95,7 @@ class Hr extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function leaves($id) {
-        $this->auth->check_is_granted('list_employees');
+        $this->auth->checkIfOperationIsAllowed('list_employees');
         $data = getUserContext($this);
         $this->load->model('users_model');
         $data['name'] = $this->users_model->getName($id);
@@ -121,7 +121,7 @@ class Hr extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function overtime($id) {
-        $this->auth->check_is_granted('list_employees');
+        $this->auth->checkIfOperationIsAllowed('list_employees');
         $data = getUserContext($this);
         $this->load->model('users_model');
         $data['name'] = $this->users_model->getName($id);
@@ -147,7 +147,7 @@ class Hr extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function counters($id, $refTmp = NULL) {
-        $this->auth->check_is_granted('list_employees');
+        $this->auth->checkIfOperationIsAllowed('list_employees');
         $data = getUserContext($this);
         $this->lang->load('entitleddays', $this->language);
         $this->lang->load('datatable', $this->language);
@@ -193,7 +193,7 @@ class Hr extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function createleave($id) {
-        $this->auth->check_is_granted('list_employees');
+        $this->auth->checkIfOperationIsAllowed('list_employees');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -244,8 +244,8 @@ class Hr extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function presence($source, $id, $month=0, $year=0) {
-        if ($source == 'collaborators') { $this->auth->check_is_granted('list_collaborators'); }
-        if ($source == 'employees') { $this->auth->check_is_granted('list_employees'); }
+        if ($source == 'collaborators') { $this->auth->checkIfOperationIsAllowed('list_collaborators'); }
+        if ($source == 'employees') { $this->auth->checkIfOperationIsAllowed('list_employees'); }
         $data = getUserContext($this);
         if ($source == 'collaborators') { $data['source'] = 'collaborators'; }
         if ($source == 'employees') { $data['source'] = 'employees'; }
@@ -365,8 +365,8 @@ class Hr extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function exportPresence($source,$id, $month=0, $year=0) {
-        if ($source == 'collaborators') { $this->auth->check_is_granted('list_collaborators'); }
-        if ($source == 'employees') { $this->auth->check_is_granted('list_employees'); }
+        if ($source == 'collaborators') { $this->auth->checkIfOperationIsAllowed('list_collaborators'); }
+        if ($source == 'employees') { $this->auth->checkIfOperationIsAllowed('list_employees'); }
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
         $this->load->model('leaves_model');

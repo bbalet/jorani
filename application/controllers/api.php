@@ -341,7 +341,7 @@ class Api extends CI_Controller {
             if (count($employee) == 0) {
                 $this->output->set_header("HTTP/1.1 404 Not Found");
             } else {
-                $this->users_model->delete_user($id);
+                $this->users_model->deleteUser($id);
                 echo json_encode("OK");
             }
         }
@@ -376,7 +376,7 @@ class Api extends CI_Controller {
             if ($this->input->post('ldap_path')!=FALSE) {$data['ldap_path']= $this->input->post('ldap_path');}
             if ($this->input->post('country')!=FALSE) {$data['country']= $this->input->post('country');}
             if ($this->input->post('calendar')!=FALSE) {$data['calendar']= $this->input->post('calendar');}
-            $result = $this->users_model->update_user_api($id, $data);
+            $result = $this->users_model->updateUserByApi($id, $data);
             if (empty($result)) {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             } else {
@@ -438,7 +438,7 @@ class Api extends CI_Controller {
                 log_message('error', 'Mandatory fields are missing.');
             } else {
                 if ($this->users_model->is_login_available($login)) {
-                    $result = $this->users_model->insert_user_api($firstname, $lastname, $login, $email, $password, $role,
+                    $result = $this->users_model->insertUserByApi($firstname, $lastname, $login, $email, $password, $role,
                         $manager, $organization, $contract, $position, $datehired, $identifier, $language, $timezone,
                         $ldap_path, TRUE, $country, $calendar);
                     

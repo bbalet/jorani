@@ -40,7 +40,7 @@ class LeaveTypes extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
-        $this->auth->check_is_granted('leavetypes_list');
+        $this->auth->checkIfOperationIsAllowed('leavetypes_list');
         $data = getUserContext($this);
         $data['leavetypes'] = $this->types_model->getTypes();
         $data['title'] = lang('leavetypes_type_title');
@@ -57,7 +57,7 @@ class LeaveTypes extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function create() {
-        $this->auth->check_is_granted('leavetypes_create');
+        $this->auth->checkIfOperationIsAllowed('leavetypes_create');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -79,7 +79,7 @@ class LeaveTypes extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
-        $this->auth->check_is_granted('leavetypes_edit');
+        $this->auth->checkIfOperationIsAllowed('leavetypes_edit');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -104,7 +104,7 @@ class LeaveTypes extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
-        $this->auth->check_is_granted('leavetypes_delete');
+        $this->auth->checkIfOperationIsAllowed('leavetypes_delete');
         if ($id != 0) {
             if ($this->types_model->usage($id) > 0) {
                 $this->session->set_flashdata('msg', lang('leavetypes_popup_delete_flash_forbidden'));
@@ -123,7 +123,7 @@ class LeaveTypes extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
-        $this->auth->check_is_granted('leavetypes_export');
+        $this->auth->checkIfOperationIsAllowed('leavetypes_export');
         $this->load->library('excel');
         $this->load->view('leavetypes/export');
     }

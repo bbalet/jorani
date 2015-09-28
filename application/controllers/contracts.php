@@ -42,7 +42,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index($filter = 'requested') {
-        $this->auth->check_is_granted('list_contracts');
+        $this->auth->checkIfOperationIsAllowed('list_contracts');
         $this->lang->load('datatable', $this->language);
         $data = getUserContext($this);
         $data['filter'] = $filter;
@@ -61,7 +61,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {
-        $this->auth->check_is_granted('edit_contract');
+        $this->auth->checkIfOperationIsAllowed('edit_contract');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -96,7 +96,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function create() {
-        $this->auth->check_is_granted('create_contract');
+        $this->auth->checkIfOperationIsAllowed('create_contract');
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -127,7 +127,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($id) {
-        $this->auth->check_is_granted('delete_contract');
+        $this->auth->checkIfOperationIsAllowed('delete_contract');
         //Test if the contract exists
         $data['contract'] = $this->contracts_model->getContracts($id);
         if (empty($data['contract'])) {
@@ -147,7 +147,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function calendar($id, $year = 0) {
-        $this->auth->check_is_granted('calendar_contract');
+        $this->auth->checkIfOperationIsAllowed('calendar_contract');
         $data = getUserContext($this);
         $this->lang->load('calendar', $this->language);
         $data['title'] = lang('contract_calendar_title');
@@ -192,7 +192,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function copydayoff($source, $destination, $year) {
-        $this->auth->check_is_granted('calendar_contract');
+        $this->auth->checkIfOperationIsAllowed('calendar_contract');
         $this->load->model('dayoffs_model');
         $this->dayoffs_model->copy_dayoffs($source, $destination, $year);
         //Redirect to the contract where we've just copied the days off
@@ -205,7 +205,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function editdayoff() {
-        if ($this->auth->is_granted('adddayoff_contract') == FALSE) {
+        if ($this->auth->isAllowed('adddayoff_contract') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $contract = $this->input->post('contract', TRUE);
@@ -231,7 +231,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function series() {
-        if ($this->auth->is_granted('adddayoff_contract') == FALSE) {
+        if ($this->auth->isAllowed('adddayoff_contract') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             if ($this->input->post('day', TRUE) !=null && $this->input->post('type', TRUE) !=null &&
@@ -338,7 +338,7 @@ class Contracts extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
-        $this->auth->check_is_granted('export_contracts');
+        $this->auth->checkIfOperationIsAllowed('export_contracts');
         $this->load->library('excel');
         $this->load->view('contracts/export');
     }

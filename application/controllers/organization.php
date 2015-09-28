@@ -41,7 +41,7 @@ class Organization extends CI_Controller {
      */
     public function index() {
         setUserContext($this);
-        $this->auth->check_is_granted('organization_index');
+        $this->auth->checkIfOperationIsAllowed('organization_index');
         $data = getUserContext($this);
         $this->lang->load('organization', $this->language);
         $this->lang->load('datatable', $this->language);
@@ -71,7 +71,7 @@ class Organization extends CI_Controller {
             $this->load->view('organization/select', $data);
         } else {
             setUserContext($this);
-            $this->auth->check_is_granted('organization_select');
+            $this->auth->checkIfOperationIsAllowed('organization_select');
             $data = getUserContext($this);
             $this->lang->load('organization', $this->language);
             $this->lang->load('treeview', $this->language);
@@ -87,7 +87,7 @@ class Organization extends CI_Controller {
     public function rename() {
         header("Content-Type: application/json");
         setUserContext($this);
-        if ($this->auth->is_granted('edit_organization') == FALSE) {
+        if ($this->auth->isAllowed('edit_organization') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $id = $this->input->get('id', TRUE);
@@ -105,7 +105,7 @@ class Organization extends CI_Controller {
     public function create() {
         header("Content-Type: application/json");
         setUserContext($this);
-        if ($this->auth->is_granted('edit_organization') == FALSE) {
+        if ($this->auth->isAllowed('edit_organization') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $id = $this->input->get('id', TRUE);
@@ -123,7 +123,7 @@ class Organization extends CI_Controller {
     public function move() {
         header("Content-Type: application/json");
         setUserContext($this);
-        if ($this->auth->is_granted('edit_organization') == FALSE) {
+        if ($this->auth->isAllowed('edit_organization') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $id = $this->input->get('id', TRUE);
@@ -141,7 +141,7 @@ class Organization extends CI_Controller {
     public function copy() {
         header("Content-Type: application/json");
         setUserContext($this);
-        if ($this->auth->is_granted('edit_organization') == FALSE) {
+        if ($this->auth->isAllowed('edit_organization') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $id = $this->input->get('id', TRUE);
@@ -185,7 +185,7 @@ class Organization extends CI_Controller {
     public function addemployee() {
         header("Content-Type: application/json");
         setUserContext($this);
-        if ($this->auth->is_granted('edit_organization') == FALSE) {
+        if ($this->auth->isAllowed('edit_organization') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $id = $this->input->get('user', TRUE);
@@ -203,7 +203,7 @@ class Organization extends CI_Controller {
     public function delemployee() {
         header("Content-Type: application/json");
         setUserContext($this);
-        if ($this->auth->is_granted('edit_organization') == FALSE) {
+        if ($this->auth->isAllowed('edit_organization') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $id = $this->input->get('user', TRUE);
@@ -220,7 +220,7 @@ class Organization extends CI_Controller {
     public function delete() {
         header("Content-Type: application/json");
         setUserContext($this);
-        if ($this->auth->is_granted('edit_organization') == FALSE) {
+        if ($this->auth->isAllowed('edit_organization') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $entity = $this->input->get('entity', TRUE);
@@ -240,7 +240,7 @@ class Organization extends CI_Controller {
             //nop
         } else {
             setUserContext($this);
-            $this->auth->check_is_granted('organization_select');
+            $this->auth->checkIfOperationIsAllowed('organization_select');
         }
         
         $id = $this->input->get('id', TRUE);
@@ -290,7 +290,7 @@ class Organization extends CI_Controller {
     public function setsupervisor() {
         header("Content-Type: application/json");
         setUserContext($this);
-        if ($this->auth->is_granted('edit_organization') == FALSE) {
+        if ($this->auth->isAllowed('edit_organization') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             if ($this->input->get('user', TRUE) == "") {

@@ -41,7 +41,7 @@ class Admin extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function settings() {
-        $this->auth->check_is_granted('list_settings');
+        $this->auth->checkIfOperationIsAllowed('list_settings');
         $data = getUserContext($this);
         $data['title'] = 'application/config/config.php';
         $data['help'] = ''; //create_help_link

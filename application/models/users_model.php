@@ -50,16 +50,16 @@ class Users_model extends CI_Model {
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_all_employees() {
+    public function getAllEmployees() {
         $this->db->select('id, firstname, lastname, email');
         $query = $this->db->get('users');
         return $query->result_array();
     }
     
     /**
-     * Get the label of a given user id
-     * @param type $id
-     * @return string label
+     * Get the name of a given user
+     * @param int $id Identifier of employee
+     * @return string firstname and lastname of the employee
      */
     public function getName($id) {
         $record = $this->getUsers($id);
@@ -69,23 +69,12 @@ class Users_model extends CI_Model {
     }
     
     /**
-     * Get the list of employees belonging to an entity
-     * @param int $id identifier of the entity
-     * @return array record of users
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function get_employees_entity($id = 0) {
-        $query = $this->db->get_where('users', array('organization' => $id));
-        return $query->result_array();
-    }
-    
-    /**
      * Get the list of employees that are the collaborators of the given user
      * @param int $id identifier of the manager
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_employees_manager($id = 0) {
+    public function getCollaboratorsOfManager($id = 0) {
         $this->db->from('users');
         $this->db->order_by("lastname", "asc");
         $this->db->order_by("firstname", "asc");
@@ -117,7 +106,7 @@ class Users_model extends CI_Model {
      * @param int $id identifier of the user
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_user($id) {
+    public function deleteUser($id) {
         $this->db->delete('users', array('id' => $id));
         $this->load->model('entitleddays_model');
         $this->load->model('leaves_model');
@@ -134,12 +123,11 @@ class Users_model extends CI_Model {
     }
 
     /**
-     * Insert a new user into the database. Inserted data are coming from an
-     * HTML form
+     * Insert a new user into the database. Inserted data are coming from an HTML form
      * @return string deciphered password (so as to send it by e-mail in clear)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_users() {
+    public function setUsers() {
         //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
         require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
         $rsa = new phpseclib\Crypt\RSA();
@@ -217,8 +205,9 @@ class Users_model extends CI_Model {
      * @param string $country country of the employee or NULL
      * @param string $calendar calendar path or NULL
      * @return int Inserted User Identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function insert_user_api($firstname, $lastname, $login, $email, $password, $role,
+    public function insertUserByApi($firstname, $lastname, $login, $email, $password, $role,
             $manager = NULL,
             $organization = NULL,
             $contract = NULL,
@@ -263,8 +252,9 @@ class Users_model extends CI_Model {
      * @param int $id Id of the user
      * @param array $data Associative array of fields to be updated
      * @return int Number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function update_user_api($id, $data) {
+    public function updateUserByApi($id, $data) {
         if (isset($password)){
             //Hash the clear password using bcrypt (8 iterations)
             $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
@@ -280,7 +270,7 @@ class Users_model extends CI_Model {
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function update_users() {
+    public function updateUsers() {
         
         //Role field is a binary mask
         $role = 0;
@@ -325,10 +315,10 @@ class Users_model extends CI_Model {
 
     /**
      * Update a given user in the database. Update data are coming from an HTML form
-     * @return type
+     * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function reset_password($id, $CipheredNewPassword) {
+    public function resetPassword($id, $CipheredNewPassword) {
         //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
         require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
         $rsa = new phpseclib\Crypt\RSA();
@@ -336,7 +326,6 @@ class Users_model extends CI_Model {
         $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
         $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
         $password = $rsa->decrypt(base64_decode($CipheredNewPassword));
-        log_message('debug', '{models/users_model/reset_password} Password=' . $password);
         
         //Hash the clear password using bcrypt (8 iterations)
         $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
@@ -345,8 +334,7 @@ class Users_model extends CI_Model {
             'password' => $hash
         );
         $this->db->where('id', $id);
-        $result = $this->db->update('users', $data);
-        return $result;
+        return $this->db->update('users', $data);
     }
     
     /**
@@ -384,12 +372,12 @@ class Users_model extends CI_Model {
     
     /**
      * Check the provided credentials
-     * @param type $login user login
-     * @param type $password password
-     * @return bool true if the user is succesfully authenticated, false otherwise
+     * @param string $login user login
+     * @param string $password password
+     * @return bool TRUE if the user is succesfully authenticated, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function check_credentials($login, $password) {
+    public function checkCredentials($login, $password) {
         $this->db->from('users');
         $this->db->where('login', $login);
         $this->db->where('active = TRUE');
@@ -397,17 +385,17 @@ class Users_model extends CI_Model {
 
         if ($query->num_rows() == 0) {
             //No match found
-            return false;
+            return FALSE;
         } else {
             $row = $query->row();
             $hash = crypt($password, $row->password);
             if ($hash == $row->password) {
                 // Password does match stored password.
                 if (((int) $row->role & 1)) {
-                    $is_admin = true;
+                    $is_admin = TRUE;
                 }
                 else {
-                    $is_admin = false;
+                    $is_admin = FALSE;
                 }
                 
                /*
@@ -417,15 +405,15 @@ class Users_model extends CI_Model {
               = 00001101 25 Can access to HR functions
                 */
                 if (((int) $row->role & 25)) {
-                    $is_hr = true;
+                    $is_hr = TRUE;
                 }
                 else {
-                    $is_hr = false;
+                    $is_hr = FALSE;
                 }
                 
                 //Determine if the connected user is a manager or if he has any delegation
                 $isManager = FALSE;
-                if (count($this->get_employees_manager($row->id)) > 0) {
+                if (count($this->getCollaboratorsOfManager($row->id)) > 0) {
                     $isManager = TRUE;
                 } else {
                     $this->load->model('delegations_model');
@@ -444,21 +432,21 @@ class Users_model extends CI_Model {
                     'logged_in' => TRUE
                 );                
                 $this->session->set_userdata($newdata);
-                return true;
+                return TRUE;
             } else {
                 // Password does not match stored password.
-                return false;
+                return FALSE;
             }
         }
     }
     
     /**
-     * Load the profile of a user
-     * @param type $login user login
+     * Load the profile of a user into the session variables
+     * @param string $login user login
      * @return bool TRUE if user was found into the database, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function load_profile($login) {
+    public function loadProfile($login) {
         $this->db->from('users');
         $this->db->where('login', $login);
         $query = $this->db->get();
@@ -466,9 +454,9 @@ class Users_model extends CI_Model {
             $row = $query->row();
             // Password does match stored password.
             if (((int) $row->role & 1)) {
-                $is_admin = true;
+                $is_admin = TRUE;
             } else {
-                $is_admin = false;
+                $is_admin = FALSE;
             }
 
             /*
@@ -478,21 +466,21 @@ class Users_model extends CI_Model {
               = 00001101 25 Can access to HR functions
              */
             if (((int) $row->role & 25)) {
-                $is_hr = true;
+                $is_hr = TRUE;
             } else {
-                $is_hr = false;
+                $is_hr = FALSE;
             }
             
             //Determine if the connected user is a manager or if he has any delegation
             $isManager = FALSE;
-            if (count($this->get_employees_manager($row->id)) > 0) {
+            if (count($this->getCollaboratorsOfManager($row->id)) > 0) {
                 $isManager = TRUE;
             } else {
                 $this->load->model('delegations_model');
                 if ($this->delegations_model->HasDelegation($row->id)) $isManager = TRUE;
             }
             
-            $newdata = array(
+            $profile = array(
                 'login' => $row->login,
                 'id' => $row->id,
                 'firstname' => $row->firstname,
@@ -503,7 +491,7 @@ class Users_model extends CI_Model {
                 'manager' => $row->manager,
                 'logged_in' => TRUE
             );
-            $this->session->set_userdata($newdata);
+            $this->session->set_userdata($profile);
             return TRUE;
         } else {
             return FALSE;
@@ -512,11 +500,11 @@ class Users_model extends CI_Model {
 
      /**
      * Get the LDAP Authentication path of a user
-     * @param type $login user login
+     * @param string $login user login
      * @return string LDAP Authentication path, empty string otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_basedn($login) {
+    public function getBaseDN($login) {
         $this->db->select('ldap_path');
         $this->db->from('users');
         $this->db->where('login', $login);
@@ -531,44 +519,12 @@ class Users_model extends CI_Model {
     
     /**
      * Get the list of employees or one employee
-     * @param int $id optional id of one user
-     * @return array record of users
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function get_employees($id = 0) {
-        if ($id === 0) {
-            $this->db->select('users.id as id,'
-                        . ' users.firstname as firstname,'
-                        . ' users.lastname as lastname,'
-                        . ' users.email as email,'
-                        . ' contracts.name as contract,'
-                        . ' managers.firstname as manager_firstname,'
-                        . ' managers.lastname as manager_lastname');
-            $this->db->from('users');
-            $this->db->join('contracts', 'contracts.id = users.contract', 'left outer');
-            $this->db->join('users as managers', 'managers.id = users.manager', 'left outer');
-            return $this->db->get()->result_array();
-        } else {
-            $this->db->select('users.id as id,'
-                        . ' users.firstname as firstname,'
-                        . ' users.lastname as lastname,'
-                        . ' users.email as email,'
-                        . ' contracts.name as contract');
-            $this->db->from('users');
-            $this->db->join('contracts', 'contracts.id = users.contract', 'left outer');
-            $this->db->where('users.id = ', $id);
-        return $this->db->get()->row_array();
-        }
-    }
-    
-    /**
-     * Get the list of employees or one employee
      * @param int $id optional id of the entity, all entities if 0
      * @param bool $children true : include sub entities, false otherwise
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function employees_of_entity($id = 0, $children = TRUE) {
+    public function employeesOfEntity($id = 0, $children = TRUE) {
         $this->db->select('users.id as id,'
                 . ' users.firstname as firstname,'
                 . ' users.lastname as lastname,'
@@ -598,19 +554,6 @@ class Users_model extends CI_Model {
 
         return $this->db->get()->result();
     }
-
-    /**
-     * Update a given employee in the database with the contract ID. 
-     * @param int $employee Identifier of employee
-     * @param int $manager Identifier of manager
-     * @return int number of affected rows
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function set_contract($employee, $contract) {
-        $this->db->set('contract', $contract);
-        $this->db->where('id', $employee);
-        return $this->db->update('users');
-    }
     
     /**
      * Update all employees when a contract is deleted
@@ -626,26 +569,13 @@ class Users_model extends CI_Model {
     }
     
     /**
-     * Update a given employee in the database with the manager ID.
-     * @param int $employee Identifier of employee
-     * @param int $manager Identifier of manager
-     * @return int number of affected rows
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function set_manager($employee, $manager) {
-        $this->db->set('manager', $manager);
-        $this->db->where('id', $employee);
-        return $this->db->update('users');
-    }
-    
-    /**
      * Set a user as active (TRUE) or inactive (FALSE)
      * @param int $id User identifier
      * @param bool $active active (TRUE) or inactive (FALSE)
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_active($id, $active) {
+    public function setActive($id, $active) {
         $this->db->set('active', $active);
         $this->db->where('id', $id);
         return $this->db->update('users');

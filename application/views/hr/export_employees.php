@@ -29,7 +29,7 @@ $sheet->setCellValue('F1', lang('hr_export_employees_thead_contract'));
 $sheet->setCellValue('G1', lang('hr_export_employees_thead_manager'));
 $sheet->getStyle('A1:G1')->getFont()->setBold(true);
 $sheet->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-$employees = $this->users_model->employees_of_entity($id, $children);
+$employees = $this->users_model->employeesOfEntity($id, $children);
 
 $line = 2;
 foreach ($employees as $employee) {

@@ -42,7 +42,7 @@ class Entitleddays extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function user($id) {
-        $this->auth->check_is_granted('entitleddays_user');
+        $this->auth->checkIfOperationIsAllowed('entitleddays_user');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['id'] = $id;
@@ -80,7 +80,7 @@ class Entitleddays extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function contract($id) {
-        $this->auth->check_is_granted('entitleddays_contract');
+        $this->auth->checkIfOperationIsAllowed('entitleddays_contract');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['id'] = $id;
@@ -110,7 +110,7 @@ class Entitleddays extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function userdelete($id) {
-        $this->auth->check_is_granted('entitleddays_user_delete');
+        $this->auth->checkIfOperationIsAllowed('entitleddays_user_delete');
         $this->output->set_content_type('text/plain');
         echo $this->entitleddays_model->delete_entitleddays($id);
     }
@@ -122,7 +122,7 @@ class Entitleddays extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function contractdelete($id) {
-        $this->auth->check_is_granted('entitleddays_contract_delete');
+        $this->auth->checkIfOperationIsAllowed('entitleddays_contract_delete');
         $this->output->set_content_type('text/plain');
         echo $this->entitleddays_model->delete_entitleddays($id);
     }
@@ -132,7 +132,7 @@ class Entitleddays extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function ajax_user() {
-        if ($this->auth->is_granted('entitleddays_user') == FALSE) {
+        if ($this->auth->isAllowed('entitleddays_user') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $user_id = $this->input->post('user_id', TRUE);
@@ -156,7 +156,7 @@ class Entitleddays extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function ajax_contract() {
-        if ($this->auth->is_granted('entitleddays_user') == FALSE) {
+        if ($this->auth->isAllowed('entitleddays_user') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $contract_id = $this->input->post('contract_id', TRUE);
@@ -185,7 +185,7 @@ class Entitleddays extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function ajax_update() {
-        if ($this->auth->is_granted('entitleddays_user') == FALSE) {
+        if ($this->auth->isAllowed('entitleddays_user') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $id = $this->input->post('id', TRUE);

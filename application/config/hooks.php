@@ -10,3 +10,16 @@
 |
 */
 
+$hook['pre_controller'] = array(
+    'class' => '',
+    'function' => 'start',
+    'filename' => 'CodeCoverage.php',
+    'filepath' => 'hooks'
+);
+
+$hook['post_system'] = array(
+    'class' => '',
+    'function' => 'stop',
+    'filename' => 'CodeCoverage.php',
+    'filepath' => 'hooks'
+);

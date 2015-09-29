@@ -23,7 +23,7 @@ if (!defined('BASEPATH')) {
  */
 
 //This CI custom library is just a wrapper around PHPExcel library
-require_once APPPATH . "/third_party/PHPExcel.php"; 
+require_once APPPATH . "/third_party/PHPExcel.php";
  
 class Excel extends PHPExcel {
     

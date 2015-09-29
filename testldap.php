@@ -19,7 +19,9 @@
  */
 
 define('BASEPATH', '.'); //Make this script works with nginx
-define('LDAP_OPT_DIAGNOSTIC_MESSAGE', 0x0032);
+if (!defined('LDAP_OPT_DIAGNOSTIC_MESSAGE')) {
+    define('LDAP_OPT_DIAGNOSTIC_MESSAGE', 0x0032);
+}
 //Configuration values are taken from application/config/config.php
 //This script may take some time especially if the LDAP is unreachable
 //-----------------------------------------------------------------

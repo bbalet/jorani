@@ -50,7 +50,7 @@ class Pages extends CI_Controller {
         }
         $view = 'pages/' . $this->language_code .'/' . $page . '.php';
         $pathCI = APPPATH . 'views/';
-        $pathLocal = dirname(BASEPATH) .'/local/';
+        $pathLocal = FCPATH .'local/';
         //Check if we have a user-defined view
         if (file_exists($pathLocal . $view)) {
             $this->load->ext_view($pathLocal, $view, $data);

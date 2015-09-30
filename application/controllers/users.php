@@ -143,7 +143,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('lastname', lang('users_edit_field_lastname'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('login', lang('users_edit_field_login'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('email', lang('users_edit_field_email'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('role', lang('users_edit_field_role'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('role[]', lang('users_edit_field_role'), 'required');
         $this->form_validation->set_rules('manager', lang('users_edit_field_manager'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('contract', lang('users_edit_field_contract'), 'xss_clean|strip_tags');
         $this->form_validation->set_rules('entity', lang('users_edit_field_entity'), 'xss_clean|strip_tags');
@@ -298,7 +298,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('login', lang('users_create_field_login'), 'required|callback_checkLogin|xss_clean|strip_tags');
         $this->form_validation->set_rules('email', lang('users_create_field_email'), 'required|xss_clean|strip_tags');
         if (!$this->config->item('ldap_enabled')) $this->form_validation->set_rules('CipheredValue', lang('users_create_field_password'), 'required');
-        $this->form_validation->set_rules('role[]', lang('users_create_field_role'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('role[]', lang('users_create_field_role'), 'required');
         $this->form_validation->set_rules('manager', lang('users_create_field_manager'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('contract', lang('users_create_field_contract'), 'xss_clean|strip_tags');
         $this->form_validation->set_rules('position', lang('users_create_field_position'), 'xss_clean|strip_tags');

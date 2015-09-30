@@ -53,7 +53,7 @@ $description = 'Credit line added by robot - ' . date("D M d, Y G:i");
 //CURRENT_PERIOD        The entitlement can be taken only during the current yearly period (recommended)
 //'FROM_MONTH              The entitlement can be taken from the current month to the end of yearly period
 //CURRENT_MONTH        The entitlement can be taken only during the current month
-//CURRENT_YEAR           The entitlement can be taken only during the current month
+//CURRENT_YEAR           The entitlement can be taken only during the current year
 $period = JoraniAPI::CURRENT_PERIOD;
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -69,8 +69,12 @@ foreach ($employee_ids as $employee_id){
     $contract = $api->getContracts($employee->contract);
     $startdate = $api->getStartDate($contract, $period);
     $enddate = $api->getEndDate($contract, $period);
-    $api->addEntitledDaysEmployee($employee_id, $startdate, $enddate, $days, $type, $description);
-    echo 'Added ' . $days . ' day(s) to employee #' . $employee_id . PHP_EOL;
+    if ($employee->active == 1) {
+        $api->addEntitledDaysEmployee($employee->id, $startdate, $enddate, $days, $type, $description);
+        echo 'Added ' . $days . ' day(s) to employee #' . $employee->id . PHP_EOL;
+    } else {
+        echo 'No credit to inactiveemployee #' . $employee->id . PHP_EOL;
+    }
 }
 
 //Get the list of contract ids and add the entitled days
@@ -91,7 +95,11 @@ foreach ($entity_ids as $entity_id){
         $contract = $api->getContracts($employee->contract);
         $startdate = $api->getStartDate($contract, $period);
         $enddate = $api->getEndDate($contract, $period);
-        $api->addEntitledDaysEmployee($employee->id, $startdate, $enddate, $days, $type, $description);
-        echo 'Added ' . $days . ' day(s) to employee #' . $employee->id . PHP_EOL;
+        if ($employee->active == 1) {
+            $api->addEntitledDaysEmployee($employee->id, $startdate, $enddate, $days, $type, $description);
+            echo 'Added ' . $days . ' day(s) to employee #' . $employee->id . PHP_EOL;
+        } else {
+            echo 'No credit to inactiveemployee #' . $employee->id . PHP_EOL;
+        }
     }
 }

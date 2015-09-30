@@ -27,10 +27,10 @@ class JoraniAPI {
     private $base_url = 'http://localhost/jorani/';
     private $token = NULL;
     
-    const CURRENT_PERIOD = 1;          //The entitlement can be taken only during the current yearly period (recommended)
+    const CURRENT_PERIOD = 1;          //The entitlement can be taken only during the current yearly period
     const FROM_MONTH = 2;                //The entitlement can be taken from the current month to the end of yearly period
     const CURRENT_MONTH = 3;         //The entitlement can be taken only during the current month
-    const CURRENT_YEAR = 4;              //The entitlement can be taken only during the current month
+    const CURRENT_YEAR = 4;              //The entitlement can be taken only during the current year
     
     /**
      * Constructor of JoraniAPI. Set a base URL and get an OAtuh2 token
@@ -100,7 +100,7 @@ class JoraniAPI {
      * @return array list of entitled days
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function getEntitledDaysEmployeeList($employee) {
+    public function getEntitledDaysListForEmployee($employee) {
         $url = $this->base_url . 'api/entitleddaysemployee/' . $employee;
         $data = array('access_token' => $this->token);
         $options = array(
@@ -233,7 +233,7 @@ class JoraniAPI {
      * Compute a start date of entitlment, by using the contract of the employee and predefined constants
      * @param object $contract Contract
      * @param int $period Entitlment period
-     * @return string start date of entitlment (with MySQL format YYYY-MM-DD)
+     * @return string start date of entitlment (in MySQL format YYYY-MM-DD)
      */
     public function getStartDate($contract, $period = self::CURRENT_PERIOD) {
         switch ($period) {
@@ -254,7 +254,7 @@ class JoraniAPI {
      * Compute an end date of entitlment, by using the contract of the employee and predefined constants
      * @param object $contract Contract
      * @param int $period Entitlment period
-     * @return string end date of entitlment (with MySQL format YYYY-MM-DD)
+     * @return string end date of entitlment (in MySQL format YYYY-MM-DD)
      */
     public function getEndDate($contract, $period = self::CURRENT_PERIOD) {
         switch ($period) {
@@ -269,5 +269,30 @@ class JoraniAPI {
                $enddate = date('Y') . '-12-31';
        }
        return $enddate;
+    }
+    
+    /**
+     * Check if an employee has an entitlment in a given period
+     * @param int $employee Identifier of the employee
+     * @param int $type Identifier of the leave type
+     * @param string $startdate start date of entitlment (in MySQL format YYYY-MM-DD)
+     * @param string $enddate end date of entitlment (in MySQL format YYYY-MM-DD)
+     * @return boolean an entitlment has been credited between $startdate and $enddate
+     */
+    function hasEntitlementInPeriod($employee, $type, $startdate, $enddate) {
+        $startdate = DateTime::createFromFormat('Y-m-d', $startdate);
+        $enddate = DateTime::createFromFormat('Y-m-d', $enddate);
+        $entitled_days = $this->getEntitledDaysListForEmployee($employee);
+        foreach ($entitled_days as $credit){
+            if ($credit->type == $type) {
+                $creditStartdate = DateTime::createFromFormat('Y-m-d', $credit->startdate );
+                $creditEnddate = DateTime::createFromFormat('Y-m-d', $credit->enddate);
+                if (($creditStartdate >= $startdate) && ($creditEnddate <= $enddate))
+                {
+                    return TRUE;
+                }
+            }
+        }
+        return FALSE;
     }
 }

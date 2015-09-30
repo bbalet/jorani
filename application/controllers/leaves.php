@@ -442,7 +442,7 @@ class Leaves extends CI_Controller {
     public function department() {
         header("Content-Type: application/json");
         $this->load->model('organization_model');
-        $department = $this->organization_model->get_department($this->user_id);
+        $department = $this->organization_model->getDepartment($this->user_id);
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
         echo $this->leaves_model->department($department[0]['id'], $start, $end);

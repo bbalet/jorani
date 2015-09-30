@@ -27,6 +27,11 @@ class JoraniAPI {
     private $base_url = 'http://localhost/jorani/';
     private $token = NULL;
     
+    const CURRENT_PERIOD = 1;          //The entitlement can be taken only during the current yearly period (recommended)
+    const FROM_MONTH = 2;                //The entitlement can be taken from the current month to the end of yearly period
+    const CURRENT_MONTH = 3;         //The entitlement can be taken only during the current month
+    const CURRENT_YEAR = 4;              //The entitlement can be taken only during the current month
+    
     /**
      * Constructor of JoraniAPI. Set a base URL and get an OAtuh2 token
      * @param string $url base URL of the REST API
@@ -64,12 +69,17 @@ class JoraniAPI {
     }
     
     /**
-     * Get the list of employess
+     * Get a list of employees or an employee
+     * @param int $employee Identifier of the employee or NULL to get the list of all employees
      * @return array list of employees
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function getEmployeesList() {
-        $url = $this->base_url . 'api/users';
+    public function getEmployees($employee = NULL) {
+        if (is_null($employee)) {
+            $url = $this->base_url . 'api/users';
+        } else {
+            $url = $this->base_url . 'api/users/' . $employee;
+        }
         $data = array('access_token' => $this->token);
         $options = array(
             'http' => array(
@@ -137,5 +147,127 @@ class JoraniAPI {
         //Get the result (of the SQL execution) => it should be the last inserted ID
         $result_int = json_decode($result);
         return $result_int;
+    }
+    
+    /**
+     * Add entitled days to a contract
+     * @param int $contract Identifier of the contract into the database
+     * @param string $startdate String formatted start date
+     * @param string $enddate String formatted end date
+     * @param int $days Number of days to be credited
+     * @param int $type Leave type
+     * @param string $description Description of the record (eg 'inserted by Robot')
+     * @return int Id of the inserted record
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function addEntitledDaysContract($contract, $startdate, $enddate, $days, $type, $description) {
+        $url = $this->base_url . 'api/addentitleddayscontract/' . $contract;
+        $data = array('access_token' => $this->token,
+            'startdate' => $startdate,
+            'enddate' => $enddate,
+            'days' => $days,
+            'type' => $type,
+            'description' => $description,);
+        $options = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query($data),
+            ),
+        );
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        //Get the result (of the SQL execution) => it should be the last inserted ID
+        $result_int = json_decode($result);
+        return $result_int;
+    }
+
+    /**
+     * Get the list of all contracts or a given contract by its ID
+     * @param int $contract Identifier of the contract or NULL to get the list of all contracts
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function getContracts($contract = NULL) {
+        if (is_null($contract)) {
+            $url = $this->base_url . 'api/contracts';
+        } else {
+            $url = $this->base_url . 'api/contracts/' . $contract;
+        }
+        $data = array('access_token' => $this->token);
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data),
+            ),
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        $result_array = json_decode($result);
+        return $result_array;
+    }
+    
+    /**
+     * Get the list of employees attached to a given entity
+     * @param int $entity Identifier of the entity
+     * @param bool $children If TRUE, we include sub-entities, FALSE otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function getListOfEmployeesInEntity($entity, $children = TRUE) {
+        $url = $this->base_url . 'api/getListOfEmployeesInEntity/' . $entity . '/' . (($children === TRUE)?'true':'false');
+        $data = array('access_token' => $this->token);
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data),
+            ),
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        $result_array = json_decode($result);
+        return $result_array;
+    }
+    
+    /**
+     * Compute a start date of entitlment, by using the contract of the employee and predefined constants
+     * @param object $contract Contract
+     * @param int $period Entitlment period
+     * @return string start date of entitlment (with MySQL format YYYY-MM-DD)
+     */
+    public function getStartDate($contract, $period = self::CURRENT_PERIOD) {
+        switch ($period) {
+           case self::CURRENT_PERIOD:
+               $startdate = date('Y') . '-' . str_replace ('/', '-', $contract->startentdate);
+               break;
+           case self::FROM_MONTH:
+           case self::CURRENT_MONTH:
+               $startdate = date('Y-m-01');
+               break;
+           default://CURRENT_YEAR
+               $startdate = date('Y') . '-01-01';
+       }
+       return $startdate;
+    }
+
+    /**
+     * Compute an end date of entitlment, by using the contract of the employee and predefined constants
+     * @param object $contract Contract
+     * @param int $period Entitlment period
+     * @return string end date of entitlment (with MySQL format YYYY-MM-DD)
+     */
+    public function getEndDate($contract, $period = self::CURRENT_PERIOD) {
+        switch ($period) {
+           case self::CURRENT_PERIOD:
+           case self::FROM_MONTH:
+               $enddate = date('Y') . '-' . str_replace ('/', '-', $contract->endentdate);
+               break;
+           case self::CURRENT_MONTH:
+               $enddate = date('Y-m-t');
+               break;
+           default://CURRENT_YEAR
+               $enddate = date('Y') . '-12-31';
+       }
+       return $enddate;
     }
 }

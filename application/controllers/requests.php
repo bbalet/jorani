@@ -341,7 +341,7 @@ class Requests extends CI_Controller {
         $this->load->model('organization_model');
         $leave = $this->leaves_model->getLeaves($id);
         $employee = $this->users_model->getUsers($leave['employee']);
-        $supervisor = $this->organization_model->get_supervisor($employee['organization']);
+        $supervisor = $this->organization_model->getSupervisor($employee['organization']);
 
         //Send an e-mail to the employee
         $this->load->library('email');

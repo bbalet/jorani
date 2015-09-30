@@ -509,7 +509,7 @@ class Users_model extends CI_Model {
 
         if ($children == TRUE) {
             $this->load->model('organization_model');
-            $list = $this->organization_model->get_all_children($id);
+            $list = $this->organization_model->getAllChildren($id);
             $ids = array();
             if (count($list) > 0) {
                 if ($list[0]['id'] != '') {

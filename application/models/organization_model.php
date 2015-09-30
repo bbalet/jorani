@@ -33,7 +33,7 @@ class Organization_model extends CI_Model {
      * @return array department details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_department($user_id) {
+    public function getDepartment($user_id) {
         $this->db->select('organization.id as id, organization.name as name');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
@@ -65,7 +65,7 @@ class Organization_model extends CI_Model {
      * @return array all entities of the organization sorted out by id and name
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_all_entities() {
+    public function getAllEntities() {
         $this->db->from('organization');
         $this->db->order_by("parent_id", "desc"); 
         $this->db->order_by("name", "asc");
@@ -78,7 +78,7 @@ class Organization_model extends CI_Model {
      * @return array list of entity identifiers
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_all_children($id) {
+    public function getAllChildren($id) {
         $query = 'SELECT GetFamilyTree(id) as id' .
                     ' FROM organization' .
                     ' WHERE id =' . $id;
@@ -109,7 +109,7 @@ class Organization_model extends CI_Model {
      * @return type result of the query
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function add_employee($id, $entity) {
+    public function attachEmployee($id, $entity) {
         $data = array(
             'organization' => $entity
         );
@@ -124,7 +124,7 @@ class Organization_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function delete($entity) {
-        $list = $this->get_all_children($entity);
+        $list = $this->getAllChildren($entity);
         //Detach all employees
         $data = array(
             'organization' => NULL
@@ -148,7 +148,7 @@ class Organization_model extends CI_Model {
      * @return type result of the query
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete_employee($id) {
+    public function detachEmployee($id) {
         $data = array(
             'organization' => NULL
         );
@@ -236,7 +236,7 @@ class Organization_model extends CI_Model {
         $this->db->join('contracts', 'contracts.id  = users.contract', 'left');
         if ($children === TRUE) {
             $this->load->model('organization_model');
-            $list = $this->organization_model->get_all_children($id);
+            $list = $this->organization_model->getAllChildren($id);
             $ids = array();
             if (count($list) > 0) {
                 if ($list[0]['id'] != '') {
@@ -263,7 +263,7 @@ class Organization_model extends CI_Model {
      * @return int result of the query
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function set_supervisor($id, $entity) {
+    public function setSupervisor($id, $entity) {
         $data = array(
             'supervisor' => $id
         );
@@ -277,7 +277,7 @@ class Organization_model extends CI_Model {
      * @return object identifier of supervisor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function get_supervisor($entity) {
+    public function getSupervisor($entity) {
         $this->db->select('users.id, CONCAT(users.firstname, \' \', users.lastname) as username, email', FALSE);
         $this->db->from('organization');
         $this->db->join('users', 'users.id = organization.supervisor');

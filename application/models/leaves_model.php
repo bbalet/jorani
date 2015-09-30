@@ -603,7 +603,7 @@ class Leaves_model extends CI_Model {
                                     ' OR (leaves.startdate >= DATE(' . $this->db->escape($start) . ') AND leaves.enddate <= DATE(' . $this->db->escape($end) . ')) )');
         if ($children === TRUE) {
             $this->load->model('organization_model');
-            $list = $this->organization_model->get_all_children($entity_id);
+            $list = $this->organization_model->getAllChildren($entity_id);
             $ids = array();
             if ($list[0]['id'] != '') {
                 $ids = explode(",", $list[0]['id']);
@@ -669,7 +669,7 @@ class Leaves_model extends CI_Model {
         $this->db->join('types', 'leaves.type = types.id');
         if ($children === TRUE) {
             $this->load->model('organization_model');
-            $list = $this->organization_model->get_all_children($entity_id);
+            $list = $this->organization_model->getAllChildren($entity_id);
             $ids = array();
             if (count($list) > 0) {
                 $ids = explode(",", $list[0]['id']);

@@ -191,7 +191,7 @@ class Organization extends CI_Controller {
             $id = $this->input->get('user', TRUE);
             $entity = $this->input->get('entity', TRUE);
             $this->load->model('organization_model');
-            echo json_encode($this->organization_model->add_employee($id, $entity));
+            echo json_encode($this->organization_model->attachEmployee($id, $entity));
         }
     }   
     
@@ -208,7 +208,7 @@ class Organization extends CI_Controller {
         } else {
             $id = $this->input->get('user', TRUE);
             $this->load->model('organization_model');
-            echo json_encode($this->organization_model->delete_employee($id));
+            echo json_encode($this->organization_model->detachEmployee($id));
         }
     } 
     
@@ -248,7 +248,7 @@ class Organization extends CI_Controller {
             unset($id);
         }
         $this->load->model('organization_model');
-        $entities = $this->organization_model->get_all_entities();
+        $entities = $this->organization_model->getAllEntities();
         $msg = '[';
         foreach ($entities->result() as $entity) {
             $msg .= '{"id":"' . $entity->id . '",';
@@ -276,7 +276,7 @@ class Organization extends CI_Controller {
         $entity = $this->input->get('entity', TRUE);
         if (isset($entity)) {
             $this->load->model('organization_model');
-            echo json_encode($this->organization_model->get_supervisor($entity));
+            echo json_encode($this->organization_model->getSupervisor($entity));
         } else {
             $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
         }
@@ -300,7 +300,7 @@ class Organization extends CI_Controller {
             }
             $entity = $this->input->get('entity', TRUE);
             $this->load->model('organization_model');
-            echo json_encode($this->organization_model->set_supervisor($id, $entity));
+            echo json_encode($this->organization_model->setSupervisor($id, $entity));
         }
     }
 }

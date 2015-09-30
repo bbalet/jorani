@@ -228,7 +228,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('organization_model');
-            $result = $this->organization_model->get_department($id);
+            $result = $this->organization_model->getDepartment($id);
             if (empty($result)) {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             } else {
@@ -238,7 +238,7 @@ class Api extends CI_Controller {
     }
 
     /**
-     * Get the list of users or a specific user
+     * Get the list of users or a specific user. The password field is removed from the result set
      * @param int $id Unique identifier of a user
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -248,12 +248,16 @@ class Api extends CI_Controller {
         } else {
             $this->load->model('users_model');
             $result = $this->users_model->getUsers($id);
-            foreach($result as $k1=>$q) {
-              foreach($q as $k2=>$r) {
-                if($k2 == 'password') {
-                  unset($result[$k1][$k2]);
+            if ($id === 0) {
+                foreach($result as $k1=>$q) {
+                  foreach($q as $k2=>$r) {
+                    if($k2 == 'password') {
+                      unset($result[$k1][$k2]);
+                    }
+                  }
                 }
-              }
+            } else {
+                unset($result['password']);
             }
             echo json_encode($result);
         }
@@ -288,8 +292,6 @@ class Api extends CI_Controller {
             echo json_encode($result);
         }
     }
-    
-    //From this line on, we are in API v2
     
     /**
      * Get the monthly presence stats for a given employee
@@ -516,10 +518,27 @@ class Api extends CI_Controller {
                 log_message('error', 'Mandatory fields are missing.');
             } else {
                     $result = $this->leaves_model->createLeaveByApi($startdate, $enddate, $status, $employee, $cause,
-                                                                                                $startdatetype, $enddatetype, $duration, $type);
+                                             $startdatetype, $enddatetype, $duration, $type);
                     echo json_encode($result);
             }
         }
     }
+    
+    /**
+     * Get the list of employees attached to an entity
+     * @param int $id Identifier of the entity
+     * @param bool $children If TRUE, we include sub-entities, FALSE otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function getListOfEmployeesInEntity($id, $children) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('organization_model');
+            $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
+            $result = $this->organization_model->allEmployees($id, $children);
+            echo json_encode($result);
+        }
+    }    
 
 }

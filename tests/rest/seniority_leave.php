@@ -33,7 +33,7 @@ $enddate = date('Y') . '-12-31';
 $api = new JoraniAPI('http://localhost/jorani/', 'testclient', 'testpass');
 
 //Get the list of employees
-$employees = $api->getEmployeesList();
+$employees = $api->getEmployees();
 //echo "Employees  = " . var_dump($employees) . PHP_EOL;
 
 //Iterate on the employees list (datehired > $condition)

@@ -233,6 +233,8 @@ $route['api/updateuser/(:num)'] = 'api/updateuser/$1';
 $route['api/createuser/(:any)'] = 'api/createuser/$1';
 $route['api/createuser'] = 'api/createuser';
 $route['api/createleave'] = 'api/createleave';
+//v0.4.3
+$route['api/getListOfEmployeesInEntity/(:num)/(:any)'] = 'api/getListOfEmployeesInEntity/$1/$2';
 
 //ICS Feeds
 $route['ics/individual/(:num)'] = 'ics/individual/$1';

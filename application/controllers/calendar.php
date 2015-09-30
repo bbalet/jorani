@@ -155,7 +155,7 @@ class Calendar extends CI_Controller {
         $data['title'] = lang('calendar_department_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_department');
         $this->load->model('organization_model');
-        $department = $this->organization_model->get_department($this->user_id);
+        $department = $this->organization_model->getDepartment($this->user_id);
         if (empty($department)) {
             $this->session->set_flashdata('msg', lang('calendar_department_msg_error'));
             redirect('leaves');

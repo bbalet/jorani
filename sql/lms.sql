@@ -15,7 +15,7 @@
 -- 
 --  You should have received a copy of the GNU General Public License
 --  along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
---
+-- @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";

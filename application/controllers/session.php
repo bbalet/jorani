@@ -151,7 +151,11 @@ class Session extends CI_Controller {
                     if (strpos($this->session->userdata('last_page'), 'index.php', strlen($this->session->userdata('last_page')) - strlen('index.php'))) {
                         $this->session->set_userdata('last_page', base_url() . 'home');
                     }
-                    redirect($this->session->userdata('last_page'));
+                    if ($this->session->userdata('last_page_params') == '') {
+                        redirect($this->session->userdata('last_page'));
+                    } else {
+                        redirect($this->session->userdata('last_page') . '?' . $this->session->userdata('last_page_params'));
+                    }
                 } else {
                     redirect(base_url() . 'home');
                 }

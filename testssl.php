@@ -126,7 +126,7 @@ extract($rsa->createKey(KEY_SIZE));
             <h2 id="pair">Private and public key pair</h2>
             
             <p>This section will help you to create <code>assets/keys/private.pem</code> and <code>assets/keys/public.pem</code> files.
-             Beware that is a pair of keys that must be set together (i.e. you must update the both files at the same time with the corresponding content).</p>
+             Beware that it is a pair of keys that must be set together (i.e. you must update the both files at the same time with the corresponding content).</p>
             
             <h3>Private Key</h3>
             

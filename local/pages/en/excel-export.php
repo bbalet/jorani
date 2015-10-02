@@ -7,6 +7,7 @@ $title = 'Types';
 $chartTitle = 'Distribution of leave types';
 $label = 'Leave type';
 $value = 'Number of days';
+$requests = 'Requests';
 
 $ci = get_instance();
 $ci->load->library('excel');
@@ -14,11 +15,12 @@ $sheet = $ci->excel->setActiveSheetIndex(0);
 $sheet->setTitle($title);
 $sheet->setCellValue('A1', $label);
 $sheet->setCellValue('B1', $value);
-$sheet->getStyle('A1:B1')->getFont()->setBold(true);
-$sheet->getStyle('A1:B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+$sheet->setCellValue('C1', $requests);
+$sheet->getStyle('A1:C1')->getFont()->setBold(true);
+$sheet->getStyle('A1:C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
 $ci->load->model('organization_model');
-$entity = ($this->input->get('txtEntityID', TRUE) !== FALSE)? $this->input->get('txtEntityID', TRUE) : 0;
+$entity = ($this->input->get('txtEntityID', TRUE) != FALSE)? $this->input->get('txtEntityID', TRUE) : 0;
 $include_children = TRUE;
 $include_children = filter_var($this->input->get('chkIncludeChildren'), FILTER_VALIDATE_BOOLEAN);
 $users = $ci->organization_model->allEmployees($entity, $include_children);
@@ -27,7 +29,7 @@ foreach ($users as $user) {
     array_push($ids, (int) $user->id);
 }
 
-$this->db->select('count(*) as number', FALSE);
+$this->db->select('count(*) as number, sum(duration) as duration', FALSE);
 $this->db->select('types.name as type_name');
 $this->db->from('leaves');
 $this->db->join('types', 'leaves.type = types.id');
@@ -45,11 +47,12 @@ $rows = $this->db->get()->result_array();
 $line = 2;
 foreach ($rows as $row) {
     $sheet->setCellValue('A' . $line, $row['type_name']);
-    $sheet->setCellValue('B' . $line, $row['number']);
+    $sheet->setCellValue('B' . $line, $row['duration']);
+    $sheet->setCellValue('C' . $line, $row['number']);
     $line++;
 }
 //Autofit
-foreach(range('A', 'B') as $colD) {
+foreach(range('A', 'C') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 

@@ -7,9 +7,9 @@
 <p>Exemple de rapport montrant la répartition des congés pris (regroupés par type).</p>
 
 <div class="row-fluid">
-    <div class="span6">
+    <div class="span4">
         <form action="<?php echo base_url();?>custom-report" method="GET">
-                <label for="cboYear">Year
+                <label for="cboYear">Année
                 <select name="cboYear">
                     <?php
                     $entity_name = $this->input->get('txtEntity', TRUE);
@@ -35,10 +35,11 @@
                 <input type="hidden" id="txtEntityID" name="txtEntityID" />
                 <label for="chkIncludeChildren">
                 <input type="checkbox" id="chkIncludeChildren" name="chkIncludeChildren" checked />&nbsp;Inclure les sous entitées</label><br />
-            <input type="submit" class="btn btn-primary" />
+                <button type="submit" id="cmdSubmit" class="btn btn-primary">Exécuter</button>
+                <a href="#" id="tipReload" data-toggle="tooltip" title="Don't forget to reload the report" data-placement="bottom" data-container="#cmdSubmit"></a>
         </form>
     </div>
-    <div class="span6">	
+    <div class="span8">	
         <div id="chart"></div>
     </div>
 </div>
@@ -67,9 +68,19 @@ function select_entity() {
     $('#txtEntity').val(entityName);
     $('#txtEntityID').val(entity);
     $("#frmSelectEntity").modal('hide');
+    suggest_reload();
+}
+
+function suggest_reload() {
+    $('#tipReload').tooltip('show');
+    setTimeout(function() {$('#tipReload').tooltip('hide')}, 1000);
 }
     
 $(document).ready(function() {
+    
+    $('#chkIncludeChildren').change(function() {
+        suggest_reload();
+    });
     
     $("#frmSelectEntity").alert();
     
@@ -95,9 +106,12 @@ if ($include_children) {
 } else {
     echo '$(\'#chkIncludeChildren\').prop(\'checked\', false);';
 }
-$entity = ($this->input->get('txtEntityID', TRUE) !== FALSE)? $this->input->get('txtEntityID', TRUE) : 0;
-if ($this->input->get('txtEntity', TRUE) !== FALSE) {
+$entity = ($this->input->get('txtEntityID', TRUE) != FALSE)? $this->input->get('txtEntityID', TRUE) : 0;
+if ($this->input->get('txtEntity', TRUE) != FALSE) {
     echo '$(\'#txtEntity\').val(\'' . $this->input->get('txtEntity', TRUE) .'\');';
+} else {
+    $entityName = $ci->organization_model->getName(0);
+    echo '$(\'#txtEntity\').val(\'' . $entityName .'\');';
 }
 
 $users = $ci->organization_model->allEmployees($entity, $include_children);
@@ -117,7 +131,7 @@ var color = d3.scale.category20c();
 var data = [
 <?php
 //$this is the instance of the current controller, so you can use it for direct access to the database?
-$this->db->select('count(*) as number', FALSE);
+$this->db->select('count(*) as number, sum(duration) as duration', FALSE);
 $this->db->select('types.name as type_name');
 $this->db->from('leaves');
 $this->db->join('types', 'leaves.type = types.id');
@@ -134,8 +148,8 @@ $rows = $this->db->get()->result_array();
 
 $total = 0;
 foreach ($rows as $row) {
-    $total += (float) $row['number'];
-    echo '{"label":"' . $row['type_name'] . '", "value":' . $row['number'] . '},';
+    $total += (float) $row['duration'];
+    echo '{"label":"' . $row['type_name'] . '", "value":' . $row['duration'] . '},';
 }
 ?>
 ];
@@ -166,21 +180,22 @@ arcs.append("svg:text").attr("transform", function(d){
 </script>
 
 <div class="row-fluid">
-    <div class="span6">&nbsp;</div>
-    <div class="span6">
+    <div class="span4">&nbsp;</div>
+    <div class="span8">
             <table class="table table-bordered table-hover table-condensed">
                 <thead>
                     <tr>
                       <th>Type de congé</th>
                       <th>Nombre de jours</th>
                       <th>Pourcentage</th>
+                      <th>Demandes</th>
                     </tr>
                   </thead>
                   <tbody>
 <?php foreach ($rows as $row) {
-    echo '<tr><td>' . $row['type_name'] . '</td><td>' . $row['number'] . '</td><td>' . sprintf("%.2f%%", (((float) $row['number'])  / $total) * 100) . '</td></tr>';
+    echo '<tr><td>' . $row['type_name'] . '</td><td>' . $row['duration'] . '</td><td>' . sprintf("%.2f%%", (((float) $row['duration'])  / $total) * 100) . '</td><td>' . $row['number'] . '</td></tr>';
 }
-   echo '<tr><td><b>TOTAL</b></td><td colspan="2"><b>' . $total . '</b></td></tr>';
+   echo '<tr><td><b>TOTAL</b></td><td colspan="3"><b>' . $total . '&nbsp;jours</b></td></tr>';
 ?>
                   </tbody>
             </table>

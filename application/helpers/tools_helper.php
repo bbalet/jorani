@@ -32,6 +32,7 @@ function setUserContext(CI_Controller $controller)
                 $controller->output->set_status_header('401');
             } else {
                 $controller->session->set_userdata('last_page', current_url());
+                $controller->session->set_userdata('last_page_params', $_SERVER['QUERY_STRING']);
                 redirect('session/login');
             }
         }

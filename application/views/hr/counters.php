@@ -54,9 +54,12 @@
 
 <div class="row-fluid">
     <div class="span12">
+        <?php if ($source == 'employees') {?>
         <h3><a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contract_id; ?>"><?php echo lang('entitleddays_counters_title_contract');?><?php echo $contract_id; ?></a>&nbsp;<span class="muted"> (<?php echo $contract_name; ?>)</span></h3>
+        <?php } else { ?>
+        <h3><?php echo lang('entitleddays_counters_title_contract') . ' ' . $contract_id; ?>&nbsp;<span class="muted"> (<?php echo $contract_name; ?>)</span></h3>
+        <?php } ?>
         <p><?php echo lang('entitleddays_counters_description_contract');?><?php echo $contract_start; ?> - <?php echo $contract_end; ?></p>
-
         <table id="entitleddayscontract">
         <thead>
             <tr>
@@ -86,7 +89,11 @@
 
 <div class="row-fluid">
     <div class="span12">
+        <?php if ($source == 'employees') {?>
         <h3><a href="<?php echo base_url();?>entitleddays/user/<?php echo $employee_id; ?>"><?php echo lang('entitleddays_counters_title_employee');?></a></h3>
+        <?php } else { ?>
+        <h3><?php echo lang('entitleddays_counters_title_employee');?></h3>
+        <?php } ?>
         <table id="entitleddaysemployee">
         <thead>
             <tr>
@@ -120,7 +127,11 @@
 
 <div class="row-fluid">
     <div class="span3">
+      <?php if ($source == 'employees') {?>
       <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_summary_button_list');?></a>
+      <?php } else { ?>
+      <a href="<?php echo base_url();?>requests/collaborators" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_summary_button_list');?></a>
+      <?php } ?>
     </div>
     <div class="span9">&nbsp;</div>
 </div>
@@ -152,7 +163,7 @@ if ($language_code != 'en') { ?>
         $('#refdate').datepicker({
             onSelect: function(dateText, inst) {
                     tmpUnix = moment($("#refdate").datepicker("getDate")).unix();
-                    url = "<?php echo base_url();?>hr/counters/<?php echo $employee_id; ?>/" + tmpUnix;
+                    url = "<?php echo base_url();?>hr/counters/<?php echo $source; ?>/<?php echo $employee_id; ?>/" + tmpUnix;
                     window.location = url;
             }
         });

@@ -9,11 +9,11 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Possibility to overwrite any page. Custom reports called from local, etc.
 - [X] PHP and JS triggers for leave/extra creation and modification. Called from local.
 - [X] Migrate the Excel exports from controllers to views (where they belong in MVC model).
+- [X] Merge HR/Counters with Validation/counters, this will reduce the basecode.
 - [ ] Try to optimize the calls to users_model->get_label (if employee already loaded, concat first and lastname).
 - [ ] Optimize overtime/leave request edit view the same as we did for view (for self view, no need to display name).
 - [X] Custom reports for current lang (loaded from local/reports).
 - [ ] Get rid of $_GET['source'] for redirection. Not a risk for XSS attack but not clean (see 'hr/presence/([^/]+)/(:num)')....
-- [ ] Merge HR/Counters with Validation/counters, this will reduce the basecode.
 - [ ] Improve code quality, adopt PSR1 for function names, especially in all models.
 - [ ] Duplicate code for tabular/hr presence and Excel for linear calendar. Can we do something?
 - [ ] Duplicate code for e-mail preparation (maybe grasp the opportunity to experiment with delete notification).

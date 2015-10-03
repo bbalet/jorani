@@ -274,13 +274,15 @@
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
-<?php if ($source == 'employees') {?>
 <div class="row-fluid">
     <div class="span12">
+      <?php if ($source == 'employees') {?>
       <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_presence_button_list');?></a>
+      <?php } else { ?>
+      <a href="<?php echo base_url();?>requests/collaborators" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_presence_button_list');?></a>
+      <?php } ?>
     </div>
 </div>
-<?php } ?>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 

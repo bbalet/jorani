@@ -18,7 +18,7 @@
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
-require_once APPPATH . "/third_party/phpcov/vendor/autoload.php";
+require_once APPPATH . "third_party/phpcov/vendor/autoload.php";
 global $coverage;
 $filter = new PHP_CodeCoverage_Filter();
 $filter->addDirectoryToBlacklist(SYSDIR);

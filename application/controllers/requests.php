@@ -269,65 +269,7 @@ class Requests extends CI_Controller {
             }
         }
     }
-
-    /**
-     * Display the details of leaves taken/entitled for a given employee
-     * This page can be displayed only if the connected user is the manager of the employee
-     * @param string $refTmp Timestamp (reference date)
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function counters($id, $refTmp = NULL) {
-        $data = getUserContext($this);
-        $this->lang->load('datatable', $this->language);
-        $this->lang->load('entitleddays', $this->language);
-        $this->lang->load('hr', $this->language);
-        $this->load->model('users_model');
-        $employee = $this->users_model->getUsers($id);
-        if (($this->user_id != $employee['manager']) && ($this->is_hr === FALSE)) {
-            log_message('error', 'User #' . $this->user_id . ' illegally tried to access to leave counter of employee #' . $id);
-            $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_forbidden'));
-            redirect('requests/collaborators');
-        } else {
-            $refDate = date("Y-m-d");
-            if ($refTmp != NULL) {
-                $refDate = date("Y-m-d", $refTmp);
-                $data['isDefault'] = 0;
-            } else {
-                $data['isDefault'] = 1;
-            }
-
-            $data['refDate'] = $refDate;
-            $data['summary'] = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $refDate);
-            
-            if (!is_null($data['summary'])) {
-                $this->load->model('entitleddays_model');
-                $this->load->model('types_model');
-                $data['types'] = $this->types_model->getTypes();
-                $this->load->model('users_model');
-                $data['employee_name'] = $this->users_model->getName($id);
-                $user = $this->users_model->getUsers($id);
-                $this->load->model('contracts_model');
-                $contract = $this->contracts_model->getContracts($user['contract']);
-                $data['contract_name'] = $contract['name'];
-                $data['contract_start'] = $contract['startentdate'];
-                $data['contract_end'] = $contract['endentdate'];
-                $data['employee_id'] = $id;
-                $data['contract_id'] = $user['contract'];
-                $data['entitleddayscontract'] = $this->entitleddays_model->getEntitledDaysForContract($user['contract']);
-                $data['entitleddaysemployee'] = $this->entitleddays_model->getEntitledDaysForEmployee($id);
-                $data['title'] = lang('requests_summary_title');
-                $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_balance_collaborators');
-                $this->load->view('templates/header', $data);
-                $this->load->view('menu/index', $data);
-                $this->load->view('requests/counters', $data);
-                $this->load->view('templates/footer');
-            } else {
-                $this->session->set_flashdata('msg', lang('requests_summary_flash_msg_error'));
-                redirect('requests/collaborators');
-            }
-        }
-    }
-
+    
     /**
      * Send a leave request email to the employee that requested the leave
      * The method will check if the leave request was accepted or rejected 

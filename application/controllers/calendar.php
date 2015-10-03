@@ -44,19 +44,22 @@ class Calendar extends CI_Controller {
             $this->lang->load('calendar', $this->language);
             $this->auth->checkIfOperationIsAllowed('organization_calendar');
             $data = getUserContext($this);
+            $this->load->model('users_model');
+            $user = $this->users_model->getUsers($employee);
             if ($year==0) $year = date("Y");
             //Either self access, Manager or HR
             if ($employee == 0) {
                 $employee = $this->user_id;
             } else {
                 if (!$this->is_hr) {
-                    if ($this->manager != $this->user_id) {
+                    if ($this->user_id != $user['manager']) {
                         $employee = $this->user_id;
+                        $user = $this->users_model->getUsers($employee);
                     }
                 }
             }
-            $this->load->model('users_model');
-            $data['employee_name'] = $this->users_model->getName($employee);
+            
+            $data['employee_name'] =  $user['firstname'] . ' ' . $user['lastname'];
             //Load the leaves for all the months of the selected year
             $this->load->model('leaves_model');
             $months = array(

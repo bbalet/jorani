@@ -84,6 +84,21 @@ class Users_model extends CI_Model {
     }
     
     /**
+     * Check if an employee is the collaborator of the given user
+     * @param int $employee identifier of the collaborator
+     * @param int $manager identifier of the manager
+     * @return bool TRUE if the employee is a collaborator, FALSE otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function isCollaboratorOfManager($employee, $manager) {
+        $this->db->from('users');
+        $this->db->where('id', $employee);
+        $this->db->where('manager', $manager);
+        $result = $this->db->get()->result_array();
+        return (count($result) > 0);
+    }
+    
+    /**
      * Check if a login can be used before creating the user
      * @param string $login login identifier
      * @return bool TRUE if available, FALSE otherwise

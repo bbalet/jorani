@@ -143,12 +143,16 @@ class Hr extends CI_Controller {
     
     /**
      * Display the details of leaves taken/entitled for a given employee
+     * @param string $source page calling the report (employees, collaborators)
      * @param string $refTmp Timestamp (reference date)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function counters($id, $refTmp = NULL) {
-        $this->auth->checkIfOperationIsAllowed('list_employees');
+    public function counters($source, $id, $refTmp = NULL) {
+        if ($source == 'collaborators') { $this->auth->checkIfOperationIsAllowed('list_collaborators'); }
+        if ($source == 'employees') { $this->auth->checkIfOperationIsAllowed('list_employees'); }
         $data = getUserContext($this);
+        if ($source == 'collaborators') { $data['source'] = 'collaborators'; }
+        if ($source == 'employees') { $data['source'] = 'employees'; }
         $this->lang->load('entitleddays', $this->language);
         $this->lang->load('datatable', $this->language);
         $refDate = date("Y-m-d");

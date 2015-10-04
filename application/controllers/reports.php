@@ -21,7 +21,7 @@
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
  * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
+ * @since         0.2.0
  */
 
 /**
@@ -195,6 +195,7 @@ class Reports extends CI_Controller {
     /**
      * Landing page of the shipped-in leaves report
      * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * @since 0.4.3
      */
     public function leaves() {
         $this->auth->checkIfOperationIsAllowed('native_report_leaves');
@@ -211,10 +212,10 @@ class Reports extends CI_Controller {
      * Report leaves request for a month and an entity
      * This report is inspired by the monthly presence report, but applicable to a set of employee.
      * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * @since 0.4.3
      */
     public function executeLeavesReport() {
         $this->auth->checkIfOperationIsAllowed('native_report_leaves');
-        $data = getUserContext($this);
         
         $month = $this->input->get("month") === FALSE ? 0 : $this->input->get("month");
         $year = $this->input->get("year") === FALSE ? 0 : $this->input->get("year");
@@ -308,6 +309,7 @@ class Reports extends CI_Controller {
     /**
      * Export the leaves report into Excel
      * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * @since 0.4.3
      */
     public function exportLeavesReport() {
         $this->auth->checkIfOperationIsAllowed('native_report_leaves');

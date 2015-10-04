@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) {exit('No direct script access allowed');}
 /*
  * This file is part of Jorani.
  *
@@ -18,10 +14,20 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
+/**
+ * This controller loads the static and custom pages of the application
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
+
+/**
+ * This class serve default and cutom pages.
+ * Please note that a page can be the implementation of a custom report (see Controller Report)
+ */
 class Pages extends CI_Controller {
    
     /**
@@ -34,8 +40,11 @@ class Pages extends CI_Controller {
     }
 
     /**
-     * Display a static web page. We try to find if a filename matches with the
-     * views available in views/pages/ folder
+     * Display a page with this order of priority (based on the provided page name) :
+     *  1. Does the page exist into local/pages/{lang}/ (this allows you to overwrite default pages)?
+     *  2. Does the page exist into the views available in views/pages/ folder?
+     * Pages are not public and we take into account the language of the connected user.
+     * If the page name contains the keyword export, then we don't output the default template.
      * @param string $page Name of the view (and of the corresponding PHP file)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -53,7 +62,7 @@ class Pages extends CI_Controller {
         $pathLocal = FCPATH .'local/';
         //Check if we have a user-defined view
         if (file_exists($pathLocal . $view)) {
-            $this->load->ext_view($pathLocal, $view, $data);
+            $this->load->customView($pathLocal, $view, $data);
         } else {//Load the page from the default location (CI views folder)
             if (!file_exists($pathCI . $view)) {
                     show_404();

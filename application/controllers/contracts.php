@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -22,8 +18,21 @@ if (!defined('BASEPATH')) {
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * This controller allows to manage the contracts
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
 
+/**
+ * This class allows to manage the contracts. Each employee has a contract.
+ * On a contract, you can define:
+ *  - The non-working days (week-ends, public days off, part-time, etc.).
+ *  - Entitled days for all employees attached to this contract.
+ *  - The default period for leave credit (taken, available, entitled).
+ */
 class Contracts extends CI_Controller {
     
     /**
@@ -41,11 +50,10 @@ class Contracts extends CI_Controller {
      * Display the list of all contracts defined in the system
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function index($filter = 'requested') {
+    public function index() {
         $this->auth->checkIfOperationIsAllowed('list_contracts');
         $this->lang->load('datatable', $this->language);
         $data = getUserContext($this);
-        $data['filter'] = $filter;
         $data['title'] = lang('contract_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_contracts_list');
         $data['contracts'] = $this->contracts_model->getContracts();

@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -18,10 +14,20 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
+/**
+ * This controller displays the calendars of the leave requests
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
+
+/**
+ * This class displays the calendars of the leave requests.
+ * In opposition to the other pages of the application, some calendars can be public (no need to be logged in).
+ */
 class Calendar extends CI_Controller {
     
     /**
@@ -50,6 +56,7 @@ class Calendar extends CI_Controller {
             //Either self access, Manager or HR
             if ($employee == 0) {
                 $employee = $this->user_id;
+                $user = $this->users_model->getUsers($employee);
             } else {
                 if (!$this->is_hr) {
                     if ($this->user_id != $user['manager']) {
@@ -292,6 +299,10 @@ class Calendar extends CI_Controller {
     /**
      * Export the tabular calendar into Excel. The presentation differs a bit according to the limitation of Excel
      * We'll get one line for the morning and one line for the afternoon
+     * @param int $id identifier of the entity
+     * @param int $month Month number
+     * @param int $year Year number
+     * @param bool $children If TRUE, includes children entity, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function exportTabular($id=-1, $month=0, $year=0, $children=TRUE) {        
@@ -318,12 +329,26 @@ class Calendar extends CI_Controller {
     /**
      * Export the yearly calendar into Excel. The presentation differs a bit according to the limitation of Excel
      * We'll get one line for the morning and one line for the afternoon
+     * @param int $id identifier of the employee
+     * @param int $year Year number
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function exportYear($employee = 0, $year = 0) {
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
         $this->auth->checkIfOperationIsAllowed('organization_calendar');
+        //Either self access, Manager or HR
+        if ($employee == 0) {
+            $employee = $this->user_id;
+            $user = $this->users_model->getUsers($employee);
+        } else {
+            if (!$this->is_hr) {
+                if ($this->user_id != $user['manager']) {
+                    $employee = $this->user_id;
+                    $user = $this->users_model->getUsers($employee);
+                }
+            }
+        }
         if ($year == 0) {
             $year = date("Y");
         }

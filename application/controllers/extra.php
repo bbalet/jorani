@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -18,12 +14,24 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
-require_once dirname(BASEPATH) . "/local/triggers/extra.php";
+/**
+ * This controller contains the actions allowing an employee to list and manage its overtime requests
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
 
+//We can define custom triggers before saving the extra request into the database
+require_once FCPATH . "local/triggers/extra.php";
+
+/**
+ * This class allows an employee to list and manage its overtime requests
+ * Since 0.4.3 a trigger is called at the creation, if the function triggerCreateExtraRequest is defined
+ * see content of /local/triggers/extra.php
+ */
 class Extra extends CI_Controller {
     
     /**
@@ -39,7 +47,7 @@ class Extra extends CI_Controller {
     }
 
     /**
-     * Display the list of the overtime requests by the connected user
+     * Display the list of the overtime requests by the connected employee
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
@@ -58,7 +66,7 @@ class Extra extends CI_Controller {
     /**
      * Display an overtime request
      * @param string $source Page source (extra, overtime) (self, manager)
-     * @param int $id identifier of the leave request
+     * @param int $id identifier of the overtime request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function view($source, $id) {
@@ -142,6 +150,7 @@ class Extra extends CI_Controller {
     
     /**
      * Edit an overtime request
+     * @param int $id identifier of the overtime request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {

@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -18,10 +14,22 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
+/**
+ * This controller serves the list of custom reports and the system reports.
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
+
+/**
+ * This classe loads:
+ *  - the list of custom reports described into local/reports/*.ini
+ *  - the system reports implemented into Jorani.
+ * The custom reports need to be implemented into local/pages/{lang}/ (see Controller Page)
+ */
 class Reports extends CI_Controller {
     
     /**
@@ -36,7 +44,7 @@ class Reports extends CI_Controller {
     }
 
     /**
-     * List the available custom reports (provided they are discribed into local/reports/*.ini)
+     * List the available custom reports (provided they are described into local/reports/*.ini)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index() {
@@ -67,16 +75,16 @@ class Reports extends CI_Controller {
         $this->load->view('reports/index', $data);
         $this->load->view('templates/footer'); 
     }
-
     
     /**
      * Landing page of the shipped-in balance report
+     * @param string $refTmp Optional Unix timestamp (set a date of reference for the report).
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function balance($refTmp = NULL) {
         $this->auth->checkIfOperationIsAllowed('native_report_balance');
         $data = getUserContext($this);
-		$refDate = date("Y-m-d");
+        $refDate = date("Y-m-d");
         if ($refTmp != NULL) {
             $refDate = date("Y-m-d", $refTmp);
         }
@@ -95,7 +103,6 @@ class Reports extends CI_Controller {
      */
     public function executeBalanceReport() {
         $this->auth->checkIfOperationIsAllowed('native_report_balance');
-        
         $this->load->model('leaves_model');
         $this->load->model('types_model');
         $this->load->model('organization_model');

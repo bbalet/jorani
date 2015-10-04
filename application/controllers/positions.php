@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -18,10 +14,21 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
+/**
+ * This controller serves all the actions performed on postions
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
+
+/**
+ * This controller serves all the actions performed on postions
+ * A postion qualifies the job of an employee.
+ * The list of postion is managed by the HR department.
+ */
 class Positions extends CI_Controller {
     
     /**
@@ -93,6 +100,7 @@ class Positions extends CI_Controller {
 
     /**
      * Display a form that allows to edit a position
+     * @param int $id position identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function edit($id) {

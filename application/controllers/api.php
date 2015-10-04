@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -18,12 +14,29 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
+/**
+ * This controller is the entry point for the REST API
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.3.0
+ */
+
+/**
+ * This class implements a REST API served through an OAuth2 server.
+ * In order to use it, you need to insert an OAuth2 client into the database, for example :
+ * INSERT INTO oauth_clients (client_id, client_secret, redirect_uri) VALUES ("testclient", "testpass", "http://fake/");
+ * where "testclient" and "testpass" are respectively the login and password.
+ * Examples are provided into tests/rest folder.
+ */
 class Api extends CI_Controller {
     
+    /**
+     * OAuth2 server used by all methods in order to determine if the user is connected
+     * @var OAuth2\Server Authentication server 
+     */
     protected $server; 
     
     /**
@@ -221,6 +234,7 @@ class Api extends CI_Controller {
     
     /**
      * Get the department details of a given user (label and ID)
+     * @param int $id Identifier of an employee (attached to an entity)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function userdepartment($id) {
@@ -529,6 +543,7 @@ class Api extends CI_Controller {
      * @param int $id Identifier of the entity
      * @param bool $children If TRUE, we include sub-entities, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * @since 0.4.3
      */
     public function getListOfEmployeesInEntity($id, $children) {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {

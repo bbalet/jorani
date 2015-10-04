@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -18,12 +14,24 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * This controller allows a manager to list and manage leave requests submitted to him
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
 
+/**
+ * This class allows a manager to list and manage leave requests submitted to him.
+ * Since 0.3.0, we expose the list of collaborators and allow a manager to access to some reports:
+ *  - presence report of an employee.
+ *  - counters of an employee (leave balance).
+ *  - Yearly calendar of an employee.
+ * But those reports are not served by this controller (either HR or Calendar controller).
+ */
 class Requests extends CI_Controller {
     
     /**
@@ -39,7 +47,9 @@ class Requests extends CI_Controller {
     }
 
     /**
-     * Display the list of all requests submitted to you (Status is submitted)
+     * Display the list of all requests submitted to you
+     * Status is submitted or accepted/rejected depending on the filter parameter.
+     * @param string $name Filter the list of submitted leave requests (all or requested)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index($filter = 'requested') {
@@ -343,6 +353,7 @@ class Requests extends CI_Controller {
     
     /**
      * Export the list of all leave requests (sent to the connected user) into an Excel file
+     * @param string $name Filter the list of submitted leave requests (all or requested)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export($filter = 'requested') {

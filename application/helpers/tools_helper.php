@@ -1,4 +1,4 @@
-<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -14,14 +14,20 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ */
+
+/**
+ * This helper contains a list of functions used throughout the application
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.2.0
  */
 
 /**
  * Check if user is connected, redirect to login form otherwise
  * Set the user context by retrieving infos from session
- * @param reference to CI Controller object
+ * @param CI_Controller $controller reference to CI Controller object
  * @author Benjamin BALET <benjamin.balet@gmail.com>
  */
 function setUserContext(CI_Controller $controller)
@@ -49,7 +55,7 @@ function setUserContext(CI_Controller $controller)
 
 /**
  * Prepare an array containing information about the current user
- * @param reference to CI Controller object
+ * @param CI_Controller $controller reference to CI Controller object
  * @return array data to be passed to the view
  * @author Benjamin BALET <benjamin.balet@gmail.com>
  */
@@ -82,7 +88,7 @@ function sanitize($value){
 
 /**
  * Wrapper between the controller and the e-mail library
- * @param reference to CI Controller object
+ * @param CI_Controller $controller reference to CI Controller object
  * @param string $subject Subject of the e-mail
  * @param string $message Message of the e-mail
  * @param string $to Recipient of the e-mail

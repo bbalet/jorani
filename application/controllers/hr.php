@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -18,12 +14,21 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * This controller serves all the actions performed by human resources department
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
 
+/**
+ * This class serves all the actions performed by human resources department.
+ * There is a distinction with Admin controller which contain technical actions on users.
+ * HR controller deals with employees.
+ */
 class Hr extends CI_Controller {
     
     /**
@@ -144,6 +149,7 @@ class Hr extends CI_Controller {
     /**
      * Display the details of leaves taken/entitled for a given employee
      * @param string $source page calling the report (employees, collaborators)
+     * @param int $id Identifier of the employee
      * @param string $refTmp Timestamp (reference date)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */

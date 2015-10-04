@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -18,13 +14,22 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
-//This CI custom library is just a wrapper around PHPExcel library
-require_once APPPATH . "/third_party/PHPExcel.php";
- 
+/**
+ * This CI custom library is just a wrapper around PHPExcel library
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
+
+require_once APPPATH . "third_party/PHPExcel.php";
+
+/**
+ * This class is a wrapper around PHPExcel library.
+ * We added a utility function that return a column name (string) from an index.
+ */
 class Excel extends PHPExcel {
     
     /**
@@ -37,6 +42,11 @@ class Excel extends PHPExcel {
     
     /**
      * Return the excel column name for a given column index
+     * This code example:
+     * <code>
+     * echo $excel->column_name(6);
+     * </code>
+     * would return F
      * @param int $number Column index
      * @return string Excel representation of the column index
      * @author Benjamin BALET <benjamin.balet@gmail.com>

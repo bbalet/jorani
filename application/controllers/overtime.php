@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -18,12 +14,19 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * This controller contains the actions allowing a manager to list and manage overtime requests
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
 
+/**
+ * This class loads the actions allowing a manager to list and manage overtime requests
+ */
 class Overtime extends CI_Controller {
     
     /**
@@ -39,7 +42,9 @@ class Overtime extends CI_Controller {
     }
 
     /**
-     * Display the list of all overtime requests submitted to you (Status is submitted)
+     * Display the list of all overtime requests submitted to the connected manager.
+     * Status is submitted or accepted/rejected depending on the filter parameter.
+     * @param string $name Filter the list of submitted overtime requests (all or requested)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function index($filter = 'requested') {
@@ -63,8 +68,8 @@ class Overtime extends CI_Controller {
     }
 
     /**
-     * Accept a leave request
-     * @param int $id leave request identifier
+     * Accept an overtime request
+     * @param int $id overtime request identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function accept($id) {
@@ -94,8 +99,8 @@ class Overtime extends CI_Controller {
     }
 
     /**
-     * Reject a leave request
-     * @param int $id leave request identifier
+     * Reject an overtime request
+     * @param int $id overtime request identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function reject($id) {
@@ -125,10 +130,9 @@ class Overtime extends CI_Controller {
     }
     
     /**
-     * Send a overtime request email to the employee that requested the leave
-     * The method will check if the leave request wes accepted or rejected 
-     * before sending the e-mail
-     * @param int $id Leave request identifier
+     * Send a overtime request email to the employee that requested the overtime
+     * The method will check if the overtime request was accepted or rejected before sending the e-mail
+     * @param int $id overtime request identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     private function sendMail($id)
@@ -193,6 +197,7 @@ class Overtime extends CI_Controller {
     
     /**
      * Export the list of all overtime requests (sent to the connected user) into an Excel file
+     * @param string $name Filter the list of submitted overtime requests (all or requested)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export($filter = 'requested') {
@@ -200,4 +205,5 @@ class Overtime extends CI_Controller {
         $data['filter'] = $filter;
         $this->load->view('overtime/export', $data);
     }
+    
 }

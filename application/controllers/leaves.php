@@ -1,8 +1,4 @@
-<?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -18,12 +14,24 @@ if (!defined('BASEPATH')) {
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
-require_once dirname(BASEPATH) . "/local/triggers/leave.php";
+/**
+ * This controller contains the actions allowing an employee to list and manage its leave requests
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
 
+//We can define custom triggers before saving the leave request into the database
+require_once FCPATH . "local/triggers/leave.php";
+
+/**
+ * This class allows an employee to list and manage its leave requests
+ * Since 0.4.3 a trigger is called at the creation, if the function triggerCreateLeaveRequest is defined
+ * see content of /local/triggers/leave.php
+ */
 class Leaves extends CI_Controller {
     
     /**

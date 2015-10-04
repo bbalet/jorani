@@ -11,3 +11,4 @@ application/temp/*
 !application/temp/index.html
 !application/temp/.htaccess
 !application/temp/README.TXT
+/tests/emails-recus/

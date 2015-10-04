@@ -38,3 +38,17 @@ $lang['reports_balance_popup_entity_button_ok'] = 'OK';
 $lang['reports_balance_popup_entity_button_cancel'] = 'Annuleren';
 
 $lang['reports_export_balance_title'] = 'Saldo afwezigheid';
+
+$lang['reports_leaves_title'] = 'Leave requests';
+$lang['reports_leaves_month_field'] = 'Maand';
+$lang['reports_leaves_year_field'] = 'Jaar';
+$lang['reports_leaves_field_entity'] = 'Selecteer entiteit';
+$lang['reports_leaves_button_entity'] = 'Selecteer';
+$lang['reports_leaves_field_subdepts'] = 'Includeer onderliggende entiteiten';
+$lang['reports_leaves_button_launch'] = 'Uitvoeren';
+$lang['reports_leaves_button_export'] = 'Exporteren';
+$lang['reports_leaves_popup_entity_title'] = 'Selecteer een entiteit';
+$lang['reports_leaves_popup_entity_button_ok'] = 'OK';
+$lang['reports_leaves_popup_entity_button_cancel'] = 'Annuleren';
+
+$lang['reports_export_leaves_title'] = 'Leave requests';

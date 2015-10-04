@@ -43,6 +43,7 @@ $lang['menu_hr_leaves_type_divider'] = 'Leaves';
 $lang['menu_hr_list_leaves_type'] = 'List of types';
 $lang['menu_hr_reports_divider'] = 'Reports';
 $lang['menu_hr_report_leave_balance'] = 'Leave balance';
+$lang['menu_hr_report_leaves'] = 'Leave requests';
 
 $lang['menu_validation_title'] = 'Validation';
 $lang['menu_validation_delegations'] = 'Delegations';

@@ -31,9 +31,23 @@ $lang['reports_balance_field_entity'] = 'Seleccionar la entidad';
 $lang['reports_balance_button_entity'] = 'Seleccionar ';
 $lang['reports_balance_field_subdepts'] = 'incluir las subentidades';
 $lang['reports_balance_button_launch'] = 'Iniciar';
-$lang['reports_balance_button_export'] = 'exportar';
+$lang['reports_balance_button_export'] = 'Exportar';
 $lang['reports_balance_popup_entity_title'] = 'Seleccionar una entidad';
 $lang['reports_balance_popup_entity_button_ok'] = 'OK';
 $lang['reports_balance_popup_entity_button_cancel'] = 'Cancelar';
 
 $lang['reports_export_balance_title'] = 'Balance de permisos';
+
+$lang['reports_leaves_title'] = 'Leave requests';
+$lang['reports_leaves_month_field'] = 'Mes';
+$lang['reports_leaves_year_field'] = 'Año';
+$lang['reports_leaves_field_entity'] = 'Seleccionar la entidad';
+$lang['reports_leaves_button_entity'] = 'Seleccionar';
+$lang['reports_leaves_field_subdepts'] = 'incluir las subentidades';
+$lang['reports_leaves_button_launch'] = 'Iniciar';
+$lang['reports_leaves_button_export'] = 'Exportar';
+$lang['reports_leaves_popup_entity_title'] = 'Seleccionar una entidad';
+$lang['reports_leaves_popup_entity_button_ok'] = 'OK';
+$lang['reports_leaves_popup_entity_button_cancel'] = 'Cancelar';
+
+$lang['reports_export_leaves_title'] = 'Leave requests';

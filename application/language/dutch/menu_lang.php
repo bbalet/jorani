@@ -43,6 +43,7 @@ $lang['menu_hr_leaves_type_divider'] = 'Afwezigheid';
 $lang['menu_hr_list_leaves_type'] = 'Lijst types';
 $lang['menu_hr_reports_divider'] = 'Rapporten';
 $lang['menu_hr_report_leave_balance'] = 'Afwezigheidssaldo';
+$lang['menu_hr_report_leaves'] = 'Leave requests';
 
 $lang['menu_validation_title'] = 'Validatie';
 $lang['menu_validation_delegations'] = 'Delegaties';

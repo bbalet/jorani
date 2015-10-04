@@ -41,6 +41,7 @@ $lang['menu_hr_leaves_type_divider'] = 'ស្លឹកឈើ';
 $lang['menu_hr_list_leaves_type'] = 'ប្រភេទនៃការសុំច្បាប់';
 $lang['menu_hr_reports_divider'] = 'របាយការណ៍';
 $lang['menu_hr_report_leave_balance'] = 'តុល្យភាពនៃការចាកចេញ';
+$lang['menu_hr_report_leaves'] = 'Leave requests';
 
 $lang['menu_validation_title'] = 'ការរង្វាយតំលៃ';
 $lang['menu_validation_delegations'] = 'Delegations';

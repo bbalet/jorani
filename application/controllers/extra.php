@@ -84,8 +84,11 @@ class Extra extends CI_Controller {
                 $this->load->model('users_model');
                 $employee = $this->users_model->getUsers($data['extra']['employee']);
                 if ($employee['manager'] != $this->user_id) {
-                    log_message('error', 'User #' . $this->user_id . ' illegally tried to view overtime #' . $id);
-                    redirect('extra');
+                    $this->load->model('delegations_model');
+                    if (!$this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager'])) {
+                        log_message('error', 'User #' . $this->user_id . ' illegally tried to view overtime #' . $id);
+                        redirect('extra');
+                    }
                 }
             } //Admin
         } //Current employee

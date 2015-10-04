@@ -44,6 +44,7 @@ $lang['menu_hr_leaves_type_divider'] = 'Permisos';
 $lang['menu_hr_list_leaves_type'] = 'Lista de tipos';
 $lang['menu_hr_reports_divider'] = 'Informes';
 $lang['menu_hr_report_leave_balance'] = 'Balance de permisos';
+$lang['menu_hr_report_leaves'] = 'Leave requests';
 
 $lang['menu_validation_title'] = 'Validación';
 $lang['menu_validation_delegations'] = 'Delegations';

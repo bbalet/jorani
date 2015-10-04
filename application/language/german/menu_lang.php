@@ -42,6 +42,7 @@ $lang['menu_hr_leaves_type_divider'] = 'Urlaube';
 $lang['menu_hr_list_leaves_type'] = 'Liste der Typen';
 $lang['menu_hr_reports_divider'] = 'Reporte';
 $lang['menu_hr_report_leave_balance'] = 'Urlaubsstatistik';
+$lang['menu_hr_report_leaves'] = 'Leave requests';
 
 $lang['menu_validation_title'] = 'Kontrolle';
 $lang['menu_validation_delegations'] = 'Bevollmächtigungen';

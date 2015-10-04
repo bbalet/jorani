@@ -38,10 +38,12 @@
 |
 */
 
+//_______________________________________________
 //Admin : global features
 $route['admin/settings'] = 'admin/settings';
 $route['admin'] = 'admin/settings';
 
+//_______________________________________________
 //Admin : user management
 $route['users/myprofile'] = 'users/myProfile';
 $route['users/employees'] = 'users/employees';
@@ -55,6 +57,7 @@ $route['users/enable/(:num)'] = 'users/enable/$1';
 $route['users/disable/(:num)'] = 'users/disable/$1';
 $route['users'] = 'users';
 
+//_______________________________________________
 //Human Resources Management
 $route['hr/employees'] = 'hr/employees';
 $route['hr/employees/entity/(:num)/(:any)'] = 'hr/employeesOfEntity/$1/$2';
@@ -72,6 +75,7 @@ $route['hr/presence/([^/]+)/(:num)/(:num)/(:num)'] = 'hr/presence/$1/$2/$3/$4';
 $route['hr/presence/export/([^/]+)/(:num)/(:num)/(:num)'] = 'hr/exportPresence/$1/$2/$3/$4';
 $route['hr'] = 'hr/employees';
 
+//_______________________________________________
 //HR edit leave types
 $route['leavetypes/delete/(:num)'] = 'leavetypes/delete/$1';
 $route['leavetypes/edit/(:num)'] = 'leavetypes/edit/$1';
@@ -80,6 +84,7 @@ $route['leavetypes/create'] = 'leavetypes/create';
 $route['leavetypes/export'] = 'leavetypes/export';
 $route['leavetypes'] = 'leavetypes';
 
+//_______________________________________________
 //HR edit positions
 $route['positions/delete/(:num)'] = 'positions/delete/$1';
 $route['positions/edit/(:num)'] = 'positions/edit/$1';
@@ -89,6 +94,7 @@ $route['positions/create'] = 'positions/create';
 $route['positions/export'] = 'positions/export';
 $route['positions'] = 'positions';
 
+//_______________________________________________
 //HR edit contracts
 $route['contracts/export'] = 'contracts/export';
 $route['contracts/create'] = 'contracts/create';
@@ -106,6 +112,7 @@ $route['contracts/calendar/userdayoffs'] = 'contracts/userDayoffs';
 $route['contracts/calendar/alldayoffs'] = 'contracts/allDayoffs';
 $route['contracts'] = 'contracts';
 
+//_______________________________________________
 //HR Organization
 $route['organization/select'] = 'organization/select';
 $route['organization/root'] = 'organization/root';
@@ -121,6 +128,7 @@ $route['organization/getsupervisor'] = 'organization/getsupervisor';
 $route['organization/setsupervisor'] = 'organization/setsupervisor';
 $route['organization'] = 'organization';
 
+//_______________________________________________
 //Various calendars
 $route['calendar/individual'] = 'calendar/individual';
 $route['calendar/workmates'] = 'calendar/workmates';
@@ -136,6 +144,7 @@ $route['calendar/year'] = 'calendar/year';
 $route['calendar/year/export/(:num)/(:num)'] = 'calendar/exportYear/$1/$2';
 $route['calendar'] = 'calendar/individual';
 
+//_______________________________________________
 //private Fullcalendar feeds
 $route['leaves/individual/(:num)'] = 'leaves/individual/$1';
 $route['leaves/individual'] = 'leaves/individual';
@@ -145,10 +154,12 @@ $route['leaves/organization/(:num)'] = 'leaves/organization/$1';
 $route['leaves/collaborators'] = 'leaves/collaborators';
 $route['leaves/team'] = 'leaves/team';
 
+//_______________________________________________
 //public Fullcalendar feeds (available when public calendars are activated)
 $route['leaves/public/organization/(:num)'] = 'calendar/publicOrganization/$1';
 $route['contracts/public/calendar/alldayoffs'] = 'calendar/publicDayoffs';
 
+//_______________________________________________
 //My leave requests
 $route['leaves/counters'] = 'leaves/counters';
 $route['leaves/counters/(:num)'] = 'leaves/counters/$1';
@@ -161,6 +172,7 @@ $route['leaves/([^/]+)/(:num)'] = 'leaves/view/$1/$2';
 $route['leaves/validate'] = 'leaves/validate';
 $route['leaves'] = 'leaves';
 
+//_______________________________________________
 //leave requests (submitted to the line manager)
 $route['requests/collaborators'] = 'requests/collaborators';
 $route['requests/createleave/(:num)'] = 'requests/createleave/$1';
@@ -176,6 +188,7 @@ $route['requests/ajax/delegations/add'] = 'requests/addDelegations';
 $route['requests/(:any)'] = 'requests/index/$1';
 $route['requests'] = 'requests/index/requested';
 
+//_______________________________________________
 //overtime requests
 $route['extra/export'] = 'extra/export';
 $route['extra/create'] = 'extra/create';
@@ -184,6 +197,7 @@ $route['extra/delete/(:num)'] = 'extra/delete/$1';
 $route['extra/([^/]+)/(:num)'] = 'extra/view/$1/$2';
 $route['extra'] = 'extra';
 
+//_______________________________________________
 //overtime validation
 $route['overtime/export/(:any)'] = 'overtime/export/$1';
 $route['overtime/accept/(:num)'] = 'overtime/accept/$1';
@@ -191,6 +205,7 @@ $route['overtime/reject/(:num)'] = 'overtime/reject/$1';
 $route['overtime/(:any)'] = 'overtime/index/$1';
 $route['overtime'] = 'overtime/index/requested';
 
+//_______________________________________________
 //Entitled days
 $route['entitleddays/user/(:num)'] = 'entitleddays/user/$1';
 $route['entitleddays/ajax/user'] = 'entitleddays/ajax_user';
@@ -205,6 +220,9 @@ $route['entitleddays/ajax/update'] = 'entitleddays/ajax_update';
 $route['reports/balance'] = 'reports/balance';
 $route['reports/balance/execute'] = 'reports/executeBalanceReport';
 $route['reports/balance/export'] = 'reports/exportBalanceReport';
+$route['reports/leaves'] = 'reports/leaves';
+$route['reports/leaves/execute'] = 'reports/executeLeavesReport';
+$route['reports/leaves/export'] = 'reports/exportLeavesReport';
 $route['reports'] = 'reports';
 
 //_______________________________________________
@@ -236,17 +254,21 @@ $route['api/createleave'] = 'api/createleave';
 //v0.4.3
 $route['api/getListOfEmployeesInEntity/(:num)/(:any)'] = 'api/getListOfEmployeesInEntity/$1/$2';
 
+//_______________________________________________
 //ICS Feeds
 $route['ics/individual/(:num)'] = 'ics/individual/$1';
 $route['ics/dayoffs/(:num)/(:num)'] = 'ics/dayoffs/$1/$2';
 $route['ics/entity/(:num)/(:num)/(:any)'] = 'ics/entity/$1/$2/$3';
 $route['ics/ical/(:num)'] = 'ics/ical/$1';
 
+//_______________________________________________
 //Session management
 $route['session/login'] = 'session/login';
 $route['session/logout'] = 'session/logout';
 $route['session/language'] = 'session/language';
 $route['session/forgetpassword'] = 'session/forgetpassword';
 
+//_______________________________________________
+//Default controllers
 $route['default_controller'] = 'leaves';
 $route['(:any)'] = 'pages/view/$1';

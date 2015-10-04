@@ -34,4 +34,19 @@ $lang['reports_balance_button_export'] = 'Esporta';
 $lang['reports_balance_popup_entity_title'] = 'Seleziona un\'entità';
 $lang['reports_balance_popup_entity_button_ok'] = 'OK';
 $lang['reports_balance_popup_entity_button_cancel'] = 'Annulla';
+
 $lang['reports_export_balance_title'] = 'Saldo ferie';
+
+$lang['reports_leaves_title'] = 'Leave requests';
+$lang['reports_leaves_month_field'] = 'Mese';
+$lang['reports_leaves_year_field'] = 'Anno';
+$lang['reports_leaves_field_entity'] = 'Seleziona l\'entità';
+$lang['reports_leaves_button_entity'] = 'Seleziona';
+$lang['reports_leaves_field_subdepts'] = 'Includi sotto-reparti';
+$lang['reports_leaves_button_launch'] = 'Avvia';
+$lang['reports_leaves_button_export'] = 'Esporta';
+$lang['reports_leaves_popup_entity_title'] = 'Seleziona un\'entità';
+$lang['reports_leaves_popup_entity_button_ok'] = 'OK';
+$lang['reports_leaves_popup_entity_button_cancel'] = 'Annulla';
+
+$lang['reports_export_leaves_title'] = 'Leave requests';

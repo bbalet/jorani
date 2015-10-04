@@ -42,6 +42,7 @@ $lang['menu_hr_leaves_type_divider'] = 'Ferie';
 $lang['menu_hr_list_leaves_type'] = 'Elenco tipologie';
 $lang['menu_hr_reports_divider'] = 'Report';
 $lang['menu_hr_report_leave_balance'] = 'Saldo ferie';
+$lang['menu_hr_report_leaves'] = 'Leave requests';
 
 $lang['menu_validation_title'] = 'Validazione';
 $lang['menu_validation_delegations'] = 'Deleghe';

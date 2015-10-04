@@ -320,35 +320,17 @@ class Requests extends CI_Controller {
             'StartDateType' => $lang_mail->line($leave['startdatetype']),
             'EndDateType' => $lang_mail->line($leave['enddatetype']),
             'Cause' => $leave['cause'],
-            'Type' => $leave['type']
+            'Type' => $leave['type_name']
         );
         
-        $message = "";
-        if ($this->config->item('subject_prefix') != FALSE) {
-            $subject = $this->config->item('subject_prefix');
-        } else {
-           $subject = '[Jorani] ';
-        }
         if ($leave['status'] == 3) {    //accepted
             $message = $this->parser->parse('emails/' . $employee['language'] . '/request_accepted', $data, TRUE);
-            $this->email->subject($subject . $lang_mail->line('email_leave_request_accept_subject'));
+            $subject = $lang_mail->line('email_leave_request_accept_subject');
         } else {    //rejected
             $message = $this->parser->parse('emails/' . $employee['language'] . '/request_rejected', $data, TRUE);
-            $this->email->subject($subject . $lang_mail->line('email_leave_request_reject_subject'));
+            $subject = $lang_mail->line('email_leave_request_reject_subject');
         }
-        $this->email->set_encoding('quoted-printable');
-        
-        if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
-           $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
-        } else {
-           $this->email->from('do.not@reply.me', 'LMS');
-        }
-        $this->email->to($employee['email']);
-        if (!is_null($supervisor)) {
-            $this->email->cc($supervisor->email);
-        }
-        $this->email->message($message);
-        $this->email->send();
+        sendMailByWrapper($this, $subject, $message, $employee['email'], is_null($supervisor)?NULL:$supervisor->email);
     }
     
     /**

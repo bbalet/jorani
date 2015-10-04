@@ -37,3 +37,17 @@ $lang['reports_balance_popup_entity_button_ok'] = 'យល់ព្រម';
 $lang['reports_balance_popup_entity_button_cancel'] = 'បោះបង់';
 
 $lang['reports_export_balance_title'] = 'តុល្យភាពនៃសំណើរ';
+
+$lang['reports_leaves_title'] = 'Leave requests';
+$lang['reports_leaves_month_field'] = 'Month';
+$lang['reports_leaves_year_field'] = 'Year';
+$lang['reports_leaves_field_entity'] = 'Select the entity';
+$lang['reports_leaves_button_entity'] = 'Select';
+$lang['reports_leaves_field_subdepts'] = 'Include sub-departments';
+$lang['reports_leaves_button_launch'] = 'Launch';
+$lang['reports_leaves_button_export'] = 'Export';
+$lang['reports_leaves_popup_entity_title'] = 'Select an entity';
+$lang['reports_leaves_popup_entity_button_ok'] = 'OK';
+$lang['reports_leaves_popup_entity_button_cancel'] = 'Cancel';
+
+$lang['reports_export_leaves_title'] = 'Leave requests';

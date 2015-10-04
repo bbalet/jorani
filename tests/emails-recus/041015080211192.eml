@@ -1,0 +1,67 @@
+        Sun, 04 Oct 2015 20:02:11 +0200 (CEST)
+Date: Sun, 4 Oct 2015 20:02:11 +0200
+To: bbalet@free.fr
+From: Jorani <do.not@reply.me>
+Subject: [Jorani] Your overtime request has been accepted
+Message-ID: <3ff6da6bde221685fe9a3dd546486bde@localhost>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.12 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="b1_3ff6da6bde221685fe9a3dd546486bde"
+
+This is a multi-part message in MIME format.
+
+--b1_3ff6da6bde221685fe9a3dd546486bde
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Overtime Request=0A Dear Bernard DURAND, =0A =0A The overtime you've reques=
+ted has been accepted. Below, the details :=0A =0A =0A Date =C2=A010/04/201=
+5=0A =0A =0A Duration =C2=A01.00=0A =0A =0A Reason =C2=A0work lot=0A =0A =
+=0A =0A *** This is an automatically generated message, please do not reply=
+ to this message ***
+
+--b1_3ff6da6bde221685fe9a3dd546486bde
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<html lang=3D"en">
+    <head>
+        <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-=
+Type">
+        <meta charset=3D"UTF-8">
+        <style>
+            table {width:50%;margin:5px;border-collapse:collapse;}
+            table, th, td {border: 1px solid black;}
+            th, td {padding: 20px;}
+            h5 {color:red;}
+        </style>
+    </head>
+    <body>
+        <h3>Overtime Request</h3>
+        Dear Bernard DURAND, <br />
+        <br />
+        The overtime you've requested has been accepted. Below, the details=
+ :
+        <table border=3D"0">
+            <tr>
+                <td>Date &nbsp;</td><td>10/04/2015</td>
+            </tr>
+            <tr>
+                <td>Duration &nbsp;</td><td>1.00</td>
+            </tr>
+            <tr>
+                <td>Reason &nbsp;</td><td>work lot</td>
+            </tr>
+        </table>
+        <hr>
+        <h5>*** This is an automatically generated message, please do not r=
+eply to this message ***</h5>
+    </body>
+</html>
+
+
+
+--b1_3ff6da6bde221685fe9a3dd546486bde--
+

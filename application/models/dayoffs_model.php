@@ -1,4 +1,4 @@
-<?php
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /* 
  * This file is part of Jorani.
  *
@@ -14,12 +14,23 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
+/**
+ * This class contains the business logic and manages the persistence of non working days
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
+
+//VObject is used to import an external calendar feed (ICS) containing non working days.
 use Sabre\VObject;
 
+/**
+ * This class contains the business logic and manages the persistence of non working days.
+ * non working days are defined on a contract..
+ */
 class Dayoffs_model extends CI_Model {
 
     /**
@@ -168,7 +179,7 @@ class Dayoffs_model extends CI_Model {
         $this->db->where('date <=', $end);
         $this->db->from('dayoffs');
         $result = $this->db->get()->result_array();
-        return $result[0]['days']; 
+        return is_null($result[0]['days'])?0:$result[0]['days']; 
     }
     
     /**
@@ -205,10 +216,11 @@ class Dayoffs_model extends CI_Model {
     }
     
     /**
-     * Import an ICS feed containing days off (all events are considered as non-working days)
-     * This first version is very basic, it supports only full days off
+     * Import an ICS feed containing days off (all events are considered as non-working days).
+     * This first version is very basic, it supports only full days off.
+     * Most of the errors are coming from the web server being not authorized to connect to the external feed.
      * @param int $contract Identifier of the contract
-     * @param string $url URL of the source ICS feed
+     * @param string $url URL of the source ICS feed (obviously, we must be able to open a connection)
      * @return string error message or empty string
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -219,14 +231,13 @@ class Dayoffs_model extends CI_Model {
             $start = new DateTime($event->DTSTART);
             $end = new DateTime($event->DTEND);
             $interval = $start->diff($end);
-            //Make a more complicated version that supports half days
+            //TODO : Make a more complicated version that supports half days
             $length = $interval->d;
             $day = $start;
             for ($ii = 0; $ii < $length; $ii++) {
                 $tmp = $day->format('U');
                 $this->deletedayoff($contract, $tmp);
                 $this->adddayoff($contract, $tmp, 1, strval($event->SUMMARY));
-                
                 $day->add(new DateInterval('P1D'));
             }
         }

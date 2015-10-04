@@ -313,6 +313,7 @@ class Api extends CI_Controller {
      * @param int $month Month number [1-12]
      * @param int $year Year number (XXXX)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * @since 0.4.0
      */
     public function monthlypresence($id, $month, $year) {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
@@ -347,6 +348,7 @@ class Api extends CI_Controller {
      * This is not recommended. Consider moving it into an archive entity of your organization
      * @param int $id Unique identifier of an employee
      * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * @since 0.4.0
      */
     public function deleteuser($id) {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
@@ -368,6 +370,7 @@ class Api extends CI_Controller {
      * Updated fields are passed by POST parameters
      * @param int $id Unique identifier of an employee
      * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * @since 0.4.0
      */
     public function updateuser($id) {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
@@ -406,6 +409,7 @@ class Api extends CI_Controller {
      * Returns the new inserted id
      * @param bool $sendEmail Send an Email to the new employee (FALSE by default)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * @since 0.4.0
      */
     public function createuser($sendEmail = FALSE) {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
@@ -506,6 +510,7 @@ class Api extends CI_Controller {
      * This function doesn't send e-mails and it is used for imposed leaves
      * Returns the new inserted id.
      * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * @since 0.4.0
      */
     public function createleave() {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {

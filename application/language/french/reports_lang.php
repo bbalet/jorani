@@ -37,3 +37,17 @@ $lang['reports_balance_popup_entity_button_ok'] = 'OK';
 $lang['reports_balance_popup_entity_button_cancel'] = 'Annuler';
 
 $lang['reports_export_balance_title'] = 'État des congés';
+
+$lang['reports_leaves_title'] = 'Demandes de congé';
+$lang['reports_leaves_month_field'] = 'Mois';
+$lang['reports_leaves_year_field'] = 'Année';
+$lang['reports_leaves_field_entity'] = 'Choisir l\'entité';
+$lang['reports_leaves_button_entity'] = 'Choisir';
+$lang['reports_leaves_field_subdepts'] = 'Inclure les sous-départements';
+$lang['reports_leaves_button_launch'] = 'Exécuter';
+$lang['reports_leaves_button_export'] = 'Exporter';
+$lang['reports_leaves_popup_entity_title'] = 'Choisir une entité';
+$lang['reports_leaves_popup_entity_button_ok'] = 'OK';
+$lang['reports_leaves_popup_entity_button_cancel'] = 'Annuler';
+
+$lang['reports_export_leaves_title'] = 'Demandes de congé';

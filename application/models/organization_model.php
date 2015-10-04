@@ -230,6 +230,7 @@ class Organization_model extends CI_Model {
     public function allEmployees($id, $children = FALSE) {
         $this->db->select('users.id, users.identifier, users.firstname, users.lastname, users.datehired');
         $this->db->select('organization.name as department, positions.name as position, contracts.name as contract');
+        $this->db->select('contracts.id as contract_id');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
         $this->db->join('positions', 'positions.id  = users.position', 'left');

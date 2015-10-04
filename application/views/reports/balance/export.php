@@ -19,7 +19,6 @@
  */
 
 $sheet = $this->excel->setActiveSheetIndex(0);
-$sheet->setTitle(lang('reports_export_balance_title'));
 $sheet->setTitle(mb_strimwidth(lang('reports_export_balance_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
 $result = array();
 $summary = array();

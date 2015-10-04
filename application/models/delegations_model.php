@@ -1,4 +1,4 @@
-<?php
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 /*
  * This file is part of Jorani.
  *
@@ -14,10 +14,21 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 
+/**
+ * This class contains the business logic and manages the persistence of delegations
+ * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
+
+/**
+ * This class contains the business logic and manages the persistence of delegations.
+ * A manager (M) can give a delegation to any other employee (E).
+ * An employee (E) having the delegation can act as a manager of the employees managed by the manager (M).
+ */
 class Delegations_model extends CI_Model {
 
     /**

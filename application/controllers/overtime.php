@@ -154,7 +154,7 @@ class Overtime extends CI_Controller {
         $lang_mail->load('email', $usr_lang);
         $lang_mail->load('global', $usr_lang);
         
-        $date = new DateTime($extra['startdate']);
+        $date = new DateTime($extra['date']);
         $startdate = $date->format($lang_mail->line('global_date_format'));
 
         $this->load->library('parser');
@@ -167,32 +167,14 @@ class Overtime extends CI_Controller {
             'Cause' => $extra['cause']
         );
         
-        $message = "";
-        if ($this->config->item('subject_prefix') != FALSE) {
-            $subject = $this->config->item('subject_prefix');
-        } else {
-           $subject = '[Jorani] ';
-        }
         if ($extra['status'] == 3) {
             $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_accepted', $data, TRUE);
-            $this->email->subject($subject . $lang_mail->line('email_overtime_request_accept_subject'));
+            $subject = $lang_mail->line('email_overtime_request_accept_subject');
         } else {
             $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_rejected', $data, TRUE);
-            $this->email->subject($subject . $lang_mail->line('email_overtime_request_reject_subject'));
+            $subject = $lang_mail->line('email_overtime_request_reject_subject');
         }
-        $this->email->set_encoding('quoted-printable');
-        
-        if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
-            $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
-        } else {
-           $this->email->from('do.not@reply.me', 'LMS');
-        }
-        $this->email->to($employee['email']);
-        if (!is_null($supervisor)) {
-            $this->email->cc($supervisor->email);
-        }
-        $this->email->message($message);
-        $this->email->send();
+        sendMailByWrapper($this, $subject, $message, $employee['email'], is_null($supervisor)?NULL:$supervisor->email);
     }
     
     /**

@@ -18,7 +18,9 @@
 
 <ul>
     <li>Valider <a href="<?php echo base_url();?>requests">les demandes de congés qui vous ont été soumises</a>.</li>
+    <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
     <li>Valider <a href="<?php echo base_url();?>overtime">les déclarations d'heures supplémentaires qui vous ont été soumises</a>.</li>
+    <?php } ?>
 </ul>
 
 <h4>Pour les responsables RH</h4>

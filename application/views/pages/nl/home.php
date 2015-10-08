@@ -12,5 +12,7 @@
 Als U een manager bent van andere medewerkers kunt u:
 <ul>
   <li>Valideren van bij U ingediende <a href="<?php echo base_url();?>requests">afwezigheidsverzoeken</a>.</li>
-    <li>Valideren van bij U ingediende <a href="<?php echo base_url();?>overtime">overuren meldingen</a>.</li>
+  <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
+  <li>Valideren van bij U ingediende <a href="<?php echo base_url();?>overtime">overuren meldingen</a>.</li>
+  <?php } ?>
 </ul>

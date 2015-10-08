@@ -12,5 +12,7 @@
 <p>Als eingetragener Vorgesetzter können Sie :</p>
 <ul>
     <li><a href="<?php echo base_url();?>requests">Beantragte Urlaube ihrer Mitarbeiter</a> evaluieren.</li>
+    <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
     <li><a href="<?php echo base_url();?>overtime">Überstundenanträge ihrer Mitarbeiter</a> anzeigen lassen.</li>
+    <?php } ?>
 </ul>

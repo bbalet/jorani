@@ -12,5 +12,7 @@
 <p>Если вы руководитель подразделения, вы можете:</p>
 <ul>
     <li>Утвердить  <a href="<?php echo base_url();?>requests">заявления на отпуск, представленные на ваше рассмотрение</a>.</li>
+    <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
     <li>Утвердить <a href="<?php echo base_url();?>overtime">запросы на сверхурочные, представленные на ваше рассмотрение</a>.</li>
+    <?php } ?>
 </ul>

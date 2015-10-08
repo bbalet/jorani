@@ -12,5 +12,7 @@
 <p>Si usted es responsable de otros empleados, usted podra:</p>
 <ul>
     <li>Validar <a href="<?php echo base_url();?>requests">permisos.</a>.</li>
+    <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
     <li>Validar <a href="<?php echo base_url();?>overtime">horas extras</a>.</li>
+    <?php } ?>
 </ul>

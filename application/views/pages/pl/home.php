@@ -12,5 +12,7 @@
 <p>Jeżeli jesteś przełożonym innych pracowników, możesz:</p>
 <ul>
     <li>Weryfikować <a href="<?php echo base_url();?>requests">przedstawione Ci wnioski urlopowe</a>.</li>
+    <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
     <li>Weryfikować <a href="<?php echo base_url();?>overtime">przedstawione Ci wnioski nadgodzin</a>.</li>
+    <?php } ?>
 </ul>

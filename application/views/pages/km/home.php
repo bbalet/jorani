@@ -12,5 +12,7 @@
 <p>ប្រសិនបើលោកអ្នកជាអ្នកគ្រប់គ្រងបុគ្គលិកផ្សេងទៀត ឥឡូវនេះលោកអ្នកនឹងអាចៈ</p>
 <ul>
     <li><a href="<?php echo base_url();?>requests">វាយតំលៃការសុំច្បាប់ដែលបានផ្ញើរទៅកាន់អ្នក។</a>.</li>
+    <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
     <li><a href="<?php echo base_url();?>overtime">វាយតំលៃការបន្ថែមម៉ោងដែលបានផ្ញើរទៅកាន់អ្នក។</a>.</li>
+    <?php } ?>
 </ul>

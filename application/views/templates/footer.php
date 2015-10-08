@@ -18,8 +18,11 @@
  * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
  */
 ?>
+                    </div><!-- /span12 -->
+                </div><!-- /row -->
+            </div><!-- /container -->
         <div id="push"></div>
-    </div><!-- /.container -->
+    </div><!-- /wrap -->
     <!-- FOOTER -->
     <div class="row" id="footer">
       <div class="span4"><?php echo lang('footer_copyright_notice');?></div>

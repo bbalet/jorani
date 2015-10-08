@@ -21,23 +21,6 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('menu', $language);?>
 
-<div class="row-fluid">
-    <div class="span6">
-        <h3><a href="<?php echo base_url();?>" style="text-decoration:none; color:black;"><img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;<?php echo lang('Leave Management System');?></a>
-    </div>
-    <div class="span6">
-        <div class="pull-right">
-            <a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user"></i></a>
-            &nbsp;
-            <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-            <a href="#" title="<?php echo lang('menu_banner_tip_reset');?>" id="cmdChangePassword"><i class="icon-lock"></i></a>
-            <?php } ?>
-            &nbsp;
-            <?php echo lang('menu_banner_welcome');?> <?php echo $fullname;?>, <a href="<?php echo base_url();?>session/logout"><?php echo lang('menu_banner_logout');?></a>     
-        </div>
-    </div>
-</div>
-
 <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
 <div id="frmChangeMyPwd" class="modal hide fade">
     <div class="modal-header">
@@ -64,13 +47,14 @@ $this->lang->load('menu', $language);?>
 </script>
 <?php } ?>
 
-<div class="navbar navbar-inverse">
+<div id="wrap">
+<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
+          <a href="<?php echo base_url();?>home" class="brand">&nbsp;<img src="<?php echo base_url();?>assets/images/brand.png" height="18" width="18" style="margin-top:-6px;">&nbsp;Jorani</a>
             <div class="nav-responsive">
                 <ul class="nav">
-                    <li><a href="<?php echo base_url();?>home"><i class="icon-home icon-white"></i></a></li>
-                    <li><a href="<?php echo base_url();?>leaves"><i class="icon-list icon-white"></i></a></li>
-                
+                    <li><a href="<?php echo base_url();?>leaves" title="<?php echo lang('menu_leaves_list_requests');?>"><i class="icon-list icon-white"></i></a></li>
+
               <?php if ($is_hr == TRUE) { ?>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_admin_title');?> <b class="caret"></b></a>
@@ -120,7 +104,7 @@ $this->lang->load('menu', $language);?>
                   </ul>
                 </li>
               <?php } ?>
-              
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_requests_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -136,7 +120,7 @@ $this->lang->load('menu', $language);?>
                     <?php } ?>
                   </ul>
                 </li>
-         
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_calendar_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -152,7 +136,22 @@ $this->lang->load('menu', $language);?>
                   </ul>
                 </li>
               </ul>
-                
+
+                <ul class="nav pull-right">
+                    <a href="<?php echo base_url();?>users/myprofile" class="brand"><?php echo $fullname;?></a>
+                    <li><a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user icon-white"></i></a></li>
+                    <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
+                    <li><a href="#" id="cmdChangePassword" title="<?php echo lang('menu_banner_tip_reset');?>"><i class="icon-lock icon-white"></i></a></li>
+                    <?php } ?>
+                    <li><a href="<?php echo base_url();?>session/logout" title="<?php echo lang('menu_banner_logout');?>"><i class="icon-off icon-white"></i></a></li>
+                </ul>
             </div>
       </div>
     </div><!-- /.navbar -->
+
+    <div class="container-fluid">
+        <div class="row-fluid"><div class="span12">
+
+
+                <div class="row-fluid"><div class="span12">&nbsp;</div></div>
+                <div class="row-fluid"><div class="span12">&nbsp;</div></div>

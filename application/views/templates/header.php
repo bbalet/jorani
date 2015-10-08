@@ -22,31 +22,72 @@ $this->lang->load('global', $language);?>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
     <link rel="icon" type="image/x-icon" href="<?php echo base_url();?>favicon.ico" sizes="32x32">
-    <style>   
-        
-      html, body {
-        height: 100%;
-      }
-      
-      #push,
-      #footer {
-        height: 40px;
-      }
-      
-        #footer {
-            border-top: 1px #e4e4e4 solid;
-            border-top-radius: 4px;
-            box-shadow: 0 0 6px #ccc;
-            padding: 10px;
-            background-color: #fff;
-        }
-      
-      #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        margin: 0 auto -40px;
-      }
+    <style>
+    /*Sticky footer*/
+    html, body {
+      height: 100%;
+    } 
+    #push,
+    #footer {
+      height: 40px;
+    }
+    #footer {
+        border-top: 1px #e4e4e4 solid;
+        border-top-radius: 4px;
+        box-shadow: 0 0 6px #ccc;
+        padding: 10px;
+        background-color: #fff;
+    }
+    #wrap {
+      min-height: 100%;
+      height: auto !important;
+      height: 100%;
+      margin: 0 auto -40px;
+    }
+    
+    /*Background color of the navbar*/
+    .navbar-inner {
+      background-color: #3097d1;
+      background-image: none;
+      color: white;
+    }
+
+    .navbar-inverse .navbar-inner {
+      background-color: #3097d1;
+      background-image: none;
+      color: white;
+      border-color: #3097d1;
+    }
+
+    .navbar .nav > li > a {
+      background-color: #3097d1;
+      color: white;
+    }
+
+    .navbar .nav > li > a:focus,
+    .navbar .nav > li > a:hover {
+      background-color: #3097d1;
+      color: white;
+    }
+
+    .navbar .nav > .active > a,
+    .navbar .nav > .active > a:hover,
+    .navbar .nav > .active > a:focus {
+      background-color: white;
+      color: #dddada;
+    }
+
+    .navbar-inverse .nav li.dropdown.open>.dropdown-toggle,
+    .navbar-inverse .nav li.dropdown.active>.dropdown-toggle,
+    .navbar-inverse .nav li.dropdown.open.active>.dropdown-toggle {
+      background-color: #3097d1;
+      color: #dddada;
+    }
+
+    .navbar .brand {
+      background-color: #3097d1;
+      color: white;
+    }
 </style>
 <?php if ($this->config->item('ga_code') != "") { ?>
     <script>
@@ -64,4 +105,3 @@ $this->lang->load('global', $language);?>
 <?php } ?>
 </head>
 <body>
-    <div class="container-fluid" id="wrap">

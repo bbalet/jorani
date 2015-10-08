@@ -30,7 +30,7 @@
 $attributes = array('id' => 'frmLeaveForm');
 echo form_open('leaves/create', $attributes) ?>
 
-    <label for="type" required><?php echo lang('leaves_create_field_type');?></label>
+    <label for="type"><?php echo lang('leaves_create_field_type');?></label>
     <select name="type" id="type">
     <?php
     $default_type = $this->config->item('default_leave_type');
@@ -40,7 +40,7 @@ echo form_open('leaves/create', $attributes) ?>
     <?php endforeach ?>
     </select>&nbsp;<span id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span><br />
         
-    <label for="viz_startdate" required><?php echo lang('leaves_create_field_start');?></label>
+    <label for="viz_startdate"><?php echo lang('leaves_create_field_start');?></label>
     <input type="text" name="viz_startdate" id="viz_startdate" value="<?php echo set_value('startdate'); ?>" />
     <input type="hidden" name="startdate" id="startdate" />
     <select name="startdatetype" id="startdatetype">
@@ -48,7 +48,7 @@ echo form_open('leaves/create', $attributes) ?>
         <option value="Afternoon"><?php echo lang('leaves_date_type_afternoon');?></option>
     </select><br />
     
-    <label for="viz_enddate" required><?php echo lang('leaves_create_field_end');?></label>
+    <label for="viz_enddate"><?php echo lang('leaves_create_field_end');?></label>
     <input type="text" name="viz_enddate" id="viz_enddate" value="<?php echo set_value('enddate'); ?>" />
     <input type="hidden" name="enddate" id="enddate" />
     <select name="enddatetype" id="enddatetype">
@@ -56,7 +56,7 @@ echo form_open('leaves/create', $attributes) ?>
         <option value="Afternoon" selected><?php echo lang('leaves_date_type_afternoon');?></option>
     </select><br />
 
-    <label for="duration" required><?php echo lang('leaves_create_field_duration');?></label>
+    <label for="duration"><?php echo lang('leaves_create_field_duration');?></label>
     <?php if ($this->config->item('disable_edit_leave_duration') == TRUE) { ?>
     <input type="text" name="duration" id="duration" value="<?php echo set_value('duration'); ?>" readonly />
     <?php } else { ?>
@@ -76,9 +76,8 @@ echo form_open('leaves/create', $attributes) ?>
     <label for="cause"><?php echo lang('leaves_create_field_cause');?></label>
     <textarea name="cause"><?php echo set_value('cause'); ?></textarea>
     
-    <label for="status" required><?php echo lang('leaves_create_field_status');?></label>
+    <label for="status"><?php echo lang('leaves_create_field_status');?></label>
     <select name="status">
-        
         <option value="1" <?php if ($this->config->item('leave_status_requested') == FALSE) echo 'selected'; ?>><?php echo lang('Planned');?></option>
         <option value="2" <?php if ($this->config->item('leave_status_requested') == TRUE) echo 'selected'; ?>><?php echo lang('Requested');?></option>
     </select><br />

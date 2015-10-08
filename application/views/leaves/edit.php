@@ -34,14 +34,14 @@ if (isset($_GET['source'])) {
     echo form_open('leaves/edit/' . $id, $attributes);
 } ?>
 
-    <label for="type" required><?php echo lang('leaves_edit_field_type');?></label>
+    <label for="type"><?php echo lang('leaves_edit_field_type');?></label>
     <select name="type" id="type">
     <?php foreach ($types as $types_item): ?>
         <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == $leave['type']) echo "selected" ?>><?php echo $types_item['name'] ?></option>
     <?php endforeach ?>    
     </select>&nbsp;<span id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span><br />
         
-    <label for="viz_startdate" required><?php echo lang('leaves_edit_field_start');?></label>
+    <label for="viz_startdate"><?php echo lang('leaves_edit_field_start');?></label>
     <input type="text" name="viz_startdate" id="viz_startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" />
     <input type="hidden" name="startdate" id="startdate" value="<?php echo $leave['startdate'];?>" />
     <select name="startdatetype" id="startdatetype">
@@ -49,7 +49,7 @@ if (isset($_GET['source'])) {
         <option value="Afternoon" <?php if ($leave['startdatetype'] == "Afternoon") {echo "selected";}?>><?php echo lang('leaves_date_type_afternoon');?></option>
     </select><br />
     
-    <label for="viz_enddate" required><?php echo lang('leaves_edit_field_end');?></label>
+    <label for="viz_enddate"><?php echo lang('leaves_edit_field_end');?></label>
     <input type="text" name="viz_enddate" id="viz_enddate" value="<?php $date = new DateTime($leave['enddate']); echo $date->format(lang('global_date_format'));?>" />
     <input type="hidden" name="enddate" id="enddate" value="<?php echo $leave['enddate'];?>" />
     <select name="enddatetype" id="enddatetype">
@@ -57,9 +57,7 @@ if (isset($_GET['source'])) {
         <option value="Afternoon" <?php if ($leave['enddatetype'] == "Afternoon") {echo "selected";}?>><?php echo lang('leaves_date_type_afternoon');?></option>
     </select><br />
 
-    <label for="duration" required><?php echo lang('leaves_edit_field_duration');?></label>
-    
-    <label for="duration" required><?php echo lang('leaves_create_field_duration');?></label>
+    <label for="duration"><?php echo lang('leaves_edit_field_duration');?></label>
     <?php if ($this->config->item('disable_edit_leave_duration') == TRUE) { ?>
     <input type="text" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" readonly />
     <?php } else { ?>
@@ -79,7 +77,7 @@ if (isset($_GET['source'])) {
     <label for="cause"><?php echo lang('leaves_edit_field_cause');?></label>
     <textarea name="cause"><?php echo $leave['cause']; ?></textarea>
     
-    <label for="status" required><?php echo lang('leaves_edit_field_status');?></label>
+    <label for="status"><?php echo lang('leaves_edit_field_status');?></label>
     <select name="status">
         <option value="1" <?php if ($leave['status'] == 1) echo 'selected'; ?>><?php echo lang('Planned');?></option>
         <option value="2" <?php if (($leave['status'] == 2) || $this->config->item('leave_status_requested')) echo 'selected'; ?>><?php echo lang('Requested');?></option>
@@ -122,7 +120,6 @@ if ($language_code != 'en') { ?>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<script src="<?php echo base_url();?>local/triggers/leave.js"></script>
 
 <?php require_once dirname(BASEPATH) . "/local/triggers/leave_view.php"; ?>
 

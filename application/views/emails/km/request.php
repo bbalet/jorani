@@ -49,7 +49,7 @@
                 <td><a href="{BaseUrl}requests/accept/{LeaveId}">ទទួលយកបាន</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">បដិសេធចោល</a></td>
             </tr>
         </table>
-<br />
-You can check the <a href="{BaseUrl}requests/counters/{UserId}">leave balance</a> before validating the leave request.
+        <br />
+        You can check the <a href="{BaseUrl}hr/counters/collaborators/{UserId}">leave balance</a> before validating the leave request.
     </body>
 </html>

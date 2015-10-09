@@ -56,7 +56,7 @@
             </tr>
         </table>
         <br />
-        You can check the <a href="{BaseUrl}requests/counters/{UserId}">leave balance</a> before validating the leave request.
+        You can check the <a href="{BaseUrl}hr/counters/collaborators/{UserId}">leave balance</a> before validating the leave request.
         <hr>
         <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
     </body>

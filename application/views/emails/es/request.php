@@ -45,8 +45,8 @@
                 <td><a href="{BaseUrl}requests/accept/{LeaveId}">Aceptar</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">Rechazar</a></td>
             </tr>
         </table>
-<br />
-Puede comprobar el <a href="{BaseUrl}requests/counters/{UserId}">balance de permisos</a> antes de la solicitud del permiso.
+        <br />
+        Puede comprobar el <a href="{BaseUrl}hr/counters/collaborators/{UserId}">balance de permisos</a> antes de la solicitud del permiso.
 
     </body>
 </html>

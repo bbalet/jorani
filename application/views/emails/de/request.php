@@ -45,8 +45,9 @@
                 <td><a href="{BaseUrl}requests/accept/{LeaveId}">Akzeptieren</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">Ablehnen</a></td>
             </tr>
         </table>
-<br />
-Über die <a href="{BaseUrl}requests/counters/{UserId}">Urlaubsstatistik</a> können Sie sich vor Beantwortung der Anfrage einen Überblick verschaffen.
-
+        <br />
+        Über die <a href="{BaseUrl}hr/counters/collaborators/{UserId}">Urlaubsstatistik</a> können Sie sich vor Beantwortung der Anfrage einen Überblick verschaffen.
+        <hr>
+        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
     </body>
 </html>

@@ -56,7 +56,7 @@
             </tr>
         </table>
         <br />
-        È possibile controllare il <a href="{BaseUrl}requests/counters/{UserId}">bilanciamento del congedo</a> prima di convalidare la richiesta di congedo.
+        È possibile controllare il <a href="{BaseUrl}hr/counters/collaborators/{UserId}">bilanciamento del congedo</a> prima di convalidare la richiesta di congedo.
         <hr>
         <h5>*** Questo è un messaggio generato automaticamente, si prega di non rispondere a questo messaggio ***</h5>
     </body>

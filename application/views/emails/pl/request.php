@@ -57,7 +57,7 @@
             </tr>
         </table>
         <br />
-        Możesz sprawdzić <a href="{BaseUrl}requests/counters/{UserId}">balans urlopu</a> przed weryfikacją wniosku urlopowego..
+        Możesz sprawdzić <a href="{BaseUrl}hr/counters/collaborators/{UserId}">balans urlopu</a> przed weryfikacją wniosku urlopowego..
         <hr>
         <h5>*** Ta wiadomość została wygenerowana automatycznie, prosimy nie odpowiadać na tę wiadomość ***</h5>
     </body>

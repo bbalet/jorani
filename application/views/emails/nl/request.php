@@ -50,7 +50,7 @@
               <td><a href="{BaseUrl}requests/reject/{LeaveId}">Afwijzen</a></td>
             </tr>
         </table>
-<br />
-Hier kunt u het <a href="{BaseUrl}requests/counters/{UserId}">dagensaldo</a> controleren <a href="{BaseUrl}requests/counters/{UserId}"></a>voordat u dit verzoek valideert.
+        <br />
+        Hier kunt u het <a href="{BaseUrl}hr/counters/collaborators/{UserId}">dagensaldo</a> controleren <a href="{BaseUrl}requests/counters/{UserId}"></a>voordat u dit verzoek valideert.
 </body>
 </html>

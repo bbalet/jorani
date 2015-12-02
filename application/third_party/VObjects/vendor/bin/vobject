@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+SRC_DIR="`pwd`"
+cd "`dirname "$0"`"
+cd "../sabre/vobject/bin"
+BIN_TARGET="`pwd`/vobject"
+cd "$SRC_DIR"
+"$BIN_TARGET" "$@"

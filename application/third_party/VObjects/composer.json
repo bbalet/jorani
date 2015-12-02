@@ -1,0 +1,5 @@
+{
+    "require": {
+        "sabre/vobject": "^3.4"
+    }
+}

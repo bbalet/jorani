@@ -1,21 +1,10 @@
 <?php 
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * This view is included into all desktop full views. It contains the footer of the application.
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
  */
 ?>
                     </div><!-- /span12 -->
@@ -25,9 +14,9 @@
     </div><!-- /wrap -->
     <!-- FOOTER -->
     <div class="row" id="footer">
-      <div class="span4"><?php echo lang('footer_copyright_notice');?></div>
-      <div class="span6 offset2"><img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;&nbsp;<b>Jorani</b>&nbsp;&nbsp;v0.5.0-dev</div>
-      <div class="span2">&nbsp;</div>
+      <div class="span4">&copy; 2014-2015 Benjamin BALET</div>
+      <div class="span4"><center><img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;&nbsp;<b><a href="http://jorani.org/" target="_blank">Jorani</a></b>&nbsp;&nbsp;v0.5.0-dev</center></div>
+      <div class="span4"><div class="pull-right"><a href="http://opensource.org/licenses/AGPL-3.0" target="_blank">AGPL-3.0</a></div></div>
     </div>
 </body>
 </html>

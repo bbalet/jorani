@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<?php 
+/**
+ * This view is included into all desktop full views. It contains HTML and CSS definitions.
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
+ */
+?><!DOCTYPE html>
 <html lang="<?php echo $language_code;?>">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -87,6 +95,61 @@ $this->lang->load('global', $language);?>
     .navbar .brand {
       background-color: #3097d1;
       color: white;
+    }
+    
+    /*Button*/
+    .btn {
+      border-radius: 1;
+      border-color: black;
+    }
+    
+    .btn:focus, .btn:active:focus, .btn.active:focus {
+        outline: 0 none;
+    }
+    
+    .btn-primary {
+        background: #3097d1;
+        border-color: #3097d1;
+        color: white;
+    }
+
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+        background: #3097d1;
+    }
+
+    .btn-primary:active, .btn-primary.active {
+        background: #3097d1;
+        box-shadow: none;
+    }
+    
+    .btn-danger {
+        background: #bd362f;
+        border-color: #bd362f;
+        color: white;
+    }
+
+    .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger {
+        background: #bd362f;
+    }
+
+    .btn-danger:active, .btn-danger.active {
+        background: #bd362f;
+        box-shadow: none;
+    }
+    
+    .btn-info {
+        background: #49afcd;
+        border-color: #49afcd;
+        color: white;
+    }
+
+    .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open > .dropdown-toggle.btn-info {
+        background: #49afcd;
+    }
+
+    .btn-info:active, .btn-info.active {
+        background: #49afcd;
+        box-shadow: none;
     }
 </style>
 <?php if ($this->config->item('ga_code') != "") { ?>

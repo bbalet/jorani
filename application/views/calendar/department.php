@@ -1,25 +1,17 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * This view displays the leave requests of the collaborators of the connected user (if any).
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
  */
 ?>
 
-<h1><?php echo lang('calendar_department_title');?> &nbsp;<?php echo $help;?></h1>
+<div class="row-fluid">
+    <div class="span12">
+
+<h2><?php echo lang('calendar_department_title');?> &nbsp;<?php echo $help;?></h2>
 
 <?php echo lang('calendar_department_description');?>
 
@@ -33,6 +25,9 @@
 </div>
 
 <div id='calendar'></div>
+
+    </div>
+</div>
 
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
         <div class="modal-header">
@@ -81,6 +76,44 @@ $(document).ready(function() {
             } else {
                 $('#frmModalAjaxWait').modal('hide');
             }    
+        },
+        eventAfterRender: function(event, element, view) {
+            //Add tooltip to the element
+            $(element).attr('title', event.title);
+            
+            if (event.enddatetype == "Morning" || event.startdatetype == "Afternoon") {
+                var nb_days = event.end.diff(event.start, "days");
+                var duration = 0.5;
+                var halfday_length = 0;
+                var length = 0;
+                var width = parseInt(jQuery(element).css('width'));
+                if (nb_days > 0) {
+                    if (event.enddatetype == "Afternoon") {
+                        duration = nb_days + 0.5;
+                    } else {
+                        duration = nb_days;
+                    }
+                    nb_days++;
+                    halfday_length = Math.round((width / nb_days) / 2);
+                    if (event.startdatetype == "Afternoon" && event.enddatetype == "Morning") {
+                        length = width - (halfday_length * 2);
+                    } else {
+                        length = width - halfday_length;
+                    }
+                } else {
+                    halfday_length = Math.round(width / 2);   //Average width of a day divided by 2
+                    length = halfday_length;
+                }
+            }
+            $(element).css('width', length + "px");
+            
+            //Starting afternoon : shift the position of event to the right
+            if (event.startdatetype == "Afternoon") {
+                $(element).css('margin-left', halfday_length + "px");
+            }
+        },
+        windowResize: function(view) {
+            $('#calendar').fullCalendar( 'rerenderEvents' );
         }
     });
 });

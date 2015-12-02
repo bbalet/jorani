@@ -1,28 +1,13 @@
-<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
-/* 
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+<?php
 /**
  * This class contains the business logic and manages the persistence of non working days
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
- * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.1.0
  */
+
+ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
 //VObject is used to import an external calendar feed (ICS) containing non working days.
 use Sabre\VObject;
@@ -269,18 +254,24 @@ class Dayoffs_model extends CI_Model {
                     $startdate = $entry->date . 'T07:00:00';
                     $enddate = $entry->date . 'T18:00:00';
                     $allDay = TRUE;
+                    $startdatetype = 'Morning';
+                    $enddatetype = 'Afternoon';
                     break;
                 case 2:
                     $title = lang('Morning') . ': ' . $entry->title;
                     $startdate = $entry->date . 'T07:00:00';
                     $enddate = $entry->date . 'T12:00:00';
                     $allDay = FALSE;
+                    $startdatetype = 'Morning';
+                    $enddatetype = 'Morning';
                     break;
                 case 3:
                     $title = lang('Afternoon') . ': ' . $entry->title;
                     $startdate = $entry->date . 'T12:00:00';
                     $enddate = $entry->date . 'T18:00:00';
                     $allDay = FALSE;
+                    $startdatetype = 'Afternoon';
+                    $enddatetype = 'Afternoon';
                     break;
             }
             $jsonevents[] = array(
@@ -289,7 +280,9 @@ class Dayoffs_model extends CI_Model {
                 'start' => $startdate,
                 'color' => '#000000',
                 'allDay' => $allDay,
-                'end' => $enddate
+                'end' => $enddate,
+                'startdatetype' => $startdatetype,
+                'enddatetype' => $enddatetype
             );
         }
         return json_encode($jsonevents);
@@ -339,18 +332,24 @@ class Dayoffs_model extends CI_Model {
                     $startdate = $entry->date . 'T07:00:00';
                     $enddate = $entry->date . 'T18:00:00';
                     $allDay = TRUE;
+                    $startdatetype = 'Morning';
+                    $enddatetype = 'Afternoon';
                     break;
                 case 2:
                     $title = lang('Morning') . ': ' . $entry->title;
                     $startdate = $entry->date . 'T07:00:00';
                     $enddate = $entry->date . 'T12:00:00';
                     $allDay = FALSE;
+                    $startdatetype = 'Morning';
+                    $enddatetype = 'Morning';
                     break;
                 case 3:
                     $title = lang('Afternoon') . ': ' . $entry->title;
                     $startdate = $entry->date . 'T12:00:00';
                     $enddate = $entry->date . 'T18:00:00';
                     $allDay = FALSE;
+                    $startdatetype = 'Afternoon';
+                    $enddatetype = 'Afternoon';
                     break;
             }
             $jsonevents[] = array(
@@ -359,7 +358,9 @@ class Dayoffs_model extends CI_Model {
                 'start' => $startdate,
                 'color' => '#000000',
                 'allDay' => $allDay,
-                'end' => $enddate
+                'end' => $enddate,
+                'startdatetype' => $startdatetype,
+                'enddatetype' => $enddatetype
             );
         }
         return json_encode($jsonevents);

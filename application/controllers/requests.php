@@ -79,7 +79,7 @@ class Requests extends CI_Controller {
         $this->load->model('delegations_model');
         $leave = $this->leaves_model->getLeaves($id);
         if (empty($leave)) {
-            show_404();
+            redirect('notfound');
         }
         $employee = $this->users_model->getUsers($leave['employee']);
         $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
@@ -110,7 +110,7 @@ class Requests extends CI_Controller {
         $this->load->model('delegations_model');
         $leave = $this->leaves_model->getLeaves($id);
         if (empty($leave)) {
-            show_404();
+            redirect('notfound');
         }
         $employee = $this->users_model->getUsers($leave['employee']);
         $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);

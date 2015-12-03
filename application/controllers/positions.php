@@ -1,28 +1,13 @@
-<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+<?php
 /**
  * This controller serves all the actions performed on postions
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
- * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.1.0
  */
+
+if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
 /**
  * This controller serves all the actions performed on postions
@@ -110,7 +95,10 @@ class Positions extends CI_Controller {
         $this->load->library('form_validation');
         $data['title'] = lang('positions_edit_title');
         $data['position'] = $this->positions_model->getPositions($id);
-        
+        //Check if exists
+        if (empty($data['position'])) {
+            redirect('notfound');
+        }
         $this->form_validation->set_rules('name', lang('positions_edit_field_name'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('description', lang('positions_edit_field_description'), 'xss_clean|strip_tags');
         

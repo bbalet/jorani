@@ -67,7 +67,7 @@ class Contracts extends CI_Controller {
 
         $data['contract'] = $this->contracts_model->getContracts($id);
         if (empty($data['contract'])) {
-            show_404();
+            redirect('notfound');
         }
 
         if ($this->form_validation->run() === FALSE) {
@@ -122,7 +122,7 @@ class Contracts extends CI_Controller {
         //Test if the contract exists
         $data['contract'] = $this->contracts_model->getContracts($id);
         if (empty($data['contract'])) {
-            show_404();
+            redirect('notfound');
         } else {
             $this->contracts_model->deleteContract($id);
         }

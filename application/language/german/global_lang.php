@@ -21,6 +21,7 @@ $lang['global_link_tooltip_documentation'] = 'Link zur Dokumentation';
 $lang['global_msg_error_forbidden'] = 'Operation (%s) ist nicht genehmigt';
 $lang['global_msg_wait'] = 'Bitte warten';
 $lang['global_msg_old_browser'] = 'Internet Explorer 8 und ältere Browser werden nicht unterstützt. Bitte aktualisieren Sie mindestens auf IE9 oder nutzen Sie Firefox oder Chrome.';
+$lang['global_msg_not_found'] = 'Object not found. Maybe that you are trying to access to an object that was deleted.';
 $lang['global_date_format'] = 'm/d/Y';
 $lang['global_true'] = 'WAHR';
 $lang['global_false'] = 'FALSCH';

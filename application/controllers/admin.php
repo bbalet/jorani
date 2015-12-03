@@ -7,7 +7,7 @@
  * @since         0.4.2
  */
 
- if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
+if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
 /**
  * This class serves the administration pages (readonly settings page for the moment).

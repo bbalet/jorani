@@ -22,6 +22,7 @@ $lang['global_link_tooltip_documentation'] = 'Link naar documentatie';
 $lang['global_msg_error_forbidden'] = 'Deze handeling (%s) is niet toegestaan';
 $lang['global_msg_wait'] = 'Een ogenblik geduld aub';
 $lang['global_msg_old_browser'] = 'Internet Explorer 8 en ouder browser worden niet ondersteund. Gelieve te upgraden naar IE9 of gebruik Firefox, Chrome, etc.';
+$lang['global_msg_not_found'] = 'Object not found. Maybe that you are trying to access to an object that was deleted.';
 $lang['global_date_format'] = 'd/m/Y';
 $lang['global_true'] = 'WAAR';
 $lang['global_false'] = 'NIET WAAR';

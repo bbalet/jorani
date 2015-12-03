@@ -24,6 +24,7 @@ $lang['global_link_tooltip_documentation'] = 'Lien vers la documentation';
 $lang['global_msg_error_forbidden'] = 'L\'opération (%s) n\'est pas autorisée';
 $lang['global_msg_wait'] = 'Veuillez patienter';
 $lang['global_msg_old_browser'] = 'Internet Explorer 8 et inférieur n\'est pas supporté. Veuillez utiliser IE9 ou Firefox, Chrome, etc.';
+$lang['global_msg_not_found'] = 'Objet non trouvé. Il est possible que vous tentiez d\'accèder à un objet supprimé.';
 $lang['global_date_format'] = 'd/m/Y';
 $lang['global_true'] = 'VRAI';
 $lang['global_false'] = 'FAUX';

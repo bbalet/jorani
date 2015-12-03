@@ -1,28 +1,13 @@
-<?php if (!defined('BASEPATH')) {exit('No direct script access allowed');}
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+<?php
 /**
  * This controller loads the static and custom pages of the application
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
- * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
+ * @since         0.4.0
  */
+
+if (!defined('BASEPATH')) {exit('No direct script access allowed');}
 
 /**
  * This class serve default and cutom pages.
@@ -39,6 +24,18 @@ class Pages extends CI_Controller {
         setUserContext($this);
     }
 
+    /**
+     * Display a simple view indicating that the business object was not found.
+     */
+    public function notfound() {
+        $data = getUserContext($this);
+        $data['title'] = 'Error';
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('pages/notfound', $data);
+        $this->load->view('templates/footer', $data);
+    }
+    
     /**
      * Display a page with this order of priority (based on the provided page name) :
      *  1. Does the page exist into local/pages/{lang}/ (this allows you to overwrite default pages)?
@@ -65,7 +62,7 @@ class Pages extends CI_Controller {
             $this->load->customView($pathLocal, $view, $data);
         } else {//Load the page from the default location (CI views folder)
             if (!file_exists($pathCI . $view)) {
-                    show_404();
+                    redirect('notfound');
             }
             $this->load->view($view, $data);
         }

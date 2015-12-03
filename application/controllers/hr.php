@@ -1,28 +1,13 @@
-<?php if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+<?php
 /**
  * This controller serves all the actions performed by human resources department
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
- * @license      http://opensource.org/licenses/GPL-3.0 GPL-3.0
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.1.0
  */
+
+if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
 /**
  * This class serves all the actions performed by human resources department.
@@ -106,7 +91,7 @@ class Hr extends CI_Controller {
         $data['name'] = $this->users_model->getName($id);
         //Check if exists
         if ($data['name'] == "") {
-            show_404();
+            redirect('notfound');
         }
         $this->lang->load('datatable', $this->language);
         $data['title'] = lang('hr_leaves_title');
@@ -132,7 +117,7 @@ class Hr extends CI_Controller {
         $data['name'] = $this->users_model->getName($id);
         //Check if exists
         if ($data['name'] == "") {
-            show_404();
+            redirect('notfound');
         }
         $this->lang->load('datatable', $this->language);
         $data['title'] = lang('hr_overtime_title');

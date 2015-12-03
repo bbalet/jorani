@@ -7,7 +7,7 @@
  * @since         0.1.0
  */
 
- if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
+if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
 //We can define custom triggers before saving the leave request into the database
 require_once FCPATH . "local/triggers/leave.php";
@@ -92,7 +92,7 @@ class Leaves extends CI_Controller {
         $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->getLeaves($id);
         if (empty($data['leave'])) {
-            show_404();
+            redirect('notfound');
         }
         //If the user is not its not HR, not manager and not the creator of the leave
         //the employee can't see it, redirect to LR list
@@ -192,7 +192,7 @@ class Leaves extends CI_Controller {
         $data['leave'] = $this->leaves_model->getLeaves($id);
         //Check if exists
         if (empty($data['leave'])) {
-            show_404();
+            redirect('notfound');
         }
         //If the user is not its own manager and if the leave is 
         //already requested, the employee can't modify it
@@ -342,7 +342,7 @@ class Leaves extends CI_Controller {
         //Test if the leave request exists
         $leaves = $this->leaves_model->getLeaves($id);
         if (empty($leaves)) {
-            show_404();
+            redirect('notfound');
         } else {
             if ($this->is_hr) {
                 $can_delete = TRUE;

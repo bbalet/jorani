@@ -5,13 +5,29 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 Following naming convention, this version will need a DB patch.
 
+- [X] Support half-days in Fullcalendar widget.
+- [ ] More flexibility with date format (see forum).
+- [ ] Report carried-over leaves wizard : select an entity (change date), opt-in/out employees, check suggested report and go.
+- [ ] Mass apply entitled days to a group of employees. (organisation) - (employees in entity) <-> select.
+- [ ] OAuth2 with Google as 3rd party authentifier.
+- [ ] USABILITY: Don't display 404 for broken links but a full page instead (controller Page ?).
+- [ ] Complete PHP triggers (add fruux lib to put CalDAV).
+Bugs:
+- [X] Broken link in Leave request e-mail.
+- [ ] ICS Feed is not working on some environments.
+- [ ] PNV: Entitled days of employees.
+Testing:
+- [ ] Simplify Overtime entitlments.
+Performance:
+- [ ] Optimize autoloading (see composer for VObjects).
+
+Maybe:
 - [ ] Update load test and its dataset.
 - [ ] Add a table to log the execution of services using the API (eg cron tasks) + a sample page in local to display them.
 - [ ] Possible DB optimization on leave table ALTER TABLE `leaves` ADD INDEX(`startdate`); ALTER TABLE `leaves` ADD INDEX(`enddate`);.
 - [ ] Possibility to sort the leave types. NEEDS DB PATCH (maybe). Cookie or DB ? Entity scope ?
 - [ ] Possibility to optionally exclude leave types to a contract. NEEDS DB PATCH (maybe). Impact leave request, should impact a dynamic build of leave balance report. 
 - [ ] Notification by e-mail : Request deleted / modified (maybe or report v0.5.0). We should maybe have basic objects to pass...
-- [ ] Report carried-over leaves wizard : select an entity (change date), opt-in/out employees, check suggested report and go.
 
 ## Ideas
 

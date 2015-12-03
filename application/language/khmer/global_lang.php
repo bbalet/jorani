@@ -22,6 +22,7 @@ $lang['global_link_tooltip_documentation'] = 'តំណភ្ជាប់ទៅ�
 $lang['global_msg_error_forbidden'] = 'ប្រតិបត្ដិការ (% s) គឺមិនត្រូវបានផ្តល់';
 $lang['global_msg_wait'] = 'Please wait';
 $lang['global_msg_old_browser'] = 'Internet Explorer 8 and older browser are not supported. Please upgrade to IE9 or use Firefox, Chrome, etc.';
+$lang['global_msg_not_found'] = 'Object not found. Maybe that you are trying to access to an object that was deleted.';
 $lang['global_date_format'] = 'm/d/Y';
 $lang['global_true'] = 'TRUE';
 $lang['global_false'] = 'FALSE';

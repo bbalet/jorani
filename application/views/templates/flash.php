@@ -1,6 +1,6 @@
 <?php 
 /**
- * This partial view is into views when we want to display a flash message.
+ * This partial view is included into views when we want to display a flash message.
  * @copyright  Copyright (c) 2014-2015 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani

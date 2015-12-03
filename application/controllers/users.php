@@ -112,7 +112,7 @@ class Users extends CI_Controller {
         $data = getUserContext($this);
         $data['user'] = $this->users_model->getUsers($this->user_id);
         if (empty($data['user'])) {
-            show_404();
+            redirect('notfound');
         }
         $data['title'] = lang('users_myprofile_html_title');
         $this->load->model('roles_model');
@@ -162,7 +162,7 @@ class Users extends CI_Controller {
         
         $data['users_item'] = $this->users_model->getUsers($id);
         if (empty($data['users_item'])) {
-            show_404();
+            redirect('notfound');
         }
 
         if ($this->form_validation->run() === FALSE) {
@@ -200,7 +200,7 @@ class Users extends CI_Controller {
         //Test if user exists
         $data['users_item'] = $this->users_model->getUsers($id);
         if (empty($data['users_item'])) {
-            show_404();
+            redirect('notfound');
         } else {
             $this->users_model->deleteUser($id);
         }
@@ -222,7 +222,7 @@ class Users extends CI_Controller {
         $data['users_item'] = $this->users_model->getUsers($id);
         if (empty($data['users_item'])) {
             log_message('debug', '{controllers/users/reset} user not found');
-            show_404();
+            redirect('notfound');
         } else {
             $data = getUserContext($this);
             $data['target_user_id'] = $id;

@@ -1,21 +1,12 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * lms is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * This diagnostic page helps you to check openssl setup and to generate a pair of keys.
+ * Please note that the configuration is not exposed by this page and that the pair of keys
+ * is calculated each time the page is reloaded.
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.4.3
  */
 
 define('BASEPATH', '.'); //Make this script works with nginx
@@ -25,8 +16,6 @@ define('KEY_SIZE', 1024);   //Change the RSA key size
 //CRYPT_RSA_MODE to 1 if you want to test the speed of Internal mode (without OpenSSL)
 //CRYPT_RSA_EXPONENT to 65537
 //CRYPT_RSA_SMALLEST_PRIME to 64 and multi-prime RSA is used
-
-//-----------------------------------------------------------------
 ?>
 <html>
     <head>

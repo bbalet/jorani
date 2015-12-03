@@ -59,7 +59,7 @@ class Extra extends CI_Controller {
         $data = getUserContext($this);
         $data['extra'] = $this->overtime_model->getExtras($id);
         if (empty($data['extra'])) {
-            show_404();
+            redirect('notfound');
         }
         
         //If the user is not its not HR, not manager and not the creator of the overtime
@@ -147,7 +147,7 @@ class Extra extends CI_Controller {
         $data['extra'] = $this->overtime_model->getExtras($id);
         //Check if exists
         if (empty($data['extra'])) {
-            show_404();
+            redirect('notfound');
         }
         //If the user is not its own manager and if the overtime is 
         //already requested, the employee can't modify it
@@ -269,7 +269,7 @@ class Extra extends CI_Controller {
         //Test if the overtime request exists
         $extra = $this->overtime_model->getExtras($id);
         if (empty($extra)) {
-            show_404();
+            redirect('notfound');
         } else {
             if ($this->is_hr) {
                 $can_delete = TRUE;

@@ -7,7 +7,7 @@
  * @since         0.3.0
  */
 
- if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
+if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
 /**
  * This class implements a REST API served through an OAuth2 server.

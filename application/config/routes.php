@@ -271,4 +271,5 @@ $route['session/forgetpassword'] = 'session/forgetpassword';
 //_______________________________________________
 //Default controllers
 $route['default_controller'] = 'leaves';
+$route['notfound'] = 'pages/notfound';
 $route['(:any)'] = 'pages/view/$1';

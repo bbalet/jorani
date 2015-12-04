@@ -67,6 +67,20 @@ $lang['entitleddays_user_confirm_delete_yes'] = 'Oui';
 $lang['entitleddays_user_confirm_delete_cancel'] = 'Annuler';
 $lang['entitleddays_user_index_field_step'] = 'Incrément';
 
+$lang['entitleddays_organization_title'] = 'Affecter des crédits d\'absence à plusieurs employés';
+$lang['entitleddays_organization_description'] = 'Double-cliquer pour ajouter ou retirer rapidement un employé d\'une liste.';
+$lang['entitleddays_organization_index_field_start'] = 'Date début';
+$lang['entitleddays_organization_index_field_end'] = 'Date fin';
+$lang['entitleddays_organization_index_field_type'] = 'Type d\'absence';
+$lang['entitleddays_organization_index_field_description'] = 'Description';
+$lang['entitleddays_organization_index_field_days'] = 'Jours';
+$lang['entitleddays_organization_index_button_add'] = 'Ajouter';
+
+$lang['organization_selection_thead_id'] = 'N°';
+$lang['organization_selection_thead_fullname'] = 'Nom';
+$lang['organization_selection_thead_entry_date'] = 'Ajouter';
+
+
 $lang['entitleddays_counters_title_contract'] = 'Crédit d\'absence pour le contrat n°';
 $lang['entitleddays_counters_description_contract'] = 'Période annuelle des congés : ';
 $lang['entitleddays_counters_title_employee'] = 'Crédit d\'absence pour l\'employé(e)';

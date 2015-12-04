@@ -37,6 +37,7 @@ $lang['menu_hr_title'] = 'HR';
 $lang['menu_hr_employees_divider'] = 'Сотрудники';
 $lang['menu_hr_list_organization'] = 'Организация';
 $lang['menu_hr_list_employees'] = 'Список сотрудников';
+$lang['menu_hr_list_entitlements'] = 'Entitlements';
 $lang['menu_hr_contracts_divider'] = 'Контракты';
 $lang['menu_hr_list_contracts'] = 'Список контактов';
 $lang['menu_hr_list_positions'] = 'Список должностей';

@@ -212,7 +212,7 @@ class Organization_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function employees($id) {
-        $this->db->select('id, firstname, lastname, email');
+        $this->db->select('id, firstname, lastname, email, datehired');
         $this->db->from('users');
         $this->db->where('organization', $id);
         $this->db->order_by('lastname', 'asc'); 

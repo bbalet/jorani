@@ -26,6 +26,7 @@ class Pages extends CI_Controller {
 
     /**
      * Display a simple view indicating that the business object was not found.
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function notfound() {
         $data = getUserContext($this);

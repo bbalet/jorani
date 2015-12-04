@@ -122,6 +122,7 @@ $route['organization/rename'] = 'organization/rename';
 $route['organization/move'] = 'organization/move';
 $route['organization/copy'] = 'organization/copy';
 $route['organization/employees'] = 'organization/employees';
+$route['organization/employeesDateHired'] = 'organization/employeesDateHired';
 $route['organization/addemployee'] = 'organization/addemployee';
 $route['organization/delemployee'] = 'organization/delemployee';
 $route['organization/getsupervisor'] = 'organization/getsupervisor';
@@ -214,6 +215,8 @@ $route['entitleddays/contract/(:num)'] = 'entitleddays/contract/$1';
 $route['entitleddays/ajax/contract'] = 'entitleddays/ajax_contract';
 $route['entitleddays/contractdelete/(:num)'] = 'entitleddays/contractdelete/$1';
 $route['entitleddays/ajax/update'] = 'entitleddays/ajax_update';
+$route['entitleddays/organization'] = 'entitleddays/organization';
+$route['entitleddays/organization/credit'] = 'entitleddays/organizationAjaxCredit';
 
 //_______________________________________________
 //Reports

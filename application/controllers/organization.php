@@ -165,6 +165,32 @@ class Organization extends CI_Controller {
     }
     
     /**
+     * Ajax endpoint: Returns the list of the employees attached to an entity
+     * The difference with employees endpoint is that the information is condensed and that we display the entry date
+     * Prints the table content in a JSON format expected by jQuery Datatable
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function employeesDateHired() {
+        header("Content-Type: application/json");
+        setUserContext($this);
+        $id = $this->input->get('id', TRUE);
+        $this->load->model('organization_model');
+        $employees = $this->organization_model->employees($id)->result();
+        $msg = '{"iTotalRecords":' . count($employees);
+        $msg .= ',"iTotalDisplayRecords":' . count($employees);
+        $msg .= ',"aaData":[';
+        foreach ($employees as $employee) {
+            $msg .= '["' . $employee->id . '",';
+            $msg .= '"' . $employee->firstname . " " . $employee->lastname . '",';
+            $msg .= '"' . $employee->datehired . '"';
+            $msg .= '],';
+        }
+        $msg = rtrim($msg, ",");
+        $msg .= ']}';
+        echo $msg;
+    }
+    
+    /**
      * Ajax endpoint: Add an employee to an entity of the organization
      * takes parameters by GET
      * @author Benjamin BALET <benjamin.balet@gmail.com>

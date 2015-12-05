@@ -33,6 +33,7 @@ define('KEY_SIZE', 1024);   //Change the RSA key size
                 <li><a href="testmail.php">Email</a></li>
                 <li><a href="testldap.php">LDAP</a></li>
                 <li class="active"><a href="#">SSL</a></li>
+                <li><a href="testoauth2.php">OAuth2</a></li>
                 <li><a href="opcache.php">Opcache</a></li>
               </ul>
             <h1>Test of your OpenSSL setup</h1>

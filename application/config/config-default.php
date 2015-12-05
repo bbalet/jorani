@@ -437,6 +437,13 @@ $config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';  //Change the pat
 $config['ldap_basedn_db'] = FALSE;      //It TRUE, ldap path is taken from user table
 
 //____________________________________________________________________________
+//Oauth2 configuration
+$config['oauth2_enabled'] = FALSE;
+$config['oauth2_provider'] = 'google';   //Supported providers: google
+$config['oauth2_client_id'] = '';
+$config['oauth2_client_secret'] = '';
+
+//____________________________________________________________________________
 //Enable public ICS feeds (global calendar, contract, personal information)
 $config['ics_enabled'] = TRUE;
 $config['default_timezone'] = 'Europe/Paris';

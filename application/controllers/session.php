@@ -61,6 +61,7 @@ class Session extends CI_Controller {
         }
         return base64_encode($rnd);
     }
+    
     /**
      * Login form
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -73,6 +74,7 @@ class Session extends CI_Controller {
         //Note that we don't receive the password as a clear string
         $this->form_validation->set_rules('login', lang('session_login_field_login'), 'required');
 
+        $data['last_page'] = $this->session->userdata('last_page');
         if ($this->form_validation->run() === FALSE) {
             $data['public_key'] = file_get_contents('./assets/keys/public.pem', TRUE);
             $data['salt'] = $this->generateRandomString(rand(5, 20));
@@ -213,4 +215,55 @@ class Session extends CI_Controller {
             echo "OK";
         }
     }
+    
+    /**
+     * Try to authenticate the user using one of the OAuth2 providers
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function loginOAuth2() {
+        require_once APPPATH . 'third_party/OAuthClient/vendor/autoload.php';
+        $oauth2Enabled = $this->config->item('oauth2_enabled');
+        $oauth2Provider = $this->config->item('oauth2_provider');
+        $oauth2ClientId = $this->config->item('oauth2_client_id');
+        $oauth2ClientSecret = $this->config->item('oauth2_client_secret');
+        if ($oauth2Enabled === FALSE) {
+            echo 'ERROR: OAuth2 is disabled';
+            return;
+        }
+        $authCode = $this->input->post('auth_code');
+        
+        if (!is_null($authCode)) {
+            $this->load->model('users_model');
+            switch ($oauth2Provider) {
+                case 'google':
+                    $provider = new League\OAuth2\Client\Provider\Google([
+                        'clientId' => $oauth2ClientId,
+                        'clientSecret' => $oauth2ClientSecret,
+                        'redirectUri' => 'postmessage',
+                        'accessType' => 'offline',
+                    ]);
+                    $token = $provider->getAccessToken('authorization_code', ['code' => $authCode]);
+                    try {
+                        //We try to get the e-mail address from the Google+ API
+                        $ownerDetails = $provider->getResourceOwner($token);
+                        $email = $ownerDetails->getEmail();
+                        //If we find the e-mail address into the database, we're good
+                        $loggedin = $this->users_model->checkCredentialsEmail($email);
+                        if ($loggedin === TRUE) {
+                            echo 'OK';
+                        } else {
+                            echo lang('session_login_flash_bad_credentials');
+                        }
+                    } catch (Exception $e) {
+                        echo 'ERROR: ' . $e->getMessage();
+                    }
+                    break;
+                default:
+                    echo 'ERROR: unsupported OAuth2 provider';
+            }
+        } else {
+            echo 'ERROR: Invalid OAuth2 token';
+        }
+    }
+
 }

@@ -1,21 +1,10 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * lms is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * This diagnostic page helps you to check your setup.
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.3.0
  */
 
 define('BASEPATH','.');//Make this script works with nginx
@@ -116,6 +105,7 @@ if ($configFileExists) {
                 <li><a href="testmail.php">Email</a></li>
                 <li><a href="testldap.php">LDAP</a></li>
                 <li><a href="testssl.php">SSL</a></li>
+                <li><a href="testoauth2.php">OAuth2</a></li>
                 <li><a href="opcache.php">Opcache</a></li>
               </ul>
             <h1>Jorani Requirements</h1>
@@ -168,20 +158,26 @@ if ($configFileExists) {
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;mcrypt is LOADED</td>
                       <?php } else { ?>
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;mcrypt IS NOT LOADED.</td>
-                      <?php } ?><td>PHP Extension mcrypt is required for the security features</td></tr>
+                      <?php } ?><td>PHP Extension mcrypt is required for the security features.</td></tr>
                       
                       <?php if (extension_loaded('Zend OPcache')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;OPcache is LOADED</td>
                       <?php } else { ?>
                       <tr><td><i class="icon-exclamation-sign"></i>&nbsp;OPcache IS NOT LOADED.</td>
-                      <?php } ?><td>Please consider activating OPcache for the best performance.</td></tr>
+                      <?php } ?><td>Please consider activating OPcache for the best performances.</td></tr>
                       
                       <?php if (extension_loaded('openssl')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;openssl is LOADED</td>
                       <?php } else { ?>
                       <tr><td><i class="icon-exclamation-sign"></i>&nbsp;openssl IS NOT LOADED.</td>
-                      <?php } ?><td>PHP Extension openssl speeds up the log in page</td></tr>
-                       
+                      <?php } ?><td>PHP Extension openssl speeds up the log in page.</td></tr>
+
+                      <?php if (extension_loaded('curl')) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;curl is LOADED</td>
+                      <?php } else { ?>
+                      <tr><td><i class="icon-exclamation-sign"></i>&nbsp;curl IS NOT LOADED.</td>
+                      <?php } ?><td>PHP Extension curl is needed for OAuth2 authentication.</td></tr>
+                      
                       <?php if (extension_loaded('ldap')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;ldap is LOADED</td>
                       <?php } else { ?>
@@ -214,6 +210,17 @@ if ($configFileExists) {
                   </tbody>
             </table>
 
+            <h2>Additional configuration</h2>
+            
+            <p>You can test the following settings, but you need to edit the corresponding PHP scripts :</p>
+            <ul>
+                <li><a href="testssl.php" target="_blank">SSL Configuration and Utility.</a></li>
+                <li><a href="testoauth2.php" target="_blank">OAuth2 Settings.</a></li>
+                <li><a href="testmail.php" target="_blank">E-mail Settings.</a></li>
+                <li><a href="testldap.php" target="_blank">LDAP Settings.</a></li>
+                <li><a href="opcache.php" target="_blank">OPCache Tester.</a></li>
+            </ul>
+            
             <h2>Database</h2>
 
             <table class="table table-bordered table-hover table-condensed">
@@ -241,16 +248,6 @@ if ($configFileExists) {
                       <?php } ?>
                   </tbody>
             </table>
-
-            <h2>Additional configuration</h2>
-            
-            <p>You can test the following settings, but you need to edit the corresponding PHP scripts :</p>
-            <ul>
-                <li><a href="testssl.php" target="_blank">SSL Configuration and Utility</a></li>
-                <li><a href="testmail.php" target="_blank">E-mail Settings</a></li>
-                <li><a href="testldap.php" target="_blank">LDAP Settings</a></li>
-                <li><a href="opcache.php" target="_blank">OPCache Tester</a></li>
-            </ul>
             
             <h2>Schema</h2>
 

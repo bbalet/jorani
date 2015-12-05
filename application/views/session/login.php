@@ -8,6 +8,19 @@
  */
 ?>
 
+<?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
+<script type="text/javascript" src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+<script type="text/javascript">
+    function start() {
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '<?php echo $this->config->item('oauth2_client_id');?>',
+        });
+      });
+    }
+</script>
+<?php }?>
+
 <style>
     body {
         background-image:url('<?php echo base_url();?>assets/images/login-background.jpg');
@@ -66,11 +79,17 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     <label for="password"><?php echo lang('session_login_field_password');?></label>
     <input class="input-medium" type="password" name="password" id="password" /><br />
     <br />
-    <button id="send" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></button><br />
-    <br />
+    <button id="send" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
+    <?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
+         <?php if ($this->config->item('oauth2_provider') == 'google') { ?>
+    <button id="cmdGoogleSignIn" class="btn btn-primary"><i class="fa fa-google"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
+        <?php } ?>
+    <?php } ?>
+    <br /><br />
     <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
     <button id="cmdForgetPassword" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
     <?php } ?>
+    
     <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>
                 </div>
                 <div class="span6" style="height:100%;">
@@ -108,6 +127,34 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         $('#loginFrom').submit();
     }
     
+    //Attempt to authenticate the user using OAuth2 protocol
+    function signInCallback(authResult) {
+        if (authResult['code']) {
+          $.ajax({
+            url: '<?php echo base_url();?>session/oauth2',
+            type: 'POST',
+            data: { 
+                      auth_code: authResult.code
+                      },
+            success: function(result) {
+                if (result == "OK") {
+                    var target = '<?php echo $last_page;?>';
+                    if (target == '') {
+                        window.location = "<?php echo base_url();?>";
+                    } else {
+                        window.location = target;
+                    }
+                } else {
+                    bootbox.alert(result);
+                }
+            }
+          });
+        } else {
+          // There was an error.
+          bootbox.alert("Unknown OAuth2 error");
+        }
+    }
+
     $(function () {
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
     $.ajaxSetup({
@@ -174,5 +221,15 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
             if(e.keyCode==13)
             submit_form();
         });
+        
+        //Alternative authentication methods
+<?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
+     <?php if ($this->config->item('oauth2_provider') == 'google') { ?>
+        $('#cmdGoogleSignIn').click(function() {
+            auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
+        });
+    <?php } ?>
+<?php } ?>
+        
     });
 </script>

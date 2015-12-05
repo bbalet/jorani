@@ -1,21 +1,10 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * This model contains the business logic and manages the persistence of users (employees)
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
  */
 
 class Users_model extends CI_Model {
@@ -44,7 +33,7 @@ class Users_model extends CI_Model {
         $query = $this->db->get_where('users', array('users.id' => $id));
         return $query->row_array();
     }
-
+    
     /**
      * Get the list of employees
      * @return array record of users
@@ -482,7 +471,28 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
-
+    
+    /**
+     * Check the provided credentials and load user's profile if they are correct
+     * Mostly used for alternative signin mechanisms such as SSO
+     * @param string $email E-mail address of the user
+     * @return bool TRUE if user was found into the database, FALSE otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function checkCredentialsEmail($email) {
+        $this->db->from('users');
+        $this->db->where('email', $email);
+        $this->db->where('active = TRUE');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $this->loadProfile($row);
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
      /**
      * Get the LDAP Authentication path of a user
      * @param string $login user login

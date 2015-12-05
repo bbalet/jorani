@@ -268,6 +268,7 @@ $route['ics/ical/(:num)'] = 'ics/ical/$1';
 //Session management
 $route['session/login'] = 'session/login';
 $route['session/logout'] = 'session/logout';
+$route['session/oauth2'] = 'session/loginOAuth2';
 $route['session/language'] = 'session/language';
 $route['session/forgetpassword'] = 'session/forgetpassword';
 

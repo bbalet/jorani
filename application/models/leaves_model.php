@@ -707,9 +707,9 @@ class Leaves_model extends CI_Model {
             $this->db->where('users.manager', $manager);
         }
         if ($all == FALSE) {
-            $this->db->where('status', 2);
+            $this->db->where('leaves.status', 2);
         }
-        $this->db->order_by('startdate', 'desc');
+        $this->db->order_by('leaves.startdate', 'desc');
         $query = $this->db->get('leaves');
         return $query->result_array();
     }

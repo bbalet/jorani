@@ -1,21 +1,10 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * This view builds a monthly tabular calendar for a group of employees.
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.3.0
  */
 
 CI_Controller::get_instance()->load->helper('language');
@@ -131,7 +120,7 @@ $this->lang->load('global', $language);?>
           if (strstr($day->display, ';')) {
               $periods = explode(";", $day->display);
               $statuses = explode(";", $day->status);
-                switch (intval($statuses[0]))
+                switch (intval($statuses[1]))
                 {
                     case 1: $class = "planned"; break;  // Planned
                     case 2: $class = "requested"; break;  // Requested
@@ -140,7 +129,7 @@ $this->lang->load('global', $language);?>
                     case 5: $class="dayoff"; break;
                     case 6: $class="dayoff"; break;
                 }
-                switch (intval($statuses[1]))
+                switch (intval($statuses[0]))
                 {
                     case 1: $class .= "planned"; break;  // Planned
                     case 2: $class .= "requested"; break;  // Requested

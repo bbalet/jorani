@@ -1,21 +1,11 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * This view builds the monthly presence report of an employee
+ * By default, the last month is selected.
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.3.1
  */
 ?>
 
@@ -132,7 +122,7 @@
           if (strstr($day->display, ';')) {
               $periods = explode(";", $day->display);
               $statuses = explode(";", $day->status);
-                switch (intval($statuses[0]))
+                switch (intval($statuses[1]))
                 {
                     case 1: $class = "planned"; break;  // Planned
                     case 2: $class = "requested"; break;  // Requested
@@ -141,7 +131,7 @@
                     case 5: $class="dayoff"; break;
                     case 6: $class="dayoff"; break;
                 }
-                switch (intval($statuses[1]))
+                switch (intval($statuses[0]))
                 {
                     case 1: $class .= "planned"; break;  // Planned
                     case 2: $class .= "requested"; break;  // Requested
@@ -359,6 +349,44 @@ $(function () {
                 } else {
                     $('#frmModalAjaxWait').modal('hide');
                 }    
+            },
+            eventAfterRender: function(event, element, view) {
+                //Add tooltip to the element
+                $(element).attr('title', event.title);
+
+                if (event.enddatetype == "Morning" || event.startdatetype == "Afternoon") {
+                    var nb_days = event.end.diff(event.start, "days");
+                    var duration = 0.5;
+                    var halfday_length = 0;
+                    var length = 0;
+                    var width = parseInt(jQuery(element).css('width'));
+                    if (nb_days > 0) {
+                        if (event.enddatetype == "Afternoon") {
+                            duration = nb_days + 0.5;
+                        } else {
+                            duration = nb_days;
+                        }
+                        nb_days++;
+                        halfday_length = Math.round((width / nb_days) / 2);
+                        if (event.startdatetype == "Afternoon" && event.enddatetype == "Morning") {
+                            length = width - (halfday_length * 2);
+                        } else {
+                            length = width - halfday_length;
+                        }
+                    } else {
+                        halfday_length = Math.round(width / 2);   //Average width of a day divided by 2
+                        length = halfday_length;
+                    }
+                }
+                $(element).css('width', length + "px");
+
+                //Starting afternoon : shift the position of event to the right
+                if (event.startdatetype == "Afternoon") {
+                    $(element).css('margin-left', halfday_length + "px");
+                }
+            },
+            windowResize: function(view) {
+                $('#calendar').fullCalendar( 'rerenderEvents' );
             }
         });
         

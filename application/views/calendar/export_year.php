@@ -1,21 +1,11 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * lms is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * This view exports a yearly calendar of the leave taken by a user (can be displayed by HR or manager)
+ * It builds an Excel 2007 file downloaded by the browser.
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.4.3
  */
 
 //Either self access, Manager or HR
@@ -152,7 +142,7 @@ foreach ($months as $month_name => $month) {
                 //6 - Afternoon Day Off /|
               $sheet->getComment($col . $line)->getText()->createTextRun($types[0]);
               $sheet->getComment($col . ($line + 1))->getText()->createTextRun($types[1]);
-              switch (intval($statuses[0]))
+              switch (intval($statuses[1]))
               {
                 case 1: $sheet->getStyle($col . $line)->applyFromArray($styleBgPlanned); break;  // Planned
                 case 2: $sheet->getStyle($col . $line)->applyFromArray($styleBgRequested); break;  // Requested
@@ -161,7 +151,7 @@ foreach ($months as $month_name => $month) {
                 case '5': $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
                 case '6': $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
               }
-              switch (intval($statuses[1]))
+              switch (intval($statuses[0]))
               {
                 case 1: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgPlanned); break;  // Planned
                 case 2: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRequested); break;  // Requested

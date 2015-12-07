@@ -1,21 +1,10 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * This view displays a yearly calendar of the leave taken by a user (can be displayed by HR or manager)
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.4.3
  */
 ?>
 <link href="<?php echo base_url();?>assets/css/tabular.css" rel="stylesheet">
@@ -68,9 +57,15 @@
                 $periods = explode(";", $day->display);
                 $statuses = explode(";", $day->status);
                 $types = explode(";", $day->type);
-                $display = $periods[0];
-                $status = $statuses[0];
-                $type = $types[0];
+                if (($periods[0] == 1) || ($periods[0] == 2) || ($periods[0] == 4) || ($periods[0] == 5)) {
+                    $display = $periods[0];
+                    $status = $statuses[0];
+                    $type = $types[0];
+                } else {
+                    $display = $periods[1];
+                    $status = $statuses[1];
+                    $type = $types[1];   
+                }
             } else {
                 $display = $day->display;
                 $status = $day->status;
@@ -108,9 +103,15 @@
                 $periods = explode(";", $day->display);
                 $statuses = explode(";", $day->status);
                 $types = explode(";", $day->type);
-                $display = $periods[1];
-                $status = $statuses[1];
-                $type = $types[1];
+                if (($periods[0] == 1) || ($periods[0] == 3) || ($periods[0] == 4) || ($periods[0] == 6)) {
+                    $display = $periods[0];
+                    $status = $statuses[0];
+                    $type = $types[0];
+                } else {
+                    $display = $periods[1];
+                    $status = $statuses[1];
+                    $type = $types[1];   
+                }
             } else {
                 $display = $day->display;
                 $status = $day->status;
@@ -131,6 +132,12 @@
       } ?>
     </tr>
   <?php } ?>
+        <tr>
+            <td>&nbsp;</td>
+            <?php for ($ii = 1; $ii <=31; $ii++) {
+                    echo '<td>' . $ii . '</td>';
+                }?>
+        </tr>
   </tbody>
 </table>
         

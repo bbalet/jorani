@@ -12,7 +12,7 @@ $this->lang->load('calendar', $language);
 $this->lang->load('global', $language);?>
 
 <link href="<?php echo base_url();?>assets/css/tabular.css" rel="stylesheet">
-<h1><?php echo lang('calendar_tabular_title');?> &nbsp;<?php echo $help;?></h1>
+<h2><?php echo lang('calendar_tabular_title');?> &nbsp;<?php echo $help;?></h2>
 
 <div class="row-fluid">
     <div class="span4">

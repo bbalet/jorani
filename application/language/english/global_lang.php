@@ -1,24 +1,12 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * Translation file
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
  */
 
-//Global strings
 $lang['Leave Management System'] = 'Leave Management System';
 $lang['global_link_tooltip_documentation'] = 'Link to documentation';
 $lang['global_msg_error_forbidden'] = 'Operation (%s) is not granted';
@@ -29,17 +17,14 @@ $lang['global_date_format'] = 'm/d/Y';
 $lang['global_true'] = 'TRUE';
 $lang['global_false'] = 'FALSE';
 
-//Footer
 $lang['footer_link_go_top'] = 'Go top';
 $lang['footer_copyright_notice'] = '&copy; 2014 Jorani Authors';
 
-//Status
 $lang['Requested'] = 'Requested';
 $lang['Planned'] = 'Planned';
 $lang['Accepted'] = 'Accepted';
 $lang['Rejected'] = 'Rejected';
 
-//Links to documentation
 $lang['global_link_doc_page_calendar_individual'] = '';
 $lang['global_link_doc_page_calendar_workmates'] = '';
 $lang['global_link_doc_page_calendar_collaborators'] = '';
@@ -75,12 +60,10 @@ $lang['global_link_doc_page_presence_report'] = '';
 
 $lang['global_link_doc_page_leave_balance_report'] = 'http://jorani.org/page-leave-balance-report.html';
 
-//Calendar
 $lang['Morning'] = 'Morning';
 $lang['Afternoon'] = 'Afternoon';
 $lang['today'] = 'today';
 
-//Global strings
 $lang['identifier'] = 'identifier';
 $lang['firstname'] = 'firstname';
 $lang['lastname'] = 'lastname';

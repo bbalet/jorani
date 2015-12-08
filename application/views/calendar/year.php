@@ -8,7 +8,7 @@
  */
 ?>
 <link href="<?php echo base_url();?>assets/css/tabular.css" rel="stylesheet">
-<h1><?php echo lang('calendar_year_title');?>&nbsp;<span class="muted">(<?php echo $employee_name;?>)</span>&nbsp;<?php echo $help;?></h1>
+<h2><?php echo lang('calendar_year_title');?>&nbsp;<span class="muted">(<?php echo $employee_name;?>)</span>&nbsp;<?php echo $help;?></h2>
 
 <div class="row-fluid">
     <div class="span4">

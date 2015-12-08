@@ -7,6 +7,11 @@
  * @since         0.1.0
  */
 
+if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
+
+/**
+ * This class contains the business logic and manages the persistence of leave requests.
+ */
 class Leaves_model extends CI_Model {
 
     /**

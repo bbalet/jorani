@@ -1,24 +1,12 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @copyright  Copyright (c) 2014 - 2015 Benjamin BALET
+/**
+ * Translation file
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
  */
 
-//Global strings
 $lang['Leave Management System'] = 'Gestion des demandes de congé';
 $lang['global_link_tooltip_documentation'] = 'Lien vers la documentation';
 $lang['global_msg_error_forbidden'] = 'L\'opération (%s) n\'est pas autorisée';
@@ -29,17 +17,14 @@ $lang['global_date_format'] = 'd/m/Y';
 $lang['global_true'] = 'VRAI';
 $lang['global_false'] = 'FAUX';
 
-//Footer
 $lang['footer_link_go_top'] = 'Aller en haut';
 $lang['footer_copyright_notice'] = '&copy; 2014 Les auteurs de Jorani';
 
-//Status
 $lang['Requested'] = 'Demandée';
 $lang['Planned'] = 'Planifiée';
 $lang['Accepted'] = 'Acceptée';
 $lang['Rejected'] = 'Rejetée';
 
-//Links to documentation
 $lang['global_link_doc_page_calendar_individual'] = 'http://fr.jorani.org/ecrans/page-mon-calendrier.html';
 $lang['global_link_doc_page_calendar_workmates'] = 'http://fr.jorani.org/ecrans/page-calendrier-mes-collegues.html';
 $lang['global_link_doc_page_calendar_collaborators'] = 'http://fr.jorani.org/ecrans/page-calendrier-mes-collaborateurs.html';
@@ -75,12 +60,10 @@ $lang['global_link_doc_page_presence_report'] = 'http://fr.jorani.org/ecrans/pag
 
 $lang['global_link_doc_page_leave_balance_report'] = 'http://fr.jorani.org/ecrans/page-rapport-etat-des-conges.html';
 
-//Calendar
 $lang['Morning'] = 'Matin';
 $lang['Afternoon'] = 'Après-midi';
 $lang['today'] = 'aujourd\'hui';
 
-//Global strings
 $lang['identifier'] = 'identifiant';
 $lang['firstname'] = 'prénom';
 $lang['lastname'] = 'nom';

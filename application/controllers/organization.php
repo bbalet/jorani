@@ -8,7 +8,12 @@
  */
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
- 
+
+/**
+ * This class allows to manage the organization of of users. Users can be attached to a node of a tree.
+ * These nodes are called 'entities' and can be 'departments' or 'sub-departments', 'groups', etc.
+ * It allows to use filters on a part of your structure, whatever your organization is.
+ */
 class Organization extends CI_Controller {
     
     /**

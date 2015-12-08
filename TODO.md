@@ -9,17 +9,17 @@ Following naming convention, this version will need a DB patch.
 - [ ] More flexibility with date format (see forum).
 - [ ] Report carried-over leaves wizard : select an entity (change date), opt-in/out employees, check suggested report and go.
 - [ ] Mass apply entitled days to a group of employees. (organisation) - (employees in entity) <-> select.
-- [ ] OAuth2 with Google as 3rd party authentifier.
-- [ ] USABILITY: Don't display 404 for broken links but a full page instead (controller Page ?).
-- [ ] Complete PHP triggers (add fruux lib to put CalDAV).
+- [X] OAuth2 with Google+ as 3rd party authentifier.
+- [X] USABILITY: Don't display 404 for broken links but a full page instead (controller Page ?).
+- [ ] Complete PHP triggers (add fruux lib to put CalDAV -> no : incomplete library).
 Bugs:
 - [X] Broken link in Leave request e-mail.
-- [ ] ICS Feed is not working on some environments.
+- [X] ICS Feed is not working in gloabal calendar (partly due to missing timezone var in PHP.ini).
 - [ ] PNV: Entitled days of employees.
 Testing:
 - [ ] Simplify Overtime entitlments.
 Performance:
-- [ ] Optimize autoloading (see composer for VObjects).
+- [X] Optimize autoloading (see composer for VObjects).
 
 Maybe:
 - [ ] Update load test and its dataset.

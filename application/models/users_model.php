@@ -7,6 +7,12 @@
  * @since         0.1.0
  */
 
+if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
+
+/**
+ * This model contains the business logic and manages the persistence of users (employees)
+ * It is also used by the session controller for the authentication.
+ */
 class Users_model extends CI_Model {
 
     /**

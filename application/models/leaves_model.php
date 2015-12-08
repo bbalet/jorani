@@ -678,7 +678,6 @@ class Leaves_model extends CI_Model {
         }
         $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
         $this->db->order_by('startdate', 'desc');
-        $this->db->limit(1024);  //Security limit
         $events = $this->db->get()->result_array();
         return $events;
     }

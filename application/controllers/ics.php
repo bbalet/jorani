@@ -144,6 +144,7 @@ class Ics extends CI_Controller {
             $this->output->set_header("HTTP/1.0 403 Forbidden");
         } else {
             $this->load->model('leaves_model');
+            $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
             $result = $this->leaves_model->entity($entity, $children);
             if (empty($result)) {
                 echo "";

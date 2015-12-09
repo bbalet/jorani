@@ -1,26 +1,16 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @author Oleg Koptev
+/**
+ * Translation file
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.4.2
+ * @author        Oleg Koptev, Yevhen Kyrylchenko
  */
 
-$lang['datatable_sEmptyTable'] = 'В таблице нет даты';
-$lang['datatable_sInfo'] = 'Показ _START_ — _END_ из _TOTAL_ записей';
-$lang['datatable_sInfoEmpty'] = 'Просмотр 0 — 0 из 0 записей';
+$lang['datatable_sEmptyTable'] = 'В таблице нет данных';
+$lang['datatable_sInfo'] = 'Показано _START_ — _END_ из _TOTAL_ записей';
+$lang['datatable_sInfoEmpty'] = 'Показано 0 — 0 из 0 записей';
 $lang['datatable_sInfoFiltered'] = '(отфильтровано от общего количества записей: _MAX_)';
 $lang['datatable_sInfoPostFix'] = '';
 $lang['datatable_sInfoThousands'] = ',';

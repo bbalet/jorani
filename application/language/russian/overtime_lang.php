@@ -1,29 +1,19 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @author Oleg Koptev
+/**
+ * Translation file
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.4.2
+ * @author        Oleg Koptev, Yevhen Kyrylchenko
  */
 
-$lang['overtime_index_title'] = 'запросы на сверхурочные, представленные на ваше рассмотрение.';
-$lang['overtime_index_description'] = 'This screen lists the overtime requests submitted to you. If you are not a manager, this list will always be empty.';
+$lang['overtime_index_title'] = 'Запросы на сверхурочные, представленные на ваше рассмотрение.';
+$lang['overtime_index_description'] = 'Здесь показан список заявлений на сверхурочные, представленных на ваше рассмотрение. Если вы не руководитель, этот список всегда будет пуст.';
 $lang['overtime_index_thead_tip_view'] = 'просмотреть';
-$lang['overtime_index_thead_tip_accept'] = 'принять';
-$lang['overtime_index_thead_tip_reject'] = 'отказать';
-$lang['overtime_index_thead_id'] = 'ИД';
+$lang['overtime_index_thead_tip_accept'] = 'утвердить';
+$lang['overtime_index_thead_tip_reject'] = 'отклонить';
+$lang['overtime_index_thead_id'] = 'ID';
 $lang['overtime_index_thead_fullname'] = 'ФИО';
 $lang['overtime_index_thead_date'] = 'Дата';
 $lang['overtime_index_thead_duration'] = 'Продолжительность';
@@ -31,12 +21,14 @@ $lang['overtime_index_thead_status'] = 'Состояние';
 $lang['overtime_index_button_export'] = 'Экспортировать список';
 $lang['overtime_index_button_show_all'] = 'Все запросы';
 $lang['overtime_index_button_show_pending'] = 'Запросы на рассмотрении';
-$lang['overtime_reject_flash_msg_error'] = 'You are not the line manager of this employee. You cannot reject this overtime request.';
+
+$lang['overtime_reject_flash_msg_error'] = 'Вы не являетесь руководителем подразделения, к которому относится данный сотрудник. Вы не можете одобрить данное Запрос на сверхурочную работу.';
 $lang['overtime_reject_flash_msg_success'] = 'Запрос на сверхурочную работу успешно отклонен';
-$lang['overtime_accept_flash_msg_error'] = 'You are not the line manager of this employee. You cannot accept this overtime request.';
-$lang['overtime_accept_flash_msg_success'] = 'Запрос на сверхурочную работу успешно одобрен';
+$lang['overtime_accept_flash_msg_error'] = 'Вы не являетесь руководителем подразделения, к которому относится данный сотрудник. Вы не можете одобрить данное заявление на отпуск.';
+$lang['overtime_accept_flash_msg_success'] = 'Запрос на сверхурочную работу успешно утвержден';
+
 $lang['overtime_export_title'] = 'Список запросов на сверхурочную работу';
-$lang['overtime_export_thead_id'] = 'ИД';
+$lang['overtime_export_thead_id'] = 'ID';
 $lang['overtime_export_thead_fullname'] = 'ФИО';
 $lang['overtime_export_thead_date'] = 'Дата';
 $lang['overtime_export_thead_duration'] = 'Продолжительность';

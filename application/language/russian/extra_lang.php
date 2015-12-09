@@ -1,28 +1,18 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @author Oleg Koptev
+/**
+ * Translation file
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.4.2
+ * @author        Oleg Koptev, Yevhen Kyrylchenko
  */
 
 $lang['extra_index_title'] = 'Мои запросы на сверхурочную работу';
 $lang['extra_index_thead_tip_view'] = 'просмотреть';
 $lang['extra_index_thead_tip_edit'] = 'редактировать';
 $lang['extra_index_thead_tip_delete'] = 'удалить';
-$lang['extra_index_thead_id'] = 'ИД';
+$lang['extra_index_thead_id'] = 'ID';
 $lang['extra_index_thead_date'] = 'Дата';
 $lang['extra_index_thead_cause'] = 'Причина';
 $lang['extra_index_thead_duration'] = 'Продолжительность';
@@ -37,13 +27,13 @@ $lang['extra_index_popup_delete_button_no'] = 'Нет';
 $lang['extra_create_title'] = 'Отправить запрос на сверхурочную работу';
 $lang['extra_create_field_date'] = 'Дата';
 $lang['extra_create_field_duration'] = 'Продолжительность';
-$lang['extra_create_field_duration_description'] = 'В целых днях или дробных частях дня (например 0,13 для 1 часа, при 8-часовом рабочем дне)';
+$lang['extra_create_field_duration_description'] = 'В целых днях или дробных частях дня (например 0,125 для 1 часа, при 8-часовом рабочем дне)';
 $lang['extra_create_field_cause'] = 'Причина';
 $lang['extra_create_field_status'] = 'Состояние';
 $lang['extra_create_button_create'] = 'Запрос на сверхурочную работу';
 $lang['extra_create_button_cancel'] = 'Отмена';
 $lang['extra_create_msg_success'] = 'Запрос на сверхурочную работу успешно создан';
-$lang['extra_create_msg_error'] = 'The overtime request has been succesfully created or updated, but you don\'t have a manager.';
+$lang['extra_create_msg_error'] = 'Запрос на сверхурочную работу успешно создан или обновлен, но у вас нет руководителя.';
 $lang['extra_create_mandatory_js_msg'] = '"Поле " + fieldname + " является обязательным."';
 $lang['extra_edit_title'] = 'Редактировать запрос на сверхурочную работу №';
 $lang['extra_edit_hmtl_title'] = 'Редактировать запрос на сверхурочную работу';
@@ -52,7 +42,7 @@ $lang['extra_edit_field_duration'] = 'Продолжительность';
 $lang['extra_edit_field_duration_description'] = 'В целых днях или дробных частях дня (например 0,125 для 1 часа, при 8-часовом рабочем дне)';
 $lang['extra_edit_field_cause'] = 'Причина';
 $lang['extra_edit_field_status'] = 'Состояние';
-$lang['extra_edit_button_update'] = 'Обновить сверхурочные работы';
+$lang['extra_edit_button_update'] = 'Обновить запрос на сверхурочную работу';
 $lang['extra_edit_button_cancel'] = 'Отмена';
 $lang['extra_edit_msg_error'] = 'Невозможно изменить уже отправленный запрос на сверхурочную работу';
 $lang['extra_edit_msg_success'] = 'Запрос на сверхурочную работу успешно обновлен';
@@ -67,7 +57,7 @@ $lang['extra_view_field_status'] = 'Состояние';
 $lang['extra_view_button_edit'] = 'Редактировать';
 $lang['extra_view_button_back_list'] = 'Вернуться к списку';
 $lang['extra_export_title'] = 'Список запросов на сверхурочную работу';
-$lang['extra_export_thead_id'] = 'ИД';
+$lang['extra_export_thead_id'] = 'ID';
 $lang['extra_export_thead_date'] = 'Дата';
 $lang['extra_export_thead_duration'] = 'Продолжительность';
 $lang['extra_export_thead_cause'] = 'Причина';

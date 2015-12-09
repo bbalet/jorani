@@ -1,4 +1,4 @@
-Jorani is a Leave Management System developed in PHP/MySQL under a GPL v3 licence.
+Jorani is a Leave Management System developed in PHP/MySQL under an AGPL v3 licence.
 Jorani is designed to provide simple leave and overtime request workflows for small organizations.
 
 ![Jorani Logo](https://raw.githubusercontent.com/bbalet/jorani/master/assets/images/Jorani_Logo_horizontal-700.png)
@@ -60,7 +60,7 @@ Use bbalet / bbalet for login / password.
 
 * NGO Passerelles numériques, our first user http://passerellesnumeriques.org/en/
 * Github and Google groupe users for their ideas and tests.
-* Translation : Hector NESTAR (Spanish), Roger WOLFS (Dutch), Christian SONNENBERG (German), Dario BRIGNONE (Italian), Oleg KOPTEV (Russian) and all participants of the Transifex project.
+* Translation : Hector NESTAR (Spanish), Roger WOLFS (Dutch), Christian SONNENBERG (German), Dario BRIGNONE (Italian), Oleg KOPTEV and Yevhen Kyrylchenko (Russian) and all participants of the Transifex project.
 
 ### Third party libraries and components
 
@@ -71,7 +71,9 @@ We thank the following open source projects for the components used by Jorani:
 * CodeIgniter MVC framework http://www.codeigniter.com/
 * RSA Encryption in pure PHP https://github.com/phpseclib/phpseclib
 * Excel import/export https://github.com/PHPOffice/PHPExcel
-* Oauth2 Server https://github.com/bshaffer/oauth2-server-php
+* OAuth2 Server https://github.com/bshaffer/oauth2-server-php
+* OAuth2 Client https://github.com/thephpleague/oauth2-client
+* OAuth2 Google Provider https://github.com/thephpleague/oauth2-google
 * Sabre/VObject https://github.com/fruux/sabre-vobject
 * PHPMailer https://github.com/PHPMailer/PHPMailer
 * PHPMailer CI wrapper https://github.com/ivantcholakov/codeigniter-phpmailer
@@ -83,6 +85,6 @@ We thank the following open source projects for the components used by Jorani:
 * FullCalendar http://arshaw.com/fullcalendar/
 * Datatable https://datatables.net/
 * RSA implementation https://github.com/travist/jsencrypt
-* Moment (JS dates lib) http://momentjs.com/
+* Moment (JS dates library) http://momentjs.com/
 * Selectize https://github.com/brianreavis/selectize.js
 * Zero Clipboard https://github.com/zeroclipboard/zeroclipboard

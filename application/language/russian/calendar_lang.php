@@ -1,21 +1,11 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @author Oleg Koptev
+/**
+ * Translation file
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.4.2
+ * @author        Oleg Koptev, Yevhen Kyrylchenko
  */
 
 $lang['calendar_year_title'] = 'Календарь на год';
@@ -30,41 +20,41 @@ $lang['calendar_individual_popup_event_button_close'] = 'Закрыть';
 $lang['calendar_individual_day_offs'] = 'Days off';
 
 $lang['calendar_workmates_title'] = 'Календарь моих коллег';
-$lang['calendar_workmates_description'] = 'Отпуска сотрудников с тем же руководителем структурного подразделения';
+$lang['calendar_workmates_description'] = 'Отпуска сотрудников с тем же руководителем отдела';
 
 $lang['calendar_collaborators_title'] = 'Календарь моих сотрудников';
-$lang['calendar_collaborators_description'] = 'Leaves of my collaborators (will be empty if I\'m not a manager).';
+$lang['calendar_collaborators_description'] = 'Отпуска моих коллег (будет пустым, если я не руководитель).';
 
 $lang['calendar_department_title'] = 'Календарь моего отдела';
 $lang['calendar_department_description'] = 'Календарь сотрудников, работающих в моем отделе';
-$lang['calendar_department_msg_error'] = 'It appears that you don\'t belong to any department. Please contact your HR Officer / Manager.';
+$lang['calendar_department_msg_error'] = 'Судя по всему вы не закреплены ни за одним из отделов. Обратитесь к своему руководителю.';
 
 $lang['calendar_organization_title'] = 'Календарь моей организации';
-$lang['calendar_organization_description'] = 'Общий календарь с фильтрацией по объекту';
-$lang['calendar_organization_field_select_entity'] = 'Выберите объект';
+$lang['calendar_organization_description'] = 'Общий календарь с фильтрацией по отделу';
+$lang['calendar_organization_field_select_entity'] = 'Выберите отдел';
 $lang['calendar_organization_button_select_entity'] = 'Выбрать';
 $lang['calendar_organization_check_include_subdept'] = 'Включая подотделы';
-$lang['calendar_organization_popup_entity_title'] = 'Выберите объект';
+$lang['calendar_organization_popup_entity_title'] = 'Выберите отдел';
 $lang['calendar_organization_popup_entity_button_ok'] = 'Ок';
 $lang['calendar_organization_popup_entity_button_cancel'] = 'Отмена';
 
 $lang['calendar_tabular_title'] = 'Табличный календарь';
-$lang['calendar_tabular_field_select_entity'] = 'Выберите объект';
+$lang['calendar_tabular_field_select_entity'] = 'Выберите отдел';
 $lang['calendar_tabular_field_month'] = 'Месяц';
 $lang['calendar_tabular_field_year'] = 'Год';
 $lang['calendar_tabular_button_select_entity'] = 'Выбрать';
 $lang['calendar_tabular_button_execute'] = 'Выполнить';
 $lang['calendar_tabular_button_export'] = 'Экспорт';
 $lang['calendar_tabular_check_include_subdept'] = 'Включая подотделы';
-$lang['calendar_tabular_popup_entity_title'] = 'Выберите объект';
+$lang['calendar_tabular_popup_entity_title'] = 'Выберите отдел';
 $lang['calendar_tabular_popup_entity_button_ok'] = 'Ок';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'Отмена';
 $lang['calendar_tabular_thead_employee'] = 'Сотрудник';
 $lang['calendar_tabular_export_title'] = 'Табличный календарь';
-$lang['calendar_tabular_export_param_entity'] = 'Объект';
+$lang['calendar_tabular_export_param_entity'] = 'Отдел';
 $lang['calendar_tabular_export_param_month'] = 'Месяц';
 $lang['calendar_tabular_export_param_year'] = 'Год';
-$lang['calendar_tabular_export_param_children'] = 'Подобъекты';
+$lang['calendar_tabular_export_param_children'] = 'Подотделы';
 $lang['calendar_tabular_export_thead_employee'] = 'Сотрудник';
 
 $lang['calendar_monday_short'] = 'Пн';

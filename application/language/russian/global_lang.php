@@ -1,24 +1,14 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * @author Oleg Koptev
+/**
+ * Translation file
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.4.2
+ * @author        Oleg Koptev, Yevhen Kyrylchenko
  */
 
-$lang['Leave Management System'] = 'отпуск системы управления';
+$lang['Leave Management System'] = 'Система управления отпусками';
 $lang['global_link_tooltip_documentation'] = 'Ссылка на документацию';
 $lang['global_msg_error_forbidden'] = 'Выполнение данного действия (%s) недоступно.';
 $lang['global_msg_wait'] = 'Подождите';
@@ -26,15 +16,15 @@ $lang['global_msg_old_browser'] = 'Internet Explorer 8 и более стары�
 $lang['global_msg_not_found'] = 'Object not found. Maybe that you are trying to access to an object that was deleted.';
 $lang['global_date_format'] = 'm/d/Y';
 
-$lang['global_true'] = 'ИСТИНА';
-$lang['global_false'] = 'ЛОЖЬ';
+$lang['global_true'] = 'ДА';
+$lang['global_false'] = 'НЕТ';
 
 $lang['footer_link_go_top'] = 'Наверх';
 $lang['footer_copyright_notice'] = '&copy; 2014 Разработчики Jorani';
 
 $lang['Requested'] = 'Запрошено';
 $lang['Planned'] = 'Запланировано';
-$lang['Accepted'] = 'Принято';
+$lang['Accepted'] = 'Утверждено';
 $lang['Rejected'] = 'Отклонено';
 
 $lang['global_link_doc_page_calendar_individual'] = '';
@@ -71,20 +61,20 @@ $lang['Morning'] = 'Утро';
 $lang['Afternoon'] = 'После полудня';
 $lang['today'] = 'сегодня';
 
-$lang['identifier'] = 'идентификатор';
+$lang['identifier'] = 'Идентификатор';
 $lang['firstname'] = 'имя';
 $lang['lastname'] = 'фамилия';
-$lang['datehired'] = 'дата принятия на работу';
+$lang['datehired'] = 'Дата принятия на работу';
 $lang['department'] = 'отдел';
 $lang['position'] = 'должность';
 $lang['contract'] = 'контракт';
 $lang['day off'] = 'выходной';
 $lang['leave'] = 'Отпуск';
 
-$lang['OK'] = 'Ок';
+$lang['OK'] = 'ОК';
 $lang['Cancel'] = 'Отмена';
 
-$lang['copied'] = 'копироваться';
+$lang['copied'] = 'копировать';
 
 $lang['global_ajax_timeout'] = 'Ваша сессия истекла. Выполните вход снова.';
 $lang['global_ajax_error'] = 'Неожиданная ошибка Ajax';

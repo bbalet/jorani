@@ -61,7 +61,8 @@ class Ics extends CI_Controller {
                     switch ($event->type) {
                         case 1: 
                             $startdate->setTime(0, 0);
-                            $enddate->setTime(23, 59);
+                            $enddate->setTime(0, 0);
+                            $enddate->modify('+1 day');
                             break;
                         case 2:
                             $startdate->setTime(0, 0);
@@ -69,7 +70,8 @@ class Ics extends CI_Controller {
                             break;
                         case 3:
                             $startdate->setTime(12, 0);
-                            $enddate->setTime(23, 59);
+                            $enddate->setTime(0, 0);
+                            $enddate->modify('+1 day');
                             break;
                     }                    
                     $vcalendar->add('VEVENT', Array(
@@ -116,7 +118,10 @@ class Ics extends CI_Controller {
                     if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
                     if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
                     if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
+                    if ($event['enddatetype'] == 'Afternoon'){
+                        $enddate->setTime(0, 0);
+                        $enddate->modify('+1 day');
+                    } 
                     
                     $vcalendar->add('VEVENT', Array(
                         'SUMMARY' => lang('leave'),

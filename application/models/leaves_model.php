@@ -83,10 +83,12 @@ class Leaves_model extends CI_Model {
      * @param int $employee
      * @param date $start start date of the leave request
      * @param date $end end date of the leave request
+     * @param string $startdatetype start date type of leave request being created (Morning or Afternoon)
+     * @param string $enddatetype end date type of leave request being created (Morning or Afternoon)
      * @return float length of leave
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function length($employee, $start, $end) {
+    public function length($employee, $start, $end, $startdatetype, $enddatetype) {
         $this->db->select('sum(CASE `type` WHEN 1 THEN 1 WHEN 2 THEN 0.5 WHEN 3 THEN 0.5 END) as days');
         $this->db->from('users');
         $this->db->join('dayoffs', 'users.contract = dayoffs.contract');
@@ -101,7 +103,13 @@ class Leaves_model extends CI_Model {
         if (count($result) != 0) { //Test if some non working days are defined on a contract
             return $numberDays - $result[0]['days'];
         } else {
-            return $numberDays;
+            //Special case when the leave request is half a day long, 
+            //we assume that the non-working day is not at the same time than the leave request
+            if ($startdatetype == $enddatetype) {
+                return 0.5;
+            } else {
+                return $numberDays;
+            }
         }
     }
     

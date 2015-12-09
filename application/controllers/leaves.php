@@ -470,8 +470,8 @@ class Leaves extends CI_Controller {
             }
         }
         if (isset($id) && isset($startdate) && isset($enddate)) {
-            $leaveValidator->length = $this->leaves_model->length($id, $startdate, $enddate);
             if (isset($startdatetype) && isset($enddatetype)) {
+                $leaveValidator->length = $this->leaves_model->length($id, $startdate, $enddate, $startdatetype, $enddatetype);
                 if (isset($leave_id)) {
                     $leaveValidator->overlap = $this->leaves_model->detectOverlappingLeaves($id, $startdate, $enddate, $startdatetype, $enddatetype, $leave_id);
                 } else {

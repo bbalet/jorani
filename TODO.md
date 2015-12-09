@@ -1,26 +1,27 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
+## v0.4.4
+
+- [X] Support half-days in Fullcalendar widget.
+- [X] USABILITY: Don't display 404 for broken links but a full page instead.
+- [X] OAuth2 with Google+ as 3rd party authentifier.
+- [X] Prevent the creation of a leave request with a duration of 0.
+Bugs:
+- [X] Broken link in Leave request e-mail.
+- [X] ICS Feed is not working in global calendar (partly due to missing timezone var in PHP.ini).
+Performance:
+- [X] Optimize autoloading (see composer for VObjects).
+
 ## v0.5.0 or later
 
 Following naming convention, this version will need a DB patch.
 
-- [X] Support half-days in Fullcalendar widget.
 - [ ] More flexibility with date format (see forum).
 - [ ] Report carried-over leaves wizard : select an entity (change date), opt-in/out employees, check suggested report and go.
 - [ ] Mass apply entitled days to a group of employees. (organisation) - (employees in entity) <-> select.
-- [X] OAuth2 with Google+ as 3rd party authentifier.
-- [X] USABILITY: Don't display 404 for broken links but a full page instead (controller Page ?).
 - [ ] Complete PHP triggers (add fruux lib to put CalDAV -> no : incomplete library).
-Bugs:
-- [X] Broken link in Leave request e-mail.
-- [X] ICS Feed is not working in gloabal calendar (partly due to missing timezone var in PHP.ini).
-- [ ] PNV: Entitled days of employees.
-Testing:
 - [ ] Simplify Overtime entitlments.
-Performance:
-- [X] Optimize autoloading (see composer for VObjects).
-
 Maybe:
 - [ ] Update load test and its dataset.
 - [ ] Add a table to log the execution of services using the API (eg cron tasks) + a sample page in local to display them.

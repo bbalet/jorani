@@ -16,7 +16,7 @@ $lang['leaves_summary_thead_taken'] = 'Taken';
 $lang['leaves_summary_thead_entitled'] = 'Entitled';
 $lang['leaves_summary_thead_description'] = 'Description';
 $lang['leaves_summary_tbody_empty'] = 'No entitled or taken days for this period. Please contact your HR Officer / Manager.';
-$lang['leaves_summary_flash_msg_error'] = 'It appears you have no contract. Please contact your HR Officer / Manager.';
+$lang['leaves_summary_flash_msg_error'] = 'It appears that you have no contract. Please contact your HR Officer / Manager.';
 $lang['leaves_summary_date_field'] = 'Date of report';
 
 $lang['leaves_index_title'] = 'My leave requests';

@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `dayoffs` (
   `contract` int(11) NOT NULL COMMENT 'Contract id',
   `date` date NOT NULL COMMENT 'Date of the day off',
   `type` int(11) NOT NULL COMMENT 'Half or full day',
-  `title` varchar(128) CHARACTER SET latin1 NOT NULL COMMENT 'Description of day off',
+  `title` varchar(128) CHARACTER SET utf8 NOT NULL COMMENT 'Description of day off',
   PRIMARY KEY (`id`),
   KEY `type` (`type`),
   KEY `contract` (`contract`)

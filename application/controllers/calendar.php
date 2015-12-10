@@ -322,6 +322,8 @@ class Calendar extends CI_Controller {
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
         $this->auth->checkIfOperationIsAllowed('organization_calendar');
+        $this->load->model('users_model');
+        $user = $this->users_model->getUsers($employee);
         //Either self access, Manager or HR
         if ($employee == 0) {
             $employee = $this->user_id;
@@ -338,7 +340,6 @@ class Calendar extends CI_Controller {
             $year = date("Y");
         }
         $this->load->model('leaves_model');
-        $this->load->model('users_model');
         $this->load->library('excel');
         $data['employee'] = $employee;
         $data['year'] = $year;

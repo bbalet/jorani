@@ -15,6 +15,7 @@ $lang['global_msg_wait'] = 'Подождите';
 $lang['global_msg_old_browser'] = 'Internet Explorer 8 и более старые версии браузера не поддерживаются. Выполните обновление до IE9 или используйте Firefox, Chrome, и т. д.';
 $lang['global_msg_not_found'] = 'Object not found. Maybe that you are trying to access to an object that was deleted.';
 $lang['global_date_format'] = 'm/d/Y';
+$lang['global_date_js_format'] = 'mm/dd/yy';
 
 $lang['global_true'] = 'ДА';
 $lang['global_false'] = 'НЕТ';

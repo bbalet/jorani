@@ -6,6 +6,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Support half-days in Fullcalendar widget.
 - [X] USABILITY: Don't display 404 for broken links but a full page instead.
 - [X] OAuth2 with Google+ as 3rd party authentifier.
+- [X] Add Ukrainian language.
 - [X] Prevent the creation of a leave request with a duration of 0.
 Bugs:
 - [X] Broken link in Leave request e-mail.
@@ -17,6 +18,7 @@ Performance:
 
 Following naming convention, this version will need a DB patch.
 
+- [ ] Fix wrong charset problem on table dayoffs.
 - [ ] More flexibility with date format (see forum).
 - [ ] Report carried-over leaves wizard : select an entity (change date), opt-in/out employees, check suggested report and go.
 - [ ] Mass apply entitled days to a group of employees. (organisation) - (employees in entity) <-> select.

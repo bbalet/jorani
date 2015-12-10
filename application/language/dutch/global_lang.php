@@ -1,19 +1,10 @@
 <?php
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+/**
+ * Translation file
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.1.0
  * @author Roger WOLFS
  */
 
@@ -24,6 +15,7 @@ $lang['global_msg_wait'] = 'Een ogenblik geduld aub';
 $lang['global_msg_old_browser'] = 'Internet Explorer 8 en ouder browser worden niet ondersteund. Gelieve te upgraden naar IE9 of gebruik Firefox, Chrome, etc.';
 $lang['global_msg_not_found'] = 'Object not found. Maybe that you are trying to access to an object that was deleted.';
 $lang['global_date_format'] = 'd/m/Y';
+$lang['global_date_js_format'] = 'dd/mm/yy';
 $lang['global_true'] = 'WAAR';
 $lang['global_false'] = 'NIET WAAR';
 

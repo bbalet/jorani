@@ -28,7 +28,7 @@ $lang['reports_balance_popup_entity_button_cancel'] = 'Отмена';
 
 $lang['reports_export_balance_title'] = 'Сальдо по отпускам';
 
-$lang['reports_leaves_title'] = 'Leave requests';
+$lang['reports_leaves_title'] = 'Список заявлений на отпуск';
 $lang['reports_leaves_month_field'] = 'Месяц';
 $lang['reports_leaves_year_field'] = 'Год';
 $lang['reports_leaves_field_entity'] = 'Выберите отдел';
@@ -40,4 +40,4 @@ $lang['reports_leaves_popup_entity_title'] = 'Выберите отдел';
 $lang['reports_leaves_popup_entity_button_ok'] = 'Ок';
 $lang['reports_leaves_popup_entity_button_cancel'] = 'Отмена';
 
-$lang['reports_export_leaves_title'] = 'Leave requests';
+$lang['reports_export_leaves_title'] = 'Список заявлений на отпуск';

@@ -1,0 +1,41 @@
+<?php
+/**
+ * Translation file
+ * @copyright Copyright (c) 2014-2015 Benjamin BALET
+ * @license     http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link           https://github.com/bbalet/jorani
+ * @since        0.1.0
+ * @author      Yevhen Kyrylchenko
+ */
+
+$lang['leavetypes_type_title'] = 'Типи відпусток';
+$lang['leavetypes_type_thead_id'] = 'ID';
+$lang['leavetypes_type_thead_name'] = 'Назва';
+$lang['leavetypes_type_thead_tip_delete'] = 'видалити';
+$lang['leavetypes_type_thead_tip_edit'] = 'редагувати';
+$lang['leavetypes_type_button_export'] = 'Експортувати список';
+$lang['leavetypes_type_button_create'] = 'Створити новий тип';
+$lang['leavetypes_type_not_found'] = 'Тип відпустки не знайдено в базі даних';
+
+$lang['leavetypes_popup_create_title'] = 'Додати тип відпустки';
+$lang['leavetypes_popup_create_button_cancel'] = 'Скасувати';
+$lang['leavetypes_popup_create_button_create'] = 'Створити';
+$lang['leavetypes_popup_create_field_name'] = 'Назва';
+$lang['leavetypes_popup_create_flash_msg'] = 'Тип відпустки успішно створений';
+$lang['leavetypes_popup_update_title'] = 'Редагувати тип відпустки';
+$lang['leavetypes_popup_update_button_cancel'] = 'Скасувати';
+$lang['leavetypes_popup_update_button_update'] = 'Оновити';
+$lang['leavetypes_popup_update_field_name'] = 'Назва';
+$lang['leavetypes_popup_update_flash_msg'] = 'Тип відпустки успішно оновлений';
+$lang['leavetypes_popup_delete_title'] = 'Видалити тип відпустки';
+$lang['leavetypes_popup_delete_description'] = 'Ви збираєтесь видалити один тип відпустки. Цю дію не можна буде скасувати.';
+$lang['leavetypes_popup_delete_confirm'] = 'Продовжити?';
+$lang['leavetypes_popup_delete_button_yes'] = 'Так';
+$lang['leavetypes_popup_delete_button_no'] = 'Ні';
+$lang['leavetypes_popup_delete_flash_msg'] = 'Тип відпустки успішно видалений.';
+$lang['leavetypes_popup_delete_flash_error'] = 'Не можна видалити системний тип відпустки.';
+$lang['leavetypes_popup_delete_flash_forbidden'] = 'Не можна видалити тип відпустки, що використовується.';
+
+$lang['leavetypes_type_export_title'] = 'Типи відпусток';
+$lang['leavetypes_type_export_thead_id'] = 'ID';
+$lang['leavetypes_type_export_thead_name'] = 'Назва';

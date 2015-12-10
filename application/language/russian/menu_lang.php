@@ -35,7 +35,7 @@ $lang['menu_hr_leaves_type_divider'] = 'Отпуска';
 $lang['menu_hr_list_leaves_type'] = 'Список типов';
 $lang['menu_hr_reports_divider'] = 'Отчеты';
 $lang['menu_hr_report_leave_balance'] = 'Сальдо по отпускам';
-$lang['menu_hr_report_leaves'] = 'Leave requests';
+$lang['menu_hr_report_leaves'] = 'Список заявлений на отпуск';
 
 $lang['menu_validation_title'] = 'Утверждение';
 $lang['menu_validation_delegations'] = 'передачи обязанностей';

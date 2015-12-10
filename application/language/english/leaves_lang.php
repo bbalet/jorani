@@ -70,7 +70,7 @@ $lang['leaves_edit_flash_msg_error'] = 'You cannot edit a leave request already 
 $lang['leaves_edit_flash_msg_success'] = 'The leave request has been succesfully updated';
 
 $lang['leaves_validate_mandatory_js_msg'] = '"The field " + fieldname + " is mandatory."';
-$lang['leaves_validate_flash_msg_no_contract'] = 'It appears you have no contract. Please contact your HR Officer / Manager.';
+$lang['leaves_validate_flash_msg_no_contract'] = 'It appears that you have no contract. Please contact your HR Officer / Manager.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'You can\'t create a leave request for two yearly leave periods. Please create two different leave requests.';
 
 $lang['leaves_delete_flash_msg_error'] = 'You can\'t delete this leave request';

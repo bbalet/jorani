@@ -136,10 +136,10 @@ if ($language_code != 'en') { ?>
     <?php } else {?>
     $(function () {$('#cmdCurrent').prop('disabled', true);});
     <?php }?>
-    //Global loacle for moment objects
+    //Global locale for moment objects
     moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});
-
     
+    //Compute the end and start dates with the contract of the employee (if defined)
     function set_current_period() {
         var now = moment();
         var startEntDate = moment();//now

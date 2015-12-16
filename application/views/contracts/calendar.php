@@ -39,7 +39,6 @@ padding-left:10px;
     display: inline-block;
     vertical-align: middle;
 }
-
 </style>
 
 <?php echo $flash_partial_view;?>
@@ -280,29 +279,31 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript">
-var timestamp;
+    var timestamp;
+    //Global locale for moment objects
+    moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});
 
-//Compute the end and start dates of the civil year being displayed
-function set_current_period() {
-    var startEntDate = moment();
-    var endEntDate = moment();
+    //Compute the end and start dates of the civil year being displayed
+    function set_current_period() {
+        var startEntDate = moment();
+        var endEntDate = moment();
 
-    //Compute boundaries
-    startEntDate.year(<?php echo $year;?>);
-    startEntDate.month(0);
-    startEntDate.date(1);
-    endEntDate.year(<?php echo $year;?>);
-    endEntDate.month(11);
-    endEntDate.date(31);
+        //Compute boundaries
+        startEntDate.year(<?php echo $year;?>);
+        startEntDate.month(0);
+        startEntDate.date(1);
+        endEntDate.year(<?php echo $year;?>);
+        endEntDate.month(11);
+        endEntDate.date(31);
 
-    //Presentation for DB and Human
-    startEntDate.locale('<?php echo $language_code;?>');
-    endEntDate.locale('<?php echo $language_code;?>');
-    $("#txtStartDate").val(startEntDate.format("YYYY-MM-DD"));
-    $("#txtEndDate").val(endEntDate.format("YYYY-MM-DD"));
-    $("#viz_startdate").val(startEntDate.format("L"));
-    $("#viz_enddate").val(endEntDate.format("L"));
-}
+        //Presentation for DB and Human
+        startEntDate.locale('<?php echo $language_code;?>');
+        endEntDate.locale('<?php echo $language_code;?>');
+        $("#txtStartDate").val(startEntDate.format("YYYY-MM-DD"));
+        $("#txtEndDate").val(endEntDate.format("YYYY-MM-DD"));
+        $("#viz_startdate").val(startEntDate.format("L"));
+        $("#viz_enddate").val(endEntDate.format("L"));
+    }
 
 //Add a day off by an Ajax query
 function add_day_off() {
@@ -380,6 +381,7 @@ $(function() {
         $("#viz_startdate").datepicker({
         changeMonth: true,
         changeYear: true,
+        dateFormat: '<?php echo lang('global_date_js_format');?>',
         altFormat: "yy-mm-dd",
         altField: "#txtStartDate",
         numberOfMonths: 3,
@@ -387,9 +389,11 @@ $(function() {
                 $( "#viz_enddate" ).datepicker( "option", "minDate", selectedDate );
               }
     }, $.datepicker.regional['<?php echo $language_code;?>']);
+    
     $("#viz_enddate").datepicker({
         changeMonth: true,
         changeYear: true,
+        dateFormat: '<?php echo lang('global_date_js_format');?>',
         altFormat: "yy-mm-dd",
         altField: "#txtEndDate",
         numberOfMonths: 3,

@@ -131,9 +131,10 @@ if ($language_code != 'en') { ?>
     var oTable;     //datatable
     var step = 1;
     var current_id = 1;
-    //Global loacle for moment objects
+    //Global locale for moment objects
     moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});
     
+    //Compute the end and start dates with the contract periods
     function set_current_period() {
         var now = moment();
         var startEntDate = moment();//now

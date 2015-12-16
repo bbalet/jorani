@@ -107,6 +107,7 @@ if ($language_code != 'en') { ?>
     var userId = <?php echo $user_id; ?>;
     var leaveId = null;
     var languageCode = '<?php echo $language_code;?>';
+    var dateJsFormat = '<?php echo lang('global_date_js_format');?>';
     
     var noContractMsg = "<?php echo lang('leaves_validate_flash_msg_no_contract');?>";
     var noTwoPeriodsMsg = "<?php echo lang('leaves_validate_flash_msg_overlap_period');?>";

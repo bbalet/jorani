@@ -94,7 +94,7 @@ if ($language_code != 'en') { ?>
     $(function () {
         //Init datepicker widget (it is complicated because we cannot based it on UTC)
         isDefault = <?php echo $isDefault;?>;
-        moment.locale('<?php echo $language_code;?>');
+        moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});
         reportDate = '<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>';
         todayDate = moment().format('L');
         if (isDefault == 1) {
@@ -103,6 +103,7 @@ if ($language_code != 'en') { ?>
             $("#refdate").val(reportDate);
         }
         $('#refdate').datepicker({
+            dateFormat: '<?php echo lang('global_date_js_format');?>',
             onSelect: function(dateText, inst) {
                     tmpUnix = moment($("#refdate").datepicker("getDate")).unix();
                     url = "<?php echo base_url();?>leaves/counters/" + tmpUnix;

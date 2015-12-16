@@ -117,6 +117,7 @@ if ($language_code != 'en') { ?>
     var userId = <?php echo $leave['employee']; ?>;
     var leaveId = <?php echo $leave['id']; ?>;
     var languageCode = '<?php echo $language_code;?>';
+    var dateJsFormat = '<?php echo lang('global_date_js_format');?>';
     
     var noContractMsg = "<?php echo lang('leaves_validate_flash_msg_no_contract');?>";
     var noTwoPeriodsMsg = "<?php echo lang('leaves_validate_flash_msg_overlap_period');?>";

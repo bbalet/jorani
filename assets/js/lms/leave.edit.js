@@ -128,6 +128,7 @@ $(function () {
     $("#viz_startdate").datepicker({
         changeMonth: true,
         changeYear: true,
+        dateFormat: dateJsFormat,
         altFormat: "yy-mm-dd",
         altField: "#startdate",
         numberOfMonths: 1,
@@ -138,6 +139,7 @@ $(function () {
     $("#viz_enddate").datepicker({
         changeMonth: true,
         changeYear: true,
+        dateFormat: dateJsFormat,
         altFormat: "yy-mm-dd",
         altField: "#enddate",
         numberOfMonths: 1,

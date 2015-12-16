@@ -151,6 +151,11 @@ $this->lang->load('global', $language);?>
         background: #49afcd;
         box-shadow: none;
     }
+    
+    /*Always put Jquery datepicker on the top layer */
+    .ui-datepicker{
+        z-index: 9999 !important;
+    }
 </style>
 <?php if ($this->config->item('ga_code') != "") { ?>
     <script>

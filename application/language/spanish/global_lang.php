@@ -25,6 +25,7 @@ $lang['global_msg_old_browser'] = 'El navegador Internet Explorer 8 o anteriores
 $lang['global_msg_not_found'] = 'Object not found. Maybe that you are trying to access to an object that was deleted.';
 $lang['global_date_format'] = 'd/m/Y';
 $lang['global_date_js_format'] = 'dd/mm/yy';
+$lang['global_date_momentjs_format'] = 'DD/MM/YYYY';
 $lang['global_true'] = 'Verdadero';
 $lang['global_false'] = 'Falso';
 

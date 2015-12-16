@@ -136,6 +136,9 @@ if ($language_code != 'en') { ?>
     <?php } else {?>
     $(function () {$('#cmdCurrent').prop('disabled', true);});
     <?php }?>
+    //Global loacle for moment objects
+    moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});
+
     
     function set_current_period() {
         var now = moment();
@@ -374,6 +377,7 @@ if ($language_code != 'en') { ?>
         $("#viz_startdate").datepicker({
             changeMonth: true,
             changeYear: true,
+            dateFormat: '<?php echo lang('global_date_js_format');?>',
             altFormat: "yy-mm-dd",
             altField: "#startdate",
             numberOfMonths: 3,
@@ -384,6 +388,7 @@ if ($language_code != 'en') { ?>
         $("#viz_enddate").datepicker({
             changeMonth: true,
             changeYear: true,
+            dateFormat: '<?php echo lang('global_date_js_format');?>',
             altFormat: "yy-mm-dd",
             altField: "#enddate",
             numberOfMonths: 3,

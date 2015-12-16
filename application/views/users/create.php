@@ -284,6 +284,7 @@ if ($language_code != 'en') { ?>
         $("#viz_datehired").datepicker({
             changeMonth: true,
             changeYear: true,
+            dateFormat: '<?php echo lang('global_date_js_format');?>',
             altFormat: "yy-mm-dd",
             altField: "#datehired"
         }, $.datepicker.regional['<?php echo $language_code;?>']);

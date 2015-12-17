@@ -184,7 +184,7 @@ class Polyglot {
 //            case 'os' : return 'ossetian'; break;
 //            case 'pa' : return 'panjabi'; break;
 //            case 'pi' : return 'pāli'; break;
-//            case 'fa' : return 'persian'; break;
+            case 'fa' : return 'persian'; break;
             case 'pl' : return 'polish'; break;
 //            case 'ps' : return 'pashto'; break;
 //            case 'pt' : return 'portuguese'; break;
@@ -378,7 +378,7 @@ class Polyglot {
 //            case 'ossetian' : return 'os'; break;
 //            case 'panjabi' : return 'pa'; break;
 //            case 'pāli' : return 'pi'; break;
-//            case 'persian' : return 'fa'; break;
+            case 'persian' : return 'fa'; break;
             case 'polish' : return 'pl'; break;
 //            case 'pashto' : return 'ps'; break;
 //            case 'portuguese' : return 'pt'; break;
@@ -572,7 +572,7 @@ class Polyglot {
 //            case 'os' : return 'nativeName'; break;
 //            case 'pa' : return 'nativeName'; break;
 //            case 'pi' : return 'पाऴि'; break;
-//            case 'fa' : return 'فارسی'; break;
+            case 'fa' : return 'فارسی'; break;
             case 'pl' : return 'Polski'; break;
 //            case 'ps' : return 'nativeName'; break;
 //            case 'pt' : return 'Português'; break;

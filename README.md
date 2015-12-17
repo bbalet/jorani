@@ -60,7 +60,7 @@ Use bbalet / bbalet for login / password.
 
 * NGO Passerelles numériques, our first user http://passerellesnumeriques.org/en/
 * Github and Google groupe users for their ideas and tests.
-* Translation : Hector NESTAR (Spanish), Roger WOLFS (Dutch), Christian SONNENBERG (German), Dario BRIGNONE (Italian), Oleg KOPTEV and Yevhen Kyrylchenko (Russian) and all participants of the Transifex project.
+* Translation : Hector NESTAR (Spanish), Roger WOLFS (Dutch), Christian SONNENBERG (German), Dario BRIGNONE (Italian), Oleg KOPTEV, Yevhen Kyrylchenko (Russian) and Sayed Kabir Salehi (Farsi) and all participants of the Transifex project.
 
 ### Third party libraries and components
 

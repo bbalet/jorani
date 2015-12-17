@@ -6,9 +6,8 @@
  * @link            https://github.com/bbalet/jorani
  * @since         0.3.0
  */
-
 require("POParser.php");
-$target = "ukrainian";
+$target = "persian";
 
 $copyright = "<?php
 /**
@@ -16,7 +15,8 @@ $copyright = "<?php
  * @copyright  Copyright (c) 2014-2015 Benjamin BALET
  * @license     http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link          https://github.com/bbalet/jorani
- * @since       0.1.0
+ * @since       0.4.4
+ * @author      Sayed Kabir Salehi
  */\n\n";
 
 //Load and parse the PO file
@@ -27,7 +27,7 @@ $lenPO = count($messages[1]);
 //Scan all translation files
 $files = scandir($target);
 foreach ($files as $file) {
-    if ($file != '.' && $file != '..') {
+    if (strpos($file, 'php') !== false) {
         $path = join_paths($target, $file);
         $ci18n = file_get_contents($path);
 
@@ -40,11 +40,11 @@ foreach ($files as $file) {
         for ($jj = 0; $jj < $lenI18N; $jj++) {
             for ($ii = 0; $ii < $lenPO; $ii++) {
                 $po2ci = str_replace('\"', '"', $messages[1][$ii]['msgid']);
-				$po2ci = str_replace("'", '\'', $po2ci);
+                $po2ci = str_replace("'", '\'', $po2ci);
                 if ($out[2][$jj] != '') {
                     if (strcmp($po2ci, $out[2][$jj]) == 0) {
-					    $po2ci = str_replace('\"', '"', $messages[1][$ii]['msgstr']);
-						$po2ci = str_replace("'", '\'', $po2ci);
+                        $po2ci = str_replace('\"', '"', $messages[1][$ii]['msgstr']);
+                        $po2ci = str_replace("'", '\'', $po2ci);
                         if ($messages[1][$ii]['msgstr'] != '') {
                             $out[2][$jj] = $po2ci;
                         }

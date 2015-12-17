@@ -1,0 +1,1413 @@
+# 
+# Translators:
+# Sayed Kabir Salehi <s.kabirsalehi@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: jorani\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-12-17 08:28+0000\n"
+"Last-Translator: Sayed Kabir Salehi <s.kabirsalehi@gmail.com>\n"
+"Language-Team: Persian (http://www.transifex.com/jorani/jorani/language/fa/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fa\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Yearly calendar"
+msgstr "تقویم سالانه"
+
+msgid "My calendar"
+msgstr "تقویم من"
+
+msgid "Calendar of my leaves."
+msgstr "تقویم مرخصی های من"
+
+msgid "Download an iCal file"
+msgstr "دانلود یک فایل تقویم"
+
+msgid "(import the event into Outlook, Thunderbird, etc.)"
+msgstr "(وارد کردن مناسبت به آوتلوک یا توندربیرد)"
+
+msgid "Event details"
+msgstr "مشخصات مناسبت"
+
+msgid "Close"
+msgstr "بسته"
+
+msgid "Day offs"
+msgstr "روزهای تعطیلی"
+
+msgid "Calendar of my workmates"
+msgstr "تقویم همکارانم"
+
+msgid "Leaves of employees having the same line manager"
+msgstr "مرخصی های کارمندان زیر نظر یک مدیرِ بخش"
+
+msgid "Calendar of my collaborators"
+msgstr "تقویم همکارانم"
+
+msgid "Leaves of my collaborators (will be empty if I'm not a manager)."
+msgstr "تقویم همکارانم(خالی میماند اگر من مدیر نباشم)."
+
+msgid "Calendar of my department"
+msgstr "تقویم دپارتمان من"
+
+msgid "Calendar of employees working in my department"
+msgstr "تقویم همکارانم که در دپارتمان من کار میکنند."
+
+msgid ""
+"It appears that you don't belong to any department. Please contact your HR "
+"Officer / Manager."
+msgstr "به نظر میرسد شما متعلق به هیچ دپارتمانی نیستید. لطفاً با مدیر منابع انسانی یا مدیر عمومی تان تماس بگیرید."
+
+msgid "Calendar of the organization"
+msgstr "تقویم سازمان"
+
+msgid "Global calendar with a filter on entity"
+msgstr "تقویم سراسری با یک فیلتر بر روی یک واحد"
+
+msgid "Select the entity"
+msgstr "واحد را انتخاب کنید"
+
+msgid "Select"
+msgstr "انتخاب"
+
+msgid "Include sub-departments"
+msgstr "شمولیت دپارتمان فرعی"
+
+msgid "Select an entity"
+msgstr "انتخاب یک واحد"
+
+msgid "OK"
+msgstr "تایید"
+
+msgid "Cancel"
+msgstr "لغو"
+
+msgid "Tabular Calendar"
+msgstr "تقویم جدولی"
+
+msgid "Month"
+msgstr "ماه"
+
+msgid "Year"
+msgstr "سال"
+
+msgid "Execute"
+msgstr "اجرا"
+
+msgid "Export"
+msgstr "صدور"
+
+msgid "Employee"
+msgstr "کارمند"
+
+msgid "Calendar Tabular"
+msgstr "جدولی تقویم"
+
+msgid "Entity"
+msgstr "واحد"
+
+msgid "Sub-entities"
+msgstr "زیر واحدها"
+
+msgid ""
+"'January','February','March','April','May','June','July','August','September','October','November','December'"
+msgstr "\"ژانویه\"،\"فوریه\"،\"مارس\"،آپریل\"،\"مه\"،\"ژوئن\"،\"جولای\"،\"آگوست\"،\"سپتامبر\"،\"اکتبر\"،\"نوامبر\"،\"دسامبر\"."
+
+msgid ""
+"'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'"
+msgstr "\"ژانویه\"،\"فوریه\"،\"مارس\"،آپریل\"،\"مه\"،\"ژوئن\"،\"جولای\"،\"آگوست\"،\"سپتامبر\"،\"اکتبر\"،\"نوامبر\"،\"دسامبر\"."
+
+msgid "'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'"
+msgstr "\"یکشنبه\"،\"دوشنبه\"،\"سه شنبه\"،\"چهارشنبه\"،\"پنجشنبه\"،\"جمعه\"،\"شنبه\""
+
+msgid "'Sun','Mon','Tue','Wed','Thu','Fri','Sat'"
+msgstr "\"یکشنبه\"،\"دوشنبه\"،\"سه شنبه\"،\"چهارشنبه\"،\"پنجشنبه\"،\"جمعه\"،\"شنبه\""
+
+msgid "MMMM yyyy"
+msgstr "ماه سال"
+
+msgid "MMM d[ yyyy]{ - [ MMM] d yyyy}"
+msgstr "ماه روز[ سال]{ - [ ماه] روز سال}"
+
+msgid "dddd, MMM d, yyyy"
+msgstr "روز, ماه, سال"
+
+msgid "ddd"
+msgstr "روز"
+
+msgid "ddd M/d"
+msgstr "روزماه/روز"
+
+msgid "dddd M/d"
+msgstr "روزماه/روز"
+
+msgid "H:mm"
+msgstr "ساعت:دقیقه"
+
+msgid "h(:mm)t"
+msgstr "ساعت(:دقیقه)صبح/عصر"
+
+msgid "H:mm{ - H:mm}"
+msgstr "ساعت:دقیقه{ - ساعت:دقیقه}"
+
+msgid "1"
+msgstr "1"
+
+msgid "today"
+msgstr "امروز"
+
+msgid "day"
+msgstr "روز"
+
+msgid "week"
+msgstr "هفته"
+
+msgid "month"
+msgstr "ماه"
+
+msgid "prev,next today"
+msgstr "قبل، بعد امروز"
+
+msgid "title"
+msgstr "عنوان"
+
+msgid "month,basicWeek,basicDay"
+msgstr "ماه، هفته اصلی، روز اصلی"
+
+msgid "Mo"
+msgstr "د"
+
+msgid "Tu"
+msgstr "س"
+
+msgid "We"
+msgstr "چ"
+
+msgid "Th"
+msgstr "پ"
+
+msgid "Fr"
+msgstr "ج"
+
+msgid "Sa"
+msgstr "ش"
+
+msgid "Su"
+msgstr "ی"
+
+msgid "Monday"
+msgstr "دوشنبه"
+
+msgid "Tuesday"
+msgstr "سه شنبه"
+
+msgid "Wednesday"
+msgstr "چهارشنبه"
+
+msgid "Thursday"
+msgstr "پنجشنبه"
+
+msgid "Friday"
+msgstr "جمعه"
+
+msgid "Saturday"
+msgstr "شنبه"
+
+msgid "Sunday"
+msgstr "یکشنبه"
+
+msgid "All days"
+msgstr "همه روزها"
+
+msgid "January"
+msgstr "ژانویه"
+
+msgid "February"
+msgstr "فوریه"
+
+msgid "March"
+msgstr "مارس"
+
+msgid "April"
+msgstr "آپریل"
+
+msgid "May"
+msgstr "مه"
+
+msgid "June"
+msgstr "ژوئن"
+
+msgid "July"
+msgstr "جولای"
+
+msgid "August"
+msgstr "آگوست"
+
+msgid "September"
+msgstr "سپتامبر"
+
+msgid "October"
+msgstr "اکتبر"
+
+msgid "November"
+msgstr "نوامبر"
+
+msgid "December"
+msgstr "دسامبر"
+
+msgid "List of contracts"
+msgstr "لیست قراردادها"
+
+msgid "ID"
+msgstr "شناسه"
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Start period"
+msgstr "شروع دوره"
+
+msgid "End period"
+msgstr "پایان دوره"
+
+msgid "delete contract"
+msgstr "حذف قرارداد"
+
+msgid "edit contract"
+msgstr "ویرایش قرارداد"
+
+msgid "entitled days"
+msgstr "روزهای مستحق"
+
+msgid "day offs and weekends"
+msgstr "روزهای تعطیلی و آخر هفته"
+
+msgid "Export this list"
+msgstr "صدور این لیست"
+
+msgid "Create contract"
+msgstr "ایجاد قرارداد"
+
+msgid "Delete Contract"
+msgstr "حذف قرارداد"
+
+msgid "You are about to delete one contract, this procedure is irreversible."
+msgstr "شما میخواهید یک قرارداد را حذف نمایید، این عمل غیرقابل بازیابی میباشد."
+
+msgid "Do you want to proceed?"
+msgstr "آیا میخواهید ادامه بدهید؟"
+
+msgid "Yes"
+msgstr "بله"
+
+msgid "No"
+msgstr "خیر"
+
+msgid "Entitled days"
+msgstr "روزهای مستحق"
+
+msgid "Edit a contract"
+msgstr "ویرایش یک قرارداد"
+
+msgid "Edit contract #"
+msgstr "ویرایش قرارداد #"
+
+msgid "Month / Start"
+msgstr "ماه /شروع"
+
+msgid "Day / Start"
+msgstr "روز/شروع"
+
+msgid "Month / End"
+msgstr "ماه/پایان"
+
+msgid "Day / End"
+msgstr "روز/پایان"
+
+msgid "Update contract"
+msgstr "به روز رسانی قرارداد"
+
+msgid "The contract has been succesfully updated"
+msgstr "قرارداد موفقانه به روز رسانی گردید."
+
+msgid "Create a new contract"
+msgstr "ایجاد یک قرارداد جدید"
+
+msgid "The contract has been succesfully created"
+msgstr "قرارداد موفقانه ایجاد گردید"
+
+msgid "The contract has been succesfully deleted"
+msgstr "قرارداد موفقانه حذف گردید"
+
+msgid "Calendar of non working days"
+msgstr "تقویم روزهای غیرکاری"
+
+msgid ""
+"Day offs and weekends are not configured by default. Click on a day to edit "
+"it individually or use the button \"Series\"."
+msgstr "روزهای تعطیلی و آخرهفته به طور پیش فرض تنظیم نمیباشند. بر روی یک روز کلیک کنید تا آنرا به تنهایی ویرایش کرده و یا هم از دکمه \"ردیف\" استفاده نمایید."
+
+msgid "Legend:"
+msgstr "علام و اختصارات"
+
+msgid "All day"
+msgstr "تمام روز"
+
+msgid "Morning"
+msgstr "صبح"
+
+msgid "Afternoon"
+msgstr "بعد از ظهر"
+
+msgid "Back to contracts"
+msgstr "بازگشت به قراردادها"
+
+msgid "Series of non-working days"
+msgstr "لیست تمام روزهای غیرکاری"
+
+msgid "Edit day off"
+msgstr "ویرایش روزهای تعطیلی"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Working day"
+msgstr "روزهای کاری"
+
+msgid "All day is off"
+msgstr "تمام روز تعطیل میباشد"
+
+msgid "Morning is off"
+msgstr "صبح تعطیل میباشد"
+
+msgid "Afternoon is off"
+msgstr "بعداز ظهر تعطیل میباشد"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Import iCal"
+msgstr "وارد کردن فایل تقویم"
+
+msgid "URL of non-working days iCal file"
+msgstr "آدرس فایل تقویم برای روزهای غیرکاری"
+
+msgid "Edit a series of day offs"
+msgstr "ویرایش یک رشته از روزهای تعطیلی"
+
+msgid "Mark every"
+msgstr "انتخاب هر"
+
+msgid "From"
+msgstr "از"
+
+msgid "Current"
+msgstr "فعلی"
+
+msgid "To"
+msgstr "به"
+
+msgid "As a"
+msgstr "براساس"
+
+msgid "Copy"
+msgstr "کپی"
+
+msgid "You must select a contract."
+msgstr "شما باید یک قرارداد را انتخاب نمایید."
+
+msgid "Data has been copied successfully."
+msgstr "اطلاعات موفقانه کپی شد."
+
+msgid "No data available in table"
+msgstr "اطلاعاتی در جدول در دسترس نمیباشد."
+
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "نمایش_آغاز_ به_پایان_ از_همه_ داده ها"
+
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "نمایش 0 تا 0 از 0 داده"
+
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(فیلتر شده از_حداکثر_ تمام داده ها)"
+
+msgid ","
+msgstr "،"
+
+msgid "Show _MENU_ entries"
+msgstr "نمایش بده_منوی_ داده ها"
+
+msgid "Loading..."
+msgstr "در حال لود کردن ..."
+
+msgid "Processing..."
+msgstr "در حال پردازش ..."
+
+msgid "Search:"
+msgstr "جستجو:"
+
+msgid "No matching records found"
+msgstr "چیزی یافت نشد."
+
+msgid "First"
+msgstr "اول"
+
+msgid "Last"
+msgstr "آخر"
+
+msgid "Next"
+msgstr "بعدی"
+
+msgid "Previous"
+msgstr "قبلی"
+
+msgid ": activate to sort column ascending"
+msgstr ":فعال کردن برای مرتب سازی صعودی ستون "
+
+msgid ": activate to sort column descending"
+msgstr ":فعال کردن برای مرتب سازی نزولی ستون "
+
+msgid "Your password has been reset"
+msgstr "رمز شما تغییر یافت."
+
+msgid "Your account has been created"
+msgstr "اکانت شما ایجاد گردید"
+
+msgid "Leave Request from"
+msgstr "درخواست مرخصی از"
+
+msgid "Leave Request"
+msgstr "درخواست مرخصی"
+
+msgid "Your leave request has been accepted"
+msgstr "درخواست مرخصی شما پذیرفته شد"
+
+msgid "Your leave request has been rejected"
+msgstr "درخواست مرخصی شما پذیرفته نشد"
+
+msgid "Your overtime request has been accepted"
+msgstr "درخواست اضافه کاری شما پذیرفته شد"
+
+msgid "Your overtime request has been rejected"
+msgstr "درخواست اضافه کاری شما پذیرفته نشد"
+
+msgid "Overtime Request"
+msgstr "درخواست اضافه کاری"
+
+msgid "Overtime request from"
+msgstr "درخواست اضافه کاری از"
+
+msgid "Entitled days for contract"
+msgstr "روزهای مستحق برای قرارداد"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "End"
+msgstr "پایان"
+
+msgid "Days"
+msgstr "روزها"
+
+msgid "Leave type"
+msgstr "نوع مرخصی"
+
+msgid "Description"
+msgstr "توضیحات"
+
+msgid "No entitled days attached to the contract."
+msgstr "هیچ روز مستحقی به قرارداد الصاق نگردیده."
+
+msgid "Add entitled days"
+msgstr "اضافه کردن روزهای مستحق"
+
+msgid "Start Date"
+msgstr "تاریخ شروع"
+
+msgid "End Date"
+msgstr "تاریخ پایان"
+
+msgid "Add"
+msgstr "اضافه کردن"
+
+msgid "\"The field \" + fieldname + \" is mandatory.\""
+msgstr "\"فیلد\" + نام فیلد+ \" اجباری میباشد.\""
+
+msgid "Back to the list of contracts"
+msgstr "بازگشت به لیست قراردادها"
+
+msgid "Are you sure that you want to delete it?"
+msgstr "آیا مطمئنید که میخواهید آنرا حذف نمائید؟"
+
+msgid "Step"
+msgstr "قدم"
+
+msgid "Entitled days for employee"
+msgstr "روزهای مستحق برای کارمند"
+
+msgid "No entitled days attached to the user."
+msgstr "هیچ روز مستحقی به کاربر الصاق نگردیده."
+
+msgid "Back to the list of employees"
+msgstr "بازگشت به لیست کارمندان"
+
+msgid "Entitled days to Contract #"
+msgstr "روزهای مستحق برای قرارداد #"
+
+msgid "Yearly leave period : "
+msgstr "بازه زمانی برای مرخصی سالانه:"
+
+msgid "Entitled days to Employee"
+msgstr "روزهای مستحق برای کارمند"
+
+msgid "My overtime requests"
+msgstr "درخواستهای اضافه کاری من"
+
+msgid "view"
+msgstr "نمایش"
+
+msgid "edit"
+msgstr "ویرایش"
+
+msgid "delete"
+msgstr "حذف"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Reason"
+msgstr "دلیل"
+
+msgid "Duration"
+msgstr "مدت زمان"
+
+msgid "Status"
+msgstr "وضعیت"
+
+msgid "New request"
+msgstr "درخواست جدید"
+
+msgid "Delete overtime request"
+msgstr "حذف درخواست اضافه کاری"
+
+msgid ""
+"You are about to delete one overtime request, this procedure is "
+"irreversible."
+msgstr "شما میخواهید یک درخواست اضافه کاری را حذف نمایید، این عمل غیرقابل بازیابی میباشد."
+
+msgid "Submit an overtime request"
+msgstr "ارسال یک درخواست اضافه کاری"
+
+msgid "In days or fraction of days (e.g. 0.13 for 1h if you work 8h/day)."
+msgstr "به روز و یا هم بخشی از روز (مثلاً: 0.13 برای یک ساعت اگر شما 8 ساعت در روز کار میکنید)."
+
+msgid "Request overtime"
+msgstr "درخواست اضافه کاری"
+
+msgid "The overtime request has been succesfully created"
+msgstr "درخواست اضافه کاری موفقانه ایجاد گردید"
+
+msgid ""
+"The overtime request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "درخواست اضافه کاری موفقانه ایجاد و یا به روزرسانی گردید، اما شما مدیر بخش ندارید."
+
+msgid "Edit overtime request #"
+msgstr "ویرایش درخواست اضافه کاری #"
+
+msgid "Edit a overtime request"
+msgstr "ویرایش یک درخواست اضافه کاری"
+
+msgid "In days or fraction of days (e.g. 0.125 for 1h if you work 8h/day)."
+msgstr "به روز و یا هم بخشی از روز (مثلاً: 0.125 برای یک ساعت اگر شما 8 ساعت در روز کار میکنید)."
+
+msgid "Update overtime"
+msgstr "به روزرسانی اضافه کاری"
+
+msgid "You cannot edit an overtime request already submitted"
+msgstr "شما نمیتوانید یک درخواست اضافه کاری را که قبلاً فرستادید ویرایش نمایید."
+
+msgid "The overtime request has been succesfully updated"
+msgstr "درخواست اضافه کاری موفقانه به روزرسانی گردید"
+
+msgid "The overtime request has been succesfully deleted"
+msgstr "درخواست اضافه کاری موفقانه حذف گردید"
+
+msgid "You can't delete this overtime request"
+msgstr "شما نمیتوانید این درخواست اضافه کاری را حذف نمایید"
+
+msgid "View overtime request #"
+msgstr "نمایش درخواست اضافه کاری #"
+
+msgid "View overtime request"
+msgstr "نمایش درخواست اضافه کاری"
+
+msgid "Edit"
+msgstr "ویرایش"
+
+msgid "Back to list"
+msgstr "بازگشت به لیست"
+
+msgid "List of overtime requests"
+msgstr "لیست درخواستهای اضافه کاری"
+
+msgid "Link to documentation"
+msgstr "اتصال به مستندات"
+
+msgid "Operation (%s) is not granted"
+msgstr "عملیات (%) تصدیق نشده."
+
+msgid "Please wait"
+msgstr "لطفاً صبر نمایید"
+
+msgid ""
+"Internet Explorer 8 and older browser are not supported. Please upgrade to "
+"IE9 or use Firefox, Chrome, etc."
+msgstr "اینترنت اکسپلورر 8 و مرورگر قدیمی تر پشتیبانی نمیشوند. لطفاً به به اینترنت اکسپلورر 9 ارتقا داده یا از فایرفاکس، گوگل کروم و دیگر مرورگرها استفاده نمایید."
+
+msgid "m/d/Y"
+msgstr "م/ر/س"
+
+msgid "TRUE"
+msgstr "درست"
+
+msgid "FALSE"
+msgstr "غلط"
+
+msgid "Go top"
+msgstr "برو بالا"
+
+msgid "&copy; 2014 Jorani Authors"
+msgstr "کپی رایت؛ 2014 جورانی"
+
+msgid "Requested"
+msgstr "درخواست شده"
+
+msgid "Planned"
+msgstr "برنامه ریزی شده"
+
+msgid "Accepted"
+msgstr "پذیرفته شده"
+
+msgid "Rejected"
+msgstr "رد شده"
+
+msgid "identifier"
+msgstr "شناسه"
+
+msgid "firstname"
+msgstr "نام"
+
+msgid "lastname"
+msgstr "نام خانوادگی"
+
+msgid "date hired"
+msgstr "تاریخ استخدام"
+
+msgid "department"
+msgstr "دپارتمان"
+
+msgid "position"
+msgstr "مقام"
+
+msgid "contract"
+msgstr "قرارداد"
+
+msgid "day off"
+msgstr "روز تعطیل"
+
+msgid "leave"
+msgstr "مرخصی"
+
+msgid "copied"
+msgstr "کپی شده"
+
+msgid "Your session has expired please login again"
+msgstr "شما زمان زیادی غیر فعال بوده و از سیستم خارج شدید، لطفاً دوباره وارد شوید."
+
+msgid "Unexpected Ajax Error"
+msgstr "خطای غیرمنتظره آجاکس"
+
+msgid "List of employees"
+msgstr "لیست کارمندان"
+
+msgid "edit user"
+msgstr "ویرایش کاربر"
+
+msgid "Leaves"
+msgstr "مرخصی ها"
+
+msgid "Extras"
+msgstr "اضافه کاری ها"
+
+msgid "Leave Balance"
+msgstr "باقیمانده مرخصی"
+
+msgid "Create Leave Request"
+msgstr "ایجاد درخواست مرخصی"
+
+msgid "Presence report"
+msgstr "گزارش حضور"
+
+msgid "Delegations"
+msgstr "هیئت ها"
+
+msgid "Firstname"
+msgstr "نام"
+
+msgid "Lastname"
+msgstr "نام خانوادگی"
+
+msgid "E-mail"
+msgstr "ایمیل"
+
+msgid "Contract"
+msgstr "قرارداد"
+
+msgid "Manager"
+msgstr "مدیر"
+
+msgid "Create"
+msgstr "ایجاد"
+
+msgid "Right-click / taphold on an employee for contextual actions."
+msgstr "برروی کامپیوتر رایت کلیک/ و بر روی مبایل کلیک کرده نگه دارید برای سایر گزینه ها"
+
+msgid "List of requested leaves"
+msgstr "لیست درخواستهای مرخصی"
+
+msgid "List of leaves for employee #"
+msgstr "لیست مرخصی های کارمند #"
+
+msgid "accept"
+msgstr "پذیرفتن"
+
+msgid "reject"
+msgstr "رد"
+
+msgid "Delete leave request"
+msgstr "حذف درخواست مرخصی"
+
+msgid ""
+"You are about to delete one leave request, this procedure is irreversible."
+msgstr "شما میخواهید یک درخواست مرخصی را حذف نمایید، این عمل غیرقابل بازیابی میباشد."
+
+msgid "Submit a leave request"
+msgstr "ارسال یک درخواست مرخصی"
+
+msgid "You are exceeding your entitled days"
+msgstr "تعداد روزهای مستحق به مرخصی شما تمام شده."
+
+msgid "You have requested another leave request within the same dates."
+msgstr "شما درخواست یک مرخصی دیگر را در تاریخی که قبلا درخواست داده بودید نمودید."
+
+msgid "Cause (optional)"
+msgstr "دلیل(اختیاری)"
+
+msgid "Request leave"
+msgstr "درخواست مرخصی"
+
+msgid "The leave request has been succesfully created"
+msgstr "درخواست مرخصی موفقانه ایجاد گردید"
+
+msgid ""
+"The leave request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "درخواست مرخصی موفقانه ایجاد و یا به روزرسانی گردید، اما شما مدیر بخش ندارید."
+
+msgid "List of overtime requests for employee #"
+msgstr "لیست درخواستهای اضافه کاری کارمند #"
+
+msgid "Leave balance for user #"
+msgstr "باقیمانده مرخصی کاربر #"
+
+msgid "Available"
+msgstr "در دسترس"
+
+msgid "Taken"
+msgstr "گرفته شده"
+
+msgid "Entitled"
+msgstr "موجه"
+
+msgid "This employee has no contract."
+msgstr "این کارمند هیچ قراردادی ندارد"
+
+msgid "Date of report"
+msgstr "تاریخ گزارش"
+
+msgid ""
+"By default this report shows the values for the last month. Please note that"
+" the list of leaves shows only the accepted leave requests."
+msgstr "به طور پیشفرض این گزارش مقادیر ماه گذشته را نشان میدهد. لطفاً مدنظرداشته باشید که لیست مرخصی ها فقط درخواست های پذیرفته شده مرخصی را نشان میدهد."
+
+msgid "Number of days"
+msgstr "تعداد روزها"
+
+msgid "Number of working days"
+msgstr "تعداد روزهای کاری"
+
+msgid "Number of non-working days"
+msgstr "تعداد روزهای غیرکاری"
+
+msgid "Duration of leaves"
+msgstr "مدت زمان مرخصی"
+
+msgid "Duration of presence"
+msgstr "مدت زمان حضور"
+
+msgid "Overlapping detected"
+msgstr "برخورد شناسایی شده"
+
+msgid "The employee has no contract"
+msgstr "کارمند هیچ قراردادی ندارد"
+
+msgid "Please check"
+msgstr "لطفاً بررسی نمایید"
+
+msgid "List of leaves in the month"
+msgstr "لیست مرخصی های ماه"
+
+msgid "My summary"
+msgstr "خلاصه من"
+
+msgid "Overtime details (added to compensate leaves)"
+msgstr "جزئیات اضافه کاری(به مرخصی تشویقی اضافه گردیده)"
+
+msgid "Catch up for"
+msgstr "بدست آوردن برای"
+
+msgid ""
+"No entitled or taken days for this period. Please contact your HR Officer / "
+"Manager."
+msgstr "هیچ روز استحقاقی و یا روز گرفته شده در این بازه وجود ندارد. لطفاً با مدیر منابع انسانی یا مدیر عمومی تان تماس بگیرید."
+
+msgid ""
+"It appears you have no contract. Please contact your HR Officer / Manager."
+msgstr "به نظر میرسد شما قراردادی ندارید. لطفاً با مدیر منابع انسانی یا مدیر عمومی تان تماس بگیرید."
+
+msgid "My leave requests"
+msgstr "درخواستهای مرخصی من"
+
+msgid "Edit a leave request"
+msgstr "ویرایش یک درخواست مرخصی"
+
+msgid "Edit leave request #"
+msgstr "ویرایش درخواست مرخصی #"
+
+msgid "Update leave"
+msgstr "به روزرسانی مرخصی"
+
+msgid "You cannot edit a leave request already submitted"
+msgstr "شما نمیتوانید یک درخواست مرخصی را که قبلاً فرستادید ویرایش نمایید."
+
+msgid "The leave request has been succesfully updated"
+msgstr "درخواست مرخصی موفقانه به روزرسانی گردید"
+
+msgid ""
+"You can't create a leave request for two yearly leave periods. Please create"
+" two different leave requests."
+msgstr "شما نمیتوانید یک درخواست مرخصی برای مرخصی های 2 ساله خود ایجاد نمایید. لطفاً دو درخواست مرخصی جداگانه ایجاد نمایید."
+
+msgid "You can't delete this leave request"
+msgstr "شما نمیتوانید این درخواست مرخصی را حذف نمایید"
+
+msgid "The leave request has been succesfully deleted"
+msgstr "درخواست مرخصی موفقانه حذف گردید"
+
+msgid "View leave request #"
+msgstr "نمایش درخواست مرخصی #"
+
+msgid "View a leave request"
+msgstr "نمایش یک درخواست مرخصی"
+
+msgid "List of leaves"
+msgstr "لیست مرخصی ها"
+
+msgid "Morning/Afternnon"
+msgstr "صبح/بعد از ظهر"
+
+msgid "Leave types"
+msgstr "انواع مرخصی ها"
+
+msgid "Create a new type"
+msgstr "ایجاد یک نوع جدید"
+
+msgid "No leave type found into the database."
+msgstr "هیچ نوع مرخصی در پایگاه داده ها پیدا نشد."
+
+msgid "Add a leave type"
+msgstr "یک نوع مرخصی اضافه نمایید"
+
+msgid "The leave type has been succesfully created."
+msgstr "نوع مرخصی موفقانه ایجاد گردید."
+
+msgid "Edit a Leave type"
+msgstr "ویرایش یک نوع مرخصی"
+
+msgid "Update"
+msgstr "به روزرسانی"
+
+msgid "The leave type has been succesfully updated."
+msgstr "نوع مرخصی موفقانه به روزرسانی گردید."
+
+msgid "Delete Leave Type"
+msgstr "حذف نوع مرخصی"
+
+msgid ""
+"You are about to delete one leave type, this procedure is irreversible."
+msgstr "شما میخواهید یک نوع مرخصی را حذف نمایید، این عمل غیرقابل بازیابی میباشد."
+
+msgid "The leave type has been succesfully deleted."
+msgstr "نوع مرخصی موفقانه حذف گردید."
+
+msgid "You cannot delete a system leave type."
+msgstr "شما نمیتوانید یک نوع مرخصی سیستمی را حذف نمایید."
+
+msgid "You cannot delete a leave type that is used."
+msgstr "شما نمیتوانید یک نوع مرخصی را که هم اکنون در حال استفاده است را حذف نمایید."
+
+msgid "Leave Management System"
+msgstr "سیستم مدیریت مرخصی"
+
+msgid "Change password"
+msgstr "تغییر رمز"
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "Logout"
+msgstr "خروج"
+
+msgid "View my personal information"
+msgstr "نمایش اطلاعات شخصی من"
+
+msgid "reset password"
+msgstr "بازنشانی رمز"
+
+msgid "Admin"
+msgstr "مدیر"
+
+msgid "List of users"
+msgstr "لیست کاربران"
+
+msgid "Create user"
+msgstr "ایجاد کاربر"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "HR"
+msgstr "منابع انسانی"
+
+msgid "Employees"
+msgstr "کارمندان"
+
+msgid "Organization"
+msgstr "سازمان"
+
+msgid "Contracts"
+msgstr "قراردادها"
+
+msgid "List of positions"
+msgstr "لیست مقام ها"
+
+msgid "List of types"
+msgstr "لیست انواع"
+
+msgid "Reports"
+msgstr "گزارشات"
+
+msgid "Leave balance"
+msgstr "باقیمانده مرخصی"
+
+msgid "Validation"
+msgstr "تایید اعتبار"
+
+msgid "My collaborators"
+msgstr "همکاران من"
+
+msgid "Overtime"
+msgstr "اضافه کاری"
+
+msgid "Requests"
+msgstr "درخواست ها"
+
+msgid "List of extras"
+msgstr "لیست اضافه کاری ها"
+
+msgid "Request an extra"
+msgstr "درخواست اضافه کاری"
+
+msgid "My leaves"
+msgstr "مرخصی های من"
+
+msgid "Counters"
+msgstr "شمارنده ها"
+
+msgid "List of leave requests"
+msgstr "لیست درخواست های مرخصی"
+
+msgid "Request a leave"
+msgstr "درخواست مرخصی"
+
+msgid "Calendars"
+msgstr "تقویم ها"
+
+msgid "My workmates"
+msgstr "همکارانم"
+
+msgid "Department"
+msgstr "دپارتمان"
+
+msgid "Global"
+msgstr "عمومی"
+
+msgid "Tabular"
+msgstr "جدولی"
+
+msgid "Search for an entity"
+msgstr "جستجو برای یک واحد"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Employees attached to entity"
+msgstr "کارمندان الصاق شده به یک واحد"
+
+msgid "Attach an Employee"
+msgstr "الصاق یک کارمند"
+
+msgid "Detach an Employee"
+msgstr "جداسازی یک کارمند"
+
+msgid "Supervisor"
+msgstr "سرپرست"
+
+msgid ""
+"If you select a supervisor, he will receive a copy of accepted and rejected "
+"leave requests submitted by employees of this entity."
+msgstr "اگر شما یک سرپرست را انتخاب نمایید، وی یک کپی از تمام درخواستهای پذیرفته شده و رد شده مرخصی که توسط کارمندان ایجاد گردیده را دریافت میکند."
+
+msgid "Select a Supervisor"
+msgstr "یک سرپرست انتخاب نمایید"
+
+msgid "Delete Entity"
+msgstr "حذف واحد"
+
+msgid "You are about to delete one entity, this procedure is irreversible."
+msgstr "شما میخواهید یک واحد را حذف نمایید، این عمل غیرقابل بازیابی میباشد."
+
+msgid "Add an Employee"
+msgstr "اضافه نمودن یک کارمند"
+
+msgid "An error occured"
+msgstr "یک خطا بوجود آمد"
+
+msgid "Name of the entity"
+msgstr "نام واحد"
+
+msgid "Please select one entity in the organization (treeview on the right)."
+msgstr "لطفا یک واحد در سازمان را انتخاب نمایید (نمودار درختی در سمت راست)"
+
+msgid ""
+"Please select one employee in the table of users belonging to the selected "
+"entity."
+msgstr "لطفاً یک کارمند را که به یک واحد مربوط میباشد را از جدول انتخاب نمایید."
+
+msgid "You cannot delete the root entity."
+msgstr "شما نمیتوانید واحد اصلی را حذف نمایید."
+
+msgid "Overtime Requests submitted to me"
+msgstr "اضافه کاری هایی که به من درخواست گردیده"
+
+msgid ""
+"This screen lists the overtime requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "این صفحه لیست تمام درخواستهای اضافه کاری را نشان میدهد، اگر شما یک مدیر نیستید این لیست همیشه برای شما خالی نشان داده میشود."
+
+msgid "Fullname"
+msgstr "نام کامل"
+
+msgid "All requests"
+msgstr "تمام درخواست ها"
+
+msgid "Pending requests "
+msgstr "درخواست های معلق"
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this "
+"overtime request."
+msgstr "شما مدیر بخش این کارمند نیستید، شما نمیتوانید این درخواست اضافه کاری را رد نمایید."
+
+msgid "The overtime request has been successfully rejected."
+msgstr "درخواست اضافه کاری موفقانه رد گردید."
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this "
+"overtime request."
+msgstr "شما مدیر بخش این کارمند نیستید، شما نمیتوانید این درخواست اضافه کاری را بپذیرید."
+
+msgid "The overtime request has been successfully accepted."
+msgstr "درخواست اضافه کاری موفقانه پذیرفته شد."
+
+msgid "List of overtime resquests"
+msgstr "لیست درخواستهای اضافه کاری"
+
+msgid "Create position"
+msgstr "ایجاد مقام"
+
+msgid "Delete Position"
+msgstr "حذف مقام"
+
+msgid "You are about to delete one position, this procedure is irreversible."
+msgstr "شما میخواهید یک مقام را حذف نمایید، این عمل غیرقابل بازیابی میباشد."
+
+msgid "Create a new position"
+msgstr "ایجاد یک مقام جدید"
+
+msgid "The position has been succesfully created."
+msgstr "مقام موفقانه ایجاد گردید."
+
+msgid "Edit position #"
+msgstr "ویرایش مقام #"
+
+msgid "Update position"
+msgstr "به روز رسانی مقام"
+
+msgid "The position has been succesfully updated."
+msgstr "مقام موفقانه به روز رسانی گردید."
+
+msgid "The position has been succesfully deleted."
+msgstr "مقام موفقانه حذف گردید"
+
+msgid "List of reports"
+msgstr "لیست گزارشات"
+
+msgid "Report"
+msgstr "گزارش"
+
+msgid "Back to list of reports"
+msgstr "بازگشت به لیست گزارشات"
+
+msgid "List of Report"
+msgstr "لیست گزارشات"
+
+msgid "Balance of leaves"
+msgstr "باقیمانده مرخصی ها"
+
+msgid "Launch"
+msgstr "راه اندازی"
+
+msgid "Leave Requests submitted to me"
+msgstr "مرخصی هایی که به من درخواست گردیده."
+
+msgid ""
+"This screen lists the leave requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "این صفحه لیست تمام درخواستهای مرخصی را نشان میدهد، اگر شما یک مدیر نیستید این لیست همیشه برای شما خالی نشان داده میشود."
+
+msgid "List of my collaborators"
+msgstr "لیست همکاران من"
+
+msgid ""
+"This screen lists your collaborators. If you are not a manager, this list "
+"will always be empty."
+msgstr "این صفحه لیست تمام همکارانتان را نشان میدهد، اگر شما یک مدیر نیستید این لیست همیشه برای شما خالی نشان داده میشود."
+
+msgid "Create a leave request in behalf of this collaborator"
+msgstr "ایجاد یک درخواست مرخصی به نمایندگی از این همکار"
+
+msgid "Your are not the manager of this employee."
+msgstr "شما مدیر این کارمند نیستید."
+
+msgid "List of collaborators"
+msgstr "لیست همکاران"
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this leave "
+"request."
+msgstr "شما مدیر بخش این کارمند نیستید، شما نمیتوانید این درخواست مرخصی را بپذیرید."
+
+msgid "The leave request has been successfully accepted."
+msgstr "درخواست مرخصی موفقانه پذیرفته شد."
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this leave "
+"request."
+msgstr "شما مدیر بخش این کارمند نیستید، شما نمیتوانید این درخواست مرخصی را رد نمایید."
+
+msgid "The leave request has been successfully rejected."
+msgstr "درخواست مرخصی موفقانه رد گردید."
+
+msgid "List of leave resquests"
+msgstr "لیست درخواست های مرخصی"
+
+msgid "Morning/Afternoon"
+msgstr "صبح/بعد از ظهر"
+
+msgid "List of delegations"
+msgstr "لیست هیئت ها"
+
+msgid ""
+"This is the list of employees who can accept or reject a request in your "
+"behalf."
+msgstr "این لیست کارمندانی است که میتوانند به نمایندگی از شما یک درخواست را پذیرفته یا رد کنند."
+
+msgid "Revoke"
+msgstr "ابطال"
+
+msgid "Add a delegate"
+msgstr "اضافه نمودن یک هیئت"
+
+msgid "Are you sure that you want to revoke this delegation?"
+msgstr "آیا مطمئنید که میخواهید این هیئت را باطل کنید؟"
+
+msgid "Login"
+msgstr "ورود"
+
+msgid "Language"
+msgstr "زبان"
+
+msgid "Password"
+msgstr "رمز"
+
+msgid "Send me my password"
+msgstr "رمز من را به من بفرست"
+
+msgid "Please fill the login field"
+msgstr "لطفاً فورم ورود را پر نمایید"
+
+msgid "Unknown login. Please contact your HR Officer / Manager."
+msgstr "ورود ناشناس. لطفاً با مدیر منابع انسانی یا مدیر عمومی تان تماس بگیرید."
+
+msgid "The password has been sent to your e-mail adress."
+msgstr "رمز به ایمیل شما فرستاده شد."
+
+msgid "Invalid login id or password"
+msgstr "شناسه یا رمز شما اشتباه است"
+
+msgid "The language has been succesfully set to "
+msgstr "زبان سیستم موفقانه تنظیم شد به "
+
+msgid "Rename"
+msgstr "تغییر نام"
+
+msgid "Remove"
+msgstr "پاک کردن"
+
+msgid "Cut"
+msgstr "بریدن"
+
+msgid "Paste"
+msgstr "الصاق"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Inactive"
+msgstr "غیرفعال"
+
+msgid "edit user details"
+msgstr "ویرایش مشخصات کاربر"
+
+msgid "delete user"
+msgstr "حذف کاربر"
+
+msgid "Role"
+msgstr "نقش"
+
+msgid "Create a new user"
+msgstr "ایجاد یک کاربر جدید"
+
+msgid "Import users"
+msgstr "وارد کردن کاربران"
+
+msgid "Delete User"
+msgstr "حذف کاربر"
+
+msgid "You are about to delete one user, this procedure is irreversible."
+msgstr "شما میخواهید یک کاربر را حذف نمایید، این عمل غیرقابل بازیابی میباشد."
+
+msgid "Import Users"
+msgstr "وارد کردن کاربران"
+
+msgid "Filename"
+msgstr "نام فایل"
+
+msgid "My personal information"
+msgstr "اطلاعات شخصی من"
+
+msgid "Position"
+msgstr "مقام"
+
+msgid "Date hired/started"
+msgstr "تاریخ استخدام/شروع کار"
+
+msgid "Internal/Company Identifier"
+msgstr "داخلی/کد سازمانی"
+
+msgid "Edit user #"
+msgstr "ویرایش کاربر #"
+
+msgid "Edit user"
+msgstr "ویرایش کاربر"
+
+msgid "No line manager."
+msgstr "بدون مدیر بخش"
+
+msgid "If a user has no manager (itself), it can validate its leave requests."
+msgstr "اگر یک کاربر مدیری ندارد(خودش بالاترین مقام است)، وی میتواند درخواست مرخصی خود را قبول نماید."
+
+msgid "Self"
+msgstr "خود"
+
+msgid "Timezone"
+msgstr "منطقه زمانی"
+
+msgid "LDAP Path"
+msgstr "مسیر LDAP"
+
+msgid "Select the manager"
+msgstr "مدیر را انتخاب کنید"
+
+msgid "Select a position"
+msgstr "یک مقام را انتخاب نمایید"
+
+msgid "Update user"
+msgstr "به روزرسانی کاربر"
+
+msgid "The user has been succesfully updated"
+msgstr "کاربر موفقانه به روز رسانی گردید."
+
+msgid "The user has been succesfully deleted"
+msgstr "کاربر موفقانه حذف گردید"
+
+msgid "The password has been succesfully changed"
+msgstr "رمز موفقانه تغییر داده شد"
+
+msgid "Generate password"
+msgstr "ساخت رمز"
+
+msgid ""
+"It is recommanded to select a contract. Do you want to create the user "
+"without a contract?"
+msgstr "بهتر است یک قرارداد را انتخاب نمایید. میخواهید یک کاربر بدون قرارداد ایجاد نمایید؟"
+
+msgid "The user has been succesfully created"
+msgstr "کاربر موفقانه ایجاد گردید"
+
+msgid "Username already exists."
+msgstr "نام کاربری قبلاً استفاده شده."
+
+msgid "This username is not available."
+msgstr "این نام کاربری در دسترس نمیباشد."
+
+msgid "Reset"
+msgstr "بازنشانی"

@@ -412,7 +412,7 @@ $config['requests_by_manager'] = FALSE;
 
 //____________________________________________________________________________
 //List of available languages. If you limit this list to one language, the list of available languages will be hidden from the login form
-$config['languages'] = 'en,fr,es,nl,de,it,ru';
+$config['languages'] = 'en,fr,es,nl,de,it,ru,uk,fa';
 
 //____________________________________________________________________________
 //Set this value to TRUE if you want to hide the menu entries related to overtime

@@ -35,7 +35,7 @@ $lang['hr_employees_field_entity'] = 'Entity';
 $lang['hr_employees_popup_entity_title'] = 'Select an entity';
 $lang['hr_employees_popup_entity_button_ok'] = 'OK';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Cancel';
-$lang['hr_employees_description'] = 'Right-click / taphold on an employee for contextual actions';
+$lang['hr_employees_description'] = 'Right-click / taphold on an employee for contextual actions.';
 $lang['hr_employees_field_subdepts'] = 'Include sub-departments';
 
 $lang['hr_export_employees_title'] = 'បញ្ជីនៃបុគ្គលិក';

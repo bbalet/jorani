@@ -400,6 +400,10 @@ $config['default_leave_type'] = FALSE;      //Set this value with the default le
 $config['disable_edit_leave_duration'] = FALSE;             //Switch to read-only (the duration of leave is computed)
 
 //____________________________________________________________________________
+//Set this value to TRUE if you want to create extras at status requested instead of planned
+$config['extra_status_requested'] = FALSE;
+
+//____________________________________________________________________________
 //Set this value to TRUE if you want to allow employees to edit or delete rejected leave requests, 2 use cases :
 // - Cancel an accepted leave request : the manager reject it, then the employee can delete it.
 // - Modify a leave request containing a mistake : the manager reject it, then the employee can edit it.

@@ -110,4 +110,5 @@ if ($language_code != 'en') { ?>
     var userId = <?php echo $employee; ?>;
     var leaveId = null;
     var languageCode = '<?php echo $language_code;?>';
+    var dateJsFormat = '<?php echo lang('global_date_js_format');?>';
 </script>

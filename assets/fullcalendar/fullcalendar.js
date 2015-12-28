@@ -9672,10 +9672,20 @@ function EventManager(options) { // assumed to be a calendar
 				var timezoneParam = firstDefined(source.timezoneParam, options.timezoneParam);
 
 				if (startParam) {
-					data[startParam] = rangeStart.format();
+                                                                                        //Patch for Jorani, see https://github.com/fullcalendar/fullcalendar/issues/2516
+                                                                                        //                                            data[startParam] = rangeStart.format();
+                                                                                        var previousLocale = rangeStart.locale();
+                                                                                        rangeStart.locale("en");
+                                                                                        data[startParam] = rangeStart.format('YYYY-MM-DD');
+                                                                                        rangeStart.locale(previousLocale);
 				}
 				if (endParam) {
-					data[endParam] = rangeEnd.format();
+                                                                                        //Patch for Jorani, see https://github.com/fullcalendar/fullcalendar/issues/2516
+                                                                                        //data[endParam] = rangeEnd.format();
+                                                                                        var previousLocale = rangeEnd.locale();
+                                                                                        rangeEnd.locale("en");
+                                                                                        data[endParam] = rangeEnd.format('YYYY-MM-DD');
+                                                                                        rangeEnd.locale(previousLocale);
 				}
 				if (options.timezone && options.timezone != 'local') {
 					data[timezoneParam] = options.timezone;

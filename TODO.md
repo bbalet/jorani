@@ -63,3 +63,13 @@ request a leave even if your credit is negative and because leave balance report
 - [ ] Different colors for each leave type. Requesters often don't know that you can get the list of leaves elsewhere.
 - [ ] PDF Export (no serious OSS PDF lib dealing correctly with Unicode / Modern browsers can print as PDF).
 - [ ] Migration to CI 3.0.0 (we don't rely too much on the library, so it has no interrest and it is slower than v2).
+
+# Impacts
+
+## Fullcalendar
+
+Migration of fullcalendar requires the application of this patch https://github.com/fullcalendar/fullcalendar/issues/2516 while the issue is not solved.
+
+## Jquery
+
+We noticed an incompatibility between Jquery 2 and datatable that must be investigated prior any migration.

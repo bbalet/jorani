@@ -175,6 +175,7 @@ if ($language_code != 'en') { ?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <script type="text/javascript">
     
+    //Popup select postion: on click OK, find the user id for the selected line
     function select_manager() {
         var manager = $('#employees .row_selected td:first').text();
         var text = $('#employees .row_selected td:eq(1)').text();
@@ -184,6 +185,7 @@ if ($language_code != 'en') { ?>
         $("#frmSelectManager").modal('hide');
     }
     
+    //Popup select entity: on click OK, find the entity id for the selected node
     function select_entity() {
         var entity = $('#organization').jstree('get_selected')[0];
         var text = $('#organization').jstree().get_text(entity);
@@ -192,6 +194,7 @@ if ($language_code != 'en') { ?>
         $("#frmSelectEntity").modal('hide');
     }
     
+    //Popup select postion: on click OK, find the position id for the selected line
     function select_position() {
         var position = $('#positions .row_selected td:first').text();
         var text = $('#positions .row_selected td:eq(1)').text();

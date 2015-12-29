@@ -180,6 +180,7 @@ if ($language_code != 'en') { ?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <script type="text/javascript">
 
+    //Popup select postion: on click OK, find the user id for the selected line
     function select_manager() {
         var manager = $('#employees .row_selected td:first').text();
         var text = $('#employees .row_selected td:eq(1)').text();
@@ -189,6 +190,7 @@ if ($language_code != 'en') { ?>
         $("#frmSelectManager").modal('hide');
     }
     
+    //Popup select entity: on click OK, find the entity id for the selected node
     function select_entity() {
         var entity = $('#organization').jstree('get_selected')[0];
         var text = $('#organization').jstree().get_text(entity);
@@ -197,6 +199,7 @@ if ($language_code != 'en') { ?>
         $("#frmSelectEntity").modal('hide');
     }
     
+    //Popup select postion: on click OK, find the position id for the selected line
     function select_position() {
         var position = $('#positions .row_selected td:first').text();
         var text = $('#positions .row_selected td:eq(1)').text();
@@ -205,20 +208,16 @@ if ($language_code != 'en') { ?>
         $("#frmSelectPosition").modal('hide');
     }
 
+    //Check for mandatory fields
     function validate_form() {
         result = false;
         var fieldname = "";
         if ($('#firstname').val() == "") fieldname = "firstname";
         if ($('#lastname').val() == "") fieldname = "lastname";
-        //if ($('#role:selected').length == 0) fieldname = "role";
         if ($('#login').val() == "") fieldname = "login";
         if ($('#email').val() == "") fieldname = "email";
         if ($('#txtManager').val() == "") fieldname = "manager";
         if ($('#contract').val() == "") fieldname = "contract";
-        //if ($('#txtEntity').val() == "") fieldname = "entity";
-        //if ($('#txtPosition').val() == "") fieldname = "position";
-        //if ($('#datehired').val() == "") fieldname = "datehired";
-        //if ($('#identifier').val() == "") fieldname = "identifier";
         if ($('#password').val() == "") fieldname = "password";
         if (fieldname == "") {
             return true;
@@ -228,6 +227,7 @@ if ($language_code != 'en') { ?>
         }
     }
     
+    //Before submitting the form, encrypt the password and don't send the clear value
     function submit_form() {
         var encrypt = new JSEncrypt();
         encrypt.setPublicKey($('#pubkey').val());
@@ -245,7 +245,7 @@ if ($language_code != 'en') { ?>
         var length = (len)?(len):(10);
         var string = "abcdefghijklnopqrstuvwxyz";
         var numeric = '0123456789';
-        var punctuation = '!@#$%;:?,./-=';
+        var punctuation = '!@?/=';
         var password = "";
         var character = "";
         while(password.length < length) {
@@ -287,15 +287,19 @@ if ($language_code != 'en') { ?>
         });
         
         //On any change on firstname or lastname fields, automatically build the
-        //login identifier with first character of firstname and lastname
+        //login identifier with first character of firstname and the 31 first characters of lastname
         $("#firstname").change(function() {
-            $("#login").val($("#firstname").val().charAt(0).toLowerCase() +
-                $("#lastname").val().toLowerCase());            
+            var lastname = $("#lastname").val().toLowerCase();
+            lastname = lastname.substring(0,31);
+            $("#login").val($("#firstname").val().charAt(0).toLowerCase() + lastname);           
         });
         $("#lastname").change(function() {
+            <?php if ($this->config->item('disable_capitalization') === FALSE) {?>
             $("#lastname").val($("#lastname").val().toUpperCase());
-            $("#login").val($("#firstname").val().charAt(0).toLowerCase() +
-                $("#lastname").val().toLowerCase());            
+            <?php }?>
+            var lastname = $("#lastname").val().toLowerCase();
+            lastname = lastname.substring(0,31);
+            $("#login").val($("#firstname").val().charAt(0).toLowerCase() + lastname);
         });
         
         //Check if the user has not exceed the number of entitled days

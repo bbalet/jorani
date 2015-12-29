@@ -386,10 +386,10 @@ $config['from_name'] = 'Jorani';
 $config['subject_prefix'] = '[Jorani] ';
 
 //____________________________________________________________________________
-//Password minimal length
-$config['password_length'] = 8;
-//Default role id (e.g. 2 for user)
-$config['default_role_id'] = 2;
+//User manangment
+$config['disable_capitalization'] = FALSE;    //Set this value to TRUE if you want to disable the capitalization of lastname
+$config['password_length'] = 8;                    //Password minimal length
+$config['default_role_id'] = 2;                     //Default role id (e.g. 2 for user)
 
 //____________________________________________________________________________
 //Set this value to TRUE if you want to create leaves at status requested instead of planned

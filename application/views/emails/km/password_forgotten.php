@@ -23,6 +23,6 @@
                 <td>លេខសំងាត់</td><td>{Password}</td>
             </tr>            
         </table>
-        <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="តំណភ្ជាប់ទៅឯកសារ" target="_blank">នៅពេលដែលបានភ្ជាប់អ្នកអាចផ្លាស់ប្តូរពាក្យសម្ងាត់របស់អ្នកជាការពន្យល់នៅទីនេះ</a>.
+        <a href="http://jorani.org/how-to-change-my-password.html" title="តំណភ្ជាប់ទៅឯកសារ" target="_blank">នៅពេលដែលបានភ្ជាប់អ្នកអាចផ្លាស់ប្តូរពាក្យសម្ងាត់របស់អ្នកជាការពន្យល់នៅទីនេះ</a>.
     </body>
 </html>

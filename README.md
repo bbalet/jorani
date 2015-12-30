@@ -88,3 +88,4 @@ We thank the following open source projects for the components used by Jorani:
 * Moment (JS dates library) http://momentjs.com/
 * Selectize https://github.com/brianreavis/selectize.js
 * Zero Clipboard https://github.com/zeroclipboard/zeroclipboard
+* Google noto fonts https://www.google.com/get/noto/

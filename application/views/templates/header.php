@@ -31,6 +31,22 @@ $this->lang->load('global', $language);?>
     <script type="text/javascript" src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
     <link rel="icon" type="image/x-icon" href="<?php echo base_url();?>favicon.ico" sizes="32x32">
     <style>
+        
+<?php
+$fonts = $this->config->item('fonts');
+if (!is_null($fonts)) {
+    if (array_key_exists($language_code, $fonts)) { ?>
+    @font-face {
+      font-family: 'Noto Sans Khmer';
+      src: url('<?php echo base_url(), 'assets/fonts/', $fonts[$language_code]['asset'];?>') format('truetype');
+    }
+    body, button, input, .ui-datepicker, .selectize-input {
+        font-family: 'Noto Sans Khmer' !important;
+    }
+<?php 
+        }
+    } ?>
+    
     /*Sticky footer*/
     html, body {
       height: 100%;

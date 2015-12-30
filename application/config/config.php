@@ -418,6 +418,20 @@ $config['requests_by_manager'] = FALSE;
 //List of available languages. If you limit this list to one language, the list of available languages will be hidden from the login form
 $config['languages'] = 'en,fr,es,nl,de,it,ru,uk,km,fa';
 
+//If you want to use another font for a specific language, put the font into assets/fonts folder and map as in this example
+//Extra fonts are coming from Google noto font project: https://www.google.com/get/noto/
+$config['fonts'] =
+    Array (
+        'km' => Array (
+            'name' => 'Noto Sans Khmer',
+            'asset' => 'NotoSansKhmer-Regular.ttf',
+        ),
+        'fa' => Array (
+            'name' => 'Noto Naskh Arabic',
+            'asset' => 'NotoNaskhArabic-Regular.ttf',
+        ),
+    );
+
 //____________________________________________________________________________
 //Set this value to TRUE if you want to hide the menu entries related to overtime
 $config['disable_overtime'] = FALSE;

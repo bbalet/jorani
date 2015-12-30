@@ -35,7 +35,7 @@ $lang['hr_employees_field_entity'] = 'អង្គភាព';
 $lang['hr_employees_popup_entity_title'] = 'ជ្រើសរើសអង្គភាព';
 $lang['hr_employees_popup_entity_button_ok'] = 'យល់ព្រម';
 $lang['hr_employees_popup_entity_button_cancel'] = 'បោះបង់';
-$lang['hr_employees_description'] = 'ចុចកណ្តុរខាងស្តាំ / taphold on an employee for contextual actions.';
+$lang['hr_employees_description'] = 'ចុចកណ្តុរខាងស្តាំ / ចុចសង្កត់ឱ្យជាប់ទៅលើនិយោជិកណាម្នាក់ ដើម្បីបង្ហាញមីនុយសកម្មភាព';
 $lang['hr_employees_field_subdepts'] = 'រួមបញ្ចូលអនុផ្នែក';
 
 $lang['hr_export_employees_title'] = 'បញ្ជីនៃបុគ្គលិក';

@@ -10,10 +10,10 @@
 
 <div class="row-fluid">
     <div class="span12">
-
-<?php echo $flash_partial_view;?>
         
 <h2><?php echo lang('hr_employees_title');?>&nbsp;<?php echo $help;?></h2>
+
+<?php echo $flash_partial_view;?>
 
 <div class="row-fluid">
     <div class="span4">
@@ -232,8 +232,8 @@ $(function () {
 
     //Transform the HTML table in a fancy datatable
     oTable = $('#users').dataTable({
+                    stateSave: true,
                     "ajax": '<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren,
-                    "iDisplayLength": 50,
                     "oLanguage": {
                         "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                         "sInfo":           "<?php echo lang('datatable_sInfo');?>",

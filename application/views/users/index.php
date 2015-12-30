@@ -10,10 +10,10 @@
 
 <div class="row-fluid">
     <div class="span12">
-
-<?php echo $flash_partial_view;?>
         
 <h2><?php echo lang('users_index_title');?><?php echo $help;?></h2>
+
+<?php echo $flash_partial_view;?>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
     <thead>
@@ -121,7 +121,8 @@
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#users').dataTable({
-		"oLanguage": {
+        stateSave: true,
+        "oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",
                     "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",

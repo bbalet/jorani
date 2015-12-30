@@ -10,10 +10,10 @@
 
 <div class="row-fluid">
     <div class="span12">
+      
+<h2><?php echo lang('positions_index_title');?> &nbsp;<?php echo $help;?></h2>
 
 <?php echo $flash_partial_view;?>
-        
-<h2><?php echo lang('positions_index_title');?> &nbsp;<?php echo $help;?></h2>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="positions" width="100%">
     <thead>

@@ -11,9 +11,9 @@
 <div class="row-fluid">
     <div class="span12">
 
-<?php echo $flash_partial_view;?>
-
 <h2><?php echo lang('overtime_index_title');?></h2>
+
+<?php echo $flash_partial_view;?>
 
 <p><?php echo lang('overtime_index_description');?></p>
 

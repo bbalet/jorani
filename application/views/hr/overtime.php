@@ -11,9 +11,9 @@
 <div class="row-fluid">
     <div class="span12">
 
-<?php echo $flash_partial_view;?>
-        
 <h2><?php echo lang('hr_overtime_html_title');?><?php echo $user_id; ?>&nbsp;<span class="muted">(<?php echo $name ?>)</span></h2>
+
+<?php echo $flash_partial_view;?>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="extras" width="100%">
     <thead>

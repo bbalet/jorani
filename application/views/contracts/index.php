@@ -108,7 +108,8 @@ $(document).ready(function() {
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#contracts').dataTable({
-		"oLanguage": {
+        stateSave: true,
+        "oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",
                     "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",

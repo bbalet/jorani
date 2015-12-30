@@ -12,9 +12,9 @@
 <div class="row-fluid">
     <div class="span12">
 
-<?php echo $flash_partial_view;?>
-
 <h2><?php echo lang('requests_collaborators_title');?>  &nbsp;<?php echo $help;?></h2>
+
+<?php echo $flash_partial_view;?>
 
 <p><?php echo lang('requests_collaborators_description');?></p>
 

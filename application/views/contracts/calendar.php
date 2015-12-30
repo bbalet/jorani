@@ -41,9 +41,9 @@ padding-left:10px;
 }
 </style>
 
-<?php echo $flash_partial_view;?>
-
 <h2><?php echo lang('contract_calendar_title');?> <span class="muted"><?php echo $contract_name; ?></span>&nbsp;<?php echo $help;?></h2>
+
+<?php echo $flash_partial_view;?>
 
 <div class="row-fluid">
     <div class="span3">

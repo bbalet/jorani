@@ -11,9 +11,9 @@
 <div class="row-fluid">
     <div class="span12">
 
-<?php echo $flash_partial_view;?>
-
 <h2><?php echo lang('extra_index_title');?></h2>
+
+<?php echo $flash_partial_view;?>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="extras" width="100%">
     <thead>

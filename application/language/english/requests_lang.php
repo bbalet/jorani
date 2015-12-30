@@ -20,13 +20,13 @@ $lang['requests_index_thead_duration'] = 'Duration';
 $lang['requests_index_thead_type'] = 'Type';
 $lang['requests_index_thead_status'] = 'Status';
 
-$lang['requests_collaborators_title'] = 'List of my collaborators';
-$lang['requests_collaborators_description'] = 'This screen lists your collaborators. If you are not a manager, this list will always be empty.';
+$lang['requests_collaborators_title'] = 'List of my subordinates';
+$lang['requests_collaborators_description'] = 'This screen lists your direct report subordinates. If you are not a manager, this list will always be empty.';
 $lang['requests_collaborators_thead_id'] = 'ID';
 $lang['requests_collaborators_thead_link_balance'] = 'Leave Balance';
 $lang['requests_collaborators_thead_link_presence'] = 'Presence report';
 $lang['requests_collaborators_thead_link_year'] = 'Yearly calendar';
-$lang['requests_collaborators_thead_link_create_leave'] = 'Create a leave request in behalf of this collaborator';
+$lang['requests_collaborators_thead_link_create_leave'] = 'Create a leave request in behalf of this subordinate';
 $lang['requests_collaborators_thead_firstname'] = 'Firstname';
 $lang['requests_collaborators_thead_lastname'] = 'Lastname';
 $lang['requests_collaborators_thead_email'] = 'E-mail';
@@ -39,7 +39,7 @@ $lang['requests_summary_thead_entitled'] = 'Entitled';
 $lang['requests_summary_thead_description'] = 'Description';
 $lang['requests_summary_flash_msg_error'] = 'This employee has no contract.';
 $lang['requests_summary_flash_msg_forbidden'] = 'Your are not the manager of this employee.';
-$lang['requests_summary_button_list'] = 'List of collaborators';
+$lang['requests_summary_button_list'] = 'List of subordinates';
 
 $lang['requests_index_button_export'] = 'Export this list';
 $lang['requests_index_button_show_all'] = 'All requests';

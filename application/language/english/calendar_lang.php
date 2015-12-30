@@ -21,8 +21,8 @@ $lang['calendar_individual_day_offs'] = 'Days off';
 $lang['calendar_workmates_title'] = 'Calendar of my workmates';
 $lang['calendar_workmates_description'] = 'Leaves of employees having the same line manager';
 
-$lang['calendar_collaborators_title'] = 'Calendar of my collaborators';
-$lang['calendar_collaborators_description'] = 'Leaves of my collaborators (will be empty if I\'m not a manager).';
+$lang['calendar_collaborators_title'] = 'Calendar of my subordinates';
+$lang['calendar_collaborators_description'] = 'Leaves of my direct report subordinates (will be empty if I\'m not a manager).';
 
 $lang['calendar_department_title'] = 'Calendar of my department';
 $lang['calendar_department_description'] = 'Calendar of employees working in my department';

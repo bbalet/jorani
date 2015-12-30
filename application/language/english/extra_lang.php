@@ -60,7 +60,7 @@ $lang['extra_view_field_status'] = 'Status';
 $lang['extra_view_button_edit'] = 'Edit';
 $lang['extra_view_button_back_list'] = 'Back to list';
 
-$lang['extra_export_title'] = 'List of overtime requests';
+$lang['extra_export_title'] = 'List of overtime worked';
 $lang['extra_export_thead_id'] = 'ID';
 $lang['extra_export_thead_date'] = 'Date';
 $lang['extra_export_thead_duration'] = 'Duration';

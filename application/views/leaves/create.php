@@ -33,16 +33,16 @@ echo form_open('leaves/create', $attributes) ?>
     <input type="text" name="viz_startdate" id="viz_startdate" value="<?php echo set_value('startdate'); ?>" />
     <input type="hidden" name="startdate" id="startdate" />
     <select name="startdatetype" id="startdatetype">
-        <option value="Morning" selected><?php echo lang('leaves_date_type_morning');?></option>
-        <option value="Afternoon"><?php echo lang('leaves_date_type_afternoon');?></option>
+        <option value="Morning" selected><?php echo lang('Morning');?></option>
+        <option value="Afternoon"><?php echo lang('Afternoon');?></option>
     </select><br />
     
     <label for="viz_enddate"><?php echo lang('leaves_create_field_end');?></label>
     <input type="text" name="viz_enddate" id="viz_enddate" value="<?php echo set_value('enddate'); ?>" />
     <input type="hidden" name="enddate" id="enddate" />
     <select name="enddatetype" id="enddatetype">
-        <option value="Morning"><?php echo lang('leaves_date_type_morning');?></option>
-        <option value="Afternoon" selected><?php echo lang('leaves_date_type_afternoon');?></option>
+        <option value="Morning"><?php echo lang('Morning');?></option>
+        <option value="Afternoon" selected><?php echo lang('Afternoon');?></option>
     </select><br />
 
     <label for="duration"><?php echo lang('leaves_create_field_duration');?></label>

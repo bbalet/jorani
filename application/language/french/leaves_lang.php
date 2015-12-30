@@ -38,9 +38,6 @@ $lang['leaves_index_popup_delete_question'] = 'Voulez-vous continuer ?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Oui';
 $lang['leaves_index_popup_delete_button_no'] = 'Non';
 
-$lang['leaves_date_type_morning'] = 'Matin';
-$lang['leaves_date_type_afternoon'] = 'Après-midi';
-
 $lang['leaves_create_title'] = 'Créer une nouvelle demande';
 $lang['leaves_create_field_start'] = 'Date de début';
 $lang['leaves_create_field_end'] = 'Date de fin';

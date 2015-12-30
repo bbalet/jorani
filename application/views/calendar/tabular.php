@@ -18,8 +18,9 @@ $this->lang->load('global', $language);?>
     <div class="span4">
         <label for="txtEntity"><?php echo lang('calendar_organization_field_select_entity');?></label>
         <div class="input-append">
-        <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
-        <button id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('calendar_tabular_button_select_entity');?></button>
+            <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
+            <button id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('calendar_tabular_button_select_entity');?></button>
+        </div>
         
         <label for="cboMonth"><?php echo lang('calendar_tabular_field_month');?></label>
         <select name="cboMonth" id="cboMonth">
@@ -45,7 +46,6 @@ $this->lang->load('global', $language);?>
             }?>
         </select>
         
-        </div>
     </div>
     <div class="span3">
         <label for="chkIncludeChildren">

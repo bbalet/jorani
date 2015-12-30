@@ -39,9 +39,6 @@ $lang['leaves_index_popup_delete_question'] = 'Möchten Sie fortfahren?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Ja';
 $lang['leaves_index_popup_delete_button_no'] = 'Nein';
 
-$lang['leaves_date_type_morning'] = 'Vormittag';
-$lang['leaves_date_type_afternoon'] = 'Nachmittag';
-
 $lang['leaves_create_title'] = 'Urlaubsanfrage übermitteln';
 $lang['leaves_create_field_start'] = 'Anfangsdatum';
 $lang['leaves_create_field_end'] = 'Enddatum';

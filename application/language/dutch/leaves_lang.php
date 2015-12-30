@@ -39,9 +39,6 @@ $lang['leaves_index_popup_delete_question'] = 'Wilt u verder gaan?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Ja';
 $lang['leaves_index_popup_delete_button_no'] = 'Nee';
 
-$lang['leaves_date_type_morning'] = 'Ochtend';
-$lang['leaves_date_type_afternoon'] = 'Middag';
-
 $lang['leaves_create_title'] = 'Dien een afwezigheidsverzoek in';
 $lang['leaves_create_field_start'] = 'Begin datum';
 $lang['leaves_create_field_end'] = 'Eind datum';

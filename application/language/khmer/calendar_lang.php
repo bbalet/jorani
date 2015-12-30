@@ -2,21 +2,22 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2015 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Benjamin BALET <benjamin.balet@gmail.com>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.4.4
+ * @author     Heng Vongkol
  */
 
-$lang['calendar_year_title'] = 'Yearly calendar';
-$lang['calendar_year_button_export'] = 'Export';
+$lang['calendar_year_title'] = 'ប្រតិទិនប្រចាំឆ្នាំ';
+$lang['calendar_year_button_export'] = 'នាំចេញ';
 
 $lang['calendar_individual_title'] = 'ប្រតិទិនរបស់ខ្ញុំ';
 $lang['calendar_individual_description'] = 'ប្រតិទិនការឈប់សម្រាក់របស់ខ្ញុំ.';
 $lang['calendar_individual_popup_event_link_ical'] = 'ទាញយកឯកសារជា iCal';
-$lang['calendar_individual_popup_event_link_ical_description'] = '(import the event into Outlook, Thunderbird, etc.)';
+$lang['calendar_individual_popup_event_link_ical_description'] = '(នាំព្រឹត្តិការណ៍ចូលទៅក្នុងកម្មវិធី Outlook, Thunderbird, ជាដើម)';
 $lang['calendar_individual_popup_event_title'] = 'សកម្មភាពលំអិត';
 $lang['calendar_individual_popup_event_button_close'] = 'បិទ';
+$lang['calendar_individual_day_offs'] = 'ថ្ងៃឈប់សម្រាក';
 
 $lang['calendar_workmates_title'] = 'កាលបរិច្ឆេទរបស់មិត្តរួមការងារ';
 $lang['calendar_workmates_description'] = 'ការសុំឈប់សម្រាករបស់បុគ្កលិកស្ថិតក្រោមការគ្រប់គ្រងតែបួយ';
@@ -27,7 +28,6 @@ $lang['calendar_collaborators_description'] = 'ការសុំបញ្ឈប
 $lang['calendar_department_title'] = 'កាលបរិច្ឆេទរបស់ក្រុមរួមការងារ';
 $lang['calendar_department_description'] = 'ប្រតិទិនសំរាប់បុគ្គលិកធ្វុើការងារក្នុងផ្នែករបស់ខ្ញុុំ';
 $lang['calendar_department_msg_error'] = 'វាមិនស្ថិតក្នុងផ្នែកណាមួយទេ។សូមទំនាក់ទំនងទៅកាន់ផ្នែកHRឬប្រធានផ្នែកគ្រប់គ្រង';
-		
 $lang['calendar_organization_title'] = 'ប្រតិទិនរបស់អង្គការ';
 $lang['calendar_organization_description'] = 'ប្រតិទិនសកល';
 $lang['calendar_organization_field_select_entity'] = 'ជ្រើសរើសអង្គភាព';
@@ -37,25 +37,24 @@ $lang['calendar_organization_popup_entity_title'] = 'ជ្រើសរើសអ
 $lang['calendar_organization_popup_entity_button_ok'] = 'យល់ព្រម';
 $lang['calendar_organization_popup_entity_button_cancel'] = 'បោះបង់';
 
-$lang['calendar_tabular_title'] = 'Tabular Calendar';
-$lang['calendar_tabular_field_select_entity'] = 'Select the entity';
-$lang['calendar_tabular_field_month'] = 'Month';
-$lang['calendar_tabular_field_year'] = 'Year';
-$lang['calendar_tabular_button_select_entity'] = 'Select';
-$lang['calendar_tabular_button_execute'] = 'Execute';
-$lang['calendar_tabular_button_export'] = 'Export';
-$lang['calendar_tabular_check_include_subdept'] = 'Include sub-departments';
-$lang['calendar_tabular_popup_entity_title'] = 'Select an entity';
-$lang['calendar_tabular_popup_entity_button_ok'] = 'OK';
-$lang['calendar_tabular_popup_entity_button_cancel'] = 'Cancel';
-$lang['calendar_tabular_thead_employee'] = 'Employee';
-
-$lang['calendar_tabular_export_title'] = 'Calendar Tabular';
-$lang['calendar_tabular_export_param_entity'] = 'Entity';
-$lang['calendar_tabular_export_param_month'] = 'Month';
-$lang['calendar_tabular_export_param_year'] = 'Year';
-$lang['calendar_tabular_export_param_children'] = 'Sub-entities';
-$lang['calendar_tabular_export_thead_employee'] = 'Employee';
+$lang['calendar_tabular_title'] = 'តារាងប្រតិទិន';
+$lang['calendar_tabular_field_select_entity'] = 'ជ្រើសរើសអង្គភាព';
+$lang['calendar_tabular_field_month'] = 'ខែ';
+$lang['calendar_tabular_field_year'] = 'ឆ្នាំ';
+$lang['calendar_tabular_button_select_entity'] = 'ជ្រើសរើស';
+$lang['calendar_tabular_button_execute'] = 'ប្រតិបត្តិ';
+$lang['calendar_tabular_button_export'] = 'នាំចេញ';
+$lang['calendar_tabular_check_include_subdept'] = 'រួមបញ្ចូលអនុផ្នែក';
+$lang['calendar_tabular_popup_entity_title'] = 'ជ្រើសរើសអង្គភាព';
+$lang['calendar_tabular_popup_entity_button_ok'] = 'យល់ព្រម';
+$lang['calendar_tabular_popup_entity_button_cancel'] = 'បោះបង់';
+$lang['calendar_tabular_thead_employee'] = 'និយោជិក';
+$lang['calendar_tabular_export_title'] = 'តារាងប្រតិទិន';
+$lang['calendar_tabular_export_param_entity'] = 'អង្គភាព';
+$lang['calendar_tabular_export_param_month'] = 'ខែ';
+$lang['calendar_tabular_export_param_year'] = 'ឆ្នាំ';
+$lang['calendar_tabular_export_param_children'] = 'អង្គភាពរង';
+$lang['calendar_tabular_export_thead_employee'] = 'និយោជិក';
 
 $lang['calendar_monday_short'] = 'ច';
 $lang['calendar_tuesday_short'] = 'អ';
@@ -64,8 +63,17 @@ $lang['calendar_thursday_short'] = 'ព្រ';
 $lang['calendar_friday_short'] = 'សុ';
 $lang['calendar_saturday_short'] = 'ស';
 $lang['calendar_sunday_short'] = 'អ';
-$lang['All days'] = 'All days';
-	
+
+$lang['Monday'] = 'ថ្ងៃចន្ទ';
+$lang['Tuesday'] = 'ថ្ងៃអង្គារ៍';
+$lang['Wednesday'] = 'ថ្ងៃពុធ';
+$lang['Thursday'] = 'ថ្ងៃព្រហស្បិ៍';
+$lang['Friday'] = 'ថ្ងៃសុក្រ';
+$lang['Saturday'] = 'ថ្ងៃសៅរ៍';
+$lang['Sunday'] = 'ថ្ងៃអាទិត្យ';
+
+$lang['All days'] = 'ថ្ងៃទាំងអស់';
+
 $lang['January'] = 'ខែមករា';
 $lang['February'] = 'ខែកុម្ផ:';
 $lang['March'] = 'ខែមិនា';

@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2015 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Benjamin BALET <benjamin.balet@gmail.com>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.4.4
+ * @author     Heng Vongkol
  */
 
 $lang['datatable_sEmptyTable'] = 'មិនអាចរកទិន្នន័យនៅក្នុងតារាង';

@@ -31,7 +31,7 @@ Use bbalet / bbalet for login / password.
 * Non working days (weekends and day offs) can be defined on a contract so as to automatically calculate the duration of a leave and to display them in the calendar.
 * REST API (OAuth2) fully documented and examples with PHP clients.
 * LDAP Authentication (OpenLDAP, AD, etc.).
-* Available in English, French, Spanish, Italian, German, Dutch and Russian.
+* Available in English, French, Spanish, Italian, German, Dutch, Russian, Ukrainian, Persian and Khmer.
 
 ## Installation
 
@@ -60,7 +60,7 @@ Use bbalet / bbalet for login / password.
 
 * NGO Passerelles numériques, our first user http://passerellesnumeriques.org/en/
 * Github and Google groupe users for their ideas and tests.
-* Translation : Hector NESTAR (Spanish), Roger WOLFS (Dutch), Christian SONNENBERG (German), Dario BRIGNONE (Italian), Oleg KOPTEV, Yevhen Kyrylchenko (Russian) and Sayed Kabir Salehi (Farsi) and all participants of the Transifex project.
+* Translation : Roger WOLFS (Dutch), Heng Vongkol (Khmer) Christian SONNENBERG (German), Hector NESTAR (Spanish), Dario BRIGNONE (Italian), Oleg KOPTEV, Yevhen Kyrylchenko (Russian) and Sayed Kabir Salehi (Farsi) and all participants of the Transifex project.
 
 ### Third party libraries and components
 

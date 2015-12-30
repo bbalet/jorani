@@ -39,9 +39,6 @@ $lang['leaves_index_popup_delete_question'] = '¿Quieres continuar?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Sí';
 $lang['leaves_index_popup_delete_button_no'] = 'No';
 
-$lang['leaves_date_type_morning'] = 'Mañana';
-$lang['leaves_date_type_afternoon'] = 'Tarde';
-
 $lang['leaves_create_title'] = 'Enviar una solicitud de permiso';
 $lang['leaves_create_field_start'] = 'Primera fecha';
 $lang['leaves_create_field_end'] = 'Última fecha';

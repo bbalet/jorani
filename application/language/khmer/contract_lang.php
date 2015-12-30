@@ -2,24 +2,23 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2015 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Benjamin BALET <benjamin.balet@gmail.com>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.4.4
+ * @author     Heng Vongkol
  */
 
 $lang['contract_index_title'] = 'បញ្ជីនៃកិច្ចសន្យា';
-$lang['contract_index_thead_id'] = 'ID';
+$lang['contract_index_thead_id'] = 'លេខអត្តសញ្ញាណ';
 $lang['contract_index_thead_name'] = 'ឈ្មោះ';
 $lang['contract_index_thead_start'] = 'ពេលចាប់ផ្តើម';
 $lang['contract_index_thead_end'] = 'ពេលបញ្ចប់';
 $lang['contract_index_tip_delete'] = 'លុបកិច្ចសន្យា';
 $lang['contract_index_tip_edit'] = 'កែកិច្ចសន្យា';
 $lang['contract_index_tip_entitled'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
-$lang['contract_index_tip_dayoffs'] = 'ថ្ងៃឈប់សម្រាកនិងថ្ងៃចុងសបា្ដហ៏';
+$lang['contract_index_tip_dayoffs'] = 'ថ្ងៃឈប់សម្រាក់ និងចុងសប្តាហ៍';
 $lang['contract_index_button_export'] = 'បញ្ជីនាំចេញ';
 $lang['contract_index_button_create'] = 'ធ្វើកិច្ចសន្យា';
-
 $lang['contract_index_popup_delete_title'] = 'លុបកិច្ចសន្យា';
 $lang['contract_index_popup_delete_description'] = 'អ្នកអាចលុបកិច្ចសន្យាបានមួយប៉ុណ្ណោះ,អ្នកបង្កើតនេះគឺមិនអាចកែប្រែបាន';
 $lang['contract_index_popup_delete_confirm'] = 'តើអ្នកចង់បន្ត?';
@@ -53,46 +52,44 @@ $lang['contract_create_msg_success'] = 'កិច្ចសន្យាត្រ�
 $lang['contract_delete_msg_success'] = 'កិច្ចសន្យាត្រូវបានលុបដោយជោគជ័យ';
 
 $lang['contract_export_title'] = 'បញ្ជីនៃកិច្ចសន្យា';
-$lang['contract_export_thead_id'] = 'ID';
+$lang['contract_export_thead_id'] = 'លេខអត្តសញ្ញាណ';
 $lang['contract_export_thead_name'] = 'ឈ្មោះ';
 $lang['contract_export_thead_start'] = 'ពេលចាប់ផ្តើម';
 $lang['contract_export_thead_end'] = 'ពេលបញ្ចប់';
 
 $lang['contract_calendar_title'] = 'ប្រតិទិននៃថ្ងៃឈប់សម្រាក់';
-$lang['contract_calendar_description'] = 'Days off and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".';
-$lang['contract_calendar_legend_title'] = 'Legend:';
-$lang['contract_calendar_legend_allday'] = 'All day';
-$lang['contract_calendar_legend_morning'] = 'Morning';
-$lang['contract_calendar_legend_afternoon'] = 'Afternoon';
-$lang['contract_calendar_button_back'] = 'Back to contracts';
-$lang['contract_calendar_button_series'] = 'Series of non-working days';
-$lang['contract_calendar_popup_dayoff_title'] = 'Edit day off';
-$lang['contract_calendar_popup_dayoff_field_title'] = 'Title';
-$lang['contract_calendar_popup_dayoff_field_type'] = 'Type';
-$lang['contract_calendar_popup_dayoff_type_working'] = 'Working day';
-$lang['contract_calendar_popup_dayoff_type_off'] = 'All day is off';
-$lang['contract_calendar_popup_dayoff_type_morning'] = 'Morning is off';
-$lang['contract_calendar_popup_dayoff_type_afternoon'] = 'Afternoon is off';
-$lang['contract_calendar_popup_dayoff_button_delete'] = 'Delete';
-$lang['contract_calendar_popup_dayoff_button_ok'] = 'OK';
-$lang['contract_calendar_popup_dayoff_button_cancel'] = 'Cancel';
-$lang['contract_calendar_button_import'] = 'Import iCal';
-$lang['contract_calendar_prompt_import'] = 'URL of non-working days iCal file';
-
+$lang['contract_calendar_description'] = 'ថ្ងៃឈប់សម្រាក់ និងចុងសប្តាហ៍មិនត្រូវបានកំណត់ទុកជាមុនទេ។ ចូរចុចលើថ្ងៃណាមួយ ដើម្បីកែសម្រួលវា ឬក៏ប្រើប្រាស់ប៊ូតុង "ស៊េរី"';
+$lang['contract_calendar_legend_title'] = 'ចំណងជើង:';
+$lang['contract_calendar_legend_allday'] = 'គ្រប់ថ្ងៃទាំងអស់';
+$lang['contract_calendar_legend_morning'] = 'ពេលព្រឹក';
+$lang['contract_calendar_legend_afternoon'] = 'ពេលរសៀល';
+$lang['contract_calendar_button_back'] = 'ត្រលប់ទៅកាន់កិច្ចសន្យា';
+$lang['contract_calendar_button_series'] = 'ស៊េរីនៃថ្ងៃដែលមិនធ្វើការ';
+$lang['contract_calendar_popup_dayoff_title'] = 'កែសម្រួលថ្ងៃឈប់សម្រាក';
+$lang['contract_calendar_popup_dayoff_field_title'] = 'ចំណងជើង';
+$lang['contract_calendar_popup_dayoff_field_type'] = 'ប្រភេទ';
+$lang['contract_calendar_popup_dayoff_type_working'] = 'ថ្ងៃធ្វើការ';
+$lang['contract_calendar_popup_dayoff_type_off'] = 'គ្រប់ថ្ងៃទាំងអស់ត្រូវបានបិទ';
+$lang['contract_calendar_popup_dayoff_type_morning'] = 'ពេលព្រឹកត្រូវបានបិទ';
+$lang['contract_calendar_popup_dayoff_type_afternoon'] = 'ពេលរសៀលត្រូវបានបិទ';
+$lang['contract_calendar_popup_dayoff_button_delete'] = 'លុបចោល';
+$lang['contract_calendar_popup_dayoff_button_ok'] = 'យល់ព្រម';
+$lang['contract_calendar_popup_dayoff_button_cancel'] = 'បោះបង់';
+$lang['contract_calendar_button_import'] = 'នាំចូល iCal';
+$lang['contract_calendar_prompt_import'] = 'URL នៃថ្ងៃមិនធ្វើការក្នុងហ្វាល់ iCal';
 $lang['contract_calendar_popup_series_title'] = 'Edit a series of days off';
-$lang['contract_calendar_popup_series_field_occurences'] = 'Mark every';
-$lang['contract_calendar_popup_series_field_from'] = 'From';
-$lang['contract_calendar_popup_series_button_current'] = 'Current';
-$lang['contract_calendar_popup_series_field_to'] = 'To';
-$lang['contract_calendar_popup_series_field_as'] = 'As a';
-$lang['contract_calendar_popup_series_field_as_working'] = 'Working day';
-$lang['contract_calendar_popup_series_field_as_off'] = 'All day is off';
-$lang['contract_calendar_popup_series_field_as_morning'] = 'Morning is off';
-$lang['contract_calendar_popup_series_field_as_afternnon'] = 'Afternoon is off';
-$lang['contract_calendar_popup_series_field_title'] = 'Title';
-$lang['contract_calendar_popup_series_button_ok'] = 'OK';
-$lang['contract_calendar_popup_series_button_cancel'] = 'Cancel';
-
-$lang['contract_calendar_button_copy'] = 'Copy';
-$lang['contract_calendar_copy_destination_js_msg'] = 'You must select a contract.';
-$lang['contract_calendar_copy_msg_success'] = 'Data has been copied successfully.';
+$lang['contract_calendar_popup_series_field_occurences'] = 'កត់សម្គាល់គ្រប់';
+$lang['contract_calendar_popup_series_field_from'] = 'ពី';
+$lang['contract_calendar_popup_series_button_current'] = 'ថ្មីៗ';
+$lang['contract_calendar_popup_series_field_to'] = 'ដល់';
+$lang['contract_calendar_popup_series_field_as'] = 'ជា';
+$lang['contract_calendar_popup_series_field_as_working'] = 'ថ្ងៃធ្វើការ';
+$lang['contract_calendar_popup_series_field_as_off'] = 'គ្រប់ថ្ងៃទាំងអស់ត្រូវបានបិទ';
+$lang['contract_calendar_popup_series_field_as_morning'] = 'ពេលព្រឹកត្រូវបានបិទ';
+$lang['contract_calendar_popup_series_field_as_afternnon'] = 'ពេលរសៀលត្រូវបានបិទ';
+$lang['contract_calendar_popup_series_field_title'] = 'ចំណងជើង';
+$lang['contract_calendar_popup_series_button_ok'] = 'យល់ព្រម';
+$lang['contract_calendar_popup_series_button_cancel'] = 'បោះបង់';
+$lang['contract_calendar_button_copy'] = 'ថតចម្លង';
+$lang['contract_calendar_copy_destination_js_msg'] = 'លោកអ្នកត្រូវតែជ្រើសរើសកិច្ចសន្យាមួយ';
+$lang['contract_calendar_copy_msg_success'] = 'ទិន្នន័យត្រូវបានថតចម្លងដោយជោគជ័យ';

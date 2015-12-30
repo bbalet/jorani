@@ -39,9 +39,6 @@ $lang['leaves_index_popup_delete_question'] = 'Продовжити?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Так';
 $lang['leaves_index_popup_delete_button_no'] = 'Ні';
 
-$lang['leaves_date_type_morning'] = 'Ранок';
-$lang['leaves_date_type_afternoon'] = 'Після обіду';
-
 $lang['leaves_create_title'] = 'Відправити заяву на відпустку';
 $lang['leaves_create_field_start'] = 'Дата початку';
 $lang['leaves_create_field_end'] = 'Дата закінчення';

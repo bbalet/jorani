@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2015 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Benjamin BALET <benjamin.balet@gmail.com>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.4.4
+ * @author     Heng Vongkol
  */
 
 $lang['email_password_reset_subject'] = 'លេខសំងាត់របស់អ្នកត្រូវបានអនុញ្ញាតិ';
@@ -16,7 +16,6 @@ $lang['email_user_create_title'] = 'គណនីរបស់អ្នកត្�
 
 $lang['email_leave_request_subject'] = 'ការស្នើសុំឈប់សំរាកពី ';
 $lang['email_leave_request_title'] = 'ការស្នើសុំឈប់សំរាក';
-
 $lang['email_leave_request_accept_subject'] = 'ការចាកចេញរបស់អ្នកត្រូវបានទទួលយក';
 $lang['email_leave_request_reject_subject'] = 'ការស្នើសុំចាកចេញរបស់អ្នកត្រូវបានច្រានចោល';
 $lang['email_leave_request_validation_title'] = 'ការស្នើសុំឈប់សំរាក';

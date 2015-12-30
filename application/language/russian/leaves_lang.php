@@ -39,9 +39,6 @@ $lang['leaves_index_popup_delete_question'] = 'Продолжить?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Да';
 $lang['leaves_index_popup_delete_button_no'] = 'Нет';
 
-$lang['leaves_date_type_morning'] = 'Утро';
-$lang['leaves_date_type_afternoon'] = 'После полудня';
-
 $lang['leaves_create_title'] = 'Отправить заявление на отпуск';
 $lang['leaves_create_field_start'] = 'Дата начала';
 $lang['leaves_create_field_end'] = 'Дата окончания';

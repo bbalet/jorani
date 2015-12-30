@@ -39,9 +39,6 @@ $lang['leaves_index_popup_delete_question'] = 'آیا میخواهید ادام�
 $lang['leaves_index_popup_delete_button_yes'] = 'بله';
 $lang['leaves_index_popup_delete_button_no'] = 'خیر';
 
-$lang['leaves_date_type_morning'] = 'صبح';
-$lang['leaves_date_type_afternoon'] = 'بعد از ظهر';
-
 $lang['leaves_create_title'] = 'ارسال یک درخواست مرخصی';
 $lang['leaves_create_field_start'] = 'تاریخ شروع';
 $lang['leaves_create_field_end'] = 'تاریخ پایان';

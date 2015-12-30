@@ -2,16 +2,16 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2015 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Benjamin BALET <benjamin.balet@gmail.com>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.4.4
+ * @author     Heng Vongkol
  */
 
 $lang['menu_banner_change_password'] = 'ផ្លាស់ប្តូរពាក្យសម្ងាត់';
 $lang['menu_banner_welcome'] = 'សូមស្វាគមន៏';
 $lang['menu_banner_logout'] = 'ចាកចេញពីប្រពន្ធ័';
-$lang['menu_banner_tip_myprofile'] = 'View my personal information';
+$lang['menu_banner_tip_myprofile'] = 'មើលពត៌មានផ្ទាល់ខ្លួនរបស់ខ្ញុំ';
 $lang['menu_banner_tip_reset'] = 'ផ្លាស់ប្តូរពាក្យសម្ងាត់';
 $lang['menu_password_popup_title'] = 'ផ្លាស់ប្តូរពាក្យសម្ងាត់';
 $lang['menu_password_popup_button_cancel'] = 'បោះបង់';
@@ -26,7 +26,7 @@ $lang['menu_hr_title'] = 'ធនធានមនុស្ស';
 $lang['menu_hr_employees_divider'] = 'បុគ្គលិក';
 $lang['menu_hr_list_organization'] = 'អង្គការ';
 $lang['menu_hr_list_employees'] = 'បញ្ជីនៃបុគ្គលិក';
-$lang['menu_hr_list_entitlements'] = 'Entitlements';
+$lang['menu_hr_list_entitlements'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
 $lang['menu_hr_contracts_divider'] = 'អង្គការ';
 $lang['menu_hr_list_contracts'] = 'បញ្ជីនៃកិច្ចសន្យា';
 $lang['menu_hr_list_positions'] = 'បញ្ជីមុខតំណែង';
@@ -34,16 +34,16 @@ $lang['menu_hr_leaves_type_divider'] = 'ស្លឹកឈើ';
 $lang['menu_hr_list_leaves_type'] = 'ប្រភេទនៃការសុំច្បាប់';
 $lang['menu_hr_reports_divider'] = 'របាយការណ៍';
 $lang['menu_hr_report_leave_balance'] = 'តុល្យភាពនៃការចាកចេញ';
-$lang['menu_hr_report_leaves'] = 'Leave requests';
+$lang['menu_hr_report_leaves'] = 'ការសុំច្បាប់របស់ខ';
 
 $lang['menu_validation_title'] = 'ការរង្វាយតំលៃ';
-$lang['menu_validation_delegations'] = 'Delegations';
-$lang['menu_validation_collaborators'] = 'My collaborators';
+$lang['menu_validation_delegations'] = 'ការផ្ទេរសិទ្ធ';
+$lang['menu_validation_collaborators'] = 'អ្នករួមការងាររបស់ខ្ញុំ';
 $lang['menu_validation_leaves'] = 'ស្លឹកឈើ';
 $lang['menu_validation_overtime'] = 'បន្ថែមម៉ោង';
 
 $lang['menu_requests_title'] = 'ការស្នើរសុំ';
-$lang['menu_requests_leaves'] = 'ការសុំច្បាប់';
+$lang['menu_requests_leaves'] = 'ស្លឹកឈើ';
 $lang['menu_requests_overtime'] = 'បន្ថែមម៉ោង';
 $lang['menu_requests_list_extras'] = 'បញ្ជីនៃបន្ថែម';
 $lang['menu_requests_request_extra'] = 'ស្នើសុំបន្ថែមមួយ';
@@ -53,10 +53,10 @@ $lang['menu_leaves_list_requests'] = 'បញ្ជីនៃសំណើឈប់
 $lang['menu_leaves_create_request'] = 'ស្នើសំុឈប់សំរាក';
 
 $lang['menu_calendar_title'] = 'ប្រតិទិន';
-$lang['menu_calendar_year'] = 'Yearly calendar';
+$lang['menu_calendar_year'] = 'ប្រតិទិនប្រចាំឆ្នាំ';
 $lang['menu_calendar_individual'] = 'ប្រតិទិនរបស់ខ្ញុំ';
 $lang['menu_calendar_workmates'] = 'មិត្តរួមការងាររបស់ខ្ញុំ';
-$lang['menu_calendar_collaborators'] = 'អ្នកសហការជាមួយខ្ញុំ';
+$lang['menu_calendar_collaborators'] = 'អ្នករួមការងាររបស់ខ្ញុំ';
 $lang['menu_calendar_department'] = 'ផ្នែក ឬ អគារ';
 $lang['menu_calendar_organization'] = 'សាកល';
-$lang['menu_calendar_tabular'] = 'Tabular';
+$lang['menu_calendar_tabular'] = 'តារាង';

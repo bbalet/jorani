@@ -40,7 +40,7 @@ if (!is_null($fonts)) {
       font-family: 'Noto Sans Khmer';
       src: url('<?php echo base_url(), 'assets/fonts/', $fonts[$language_code]['asset'];?>') format('truetype');
     }
-    body, button, input, .ui-datepicker, .selectize-input {
+    body, button, input, select, .ui-datepicker, .selectize-input {
         font-family: 'Noto Sans Khmer' !important;
     }
 <?php 

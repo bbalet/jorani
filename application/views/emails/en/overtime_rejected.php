@@ -22,7 +22,7 @@
         <h3>{Title}</h3>
         Dear {Firstname} {Lastname}, <br />
         <br />
-        The overtime you've requested has been rejected. Below, the details :
+        Unfortunately, the overtime you submitted has been rejected. Please contact your manager to discuss the matter.<br />
         <table border="0">
             <tr>
                 <td>Date &nbsp;</td><td>{Date}</td>

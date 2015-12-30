@@ -22,7 +22,7 @@
         <h3>{Title}</h3>
         Dear {Firstname} {Lastname}, <br />
         <br />
-        The leave you've requested has been rejected. Below, the details :
+        Unfortunately, the time off you requested has been rejected. Please contact your manager to discuss the matter. <br />
         <table border="0">
             <tr>
                 <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

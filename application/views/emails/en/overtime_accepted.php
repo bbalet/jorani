@@ -22,7 +22,7 @@
         <h3>{Title}</h3>
         Dear {Firstname} {Lastname}, <br />
         <br />
-        The overtime you've requested has been accepted. Below, the details :
+        The overtime you submitted has been approved.<br />
         <table border="0">
             <tr>
                 <td>Date &nbsp;</td><td>{Date}</td>

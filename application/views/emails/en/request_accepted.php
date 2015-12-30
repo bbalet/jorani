@@ -22,7 +22,7 @@
         <h3>{Title}</h3>
         Dear {Firstname} {Lastname}, <br />
         <br />
-        The leave you've requested has been accepted. Below, the details :
+        The time off you requested has been approved.<br />
         <table border="0">
             <tr>
                 <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests an overtime. Below, the details :
+        {Firstname} {Lastname} submitted overtime worked. See the details below:<br />
         <table border="0">
             <tr>
                 <td>Date &nbsp;</td><td>{Date}</td>

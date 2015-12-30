@@ -21,7 +21,7 @@
     <body>
         <h3>{Title}</h3>
         <p>Dear {Firstname} {Lastname},</p>
-        <p>If you didn't perform this operation, please contact your administrator.</p>
+        <p>Your Jorani password has been reset. If you did not perform this operation, please contact your manager.</p>
         <hr>
         <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
     </body>

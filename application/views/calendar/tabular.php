@@ -111,6 +111,11 @@ $this->lang->load('global', $language);?>
     </thead>
   <tbody>
   <?php
+/*
+ * This partial view builds a "linear" calendar (which is technically a line into an HTML table).
+ * A linear calendar displays the leaves of an employee during a month. Each cell is a day.
+ * This partial view is included into the monthly presence report and the tabular calendar.
+ */
   $repeater = 0;
   foreach ($tabular as $employee) {?>
     <tr>
@@ -137,6 +142,19 @@ $this->lang->load('global', $language);?>
                     case 4: $class .= "rejected"; break;  // Rejected
                     case 5: $class .="dayoff"; break;
                     case 6: $class .="dayoff"; break;
+                }
+                //If we have two requests the same day (morning/afternoon)
+                if (($statuses[0] == $statuses[1]) && ($periods[0] != $periods[1])){
+                    switch (intval($statuses[0]))
+                    {
+                        case 1: $class = "allplanned"; break;  // Planned
+                        case 2: $class = "allrequested"; break;  // Requested
+                        case 3: $class = "allaccepted"; break;  // Accepted
+                        case 4: $class = "allrejected"; break;  // Rejected
+                        //The 2 cases below would be weird...
+                        case 5: $class ="dayoff"; break;
+                        case 6: $class ="dayoff"; break;
+                    }
                 }
           } else {
             switch ($day->display) {

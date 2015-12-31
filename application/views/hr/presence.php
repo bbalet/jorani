@@ -140,6 +140,19 @@
                     case 5: $class .="dayoff"; break;
                     case 6: $class .="dayoff"; break;
                 }
+                //If we have two requests the same day (morning/afternoon)
+                if (($statuses[0] == $statuses[1]) && ($periods[0] != $periods[1])){
+                    switch (intval($statuses[0]))
+                    {
+                        case 1: $class = "allplanned"; break;  // Planned
+                        case 2: $class = "allrequested"; break;  // Requested
+                        case 3: $class = "allaccepted"; break;  // Accepted
+                        case 4: $class = "allrejected"; break;  // Rejected
+                        //The 2 cases below would be weird...
+                        case 5: $class ="dayoff"; break;
+                        case 6: $class ="dayoff"; break;
+                    }
+                }
           } else {
             switch ($day->display) {
                 case '0': $class="working"; break;

@@ -33,6 +33,7 @@ class Users extends CI_Controller {
     public function index() {
         $this->auth->checkIfOperationIsAllowed('list_users');
         $data = getUserContext($this);
+        $this->load->helper('form');
         $this->lang->load('datatable', $this->language);
         $data['users'] = $this->users_model->getUsers();
         $data['title'] = lang('users_index_title');
@@ -384,4 +385,63 @@ class Users extends CI_Controller {
         $this->load->library('excel');
         $this->load->view('users/export');
     }
+    
+    /**
+     * Import a list of users (XLS, XLSX or CSV) file.
+     * It can be used to mass edit the users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function import() {
+        $this->auth->checkIfOperationIsAllowed('list_users');
+        $data = getUserContext($this);
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'xls|xlsx|csv';
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload()) {
+            $error = array('error' => $this->upload->display_errors());
+            $this->load->view('upload_form', $error);
+            //redirect index ?
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+            $messages = array();
+            array_push($messages, 'Try to detect the file format');
+            //TODO : suggest template in upload popup
+            
+            //TODO: can we read from buffer?
+            $valid = false;
+            $types = array('Excel2007', 'Excel5');
+            foreach ($types as $type) {
+                $reader = PHPExcel_IOFactory::createReader($type);
+                //$objPHPExcel = PHPExcel_IOFactory::load($inputFile);
+                //Identify
+                //http://stackoverflow.com/questions/9695695/how-to-use-phpexcel-to-read-data-and-insert-into-database
+                //Below is can read method
+                //http://stackoverflow.com/questions/13626678/phpexcel-how-to-check-whether-a-xls-file-is-valid-or-not
+                if ($reader->canRead($file_path)) {
+                    array_push($messages, 'File format detected: ' . $type);
+                    $valid = true;
+                    break;
+                }
+            }
+
+            if ($valid) {
+              // TODO: load file
+              // e.g. PHPExcel_IOFactory::load($file_path)
+            } else {
+                array_push($messages, 'Unable to detect the file format');
+            }
+
+            $data['title'] = lang('users_index_title');
+            $data['help'] = $this->help->create_help_link('global_link_doc_page_list_users');
+            
+            $data['messages'] = $messages;
+            
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('users/import', $data);
+            $this->load->view('templates/footer');
+        }
+    }
+
 }

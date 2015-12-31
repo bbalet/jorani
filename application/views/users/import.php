@@ -1,6 +1,30 @@
+<?php 
+/**
+ * This view shows the result of the import function.
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.4.4
+ */
+?>
 
-We are sorry, this function will be implemented in the next release.
+<div class="row-fluid">
+    <div class="span12">
 
-<!--
-TODO: this form will display the import errors
-//-->
+        <h2><?php echo $title;?><?php echo $help;?></h2>
+
+        <table class="table table-bordered table-hover table-condensed">
+          <thead>
+            <tr>
+                <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+          <?php foreach ($messages as $message): ?>
+            <tr><td><?php echo $message; ?></td></tr>
+          <?php endforeach ?>
+          </tbody>
+        </table>
+
+    </div>
+</div>

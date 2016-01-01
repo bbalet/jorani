@@ -1,12 +1,19 @@
 # 
 # Jorani nginx sample configuration file
-# If you are using HTTP protocol, don't forget to disable HTTPS in application/config/config.php
-# $_SERVER['HTTPS'] = 'off';
+# @copyright  Copyright (c) 2014-2015 Benjamin BALET
+# @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+# @link            https://github.com/bbalet/jorani
 #
 
 server { 
 	listen 80 default;
 	server_name localhost;
+# Jorani works perfectly over HTTPS and HTTP/2:
+#        listen 443 ssl http2;
+#        server_name secure.jorani.org;
+#        ssl_certificate /etc/letsencrypt/live/secure.jorani.org/fullchain.pem;
+#       ssl_certificate_key /etc/letsencrypt/live/secure.jorani.org/privkey.pem;
+
 	access_log /var/log/nginx/localhost.access.log;
 	root /var/www/;
 	index  index.php index.html;
@@ -15,7 +22,7 @@ server {
 	gzip_disable "msie6";
 	gzip_min_length 1100;
 	gzip_types text/xml text/css image/x-icon image/bmp application/atom+xml
-                   text/javascript application/x-javascript
+                   text/javascript application/x-javascript application/javascript
                    application/pdf application/postscript
                    application/rtf application/vnd.ms-powerpoint
                    application/msword application/vnd.ms-excel
@@ -73,9 +80,9 @@ server {
 		try_files $uri $uri/ /index.php?/$request_uri;
 		include fastcgi_params;
 		fastcgi_split_path_info ^(.+\.php)(.*)$;
-		#This is a Linux socket config
+		#This is a socket configuration example
 		#fastcgi_pass unix:/var/run/php-fastcgi/php-fastcgi.socket;
-		#Alternatively, you can configure nginx/PHP with a backend
+		#Alternatively, you can use FastCGI from a network port
 		fastcgi_pass 127.0.0.1:9000;
 		fastcgi_index index.php;
                                     fastcgi_param SERVER_SOFTWARE nginx;

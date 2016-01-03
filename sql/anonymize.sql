@@ -2,7 +2,7 @@
 -- This utility helps you to anonymize the data of your Jorani database
 -- 
 -- @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
--- @copyright  Copyright (c) 2014-2015 Benjamin BALET
+-- @copyright  Copyright (c) 2014-2016 Benjamin BALET
 
 -- Create a function that will help us to anonymize data
 DROP FUNCTION IF EXISTS `shuffle`;

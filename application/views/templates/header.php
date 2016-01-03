@@ -1,7 +1,7 @@
 <?php 
 /**
  * This view is included into all desktop full views. It contains HTML and CSS definitions.
- * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.1.0
@@ -46,7 +46,10 @@ if (!is_null($fonts)) {
 <?php 
         }
     } ?>
-    
+    .anchor {
+        color: #3097d1;
+    }
+
     /*Sticky footer*/
     html, body {
       height: 100%;

@@ -1,7 +1,7 @@
 <?php
 /**
  * This controller displays the calendars of the leave requests
- * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.1.0
@@ -71,7 +71,7 @@ class Calendar extends CI_Controller {
             $data['months'] = $months;
             $data['year'] = $year;
             $data['title'] = lang('calendar_year_title');
-            $data['help'] = '';
+            $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_yearly');
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('calendar/year', $data);

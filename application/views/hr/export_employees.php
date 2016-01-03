@@ -2,7 +2,7 @@
 /**
  * This view builds an Excel5 file containing the list of employees (from HR menu).
  * It differs from the Admin menu, because it doesn't export technical information
- * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.2.0

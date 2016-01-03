@@ -1,7 +1,7 @@
 <?php
 /**
  * Translation file
- * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.1.0
@@ -28,6 +28,7 @@ $lang['Accepted'] = 'Acceptée';
 $lang['Rejected'] = 'Rejetée';
 
 $lang['global_link_doc_page_calendar_individual'] = 'http://fr.jorani.org/ecrans/page-mon-calendrier.html';
+$lang['global_link_doc_page_calendar_yearly'] = 'http://fr.jorani.org/ecrans/page-calendrier-annuel.html';
 $lang['global_link_doc_page_calendar_workmates'] = 'http://fr.jorani.org/ecrans/page-calendrier-mes-collegues.html';
 $lang['global_link_doc_page_calendar_collaborators'] = 'http://fr.jorani.org/ecrans/page-calendrier-mes-collaborateurs.html';
 $lang['global_link_doc_page_calendar_department'] = 'http://fr.jorani.org/ecrans/page-calendrier-mon-service.html';
@@ -42,6 +43,9 @@ $lang['global_link_doc_page_delegations'] = 'http://fr.jorani.org/ecrans/delegat
 $lang['global_link_doc_page_leave_requests_list'] = 'http://fr.jorani.org/ecrans/page-liste-demandes-conges.html';
 $lang['global_link_doc_page_leave_balance_collaborators'] = 'http://fr.jorani.org/ecrans/page-solde-des-conges-collaborateur.html';
 $lang['global_link_doc_page_leave_balance_employee'] = 'http://fr.jorani.org/ecrans/page-solde-des-conges-employe.html';
+
+$lang['global_link_doc_page_extra_list'] = 'http://fr.jorani.org/ecrans/page-liste-demandes-heures-supplementaires.html';
+$lang['global_link_doc_page_overtime_list'] = '';
 $lang['global_link_doc_page_create_overtime'] = 'http://fr.jorani.org/ecrans/page-declarer-heures-supplementaires.html';
 
 $lang['global_link_doc_page_entitleddays_employee'] = 'http://fr.jorani.org/ecrans/page-credit-conges-employe.html';
@@ -55,13 +59,16 @@ $lang['global_link_doc_page_reset_password'] = 'http://fr.jorani.org/utilisation
 $lang['global_link_doc_page_leave_validation'] = '';
 $lang['global_link_doc_page_login'] = 'http://fr.jorani.org/ecrans/page-ecran-de-connexion.html';
 $lang['global_link_doc_page_create_user'] = 'http://fr.jorani.org/ecrans/page-ajouter-un-utilisateur.html';
-$lang['global_link_doc_page_list_users'] = 'http://fr.jorani.org/ecrans/page-liste-des-utilisateurs.html';
 $lang['global_link_doc_page_list_employees'] = 'http://fr.jorani.org/ecrans/page-liste-des-employes.html';
+
+$lang['global_link_doc_page_list_users'] = 'http://fr.jorani.org/ecrans/page-liste-des-utilisateurs.html';
+$lang['global_link_doc_page_settings'] = 'http://fr.jorani.org/utilisation/fichier-de-configuration.html';
 
 $lang['global_link_doc_page_presence_report'] = 'http://fr.jorani.org/ecrans/page-rapport-presence-mensuelle.html';
 
 $lang['global_link_doc_page_leave_balance_report'] = 'http://fr.jorani.org/ecrans/page-rapport-etat-des-conges.html';
-
+$lang['global_link_doc_page_leaves_report'] = 'http://fr.jorani.org/ecrans/page-rapport-liste-tous-les-conges.html';
+    
 $lang['Morning'] = 'Matin';
 $lang['Afternoon'] = 'Après-midi';
 $lang['today'] = 'aujourd\'hui';

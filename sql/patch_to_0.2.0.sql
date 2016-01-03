@@ -2,7 +2,7 @@
 -- Jorani Schema upgrade to 0.2.0
 -- 
 -- @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
--- @copyright  Copyright (c) 2014-2015 Benjamin BALET
+-- @copyright  Copyright (c) 2014-2016 Benjamin BALET
 
 -- New features
 --      * Early versions didn't have the weekly duration of a contract

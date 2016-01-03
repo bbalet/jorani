@@ -1,7 +1,7 @@
 <?php
 /**
  * This controller contains the actions allowing an employee to list and manage its overtime requests
- * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.1.0
@@ -41,6 +41,7 @@ class Extra extends CI_Controller {
         $this->lang->load('datatable', $this->language);
         $data['extras'] = $this->overtime_model->getExtrasOfEmployee($this->user_id);
         $data['title'] = lang('extra_index_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_extra_list');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);

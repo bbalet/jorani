@@ -1,766 +1,726 @@
 <?php
-/*
- * This file is part of Jorani.
+/**
+ * OPcache GUI
  *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * A simple but effective single-file GUI for the OPcache PHP extension.
  *
- * lms is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+ * @author Andrew Collington, andy@amnuts.com
+ * @version 2.2.0
+ * @link https://github.com/amnuts/opcache-gui
+ * @license MIT, http://acollington.mit-license.org/
  */
 
-//This script was stolen from https://github.com/rlerdorf/opcache-status
+define('BASEPATH','.');//Make this script works with nginx
 
-define('BASEPATH','.');                             //Make this script works with nginx
-define('OPCACHE_TESTER', FALSE);          //Allow this script to run
-define('THOUSAND_SEPARATOR', true);
+/*
+ * User configuration
+ */
+
+$options = [
+    'allow_filelist'   => false,  // show/hide the files tab
+    'allow_invalidate' => false,  // give a link to invalidate files
+    'allow_reset'      => false,  // give option to reset the whole cache
+    'allow_realtime'   => false,  // give option to enable/disable real-time updates
+    'refresh_time'     => 5,     // how often the data will refresh, in seconds
+    'size_precision'   => 2,     // Digits after decimal point
+    'size_space'       => false, // have '1MB' or '1 MB' when showing sizes
+    'charts'           => true   // show gauge chart or just big numbers
+];
+
+/*
+ * Shouldn't need to alter anything else below here
+ */
+
+if (!extension_loaded('Zend OPcache')) {
+    die('The Zend OPcache extension does not appear to be installed');
+}
+
+class OpCacheService
+{
+    protected $data;
+    protected $options;
+    protected $defaults = [
+        'allow_filelist'   => true,
+        'allow_invalidate' => true,
+        'allow_reset'      => true,
+        'allow_realtime'   => true,
+        'refresh_time'     => 5,
+        'size_precision'   => 2,
+        'size_space'       => false,
+        'charts'           => true
+    ];
+
+    private function __construct($options = [])
+    {
+        $this->options = array_merge($this->defaults, $options);
+        $this->data = $this->compileState();
+    }
+
+    public static function init($options = [])
+    {
+        $self = new self($options);
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
+        ) {
+            if (isset($_GET['reset']) && $self->getOption('allow_reset')) {
+                echo '{ "success": "' . ($self->resetCache() ? 'yes' : 'no') . '" }';
+            } else if (isset($_GET['invalidate']) && $self->getOption('allow_invalidate')) {
+                echo '{ "success": "' . ($self->resetCache($_GET['invalidate']) ? 'yes' : 'no') . '" }';
+            } else {
+                echo json_encode($self->getData((empty($_GET['section']) ? null : $_GET['section'])));
+            }
+            exit;
+        } else if (isset($_GET['reset']) && $self->getOption('allow_reset')) {
+            $self->resetCache();
+        } else if (isset($_GET['invalidate']) && $self->getOption('allow_invalidate')) {
+            $self->resetCache($_GET['invalidate']);
+        }
+        return $self;
+    }
+
+    public function getOption($name = null)
+    {
+        if ($name === null) {
+            return $this->options;
+        }
+        return (isset($this->options[$name])
+            ? $this->options[$name]
+            : null
+        );
+    }
+
+    public function getData($section = null, $property = null)
+    {
+        if ($section === null) {
+            return $this->data;
+        }
+        $section = strtolower($section);
+        if (isset($this->data[$section])) {
+            if ($property === null || !isset($this->data[$section][$property])) {
+                return $this->data[$section];
+            }
+            return $this->data[$section][$property];
+        }
+        return null;
+    }
+
+    public function canInvalidate()
+    {
+        return ($this->getOption('allow_invalidate') && function_exists('opcache_invalidate'));
+    }
+
+    public function resetCache($file = null)
+    {
+        $success = false;
+        if ($file === null) {
+            $success = opcache_reset();
+        } else if (function_exists('opcache_invalidate')) {
+            $success = opcache_invalidate(urldecode($file), true);
+        }
+        if ($success) {
+            $this->compileState();
+        }
+        return $success;
+    }
+
+    protected function size($size)
+    {
+        $i = 0;
+        $val = array('b', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        while (($size / 1024) > 1) {
+            $size /= 1024;
+            ++$i;
+        }
+        return sprintf('%.'.$this->getOption('size_precision').'f%s%s',
+            number_format($size),
+            ($this->getOption('size_space') ? ' ' : ''),
+            $val[$i]
+        );
+    }
+
+    protected function compileState()
+    {
+        $status = opcache_get_status();
+        $config = opcache_get_configuration();
+
+        $files = [];
+        if (!empty($status['scripts']) && $this->getOption('allow_filelist')) {
+            uasort($status['scripts'], function($a, $b) {
+                return $a['hits'] < $b['hits'];
+            });
+            foreach ($status['scripts'] as &$file) {
+                $file['full_path'] = str_replace('\\', '/', $file['full_path']);
+                $file['readable'] = [
+                    'hits'               => number_format($file['hits']),
+                    'memory_consumption' => $this->size($file['memory_consumption'])
+                ];
+            }
+            $files = array_values($status['scripts']);
+        }
+
+        $overview = array_merge(
+            $status['memory_usage'], $status['opcache_statistics'], [
+                'used_memory_percentage'  => round(100 * (
+                        ($status['memory_usage']['used_memory'] + $status['memory_usage']['wasted_memory'])
+                        / $config['directives']['opcache.memory_consumption'])),
+                'hit_rate_percentage'     => round($status['opcache_statistics']['opcache_hit_rate']),
+                'wasted_percentage'       => round($status['memory_usage']['current_wasted_percentage'], 2),
+                'readable' => [
+                    'total_memory'       => $this->size($config['directives']['opcache.memory_consumption']),
+                    'used_memory'        => $this->size($status['memory_usage']['used_memory']),
+                    'free_memory'        => $this->size($status['memory_usage']['free_memory']),
+                    'wasted_memory'      => $this->size($status['memory_usage']['wasted_memory']),
+                    'num_cached_scripts' => number_format($status['opcache_statistics']['num_cached_scripts']),
+                    'hits'               => number_format($status['opcache_statistics']['hits']),
+                    'misses'             => number_format($status['opcache_statistics']['misses']),
+                    'blacklist_miss'     => number_format($status['opcache_statistics']['blacklist_misses']),
+                    'num_cached_keys'    => number_format($status['opcache_statistics']['num_cached_keys']),
+                    'max_cached_keys'    => number_format($status['opcache_statistics']['max_cached_keys']),
+                    'start_time'         => date_format(date_create("@{$status['opcache_statistics']['start_time']}"), 'Y-m-d H:i:s'),
+                    'last_restart_time'  => ($status['opcache_statistics']['last_restart_time'] == 0
+                            ? 'never'
+                            : date_format(date_create("@{$status['opcache_statistics']['last_restart_time']}"), 'Y-m-d H:i:s')
+                        )
+                ]
+            ]
+        );
+
+        $directives = [];
+        ksort($config['directives']);
+        foreach ($config['directives'] as $k => $v) {
+            $directives[] = ['k' => $k, 'v' => $v];
+        }
+
+        $version = array_merge(
+            $config['version'],
+            [
+                'php'    => phpversion(),
+                'server' => $_SERVER['SERVER_SOFTWARE'],
+                'host'   => (function_exists('gethostname')
+                    ? gethostname()
+                    : (php_uname('n')
+                        ?: (empty($_SERVER['SERVER_NAME'])
+                            ? $_SERVER['HOST_NAME']
+                            : $_SERVER['SERVER_NAME']
+                        )
+                    )
+                )
+            ]
+        );
+
+        return [
+            'version'    => $version,
+            'overview'   => $overview,
+            'files'      => $files,
+            'directives' => $directives,
+            'blacklist'  => $config['blacklist'],
+            'functions'  => get_extension_funcs('Zend OPcache')
+        ];
+    }
+}
+
+$opcache = OpCacheService::init($options);
 
 ?>
-<!DOCTYPE html>
-<meta charset="utf-8">
+<!doctype html>
 <html>
 <head>
-    <style>
-        body {
-            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-            margin: 0;
-            padding: 0;
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>OPcache statistics on <?php echo $opcache->getData('version', 'host'); ?></title>
+    <script src="//cdn.jsdelivr.net/react/0.13.2/react.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <style type="text/css">
+        body { font-family:sans-serif; font-size:90%; padding: 0; margin: 0 }
+        nav { padding-top: 20px; }
+        nav > ul { list-style-type: none; padding-left: 8px; margin: 0; border-bottom: 1px solid #ccc; }
+        nav > ul > li { display: inline-block; padding: 0; margin: 0 0 -1px 0; }
+        nav > ul > li > a { display: block; margin: 0 10px; padding: 15px 30px; border: 1px solid transparent; border-bottom-color: #ccc; text-decoration: none; }
+        nav > ul > li > a:hover { background-color: #f4f4f4; text-decoration: underline; }
+        nav > ul > li > a.active:hover { background-color: initial; }
+        nav > ul > li > a[data-for].active { border: 1px solid #ccc; border-bottom-color: #ffffff; border-top: 3px solid #6ca6ef; }
+        table { margin: 0 0 1em 0; border-collapse: collapse; border-color: #fff; width: 100%; table-layout: fixed; }
+        table caption { text-align: left; font-size: 1.5em; }
+        table tr { background-color: #99D0DF; border-color: #fff; }
+        table th { text-align: left; padding: 6px; background-color: #6ca6ef; color: #fff; border-color: #fff; font-weight: normal; }
+        table td { padding: 4px 6px; line-height: 1.4em; vertical-align: top; border-color: #fff; }
+        table tr:nth-child(odd) { background-color: #EFFEFF; }
+        table tr:nth-child(even) { background-color: #E0ECEF; }
+        td.pathname { width: 70%; }
+        footer { border-top: 1px solid #ccc; padding: 1em 2em; }
+        footer a { padding: 2em; text-decoration: none; opacity: 0.7; }
+        footer a:hover { opacity: 1; }
+        canvas { display: block; width: 250px; height: 250px; margin: 0 auto; }
+        #tabs { padding: 2em; }
+        #tabs > div { display: none; }
+        #tabs > div#overview { display:block; }
+        #resetCache, #toggleRealtime, footer > a { background-position: 5px 50%; background-repeat: no-repeat; background-color: transparent; }
+        footer > a { background-position: 0 50%; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAQCAYAAAAbBi9cAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjE2MENCRkExNzVBQjExRTQ5NDBGRTUzMzQyMDVDNzFFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjE2MENCRkEyNzVBQjExRTQ5NDBGRTUzMzQyMDVDNzFFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MTYwQ0JGOUY3NUFCMTFFNDk0MEZFNTMzNDIwNUM3MUUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MTYwQ0JGQTA3NUFCMTFFNDk0MEZFNTMzNDIwNUM3MUUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7HtUU1AAABN0lEQVR42qyUvWoCQRSF77hCLLKC+FOlCKTyIbYQUuhbWPkSFnZ2NpabUvANLGyz5CkkYGMlFtFAUmiSM8lZOVkWsgm58K079+fMnTusZl92BXbgDrTtZ2szd8fas/XBOzmBKaiCEFyTkL4pc9L8vgpNJJDyWtDna61EoXpO+xcFfXUVqtrf7Vx7m9Pub/EatvgHoYXD4ylztC14BBVwydvydgDPHPgNaErN3jLKIxAUmEvAXK21I18SJpXBGAxyBAaMlblOWOs1bMXFkMGeBFsi0pJNe/QNuV7563+gs8LfhrRfE6GaHLuRqfnUiKi6lJ034B44EXL0baTTJWujNGkG3kBX5uRyZuRkPl3WzDTBtzjnxxiDDq83yNxUk7GYuXM53jeLuMNavvAXkv4zrJkTaeGHAAMAIal3icPMsyQAAAAASUVORK5CYII='); font-size: 80%; }
+        #resetCache { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjBFMUMyMjI3NDlGMTFFNEE3QzNGNjQ0OEFDQzQ1MkMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjBFMUMyMjM3NDlGMTFFNEE3QzNGNjQ0OEFDQzQ1MkMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MEUxQzIyMDc0OUYxMUU0QTdDM0Y2NDQ4QUNDNDUyQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2MEUxQzIyMTc0OUYxMUU0QTdDM0Y2NDQ4QUNDNDUyQyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PplZ+ZkAAAD1SURBVHjazFPtDYJADIUJZAMZ4UbACWQENjBO4Ao6AW5AnODcADZQJwAnwJ55NbWhB/6zycsdpX39uDZNpsURtjgzwkDoCBecs5ITPGGMwCNAkIrQw+8ri36GhBHsavFdpILEo4wEpZxRigy009EhG760gr0VhFoyZfvJKPwsheIWIeGejBZRIxRVhMRFevbuUXBew/iE/lhlBduV0j8Jx+TvJEWPphq8n5li9utgaw6cW/h6NSt/JcnVBhQxotIgKTBrbNvIHo2G0x1rwlKqTDusxiAz6hHNL1zayTVqVKRKpa/LPljPH1sJh6l/oNSrZfwSYABtq3tFdZA5BAAAAABJRU5ErkJggg=='); }
+        #toggleRealtime { position: relative; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAYAAACAl21KAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6ODE5RUU4NUE3NDlGMTFFNDkyMzA4QzY1RjRBQkIzQjUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ODE5RUU4NUI3NDlGMTFFNDkyMzA4QzY1RjRBQkIzQjUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4MTlFRTg1ODc0OUYxMUU0OTIzMDhDNjVGNEFCQjNCNSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4MTlFRTg1OTc0OUYxMUU0OTIzMDhDNjVGNEFCQjNCNSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpXjpvMAAAD2SURBVHjarFQBEcMgDKR3E1AJldA5wMEqAQmTgINqmILdFCChdUAdMAeMcukuSwnQbbnLlZLwJPkQIcrSiT/IGNQHNb8CGQDyRw+2QWUBqC+luzo4OKQZIAVrB+ssyKp3Bkijf0+ijzIh4wQppoBauMSjyDZfMSCDxYZMsfHF120T36AqWZMkgyguQ3GOfottJ5TKnHC+wfeRsC2oDVayPgr3bbN2tHBH3tWuJCPa0JUgKtFzMQrcZH3FNHAc0yOp1cCASALyngoN6lhDopkJWxdifwY9A3u7l29ImpxOFSWIOVsGwHKENIWxss2eBVKdOeeXAAMAk/Z9h4QhXmUAAAAASUVORK5CYII='); }
+        #counts { width: 270px; float: right; }
+        #counts > div > div { background-color: #ededed; margin-bottom: 10px; }
+        #counts > div > div > h3 { background-color: #cdcdcd; padding: 4px 6px; margin: 0; text-align: center; }
+        #counts > div > div > p { margin: 0; text-align: center; }
+        #counts > div > div > p > span.large + span { font-size: 20pt; margin: 0; }
+        #counts > div > div > p > span.large { font-size: 80pt; margin: 0; padding: 0; text-align: center; }
+        #info { margin-right: 280px; }
+        #frmFilter { width: 520px; }
+        #moreinfo { padding: 10px; }
+        #moreinfo > p { text-align: left !important; line-height: 180%; }
+        .metainfo { font-size: 80%; }
+        .hide { display: none; }
+        #toggleRealtime.pulse::before {
+            content: ""; position: absolute;
+            top: 13px; left: 3px; width: 18px; height: 18px;
+            z-index: 10; opacity: 0; background-color: transparent;
+            border: 2px solid rgb(255, 116, 0); border-radius: 100%;
+            -webkit-animation: pulse 1s linear 2;
+            -moz-animation: pulse 1s linear 2;
+            animation: pulse 1s linear 2;
         }
-
-        #container {
-            width: 1024px;
-            margin: auto;
-            position: relative;
+        @media screen and (max-width: 750px) {
+            #info { margin-right:auto; clear:both; }
+            nav > ul { border-bottom: 0; }
+            nav > ul > li { display: block; margin: 0; }
+            nav > ul > li > a { display: block; margin: 0 10px; padding: 10px 0 10px 30px; border: 0; }
+            nav > ul > li > a[data-for].active { border-bottom-color: #ccc; }
+            #counts { position:relative; display:block; width:100%; }
+            #toggleRealtime.pulse::before { top: 8px; }
         }
-
-        h1 {
-            padding: 10px 0;
+        @media screen and (max-width: 550px) {
+            #frmFilter { width: 100%; }
         }
-
-        table {
-            border-collapse: collapse;
+        @keyframes pulse {
+            0% {transform: scale(1); opacity: 0;}
+            50% {transform: scale(1.3); opacity: 0.7;}
+            100% {transform: scale(1.6); opacity: 1;}
         }
-
-        tbody tr:nth-child(even) {
-            background-color: #eee;
+        @-webkit-keyframes pulse {
+            0% {-webkit-transform: scale(1); opacity: 0;}
+            50% {-webkit-transform: scale(1.3); opacity: 0.7;}
+            100% {-webkit-transform: scale(1.6); opacity: 0;}
         }
-
-        p.capitalize {
-            text-transform: capitalize;
-        }
-
-        .tabs {
-            position: relative;
-            float: left;
-            width: 60%;
-        }
-
-        .tab {
-            float: left;
-        }
-
-        .tab label {
-            background: #eee;
-            padding: 10px 12px;
-            border: 1px solid #ccc;
-            margin-left: -1px;
-            position: relative;
-            left: 1px;
-        }
-
-        .tab [type=radio] {
-            display: none;
-        }
-
-        .tab th, .tab td {
-            padding: 8px 12px;
-        }
-
-        .content {
-            position: absolute;
-            top: 28px;
-            left: 0;
-            background: white;
-            border: 1px solid #ccc;
-            height: 450px;
-            width: 100%;
-            overflow: auto;
-        }
-
-        .content table {
-            width: 100%;
-        }
-
-        .content th, .tab:nth-child(3) td {
-            text-align: left;
-        }
-
-        .content td {
-            text-align: right;
-        }
-
-        .clickable {
-            cursor: pointer;
-        }
-
-        [type=radio]:checked ~ label {
-            background: white;
-            border-bottom: 1px solid white;
-            z-index: 2;
-        }
-
-        [type=radio]:checked ~ label ~ .content {
-            z-index: 1;
-        }
-
-        #graph {
-            float: right;
-            width: 40%;
-            position: relative;
-        }
-
-        #graph > form {
-            position: absolute;
-            right: 60px;
-            top: -20px;
-        }
-
-        #graph > svg {
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
-
-        #stats {
-            position: absolute;
-            right: 125px;
-            top: 145px;
-        }
-
-        #stats th, #stats td {
-            padding: 6px 10px;
-            font-size: 0.8em;
-        }
-
-        #partition {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 10;
-            top: 0;
-            left: 0;
-            background: #ddd;
-            display: none;
-        }
-
-        #close-partition {
-            display: none;
-            position: absolute;
-            z-index: 20;
-            right: 15px;
-            top: 15px;
-            background: #f9373d;
-            color: #fff;
-            padding: 12px 15px;
-        }
-
-        #close-partition:hover {
-            background: #D32F33;
-            cursor: pointer;
-        }
-
-        #partition rect {
-            stroke: #fff;
-            fill: #aaa;
-            fill-opacity: 1;
-        }
-
-        #partition rect.parent {
-            cursor: pointer;
-            fill: steelblue;
-        }
-
-        #partition text {
-            pointer-events: none;
-        }
-
-        label {
-            cursor: pointer;
+        @-moz-keyframes pulse {
+            0% {-moz-transform: scale(1); opacity: 0;}
+            50% {-moz-transform: scale(1.3); opacity: 0.7;}
+            100% {-moz-transform: scale(1.6); opacity: 0;}
         }
     </style>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
-    <script type="text/javascript" src="assets/js/jquery-1.11.0.min.js"></script>
-    <script src="assets/js/d3.min.js"></script>
-    
-    <script>
-        var hidden = {};
-        function toggleVisible(head, row) {
-            if (!hidden[row]) {
-                d3.selectAll(row).transition().style('display', 'none');
-                hidden[row] = true;
-                d3.select(head).transition().style('color', '#ccc');
-            } else {
-                d3.selectAll(row).transition().style('display');
-                hidden[row] = false;
-                d3.select(head).transition().style('color', '#000');
-            }
-        }
-    </script>
-    <title>OpCache tester</title>
 </head>
 
 <body>
-    <div id="container">
 
-<?php
-if (constant("OPCACHE_TESTER") == FALSE) {
-    echo 'You are not allowed to run this script</body></html>';
-    die();
-}
+<header>
+    <nav>
+        <ul>
+            <li><a href="requirements.php">Back to Requirements</a></li>
+            <li><a data-for="overview" href="#overview" class="active">Overview</a></li>
+            <?php if ($opcache->getOption('allow_filelist')): ?>
+            <li><a data-for="files" href="#files">File usage</a></li>
+            <?php endif; ?>
+            <?php if ($opcache->getOption('allow_reset')): ?>
+            <li><a href="?reset=1" id="resetCache" onclick="return confirm('Are you sure you want to reset the cache?');">Reset cache</a></li>
+            <?php endif; ?>
+            <?php if ($opcache->getOption('allow_realtime')): ?>
+            <li><a href="#" id="toggleRealtime">Enable real-time update</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+</header>
 
-if (!extension_loaded('Zend OPcache')) {
-    echo 'You do not have the Zend OPcache extension loaded</body></html>';
-    die();
-}
-
-class OpCacheDataModel
-{
-    private $_configuration;
-    private $_status;
-    private $_d3Scripts = array();
-
-    public function __construct()
-    {
-        $this->_configuration = opcache_get_configuration();
-        $this->_status = opcache_get_status();
-    }
-
-    public function getPageTitle()
-    {
-        return 'PHP ' . phpversion() . " with OpCache {$this->_configuration['version']['version']}";
-    }
-
-    public function getStatusDataRows()
-    {
-        $rows = array();
-        foreach ($this->_status as $key => $value) {
-            if ($key === 'scripts') {
-                continue;
-            }
-
-            if (is_array($value)) {
-                foreach ($value as $k => $v) {
-                    if ($v === false) {
-                        $value = 'false';
-                    }
-                    if ($v === true) {
-                        $value = 'true';
-                    }
-                    if ($k === 'used_memory' || $k === 'free_memory' || $k === 'wasted_memory') {
-                        $v = $this->_size_for_humans(
-                            $v
-                        );
-                    }
-                    if ($k === 'current_wasted_percentage' || $k === 'opcache_hit_rate') {
-                        $v = number_format(
-                                $v,
-                                2
-                            ) . '%';
-                    }
-                    if ($k === 'blacklist_miss_ratio') {
-                        $v = number_format($v, 2) . '%';
-                    }
-                    if ($k === 'start_time' || $k === 'last_restart_time') {
-                        $v = ($v ? date(DATE_RFC822, $v) : 'never');
-                    }
-                    if (THOUSAND_SEPARATOR === true && is_int($v)) {
-                        $v = number_format($v);
-                    }
-
-                    $rows[] = "<tr><th>$k</th><td>$v</td></tr>\n";
-                }
-                continue;
-            }
-            if ($value === false) {
-                $value = 'false';
-            }
-            if ($value === true) {
-                $value = 'true';
-            }
-            $rows[] = "<tr><th>$key</th><td>$value</td></tr>\n";
-        }
-
-        return implode("\n", $rows);
-    }
-
-    public function getConfigDataRows()
-    {
-        $rows = array();
-        foreach ($this->_configuration['directives'] as $key => $value) {
-            if ($value === false) {
-                $value = 'false';
-            }
-            if ($value === true) {
-                $value = 'true';
-            }
-            if ($key == 'opcache.memory_consumption') {
-                $value = $this->_size_for_humans($value);
-            }
-            $rows[] = "<tr><th>$key</th><td>$value</td></tr>\n";
-        }
-
-        return implode("\n", $rows);
-    }
-
-    public function getScriptStatusRows()
-    {
-        foreach ($this->_status['scripts'] as $key => $data) {
-            $dirs[dirname($key)][basename($key)] = $data;
-            $this->_arrayPset($this->_d3Scripts, $key, array(
-                'name' => basename($key),
-                'size' => $data['memory_consumption'],
-            ));
-        }
-
-        asort($dirs);
-
-        $basename = '';
-        while (true) {
-            if (count($this->_d3Scripts) !=1) break;
-            $basename .= DIRECTORY_SEPARATOR . key($this->_d3Scripts);
-            $this->_d3Scripts = reset($this->_d3Scripts);
-        }
-
-        $this->_d3Scripts = $this->_processPartition($this->_d3Scripts, $basename);
-        $id = 1;
-
-        $rows = array();
-        foreach ($dirs as $dir => $files) {
-            $count = count($files);
-            $file_plural = $count > 1 ? 's' : null;
-            $m = 0;
-            foreach ($files as $file => $data) {
-                $m += $data["memory_consumption"];
-            }
-            $m = $this->_size_for_humans($m);
-
-            if ($count > 1) {
-                $rows[] = '<tr>';
-                $rows[] = "<th class=\"clickable\" id=\"head-{$id}\" colspan=\"3\" onclick=\"toggleVisible('#head-{$id}', '#row-{$id}')\">{$dir} ({$count} file{$file_plural}, {$m})</th>";
-                $rows[] = '</tr>';
-            }
-
-            foreach ($files as $file => $data) {
-                $rows[] = "<tr id=\"row-{$id}\">";
-                $rows[] = "<td>" . $this->_format_value($data["hits"]) . "</td>";
-                $rows[] = "<td>" . $this->_size_for_humans($data["memory_consumption"]) . "</td>";
-                $rows[] = $count > 1 ? "<td>{$file}</td>" : "<td>{$dir}/{$file}</td>";
-                $rows[] = '</tr>';
-            }
-
-            ++$id;
-        }
-
-        return implode("\n", $rows);
-    }
-
-    public function getScriptStatusCount()
-    {
-        return count($this->_status["scripts"]);
-    }
-
-    public function getGraphDataSetJson()
-    {
-        $dataset = array();
-        $dataset['memory'] = array(
-            $this->_status['memory_usage']['used_memory'],
-            $this->_status['memory_usage']['free_memory'],
-            $this->_status['memory_usage']['wasted_memory'],
-        );
-
-        $dataset['keys'] = array(
-            $this->_status['opcache_statistics']['num_cached_keys'],
-            $this->_status['opcache_statistics']['max_cached_keys'] - $this->_status['opcache_statistics']['num_cached_keys'],
-            0
-        );
-
-        $dataset['hits'] = array(
-            $this->_status['opcache_statistics']['misses'],
-            $this->_status['opcache_statistics']['hits'],
-            0,
-        );
-
-        $dataset['restarts'] = array(
-            $this->_status['opcache_statistics']['oom_restarts'],
-            $this->_status['opcache_statistics']['manual_restarts'],
-            $this->_status['opcache_statistics']['hash_restarts'],
-        );
-
-        if (THOUSAND_SEPARATOR === true) {
-            $dataset['TSEP'] = 1;
-        } else {
-            $dataset['TSEP'] = 0;
-        }
-
-        return json_encode($dataset);
-    }
-
-    public function getHumanUsedMemory()
-    {
-        return $this->_size_for_humans($this->getUsedMemory());
-    }
-
-    public function getHumanFreeMemory()
-    {
-        return $this->_size_for_humans($this->getFreeMemory());
-    }
-
-    public function getHumanWastedMemory()
-    {
-        return $this->_size_for_humans($this->getWastedMemory());
-    }
-
-    public function getUsedMemory()
-    {
-        return $this->_status['memory_usage']['used_memory'];
-    }
-
-    public function getFreeMemory()
-    {
-        return $this->_status['memory_usage']['free_memory'];
-    }
-
-    public function getWastedMemory()
-    {
-        return $this->_status['memory_usage']['wasted_memory'];
-    }
-
-    public function getWastedMemoryPercentage()
-    {
-        return number_format($this->_status['memory_usage']['current_wasted_percentage'], 2);
-    }
-
-    public function getD3Scripts()
-    {
-        return $this->_d3Scripts;
-    }
-
-    private function _processPartition($value, $name = null)
-    {
-        if (array_key_exists('size', $value)) {
-            return $value;
-        }
-
-        $array = array('name' => $name,'children' => array());
-
-        foreach ($value as $k => $v) {
-            $array['children'][] = $this->_processPartition($v, $k);
-        }
-
-        return $array;
-    }
-
-    private function _format_value($value)
-    {
-        if (THOUSAND_SEPARATOR === true) {
-            return number_format($value);
-        } else {
-            return $value;
-        }
-    }
-
-    private function _size_for_humans($bytes)
-    {
-        if ($bytes > 1048576) {
-            return sprintf('%.2f&nbsp;MB', $bytes / 1048576);
-        } else {
-            if ($bytes > 1024) {
-                return sprintf('%.2f&nbsp;kB', $bytes / 1024);
-            } else {
-                return sprintf('%d&nbsp;bytes', $bytes);
-            }
-        }
-    }
-
-    // Borrowed from Laravel
-    private function _arrayPset(&$array, $key, $value)
-    {
-        if (is_null($key)) return $array = $value;
-        $keys = explode(DIRECTORY_SEPARATOR, ltrim($key, DIRECTORY_SEPARATOR));
-        while (count($keys) > 1) {
-            $key = array_shift($keys);
-            if ( ! isset($array[$key]) || ! is_array($array[$key])) {
-                $array[$key] = array();
-            }
-            $array =& $array[$key];
-        }
-        $array[array_shift($keys)] = $value;
-        return $array;
-    }
-
-}
-
-$dataModel = new OpCacheDataModel();
-?>
-        <h1><?php echo $dataModel->getPageTitle(); ?></h1>
-        
-        <div class="tabs">
-
-            <div class="tab">
-                <input type="radio" id="tab-status" name="tab-group-1" checked>
-                <label for="tab-status">Status</label>
-                <div class="content">
+<div id="tabs">
+    <div id="overview">
+        <div class="container">
+            <div id="counts"></div>
+            <div id="info">
+                <div id="generalInfo"></div>
+                <div id="directives"></div>
+                <div id="functions">
                     <table>
-                        <?php echo $dataModel->getStatusDataRows(); ?>
+                        <thead>
+                            <tr><th>Available functions</th></tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($opcache->getData('functions') as $func): ?>
+                            <tr><td><a href="http://php.net/<?php echo $func; ?>" title="View manual page" target="_blank"><?php echo $func; ?></a></td></tr>
+                            <?php endforeach; ?>
+                        </tbody>
                     </table>
                 </div>
+                <br style="clear:both;" />
             </div>
-
-            <div class="tab">
-                <input type="radio" id="tab-config" name="tab-group-1">
-                <label for="tab-config">Configuration</label>
-                <div class="content">
-                    <table>
-                        <?php echo $dataModel->getConfigDataRows(); ?>
-                    </table>
-                </div>
-            </div>
-
-            <div class="tab">
-                <input type="radio" id="tab-scripts" name="tab-group-1">
-                <label for="tab-scripts">Scripts (<?php echo $dataModel->getScriptStatusCount(); ?>)</label>
-                <div class="content">
-                    <table style="font-size:0.8em;">
-                        <tr>
-                            <th width="10%">Hits</th>
-                            <th width="20%">Memory</th>
-                            <th width="70%">Path</th>
-                        </tr>
-                        <?php echo $dataModel->getScriptStatusRows(); ?>
-                    </table>
-                </div>
-            </div>
-
-            <div class="tab">
-                <input type="radio" id="tab-visualise" name="tab-group-1">
-                <label for="tab-visualise">Visualise Partition</label>
-                <div class="content"></div>
-            </div>
-
-        </div>
-
-        <div id="graph">
-            <form>
-                <label><input type="radio" name="dataset" value="memory" checked> Memory</label>
-                <label><input type="radio" name="dataset" value="keys"> Keys</label>
-                <label><input type="radio" name="dataset" value="hits"> Hits</label>
-                <label><input type="radio" name="dataset" value="restarts"> Restarts</label>
-            </form>
-
-            <div id="stats"></div>
         </div>
     </div>
+    <div id="files">
+        <?php if ($opcache->getOption('allow_filelist')): ?>
+        <p><label>Start typing to filter on script path<br/><input type="text" name="filter" id="frmFilter" /><label></p>
+        <?php endif; ?>
+        <div class="container" id="filelist"></div>
+    </div>
+</div>
 
-    <div id="close-partition">&#10006; Close Visualisation</div>
-    <div id="partition"></div>
+<footer>
+    <a href="https://github.com/amnuts/opcache-gui" target="_blank">https://github.com/amnuts/opcache-gui</a>
+</footer>
 
-    <script>
-        var dataset = <?php echo $dataModel->getGraphDataSetJson(); ?>;
+<script type="text/javascript">
+    var realtime = false;
+    var opstate = <?php echo json_encode($opcache->getData()); ?>;
+    var canInvalidate = <?php echo ($opcache->canInvalidate() ? 'true' : 'false'); ?>;
+    var useCharts = <?php echo ($opcache->getOption('charts') ? 'true' : 'false'); ?>;
+    var allowFiles = <?php echo ($opcache->getOption('allow_filelist') ? 'true' : 'false'); ?>;
 
-        var width = 400,
-            height = 400,
-            radius = Math.min(width, height) / 2,
-            colours = ['#B41F1F', '#1FB437', '#ff7f0e'];
-
-        d3.scale.customColours = function() {
-            return d3.scale.ordinal().range(colours);
+    <?php if ($opcache->getOption('charts')): ?>
+    var Gauge = function(el, colour) {
+        this.canvas  = $(el).get(0);
+        this.ctx     = this.canvas.getContext('2d');
+        this.width   = this.canvas.width;
+        this.height  = this.canvas.height;
+        this.colour  = colour || '#6ca6ef';
+        this.loop    = null;
+        this.degrees = 0;
+        this.newdegs = 0;
+        this.text    = '';
+        this.init = function() {
+            this.ctx.clearRect(0, 0, this.width, this.height);
+            this.ctx.beginPath();
+            this.ctx.strokeStyle = '#e2e2e2';
+            this.ctx.lineWidth = 30;
+            this.ctx.arc(this.width/2, this.height/2, 100, 0, Math.PI*2, false);
+            this.ctx.stroke();
+            this.ctx.beginPath();
+            this.ctx.strokeStyle = this.colour;
+            this.ctx.lineWidth = 30;
+            this.ctx.arc(this.width/2, this.height/2, 100, 0 - (90 * Math.PI / 180), (this.degrees * Math.PI / 180) - (90 * Math.PI / 180), false);
+            this.ctx.stroke();
+            this.ctx.fillStyle = this.colour;
+            this.ctx.font = '60px sans-serif';
+            this.text = Math.round((this.degrees/360)*100) + '%';
+            this.ctx.fillText(this.text, (this.width/2) - (this.ctx.measureText(this.text).width/2), (this.height/2) + 20);
         };
-
-        var colour = d3.scale.customColours();
-        var pie = d3.layout.pie().sort(null);
-
-        var arc = d3.svg.arc().innerRadius(radius - 20).outerRadius(radius - 50);
-        var svg = d3.select("#graph").append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .append("g")
-                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-        var path = svg.selectAll("path")
-                      .data(pie(dataset.memory))
-                      .enter().append("path")
-                      .attr("fill", function(d, i) { return colour(i); })
-                      .attr("d", arc)
-                      .each(function(d) { this._current = d; }); // store the initial values
-
-        d3.selectAll("input").on("change", change);
-        set_text("memory");
-
-        function set_text(t) {
-            if (t === "memory") {
-                d3.select("#stats").html(
-                    "<table><tr><th style='background:#B41F1F;'>Used</th><td><?php echo $dataModel->getHumanUsedMemory()?></td></tr>"+
-                    "<tr><th style='background:#1FB437;'>Free</th><td><?php echo $dataModel->getHumanFreeMemory()?></td></tr>"+
-                    "<tr><th style='background:#ff7f0e;' rowspan=\"2\">Wasted</th><td><?php echo $dataModel->getHumanWastedMemory()?></td></tr>"+
-                    "<tr><td><?php echo $dataModel->getWastedMemoryPercentage()?>%</td></tr></table>"
-                );
-            } else if (t === "keys") {
-                d3.select("#stats").html(
-                    "<table><tr><th style='background:#B41F1F;'>Cached keys</th><td>"+format_value(dataset[t][0])+"</td></tr>"+
-                    "<tr><th style='background:#1FB437;'>Free Keys</th><td>"+format_value(dataset[t][1])+"</td></tr></table>"
-                );
-            } else if (t === "hits") {
-                d3.select("#stats").html(
-                    "<table><tr><th style='background:#B41F1F;'>Misses</th><td>"+format_value(dataset[t][0])+"</td></tr>"+
-                    "<tr><th style='background:#1FB437;'>Cache Hits</th><td>"+format_value(dataset[t][1])+"</td></tr></table>"
-                );
-            } else if (t === "restarts") {
-                d3.select("#stats").html(
-                    "<table><tr><th style='background:#B41F1F;'>Memory</th><td>"+dataset[t][0]+"</td></tr>"+
-                    "<tr><th style='background:#1FB437;'>Manual</th><td>"+dataset[t][1]+"</td></tr>"+
-                    "<tr><th style='background:#ff7f0e;'>Keys</th><td>"+dataset[t][2]+"</td></tr></table>"
-                );
+        this.draw = function() {
+            if (typeof this.loop != 'undefined') {
+                clearInterval(this.loop);
             }
-        }
-
-        function change() {
-            // Filter out any zero values to see if there is anything left
-            var remove_zero_values = dataset[this.value].filter(function(value) {
-                return value > 0;
-            });
-
-            // Skip if the value is undefined for some reason
-            if (typeof dataset[this.value] !== 'undefined' && remove_zero_values.length > 0) {
-                $('#graph').find('> svg').show();
-                path = path.data(pie(dataset[this.value])); // update the data
-                path.transition().duration(750).attrTween("d", arcTween); // redraw the arcs
-            // Hide the graph if we can't draw it correctly, not ideal but this works
+            var self = this;
+            self.loop = setInterval(function(){ self.animate(); }, 1000/(this.newdegs - this.degrees));
+        };
+        this.animate = function() {
+            if (this.degrees == this.newdegs) {
+                clearInterval(this.loop);
+            }
+            if (this.degrees < this.newdegs) {
+                ++this.degrees;
             } else {
-                $('#graph').find('> svg').hide();
+                --this.degrees;
             }
+            this.init();
+        };
+        this.setValue = function(val) {
+            this.newdegs = Math.round(3.6 * val);
+            this.draw();
+        };
+    }
+    <?php endif; ?>
 
-            set_text(this.value);
-        }
-
-        function arcTween(a) {
-            var i = d3.interpolate(this._current, a);
-            this._current = i(0);
-            return function(t) {
-                return arc(i(t));
-            };
-        }
-
-        function size_for_humans(bytes) {
-            if (bytes > 1048576) {
-                return (bytes/1048576).toFixed(2) + ' MB';
-            } else if (bytes > 1024) {
-                return (bytes/1024).toFixed(2) + ' KB';
-            } else return bytes + ' bytes';
-        }
-
-        function format_value(value) {
-            if (dataset["TSEP"] == 1) {
-                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            } else {
-                return value;
-            }
-        }
-
-        var w = window.innerWidth,
-            h = window.innerHeight,
-            x = d3.scale.linear().range([0, w]),
-            y = d3.scale.linear().range([0, h]);
-
-        var vis = d3.select("#partition")
-                    .style("width", w + "px")
-                    .style("height", h + "px")
-                    .append("svg:svg")
-                    .attr("width", w)
-                    .attr("height", h);
-
-        var partition = d3.layout.partition()
-                .value(function(d) { return d.size; });
-
-        root = JSON.parse('<?php echo json_encode($dataModel->getD3Scripts()); ?>');
-
-        var g = vis.selectAll("g")
-                   .data(partition.nodes(root))
-                   .enter().append("svg:g")
-                   .attr("transform", function(d) { return "translate(" + x(d.y) + "," + y(d.x) + ")"; })
-                   .on("click", click);
-
-        var kx = w / root.dx,
-                ky = h / 1;
-
-        g.append("svg:rect")
-         .attr("width", root.dy * kx)
-         .attr("height", function(d) { return d.dx * ky; })
-         .attr("class", function(d) { return d.children ? "parent" : "child"; });
-
-        g.append("svg:text")
-         .attr("transform", transform)
-         .attr("dy", ".35em")
-         .style("opacity", function(d) { return d.dx * ky > 12 ? 1 : 0; })
-         .text(function(d) { return d.name; })
-
-        d3.select(window)
-          .on("click", function() { click(root); })
-
-        function click(d) {
-            if (!d.children) return;
-
-            kx = (d.y ? w - 40 : w) / (1 - d.y);
-            ky = h / d.dx;
-            x.domain([d.y, 1]).range([d.y ? 40 : 0, w]);
-            y.domain([d.x, d.x + d.dx]);
-
-            var t = g.transition()
-                     .duration(d3.event.altKey ? 7500 : 750)
-                     .attr("transform", function(d) { return "translate(" + x(d.y) + "," + y(d.x) + ")"; });
-
-            t.select("rect")
-             .attr("width", d.dy * kx)
-             .attr("height", function(d) { return d.dx * ky; });
-
-            t.select("text")
-             .attr("transform", transform)
-             .style("opacity", function(d) { return d.dx * ky > 12 ? 1 : 0; });
-
-            d3.event.stopPropagation();
-        }
-
-        function transform(d) {
-            return "translate(8," + d.dx * ky / 2 + ")";
-        }
-
-        $(document).ready(function() {
-            function handleVisualisationToggle(close) {
-
-                $('#partition, #close-partition').fadeToggle();
-
-                // Is the visualisation being closed? If so show the status tab again
-                if (close) {
-                    $('#tab-visualise').removeAttr('checked');
-                    $('#tab-status').trigger('click');
+    $(function(){
+        <?php if ($opcache->getOption('allow_realtime')): ?>
+        function updateStatus() {
+            $('#toggleRealtime').removeClass('pulse');
+            $.ajax({
+                url: "#",
+                dataType: "json",
+                cache: false,
+                success: function(data) {
+                    $('#toggleRealtime').addClass('pulse');
+                    opstate = data;
+                    overviewCountsObj.setState({
+                        data : opstate.overview
+                    });
+                    generalInfoObj.setState({
+                        version : opstate.version,
+                        start : opstate.overview.readable.start_time,
+                        reset : opstate.overview.readable.last_restart_time
+                    });
+                    filesObj.setState({
+                        data : opstate.files,
+                        count_formatted : opstate.overview.readable.num_cached_scripts,
+                        count : opstate.overview.num_cached_scripts
+                    });
+                    $('#frmFilter').trigger('keyup');
                 }
+            });
+        }
+        $('#toggleRealtime').click(function(){
+            if (realtime === false) {
+                realtime = setInterval(function(){updateStatus()}, <?php echo (int)$opcache->getOption('refresh_time') * 1000; ?>);
+                $(this).text('Disable real-time update');
+            } else {
+                clearInterval(realtime);
+                realtime = false;
+                $(this).text('Enable real-time update').removeClass('pulse');
             }
-
-            $('label[for="tab-visualise"], #close-partition').on('click', function() {
-                handleVisualisationToggle(($(this).attr('id') === 'close-partition'));
-            });
-
-            $(document).keyup(function(e) {
-                if (e.keyCode == 27) handleVisualisationToggle(true);
-            });
-
         });
-    </script>
+        <?php endif; ?>
+        $('nav a[data-for]').click(function(){
+            $('#tabs > div').hide();
+            $('#' + $(this).data('for')).show();
+            $('nav a[data-for]').removeClass('active');
+            $(this).addClass('active');
+            return false;
+        });
+        $(document).on('paint', '#filelist table tbody', function(event, params) {
+            var trs = $('tr', $(this)).not('.hide');
+            trs.filter(':odd').css({backgroundColor:'#E0ECEF'})
+               .end().filter(':even').css({backgroundColor:'#EFFEFF'});
+            filesObj.setState({showing: trs.length});
+        });
+        $('#frmFilter').bind('keyup', function(event){
+            $('span.pathname').each(function(index){
+                if ($(this).text().toLowerCase().indexOf($('#frmFilter').val().toLowerCase()) == -1) {
+                    $(this).closest('tr').addClass('hide');
+                } else {
+                    $(this).closest('tr').removeClass('hide');
+                }
+            });
+            $('#filelist table tbody').trigger('paint');
+        });
+    });
+
+    var MemoryUsage = React.createClass({displayName: 'MemoryUsage',
+        componentDidMount: function() {
+            if (this.props.chart) {
+                this.props.memoryUsageGauge = new Gauge('#memoryUsageCanvas');
+                this.props.memoryUsageGauge.setValue(this.props.value);
+            }
+        },
+        componentDidUpdate: function() {
+            if (typeof this.props.memoryUsageGauge != 'undefined') {
+                this.props.memoryUsageGauge.setValue(this.props.value);
+            }
+        },
+        render: function() {
+            if (this.props.chart == true) {
+                return(React.createElement("canvas", {id: "memoryUsageCanvas", width: "250", height: "250", 'data-value': this.props.value}));
+            }
+            return(React.createElement("p", null, React.createElement("span", {className: "large"}, this.props.value), React.createElement("span", null, "%")));
+        }
+    });
+
+    var HitRate = React.createClass({displayName: 'HitRate',
+        componentDidMount: function() {
+            if (this.props.chart) {
+                this.props.hitRateGauge = new Gauge('#hitRateCanvas');
+                this.props.hitRateGauge.setValue(this.props.value)
+            }
+        },
+        componentDidUpdate: function() {
+            if (typeof this.props.hitRateGauge != 'undefined') {
+                this.props.hitRateGauge.setValue(this.props.value);
+            }
+        },
+        render: function() {
+            if (this.props.chart == true) {
+                return(React.createElement("canvas", {id: "hitRateCanvas", width: "250", height: "250", 'data-value': this.props.value}));
+            }
+            return(React.createElement("p", null, React.createElement("span", {className: "large"}, this.props.value), React.createElement("span", null, "%")));
+        }
+    });
+
+    var OverviewCounts = React.createClass({displayName: 'OverviewCounts',
+        getInitialState: function() {
+            return {
+                data  : opstate.overview,
+                chart : useCharts
+            };
+        },
+        render: function() {
+            return (
+                React.createElement("div", null,
+                    React.createElement("div", null,
+                        React.createElement("h3", null, "memory usage"),
+                        React.createElement("p", null, React.createElement(MemoryUsage, {chart: this.state.chart, value: this.state.data.used_memory_percentage}))
+                    ),
+                    React.createElement("div", null,
+                        React.createElement("h3", null, "hit rate"),
+                        React.createElement("p", null, React.createElement(HitRate, {chart: this.state.chart, value: this.state.data.hit_rate_percentage}))
+                    ),
+                    React.createElement("div", {id: "moreinfo"},
+                        React.createElement("p", null, React.createElement("b", null, "total memory:"), " ", this.state.data.readable.total_memory),
+                        React.createElement("p", null, React.createElement("b", null, "used memory:"), " ", this.state.data.readable.used_memory),
+                        React.createElement("p", null, React.createElement("b", null, "free memory:"), " ", this.state.data.readable.free_memory),
+                        React.createElement("p", null, React.createElement("b", null, "wasted memory:"), " ", this.state.data.readable.wasted_memory, " (", this.state.data.wasted_percentage, "%)"),
+                        React.createElement("p", null, React.createElement("b", null, "number of cached files:"), " ", this.state.data.readable.num_cached_scripts),
+                        React.createElement("p", null, React.createElement("b", null, "number of hits:"), " ", this.state.data.readable.hits),
+                        React.createElement("p", null, React.createElement("b", null, "number of misses:"), " ", this.state.data.readable.misses),
+                        React.createElement("p", null, React.createElement("b", null, "blacklist misses:"), " ", this.state.data.readable.blacklist_miss),
+                        React.createElement("p", null, React.createElement("b", null, "number of cached keys:"), " ", this.state.data.readable.num_cached_keys),
+                        React.createElement("p", null, React.createElement("b", null, "max cached keys:"), " ", this.state.data.readable.max_cached_keys)
+                    )
+                )
+            );
+        }
+    });
+
+    var GeneralInfo = React.createClass({displayName: 'GeneralInfo',
+        getInitialState: function() {
+            return {
+                version : opstate.version,
+                start : opstate.overview.readable.start_time,
+                reset : opstate.overview.readable.last_restart_time
+            };
+        },
+        render: function() {
+            return (
+                React.createElement("table", null,
+                    React.createElement("thead", null,
+                        React.createElement("tr", null, React.createElement("th", {colSpan: "2"}, "General info"))
+                    ),
+                    React.createElement("tbody", null,
+                        React.createElement("tr", null, React.createElement("td", null, "Zend OPcache"), React.createElement("td", null, this.state.version.version)),
+                        React.createElement("tr", null, React.createElement("td", null, "PHP"), React.createElement("td", null, this.state.version.php)),
+                        React.createElement("tr", null, React.createElement("td", null, "Host"), React.createElement("td", null, this.state.version.host)),
+                        React.createElement("tr", null, React.createElement("td", null, "Server Software"), React.createElement("td", null, this.state.version.server)),
+                        React.createElement("tr", null, React.createElement("td", null, "Start time"), React.createElement("td", null, this.state.start)),
+                        React.createElement("tr", null, React.createElement("td", null, "Last reset"), React.createElement("td", null, this.state.reset))
+                    )
+                )
+            );
+        }
+    });
+
+    var Directives = React.createClass({displayName: 'Directives',
+        getInitialState: function() {
+            return { data : opstate.directives };
+        },
+        render: function() {
+            var directiveNodes = this.state.data.map(function(directive) {
+                var map = { 'opcache.':'', '_':' ' };
+                var dShow = directive.k.replace(/opcache\.|_/gi, function(matched){
+                    return map[matched];
+                });
+                var vShow;
+                if (directive.v === true || directive.v === false) {
+                    vShow = React.createElement('i', {}, directive.v.toString());
+                } else if (directive.v == '') {
+                    vShow = React.createElement('i', {}, 'no value');
+                } else {
+                    vShow = directive.v;
+                }
+                return (
+                    React.createElement("tr", {key: directive.k},
+                        React.createElement("td", {title: 'View ' + directive.k + ' manual entry'}, React.createElement("a", {href: 'http://php.net/manual/en/opcache.configuration.php#ini.'
+                        + (directive.k).replace(/_/g,'-'), target: "_blank"}, dShow)),
+                        React.createElement("td", null, vShow)
+                    )
+                );
+            });
+            return (
+                React.createElement("table", null,
+                    React.createElement("thead", null,
+                        React.createElement("tr", null, React.createElement("th", {colSpan: "2"}, "Directives"))
+                    ),
+                    React.createElement("tbody", null, directiveNodes)
+                )
+            );
+        }
+    });
+
+    var Files = React.createClass({displayName: 'Files',
+        getInitialState: function() {
+            return {
+                data : opstate.files,
+                showing: null,
+                allowFiles: allowFiles
+            };
+        },
+        handleInvalidate: function(e) {
+            e.preventDefault();
+            if (realtime) {
+                $.get('#', { invalidate: e.currentTarget.getAttribute('data-file') }, function(data) {
+                    console.log('success: ' + data.success);
+                }, 'json');
+            } else {
+                window.location.href = e.currentTarget.href;
+            }
+        },
+        render: function() {
+            if (this.state.allowFiles) {
+                var fileNodes = this.state.data.map(function(file) {
+                    var invalidate, invalidated;
+                    if (file.timestamp == 0) {
+                        invalidated = React.createElement("span", null, React.createElement("i", {className: "invalid metainfo"}, "has been invalidated"));
+                    }
+                    if (canInvalidate) {
+                        invalidate = React.createElement("span", null, ", ", React.createElement("a", {className: "metainfo", href: '?invalidate='
+                        + file.full_path, 'data-file': file.full_path, onClick: this.handleInvalidate}, "force file invalidation"));
+                    }
+                    return (
+                        React.createElement("tr", {key: file.full_path},
+                            React.createElement("td", null,
+                                React.createElement("div", null,
+                                    React.createElement("span", {className: "pathname"}, file.full_path), React.createElement("br", null),
+                                    React.createElement(FilesMeta, {data: [file.readable.hits, file.readable.memory_consumption, file.last_used]}),
+                                    invalidate,
+                                    invalidated
+                                )
+                            )
+                        )
+                    );
+                }.bind(this));
+                return (
+                    React.createElement("div", null,
+                        React.createElement(FilesListed, {showing: this.state.showing}),
+                        React.createElement("table", null,
+                            React.createElement("thead", null,
+                                React.createElement("tr", null,
+                                    React.createElement("th", null, "Script")
+                                )
+                            ),
+                            React.createElement("tbody", null, fileNodes)
+                        )
+                    )
+                );
+            } else {
+                return React.createElement("span", null);
+            }
+        }
+    });
+
+    var FilesMeta = React.createClass({displayName: 'FilesMeta',
+        render: function() {
+            return (
+                React.createElement("span", {className: "metainfo"},
+                    React.createElement("b", null, "hits: "), React.createElement("span", null, this.props.data[0], ", "),
+                    React.createElement("b", null, "memory: "), React.createElement("span", null, this.props.data[1], ", "),
+                    React.createElement("b", null, "last used: "), React.createElement("span", null, this.props.data[2])
+                )
+            );
+        }
+    });
+
+    var FilesListed = React.createClass({displayName: 'FilesListed',
+        getInitialState: function() {
+            return {
+                formatted : opstate.overview.readable.num_cached_scripts,
+                total     : opstate.overview.num_cached_scripts
+            };
+        },
+        render: function() {
+            var display = this.state.formatted + ' file' + (this.state.total == 1 ? '' : 's') + ' cached';
+            if (this.props.showing !== null && this.props.showing != this.state.total) {
+                display += ', ' + this.props.showing + ' showing due to filter';
+            }
+            return (React.createElement("h3", null, display));
+        }
+    });
+
+    var overviewCountsObj = React.render(React.createElement(OverviewCounts, null), document.getElementById('counts'));
+    var generalInfoObj = React.render(React.createElement(GeneralInfo, null), document.getElementById('generalInfo'));
+    var filesObj = React.render(React.createElement(Files, null), document.getElementById('filelist'));
+    React.render(React.createElement(Directives, null), document.getElementById('directives'));
+</script>
+
 </body>
 </html>

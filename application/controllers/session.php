@@ -236,12 +236,12 @@ class Session extends CI_Controller {
             $this->load->model('users_model');
             switch ($oauth2Provider) {
                 case 'google':
-                    $provider = new League\OAuth2\Client\Provider\Google([
+                    $provider = new League\OAuth2\Client\Provider\Google(Array(
                         'clientId' => $oauth2ClientId,
                         'clientSecret' => $oauth2ClientSecret,
                         'redirectUri' => 'postmessage',
                         'accessType' => 'offline',
-                    ]);
+                    ));
                     $token = $provider->getAccessToken('authorization_code', ['code' => $authCode]);
                     try {
                         //We try to get the e-mail address from the Google+ API

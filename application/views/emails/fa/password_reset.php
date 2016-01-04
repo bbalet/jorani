@@ -1,13 +1,13 @@
 <?php
 /**
  * Email template.You can change the content of this template
- * @copyright  Copyright (c) 2014-2016 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.4.5
  */
 ?>
-<html lang="en">
+<html lang="fa">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,9 +20,9 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>Dear {Firstname} {Lastname},</p>
-        <p>If you didn't perform this operation, please contact your administrator.</p>
+        <p>آقا/خانم {Firstname} {Lastname},</p>
+        <p>اگر شما این عملیات را انجام نداده اید، لطفاً فوراً با مدیر بخشتان تماس بگیرید</p>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** این یک پیام اتوماتیک کامپیوتری است، لطفاً به این ایمیل پاسخ ندهید ***</h5>
     </body>
 </html>

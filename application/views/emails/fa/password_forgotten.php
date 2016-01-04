@@ -1,13 +1,13 @@
 <?php
 /**
  * Email template.You can change the content of this template
- * @copyright  Copyright (c) 2014-2016 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.4.5
  */
 ?>
-<html lang="en">
+<html lang="fa">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,17 +20,17 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        لطفا این مشخصات را <a href="{BaseURL}">برای ورود به سیستم وارد نمایید</a> :
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>ورود</td><td>{Login}</td>
             </tr>
             <tr>
-                <td>Password</td><td>{Password}</td>
+                <td>رمز</td><td>{Password}</td>
             </tr>            
         </table>
-        Once connected, you can change your password, as explained <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        پس از اتصال میتوانید رمزتان را تغییر دهید، طوریکه توضیح داده شده در <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="اتصال به راهنما" target="_blank">اینجا</a>.
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** این یک پیام اتوماتیک کامپیوتری است، لطفاً به این ایمیل پاسخ ندهید ***</h5>
     </body>
 </html>

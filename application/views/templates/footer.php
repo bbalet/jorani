@@ -14,7 +14,7 @@
     </div><!-- /wrap -->
     <!-- FOOTER -->
     <div class="row" id="footer">
-      <div class="span4">&copy; 2014-2015 Benjamin BALET</div>
+      <div class="span4">&copy; 2014-2016 Benjamin BALET</div>
       <div class="span4">
           <center>
               <img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;&nbsp;
@@ -23,7 +23,7 @@
     case 'fr' : echo '<a class="anchor" href="http://fr.jorani.org/" target="_blank">Jorani</a>'; break;
     default : echo '<a class="anchor" href="http://jorani.org/" target="_blank">Jorani</a>'; break;
 } ?>
-                  </b>&nbsp;&nbsp;v0.4.4
+                  </b>&nbsp;&nbsp;v0.4.5
           </center>
       </div>
       <div class="span4">&nbsp;</div></div>

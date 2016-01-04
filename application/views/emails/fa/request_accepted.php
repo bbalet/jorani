@@ -1,13 +1,13 @@
 <?php
 /**
  * Email template.You can change the content of this template
- * @copyright  Copyright (c) 2014-2016 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.4.5
  */
 ?>
-<html lang="en">
+<html lang="fa">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,24 +20,24 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        آقا/خانم {Firstname} {Lastname}, <br />
         <br />
-        The leave you've requested has been accepted. Below, the details :
+        درخواست مرخصی شما پذیرفته شده است. مشخصات طبق ذیل میباشد :
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>از &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>تا &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
-                <td>Type &nbsp;</td><td>{Type}</td>
+                <td>نوع &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>دلیل &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** این یک پیام اتوماتیک کامپیوتری است، لطفاً به این ایمیل پاسخ ندهید ***</h5>
     </body>
 </html>

@@ -1,18 +1,18 @@
-<h1>Leave and Overtime Management System</h1>
+<h1>سیستم مدیریت مرخصی و اضافه کاری</h1>
 
-<p>Welcome in Jorani. If you are an employee, you could now :</p>
+<p>به جورانی خوش آمدید. اگر شما یک کارمند استید، باید به این امکانات دسترسی داشته باشید:</p>
 <ul>
-    <li>See your <a href="<?php echo base_url();?>leaves/counters">leave balance</a>.</li>
-    <li>See the <a href="<?php echo base_url();?>leaves">list of the leave requests you have submitted</a>.</li>
-    <li>Request a <a href="<?php echo base_url();?>leaves/create">new leave</a>.</li>
+    <li>دیدن <a href="<?php echo base_url();?>leaves/counters">باقیمانده مرخصی ها</a>.</li>
+    <li>دیدن <a href="<?php echo base_url();?>leaves">لیست تمام درخواستهای مرخصی های تان</a>.</li>
+    <li>درخواست یک <a href="<?php echo base_url();?>leaves/create">مرخصی جدید</a>.</li>
 </ul>
 
 <br />
 
-<p>If your are the line manager of other employee(s), you could now :</p>
+<p>اگر شما مدیر کارمند(کارمندان) استید، باید به این امکانات دسترسی داشته باشید:</p>
 <ul>
-    <li>Validate <a href="<?php echo base_url();?>requests">leave requests submitted to you</a>.</li>
+    <li>پذیرض/رد <a href="<?php echo base_url();?>requests">درخواست های مرخصی داده شده به شما</a>.</li>
     <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
-    <li>Validate <a href="<?php echo base_url();?>overtime">overtime requests submitted to you</a>.</li>
+    <li>پذیرش/رد <a href="<?php echo base_url();?>overtime">درخواست های اضافه کاری داده شده به شما</a>.</li>
     <?php } ?>
 </ul>

@@ -1,6 +1,6 @@
-<h1>Access forbidden</h1>
+<h1>دسترسی غیر مجاز</h1>
 
-<p>You are not allowed to perform this action.</p>
+<p>شما مجاز به انجام این عمل نیستید.</p>
 
 <?php if($this->session->flashdata('msg')){ ?>
 <p>  

@@ -1,13 +1,13 @@
 <?php
 /**
  * Email template.You can change the content of this template
- * @copyright  Copyright (c) 2014-2016 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
+ * @copyright  Copyright (c) 2014-2015 Benjamin BALET
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.4.5
  */
 ?>
-<html lang="en">
+<html lang="fa">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,21 +20,21 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requests an overtime. Below, the details :
+        {Firstname} {Lastname} درخواست اضافه کاری داده است. مشخصات طبق ذیل میباشد:
         <table border="0">
             <tr>
-                <td>Date &nbsp;</td><td>{Date}</td>
+                <td>تاریخ &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>مدت زمان &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>دلیل &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+        <a href="{UrlAccept}">پذیرش</a>
+        <a href="{UrlReject}">رد</a>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** این یک پیام اتوماتیک کامپیوتری است، لطفاً به این ایمیل پاسخ ندهید ***</h5>
     </body>
 </html>

@@ -242,7 +242,7 @@ class Session extends CI_Controller {
                         'redirectUri' => 'postmessage',
                         'accessType' => 'offline',
                     ));
-                    $token = $provider->getAccessToken('authorization_code', ['code' => $authCode]);
+                    $token = $provider->getAccessToken('authorization_code', Array('code' => $authCode));
                     try {
                         //We try to get the e-mail address from the Google+ API
                         $ownerDetails = $provider->getResourceOwner($token);

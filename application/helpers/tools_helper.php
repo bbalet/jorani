@@ -101,3 +101,28 @@ function sendMailByWrapper(CI_Controller $controller, $subject, $message, $to, $
     $controller->email->message($message);
     $controller->email->send();
 }
+
+//Function cal_days_in_month might not exist with HHVM and FreeBSD without proper config
+if (!function_exists('cal_days_in_month')) {
+    /**
+     * Alternative implementation of cal_days_in_month function
+     * @param int $calendar calendar number
+     * @param int $month month number
+     * @param int $year year number
+     * @return int number of days in the month or 0 if error
+     */
+    function cal_days_in_month($calendar, $month, $year) {
+        if (checkdate($month, 31, $year))
+            return 31;
+        if (checkdate($month, 30, $year))
+            return 30;
+        if (checkdate($month, 29, $year))
+            return 29;
+        if (checkdate($month, 28, $year))
+            return 28;
+        return 0; // error 
+    }
+}
+
+if (!defined('CAL_GREGORIAN')) 
+    define('CAL_GREGORIAN', 1); 

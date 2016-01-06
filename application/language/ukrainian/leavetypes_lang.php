@@ -9,6 +9,7 @@
  */
 
 $lang['leavetypes_type_title'] = 'Типи відпусток';
+$lang['leavetypes_type_description'] = 'Leave type #0 is a system type reserved for overtime management. You should not use it for other requests.';
 $lang['leavetypes_type_thead_id'] = 'ID';
 $lang['leavetypes_type_thead_name'] = 'Назва';
 $lang['leavetypes_type_thead_tip_delete'] = 'видалити';

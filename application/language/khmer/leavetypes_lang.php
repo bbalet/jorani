@@ -9,6 +9,7 @@
  */
 
 $lang['leavetypes_type_title'] = 'ប្រភេទនៃការសុំច្បាប់';
+$lang['leavetypes_type_description'] = 'Leave type #0 is a system type reserved for overtime management. You should not use it for other requests.';
 $lang['leavetypes_type_thead_id'] = 'លេខអត្តសញ្ញាណ';
 $lang['leavetypes_type_thead_name'] = 'ឈ្មោះ';
 $lang['leavetypes_type_thead_tip_delete'] = 'លុប';

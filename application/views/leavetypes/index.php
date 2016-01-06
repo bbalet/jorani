@@ -10,6 +10,8 @@
 
 <h2><?php echo lang('leavetypes_type_title');?><?php echo $help;?></h2>
 
+<p><?php echo lang('leavetypes_type_description');?></p>
+
 <?php echo $flash_partial_view;?>
 
 <table class="table table-bordered table-hover">

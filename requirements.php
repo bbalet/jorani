@@ -32,6 +32,7 @@ $configFileExists = file_exists($pathConfigFile);
 $dbConnError = TRUE;
 $dbSelectDbError = TRUE;
 $dbQueryError = TRUE;
+$dbProcsError = TRUE;
 
 if ($configFileExists) {
     include $pathConfigFile;
@@ -43,6 +44,12 @@ if ($configFileExists) {
         $dbSelectDbError = ($dbConn->errno > 0) ? TRUE : FALSE;
         //Try to get the signature of the schema
         if (!$dbSelectDbError) {
+            //Try to use a procedure in order to check the install script
+            //We don't know if the user has access to information schema
+            //So we try to call one of the procedures with a parameter returning a small set of results
+            $dbConn->query("SELECT GetParentIDByID(0) AS result");
+            $dbProcsError = ($dbConn->errno > 0) ? TRUE : FALSE;
+            
             $sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
                     . " FROM information_schema.columns"
                     . " WHERE table_schema =  DATABASE()"
@@ -245,6 +252,10 @@ if ($configFileExists) {
 
                       <?php if (!$dbQueryError) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database query</td><td>OK</td></tr>
                       <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Database query</td><td>Error</td></tr>
+                      <?php } ?>
+                      
+                      <?php if (!$dbProcsError) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database procedures</td><td>OK</td></tr>
+                      <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Database procedures</td><td>Error. Please check if your hosting company allows custom procedures (e.g. <a href="https://techtavern.wordpress.com/2013/06/17/mysql-triggers-and-amazon-rds/" target="_blank">Amazon RDS</a>).</td></tr>
                       <?php } ?>
                   </tbody>
             </table>

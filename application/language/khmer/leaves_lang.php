@@ -54,6 +54,9 @@ $lang['leaves_create_button_cancel'] = 'បោះបង់';
 $lang['leaves_create_flash_msg_success'] = 'ការស្នើរសុំឈប់សម្រាកត្រូវបានបង្កើតដោយជោគជ័យ';
 $lang['leaves_create_flash_msg_error'] = 'ការស្នើរសុំឈប់សម្រាកត្រូវបានបង្កើតឬធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ, ប៉ុន្តែលោកអ្នកមិនមានអ្នកគ្រប់គ្រងទេ។';
 
+$lang['leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
+$lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request match with a non-working day.';
+
 $lang['leaves_edit_html_title'] = 'ការសម្រួលការស្នើរសុំឈប់សម្រាក';
 $lang['leaves_edit_title'] = 'កែប្រែការសំុច្បាប់ លេខ#';
 $lang['leaves_edit_field_start'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';

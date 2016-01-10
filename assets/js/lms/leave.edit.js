@@ -20,36 +20,36 @@ function getLeaveLength(refreshInfos) {
         if (start.isSame(end)) {
             if (startType == "Morning" && endType == "Morning") {
                 addDays = 0.5;
-                $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_1d_MM.png' />");
+                $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_1d_MM.png' />");
             }
             if (startType == "Afternoon" && endType == "Afternoon") {
                 addDays = 0.5;
-                $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_1d_AA.png' />");
+                $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_1d_AA.png' />");
             }
             if (startType == "Morning" && endType == "Afternoon") {
                 addDays = 1;
-                $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_1d_MA.png' />");
+                $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_1d_MA.png' />");
             }
             if (startType == "Afternoon" && endType == "Morning") {
                 //Error
-                $("#spnDayOff").html("<img src='" + baseURL + "assets/images/date_error.png' />");
+                $("#spnDayType").html("<img src='" + baseURL + "assets/images/date_error.png' />");
             }
         } else {
              if (start.isBefore(end)) {
                 if (startType == "Morning" && endType == "Morning") {
-                    $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_2d_MM.png' />");
+                    $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_2d_MM.png' />");
                     addDays = 0.5;
                 }
                 if (startType == "Afternoon" && endType == "Afternoon") {
-                    $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_2d_AA.png' />");
+                    $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_2d_AA.png' />");
                     addDays = 0.5;
                 }
                 if (startType == "Morning" && endType == "Afternoon") {
-                    $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_2d_MA.png' />");
+                    $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_2d_MA.png' />");
                     addDays = 1;
                 }
                 if (startType == "Afternoon" && endType == "Morning") {
-                    $("#spnDayOff").html("<img src='" + baseURL + "assets/images/leave_2d_AM.png' />");
+                    $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_2d_AM.png' />");
                     addDays = 0;
                 }
              }
@@ -98,13 +98,8 @@ function getLeaveInfos(preventDefault) {
                     $("#lblCredit").text('(' + leaveInfo.credit + ')');
                 }
             }
-            if (typeof leaveInfo.overlap !== 'undefined') {
-                if (Boolean(leaveInfo.overlap)) {
-                    $("#lblOverlappingAlert").show();
-                } else {
-                    $("#lblOverlappingAlert").hide();
-                }
-            }
+            //Check if the current request overlaps with another one
+            showOverlappingMessage(leaveInfo);
             //Check if the employee has a contract
             if (leaveInfo.hasContract == false) {
                 bootbox.alert(noContractMsg);
@@ -117,8 +112,70 @@ function getLeaveInfos(preventDefault) {
                     }
                 }
             }
+            showListDayOff(leaveInfo);
             $('#frmModalAjaxWait').modal('hide');
         });    
+}
+
+//When editing/viewing a leave request, refresh the information about overlapping and days off in the period
+function refreshLeaveInfo() {
+        $('#frmModalAjaxWait').modal('show');
+        var start = moment($('#startdate').val());
+        var end = moment($('#enddate').val());
+        $.ajax({
+        type: "POST",
+        url: baseURL + "leaves/validate",
+        data: {   id: userId,
+                    type: $("#type option:selected").text(),
+                    startdate: $('#startdate').val(),
+                    enddate: $('#enddate').val(),
+                    startdatetype: $('#startdatetype').val(),
+                    enddatetype: $('#enddatetype').val(),
+                    leave_id: leaveId
+                }
+        })
+        .done(function(leaveInfo) {
+            showOverlappingMessage(leaveInfo);
+            showListDayOff(leaveInfo);
+            $('#frmModalAjaxWait').modal('hide');
+        });    
+}
+
+//Display the list of non-working days occuring between the leave request start and end dates
+function showListDayOff(leaveInfo) {
+    if (typeof leaveInfo.listDaysOff !== 'undefined') {
+        var arrayLength = leaveInfo.listDaysOff.length;
+        if (arrayLength>0) {
+            var htmlTable = "<a href='#divDaysOff' data-toggle='collapse'  class='btn btn-primary input-block-level'>";
+            htmlTable += listOfDaysOffTitle.replace("%s", leaveInfo.lengthDaysOff);
+            htmlTable += "&nbsp;<i class='icon-chevron-down icon-white'></i></a>\n";
+            htmlTable += "<div id='divDaysOff' class='collapse'>";
+            htmlTable += "<table class='table table-bordered table-hover table-condensed'>\n";
+            htmlTable += "<tbody>";
+            for (var i = 0; i < arrayLength; i++) {
+                htmlTable += "<tr><td>";
+                htmlTable += moment(leaveInfo.listDaysOff[i].date, 'YYYY-MM-DD').format(dateMomentJsFormat);
+                htmlTable += " / <b>" + leaveInfo.listDaysOff[i].title + "</b></td>";
+                htmlTable += "<td>" + leaveInfo.listDaysOff[i].length + "</td>";
+                htmlTable += "</tr>\n";
+            }
+            htmlTable += "</tbody></table></div>";
+            $("#spnDaysOffList").html(htmlTable);
+        } else {
+            //NOP
+        }
+    }
+}
+
+//Display the list of non-working days occuring between the leave request start and end dates
+function showOverlappingMessage(leaveInfo) {
+    if (typeof leaveInfo.overlap !== 'undefined') {
+        if (Boolean(leaveInfo.overlap)) {
+            $("#lblOverlappingAlert").show();
+        } else {
+            $("#lblOverlappingAlert").hide();
+        }
+    }
 }
 
 $(function () {

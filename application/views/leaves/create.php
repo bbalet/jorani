@@ -30,7 +30,7 @@ echo form_open('leaves/create', $attributes) ?>
     </select>&nbsp;<span id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span><br />
         
     <label for="viz_startdate"><?php echo lang('leaves_create_field_start');?></label>
-    <input type="text" name="viz_startdate" id="viz_startdate" value="<?php echo set_value('startdate'); ?>" />
+    <input type="text" name="viz_startdate" id="viz_startdate" value="<?php echo set_value('startdate'); ?>" autocomplete="off" />
     <input type="hidden" name="startdate" id="startdate" />
     <select name="startdatetype" id="startdatetype">
         <option value="Morning" selected><?php echo lang('Morning');?></option>
@@ -38,7 +38,7 @@ echo form_open('leaves/create', $attributes) ?>
     </select><br />
     
     <label for="viz_enddate"><?php echo lang('leaves_create_field_end');?></label>
-    <input type="text" name="viz_enddate" id="viz_enddate" value="<?php echo set_value('enddate'); ?>" />
+    <input type="text" name="viz_enddate" id="viz_enddate" value="<?php echo set_value('enddate'); ?>" autocomplete="off" />
     <input type="hidden" name="enddate" id="enddate" />
     <select name="enddatetype" id="enddatetype">
         <option value="Morning"><?php echo lang('Morning');?></option>
@@ -78,7 +78,16 @@ echo form_open('leaves/create', $attributes) ?>
 
     </div>
     <div class="span4">
-        <span id="spnDayOff">&nbsp;</span>
+        <div class="row-fluid">
+            <div class="span12">
+                <span id="spnDayType"></span>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <span id="spnDaysOffList"></span>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -108,9 +117,13 @@ if ($language_code != 'en') { ?>
     var leaveId = null;
     var languageCode = '<?php echo $language_code;?>';
     var dateJsFormat = '<?php echo lang('global_date_js_format');?>';
+    var dateMomentJsFormat = '<?php echo lang('global_date_momentjs_format');?>';
     
     var noContractMsg = "<?php echo lang('leaves_validate_flash_msg_no_contract');?>";
     var noTwoPeriodsMsg = "<?php echo lang('leaves_validate_flash_msg_overlap_period');?>";
+    
+    var overlappingWithDayOff = "<?php echo lang('leaves_flash_msg_overlap_dayoff');?>";
+    var listOfDaysOffTitle = "<?php echo lang('leaves_flash_spn_list_days_off');?>";
     
 function validate_form() {
     var fieldname = "";

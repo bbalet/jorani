@@ -50,8 +50,12 @@ $lang['leaves_create_field_cause'] = 'دلیل(اختیاری)';
 $lang['leaves_create_field_status'] = 'وضعیت';
 $lang['leaves_create_button_create'] = 'درخواست مرخصی';
 $lang['leaves_create_button_cancel'] = 'لغو';
+
 $lang['leaves_create_flash_msg_success'] = 'درخواست مرخصی موفقانه ایجاد گردید';
 $lang['leaves_create_flash_msg_error'] = 'درخواست مرخصی موفقانه ایجاد و یا به روزرسانی گردید، اما شما مدیر بخش ندارید.';
+
+$lang['leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
+$lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request match with a non-working day.';
 
 $lang['leaves_edit_html_title'] = 'ویرایش یک درخواست مرخصی';
 $lang['leaves_edit_title'] = 'ویرایش درخواست مرخصی #';

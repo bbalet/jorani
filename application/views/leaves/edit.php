@@ -31,7 +31,7 @@ if (isset($_GET['source'])) {
     </select>&nbsp;<span id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span><br />
         
     <label for="viz_startdate"><?php echo lang('leaves_edit_field_start');?></label>
-    <input type="text" name="viz_startdate" id="viz_startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" />
+    <input type="text" name="viz_startdate" id="viz_startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" autocomplete="off" />
     <input type="hidden" name="startdate" id="startdate" value="<?php echo $leave['startdate'];?>" />
     <select name="startdatetype" id="startdatetype">
         <option value="Morning" <?php if ($leave['startdatetype'] == "Morning") {echo "selected";}?>><?php echo lang('Morning');?></option>
@@ -39,7 +39,7 @@ if (isset($_GET['source'])) {
     </select><br />
     
     <label for="viz_enddate"><?php echo lang('leaves_edit_field_end');?></label>
-    <input type="text" name="viz_enddate" id="viz_enddate" value="<?php $date = new DateTime($leave['enddate']); echo $date->format(lang('global_date_format'));?>" />
+    <input type="text" name="viz_enddate" id="viz_enddate" value="<?php $date = new DateTime($leave['enddate']); echo $date->format(lang('global_date_format'));?>" autocomplete="off" />
     <input type="hidden" name="enddate" id="enddate" value="<?php echo $leave['enddate'];?>" />
     <select name="enddatetype" id="enddatetype">
         <option value="Morning" <?php if ($leave['enddatetype'] == "Morning") {echo "selected";}?>><?php echo lang('Morning');?></option>
@@ -88,7 +88,16 @@ if (isset($_GET['source'])) {
 
     </div>
     <div class="span4">
-        <span id="spnDayOff">&nbsp;</span>
+        <div class="row-fluid">
+            <div class="span12">
+                <span id="spnDayType"></span>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <span id="spnDaysOffList"></span>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -118,9 +127,13 @@ if ($language_code != 'en') { ?>
     var leaveId = <?php echo $leave['id']; ?>;
     var languageCode = '<?php echo $language_code;?>';
     var dateJsFormat = '<?php echo lang('global_date_js_format');?>';
+    var dateMomentJsFormat = '<?php echo lang('global_date_momentjs_format');?>';
     
     var noContractMsg = "<?php echo lang('leaves_validate_flash_msg_no_contract');?>";
     var noTwoPeriodsMsg = "<?php echo lang('leaves_validate_flash_msg_overlap_period');?>";
+    
+    var overlappingWithDayOff = "<?php echo lang('leaves_flash_msg_overlap_dayoff');?>";
+    var listOfDaysOffTitle = "<?php echo lang('leaves_flash_spn_list_days_off');?>";
     
 function validate_form() {
     var fieldname = "";
@@ -150,5 +163,11 @@ $(function () {
     });
 });
 <?php }?>
+
+//On opening, refresh leave request information
+$(function () {
+    refreshLeaveInfo();
+});
+
 </script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit.js" type="text/javascript"></script>

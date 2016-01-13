@@ -14,6 +14,9 @@ msgstr ""
 msgid "Yearly calendar"
 msgstr ""
 
+msgid "Export"
+msgstr ""
+
 msgid "My calendar"
 msgstr ""
 
@@ -32,7 +35,7 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-msgid "Day offs"
+msgid "Days off"
 msgstr ""
 
 msgid "Calendar of my workmates"
@@ -41,10 +44,10 @@ msgstr ""
 msgid "Leaves of employees having the same line manager"
 msgstr ""
 
-msgid "Calendar of my collaborators"
+msgid "Calendar of my subordinates"
 msgstr ""
 
-msgid "Leaves of my collaborators (will be empty if I'm not a manager)."
+msgid "Leaves of my direct report subordinates (will be empty if I'm not a manager)."
 msgstr ""
 
 msgid "Calendar of my department"
@@ -92,9 +95,6 @@ msgstr ""
 msgid "Execute"
 msgstr ""
 
-msgid "Export"
-msgstr ""
-
 msgid "Employee"
 msgstr ""
 
@@ -105,69 +105,6 @@ msgid "Entity"
 msgstr ""
 
 msgid "Sub-entities"
-msgstr ""
-
-msgid "'January','February','March','April','May','June','July','August','September','October','November','December'"
-msgstr ""
-
-msgid "'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'"
-msgstr ""
-
-msgid "'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'"
-msgstr ""
-
-msgid "'Sun','Mon','Tue','Wed','Thu','Fri','Sat'"
-msgstr ""
-
-msgid "MMMM yyyy"
-msgstr ""
-
-msgid "MMM d[ yyyy]{ - [ MMM] d yyyy}"
-msgstr ""
-
-msgid "dddd, MMM d, yyyy"
-msgstr ""
-
-msgid "ddd"
-msgstr ""
-
-msgid "ddd M/d"
-msgstr ""
-
-msgid "dddd M/d"
-msgstr ""
-
-msgid "H:mm"
-msgstr ""
-
-msgid "h(:mm)t"
-msgstr ""
-
-msgid "H:mm{ - H:mm}"
-msgstr ""
-
-msgid "1"
-msgstr ""
-
-msgid "today"
-msgstr ""
-
-msgid "day"
-msgstr ""
-
-msgid "week"
-msgstr ""
-
-msgid "month"
-msgstr ""
-
-msgid "prev,next today"
-msgstr ""
-
-msgid "title"
-msgstr ""
-
-msgid "month,basicWeek,basicDay"
 msgstr ""
 
 msgid "Mo"
@@ -275,7 +212,7 @@ msgstr ""
 msgid "entitled days"
 msgstr ""
 
-msgid "day offs and weekends"
+msgid "days off and weekends"
 msgstr ""
 
 msgid "Export this list"
@@ -338,7 +275,7 @@ msgstr ""
 msgid "Calendar of non working days"
 msgstr ""
 
-msgid "Day offs and weekends are not configured by default. Click on a day to edit it individually or use the button \"Series\"."
+msgid "Days off and weekends are not configured by default. Click on a day to edit it individually or use the button \"Series\"."
 msgstr ""
 
 msgid "Legend:"
@@ -389,7 +326,7 @@ msgstr ""
 msgid "URL of non-working days iCal file"
 msgstr ""
 
-msgid "Edit a series of day offs"
+msgid "Edit a series of days off"
 msgstr ""
 
 msgid "Mark every"
@@ -497,6 +434,9 @@ msgstr ""
 msgid "Entitled days for contract"
 msgstr ""
 
+msgid "Edit"
+msgstr ""
+
 msgid "Start"
 msgstr ""
 
@@ -510,9 +450,6 @@ msgid "Leave type"
 msgstr ""
 
 msgid "Description"
-msgstr ""
-
-msgid "No entitled days attached to the contract."
 msgstr ""
 
 msgid "Add entitled days"
@@ -540,9 +477,6 @@ msgid "Step"
 msgstr ""
 
 msgid "Entitled days for employee"
-msgstr ""
-
-msgid "No entitled days attached to the user."
 msgstr ""
 
 msgid "Back to the list of employees"
@@ -635,13 +569,13 @@ msgstr ""
 msgid "View overtime request"
 msgstr ""
 
-msgid "Edit"
-msgstr ""
-
 msgid "Back to list"
 msgstr ""
 
-msgid "List of overtime requests"
+msgid "List of overtime worked"
+msgstr ""
+
+msgid "Leave Management System"
 msgstr ""
 
 msgid "Link to documentation"
@@ -656,7 +590,16 @@ msgstr ""
 msgid "Internet Explorer 8 and older browser are not supported. Please upgrade to IE9 or use Firefox, Chrome, etc."
 msgstr ""
 
+msgid "Object not found. Maybe that you are trying to access to an object that was deleted."
+msgstr ""
+
 msgid "m/d/Y"
+msgstr ""
+
+msgid "mm/dd/yy"
+msgstr ""
+
+msgid "MM/DD/YYYY"
 msgstr ""
 
 msgid "TRUE"
@@ -681,6 +624,9 @@ msgid "Accepted"
 msgstr ""
 
 msgid "Rejected"
+msgstr ""
+
+msgid "today"
 msgstr ""
 
 msgid "identifier"
@@ -728,7 +674,7 @@ msgstr ""
 msgid "Leaves"
 msgstr ""
 
-msgid "Extras"
+msgid "OT Worked"
 msgstr ""
 
 msgid "Leave Balance"
@@ -803,6 +749,9 @@ msgstr ""
 msgid "The leave request has been succesfully created or updated, but you don't have a manager."
 msgstr ""
 
+msgid "List of overtime requests"
+msgstr ""
+
 msgid "List of overtime requests for employee #"
 msgstr ""
 
@@ -866,10 +815,16 @@ msgstr ""
 msgid "No entitled or taken days for this period. Please contact your HR Officer / Manager."
 msgstr ""
 
-msgid "It appears you have no contract. Please contact your HR Officer / Manager."
+msgid "It appears that you have no contract. Please contact your HR Officer / Manager."
 msgstr ""
 
 msgid "My leave requests"
+msgstr ""
+
+msgid "%s non-working days in the period"
+msgstr ""
+
+msgid "Your leave request match with a non-working day."
 msgstr ""
 
 msgid "Edit a leave request"
@@ -911,6 +866,12 @@ msgstr ""
 msgid "Leave types"
 msgstr ""
 
+msgid "Leave type #0 is a system type reserved for overtime management. You should not use it for other requests."
+msgstr ""
+
+msgid "Leave type #0 is a system type reserved for overtime management. Are you sure that you want to rename it?"
+msgstr ""
+
 msgid "Create a new type"
 msgstr ""
 
@@ -945,9 +906,6 @@ msgid "You cannot delete a system leave type."
 msgstr ""
 
 msgid "You cannot delete a leave type that is used."
-msgstr ""
-
-msgid "Leave Management System"
 msgstr ""
 
 msgid "Change password"
@@ -986,6 +944,9 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
+msgid "Multiple Edit"
+msgstr ""
+
 msgid "Contracts"
 msgstr ""
 
@@ -1001,10 +962,13 @@ msgstr ""
 msgid "Leave balance"
 msgstr ""
 
-msgid "Validation"
+msgid "Leave requests"
 msgstr ""
 
-msgid "My collaborators"
+msgid "Approval"
+msgstr ""
+
+msgid "My subordinates"
 msgstr ""
 
 msgid "Overtime"
@@ -1013,13 +977,10 @@ msgstr ""
 msgid "Requests"
 msgstr ""
 
-msgid "List of extras"
+msgid "List of OT Worked"
 msgstr ""
 
-msgid "Request an extra"
-msgstr ""
-
-msgid "My leaves"
+msgid "Submit an OT Request"
 msgstr ""
 
 msgid "Counters"
@@ -1121,9 +1082,6 @@ msgstr ""
 msgid "The overtime request has been successfully accepted."
 msgstr ""
 
-msgid "List of overtime resquests"
-msgstr ""
-
 msgid "Create position"
 msgstr ""
 
@@ -1175,19 +1133,19 @@ msgstr ""
 msgid "This screen lists the leave requests submitted to you. If you are not a manager, this list will always be empty."
 msgstr ""
 
-msgid "List of my collaborators"
+msgid "List of my subordinates"
 msgstr ""
 
-msgid "This screen lists your collaborators. If you are not a manager, this list will always be empty."
+msgid "This screen lists your direct report subordinates. If you are not a manager, this list will always be empty."
 msgstr ""
 
-msgid "Create a leave request in behalf of this collaborator"
+msgid "Create a leave request in behalf of this subordinate"
 msgstr ""
 
 msgid "Your are not the manager of this employee."
 msgstr ""
 
-msgid "List of collaborators"
+msgid "List of subordinates"
 msgstr ""
 
 msgid "You are not the line manager of this employee. You cannot accept this leave request."
@@ -1200,9 +1158,6 @@ msgid "You are not the line manager of this employee. You cannot reject this lea
 msgstr ""
 
 msgid "The leave request has been successfully rejected."
-msgstr ""
-
-msgid "List of leave resquests"
 msgstr ""
 
 msgid "Morning/Afternoon"
@@ -1349,7 +1304,7 @@ msgstr ""
 msgid "Generate password"
 msgstr ""
 
-msgid "It is recommanded to select a contract. Do you want to create the user without a contract?"
+msgid "It is recommended to select a contract. Do you want to create the user without a contract?"
 msgstr ""
 
 msgid "The user has been succesfully created"

@@ -10,6 +10,7 @@
 
 $lang['leavetypes_type_title'] = 'Abwesenheitsarten';
 $lang['leavetypes_type_description'] = 'Leave type #0 is a system type reserved for overtime management. You should not use it for other requests.';
+$lang['leavetypes_type_confirm_rename'] = 'Leave type #0 is a system type reserved for overtime management. Are you sure that you want to rename it?';
 $lang['leavetypes_type_thead_id'] = 'ID';
 $lang['leavetypes_type_thead_name'] = 'Name';
 $lang['leavetypes_type_thead_tip_delete'] = 'löschen';

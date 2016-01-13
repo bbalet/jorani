@@ -706,7 +706,7 @@ class Leaves_model extends CI_Model {
     public function getLeavesRequestedToManager($manager, $all = FALSE) {
         $this->load->model('delegations_model');
         $ids = $this->delegations_model->listManagersGivingDelegation($manager);
-        $this->db->select('leaves.id as id, users.*, leaves.*, types.name as type_label');
+        $this->db->select('leaves.id as leave_id, users.*, leaves.*, types.name as type_label');
         $this->db->select('status.name as status_name, types.name as type_name');
         $this->db->join('status', 'leaves.status = status.id');
         $this->db->join('types', 'leaves.type = types.id');

@@ -30,7 +30,7 @@ foreach ($requests as $request) {
     $startdate = $date->format(lang('global_date_format'));
     $date = new DateTime($request['enddate']);
     $enddate = $date->format(lang('global_date_format'));
-    $sheet->setCellValue('A' . $line, $request['id']);
+    $sheet->setCellValue('A' . $line, $request['leave_id']);
     $sheet->setCellValue('B' . $line, $request['firstname'] . ' ' . $request['lastname']);
     $sheet->setCellValue('C' . $line, $startdate);
     $sheet->setCellValue('D' . $line, lang($request['startdatetype']));

@@ -64,8 +64,8 @@
     
     <label for="status" required><?php echo lang('hr_leaves_create_field_status');?></label>
     <select name="status">
-        <option value="1" selected><?php echo lang('Planned');?></option>
-        <option value="2"><?php echo lang('Requested');?></option>
+        <option value="1" <?php if ($this->config->item('leave_status_requested') == FALSE) echo 'selected'; ?>><?php echo lang('Planned');?></option>
+        <option value="2" <?php if ($this->config->item('leave_status_requested') == TRUE) echo 'selected'; ?>><?php echo lang('Requested');?></option>
         <option value="3"><?php echo lang('Accepted');?></option>
         <option value="4"><?php echo lang('Rejected');?></option>    
     </select><br />

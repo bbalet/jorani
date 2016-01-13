@@ -32,7 +32,10 @@ echo form_open('users/create', $attributes); ?>
     </select>
 
     <label for="login"><?php echo lang('users_create_field_login');?></label>
-    <input type="text" name="login" id="login" required /><br />
+    <div class="input-append">
+        <input type="text" name="login" id="login" required />
+        <a id="cmdRefreshLogin" class="btn btn-primary"><i class="icon-refresh icon-white"></i></a>
+    </div><br />
     <div class="alert hide alert-error" id="lblLoginAlert">
         <button type="button" class="close" onclick="$('#lblLoginAlert').hide();">&times;</button>
         <?php echo lang('users_create_flash_msg_error');?>
@@ -238,8 +241,9 @@ if ($language_code != 'en') { ?>
     
     /**
      * Generate a password of the specified length
-     * @param int len   length of password to be generated
-     * @returns string  generated password
+     * @param int len Length of password to be generated
+     * @returns string generated password
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     function password_generator(len) {
         var length = (len)?(len):(10);
@@ -260,6 +264,55 @@ if ($language_code != 'en') { ?>
             password = character;
         }
         return password;
+    }
+    
+    /**
+     * Generate a login according to a pattern
+     * @param string User's firstname
+     * @param string User's lastname
+     * @param string pattern of the combination
+     * @param int max Maximum length of the generated login (default 32)
+     * @returns string Combination of firstname and lastname
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    function generateLogin(firstname, lastname, pattern, max) {
+        max = typeof max !== 'undefined' ? max : 32;
+        var login = '';
+        switch (pattern) {
+            case 'jdoe':
+                login = firstname.charAt(0).toLowerCase() + lastname.toLowerCase();
+                break;
+            case 'john.doe':
+                login = firstname.toLowerCase() + '.' + lastname.toLowerCase();
+                break;
+            case 'john_doe':
+                login = firstname.toLowerCase() + '_' + lastname.toLowerCase();
+                break;
+            default:
+                if (pattern.indexOf('#') != -1) {
+                    login = $(pattern).val();
+                }
+                break;
+        }
+        return login.substring(0, max);
+    }
+    
+    //Check if the login is valid or not
+    function checkLogin() {
+        if ($("#login").val() != '') {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url();?>users/check/login",
+                data: { login: $("#login").val() }
+                })
+                .done(function( msg ) {
+                    if (msg == "true") {
+                        $("#lblLoginAlert").hide();
+                    } else {
+                        $("#lblLoginAlert").show();
+                    }
+                });
+        }
     }
     
     $(function () {
@@ -289,33 +342,27 @@ if ($language_code != 'en') { ?>
         //On any change on firstname or lastname fields, automatically build the
         //login identifier with first character of firstname and the 31 first characters of lastname
         $("#firstname").change(function() {
-            var lastname = $("#lastname").val().toLowerCase();
-            lastname = lastname.substring(0,31);
-            $("#login").val($("#firstname").val().charAt(0).toLowerCase() + lastname);           
+            var login = generateLogin($("#firstname").val(), $("#lastname").val(), '<?php echo $this->config->item('login_pattern')!==FALSE?$this->config->item('login_pattern'):'jdoe';?>',32);
+            $("#login").val(login);
         });
         $("#lastname").change(function() {
             <?php if ($this->config->item('disable_capitalization') === FALSE) {?>
             $("#lastname").val($("#lastname").val().toUpperCase());
             <?php }?>
-            var lastname = $("#lastname").val().toLowerCase();
-            lastname = lastname.substring(0,31);
-            $("#login").val($("#firstname").val().charAt(0).toLowerCase() + lastname);
+            var login = generateLogin($("#firstname").val(), $("#lastname").val(), '<?php echo $this->config->item('login_pattern')!==FALSE?$this->config->item('login_pattern'):'jdoe';?>',32);
+            $("#login").val(login);
+        });
+        
+        //
+        $('#cmdRefreshLogin').click(function() {
+            var login = generateLogin($("#firstname").val(), $("#lastname").val(), '<?php echo $this->config->item('login_pattern')!==FALSE?$this->config->item('login_pattern'):'jdoe';?>',32);
+            $("#login").val(login);
+            checkLogin();
         });
         
         //Check if the user has not exceed the number of entitled days
         $("#login").change(function() {
-            $.ajax({
-                type: "POST",
-                url: "<?php echo base_url();?>users/check/login",
-                data: { login: $("#login").val() }
-                })
-                .done(function( msg ) {
-                    if (msg == "true") {
-                        $("#lblLoginAlert").hide();
-                    } else {
-                        $("#lblLoginAlert").show();
-                    }
-                });
+            checkLogin();
         });
         
         $('#send').click(function() {

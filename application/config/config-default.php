@@ -386,10 +386,15 @@ $config['from_name'] = 'Jorani';
 $config['subject_prefix'] = '[Jorani] ';
 
 //____________________________________________________________________________
-//User manangment
+//User management
 $config['disable_capitalization'] = FALSE;    //Set this value to TRUE if you want to disable the capitalization of lastname
 $config['password_length'] = 8;                    //Password minimal length
 $config['default_role_id'] = 2;                     //Default role id (e.g. 2 for user)
+//Login pattern (automatically created from firstname and lastname)
+$config['login_pattern'] = 'jdoe';            //(default) First letter of firstname and lastname (up to field limit)
+//$config['login_pattern'] = 'john.doe';    //Firstname plus dot plus lastname (up to field limit)
+//$config['login_pattern'] = 'john_doe';    //Firstname plus underscore plus lastname (up to field limit)
+$config['login_pattern'] = '#email';                //Copy another field of the form (use an existing field name with the pound sign)
 
 //____________________________________________________________________________
 //Set this value to TRUE if you want to create leaves at status requested instead of planned

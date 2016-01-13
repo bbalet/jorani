@@ -232,7 +232,7 @@ class Polyglot {
 //            case 'ur' : return 'urdu'; break;
 //            case 'uz' : return 'uzbek'; break;
 //            case 've' : return 'venda'; break;
-//            case 'vi' : return 'vietnamese'; break;
+            case 'vi' : return 'vietnamese'; break;
 //            case 'vo' : return 'volapük'; break;
 //            case 'wa' : return 'walloon'; break;
 //            case 'cy' : return 'welsh'; break;
@@ -426,7 +426,7 @@ class Polyglot {
 //            case 'urdu' : return 'ur'; break;
 //            case 'uzbek' : return 'uz'; break;
 //            case 'venda' : return 've'; break;
-//            case 'vietnamese' : return 'vi'; break;
+            case 'vietnamese' : return 'vi'; break;
 //            case 'volapük' : return 'vo'; break;
 //            case 'walloon' : return 'wa'; break;
 //            case 'welsh' : return 'cy'; break;
@@ -620,7 +620,7 @@ class Polyglot {
 //            case 'ur' : return 'اردو'; break;
 //            case 'uz' : return 'zbek'; break;
 //            case 've' : return 'Tshivenḓa'; break;
-//            case 'vi' : return 'Tiếng Việt'; break;
+            case 'vi' : return 'Tiếng Việt'; break;
 //            case 'vo' : return 'Volapük'; break;
 //            case 'wa' : return 'Walon'; break;
 //            case 'cy' : return 'Cymraeg'; break;
@@ -814,7 +814,7 @@ class Polyglot {
 //            case 'اردو' : return 'ur'; break;
 //            case 'zbek' : return 'uz'; break;
 //            case 'Tshivenḓa' : return 've'; break;
-//            case 'Tiếng Việt' : return 'vi'; break;
+            case 'Tiếng Việt' : return 'vi'; break;
 //            case 'Volapük' : return 'vo'; break;
 //            case 'Walon' : return 'wa'; break;
 //            case 'Cymraeg' : return 'cy'; break;

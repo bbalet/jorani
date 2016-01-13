@@ -4,7 +4,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 ## v0.4.5
 
 - [X] Add Persian language.
-- [ ] Add Vietnamese language.
+- [X] Add Vietnamese language.
 - [ ] Clarify usage of leave type 'compensate' (warning id edit/description in page).
 - [X] Improve robustness to bad conf. detect Database procedures and cal_days_in_month.
 - [X] Show list of days off in Leave request create/edit. Linked to #87.

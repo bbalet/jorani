@@ -485,7 +485,7 @@ msgstr ""
 msgid "Entitled days to Contract #"
 msgstr ""
 
-msgid "Yearly leave period : "
+msgid "Yearly leave period: "
 msgstr ""
 
 msgid "Entitled days to Employee"
@@ -527,7 +527,7 @@ msgstr ""
 msgid "Submit an overtime request"
 msgstr ""
 
-msgid "In days or fraction of days (e.g. 0.13 for 1h if you work 8h/day)."
+msgid "In days or fraction of days (e.g. 0.125 for 1h if you work 8h/day)."
 msgstr ""
 
 msgid "Request overtime"
@@ -543,9 +543,6 @@ msgid "Edit overtime request #"
 msgstr ""
 
 msgid "Edit a overtime request"
-msgstr ""
-
-msgid "In days or fraction of days (e.g. 0.125 for 1h if you work 8h/day)."
 msgstr ""
 
 msgid "Update overtime"

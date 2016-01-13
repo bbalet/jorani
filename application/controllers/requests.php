@@ -241,11 +241,13 @@ class Requests extends CI_Controller {
             $this->form_validation->set_rules('status', lang('hr_leaves_create_field_status'), 'required|xss_clean|strip_tags');
 
             $data['credit'] = 0;
+            $default_type = $this->config->item('default_leave_type');
+            $default_type = $default_type == FALSE ? 0 : $default_type;
             if ($this->form_validation->run() === FALSE) {
                 $this->load->model('types_model');
                 $data['types'] = $this->types_model->getTypes();
                 foreach ($data['types'] as $type) {
-                    if ($type['id'] == 0) {
+                    if ($type['id'] == $default_type) {
                         $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($id, $type['name']);
                         break;
                     }

@@ -27,18 +27,17 @@
 	</tbody>
 </table>
 
-<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/select/css/select.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
-
-<style>
-    tr.row_selected td{background-color:#b0bed9 !important;}
-</style>
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/select/js/dataTables.select.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#positions').dataTable({
         "pageLength": 5,
+        select: 'single',
         "oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",
@@ -65,11 +64,5 @@ $(document).ready(function() {
     });
     //Hide pagination select box in order to save space
     $('.dataTables_length').css("display", "none");
-    //Display selected row
-    $('body').on("click", "#positions tbody tr", function () {
-            $("#positions tbody tr").removeClass('row_selected');		
-            $(this).addClass('row_selected');
-    });
-    $("#positions tbody tr:first").addClass('row_selected');
 });
 </script>

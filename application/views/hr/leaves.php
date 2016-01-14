@@ -74,7 +74,7 @@
     <div class="span12">&nbsp;</div>
 </div>
 
-<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 
 <div id="frmDeleteLeaveRequest" class="modal hide fade">

@@ -64,7 +64,7 @@
  </div>
 
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     var oTable;     //datatable
@@ -90,10 +90,10 @@
     }
 
     function select_delegate() {
-        employee = $('#employees .row_selected td:first').text();
-        if (employee != "") {
-            name = $('#employees .row_selected td:eq(1)').text();
-            name += ' ' + $('#employees .row_selected td:eq(2)').text();
+        var employees = $('#employees').DataTable();
+        if ( employees.rows({ selected: true }).any() ) {
+            var employee = employees.rows({selected: true}).data()[0][0];
+            name = employees.rows({selected: true}).data()[0][1] + ' ' + employees.rows({selected: true}).data()[0][2];
             $('#frmSelectDelegate').modal('hide');
             if (parseInt(employee) != parseInt('<?php echo $id; ?>')) {
                 $('#frmModalAjaxWait').modal('show');
@@ -101,7 +101,7 @@
                     url: "<?php echo base_url();?>requests/ajax/delegations/add",
                     type: "POST",
                     data: { manager_id: <?php echo $id; ?>,
-                            delegate_id: $('#employees .row_selected td:first').text()
+                            delegate_id: employee
                         }
                   }).done(function(id) {
                       if (id != 'null') {
@@ -119,7 +119,6 @@
             $('#frmSelectDelegate').modal('hide');
         }
     }
-    
     
     $(function () {
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>

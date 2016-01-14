@@ -586,6 +586,7 @@ class Users_model extends CI_Model {
      * Try to return the user information from the login field
      * @param string $login Login
      * @return User data row or null if no user was found
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function getUserByLogin($login) {
         $this->db->from('users');
@@ -603,6 +604,7 @@ class Users_model extends CI_Model {
      * Generate some random bytes by using openssl, dev/urandom or random
      * @param int $count length of the random string
      * @return string a string of pseudo-random bytes (must be encoded)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     protected function getRandomBytes($length) {
         if(function_exists('openssl_random_pseudo_bytes')) {

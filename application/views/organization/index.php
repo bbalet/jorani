@@ -48,10 +48,6 @@
     </div>
 </div>
 
-<style>
-    tr.row_selected td{background-color:#b0bed9 !important;}
-</style>
-
 <div id="frmConfirmDelete" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="close">&times;</a>
@@ -115,10 +111,12 @@
         </div>
  </div>
 
-<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/select/css/select.dataTables.min.css" rel="stylesheet">
 <link rel="stylesheet" href='<?php echo base_url(); ?>assets/jsTree/themes/default/style.css' type="text/css" media="screen, projection" />
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/jsTree/jstree.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/select/js/dataTables.select.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">
@@ -128,7 +126,8 @@
     var createMtx = false;
     
     function add_employee() {
-        var id = $('#employees .row_selected td:first').text();
+        var employees = $('#employees').DataTable();
+        var id = employees.rows({selected: true}).data()[0][0];
         var entity = $('#organization').jstree('get_selected')[0];
         $.ajax({
             type: "GET",
@@ -149,10 +148,10 @@
     function select_supervisor() {
         $("#frmSelectSupervisor").modal('hide');
         $('#frmModalAjaxWait').modal('show');
-        var id = $('#employees .row_selected td:first').text();
+        var employees = $('#employees').DataTable();
+        var id = employees.rows({selected: true}).data()[0][0];
+        var text = employees.rows({selected: true}).data()[0][1] + ' ' + employees.rows({selected: true}).data()[0][2];
         var entity = $('#organization').jstree('get_selected')[0];
-        var text = $('#employees .row_selected td:eq(1)').text();
-        text += ' ' + $('#employees .row_selected td:eq(2)').text();
         $.ajax({
             type: "GET",
             url: "<?php echo base_url(); ?>organization/setsupervisor",
@@ -229,7 +228,7 @@
 
         //Remove an employee to an entity
         $("#cmdRemoveEmployee").click(function() {
-            var id = $('#collaborators .row_selected td:first').text();
+            var id = oTable.rows({selected: true}).data()[0][0];
             if (id != "") {
                 if ($("#organization").jstree('get_selected').length == 1) {
                     var entity = $('#organization').jstree('get_selected')[0];
@@ -285,16 +284,9 @@
             if (e.keyCode == 27) { $("#organization").jstree("clear_search"); }   // escape key
         });
         
-        
         //Transform the HTML table in a fancy datatable
         oTable = $('#collaborators').DataTable({
-            fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-                //As the datatable is populated with Ajax we need to add a callback this way
-                $('td', nRow).on('click', function() {
-                    $("#collaborators tbody tr").removeClass('row_selected');
-                    $(nRow).addClass("row_selected");
-                });
-            },
+            select: 'single',
             "oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
                     "sInfo":           "<?php echo lang('datatable_sInfo');?>",

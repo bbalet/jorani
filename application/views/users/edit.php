@@ -177,11 +177,13 @@ if ($language_code != 'en') { ?>
     
     //Popup select postion: on click OK, find the user id for the selected line
     function select_manager() {
-        var manager = $('#employees .row_selected td:first').text();
-        var text = $('#employees .row_selected td:eq(1)').text();
-        text += ' ' + $('#employees .row_selected td:eq(2)').text();
-        $('#manager').val(manager);
-        $('#txtManager').val(text);
+        var employees = $('#employees').DataTable();
+        if ( employees.rows({ selected: true }).any() ) {
+            var manager = employees.rows({selected: true}).data()[0][0];
+            var text = employees.rows({selected: true}).data()[0][1] + ' ' + employees.rows({selected: true}).data()[0][2];
+            $('#manager').val(manager);
+            $('#txtManager').val(text);
+        }
         $("#frmSelectManager").modal('hide');
     }
     
@@ -196,10 +198,13 @@ if ($language_code != 'en') { ?>
     
     //Popup select postion: on click OK, find the position id for the selected line
     function select_position() {
-        var position = $('#positions .row_selected td:first').text();
-        var text = $('#positions .row_selected td:eq(1)').text();
-        $('#position').val(position);
-        $('#txtPosition').val(text);
+        var positions = $('#positions').DataTable();
+        if ( positions.rows({ selected: true }).any() ) {
+            var position = positions.rows({selected: true}).data()[0][0];
+            var text = positions.rows({selected: true}).data()[0][1];
+            $('#position').val(position);
+            $('#txtPosition').val(text);
+        }
         $("#frmSelectPosition").modal('hide');
     }
 

@@ -9,6 +9,8 @@
  */
 ?>
 
+<div class="row-fluid">
+    <div class="span12">
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="employees" width="100%">
     <thead>
         <tr>
@@ -27,20 +29,21 @@
         <td><?php echo $employee['email'] ?></td>
     </tr>
 <?php endforeach ?>
-	</tbody>
+    </tbody>
 </table>
+    </div>
+</div>
 
-<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/select/css/select.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
-
-<style>
-    tr.row_selected td{background-color:#b0bed9 !important;}
-</style>
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/select/js/dataTables.select.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#employees').dataTable({
+        select: 'single',
         "pageLength": 5,
         "oLanguage": {
                     "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
@@ -68,11 +71,5 @@ $(document).ready(function() {
     });
     //Hide pagination select box in order to save space
     $('.dataTables_length').css("display", "none");
-    //Display selected row
-    $('body').on("click", "#employees tbody tr", function () {
-            $("#employees tbody tr").removeClass('row_selected');		
-            $(this).addClass('row_selected');
-    });
-    $("#employees tbody tr:first").addClass('row_selected');
 });
 </script>

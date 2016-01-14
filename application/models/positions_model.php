@@ -48,7 +48,11 @@ class Positions_model extends CI_Model {
      */
     public function getName($id) {
         $record = $this->getPositions($id);
-        return $record['name'];
+        if (count($record) >0) {
+            return $record['name'];
+        } else {
+            return '';
+        }
     }
     
     /**

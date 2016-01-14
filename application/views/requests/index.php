@@ -112,14 +112,14 @@ $(document).ready(function() {
         });
 
      //Prevent double click on accept and reject buttons
-     $(".lnkAccept").on('click', function (event) {
+     $('#leaves').on('click', '.lnkAccept', function (event) {
         event.preventDefault();
         if (!clicked) {
             clicked = true;
             window.location.href = "<?php echo base_url();?>requests/accept/" + $(this).data("id");
         }
      });
-     $(".lnkReject").on('click', function (event) {
+     $("#leaves").on('click', '.lnkReject', function (event) {
         event.preventDefault();
         if (!clicked) {
             clicked = true;

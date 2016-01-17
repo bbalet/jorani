@@ -31,6 +31,7 @@ $lang['requests_collaborators_thead_link_create_leave'] = 'Maak een afwezigheids
 $lang['requests_collaborators_thead_firstname'] = 'Voornaam';
 $lang['requests_collaborators_thead_lastname'] = 'Achternaam';
 $lang['requests_collaborators_thead_email'] = 'E-mail';
+$lang['requests_collaborators_thead_identifier'] = 'Identifier';
 
 $lang['requests_summary_title'] = 'Afwezigheidsoverzicht voor gebruiker #';
 $lang['requests_summary_thead_type'] = 'Soort afwezigheid';

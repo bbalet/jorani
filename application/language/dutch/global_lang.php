@@ -74,7 +74,7 @@ $lang['Morning'] = 'Ochtend';
 $lang['Afternoon'] = 'Middag';
 $lang['today'] = 'vandaag';
 
-$lang['identifier'] = 'identifier';
+$lang['identifier'] = 'Identifikator';
 $lang['firstname'] = 'voornaam';
 $lang['lastname'] = 'achternaam';
 $lang['datehired'] = 'datum ingehuurd';

@@ -31,6 +31,7 @@ $lang['requests_collaborators_thead_link_create_leave'] = 'Create a leave reques
 $lang['requests_collaborators_thead_firstname'] = 'Nombre';
 $lang['requests_collaborators_thead_lastname'] = 'Apellido';
 $lang['requests_collaborators_thead_email'] = 'E-mail';
+$lang['requests_collaborators_thead_identifier'] = 'identificación';
 
 $lang['requests_summary_title'] = 'Balance de permisos para el usuario #';
 $lang['requests_summary_thead_type'] = 'Tipo de permiso';

@@ -25,3 +25,11 @@ $lang['datatable_sNext'] = 'Следующий';
 $lang['datatable_sPrevious'] = 'Предыдущий';
 $lang['datatable_sSortAscending'] = ': активировать для сортировки столбцов по возрастанию';
 $lang['datatable_sSortDescending'] = ': активировать для сортировки столбца по убыванию';
+
+$lang['datatable_pagination'] = 'Page length';
+$lang['datatable_10_rows'] = '10 rows';
+$lang['datatable_25_rows'] = '25 rows';
+$lang['datatable_50_rows'] = '50 rows';
+$lang['datatable_all_rows'] = 'Show all';
+$lang['datatable_colvis'] = 'Change columns';
+$lang['datatable_colvisRestore'] = 'Show all';

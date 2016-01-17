@@ -31,6 +31,7 @@ $lang['requests_collaborators_thead_link_create_leave'] = 'Create a leave reques
 $lang['requests_collaborators_thead_firstname'] = 'Vorname';
 $lang['requests_collaborators_thead_lastname'] = 'Nachname';
 $lang['requests_collaborators_thead_email'] = 'E-Mail';
+$lang['requests_collaborators_thead_identifier'] = 'Identifikator';
 
 $lang['requests_summary_title'] = 'Urlaubsstatistik für Angestellten #';
 $lang['requests_summary_thead_type'] = 'Art des Urlaubs';

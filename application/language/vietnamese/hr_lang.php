@@ -25,6 +25,7 @@ $lang['hr_employees_thead_email'] = 'E-mail';
 $lang['hr_employees_thead_entity'] = 'Thực thể';
 $lang['hr_employees_thead_contract'] = 'Hợp đồng';
 $lang['hr_employees_thead_manager'] = 'Quản lý';
+$lang['hr_employees_thead_identifier'] = 'Người nhận dạng';
 $lang['hr_employees_button_create_user'] = 'Khởi tạo';
 $lang['hr_employees_button_export'] = 'Xuất danh sách';
 $lang['hr_employees_popup_entitlment_title'] = 'Gán tiêu đề cho ngày';
@@ -37,6 +38,7 @@ $lang['hr_employees_popup_entity_button_ok'] = 'Chấp nhận';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Hủy bỏ';
 $lang['hr_employees_description'] = 'Nhấn chuột phải / chạm giữ lâu trên một nhân viên để thực hiện các hành động theo hoàn cảnh.';
 $lang['hr_employees_field_subdepts'] = 'Thêm vào các đơn vị trực thuộc';
+
 $lang['hr_export_employees_title'] = 'Danh sách nhân viên';
 $lang['hr_export_employees_thead_id'] = 'ID';
 $lang['hr_export_employees_thead_firstname'] = 'Tên';
@@ -45,6 +47,7 @@ $lang['hr_export_employees_thead_email'] = 'E-mail';
 $lang['hr_export_employees_thead_entity'] = 'Thực thể';
 $lang['hr_export_employees_thead_contract'] = 'Hợp đồng';
 $lang['hr_export_employees_thead_manager'] = 'Quản lý';
+
 $lang['hr_leaves_title'] = 'Danh sách các yêu cầu nghỉ';
 $lang['hr_leaves_html_title'] = 'Danh sách ngày nghỉ cho nhân viên #';
 $lang['hr_leaves_thead_tip_edit'] = 'sửa';
@@ -64,6 +67,7 @@ $lang['hr_leaves_popup_delete_message'] = 'You are about to delete one leave req
 $lang['hr_leaves_popup_delete_question'] = 'Bạn muốn tiếp tục chứ?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Có';
 $lang['hr_leaves_popup_delete_button_no'] = 'không';
+
 $lang['hr_export_leaves_title'] = 'Danh sách các yêu cầu nghỉ';
 $lang['hr_export_leaves_thead_id'] = 'ID';
 $lang['hr_export_leaves_thead_status'] = 'Trạng thái';
@@ -84,6 +88,7 @@ $lang['hr_leaves_create_button_create'] = 'Yêu cầu nghỉ';
 $lang['hr_leaves_create_button_cancel'] = 'Hủy bỏ';
 $lang['hr_leaves_create_flash_msg_success'] = 'Yêu cầu nghỉ đã được tạo thành công';
 $lang['hr_leaves_create_flash_msg_error'] = 'The leave request has been succesfully created or updated, but you don\'t have a manager.';
+
 $lang['hr_overtime_title'] = 'Danh sách các yêu cầu làm thêm giờ';
 $lang['hr_overtime_html_title'] = 'Danh sách yêu cầu làm thêm giờ của cán bộ #';
 $lang['hr_overtime_thead_tip_edit'] = 'sửa';
@@ -102,12 +107,14 @@ $lang['hr_overtime_popup_delete_message'] = 'You are about to delete one overtim
 $lang['hr_overtime_popup_delete_question'] = 'Bạn muốn tiếp tục chứ?';
 $lang['hr_overtime_popup_delete_button_yes'] = 'Có';
 $lang['hr_overtime_popup_delete_button_no'] = 'không';
+
 $lang['hr_export_overtime_title'] = 'Danh sách các yêu cầu làm thêm giờ';
 $lang['hr_export_overtime_thead_id'] = 'ID';
 $lang['hr_export_overtime_thead_status'] = 'Trạng thái';
 $lang['hr_export_overtime_thead_date'] = 'Ngày';
 $lang['hr_export_overtime_thead_duration'] = 'Khoảng thời gian';
 $lang['hr_export_overtime_thead_cause'] = 'lý do';
+
 $lang['hr_summary_title'] = 'Leave balance for user #';
 $lang['hr_summary_thead_type'] = 'Loại ngày nghỉ';
 $lang['hr_summary_thead_available'] = 'Có sẵn';
@@ -117,6 +124,7 @@ $lang['hr_summary_thead_description'] = 'Miêu tả';
 $lang['hr_summary_flash_msg_error'] = 'This employee has no contract.';
 $lang['hr_summary_button_list'] = 'Danh sách nhân viên';
 $lang['hr_summary_date_field'] = 'Ngày báo cáo';
+
 $lang['hr_presence_title'] = 'Báo cáo có mặt';
 $lang['hr_presence_description'] = 'By default this report shows the values for the last month. Please note that the list of leaves shows only the accepted leave requests.';
 $lang['hr_presence_thead_tip_edit'] = 'sửa';

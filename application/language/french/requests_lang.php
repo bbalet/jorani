@@ -30,6 +30,7 @@ $lang['requests_collaborators_thead_link_create_leave'] = 'Créer une demande de
 $lang['requests_collaborators_thead_firstname'] = 'Prénom';
 $lang['requests_collaborators_thead_lastname'] = 'Nom';
 $lang['requests_collaborators_thead_email'] = 'E-mail';
+$lang['requests_collaborators_thead_identifier'] = 'Identifiant';
 
 $lang['requests_summary_title'] = 'Etat des congés pour l\'utilisateur #';
 $lang['requests_summary_thead_type'] = 'Type de congé';

@@ -60,18 +60,20 @@ class Hr extends CI_Controller {
             $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
             $this->load->model('users_model');
             $employees = $this->users_model->employeesOfEntity($id, $children);
-            $msg = '{"iTotalRecords":' . count($employees);
-            $msg .= ',"iTotalDisplayRecords":' . count($employees);
-            $msg .= ',"aaData":[';
+            $msg = '{"draw": 1,';
+            $msg .= '"recordsTotal":' . count($employees);
+            $msg .= ',"recordsFiltered":' . count($employees);
+            $msg .= ',"data":[';
             foreach ($employees as $employee) {
-                $msg .= '["' . $employee->id . '",';
-                $msg .= '"' . $employee->firstname . '",';
-                $msg .= '"' . $employee->lastname . '",';
-                $msg .= '"' . $employee->email . '",';
-                $msg .= '"' . $employee->entity . '",';
-                $msg .= '"' . $employee->contract . '",';
-                $msg .= '"' . $employee->manager_name . '"';
-                $msg .= '],';
+                $msg .= '{"id":"' . $employee->id . '",';
+                $msg .= '"firstname":"' . $employee->firstname . '",';
+                $msg .= '"lastname":"' . $employee->lastname . '",';
+                $msg .= '"email":"' . $employee->email . '",';
+                $msg .= '"entity":"' . $employee->entity . '",';
+                $msg .= '"identifier":"' . $employee->identifier . '",';
+                $msg .= '"contract":"' . $employee->contract . '",';
+                $msg .= '"manager_name":"' . $employee->manager_name . '"';
+                $msg .= '},';
             }
             $msg = rtrim($msg, ",");
             $msg .= ']}';

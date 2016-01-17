@@ -25,3 +25,11 @@ $lang['datatable_sNext'] = 'بعدی';
 $lang['datatable_sPrevious'] = 'قبلی';
 $lang['datatable_sSortAscending'] = ':فعال کردن برای مرتب سازی صعودی ستون ';
 $lang['datatable_sSortDescending'] = ':فعال کردن برای مرتب سازی نزولی ستون ';
+
+$lang['datatable_pagination'] = 'Page length';
+$lang['datatable_10_rows'] = '10 rows';
+$lang['datatable_25_rows'] = '25 rows';
+$lang['datatable_50_rows'] = '50 rows';
+$lang['datatable_all_rows'] = 'Show all';
+$lang['datatable_colvis'] = 'Change columns';
+$lang['datatable_colvisRestore'] = 'Show all';

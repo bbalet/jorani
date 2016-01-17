@@ -43,6 +43,7 @@
             <th><?php echo lang('hr_employees_thead_entity');?></th>
             <th><?php echo lang('hr_employees_thead_contract');?></th>
             <th><?php echo lang('hr_employees_thead_manager');?></th>
+            <th><?php echo lang('hr_employees_thead_identifier');?></th>
         </tr>
     </thead>
     <tbody class="context" data-toggle="context" data-target="#context-menu">
@@ -120,8 +121,11 @@
  </div>
 
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/buttons/css/buttons.dataTables.min.css" rel="stylesheet"/>
 <link href="<?php echo base_url();?>assets/datatable/colreorder/css/colReorder.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/buttons/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/buttons/js/buttons.colVis.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/colreorder/js/dataTables.colReorder.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/context.menu.min.js"></script>
@@ -234,42 +238,77 @@ $(function () {
         $.cookie('includeChildren', includeChildren);
     }    
 
-    //Transform the HTML table in a fancy datatable
+    //Transform the HTML table in a fancy datatable:
+    // * Column ID cannot be moved or hidden because it is used for contextual actions
     oTable = $('#users').dataTable({
+            "ajax": '<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren,
+            columns: [
+                { data: "id" },
+                { data: "firstname" },
+                { data: "lastname" },
+                { data: "email" },
+                { data: "entity" },
+                { data: "contract" },
+                { data: "manager_name" },
+                { data: "identifier" }
+            ],
             stateSave: true,
-            colReorder: true,
             dom: 'Bfrtip',
             buttons: [
-                'colvis'
+                            {
+                                extend: 'pageLength',
+                                text: '<?php echo lang('datatable_pagination');?>'
+                            },
+                            {
+                                extend: 'colvis',
+                                columns: ':not(:first-child)',
+                                postfixButtons: [
+                                    {
+                                        extend: 'colvisRestore',
+                                        text: '<?php echo lang('datatable_colvisRestore');?>'
+                                    }
+                                ]
+                            }
             ],
-            "ajax": '<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren,
-            "oLanguage": {
-                "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
-                "sInfo":           "<?php echo lang('datatable_sInfo');?>",
-                "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
-                "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
-                "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
-                "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
-                "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
-                "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
-                "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
-                "sSearch":         "<?php echo lang('datatable_sSearch');?>",
-                "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
-            "oPaginate": {
-                "sFirst":    "<?php echo lang('datatable_sFirst');?>",
-                "sLast":     "<?php echo lang('datatable_sLast');?>",
-                "sNext":     "<?php echo lang('datatable_sNext');?>",
-                "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+            lengthMenu: [
+                [ 10, 25, 50, -1 ],
+                [
+                    '<?php echo lang('datatable_10_rows');?>',
+                    '<?php echo lang('datatable_25_rows');?>',
+                    '<?php echo lang('datatable_50_rows');?>',
+                    '<?php echo lang('datatable_all_rows');?>' 
+                ]
+            ],
+            colReorder: {
+                fixedColumnsLeft: 1
             },
-            "oAria": {
-                "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
-                "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+        language: {
+            buttons: {
+                colvis: '<?php echo lang('datatable_colvis');?>'
+            },
+            decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
+            processing:       "<?php echo lang('datatable_sProcessing');?>",
+            search:              "<?php echo lang('datatable_sSearch');?>",
+            lengthMenu:     "<?php echo lang('datatable_sLengthMenu');?>",
+            info:                   "<?php echo lang('datatable_sInfo');?>",
+            infoEmpty:          "<?php echo lang('datatable_sInfoEmpty');?>",
+            infoFiltered:       "<?php echo lang('datatable_sInfoFiltered');?>",
+            infoPostFix:        "<?php echo lang('datatable_sInfoPostFix');?>",
+            loadingRecords: "<?php echo lang('datatable_sLoadingRecords');?>",
+            zeroRecords:    "<?php echo lang('datatable_sZeroRecords');?>",
+            emptyTable:     "<?php echo lang('datatable_sEmptyTable');?>",
+            paginate: {
+                first:          "<?php echo lang('datatable_sFirst');?>",
+                previous:   "<?php echo lang('datatable_sPrevious');?>",
+                next:           "<?php echo lang('datatable_sNext');?>",
+                last:           "<?php echo lang('datatable_sLast');?>"
+            },
+            aria: {
+                sortAscending:  "<?php echo lang('datatable_sSortAscending');?>",
+                sortDescending: "<?php echo lang('datatable_sSortDescending');?>"
             }
-        }
+        },
     });
-    
-    //Initialize pop-up entitled days
-    $("#frmEntitledDays").alert();
     
     //Popup select entity
     $("#cmdSelectEntity").click(function() {
@@ -277,11 +316,8 @@ $(function () {
         $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
     });
     
-    //Prevent to load always the same content (refreshed each time)
-    $('#frmEntitledDays').on('hidden', function() {
-        $(this).removeData('modal');
-    });
-    
+    //If we opt-in the include children box, we'll recursively include the children of the selected entity
+    //and the attached employees
     $("#chkIncludeChildren").on('change', function() {
         includeChildren = $('#chkIncludeChildren').is(':checked');
         $.cookie('includeChildren', includeChildren);
@@ -293,6 +329,7 @@ $(function () {
             }, true);
     });
     
+    //On click button export, call the export to Excel view
     $("#cmdExportEmployees").click(function() {
         window.location = '<?php echo base_url();?>hr/employees/export/' + entity + '/' + includeChildren;
     });

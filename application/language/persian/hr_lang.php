@@ -25,6 +25,7 @@ $lang['hr_employees_thead_email'] = 'ایمیل';
 $lang['hr_employees_thead_entity'] = 'واحد';
 $lang['hr_employees_thead_contract'] = 'قرارداد';
 $lang['hr_employees_thead_manager'] = 'مدیر';
+$lang['hr_employees_thead_identifier'] = 'شناسه';
 $lang['hr_employees_button_create_user'] = 'ایجاد';
 $lang['hr_employees_button_export'] = 'صدور این لیست';
 $lang['hr_employees_popup_entitlment_title'] = 'روزهای مستحق';

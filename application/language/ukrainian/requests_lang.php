@@ -31,6 +31,7 @@ $lang['requests_collaborators_thead_link_create_leave'] = 'Створити за
 $lang['requests_collaborators_thead_firstname'] = 'Ім\'я';
 $lang['requests_collaborators_thead_lastname'] = 'Прізвище';
 $lang['requests_collaborators_thead_email'] = 'Ел. пошта';
+$lang['requests_collaborators_thead_identifier'] = 'Ідентифікатор';
 
 $lang['requests_summary_title'] = 'Сальдо по відпустках для працівника №';
 $lang['requests_summary_thead_type'] = 'Тип відпустки';

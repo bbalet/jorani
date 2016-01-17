@@ -24,3 +24,11 @@ $lang['datatable_sNext'] = 'Next';
 $lang['datatable_sPrevious'] = 'Previous';
 $lang['datatable_sSortAscending'] = ': activate to sort column ascending';
 $lang['datatable_sSortDescending'] = ': activate to sort column descending';
+
+$lang['datatable_pagination'] = 'Page length';
+$lang['datatable_10_rows'] = '10 rows';
+$lang['datatable_25_rows'] = '25 rows';
+$lang['datatable_50_rows'] = '50 rows';
+$lang['datatable_all_rows'] = 'Show all';
+$lang['datatable_colvis'] = 'Change columns';
+$lang['datatable_colvisRestore'] = 'Show all';

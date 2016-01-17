@@ -55,6 +55,7 @@ class Users_model extends CI_Model {
      * Get the name of a given user
      * @param int $id Identifier of employee
      * @return string firstname and lastname of the employee
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function getName($id) {
         $record = $this->getUsers($id);
@@ -530,6 +531,7 @@ class Users_model extends CI_Model {
                 . ' users.firstname as firstname,'
                 . ' users.lastname as lastname,'
                 . ' users.email as email,'
+                . ' users.identifier as identifier,'
                 . ' organization.name as entity,'
                 . ' contracts.name as contract,'
                 . ' CONCAT_WS(\' \',managers.firstname,  managers.lastname) as manager_name', FALSE);

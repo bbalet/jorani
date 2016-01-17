@@ -25,6 +25,7 @@ $lang['hr_employees_thead_email'] = 'Эл. почта';
 $lang['hr_employees_thead_entity'] = 'Отдел';
 $lang['hr_employees_thead_contract'] = 'Контракт';
 $lang['hr_employees_thead_manager'] = 'Руководитель';
+$lang['hr_employees_thead_identifier'] = 'Идентификатор';
 $lang['hr_employees_button_create_user'] = 'Создать';
 $lang['hr_employees_button_export'] = 'Экспортировать список';
 $lang['hr_employees_popup_entitlment_title'] = 'Предоставляемые дни';

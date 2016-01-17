@@ -31,6 +31,7 @@ $lang['requests_collaborators_thead_link_create_leave'] = 'Create a leave reques
 $lang['requests_collaborators_thead_firstname'] = 'Nome';
 $lang['requests_collaborators_thead_lastname'] = 'Cognome';
 $lang['requests_collaborators_thead_email'] = 'E-mail';
+$lang['requests_collaborators_thead_identifier'] = 'identificatore';
 
 $lang['requests_summary_title'] = 'Saldo ferie per l\'utente #';
 $lang['requests_summary_thead_type'] = 'Tipologia ferie';

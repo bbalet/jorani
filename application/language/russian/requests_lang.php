@@ -31,6 +31,7 @@ $lang['requests_collaborators_thead_link_create_leave'] = 'Создать зая
 $lang['requests_collaborators_thead_firstname'] = 'Имя';
 $lang['requests_collaborators_thead_lastname'] = 'Фамилия';
 $lang['requests_collaborators_thead_email'] = 'Эл. почта';
+$lang['requests_collaborators_thead_identifier'] = 'Идентификатор';
 
 $lang['requests_summary_title'] = 'Сальдо по отпускам, для сотрудника N°';
 $lang['requests_summary_thead_type'] = 'Тип отпуска';

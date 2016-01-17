@@ -31,6 +31,7 @@ $lang['requests_collaborators_thead_link_create_leave'] = 'ایجاد یک در�
 $lang['requests_collaborators_thead_firstname'] = 'نام';
 $lang['requests_collaborators_thead_lastname'] = 'نام خانوادگی';
 $lang['requests_collaborators_thead_email'] = 'ایمیل';
+$lang['requests_collaborators_thead_identifier'] = 'شناسه';
 
 $lang['requests_summary_title'] = 'باقیمانده مرخصی کاربر #';
 $lang['requests_summary_thead_type'] = 'نوع مرخصی';

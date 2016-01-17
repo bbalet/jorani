@@ -25,3 +25,11 @@ $lang['datatable_sNext'] = 'បន្ទាប់';
 $lang['datatable_sPrevious'] = 'ពីមុន';
 $lang['datatable_sSortAscending'] = ':ដំណើរការបង្ហាញជួរឈរតាមលំដាប់កើន';
 $lang['datatable_sSortDescending'] = ':ដំណើរការបង្ហាញជួរឈរតាមលំដាប់ចុុះ';
+
+$lang['datatable_pagination'] = 'Page length';
+$lang['datatable_10_rows'] = '10 rows';
+$lang['datatable_25_rows'] = '25 rows';
+$lang['datatable_50_rows'] = '50 rows';
+$lang['datatable_all_rows'] = 'Show all';
+$lang['datatable_colvis'] = 'Change columns';
+$lang['datatable_colvisRestore'] = 'Show all';

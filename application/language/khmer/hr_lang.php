@@ -25,6 +25,7 @@ $lang['hr_employees_thead_email'] = 'ម៉ែល';
 $lang['hr_employees_thead_entity'] = 'អង្គភាព';
 $lang['hr_employees_thead_contract'] = 'ខសន្យា';
 $lang['hr_employees_thead_manager'] = 'អ្នកគ្រប់គ្រង';
+$lang['hr_employees_thead_identifier'] = 'ឯកសារកំណត់អត្តសញ្ញាណ';
 $lang['hr_employees_button_create_user'] = 'បង្កើត';
 $lang['hr_employees_button_export'] = 'បញ្ជីនាំចេញ';
 $lang['hr_employees_popup_entitlment_title'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';

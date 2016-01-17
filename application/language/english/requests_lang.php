@@ -30,6 +30,7 @@ $lang['requests_collaborators_thead_link_create_leave'] = 'Create a leave reques
 $lang['requests_collaborators_thead_firstname'] = 'Firstname';
 $lang['requests_collaborators_thead_lastname'] = 'Lastname';
 $lang['requests_collaborators_thead_email'] = 'E-mail';
+$lang['requests_collaborators_thead_identifier'] = 'Identifier';
 
 $lang['requests_summary_title'] = 'Leave balance for user #';
 $lang['requests_summary_thead_type'] = 'Leave type';

@@ -24,6 +24,7 @@ $lang['hr_employees_thead_email'] = 'E-mail';
 $lang['hr_employees_thead_entity'] = 'Entité';
 $lang['hr_employees_thead_contract'] = 'Contrat';
 $lang['hr_employees_thead_manager'] = 'Manager';
+$lang['hr_employees_thead_identifier'] = 'Identifiant';
 $lang['hr_employees_button_create_user'] = 'Créer';
 $lang['hr_employees_button_export'] = 'Exporter cette liste';
 $lang['hr_employees_popup_entitlment_title'] = 'Crédit congés';

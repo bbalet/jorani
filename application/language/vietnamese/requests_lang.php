@@ -20,6 +20,7 @@ $lang['requests_index_thead_enddate'] = 'Ngày kết thúc';
 $lang['requests_index_thead_duration'] = 'Khoảng thời gian';
 $lang['requests_index_thead_type'] = 'Loại';
 $lang['requests_index_thead_status'] = 'Trạng thái';
+
 $lang['requests_collaborators_title'] = 'Danh sách các cộng tác viên';
 $lang['requests_collaborators_description'] = 'This screen lists your direct report subordinates. If you are not a manager, this list will always be empty.';
 $lang['requests_collaborators_thead_id'] = 'ID';
@@ -30,6 +31,8 @@ $lang['requests_collaborators_thead_link_create_leave'] = 'Tạo một yêu cầ
 $lang['requests_collaborators_thead_firstname'] = 'Tên';
 $lang['requests_collaborators_thead_lastname'] = 'Họ';
 $lang['requests_collaborators_thead_email'] = 'E-mail';
+$lang['requests_collaborators_thead_identifier'] = 'Người nhận dạng';
+
 $lang['requests_summary_title'] = 'Leave balance for user #';
 $lang['requests_summary_thead_type'] = 'Loại ngày nghỉ';
 $lang['requests_summary_thead_available'] = 'Có sẵn';
@@ -39,13 +42,16 @@ $lang['requests_summary_thead_description'] = 'Miêu tả';
 $lang['requests_summary_flash_msg_error'] = 'This employee has no contract.';
 $lang['requests_summary_flash_msg_forbidden'] = 'Bạn không phải là lãnh đạo của nhân viên này';
 $lang['requests_summary_button_list'] = 'Danh sách cộng tác viên';
+
 $lang['requests_index_button_export'] = 'Xuất danh sách';
 $lang['requests_index_button_show_all'] = 'Tất cả các yêu cầu';
 $lang['requests_index_button_show_pending'] = 'Các yêu cầu chờ phê duyệt';
+
 $lang['requests_accept_flash_msg_error'] = 'You are not the line manager of this employee. You cannot accept this leave request.';
 $lang['requests_accept_flash_msg_success'] = 'Yêu cầu nghỉ đã được chấp nhận';
 $lang['requests_reject_flash_msg_error'] = 'You are not the line manager of this employee. You cannot reject this leave request.';
 $lang['requests_reject_flash_msg_success'] = 'Yêu cầu nghỉ đã bị từ chối';
+
 $lang['requests_export_title'] = 'Danh sách các yêu cầu nghỉ';
 $lang['requests_export_thead_id'] = 'ID';
 $lang['requests_export_thead_fullname'] = 'Tên đầy đủ';
@@ -57,6 +63,7 @@ $lang['requests_export_thead_duration'] = 'Khoảng thời gian';
 $lang['requests_export_thead_type'] = 'Loại';
 $lang['requests_export_thead_cause'] = 'lý do';
 $lang['requests_export_thead_status'] = 'Trạng thái';
+
 $lang['requests_delegations_title'] = 'Danh sách uỷ quyền';
 $lang['requests_delegations_description'] = 'This is the list of employees who can accept or reject a request in your behalf.';
 $lang['requests_delegations_thead_employee'] = 'Nhân viên';

@@ -25,6 +25,7 @@ $lang['hr_employees_thead_email'] = 'E-mail';
 $lang['hr_employees_thead_entity'] = 'Entidad';
 $lang['hr_employees_thead_contract'] = 'Contrato';
 $lang['hr_employees_thead_manager'] = 'Gestor';
+$lang['hr_employees_thead_identifier'] = 'identificación';
 $lang['hr_employees_button_create_user'] = 'Crear';
 $lang['hr_employees_button_export'] = 'Exporta a listado';
 $lang['hr_employees_popup_entitlment_title'] = 'Autorizar días';

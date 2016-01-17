@@ -25,3 +25,11 @@ $lang['datatable_sNext'] = 'Próximo';
 $lang['datatable_sPrevious'] = 'Anterior';
 $lang['datatable_sSortAscending'] = ': activar la función de ordenado por columna ascendente';
 $lang['datatable_sSortDescending'] = ': activar la función de ordenado por columna descendente';
+
+$lang['datatable_pagination'] = 'Page length';
+$lang['datatable_10_rows'] = '10 rows';
+$lang['datatable_25_rows'] = '25 rows';
+$lang['datatable_50_rows'] = '50 rows';
+$lang['datatable_all_rows'] = 'Show all';
+$lang['datatable_colvis'] = 'Change columns';
+$lang['datatable_colvisRestore'] = 'Show all';

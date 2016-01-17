@@ -25,6 +25,7 @@ $lang['hr_employees_thead_email'] = 'E-mail';
 $lang['hr_employees_thead_entity'] = 'Entiteit';
 $lang['hr_employees_thead_contract'] = 'Contract';
 $lang['hr_employees_thead_manager'] = 'Manager';
+$lang['hr_employees_thead_identifier'] = 'Identifier';
 $lang['hr_employees_button_create_user'] = 'Aanmaken';
 $lang['hr_employees_button_export'] = 'Exporteer dit overzicht';
 $lang['hr_employees_popup_entitlment_title'] = 'Beschikbare dagen';

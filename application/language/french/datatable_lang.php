@@ -24,3 +24,11 @@ $lang['datatable_sNext'] = 'Suivant';
 $lang['datatable_sPrevious'] = 'Pr&eacute;c&eacute;dent';
 $lang['datatable_sSortAscending'] = ': activer pour trier la colonne par ordre croissant';
 $lang['datatable_sSortDescending'] = ': activer pour trier la colonne par ordre décroissant';
+
+$lang['datatable_pagination'] = 'Pagination';
+$lang['datatable_10_rows'] = '10 lignes';
+$lang['datatable_25_rows'] = '25 lignes';
+$lang['datatable_50_rows'] = '50 lignes';
+$lang['datatable_all_rows'] = 'Afficher tout';
+$lang['datatable_colvis'] = 'Changer les colonnes';
+$lang['datatable_colvisRestore'] = 'Afficher tout';

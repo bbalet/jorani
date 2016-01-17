@@ -25,6 +25,7 @@ $lang['hr_employees_thead_email'] = 'E-Mail';
 $lang['hr_employees_thead_entity'] = 'Einheit';
 $lang['hr_employees_thead_contract'] = 'Vertrag';
 $lang['hr_employees_thead_manager'] = 'Vorgesetzter';
+$lang['hr_employees_thead_identifier'] = 'Identifikator';
 $lang['hr_employees_button_create_user'] = 'Erstellen';
 $lang['hr_employees_button_export'] = 'Diese Liste exportieren';
 $lang['hr_employees_popup_entitlment_title'] = 'Bezugsberechtigte Tage';

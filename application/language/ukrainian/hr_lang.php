@@ -25,6 +25,7 @@ $lang['hr_employees_thead_email'] = 'Ел. пошта';
 $lang['hr_employees_thead_entity'] = 'Відділ';
 $lang['hr_employees_thead_contract'] = 'Контракт';
 $lang['hr_employees_thead_manager'] = 'Керівник';
+$lang['hr_employees_thead_identifier'] = 'Ідентифікатор';
 $lang['hr_employees_button_create_user'] = 'Створити';
 $lang['hr_employees_button_export'] = 'Експортувати список';
 $lang['hr_employees_popup_entitlment_title'] = 'Надані дні';

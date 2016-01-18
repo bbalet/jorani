@@ -89,6 +89,8 @@ $lang['hr_leaves_create_button_create'] = 'Solicitud de permiso';
 $lang['hr_leaves_create_button_cancel'] = 'Cancelar';
 $lang['hr_leaves_create_flash_msg_success'] = 'La solicitud de permisos se ha creado correctamente';
 $lang['hr_leaves_create_flash_msg_error'] = 'La solicitud del permiso se ha creado o modificado correctamente, pero tu no tienes un administrador.';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['hr_overtime_title'] = 'Listado de horas extras solicitadas.';
 $lang['hr_overtime_html_title'] = 'Lista de solicitudes de horas extras para los empleados #';

@@ -470,7 +470,6 @@ class Leaves extends CI_Controller {
             }
         }
         if (isset($id) && isset($startdate) && isset($enddate)) {
-            $leaveValidator->length = $this->leaves_model->length($id, $startdate, $enddate, $startdatetype, $enddatetype);
             if (isset($leave_id)) {
                 $leaveValidator->overlap = $this->leaves_model->detectOverlappingLeaves($id, $startdate, $enddate, $startdatetype, $enddatetype, $leave_id);
             } else {
@@ -488,42 +487,18 @@ class Leaves extends CI_Controller {
         $leaveValidator->hasContract = $hasContract;
         
         //Add non working days between the two dates (including their type: morning, afternoon and all day)
-        if (isset($id) && isset($startdate) && isset($enddate)  && $hasContract===TRUE) {
+        if (isset($id) && ($startdate!='') && ($enddate!='')  && $hasContract===TRUE) {
             $this->load->model('dayoffs_model');
-            $leaveValidator->listDaysOff = $this->dayoffs_model->listOfDaysOffBetweenDates($id, $startdate, $enddate);
-            
-            //Iterate on the list of days off with two objectives:
-            // - Compute sum of days off between the two dates
-            // - Detect if the leave request exactly overlaps with a day off
-            $leaveValidator->overlapDayOff = FALSE;
-            $lengthDaysOff = 0;
-            //Sum and overlapping detection
-            foreach ($leaveValidator->listDaysOff as $dayOff) {
-                $lengthDaysOff+=$dayOff['length'];
-                //TODO:Actually more complicated because we have to decompose the leave request day by day
-                /*$startDateObject = DateTime::createFromFormat('Y-m-d', $startDate);
-                $endDateObject = DateTime::createFromFormat('Y-m-d', $endDate);
-                $iDate = clone $startDateObject;
-                //Iteration between 2 dates
-                while ($iDate <= $endDateObject)
-                {
-                    if ($startdatetype == "Morning") {
-                        $startTmp = strtotime($startdate." 08:00:00 UTC");
-                    } else {
-                        $startTmp = strtotime($startdate." 12:01:00 UTC");
-                    }
-                    if ($enddatetype == "Morning") {
-                        $endTmp = strtotime($enddate." 12:00:00 UTC");
-                    } else {
-                        $endTmp = strtotime($enddate." 18:00:00 UTC");
-                    }
-                    if (($startTmp != $dayOff['endTmp']) && ($endTmp != $dayOff['startTmp'])) {
-                        $leaveValidator->overlapDayOff = FALSE;
-                    }
-                    $iDate->modify('+1 day');   //Next day
-                }*/
-            }
-            $leaveValidator->lengthDaysOff =$lengthDaysOff;
+            $leaveValidator->listDaysOff = $this->dayoffs_model->listOfDaysOffBetweenDates($id, $startdate, $enddate);            
+            //Sum non-working days and overlapping with day off detection
+            $result = $this->leaves_model->actualLengthAndDaysOff($id, $startdate, $enddate, $startdatetype, $enddatetype, $leaveValidator->listDaysOff);
+            $leaveValidator->overlapDayOff = $result['overlapping'];
+            $leaveValidator->lengthDaysOff = $result['daysoff'];
+            $leaveValidator->length = $result['length'];
+        }
+        //If the user has no contract, simply compute a date difference between start and end dates
+        if (isset($id) && isset($startdate) && isset($enddate)  && $hasContract===FALSE) {
+            $leaveValidator->length = $this->leaves_model->length($id, $startdate, $enddate, $startdatetype, $enddatetype);
         }
         
         echo json_encode($leaveValidator);

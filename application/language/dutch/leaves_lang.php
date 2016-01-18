@@ -55,7 +55,7 @@ $lang['leaves_create_flash_msg_success'] = 'Het afwezigheidsverzoek is succesvol
 $lang['leaves_create_flash_msg_error'] = 'De afwezigheidsmelding is succesvol aangemaakt/bijgewerkt, echter u heeft geen manager.';
 
 $lang['leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
-$lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request match with a non-working day.';
+$lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['leaves_edit_html_title'] = 'Bewerk een afwezigheidsverzoek';
 $lang['leaves_edit_title'] = 'Bewerk afwezigheidsverzoek #';

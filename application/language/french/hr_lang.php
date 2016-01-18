@@ -60,6 +60,8 @@ $lang['hr_leaves_create_button_create'] = 'Créer la demande';
 $lang['hr_leaves_create_button_cancel'] = 'Annuler';
 $lang['hr_leaves_create_flash_msg_success'] = 'La demande d\'absence a été créée avec succès.';
 $lang['hr_leaves_create_flash_msg_error'] = 'La demande d\'absence a été créée ou modifiée avec succès, mais vous n\'avez pas de manager.';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s jours non travaillés dans la période';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Votre demande coïncide avec un jour non travaillé.';
 
 $lang['hr_leaves_title'] = 'Liste des demandes de ';
 $lang['hr_leaves_html_title'] = 'Liste des demandes de congé de l\'employé n°';

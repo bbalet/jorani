@@ -182,35 +182,26 @@ class Dayoffs_model extends CI_Model {
         $this->db->where('date >=', $start);
         $this->db->where('date <=', $end);
         $events = $this->db->get('users')->result();
-        
         $listOfDaysOff = array();
         foreach ($events as $entry) {
             switch ($entry->type)
             {
-                case 1:
+                case 1://1 : All day
                     $title = $entry->title;
                     $length = 1;
-                    $startTmp = strtotime($entry->date." 08:00:00 UTC");
-                    $endTmp = strtotime($entry->date." 18:00:00 UTC");
                     break;
-                case 2:
+                case 2://2 : Morning
                     $title = lang('Morning') . ': ' . $entry->title;
                     $length = 0.5;
-                    $startTmp = strtotime($entry->date." 08:00:00 UTC");
-                    $endTmp = strtotime($entry->date." 12:00:00 UTC");
                     break;
-                case 3:
+                case 3://3 : Afternnon
                     $title = lang('Afternoon') . ': ' . $entry->title;
                     $length = 0.5;
-                    $startTmp = strtotime($entry->date." 12:01:00 UTC");
-                    $endTmp = strtotime($entry->date." 12:00:00 UTC");
                     break;
             }
             $listOfDaysOff[] = array(
                 'title' => $title,                                  //Title of Day off
                 'date' => $entry->date,                      //Date of day off
-                'startTmp' => $startTmp,                  //Timestamp of the start date (used for overlapping detection)
-                'endTmp' => $endTmp,                     //Timestamp of the end date (used for overlapping detection)
                 'type' => $entry->type,                      //1:All day, 2:Morning, 3:Afternoon
                 'length' => $length                            //1 or 0.5 depending on the type (for sum)
             );

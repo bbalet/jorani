@@ -88,6 +88,8 @@ $lang['hr_leaves_create_button_create'] = 'Yêu cầu nghỉ';
 $lang['hr_leaves_create_button_cancel'] = 'Hủy bỏ';
 $lang['hr_leaves_create_flash_msg_success'] = 'Yêu cầu nghỉ đã được tạo thành công';
 $lang['hr_leaves_create_flash_msg_error'] = 'The leave request has been succesfully created or updated, but you don\'t have a manager.';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['hr_overtime_title'] = 'Danh sách các yêu cầu làm thêm giờ';
 $lang['hr_overtime_html_title'] = 'Danh sách yêu cầu làm thêm giờ của cán bộ #';

@@ -89,6 +89,8 @@ $lang['hr_leaves_create_button_create'] = 'Urlaubsanfrage';
 $lang['hr_leaves_create_button_cancel'] = 'Abbrechen';
 $lang['hr_leaves_create_flash_msg_success'] = 'Urlaubsanfrage erfolgreich erstellt';
 $lang['hr_leaves_create_flash_msg_error'] = 'Urlaubsanfrage erfolgreich erstellt, Sie haben jedoch keinen eingetragenen Vorgesetzten.';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['hr_overtime_title'] = 'Liste der Überstundenanfragen';
 $lang['hr_overtime_html_title'] = 'Liste der Überstundenanfragen für Angestellten #';

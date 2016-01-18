@@ -80,7 +80,7 @@ class Leaves_model extends CI_Model {
     /**
      * Try to calculate the length of a leave using the start and and date of the leave
      * and the non working days defined on a contract
-     * @param int $employee
+     * @param int $employee Identifier of the employee
      * @param date $start start date of the leave request
      * @param date $end end date of the leave request
      * @param string $startdatetype start date type of leave request being created (Morning or Afternoon)
@@ -111,6 +111,84 @@ class Leaves_model extends CI_Model {
                 return $numberDays;
             }
         }
+    }
+    
+    /**
+     * Calculate the actual length of a leave request by taking into account the non-working days
+     * Detect overlapping with non-working days. It returns a K/V arrays of 3 items.
+     * @param int $employee Identifier of the employee
+     * @param date $startdate start date of the leave request
+     * @param date $enddate end date of the leave request
+     * @param string $startdatetype start date type of leave request being created (Morning or Afternoon)
+     * @param string $enddatetype end date type of leave request being created (Morning or Afternoon)
+     * @param array List of non-working days
+     * @return array (length=>length of leave, overlapping=>excat match with a non-working day, daysoff=>sum of days off)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function actualLengthAndDaysOff($employee, $startdate, $enddate, $startdatetype, $enddatetype, $daysoff) {
+        $startDateObject = DateTime::createFromFormat('Y-m-d H:i:s', $startdate . ' 00:00:00');
+        $endDateObject = DateTime::createFromFormat('Y-m-d H:i:s', $enddate . ' 00:00:00');
+        $iDate = clone $startDateObject;
+
+        //Simplify logic
+        if ($startdate == $startdate) $one_day = TRUE; else $one_day = FALSE;
+        if ($startdatetype == 'Morning') $start_morning = TRUE; else $start_morning = FALSE;
+        if ($startdatetype == 'Afternoon') $start_afternoon = TRUE; else $start_afternoon = FALSE;
+        if ($enddatetype == 'Morning') $end_morning = TRUE; else $end_morning = FALSE;
+        if ($enddatetype == 'Afternoon') $end_afternoon = TRUE; else $end_afternoon = FALSE;
+
+        //Iteration between start and end dates of the leave request
+        $lengthDaysOff = 0;
+        $length = 0;
+        $hasDayOff = FALSE;
+        $overlapDayOff = FALSE;
+        while ($iDate <= $endDateObject)
+        {
+            if ($iDate == $startDateObject) $first_day = TRUE; else $first_day = FALSE;
+            if ($iDate == $endDateObject) $last_day = TRUE; else $last_day = FALSE;
+            //Iterate on the list of days off with two objectives:
+            // - Compute sum of days off between the two dates
+            // - Detect if the leave request exactly overlaps with a day off
+            foreach ($daysoff as $dayOff) {
+                $dayOffObject = DateTime::createFromFormat('Y-m-d H:i:s', $dayOff['date'] . ' 00:00:00');
+
+                if ($dayOffObject == $iDate) {
+                    $lengthDaysOff+=$dayOff['length'];
+                    $hasDayOff = TRUE;
+                    switch ($dayOff['type']) {
+                        case 1: //1 : All day
+                            if ($one_day && $start_morning && $end_afternoon && $first_day)
+                                $overlapDayOff = TRUE;
+                            break;
+                        case 2: //2 : Morning
+                            if ($one_day && $start_morning && $end_morning && $first_day)
+                                $overlapDayOff = TRUE;
+                            else
+                                $length+=0.5;
+                            break;
+                        case 3: //3 : Afternnon
+                            if ($one_day && $start_afternoon && $end_afternoon && $first_day)
+                                $overlapDayOff = TRUE;
+                            else
+                                $length+=0.5;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                }
+            }
+            if (!$hasDayOff) {
+                $length++;
+            }
+            $iDate->modify('+1 day');   //Next day
+        }
+
+        //Other obvious cases of overlapping
+        if ($hasDayOff && ($length == 0)) {
+            $overlapDayOff = TRUE;
+        }
+        return array('length' => $length, 'daysoff' => $lengthDaysOff, 'overlapping' => $overlapDayOff);
     }
     
     /**

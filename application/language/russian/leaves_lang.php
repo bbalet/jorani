@@ -55,7 +55,7 @@ $lang['leaves_create_flash_msg_success'] = 'Заявление на отпуск
 $lang['leaves_create_flash_msg_error'] = 'Заявление на отпуск было успешно создано/обновлено, но у вас нет руководителя.';
 
 $lang['leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
-$lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request match with a non-working day.';
+$lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['leaves_edit_html_title'] = 'Редактировать заявление на отпуск';
 $lang['leaves_edit_title'] = 'Редактировать заявление на отпуск №';

@@ -89,6 +89,8 @@ $lang['hr_leaves_create_button_create'] = 'Richiedi ferie';
 $lang['hr_leaves_create_button_cancel'] = 'Annulla';
 $lang['hr_leaves_create_flash_msg_success'] = 'La richiesta di ferie è stata creata con successo';
 $lang['hr_leaves_create_flash_msg_error'] = 'La richiesta di ferie è stata creata con successo oppure aggiornata, ma non hai un manager.';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['hr_overtime_title'] = 'Elenco di richieste di straordinario';
 $lang['hr_overtime_html_title'] = 'Elenco richieste di straordinario per il dipendente #';

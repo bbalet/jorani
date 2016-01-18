@@ -6,8 +6,6 @@
  * @since         0.3.0
  */
     
-var addDays = 0;
-    
 //Try to calculate the length of the leave
 function getLeaveLength(refreshInfos) {
     refreshInfos = typeof refreshInfos !== 'undefined' ? refreshInfos : true;
@@ -19,38 +17,30 @@ function getLeaveLength(refreshInfos) {
     if (start.isValid() && end.isValid()) {
         if (start.isSame(end)) {
             if (startType == "Morning" && endType == "Morning") {
-                addDays = 0.5;
                 $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_1d_MM.png' />");
             }
             if (startType == "Afternoon" && endType == "Afternoon") {
-                addDays = 0.5;
                 $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_1d_AA.png' />");
             }
             if (startType == "Morning" && endType == "Afternoon") {
-                addDays = 1;
                 $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_1d_MA.png' />");
             }
             if (startType == "Afternoon" && endType == "Morning") {
-                //Error
                 $("#spnDayType").html("<img src='" + baseURL + "assets/images/date_error.png' />");
             }
         } else {
              if (start.isBefore(end)) {
                 if (startType == "Morning" && endType == "Morning") {
                     $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_2d_MM.png' />");
-                    addDays = 0.5;
                 }
                 if (startType == "Afternoon" && endType == "Afternoon") {
                     $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_2d_AA.png' />");
-                    addDays = 0.5;
                 }
                 if (startType == "Morning" && endType == "Afternoon") {
                     $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_2d_MA.png' />");
-                    addDays = 1;
                 }
                 if (startType == "Afternoon" && endType == "Morning") {
                     $("#spnDayType").html("<img src='" + baseURL + "assets/images/leave_2d_AM.png' />");
-                    addDays = 0;
                 }
              }
         }
@@ -78,7 +68,7 @@ function getLeaveInfos(preventDefault) {
         })
         .done(function(leaveInfo) {
             if (typeof leaveInfo.length !== 'undefined') {
-                var duration = parseFloat(leaveInfo.length)  + addDays;
+                var duration = parseFloat(leaveInfo.length);
                 duration = Math.round(duration * 1000) / 1000;  //Round to 3 decimals only if necessary
                 if (!preventDefault) {
                     if (start.isValid() && end.isValid()) {
@@ -100,6 +90,8 @@ function getLeaveInfos(preventDefault) {
             }
             //Check if the current request overlaps with another one
             showOverlappingMessage(leaveInfo);
+            //Or overlaps with a non-working day
+            showOverlappingDayOffMessage(leaveInfo);
             //Check if the employee has a contract
             if (leaveInfo.hasContract == false) {
                 bootbox.alert(noContractMsg);
@@ -136,6 +128,7 @@ function refreshLeaveInfo() {
         })
         .done(function(leaveInfo) {
             showOverlappingMessage(leaveInfo);
+            showOverlappingDayOffMessage(leaveInfo);
             showListDayOff(leaveInfo);
             $('#frmModalAjaxWait').modal('hide');
         });    
@@ -178,8 +171,18 @@ function showOverlappingMessage(leaveInfo) {
     }
 }
 
+//Check if the leave request overlaps with a non-working day
+function showOverlappingDayOffMessage(leaveInfo) {
+    if (typeof leaveInfo.overlapDayOff !== 'undefined') {
+        if (Boolean(leaveInfo.overlapDayOff)) {
+            $("#lblOverlappingDayOffAlert").show();
+        } else {
+            $("#lblOverlappingDayOffAlert").hide();
+        }
+    }
+}
+
 $(function () {
-    //On openning leave/edit, init addDays variable
     getLeaveLength(false);
     
     $("#viz_startdate").datepicker({

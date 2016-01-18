@@ -62,6 +62,11 @@ echo form_open('leaves/create', $attributes) ?>
         <?php echo lang('leaves_create_field_overlapping_message');?>
     </div>
     
+    <div class="alert hide alert-error" id="lblOverlappingDayOffAlert" onclick="$('#lblOverlappingDayOffAlert').hide();">
+        <button type="button" class="close">&times;</button>
+        <?php echo lang('leaves_flash_msg_overlap_dayoff');?>
+    </div>
+    
     <label for="cause"><?php echo lang('leaves_create_field_cause');?></label>
     <textarea name="cause"><?php echo set_value('cause'); ?></textarea>
     

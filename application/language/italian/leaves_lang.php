@@ -55,7 +55,7 @@ $lang['leaves_create_flash_msg_success'] = 'La richiesta di ferie è stata creat
 $lang['leaves_create_flash_msg_error'] = 'La richiesta di ferie è stata creata con successo oppure aggiornata, ma non hai un manager.';
 
 $lang['leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
-$lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request match with a non-working day.';
+$lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['leaves_edit_html_title'] = 'Modifica una richiesta di ferie';
 $lang['leaves_edit_title'] = 'Modifica richiesta di ferie #';

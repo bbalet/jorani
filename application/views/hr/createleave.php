@@ -59,6 +59,11 @@
         <?php echo lang('hr_leaves_create_field_overlapping_message');?>
     </div>
     
+    <div class="alert hide alert-error" id="lblOverlappingDayOffAlert" onclick="$('#lblOverlappingDayOffAlert').hide();">
+        <button type="button" class="close">&times;</button>
+        <?php echo lang('hr_leaves_flash_msg_overlap_dayoff');?>
+    </div>
+    
     <label for="cause"><?php echo lang('hr_leaves_create_field_cause');?></label>
     <textarea name="cause"><?php echo set_value('cause'); ?></textarea>
     
@@ -77,7 +82,16 @@
 
     </div>
     <div class="span4">
-        <span id="spnDayOff">&nbsp;</span>
+        <div class="row-fluid">
+            <div class="span12">
+                <span id="spnDayType"></span>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <span id="spnDaysOffList"></span>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -111,4 +125,11 @@ if ($language_code != 'en') { ?>
     var leaveId = null;
     var languageCode = '<?php echo $language_code;?>';
     var dateJsFormat = '<?php echo lang('global_date_js_format');?>';
+    var dateMomentJsFormat = '<?php echo lang('global_date_momentjs_format');?>';
+    
+    var noContractMsg = "<?php echo lang('hr_leaves_validate_flash_msg_no_contract');?>";
+    var noTwoPeriodsMsg = "<?php echo lang('hr_leaves_validate_flash_msg_overlap_period');?>";
+    
+    var overlappingWithDayOff = "<?php echo lang('hr_leaves_flash_msg_overlap_dayoff');?>";
+    var listOfDaysOffTitle = "<?php echo lang('hr_leaves_flash_spn_list_days_off');?>";
 </script>

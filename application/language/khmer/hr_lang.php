@@ -87,9 +87,10 @@ $lang['hr_leaves_create_field_cause'] = 'មូលហេតុ(មានក៏�
 $lang['hr_leaves_create_field_status'] = 'ស្ថានភាព';
 $lang['hr_leaves_create_button_create'] = 'ស្នើរសុំការឈប់សម្រាក';
 $lang['hr_leaves_create_button_cancel'] = 'បោះបង់';
-
 $lang['hr_leaves_create_flash_msg_success'] = 'ការស្នើរសុំឈប់សម្រាកត្រូវបានបង្កើតដោយជោគជ័យ';
 $lang['hr_leaves_create_flash_msg_error'] = 'ការស្នើរសុំឈប់សម្រាកត្រូវបានបង្កើតឬធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ, ប៉ុន្តែលោកអ្នកមិនមានអ្នកគ្រប់គ្រងទេ។';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['hr_overtime_title'] = 'បញ្ជីនៃសំណើសុំក្រៅម៉ោង';
 $lang['hr_overtime_html_title'] = 'សំណើបន្ថែមម៉ោងរបស់បគ្គលិក #';

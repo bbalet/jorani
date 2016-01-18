@@ -89,6 +89,8 @@ $lang['hr_leaves_create_button_create'] = 'Vraaag afwezigheid aan';
 $lang['hr_leaves_create_button_cancel'] = 'Annuleren';
 $lang['hr_leaves_create_flash_msg_success'] = 'Het afwezigheidsverzoek is succesvol aangemaakt';
 $lang['hr_leaves_create_flash_msg_error'] = 'De afwezigheidsmelding is succesvol aangemaakt/bijgewerkt, echter u heeft geen manager.';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['hr_overtime_title'] = 'Overzicht van overuren aanmeldingen';
 $lang['hr_overtime_html_title'] = 'Overzicht overuren voor werknemer #';

@@ -88,6 +88,8 @@ $lang['hr_leaves_create_button_create'] = 'Запит відпустки';
 $lang['hr_leaves_create_button_cancel'] = 'Скасувати';
 $lang['hr_leaves_create_flash_msg_success'] = 'Заява на відпустку успішно створена';
 $lang['hr_leaves_create_flash_msg_error'] = 'Заява на відпустку успішно створена або оновлена, але у вас немає керівника.';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['hr_overtime_title'] = 'Список заяв на понаднормові';
 $lang['hr_overtime_html_title'] = 'Список заяв на понаднормові для працівника №';

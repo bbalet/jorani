@@ -821,7 +821,7 @@ msgstr ""
 msgid "%s non-working days in the period"
 msgstr ""
 
-msgid "Your leave request match with a non-working day."
+msgid "Your leave request matches with a non-working day."
 msgstr ""
 
 msgid "Edit a leave request"

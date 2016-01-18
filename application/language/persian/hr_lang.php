@@ -88,6 +88,8 @@ $lang['hr_leaves_create_field_status'] = 'وضعیت';
 $lang['hr_leaves_create_button_create'] = 'درخواست مرخصی';
 $lang['hr_leaves_create_button_cancel'] = 'لغو';
 $lang['hr_leaves_create_flash_msg_success'] = 'درخواست مرخصی موفقانه ایجاد گردید';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['hr_leaves_create_flash_msg_error'] = 'درخواست مرخصی موفقانه ایجاد و یا به روزرسانی گردید، اما شما مدیر بخش ندارید.';
 $lang['hr_overtime_title'] = 'لیست درخواستهای اضافه کاری';

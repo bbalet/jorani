@@ -53,7 +53,7 @@ $lang['leaves_create_flash_msg_success'] = 'The leave request has been succesful
 $lang['leaves_create_flash_msg_error'] = 'The leave request has been succesfully created or updated, but you don\'t have a manager.';
 
 $lang['leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
-$lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request match with a non-working day.';
+$lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
 $lang['leaves_edit_html_title'] = 'Edit a leave request';
 $lang['leaves_edit_title'] = 'Edit leave request #';

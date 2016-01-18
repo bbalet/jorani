@@ -145,7 +145,6 @@ class Leaves_model extends CI_Model {
         while ($iDate <= $endDateObject)
         {
             if ($iDate == $startDateObject) $first_day = TRUE; else $first_day = FALSE;
-            if ($iDate == $endDateObject) $last_day = TRUE; else $last_day = FALSE;
             //Iterate on the list of days off with two objectives:
             // - Compute sum of days off between the two dates
             // - Detect if the leave request exactly overlaps with a day off
@@ -982,16 +981,16 @@ class Leaves_model extends CI_Model {
         $this->db->where('leaves.employee = ', $employee_id);
         $this->db->order_by('startdate', 'asc');
         $events = $this->db->get()->result();
-        $limitDate = DateTime::createFromFormat('Y-m-d', $end);
-        $floorDate = DateTime::createFromFormat('Y-m-d', $start);
+        $limitDate = DateTime::createFromFormat('Y-m-d H:i:s', $end . ' 00:00:00');
+        $floorDate = DateTime::createFromFormat('Y-m-d H:i:s', $start . ' 00:00:00');
         
         $this->load->model('dayoffs_model');
         foreach ($events as $entry) {
             
-            $startDate = DateTime::createFromFormat('Y-m-d', $entry->startdate);
+            $startDate = DateTime::createFromFormat('Y-m-d H:i:s', $entry->startdate . ' 00:00:00');
             if ($startDate < $floorDate) $startDate = $floorDate;
             $iDate = clone $startDate;
-            $endDate = DateTime::createFromFormat('Y-m-d', $entry->enddate);
+            $endDate = DateTime::createFromFormat('Y-m-d H:i:s', $entry->enddate . ' 00:00:00');
             if ($endDate > $limitDate) $endDate = $limitDate;
             
             //Iteration between 2 dates

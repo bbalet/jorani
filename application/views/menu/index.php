@@ -67,7 +67,6 @@ $this->lang->load('menu', $language);?>
                     <li class="nav-header"><?php echo lang('menu_hr_employees_divider');?></li>
                     <li><a href="<?php echo base_url();?>hr/employees"><?php echo lang('menu_hr_list_employees');?></a></li>
                     <li><a href="<?php echo base_url();?>organization"><?php echo lang('menu_hr_list_organization');?></a></li>
-                    <!--<li><a href="<?php echo base_url();?>entitleddays/organization"><?php echo lang('menu_hr_list_entitlements');?></a></li>//-->
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_hr_contracts_divider');?></li>
                     <li><a href="<?php echo base_url();?>contracts"><?php echo lang('menu_hr_list_contracts');?></a></li>

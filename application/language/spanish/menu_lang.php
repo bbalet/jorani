@@ -28,7 +28,6 @@ $lang['menu_hr_title'] = 'RH';
 $lang['menu_hr_employees_divider'] = 'Empleados';
 $lang['menu_hr_list_organization'] = 'Organización';
 $lang['menu_hr_list_employees'] = 'Lista de empleados';
-$lang['menu_hr_list_entitlements'] = 'Multiple Edit';
 $lang['menu_hr_contracts_divider'] = 'Contratos';
 $lang['menu_hr_list_contracts'] = 'Lista de contratos';
 $lang['menu_hr_list_positions'] = 'Lista de categorias';

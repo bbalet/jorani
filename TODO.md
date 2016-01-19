@@ -3,13 +3,21 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 ## v0.4.5
 
-- [X] Add Persian language.
-- [X] Add Vietnamese language.
-- [ ] Clarify usage of leave type 'compensate' (warning id edit/description in page).
-- [X] Improve robustness to bad conf. detect Database procedures and cal_days_in_month.
+- [ ] Multiple edit from HR/Employees page.
+- [X] Leave balance report for managers.
 - [X] Show list of days off in Leave request create/edit. Linked to #87.
-- [ ] Leave request / day off overlapping detection. Linked to #87.
-- [ ] BUG(87): Leave duration calculation wrong if a contract has a morning or an afternoon set as a non-work day.
+- [X] Leave request / day off overlapping detection. Linked to #87.
+- [X] Add Persian language.
+- [ ] Add Vietnamese language.
+- [X] Clarify usage of leave type 'compensate' (warning id edit/description in page).
+- [X] Improve robustness to bad conf. detect Database procedures and cal_days_in_month.
+- [X] BUG(87): Leave duration calculation wrong if a contract has a morning or an afternoon set as a non-work day.
+- [ ] Clean Boostrap classes btn secondary
+- [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
+- [ ] Migrate all datatables to the new API ($().dataTable() to $().DataTable()).
+- [ ] Migrate all datatables to the new language initiatlization.
+- [ ] For all datatables, try to simplify the code with databinding.
+- [ ] Maybe user/index : Ajaxload.
 
 ## v0.5.0 or later
 

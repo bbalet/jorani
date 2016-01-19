@@ -60,10 +60,33 @@
     <div class="span2">
       <a href="#" id="cmdExportEmployees" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
     </div>
-    <div class="span8">&nbsp;</div>
+    <div class="span8">
+        <!--<div class="btn-group dropup">
+            <button id="cmdSelection" class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+              Selection&nbsp;<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#" id="cmdSelectManager"><i class="fa fa-pencil"></i>&nbsp;Select Manager</a></li>
+            </ul>
+        </div>//-->
+    </div>
 </div>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
+<div id="frmSelectManager" class="modal hide fade">
+    <div class="modal-header">
+        <a href="#" onclick="$('#frmSelectManager').modal('hide');" class="close">&times;</a>
+         <h3><?php echo lang('hr_employees_popup_manager_title');?></h3>
+    </div>
+    <div class="modal-body" id="frmSelectManagerBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="select_manager();" class="btn btn-primary"><?php echo lang('OK');?></a>
+        <a href="#" onclick="$('#frmSelectManager').modal('hide');" class="btn btn-danger"><?php echo lang('Cancel');?></a>
+    </div>
+</div>
 
 <div id="frmSelectEntity" class="modal hide fade">
     <div class="modal-header">
@@ -123,10 +146,13 @@
 <link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/datatable/buttons/css/buttons.dataTables.min.css" rel="stylesheet"/>
 <link href="<?php echo base_url();?>assets/datatable/colreorder/css/colReorder.dataTables.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/select/css/select.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/buttons/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/buttons/js/buttons.colVis.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/colreorder/js/dataTables.colReorder.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/select/js/dataTables.select.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/context.menu.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/toe.min.js"></script>
@@ -156,6 +182,36 @@ function select_entity() {
         }, true);
 }
 
+    //Popup select postion: on click OK, find the user id for the selected line
+    function select_manager() {
+        var employees = $('#employees').DataTable();
+        if ( employees.rows({ selected: true }).any() ) {
+            var manager = employees.rows({selected: true}).data()[0][0];
+            var text = employees.rows({selected: true}).data()[0][1] + ' ' + employees.rows({selected: true}).data()[0][2];
+            var employeeIds = [];;
+            //Get the list of selected employees into datatable users
+           oTable.rows({selected: true}).every( function () {
+               employeeIds.push(this.data().id);
+            });
+            //TODO: Call a web service that changes the manager of a list of employees
+            oTable.ajax.reload();
+            /*$.ajax({
+                url: "<?php echo base_url();?>hr/employees/edit/manager",
+                type: "POST",
+                data: { manager_id: <?php echo $id; ?>,
+                        delegate_id: employee
+                    }
+              }).done(function(id) {
+                  if (id != 'null') {
+                    
+                      oTable.ajax.reload();
+                  }
+                  $('#frmModalAjaxWait').modal('hide');
+            });*/
+        }
+        $("#frmSelectManager").modal('hide');
+    }
+
 //Prevent text selection after double click
 function clearSelection() {
     if(document.selection && document.selection.empty) {
@@ -167,11 +223,25 @@ function clearSelection() {
 }
 
 $(function () {
+    
+    //Global Ajax error handling mainly used for session expiration
+    $( document ).ajaxError(function(event, jqXHR, settings, errorThrown) {
+        $('#frmModalAjaxWait').modal('hide');
+        if (jqXHR.status == 401) {
+            bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
+                //After the login page, we'll be redirected to the current page 
+               location.reload();
+            });
+        } else { //Oups
+            bootbox.alert("<?php echo lang('global_ajax_error');?>");
+        }
+      });
+    
     //Handle a context menu of the DataTable
     $('.context').contextmenu({
         before: function (e, element, target) {
             e.preventDefault();
-            if (oTable.fnSettings().fnRecordsDisplay() != 0) {
+            if (oTable.data().any()) {
                 contextObject = e.target;
                 return true;
             } else {
@@ -240,7 +310,7 @@ $(function () {
 
     //Transform the HTML table in a fancy datatable:
     // * Column ID cannot be moved or hidden because it is used for contextual actions
-    oTable = $('#users').dataTable({
+    oTable = $('#users').DataTable({
             "ajax": '<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren,
             columns: [
                 { data: "id" },
@@ -253,6 +323,7 @@ $(function () {
                 { data: "identifier" }
             ],
             stateSave: true,
+            select: 'multiple',
             dom: 'Bfrtip',
             buttons: [
                             {
@@ -314,6 +385,17 @@ $(function () {
     $("#cmdSelectEntity").click(function() {
         $("#frmSelectEntity").modal('show');
         $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
+    });
+    
+    //Popup select manager
+    $("#cmdSelectManager").click(function() {
+        if (oTable.rows({selected: true}).any()) {
+            $("#frmSelectManager").modal('show');
+            $("#frmSelectManagerBody").load('<?php echo base_url(); ?>users/employees');
+        }
+        else {
+            bootbox.alert("<?php echo lang('hr_employees_multiple_edit_selection_msg');?>");
+        }
     });
     
     //If we opt-in the include children box, we'll recursively include the children of the selected entity

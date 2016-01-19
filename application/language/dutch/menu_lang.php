@@ -27,7 +27,6 @@ $lang['menu_hr_title'] = 'HR';
 $lang['menu_hr_employees_divider'] = 'Werknemers';
 $lang['menu_hr_list_organization'] = 'Organisatie';
 $lang['menu_hr_list_employees'] = 'Lijst werknemers';
-$lang['menu_hr_list_entitlements'] = 'Multiple Edit';
 $lang['menu_hr_contracts_divider'] = 'Contracten';
 $lang['menu_hr_list_contracts'] = 'Lijst contracten';
 $lang['menu_hr_list_positions'] = 'Lijst functies';

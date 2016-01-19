@@ -27,7 +27,6 @@ $lang['menu_hr_title'] = 'منابع انسانی';
 $lang['menu_hr_employees_divider'] = 'کارمندان';
 $lang['menu_hr_list_organization'] = 'سازمان';
 $lang['menu_hr_list_employees'] = 'لیست کارمندان';
-$lang['menu_hr_list_entitlements'] = 'Multiple Edit';
 
 $lang['menu_hr_contracts_divider'] = 'قراردادها';
 $lang['menu_hr_list_contracts'] = 'لیست قراردادها';

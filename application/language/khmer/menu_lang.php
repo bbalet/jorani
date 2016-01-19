@@ -26,7 +26,6 @@ $lang['menu_hr_title'] = 'ធនធានមនុស្ស';
 $lang['menu_hr_employees_divider'] = 'បុគ្គលិក';
 $lang['menu_hr_list_organization'] = 'អង្គការ';
 $lang['menu_hr_list_employees'] = 'បញ្ជីនៃបុគ្គលិក';
-$lang['menu_hr_list_entitlements'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
 $lang['menu_hr_contracts_divider'] = 'អង្គការ';
 $lang['menu_hr_list_contracts'] = 'បញ្ជីនៃកិច្ចសន្យា';
 $lang['menu_hr_list_positions'] = 'បញ្ជីមុខតំណែង';

@@ -38,6 +38,9 @@ $lang['hr_employees_popup_entity_button_cancel'] = 'Cancel';
 $lang['hr_employees_description'] = 'Right-click / taphold on an employee for contextual actions.';
 $lang['hr_employees_field_subdepts'] = 'Include sub-departments';
 
+$lang['hr_employees_popup_manager_title'] = 'Select the manager';
+$lang['hr_employees_multiple_edit_selection_msg'] = 'You must select at least one employee into the table';
+
 $lang['hr_export_employees_title'] = 'List of employees';
 $lang['hr_export_employees_thead_id'] = 'ID';
 $lang['hr_export_employees_thead_firstname'] = 'Firstname';

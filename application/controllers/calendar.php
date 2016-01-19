@@ -51,6 +51,7 @@ class Calendar extends CI_Controller {
                 }
             }
             
+            $data['employee_id'] = $employee;
             $data['employee_name'] =  $user['firstname'] . ' ' . $user['lastname'];
             //Load the leaves for all the months of the selected year
             $this->load->model('leaves_model');

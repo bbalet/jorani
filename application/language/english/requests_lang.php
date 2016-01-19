@@ -75,3 +75,7 @@ $lang['requests_delegations_popup_delegate_button_cancel'] = 'Cancel';
 $lang['requests_delegations_confirm_delete_message'] = 'Are you sure that you want to revoke this delegation?';
 $lang['requests_delegations_confirm_delete_cancel'] = 'Cancel';
 $lang['requests_delegations_confirm_delete_yes'] = 'Yes';
+
+$lang['requests_balance_title'] = 'Leave balance (subordinates)';
+$lang['requests_balance_description'] = 'Leave balance of my direct report subordinates. If you are not a manager, this list will always be empty.';
+$lang['requests_balance_date_field'] = 'Date of report';

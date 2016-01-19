@@ -75,3 +75,7 @@ $lang['requests_delegations_popup_delegate_button_cancel'] = 'لغو';
 $lang['requests_delegations_confirm_delete_message'] = 'آیا مطمئنید که میخواهید این هیئت را باطل کنید؟';
 $lang['requests_delegations_confirm_delete_cancel'] = 'لغو';
 $lang['requests_delegations_confirm_delete_yes'] = 'بله';
+
+$lang['requests_balance_title'] = 'Leave balance (subordinates)';
+$lang['requests_balance_description'] = 'Leave balance of my direct report subordinates. If you are not a manager, this list will always be empty.';
+$lang['requests_balance_date_field'] = 'Date of report';

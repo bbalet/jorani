@@ -75,3 +75,7 @@ $lang['requests_delegations_popup_delegate_button_cancel'] = 'Annuler';
 $lang['requests_delegations_confirm_delete_message'] = 'Etes vous sûr de vouloir révoquer cette délégation ?';
 $lang['requests_delegations_confirm_delete_cancel'] = 'Annuler';
 $lang['requests_delegations_confirm_delete_yes'] = 'Oui';
+
+$lang['requests_balance_title'] = 'État des congés (collaborateurs)';
+$lang['requests_balance_description'] = 'État des congés de mes collaborateurs. Si vous n\'êtes pas un manager, cette liste sera vide.';
+$lang['requests_balance_date_field'] = 'Date du rapport';

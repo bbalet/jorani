@@ -75,3 +75,7 @@ $lang['requests_delegations_popup_delegate_button_cancel'] = 'Hủy bỏ';
 $lang['requests_delegations_confirm_delete_message'] = 'Bạn có chắc chắn rằng bạn muốn thu hồi uỷ quyền này?';
 $lang['requests_delegations_confirm_delete_cancel'] = 'Hủy bỏ';
 $lang['requests_delegations_confirm_delete_yes'] = 'Có';
+
+$lang['requests_balance_title'] = 'Leave balance (subordinates)';
+$lang['requests_balance_description'] = 'Leave balance of my direct report subordinates. If you are not a manager, this list will always be empty.';
+$lang['requests_balance_date_field'] = 'Date of report';

@@ -177,6 +177,8 @@ $route['leaves'] = 'leaves';
 //_______________________________________________
 //leave requests (submitted to the line manager)
 $route['requests/collaborators'] = 'requests/collaborators';
+$route['requests/balance'] = 'requests/balance';
+$route['requests/balance/(:num)'] = 'requests/balance/$1';
 $route['requests/createleave/(:num)'] = 'requests/createleave/$1';
 $route['requests/counters/(:num)'] = 'requests/counters/$1';
 $route['requests/counters/(:num)/(:num)'] = 'requests/counters/$1/$2';

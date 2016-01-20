@@ -44,6 +44,11 @@ if ($configFileExists) {
         $dbSelectDbError = ($dbConn->errno > 0) ? TRUE : FALSE;
         //Try to get the signature of the schema
         if (!$dbSelectDbError) {
+            //Examine organization structure
+            $resultOrg = $dbConn->query("SELECT id FROM organization WHERE parent_id=-1");
+            $rowOrg = $resultOrg->fetch_assoc();
+            $resultOrg->free();;
+            
             //Try to use a procedure in order to check the install script
             //We don't know if the user has access to information schema
             //So we try to call one of the procedures with a parameter returning a small set of results
@@ -160,12 +165,18 @@ if ($configFileExists) {
                       <?php } else { ?>
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;Timezone undefined</td>
                       <?php } ?><td>If error, please check date.timezone into PHP.ini.</td></tr>
+                      
+                      <?php if (function_exists('mb_strimwidth')) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;<code>mb_strimwidth</code> function exists</td>
+                      <?php } else { ?>
+                      <tr><td><i class="icon-remove-sign"></i>&nbsp;<code>mb_strimwidth</code> function doesn't exist</td>
+                      <?php } ?><td>PHP must be compiled with <a href="http://php.net/manual/en/mbstring.installation.php" target="_blank">multibyte string support<a>.</td></tr>
                        
                       <?php if (extension_loaded('mcrypt')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;mcrypt is LOADED</td>
                       <?php } else { ?>
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;mcrypt IS NOT LOADED.</td>
-                      <?php } ?><td>PHP Extension mcrypt is required for the security features.</td></tr>
+                      <?php } ?><td>PHP Extension mcrypt is required for some security features.</td></tr>
                       
                       <?php if (extension_loaded('Zend OPcache')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;OPcache is LOADED</td>
@@ -257,6 +268,14 @@ if ($configFileExists) {
                       <?php if (!$dbProcsError) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database procedures</td><td>OK</td></tr>
                       <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Database procedures</td><td>Error. Please check if your hosting company allows custom procedures (e.g. <a href="https://techtavern.wordpress.com/2013/06/17/mysql-triggers-and-amazon-rds/" target="_blank">Amazon RDS</a>).</td></tr>
                       <?php } ?>
+                      
+                      <?php if (is_null($rowOrg)) { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Organization structure</td><td>No root entity was found.</td></tr>
+                      <?php } else { ?>
+                            <?php if ($rowOrg['id'] != 0) { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Organization structure</td><td>The root entity must be equal to zero. To fix a problem of backup/restore, please execute this query: <br />
+                                    <code>UPDATE `organization` SET `organization`.`id` = 0 WHERE `parent_id` = -1</code></td></tr>
+                            <?php } else { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Organization structure</td><td>OK</td></tr>
+                      <?php } 
+                           }?>
                   </tbody>
             </table>
             

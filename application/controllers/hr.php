@@ -80,6 +80,24 @@ class Hr extends CI_Controller {
             echo $msg;
         }
     }
+    
+    /**
+     * Ajax endpoint: edit the manager for a list of employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function editManager() {
+        header("Content-Type: application/json");
+        if ($this->auth->isAllowed('list_employees') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $managerId = $this->input->post('manager', TRUE);
+            $employees = $this->input->post('employees', TRUE);
+            $objectEmployees = json_decode($employees);
+            $this->load->model('users_model');
+            $result = $this->users_model->updateManagerForUserList($managerId, $objectEmployees->employeeIds);
+            echo $result;
+        }
+    }
 
     /**
      * Display the list of leaves for a given employee

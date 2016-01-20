@@ -632,4 +632,18 @@ class Users_model extends CI_Model {
         }
         return $rnd;
     }
+    
+    /**
+     * Update the manager for a list of employees
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function updateManagerForUserList($managerId, $usersList) {
+        $data = array(
+            'manager' => $managerId
+        );
+        $this->db->where_in('id', $usersList);
+        $result = $this->db->update('users', $data);
+        return $result;
+    }
 }

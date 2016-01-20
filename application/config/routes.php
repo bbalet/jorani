@@ -63,6 +63,7 @@ $route['users'] = 'users';
 $route['hr/employees'] = 'hr/employees';
 $route['hr/employees/entity/(:num)/(:any)'] = 'hr/employeesOfEntity/$1/$2';
 $route['hr/employees/export/(:num)/(:any)'] = 'hr/exportEmployees/$1/$2';
+$route['hr/employees/edit/manager'] = 'hr/editManager';
 $route['hr/leaves/(:num)'] = 'hr/leaves/$1';
 $route['hr/leaves/export/(:num)'] = 'hr/exportLeaves/$1';
 $route['hr/overtime/(:num)'] = 'hr/overtime/$1';
@@ -218,8 +219,6 @@ $route['entitleddays/contract/(:num)'] = 'entitleddays/contract/$1';
 $route['entitleddays/ajax/contract'] = 'entitleddays/ajax_contract';
 $route['entitleddays/contractdelete/(:num)'] = 'entitleddays/contractdelete/$1';
 $route['entitleddays/ajax/update'] = 'entitleddays/ajax_update';
-$route['entitleddays/organization'] = 'entitleddays/organization';
-$route['entitleddays/organization/credit'] = 'entitleddays/organizationAjaxCredit';
 
 //_______________________________________________
 //Reports

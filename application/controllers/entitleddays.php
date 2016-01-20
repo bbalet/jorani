@@ -95,27 +95,6 @@ class Entitleddays extends CI_Controller {
     }
     
     /**
-     * Displays a page that allows you to :
-     * 1. Select a list of employees (using organization tree).
-     * 2. Credit entitled days to them.
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function organization() {
-        setUserContext($this);
-        $this->auth->checkIfOperationIsAllowed('entitleddays_user');
-        $data = getUserContext($this);
-        $this->lang->load('organization', $this->language);
-        $this->lang->load('datatable', $this->language);
-        $this->lang->load('treeview', $this->language);
-        $data['title'] = lang('organization_index_title');
-        $data['help'] = '';
-        $this->load->view('templates/header', $data);
-        $this->load->view('menu/index', $data);
-        $this->load->view('entitleddays/organization', $data);
-        $this->load->view('templates/footer');
-    }
-    
-    /**
      * Ajax endpoint : delete an entitled days credit (to an employee)
      * and returns the number of rows affected
      * @param int $id entitled days credit identifier

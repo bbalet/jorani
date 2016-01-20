@@ -61,14 +61,14 @@
       <a href="#" id="cmdExportEmployees" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
     </div>
     <div class="span8">
-        <!--<div class="btn-group dropup">
+        <div class="btn-group dropup">
             <button id="cmdSelection" class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-              Selection&nbsp;<span class="caret"></span>
+              <i class="fa fa-pencil"></i>&nbsp;Selection&nbsp;<span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="#" id="cmdSelectManager"><i class="fa fa-pencil"></i>&nbsp;Select Manager</a></li>
+                <li><a href="#" id="cmdSelectManager"><i class="fa fa-user"></i>&nbsp;Select Manager</a></li>
             </ul>
-        </div>//-->
+        </div>
     </div>
 </div>
 
@@ -176,41 +176,38 @@ function select_entity() {
     $("#frmSelectEntity").modal('hide');
     //Refresh datatable
     $('#frmModalAjaxWait').modal('show');
-    oTable.api().ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren)
+    oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren)
         .load(function() {
             $("#frmModalAjaxWait").modal('hide');
         }, true);
 }
 
-    //Popup select postion: on click OK, find the user id for the selected line
-    function select_manager() {
-        var employees = $('#employees').DataTable();
-        if ( employees.rows({ selected: true }).any() ) {
-            var manager = employees.rows({selected: true}).data()[0][0];
-            var text = employees.rows({selected: true}).data()[0][1] + ' ' + employees.rows({selected: true}).data()[0][2];
-            var employeeIds = [];;
-            //Get the list of selected employees into datatable users
-           oTable.rows({selected: true}).every( function () {
-               employeeIds.push(this.data().id);
-            });
-            //TODO: Call a web service that changes the manager of a list of employees
-            oTable.ajax.reload();
-            /*$.ajax({
-                url: "<?php echo base_url();?>hr/employees/edit/manager",
-                type: "POST",
-                data: { manager_id: <?php echo $id; ?>,
-                        delegate_id: employee
-                    }
-              }).done(function(id) {
-                  if (id != 'null') {
-                    
-                      oTable.ajax.reload();
-                  }
-                  $('#frmModalAjaxWait').modal('hide');
-            });*/
-        }
-        $("#frmSelectManager").modal('hide');
+//Popup select manager: on click OK, find the id of all selected employees and update their manager.
+function select_manager() {
+    var employees = $('#employees').DataTable();
+    if ( employees.rows({ selected: true }).any() ) {
+        var manager_id = employees.rows({selected: true}).data()[0][0];
+        var employeeIds = [];;
+        //Get the list of selected employees into datatable users
+       oTable.rows({selected: true}).every( function () {
+           employeeIds.push(this.data().id);
+        });
+        //Call a web service that changes the manager of a list of employees
+        $.ajax({
+            url: "<?php echo base_url();?>hr/employees/edit/manager",
+            type: "POST",
+            dataType: 'json',
+            data: {
+                    manager: manager_id,
+                    employees: JSON.stringify({employeeIds})
+                }
+          }).done(function() {
+              oTable.ajax.reload();
+              $('#frmModalAjaxWait').modal('hide');
+        });
     }
+    $("#frmSelectManager").modal('hide');
+}
 
 //Prevent text selection after double click
 function clearSelection() {
@@ -223,6 +220,13 @@ function clearSelection() {
 }
 
 $(function () {
+<?php if ($this->config->item('csrf_protection') == TRUE) {?>
+    $.ajaxSetup({
+        data: {
+            <?php echo $this->security->get_csrf_token_name();?>: "<?php echo $this->security->get_csrf_hash();?>",
+        }
+    });
+<?php }?>
     
     //Global Ajax error handling mainly used for session expiration
     $( document ).ajaxError(function(event, jqXHR, settings, errorThrown) {
@@ -405,7 +409,7 @@ $(function () {
         $.cookie('includeChildren', includeChildren);
         //Refresh datatable
         $('#frmModalAjaxWait').modal('show');
-        oTable.api().ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren)
+        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren)
             .load(function() {
                 $("#frmModalAjaxWait").modal('hide');
             }, true);

@@ -97,15 +97,26 @@ echo "<tr><td>CRYPT_RSA_MODE</td><td>" . ((CRYPT_RSA_MODE==1)? 'MODE_INTERNAL' :
 
 $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
 $plaintext = 'Jorani is the best open source Leave Management System';
+
 $rsa->loadKey($publicKey);
 $ciphertext = $rsa->encrypt($plaintext);
 
-$rsa->loadKey($privateKey, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
 $time_start = microtime(true);
+$rsa->loadKey($privateKey, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
 echo "<tr><td>Decrypted message</td><td>" . $rsa->decrypt($ciphertext)  . '</td></tr>';
 $time_end = microtime(true);
 $time = $time_end - $time_start;
-echo "<tr><td>Decryption speed</td><td>" . $time  . '</td></tr>';
+echo "<tr><td>Decryption speed (fallback)</td><td>" . $time  . '</td></tr>';
+
+if (function_exists('openssl_pkey_get_private')) {
+    $time_start = microtime(true);
+    $key = openssl_pkey_get_private($privateKey);
+    openssl_private_decrypt($ciphertext, $message, $key);
+    echo "<tr><td>Decrypted message</td><td>" . $message . '</td></tr>';
+    $time_end = microtime(true);
+    $time = $time_end - $time_start;
+    echo "<tr><td>Decryption speed (native)</td><td>" . $time  . '</td></tr>';
+}
 
 //Generate public and private keys for a single usage
 extract($rsa->createKey(KEY_SIZE));

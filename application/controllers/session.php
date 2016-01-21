@@ -92,12 +92,18 @@ class Session extends CI_Controller {
             $this->session->set_userdata('language', $this->polyglot->code2language($this->input->post('language')));
             
             //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt) and remove the salt!
-            require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
-            $rsa = new phpseclib\Crypt\RSA();
-            $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
-            $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
-            $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
-            $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
+            $password = '';
+            if (function_exists('openssl_pkey_get_private')) {
+                $privateKey = openssl_pkey_get_private(file_get_contents('./assets/keys/private.pem', TRUE));
+                openssl_private_decrypt(base64_decode($this->input->post('CipheredValue')), $password, $privateKey);
+            } else {
+                require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
+                $rsa = new phpseclib\Crypt\RSA();
+                $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
+                $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
+                $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
+                $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
+            }
             //Remove the salt
             $len_salt = strlen($this->session->userdata('salt')) * (-1);
             $password = substr($password, 0, $len_salt);
@@ -127,15 +133,7 @@ class Session extends CI_Controller {
             if ($loggedin == FALSE) {
                 log_message('error', '{controllers/session/login} Invalid login id or password for user=' . $this->input->post('login'));
                 $this->session->set_flashdata('msg', lang('session_login_flash_bad_credentials'));
-                $data['public_key'] = file_get_contents('./assets/keys/public.pem', TRUE);
-                $data['salt'] = $this->generateRandomString(rand(5, 20));
-                $data['language'] = $this->session->userdata('language');
-                $data['language_code'] = $this->session->userdata('language_code');
-                $this->session->set_userdata('salt', $data['salt']);
-                $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
-                $this->load->view('templates/header', $data);
-                $this->load->view('session/login', $data);
-                $this->load->view('templates/footer');
+                redirect('session/login');
             } else {
                 //If the user has a target page (e.g. link in an e-mail), redirect to this destination
                 if ($this->session->userdata('last_page') != '') {

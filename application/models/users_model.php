@@ -140,13 +140,18 @@ class Users_model extends CI_Model {
      */
     public function setUsers() {
         //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
-        require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
-        $rsa = new phpseclib\Crypt\RSA();
-        $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
-        $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
-        $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
-        $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
-        
+        $password = '';
+        if (function_exists('openssl_pkey_get_private')) {
+            $privateKey = openssl_pkey_get_private(file_get_contents('./assets/keys/private.pem', TRUE));
+            openssl_private_decrypt(base64_decode($this->input->post('CipheredValue')), $password, $privateKey);
+        } else {
+            require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
+            $rsa = new phpseclib\Crypt\RSA();
+            $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
+            $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
+            $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
+            $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
+        }
         //Hash the clear password using bcrypt (8 iterations)
         $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
         $hash = crypt($password, $salt);
@@ -331,13 +336,18 @@ class Users_model extends CI_Model {
      */
     public function resetPassword($id, $CipheredNewPassword) {
         //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt)
-        require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
-        $rsa = new phpseclib\Crypt\RSA();
-        $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
-        $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
-        $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
-        $password = $rsa->decrypt(base64_decode($CipheredNewPassword));
-        
+        $password = '';
+        if (function_exists('openssl_pkey_get_private')) {
+            $privateKey = openssl_pkey_get_private(file_get_contents('./assets/keys/private.pem', TRUE));
+            openssl_private_decrypt(base64_decode($this->input->post('CipheredValue')), $password, $privateKey);
+        } else {
+            require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
+            $rsa = new phpseclib\Crypt\RSA();
+            $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
+            $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
+            $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
+            $password = $rsa->decrypt(base64_decode($CipheredNewPassword));
+        }
         //Hash the clear password using bcrypt (8 iterations)
         $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
         $hash = crypt($password, $salt);

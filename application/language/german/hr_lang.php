@@ -26,6 +26,8 @@ $lang['hr_employees_thead_entity'] = 'Einheit';
 $lang['hr_employees_thead_contract'] = 'Vertrag';
 $lang['hr_employees_thead_manager'] = 'Vorgesetzter';
 $lang['hr_employees_thead_identifier'] = 'Identifikator';
+$lang['hr_employees_thead_datehired'] = 'Anstellungsdatum';
+$lang['hr_employees_thead_position'] = 'Position';
 $lang['hr_employees_button_create_user'] = 'Erstellen';
 $lang['hr_employees_button_export'] = 'Diese Liste exportieren';
 $lang['hr_employees_popup_entitlment_title'] = 'Bezugsberechtigte Tage';
@@ -38,6 +40,9 @@ $lang['hr_employees_popup_entity_button_ok'] = 'OK';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Abbrechen';
 $lang['hr_employees_description'] = 'Rechtsklick auf einen Mitarbeiter für Kontextmenü.';
 $lang['hr_employees_field_subdepts'] = 'Unterabteilungen inkludieren';
+
+$lang['hr_employees_popup_manager_title'] = 'Select the manager';
+$lang['hr_employees_multiple_edit_selection_msg'] = 'You must select at least one employee into the table';
 
 $lang['hr_export_employees_title'] = 'Liste der Angestellten';
 $lang['hr_export_employees_thead_id'] = 'ID';

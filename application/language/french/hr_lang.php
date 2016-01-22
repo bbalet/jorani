@@ -25,6 +25,8 @@ $lang['hr_employees_thead_entity'] = 'Entité';
 $lang['hr_employees_thead_contract'] = 'Contrat';
 $lang['hr_employees_thead_manager'] = 'Manager';
 $lang['hr_employees_thead_identifier'] = 'Identifiant';
+$lang['hr_employees_thead_datehired'] = 'Date d\'embauche';
+$lang['hr_employees_thead_position'] = 'Position';
 $lang['hr_employees_button_create_user'] = 'Créer';
 $lang['hr_employees_button_export'] = 'Exporter cette liste';
 $lang['hr_employees_popup_entitlment_title'] = 'Crédit congés';
@@ -37,6 +39,9 @@ $lang['hr_employees_popup_entity_button_ok'] = 'OK';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Annuler';
 $lang['hr_employees_description'] = 'Clic droit / taphold sur un employé pour les actions contextuelles.';
 $lang['hr_employees_field_subdepts'] = 'Inclure les sous-départments';
+
+$lang['hr_employees_popup_manager_title'] = 'Sélectionnez le manager';
+$lang['hr_employees_multiple_edit_selection_msg'] = 'Vous devez sélectionner au moins une ligne dans la table';
 
 $lang['hr_export_employees_title'] = 'Liste des employés';
 $lang['hr_export_employees_thead_id'] = 'N°';

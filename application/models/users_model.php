@@ -542,11 +542,14 @@ class Users_model extends CI_Model {
                 . ' users.lastname as lastname,'
                 . ' users.email as email,'
                 . ' users.identifier as identifier,'
+                . ' users.datehired as datehired,'
+                . ' positions.name as position,'
                 . ' organization.name as entity,'
                 . ' contracts.name as contract,'
                 . ' CONCAT_WS(\' \',managers.firstname,  managers.lastname) as manager_name', FALSE);
         $this->db->from('users');
         $this->db->join('contracts', 'contracts.id = users.contract', 'left outer');
+        $this->db->join('positions', 'positions.id = users.position', 'left outer');
         $this->db->join('users as managers', 'managers.id = users.manager', 'left outer');
         $this->db->join('organization', 'organization.id = users.organization', 'left outer');
 

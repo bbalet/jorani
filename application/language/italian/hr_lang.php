@@ -26,6 +26,8 @@ $lang['hr_employees_thead_entity'] = 'Entità';
 $lang['hr_employees_thead_contract'] = 'Contratto';
 $lang['hr_employees_thead_manager'] = 'Gestore';
 $lang['hr_employees_thead_identifier'] = 'identificatore';
+$lang['hr_employees_thead_datehired'] = 'Data assunzione';
+$lang['hr_employees_thead_position'] = 'Position';
 $lang['hr_employees_button_create_user'] = 'Crea';
 $lang['hr_employees_button_export'] = 'Esporta questo elenco';
 $lang['hr_employees_popup_entitlment_title'] = 'Giorni spettanti';
@@ -38,6 +40,9 @@ $lang['hr_employees_popup_entity_button_ok'] = 'OK';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Annulla';
 $lang['hr_employees_description'] = 'Click tasto destro / pressione lunga';
 $lang['hr_employees_field_subdepts'] = 'Includi sotto-reparti';
+
+$lang['hr_employees_popup_manager_title'] = 'Select the manager';
+$lang['hr_employees_multiple_edit_selection_msg'] = 'You must select at least one employee into the table';
 
 $lang['hr_export_employees_title'] = 'Elenco dipendenti';
 $lang['hr_export_employees_thead_id'] = 'ID';

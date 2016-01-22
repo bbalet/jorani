@@ -26,6 +26,8 @@ $lang['hr_employees_thead_entity'] = 'واحد';
 $lang['hr_employees_thead_contract'] = 'قرارداد';
 $lang['hr_employees_thead_manager'] = 'مدیر';
 $lang['hr_employees_thead_identifier'] = 'شناسه';
+$lang['hr_employees_thead_datehired'] = 'تاریخ استخدام';
+$lang['hr_employees_thead_position'] = 'مقام';
 $lang['hr_employees_button_create_user'] = 'ایجاد';
 $lang['hr_employees_button_export'] = 'صدور این لیست';
 $lang['hr_employees_popup_entitlment_title'] = 'روزهای مستحق';
@@ -38,6 +40,9 @@ $lang['hr_employees_popup_entity_button_ok'] = 'تایید';
 $lang['hr_employees_popup_entity_button_cancel'] = 'لغو';
 $lang['hr_employees_description'] = 'برروی کامپیوتر رایت کلیک/ و بر روی مبایل کلیک کرده نگه دارید برای سایر گزینه ها';
 $lang['hr_employees_field_subdepts'] = 'شمولیت دپارتمان فرعی';
+
+$lang['hr_employees_popup_manager_title'] = 'Select the manager';
+$lang['hr_employees_multiple_edit_selection_msg'] = 'You must select at least one employee into the table';
 
 $lang['hr_export_employees_title'] = 'لیست کارمندان';
 $lang['hr_export_employees_thead_id'] = 'شناسه';

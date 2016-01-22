@@ -65,13 +65,23 @@ class Hr extends CI_Controller {
             $msg .= ',"recordsFiltered":' . count($employees);
             $msg .= ',"data":[';
             foreach ($employees as $employee) {
-                $msg .= '{"id":"' . $employee->id . '",';
+                $date = new DateTime($employee->datehired);
+                $tmpDate = $date->getTimestamp();
+                $displayDate = $date->format(lang('global_date_format'));
+                
+                $msg .= '{"DT_RowId":"' . $employee->id . '",';
+                $msg .= '"id":"' . $employee->id . '",';
                 $msg .= '"firstname":"' . $employee->firstname . '",';
                 $msg .= '"lastname":"' . $employee->lastname . '",';
                 $msg .= '"email":"' . $employee->email . '",';
                 $msg .= '"entity":"' . $employee->entity . '",';
                 $msg .= '"identifier":"' . $employee->identifier . '",';
                 $msg .= '"contract":"' . $employee->contract . '",';
+                $msg .= '"datehired": {';
+                $msg .=     '"display":"' . $displayDate . '",';
+                $msg .=     '"timestamp":"' . $tmpDate . '"';
+                $msg .= '},';
+                $msg .= '"position":"' . $employee->position . '",';
                 $msg .= '"manager_name":"' . $employee->manager_name . '"';
                 $msg .= '},';
             }

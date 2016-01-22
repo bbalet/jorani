@@ -26,6 +26,8 @@ $lang['hr_employees_thead_entity'] = 'Отдел';
 $lang['hr_employees_thead_contract'] = 'Контракт';
 $lang['hr_employees_thead_manager'] = 'Руководитель';
 $lang['hr_employees_thead_identifier'] = 'Идентификатор';
+$lang['hr_employees_thead_datehired'] = 'Дата принятия на работу';
+$lang['hr_employees_thead_position'] = 'Должность';
 $lang['hr_employees_button_create_user'] = 'Создать';
 $lang['hr_employees_button_export'] = 'Экспортировать список';
 $lang['hr_employees_popup_entitlment_title'] = 'Предоставляемые дни';
@@ -38,6 +40,9 @@ $lang['hr_employees_popup_entity_button_ok'] = 'Ок';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Отмена';
 $lang['hr_employees_description'] = 'Щелкните правой кнопкой мыши/нажмите на работнике для вызова контекстного меню.';
 $lang['hr_employees_field_subdepts'] = 'Включая подотделы';
+
+$lang['hr_employees_popup_manager_title'] = 'Select the manager';
+$lang['hr_employees_multiple_edit_selection_msg'] = 'You must select at least one employee into the table';
 
 $lang['hr_export_employees_title'] = 'Список сотрудников';
 $lang['hr_export_employees_thead_id'] = 'ID';

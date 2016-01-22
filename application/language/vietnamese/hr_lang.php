@@ -26,6 +26,8 @@ $lang['hr_employees_thead_entity'] = 'Thực thể';
 $lang['hr_employees_thead_contract'] = 'Hợp đồng';
 $lang['hr_employees_thead_manager'] = 'Quản lý';
 $lang['hr_employees_thead_identifier'] = 'Người nhận dạng';
+$lang['hr_employees_thead_datehired'] = 'Ngày được tuyển dụng';
+$lang['hr_employees_thead_position'] = 'Vị trí';
 $lang['hr_employees_button_create_user'] = 'Khởi tạo';
 $lang['hr_employees_button_export'] = 'Xuất danh sách';
 $lang['hr_employees_popup_entitlment_title'] = 'Gán tiêu đề cho ngày';
@@ -38,6 +40,9 @@ $lang['hr_employees_popup_entity_button_ok'] = 'Chấp nhận';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Hủy bỏ';
 $lang['hr_employees_description'] = 'Nhấn chuột phải / chạm giữ lâu trên một nhân viên để thực hiện các hành động theo hoàn cảnh.';
 $lang['hr_employees_field_subdepts'] = 'Thêm vào các đơn vị trực thuộc';
+
+$lang['hr_employees_popup_manager_title'] = 'Select the manager';
+$lang['hr_employees_multiple_edit_selection_msg'] = 'You must select at least one employee into the table';
 
 $lang['hr_export_employees_title'] = 'Danh sách nhân viên';
 $lang['hr_export_employees_thead_id'] = 'ID';

@@ -26,6 +26,8 @@ $lang['hr_employees_thead_entity'] = 'អង្គភាព';
 $lang['hr_employees_thead_contract'] = 'ខសន្យា';
 $lang['hr_employees_thead_manager'] = 'អ្នកគ្រប់គ្រង';
 $lang['hr_employees_thead_identifier'] = 'ឯកសារកំណត់អត្តសញ្ញាណ';
+$lang['hr_employees_thead_datehired'] = 'កាលបរិច្ឆេទជួល';
+$lang['hr_employees_thead_position'] = 'មុខតំណែង';
 $lang['hr_employees_button_create_user'] = 'បង្កើត';
 $lang['hr_employees_button_export'] = 'បញ្ជីនាំចេញ';
 $lang['hr_employees_popup_entitlment_title'] = 'ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់';
@@ -38,6 +40,9 @@ $lang['hr_employees_popup_entity_button_ok'] = 'យល់ព្រម';
 $lang['hr_employees_popup_entity_button_cancel'] = 'បោះបង់';
 $lang['hr_employees_description'] = 'ចុចកណ្តុរខាងស្តាំ / ចុចសង្កត់ឱ្យជាប់ទៅលើនិយោជិកណាម្នាក់ ដើម្បីបង្ហាញមីនុយសកម្មភាព';
 $lang['hr_employees_field_subdepts'] = 'រួមបញ្ចូលអនុផ្នែក';
+
+$lang['hr_employees_popup_manager_title'] = 'Select the manager';
+$lang['hr_employees_multiple_edit_selection_msg'] = 'You must select at least one employee into the table';
 
 $lang['hr_export_employees_title'] = 'បញ្ជីនៃបុគ្គលិក';
 $lang['hr_export_employees_thead_id'] = 'លេខអត្តសញ្ញាណ';

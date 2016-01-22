@@ -44,6 +44,8 @@
             <th><?php echo lang('hr_employees_thead_contract');?></th>
             <th><?php echo lang('hr_employees_thead_manager');?></th>
             <th><?php echo lang('hr_employees_thead_identifier');?></th>
+            <th><?php echo lang('hr_employees_thead_datehired');?></th>
+            <th><?php echo lang('hr_employees_thead_position');?></th>
         </tr>
     </thead>
     <tbody class="context" data-toggle="context" data-target="#context-menu">
@@ -54,13 +56,11 @@
 </div>
     
 <div class="row-fluid">
-    <div class="span2">
+    <div class="span12">
       <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_create_user');?></a>
-    </div>
-    <div class="span2">
+      &nbsp;
       <a href="#" id="cmdExportEmployees" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
-    </div>
-    <div class="span8">
+      &nbsp;
         <div class="btn-group dropup">
             <button id="cmdSelection" class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
               <i class="fa fa-pencil"></i>&nbsp;Selection&nbsp;<span class="caret"></span>
@@ -97,8 +97,8 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_entity();" class="btn secondary"><?php echo lang('hr_employees_popup_entity_button_ok');?></a>
-        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('hr_employees_popup_entity_button_cancel');?></a>
+        <a href="#" onclick="select_entity();" class="btn secondary"><?php echo lang('OK');?></a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('Cancel');?></a>
     </div>
 </div>
 
@@ -156,6 +156,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/context.menu.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/toe.min.js"></script>
+
 <script type="text/javascript">
 var entity = 0; //Root of the tree by default
 var entityName = '';
@@ -324,7 +325,14 @@ $(function () {
                 { data: "entity" },
                 { data: "contract" },
                 { data: "manager_name" },
-                { data: "identifier" }
+                { data: "identifier" },
+                { data: {
+                        _: "datehired.display",
+                        sort: "datehired.timestamp"
+                    },
+                    "orderDataType": "dom-text", "type": "numeric"
+                },
+                { data: "position" }
             ],
             stateSave: true,
             select: 'multiple',

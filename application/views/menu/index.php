@@ -82,7 +82,13 @@ $this->lang->load('menu', $language);?>
 
              <?php if ($is_manager == TRUE) { ?>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_validation_title');?> <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <?php echo lang('menu_validation_title');?>&nbsp;
+                      <?php if ($requests_count > 0) { ?>
+                      <span class="badge badge-warning"><?php echo $requests_count;?></span>
+                      <?php } ?>
+                      &nbsp;<b class="caret"></b>
+                  </a>
                   <ul class="dropdown-menu">
                     <li><a href="<?php echo base_url();?>requests/delegations"><?php echo lang('menu_validation_delegations');?></a></li>
                     <li><a href="<?php echo base_url();?>requests/collaborators"><?php echo lang('menu_validation_collaborators');?></a></li>

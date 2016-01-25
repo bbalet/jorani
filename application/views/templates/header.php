@@ -171,6 +171,10 @@ if (!is_null($fonts)) {
         box-shadow: none;
     }
     
+    .badge-warning {
+        background: #F5811E;
+    }
+    
     /*Always put Jquery datepicker on the top layer */
     .ui-datepicker{
         z-index: 9999 !important;

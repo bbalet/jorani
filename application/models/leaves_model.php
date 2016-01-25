@@ -804,6 +804,31 @@ class Leaves_model extends CI_Model {
     }
     
     /**
+     * Count leave requests submitted to the connected user (or if delegate of a manager)
+     * @param int $manager connected user
+     * @return int number of requests
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function countLeavesRequestedToManager($manager) {
+        $this->load->model('delegations_model');
+        $ids = $this->delegations_model->listManagersGivingDelegation($manager);
+        $this->db->select('count(*) as number', FALSE);
+        $this->db->join('status', 'leaves.status = status.id');
+        $this->db->join('types', 'leaves.type = types.id');
+        $this->db->join('users', 'users.id = leaves.employee');
+        $this->db->where('leaves.status', 2);
+
+        if (count($ids) > 0) {
+            array_push($ids, $manager);
+            $this->db->where_in('users.manager', $ids);
+        } else {
+            $this->db->where('users.manager', $manager);
+        }
+        $result = $this->db->get('leaves');
+        return $result->row()->number;
+    }
+    
+    /**
      * Purge the table by deleting the records prior $toDate
      * @param date $toDate 
      * @return int number of affected rows

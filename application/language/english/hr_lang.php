@@ -95,6 +95,9 @@ $lang['hr_leaves_create_flash_msg_success'] = 'The leave request has been succes
 $lang['hr_leaves_create_flash_msg_error'] = 'The leave request has been succesfully created or updated, but you don\'t have a manager.';
 $lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
 $lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
+$lang['hr_leaves_validate_mandatory_js_msg'] = '"The field " + fieldname + " is mandatory."';
+$lang['hr_leaves_validate_flash_msg_no_contract'] = 'It appears that you have no contract. Please contact your HR Officer / Manager.';
+$lang['hr_leaves_validate_flash_msg_overlap_period'] = 'You can\'t create a leave request for two yearly leave periods. Please create two different leave requests.';
 
 $lang['hr_overtime_title'] = 'List of overtime requests';
 $lang['hr_overtime_html_title'] = 'List of overtime requests for employee #';

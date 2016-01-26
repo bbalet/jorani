@@ -96,6 +96,9 @@ $lang['hr_leaves_create_flash_msg_success'] = 'La richiesta di ferie è stata cr
 $lang['hr_leaves_create_flash_msg_error'] = 'La richiesta di ferie è stata creata con successo oppure aggiornata, ma non hai un manager.';
 $lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
 $lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
+$lang['hr_leaves_validate_mandatory_js_msg'] = '"Il campo " + fieldname + " è obbligatorio."';
+$lang['hr_leaves_validate_flash_msg_no_contract'] = 'Sembra che tu non abbia un contratto. Sei pregato di contattare il tuo responsabile delle Risorse Umane / Manager';
+$lang['hr_leaves_validate_flash_msg_overlap_period'] = 'Non è possibile creare una richiesta di congedo per due periodi di ferie annuali. Si prega di creare due diverse richieste di ferie.';
 
 $lang['hr_overtime_title'] = 'Elenco di richieste di straordinario';
 $lang['hr_overtime_html_title'] = 'Elenco richieste di straordinario per il dipendente #';

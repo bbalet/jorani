@@ -482,8 +482,8 @@ class Leaves extends CI_Controller {
         $startentdate = NULL;
         $endentdate = NULL;
         $hasContract = $this->contracts_model->getBoundaries($id, $startentdate, $endentdate);
-        $leaveValidator->startentdate = $startentdate;
-        $leaveValidator->endentdate = $endentdate;
+        $leaveValidator->PeriodStartDate = $startentdate;
+        $leaveValidator->PeriodEndDate = $endentdate;
         $leaveValidator->hasContract = $hasContract;
         
         //Add non working days between the two dates (including their type: morning, afternoon and all day)
@@ -500,6 +500,10 @@ class Leaves extends CI_Controller {
         if (isset($id) && isset($startdate) && isset($enddate)  && $hasContract===FALSE) {
             $leaveValidator->length = $this->leaves_model->length($id, $startdate, $enddate, $startdatetype, $enddatetype);
         }
+        
+        //Repeat start and end dates of the leave request
+        $leaveValidator->RequestStartDate = $startdate;
+        $leaveValidator->RequestEndDate = $enddate;
         
         echo json_encode($leaveValidator);
     }

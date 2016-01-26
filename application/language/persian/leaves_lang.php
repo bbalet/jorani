@@ -74,6 +74,7 @@ $lang['leaves_edit_flash_msg_success'] = 'درخواست مرخصی موفقان
 $lang['leaves_validate_mandatory_js_msg'] = '"فیلد" + fieldname + " اجباری میباشد."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'به نظر میرسد شما قراردادی ندارید. لطفاً با مدیر منابع انسانی یا مدیر عمومی تان تماس بگیرید.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'شما نمیتوانید یک درخواست مرخصی برای مرخصی های 2 ساله خود ایجاد نمایید. لطفاً دو درخواست مرخصی جداگانه ایجاد نمایید.';
+
 $lang['leaves_delete_flash_msg_error'] = 'شما نمیتوانید این درخواست مرخصی را حذف نمایید';
 $lang['leaves_delete_flash_msg_success'] = 'درخواست مرخصی موفقانه حذف گردید';
 

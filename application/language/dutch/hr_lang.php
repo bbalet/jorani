@@ -93,6 +93,9 @@ $lang['hr_leaves_create_flash_msg_success'] = 'Het afwezigheidsverzoek is succes
 $lang['hr_leaves_create_flash_msg_error'] = 'De afwezigheidsmelding is succesvol aangemaakt/bijgewerkt, echter u heeft geen manager.';
 $lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
 $lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
+$lang['hr_leaves_validate_mandatory_js_msg'] = '"Het veld" + fieldname + "is verplicht."';
+$lang['hr_leaves_validate_flash_msg_no_contract'] = 'Geen contract gegevens gevonden. Neem contact op met uw HR Officer / manager.';
+$lang['hr_leaves_validate_flash_msg_overlap_period'] = 'U kunt geen afwezigheidsverzoek aanmaken dat de jaarperiode overschrijdt. Maak a.u.b. 2 aparte verzoeken aan.';
 
 $lang['hr_overtime_title'] = 'Overzicht van overuren aanmeldingen';
 $lang['hr_overtime_html_title'] = 'Overzicht overuren voor werknemer #';

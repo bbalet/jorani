@@ -96,6 +96,9 @@ $lang['hr_leaves_create_flash_msg_success'] = 'ការស្នើរសុំ
 $lang['hr_leaves_create_flash_msg_error'] = 'ការស្នើរសុំឈប់សម្រាកត្រូវបានបង្កើតឬធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ, ប៉ុន្តែលោកអ្នកមិនមានអ្នកគ្រប់គ្រងទេ។';
 $lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
 $lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
+$lang['hr_leaves_validate_mandatory_js_msg'] = '"កាឡោន​ " + fieldname + " គី​ចំាបាច់"';
+$lang['hr_leaves_validate_flash_msg_no_contract'] = 'ទំនងជាអ្នកមិនមនាកិច្ចសន្យាទេ។ សូមទំនាក់ទំនងមន្ត្រីធនធានមនុស្យ / អ្នកគ្រប់គ្រងរបស់អ្នក។';
+$lang['hr_leaves_validate_flash_msg_overlap_period'] = 'លោកអ្នកមិនអាចបង្កើតការស្នើរសុំឈប់សម្រាកសម្រាប់រយៈពេលពីរឆ្នាំបានទេ។ សូមបង្កើតការស្នើរសុំឈប់សម្រាកពីរផ្សេងគ្នា។';
 
 $lang['hr_overtime_title'] = 'បញ្ជីនៃសំណើសុំក្រៅម៉ោង';
 $lang['hr_overtime_html_title'] = 'សំណើបន្ថែមម៉ោងរបស់បគ្គលិក #';

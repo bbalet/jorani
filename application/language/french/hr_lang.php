@@ -67,6 +67,9 @@ $lang['hr_leaves_create_flash_msg_success'] = 'La demande d\'absence a été cr�
 $lang['hr_leaves_create_flash_msg_error'] = 'La demande d\'absence a été créée ou modifiée avec succès, mais vous n\'avez pas de manager.';
 $lang['hr_leaves_flash_spn_list_days_off'] = '%s jours non travaillés dans la période';
 $lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Votre demande coïncide avec un jour non travaillé.';
+$lang['hr_leaves_validate_mandatory_js_msg'] = '"Le champ " + fieldname + " est obligatoire."';
+$lang['hr_leaves_validate_flash_msg_no_contract'] = 'Il semble que vous n\'ayez pas de contrat. Veuillez contacter un responsable des ressources humaines.';
+$lang['hr_leaves_validate_flash_msg_overlap_period'] = 'Vous ne pouvez pas créer une demande de congé pour deux périodes annuelles de congé. Veuillez créer deux demandes différentes.';
 
 $lang['hr_leaves_title'] = 'Liste des demandes de ';
 $lang['hr_leaves_html_title'] = 'Liste des demandes de congé de l\'employé n°';

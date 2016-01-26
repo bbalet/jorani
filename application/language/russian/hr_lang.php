@@ -96,6 +96,9 @@ $lang['hr_leaves_create_flash_msg_success'] = 'Заявление на отпу�
 $lang['hr_leaves_create_flash_msg_error'] = 'The leave request has been succesfully created or updated, but you don\'t have a manager.';
 $lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
 $lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
+$lang['hr_leaves_validate_mandatory_js_msg'] = '"Поле " + fieldname + " является обязательным."';
+$lang['hr_leaves_validate_flash_msg_no_contract'] = 'Похоже вы не имеете контракта. Обратитесь к своему руководителю.';
+$lang['hr_leaves_validate_flash_msg_overlap_period'] = 'Вы не можете создать заявление на отпуск для разных годов.  Пожалуйста, создайте два разных заявления на отпуск.';
 
 $lang['hr_overtime_title'] = 'Список запросов на сверхурочную работу';
 $lang['hr_overtime_html_title'] = 'Список запросов сверхурочных, для сотрудника N°';

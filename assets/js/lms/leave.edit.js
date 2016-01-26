@@ -97,7 +97,7 @@ function getLeaveInfos(preventDefault) {
                 bootbox.alert(noContractMsg);
             } else {
                 //If the employee has a contract, check if the current leave request is not on two yearly leave periods
-                var limit = moment(leaveInfo.endentdate);
+                var limit = moment(leaveInfo.PeriodEndDate);
                 if (start.isValid() && end.isValid() && limit.isValid()) {
                     if (start.isBefore(limit) && limit.isBefore(end)) {
                         bootbox.alert(noTwoPeriodsMsg);
@@ -185,6 +185,7 @@ function showOverlappingDayOffMessage(leaveInfo) {
 $(function () {
     getLeaveLength(false);
     
+    //Init the start and end date picker and link them (end>=date)
     $("#viz_startdate").datepicker({
         changeMonth: true,
         changeYear: true,

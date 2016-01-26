@@ -74,6 +74,7 @@ $lang['leaves_edit_flash_msg_success'] = 'សំណើរការឈប់ស�
 $lang['leaves_validate_mandatory_js_msg'] = '"កាឡោន​ " + fieldname + " គី​ចំាបាច់"';
 $lang['leaves_validate_flash_msg_no_contract'] = 'ទំនងជាអ្នកមិនមនាកិច្ចសន្យាទេ។ សូមទំនាក់ទំនងមន្ត្រីធនធានមនុស្យ / អ្នកគ្រប់គ្រងរបស់អ្នក។';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'លោកអ្នកមិនអាចបង្កើតការស្នើរសុំឈប់សម្រាកសម្រាប់រយៈពេលពីរឆ្នាំបានទេ។ សូមបង្កើតការស្នើរសុំឈប់សម្រាកពីរផ្សេងគ្នា។';
+
 $lang['leaves_delete_flash_msg_error'] = 'អ្នកមិនអាចលុបការចាកចេញពីការស្នើសំុបានទេ';
 $lang['leaves_delete_flash_msg_success'] = 'សំណើការឈប់សម្រាកនេះត្រូវបានគេលុបដោយជោគជ័យ';
 

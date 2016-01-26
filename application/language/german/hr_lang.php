@@ -96,6 +96,9 @@ $lang['hr_leaves_create_flash_msg_success'] = 'Urlaubsanfrage erfolgreich erstel
 $lang['hr_leaves_create_flash_msg_error'] = 'Urlaubsanfrage erfolgreich erstellt, Sie haben jedoch keinen eingetragenen Vorgesetzten.';
 $lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
 $lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
+$lang['hr_leaves_validate_mandatory_js_msg'] = '"Das Feld " + fieldname + " ist zwingend erforderlich."';
+$lang['hr_leaves_validate_flash_msg_no_contract'] = 'Es scheint als hätten Sie keinen Vertrag. Bitte kontaktieren Sie Ihre Personalabteilung oder Ihren Vorgesetzten.';
+$lang['hr_leaves_validate_flash_msg_overlap_period'] = 'Sie können einen Urlaubsantrag für zwei jährliche Urlaubszeiten nicht zu schaffen. Bitte erstellen Sie zwei verschiedene Urlaubsanträge.';
 
 $lang['hr_overtime_title'] = 'Liste der Überstundenanfragen';
 $lang['hr_overtime_html_title'] = 'Liste der Überstundenanfragen für Angestellten #';

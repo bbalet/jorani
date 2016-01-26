@@ -18,7 +18,8 @@
 
 <?php echo validation_errors(); ?>
 
-<?php echo form_open($form_action) ?>
+<?php $attributes = array('id' => 'frmLeaveForm');
+echo form_open($form_action, $attributes) ?>
 
     <label for="type" required><?php echo lang('hr_leaves_create_field_type');?></label>
     <select name="type" id="type">
@@ -112,13 +113,16 @@ if ($language_code != 'en') { ?>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
+$(function () {
     $.ajaxSetup({
         data: {
             <?php echo $this->security->get_csrf_token_name();?>: "<?php echo $this->security->get_csrf_hash();?>",
         }
     });
+});
 <?php }?>
     var baseURL = '<?php echo base_url();?>';
     var userId = <?php echo $employee; ?>;
@@ -132,4 +136,23 @@ if ($language_code != 'en') { ?>
     
     var overlappingWithDayOff = "<?php echo lang('hr_leaves_flash_msg_overlap_dayoff');?>";
     var listOfDaysOffTitle = "<?php echo lang('hr_leaves_flash_spn_list_days_off');?>";
+    
+function validate_form() {
+    var fieldname = "";
+    
+    //Call custom trigger defined into local/triggers/leave.js
+    if (typeof triggerValidateCreateForm == 'function') { 
+       if (triggerValidateCreateForm() == false) return false;
+    }
+    
+    if ($('#viz_startdate').val() == "") fieldname = "<?php echo lang('hr_leaves_create_field_start');?>";
+    if ($('#viz_enddate').val() == "") fieldname = "<?php echo lang('hr_leaves_create_field_end');?>";
+    if ($('#duration').val() == "" || $('#duration').val() == 0) fieldname = "<?php echo lang('hr_leaves_create_field_duration');?>";
+    if (fieldname == "") {
+        return true;
+    } else {
+        bootbox.alert(<?php echo lang('hr_leaves_validate_mandatory_js_msg');?>);
+        return false;
+    }
+}
 </script>

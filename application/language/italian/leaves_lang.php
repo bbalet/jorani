@@ -74,6 +74,7 @@ $lang['leaves_edit_flash_msg_success'] = 'La richiesta di ferie è stata aggiorn
 $lang['leaves_validate_mandatory_js_msg'] = '"Il campo " + fieldname + " è obbligatorio."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'Sembra che tu non abbia un contratto. Sei pregato di contattare il tuo responsabile delle Risorse Umane / Manager';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'Non è possibile creare una richiesta di congedo per due periodi di ferie annuali. Si prega di creare due diverse richieste di ferie.';
+
 $lang['leaves_delete_flash_msg_error'] = 'Non puoi cancellare questa richiesta di ferie';
 $lang['leaves_delete_flash_msg_success'] = 'La richiesta di ferie è stata cancellata con successo';
 $lang['leaves_view_title'] = 'Vedi richiesta di ferie #';

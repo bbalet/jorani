@@ -489,7 +489,7 @@ class Leaves extends CI_Controller {
         //Add non working days between the two dates (including their type: morning, afternoon and all day)
         if (isset($id) && ($startdate!='') && ($enddate!='')  && $hasContract===TRUE) {
             $this->load->model('dayoffs_model');
-            $leaveValidator->listDaysOff = $this->dayoffs_model->listOfDaysOffBetweenDates($id, $startdate, $enddate);            
+            $leaveValidator->listDaysOff = $this->dayoffs_model->listOfDaysOffBetweenDates($id, $startdate, $enddate);
             //Sum non-working days and overlapping with day off detection
             $result = $this->leaves_model->actualLengthAndDaysOff($id, $startdate, $enddate, $startdatetype, $enddatetype, $leaveValidator->listDaysOff);
             $leaveValidator->overlapDayOff = $result['overlapping'];

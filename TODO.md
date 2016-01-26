@@ -41,6 +41,16 @@ Maybe:
 - [ ] Provide examples of REST clients (seniority leaves, carry over, LDAP sync...) in PHP (cron) or go (service).
 - [ ] PHP scripts of migration from OrangeHRM, PHP_Conges, LiberTempo, etc.
 - [ ] More OAuth2 or SAML identity providers (Investigation for a CAS/SSO integration).
+- [ ] Color set/stripes for color blind people, eg. :
+
+Code sample:
+
+        /*Status for color-blind people*/
+        .rejected-color-blind {
+            /*background-color: #ff0000;*/
+            background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.5) 50%);
+            background-size: 10px 10px;
+        }
 
 ## Not a priority
 

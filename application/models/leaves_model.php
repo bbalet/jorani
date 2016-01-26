@@ -131,7 +131,7 @@ class Leaves_model extends CI_Model {
         $iDate = clone $startDateObject;
 
         //Simplify logic
-        if ($startdate == $startdate) $one_day = TRUE; else $one_day = FALSE;
+        if ($startdate == $enddate) $one_day = TRUE; else $one_day = FALSE;
         if ($startdatetype == 'Morning') $start_morning = TRUE; else $start_morning = FALSE;
         if ($startdatetype == 'Afternoon') $start_afternoon = TRUE; else $start_afternoon = FALSE;
         if ($enddatetype == 'Morning') $end_morning = TRUE; else $end_morning = FALSE;
@@ -145,14 +145,15 @@ class Leaves_model extends CI_Model {
         while ($iDate <= $endDateObject)
         {
             if ($iDate == $startDateObject) $first_day = TRUE; else $first_day = FALSE;
+            $isDayOff = FALSE;
             //Iterate on the list of days off with two objectives:
             // - Compute sum of days off between the two dates
             // - Detect if the leave request exactly overlaps with a day off
             foreach ($daysoff as $dayOff) {
                 $dayOffObject = DateTime::createFromFormat('Y-m-d H:i:s', $dayOff['date'] . ' 00:00:00');
-
                 if ($dayOffObject == $iDate) {
                     $lengthDaysOff+=$dayOff['length'];
+                    $isDayOff = TRUE;
                     $hasDayOff = TRUE;
                     switch ($dayOff['type']) {
                         case 1: //1 : All day
@@ -177,8 +178,20 @@ class Leaves_model extends CI_Model {
                     break;
                 }
             }
-            if (!$hasDayOff) {
-                $length++;
+            if (!$isDayOff) {
+                if ($one_day) {
+                    if ($start_morning && $end_afternoon) $length++;
+                    if ($start_morning && $end_morning) $length+=0.5;
+                    if ($start_afternoon && $end_afternoon) $length+=0.5;
+                } else {
+                    if ($iDate == $endDateObject) $last_day = TRUE; else $last_day = FALSE;
+                    if (!$first_day && !$last_day) $length++;
+                    if ($first_day && $start_morning) $length++;
+                    if ($first_day && $start_afternoon) $length+=0.5;
+                    if ($last_day && $end_morning) $length+=0.5;
+                    if ($last_day && $end_afternoon) $length++;
+                }
+                $overlapDayOff = FALSE;
             }
             $iDate->modify('+1 day');   //Next day
         }

@@ -136,7 +136,7 @@ if (!is_null($fonts)) {
         background: #3097d1;
     }
 
-    .btn-primary:active, .btn-primary.active {
+    .btn-primary:active, .btn-primary.active, .btn-group.open .btn-primary.dropdown-toggle {
         background: #3097d1;
         box-shadow: none;
     }

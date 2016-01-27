@@ -41,6 +41,15 @@ $lang['hr_employees_popup_entity_button_cancel'] = 'Cancelar';
 $lang['hr_employees_description'] = 'Haga clic / taphold en el botón derecho sobre un empleado para mostrar el menú contextual.';
 $lang['hr_employees_field_subdepts'] = 'incluir las subentidades';
 
+$lang['hr_employees_button_selection'] = 'Selection';
+$lang['hr_employees_button_select_all'] = 'Select all';
+$lang['hr_employees_button_deselect_all'] = 'Deselect all';
+$lang['hr_employees_button_select_manager'] = 'Select Manager';
+$lang['hr_employees_button_select_contract'] = 'Select Contract';
+$lang['hr_employees_button_select_entity'] = 'Select Entity';
+$lang['hr_employees_popup_contract_title'] = 'Select Contract';
+$lang['hr_employees_button_entitleddays'] = 'Entitled days';
+
 $lang['hr_employees_popup_manager_title'] = 'Select the manager';
 $lang['hr_employees_multiple_edit_selection_msg'] = 'You must select at least one employee into the table';
 

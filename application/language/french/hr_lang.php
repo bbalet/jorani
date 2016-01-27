@@ -40,6 +40,15 @@ $lang['hr_employees_popup_entity_button_cancel'] = 'Annuler';
 $lang['hr_employees_description'] = 'Clic droit / taphold sur un employé pour les actions contextuelles.';
 $lang['hr_employees_field_subdepts'] = 'Inclure les sous-départments';
 
+$lang['hr_employees_button_selection'] = 'Sélection';
+$lang['hr_employees_button_select_all'] = 'Tout sélectionner';
+$lang['hr_employees_button_deselect_all'] = 'Tout désélectionner';
+$lang['hr_employees_button_select_manager'] = 'Sélectionner le Manager';
+$lang['hr_employees_button_select_contract'] = 'Sélectionner le Contract';
+$lang['hr_employees_button_select_entity'] = 'Sélectionner l\'entité';
+$lang['hr_employees_popup_contract_title'] = 'Sélectionner le contract';
+$lang['hr_employees_button_entitleddays'] = 'Crédits congés';
+
 $lang['hr_employees_popup_manager_title'] = 'Sélectionnez le manager';
 $lang['hr_employees_multiple_edit_selection_msg'] = 'Vous devez sélectionner au moins une ligne dans la table';
 

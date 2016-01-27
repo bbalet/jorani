@@ -63,10 +63,16 @@
       &nbsp;
         <div class="btn-group dropup">
             <button id="cmdSelection" class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-              <i class="fa fa-pencil"></i>&nbsp;Selection&nbsp;<span class="caret"></span>
+              <i class="fa fa-pencil"></i>&nbsp;<?php echo lang('hr_employees_button_selection');?>&nbsp;<span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="#" id="cmdSelectManager"><i class="fa fa-user"></i>&nbsp;Select Manager</a></li>
+                <li><a href="#" id="cmdSelectAll"><i class="fa fa-circle"></i>&nbsp;<?php echo lang('hr_employees_button_select_all');?></a></li>
+                <li><a href="#" id="cmdDeselectAll"><i class="fa fa-circle-o"></i>&nbsp;<?php echo lang('hr_employees_button_deselect_all');?></a></li>
+                <li class="divider"></li>
+                <li><a href="#" id="cmdSelectManager"><i class="fa fa-user"></i>&nbsp;<?php echo lang('hr_employees_button_select_manager');?></a></li>
+                <!--<li><a href="#" id="cmdAddEntitlments"><i class="fa fa-pencil-square-o"></i>&nbsp;<?php echo lang('hr_employees_button_entitleddays');?></a></li>//-->
+                <li><a href="#" id="cmdSelectContract"><i class="fa fa-file-text-o"></i>&nbsp;<?php echo lang('hr_employees_button_select_contract');?></a></li>
+                <li><a href="#" id="cmdChangeEntity"><i class="fa fa-sitemap"></i>&nbsp;<?php echo lang('hr_employees_button_select_entity');?></a></li>
             </ul>
         </div>
     </div>
@@ -97,10 +103,64 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_entity();" class="btn secondary"><?php echo lang('OK');?></a>
+        <a href="#" onclick="select_entity();" class="btn"><?php echo lang('OK');?></a>
         <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('Cancel');?></a>
     </div>
 </div>
+
+<div id="frmSelectContract" class="modal hide fade">
+    <div class="modal-header">
+        <a href="#" onclick="$('#frmSelectContract').modal('hide');" class="close">&times;</a>
+         <h3><?php echo lang('hr_employees_popup_contract_title');?></h3>
+    </div>
+    <div class="modal-body">
+        <select id="cboContract" class="selectized input-xlarge">
+        <?php $index = 0;
+             foreach ($contracts as $contract) { ?>
+            <option value="<?php echo $contract['id'] ?>" <?php if ($index == 0) echo "selected"; ?>><?php echo $contract['name']; ?></option>
+        <?php 
+                $index++;
+            } ?>
+        </select>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="select_contract();" class="btn"><?php echo lang('OK');?></a>
+        <a href="#" onclick="$('#frmSelectContract').modal('hide');" class="btn secondary"><?php echo lang('Cancel');?></a>
+    </div>
+</div>
+
+<div id="frmAddEntitledDays" class="modal hide fade">
+        <div class="modal-header">
+            <a href="#" class="close" onclick="$('#frmAddEntitledDays').modal('hide');">&times;</a>
+            <h3 id="frmAddEntitledDaysTitle"><?php echo lang('entitleddays_contract_popup_title');?></h3>
+        </div>
+        <div class="modal-body">
+            <label for="viz_startdate"><?php echo lang('entitleddays_user_index_field_start');?></label>
+            <div class="input-append">
+                <input type="text" id="viz_startdate" name="viz_startdate" required />
+                <button class="btn" id="cmdCurrent" onclick="set_current_period();"><?php echo lang('entitleddays_contract_index_button_current');?></button>
+            </div>
+            <br />
+            <input type="hidden" name="startdate" id="startdate" />
+            <label for="viz_enddate"><?php echo lang('entitleddays_user_index_field_end');?></label>
+            <input type="text" id="viz_enddate" name="viz_enddate" required /><br />
+            <input type="hidden" name="enddate" id="enddate" />
+            <label for="type"><?php echo lang('entitleddays_user_index_field_type');?></label>
+            <select name="type" id="type" required>
+            <?php foreach ($types as $types_item): ?>
+                <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 1) echo "selected" ?>><?php echo $types_item['name'] ?></option>
+            <?php endforeach ?> 
+            </select>    
+            <label for="days" required><?php echo lang('entitleddays_user_index_field_days');?></label>
+            <input type="text" class="input-mini" name="days" id="days" />
+            <label for="description"><?php echo lang('entitleddays_user_index_field_description');?></label>
+            <input type="text" class="input-xlarge" name="description" id="description" />
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="add_entitleddays();" ><?php echo lang('OK');?></button>
+            <button class="btn btn-danger" onclick="$('#frmAddEntitledDays').modal('hide');"><?php echo lang('entitleddays_user_index_button_cancel');?></button>
+        </div>
+ </div>
 
 <div id="context-menu">
   <ul class="dropdown-menu" role="menu">
@@ -162,25 +222,56 @@ var entity = 0; //Root of the tree by default
 var entityName = '';
 var includeChildren = true;
 var contextObject;
+var contextSelectEntity = "select";
 var oTable;
 
 //Handle choose of entity with the modal form "select an entity". Update cookie with selected values
 function select_entity() {
     entity = $('#organization').jstree('get_selected')[0];
     entityName = $('#organization').jstree().get_text(entity);
-    includeChildren = $('#chkIncludeChildren').is(':checked');
-    $('#entity').val(entity);
-    $('#txtEntity').val(entityName);
-    $.cookie('entity', entity);
-    $.cookie('entityName', entityName);
-    $.cookie('includeChildren', includeChildren);
     $("#frmSelectEntity").modal('hide');
-    //Refresh datatable
-    $('#frmModalAjaxWait').modal('show');
-    oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren)
-        .load(function() {
-            $("#frmModalAjaxWait").modal('hide');
-        }, true);
+    if (contextSelectEntity == "select") {
+        //"select": Filter the content of datatable for a given entity
+        includeChildren = $('#chkIncludeChildren').is(':checked');
+        $('#entity').val(entity);
+        $('#txtEntity').val(entityName);
+        $.cookie('entity', entity);
+        $.cookie('entityName', entityName);
+        $.cookie('includeChildren', includeChildren);
+        //Refresh datatable
+        $('#frmModalAjaxWait').modal('show');
+        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren)
+            .load(function() {
+                $("#frmModalAjaxWait").modal('hide');
+            }, true);
+    } else {
+        //"change": Move selected employees to another entity
+        var employeeIds = getSelectedEmployees();
+        //Call a web service that changes the entity of a list of employees
+        $('#frmModalAjaxWait').modal('show');
+        $.ajax({
+            url: "<?php echo base_url();?>hr/employees/edit/entity",
+            type: "POST",
+            data: {
+                    entity: entity,
+                    employees: employeeIds
+                }
+          }).done(function() {
+              oTable.ajax.reload(function ( json ) {
+                  $('#frmModalAjaxWait').modal('hide');
+              });
+        });
+    }
+}
+
+//Get the list of selected employees into the datatable
+//Return a JSON representation of an array of identifiers (integer)
+function getSelectedEmployees() {
+    var employeeIds = [];
+    oTable.rows({selected: true}).every( function () {
+        employeeIds.push(this.data().id);
+     });
+     return JSON.stringify({employeeIds});
 }
 
 //Popup select manager: on click OK, find the id of all selected employees and update their manager.
@@ -188,26 +279,65 @@ function select_manager() {
     var employees = $('#employees').DataTable();
     if ( employees.rows({ selected: true }).any() ) {
         var manager_id = employees.rows({selected: true}).data()[0][0];
-        var employeeIds = [];;
-        //Get the list of selected employees into datatable users
-       oTable.rows({selected: true}).every( function () {
-           employeeIds.push(this.data().id);
-        });
+        var employeeIds = getSelectedEmployees();
         //Call a web service that changes the manager of a list of employees
+        $('#frmModalAjaxWait').modal('show');
         $.ajax({
             url: "<?php echo base_url();?>hr/employees/edit/manager",
             type: "POST",
-            dataType: 'json',
             data: {
                     manager: manager_id,
-                    employees: JSON.stringify({employeeIds})
+                    employees: employeeIds
                 }
           }).done(function() {
-              oTable.ajax.reload();
-              $('#frmModalAjaxWait').modal('hide');
+              oTable.ajax.reload(function ( json ) {
+                  $('#frmModalAjaxWait').modal('hide');
+              });
         });
     }
     $("#frmSelectManager").modal('hide');
+}
+
+//Popup select contract: on click OK, find the id of all selected employees and update their contract.
+function select_contract() {
+    var contract_id = $('#cboContract').val();
+    var employeeIds = getSelectedEmployees();
+    //Call a web service that changes the contract of a list of employees
+    $('#frmModalAjaxWait').modal('show');
+    $.ajax({
+        url: "<?php echo base_url();?>hr/employees/edit/contract",
+        type: "POST",
+        data: {
+                contract: contract_id,
+                employees: employeeIds
+            }
+      }).done(function() {
+          oTable.ajax.reload(function ( json ) {
+              $('#frmModalAjaxWait').modal('hide');
+          });
+    });
+    $("#frmSelectContract").modal('hide');
+}
+
+//Popup add entitled days: on click OK, find the id of all selected employees and update their contract.
+function add_entitleddays() {
+    alert('TODO');
+    /*var employeeIds = getSelectedEmployees();
+    //Call a web service that changes the entitlements of a list of employees
+    $('#frmModalAjaxWait').modal('show');
+    $.ajax({
+        url: "<?php echo base_url();?>hr/employees/edit/entitlements",
+        type: "POST",
+        data: {
+                contract: contract_id,
+                employees: employeeIds
+            }
+      }).done(function() {
+          oTable.ajax.reload(function ( json ) {
+              $('#frmModalAjaxWait').modal('hide');
+          });
+    });*/
+    $("#frmAddEntitledDays").modal('hide');
 }
 
 //Prevent text selection after double click
@@ -395,6 +525,7 @@ $(function () {
     
     //Popup select entity
     $("#cmdSelectEntity").click(function() {
+        contextSelectEntity = "select";
         $("#frmSelectEntity").modal('show');
         $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
     });
@@ -408,6 +539,33 @@ $(function () {
         else {
             bootbox.alert("<?php echo lang('hr_employees_multiple_edit_selection_msg');?>");
         }
+    });
+    
+    //Add entitled days to a group of employees
+    $("#cmdAddEntitlments").click(function() {
+        $("#frmAddEntitledDays").modal('show');
+    });
+    
+    //Change the contract of a group of employees
+    $("#cmdSelectContract").click(function() {
+        $("#frmSelectContract").modal('show');
+    });
+    
+    //Move the entity of a group of employees
+    $("#cmdChangeEntity").click(function() {
+        contextSelectEntity = "change";
+        $("#frmSelectEntity").modal('show');
+        $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
+    });
+    
+    //Select or deselect all rows
+    $("#cmdSelectAll").click(function() {
+        oTable.rows().select();
+        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+    });
+    $("#cmdDeselectAll").click(function() {
+        oTable.rows().deselect();
+        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
     });
     
     //If we opt-in the include children box, we'll recursively include the children of the selected entity

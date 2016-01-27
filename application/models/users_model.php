@@ -647,13 +647,47 @@ class Users_model extends CI_Model {
     }
     
     /**
-     * Update the manager for a list of employees
+     * Update the manager of a list of employees
+     * @param int $managerId DB Identifier of the manager
+     * @param array $usersList List of DB ID of the affected employees
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function updateManagerForUserList($managerId, $usersList) {
         $data = array(
             'manager' => $managerId
+        );
+        $this->db->where_in('id', $usersList);
+        $result = $this->db->update('users', $data);
+        return $result;
+    }
+    
+    /**
+     * Update the entity of a list of employees
+     * @param int $entityId DB Identifier of the entity
+     * @param array $usersList List of DB ID of the affected employees
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function updateEntityForUserList($entityId, $usersList) {
+        $data = array(
+            'organization' => $entityId
+        );
+        $this->db->where_in('id', $usersList);
+        $result = $this->db->update('users', $data);
+        return $result;
+    }
+    
+    /**
+     * Update the contract of a list of employees
+     * @param int $contractId DB Identifier of the contract
+     * @param array $usersList List of DB ID of the affected employees
+     * @return int number of affected rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function updateContractForUserList($contractId, $usersList) {
+        $data = array(
+            'contract' => $contractId
         );
         $this->db->where_in('id', $usersList);
         $result = $this->db->update('users', $data);

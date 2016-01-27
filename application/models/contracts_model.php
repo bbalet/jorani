@@ -30,6 +30,7 @@ class Contracts_model extends CI_Model {
      */
     public function getContracts($id = 0) {
         if ($id === 0) {
+            $this->db->order_by("name", "asc");
             $query = $this->db->get('contracts');
             return $query->result_array();
         }

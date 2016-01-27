@@ -36,8 +36,11 @@ class Hr extends CI_Controller {
         $this->auth->checkIfOperationIsAllowed('list_employees');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
+        $this->lang->load('entitleddays', $this->language);
         $data['title'] = lang('hr_employees_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_employees');
+        $this->load->model('contracts_model');
+        $data['contracts'] = $this->contracts_model->getContracts();
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -106,6 +109,69 @@ class Hr extends CI_Controller {
             $this->load->model('users_model');
             $result = $this->users_model->updateManagerForUserList($managerId, $objectEmployees->employeeIds);
             echo $result;
+        }
+    }
+    
+    /**
+     * Ajax endpoint: edit the entity for a list of employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function editEntity() {
+        header("Content-Type: application/json");
+        if ($this->auth->isAllowed('list_employees') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $entityId = $this->input->post('entity', TRUE);
+            $employees = $this->input->post('employees', TRUE);
+            $objectEmployees = json_decode($employees);
+            $this->load->model('users_model');
+            $result = $this->users_model->updateEntityForUserList($entityId, $objectEmployees->employeeIds);
+            echo $result;
+        }
+    }
+    
+    /**
+     * Ajax endpoint: edit the contract for a list of employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function editContract() {
+        header("Content-Type: application/json");
+        if ($this->auth->isAllowed('list_employees') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $contractId = $this->input->post('contract', TRUE);
+            $employees = $this->input->post('employees', TRUE);
+            $objectEmployees = json_decode($employees);
+            $this->load->model('users_model');
+            $result = $this->users_model->updateContractForUserList($contractId, $objectEmployees->employeeIds);
+            echo $result;
+        }
+    }
+    
+    /**
+     * Ajax endpoint : insert into the list of entitled days for a list of employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function editEntitlements() {
+        if ($this->auth->isAllowed('entitleddays_user') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $employees = $this->input->post('employees', TRUE);
+            $startdate = $this->input->post('startdate', TRUE);
+            $enddate = $this->input->post('enddate', TRUE);
+            $days = $this->input->post('days', TRUE);
+            $type = $this->input->post('type', TRUE);
+            $description = sanitize($this->input->post('description', TRUE));
+            if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($employees)) {
+                $this->output->set_content_type('text/plain');
+                $objectEmployees = json_decode($employees);
+                foreach ($objectEmployees as $user_id) {
+                    $id = $this->entitleddays_model->addEntitledDaysToEmployee($user_id, $startdate, $enddate, $days, $type, $description);
+                    echo $id . ',';
+                }
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            }
         }
     }
 

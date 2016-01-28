@@ -41,6 +41,8 @@ class Hr extends CI_Controller {
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_employees');
         $this->load->model('contracts_model');
         $data['contracts'] = $this->contracts_model->getContracts();
+        $this->load->model('types_model');
+        $data['types'] = $this->types_model->getTypes();
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -163,10 +165,10 @@ class Hr extends CI_Controller {
             $type = $this->input->post('type', TRUE);
             $description = sanitize($this->input->post('description', TRUE));
             if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($employees)) {
-                $this->output->set_content_type('text/plain');
+                $this->load->model('entitleddays_model');
                 $objectEmployees = json_decode($employees);
-                foreach ($objectEmployees as $user_id) {
-                    $id = $this->entitleddays_model->addEntitledDaysToEmployee($user_id, $startdate, $enddate, $days, $type, $description);
+                foreach ($objectEmployees->employeeIds as $user_id) {
+                    $id = $this->entitleddays_model->addEntitledDaysToEmployee((int) $user_id, $startdate, $enddate, $days, $type, $description);
                     echo $id . ',';
                 }
             } else {

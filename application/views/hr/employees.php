@@ -70,7 +70,7 @@
                 <li><a href="#" id="cmdDeselectAll"><i class="fa fa-circle-o"></i>&nbsp;<?php echo lang('hr_employees_button_deselect_all');?></a></li>
                 <li class="divider"></li>
                 <li><a href="#" id="cmdSelectManager"><i class="fa fa-user"></i>&nbsp;<?php echo lang('hr_employees_button_select_manager');?></a></li>
-                <!--<li><a href="#" id="cmdAddEntitlments"><i class="fa fa-pencil-square-o"></i>&nbsp;<?php echo lang('hr_employees_button_entitleddays');?></a></li>//-->
+                <li><a href="#" id="cmdAddEntitlments"><i class="fa fa-pencil-square-o"></i>&nbsp;<?php echo lang('hr_employees_button_entitleddays');?></a></li>
                 <li><a href="#" id="cmdSelectContract"><i class="fa fa-file-text-o"></i>&nbsp;<?php echo lang('hr_employees_button_select_contract');?></a></li>
                 <li><a href="#" id="cmdChangeEntity"><i class="fa fa-sitemap"></i>&nbsp;<?php echo lang('hr_employees_button_select_entity');?></a></li>
             </ul>
@@ -135,26 +135,23 @@
             <h3 id="frmAddEntitledDaysTitle"><?php echo lang('entitleddays_contract_popup_title');?></h3>
         </div>
         <div class="modal-body">
-            <label for="viz_startdate"><?php echo lang('entitleddays_user_index_field_start');?></label>
-            <div class="input-append">
-                <input type="text" id="viz_startdate" name="viz_startdate" required />
-                <button class="btn" id="cmdCurrent" onclick="set_current_period();"><?php echo lang('entitleddays_contract_index_button_current');?></button>
-            </div>
+            <label for="viz_startentdate"><?php echo lang('entitleddays_user_index_field_start');?></label>
+            <input type="text" id="viz_startentdate" name="viz_startentdate" required />
             <br />
-            <input type="hidden" name="startdate" id="startdate" />
-            <label for="viz_enddate"><?php echo lang('entitleddays_user_index_field_end');?></label>
-            <input type="text" id="viz_enddate" name="viz_enddate" required /><br />
-            <input type="hidden" name="enddate" id="enddate" />
-            <label for="type"><?php echo lang('entitleddays_user_index_field_type');?></label>
-            <select name="type" id="type" required>
+            <input type="hidden" name="startentdate" id="startentdate" />
+            <label for="viz_endentdate"><?php echo lang('entitleddays_user_index_field_end');?></label>
+            <input type="text" id="viz_endentdate" name="viz_endentdate" required /><br />
+            <input type="hidden" name="endentdate" id="endentdate" />
+            <label for="typeEnt"><?php echo lang('entitleddays_user_index_field_type');?></label>
+            <select name="typeEnt" id="typeEnt" required>
             <?php foreach ($types as $types_item): ?>
                 <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 1) echo "selected" ?>><?php echo $types_item['name'] ?></option>
             <?php endforeach ?> 
             </select>    
-            <label for="days" required><?php echo lang('entitleddays_user_index_field_days');?></label>
-            <input type="text" class="input-mini" name="days" id="days" />
-            <label for="description"><?php echo lang('entitleddays_user_index_field_description');?></label>
-            <input type="text" class="input-xlarge" name="description" id="description" />
+            <label for="daysEnt" required><?php echo lang('entitleddays_user_index_field_days');?></label>
+            <input type="text" class="input-mini" name="daysEnt" id="daysEnt" />
+            <label for="descriptionEnt"><?php echo lang('entitleddays_user_index_field_description');?></label>
+            <input type="text" class="input-xlarge" name="descriptionEnt" id="descriptionEnt" />
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" onclick="add_entitleddays();" ><?php echo lang('OK');?></button>
@@ -207,6 +204,7 @@
 <link href="<?php echo base_url();?>assets/datatable/buttons/css/buttons.dataTables.min.css" rel="stylesheet"/>
 <link href="<?php echo base_url();?>assets/datatable/colreorder/css/colReorder.dataTables.min.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/datatable/select/css/select.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/buttons/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/buttons/js/buttons.colVis.min.js"></script>
@@ -216,6 +214,11 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/context.menu.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/toe.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
+<?php //Prevent HTTP-404 when localization isn't needed
+if ($language_code != 'en') { ?>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
+<?php } ?>
 
 <script type="text/javascript">
 var entity = 0; //Root of the tree by default
@@ -321,22 +324,37 @@ function select_contract() {
 
 //Popup add entitled days: on click OK, find the id of all selected employees and update their contract.
 function add_entitleddays() {
-    alert('TODO');
-    /*var employeeIds = getSelectedEmployees();
+    var employeeIds = getSelectedEmployees();
+    //Validate the form
+    var fieldname = "";
+    if ($('#startentdate').val() == "") fieldname = "<?php echo lang('entitleddays_user_index_field_start');?>";
+    if ($('#endentdate').val() == "") fieldname = "<?php echo lang('entitleddays_user_index_field_end');?>";
+    if ($('#typeEnt').val() == "") fieldname = "<?php echo lang('entitleddays_user_index_field_type');?>";
+    if ($('#daysEnt').val() == "") fieldname = "<?php echo lang('entitleddays_user_index_field_days');?>";
+    if (fieldname != "") {
+        bootbox.alert(<?php echo lang('entitleddays_user_mandatory_js_msg');?>);
+        $("#frmAddEntitledDays").modal('hide');
+        return;
+    }
+    
     //Call a web service that changes the entitlements of a list of employees
     $('#frmModalAjaxWait').modal('show');
     $.ajax({
         url: "<?php echo base_url();?>hr/employees/edit/entitlements",
         type: "POST",
         data: {
-                contract: contract_id,
+                startdate: $('#startentdate').val(),
+                enddate: $('#endentdate').val(),
+                days: $('#daysEnt').val(),
+                type: $('#typeEnt').val(),
+                description: $('#descriptionEnt').val(),
                 employees: employeeIds
             }
       }).done(function() {
           oTable.ajax.reload(function ( json ) {
               $('#frmModalAjaxWait').modal('hide');
           });
-    });*/
+    });
     $("#frmAddEntitledDays").modal('hide');
 }
 
@@ -545,6 +563,36 @@ $(function () {
     $("#cmdAddEntitlments").click(function() {
         $("#frmAddEntitledDays").modal('show');
     });
+    //Force decimal separator whatever the locale is
+    $( "#days" ).keyup(function() {
+        var value = $("#days").val();
+        value = value.replace(",", ".");
+        $("#days").val(value);
+    });
+    //Link the two dates of the entitled days popup
+    $("#viz_startentdate").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: '<?php echo lang('global_date_js_format');?>',
+        altFormat: "yy-mm-dd",
+        altField: "#startentdate",
+        numberOfMonths: 3,
+              onClose: function( selectedDate ) {
+                $( "#viz_endentdate" ).datepicker( "option", "minDate", selectedDate );
+              }
+    }, $.datepicker.regional['<?php echo $language_code;?>']);
+    $("#viz_endentdate").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: '<?php echo lang('global_date_js_format');?>',
+        altFormat: "yy-mm-dd",
+        altField: "#endentdate",
+        numberOfMonths: 3,
+              onClose: function( selectedDate ) {
+                $( "#viz_startentdate" ).datepicker( "option", "maxDate", selectedDate );
+              }
+    }, $.datepicker.regional['<?php echo $language_code;?>']);
+    
     
     //Change the contract of a group of employees
     $("#cmdSelectContract").click(function() {

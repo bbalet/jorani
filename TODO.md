@@ -18,6 +18,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] Migrate all datatables to the new language initiatlization.
 - [ ] For all datatables, try to simplify the code with databinding.
 - [ ] Maybe user/index : Ajaxload.
+- [ ] We should add an option to hide the inactive users into HR/Employee, next to "Include sub-departments".
 
 ## v0.5.0 or later
 
@@ -33,6 +34,7 @@ Maybe:
 - [ ] Possible DB optimization on leave table ALTER TABLE `leaves` ADD INDEX(`startdate`); ALTER TABLE `leaves` ADD INDEX(`enddate`);.
 - [ ] Possibility to sort the leave types. NEEDS DB PATCH (maybe). Cookie or DB ? Entity scope ?
 - [ ] Possibility to optionally exclude leave types to a contract. NEEDS DB PATCH (maybe). Impact leave request, should impact a dynamic build of leave balance report. What about type 0?
+- [ ] Possibility to optionally sort the leave types (contract-level, types not excluded).
 - [ ] Notification by e-mail : Request deleted / modified (maybe or report v0.5.0). We should maybe have basic objects to pass...
 - [ ] Better LDAP integration with an explorer and better/simpler binding method.
 

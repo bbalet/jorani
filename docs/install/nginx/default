@@ -21,12 +21,21 @@ server {
 	gzip on;
 	gzip_disable "msie6";
 	gzip_min_length 1100;
-	gzip_types text/xml text/css image/x-icon image/bmp application/atom+xml
+                  gzip_types text/xml text/css image/x-icon image/bmp application/json
                    text/javascript application/x-javascript application/javascript
                    application/pdf application/postscript
                    application/rtf application/vnd.ms-powerpoint
                    application/msword application/vnd.ms-excel
                    application/vnd.wap.xhtml+xml;
+
+# Example with brotli
+#                    brotli on;
+#                    brotli_types text/xml text/css image/x-icon image/bmp application/json
+#                   text/javascript application/x-javascript application/javascript
+#                   application/pdf application/postscript
+#                   application/rtf application/vnd.ms-powerpoint
+#                   application/msword application/vnd.ms-excel
+#                   application/vnd.wap.xhtml+xml;
 
 	# If file is an asset, set expires and break
     	location ~* \.(ico|css|js|gif|jpe?g|png)(\?[0-9]+)?$ {

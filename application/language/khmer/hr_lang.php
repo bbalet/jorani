@@ -41,6 +41,9 @@ $lang['hr_employees_popup_entity_button_cancel'] = 'បោះបង់';
 $lang['hr_employees_description'] = 'ចុចកណ្តុរខាងស្តាំ / ចុចសង្កត់ឱ្យជាប់ទៅលើនិយោជិកណាម្នាក់ ដើម្បីបង្ហាញមីនុយសកម្មភាព';
 $lang['hr_employees_field_subdepts'] = 'រួមបញ្ចូលអនុផ្នែក';
 
+$lang['hr_employees_button_all'] = 'All';
+$lang['hr_employees_button_active'] = 'Active';
+$lang['hr_employees_button_inactive'] = 'Inactive';
 $lang['hr_employees_button_selection'] = 'Selection';
 $lang['hr_employees_button_select_all'] = 'Select all';
 $lang['hr_employees_button_deselect_all'] = 'Deselect all';

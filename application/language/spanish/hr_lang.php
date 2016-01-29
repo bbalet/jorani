@@ -41,6 +41,9 @@ $lang['hr_employees_popup_entity_button_cancel'] = 'Cancelar';
 $lang['hr_employees_description'] = 'Haga clic / taphold en el botón derecho sobre un empleado para mostrar el menú contextual.';
 $lang['hr_employees_field_subdepts'] = 'incluir las subentidades';
 
+$lang['hr_employees_button_all'] = 'All';
+$lang['hr_employees_button_active'] = 'Active';
+$lang['hr_employees_button_inactive'] = 'Inactive';
 $lang['hr_employees_button_selection'] = 'Selection';
 $lang['hr_employees_button_select_all'] = 'Select all';
 $lang['hr_employees_button_deselect_all'] = 'Deselect all';

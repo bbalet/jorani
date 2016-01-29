@@ -533,10 +533,11 @@ class Users_model extends CI_Model {
      * Get the list of employees or one employee
      * @param int $id optional id of the entity, all entities if 0
      * @param bool $children TRUE : include sub entities, FALSE otherwise
+     * @param string $filterActive "all"; "active" (only), or "inactive" (only)
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function employeesOfEntity($id = 0, $children = TRUE) {
+    public function employeesOfEntity($id = 0, $children = TRUE, $filterActive = "all") {
         $this->db->select('users.id as id,'
                 . ' users.firstname as firstname,'
                 . ' users.lastname as lastname,'
@@ -567,7 +568,15 @@ class Users_model extends CI_Model {
         } else {
             $this->db->where('users.organization', $id);
         }
-
+        
+        //Triple value for active filter ("all" = no where criteria)
+        if ($filterActive == "active") {
+            $this->db->where('users.active', TRUE);
+        }
+        if ($filterActive == "inactive") {
+            $this->db->where('users.active', FALSE);
+        }
+        
         return $this->db->get()->result();
     }
     

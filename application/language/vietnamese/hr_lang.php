@@ -41,6 +41,9 @@ $lang['hr_employees_popup_entity_button_cancel'] = 'Hủy bỏ';
 $lang['hr_employees_description'] = 'Nhấn chuột phải / chạm giữ lâu trên một nhân viên để thực hiện các hành động theo hoàn cảnh.';
 $lang['hr_employees_field_subdepts'] = 'Thêm vào các đơn vị trực thuộc';
 
+$lang['hr_employees_button_all'] = 'All';
+$lang['hr_employees_button_active'] = 'Active';
+$lang['hr_employees_button_inactive'] = 'Inactive';
 $lang['hr_employees_button_selection'] = 'Selection';
 $lang['hr_employees_button_select_all'] = 'Select all';
 $lang['hr_employees_button_deselect_all'] = 'Deselect all';

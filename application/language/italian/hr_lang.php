@@ -41,6 +41,9 @@ $lang['hr_employees_popup_entity_button_cancel'] = 'Annulla';
 $lang['hr_employees_description'] = 'Click tasto destro / pressione lunga';
 $lang['hr_employees_field_subdepts'] = 'Includi sotto-reparti';
 
+$lang['hr_employees_button_all'] = 'All';
+$lang['hr_employees_button_active'] = 'Active';
+$lang['hr_employees_button_inactive'] = 'Inactive';
 $lang['hr_employees_button_selection'] = 'Selection';
 $lang['hr_employees_button_select_all'] = 'Select all';
 $lang['hr_employees_button_deselect_all'] = 'Deselect all';

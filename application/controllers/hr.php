@@ -55,16 +55,17 @@ class Hr extends CI_Controller {
      * Prints the table content in a JSON format expected by jQuery Datatable
      * @param int $id optional id of the entity, all entities if 0
      * @param bool $children TRUE : include sub entities, FALSE otherwise
+     * @param string $filterActive "all"; "active" (only), or "inactive" (only)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function employeesOfEntity($id = 0, $children = TRUE) {
+    public function employeesOfEntity($id = 0, $children = TRUE, $filterActive = "all") {
         header("Content-Type: application/json");
         if ($this->auth->isAllowed('list_employees') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
             $this->load->model('users_model');
-            $employees = $this->users_model->employeesOfEntity($id, $children);
+            $employees = $this->users_model->employeesOfEntity($id, $children, $filterActive);
             $msg = '{"draw": 1,';
             $msg .= '"recordsTotal":' . count($employees);
             $msg .= ',"recordsFiltered":' . count($employees);
@@ -441,13 +442,15 @@ class Hr extends CI_Controller {
      * Export the list of all employees into an Excel file
      * @param int $id optional id of the entity, all entities if 0
      * @param bool $children TRUE : include sub entities, FALSE otherwise
+     * @param string $filterActive "all"; "active" (only), or "inactive" (only)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function exportEmployees($id = 0, $children = TRUE) {
+    public function exportEmployees($id = 0, $children = TRUE, $filterActive = "all") {
         $this->load->model('users_model');
         $this->load->library('excel');
         $data['id'] = $id;
         $data['children'] = filter_var($children, FILTER_VALIDATE_BOOLEAN);
+        $data['filterActive'] = $filterActive;
         $this->load->view('hr/export_employees', $data);
     }
     

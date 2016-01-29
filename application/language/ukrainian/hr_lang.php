@@ -41,6 +41,9 @@ $lang['hr_employees_popup_entity_button_cancel'] = 'Скасувати';
 $lang['hr_employees_description'] = 'Натисніть правою кнопкою мишки на працівнику щоб відкрити контекстне меню.';
 $lang['hr_employees_field_subdepts'] = 'Включаючи підвідділи';
 
+$lang['hr_employees_button_all'] = 'All';
+$lang['hr_employees_button_active'] = 'Active';
+$lang['hr_employees_button_inactive'] = 'Inactive';
 $lang['hr_employees_button_selection'] = 'Selection';
 $lang['hr_employees_button_select_all'] = 'Select all';
 $lang['hr_employees_button_deselect_all'] = 'Deselect all';

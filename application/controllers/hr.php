@@ -84,7 +84,7 @@ class Hr extends CI_Controller {
                 $msg .= '"contract":"' . $employee->contract . '",';
                 $msg .= '"datehired": {';
                 $msg .=     '"display":"' . $displayDate . '",';
-                $msg .=     '"timestamp":"' . $tmpDate . '"';
+                $msg .=     '"timestamp":' . $tmpDate;
                 $msg .= '},';
                 $msg .= '"position":"' . $employee->position . '",';
                 $msg .= '"manager_name":"' . $employee->manager_name . '"';

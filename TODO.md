@@ -43,6 +43,7 @@ Maybe:
 - [ ] Provide examples of REST clients (seniority leaves, carry over, LDAP sync...) in PHP (cron) or go (service).
 - [ ] PHP scripts of migration from OrangeHRM, PHP_Conges, LiberTempo, etc.
 - [ ] More OAuth2 or SAML identity providers (Investigation for a CAS/SSO integration).
+- [ ] Option/Config: kind of multi-tenancy filter on entity and its children the calendars (then calendar/global should be hidden).
 - [ ] Color set/stripes for color blind people, eg. :
 
 Code sample:

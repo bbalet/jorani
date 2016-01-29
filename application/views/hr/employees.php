@@ -474,11 +474,11 @@ $(function () {
                 { data: "contract" },
                 { data: "manager_name" },
                 { data: "identifier" },
-                { data: {
-                        _: "datehired.display",
-                        sort: "datehired.timestamp"
-                    },
-                    "orderDataType": "dom-text", "type": "numeric"
+                { data: 'datehired',
+                    render: {
+                        display: "display",
+                        sort: "timestamp"
+                    }, type: "numeric"
                 },
                 { data: "position" }
             ],

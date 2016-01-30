@@ -78,8 +78,8 @@
         <p><?php echo lang('hr_overtime_popup_delete_question');?></p>
     </div>
     <div class="modal-footer">
-        <a href="#" id="lnkDeleteExtra" class="btn danger"><?php echo lang('hr_overtime_popup_delete_button_yes');?></a>
-        <a href="#" onclick="$('#frmDeleteExtraRequest').modal('hide');" class="btn secondary"><?php echo lang('hr_overtime_popup_delete_button_no');?></a>
+        <a href="#" id="lnkDeleteExtra" class="btn btn-danger"><?php echo lang('hr_overtime_popup_delete_button_yes');?></a>
+        <a href="#" onclick="$('#frmDeleteExtraRequest').modal('hide');" class="btn"><?php echo lang('hr_overtime_popup_delete_button_no');?></a>
     </div>
 </div>
 

@@ -199,8 +199,8 @@ for ($mC = 1; $mC <= 12; $mC++) {
     </div>
     <div class="modal-footer">
         <button id="cmdDeleteDayOff" onclick="delete_day_off();" class="btn btn-danger"><?php echo lang('contract_calendar_popup_dayoff_button_delete');?></button>
-        <button onclick="add_day_off();" class="btn secondary"><?php echo lang('contract_calendar_popup_dayoff_button_ok');?></button>
-        <button onclick="$('#frmAddDayOff').modal('hide');" class="btn secondary"><?php echo lang('contract_calendar_popup_dayoff_button_cancel');?></button>
+        <button onclick="add_day_off();" class="btn"><?php echo lang('contract_calendar_popup_dayoff_button_ok');?></button>
+        <button onclick="$('#frmAddDayOff').modal('hide');" class="btn"><?php echo lang('contract_calendar_popup_dayoff_button_cancel');?></button>
     </div>
 </div>
 
@@ -242,8 +242,8 @@ for ($mC = 1; $mC <= 12; $mC++) {
         <input type="text" id="cboDayOffSeriesTitle" name="cboDayOffSeriesTitle" />
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="edit_series();" class="btn secondary"><?php echo lang('contract_calendar_popup_series_button_ok');?></a>
-        <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="btn secondary"><?php echo lang('contract_calendar_popup_series_button_cancel');?></a>
+        <a href="#" onclick="edit_series();" class="btn"><?php echo lang('contract_calendar_popup_series_button_ok');?></a>
+        <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="btn"><?php echo lang('contract_calendar_popup_series_button_cancel');?></a>
     </div>
 </div>
 

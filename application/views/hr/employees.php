@@ -109,7 +109,7 @@
     </div>
     <div class="modal-footer">
         <a href="#" onclick="select_entity();" class="btn"><?php echo lang('OK');?></a>
-        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('Cancel');?></a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn"><?php echo lang('Cancel');?></a>
     </div>
 </div>
 
@@ -130,7 +130,7 @@
     </div>
     <div class="modal-footer">
         <a href="#" onclick="select_contract();" class="btn"><?php echo lang('OK');?></a>
-        <a href="#" onclick="$('#frmSelectContract').modal('hide');" class="btn secondary"><?php echo lang('Cancel');?></a>
+        <a href="#" onclick="$('#frmSelectContract').modal('hide');" class="btn"><?php echo lang('Cancel');?></a>
     </div>
 </div>
 

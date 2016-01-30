@@ -84,8 +84,8 @@ $(document).ready(function() {
         <p><?php echo lang('contract_index_popup_delete_confirm');?></p>
     </div>
     <div class="modal-footer">
-        <a href="#" id="lnkDeleteContract" class="btn danger"><?php echo lang('contract_index_popup_delete_button_yes');?></a>
-        <a href="#" onclick="$('#frmDeleteContract').modal('hide');" class="btn secondary"><?php echo lang('contract_index_popup_delete_button_no');?></a>
+        <a href="#" id="lnkDeleteContract" class="btn btn-danger"><?php echo lang('contract_index_popup_delete_button_yes');?></a>
+        <a href="#" onclick="$('#frmDeleteContract').modal('hide');" class="btn"><?php echo lang('contract_index_popup_delete_button_no');?></a>
     </div>
 </div>
 
@@ -98,7 +98,7 @@ $(document).ready(function() {
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn secondary"><?php echo lang('contract_index_popup_entitled_button_close');?></a>
+        <a href="#" onclick="$('#frmEntitledDays').modal('hide');" class="btn"><?php echo lang('contract_index_popup_entitled_button_close');?></a>
     </div>
 </div>
 

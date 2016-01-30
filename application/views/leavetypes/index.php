@@ -64,7 +64,7 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="btn secondary btn-danger"><?php echo lang('leavetypes_popup_create_button_cancel');?></a>
+        <a href="#" onclick="$('#frmAddLeaveType').modal('hide');" class="btn btn-danger"><?php echo lang('leavetypes_popup_create_button_cancel');?></a>
     </div>
 </div>
 
@@ -77,7 +77,7 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmEditLeaveType').modal('hide');" class="btn secondary"><?php echo lang('leavetypes_popup_update_button_cancel');?></a>
+        <a href="#" onclick="$('#frmEditLeaveType').modal('hide');" class="btn"><?php echo lang('leavetypes_popup_update_button_cancel');?></a>
     </div>
 </div>
 
@@ -91,8 +91,8 @@
         <p><?php echo lang('leavetypes_popup_delete_confirm');?></p>
     </div>
     <div class="modal-footer">
-        <a href="#" id="lnkDeleteLeaveType" class="btn danger"><?php echo lang('leavetypes_popup_delete_button_yes');?></a>
-        <a href="#" onclick="$('#frmDeleteLeaveType').modal('hide');" class="btn secondary"><?php echo lang('leavetypes_popup_delete_button_no');?></a>
+        <a href="#" id="lnkDeleteLeaveType" class="btn btn-danger"><?php echo lang('leavetypes_popup_delete_button_yes');?></a>
+        <a href="#" onclick="$('#frmDeleteLeaveType').modal('hide');" class="btn"><?php echo lang('leavetypes_popup_delete_button_no');?></a>
     </div>
 </div>
 

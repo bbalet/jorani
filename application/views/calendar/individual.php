@@ -61,7 +61,7 @@
         
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmEvent').modal('hide');" class="btn secondary"><?php echo lang('calendar_individual_popup_event_button_close');?></a>
+        <a href="#" onclick="$('#frmEvent').modal('hide');" class="btn"><?php echo lang('calendar_individual_popup_event_button_close');?></a>
     </div>
 </div>
 

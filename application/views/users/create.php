@@ -138,8 +138,8 @@ echo form_open('users/create', $attributes); ?>
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_manager();" class="btn secondary"><?php echo lang('users_create_popup_manager_button_ok');?></a>
-        <a href="#" onclick="$('#frmSelectManager').modal('hide');" class="btn secondary"><?php echo lang('users_create_popup_manager_button_cancel');?></a>
+        <a href="#" onclick="select_manager();" class="btn"><?php echo lang('users_create_popup_manager_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectManager').modal('hide');" class="btn"><?php echo lang('users_create_popup_manager_button_cancel');?></a>
     </div>
 </div>
 
@@ -152,8 +152,8 @@ echo form_open('users/create', $attributes); ?>
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_entity();" class="btn secondary"><?php echo lang('users_create_popup_entity_button_ok');?></a>
-        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('users_create_popup_entity_button_cancel');?></a>
+        <a href="#" onclick="select_entity();" class="btn"><?php echo lang('users_create_popup_entity_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn"><?php echo lang('users_create_popup_entity_button_cancel');?></a>
     </div>
 </div>
 
@@ -166,8 +166,8 @@ echo form_open('users/create', $attributes); ?>
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_position();" class="btn secondary"><?php echo lang('users_create_popup_position_button_ok');?></a>
-        <a href="#" onclick="$('#frmSelectPosition').modal('hide');" class="btn secondary"><?php echo lang('users_create_popup_position_button_cancel');?></a>
+        <a href="#" onclick="select_position();" class="btn"><?php echo lang('users_create_popup_position_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectPosition').modal('hide');" class="btn"><?php echo lang('users_create_popup_position_button_cancel');?></a>
     </div>
 </div>
 

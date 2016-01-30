@@ -51,8 +51,8 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_entity();" class="btn secondary"><?php echo lang('reports_balance_popup_entity_button_ok');?></a>
-        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn secondary"><?php echo lang('reports_balance_popup_entity_button_cancel');?></a>
+        <a href="#" onclick="select_entity();" class="btn"><?php echo lang('reports_balance_popup_entity_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn"><?php echo lang('reports_balance_popup_entity_button_cancel');?></a>
     </div>
 </div>
 

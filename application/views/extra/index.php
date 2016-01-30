@@ -77,8 +77,8 @@ $tmpDate = $date->getTimestamp();?>
         <p><?php echo lang('extra_index_popup_delete_question');?></p>
     </div>
     <div class="modal-footer">
-        <a href="#" id="lnkDeleteUser" class="btn danger"><?php echo lang('extra_index_popup_delete_button_yes');?></a>
-        <a href="#" onclick="$('#frmDeleteExtraRequest').modal('hide');" class="btn secondary"><?php echo lang('extra_index_popup_delete_button_no');?></a>
+        <a href="#" id="lnkDeleteUser" class="btn btn-danger"><?php echo lang('extra_index_popup_delete_button_yes');?></a>
+        <a href="#" onclick="$('#frmDeleteExtraRequest').modal('hide');" class="btn"><?php echo lang('extra_index_popup_delete_button_no');?></a>
     </div>
 </div>
 
@@ -86,31 +86,32 @@ $tmpDate = $date->getTimestamp();?>
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     $('#extras').dataTable({
-                    "order": [[ 1, "desc" ]],
-                    "oLanguage": {
-                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
-                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
-                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
-                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
-                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
-                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
-                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
-                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
-                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
-                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
-                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
-                    "oPaginate": {
-                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
-                        "sLast":     "<?php echo lang('datatable_sLast');?>",
-                        "sNext":     "<?php echo lang('datatable_sNext');?>",
-                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
-                    },
-                    "oAria": {
-                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
-                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
-                    }
-                }
-            });
+        stateSave: true,
+        "order": [[ 1, "desc" ]],
+        language: {
+            decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
+            processing:       "<?php echo lang('datatable_sProcessing');?>",
+            search:              "<?php echo lang('datatable_sSearch');?>",
+            lengthMenu:     "<?php echo lang('datatable_sLengthMenu');?>",
+            info:                   "<?php echo lang('datatable_sInfo');?>",
+            infoEmpty:          "<?php echo lang('datatable_sInfoEmpty');?>",
+            infoFiltered:       "<?php echo lang('datatable_sInfoFiltered');?>",
+            infoPostFix:        "<?php echo lang('datatable_sInfoPostFix');?>",
+            loadingRecords: "<?php echo lang('datatable_sLoadingRecords');?>",
+            zeroRecords:    "<?php echo lang('datatable_sZeroRecords');?>",
+            emptyTable:     "<?php echo lang('datatable_sEmptyTable');?>",
+            paginate: {
+                first:          "<?php echo lang('datatable_sFirst');?>",
+                previous:   "<?php echo lang('datatable_sPrevious');?>",
+                next:           "<?php echo lang('datatable_sNext');?>",
+                last:           "<?php echo lang('datatable_sLast');?>"
+            },
+            aria: {
+                sortAscending:  "<?php echo lang('datatable_sSortAscending');?>",
+                sortDescending: "<?php echo lang('datatable_sSortDescending');?>"
+            }
+        },
+    });
       
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
     $('#frmDeleteExtraRequest').on('show', function() {

@@ -58,8 +58,8 @@
         <p><?php echo lang('organization_index_popup_delete_confirm');?></p>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn danger" id="lnkDeleteEntity"><?php echo lang('organization_index_popup_delete_button_yes');?></a>
-        <a href="#" onclick="$('#organization').jstree('refresh'); $('#frmConfirmDelete').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_delete_button_no');?></a>
+        <a href="#" class="btn btn-danger" id="lnkDeleteEntity"><?php echo lang('organization_index_popup_delete_button_yes');?></a>
+        <a href="#" onclick="$('#organization').jstree('refresh'); $('#frmConfirmDelete').modal('hide');" class="btn"><?php echo lang('organization_index_popup_delete_button_no');?></a>
     </div>
 </div>
 
@@ -72,8 +72,8 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="add_employee();" class="btn secondary"><?php echo lang('organization_index_popup_add_button_ok');?></a>
-        <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_add_button_cancel');?></a>
+        <a href="#" onclick="add_employee();" class="btn"><?php echo lang('organization_index_popup_add_button_ok');?></a>
+        <a href="#" onclick="$('#frmAddEmployee').modal('hide');" class="btn"><?php echo lang('organization_index_popup_add_button_cancel');?></a>
     </div>
 </div>
 
@@ -86,8 +86,8 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_supervisor();" class="btn secondary"><?php echo lang('organization_index_popup_supervisor_button_ok');?></a>
-        <a href="#" onclick="$('#frmSelectSupervisor').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_supervisor_button_cancel');?></a>
+        <a href="#" onclick="select_supervisor();" class="btn"><?php echo lang('organization_index_popup_supervisor_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectSupervisor').modal('hide');" class="btn"><?php echo lang('organization_index_popup_supervisor_button_cancel');?></a>
     </div>
 </div>
 
@@ -98,7 +98,7 @@
     </div>
     <div class="modal-body" id="lblError"></div>
     <div class="modal-footer">
-        <a href="#" onclick="$('#frmError').modal('hide');" class="btn secondary"><?php echo lang('organization_index_popup_error_button_ok');?></a>
+        <a href="#" onclick="$('#frmError').modal('hide');" class="btn"><?php echo lang('organization_index_popup_error_button_ok');?></a>
     </div>
 </div>
 

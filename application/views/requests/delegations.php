@@ -49,8 +49,8 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_delegate();" class="btn secondary"><?php echo lang('requests_delegations_popup_delegate_button_ok');?></a>
-        <a href="#" onclick="$('#frmSelectDelegate').modal('hide');" class="btn secondary"><?php echo lang('requests_delegations_popup_delegate_button_cancel');?></a>
+        <a href="#" onclick="select_delegate();" class="btn"><?php echo lang('requests_delegations_popup_delegate_button_ok');?></a>
+        <a href="#" onclick="$('#frmSelectDelegate').modal('hide');" class="btn"><?php echo lang('requests_delegations_popup_delegate_button_cancel');?></a>
     </div>
 </div>
 

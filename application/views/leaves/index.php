@@ -97,8 +97,8 @@
         <p><?php echo lang('leaves_index_popup_delete_question');?></p>
     </div>
     <div class="modal-footer">
-        <a href="#" id="lnkDeleteUser" class="btn danger"><?php echo lang('leaves_index_popup_delete_button_yes');?></a>
-        <a href="#" onclick="$('#frmDeleteLeaveRequest').modal('hide');" class="btn secondary"><?php echo lang('leaves_index_popup_delete_button_no');?></a>
+        <a href="#" id="lnkDeleteUser" class="btn btn-danger"><?php echo lang('leaves_index_popup_delete_button_yes');?></a>
+        <a href="#" onclick="$('#frmDeleteLeaveRequest').modal('hide');" class="btn"><?php echo lang('leaves_index_popup_delete_button_no');?></a>
     </div>
 </div>
 

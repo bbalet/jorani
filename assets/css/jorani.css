@@ -132,7 +132,11 @@ html, body {
 }
 
 .badge-warning {
-    background: #F5811E;
+    background: #f5811e;
+}
+
+.badge-info {
+    background: #3097d1;
 }
 
 /*Always put Jquery datepicker on the top layer */

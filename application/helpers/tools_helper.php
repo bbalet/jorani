@@ -55,7 +55,14 @@ function getUserContext(CI_Controller $controller)
     $data['language_code'] =  $controller->session->userdata('language_code');
     if ($controller->is_manager === TRUE) {
         $controller->load->model('leaves_model');
-        $data['requests_count'] = $controller->leaves_model->countLeavesRequestedToManager($controller->user_id);
+        $data['requested_leaves_count'] = $controller->leaves_model->countLeavesRequestedToManager($controller->user_id);
+        if ($controller->config->item('disable_overtime') == FALSE) {
+            $controller->load->model('overtime_model');
+            $data['requested_extra_count'] = $controller->overtime_model->countExtraRequestedToManager($controller->user_id);
+        } else {
+            $data['requested_extra_count'] = 0;
+        }
+        $data['requests_count'] = $data['requested_leaves_count'] + $data['requested_extra_count'];
     }
     return $data;
 }

@@ -826,8 +826,6 @@ class Leaves_model extends CI_Model {
         $this->load->model('delegations_model');
         $ids = $this->delegations_model->listManagersGivingDelegation($manager);
         $this->db->select('count(*) as number', FALSE);
-        $this->db->join('status', 'leaves.status = status.id');
-        $this->db->join('types', 'leaves.type = types.id');
         $this->db->join('users', 'users.id = leaves.employee');
         $this->db->where('leaves.status', 2);
 

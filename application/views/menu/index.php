@@ -95,9 +95,17 @@ $this->lang->load('menu', $language);?>
                     <li><a href="<?php echo base_url();?>requests/balance"><?php echo lang('menu_hr_report_leave_balance');?></a></li>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_validation_title');?></li>
-                    <li><a href="<?php echo base_url();?>requests"><?php echo lang('menu_validation_leaves');?></a></li>
+                    <li><a href="<?php echo base_url();?>requests">
+                      <?php if ($requested_leaves_count > 0) { ?>
+                      <span class="badge badge-info"><?php echo $requested_leaves_count;?></span>
+                      <?php } ?>
+                        <?php echo lang('menu_validation_leaves');?></a></li>
                     <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
-                    <li><a href="<?php echo base_url();?>overtime"><?php echo lang('menu_validation_overtime');?></a></li>
+                    <li><a href="<?php echo base_url();?>overtime">
+                      <?php if ($requested_extra_count > 0) { ?>
+                      <span class="badge badge-info"><?php echo $requested_extra_count;?></span>
+                      <?php } ?>
+                        <?php echo lang('menu_validation_overtime');?></a></li>
                     <?php } ?>
                   </ul>
                 </li>

@@ -1,19 +1,144 @@
-/*
- * This file is part of Jorani.
- *
- * Jorani is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jorani is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jorani.  If not, see <http://www.gnu.org/licenses/>.
+/**
+ * Custom styles for Jorani
+ * @copyright  Copyright (c) 2014-2016 Benjamin BALET
+ * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link            https://github.com/bbalet/jorani
+ * @since         0.4.5
  */
+
+.anchor {
+    color: #3097d1;
+}
+
+/*Sticky footer*/
+html, body {
+  height: 100%;
+} 
+#push,
+#footer {
+  height: 40px;
+}
+#footer {
+    border-top: 1px #e4e4e4 solid;
+    border-top-radius: 4px;
+    box-shadow: 0 0 6px #ccc;
+    padding: 10px;
+    background-color: #fff;
+}
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -40px;
+}
+
+/*Background color of the navbar*/
+.navbar-inner {
+  background-color: #3097d1;
+  background-image: none;
+  color: white;
+}
+
+.navbar-inverse .navbar-inner {
+  background-color: #3097d1;
+  background-image: none;
+  color: white;
+  border-color: #3097d1;
+}
+
+.navbar .nav > li > a {
+  background-color: #3097d1;
+  color: white;
+}
+
+.navbar .nav > li > a:focus,
+.navbar .nav > li > a:hover {
+  background-color: #3097d1;
+  color: white;
+}
+
+.navbar .nav > .active > a,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus {
+  background-color: white;
+  color: #dddada;
+}
+
+.navbar-inverse .nav li.dropdown.open>.dropdown-toggle,
+.navbar-inverse .nav li.dropdown.active>.dropdown-toggle,
+.navbar-inverse .nav li.dropdown.open.active>.dropdown-toggle {
+  background-color: #3097d1;
+  color: #dddada;
+}
+
+.navbar .brand {
+  background-color: #3097d1;
+  color: white;
+}
+
+/*Button*/
+.btn {
+  border-radius: 1;
+  border-color: black;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+    background: #3097d1;
+    border-color: #3097d1;
+    color: white;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #3097d1;
+}
+
+.btn-primary:active, .btn-primary.active, .btn-group.open .btn-primary.dropdown-toggle {
+    background: #3097d1;
+    box-shadow: none;
+}
+
+.btn-danger {
+    background: #bd362f;
+    border-color: #bd362f;
+    color: white;
+}
+
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger {
+    background: #bd362f;
+}
+
+.btn-danger:active, .btn-danger.active {
+    background: #bd362f;
+    box-shadow: none;
+}
+
+.btn-info {
+    background: #49afcd;
+    border-color: #49afcd;
+    color: white;
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open > .dropdown-toggle.btn-info {
+    background: #49afcd;
+}
+
+.btn-info:active, .btn-info.active {
+    background: #49afcd;
+    box-shadow: none;
+}
+
+.badge-warning {
+    background: #F5811E;
+}
+
+/*Always put Jquery datepicker on the top layer */
+.ui-datepicker{
+    z-index: 9999 !important;
+}
 
 .allplanned {
     background-color: #999;

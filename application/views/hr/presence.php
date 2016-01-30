@@ -9,7 +9,6 @@
  */
 ?>
 
-<link href="<?php echo base_url();?>assets/css/tabular.css" rel="stylesheet">
 <div class="row-fluid">
     <div class="span12">
 

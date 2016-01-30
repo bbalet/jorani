@@ -7,7 +7,7 @@
  * @since         0.4.3
  */
 ?>
-<link href="<?php echo base_url();?>assets/css/tabular.css" rel="stylesheet">
+
 <h2><?php echo lang('calendar_year_title');?>&nbsp;<span class="muted">(<?php echo $employee_name;?>)</span>&nbsp;<?php echo $help;?></h2>
 
 <div class="row-fluid">

@@ -895,11 +895,11 @@ class Leaves_model extends CI_Model {
         $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
         //If no entity was selected, select the entity of the connected user or the root of the organization
         if ($entity == -1) {
-            $this->load->model('users_model');
-            $user = $this->users_model->getUsers($this->session->userdata('id'));
-            if (is_null($user['organization'])) {
+            if (!$this->session->userdata('logged_in')) {
                 $entity = 0;
             } else {
+                $this->load->model('users_model');
+                $user = $this->users_model->getUsers($this->session->userdata('id'));
                 $entity = $user['organization'];
             }
         }

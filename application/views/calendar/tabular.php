@@ -6,12 +6,8 @@
  * @link            https://github.com/bbalet/jorani
  * @since         0.3.0
  */
+?>
 
-CI_Controller::get_instance()->load->helper('language');
-$this->lang->load('calendar', $language);
-$this->lang->load('global', $language);?>
-
-<link href="<?php echo base_url();?>assets/css/tabular.css" rel="stylesheet">
 <h2><?php echo lang('calendar_tabular_title');?> &nbsp;<?php echo $help;?></h2>
 
 <div class="row-fluid">

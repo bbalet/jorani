@@ -58,6 +58,7 @@ class Leaves extends CI_Controller {
     public function counters($refTmp = NULL) {
         $this->auth->checkIfOperationIsAllowed('counters_leaves');
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $refDate = date("Y-m-d");
         if ($refTmp != NULL) {
             $refDate = date("Y-m-d", $refTmp);

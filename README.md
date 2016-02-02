@@ -12,7 +12,7 @@ Jorani is designed to provide simple leave and overtime request workflows for sm
 
 ## Status
 
-This project is stable and ready for production. An online demo is available here : http://demo.jorani.org/
+This project is stable and ready for production. An online demo is available here : https://demo.jorani.org/
 Use bbalet / bbalet for login / password.
 
 ## Features

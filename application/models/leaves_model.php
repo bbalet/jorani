@@ -553,6 +553,19 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
             
+            $imageUrl = '';
+            $allDay = FALSE;
+            $startdatetype =  $entry->startdatetype;
+            $enddatetype = $entry->enddatetype;
+            if ($startdate == $enddate) { //Deal with invalid start/end date
+                $imageUrl = base_url() . 'assets/images/date_error.png';
+                $startdate = $entry->startdate . 'T07:00:00';
+                $enddate = $entry->enddate . 'T18:00:00';
+                $startdatetype = "Morning";
+                $enddatetype = "Afternoon";
+                $allDay = TRUE;
+            }
+            
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -564,12 +577,13 @@ class Leaves_model extends CI_Model {
             $jsonevents[] = array(
                 'id' => $entry->id,
                 'title' => $entry->type,
+                'imageurl' => $imageUrl,
                 'start' => $startdate,
                 'color' => $color,
-                'allDay' => FALSE,
+                'allDay' => $allDay,
                 'end' => $enddate,
-                'startdatetype' => $entry->startdatetype,
-                'enddatetype' => $entry->enddatetype
+                'startdatetype' => $startdatetype,
+                'enddatetype' => $enddatetype
             );
         }
         return json_encode($jsonevents);
@@ -607,6 +621,19 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
             
+            $imageUrl = '';
+            $allDay = FALSE;
+            $startdatetype =  $entry->startdatetype;
+            $enddatetype = $entry->enddatetype;
+            if ($startdate == $enddate) { //Deal with invalid start/end date
+                $imageUrl = base_url() . 'assets/images/date_error.png';
+                $startdate = $entry->startdate . 'T07:00:00';
+                $enddate = $entry->enddate . 'T18:00:00';
+                $startdatetype = "Morning";
+                $enddatetype = "Afternoon";
+                $allDay = TRUE;
+            }
+            
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -618,12 +645,13 @@ class Leaves_model extends CI_Model {
             $jsonevents[] = array(
                 'id' => $entry->id,
                 'title' => $entry->firstname .' ' . $entry->lastname,
+                'imageurl' => $imageUrl,
                 'start' => $startdate,
                 'color' => $color,
-                'allDay' => FALSE,
+                'allDay' => $allDay,
                 'end' => $enddate,
-                'startdatetype' => $entry->startdatetype,
-                'enddatetype' => $entry->enddatetype
+                'startdatetype' => $startdatetype,
+                'enddatetype' => $enddatetype
             );
         }
         return json_encode($jsonevents);
@@ -660,6 +688,19 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
             
+            $imageUrl = '';
+            $allDay = FALSE;
+            $startdatetype =  $entry->startdatetype;
+            $enddatetype = $entry->enddatetype;
+            if ($startdate == $enddate) { //Deal with invalid start/end date
+                $imageUrl = base_url() . 'assets/images/date_error.png';
+                $startdate = $entry->startdate . 'T07:00:00';
+                $enddate = $entry->enddate . 'T18:00:00';
+                $startdatetype = "Morning";
+                $enddatetype = "Afternoon";
+                $allDay = TRUE;
+            }
+            
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -671,12 +712,13 @@ class Leaves_model extends CI_Model {
             $jsonevents[] = array(
                 'id' => $entry->id,
                 'title' => $entry->firstname .' ' . $entry->lastname,
+                'imageurl' => $imageUrl,
                 'start' => $startdate,
                 'color' => $color,
-                'allDay' => FALSE,
+                'allDay' => $allDay,
                 'end' => $enddate,
-                'startdatetype' => $entry->startdatetype,
-                'enddatetype' => $entry->enddatetype
+                'startdatetype' => $startdatetype,
+                'enddatetype' => $enddatetype
             );
         }
         return json_encode($jsonevents);
@@ -732,6 +774,19 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
             
+            $imageUrl = '';
+            $allDay = FALSE;
+            $startdatetype =  $entry->startdatetype;
+            $enddatetype = $entry->enddatetype;
+            if ($startdate == $enddate) { //Deal with invalid start/end date
+                $imageUrl = base_url() . 'assets/images/date_error.png';
+                $startdate = $entry->startdate . 'T07:00:00';
+                $enddate = $entry->enddate . 'T18:00:00';
+                $startdatetype = "Morning";
+                $enddatetype = "Afternoon";
+                $allDay = TRUE;
+            }
+            
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -743,12 +798,13 @@ class Leaves_model extends CI_Model {
             $jsonevents[] = array(
                 'id' => $entry->id,
                 'title' => $entry->firstname .' ' . $entry->lastname,
+                'imageurl' => $imageUrl,
                 'start' => $startdate,
                 'color' => $color,
-                'allDay' => FALSE,
+                'allDay' => $allDay,
                 'end' => $enddate,
-                'startdatetype' => $entry->startdatetype,
-                'enddatetype' => $entry->enddatetype
+                'startdatetype' => $startdatetype,
+                'enddatetype' => $enddatetype
             );
         }
         return json_encode($jsonevents);
@@ -1053,11 +1109,13 @@ class Leaves_model extends CI_Model {
                 //4 - All Day Off       []
                 //5 - Morning Day Off   |\
                 //6 - Afternoon Day Off /|
+                //9 - Error in start/end types
                 
                 //Length of leave request is one day long
                 if ($one_day && $start_morning && $end_afternoon) $display = '1';
                 if ($one_day && $start_morning && $end_morning) $display = '2';
                 if ($one_day && $start_afternoon && $end_afternoon) $display = '3';
+                if ($one_day && $start_afternoon && $end_morning) $display = '9';
                 //Length of leave request is one day long is more than one day
                 //We are in the middle of a long leave request
                 if (!$one_day && !$first_day && !$last_day) $display = '1';

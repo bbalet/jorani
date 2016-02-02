@@ -154,6 +154,7 @@
                 }
           } else {
             switch ($day->display) {
+                case '9': $class="error"; break;
                 case '0': $class="working"; break;
                 case '4': $class="dayoff"; break;
                 case '5': $class="amdayoff"; break;
@@ -198,10 +199,14 @@
                         $overlapping = TRUE;
               break;
           }
-            if ($overlapping) {
-                echo '<td title="' . $day->type . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
+            if ($class == "error"){
+                echo '<td><img src="'.  base_url() .'assets/images/date_error.png"></td>';
             } else {
-                echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+                if ($overlapping) {
+                    echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
+                } else {
+                    echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+                }
             }
             ?>
     <?php } ?>

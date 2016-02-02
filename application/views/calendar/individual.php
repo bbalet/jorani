@@ -161,6 +161,11 @@ $(function () {
                 $('#frmModalAjaxWait').modal('hide');
             }    
         },
+        eventRender: function(event, element, view) {
+            if(event.imageurl){
+                $(element).find('span:first').prepend('<img src="' + event.imageurl + '" />');
+            }
+        },
         eventAfterRender: function(event, element, view) {
             //Add tooltip to the element
             $(element).attr('title', event.title);

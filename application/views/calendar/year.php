@@ -71,13 +71,15 @@
                 $status = $day->status;
                 $type = $day->type;
             }
-                //0 - Working day  _
-                //1 - All day           []
-                //2 - Morning        |\
-                //3 - Afternoon      /|
-                //4 - All Day Off       []
-                //5 - Morning Day Off   |\
-                //6 - Afternoon Day Off /|
+            //0 - Working day  _
+            //1 - All day           []
+            //2 - Morning        |\
+            //3 - Afternoon      /|
+            //4 - All Day Off       []
+            //5 - Morning Day Off   |\
+            //6 - Afternoon Day Off /|
+            //9 - Error in start/end types
+            if ($display == 9) echo '<td><img src="'.  base_url() .'assets/images/date_error.png"></td>';
             if ($display == 0) echo '<td>&nbsp;</td>';
             if ($display == 3 || $display == 6) echo '<td>&nbsp;</td>';
             if ($display == 4 || $display == 5) echo '<td title="' . $type .'" class="dayoff">&nbsp;</td>';
@@ -117,6 +119,7 @@
                 $status = $day->status;
                 $type = $day->type;
             }
+            if ($display == 9) echo '<td><img src="'.  base_url() .'assets/images/date_error.png"></td>';
             if ($display == 0) echo '<td>&nbsp;</td>';
             if ($display == 2 || $display == 5) echo '<td>&nbsp;</td>';
             if ($display == 4 || $display == 6) echo '<td title="' . $type .'" class="dayoff">&nbsp;</td>';

@@ -154,6 +154,7 @@
                 }
           } else {
             switch ($day->display) {
+                case '9': $class="error"; break;
                 case '0': $class="working"; break;
                 case '4': $class="dayoff"; break;
                 case '5': $class="amdayoff"; break;
@@ -196,10 +197,14 @@
                         $overlapping = TRUE;
               break;
           }
-            if ($overlapping) {
-                echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
+            if ($class == "error"){
+                echo '<td><img src="'.  base_url() .'assets/images/date_error.png"></td>';
             } else {
-                echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+                if ($overlapping) {
+                    echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
+                } else {
+                    echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+                }
             }
      } ?>
           </tr>
@@ -319,30 +324,30 @@ $(function () {
     
     //Transform the HTML table in a fancy datatable
     var oTable = $('#leaves').dataTable({
-                "order": [[ 1, "asc" ]],
-                "oLanguage": {
-                "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
-                "sInfo":           "<?php echo lang('datatable_sInfo');?>",
-                "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
-                "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
-                "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
-                "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
-                "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
-                "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
-                "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
-                "sSearch":         "<?php echo lang('datatable_sSearch');?>",
-                "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
-                "oPaginate": {
-                    "sFirst":    "<?php echo lang('datatable_sFirst');?>",
-                    "sLast":     "<?php echo lang('datatable_sLast');?>",
-                    "sNext":     "<?php echo lang('datatable_sNext');?>",
-                    "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
+            order: [[ 1, "asc" ]],
+            language: {
+                decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
+                processing:       "<?php echo lang('datatable_sProcessing');?>",
+                search:              "<?php echo lang('datatable_sSearch');?>",
+                lengthMenu:     "<?php echo lang('datatable_sLengthMenu');?>",
+                info:                   "<?php echo lang('datatable_sInfo');?>",
+                infoEmpty:          "<?php echo lang('datatable_sInfoEmpty');?>",
+                infoFiltered:       "<?php echo lang('datatable_sInfoFiltered');?>",
+                infoPostFix:        "<?php echo lang('datatable_sInfoPostFix');?>",
+                loadingRecords: "<?php echo lang('datatable_sLoadingRecords');?>",
+                zeroRecords:    "<?php echo lang('datatable_sZeroRecords');?>",
+                emptyTable:     "<?php echo lang('datatable_sEmptyTable');?>",
+                paginate: {
+                    first:          "<?php echo lang('datatable_sFirst');?>",
+                    previous:   "<?php echo lang('datatable_sPrevious');?>",
+                    next:           "<?php echo lang('datatable_sNext');?>",
+                    last:           "<?php echo lang('datatable_sLast');?>"
                 },
-                "oAria": {
-                    "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
-                    "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
+                aria: {
+                    sortAscending:  "<?php echo lang('datatable_sSortAscending');?>",
+                    sortDescending: "<?php echo lang('datatable_sSortDescending');?>"
                 }
-            }
+            },
         });
         
         //Load a tiny calendar
@@ -361,6 +366,11 @@ $(function () {
                 } else {
                     $('#frmModalAjaxWait').modal('hide');
                 }    
+            },
+            eventRender: function(event, element, view) {
+                if(event.imageurl){
+                    $(element).find('span:first').prepend('<img src="' + event.imageurl + '" />');
+                }
             },
             eventAfterRender: function(event, element, view) {
                 //Add tooltip to the element

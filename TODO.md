@@ -12,8 +12,9 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Clarify usage of leave type 'compensate' (warning id edit/description in page).
 - [X] Improve robustness to bad conf. detect Database procedures and cal_days_in_month.
 - [X] BUG(87): Leave duration calculation wrong if a contract has a morning or an afternoon set as a non-work day.
+- [X] BUG: Entering reverse end/start date type for one day leave requests makes the calendars crash.
 - [X] Add an option to hide the inactive users into HR/Employee, next to "Include sub-departments".
-- [ ] Clean Boostrap classes btn secondary
+- [X] Clean Boostrap classes btn secondary
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
 - [ ] Migrate all datatables to the new API ($().dataTable() to $().DataTable()).
 - [ ] Migrate all datatables to the new language initiatlization.

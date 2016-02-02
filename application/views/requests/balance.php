@@ -17,7 +17,7 @@
 
         <p><?php echo lang('requests_balance_date_field');?>&nbsp;<input type="text" id="refdate" /></p>
 
-        <table cellpadding="0" cellspacing="0" border="0" class="display" id="balance" width="100%">
+        <table cellpadding="0" cellspacing="0" border="0" class="cell-border" id="balance" width="100%">
             <thead>
                 <tr>
                     <th><?php echo lang('identifier');?></th>
@@ -77,7 +77,6 @@ $(function () {
                     },
                     {
                         extend: 'colvis',
-                        columns: ':not(:first-child)',
                         postfixButtons: [
                             {
                                 extend: 'colvisRestore',

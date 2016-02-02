@@ -365,7 +365,7 @@ class Requests extends CI_Controller {
             $result[$user['id']]['lastname'] = $user['lastname'];
             $date = new DateTime($user['datehired']);
             $result[$user['id']]['datehired'] = $date->format(lang('global_date_format'));
-            $result[$user['id']]['position'] = $user['position'];
+            $result[$user['id']]['position'] = $user['position_name'];
             foreach ($data['types'] as $type) {
                 $result[$user['id']][$type['name']] = '';
             }

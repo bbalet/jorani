@@ -71,7 +71,12 @@ class Users_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function getCollaboratorsOfManager($id = 0) {
+        $this->db->select('users.*');
+        $this->db->select('organization.name as department_name, positions.name as position_name, contracts.name as contract_name');
         $this->db->from('users');
+        $this->db->join('organization', 'users.organization = organization.id');
+        $this->db->join('positions', 'positions.id  = users.position', 'left');
+        $this->db->join('contracts', 'contracts.id  = users.contract', 'left');
         $this->db->order_by("lastname", "asc");
         $this->db->order_by("firstname", "asc");
         $this->db->where('manager', $id);

@@ -278,6 +278,14 @@ $route['session/language'] = 'session/language';
 $route['session/forgetpassword'] = 'session/forgetpassword';
 
 //_______________________________________________
+//Experimental mobile endpoint
+$route['mobile/getPublicKey'] = 'mobile/getPublicKey';
+$route['mobile/login'] = 'mobile/login';
+$route['mobile/logout'] = 'mobile/logout';
+$route['mobile/notifications'] = 'mobile/notifications';
+$route['mobile/leaves/(:num)'] = 'mobile/leaves/$1';
+
+//_______________________________________________
 //Default controllers
 $route['default_controller'] = 'leaves';
 $route['notfound'] = 'pages/notfound';

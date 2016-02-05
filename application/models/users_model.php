@@ -498,17 +498,25 @@ class Users_model extends CI_Model {
      * Check the provided credentials and load user's profile if they are correct
      * Mostly used for alternative signin mechanisms such as SSO
      * @param string $email E-mail address of the user
+     * @param string $password Optional password
      * @return bool TRUE if user was found into the database, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function checkCredentialsEmail($email) {
+    public function checkCredentialsEmail($email, $password = NULL) {
         $this->db->from('users');
         $this->db->where('email', $email);
         $this->db->where('active = TRUE');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $row = $query->row();
-            $this->loadProfile($row);
+            if (!is_null($password)) {
+                $hash = crypt($password, $row->password);
+                if ($hash == $row->password) {
+                    $this->loadProfile($row);
+                }
+            } else {
+                $this->loadProfile($row);
+            }
             return TRUE;
         } else {
             return FALSE;

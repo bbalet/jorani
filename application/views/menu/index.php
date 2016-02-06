@@ -36,6 +36,32 @@ $this->lang->load('menu', $language);?>
 </script>
 <?php } ?>
 
+<?php if ($this->config->item('enable_mobile') != FALSE) { ?>
+<div id="frmGenerateQRCode" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h3>QR Code</h3>
+    </div>
+    <div class="modal-body" id="frmGenerateQRCodeBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal"><?php echo lang('OK');?></button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        //Popup generate a QR Code for mobile access
+        $("#cmdGenerateQRCode").click(function() {
+            $("#frmGenerateQRCode").modal('show');
+            $("#frmGenerateQRCodeBody").load('<?php echo base_url();?>admin/qrcode');
+        });
+        
+    });
+</script>
+<?php } ?>
+
 <div id="wrap">
 <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -146,6 +172,9 @@ $this->lang->load('menu', $language);?>
                 <ul class="nav pull-right">
                     <a href="<?php echo base_url();?>users/myprofile" class="brand"><?php echo $fullname;?></a>
                     <li><a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user icon-white"></i></a></li>
+                    <?php if ($this->config->item('enable_mobile') != FALSE) { ?>
+                    <li><a href="#" id="cmdGenerateQRCode" title="QR Code"><i class="fa fa-mobile"></i></a></li>
+                    <?php } ?>
                     <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
                     <li><a href="#" id="cmdChangePassword" title="<?php echo lang('menu_banner_tip_reset');?>"><i class="icon-lock icon-white"></i></a></li>
                     <?php } ?>
@@ -157,7 +186,5 @@ $this->lang->load('menu', $language);?>
 
     <div class="container-fluid">
         <div class="row-fluid"><div class="span12">
-
-
                 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
                 <div class="row-fluid"><div class="span12">&nbsp;</div></div>

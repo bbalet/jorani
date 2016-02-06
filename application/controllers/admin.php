@@ -39,4 +39,18 @@ class Admin extends CI_Controller {
         $this->load->view('admin/settings', $data);
         $this->load->view('templates/footer');
     }
+    
+    /**
+     * Output a QRCode containing the URL of the Jorani instance and the e-mail of the connected user
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function qrCode() {
+        require_once(APPPATH . 'third_party/QRCode.php');
+        $this->load->model('users_model');
+        $user = $this->users_model->getUsers($this->user_id);
+        $qr = new QRCode();
+        $qr = QRCode::getMinimumQRCode(base_url() . '#' . $user['login'] .
+                 '#' . $user['email'], QR_ERROR_CORRECT_LEVEL_L);
+        echo $qr->printHTML();
+    }
 }

@@ -15,26 +15,42 @@
 
 <?php echo $flash_partial_view;?>
 
-<div class="row-fluid">
-    <div class="span4">
-        <input type="hidden" name="entity" id="entity" />
-         <label for="txtEntity"><?php echo lang('hr_employees_field_entity');?>
-            <div class="input-append">
-                <input type="text" id="txtEntity" name="txtEntity" readonly />
-                <a id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('hr_employees_button_select');?></a>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading" style="background: #3097d1; border-color: #3097d1;">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="text-decoration:none; color:white;">
+                <i class="fa fa-sitemap"></i>&nbsp;<i class="fa fa-check-square-o"></i>&nbsp;<i class="fa fa-filter"></i>
+                <span class="pull-right">
+                    <i class="icon-chevron-down icon-white"></i>
+                </span>
+            </a>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <div class="row-fluid">
+                    <div class="span4">
+                        <input type="hidden" name="entity" id="entity" />
+                         <label for="txtEntity"><?php echo lang('hr_employees_field_entity');?>
+                            <div class="input-append">
+                                <input type="text" id="txtEntity" name="txtEntity" readonly />
+                                <a id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('hr_employees_button_select');?></a>
+                            </div>
+                         </label>
+                    </div>
+                    <div class="span4">
+                      <input type="checkbox" id="chkIncludeChildren" /> <?php echo lang('hr_employees_field_subdepts');?>
+                      <div class="btn-group" data-toggle="buttons-radio">
+                        <button id="cmdAll" type="button" class="btn"><?php echo lang('hr_employees_button_all');?></button>
+                        <button id="cmdActive" type="button" class="btn"><?php echo lang('hr_employees_button_active');?></button>
+                        <button id="cmdInactive" type="button" class="btn"><?php echo lang('hr_employees_button_inactive');?></button>
+                      </div>
+                    </div>
+                    <div class="span4">
+                      <?php echo lang('hr_employees_description');?>
+                    </div>
+                </div>
             </div>
-         </label>
-    </div>
-    <div class="span4">
-      <input type="checkbox" id="chkIncludeChildren" /> <?php echo lang('hr_employees_field_subdepts');?>
-      <div class="btn-group" data-toggle="buttons-radio">
-        <button id="cmdAll" type="button" class="btn"><?php echo lang('hr_employees_button_all');?></button>
-        <button id="cmdActive" type="button" class="btn"><?php echo lang('hr_employees_button_active');?></button>
-        <button id="cmdInactive" type="button" class="btn"><?php echo lang('hr_employees_button_inactive');?></button>
-      </div>
-    </div>
-    <div class="span4">
-      <?php echo lang('hr_employees_description');?>
+        </div>
     </div>
 </div>
 
@@ -339,7 +355,6 @@ function add_entitleddays() {
     if ($('#daysEnt').val() == "") fieldname = "<?php echo lang('entitleddays_user_index_field_days');?>";
     if (fieldname != "") {
         bootbox.alert(<?php echo lang('entitleddays_user_mandatory_js_msg');?>);
-        $("#frmAddEntitledDays").modal('hide');
         return;
     }
     
@@ -563,21 +578,6 @@ $(function () {
         $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
     });
     
-    //Popup select manager
-    $("#cmdSelectManager").click(function() {
-        if (oTable.rows({selected: true}).any()) {
-            $("#frmSelectManager").modal('show');
-            $("#frmSelectManagerBody").load('<?php echo base_url(); ?>users/employees');
-        }
-        else {
-            bootbox.alert("<?php echo lang('hr_employees_multiple_edit_selection_msg');?>");
-        }
-    });
-    
-    //Add entitled days to a group of employees
-    $("#cmdAddEntitlments").click(function() {
-        $("#frmAddEntitledDays").modal('show');
-    });
     //Force decimal separator whatever the locale is
     $( "#days" ).keyup(function() {
         var value = $("#days").val();
@@ -608,17 +608,47 @@ $(function () {
               }
     }, $.datepicker.regional['<?php echo $language_code;?>']);
     
+    //Change the manager of a group of employees
+    $("#cmdSelectManager").click(function() {
+        if (oTable.rows({selected: true}).any()) {
+            $("#frmSelectManager").modal('show');
+            $("#frmSelectManagerBody").load('<?php echo base_url(); ?>users/employees');
+        }
+        else {
+            bootbox.alert("<?php echo lang('hr_employees_multiple_edit_selection_msg');?>");
+        }
+    });
+    
+    //Add entitled days to a group of employees
+    $("#cmdAddEntitlments").click(function() {
+        if (oTable.rows({selected: true}).any()) {
+            $("#frmAddEntitledDays").modal('show');
+        }
+        else {
+            bootbox.alert("<?php echo lang('hr_employees_multiple_edit_selection_msg');?>");
+        }
+    });
     
     //Change the contract of a group of employees
     $("#cmdSelectContract").click(function() {
-        $("#frmSelectContract").modal('show');
+        if (oTable.rows({selected: true}).any()) {
+            $("#frmSelectContract").modal('show');
+        }
+        else {
+            bootbox.alert("<?php echo lang('hr_employees_multiple_edit_selection_msg');?>");
+        }
     });
     
     //Move the entity of a group of employees
     $("#cmdChangeEntity").click(function() {
-        contextSelectEntity = "change";
-        $("#frmSelectEntity").modal('show');
-        $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
+        if (oTable.rows({selected: true}).any()) {
+            contextSelectEntity = "change";
+            $("#frmSelectEntity").modal('show');
+            $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
+        }
+        else {
+            bootbox.alert("<?php echo lang('hr_employees_multiple_edit_selection_msg');?>");
+        }
     });
     
     //Select or deselect all rows

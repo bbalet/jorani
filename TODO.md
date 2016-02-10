@@ -41,6 +41,7 @@ Maybe:
 
 ## Ideas
 
+- [ ] Export to Excel: export only the visible rows (POST with the list of Ids). Look into HR/Employees to see how to build the list.
 - [ ] Provide examples of REST clients (seniority leaves, carry over, LDAP sync...) in PHP (cron) or go (service).
 - [ ] PHP scripts of migration from OrangeHRM, PHP_Conges, LiberTempo, etc.
 - [ ] More OAuth2 or SAML identity providers (Investigation for a CAS/SSO integration).

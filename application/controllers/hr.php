@@ -56,16 +56,22 @@ class Hr extends CI_Controller {
      * @param int $id optional id of the entity, all entities if 0
      * @param bool $children TRUE : include sub entities, FALSE otherwise
      * @param string $filterActive "all"; "active" (only), or "inactive" (only)
+     * @param string $criterion1 "lesser" or "greater" (optional)
+     * @param string $date1 Date Hired (optional)
+     * @param string $criterion2 "lesser" or "greater" (optional)
+     * @param string $date2 Date Hired (optional)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function employeesOfEntity($id = 0, $children = TRUE, $filterActive = "all") {
+    public function employeesOfEntity($id = 0, $children = TRUE, $filterActive = "all",
+            $criterion1 = NULL, $date1 = NULL, $criterion2 = NULL, $date2 = NULL) {
         header("Content-Type: application/json");
         if ($this->auth->isAllowed('list_employees') == FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
             $this->load->model('users_model');
-            $employees = $this->users_model->employeesOfEntity($id, $children, $filterActive);
+            $employees = $this->users_model->employeesOfEntity($id, $children, $filterActive,
+                    $criterion1, $date1, $criterion2, $date2);
             $msg = '{"draw": 1,';
             $msg .= '"recordsTotal":' . count($employees);
             $msg .= ',"recordsFiltered":' . count($employees);
@@ -443,14 +449,23 @@ class Hr extends CI_Controller {
      * @param int $id optional id of the entity, all entities if 0
      * @param bool $children TRUE : include sub entities, FALSE otherwise
      * @param string $filterActive "all"; "active" (only), or "inactive" (only)
+     * @param string $criterion1 "lesser" or "greater" (optional)
+     * @param string $date1 Date Hired (optional)
+     * @param string $criterion2 "lesser" or "greater" (optional)
+     * @param string $date2 Date Hired (optional)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function exportEmployees($id = 0, $children = TRUE, $filterActive = "all") {
+    public function exportEmployees($id = 0, $children = TRUE, $filterActive = "all",
+                            $criterion1 = NULL, $date1 = NULL, $criterion2 = NULL, $date2 = NULL) {
         $this->load->model('users_model');
         $this->load->library('excel');
         $data['id'] = $id;
         $data['children'] = filter_var($children, FILTER_VALIDATE_BOOLEAN);
         $data['filterActive'] = $filterActive;
+        $data['criterion1'] = $criterion1;
+        $data['date1'] = $date1;
+        $data['criterion2'] = $criterion2;
+        $data['date2'] = $date2;
         $this->load->view('hr/export_employees', $data);
     }
     

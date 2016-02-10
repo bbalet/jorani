@@ -37,16 +37,44 @@
                             </div>
                          </label>
                     </div>
-                    <div class="span4">
+                    <div class="span3">
                       <input type="checkbox" id="chkIncludeChildren" /> <?php echo lang('hr_employees_field_subdepts');?>
-                      <div class="btn-group" data-toggle="buttons-radio">
-                        <button id="cmdAll" type="button" class="btn"><?php echo lang('hr_employees_button_all');?></button>
-                        <button id="cmdActive" type="button" class="btn"><?php echo lang('hr_employees_button_active');?></button>
-                        <button id="cmdInactive" type="button" class="btn"><?php echo lang('hr_employees_button_inactive');?></button>
-                      </div>
                     </div>
-                    <div class="span4">
+                    <div class="span5">
                       <?php echo lang('hr_employees_description');?>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="btn-group" data-toggle="buttons-radio">
+                          <button id="cmdAll" type="button" class="btn"><?php echo lang('hr_employees_button_all');?></button>
+                          <button id="cmdActive" type="button" class="btn"><?php echo lang('hr_employees_button_active');?></button>
+                          <button id="cmdInactive" type="button" class="btn"><?php echo lang('hr_employees_button_inactive');?></button>
+                        </div>
+                    </div>
+                    <div class="span8">
+                        <?php echo lang('hr_employees_thead_datehired');?>
+                        <div class="input-prepend">
+                            <div class="btn-group dropup">
+                                <div class="btn-group" data-toggle="buttons-radio">
+                                    <button id="cmdGreater1" type="button" class="btn active"><i class="fa fa-chevron-right"></i></button>
+                                    <button id="cmdLesser1" type="button" class="btn"><i class="fa fa-chevron-left"></i></button>
+                                </div>
+                                <input type="text" id="viz_datehired1" class="input-small" readonly />
+                            </div>                            
+                        </div>
+                        &nbsp;&mdash;&nbsp;
+                        <div class="input-prepend">
+                            <div class="btn-group dropup">
+                                <div class="btn-group" data-toggle="buttons-radio">
+                                    <button id="cmdGreater2" type="button" class="btn"><i class="fa fa-chevron-right"></i></button>
+                                    <button id="cmdLesser2" type="button" class="btn active"><i class="fa fa-chevron-left"></i></button>
+                                </div>
+                                <input type="text" id="viz_datehired2" class="input-small" readonly />
+                            </div>                            
+                        </div>
+                        <input type="hidden" name="datehired1" id="datehired1" />
+                        <input type="hidden" name="datehired2" id="datehired2" />
                     </div>
                 </div>
             </div>
@@ -249,6 +277,9 @@ var contextObject;
 var contextSelectEntity = "select";
 var filterActive = "all"; //active (only), inactive (only), all
 var oTable;
+var filterDate = "greater/empty/greater/empty";
+var state1="greater";
+var state2="lesser";
 
 //Handle choose of entity with the modal form "select an entity". Update cookie with selected values
 function select_entity() {
@@ -263,12 +294,7 @@ function select_entity() {
         $.cookie('entity', entity);
         $.cookie('entityName', entityName);
         $.cookie('includeChildren', includeChildren);
-        //Refresh datatable
-        $('#frmModalAjaxWait').modal('show');
-        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive)
-            .load(function() {
-                $("#frmModalAjaxWait").modal('hide');
-            }, true);
+        refreshDataTable();
     } else {
         //"change": Move selected employees to another entity
         var employeeIds = getSelectedEmployees();
@@ -287,6 +313,17 @@ function select_entity() {
               });
         });
     }
+}
+
+function refreshDataTable() {
+    date1 = $("#datehired1").val()!=""?$("#datehired1").val():"empty";
+    date2 = $("#datehired2").val()!=""?$("#datehired2").val():"empty";
+    filterDate = state1 + "/" + date1 + "/" + state2 + "/" + date2;
+    $('#frmModalAjaxWait').modal('show');
+    oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate)
+        .load(function() {
+            $("#frmModalAjaxWait").modal('hide');
+        }, true);
 }
 
 //Get the list of selected employees into the datatable
@@ -494,7 +531,7 @@ $(function () {
     //Transform the HTML table in a fancy datatable:
     // * Column ID cannot be moved or hidden because it is used for contextual actions
     oTable = $('#users').DataTable({
-            "ajax": '<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive,
+            "ajax": '<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate,
             columns: [
                 { data: "id" },
                 { data: "firstname" },
@@ -653,7 +690,7 @@ $(function () {
     
     //Select or deselect all rows
     $("#cmdSelectAll").click(function() {
-        oTable.rows().select();
+        oTable.rows({filter: 'applied'}).select();
         $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
     });
     $("#cmdDeselectAll").click(function() {
@@ -668,7 +705,7 @@ $(function () {
         includeChildren = $('#chkIncludeChildren').is(':checked');
         $.cookie('includeChildren', includeChildren);
         //Refresh datatable
-        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive)
+        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate)
             .load(function() {
                 $("#frmModalAjaxWait").modal('hide');
             }, true);
@@ -679,7 +716,7 @@ $(function () {
         $('#frmModalAjaxWait').modal('show');
         filterActive = "all";
         $.cookie('filterActive', filterActive);
-        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive)
+        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate)
             .load(function() {
                 $("#frmModalAjaxWait").modal('hide');
             }, true);
@@ -688,7 +725,7 @@ $(function () {
         $('#frmModalAjaxWait').modal('show');
         filterActive = "active";
         $.cookie('filterActive', filterActive);
-        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive)
+        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate)
             .load(function() {
                 $("#frmModalAjaxWait").modal('hide');
             }, true); 
@@ -697,7 +734,7 @@ $(function () {
         $('#frmModalAjaxWait').modal('show');
         filterActive = "inactive";
         $.cookie('filterActive', filterActive);
-        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive)
+        oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate)
             .load(function() {
                 $("#frmModalAjaxWait").modal('hide');
             }, true); 
@@ -705,7 +742,47 @@ $(function () {
     
     //On click button export, call the export to Excel view
     $("#cmdExportEmployees").click(function() {
-        window.location = '<?php echo base_url();?>hr/employees/export/' + entity + '/' + includeChildren + '/' + filterActive;
+        window.location = '<?php echo base_url();?>hr/employees/export/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate;
+    });
+
+    //Filter on date hired
+    $("#viz_datehired1").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: '<?php echo lang('global_date_js_format');?>',
+        altFormat: "yy-mm-dd",
+        altField: "#datehired1",
+        onSelect: function() {
+            refreshDataTable();
+        }
+    }, $.datepicker.regional['<?php echo $language_code;?>']);
+    $("#viz_datehired2").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: '<?php echo lang('global_date_js_format');?>',
+        altFormat: "yy-mm-dd",
+        altField: "#datehired2",
+        onSelect: function() {
+            refreshDataTable();
+        }
+    }, $.datepicker.regional['<?php echo $language_code;?>']);
+    
+    //Handle filters on date hired field
+    $("#cmdLesser1").click(function() {
+        state1="lesser";
+        refreshDataTable();
+    });
+    $("#cmdGreater1").click(function() {
+        state1="greater";
+        refreshDataTable();
+    });
+    $("#cmdLesser2").click(function() {
+        state2="lesser";
+        refreshDataTable();
+    });
+    $("#cmdGreater2").click(function() {
+        state2="greater";
+        refreshDataTable();
     });
 });
 </script>

@@ -547,10 +547,15 @@ class Users_model extends CI_Model {
      * @param int $id optional id of the entity, all entities if 0
      * @param bool $children TRUE : include sub entities, FALSE otherwise
      * @param string $filterActive "all"; "active" (only), or "inactive" (only)
+     * @param string $criterion1 "lesser" or "greater" (optional)
+     * @param string $date1 Date Hired (optional)
+     * @param string $criterion2 "lesser" or "greater" (optional)
+     * @param string $date2 Date Hired (optional)
      * @return array record of users
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function employeesOfEntity($id = 0, $children = TRUE, $filterActive = "all") {
+    public function employeesOfEntity($id = 0, $children = TRUE, $filterActive = "all",
+            $criterion1 = NULL, $date1 = NULL, $criterion2 = NULL, $date2 = NULL) {
         $this->db->select('users.id as id,'
                 . ' users.firstname as firstname,'
                 . ' users.lastname as lastname,'
@@ -588,6 +593,15 @@ class Users_model extends CI_Model {
         }
         if ($filterActive == "inactive") {
             $this->db->where('users.active', FALSE);
+        }
+        
+        if (!is_null($criterion1) && !is_null($date1) && $date1!="empty" && $date1!="undefined") {
+            $criterion1 = ($criterion1 == "greater"?">":"<");
+            $this->db->where("users.datehired " . $criterion1 . " STR_TO_DATE('" . $date1 . "', '%Y-%m-%d')");
+        }
+        if (!is_null($criterion2) && !is_null($date2) && $date2!="empty" && $date2!="undefined") {
+            $criterion2 = ($criterion2 == "greater"?">":"<");
+            $this->db->where("users.datehired " . $criterion2 . " STR_TO_DATE('" . $date2 . "', '%Y-%m-%d')");
         }
         
         return $this->db->get()->result();

@@ -201,7 +201,9 @@ class Extra extends CI_Controller {
     private function sendMail($id) {
         $this->load->model('users_model');
         $this->load->model('delegations_model');
-        $manager = $this->users_model->getUsers($this->session->userdata('manager'));
+        $extra = $this->overtime_model->getExtras($id);
+        $user = $this->users_model->getUsers($extra['employee']);
+        $manager = $this->users_model->getUsers($user['manager']);
 
         //Test if the manager hasn't been deleted meanwhile
         if (empty($manager['email'])) {

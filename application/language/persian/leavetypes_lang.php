@@ -19,16 +19,20 @@ $lang['leavetypes_type_button_export'] = 'صدور این لیست';
 $lang['leavetypes_type_button_create'] = 'ایجاد یک نوع جدید';
 $lang['leavetypes_type_not_found'] = 'هیچ نوع مرخصی در پایگاه داده ها پیدا نشد.';
 
+$lang['leavetypes_js_unique_error_msg'] = 'This leave type already exists.';
+
 $lang['leavetypes_popup_create_title'] = 'یک نوع مرخصی اضافه نمایید';
 $lang['leavetypes_popup_create_button_cancel'] = 'لغو';
 $lang['leavetypes_popup_create_button_create'] = 'ایجاد';
 $lang['leavetypes_popup_create_field_name'] = 'نام';
 $lang['leavetypes_popup_create_flash_msg'] = 'نوع مرخصی موفقانه ایجاد گردید.';
+
 $lang['leavetypes_popup_update_title'] = 'ویرایش یک نوع مرخصی';
 $lang['leavetypes_popup_update_button_cancel'] = 'لغو';
 $lang['leavetypes_popup_update_button_update'] = 'به روزرسانی';
 $lang['leavetypes_popup_update_field_name'] = 'نام';
 $lang['leavetypes_popup_update_flash_msg'] = 'نوع مرخصی موفقانه به روزرسانی گردید.';
+
 $lang['leavetypes_popup_delete_title'] = 'حذف نوع مرخصی';
 $lang['leavetypes_popup_delete_description'] = 'شما میخواهید یک نوع مرخصی را حذف نمایید، این عمل غیرقابل بازیابی میباشد.';
 $lang['leavetypes_popup_delete_confirm'] = 'آیا میخواهید ادامه بدهید؟';

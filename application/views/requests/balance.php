@@ -34,7 +34,7 @@
             <?php foreach ($result as $row): ?>
                 <tr>
                     <?php foreach ($row as $key => $value): ?>
-                    <td><?php echo $value; ?></td>
+                    <td><?php echo $value == '' ? '&nbsp;' : $value; ?></td>
                     <?php endforeach ?>
                 </tr>
             <?php endforeach ?>

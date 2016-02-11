@@ -19,16 +19,20 @@ $lang['leavetypes_type_button_export'] = 'Exporta a listado';
 $lang['leavetypes_type_button_create'] = 'Crear un nuevo tipo';
 $lang['leavetypes_type_not_found'] = 'No existen ningún tipo de permiso.';
 
+$lang['leavetypes_js_unique_error_msg'] = 'This leave type already exists.';
+
 $lang['leavetypes_popup_create_title'] = 'Añade un tipo de permiso';
 $lang['leavetypes_popup_create_button_cancel'] = 'Cancelar';
 $lang['leavetypes_popup_create_button_create'] = 'Crear';
 $lang['leavetypes_popup_create_field_name'] = 'Nombre';
 $lang['leavetypes_popup_create_flash_msg'] = 'El tipo de permiso ha sido creado correctamente.';
+
 $lang['leavetypes_popup_update_title'] = 'Editar un tipo de permiso';
 $lang['leavetypes_popup_update_button_cancel'] = 'Cancelar';
 $lang['leavetypes_popup_update_button_update'] = 'Modificar';
 $lang['leavetypes_popup_update_field_name'] = 'Nombre';
 $lang['leavetypes_popup_update_flash_msg'] = 'El tipo de permiso ha sido modificado correctamente.';
+
 $lang['leavetypes_popup_delete_title'] = 'Borrar el tipo de permiso';
 $lang['leavetypes_popup_delete_description'] = 'Estás a punto de eliminar un tipo de permiso, este acción no se puede deshacer.';
 $lang['leavetypes_popup_delete_confirm'] = '¿Quieres continuar?';

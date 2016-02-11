@@ -19,16 +19,20 @@ $lang['leavetypes_type_button_export'] = 'Експортувати список'
 $lang['leavetypes_type_button_create'] = 'Створити новий тип';
 $lang['leavetypes_type_not_found'] = 'Тип відпустки не знайдено в базі даних';
 
+$lang['leavetypes_js_unique_error_msg'] = 'This leave type already exists.';
+
 $lang['leavetypes_popup_create_title'] = 'Додати тип відпустки';
 $lang['leavetypes_popup_create_button_cancel'] = 'Скасувати';
 $lang['leavetypes_popup_create_button_create'] = 'Створити';
 $lang['leavetypes_popup_create_field_name'] = 'Назва';
 $lang['leavetypes_popup_create_flash_msg'] = 'Тип відпустки успішно створений';
+
 $lang['leavetypes_popup_update_title'] = 'Редагувати тип відпустки';
 $lang['leavetypes_popup_update_button_cancel'] = 'Скасувати';
 $lang['leavetypes_popup_update_button_update'] = 'Оновити';
 $lang['leavetypes_popup_update_field_name'] = 'Назва';
 $lang['leavetypes_popup_update_flash_msg'] = 'Тип відпустки успішно оновлений';
+
 $lang['leavetypes_popup_delete_title'] = 'Видалити тип відпустки';
 $lang['leavetypes_popup_delete_description'] = 'Ви збираєтесь видалити один тип відпустки. Цю дію не можна буде скасувати.';
 $lang['leavetypes_popup_delete_confirm'] = 'Продовжити?';

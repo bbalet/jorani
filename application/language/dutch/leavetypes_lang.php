@@ -19,16 +19,20 @@ $lang['leavetypes_type_button_export'] = 'Exporteer dit overzicht';
 $lang['leavetypes_type_button_create'] = 'Maak een nieuw type aan';
 $lang['leavetypes_type_not_found'] = 'Geen afwezigheidstype gevonden in database.';
 
+$lang['leavetypes_js_unique_error_msg'] = 'This leave type already exists.';
+
 $lang['leavetypes_popup_create_title'] = 'Voeg een afwezigheidstype toe';
 $lang['leavetypes_popup_create_button_cancel'] = 'Annuleren';
 $lang['leavetypes_popup_create_button_create'] = 'Aanmaken';
 $lang['leavetypes_popup_create_field_name'] = 'Naam';
 $lang['leavetypes_popup_create_flash_msg'] = 'Het afwezigheidstype is succesvol toegevoegd';
+
 $lang['leavetypes_popup_update_title'] = 'Bewerk afwezigheidstype';
 $lang['leavetypes_popup_update_button_cancel'] = 'Annuleren';
 $lang['leavetypes_popup_update_button_update'] = 'Bijwerken';
 $lang['leavetypes_popup_update_field_name'] = 'Naam';
 $lang['leavetypes_popup_update_flash_msg'] = 'Het afwezigheidstype is succesvol bijgewerkt';
+
 $lang['leavetypes_popup_delete_title'] = 'Verwijder afwezigheidstype';
 $lang['leavetypes_popup_delete_description'] = 'U staat op het punt om een afwezigheidstype te verwijderen. Dit kan niet hersteld worden.';
 $lang['leavetypes_popup_delete_confirm'] = 'Wilt u verder gaan?';

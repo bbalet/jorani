@@ -18,6 +18,8 @@ $lang['leavetypes_type_button_export'] = 'Export this list';
 $lang['leavetypes_type_button_create'] = 'Create a new type';
 $lang['leavetypes_type_not_found'] = 'No leave type found into the database.';
 
+$lang['leavetypes_js_unique_error_msg'] = 'This leave type already exists.';
+
 $lang['leavetypes_popup_create_title'] = 'Add a leave type';
 $lang['leavetypes_popup_create_button_cancel'] = 'Cancel';
 $lang['leavetypes_popup_create_button_create'] = 'Create';

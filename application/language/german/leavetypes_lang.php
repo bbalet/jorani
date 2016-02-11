@@ -19,6 +19,8 @@ $lang['leavetypes_type_button_export'] = 'Diese Liste exportieren';
 $lang['leavetypes_type_button_create'] = 'Neue Art erstellen';
 $lang['leavetypes_type_not_found'] = 'Keine Abwesenheitsart in Datenbank gefunden';
 
+$lang['leavetypes_js_unique_error_msg'] = 'This leave type already exists.';
+
 $lang['leavetypes_popup_create_title'] = 'Abwesenheitsart hinzufügen';
 $lang['leavetypes_popup_create_button_cancel'] = 'Abbrechen';
 $lang['leavetypes_popup_create_button_create'] = 'Erstellen';

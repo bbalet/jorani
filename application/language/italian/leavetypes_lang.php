@@ -19,16 +19,20 @@ $lang['leavetypes_type_button_export'] = 'Esporta questo elenco';
 $lang['leavetypes_type_button_create'] = 'Crea una nuova tipologia';
 $lang['leavetypes_type_not_found'] = 'Nessuna tipologia di ferie trovata nel database';
 
+$lang['leavetypes_js_unique_error_msg'] = 'This leave type already exists.';
+
 $lang['leavetypes_popup_create_title'] = 'Aggiungi una tipologia di ferie';
 $lang['leavetypes_popup_create_button_cancel'] = 'Annulla';
 $lang['leavetypes_popup_create_button_create'] = 'Crea';
 $lang['leavetypes_popup_create_field_name'] = 'Nome';
 $lang['leavetypes_popup_create_flash_msg'] = 'La tipologia di ferie è stata creata con successo';
+
 $lang['leavetypes_popup_update_title'] = 'Modifica una richiesta di ferie';
 $lang['leavetypes_popup_update_button_cancel'] = 'Annulla';
 $lang['leavetypes_popup_update_button_update'] = 'Aggiorna';
 $lang['leavetypes_popup_update_field_name'] = 'Nome';
 $lang['leavetypes_popup_update_flash_msg'] = 'La tipologia di ferie è stata aggiornata con successo.';
+
 $lang['leavetypes_popup_delete_title'] = 'Elimina tipologia ferie';
 $lang['leavetypes_popup_delete_description'] = 'Stai per cancellare una tipologia di ferie, questa procedura è irreversibile.';
 $lang['leavetypes_popup_delete_confirm'] = 'Vuoi proseguire?';

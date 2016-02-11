@@ -20,6 +20,8 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] Migrate all datatables to the new language initiatlization.
 - [ ] For all datatables, try to simplify the code with databinding.
 - [ ] Maybe user/index : Ajaxload.
+- [ ] Multiple creation of a leave request.
+- [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
 
 ## v0.5.0 or later
 

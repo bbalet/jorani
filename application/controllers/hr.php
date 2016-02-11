@@ -116,7 +116,7 @@ class Hr extends CI_Controller {
             $employees = $this->input->post('employees', TRUE);
             $objectEmployees = json_decode($employees);
             $this->load->model('users_model');
-            $result = $this->users_model->updateManagerForUserList($managerId, $objectEmployees->employeeIds);
+            $result = $this->users_model->updateManagerForUserList($managerId, $objectEmployees);
             echo $result;
         }
     }
@@ -134,7 +134,7 @@ class Hr extends CI_Controller {
             $employees = $this->input->post('employees', TRUE);
             $objectEmployees = json_decode($employees);
             $this->load->model('users_model');
-            $result = $this->users_model->updateEntityForUserList($entityId, $objectEmployees->employeeIds);
+            $result = $this->users_model->updateEntityForUserList($entityId, $objectEmployees);
             echo $result;
         }
     }
@@ -152,7 +152,7 @@ class Hr extends CI_Controller {
             $employees = $this->input->post('employees', TRUE);
             $objectEmployees = json_decode($employees);
             $this->load->model('users_model');
-            $result = $this->users_model->updateContractForUserList($contractId, $objectEmployees->employeeIds);
+            $result = $this->users_model->updateContractForUserList($contractId, $objectEmployees);
             echo $result;
         }
     }

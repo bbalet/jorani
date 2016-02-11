@@ -333,7 +333,7 @@ function getSelectedEmployees() {
     oTable.rows({selected: true}).every( function () {
         employeeIds.push(this.data().id);
      });
-     return JSON.stringify({employeeIds});
+     return JSON.stringify(employeeIds);
 }
 
 //Popup select manager: on click OK, find the id of all selected employees and update their manager.

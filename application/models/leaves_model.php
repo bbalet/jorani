@@ -297,7 +297,9 @@ class Leaves_model extends CI_Model {
                 }
                 $sum += (float) $entitled['duration']; //entitled
             }
-            $this->db->select('sum(leaves.duration) as taken');
+            //This query give a sum of durations on the leave type 0, so it should be a const declared in the config file. no ?
+            //For my example, type 0 is paid leave so i have wrong counter if i leave this query, so i have commented this part - it's a temporary resolution
+            /*$this->db->select('sum(leaves.duration) as taken');
             $this->db->from('leaves');
             $this->db->where('leaves.employee', $id);
             $this->db->where('leaves.status', 3);
@@ -314,7 +316,7 @@ class Leaves_model extends CI_Model {
             if (array_key_exists($compensate_name, $summary)) {
                 $summary[$compensate_name][1] = (float) $summary[$compensate_name][1] + $sum; //entitled
             }
-            
+            */
             //Remove all lines having taken and entitled set to set to 0
             foreach ($summary as $key => $value) {
                 if ($value[0]==0 && $value[1]==0) {

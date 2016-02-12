@@ -19,3 +19,4 @@ $lang['session_login_msg_unknown_login'] = 'Identificación desconocidad. Por fa
 $lang['session_login_msg_password_sent'] = 'La contraseña ha sido enviada a su e-mail.';
 $lang['session_login_flash_bad_credentials'] = 'Identificación o contraseña incorrecta';
 $lang['session_login_flash_change_language'] = 'El idioma se ha establecido correctamente a';
+$lang['session_login_flash_account_disabled'] = 'Your account is disabled. Please contact your HR Officer / Manager.';

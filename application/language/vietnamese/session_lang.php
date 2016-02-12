@@ -19,3 +19,4 @@ $lang['session_login_msg_unknown_login'] = 'User không tồn tại. Hãy liên 
 $lang['session_login_msg_password_sent'] = 'Mật khẩu đã được gửi vào e-mail của bạn';
 $lang['session_login_flash_bad_credentials'] = 'Thông tin đăng nhập và mật khẩu không chính xác';
 $lang['session_login_flash_change_language'] = 'Đã chuyển ngôn ngữ';
+$lang['session_login_flash_account_disabled'] = 'Your account is disabled. Please contact your HR Officer / Manager.';

@@ -19,3 +19,4 @@ $lang['session_login_msg_unknown_login'] = 'Login sconosciuto. Si prega di conta
 $lang['session_login_msg_password_sent'] = 'La password è stata inviata al tuo indirizzo e-mail.';
 $lang['session_login_flash_bad_credentials'] = 'Login o password non validi';
 $lang['session_login_flash_change_language'] = 'La lingua è stata cambiata con successo in ';
+$lang['session_login_flash_account_disabled'] = 'Your account is disabled. Please contact your HR Officer / Manager.';

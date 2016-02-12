@@ -19,3 +19,4 @@ $lang['session_login_msg_unknown_login'] = 'Unbekanntes Anmelden';
 $lang['session_login_msg_password_sent'] = 'Ein neues Passwort wurde Ihnen per Mail zugesandt.';
 $lang['session_login_flash_bad_credentials'] = 'Unbekannter Benutzername oder Passwort';
 $lang['session_login_flash_change_language'] = 'Sprache wurde erfolgreich gesetzt auf';
+$lang['session_login_flash_account_disabled'] = 'Your account is disabled. Please contact your HR Officer / Manager.';

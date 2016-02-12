@@ -132,7 +132,11 @@ class Session extends CI_Controller {
             
             if ($loggedin == FALSE) {
                 log_message('error', '{controllers/session/login} Invalid login id or password for user=' . $this->input->post('login'));
-                $this->session->set_flashdata('msg', lang('session_login_flash_bad_credentials'));
+                if ($this->users_model->isActive($this->input->post('login'))) {
+                    $this->session->set_flashdata('msg', lang('session_login_flash_bad_credentials'));
+                } else {
+                    $this->session->set_flashdata('msg', lang('session_login_flash_account_disabled'));
+                }
                 redirect('session/login');
             } else {
                 //If the user has a target page (e.g. link in an e-mail), redirect to this destination

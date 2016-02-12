@@ -19,3 +19,4 @@ $lang['session_login_msg_unknown_login'] = 'Onbekende login. Neem aub contact op
 $lang['session_login_msg_password_sent'] = 'Het wachtwoord is naar uw email adres gestuurd.';
 $lang['session_login_flash_bad_credentials'] = 'Ongeldige login of wachtwoord';
 $lang['session_login_flash_change_language'] = 'De taal is succesvol bijgewerkt naar';
+$lang['session_login_flash_account_disabled'] = 'Your account is disabled. Please contact your HR Officer / Manager.';

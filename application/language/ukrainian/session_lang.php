@@ -19,3 +19,4 @@ $lang['session_login_msg_unknown_login'] = 'Невірну ім\'я корист
 $lang['session_login_msg_password_sent'] = 'Пароль був висланий на вашу електронну адресу.';
 $lang['session_login_flash_bad_credentials'] = 'Невірне ім\'я користувача або пароль';
 $lang['session_login_flash_change_language'] = 'Мова біла успішно встановлена на';
+$lang['session_login_flash_account_disabled'] = 'Your account is disabled. Please contact your HR Officer / Manager.';

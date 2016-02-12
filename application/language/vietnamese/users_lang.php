@@ -35,6 +35,7 @@ $lang['users_index_popup_import_title'] = 'Nhập danh sách User';
 $lang['users_index_popup_field_filename'] = 'Tên File';
 $lang['users_index_popup_import_button_cancel'] = 'Hủy bỏ';
 $lang['employees_index_title'] = 'Danh sách nhân viên';
+
 $lang['users_myprofile_title'] = 'Thông tin các nhân của tôi';
 $lang['users_myprofile_html_title'] = 'Thông tin các nhân của tôi';
 $lang['users_myprofile_field_firstname'] = 'Tên';
@@ -45,6 +46,7 @@ $lang['users_myprofile_field_position'] = 'Chức danh';
 $lang['users_myprofile_field_entity'] = 'Thực thể';
 $lang['users_myprofile_field_hired'] = 'Ngày tuyển dụng';
 $lang['users_myprofile_field_identifier'] = 'Mã cán bộ';
+
 $lang['users_edit_title'] = 'Sửa đổi thông tin user #';
 $lang['users_edit_html_title'] = 'Sửa đổi thông tin user';
 $lang['users_edit_field_firstname'] = 'Tên';
@@ -76,9 +78,11 @@ $lang['users_edit_popup_position_button_ok'] = 'Chấp nhận';
 $lang['users_edit_popup_position_button_cancel'] = 'Hủy bỏ';
 $lang['users_edit_button_update'] = 'Cập nhật thông tin user';
 $lang['users_edit_button_cancel'] = 'Hủy bỏ';
+
 $lang['users_edit_flash_msg_success'] = 'Thông tin user được cập nhật thành công';
 $lang['users_delete_flash_msg_success'] = 'User đã bị xóa';
 $lang['users_reset_flash_msg_success'] = 'Mật khẩu đã được thanh đổi thành công';
+
 $lang['users_create_title'] = 'Tạo User mới';
 $lang['users_create_field_firstname'] = 'Tên';
 $lang['users_create_field_lastname'] = 'Họ';
@@ -111,17 +115,21 @@ $lang['users_create_field_manager_alt'] = 'Không có người quản lý trực
 $lang['users_create_button_generate_password'] = 'Tạo mật khẩu';
 $lang['users_create_button_create'] = 'Tạo User';
 $lang['users_create_button_cancel'] = 'Hủy bỏ';
-$lang['users_create_mandatory_js_msg'] = '"Trường " + tên trường + " là bắt buộc."';
-$lang['users_create_no_contract_confirm'] = 'It is recommended to select a contract. Do you want to create the user without a contract?';
+$lang['users_create_mandatory_js_msg'] = '"Trường " + fieldname + " là bắt buộc."';
+$lang['users_create_no_contract_confirm'] = 'Khuyến nghị bạn chọn một hợp đồng. Bạn muốn tạo người dùng mà không có hợp đồng?';
 $lang['users_create_flash_msg_success'] = 'User đã được tạo thành công';
 $lang['users_create_login_check'] = 'User đã tồn tại';
+
 $lang['users_create_flash_msg_error'] = 'User này không sẵn sàng';
+
 $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Tên';
 $lang['users_employees_thead_lastname'] = 'Họ';
 $lang['users_employees_thead_email'] = 'E-mail';
+
 $lang['users_reset_field_password'] = 'Mật khẩu';
 $lang['users_reset_button_reset'] = 'Reset';
+
 $lang['users_export_title'] = 'Danh sách người sử dụng';
 $lang['users_export_thead_id'] = 'ID';
 $lang['users_export_thead_firstname'] = 'Tên';

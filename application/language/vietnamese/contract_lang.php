@@ -27,6 +27,7 @@ $lang['contract_index_popup_delete_button_no'] = 'không';
 $lang['contract_index_popup_entitled_title'] = 'Gán tiêu đề cho ngày';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Hủy bỏ';
 $lang['contract_index_popup_entitled_button_close'] = 'Đóng';
+
 $lang['contract_edit_title'] = 'Sửa hợp đồng';
 $lang['contract_edit_description'] = 'Sửa hợp đồng số';
 $lang['contract_edit_field_name'] = 'Tên';
@@ -37,6 +38,7 @@ $lang['contract_edit_field_end_day'] = 'Ngày / kết thúc';
 $lang['contract_edit_button_update'] = 'Cập nhật hợp đồng';
 $lang['contract_edit_button_cancel'] = 'Hủy bỏ';
 $lang['contract_edit_msg_success'] = 'Hợp đồng đã cập nhật thành công';
+
 $lang['contract_create_title'] = 'Tạo hợp đồng mới';
 $lang['contract_create_field_name'] = 'Tên';
 $lang['contract_create_field_start_month'] = 'Tháng / Bắt đầu';
@@ -46,14 +48,17 @@ $lang['contract_create_field_end_day'] = 'Ngày / kết thúc';
 $lang['contract_create_button_create'] = 'Tạo hợp đồng';
 $lang['contract_create_button_cancel'] = 'Hủy bỏ';
 $lang['contract_create_msg_success'] = 'Hợp đồng đã tạo thành công';
+
 $lang['contract_delete_msg_success'] = 'Hợp đồng đã được xóa.';
+
 $lang['contract_export_title'] = 'Danh sách các hợp đồng';
 $lang['contract_export_thead_id'] = 'ID';
 $lang['contract_export_thead_name'] = 'Tên';
 $lang['contract_export_thead_start'] = 'Bắt đầu làm việc';
 $lang['contract_export_thead_end'] = 'Kết thúc làm việc';
+
 $lang['contract_calendar_title'] = 'Lịch biểu ngày không làm việc';
-$lang['contract_calendar_description'] = 'Days off and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".';
+$lang['contract_calendar_description'] = 'Ngày lễ và ngày nghỉ không được thiết lập mặc địnhbởi hệ thống. Nhấp chọn vào một ngày để tự thiết lập hoặc nhấn nút \"Series\"';
 $lang['contract_calendar_legend_title'] = 'Chú thích:';
 $lang['contract_calendar_legend_allday'] = 'Cả ngày';
 $lang['contract_calendar_legend_morning'] = 'Sáng';

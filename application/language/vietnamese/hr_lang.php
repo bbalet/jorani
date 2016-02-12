@@ -81,7 +81,7 @@ $lang['hr_leaves_thead_type'] = 'Loại';
 $lang['hr_leaves_button_export'] = 'Xuất danh sách';
 $lang['hr_leaves_button_list'] = 'Danh sách nhân viên';
 $lang['hr_leaves_popup_delete_title'] = 'Xóa yêu cầu nghỉ';
-$lang['hr_leaves_popup_delete_message'] = 'You are about to delete one leave request, this procedure is irreversible.';
+$lang['hr_leaves_popup_delete_message'] = 'Bạn muốn xóa một đề nghị nghỉ phép, thao tác này không thể phục hồi lại.';
 $lang['hr_leaves_popup_delete_question'] = 'Bạn muốn tiếp tục chứ?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Có';
 $lang['hr_leaves_popup_delete_button_no'] = 'không';
@@ -93,6 +93,7 @@ $lang['hr_export_leaves_thead_start'] = 'Ngày bắt đầu';
 $lang['hr_export_leaves_thead_end'] = 'Ngày kết thúc';
 $lang['hr_export_leaves_thead_duration'] = 'Khoảng thời gian';
 $lang['hr_export_leaves_thead_type'] = 'Loại';
+
 $lang['hr_leaves_create_title'] = 'Đệ trình một yêu cầu nghỉ';
 $lang['hr_leaves_create_field_start'] = 'Ngày bắt đầu';
 $lang['hr_leaves_create_field_end'] = 'Ngày kết thúc';
@@ -105,11 +106,12 @@ $lang['hr_leaves_create_field_status'] = 'Trạng thái';
 $lang['hr_leaves_create_button_create'] = 'Yêu cầu nghỉ';
 $lang['hr_leaves_create_button_cancel'] = 'Hủy bỏ';
 $lang['hr_leaves_create_flash_msg_success'] = 'Yêu cầu nghỉ đã được tạo thành công';
-$lang['hr_leaves_create_flash_msg_error'] = 'The leave request has been succesfully created or updated, but you don\'t have a manager.';
+$lang['hr_leaves_create_flash_msg_error'] = 'Yêu cầu nghỉ đã được tạo và cập nhật thành công, nhưng User của bạn không có ai quản lý.';
 $lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
 $lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
-$lang['hr_leaves_validate_mandatory_js_msg'] = '"Trường " + tên trường + " là bắt buộc."';
-$lang['hr_leaves_validate_flash_msg_no_contract'] = 'It appears that you have no contract. Please contact your HR Officer / Manager.';
+
+$lang['hr_leaves_validate_mandatory_js_msg'] = '"Trường " + fieldname + " là bắt buộc."';
+$lang['hr_leaves_validate_flash_msg_no_contract'] = 'Hiển thị bạn không có hợp đồng. Vui lòng liên hệ Trưởng bộ phận nhân sự của bạn.';
 $lang['hr_leaves_validate_flash_msg_overlap_period'] = 'You can\'t create a leave request for two yearly leave periods. Please create two different leave requests.';
 
 $lang['hr_overtime_title'] = 'Danh sách các yêu cầu làm thêm giờ';
@@ -149,7 +151,7 @@ $lang['hr_summary_button_list'] = 'Danh sách nhân viên';
 $lang['hr_summary_date_field'] = 'Ngày báo cáo';
 
 $lang['hr_presence_title'] = 'Báo cáo có mặt';
-$lang['hr_presence_description'] = 'By default this report shows the values for the last month. Please note that the list of leaves shows only the accepted leave requests.';
+$lang['hr_presence_description'] = 'Mặc định báo cáo này sẽ hiển thị số liệu trong tháng trước. Xin lưu ý rằng danh sách ngày nghỉ này chỉ hiển thị các đề nghị nghỉ phép được chấp nhận.';
 $lang['hr_presence_thead_tip_edit'] = 'sửa';
 $lang['hr_presence_thead_id'] = 'ID';
 $lang['hr_presence_thead_start'] = 'Ngày bắt đầu';

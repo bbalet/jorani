@@ -9,7 +9,7 @@
  */
 
 $lang['requests_index_title'] = 'Yêu cầu nghỉ đã được đệ trình cho tôi';
-$lang['requests_index_description'] = 'This screen lists the leave requests submitted to you. If you are not a manager, this list will always be empty.';
+$lang['requests_index_description'] = 'Danh sách này hiển ghị các yêu cầu nghỉ được đệ trình cho bạn. Nếu bạn không phải là lãnh đạo, danh sách này sẽ trống.';
 $lang['requests_index_thead_tip_view'] = 'xem';
 $lang['requests_index_thead_tip_accept'] = 'chấp nhận';
 $lang['requests_index_thead_tip_reject'] = 'từ chối';
@@ -49,7 +49,7 @@ $lang['requests_index_button_show_pending'] = 'Các yêu cầu chờ phê duyệ
 
 $lang['requests_accept_flash_msg_error'] = 'You are not the line manager of this employee. You cannot accept this leave request.';
 $lang['requests_accept_flash_msg_success'] = 'Yêu cầu nghỉ đã được chấp nhận';
-$lang['requests_reject_flash_msg_error'] = 'You are not the line manager of this employee. You cannot reject this leave request.';
+$lang['requests_reject_flash_msg_error'] = 'Bạn không phải là quản lý trực tiếp của nhân viên này. Bạn không thể từ chối đề nghị nghỉ phép này.';
 $lang['requests_reject_flash_msg_success'] = 'Yêu cầu nghỉ đã bị từ chối';
 
 $lang['requests_export_title'] = 'Danh sách các yêu cầu nghỉ';
@@ -65,7 +65,7 @@ $lang['requests_export_thead_cause'] = 'lý do';
 $lang['requests_export_thead_status'] = 'Trạng thái';
 
 $lang['requests_delegations_title'] = 'Danh sách uỷ quyền';
-$lang['requests_delegations_description'] = 'This is the list of employees who can accept or reject a request in your behalf.';
+$lang['requests_delegations_description'] = 'Danh sách người thay mặt bạn chấp nhận hoặc từ chối các yêu cầu.';
 $lang['requests_delegations_thead_employee'] = 'Nhân viên';
 $lang['requests_delegations_thead_tip_delete'] = 'Thu hồi';
 $lang['requests_delegations_button_add'] = 'Thêm';

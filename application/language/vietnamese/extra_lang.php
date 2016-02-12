@@ -24,6 +24,7 @@ $lang['extra_index_popup_delete_message'] = 'You are about to delete one overtim
 $lang['extra_index_popup_delete_question'] = 'Bạn muốn tiếp tục chứ?';
 $lang['extra_index_popup_delete_button_yes'] = 'Có';
 $lang['extra_index_popup_delete_button_no'] = 'không';
+
 $lang['extra_create_title'] = 'Đệ trình yêu cầu làm thêm giờ';
 $lang['extra_create_field_date'] = 'Ngày';
 $lang['extra_create_field_duration'] = 'Khoảng thời gian';
@@ -33,8 +34,9 @@ $lang['extra_create_field_status'] = 'Trạng thái';
 $lang['extra_create_button_create'] = 'Yêu cầu làm thêm giờ';
 $lang['extra_create_button_cancel'] = 'Hủy bỏ';
 $lang['extra_create_msg_success'] = 'Yêu cầu làm thêm giờ đã được tạo thành công';
-$lang['extra_create_msg_error'] = 'The overtime request has been succesfully created or updated, but you don\'t have a manager.';
+$lang['extra_create_msg_error'] = 'Yêu cầu làm thêm giờ đã được tạo và cập nhật, nhưng User của bạn không có người quản lý.';
 $lang['extra_create_mandatory_js_msg'] = '"Trường " + tên trường + " là bắt buộc."';
+
 $lang['extra_edit_title'] = 'Sửa yêu cầu làm thêm giờ #';
 $lang['extra_edit_hmtl_title'] = 'Sửa một yêu cầu làm thêm giờ';
 $lang['extra_edit_field_date'] = 'Ngày';
@@ -46,8 +48,10 @@ $lang['extra_edit_button_update'] = 'Cập nhật làm thêm giờ';
 $lang['extra_edit_button_cancel'] = 'Hủy bỏ';
 $lang['extra_edit_msg_error'] = 'Bạn không thể sửa yêu cầu làm thêm giờ khi đã đệ trình';
 $lang['extra_edit_msg_success'] = 'Yêu cầu làm thêm giờ đã được cập nhật thành công';
+
 $lang['extra_delete_msg_success'] = 'Yêu cầu làm thêm giờ đã được xóa thành công';
-$lang['extra_delete_msg_error'] = 'You can\'t delete this overtime request';
+$lang['extra_delete_msg_error'] = 'Bạn không thể xóa yêu cầu làm thêm giờ';
+
 $lang['extra_view_title'] = 'Xem yêu cầu làm thêm giờ #';
 $lang['extra_view_hmtl_title'] = 'Xem yêu cầu làm thê giờ';
 $lang['extra_view_field_date'] = 'Ngày';

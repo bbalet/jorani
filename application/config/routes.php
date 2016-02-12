@@ -68,6 +68,7 @@ $route['hr/employees/edit/manager'] = 'hr/editManager';
 $route['hr/employees/edit/entity'] = 'hr/editEntity';
 $route['hr/employees/edit/contract'] = 'hr/editContract';
 $route['hr/employees/edit/entitlements'] = 'hr/editEntitlements';
+$route['hr/employees/create/leave'] = 'hr/createLeaveRequest';
 $route['hr/leaves/(:num)'] = 'hr/leaves/$1';
 $route['hr/leaves/export/(:num)'] = 'hr/exportLeaves/$1';
 $route['hr/overtime/(:num)'] = 'hr/overtime/$1';

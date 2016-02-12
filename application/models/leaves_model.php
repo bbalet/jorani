@@ -402,7 +402,7 @@ class Leaves_model extends CI_Model {
     /**
      * Create a leave request
      * @param int $id Identifier of the employee
-     * @return int id of the newly acreated leave request into the db
+     * @return int id of the newly created leave request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function setLeaves($id) {
@@ -420,6 +420,38 @@ class Leaves_model extends CI_Model {
         $this->db->insert('leaves', $data);
         return $this->db->insert_id();
     }
+    
+    /**
+     * Create the same leave request for a list of employees
+     * @param int $type Identifier of the leave type
+     * @param float $duration duration of the leave
+     * @param string $startdate Start date (MySQL format YYYY-MM-DD)
+     * @param string $enddate End date (MySQL format YYYY-MM-DD)
+     * @param string $startdatetype Start date type of the leave (Morning/Afternoon)
+     * @param string $enddatetype End date type of the leave (Morning/Afternoon)
+     * @param string $cause Identifier of the leave
+     * @param int $status status of the leave
+     * @param array $employees List of DB Ids of the affected employees
+     * @return int Result
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function createRequestForUserList($type, $duration, $startdate, $enddate,
+                    $startdatetype, $enddatetype, $cause, $status, $employees) {
+        $data = array();
+        foreach ($employees as $id) {
+            $data[] = array(
+                'startdate' => $this->input->post('startdate'),
+                'startdatetype' => $this->input->post('startdatetype'),
+                'enddate' => $this->input->post('enddate'),
+                'enddatetype' => $this->input->post('enddatetype'),
+                'duration' => abs($this->input->post('duration')),
+                'type' => $this->input->post('type'),
+                'cause' => $this->input->post('cause'),
+                'status' => $this->input->post('status'),
+                'employee' => $id);
+        }
+        return $this->db->insert_batch('leaves', $data); 
+    }
 
     /**
      * Create a leave request (suitable for API use)
@@ -430,7 +462,7 @@ class Leaves_model extends CI_Model {
      * @param string $cause Optional reason of the leave
      * @param string $startdatetype Start date type (Morning/Afternoon)
      * @param string $enddatetype End date type (Morning/Afternoon)
-     * @param int $duration Length of the leave request
+     * @param float $duration duration of the leave request
      * @param int $type Type of leave (except compensate, fully customizable by user)
      * @return int id of the newly acreated leave request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>

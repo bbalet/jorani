@@ -51,6 +51,7 @@ $lang['hr_employees_button_select_contract'] = 'Sélectionner le Contract';
 $lang['hr_employees_button_select_entity'] = 'Sélectionner l\'entité';
 $lang['hr_employees_popup_contract_title'] = 'Sélectionner le contract';
 $lang['hr_employees_button_entitleddays'] = 'Crédits congés';
+$lang['hr_employees_button_create_request'] = 'Créer une nouvelle demande';
 
 $lang['hr_employees_popup_manager_title'] = 'Sélectionnez le manager';
 $lang['hr_employees_multiple_edit_selection_msg'] = 'Vous devez sélectionner au moins une ligne dans la table';

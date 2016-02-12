@@ -37,6 +37,7 @@ class Hr extends CI_Controller {
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $this->lang->load('entitleddays', $this->language);
+        $this->lang->load('leaves', $this->language);
         $data['title'] = lang('hr_employees_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_employees');
         $this->load->model('contracts_model');
@@ -153,6 +154,33 @@ class Hr extends CI_Controller {
             $objectEmployees = json_decode($employees);
             $this->load->model('users_model');
             $result = $this->users_model->updateContractForUserList($contractId, $objectEmployees);
+            echo $result;
+        }
+    }
+    
+    /**
+     * Ajax endpoint: create a leave request for a list of employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function createLeaveRequest() {
+        header("Content-Type: application/json");
+        if ($this->auth->isAllowed('list_employees') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $type = $this->input->post('type', TRUE);
+            $duration = $this->input->post('duration', TRUE);
+            $startdate = $this->input->post('startdate', TRUE);
+            $enddate = $this->input->post('enddate', TRUE);
+            $startdatetype = $this->input->post('startdatetype', TRUE);
+            $enddatetype = $this->input->post('enddatetype', TRUE);
+            $cause = $this->input->post('cause', TRUE);
+            $status = $this->input->post('status', TRUE);
+            $employees = $this->input->post('employees', TRUE);
+            $objectEmployees = json_decode($employees);
+            $this->load->model('leaves_model');
+            $result = $this->leaves_model->createRequestForUserList($type, $duration,
+                    $startdate, $enddate, $startdatetype, $enddatetype, $cause, $status,
+                    $objectEmployees);
             echo $result;
         }
     }

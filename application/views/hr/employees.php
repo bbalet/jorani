@@ -15,72 +15,78 @@
 
 <?php echo $flash_partial_view;?>
 
-<div class="accordion" id="accordion2">
-    <div class="accordion-group">
-        <div class="accordion-heading" style="background: #3097d1; border-color: #3097d1;">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="text-decoration:none; color:white;">
-                <i class="fa fa-sitemap"></i>&nbsp;<i class="fa fa-check-square-o"></i>&nbsp;<i class="fa fa-filter"></i>
-                <span class="pull-right">
-                    <i class="icon-chevron-down icon-white"></i>
-                </span>
-            </a>
-        </div>
-        <div id="collapseOne" class="accordion-body collapse in">
-            <div class="accordion-inner">
-                <div class="row-fluid">
-                    <div class="span4">
-                        <input type="hidden" name="entity" id="entity" />
-                         <label for="txtEntity"><?php echo lang('hr_employees_field_entity');?>
-                            <div class="input-append">
-                                <input type="text" id="txtEntity" name="txtEntity" readonly />
-                                <a id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('hr_employees_button_select');?></a>
-                            </div>
-                         </label>
+        <div class="row-fluid">
+            <div class="span4">
+                <input type="hidden" name="entity" id="entity" />
+                 <label for="txtEntity"><?php echo lang('hr_employees_field_entity');?>
+                    <div class="input-append">
+                        <input type="text" id="txtEntity" name="txtEntity" readonly />
+                        <a id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('hr_employees_button_select');?></a>
                     </div>
-                    <div class="span3">
-                      <input type="checkbox" id="chkIncludeChildren" /> <?php echo lang('hr_employees_field_subdepts');?>
-                    </div>
-                    <div class="span5">
-                      <?php echo lang('hr_employees_description');?>
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span4">
-                        <div class="btn-group" data-toggle="buttons-radio">
-                          <button id="cmdAll" type="button" class="btn"><?php echo lang('hr_employees_button_all');?></button>
-                          <button id="cmdActive" type="button" class="btn"><?php echo lang('hr_employees_button_active');?></button>
-                          <button id="cmdInactive" type="button" class="btn"><?php echo lang('hr_employees_button_inactive');?></button>
-                        </div>
-                    </div>
-                    <div class="span8">
-                        <?php echo lang('hr_employees_thead_datehired');?>
-                        <div class="input-prepend">
-                            <div class="btn-group dropup">
-                                <div class="btn-group" data-toggle="buttons-radio">
-                                    <button id="cmdGreater1" type="button" class="btn active"><i class="fa fa-chevron-right"></i></button>
-                                    <button id="cmdLesser1" type="button" class="btn"><i class="fa fa-chevron-left"></i></button>
-                                </div>
-                                <input type="text" id="viz_datehired1" class="input-small" readonly />
-                            </div>                            
-                        </div>
-                        &nbsp;&mdash;&nbsp;
-                        <div class="input-prepend">
-                            <div class="btn-group dropup">
-                                <div class="btn-group" data-toggle="buttons-radio">
-                                    <button id="cmdGreater2" type="button" class="btn"><i class="fa fa-chevron-right"></i></button>
-                                    <button id="cmdLesser2" type="button" class="btn active"><i class="fa fa-chevron-left"></i></button>
-                                </div>
-                                <input type="text" id="viz_datehired2" class="input-small" readonly />
-                            </div>                            
-                        </div>
-                        <input type="hidden" name="datehired1" id="datehired1" />
-                        <input type="hidden" name="datehired2" id="datehired2" />
-                    </div>
-                </div>
+                 </label>
+            </div>
+            <div class="span3">
+              <input type="checkbox" id="chkIncludeChildren" /> <?php echo lang('hr_employees_field_subdepts');?>
+            </div>
+            <div class="span5">
+              <?php echo lang('hr_employees_description');?>
             </div>
         </div>
-    </div>
-</div>
+        <div class="row-fluid">
+            <div class="span3">
+                <div class="btn-group" data-toggle="buttons-radio">
+                  <button id="cmdAll" type="button" class="btn"><?php echo lang('hr_employees_button_all');?></button>
+                  <button id="cmdActive" type="button" class="btn"><?php echo lang('hr_employees_button_active');?></button>
+                  <button id="cmdInactive" type="button" class="btn"><?php echo lang('hr_employees_button_inactive');?></button>
+                </div>
+            </div>
+            <div class="span5">
+                <?php echo lang('hr_employees_thead_datehired');?>
+                <div class="input-prepend">
+                    <div class="btn-group">
+                        <div class="btn-group" data-toggle="buttons-radio">
+                            <button id="cmdGreater1" type="button" class="btn active"><i class="fa fa-chevron-right"></i></button>
+                            <button id="cmdLesser1" type="button" class="btn"><i class="fa fa-chevron-left"></i></button>
+                        </div>
+                        <input type="text" id="viz_datehired1" class="input-small" readonly />
+                    </div>                            
+                </div>
+                &nbsp;&mdash;&nbsp;
+                <div class="input-prepend">
+                    <div class="btn-group">
+                        <div class="btn-group" data-toggle="buttons-radio">
+                            <button id="cmdGreater2" type="button" class="btn"><i class="fa fa-chevron-right"></i></button>
+                            <button id="cmdLesser2" type="button" class="btn active"><i class="fa fa-chevron-left"></i></button>
+                        </div>
+                        <input type="text" id="viz_datehired2" class="input-small" readonly />
+                    </div>                            
+                </div>
+                <input type="hidden" name="datehired1" id="datehired1" />
+                <input type="hidden" name="datehired2" id="datehired2" />
+            </div>
+            <div class="span4">
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button id="cmdSelection" class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                          <i class="fa fa-pencil"></i>&nbsp;<?php echo lang('hr_employees_button_selection');?>&nbsp;<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="cmdCreateRequest"><i class="fa fa-plus"></i>&nbsp;<?php echo lang('hr_employees_button_create_request');?></a></li>
+                            <li><a href="#" id="cmdSelectManager"><i class="fa fa-user"></i>&nbsp;<?php echo lang('hr_employees_button_select_manager');?></a></li>
+                            <li><a href="#" id="cmdAddEntitlments"><i class="fa fa-pencil-square-o"></i>&nbsp;<?php echo lang('hr_employees_button_entitleddays');?></a></li>
+                            <li><a href="#" id="cmdSelectContract"><i class="fa fa-file-text-o"></i>&nbsp;<?php echo lang('hr_employees_button_select_contract');?></a></li>
+                            <li><a href="#" id="cmdChangeEntity"><i class="fa fa-sitemap"></i>&nbsp;<?php echo lang('hr_employees_button_select_entity');?></a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" id="cmdSelectAll"><i class="fa fa-circle"></i>&nbsp;<?php echo lang('hr_employees_button_select_all');?></a></li>
+                            <li><a href="#" id="cmdDeselectAll"><i class="fa fa-circle-o"></i>&nbsp;<?php echo lang('hr_employees_button_deselect_all');?></a></li>
+                        </ul>
+                    </div>
+                  &nbsp;<a href="#" id="cmdExportEmployees" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
+                  &nbsp;<a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_create_user');?></a>
+              </div>
+            </div>
+        </div>
+
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
     <thead>
@@ -102,29 +108,6 @@
 </table>
 
         </div>
-</div>
-    
-<div class="row-fluid">
-    <div class="span12">
-      <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('hr_employees_button_create_user');?></a>
-      &nbsp;
-      <a href="#" id="cmdExportEmployees" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
-      &nbsp;
-        <div class="btn-group dropup">
-            <button id="cmdSelection" class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-              <i class="fa fa-pencil"></i>&nbsp;<?php echo lang('hr_employees_button_selection');?>&nbsp;<span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#" id="cmdSelectAll"><i class="fa fa-circle"></i>&nbsp;<?php echo lang('hr_employees_button_select_all');?></a></li>
-                <li><a href="#" id="cmdDeselectAll"><i class="fa fa-circle-o"></i>&nbsp;<?php echo lang('hr_employees_button_deselect_all');?></a></li>
-                <li class="divider"></li>
-                <li><a href="#" id="cmdSelectManager"><i class="fa fa-user"></i>&nbsp;<?php echo lang('hr_employees_button_select_manager');?></a></li>
-                <li><a href="#" id="cmdAddEntitlments"><i class="fa fa-pencil-square-o"></i>&nbsp;<?php echo lang('hr_employees_button_entitleddays');?></a></li>
-                <li><a href="#" id="cmdSelectContract"><i class="fa fa-file-text-o"></i>&nbsp;<?php echo lang('hr_employees_button_select_contract');?></a></li>
-                <li><a href="#" id="cmdChangeEntity"><i class="fa fa-sitemap"></i>&nbsp;<?php echo lang('hr_employees_button_select_entity');?></a></li>
-            </ul>
-        </div>
-    </div>
 </div>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
@@ -208,6 +191,64 @@
         </div>
  </div>
 
+<div id="frmCreateLeaveRequest" class="modal hide fade">
+    <div class="modal-header">
+        <a href="#" onclick="$('#frmCreateLeaveRequest').modal('hide');" class="close">&times;</a>
+         <h3><?php echo lang('hr_employees_button_create_request');?></h3>
+    </div>
+    <div class="modal-body">
+        <label for="leaveType"><?php echo lang('leaves_create_field_type');?></label>
+        <select name="leaveType" id="leaveType">
+        <?php
+        $default_type = $this->config->item('default_leave_type');
+        $default_type = $default_type == FALSE ? 0 : $default_type;
+        foreach ($types as $types_item): ?>
+            <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == $default_type) echo "selected" ?>><?php echo $types_item['name'] ?></option>
+        <?php endforeach ?>
+        </select>
+
+        <label for="viz_leaveStartdate"><?php echo lang('leaves_create_field_start');?></label>
+        <input type="text" name="viz_leaveStartdate" id="viz_leaveStartdate" autocomplete="off" />
+        <input type="hidden" name="leaveStartdate" id="leaveStartdate" />
+        <select name="leaveStartdatetype" id="leaveStartdatetype">
+            <option value="Morning" selected><?php echo lang('Morning');?></option>
+            <option value="Afternoon"><?php echo lang('Afternoon');?></option>
+        </select><br />
+
+        <label for="viz_leaveEnddate"><?php echo lang('leaves_create_field_end');?></label>
+        <input type="text" name="viz_leaveEnddate" id="viz_leaveEnddate" autocomplete="off" />
+        <input type="hidden" name="leaveEnddate" id="leaveEnddate" />
+        <select name="leaveEnddatetype" id="leaveEnddatetype">
+            <option value="Morning"><?php echo lang('Morning');?></option>
+            <option value="Afternoon" selected><?php echo lang('Afternoon');?></option>
+        </select><br />
+
+        <label for="leaveDuration"><?php echo lang('leaves_create_field_duration');?></label>
+        <input type="text" name="leaveDuration" id="leaveDuration" />
+
+        <div class="alert hide alert-error" id="lblOverlappingAlert" onclick="$('#lblOverlappingAlert').hide();">
+            <button type="button" class="close">&times;</button>
+            <?php echo lang('leaves_create_field_overlapping_message');?>
+        </div>
+
+        <label for="leaveCause"><?php echo lang('leaves_create_field_cause');?></label>
+        <textarea name="leaveCause" id="leaveCause"></textarea>
+
+        <label for="leaveStatus"><?php echo lang('leaves_create_field_status');?></label>
+        <select name="leaveStatus" id ="leaveStatus">
+            <option value="1"><?php echo lang('Planned');?></option>
+            <option value="2"><?php echo lang('Requested');?></option>
+            <option value="3"><?php echo lang('Accepted');?></option>
+            <option value="4"><?php echo lang('Rejected');?></option>
+        </select><br />
+
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="createLeaveRequest();" class="btn"><?php echo lang('OK');?></a>
+        <a href="#" onclick="$('#frmCreateLeaveRequest').modal('hide');" class="btn"><?php echo lang('Cancel');?></a>
+    </div>
+</div>
+
 <div id="context-menu">
   <ul class="dropdown-menu" role="menu">
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/leaves/create/{id}"><i class="icon-plus"></i>&nbsp;<?php echo lang('hr_employees_thead_link_create_leave');?></a></li>
@@ -254,6 +295,7 @@
 <link href="<?php echo base_url();?>assets/datatable/colreorder/css/colReorder.dataTables.min.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/datatable/select/css/select.dataTables.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/buttons/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/buttons/js/buttons.colVis.min.js"></script>
@@ -334,6 +376,55 @@ function getSelectedEmployees() {
         employeeIds.push(this.data().id);
      });
      return JSON.stringify(employeeIds);
+}
+
+//Popup create leave request: on click OK:
+// - Find the id of all selected employees.
+// - Validate the input form.
+function createLeaveRequest() {
+    //Validate the form
+    var fieldname = "";
+    var startType = $('#leaveStartdatetype option:selected').val();
+    var endType = $('#leaveEnddatetype option:selected').val();
+    var start = moment($('#leaveStartdate').val());
+    var end = moment($('#leaveEnddate').val());
+    if (start.isSame(end)) {
+        if (startType == "Afternoon" && endType == "Morning") {
+            bootbox.alert("<img src='<?php echo base_url();?>assets/images/date_error.png' />" +
+                    "&nbsp;<?php echo lang('leaves_create_field_end');?> >" +
+                    "&nbsp;<?php echo lang('leaves_create_field_start');?>");
+            return;
+        }
+    }
+    if ($('#viz_leaveStartdate').val() == "") fieldname = "<?php echo lang('leaves_create_field_start');?>";
+    if ($('#viz_leaveEnddate').val() == "") fieldname = "<?php echo lang('leaves_create_field_end');?>";
+    if ($('#leaveDuration').val() == "" || $('#leaveDuration').val() == 0) fieldname = "<?php echo lang('leaves_create_field_duration');?>";
+    if (fieldname != "") {
+        bootbox.alert(<?php echo lang('leaves_validate_mandatory_js_msg');?>);
+        return;
+    }
+
+    //Call a web service to batch insert all the leave requests
+    var employeeIds = getSelectedEmployees();
+    $('#frmModalAjaxWait').modal('show');
+    $.ajax({
+        url: "<?php echo base_url();?>hr/employees/create/leave",
+        type: "POST",
+        data: {
+                type: $('#leaveType').val(),
+                duration: $('#leaveDuration').val(),
+                startdate: $('#leaveStartdate').val(),
+                enddate: $('#leaveEnddate').val(),
+                startdatetype: startType,
+                enddatetype: endType,
+                cause: $('#leaveCause').val(),
+                status: $('#leaveStatus option:selected').val(),
+                employees: employeeIds
+            }
+      }).done(function() {
+        $('#frmModalAjaxWait').modal('hide');
+    });
+    $("#frmCreateLeaveRequest").modal('hide');
 }
 
 //Popup select manager: on click OK, find the id of all selected employees and update their manager.
@@ -688,14 +779,45 @@ $(function () {
         }
     });
     
+    //Create a leave request for a group of employees
+    $("#cmdCreateRequest").click(function() {
+        if (oTable.rows({selected: true}).any()) {
+            $("#frmCreateLeaveRequest").modal('show');
+            //Init the start and end date picker and link them (end>=date)
+            $("#viz_leaveStartdate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: '<?php echo lang('global_date_js_format');?>',
+                altFormat: "yy-mm-dd",
+                altField: "#leaveStartdate",
+                numberOfMonths: 1,
+                      onClose: function( selectedDate ) {
+                        $( "#viz_leaveEnddate" ).datepicker( "option", "minDate", selectedDate );
+                      }
+            }, $.datepicker.regional['<?php echo $language_code;?>']);
+            $("#viz_leaveEnddate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: '<?php echo lang('global_date_js_format');?>',
+                altFormat: "yy-mm-dd",
+                altField: "#leaveEnddate",
+                numberOfMonths: 1,
+                      onClose: function( selectedDate ) {
+                        $( "#viz_leaveStartdate" ).datepicker( "option", "maxDate", selectedDate );
+                      }
+            }, $.datepicker.regional['<?php echo $language_code;?>']);
+        }
+        else {
+            bootbox.alert("<?php echo lang('hr_employees_multiple_edit_selection_msg');?>");
+        }
+    });
+    
     //Select or deselect all rows
     $("#cmdSelectAll").click(function() {
         oTable.rows({filter: 'applied'}).select();
-        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
     });
     $("#cmdDeselectAll").click(function() {
         oTable.rows().deselect();
-        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
     });
     
     //If we opt-in the include children box, we'll recursively include the children of the selected entity

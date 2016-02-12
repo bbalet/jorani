@@ -227,8 +227,8 @@ class Extra extends CI_Controller {
             $this->load->library('parser');
             $data = array(
                 'Title' => $lang_mail->line('email_extra_request_validation_title'),
-                'Firstname' => $this->session->userdata('firstname'),
-                'Lastname' => $this->session->userdata('lastname'),
+                'Firstname' => $user['firstname'],
+                'Lastname' => $user['lastname'],
                 'Date' => $startdate,
                 'Duration' => $this->input->post('duration'),
                 'Cause' => $this->input->post('cause'),
@@ -236,29 +236,11 @@ class Extra extends CI_Controller {
                 'UrlReject' => $rejectUrl
             );
             $message = $this->parser->parse('emails/' . $manager['language'] . '/overtime', $data, TRUE);
-            $this->email->set_encoding('quoted-printable');
-            
-            if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
-                $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
-            } else {
-               $this->email->from('do.not@reply.me', 'LMS');
-            }
-            $this->email->to($manager['email']);
-            if ($this->config->item('subject_prefix') != FALSE) {
-                $subject = $this->config->item('subject_prefix');
-            } else {
-               $subject = '[Jorani] ';
-            }
             //Copy to the delegates, if any
             $delegates = $this->delegations_model->listMailsOfDelegates($manager['id']);
-            if ($delegates != '') {
-                $this->email->cc($delegates);
-            }
-            $this->email->subject($subject . $lang_mail->line('email_extra_request_reject_subject') . ' ' .
-                    $this->session->userdata('firstname') . ' ' .
-                    $this->session->userdata('lastname'));
-            $this->email->message($message);
-            $this->email->send();
+            $subject = $lang_mail->line('email_extra_request_reject_subject') . ' ' .
+                                $user['firstname'] . ' ' .$user['lastname'];
+            sendMailByWrapper($this, $subject, $message, $manager['email'], $delegates);
         }
     }
 

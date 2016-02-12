@@ -19,21 +19,23 @@ class Mobile extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function getPublicKey() {
-        header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
-        header('Access-Control-Allow-Credentials : true');
-        header('Access-Control-Allow-Methods: GET');
-        header('Content-Type:application/json');
-        $this->session->sess_create();
-        $this->security->csrf_set_cookie();
-        $salt = $this->generateRandomString(rand(5, 20));
-        $this->session->set_userdata('salt', $salt);
-        $security = new stdClass;
-        $security->salt = $salt;
-        $security->publicKey = file_get_contents('./assets/keys/public.pem', TRUE);
-        $security->csrfProtection = $this->config->item('csrf_protection');
-        $security->csrfTokenName = $this->security->get_csrf_token_name();
-        $security->csrfHash = $this->security->get_csrf_hash();
-        echo json_encode($security);
+        if ($this->config->item('enable_mobile') != FALSE) {
+            header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+            header('Access-Control-Allow-Credentials : true');
+            header('Access-Control-Allow-Methods: GET');
+            header('Content-Type:application/json');
+            $this->session->sess_create();
+            $this->security->csrf_set_cookie();
+            $salt = $this->generateRandomString(rand(5, 20));
+            $this->session->set_userdata('salt', $salt);
+            $security = new stdClass;
+            $security->salt = $salt;
+            $security->publicKey = file_get_contents('./assets/keys/public.pem', TRUE);
+            $security->csrfProtection = $this->config->item('csrf_protection');
+            $security->csrfTokenName = $this->security->get_csrf_token_name();
+            $security->csrfHash = $this->security->get_csrf_hash();
+            echo json_encode($security);
+        }
     }
     
     /**
@@ -43,31 +45,33 @@ class Mobile extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function login() {
-        header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
-        header('Access-Control-Allow-Credentials : true');
-        header('Access-Control-Allow-Methods: GET');
-        header('Content-Type:application/json');
-        //Decipher the password (mind to remove the salt) and attempt to login
-        $password = '';
-        $keyPEM = file_get_contents('./assets/keys/private.pem', TRUE);
-        $privateKey = openssl_pkey_get_private($keyPEM);
-        openssl_private_decrypt(base64_decode($this->input->get('password')), 
-                                $password, $privateKey, OPENSSL_PKCS1_OAEP_PADDING);
-        $len_salt = strlen($this->session->userdata('salt')) * (-1);
-        $password = substr($password, 0, $len_salt);
-        $this->load->model('users_model');
-        $loggedin = $this->users_model->checkCredentialsEmail($this->input->get('email'), $password);
-        //Return user's details (some fields might be empty if not logged in)
-        $userDetails = new stdClass;
-        $userDetails->id = $this->session->userdata('id');
-        $userDetails->firstname = $this->session->userdata('firstname');
-        $userDetails->lastname = $this->session->userdata('lastname');
-        $userDetails->isManager = $this->session->userdata('is_manager');
-        $userDetails->isAdmin = $this->session->userdata('is_admin');
-        $userDetails->isHR = $this->session->userdata('is_hr');
-        $userDetails->managerId = $this->session->userdata('manager');
-        $userDetails->isLoggedIn = $loggedin;
-        echo json_encode($userDetails);
+        if ($this->config->item('enable_mobile') != FALSE) {
+            header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+            header('Access-Control-Allow-Credentials : true');
+            header('Access-Control-Allow-Methods: GET');
+            header('Content-Type:application/json');
+            //Decipher the password (mind to remove the salt) and attempt to login
+            $password = '';
+            $keyPEM = file_get_contents('./assets/keys/private.pem', TRUE);
+            $privateKey = openssl_pkey_get_private($keyPEM);
+            openssl_private_decrypt(base64_decode($this->input->get('password')), 
+                                    $password, $privateKey, OPENSSL_PKCS1_OAEP_PADDING);
+            $len_salt = strlen($this->session->userdata('salt')) * (-1);
+            $password = substr($password, 0, $len_salt);
+            $this->load->model('users_model');
+            $loggedin = $this->users_model->checkCredentialsEmail($this->input->get('email'), $password);
+            //Return user's details (some fields might be empty if not logged in)
+            $userDetails = new stdClass;
+            $userDetails->id = $this->session->userdata('id');
+            $userDetails->firstname = $this->session->userdata('firstname');
+            $userDetails->lastname = $this->session->userdata('lastname');
+            $userDetails->isManager = $this->session->userdata('is_manager');
+            $userDetails->isAdmin = $this->session->userdata('is_admin');
+            $userDetails->isHR = $this->session->userdata('is_hr');
+            $userDetails->managerId = $this->session->userdata('manager');
+            $userDetails->isLoggedIn = $loggedin;
+            echo json_encode($userDetails);
+        }
     }
     
     /**
@@ -76,24 +80,26 @@ class Mobile extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function notifications() {
-        header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
-        header('Access-Control-Allow-Credentials : true');
-        header('Access-Control-Allow-Methods: GET');
-        header('Content-Type:application/json');
-        $notifications = new stdClass;
-        $notifications->requestedLeavesCount = 0;
-        $notifications->requestedExtraCount = 0;
-        if ($this->session->userdata('is_manager') === TRUE) {
-            $this->load->model('leaves_model');
-            $notifications->requestedLeavesCount = $this->leaves_model->countLeavesRequestedToManager($this->input->get('employeeId'));
-            if ($this->config->item('disable_overtime') == FALSE) {
-                $this->load->model('overtime_model');
-                $notifications->requestedExtraCount = $this->overtime_model->countExtraRequestedToManager($this->input->get('employeeId'));
-            } else {
-                $notifications->requestedExtraCount = 0;
+        if ($this->config->item('enable_mobile') != FALSE) {
+            header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+            header('Access-Control-Allow-Credentials : true');
+            header('Access-Control-Allow-Methods: GET');
+            header('Content-Type:application/json');
+            $notifications = new stdClass;
+            $notifications->requestedLeavesCount = 0;
+            $notifications->requestedExtraCount = 0;
+            if ($this->session->userdata('is_manager') === TRUE) {
+                $this->load->model('leaves_model');
+                $notifications->requestedLeavesCount = $this->leaves_model->countLeavesRequestedToManager($this->input->get('employeeId'));
+                if ($this->config->item('disable_overtime') == FALSE) {
+                    $this->load->model('overtime_model');
+                    $notifications->requestedExtraCount = $this->overtime_model->countExtraRequestedToManager($this->input->get('employeeId'));
+                } else {
+                    $notifications->requestedExtraCount = 0;
+                }
             }
+            echo json_encode($notifications);
         }
-        echo json_encode($notifications);
     }
     
     /**
@@ -101,11 +107,13 @@ class Mobile extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function logout() {
-        header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
-        header('Access-Control-Allow-Credentials : true');
-        header('Access-Control-Allow-Methods: GET');
-        $this->session->sess_destroy();
-        echo 'BYE';
+        if ($this->config->item('enable_mobile') != FALSE) {
+            header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+            header('Access-Control-Allow-Credentials : true');
+            header('Access-Control-Allow-Methods: GET');
+            $this->session->sess_destroy();
+            echo 'BYE';
+        }
     }
     
     /**

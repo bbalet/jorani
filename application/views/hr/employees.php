@@ -16,7 +16,7 @@
 <?php echo $flash_partial_view;?>
 
         <div class="row-fluid">
-            <div class="span4">
+            <div class="span6">
                 <input type="hidden" name="entity" id="entity" />
                  <label for="txtEntity"><?php echo lang('hr_employees_field_entity');?>
                     <div class="input-append">
@@ -24,23 +24,21 @@
                         <a id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('hr_employees_button_select');?></a>
                     </div>
                  </label>
-            </div>
-            <div class="span3">
-              <input type="checkbox" id="chkIncludeChildren" /> <?php echo lang('hr_employees_field_subdepts');?>
-            </div>
-            <div class="span5">
-              <?php echo lang('hr_employees_description');?>
+                </div>
+            <div class="span6">
+                <div class="pull-left">
+                    <input type="checkbox" id="chkIncludeChildren" /> <?php echo lang('hr_employees_field_subdepts');?>
+                </div>
             </div>
         </div>
         <div class="row-fluid">
-            <div class="span3">
+            <div class="span12">
                 <div class="btn-group" data-toggle="buttons-radio">
                   <button id="cmdAll" type="button" class="btn"><?php echo lang('hr_employees_button_all');?></button>
                   <button id="cmdActive" type="button" class="btn"><?php echo lang('hr_employees_button_active');?></button>
                   <button id="cmdInactive" type="button" class="btn"><?php echo lang('hr_employees_button_inactive');?></button>
                 </div>
-            </div>
-            <div class="span5">
+                &nbsp;
                 <?php echo lang('hr_employees_thead_datehired');?>
                 <div class="input-prepend">
                     <div class="btn-group">
@@ -64,7 +62,12 @@
                 <input type="hidden" name="datehired1" id="datehired1" />
                 <input type="hidden" name="datehired2" id="datehired2" />
             </div>
-            <div class="span4">
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+              <?php echo lang('hr_employees_description');?>
+            </div>
+            <div class="span6">
                 <div class="pull-right">
                     <div class="btn-group">
                         <button id="cmdSelection" class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
@@ -87,25 +90,30 @@
             </div>
         </div>
 
+        <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
-    <thead>
-        <tr>
-            <th><?php echo lang('hr_employees_thead_id');?></th>
-            <th><?php echo lang('hr_employees_thead_firstname');?></th>
-            <th><?php echo lang('hr_employees_thead_lastname');?></th>
-            <th><?php echo lang('hr_employees_thead_email');?></th>
-            <th><?php echo lang('hr_employees_thead_entity');?></th>
-            <th><?php echo lang('hr_employees_thead_contract');?></th>
-            <th><?php echo lang('hr_employees_thead_manager');?></th>
-            <th><?php echo lang('hr_employees_thead_identifier');?></th>
-            <th><?php echo lang('hr_employees_thead_datehired');?></th>
-            <th><?php echo lang('hr_employees_thead_position');?></th>
-        </tr>
-    </thead>
-    <tbody class="context" data-toggle="context" data-target="#context-menu">
-    </tbody>
-</table>
+        <div class="row-fluid">
+            <div class="span12">
+                <table cellpadding="0" cellspacing="0" border="0" class="display" id="users" width="100%">
+                    <thead>
+                        <tr>
+                            <th><?php echo lang('hr_employees_thead_id');?></th>
+                            <th><?php echo lang('hr_employees_thead_firstname');?></th>
+                            <th><?php echo lang('hr_employees_thead_lastname');?></th>
+                            <th><?php echo lang('hr_employees_thead_email');?></th>
+                            <th><?php echo lang('hr_employees_thead_entity');?></th>
+                            <th><?php echo lang('hr_employees_thead_contract');?></th>
+                            <th><?php echo lang('hr_employees_thead_manager');?></th>
+                            <th><?php echo lang('hr_employees_thead_identifier');?></th>
+                            <th><?php echo lang('hr_employees_thead_datehired');?></th>
+                            <th><?php echo lang('hr_employees_thead_position');?></th>
+                        </tr>
+                    </thead>
+                    <tbody class="context" data-toggle="context" data-target="#context-menu">
+                    </tbody>
+                </table>
+            </div>
+         </div>
 
         </div>
 </div>

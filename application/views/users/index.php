@@ -73,9 +73,6 @@
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
-<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
-<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
-
 <div id="frmConfirmDelete" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="close">&times;</a>
@@ -123,6 +120,9 @@
     </div>
 
 </div>
+
+<link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

@@ -86,130 +86,130 @@
 <div class="row-fluid">
     <div class="span12">
         <table class="table table-bordered">
-    <thead>
-        <tr>
-            <?php
-                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
-                $lastDay = date("t", strtotime($start));    //last day of selected month
-                for ($ii = 1; $ii <=$lastDay; $ii++) {
-                    $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
-                    switch ($dayNum)
-                    {
-                        case 1: echo '<td><b>' . lang('calendar_monday_short') . '</b></td>'; break;
-                        case 2: echo '<td><b>' . lang('calendar_tuesday_short') . '</b></td>'; break;
-                        case 3: echo '<td><b>' . lang('calendar_wednesday_short') . '</b></td>'; break;
-                        case 4: echo '<td><b>' . lang('calendar_thursday_short') . '</b></td>'; break;
-                        case 5: echo '<td><b>' . lang('calendar_friday_short') . '</b></td>'; break;
-                        case 6: echo '<td><b>' . lang('calendar_saturday_short') . '</b></td>'; break;
-                        case 7: echo '<td><b>' . lang('calendar_sunday_short') . '</b></td>'; break;
+            <thead>
+                <tr>
+                    <?php
+                        $start = $year . '-' . $month . '-' . '1';    //first date of selected month
+                        $lastDay = date("t", strtotime($start));    //last day of selected month
+                        for ($ii = 1; $ii <=$lastDay; $ii++) {
+                            $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
+                            switch ($dayNum)
+                            {
+                                case 1: echo '<td><b>' . lang('calendar_monday_short') . '</b></td>'; break;
+                                case 2: echo '<td><b>' . lang('calendar_tuesday_short') . '</b></td>'; break;
+                                case 3: echo '<td><b>' . lang('calendar_wednesday_short') . '</b></td>'; break;
+                                case 4: echo '<td><b>' . lang('calendar_thursday_short') . '</b></td>'; break;
+                                case 5: echo '<td><b>' . lang('calendar_friday_short') . '</b></td>'; break;
+                                case 6: echo '<td><b>' . lang('calendar_saturday_short') . '</b></td>'; break;
+                                case 7: echo '<td><b>' . lang('calendar_sunday_short') . '</b></td>'; break;
+                            }
+                        }?>
+                </tr>
+                <tr>
+                    <?php
+                        $start = $year . '-' . $month . '-' . '1';    //first date of selected month
+                        $lastDay = date("t", strtotime($start));    //last day of selected month
+                        for ($ii = 1; $ii <=$lastDay; $ii++) {
+                            echo '<td><b>' . $ii . '</b></td>';
+                        }?>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <?php foreach ($linear->days as $day) {
+                    $overlapping = FALSE;
+                    if (strstr($day->display, ';')) {
+                        $periods = explode(";", $day->display);
+                        $statuses = explode(";", $day->status);
+                          switch (intval($statuses[1]))
+                          {
+                              case 1: $class = "planned"; break;  // Planned
+                              case 2: $class = "requested"; break;  // Requested
+                              case 3: $class = "accepted"; break;  // Accepted
+                              case 4: $class = "rejected"; break;  // Rejected
+                              case 5: $class="dayoff"; break;
+                              case 6: $class="dayoff"; break;
+                          }
+                          switch (intval($statuses[0]))
+                          {
+                              case 1: $class .= "planned"; break;  // Planned
+                              case 2: $class .= "requested"; break;  // Requested
+                              case 3: $class .= "accepted"; break;  // Accepted
+                              case 4: $class .= "rejected"; break;  // Rejected
+                              case 5: $class .="dayoff"; break;
+                              case 6: $class .="dayoff"; break;
+                          }
+                          //If we have two requests the same day (morning/afternoon)
+                          if (($statuses[0] == $statuses[1]) && ($periods[0] != $periods[1])){
+                              switch (intval($statuses[0]))
+                              {
+                                  case 1: $class = "allplanned"; break;  // Planned
+                                  case 2: $class = "allrequested"; break;  // Requested
+                                  case 3: $class = "allaccepted"; break;  // Accepted
+                                  case 4: $class = "allrejected"; break;  // Rejected
+                                  //The 2 cases below would be weird...
+                                  case 5: $class ="dayoff"; break;
+                                  case 6: $class ="dayoff"; break;
+                              }
+                          }
+                    } else {
+                      switch ($day->display) {
+                          case '9': $class="error"; break;
+                          case '0': $class="working"; break;
+                          case '4': $class="dayoff"; break;
+                          case '5': $class="amdayoff"; break;
+                          case '6': $class="pmdayoff"; break;
+                          case '1':
+                                switch ($day->status)
+                                {
+                                    case 1: $class = "allplanned"; break;  // Planned
+                                    case 2: $class = "allrequested"; break;  // Requested
+                                    case 3: $class = "allaccepted"; break;  // Accepted
+                                    case 4: $class = "allrejected"; break;  // Rejected
+                                }
+                                break;
+                          case '2':
+                              switch ($day->status)
+                                {
+                                    case 1: $class = "amplanned"; break;  // Planned
+                                    case 2: $class = "amrequested"; break;  // Requested
+                                    case 3: $class = "amaccepted"; break;  // Accepted
+                                    case 4: $class = "amrejected"; break;  // Rejected
+                                }
+                              break;
+                          case '3':
+                              switch ($day->status)
+                                {
+                                    case 1: $class = "pmplanned"; break;  // Planned
+                                    case 2: $class = "pmrequested"; break;  // Requested
+                                    case 3: $class = "pmaccepted"; break;  // Accepted
+                                    case 4: $class = "pmrejected"; break;  // Rejected
+                                }
+                              break;
+                      }
                     }
-                }?>
-        </tr>
-        <tr>
-            <?php
-                $start = $year . '-' . $month . '-' . '1';    //first date of selected month
-                $lastDay = date("t", strtotime($start));    //last day of selected month
-                for ($ii = 1; $ii <=$lastDay; $ii++) {
-                    echo '<td><b>' . $ii . '</b></td>';
-                }?>
-        </tr>
-    </thead>
-  <tbody>
-    <tr>
-      <?php foreach ($linear->days as $day) {
-          $overlapping = FALSE;
-          if (strstr($day->display, ';')) {
-              $periods = explode(";", $day->display);
-              $statuses = explode(";", $day->status);
-                switch (intval($statuses[1]))
-                {
-                    case 1: $class = "planned"; break;  // Planned
-                    case 2: $class = "requested"; break;  // Requested
-                    case 3: $class = "accepted"; break;  // Accepted
-                    case 4: $class = "rejected"; break;  // Rejected
-                    case 5: $class="dayoff"; break;
-                    case 6: $class="dayoff"; break;
-                }
-                switch (intval($statuses[0]))
-                {
-                    case 1: $class .= "planned"; break;  // Planned
-                    case 2: $class .= "requested"; break;  // Requested
-                    case 3: $class .= "accepted"; break;  // Accepted
-                    case 4: $class .= "rejected"; break;  // Rejected
-                    case 5: $class .="dayoff"; break;
-                    case 6: $class .="dayoff"; break;
-                }
-                //If we have two requests the same day (morning/afternoon)
-                if (($statuses[0] == $statuses[1]) && ($periods[0] != $periods[1])){
-                    switch (intval($statuses[0]))
-                    {
-                        case 1: $class = "allplanned"; break;  // Planned
-                        case 2: $class = "allrequested"; break;  // Requested
-                        case 3: $class = "allaccepted"; break;  // Accepted
-                        case 4: $class = "allrejected"; break;  // Rejected
-                        //The 2 cases below would be weird...
-                        case 5: $class ="dayoff"; break;
-                        case 6: $class ="dayoff"; break;
+                    //Detect overlapping cases
+                    switch ($class) {
+                              case "plannedplanned":
+                              case "requestedrequested":
+                              case "acceptedaccepted":
+                              case "rejectedrejected":
+                                  $overlapping = TRUE;
+                        break;
                     }
-                }
-          } else {
-            switch ($day->display) {
-                case '9': $class="error"; break;
-                case '0': $class="working"; break;
-                case '4': $class="dayoff"; break;
-                case '5': $class="amdayoff"; break;
-                case '6': $class="pmdayoff"; break;
-                case '1':
-                      switch ($day->status)
-                      {
-                          case 1: $class = "allplanned"; break;  // Planned
-                          case 2: $class = "allrequested"; break;  // Requested
-                          case 3: $class = "allaccepted"; break;  // Accepted
-                          case 4: $class = "allrejected"; break;  // Rejected
+                      if ($class == "error"){
+                          echo '<td><img src="'.  base_url() .'assets/images/date_error.png"></td>';
+                      } else {
+                          if ($overlapping) {
+                              echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
+                          } else {
+                              echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+                          }
                       }
-                      break;
-                case '2':
-                    switch ($day->status)
-                      {
-                          case 1: $class = "amplanned"; break;  // Planned
-                          case 2: $class = "amrequested"; break;  // Requested
-                          case 3: $class = "amaccepted"; break;  // Accepted
-                          case 4: $class = "amrejected"; break;  // Rejected
-                      }
-                    break;
-                case '3':
-                    switch ($day->status)
-                      {
-                          case 1: $class = "pmplanned"; break;  // Planned
-                          case 2: $class = "pmrequested"; break;  // Requested
-                          case 3: $class = "pmaccepted"; break;  // Accepted
-                          case 4: $class = "pmrejected"; break;  // Rejected
-                      }
-                    break;
-            }
-          }
-          //Detect overlapping cases
-          switch ($class) {
-                    case "plannedplanned":
-                    case "requestedrequested":
-                    case "acceptedaccepted":
-                    case "rejectedrejected":
-                        $overlapping = TRUE;
-              break;
-          }
-            if ($class == "error"){
-                echo '<td><img src="'.  base_url() .'assets/images/date_error.png"></td>';
-            } else {
-                if ($overlapping) {
-                    echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
-                } else {
-                    echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
-                }
-            }
-     } ?>
-          </tr>
-  </tbody>
-</table>
+               } ?>
+                    </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -254,27 +254,27 @@
             <input type="text" value="<?php echo $refDate; ?>" readonly />
         </p>
         
-        <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-              <th><?php echo lang('hr_summary_thead_type');?></th>
-              <th><?php echo lang('hr_summary_thead_available');?></th>
-              <th><?php echo lang('hr_summary_thead_taken');?></th>
-              <th><?php echo lang('hr_summary_thead_entitled');?></th>
-              <th><?php echo lang('hr_summary_thead_description');?></th>
-            </tr>
-          </thead>
-          <tbody>
-          <?php foreach ($summary as $key => $value) { ?>
-            <tr>
-              <td><?php echo $key; ?></td>
-              <td><?php echo round(((float) $value[1] - (float) $value[0]), 3, PHP_ROUND_HALF_DOWN); ?></td>
-              <td><?php if ($value[2] == '') { echo ((float) $value[0]); } else { echo '-'; } ?></td>
-              <td><?php if ($value[2] == '') { echo ((float) $value[1]); } else { echo '-'; } ?></td>
-              <td><?php echo $value[2]; ?></td>
-            </tr>
-          <?php } ?>
-          </tbody>
+        <table id="counters" cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+            <thead>
+                <tr>
+                  <th><?php echo lang('hr_summary_thead_type');?></th>
+                  <th><?php echo lang('hr_summary_thead_available');?></th>
+                  <th><?php echo lang('hr_summary_thead_taken');?></th>
+                  <th><?php echo lang('hr_summary_thead_entitled');?></th>
+                  <th><?php echo lang('hr_summary_thead_description');?></th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php foreach ($summary as $key => $value) { ?>
+                <tr>
+                  <td><?php echo $key; ?></td>
+                  <td><?php echo round(((float) $value[1] - (float) $value[0]), 3, PHP_ROUND_HALF_DOWN); ?></td>
+                  <td><?php if ($value[2] == '') { echo ((float) $value[0]); } else { echo '-'; } ?></td>
+                  <td><?php if ($value[2] == '') { echo ((float) $value[1]); } else { echo '-'; } ?></td>
+                  <td><?php echo $value[2]; ?></td>
+                </tr>
+              <?php } ?>
+              </tbody>
         </table>
     </div>
 </div>
@@ -302,8 +302,8 @@
 <?php if ($language_code != 'en') {?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo $language_code;?>.js"></script>
 <?php }?>
-<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
-<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
+<link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
 var employee = <?php echo $user_id;?>;
@@ -322,7 +322,7 @@ function refresh_calendar() {
     
 $(function () {
     
-    //Transform the HTML table in a fancy datatable
+    //Transform the HTML tables into fancy datatables
     var oTable = $('#leaves').dataTable({
             order: [[ 1, "asc" ]],
             language: {
@@ -348,6 +348,33 @@ $(function () {
                     sortDescending: "<?php echo lang('datatable_sSortDescending');?>"
                 }
             },
+        });
+        
+        $('#counters').dataTable({
+            order: [[ 0, "desc" ]],
+            language: {
+                decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
+                processing:       "<?php echo lang('datatable_sProcessing');?>",
+                search:              "<?php echo lang('datatable_sSearch');?>",
+                lengthMenu:     "<?php echo lang('datatable_sLengthMenu');?>",
+                info:                   "<?php echo lang('datatable_sInfo');?>",
+                infoEmpty:          "<?php echo lang('datatable_sInfoEmpty');?>",
+                infoFiltered:       "<?php echo lang('datatable_sInfoFiltered');?>",
+                infoPostFix:        "<?php echo lang('datatable_sInfoPostFix');?>",
+                loadingRecords: "<?php echo lang('datatable_sLoadingRecords');?>",
+                zeroRecords:    "<?php echo lang('datatable_sZeroRecords');?>",
+                emptyTable:     "<?php echo lang('datatable_sEmptyTable');?>",
+                paginate: {
+                    first:          "<?php echo lang('datatable_sFirst');?>",
+                    previous:   "<?php echo lang('datatable_sPrevious');?>",
+                    next:           "<?php echo lang('datatable_sNext');?>",
+                    last:           "<?php echo lang('datatable_sLast');?>"
+                },
+                aria: {
+                    sortAscending:  "<?php echo lang('datatable_sSortAscending');?>",
+                    sortDescending: "<?php echo lang('datatable_sSortDescending');?>"
+                }
+            }
         });
         
         //Load a tiny calendar

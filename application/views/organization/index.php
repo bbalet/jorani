@@ -111,12 +111,12 @@
         </div>
  </div>
 
-<link href="<?php echo base_url();?>assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>assets/datatable/select/css/select.dataTables.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/Select-1.1.2/css/select.dataTables.min.css" rel="stylesheet">
 <link rel="stylesheet" href='<?php echo base_url(); ?>assets/jsTree/themes/default/style.css' type="text/css" media="screen, projection" />
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/jsTree/jstree.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/select/js/dataTables.select.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/Select-1.1.2/js/dataTables.select.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">
@@ -287,29 +287,29 @@
         //Transform the HTML table in a fancy datatable
         oTable = $('#collaborators').DataTable({
             select: 'single',
-            "oLanguage": {
-                    "sEmptyTable":     "<?php echo lang('datatable_sEmptyTable');?>",
-                    "sInfo":           "<?php echo lang('datatable_sInfo');?>",
-                    "sInfoEmpty":      "<?php echo lang('datatable_sInfoEmpty');?>",
-                    "sInfoFiltered":   "<?php echo lang('datatable_sInfoFiltered');?>",
-                    "sInfoPostFix":    "<?php echo lang('datatable_sInfoPostFix');?>",
-                    "sInfoThousands":  "<?php echo lang('datatable_sInfoThousands');?>",
-                    "sLengthMenu":     "<?php echo lang('datatable_sLengthMenu');?>",
-                    "sLoadingRecords": "<?php echo lang('datatable_sLoadingRecords');?>",
-                    "sProcessing":     "<?php echo lang('datatable_sProcessing');?>",
-                    "sSearch":         "<?php echo lang('datatable_sSearch');?>",
-                    "sZeroRecords":    "<?php echo lang('datatable_sZeroRecords');?>",
-                    "oPaginate": {
-                        "sFirst":    "<?php echo lang('datatable_sFirst');?>",
-                        "sLast":     "<?php echo lang('datatable_sLast');?>",
-                        "sNext":     "<?php echo lang('datatable_sNext');?>",
-                        "sPrevious": "<?php echo lang('datatable_sPrevious');?>"
-                    },
-                    "oAria": {
-                        "sSortAscending":  "<?php echo lang('datatable_sSortAscending');?>",
-                        "sSortDescending": "<?php echo lang('datatable_sSortDescending');?>"
-                    }
+            language: {
+                decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
+                processing:       "<?php echo lang('datatable_sProcessing');?>",
+                search:              "<?php echo lang('datatable_sSearch');?>",
+                lengthMenu:     "<?php echo lang('datatable_sLengthMenu');?>",
+                info:                   "<?php echo lang('datatable_sInfo');?>",
+                infoEmpty:          "<?php echo lang('datatable_sInfoEmpty');?>",
+                infoFiltered:       "<?php echo lang('datatable_sInfoFiltered');?>",
+                infoPostFix:        "<?php echo lang('datatable_sInfoPostFix');?>",
+                loadingRecords: "<?php echo lang('datatable_sLoadingRecords');?>",
+                zeroRecords:    "<?php echo lang('datatable_sZeroRecords');?>",
+                emptyTable:     "<?php echo lang('datatable_sEmptyTable');?>",
+                paginate: {
+                    first:          "<?php echo lang('datatable_sFirst');?>",
+                    previous:   "<?php echo lang('datatable_sPrevious');?>",
+                    next:           "<?php echo lang('datatable_sNext');?>",
+                    last:           "<?php echo lang('datatable_sLast');?>"
+                },
+                aria: {
+                    sortAscending:  "<?php echo lang('datatable_sSortAscending');?>",
+                    sortDescending: "<?php echo lang('datatable_sSortDescending');?>"
                 }
+            }
         });
         
         //Initialize the tree of the organization

@@ -52,9 +52,18 @@ $(document).ready(function() {
                 <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>/calendar" title="<?php echo lang('contract_index_tip_dayoffs');?>"><i class="icon-calendar"></i></a>
             </div>
         </td>
-        <td><?php echo $contracts_item['name'] ?></td>
-        <td><?php echo $contracts_item['startentdate'] ?></td>
-        <td><?php echo $contracts_item['endentdate'] ?></td>
+        <td><?php echo $contracts_item['name']; ?></td>
+        <?php 
+        $startentdate = $contracts_item['startentdate'];
+        $endentdate = $contracts_item['endentdate'];
+        if (strpos(lang('global_date_format'), 'd') < strpos(lang('global_date_format'), 'm')) {
+            $pieces = explode("/", $startentdate);
+            $startentdate = $pieces[1] . '/' . $pieces[0];
+            $pieces = explode("/", $endentdate);
+            $endentdate = $pieces[1] . '/' . $pieces[0];
+        }?>
+        <td><?php echo $startentdate; ?></td>
+        <td><?php echo $endentdate; ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>

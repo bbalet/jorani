@@ -1,26 +1,17 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
-## v0.4.5
+## v0.4.6
 
-- [ ] Multiple edit from HR/Employees page.
-- [X] Leave balance report for managers.
-- [X] Show list of days off in Leave request create/edit. Linked to #87.
-- [X] Leave request / day off overlapping detection. Linked to #87.
-- [X] Add Persian language.
-- [ ] Add Vietnamese language.
-- [X] Clarify usage of leave type 'compensate' (warning id edit/description in page).
-- [X] Improve robustness to bad conf. detect Database procedures and cal_days_in_month.
-- [X] BUG(87): Leave duration calculation wrong if a contract has a morning or an afternoon set as a non-work day.
-- [X] BUG: Entering reverse end/start date type for one day leave requests makes the calendars crash.
-- [X] Add an option to hide the inactive users into HR/Employee, next to "Include sub-departments".
-- [X] Clean Boostrap classes btn secondary
+- [X] i18n: Use locale for m/d start/end periods in contracts list.
+- [ ] i18n: Last 3 columns in Reports/Leaves.
+- [ ] Use open formats for Spreadsheet exports.
+- [ ] Add a "All" option into Reports/Leaves.
+- [ ] Add requests list into Reports/Leaves.
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
 - [ ] Migrate all datatables to the new API ($().dataTable() to $().DataTable()).
 - [ ] Migrate all datatables to the new language initiatlization.
-- [ ] For all datatables, try to simplify the code with databinding.
 - [ ] Maybe user/index : Ajaxload.
-- [ ] Multiple creation of a leave request.
 - [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
 
 ## v0.5.0 or later

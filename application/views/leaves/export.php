@@ -45,9 +45,4 @@ foreach(range('A', 'I') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-$filename = 'leaves.xls';
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="' . $filename . '"');
-header('Cache-Control: max-age=0');
-$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-$objWriter->save('php://output');
+exportSpreadsheet($this, 'leaves');

@@ -1,6 +1,6 @@
 <?php
 /**
- * This view builds an Excel5 file of the native report 'balance of leave requests'.
+ * This view builds a Spreadsheet file of the native report 'balance of leave requests'.
  * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
@@ -66,9 +66,4 @@ for ($ii=1; $ii <$max; $ii++) {
     $sheet->getColumnDimension($col)->setAutoSize(TRUE);
 }
 
-$filename = 'leave_balance.xls';
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="' . $filename . '"');
-header('Cache-Control: max-age=0');
-$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-$objWriter->save('php://output');
+exportSpreadsheet($this, 'leave_balance');

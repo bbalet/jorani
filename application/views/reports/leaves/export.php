@@ -1,6 +1,6 @@
 <?php
 /**
- * This view exports to Excel the native report listing the approved leave requests of employees attached to an entity.
+ * This view exports into a Spreadsheet file the native report listing the approved leave requests of employees attached to an entity.
  * This report is launched by the user from the view reports/leaves.
  * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
@@ -92,9 +92,5 @@ for ($ii=1; $ii <$max; $ii++) {
     $sheet->getColumnDimension($col)->setAutoSize(TRUE);
 }
 
-$filename = 'leave_requests_'. $month . '_' . $year .'.xls';
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="' . $filename . '"');
-header('Cache-Control: max-age=0');
-$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-$objWriter->save('php://output');
+$filename = 'leave_requests_'. $month . '_' . $year;
+exportSpreadsheet($this, $filename);

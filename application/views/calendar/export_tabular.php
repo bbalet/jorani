@@ -1,7 +1,7 @@
 <?php
 /**
  * This view exports a tabular calendar of the leave taken by a group of users
- * It builds an Excel 2007 file downloaded by the browser.
+ * It builds a Spreadsheet file downloaded by the browser.
  * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
@@ -230,9 +230,4 @@ $sheet->getPageSetup()->setFitToPage(true);
 $sheet->getPageSetup()->setFitToWidth(1);
 $sheet->getPageSetup()->setFitToHeight(0);
 
-$filename = 'tabular.xlsx';
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="' . $filename . '"');
-header('Cache-Control: max-age=0');
-$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
-$objWriter->save('php://output');
+exportSpreadsheet($this, 'tabular');

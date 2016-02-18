@@ -73,7 +73,8 @@ function getUserContext(CI_Controller $controller)
  * @return string value where problematic characters have been removed
  * @author Benjamin BALET <benjamin.balet@gmail.com>
  */
-function sanitize($value){
+function sanitize($value)
+{
     $value = trim($value);
     $value = str_replace('\\','',$value);
     $value = strtr($value,array_flip(get_html_translation_table(HTML_ENTITIES)));
@@ -113,8 +114,38 @@ function sendMailByWrapper(CI_Controller $controller, $subject, $message, $to, $
     $controller->email->send();
 }
 
+/**
+ * Finalize the export to a spreadsheet. Called from an export view.
+ * @param $context reference to CI Controller/View object
+ * @param string $filename filename of the spreadsheet (xlsx, ods)
+ * @author Benjamin BALET <benjamin.balet@gmail.com>
+ */
+function exportSpreadsheet($context, $filename)
+{
+    $format = 'xlsx';
+    $objWriter = NULL;
+    if (in_array($context->config->item('spreadsheet_format'), array('ods', 'xlsx'))) {
+        $format = $context->config->item('spreadsheet_format');
+    }
+    $filename .= '.' . $format;
+    header('Cache-Control: max-age=0');
+    header('Content-Disposition: attachment;filename="' . $filename . '"');
+    switch ($format) {
+        case 'ods':
+            header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
+            $objWriter = PHPExcel_IOFactory::createWriter($context->excel, 'OpenDocument');
+            break;
+        case 'xlsx':
+            header('Content-Type: application/vnd.ms-excel');
+            $objWriter = PHPExcel_IOFactory::createWriter($context->excel, 'Excel2007');
+            break;
+    }
+    $objWriter->save('php://output');
+}
+
 //Function cal_days_in_month might not exist with HHVM and FreeBSD without proper config
-if (!function_exists('cal_days_in_month')) {
+if (!function_exists('cal_days_in_month'))
+{
     /**
      * Alternative implementation of cal_days_in_month function
      * @param int $calendar calendar number

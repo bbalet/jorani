@@ -1,6 +1,6 @@
 <?php
 /**
- * This view builds an Excel5 file containing the list of employees (from HR menu).
+ * This view builds a Spreadsheet file containing the list of employees (from HR menu).
  * It differs from the Admin menu, because it doesn't export technical information
  * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
@@ -38,9 +38,4 @@ foreach(range('A', 'G') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-$filename = 'employees.xls';
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="' . $filename . '"');
-header('Cache-Control: max-age=0');
-$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-$objWriter->save('php://output');
+exportSpreadsheet($this, 'employees');

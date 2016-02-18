@@ -5,13 +5,15 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 - [X] i18n: Use locale for m/d start/end periods in contracts list.
 - [ ] i18n: Last 3 columns in Reports/Leaves.
+- [ ] Add a version for JS libs (avoid cache problems).
 - [ ] Use open formats for Spreadsheet exports.
 - [ ] Add a "All" option into Reports/Leaves.
 - [ ] Add requests list into Reports/Leaves.
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
 - [ ] Migrate all datatables to the new API ($().dataTable() to $().DataTable()).
 - [ ] Migrate all datatables to the new language initiatlization.
-- [ ] Maybe user/index : Ajaxload.
+- [ ] Maybe: Filter Excel export on visible rows (lot of security backend).
+- [ ] Maybe: user/index Ajaxload.
 - [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
 
 ## v0.5.0 or later

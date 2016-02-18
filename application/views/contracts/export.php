@@ -1,6 +1,6 @@
 <?php
 /**
- * This view exports the list of contracts into Excel
+ * This view exports the list of contracts into a Spreadsheet file
  * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
@@ -21,8 +21,16 @@ $line = 2;
 foreach ($contracts as $contract) {
     $sheet->setCellValue('A' . $line, $contract['id']);
     $sheet->setCellValue('B' . $line, $contract['name']);
-    $sheet->setCellValue('C' . $line, $contract['startentdate']);
-    $sheet->setCellValue('D' . $line, $contract['endentdate']);
+    $startentdate = $contract['startentdate'];
+    $endentdate = $contract['endentdate'];
+    if (strpos(lang('global_date_format'), 'd') < strpos(lang('global_date_format'), 'm')) {
+        $pieces = explode("/", $startentdate);
+        $startentdate = $pieces[1] . '/' . $pieces[0];
+        $pieces = explode("/", $endentdate);
+        $endentdate = $pieces[1] . '/' . $pieces[0];
+    }
+    $sheet->setCellValue('C' . $line, $startentdate);
+    $sheet->setCellValue('D' . $line, $endentdate);
     $line++;
 }
 
@@ -31,9 +39,4 @@ foreach(range('A', 'D') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-$filename = 'contracts.xls';
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="' . $filename . '"');
-header('Cache-Control: max-age=0');
-$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-$objWriter->save('php://output');
+exportSpreadsheet($this, 'contracts');

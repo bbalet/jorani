@@ -475,3 +475,8 @@ $config['default_timezone'] = 'Europe/Paris';
 //Enable public access for tabular and global calendar
 //As the user won't choose the language of the web ui, please set <<language>>
 $config['public_calendar'] = FALSE;
+
+//____________________________________________________________________________
+//Force spreadsheet export format. We strongly recommend XLSX format over Open Document Format.
+//Please note that ods doesn't support all formatting/style options and is considered as experimental
+$config['spreadsheet_format'] = 'xlsx';   //Supported formats: xlsx, ods

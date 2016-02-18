@@ -1,6 +1,6 @@
 <?php
 /**
- * This view builds an Excel5 file containing the list of leave types.
+ * This view builds a Spreadsheet file containing the list of leave types.
  * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
@@ -27,9 +27,4 @@ foreach(range('A', 'B') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-$filename = 'leave_types.xls';
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="' . $filename . '"');
-header('Cache-Control: max-age=0');
-$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-$objWriter->save('php://output');
+exportSpreadsheet($this, 'leave_types');

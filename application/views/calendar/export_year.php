@@ -240,9 +240,4 @@ $sheet->getPageSetup()->setFitToPage(true);
 $sheet->getPageSetup()->setFitToWidth(1);
 $sheet->getPageSetup()->setFitToHeight(0);
 
-$filename = 'year.xlsx';
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="' . $filename . '"');
-header('Cache-Control: max-age=0');
-$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
-$objWriter->save('php://output');
+exportSpreadsheet($this, 'year');

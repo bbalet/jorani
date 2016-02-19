@@ -33,6 +33,7 @@ $lang['reports_leaves_year_field'] = 'Année';
 $lang['reports_leaves_field_entity'] = 'Choisir l\'entité';
 $lang['reports_leaves_button_entity'] = 'Choisir';
 $lang['reports_leaves_field_subdepts'] = 'Inclure les sous-départements';
+$lang['reports_leaves_field_leave_requests'] = 'Demandes de congé';
 $lang['reports_leaves_button_launch'] = 'Exécuter';
 $lang['reports_leaves_button_export'] = 'Exporter';
 $lang['reports_leaves_popup_entity_title'] = 'Choisir une entité';

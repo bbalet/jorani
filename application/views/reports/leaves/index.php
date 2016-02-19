@@ -23,6 +23,7 @@
                         echo "<option val='" . $ii ."'>" . $ii ."</option>";
                     }
                 }?>
+                <option val='0'><?php echo lang('All');?></option>
             </select>
         </label>
         <label for="cboYear"><?php echo lang('reports_leaves_year_field');?>
@@ -45,11 +46,14 @@
         <input type="text" id="txtEntity" name="txtEntity" readonly />
         <button id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('reports_leaves_button_entity');?></button>
         </div>
+        <label for="chkIncludeChildren">
+                <input type="checkbox" id="chkIncludeChildren" name="chkIncludeChildren" checked /> <?php echo lang('reports_leaves_field_subdepts');?>
+        </label>
     </div>
     <div class="span4">
         <div class="pull-right">    
-            <label for="chkIncludeChildren">
-                <input type="checkbox" id="chkIncludeChildren" name="chkIncludeChildren" checked /> <?php echo lang('reports_leaves_field_subdepts');?>
+            <label for="chkLeaveDetails">
+                    <input type="checkbox" id="chkLeaveDetails" name="chkLeaveDetails" /> <?php echo lang('reports_leaves_field_leave_requests');?>
             </label>
             &nbsp;
             <button class="btn btn-primary" id="cmdLaunchReport"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('reports_leaves_button_launch');?></button>
@@ -91,6 +95,7 @@ if ($language_code != 'en') { ?>
 var entity = -1; //Id of the selected entity
 var entityName = ''; //Label of the selected entity
 var includeChildren = true;
+var leaveDetails = false;
 var month = <?php echo date('m');?>;
 var year = <?php echo date('Y');?>;
 
@@ -140,6 +145,11 @@ $(document).ready(function() {
         } else {
             rtpQuery += '&children=false';
         }
+        if ($('#chkLeaveDetails').prop('checked') == true) {
+            rtpQuery += '&requests=true';
+        } else {
+            rtpQuery += '&requests=false';
+        }
         document.location.href = rtpQuery;
     });
     
@@ -158,6 +168,11 @@ $(document).ready(function() {
         } else {
             ajaxQuery += '&children=false';
         }
+        if ($('#chkLeaveDetails').prop('checked') == true) {
+            ajaxQuery += '&requests=true';
+        } else {
+            ajaxQuery += '&requests=false';
+        }
         $('#reportResult').html("<img src='<?php echo base_url();?>assets/images/loading.gif' />");
         
         $.ajax({
@@ -169,10 +184,16 @@ $(document).ready(function() {
 
     });
     
-    //Toggle day offs displays
+    //Toggle include sub-entities option
     $('#chkIncludeChildren').on('change', function() {
         includeChildren = $('#chkIncludeChildren').prop('checked');
         $.cookie('rep_includeChildren', includeChildren);
+    });
+    
+    //Toggle include leave requests
+    $('#chkLeaveDetails').on('change', function() {
+        leaveDetails = $('#chkLeaveDetails').prop('checked');
+        $.cookie('rep_leaveDetails', leaveDetails);
     });
     
     //Cookie has value ? take -1 by default
@@ -180,14 +201,18 @@ $(document).ready(function() {
         entity = $.cookie('rep_entity');
         entityName = $.cookie('rep_entityName');
         includeChildren = $.cookie('rep_includeChildren');
+        leaveDetails = (typeof $.cookie('rep_leaveDetails') === 'undefined') ? "false" : $.cookie('rep_leaveDetails');
         //Parse boolean values
         includeChildren = $.parseJSON(includeChildren.toLowerCase());
+        leaveDetails = $.parseJSON(leaveDetails.toLowerCase());
         $('#txtEntity').val(entityName);
         $('#chkIncludeChildren').prop('checked', includeChildren);
+        $('#chkLeaveDetails').prop('checked', leaveDetails);
     } else { //Set default value
         $.cookie('rep_entity', entity);
         $.cookie('rep_entityName', entityName);
         $.cookie('rep_includeChildren', includeChildren);
+        $.cookie('rep_leaveDetails', leaveDetails);
     }
 });
 </script>

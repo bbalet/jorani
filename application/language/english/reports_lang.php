@@ -35,6 +35,7 @@ $lang['reports_leaves_year_field'] = 'Year';
 $lang['reports_leaves_field_entity'] = 'Select the entity';
 $lang['reports_leaves_button_entity'] = 'Select';
 $lang['reports_leaves_field_subdepts'] = 'Include sub-departments';
+$lang['reports_leaves_field_leave_requests'] = 'Leave requests';
 $lang['reports_leaves_button_launch'] = 'Launch';
 $lang['reports_leaves_button_export'] = 'Export';
 $lang['reports_leaves_popup_entity_title'] = 'Select an entity';

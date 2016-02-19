@@ -5,15 +5,18 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 - [X] i18n: Use locale for m/d start/end periods in contracts list.
 - [ ] i18n: Last 3 columns in Reports/Leaves.
-- [ ] Add a version for JS libs (avoid cache problems).
-- [ ] Use open formats for Spreadsheet exports.
-- [ ] Add a "All" option into Reports/Leaves.
+- [ ] i18n: reports_leaves_field_leave_requests / All
+- [X] Add a version for JS libs (avoid cache problems).
+- [X] Use open formats for Spreadsheet exports.
+- [X] Add a "All" option into Reports/Leaves.
 - [ ] Add requests list into Reports/Leaves.
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
-- [ ] Migrate all datatables to the new API ($().dataTable() to $().DataTable()).
-- [ ] Migrate all datatables to the new language initiatlization.
+- [X] Migrate all datatables to the new language initiatlization.
+- [ ] Add shortcuts to ICS feeds into My leaves/My collaborators.
+- [ ] HR/Employees: reset filters on entry date (post pend).
 - [ ] Maybe: Filter Excel export on visible rows (lot of security backend).
 - [ ] Maybe: user/index Ajaxload.
+- [ ] Maybe: series of leave requests (Employees / Multiple edit). and...
 - [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
 
 ## v0.5.0 or later

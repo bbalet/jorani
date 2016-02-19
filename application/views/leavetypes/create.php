@@ -23,7 +23,7 @@ echo form_open('leavetypes/create', $attributes); ?>
         $('#cmdCreateLeaveType').click(function() {
             var typeNames = [<?php echo implode(', ', array_map(function ($entry) { return '"' . $entry['name'] . '"'; }, $leavetypes)); ?>];
             if (typeNames.indexOf($('#name').val()) > -1) {
-                bootbox.alert('<?php echo lang('leavetypes_js_unique_error_msg');?>');
+                bootbox.alert("<?php echo lang('leavetypes_js_unique_error_msg');?>");
             } else {
                 $('#formCreateLeaveType').submit();
             }

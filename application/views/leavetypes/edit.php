@@ -34,7 +34,7 @@ echo form_open('leavetypes/edit/' . $id, $attributes); ?>
                 }
             }
             if (found == true) {
-                bootbox.alert('<?php echo lang('leavetypes_js_unique_error_msg');?>');
+                bootbox.alert("<?php echo lang('leavetypes_js_unique_error_msg');?>");
             } else {
                 $('#formEditLeaveType').submit();
             }

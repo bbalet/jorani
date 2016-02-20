@@ -82,6 +82,8 @@ $lang['position'] = 'посада';
 $lang['contract'] = 'контракт';
 $lang['day off'] = 'вихідний';
 $lang['leave'] = 'відпустка';
+
+$lang['All'] = 'All';
 $lang['OK'] = 'ОК';
 $lang['Cancel'] = 'Скасувати';
 $lang['copied'] = 'скопійовано';

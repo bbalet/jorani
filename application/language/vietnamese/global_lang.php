@@ -76,6 +76,7 @@ $lang['contract'] = 'Hợp đồng';
 $lang['day off'] = 'Ngày nghỉ';
 $lang['leave'] = 'nghỉ phép';
 
+$lang['All'] = 'All';
 $lang['OK'] = 'Chấp nhận';
 $lang['Cancel'] = 'Hủy bỏ';
 $lang['copied'] = 'Đã sao chép';

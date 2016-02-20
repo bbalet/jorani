@@ -84,6 +84,7 @@ $lang['contract'] = 'contract';
 $lang['day off'] = 'vrije dag';
 $lang['leave'] = 'afwezigheid';
 
+$lang['All'] = 'All';
 $lang['OK'] = 'OK';
 $lang['Cancel'] = 'Annuleren';
 $lang['copied'] = 'gekopieerd';

@@ -34,6 +34,7 @@ $lang['reports_leaves_year_field'] = 'Год';
 $lang['reports_leaves_field_entity'] = 'Выберите отдел';
 $lang['reports_leaves_button_entity'] = 'Выбрать';
 $lang['reports_leaves_field_subdepts'] = 'Включая подотделы';
+$lang['reports_leaves_field_leave_requests'] = 'Список заявлений на отпуск';
 $lang['reports_leaves_button_launch'] = 'Выполнить';
 $lang['reports_leaves_button_export'] = 'Экспорт';
 $lang['reports_leaves_popup_entity_title'] = 'Выберите отдел';

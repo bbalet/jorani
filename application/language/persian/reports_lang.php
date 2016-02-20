@@ -36,6 +36,7 @@ $lang['reports_leaves_year_field'] = 'سال';
 $lang['reports_leaves_field_entity'] = 'واحد را انتخاب کنید';
 $lang['reports_leaves_button_entity'] = 'انتخاب';
 $lang['reports_leaves_field_subdepts'] = 'شمولیت دپارتمان فرعی';
+$lang['reports_leaves_field_leave_requests'] = 'Leave requests';
 $lang['reports_leaves_button_launch'] = 'راه اندازی';
 $lang['reports_leaves_button_export'] = 'صدور';
 $lang['reports_leaves_popup_entity_title'] = 'انتخاب یک واحد';

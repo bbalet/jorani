@@ -40,23 +40,25 @@
                 </div>
                 &nbsp;
                 <?php echo lang('hr_employees_thead_datehired');?>
-                <div class="input-prepend">
+                <div class="input-prepend input-append">
                     <div class="btn-group">
                         <div class="btn-group" data-toggle="buttons-radio">
                             <button id="cmdGreater1" type="button" class="btn active"><i class="fa fa-chevron-right"></i></button>
                             <button id="cmdLesser1" type="button" class="btn"><i class="fa fa-chevron-left"></i></button>
                         </div>
                         <input type="text" id="viz_datehired1" class="input-small" readonly />
+                        <button id="cmdResetDate1" type="button" class="btn"><i class="fa fa-times"></i></button>
                     </div>                            
                 </div>
                 &nbsp;&mdash;&nbsp;
-                <div class="input-prepend">
+                <div class="input-prepend input-append">
                     <div class="btn-group">
                         <div class="btn-group" data-toggle="buttons-radio">
                             <button id="cmdGreater2" type="button" class="btn"><i class="fa fa-chevron-right"></i></button>
                             <button id="cmdLesser2" type="button" class="btn active"><i class="fa fa-chevron-left"></i></button>
                         </div>
                         <input type="text" id="viz_datehired2" class="input-small" readonly />
+                        <button id="cmdResetDate2" type="button" class="btn"><i class="fa fa-times"></i></button>
                     </div>                            
                 </div>
                 <input type="hidden" name="datehired1" id="datehired1" />
@@ -912,6 +914,16 @@ $(function () {
     });
     $("#cmdGreater2").click(function() {
         state2="greater";
+        refreshDataTable();
+    });
+    $("#cmdResetDate1").click(function() {
+        $("#viz_datehired1").val("");
+        $("#datehired1").val("");
+        refreshDataTable();
+    });
+    $("#cmdResetDate2").click(function() {
+        $("#viz_datehired2").val("");
+        $("#datehired2").val("");
         refreshDataTable();
     });
 });

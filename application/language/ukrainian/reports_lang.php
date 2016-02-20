@@ -36,6 +36,7 @@ $lang['reports_leaves_year_field'] = 'Рік';
 $lang['reports_leaves_field_entity'] = 'Оберіть відділ';
 $lang['reports_leaves_button_entity'] = 'Вибрати';
 $lang['reports_leaves_field_subdepts'] = 'Включаючи підвідділи';
+$lang['reports_leaves_field_leave_requests'] = 'Leave requests';
 $lang['reports_leaves_button_launch'] = 'Виконати';
 $lang['reports_leaves_button_export'] = 'Експортувати';
 $lang['reports_leaves_popup_entity_title'] = 'Оберіть відділ';

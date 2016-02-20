@@ -85,9 +85,10 @@ $lang['contract'] = 'កិច្ចសន្យា';
 $lang['day off'] = 'ថ្ងៃឈប់សម្រាក';
 $lang['leave'] = 'ឈប់សម្រាក់';
 
+$lang['All'] = 'All';
 $lang['OK'] = 'យល់ព្រម';
 $lang['Cancel'] = 'បោះបង់';
-
 $lang['copied'] = 'បានថតចម្លង';
+
 $lang['global_ajax_timeout'] = 'រយៈពេលនៃការប្រើប្រាស់ត្រូវបានផុតកំណត់ សូមចូលក្នុងកម្មវិធីជាថ្មី';
 $lang['global_ajax_error'] = 'មានបញ្ហា Ajax កើតឡើងដោយមិនរំពឹងទុក';

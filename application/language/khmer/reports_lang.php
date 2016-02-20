@@ -33,6 +33,7 @@ $lang['reports_leaves_year_field'] = 'ឆ្នាំ';
 $lang['reports_leaves_field_entity'] = 'ជ្រើសរើសអង្គភាព';
 $lang['reports_leaves_button_entity'] = 'ជ្រើសរើស';
 $lang['reports_leaves_field_subdepts'] = 'រួមបញ្ចូលអនុផ្នែក';
+$lang['reports_leaves_field_leave_requests'] = 'Leave requests';
 $lang['reports_leaves_button_launch'] = 'ចាប់ផ្ពើមដំណើរការ';
 $lang['reports_leaves_button_export'] = 'នាំចេញ';
 $lang['reports_leaves_popup_entity_title'] = 'ជ្រើសរើសអង្គភាព';

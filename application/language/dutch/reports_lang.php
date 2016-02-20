@@ -36,6 +36,7 @@ $lang['reports_leaves_year_field'] = 'Jaar';
 $lang['reports_leaves_field_entity'] = 'Selecteer entiteit';
 $lang['reports_leaves_button_entity'] = 'Selecteer';
 $lang['reports_leaves_field_subdepts'] = 'Includeer onderliggende entiteiten';
+$lang['reports_leaves_field_leave_requests'] = 'Leave requests';
 $lang['reports_leaves_button_launch'] = 'Uitvoeren';
 $lang['reports_leaves_button_export'] = 'Exporteren';
 $lang['reports_leaves_popup_entity_title'] = 'Selecteer een entiteit';

@@ -84,7 +84,6 @@ $lang['day off'] = 'jour non travaillé';
 $lang['leave'] = 'absence';
 
 $lang['All'] = 'Tout';
-
 $lang['OK'] = 'OK';
 $lang['Cancel'] = 'Annuler';
 $lang['copied'] = 'copié';

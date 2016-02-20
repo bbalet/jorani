@@ -36,6 +36,7 @@ $lang['reports_leaves_year_field'] = 'Năm';
 $lang['reports_leaves_field_entity'] = 'Chọn thực thể';
 $lang['reports_leaves_button_entity'] = 'Chọn';
 $lang['reports_leaves_field_subdepts'] = 'Thêm vào các đơn vị trực thuộc';
+$lang['reports_leaves_field_leave_requests'] = 'Leave requests';
 $lang['reports_leaves_button_launch'] = 'Phóng';
 $lang['reports_leaves_button_export'] = 'Xuất';
 $lang['reports_leaves_popup_entity_title'] = 'Chọn thực thể';

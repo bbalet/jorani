@@ -36,6 +36,7 @@ $lang['reports_leaves_year_field'] = 'Jahr';
 $lang['reports_leaves_field_entity'] = 'Einheit auswählen';
 $lang['reports_leaves_button_entity'] = 'Auswahl';
 $lang['reports_leaves_field_subdepts'] = 'Unterabteilungen inkludieren';
+$lang['reports_leaves_field_leave_requests'] = 'Leave requests';
 $lang['reports_leaves_button_launch'] = 'Start';
 $lang['reports_leaves_button_export'] = 'Export';
 $lang['reports_leaves_popup_entity_title'] = 'Einheit auswählen';

@@ -12,7 +12,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] Add requests list into Reports/Leaves.
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
 - [X] Migrate all datatables to the new language initiatlization.
-- [ ] Add shortcuts to ICS feeds into My leaves/My collaborators.
+- [X] Add shortcuts to ICS feeds into My leaves/My collaborators.
 - [X] HR/Employees: reset filters on entry date (post pend).
 - [ ] Maybe: Filter Excel export on visible rows (lot of security backend).
 - [ ] Maybe: user/index Ajaxload.

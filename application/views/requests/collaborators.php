@@ -50,7 +50,36 @@
     <?php endforeach ?>
     </tbody>
 </table>
-	</div>
+    </div>
+</div>
+
+<div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
+<div class="row-fluid">
+    <div class="span12">
+        <?php if ($this->config->item('ics_enabled') == TRUE) {?>
+        <a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a>
+        <?php }?>
+    </div>
+</div>
+
+<div id="frmLinkICS" class="modal hide fade">
+    <div class="modal-header">
+        <h3>ICS<a href="#" onclick="$('#frmLinkICS').modal('hide');" class="close">&times;</a></h3>
+    </div>
+    <div class="modal-body" id="frmSelectDelegateBody">
+        <div class='input-append'>
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                    value="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>" />
+                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>">
+                     <i class="fa fa-clipboard"></i>
+                 </button>
+                <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="$('#frmLinkICS').modal('hide');" class="btn btn-primary"><?php echo lang('OK');?></a>
+    </div>
 </div>
 
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -59,6 +88,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/Buttons-1.1.2/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/Buttons-1.1.2/js/buttons.colVis.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/ColReorder-1.3.1/js/dataTables.colReorder.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -121,6 +151,16 @@ $(document).ready(function() {
                 sortDescending: "<?php echo lang('datatable_sSortDescending');?>"
             }
         },
+    });
+    
+    //Copy/Paste ICS Feed
+    var client = new ZeroClipboard($("#cmdCopy"));
+    $('#lnkICS').click(function () {
+        $("#frmLinkICS").modal('show');
+    });
+    client.on( "aftercopy", function( event ) {
+        $('#tipCopied').tooltip('show');
+        setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });
 });
 </script>

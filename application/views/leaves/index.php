@@ -67,9 +67,9 @@
         <td><?php echo lang($leaves_item['status_name']); ?></td>
     </tr>
 <?php endforeach ?>
-	</tbody>
+    </tbody>
 </table>
-	</div>
+    </div>
 </div>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
@@ -79,6 +79,10 @@
       <a href="<?php echo base_url();?>leaves/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('leaves_index_button_export');?></a>
       &nbsp;&nbsp;
       <a href="<?php echo base_url();?>leaves/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('leaves_index_button_create');?></a>
+      &nbsp;&nbsp;
+        <?php if ($this->config->item('ics_enabled') == TRUE) {?>
+        <a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a>
+        <?php }?>
     </div>
 </div>
 
@@ -99,8 +103,28 @@
     </div>
 </div>
 
+<div id="frmLinkICS" class="modal hide fade">
+    <div class="modal-header">
+        <h3>ICS<a href="#" onclick="$('#frmLinkICS').modal('hide');" class="close">&times;</a></h3>
+    </div>
+    <div class="modal-body" id="frmSelectDelegateBody">
+        <div class='input-append'>
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                    value="<?php echo base_url() . 'ics/individual/' . $user_id;?>" />
+                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/individual/' . $user_id;?>">
+                     <i class="fa fa-clipboard"></i>
+                 </button>
+                <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="$('#frmLinkICS').modal('hide');" class="btn btn-primary"><?php echo lang('OK');?></a>
+    </div>
+</div>
+
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -151,6 +175,16 @@ $(document).ready(function() {
     //Prevent to load always the same content (refreshed each time)
     $('#frmDeleteLeaveRequest').on('hidden', function() {
         $(this).removeData('modal');
+    });
+    
+    //Copy/Paste ICS Feed
+    var client = new ZeroClipboard($("#cmdCopy"));
+    $('#lnkICS').click(function () {
+        $("#frmLinkICS").modal('show');
+    });
+    client.on( "aftercopy", function( event ) {
+        $('#tipCopied').tooltip('show');
+        setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });
 });
 </script>

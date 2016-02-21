@@ -189,6 +189,54 @@ class Ics extends CI_Controller {
     }
     
     /**
+     * Get the list of leaves of the collaborators of the connected user (manager)
+     * @param int $user identifier of the user wanting to view the list (mind timezone)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function collaborators($user) {
+        if ($this->config->item('ics_enabled') == FALSE) {
+            $this->output->set_header("HTTP/1.0 403 Forbidden");
+        } else {
+            $this->load->model('leaves_model');
+            $result = $this->leaves_model->getLeavesRequestedToManager($user, TRUE);
+            if (empty($result)) {
+                echo "";
+            } else {
+                //Get timezone and language of the user
+                $this->load->model('users_model');
+                $employee = $this->users_model->getUsers($user);
+                if (!is_null($employee['timezone'])) {
+                    $tzdef = $employee['timezone'];
+                } else {
+                    $tzdef = $this->config->item('default_timezone');
+                    if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
+                }
+                $this->lang->load('global', $this->polyglot->code2language($employee['language']));
+                
+                $vcalendar = new VObject\Component\VCalendar();
+                foreach ($result as $event) {
+                    $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
+                    $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
+                    if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 1);
+                    if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
+                    if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
+                    if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
+                    
+                    $vcalendar->add('VEVENT', Array(
+                        'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
+                        'CATEGORIES' => lang('leave'),
+                        'DTSTART' => $startdate,
+                        'DTEND' => $enddate,
+                        'DESCRIPTION' => $event['type_label'] . ($event['cause']!=''?(' / ' . $event['cause']):''),
+                        'URL' => base_url() . "leaves/" . $event['id'],
+                    ));    
+                }
+                echo $vcalendar->serialize();
+            }
+        }
+    }
+    
+    /**
      * Action : download an iCal event corresponding to a leave request
      * @param int leave request id
      * @author Benjamin BALET <benjamin.balet@gmail.com>

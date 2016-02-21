@@ -59,7 +59,7 @@
 <?php endforeach ?>
 	</tbody>
 </table>
-	</div>
+    </div>
 </div>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
@@ -71,13 +71,37 @@
         <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_all');?></a>
         &nbsp;&nbsp;
         <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_pending');?></a>
+        &nbsp;&nbsp;
+        <?php if ($this->config->item('ics_enabled') == TRUE) {?>
+        <a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a>
+        <?php }?>
     </div>
 </div>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
+<div id="frmLinkICS" class="modal hide fade">
+    <div class="modal-header">
+        <h3>ICS<a href="#" onclick="$('#frmLinkICS').modal('hide');" class="close">&times;</a></h3>
+    </div>
+    <div class="modal-body" id="frmSelectDelegateBody">
+        <div class='input-append'>
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                    value="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>" />
+                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>">
+                     <i class="fa fa-clipboard"></i>
+                 </button>
+                <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="$('#frmLinkICS').modal('hide');" class="btn btn-primary"><?php echo lang('OK');?></a>
+    </div>
+</div>
+
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 
 <script type="text/javascript">
 var clicked = false;
@@ -126,5 +150,15 @@ $(document).ready(function() {
             window.location.href = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
         }
      });
+     
+    //Copy/Paste ICS Feed
+    var client = new ZeroClipboard($("#cmdCopy"));
+    $('#lnkICS').click(function () {
+        $("#frmLinkICS").modal('show');
+    });
+    client.on( "aftercopy", function( event ) {
+        $('#tipCopied').tooltip('show');
+        setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
+    });
 });
 </script>

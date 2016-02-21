@@ -269,6 +269,7 @@ $route['api/getListOfEmployeesInEntity/(:num)/(:any)'] = 'api/getListOfEmployees
 $route['ics/individual/(:num)'] = 'ics/individual/$1';
 $route['ics/dayoffs/(:num)/(:num)'] = 'ics/dayoffs/$1/$2';
 $route['ics/entity/(:num)/(:num)/(:any)'] = 'ics/entity/$1/$2/$3';
+$route['ics/collaborators/(:num)'] = 'ics/collaborators/$1';
 $route['ics/ical/(:num)'] = 'ics/ical/$1';
 
 //_______________________________________________

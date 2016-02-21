@@ -432,6 +432,22 @@ class Dayoffs_model extends CI_Model {
     }
     
     /**
+     * Count the days off defined for a contract and a year
+     * @param int $contract Contract to check
+     * @param int $year Year to check
+     * @return int number of rows
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function countDaysOff($contract, $year) {
+        $this->db->select('count(*) as number', FALSE);
+        $this->db->from('dayoffs');
+        $this->db->where('contract', $contract);
+        $this->db->where('YEAR(date)', $year);
+        $result = $this->db->get();
+        return $result->row()->number;
+    }
+    
+    /**
      * All day offs of a given employee and between two dates
      * @param int $user_id connected user
      * @param string $start Start date displayed on calendar
@@ -447,5 +463,30 @@ class Dayoffs_model extends CI_Model {
         $this->db->where('date <= DATE(' . $this->db->escape($end) . ')');
         $dayoffs = $this->db->get('users')->result();
         return $dayoffs;
+    }
+    
+    /**
+     * Check if days off have been defined for year - 1, year and year + 1
+     * @param int $year Year to check
+     * @return array (id, name, y-1, y, y+1)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function checkIfDefined($year) {
+        $ym1 = intval($year) - 1;
+        $y = intval($year);
+        $yp1 = intval($year) + 1;
+        $this->load->model('contracts_model');
+        $contracts = $this->contracts_model->getContracts();
+        $result = array();
+        foreach ($contracts as $contract) {
+            $result[] = array (
+                'contract' => $contract['id'],
+                'name' => $contract['name'],
+                'ym1' => $this->countDaysOff($contract['id'], $ym1),
+                'y' => $this->countDaysOff($contract['id'], $y),
+                'yp1' => $this->countDaysOff($contract['id'], $yp1)
+            );
+        }
+        return $result;
     }
 }

@@ -22,6 +22,7 @@ $lang['menu_admin_list_users'] = 'Список користувачів';
 $lang['menu_admin_add_user'] = 'Створити користувача';
 $lang['menu_admin_settings_divider'] = 'Налаштування';
 $lang['menu_admin_settings'] = 'Налаштування';
+$lang['menu_admin_diagnostic'] = 'Diagnostic';
 
 $lang['menu_hr_title'] = 'HR';
 $lang['menu_hr_employees_divider'] = 'Працівники';

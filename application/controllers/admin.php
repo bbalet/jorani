@@ -23,6 +23,7 @@ class Admin extends CI_Controller {
         parent::__construct();
         setUserContext($this);
         $this->lang->load('global', $this->language);
+        $this->lang->load('admin', $this->language);
     }
     
     /**
@@ -37,6 +38,28 @@ class Admin extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('admin/settings', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Display the diagnostic of the content (duplicated requests, etc.) and configuration
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function diagnostic() {
+        $this->auth->checkIfOperationIsAllowed('list_settings');
+        $data = getUserContext($this);
+        $data['title'] =lang('admin_diagnostic_title');
+        $data['help'] = '';
+        $this->load->model('leaves_model');
+        $this->load->model('entitleddays_model');
+        $this->load->model('dayoffs_model');
+        $data['duplicatedLeaves'] = $this->leaves_model->detectDuplicatedRequests();
+        $data['wrongDateType'] = $this->leaves_model->detectWrongDateTypes();
+        $data['entitlmentOverflow'] = $this->entitleddays_model->detectOverflow();
+        $data['daysOffYears'] = $this->dayoffs_model->checkIfDefined(date("Y"));
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('admin/diagnostic', $data);
         $this->load->view('templates/footer');
     }
     

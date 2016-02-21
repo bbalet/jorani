@@ -22,6 +22,7 @@ $lang['menu_admin_list_users'] = 'Liste der User';
 $lang['menu_admin_add_user'] = 'User erstellen';
 $lang['menu_admin_settings_divider'] = 'Einstellungen';
 $lang['menu_admin_settings'] = 'Einstellungen';
+$lang['menu_admin_diagnostic'] = 'Diagnostic';
 
 $lang['menu_hr_title'] = 'Personal';
 $lang['menu_hr_employees_divider'] = 'Angestellte';

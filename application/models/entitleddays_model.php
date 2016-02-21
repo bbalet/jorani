@@ -216,4 +216,27 @@ class Entitleddays_model extends CI_Model {
         $result = $this->db->get();
         return $result->row()->number;
     }
+    
+    /**
+     * List all entitlements overflowing (more than one year).
+     * @return array List of possible duplicated leave requests
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function detectOverflow() {
+        //Note: the query below detects deletion problems:
+        //SELECT * FROM entitleddays 
+        //LEFT OUTER JOIN users ON entitleddays.employee = users.id 
+        //LEFT OUTER JOIN contracts ON entitleddays.contract = contracts.id 
+        //WHERE users.firstname IS NULL AND contracts.name IS NULL
+        $this->db->select('CONCAT(users.firstname, \' \', users.lastname) as user_label', FALSE);
+        $this->db->select('contracts.name as contract_label');
+        $this->db->select('entitleddays.*');
+        $this->db->from('entitleddays');
+        $this->db->join('users', 'users.id = entitleddays.employee', 'left outer');
+        $this->db->join('contracts', 'entitleddays.contract = contracts.id', 'left outer');
+        $this->db->where('TIMESTAMPDIFF(YEAR, `startdate`, `enddate`) > 0');   //More than a year
+        $this->db->order_by("contracts.id", "asc"); 
+        $this->db->order_by("users.id", "asc");
+        return $this->db->get()->result_array();
+    }
 }

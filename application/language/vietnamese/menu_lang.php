@@ -22,6 +22,7 @@ $lang['menu_admin_list_users'] = 'Danh sách người sử dụng';
 $lang['menu_admin_add_user'] = 'Tạo User';
 $lang['menu_admin_settings_divider'] = 'Cài đặt';
 $lang['menu_admin_settings'] = 'Cài đặt';
+$lang['menu_admin_diagnostic'] = 'Diagnostic';
 
 $lang['menu_hr_title'] = 'HR';
 $lang['menu_hr_employees_divider'] = 'Nhân viên';

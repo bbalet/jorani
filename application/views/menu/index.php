@@ -82,6 +82,7 @@ $this->lang->load('menu', $language);?>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_admin_settings_divider');?></li>
                     <li><a href="<?php echo base_url();?>admin/settings"><?php echo lang('menu_admin_settings');?></a></li>
+                    <li><a href="<?php echo base_url();?>admin/diagnostic"><?php echo lang('menu_admin_diagnostic');?></a></li>
                   </ul>
                 </li>
               <?php } ?>

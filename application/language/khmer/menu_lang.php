@@ -21,6 +21,7 @@ $lang['menu_admin_list_users'] = 'បញ្ជីនៃអ្នកប្រើ�
 $lang['menu_admin_add_user'] = 'បង្កើតឈ្មោះថ្មី';
 $lang['menu_admin_settings_divider'] = 'ការកំណត់';
 $lang['menu_admin_settings'] = 'ការកំណត់';
+$lang['menu_admin_diagnostic'] = 'Diagnostic';
 
 $lang['menu_hr_title'] = 'ធនធានមនុស្ស';
 $lang['menu_hr_employees_divider'] = 'បុគ្គលិក';

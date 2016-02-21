@@ -1179,4 +1179,47 @@ class Leaves_model extends CI_Model {
         return $user;
     }
     
+    /**
+     * List all duplicated leave requests (exact same dates, status, etc.)
+     * Note: this doesn't detect overlapping requests.
+     * @return array List of duplicated leave requests
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function detectDuplicatedRequests() {
+        $this->db->select('leaves.id, CONCAT(users.firstname, \' \', users.lastname) as user_label', FALSE);
+        $this->db->select('leaves.startdate, types.name as types_label');
+        $this->db->from('leaves');
+        $this->db->join('(SELECT * FROM leaves) dup', 'leaves.employee = dup.employee' .
+                ' AND leaves.startdate = dup.startdate' .
+                ' AND leaves.enddate = dup.enddate' .
+                ' AND leaves.startdatetype = dup.startdatetype' .
+                ' AND leaves.enddatetype = dup.enddatetype' .
+                ' AND leaves.status = dup.status' .
+                ' AND leaves.id != dup.id', 'inner');
+        $this->db->join('users', 'users.id = leaves.employee', 'inner');
+        $this->db->join('types', 'leaves.type = types.id', 'inner');
+        $this->db->where('leaves.status', 3);   //Accepted
+        $this->db->order_by("users.id", "asc"); 
+        $this->db->order_by("leaves.startdate", "desc");
+        return $this->db->get()->result_array();
+    }
+    
+    /**
+     * List all leave requests with a wrong date type (starting afternoon and ending morning of the same day)
+     * @return array List of wrong leave requests
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function detectWrongDateTypes() {
+        $this->db->select('leaves.*, CONCAT(users.firstname, \' \', users.lastname) as user_label', FALSE);
+        $this->db->select('status.name as status_label');
+        $this->db->from('leaves');
+        $this->db->join('users', 'users.id = leaves.employee', 'inner');
+        $this->db->join('status', 'leaves.status = status.id', 'inner');
+        $this->db->where('leaves.startdatetype', 'Afternoon');
+        $this->db->where('leaves.enddatetype', 'Morning');
+        $this->db->where('leaves.startdate = leaves.enddate');
+        $this->db->order_by("users.id", "asc"); 
+        $this->db->order_by("leaves.startdate", "desc");
+        return $this->db->get()->result_array();
+    }
 }

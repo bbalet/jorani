@@ -46,3 +46,24 @@ $lang['admin_diagnostic_daysoff_thead_name'] = 'Name';
 $lang['admin_diagnostic_daysoff_thead_ym1'] = 'Last year';
 $lang['admin_diagnostic_daysoff_thead_y'] = 'This year';
 $lang['admin_diagnostic_daysoff_thead_yp1'] = 'Next year';
+
+$lang['admin_diagnostic_overtime_tab'] = 'Overtime';
+$lang['admin_diagnostic_daysoff_description'] = 'Overtime requests with a negative duration';
+$lang['admin_diagnostic_daysoff_thead_id'] = 'ID';
+$lang['admin_diagnostic_daysoff_thead_employee'] = 'Employee';
+$lang['admin_diagnostic_daysoff_thead_date'] = 'Date';
+$lang['admin_diagnostic_daysoff_thead_duration'] = 'Duration';
+$lang['admin_diagnostic_daysoff_thead_status'] = 'Status';
+
+$lang['admin_diagnostic_contract_tab'] = 'Contracts';
+$lang['admin_diagnostic_contract_description'] = 'Unused contracts (check if the contract is not duplicated).';
+$lang['admin_diagnostic_contract_thead_id'] = 'ID';
+$lang['admin_diagnostic_contract_thead_name'] = 'Name';
+
+$lang['admin_diagnostic_balance_tab'] = 'Balance';
+$lang['admin_diagnostic_balance_description'] = 'Leave requests for which there are no entitlments.';
+$lang['admin_diagnostic_balance_thead_id'] = 'ID';
+$lang['admin_diagnostic_balance_thead_employee'] = 'Employee';
+$lang['admin_diagnostic_balance_thead_contract'] = 'Contract';
+$lang['admin_diagnostic_balance_thead_start_date'] = 'Start Date';
+$lang['admin_diagnostic_balance_thead_status'] = 'Status';

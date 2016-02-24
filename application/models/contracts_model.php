@@ -149,4 +149,18 @@ class Contracts_model extends CI_Model {
             return FALSE;
         }
     }
+    
+    /**
+     * Detect not used contracts (maybe duplicated)
+     * @return array list of unused contracts
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function notUsedContracts() {
+        //SELECT contracts.* FROM `contracts` LEFT OUTER JOIN users ON contracts.id = users.contract
+        // WHERE users.contract IS NULL
+        $this->db->select('contracts.*');
+        $this->db->join('users', 'contracts.id = users.contract', 'left outer');
+        $this->db->where('users.contract IS NULL');
+        return $this->db->get('contracts')->result_array();
+    }
 }

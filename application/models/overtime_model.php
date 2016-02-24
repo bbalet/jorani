@@ -210,4 +210,18 @@ class Overtime_model extends CI_Model {
         $result = $this->db->get();
         return $result->row()->number;
     }
+    
+    /**
+     * Detect overtime with a negative duration. This is a warning as it substract entitled days to user.
+     * @return array list of invalid requests
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function detectNegativeOvertime() {
+        $this->db->select('overtime.*, CONCAT(users.firstname, \' \', users.lastname) as user_label', FALSE);
+        $this->db->select('status.name as status_label');
+        $this->db->join('users', 'users.id = overtime.employee');
+        $this->db->join('status', 'overtime.status = status.id', 'inner');
+        $this->db->where('overtime.duration < 0');
+        return $this->db->get('overtime')->result_array();
+    }
 }

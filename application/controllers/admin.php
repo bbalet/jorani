@@ -53,10 +53,28 @@ class Admin extends CI_Controller {
         $this->load->model('leaves_model');
         $this->load->model('entitleddays_model');
         $this->load->model('dayoffs_model');
+        $this->load->model('contracts_model');
         $data['duplicatedLeaves'] = $this->leaves_model->detectDuplicatedRequests();
         $data['wrongDateType'] = $this->leaves_model->detectWrongDateTypes();
         $data['entitlmentOverflow'] = $this->entitleddays_model->detectOverflow();
         $data['daysOffYears'] = $this->dayoffs_model->checkIfDefined(date("Y"));
+        $data['negativeOvertime'] = $this->overtime_model->detectNegativeOvertime();
+        $data['unusedContracts'] = $this->contracts_model->notUsedContracts();
+        //$data['leaveBalance'] = $this->leaves_model->detectBalanceProblems();
+        
+        //Count the number of items (will be used for badges in tab 
+        $data['duplicatedLeaves_count'] = count($data['duplicatedLeaves']);
+        $data['wrongDateType_count'] = count($data['wrongDateType']);
+        $data['entitlmentOverflow_count'] = count($data['entitlmentOverflow']);
+        $data['negativeOvertime_count'] = count($data['negativeOvertime']);
+        $data['unusedContracts_count'] = count($data['unusedContracts']);
+        //$data['leaveBalance_count'] = count($data['leaveBalance']);
+        $data['daysOffYears_count'] = 0;
+        foreach ($data['daysOffYears'] as $yearDef) {
+            if ($yearDef['y'] == 0) {
+                $data['daysOffYears_count']++;
+            }
+        }
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('admin/diagnostic', $data);

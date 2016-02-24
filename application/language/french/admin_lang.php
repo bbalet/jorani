@@ -46,3 +46,24 @@ $lang['admin_diagnostic_daysoff_thead_name'] = 'Nom';
 $lang['admin_diagnostic_daysoff_thead_ym1'] = 'L\'année dernière';
 $lang['admin_diagnostic_daysoff_thead_y'] = 'Cette année';
 $lang['admin_diagnostic_daysoff_thead_yp1'] = 'L\'année prochaine';
+
+$lang['admin_diagnostic_overtime_tab'] = 'Heures supp.';
+$lang['admin_diagnostic_daysoff_description'] = 'Déclarations d\'heures supplémentaires avec une durée négative.';
+$lang['admin_diagnostic_daysoff_thead_id'] = 'N°';
+$lang['admin_diagnostic_daysoff_thead_employee'] = 'Employé';
+$lang['admin_diagnostic_daysoff_thead_date'] = 'Date';
+$lang['admin_diagnostic_daysoff_thead_duration'] = 'Durée';
+$lang['admin_diagnostic_daysoff_thead_status'] = 'Statut';
+
+$lang['admin_diagnostic_contract_tab'] = 'Contrats';
+$lang['admin_diagnostic_contract_description'] = 'Contrats non utilisés (vérifier si le contrat n\'est pas en double).';
+$lang['admin_diagnostic_contract_thead_id'] = 'N°';
+$lang['admin_diagnostic_contract_thead_name'] = 'Nom';
+
+$lang['admin_diagnostic_balance_tab'] = 'Balance';
+$lang['admin_diagnostic_balance_description'] = 'Demandes de congé pour lesquelles il n\'y a pas de crédit.';
+$lang['admin_diagnostic_balance_thead_id'] = 'N°';
+$lang['admin_diagnostic_balance_thead_employee'] = 'Employé';
+$lang['admin_diagnostic_balance_thead_contract'] = 'Contrat';
+$lang['admin_diagnostic_balance_thead_start_date'] = 'Date début';
+$lang['admin_diagnostic_balance_thead_status'] = 'Statut';

@@ -11,6 +11,102 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: en\n"
 
+msgid "Data & Config Diagnostic"
+msgstr ""
+
+msgid "Detection of configuration and data problems"
+msgstr ""
+
+msgid "No error"
+msgstr ""
+
+msgid "Leave Requests"
+msgstr ""
+
+msgid "Accepted but duplicated Leave Requests"
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "Employee"
+msgstr ""
+
+msgid "Start Date"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Afternoon/Morning"
+msgstr ""
+
+msgid "Leave Requests with a wrong start/end type."
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "End"
+msgstr ""
+
+msgid "Entitled days"
+msgstr ""
+
+msgid "List of contracts and employees having entitlements for more than one year."
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "End Date"
+msgstr ""
+
+msgid "Contract"
+msgstr ""
+
+msgid "Incomplete deletion into database."
+msgstr ""
+
+msgid "Non-working days"
+msgstr ""
+
+msgid "Overtime requests with a negative duration"
+msgstr ""
+
+msgid "Last year"
+msgstr ""
+
+msgid "This year"
+msgstr ""
+
+msgid "Next year"
+msgstr ""
+
+msgid "Overtime"
+msgstr ""
+
+msgid "Duration"
+msgstr ""
+
+msgid "Contracts"
+msgstr ""
+
+msgid "Unused contracts (check if the contract is not duplicated)."
+msgstr ""
+
+msgid "Balance"
+msgstr ""
+
+msgid "Leave requests for which there are no entitlments."
+msgstr ""
+
 msgid "Yearly calendar"
 msgstr ""
 
@@ -93,9 +189,6 @@ msgid "Year"
 msgstr ""
 
 msgid "Execute"
-msgstr ""
-
-msgid "Employee"
 msgstr ""
 
 msgid "Calendar Tabular"
@@ -191,12 +284,6 @@ msgstr ""
 msgid "List of contracts"
 msgstr ""
 
-msgid "ID"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
 msgid "Start period"
 msgstr ""
 
@@ -234,9 +321,6 @@ msgid "Yes"
 msgstr ""
 
 msgid "No"
-msgstr ""
-
-msgid "Entitled days"
 msgstr ""
 
 msgid "Edit a contract"
@@ -300,9 +384,6 @@ msgid "Edit day off"
 msgstr ""
 
 msgid "Title"
-msgstr ""
-
-msgid "Type"
 msgstr ""
 
 msgid "Working day"
@@ -401,6 +482,24 @@ msgstr ""
 msgid ": activate to sort column descending"
 msgstr ""
 
+msgid "Page length"
+msgstr ""
+
+msgid "10 rows"
+msgstr ""
+
+msgid "25 rows"
+msgstr ""
+
+msgid "50 rows"
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Change columns"
+msgstr ""
+
 msgid "Your password has been reset"
 msgstr ""
 
@@ -437,12 +536,6 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-msgid "Start"
-msgstr ""
-
-msgid "End"
-msgstr ""
-
 msgid "Days"
 msgstr ""
 
@@ -453,12 +546,6 @@ msgid "Description"
 msgstr ""
 
 msgid "Add entitled days"
-msgstr ""
-
-msgid "Start Date"
-msgstr ""
-
-msgid "End Date"
 msgstr ""
 
 msgid "Add"
@@ -503,16 +590,7 @@ msgstr ""
 msgid "delete"
 msgstr ""
 
-msgid "Date"
-msgstr ""
-
 msgid "Reason"
-msgstr ""
-
-msgid "Duration"
-msgstr ""
-
-msgid "Status"
 msgstr ""
 
 msgid "New request"
@@ -653,6 +731,9 @@ msgstr ""
 msgid "leave"
 msgstr ""
 
+msgid "All"
+msgstr ""
+
 msgid "copied"
 msgstr ""
 
@@ -695,16 +776,55 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
-msgid "Contract"
+msgid "Manager"
 msgstr ""
 
-msgid "Manager"
+msgid "Identifier"
+msgstr ""
+
+msgid "Date hired"
+msgstr ""
+
+msgid "Position"
 msgstr ""
 
 msgid "Create"
 msgstr ""
 
 msgid "Right-click / taphold on an employee for contextual actions."
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Selection"
+msgstr ""
+
+msgid "Select all"
+msgstr ""
+
+msgid "Deselect all"
+msgstr ""
+
+msgid "Select Manager"
+msgstr ""
+
+msgid "Select Contract"
+msgstr ""
+
+msgid "Select Entity"
+msgstr ""
+
+msgid "Submit a leave request"
+msgstr ""
+
+msgid "Select the manager"
+msgstr ""
+
+msgid "You must select at least one employee into the table"
 msgstr ""
 
 msgid "List of requested leaves"
@@ -725,9 +845,6 @@ msgstr ""
 msgid "You are about to delete one leave request, this procedure is irreversible."
 msgstr ""
 
-msgid "Submit a leave request"
-msgstr ""
-
 msgid "You are exceeding your entitled days"
 msgstr ""
 
@@ -744,6 +861,18 @@ msgid "The leave request has been succesfully created"
 msgstr ""
 
 msgid "The leave request has been succesfully created or updated, but you don't have a manager."
+msgstr ""
+
+msgid "%s non-working days in the period"
+msgstr ""
+
+msgid "Your leave request matches with a non-working day."
+msgstr ""
+
+msgid "It appears that you have no contract. Please contact your HR Officer / Manager."
+msgstr ""
+
+msgid "You can't create a leave request for two yearly leave periods. Please create two different leave requests."
 msgstr ""
 
 msgid "List of overtime requests"
@@ -812,16 +941,7 @@ msgstr ""
 msgid "No entitled or taken days for this period. Please contact your HR Officer / Manager."
 msgstr ""
 
-msgid "It appears that you have no contract. Please contact your HR Officer / Manager."
-msgstr ""
-
 msgid "My leave requests"
-msgstr ""
-
-msgid "%s non-working days in the period"
-msgstr ""
-
-msgid "Your leave request matches with a non-working day."
 msgstr ""
 
 msgid "Edit a leave request"
@@ -839,9 +959,6 @@ msgstr ""
 msgid "The leave request has been succesfully updated"
 msgstr ""
 
-msgid "You can't create a leave request for two yearly leave periods. Please create two different leave requests."
-msgstr ""
-
 msgid "You can't delete this leave request"
 msgstr ""
 
@@ -857,7 +974,7 @@ msgstr ""
 msgid "List of leaves"
 msgstr ""
 
-msgid "Morning/Afternnon"
+msgid "Morning/Afternoon"
 msgstr ""
 
 msgid "Leave types"
@@ -873,6 +990,9 @@ msgid "Create a new type"
 msgstr ""
 
 msgid "No leave type found into the database."
+msgstr ""
+
+msgid "This leave type already exists."
 msgstr ""
 
 msgid "Add a leave type"
@@ -932,6 +1052,9 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+msgid "Diagnostic"
+msgstr ""
+
 msgid "HR"
 msgstr ""
 
@@ -939,12 +1062,6 @@ msgid "Employees"
 msgstr ""
 
 msgid "Organization"
-msgstr ""
-
-msgid "Multiple Edit"
-msgstr ""
-
-msgid "Contracts"
 msgstr ""
 
 msgid "List of positions"
@@ -966,9 +1083,6 @@ msgid "Approval"
 msgstr ""
 
 msgid "My subordinates"
-msgstr ""
-
-msgid "Overtime"
 msgstr ""
 
 msgid "Requests"
@@ -1157,9 +1271,6 @@ msgstr ""
 msgid "The leave request has been successfully rejected."
 msgstr ""
 
-msgid "Morning/Afternoon"
-msgstr ""
-
 msgid "List of delegations"
 msgstr ""
 
@@ -1173,6 +1284,12 @@ msgid "Add a delegate"
 msgstr ""
 
 msgid "Are you sure that you want to revoke this delegation?"
+msgstr ""
+
+msgid "Leave balance (subordinates)"
+msgstr ""
+
+msgid "Leave balance of my direct report subordinates. If you are not a manager, this list will always be empty."
 msgstr ""
 
 msgid "Login"
@@ -1202,6 +1319,9 @@ msgstr ""
 msgid "The language has been succesfully set to "
 msgstr ""
 
+msgid "Your account is disabled. Please contact your HR Officer / Manager."
+msgstr ""
+
 msgid "Rename"
 msgstr ""
 
@@ -1212,12 +1332,6 @@ msgid "Cut"
 msgstr ""
 
 msgid "Paste"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Inactive"
 msgstr ""
 
 msgid "edit user details"
@@ -1250,9 +1364,6 @@ msgstr ""
 msgid "My personal information"
 msgstr ""
 
-msgid "Position"
-msgstr ""
-
 msgid "Date hired/started"
 msgstr ""
 
@@ -1278,9 +1389,6 @@ msgid "Timezone"
 msgstr ""
 
 msgid "LDAP Path"
-msgstr ""
-
-msgid "Select the manager"
 msgstr ""
 
 msgid "Select a position"

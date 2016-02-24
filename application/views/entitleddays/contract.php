@@ -422,7 +422,7 @@ if ($language_code != 'en') { ?>
         });
         
         //Transform the HTML table in a fancy datatable
-        oTable = $('#entitleddayscontract').dataTable({
+        oTable = $('#entitleddayscontract').DataTable({
             order: [[ 1, "desc" ]],
             language: {
                     decimal:            "<?php echo lang('datatable_sInfoThousands');?>",

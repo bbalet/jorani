@@ -52,9 +52,9 @@
     </div>
     <div class="span4">
         <div class="pull-right">    
-            <!--<label for="chkLeaveDetails">
+            <label for="chkLeaveDetails">
                     <input type="checkbox" id="chkLeaveDetails" name="chkLeaveDetails" /> <?php echo lang('reports_leaves_field_leave_requests');?>
-            </label>//-->
+            </label>
             &nbsp;
             <button class="btn btn-primary" id="cmdLaunchReport"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('reports_leaves_button_launch');?></button>
             <button class="btn btn-primary" id="cmdExportReport"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('reports_leaves_button_export');?></button>

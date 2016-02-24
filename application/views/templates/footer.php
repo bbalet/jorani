@@ -23,7 +23,7 @@
     case 'fr' : echo '<a class="anchor" href="http://fr.jorani.org/" target="_blank">Jorani</a>'; break;
     default : echo '<a class="anchor" href="http://jorani.org/" target="_blank">Jorani</a>'; break;
 } ?>
-                  </b>&nbsp;&nbsp;v0.4.6
+                  </b>&nbsp;&nbsp;v0.4.7
           </center>
       </div>
       <div class="span4">&nbsp;</div></div>

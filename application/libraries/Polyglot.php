@@ -222,7 +222,7 @@ class Polyglot {
 //            case 'tl' : return 'tagalog'; break;
 //            case 'tn' : return 'tswana'; break;
 //            case 'to' : return 'tonga'; break;
-//            case 'tr' : return 'turkish'; break;
+            case 'tr' : return 'turkish'; break;
 //            case 'ts' : return 'tsonga'; break;
 //            case 'tt' : return 'tatar'; break;
 //            case 'tw' : return 'twi'; break;
@@ -416,7 +416,7 @@ class Polyglot {
 //            case 'tagalog' : return 'tl'; break;
 //            case 'tswana' : return 'tn'; break;
 //            case 'tonga' : return 'to'; break;
-//            case 'turkish' : return 'tr'; break;
+            case 'turkish' : return 'tr'; break;
 //            case 'tsonga' : return 'ts'; break;
 //            case 'tatar' : return 'tt'; break;
 //            case 'twi' : return 'tw'; break;
@@ -610,7 +610,7 @@ class Polyglot {
 //            case 'tl' : return 'Wikang Tagalog'; break;
 //            case 'tn' : return 'Setswana'; break;
 //            case 'to' : return 'faka Tonga'; break;
-//            case 'tr' : return 'Türkçe'; break;
+            case 'tr' : return 'Türkçe'; break;
 //            case 'ts' : return 'Xitsonga'; break;
 //            case 'tt' : return 'татарча'; break;
 //            case 'tw' : return 'Twi'; break;
@@ -804,7 +804,7 @@ class Polyglot {
 //            case 'Wikang Tagalog' : return 'tl'; break;
 //            case 'Setswana' : return 'tn'; break;
 //            case 'faka Tonga' : return 'to'; break;
-//            case 'Türkçe' : return 'tr'; break;
+            case 'Türkçe' : return 'tr'; break;
 //            case 'Xitsonga' : return 'ts'; break;
 //            case 'татарча' : return 'tt'; break;
 //            case 'Twi' : return 'tw'; break;

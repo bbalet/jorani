@@ -7,7 +7,7 @@
  * @since      0.3.0
  */
 require("POParser.php");
-$target = "vietnamese";
+$target = "turkish";
 
 $copyright = "<?php
 /**
@@ -15,8 +15,8 @@ $copyright = "<?php
  * @copyright  Copyright (c) 2014-2016 Benjamin BALET
  * @license     http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link          https://github.com/bbalet/jorani
- * @since       0.4.5
- * @author      See list on Transifex https://www.transifex.com/jorani/
+ * @since       0.4.6
+ * @author      Ela Alptekin
  */\n\n";
 
 //Load and parse the PO file

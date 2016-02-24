@@ -12,8 +12,9 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Add a diagnostic page (check configuration and data).
 
 ## v0.4.7
-- [X] TBT: Add a "All" option into Reports/Leaves.
-- [X] TBT: Add requests list into Reports/Leaves.
+
+- [ ] Add turkish language.
+- [X] Add requests list into Reports/Leaves.
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
 - [ ] i18n: Last 3 columns in Reports/Leaves.
 - [ ] Maybe: Filter Excel export on visible rows (lot of security backend).
@@ -21,6 +22,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] Compute automatically: length of multiple leave requests.
 - [ ] Maybe: series of leave requests (Employees / Multiple edit); take into account days off. and...
 - [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
+- [ ] Add a "All" option into Reports/Leaves.
 
 ## v0.5.0 or later
 

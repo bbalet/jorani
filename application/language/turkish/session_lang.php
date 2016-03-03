@@ -19,4 +19,4 @@ $lang['session_login_msg_unknown_login'] = 'Bilinmeyen oturum. Lütfen İK Sorum
 $lang['session_login_msg_password_sent'] = 'Şifreniz e-posta adresinize gönderildi.';
 $lang['session_login_flash_bad_credentials'] = 'Geçersiz giriş kimliği veya şifre';
 $lang['session_login_flash_change_language'] = 'Dil başarıyla ayarlandı';
-$lang['session_login_flash_account_disabled'] = 'Your account is disabled. Please contact your HR Officer / Manager.';
+$lang['session_login_flash_account_disabled'] = 'Hesabınız devre dışı bırakıldı. Lütfen İK Sorumlusu / Yöneticisi ile irtibata geçiniz.';

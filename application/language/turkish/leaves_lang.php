@@ -10,7 +10,7 @@
 
 $lang['leaves_summary_title'] = 'Benim özetim';
 $lang['leaves_summary_title_overtime'] = 'Fazla mesai ayrıntıları (izin günlerini telafi etmek için ilave edildi)';
-$lang['leaves_summary_key_overtime'] = 'Catch up for';
+$lang['leaves_summary_key_overtime'] = 'Geri almak için';
 $lang['leaves_summary_thead_type'] = 'İzin türü';
 $lang['leaves_summary_thead_available'] = 'Müsait';
 $lang['leaves_summary_thead_taken'] = 'Alınmış';

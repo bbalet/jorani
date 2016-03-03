@@ -19,7 +19,7 @@ $lang['leavetypes_type_button_export'] = 'Bu listeyi dışa aktar';
 $lang['leavetypes_type_button_create'] = 'Yeni bir tür oluştur';
 $lang['leavetypes_type_not_found'] = 'Veritabanında hiçbir izin türü bulunamadı.';
 
-$lang['leavetypes_js_unique_error_msg'] = 'This leave type already exists.';
+$lang['leavetypes_js_unique_error_msg'] = 'Bu izin türü zaten mevcut.';
 
 $lang['leavetypes_popup_create_title'] = 'Bir izin türü ekle';
 $lang['leavetypes_popup_create_button_cancel'] = 'İptal';

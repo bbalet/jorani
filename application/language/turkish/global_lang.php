@@ -15,13 +15,16 @@ $lang['global_msg_wait'] = 'Lütfen bekleyin';
 $lang['global_msg_old_browser'] = 'Internet Explorer 8 ve daha eski tarayıcılar desteklenmiyor. Lütfen tarayıcınızı IE9\'a yükseltin veya Firefox, Chrome vb kullanın.';
 $lang['global_msg_not_found'] = 'Nesne bulunamadı. Silinmiş bir nesneye erişmeye çalışıyor olabilirsiniz.';
 
-$lang['global_date_format'] = 'a/g/Y';
-$lang['global_date_js_format'] = 'aa/gg/yy';
-$lang['global_date_momentjs_format'] = 'AA/GG/YYYY';
+$lang['global_date_format'] = 'm/d/Y';
+$lang['global_date_js_format'] = 'mm/dd/yy';
+$lang['global_date_momentjs_format'] = 'MM/DD/YYYY';
+
 $lang['global_true'] = 'DOĞRU';
 $lang['global_false'] = 'YANLIŞ';
+
 $lang['footer_link_go_top'] = 'Başa dön';
 $lang['footer_copyright_notice'] = '&copy; 2014 Jorani Yazarları';
+
 $lang['Requested'] = 'Talep edildi';
 $lang['Planned'] = 'Planlandı';
 $lang['Accepted'] = 'Kabul edildi';
@@ -75,9 +78,12 @@ $lang['position'] = 'pozisyon';
 $lang['contract'] = 'sözleşme';
 $lang['day off'] = 'izin günleri';
 $lang['leave'] = 'izin';
-$lang['All'] = 'All';
+
+$lang['All'] = 'Hepsi';
 $lang['OK'] = 'Tamam';
 $lang['Cancel'] = 'İptal';
+
 $lang['copied'] = 'kopyalandı';
+
 $lang['global_ajax_timeout'] = 'Oturumunuzun süresi doldu, lütfen tekrar oturum açın';
 $lang['global_ajax_error'] = 'Beklenmedik Ajax hatası';

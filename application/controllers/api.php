@@ -202,6 +202,36 @@ class Api extends CI_Controller {
             echo json_encode($result);
         }
     }
+
+    /**
+     * Accept a leave request
+     * @param int $id identifier of leave request to accept
+     * @author Guillaume BLAQUIERE <guillaume.blaquiere@gmail.com>
+     */
+    public function acceptleaves($id = 0) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('leaves_model');
+            $result = $this->leaves_model->acceptLeave($id);
+            echo json_encode($result);
+        }
+    }
+
+    /**
+     * Reject a leave request
+     * @param int $id identifier of leave request to reject
+     * @author Guillaume BLAQUIERE <guillaume.blaquiere@gmail.com>
+     */
+    public function rejectleaves($id = 0) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('leaves_model');
+            $result = $this->leaves_model->rejectLeave($id);
+            echo json_encode($result);
+        }
+    }
     
     /**
      * Get the list of positions (useful to get the labels into a cache)

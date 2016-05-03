@@ -264,6 +264,8 @@ $route['api/createuser'] = 'api/createuser';
 $route['api/createleave'] = 'api/createleave';
 //v0.4.3
 $route['api/getListOfEmployeesInEntity/(:num)/(:any)'] = 'api/getListOfEmployeesInEntity/$1/$2';
+//Next version 0.4.4?
+$route['api/acceptleaves/(:num)'] = 'api/acceptleaves/$1';
 
 //_______________________________________________
 //ICS Feeds

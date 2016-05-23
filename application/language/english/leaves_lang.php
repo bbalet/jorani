@@ -22,6 +22,7 @@ $lang['leaves_summary_date_field'] = 'Date of report';
 $lang['leaves_index_title'] = 'My leave requests';
 $lang['leaves_index_thead_tip_view'] = 'view';
 $lang['leaves_index_thead_tip_edit'] = 'edit';
+$lang['leaves_index_thead_tip_cancel'] = 'cancel';
 $lang['leaves_index_thead_tip_delete'] = 'delete';
 $lang['leaves_index_thead_id'] = 'ID';
 $lang['leaves_index_thead_start_date'] = 'Start Date';
@@ -49,8 +50,8 @@ $lang['leaves_create_field_cause'] = 'Cause (optional)';
 $lang['leaves_create_field_status'] = 'Status';
 $lang['leaves_create_button_create'] = 'Request leave';
 $lang['leaves_create_button_cancel'] = 'Cancel';
-$lang['leaves_create_flash_msg_success'] = 'The leave request has been succesfully created';
-$lang['leaves_create_flash_msg_error'] = 'The leave request has been succesfully created or updated, but you don\'t have a manager.';
+$lang['leaves_create_flash_msg_success'] = 'The leave request has been successfully created';
+$lang['leaves_create_flash_msg_error'] = 'The leave request has been successfully created or updated, but you don\'t have a manager.';
 
 $lang['leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
 $lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
@@ -67,14 +68,17 @@ $lang['leaves_edit_field_status'] = 'Status';
 $lang['leaves_edit_button_update'] = 'Update leave';
 $lang['leaves_edit_button_cancel'] = 'Cancel';
 $lang['leaves_edit_flash_msg_error'] = 'You cannot edit a leave request already submitted';
-$lang['leaves_edit_flash_msg_success'] = 'The leave request has been succesfully updated';
+$lang['leaves_edit_flash_msg_success'] = 'The leave request has been successfully updated';
 
 $lang['leaves_validate_mandatory_js_msg'] = '"The field " + fieldname + " is mandatory."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'It appears that you have no contract. Please contact your HR Officer / Manager.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'You can\'t create a leave request for two yearly leave periods. Please create two different leave requests.';
 
+$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
+
 $lang['leaves_delete_flash_msg_error'] = 'You can\'t delete this leave request';
-$lang['leaves_delete_flash_msg_success'] = 'The leave request has been succesfully deleted';
+$lang['leaves_delete_flash_msg_success'] = 'The leave request has been successfully deleted';
 
 $lang['leaves_view_title'] = 'View leave request #';
 $lang['leaves_view_html_title'] = 'View a leave request';

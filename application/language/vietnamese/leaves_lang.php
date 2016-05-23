@@ -23,6 +23,7 @@ $lang['leaves_summary_date_field'] = 'Ngày báo cáo';
 $lang['leaves_index_title'] = 'Yêu cầu nghỉ của tôi';
 $lang['leaves_index_thead_tip_view'] = 'xem';
 $lang['leaves_index_thead_tip_edit'] = 'sửa';
+$lang['leaves_index_thead_tip_cancel'] = 'cancel';
 $lang['leaves_index_thead_tip_delete'] = 'xóa';
 $lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
@@ -84,6 +85,10 @@ $lang['leaves_edit_flash_msg_success'] = 'Yêu cầu nghỉ đã được cập 
 $lang['leaves_validate_mandatory_js_msg'] = '"Trường " + fieldname + " là bắt buộc."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'Hiển thị bạn không có hợp đồng. Vui lòng liên hệ Trưởng bộ phận nhân sự của bạn..';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'You can\'t create a leave request for two yearly leave periods. Please create two different leave requests.';
+
+$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
+
 $lang['leaves_delete_flash_msg_error'] = 'Bạn không thể xóa yêu cầu nghỉ này';
 $lang['leaves_delete_flash_msg_success'] = 'Yêu cầu nghỉ đã được xóa thành công';
 

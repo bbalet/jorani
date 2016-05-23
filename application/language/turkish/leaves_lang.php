@@ -23,6 +23,7 @@ $lang['leaves_summary_date_field'] = 'Rapor tarihi';
 $lang['leaves_index_title'] = 'İzin taleplerim';
 $lang['leaves_index_thead_tip_view'] = 'görüntüle';
 $lang['leaves_index_thead_tip_edit'] = 'düzenle';
+$lang['leaves_index_thead_tip_cancel'] = 'cancel';
 $lang['leaves_index_thead_tip_delete'] = 'sil';
 $lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
@@ -84,6 +85,10 @@ $lang['leaves_edit_flash_msg_success'] = 'İzin talebi başarıyla güncellendi'
 $lang['leaves_validate_mandatory_js_msg'] = '" " + fieldname + " alanı zorunludur."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'Hiçbir sözleşmeniz yok gibi görünüyor. Lütfen İK Sorumlusu / Yöneticisi ile irtibata geçiniz.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'İki yıllık izin dönemleri için bir izin talebi oluşturamazsınız. Lütfen iki farklı izin talebi oluşturun.';
+
+$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
+
 $lang['leaves_delete_flash_msg_error'] = 'Bu izin talebini silemezsiniz.';
 $lang['leaves_delete_flash_msg_success'] = 'İzin talebi başarıyla silindi';
 

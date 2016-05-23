@@ -404,6 +404,9 @@ $config['default_leave_type'] = FALSE;      //Set this value with the default le
 //Create a leave request / Allow overwrite of the duration
 $config['disable_edit_leave_duration'] = FALSE;             //Switch to read-only (the duration of leave is computed)
 
+//Allow to cancel a leave request
+$config['cancel_leave_request'] = FALSE;             //Switch to allow the leave request cancellation by the requester
+
 //____________________________________________________________________________
 //Set this value to TRUE if you want to create extras at status requested instead of planned
 $config['extra_status_requested'] = FALSE;

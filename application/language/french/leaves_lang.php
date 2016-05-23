@@ -22,6 +22,7 @@ $lang['leaves_summary_date_field'] = 'Date du rapport';
 $lang['leaves_index_title'] = 'Mes demandes de congé';
 $lang['leaves_index_thead_tip_view'] = 'voir';
 $lang['leaves_index_thead_tip_edit'] = 'modifier';
+$lang['leaves_index_thead_tip_cancel'] = 'annuler';
 $lang['leaves_index_thead_tip_delete'] = 'supprimer';
 $lang['leaves_index_thead_tip_history'] = 'afficher l\'historique';
 $lang['leaves_index_thead_id'] = 'N°';
@@ -84,6 +85,9 @@ $lang['leaves_edit_flash_msg_success'] = 'La demande d\'absence a été modifié
 $lang['leaves_validate_mandatory_js_msg'] = '"Le champ " + fieldname + " est obligatoire."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'Il semble que vous n\'ayez pas de contrat. Veuillez contacter un responsable des ressources humaines.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'Vous ne pouvez pas créer une demande de congé pour deux périodes annuelles de congé. Veuillez créer deux demandes différentes.';
+
+$lang['leaves_cancel_flash_msg_error'] = 'Vous ne pouvez pas annuler cette demande d\'absence.';
+$lang['leaves_cancel_flash_msg_success'] = 'La demande d\'absence a été annulée avec succès.';
 
 $lang['leaves_delete_flash_msg_error'] = 'Vous ne pouvez pas supprimer cette demande d\'absence.';
 $lang['leaves_delete_flash_msg_success'] = 'La demande d\'absence a été supprimée avec succès.';

@@ -381,6 +381,45 @@ class Leaves extends CI_Controller {
     }
 
     /**
+     * Cancel a leave request
+     * @param int $id identifier of the leave request
+     * @author Guillaume Blaquiere <guillaume.blaquiere@gmail.com>
+     */
+    public function cancel($id) {
+        $can_cancel = FALSE;
+        //Test if the leave request exists
+        $leaves = $this->leaves_model->getLeaves($id);
+        if (empty($leaves)) {
+            redirect('notfound');
+        } else {
+            if ($this->is_hr) {
+                $can_cancel = TRUE;
+            } else {
+                if ($this->config->item('cancel_leave_request') == TRUE &&
+                    $leaves['status'] == 2) {
+                    $can_cancel = TRUE;
+                }
+            }
+            if ($can_cancel === TRUE) {
+                $this->leaves_model->cancelLeave($id);
+            } else {
+                $this->session->set_flashdata('msg', lang('leaves_cancel_flash_msg_error'));
+                if (isset($_GET['source'])) {
+                    redirect($_GET['source']);
+                } else {
+                    redirect('leaves');
+                }
+            }
+        }
+        $this->session->set_flashdata('msg', lang('leaves_cancel_flash_msg_success'));
+        if (isset($_GET['source'])) {
+            redirect($_GET['source']);
+        } else {
+            redirect('leaves');
+        }
+    }
+
+    /**
      * Export the list of all leaves into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */

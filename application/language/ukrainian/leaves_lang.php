@@ -23,6 +23,7 @@ $lang['leaves_summary_date_field'] = 'Дата звіту';
 $lang['leaves_index_title'] = 'Мої заяви на відпустку';
 $lang['leaves_index_thead_tip_view'] = 'переглянути';
 $lang['leaves_index_thead_tip_edit'] = 'редагувати';
+$lang['leaves_index_thead_tip_cancel'] = 'cancel';
 $lang['leaves_index_thead_tip_delete'] = 'видалити';
 $lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
@@ -85,6 +86,9 @@ $lang['leaves_edit_flash_msg_success'] = 'Заява на понаднормов
 $lang['leaves_validate_mandatory_js_msg'] = '"Поле " + fieldname + " є обов\'язковим."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'Схоже не те, що у вас немає контракту. Зверніться до свого керівника.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'Ви не можете створити заяву на відпустку для різних років. Будь ласка створіть дві окремі заяви на відпустку.';
+
+$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
 
 $lang['leaves_delete_flash_msg_error'] = 'Не можна видалити цю заяву на відпустку';
 $lang['leaves_delete_flash_msg_success'] = 'Заява на відпустку успішно видалена';

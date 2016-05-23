@@ -23,6 +23,7 @@ $lang['leaves_summary_date_field'] = 'កាលបរិច្ឆេទនៃរ
 $lang['leaves_index_title'] = 'ការសុំច្បាប់របស់ខ្ញុំ';
 $lang['leaves_index_thead_tip_view'] = 'បង្ហាញ';
 $lang['leaves_index_thead_tip_edit'] = 'កែសម្រួល';
+$lang['leaves_index_thead_tip_cancel'] = 'cancel';
 $lang['leaves_index_thead_tip_delete'] = 'លុប';
 $lang['leaves_index_thead_id'] = 'លេខអត្តសញ្ញាណ';
 $lang['leaves_index_thead_start_date'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
@@ -74,6 +75,9 @@ $lang['leaves_edit_flash_msg_success'] = 'សំណើរការឈប់ស�
 $lang['leaves_validate_mandatory_js_msg'] = '"កាឡោន​ " + fieldname + " គី​ចំាបាច់"';
 $lang['leaves_validate_flash_msg_no_contract'] = 'ទំនងជាអ្នកមិនមនាកិច្ចសន្យាទេ។ សូមទំនាក់ទំនងមន្ត្រីធនធានមនុស្យ / អ្នកគ្រប់គ្រងរបស់អ្នក។';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'លោកអ្នកមិនអាចបង្កើតការស្នើរសុំឈប់សម្រាកសម្រាប់រយៈពេលពីរឆ្នាំបានទេ។ សូមបង្កើតការស្នើរសុំឈប់សម្រាកពីរផ្សេងគ្នា។';
+
+$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
 
 $lang['leaves_delete_flash_msg_error'] = 'អ្នកមិនអាចលុបការចាកចេញពីការស្នើសំុបានទេ';
 $lang['leaves_delete_flash_msg_success'] = 'សំណើការឈប់សម្រាកនេះត្រូវបានគេលុបដោយជោគជ័យ';

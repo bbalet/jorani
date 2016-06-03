@@ -14,8 +14,11 @@ $lang['email_password_reset_title'] = 'Сброс пароля выполнен'
 $lang['email_user_create_subject'] = 'Учетная запись создана';
 $lang['email_user_create_title'] = 'Учетная запись создана';
 
-$lang['email_leave_request_subject'] = 'Заявление на отпуск от';
-$lang['email_leave_request_title'] = 'Заявление на отпуск';
+$lang['email_leave_request_creation_subject'] = 'Заявление на отпуск от';
+$lang['email_leave_request_creation_title'] = 'Заявление на отпуск';
+$lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
+$lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
+
 $lang['email_leave_request_accept_subject'] = 'Заявление на отпуск утверждено';
 $lang['email_leave_request_reject_subject'] = 'Заявление на отпуск отклонено';
 $lang['email_leave_request_validation_title'] = 'Заявление на отпуск';

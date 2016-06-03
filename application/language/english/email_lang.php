@@ -13,8 +13,11 @@ $lang['email_password_reset_title'] = 'Your password has been reset';
 $lang['email_user_create_subject'] = 'Your account has been created';
 $lang['email_user_create_title'] = 'Your account has been created';
 
-$lang['email_leave_request_subject'] = 'Leave Request from';
-$lang['email_leave_request_title'] = 'Leave Request';
+$lang['email_leave_request_creation_subject'] = 'Leave Request from';
+$lang['email_leave_request_creation_title'] = 'Leave Request';
+$lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
+$lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
+
 
 $lang['email_leave_request_accept_subject'] = 'Your leave request has been accepted';
 $lang['email_leave_request_reject_subject'] = 'Your leave request has been rejected';

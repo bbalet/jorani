@@ -86,6 +86,10 @@ $lang['leaves_validate_mandatory_js_msg'] = '"Het veld" + fieldname + "is verpli
 $lang['leaves_validate_flash_msg_no_contract'] = 'Geen contract gegevens gevonden. Neem contact op met uw HR Officer / manager.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'U kunt geen afwezigheidsverzoek aanmaken dat de jaarperiode overschrijdt. Maak a.u.b. 2 aparte verzoeken aan.';
 
+$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['leaves_cancel_unauthorized_msg_error'] = 'You can\'t cancel a leave request starting in the past. Ask your manager for rejecting it.';
+
 $lang['leaves_delete_flash_msg_error'] = 'U kunt dit afwezigheidsverzoek niet verwijderen';
 $lang['leaves_delete_flash_msg_success'] = 'Het afwezigheidsverzoek is succesvol verwijderd';
 

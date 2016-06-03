@@ -89,6 +89,7 @@ $lang['leaves_validate_flash_msg_overlap_period'] = 'شما نمیتوانید �
 
 $lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
 $lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['leaves_cancel_unauthorized_msg_error'] = 'You can\'t cancel a leave request starting in the past. Ask your manager for rejecting it.';
 
 $lang['leaves_delete_flash_msg_error'] = 'شما نمیتوانید این درخواست مرخصی را حذف نمایید';
 $lang['leaves_delete_flash_msg_success'] = 'درخواست مرخصی موفقانه حذف گردید';

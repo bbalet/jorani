@@ -14,8 +14,10 @@ $lang['email_password_reset_title'] = 'La tua password è stata reimpostata';
 $lang['email_user_create_subject'] = 'Il tuo account è stato creato';
 $lang['email_user_create_title'] = 'Il tuo account è stato creato';
 
-$lang['email_leave_request_subject'] = 'Richiesta ferie da';
-$lang['email_leave_request_title'] = 'Richiesta ferie';
+$lang['email_leave_request_creation_subject'] = 'Richiesta ferie da';
+$lang['email_leave_request_creation_title'] = 'Richiesta ferie';
+$lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
+$lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
 
 $lang['email_leave_request_accept_subject'] = 'La tua richiesta ferie è stata accettata';
 $lang['email_leave_request_reject_subject'] = 'La tua richiesta ferie è stata rifiutata';

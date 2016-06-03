@@ -14,8 +14,10 @@ $lang['email_password_reset_title'] = 'Passwort wurde zurückgesetzt';
 $lang['email_user_create_subject'] = 'Ihr Account wurde erstellt';
 $lang['email_user_create_title'] = 'Ihr Account wurde erstellt';
 
-$lang['email_leave_request_subject'] = 'Urlaubsanfrage von';
-$lang['email_leave_request_title'] = 'Urlaubsanfrage';
+$lang['email_leave_request_creation_subject'] = 'Urlaubsanfrage von';
+$lang['email_leave_request_creation_title'] = 'Urlaubsanfrage';
+$lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
+$lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
 
 $lang['email_leave_request_accept_subject'] = 'Ihre angefragter Urlaub wurde genehmigt';
 $lang['email_leave_request_reject_subject'] = 'Ihr angefragter Urlaub wurde abgelehnt';

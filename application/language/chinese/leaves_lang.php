@@ -73,6 +73,11 @@ $lang['leaves_edit_flash_msg_success'] = '休假申請已成功更新';
 $lang['leaves_validate_mandatory_js_msg'] = '"The field " + fieldname + " is mandatory."';
 $lang['leaves_validate_flash_msg_no_contract'] = '你無類別.請連繫HR部門/管理者';
 $lang['leaves_validate_flash_msg_overlap_period'] = '你無法同時建立2個休假申請,請分別建立';
+
+$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['leaves_cancel_unauthorized_msg_error'] = 'You can\'t cancel a leave request starting in the past. Ask your manager for rejecting it.';
+
 $lang['leaves_delete_flash_msg_error'] = '你無法刪除此休假申請';
 $lang['leaves_delete_flash_msg_success'] = '休假申請已成功刪除';
 

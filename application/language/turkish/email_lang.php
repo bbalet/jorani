@@ -12,8 +12,11 @@ $lang['email_password_reset_subject'] = 'Şifreniz sıfırlandı';
 $lang['email_password_reset_title'] = 'Şifreniz sıfırlandı';
 $lang['email_user_create_subject'] = 'Hesabınız oluşturuldu';
 $lang['email_user_create_title'] = 'Hesabınız oluşturuldu';
-$lang['email_leave_request_subject'] = 'İzin Talebi kaynağı';
-$lang['email_leave_request_title'] = 'İzin Talebi';
+$lang['email_leave_request_creation_subject'] = 'İzin Talebi kaynağı';
+$lang['email_leave_request_creation_title'] = 'İzin Talebi';
+$lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
+$lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
+
 $lang['email_leave_request_accept_subject'] = 'İzin talebiniz kabul edildi.';
 $lang['email_leave_request_reject_subject'] = 'İzin talebiniz reddedildi.';
 $lang['email_leave_request_validation_title'] = 'İzin Talebi';

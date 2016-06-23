@@ -79,7 +79,12 @@ class Organization_model extends CI_Model {
                     ' FROM organization' .
                     ' WHERE id =' . $id;
         $query = $this->db->query($query); 
-        $arr = $query->result_array();
+        if($query){
+            $arr = $query->result_array();
+        }
+        else{
+            $arr = array();
+        }
         return $arr;
     }
     

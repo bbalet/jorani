@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} prosi o urlop. Poniżej, <a href="{BaseUrl}leaves/{LeaveId}">detale</a> :
+        {Firstname} {Lastname} prosi o urlop. Poniżej, <a href="{BaseUrl}leaves/requests/{LeaveId}">detale</a> :
         <table border="0">
             <tr>
                 <td>Od &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

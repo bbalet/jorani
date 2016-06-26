@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} richiede un congedo. Qui di seguito <a href="{BaseUrl}leaves/{LeaveId}">i dettagli</a>:
+        {Firstname} {Lastname} richiede un congedo. Qui di seguito <a href="{BaseUrl}leaves/requests/{LeaveId}">i dettagli</a>:
         <table border="0">
             <tr>
                 <td>Da &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

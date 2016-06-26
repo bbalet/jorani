@@ -39,6 +39,16 @@ class Leaves extends CI_Controller {
     public function index() {
         $this->auth->checkIfOperationIsAllowed('list_leaves');
         $data = getUserContext($this);
+
+        
+        $this->load->model('users_model');
+        $this->lang->load('users', $this->language);
+        $data['user'] = $this->users_model->getUsers($this->user_id);
+        if (empty($data['user'])) {
+            redirect('notfound');
+        }
+        $data['manager_label'] = $this->users_model->getName($data['user']['manager']);
+
         $this->lang->load('datatable', $this->language);
         $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($this->session->userdata('id'));
         $data['title'] = lang('leaves_index_title');

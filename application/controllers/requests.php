@@ -307,7 +307,8 @@ class Requests extends CI_Controller {
             'StartDateType' => $lang_mail->line($leave['startdatetype']),
             'EndDateType' => $lang_mail->line($leave['enddatetype']),
             'Cause' => $leave['cause'],
-            'Type' => $leave['type_name']
+            'Type' => $leave['type_name'],
+            'Supervisor' => $supervisor->username
         );
         
         if ($leave['status'] == 3) {    //accepted

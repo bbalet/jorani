@@ -14,7 +14,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Afwezigheidsverzoek van {Firstname} {Lastname}. Hieronder de <a href="{BaseUrl}leaves/{LeaveId}">details</a> :
+        Afwezigheidsverzoek van {Firstname} {Lastname}. Hieronder de <a href="{BaseUrl}leaves/requests/{LeaveId}">details</a> :
         <table border="0">
             <tr>
                 <td>Van &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

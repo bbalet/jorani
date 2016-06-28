@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} درخواست مرخصی داده است. جزئیات در <a href="{BaseUrl}leaves/{LeaveId}">اینجا</a> :
+        {Firstname} {Lastname} درخواست مرخصی داده است. جزئیات در <a href="{BaseUrl}leaves/requests/{LeaveId}">اینجا</a> :
         <table border="0">
             <tr>
                 <td>از &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

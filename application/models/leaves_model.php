@@ -1248,4 +1248,18 @@ class Leaves_model extends CI_Model {
         ORDER BY users.id ASC, leaves.startdate DESC', FALSE);
         return $query->result_array();  
     }
+
+    /**
+     * List of coming leaves
+     * @param  Int $dayBefore is the number of days before a leave
+     * @return array List of leave requests
+     * @author Loc Nguyen <me@locnh.com>
+     */
+    public function getComingLeave($dayBefore) {
+        $query =   "SELECT * FROM leaves AS l
+                    JOIN users as u ON l.employee = u.id
+                    WHERE startdate = DATE_ADD(CURDATE(), INTERVAL $dayBefore DAY)
+                    AND status != 4";
+        return $this->db->query($query)->result_array();
+    }
 }

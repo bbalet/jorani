@@ -22,7 +22,7 @@
         <h3>{Title}</h3>
         Dear {Firstname} {Lastname}, <br />
         <br />
-        The time off you requested has been approved.<br />
+        The time off you requested has been approved by your line manager, {Supervisor}.<br />
         <table border="0">
             <tr>
                 <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

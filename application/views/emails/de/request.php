@@ -10,7 +10,7 @@
 <html lang="en">
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} beantragt Urlaub. Hierzu die <a href="{BaseUrl}leaves/{LeaveId}">Details</a> :
+        {Firstname} {Lastname} beantragt Urlaub. Hierzu die <a href="{BaseUrl}leaves/requests/{LeaveId}">Details</a> :
         <table border="0">
             <tr>
                 <td>Von &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

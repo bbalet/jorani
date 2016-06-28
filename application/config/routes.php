@@ -293,6 +293,10 @@ $route['mobile/notifications'] = 'mobile/notifications';
 $route['mobile/leaves/(:num)'] = 'mobile/leaves/$1';
 
 //_______________________________________________
+//Crons controllers
+$route['crons/leaveremind/(:num)'] = 'crons/leaveremind/$1';
+
+//_______________________________________________
 //Default controllers
 $route['default_controller'] = 'leaves';
 $route['notfound'] = 'pages/notfound';

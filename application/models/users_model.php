@@ -63,6 +63,19 @@ class Users_model extends CI_Model {
             return $record['firstname'] . ' ' . $record['lastname'];
         }
     }
+
+    /**
+     * Get the email of a given user
+     * @param int $id Identifier of employee
+     * @return string email of the employee
+     * @author Loc Nguyen <me@locnh.com>
+     */
+    public function getEmail($id) {
+        $record = $this->getUsers($id);
+        if (count($record) > 0) {
+            return $record['email'];
+        }
+    }
     
     /**
      * Get the list of employees that are the collaborators of the given user

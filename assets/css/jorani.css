@@ -482,7 +482,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 
 /*Current Day*/
 
-td..currentday-bg {
+td.currentday-bg {
     background-color: #FCF8E3;
 }
 

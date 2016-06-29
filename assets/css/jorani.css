@@ -479,3 +479,14 @@ background: -ms-linear-gradient(-45deg, #ff0000 50%,#468847 50%); /* IE10+ */
 background: linear-gradient(135deg, #ff0000 50%,#468847 50%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#468847',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+/*Current Day*/
+
+td..currentday-bg {
+    background-color: #FCF8E3;
+}
+
+td.currentday-border {
+    border-left: 1px dashed #666;
+    border-right: 1px dashed #666;
+}

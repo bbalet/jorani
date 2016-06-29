@@ -81,17 +81,23 @@
             <?php
                 $start = $year . '-' . $month . '-' . '1';    //first date of selected month
                 $lastDay = date("t", strtotime($start));    //last day of selected month
+                $isCurrentMonth = date('Y-m') === $year . '-' . $month;
+                $currentDay = (int)date('d');
                 for ($ii = 1; $ii <=$lastDay; $ii++) {
+                    $class = '';
+                    if($isCurrentMonth && $ii === $currentDay){
+                        $class .= ' currentday-bg';
+                    }
                     $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
                     switch ($dayNum)
                     {
-                        case 1: echo '<td><b>' . lang('calendar_monday_short') . '</b></td>'; break;
-                        case 2: echo '<td><b>' . lang('calendar_tuesday_short') . '</b></td>'; break;
-                        case 3: echo '<td><b>' . lang('calendar_wednesday_short') . '</b></td>'; break;
-                        case 4: echo '<td><b>' . lang('calendar_thursday_short') . '</b></td>'; break;
-                        case 5: echo '<td><b>' . lang('calendar_friday_short') . '</b></td>'; break;
-                        case 6: echo '<td><b>' . lang('calendar_saturday_short') . '</b></td>'; break;
-                        case 7: echo '<td><b>' . lang('calendar_sunday_short') . '</b></td>'; break;
+                        case 1: echo '<td'.($class?' class="'.$class.'"':'').'><b>' . lang('calendar_monday_short') . '</b></td>'; break;
+                        case 2: echo '<td'.($class?' class="'.$class.'"':'').'><b>' . lang('calendar_tuesday_short') . '</b></td>'; break;
+                        case 3: echo '<td'.($class?' class="'.$class.'"':'').'><b>' . lang('calendar_wednesday_short') . '</b></td>'; break;
+                        case 4: echo '<td'.($class?' class="'.$class.'"':'').'><b>' . lang('calendar_thursday_short') . '</b></td>'; break;
+                        case 5: echo '<td'.($class?' class="'.$class.'"':'').'><b>' . lang('calendar_friday_short') . '</b></td>'; break;
+                        case 6: echo '<td'.($class?' class="'.$class.'"':'').'><b>' . lang('calendar_saturday_short') . '</b></td>'; break;
+                        case 7: echo '<td'.($class?' class="'.$class.'"':'').'><b>' . lang('calendar_sunday_short') . '</b></td>'; break;
                     }
                 }?>
         </tr>
@@ -101,7 +107,11 @@
                 $start = $year . '-' . $month . '-' . '1';    //first date of selected month
                 $lastDay = date("t", strtotime($start));    //last day of selected month
                 for ($ii = 1; $ii <=$lastDay; $ii++) {
-                    echo '<td><b>' . $ii . '</b></td>';
+                    $class = '';
+                    if($isCurrentMonth && $ii === $currentDay){
+                        $class .= ' currentday-bg';
+                    }
+                    echo '<td'.($class?' class="'.$class.'"':'').'><b>' . $ii . '</b></td>';
                 }?>
         </tr>
     </thead>
@@ -113,10 +123,15 @@
  * This partial view is included into the monthly presence report and the tabular calendar.
  */
   $repeater = 0;
-  foreach ($tabular as $employee) {?>
+
+  
+  foreach ($tabular as $employee) {
+      $dayIterator = 0;
+      ?>
     <tr>
       <td><?php echo $employee->name; ?></td>
       <?php foreach ($employee->days as $day) {
+          $dayIterator++;
           $overlapping = FALSE;
           if (strstr($day->display, ';')) {
               $periods = explode(";", $day->display);
@@ -199,6 +214,12 @@
                         $overlapping = TRUE;
               break;
           }
+          
+          // Current day class
+          if($isCurrentMonth && $dayIterator === $currentDay){
+              $class .= ' currentday-border';
+          }
+          
             if ($class == "error"){
                 echo '<td><img src="'.  base_url() .'assets/images/date_error.png"></td>';
             } else {

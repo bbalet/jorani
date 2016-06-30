@@ -81,7 +81,7 @@
             <?php
                 $start = $year . '-' . $month . '-' . '1';    //first date of selected month
                 $lastDay = date("t", strtotime($start));    //last day of selected month
-                $isCurrentMonth = date('Y-m') === $year . '-' . $month;
+                $isCurrentMonth = date('Y-n') === $year . '-' . (int)$month;
                 $currentDay = (int)date('d');
                 for ($ii = 1; $ii <=$lastDay; $ii++) {
                     $class = '';

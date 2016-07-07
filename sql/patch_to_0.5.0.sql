@@ -6,6 +6,8 @@
 
 -- New features:
 --      * Bug fix on table dayoffs
+--      * Users table now supports Regional translations (e.g. 'en' to 'en_GB')
 
 ALTER TABLE `dayoffs` MODIFY `title` varchar(128) CHARACTER SET utf8;
 
+ALTER TABLE `users` MODIFY `language` varchar(5);

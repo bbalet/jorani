@@ -390,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `position` int(11) NOT NULL,
   `datehired` date DEFAULT NULL COMMENT 'Date hired / Started',
   `identifier` varchar(64) CHARACTER SET utf8 NOT NULL COMMENT 'Internal/company identifier',
-  `language` varchar(2) CHARACTER SET utf8 NOT NULL DEFAULT 'en',
+  `language` varchar(5) CHARACTER SET utf8 NOT NULL DEFAULT 'en',
   `ldap_path` varchar(1024) DEFAULT NULL COMMENT 'LDAP Path for complex authentication schemes',
   `active` bool DEFAULT TRUE COMMENT 'Is user active',
   `timezone` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT 'Timezone of user',

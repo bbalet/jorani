@@ -48,12 +48,12 @@ $lang['admin_diagnostic_daysoff_thead_y'] = '今年';
 $lang['admin_diagnostic_daysoff_thead_yp1'] = '明年';
 
 $lang['admin_diagnostic_overtime_tab'] = '加班';
-$lang['admin_diagnostic_daysoff_description'] = 'Overtime requests with a negative duration';
-$lang['admin_diagnostic_daysoff_thead_id'] = '證號';
-$lang['admin_diagnostic_daysoff_thead_employee'] = '員工';
-$lang['admin_diagnostic_daysoff_thead_date'] = '日期';
-$lang['admin_diagnostic_daysoff_thead_duration'] = '時段';
-$lang['admin_diagnostic_daysoff_thead_status'] = '職位';
+$lang['admin_diagnostic_overtime_description'] = 'Overtime requests with a negative duration';
+$lang['admin_diagnostic_overtime_thead_id'] = '證號';
+$lang['admin_diagnostic_overtime_thead_employee'] = '員工';
+$lang['admin_diagnostic_overtime_thead_date'] = '日期';
+$lang['admin_diagnostic_overtime_thead_duration'] = '時段';
+$lang['admin_diagnostic_overtime_thead_status'] = '職位';
 
 $lang['admin_diagnostic_contract_tab'] = '類別';
 $lang['admin_diagnostic_contract_description'] = '沒使用的類別（請檢查重複類別）';

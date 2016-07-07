@@ -48,12 +48,12 @@ $lang['admin_diagnostic_daysoff_thead_y'] = 'Cette année';
 $lang['admin_diagnostic_daysoff_thead_yp1'] = 'L\'année prochaine';
 
 $lang['admin_diagnostic_overtime_tab'] = 'Heures supp.';
-$lang['admin_diagnostic_daysoff_description'] = 'Déclarations d\'heures supplémentaires avec une durée négative.';
-$lang['admin_diagnostic_daysoff_thead_id'] = 'N°';
-$lang['admin_diagnostic_daysoff_thead_employee'] = 'Employé';
-$lang['admin_diagnostic_daysoff_thead_date'] = 'Date';
-$lang['admin_diagnostic_daysoff_thead_duration'] = 'Durée';
-$lang['admin_diagnostic_daysoff_thead_status'] = 'Statut';
+$lang['admin_diagnostic_overtime_description'] = 'Déclarations d\'heures supplémentaires avec une durée négative.';
+$lang['admin_diagnostic_overtime_thead_id'] = 'N°';
+$lang['admin_diagnostic_overtime_thead_employee'] = 'Employé';
+$lang['admin_diagnostic_overtime_thead_date'] = 'Date';
+$lang['admin_diagnostic_overtime_thead_duration'] = 'Durée';
+$lang['admin_diagnostic_overtime_thead_status'] = 'Statut';
 
 $lang['admin_diagnostic_contract_tab'] = 'Contrats';
 $lang['admin_diagnostic_contract_description'] = 'Contrats non utilisés (vérifier si le contrat n\'est pas en double).';

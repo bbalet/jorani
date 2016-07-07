@@ -49,12 +49,12 @@ $lang['admin_diagnostic_daysoff_thead_y'] = 'Bu yıl';
 $lang['admin_diagnostic_daysoff_thead_yp1'] = 'Gelecek yıl';
 
 $lang['admin_diagnostic_overtime_tab'] = 'Fazla mesai';
-$lang['admin_diagnostic_daysoff_description'] = 'Negatif süreli fazla mesai istekleri';
-$lang['admin_diagnostic_daysoff_thead_id'] = 'ID';
-$lang['admin_diagnostic_daysoff_thead_employee'] = 'Çalışan';
-$lang['admin_diagnostic_daysoff_thead_date'] = 'Tarih';
-$lang['admin_diagnostic_daysoff_thead_duration'] = 'Süre';
-$lang['admin_diagnostic_daysoff_thead_status'] = 'Durum';
+$lang['admin_diagnostic_overtime_description'] = 'Negatif süreli fazla mesai istekleri';
+$lang['admin_diagnostic_overtime_thead_id'] = 'ID';
+$lang['admin_diagnostic_overtime_thead_employee'] = 'Çalışan';
+$lang['admin_diagnostic_overtime_thead_date'] = 'Tarih';
+$lang['admin_diagnostic_overtime_thead_duration'] = 'Süre';
+$lang['admin_diagnostic_overtime_thead_status'] = 'Durum';
 
 $lang['admin_diagnostic_contract_tab'] = 'Sözleşmeler';
 $lang['admin_diagnostic_contract_description'] = 'Kullanılmamış sözleşmeler (sözleşmenin tekrarlanmış olup olmadığını kontrol et).';

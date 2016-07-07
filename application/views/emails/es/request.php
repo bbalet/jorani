@@ -10,7 +10,7 @@
 <html lang="es">
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} solicitud de una licencia. A continuación, el <a href="{BaseUrl}leaves/{LeaveId}">detalle</a> :
+        {Firstname} {Lastname} solicitud de una licencia. A continuación, el <a href="{BaseUrl}leaves/requests/{LeaveId}">detalle</a> :
         <table border="0">
             <tr>
                 <td>Desde &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

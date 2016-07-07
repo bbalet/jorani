@@ -25,6 +25,7 @@
             <th><?php echo lang('leaves_index_thead_duration');?></th>
             <th><?php echo lang('leaves_index_thead_type');?></th>
             <th><?php echo lang('leaves_index_thead_status');?></th>
+            <th><?php echo lang('users_myprofile_field_manager');?></th>
         </tr>
     </thead>
     <tbody>
@@ -65,6 +66,7 @@
         <td><?php echo $leaves_item['duration']; ?></td>
         <td><?php echo $leaves_item['type_name']; ?></td>
         <td><?php echo lang($leaves_item['status_name']); ?></td>
+        <td><?php echo $manager_label; ?></td>
     </tr>
 <?php endforeach ?>
     </tbody>

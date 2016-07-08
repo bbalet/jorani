@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} отправил заявление на отпуск. <a href="{BaseUrl}leaves/{LeaveId}">Детали</a> ниже:
+        {Firstname} {Lastname} отправил заявление на отпуск. <a href="{BaseUrl}leaves/requests/{LeaveId}">Детали</a> ниже:
         <table border="0">
             <tr>
                 <td>От &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

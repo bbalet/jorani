@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>{Firstname} {Lastname} vous soumet une demande d'absence. Voici les <a href="{BaseUrl}leaves/{LeaveId}">détails</a> :</p>
+        <p>{Firstname} {Lastname} vous soumet une demande d'absence. Voici les <a href="{BaseUrl}leaves/requests/{LeaveId}">détails</a> :</p>
         <table>
             <tr>
                 <td>Du &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

@@ -296,29 +296,17 @@
     </div>
 </div>
 
-<link href="<?php echo base_url();?>assets/fullcalendar/fullcalendar.css" rel="stylesheet">
-<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lib/moment.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/fullcalendar.min.js"></script>
+<link href="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.css" rel="stylesheet">
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lib/moment.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.min.js"></script>
 <?php if ($language_code != 'en') {?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo str_replace("_", "-", $language_code);?>.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lang/<?php echo str_replace("_", "-", $language_code);?>.js"></script>
 <?php }?>
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
 var employee = <?php echo $user_id;?>;
-            
-function refresh_calendar() {
-    source = '<?php echo base_url();?>leaves/individual/' + employee;
-    $('#calendar').fullCalendar('removeEvents');
-    $('#calendar').fullCalendar('addEventSource', source);
-    $('#calendar').fullCalendar('removeEventSource', source);
-    source = '<?php echo base_url();?>contracts/calendar/userdayoffs/' + employee;
-    $('#calendar').fullCalendar('removeEventSource', source);
-    $('#calendar').fullCalendar('addEventSource', source);
-    $('#calendar').fullCalendar('rerenderEvents');
-    $('#calendar').fullCalendar('removeEventSource', source);
-}
     
 $(function () {
     
@@ -438,6 +426,9 @@ $(function () {
                 $('#calendar').fullCalendar( 'rerenderEvents' );
             }
         });
+        $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>leaves/individual/' + employee);
+        $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>contracts/calendar/userdayoffs/' + employee);
+
         
         //Execute the report for another date
         $('#cmdExecute').click(function() {

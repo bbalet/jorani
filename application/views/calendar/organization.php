@@ -101,11 +101,11 @@
     </div>
 </div>
 
-<link href="<?php echo base_url();?>assets/fullcalendar/fullcalendar.css" rel="stylesheet">
-<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lib/moment.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/fullcalendar.min.js"></script>
+<link href="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.css" rel="stylesheet">
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lib/moment.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.min.js"></script>
 <?php if ($language_code != 'en') {?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo str_replace("_", "-", $language_code);?>.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lang/<?php echo str_replace("_", "-", $language_code);?>.js"></script>
 <?php }?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
@@ -119,6 +119,8 @@
     
     //Refresh the calendar if data is available
     function refresh_calendar() {
+        $('#calendar').fullCalendar('removeEventSources');
+        //$('#calendar').fullCalendar('removeEvents');
         if (entity != -1) {
             <?php if ($logged_in == TRUE) {?>
             var source = '<?php echo base_url();?>leaves/organization/' + entity;
@@ -130,10 +132,7 @@
             } else {
                 source += '?children=false';
             }
-            $('#calendar').fullCalendar('removeEvents');
             $('#calendar').fullCalendar('addEventSource', source);
-            $('#calendar').fullCalendar('rerenderEvents');
-            $('#calendar').fullCalendar('removeEventSource', source);
         }
         <?php if ($logged_in == TRUE) {?>
         source = '<?php echo base_url();?>contracts/calendar/alldayoffs?entity=' + entity;
@@ -147,8 +146,6 @@
         }
         if (toggleDayoffs) {
             $('#calendar').fullCalendar('addEventSource', source);
-            $('#calendar').fullCalendar('rerenderEvents');
-            $('#calendar').fullCalendar('removeEventSource', source);
         } else {
             $('#calendar').fullCalendar('removeEventSource', source);
         }
@@ -268,18 +265,22 @@
         
         $('#cmdNext').click(function() {
             $('#calendar').fullCalendar('next');
-            refresh_calendar();
         });
         
         $('#cmdPrevious').click(function() {
             $('#calendar').fullCalendar('prev');
-            refresh_calendar();
         });
         
-        $('#cmdToday').click(function() {
+    //On click on today, if the current month is the same than the displayed month, we refetch the events
+    $('#cmdToday').click(function() {
+        var displayedDate = new Date($('#calendar').fullCalendar('getDate'));
+        var currentDate = new Date();
+        if (displayedDate.getMonth() == currentDate.getMonth()) {
+            $('#calendar').fullCalendar('refetchEvents');
+        } else {
             $('#calendar').fullCalendar('today');
-            refresh_calendar();
-        });
+        }
+    });
         
         //Cookie has value ? take -1 by default
         if($.cookie('cal_entity') != null) {

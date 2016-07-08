@@ -93,36 +93,18 @@
     </div>
 </div>
 
-<link href="<?php echo base_url();?>assets/fullcalendar/fullcalendar.css" rel="stylesheet">
-<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lib/moment.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/fullcalendar.min.js"></script>
+<link href="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.css" rel="stylesheet">
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lib/moment.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.min.js"></script>
 <?php if ($language_code != 'en') {?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar/lang/<?php echo str_replace("_", "-", $language_code);?>.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lang/<?php echo str_replace("_", "-", $language_code);?>.js"></script>
 <?php }?>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 <script type="text/javascript">
-    var toggleDayoffs = false;
-    
-    //Refresh the calendar if data is available
-    function refresh_calendar() {
-        source = '<?php echo base_url();?>leaves/individual';;
-        $('#calendar').fullCalendar('removeEvents');
-        $('#calendar').fullCalendar('addEventSource', source);
-        $('#calendar').fullCalendar('removeEventSource', source);
-        source = '<?php echo base_url();?>contracts/calendar/userdayoffs';
-        if (toggleDayoffs) {
-            $('#calendar').fullCalendar('removeEventSource', source);
-            $('#calendar').fullCalendar('addEventSource', source);
-            $('#calendar').fullCalendar('rerenderEvents');
-            $('#calendar').fullCalendar('removeEventSource', source);
-        } else {
-            $('#calendar').fullCalendar('removeEventSource', source);
-        }
-    }
+var toggleDayoffs = false;
     
 $(function () {
-    
     //Global Ajax error handling mainly used for session expiration
     $( document ).ajaxError(function(event, jqXHR, settings, errorThrown) {
         $('#frmModalAjaxWait').modal('hide');
@@ -138,6 +120,7 @@ $(function () {
     
     $("#frmEvent").alert();
 
+    //Load FullCalendar widget
     $('#calendar').fullCalendar({
         timeFormat: ' ', /*Trick to remove the start time of the event*/
         header: {
@@ -211,25 +194,33 @@ $(function () {
         $(this).removeData('modal');
     });
     
-    //Toggle day offs displays
+    //Toggle day offs display
     $('#cmdDisplayDayOff').on('click', function() {
         toggleDayoffs = !toggleDayoffs;
-        refresh_calendar();
+        if (toggleDayoffs) {
+            $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>contracts/calendar/userdayoffs');
+        } else {
+            $('#calendar').fullCalendar('removeEventSources', '<?php echo base_url();?>contracts/calendar/userdayoffs');
+        }
     });
     
+    //Manage Prev/Next buttons
     $('#cmdNext').click(function() {
         $('#calendar').fullCalendar('next');
-        if (toggleDayoffs) refresh_calendar();
     });
-
     $('#cmdPrevious').click(function() {
         $('#calendar').fullCalendar('prev');
-        if (toggleDayoffs) refresh_calendar();
     });
-
+    
+    //On click on today, if the current month is the same than the displayed month, we refetch the events
     $('#cmdToday').click(function() {
-        $('#calendar').fullCalendar('today');
-        if (toggleDayoffs) refresh_calendar();
+        var displayedDate = new Date($('#calendar').fullCalendar('getDate'));
+        var currentDate = new Date();
+        if (displayedDate.getMonth() == currentDate.getMonth()) {
+            $('#calendar').fullCalendar('refetchEvents');
+        } else {
+            $('#calendar').fullCalendar('today');
+        }
     });
     
     //Copy/Paste ICS Feed

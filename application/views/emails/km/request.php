@@ -14,7 +14,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} <a href="{BaseUrl}leaves/{LeaveId}">ស្នើសុំចាកចេញមួយខាងក្រោមសេចក្ដីលម្អិត</a> :
+        {Firstname} {Lastname} <a href="{BaseUrl}leaves/requests/{LeaveId}">ស្នើសុំចាកចេញមួយខាងក្រោមសេចក្ដីលម្អិត</a> :
         <table border="0">
             <tr>
                 <td>មកពី &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

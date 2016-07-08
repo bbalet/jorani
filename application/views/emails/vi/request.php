@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} đã yêu cầu nghỉ phép. <a href="{BaseUrl}leaves/{LeaveId}">Xem chi tiết</a> bên dưới:<br />
+        {Firstname} {Lastname} đã yêu cầu nghỉ phép. <a href="{BaseUrl}leaves/requests/{LeaveId}">Xem chi tiết</a> bên dưới:<br />
         <table border="0">
             <tr>
                 <td>Từ</td><td>{StartDate}&nbsp;({StartDateType})</td>

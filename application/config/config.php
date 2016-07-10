@@ -421,7 +421,7 @@ $config['requests_by_manager'] = FALSE;
 
 //____________________________________________________________________________
 //List of available languages. If you limit this list to one language, the list of available languages will be hidden from the login form
-$config['languages'] = 'en,en_GB,fr,es,nl,de,it,ru,uk,km,fa,vi,tr,zh';
+$config['languages'] = 'en,en-gb,fr,es,nl,de,it,ru,uk,km,fa,vi,tr,zh';
 
 //If you want to use another font for a specific language, put the font into assets/fonts folder and map as in this example
 //Extra fonts are coming from Google noto font project: https://www.google.com/get/noto/
@@ -465,6 +465,11 @@ $config['oauth2_enabled'] = FALSE;
 $config['oauth2_provider'] = 'google';   //Supported providers: google
 $config['oauth2_client_id'] = '';
 $config['oauth2_client_secret'] = '';
+
+//____________________________________________________________________________
+//SAML configuration
+$config['saml_enabled'] = FALSE;
+//Please configure SAML settings into config/saml.php
 
 //____________________________________________________________________________
 //Enable public ICS feeds (global calendar, contract, personal information)

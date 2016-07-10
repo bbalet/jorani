@@ -47,6 +47,7 @@ $lang['users_myprofile_field_position'] = 'Position';
 $lang['users_myprofile_field_entity'] = 'Einheit';
 $lang['users_myprofile_field_hired'] = 'Anmeldedatum';
 $lang['users_myprofile_field_identifier'] = 'Interner Identifikator';
+$lang['users_myprofile_field_language'] = 'Sprache';
 
 $lang['users_edit_title'] = 'User # bearbeiten';
 $lang['users_edit_html_title'] = 'User bearbeiten';

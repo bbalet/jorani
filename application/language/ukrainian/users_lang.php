@@ -47,6 +47,7 @@ $lang['users_myprofile_field_position'] = 'Посада';
 $lang['users_myprofile_field_entity'] = 'Відділ';
 $lang['users_myprofile_field_hired'] = 'Дата прийому на роботу';
 $lang['users_myprofile_field_identifier'] = 'Ідентифікатор користувача';
+$lang['users_myprofile_field_language'] = 'Мова';
 
 $lang['users_edit_title'] = 'Редагувати користувача №';
 $lang['users_edit_html_title'] = 'Редагувати користувача';

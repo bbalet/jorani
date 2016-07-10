@@ -652,6 +652,24 @@ class Users_model extends CI_Model {
     }
     
     /**
+     * Check if a user is active (TRUE) or inactive (FALSE)
+     * @param string $email e-mail of a user
+     * @return bool active (TRUE) or inactive (FALSE)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function isActiveByEmail($login) {
+        $this->db->from('users');
+        $this->db->where('email', $email);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->active;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    /**
      * Try to return the user information from the login field
      * @param string $login Login
      * @return User data row or null if no user was found

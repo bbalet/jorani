@@ -51,23 +51,24 @@ class Pages extends CI_Controller {
         $trans = array("-" => " ", "_" => " ", "." => " ");
         $data['title'] = ucfirst(strtr($page, $trans)); // Capitalize the first letter
         //The page containing export in their name are returning another MIMETYPE
-        if (strpos($page,'export') === FALSE) {//Don't include header and menu
+        if (strpos($page, 'export') === FALSE) {//Don't include header and menu
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
         }
-        $view = 'pages/' . $this->language_code .'/' . $page . '.php';
+        $view = 'pages/' . $this->language_code . '/' . $page . '.php';
         $pathCI = APPPATH . 'views/';
-        $pathLocal = FCPATH .'local/';
+        $pathLocal = FCPATH . 'local/';
         //Check if we have a user-defined view
         if (file_exists($pathLocal . $view)) {
             $this->load->customView($pathLocal, $view, $data);
         } else {//Load the page from the default location (CI views folder)
             if (!file_exists($pathCI . $view)) {
-                    redirect('notfound');
+                log_message('error', '{controllers/pages/view} Not found=' . $pathCI . $view);
+                redirect('notfound');
             }
             $this->load->view($view, $data);
         }
-        if (strpos($page,'export') === FALSE) {
+        if (strpos($page, 'export') === FALSE) {
             $this->load->view('templates/footer', $data);
         }
     }

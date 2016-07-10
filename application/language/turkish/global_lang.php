@@ -63,7 +63,7 @@ $lang['global_link_doc_page_list_users'] = 'http://jorani.org/page-list-of-users
 $lang['global_link_doc_page_settings'] = 'http://jorani.org/configuration-file.html';
 $lang['global_link_doc_page_presence_report'] = '';
 $lang['global_link_doc_page_leave_balance_report'] = 'http://jorani.org/page-leave-balance-report.html';
-$lang['global_link_doc_page_leave_balance_report'] = '';
+$lang['global_link_doc_page_leaves_report'] = '';
 
 $lang['Morning'] = 'Sabah';
 $lang['Afternoon'] = 'Öğleden sonra';

@@ -95,6 +95,7 @@ class Users extends CI_Controller {
      */
     public function myProfile() {
         $this->auth->checkIfOperationIsAllowed('view_myprofile');
+        $this->load->library('polyglot');
         $data = getUserContext($this);
         $data['user'] = $this->users_model->getUsers($this->user_id);
         if (empty($data['user'])) {

@@ -46,6 +46,7 @@ $lang['users_myprofile_field_position'] = '職稱';
 $lang['users_myprofile_field_entity'] = '事業體';
 $lang['users_myprofile_field_hired'] = '到職日';
 $lang['users_myprofile_field_identifier'] = '內部/公司識別碼';
+$lang['users_myprofile_field_language'] = '語言';
 
 $lang['users_edit_title'] = '編輯使用者＃';
 $lang['users_edit_html_title'] = '編輯使用者';

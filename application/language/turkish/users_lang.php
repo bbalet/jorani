@@ -47,6 +47,7 @@ $lang['users_myprofile_field_position'] = 'Pozisyon';
 $lang['users_myprofile_field_entity'] = 'Takım';
 $lang['users_myprofile_field_hired'] = 'İşe alındığı/başladığı tarih';
 $lang['users_myprofile_field_identifier'] = 'Dahili/Firma Tanımlayıcı';
+$lang['users_myprofile_field_language'] = 'Dil';
 
 $lang['users_edit_title'] = 'Kullanıcıyı düzenle #';
 $lang['users_edit_html_title'] = 'Kullanıcıyı düzenle';

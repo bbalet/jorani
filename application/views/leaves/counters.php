@@ -88,10 +88,9 @@
 <script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
 if ($language_code != 'en') { ?>
-<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo str_replace("_", "-", $language_code);?>.js"></script>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(function () {
         //Init datepicker widget (it is complicated because we cannot based it on UTC)
@@ -113,7 +112,7 @@ if ($language_code != 'en') { ?>
             }
         });
         
-    //Transform the HTML table in a dynamic datatable
+    //Transform the HTML table into a dynamic datatable
     $('#overtime').dataTable({
         language: {
                     decimal:            "<?php echo lang('datatable_sInfoThousands');?>",

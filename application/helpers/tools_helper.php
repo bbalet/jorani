@@ -15,27 +15,29 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
  * @param CI_Controller $controller reference to CI Controller object
  * @author Benjamin BALET <benjamin.balet@gmail.com>
  */
-function setUserContext(CI_Controller $controller)
-{
-        if (!$controller->session->userdata('logged_in')) {
-            //Test if the expired session was detected while responding to an Ajax request
-            if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest') {
-                $controller->output->set_status_header('401');
-            } else {
-                $controller->session->set_userdata('last_page', current_url());
-                $controller->session->set_userdata('last_page_params', $_SERVER['QUERY_STRING']);
-                redirect('session/login');
-            }
+function setUserContext(CI_Controller $controller) {
+    //Memorize the last displayed page except for Ajax queries
+    if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') !== 'XMLHttpRequest') {
+        $controller->session->set_userdata('last_page', current_url());
+        $controller->session->set_userdata('last_page_params', $_SERVER['QUERY_STRING']);
+    }
+    if (!$controller->session->userdata('logged_in')) {
+        //Test if the expired session was detected while responding to an Ajax request
+        if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest') {
+            $controller->output->set_status_header('401');
+        } else {
+            redirect('session/login');
         }
-        $controller->fullname = $controller->session->userdata('firstname') . ' ' .
-                $controller->session->userdata('lastname');
-        $controller->is_manager = $controller->session->userdata('is_manager');
-        $controller->is_admin = $controller->session->userdata('is_admin');
-        $controller->is_hr = $controller->session->userdata('is_hr');
-        $controller->user_id = $controller->session->userdata('id');
-        $controller->manager = $controller->session->userdata('manager');
-        $controller->language = $controller->session->userdata('language');
-        $controller->language_code = $controller->session->userdata('language_code');
+    }
+    $controller->fullname = $controller->session->userdata('firstname') . ' ' .
+            $controller->session->userdata('lastname');
+    $controller->is_manager = $controller->session->userdata('is_manager');
+    $controller->is_admin = $controller->session->userdata('is_admin');
+    $controller->is_hr = $controller->session->userdata('is_hr');
+    $controller->user_id = $controller->session->userdata('id');
+    $controller->manager = $controller->session->userdata('manager');
+    $controller->language = $controller->session->userdata('language');
+    $controller->language_code = $controller->session->userdata('language_code');
 }
 
 /**

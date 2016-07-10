@@ -47,6 +47,7 @@ $lang['users_myprofile_field_position'] = 'Functie';
 $lang['users_myprofile_field_entity'] = 'Entiteit';
 $lang['users_myprofile_field_hired'] = 'Datum start aanstelling';
 $lang['users_myprofile_field_identifier'] = 'Interne identifier';
+$lang['users_myprofile_field_language'] = 'Taal';
 
 $lang['users_edit_title'] = 'Wijzig gebruiker #';
 $lang['users_edit_html_title'] = 'Wijzig gebruiker';

@@ -176,10 +176,14 @@ $this->lang->load('menu', $language);?>
                     <?php if ($this->config->item('enable_mobile') != FALSE) { ?>
                     <li><a href="#" id="cmdGenerateQRCode" title="QR Code"><i class="fa fa-mobile"></i></a></li>
                     <?php } ?>
-                    <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
+                    <?php if ($this->config->item('ldap_enabled') === FALSE && $this->config->item('saml_enabled') === FALSE) { ?>
                     <li><a href="#" id="cmdChangePassword" title="<?php echo lang('menu_banner_tip_reset');?>"><i class="icon-lock icon-white"></i></a></li>
-                    <?php } ?>
-                    <li><a href="<?php echo base_url();?>session/logout" title="<?php echo lang('menu_banner_logout');?>"><i class="icon-off icon-white"></i></a></li>
+                    <?php }
+                    $urlLogout = 'session/logout';
+                    if ($this->config->item('saml_enabled') === TRUE){
+                        $urlLogout = 'api/slo';
+                    } ?>
+                    <li><a href="<?php echo base_url() . $urlLogout;?>" title="<?php echo lang('menu_banner_logout');?>"><i class="icon-off icon-white"></i></a></li>
                 </ul>
             </div>
       </div>

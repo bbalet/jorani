@@ -100,7 +100,7 @@ class Polyglot {
             //case 'dv' : return 'divehi'; break;
             case 'nl' : return 'dutch'; break;
             case 'en' : return 'english'; break;
-            case 'en_gb' : return 'english_gb'; break;
+            case 'en-gb' : return 'english_gb'; break;
             //case 'eo' : return 'esperanto'; break;
             //case 'et' : return 'estonian'; break;
             //case 'ee' : return 'ewe'; break;
@@ -295,7 +295,7 @@ class Polyglot {
 //            case 'divehi' : return 'dv'; break;
             case 'dutch' : return 'nl'; break;
             case 'english' : return 'en'; break;
-            case 'english_gb' : return 'en_gb'; break;
+            case 'english_gb' : return 'en-gb'; break;
 //            case 'esperanto' : return 'eo'; break;
 //            case 'estonian' : return 'et'; break;
 //            case 'ewe' : return 'ee'; break;
@@ -490,7 +490,7 @@ class Polyglot {
 //            case 'dv' : return 'ދިވެހި'; break;
             case 'nl' : return 'Nederlands'; break;
             case 'en' : return 'English'; break;
-            case 'en_gb' : return 'English (UK)'; break;
+            case 'en-gb' : return 'English (UK)'; break;
 //            case 'eo' : return 'Esperanto'; break;
 //            case 'et' : return 'eesti'; break;
 //            case 'ee' : return 'Eʋegbe'; break;
@@ -685,7 +685,7 @@ class Polyglot {
 //            case 'ދިވެހި' : return 'dv'; break;
             case 'Nederlands' : return 'nl'; break;
             case 'English' : return 'en'; break;
-            case 'English (UK)' : return 'en_gb'; break;
+            case 'English (UK)' : return 'en-gb'; break;
 //            case 'Esperanto' : return 'eo'; break;
 //            case 'eesti' : return 'et'; break;
 //            case 'Eʋegbe' : return 'ee'; break;

@@ -67,6 +67,23 @@ echo $date->format(lang('global_date_format'));
     <div class="span6">&nbsp;</div>
 </div>
 
+<div class="row-fluid">
+    <div class="span3"><strong><?php echo lang('users_myprofile_field_language');?></strong></div>
+    <div class="span9">
+        <?php $languages = $this->polyglot->nativelanguages($this->config->item('languages'));?>
+        <input type="hidden" name="last_page" value="session/failure" />
+        <?php if (count($languages) == 1) { ?>
+        <input type="hidden" name="language" value="<?php echo $language_code; ?>" />
+        <?php } else { ?>
+        <select class="input-medium" name="language" id="language">
+            <?php foreach ($languages as $lang_code => $lang_name) { ?>
+            <option value="<?php echo $lang_code; ?>" <?php if ($language_code == $lang_code) echo 'selected'; ?>><?php echo $lang_name; ?></option>
+            <?php }?>
+        </select>
+        <?php } ?>
+    </div>
+</div>
+
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div id="frmLinkICS" class="modal hide fade">
@@ -88,6 +105,9 @@ echo $date->format(lang('global_date_format'));
     </div>
 </div>
 
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 <script type="text/javascript">
 $(function() {
@@ -100,5 +120,16 @@ $(function() {
         $('#tipCopied').tooltip('show');
         setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });
+    
+    //Refresh page language
+    $('#language').selectize({
+        onChange: function (value) {
+            if (value != '') {
+                $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
+                window.location.href = '<?php echo base_url();?>session/language?language=' + value;
+            }
+        }
+    });
+
 });
 </script>

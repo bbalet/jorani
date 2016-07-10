@@ -46,6 +46,7 @@ $lang['users_myprofile_field_position'] = 'مقام';
 $lang['users_myprofile_field_entity'] = 'واحد';
 $lang['users_myprofile_field_hired'] = 'تاریخ استخدام/شروع کار';
 $lang['users_myprofile_field_identifier'] = 'داخلی/کد سازمانی';
+$lang['users_myprofile_field_language'] = 'زبان';
 
 $lang['users_edit_title'] = 'ویرایش کاربر #';
 $lang['users_edit_html_title'] = 'ویرایش کاربر';

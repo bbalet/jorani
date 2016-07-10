@@ -116,7 +116,7 @@ echo form_open('users/create', $attributes); ?>
     <?php }?>
 </form>
 
-    <?php if (!$this->config->item('ldap_enabled')) {?>
+    <?php if ($this->config->item('ldap_enabled')=== FALSE && $this->config->item('saml_enabled') === FALSE) {?>
     <label for="password"><?php echo lang('users_create_field_password');?></label>
     <div class="input-append">
         <input type="password" name="password" id="password" required />
@@ -176,7 +176,7 @@ echo form_open('users/create', $attributes); ?>
 <script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
 if ($language_code != 'en') { ?>
-<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo str_replace("_", "-", $language_code);?>.js"></script>
+<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>

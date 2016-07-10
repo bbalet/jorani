@@ -46,6 +46,7 @@ $lang['users_myprofile_field_position'] = 'Poste';
 $lang['users_myprofile_field_entity'] = 'Entité';
 $lang['users_myprofile_field_hired'] = 'Date d\'embauche/démarrage';
 $lang['users_myprofile_field_identifier'] = 'Identifiant interne';
+$lang['users_myprofile_field_language'] = 'Langage';
 
 $lang['users_edit_title'] = 'Modification de l\'utilisateur n°';
 $lang['users_edit_html_title'] = 'Edit user';

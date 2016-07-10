@@ -65,7 +65,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     <input type="hidden" name="language" value="<?php echo $language_code; ?>" />
     <?php } else { ?>
     <label for="language"><?php echo lang('session_login_field_language');?></label>
-    <select class="input-medium" name="language" id="language" onchange="Javascript:change_language();">
+    <select class="input-medium" name="language" id="language">
         <?php foreach ($languages as $lang_code => $lang_name) { ?>
         <option value="<?php echo $lang_code; ?>" <?php if ($language_code == $lang_code) echo 'selected'; ?>><?php echo $lang_name; ?></option>
         <?php }?>

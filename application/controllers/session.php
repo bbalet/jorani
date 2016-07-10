@@ -24,12 +24,11 @@ class Session extends CI_Controller {
         parent::__construct();
         $this->load->library('polyglot');
         if ($this->session->userdata('language') === FALSE) {
-            $availableLanguages = $languages = explode(",", $this->config->item('languages'));
+            $availableLanguages = explode(",", $this->config->item('languages'));
             $languageCode = $this->polyglot->language2code($this->config->item('language'));
             if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
                 if (in_array($_SERVER['HTTP_ACCEPT_LANGUAGE'], $availableLanguages)) {
                     $languageCode = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-                    echo var_dump($_SERVER['HTTP_ACCEPT_LANGUAGE']);
                 }
             }
             $this->session->set_userdata('language_code', $languageCode);
@@ -367,10 +366,8 @@ class Session extends CI_Controller {
 
         $auth->processSLO(false, $requestID);
         $errors = $auth->getErrors();
-        if (empty($errors)) {
-            print_r('<p>Sucessfully logged out</p>');
-        } else {
-            print_r('<p>' . implode(', ', $errors) . '</p>');
+        if (!empty($errors)) {
+            log_message('error', '{controllers/session/sls} SSO Errors=' . implode(', ', $errors));
         }
         $this->session->sess_destroy();
         redirect('api/sso');

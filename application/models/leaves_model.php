@@ -330,7 +330,7 @@ class Leaves_model extends CI_Model {
     /**
      * Get the number of days a user can take for a given leave type
      * @param int $id employee identifier
-     * @param string $type type of leave request
+     * @param string $type leave type name
      * @param date $startdate Start date of leave request or null
      * @return int number of available days or NULL if the user has no contract
      * @author Benjamin BALET <benjamin.balet@gmail.com>

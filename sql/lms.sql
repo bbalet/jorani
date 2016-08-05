@@ -174,6 +174,7 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `endentdate` varchar(5) CHARACTER SET utf8 NOT NULL,
   `weekly_duration` int(11) DEFAULT NULL COMMENT 'Approximate duration of work per week (in minutes)',
   `daily_duration` int(11) DEFAULT NULL COMMENT 'Approximate duration of work per day and (in minutes)',
+  `default_leave_type` INT NULL DEFAULT NULL COMMENT 'default leave type for the contract (overwrite default type set in config file).',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -418,6 +419,18 @@ CREATE TABLE IF NOT EXISTS `delegations` (
   PRIMARY KEY (`id`),
   KEY `manager_id` (`manager_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Delegation of approval' AUTO_INCREMENT=1 ;
+
+--
+-- Structure of table `excluded_types`
+--
+CREATE TABLE IF NOT EXISTS `excluded_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id of exclusion',
+  `contract_id` int(11) NOT NULL COMMENT 'Id of contract',
+  `type_id` int(11) NOT NULL COMMENT 'Id of leave ype to be excluded to the contract',
+  PRIMARY KEY (`id`),
+  KEY `contract_id` (`contract_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Exclude a leave type from a contract' AUTO_INCREMENT=1 ;
+
 
 -- Tables for OAuth2 server
 CREATE TABLE oauth_clients (client_id VARCHAR(80) NOT NULL, client_secret VARCHAR(80) NOT NULL, redirect_uri VARCHAR(2000) NOT NULL, grant_types VARCHAR(80), scope VARCHAR(100), user_id VARCHAR(80), CONSTRAINT clients_client_id_pk PRIMARY KEY (client_id));

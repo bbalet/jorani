@@ -71,6 +71,15 @@ class Contracts extends CI_Controller {
         }
 
         if ($this->form_validation->run() === FALSE) {
+            $this->load->model('types_model');
+            $data['types'] = $this->types_model->getTypesAsArray();
+            $defaultType = $this->config->item('default_leave_type');
+            if (is_null($data['contract']['default_leave_type'])) {
+                $defaultType = ($defaultType == FALSE) ? 0 : $defaultType;
+            } else {
+                $defaultType = $data['contract']['default_leave_type'];
+            }
+            $data['defaultType'] = $defaultType;
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('contracts/edit', $data);
@@ -101,6 +110,11 @@ class Contracts extends CI_Controller {
         $this->form_validation->set_rules('endentdateday', lang('contract_create_field_end_day'), 'required|xss_clean|strip_tags');
 
         if ($this->form_validation->run() === FALSE) {
+            $this->load->model('types_model');
+            $data['types'] = $this->types_model->getTypesAsArray();
+            $defaultType = $this->config->item('default_leave_type');
+            $defaultType = ($defaultType == FALSE) ? 0 : $defaultType;
+            $data['defaultType'] = $defaultType;
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('contracts/create', $data);
@@ -189,6 +203,70 @@ class Contracts extends CI_Controller {
         //Redirect to the contract where we've just copied the days off
         $this->session->set_flashdata('msg', lang('contract_calendar_copy_msg_success'));
         redirect('contracts/' . $destination . '/calendar/' . $year);
+    }
+    
+    /**
+     * Display a form that allows to exclude some leave types from a contract
+     * @param int $id Contract identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function excludeTypes($id) {
+        $this->auth->checkIfOperationIsAllowed('edit_contract');
+        $data = getUserContext($this);
+
+        $data['contract'] = $this->contracts_model->getContracts($id);
+        if (empty($data['contract'])) {
+            redirect('notfound');
+        }
+        $data['title'] = lang('contract_exclude_title');
+        $data['includedTypes'] = $this->contracts_model->getListOfIncludedTypes($id);
+        $data['excludedTypes'] = $this->contracts_model->getListOfExcludedTypes($id);
+        $data['typesUsage'] = $this->contracts_model->getTypeUsageForContract($id);
+        //If a default leave type is set on the contract, it overwrites what is set in config file
+        $defaultType = $this->config->item('default_leave_type');
+        if (is_null($data['contract']['default_leave_type'])) {
+            $defaultType = ($defaultType == FALSE) ? 0 : $defaultType;
+        } else {
+            $defaultType = $data['contract']['default_leave_type'];
+        }
+        $data['defaultType'] = $defaultType;
+        $data['help'] = '';
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('contracts/exclude_types', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Ajax endpoint : include a leave type into a contract
+     * @param int $contractId identifier of the contract
+     * @param int $typeId identifier of the leave type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function includeTypeFromContract($contractId, $typeId) {
+        if ($this->auth->isAllowed('edit_contract') === FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            header("Content-Type: text/plain");
+            $this->contracts_model->includeLeaveTypeInContract($contractId, $typeId);
+            echo "OK";
+        }
+    }
+
+    /**
+     * Ajax endpoint : exclude a leave type into a contract
+     * @param int $contractId identifier of the contract
+     * @param int $typeId identifier of the leave type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function excludeTypeFromContract($contractId, $typeId) {
+        if ($this->auth->isAllowed('edit_contract') === FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            header("Content-Type: text/plain");
+            echo $this->contracts_model->excludeLeaveTypeForContract($contractId, $typeId);
+        }
     }
 
     /**

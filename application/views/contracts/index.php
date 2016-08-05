@@ -50,6 +50,8 @@ $(document).ready(function() {
                 <a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contracts_item['id'] ?>" title="<?php echo lang('contract_index_tip_entitled');?>"><i class="icon-edit"></i></a>
                 &nbsp;
                 <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>/calendar" title="<?php echo lang('contract_index_tip_dayoffs');?>"><i class="icon-calendar"></i></a>
+                &nbsp;
+                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>/excludetypes" title="<?php echo lang('contract_index_tip_exclude_types');?>"><i class="icon-ban-circle"></i></a>
             </div>
         </td>
         <td><?php echo $contracts_item['name']; ?></td>

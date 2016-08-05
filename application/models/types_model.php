@@ -38,6 +38,22 @@ class Types_model extends CI_Model {
     }
     
     /**
+     * Get the list of types as an ordered associative array
+     * @return array Associative array of types (id, name)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function getTypesAsArray($id = 0) {
+        $listOfTypes = array();
+        $this->db->from('types');
+        $this->db->order_by('name');
+        $rows = $this->db->get()->result_array();
+        foreach ($rows as $row) {
+            $listOfTypes[$row['id']] = $row['name'];
+        }
+        return $listOfTypes;
+    }
+    
+    /**
      * Get the name of a given type id
      * @param int $id ID of the type
      * @return string label of the type

@@ -21,15 +21,15 @@
 <?php $attributes = array('id' => 'frmLeaveForm');
 echo form_open($form_action, $attributes) ?>
 
-    <label for="type" required><?php echo lang('hr_leaves_create_field_type');?></label>
-    <select name="type" id="type">
-    <?php
-    $default_type = $this->config->item('default_leave_type');
-    $default_type = $default_type == FALSE ? 0 : $default_type;
-    foreach ($types as $types_item): ?>
-        <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == $default_type) echo "selected" ?>><?php echo $types_item['name'] ?></option>
+    <label for="type" required>
+        <?php echo lang('hr_leaves_create_field_type');?>
+        &nbsp;<span class="muted" id="lblCredit"><?php echo '(' . $credit . ')'; ?></span>
+    </label>
+    <select class="input-xxlarge" name="type" id="type">
+    <?php foreach ($types as $typeId => $TypeName): ?>
+        <option value="<?php echo $typeId; ?>" <?php if ($typeId == $defaultType) echo "selected"; ?>><?php echo $TypeName; ?></option>
     <?php endforeach ?>
-    </select>&nbsp;<span id="lblCredit"><?php echo '(' . $credit . ')'; ?></span><br />
+    </select>
         
     <label for="viz_startdate" required><?php echo lang('hr_leaves_create_field_start');?></label>
     <input type="text" name="viz_startdate" id="viz_startdate" value="<?php echo set_value('startdate'); ?>" />
@@ -105,6 +105,7 @@ echo form_open($form_action, $attributes) ?>
         </div>
  </div>
 
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
@@ -114,6 +115,8 @@ if ($language_code != 'en') { ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+
 <script type="text/javascript">
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
 $(function () {
@@ -155,4 +158,9 @@ function validate_form() {
         return false;
     }
 }
+
+$(function () {
+    //Selectize the leave type combo
+    $('#type').selectize();
+});
 </script>

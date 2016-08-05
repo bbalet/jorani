@@ -23,12 +23,15 @@ if (isset($_GET['source'])) {
     echo form_open('leaves/edit/' . $id, $attributes);
 } ?>
 
-    <label for="type"><?php echo lang('leaves_edit_field_type');?></label>
-    <select name="type" id="type">
-    <?php foreach ($types as $types_item): ?>
-        <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == $leave['type']) echo "selected" ?>><?php echo $types_item['name'] ?></option>
+    <label for="type">
+        <?php echo lang('leaves_edit_field_type');?>
+        &nbsp;<span class="muted" id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span>
+    </label>
+    <select class="input-xxlarge" name="type" id="type">
+    <?php foreach ($types as $typeId => $TypeName): ?>
+        <option value="<?php echo $typeId; ?>" <?php if ($typeId == $leave['type']) echo "selected"; ?>><?php echo $TypeName; ?></option>
     <?php endforeach ?>    
-    </select>&nbsp;<span id="lblCredit"><?php if (!is_null($credit)) { ?>(<?php echo $credit; ?>)<?php } ?></span><br />
+    </select>
         
     <label for="viz_startdate"><?php echo lang('leaves_edit_field_start');?></label>
     <input type="text" name="viz_startdate" id="viz_startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" autocomplete="off" />
@@ -115,6 +118,7 @@ if (isset($_GET['source'])) {
         </div>
  </div>
 
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
@@ -123,6 +127,7 @@ if ($language_code != 'en') { ?>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 
 <?php require_once dirname(BASEPATH) . "/local/triggers/leave_view.php"; ?>
 
@@ -169,8 +174,12 @@ $(function () {
 });
 <?php }?>
 
-//On opening, refresh leave request information
+
 $(function () {
+    //Selectize the leave type combo
+    $('#type').selectize();
+    
+    //On opening, refresh leave request information
     refreshLeaveInfo();
 });
 

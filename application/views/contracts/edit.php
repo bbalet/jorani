@@ -124,9 +124,25 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
         <option value='30' <?php if (substr($contract['endentdate'], 3, 2) == '30') { echo "selected"; } ?>>30</option>
         <option value='31' <?php if (substr($contract['endentdate'], 3, 2) == 31) { echo "selected"; } ?>>31</option>
     </select>
-
+    
+    <label for="default_leave_type"><?php echo lang('contract_edit_default_leave_type');?></label>
+    <select class="input-xxlarge" name="default_leave_type" id="default_leave_type">
+    <?php foreach ($types as $typeId => $TypeName): ?>
+        <option value="<?php echo $typeId; ?>" <?php if ($typeId == $defaultType) echo "selected"; ?>><?php echo $TypeName; ?></option>
+    <?php endforeach ?>
+    </select>
+    
     <br /><br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('contract_edit_button_update');?></button>
     &nbsp;
     <a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('contract_edit_button_cancel');?></a>
 </form>
+
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<script type="text/javascript">
+$(function () {
+    //Selectize the leave type combo
+    $('#default_leave_type').selectize();
+});
+</script>

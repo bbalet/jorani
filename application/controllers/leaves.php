@@ -148,18 +148,13 @@ class Leaves extends CI_Controller {
         $this->form_validation->set_rules('type', lang('leaves_create_field_type'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('cause', lang('leaves_create_field_cause'), 'xss_clean|strip_tags');
         $this->form_validation->set_rules('status', lang('leaves_create_field_status'), 'required|xss_clean|strip_tags');
-
-        $data['credit'] = 0;
-        $default_type = $this->config->item('default_leave_type');
-        $default_type = $default_type == FALSE ? 0 : $default_type;
+        
         if ($this->form_validation->run() === FALSE) {
-            $data['types'] = $this->types_model->getTypes();
-            foreach ($data['types'] as $type) {
-                if ($type['id'] == $default_type) {
-                    $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($this->user_id, $type['name']);
-                    break;
-                }
-            }
+            $this->load->model('contracts_model');
+            $leaveTypesDetails = $this->contracts_model->getLeaveTypesDetailsOTypesForUser($this->session->userdata('id'));
+            $data['defaultType'] = $leaveTypesDetails->defaultType;
+            $data['credit'] = $leaveTypesDetails->credit;
+            $data['types'] = $leaveTypesDetails->types;
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('leaves/create');
@@ -211,19 +206,6 @@ class Leaves extends CI_Controller {
         
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = lang('leaves_edit_html_title');
-        $data['help'] = $this->help->create_help_link('global_link_doc_page_request_leave');
-        $data['id'] = $id;
-        
-        $data['credit'] = 0;
-        $data['types'] = $this->types_model->getTypes();
-        foreach ($data['types'] as $type) {
-            if ($type['id'] == $data['leave']['type']) {
-                $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($data['leave']['employee'], $type['name']);
-                break;
-            }
-        }
-        
         $this->form_validation->set_rules('startdate', lang('leaves_edit_field_start'), 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean|strip_tags');
         $this->form_validation->set_rules('enddate', lang('leaves_edit_field_end'), 'required|xss_clean|strip_tags');
@@ -234,6 +216,14 @@ class Leaves extends CI_Controller {
         $this->form_validation->set_rules('status', lang('leaves_edit_field_status'), 'required|xss_clean|strip_tags');
 
         if ($this->form_validation->run() === FALSE) {
+            $data['title'] = lang('leaves_edit_html_title');
+            $data['help'] = $this->help->create_help_link('global_link_doc_page_request_leave');
+            $data['id'] = $id;
+            $this->load->model('contracts_model');
+            $leaveTypesDetails = $this->contracts_model->getLeaveTypesDetailsOTypesForUser($this->session->userdata('id'), $data['leave']['type']);
+            $data['defaultType'] = $leaveTypesDetails->defaultType;
+            $data['credit'] = $leaveTypesDetails->credit;
+            $data['types'] = $leaveTypesDetails->types;
             $this->load->model('users_model');
             $data['name'] = $this->users_model->getName($data['leave']['employee']);
             $this->load->view('templates/header', $data);

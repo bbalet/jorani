@@ -17,6 +17,7 @@ $lang['contract_index_tip_delete'] = '刪除類別';
 $lang['contract_index_tip_edit'] = '編輯類別';
 $lang['contract_index_tip_entitled'] = '享有天數';
 $lang['contract_index_tip_dayoffs'] = '休假與週末';
+$lang['contract_index_tip_exclude_types'] = 'Exclude leave types';
 $lang['contract_index_button_export'] = '匯出此單';
 $lang['contract_index_button_create'] = '創造類別';
 $lang['contract_index_popup_delete_title'] = '刪除類別';
@@ -28,6 +29,15 @@ $lang['contract_index_popup_entitled_title'] = '享有類別';
 $lang['contract_index_popup_entitled_button_cancel'] = '取消';
 $lang['contract_index_popup_entitled_button_close'] = '關閉';
 
+$lang['contract_exclude_title'] = 'Exclude leave types from a contract';
+$lang['contract_exclude_description'] = 'You cannot exclude leave types already in use (used at least one time by en employee attached to the contract) and the default leave type (set on the contract or into the configuration file).';
+$lang['contract_exclude_title_included'] = 'Included leave types';
+$lang['contract_exclude_title_excluded'] = 'Excluded leave types';
+$lang['contract_exclude_tip_include_type'] = 'Include this leave type';
+$lang['contract_exclude_tip_exclude_type'] = 'Exclude this leave type';
+$lang['contract_exclude_tip_already_used'] = 'This leave type is already in use';
+$lang['contract_exclude_tip_default_type'] = 'You cannot exclude the default leave type';
+
 $lang['contract_edit_title'] = '編輯的類別';
 $lang['contract_edit_description'] = '編輯類別';
 $lang['contract_edit_field_name'] = '名字';
@@ -35,6 +45,7 @@ $lang['contract_edit_field_start_month'] = '月/開始';
 $lang['contract_edit_field_start_day'] = '天/開始';
 $lang['contract_edit_field_end_month'] = '月/結束';
 $lang['contract_edit_field_end_day'] = '天/結束';
+$lang['contract_edit_default_leave_type'] = 'Default leave type';
 $lang['contract_edit_button_update'] = '更新類別';
 $lang['contract_edit_button_cancel'] = '取消';
 
@@ -46,6 +57,7 @@ $lang['contract_create_field_start_month'] = '月/開始';
 $lang['contract_create_field_start_day'] = '天/開始';
 $lang['contract_create_field_end_month'] = '月/結束';
 $lang['contract_create_field_end_day'] = '天/結束';
+$lang['contract_create_default_leave_type'] = 'Default leave type';
 $lang['contract_create_button_create'] = '創造類別';
 $lang['contract_create_button_cancel'] = '取消';
 

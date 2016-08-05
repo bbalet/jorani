@@ -1,20 +1,23 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
-## v0.4.6
+## v0.5.0 (NEEDS A DB PATCH)
 
-- [X] i18n: Use locale for m/d start/end periods in contracts list.
-- [X] Add a version for JS libs (avoid cache problems).
-- [X] Use open formats for Spreadsheet exports.
-- [X] Migrate all datatables to the new language initiatlization.
-- [X] Add shortcuts to ICS feeds into My leaves/My collaborators.
-- [X] HR/Employees: reset filters on entry date (post pend).
-- [X] Add a diagnostic page (check configuration and data).
-
-## v0.4.7
-
-- [ ] Add turkish language.
+- [X] Fix wrong charset problem on table dayoffs.
+- [X] Fix E-mail requets e-mail templates containing wrong links.
+- [X] Add a regional variant to english translation (GB).
+- [X] SSO via SAML protocol (support of onelogin as idp).
 - [X] Add requests list into Reports/Leaves.
+- [X] Exclude leave types from contracts and define a leave type as the default one for a given contract.
+- [ ] Add Turkish language.
+- [ ] Add Chinese language.
+- [ ] Extract mails and pages content into separated PO files.
+- [ ] Maybe: leave type colors (depend on external contributors).
+- [ ] Maybe: leave cancellation.
+
+## v0.5.1 or later
+
+- [ ] Investigate the strange behavior of the compensate balance (see PNC).
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
 - [ ] i18n: Last 3 columns in Reports/Leaves.
 - [ ] Maybe: Filter Excel export on visible rows (lot of security backend).
@@ -24,11 +27,10 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
 - [ ] Add a "All" option into Reports/Leaves.
 
-## v0.5.0 or later
+## v0.6.0 or later
 
 Following naming convention, this version will need a DB patch.
 
-- [ ] Fix wrong charset problem on table dayoffs.
 - [ ] Report carried-over leaves wizard : select an entity (change date), opt-in/out employees, check suggested report and go.
 - [ ] Mass apply entitled days to a group of employees. (organisation) - (employees in entity) <-> select.
 - [ ] Complete PHP triggers (add fruux lib to put CalDAV -> no : incomplete library).

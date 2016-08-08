@@ -16,10 +16,17 @@
 <p><?php echo lang('calendar_collaborators_description');?></p>
 
 <div class="row-fluid">
-    <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
-    <div class="span3"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
-    <div class="span3"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
-    <div class="span3"><span class="label label-important" style="background-color: #ff0000;"><?php echo lang('Rejected');?></span></div>
+    <div class="span2"><span class="label"><?php echo lang('Planned');?></span></div>
+    <div class="span2"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
+    <div class="span2"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
+    <div class="span2"><span class="label label-important" style="background-color: #ff0000;"><?php echo lang('Rejected');?></span></div>
+    <div class="span4">
+        <?php if ($this->config->item('ics_enabled') == FALSE) {?>
+        &nbsp;
+        <?php } else {?>
+        <span class="pull-right"><a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a></span>
+        <?php }?>        
+    </div>
 </div>
 
 <div id='calendar'></div>
@@ -36,6 +43,25 @@
         </div>
  </div>
 
+<div id="frmLinkICS" class="modal hide fade">
+    <div class="modal-header">
+        <h3>ICS<a href="#" onclick="$('#frmLinkICS').modal('hide');" class="close">&times;</a></h3>
+    </div>
+    <div class="modal-body" id="frmSelectDelegateBody">
+        <div class='input-append'>
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                    value="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>" />
+                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>">
+                     <i class="fa fa-clipboard"></i>
+                 </button>
+                <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="$('#frmLinkICS').modal('hide');" class="btn btn-primary"><?php echo lang('OK');?></a>
+    </div>
+</div>
+
 <link href="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lib/moment.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.min.js"></script>
@@ -43,6 +69,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lang/<?php echo $language_code;?>.js"></script>
 <?php }?>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     
@@ -118,6 +145,16 @@ $(document).ready(function() {
         windowResize: function(view) {
             $('#calendar').fullCalendar( 'rerenderEvents' );
         }
+    });
+    
+    //Copy/Paste ICS Feed
+    var client = new ZeroClipboard($("#cmdCopy"));
+    $('#lnkICS').click(function () {
+        $("#frmLinkICS").modal('show');
+    });
+    client.on( "aftercopy", function( event ) {
+        $('#tipCopied').tooltip('show');
+        setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });
 });
 </script>

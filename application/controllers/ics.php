@@ -73,7 +73,10 @@ class Ics extends CI_Controller {
                             $enddate->setTime(0, 0);
                             $enddate->modify('+1 day');
                             break;
-                    }                    
+                    }
+                    //In order to support Outlook, we convert start and end dates to UTC
+                    $startdate->setTimezone(new DateTimeZone("UTC"));
+                    $enddate->setTimezone(new DateTimeZone("UTC"));
                     $vcalendar->add('VEVENT', Array(
                         'SUMMARY' => $event->title,
                         'CATEGORIES' => lang('day off'),
@@ -123,14 +126,17 @@ class Ics extends CI_Controller {
                         $enddate->modify('+1 day');
                     } 
                     
+                    //In order to support Outlook, we convert start and end dates to UTC
+                    $startdate->setTimezone(new DateTimeZone("UTC"));
+                    $enddate->setTimezone(new DateTimeZone("UTC"));
                     $vcalendar->add('VEVENT', Array(
-                        'SUMMARY' => lang('leave'),
-                        'CATEGORIES' => lang('leave'),
-                        'DTSTART' => $startdate,
-                        'DTEND' => $enddate,
-                        'DESCRIPTION' => $event['cause'],
-                        'URL' => base_url() . "leaves/" . $event['id'],
-                    ));    
+                            'SUMMARY' => lang('leave'),
+                            'CATEGORIES' => lang('leave'),
+                            'DTSTART' => $startdate,
+                            'DTEND' => $enddate,
+                            'DESCRIPTION' => $event['cause'],
+                            'URL' => base_url() . "leaves/" . $event['id'],
+                    ));
                 }
                 echo $vcalendar->serialize();
             }
@@ -174,6 +180,9 @@ class Ics extends CI_Controller {
                     if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
                     if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
                     
+                    //In order to support Outlook, we convert start and end dates to UTC
+                    $startdate->setTimezone(new DateTimeZone("UTC"));
+                    $enddate->setTimezone(new DateTimeZone("UTC"));
                     $vcalendar->add('VEVENT', Array(
                         'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
                         'CATEGORIES' => lang('leave'),
@@ -222,6 +231,9 @@ class Ics extends CI_Controller {
                     if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
                     if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
                     
+                    //In order to support Outlook, we convert start and end dates to UTC
+                    $startdate->setTimezone(new DateTimeZone("UTC"));
+                    $enddate->setTimezone(new DateTimeZone("UTC"));
                     $vcalendar->add('VEVENT', Array(
                         'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
                         'CATEGORIES' => lang('leave'),
@@ -257,13 +269,19 @@ class Ics extends CI_Controller {
         }
         $this->lang->load('global', $this->polyglot->code2language($employee['language']));
         
+        $startdate = new \DateTime($leave['startdate'], new \DateTimeZone($tzdef));
+        $enddate = new \DateTime($leave['enddate'], new \DateTimeZone($tzdef));
+        //In order to support Outlook, we convert start and end dates to UTC
+        $startdate->setTimezone(new DateTimeZone("UTC"));
+        $enddate->setTimezone(new DateTimeZone("UTC"));
+        
         $vcalendar = new VObject\Component\VCalendar();
         $vcalendar->add('VEVENT', Array(
             'SUMMARY' => lang('leave'),
             'CATEGORIES' => lang('leave'),
             'DESCRIPTION' => $leave['cause'],
-            'DTSTART' => new \DateTime($leave['startdate'], new \DateTimeZone($tzdef)),
-            'DTEND' => new \DateTime($leave['enddate'], new \DateTimeZone($tzdef)),
+            'DTSTART' => $startdate,
+            'DTEND' => $enddate,
             'URL' => base_url() . "leaves/" . $id,
         ));
         echo $vcalendar->serialize();

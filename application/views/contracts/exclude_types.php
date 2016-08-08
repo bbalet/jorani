@@ -32,10 +32,10 @@
                             <?php if ($typesUsage[$typeId] == 0 && $defaultType != $typeId) { ?>
                             <a href="#" class="exclude" data-id="<?php echo $typeId; ?>" title="<?php echo lang('contract_exclude_tip_exclude_type');?>"><i class="icon-remove"></i></a>
                             <?php } else { ?>
+                            <span class="badge badge-info"><?php echo $typesUsage[$typeId]; ?></span>
                             <?php       if ($defaultType == $typeId) { ?>
                             <a href="#" title="<?php echo lang('contract_exclude_tip_default_type');?>"><i class="icon-star"></i></a>
                             <?php       } else { ?>
-                            <span class="badge badge-info"><?php echo $typesUsage[$typeId]; ?></span>
                             <a href="#" title="<?php echo lang('contract_exclude_tip_already_used');?>"><i class="icon-exclamation-sign"></i></a>
                             <?php       } ?>
                             <?php } ?>

@@ -72,7 +72,9 @@ class Contracts extends CI_Controller {
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->model('types_model');
-            $data['types'] = $this->types_model->getTypesAsArray();
+            $allTypes = $this->types_model->getTypesAsArray();
+            $excludedTypes = $this->contracts_model->getListOfExcludedTypes($id);
+            $data['types'] = array_diff($allTypes, $excludedTypes);
             $defaultType = $this->config->item('default_leave_type');
             if (is_null($data['contract']['default_leave_type'])) {
                 $defaultType = ($defaultType == FALSE) ? 0 : $defaultType;

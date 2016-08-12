@@ -24,6 +24,7 @@ $lang['leaves_index_title'] = 'Mijn afwezigheidsverzoeken';
 $lang['leaves_index_thead_tip_view'] = 'bekijken';
 $lang['leaves_index_thead_tip_edit'] = 'bewerken';
 $lang['leaves_index_thead_tip_delete'] = 'verwijderen';
+$lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
 $lang['leaves_index_thead_start_date'] = 'Begin datum';
 $lang['leaves_index_thead_end_date'] = 'Eind datum';
@@ -38,6 +39,16 @@ $lang['leaves_index_popup_delete_message'] = 'U staat op het punt om een afwezig
 $lang['leaves_index_popup_delete_question'] = 'Wilt u verder gaan?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Ja';
 $lang['leaves_index_popup_delete_button_no'] = 'Nee';
+
+$lang['leaves_history_thead_changed_date'] = 'Changed Date';
+$lang['leaves_history_thead_change_type'] = 'Change Type';
+$lang['leaves_history_thead_changed_by'] = 'Changed By';
+$lang['leaves_history_thead_start_date'] = 'Start Date';
+$lang['leaves_history_thead_end_date'] = 'End Date';
+$lang['leaves_history_thead_cause'] = 'Reason';
+$lang['leaves_history_thead_duration'] = 'Duration';
+$lang['leaves_history_thead_type'] = 'Type';
+$lang['leaves_history_thead_status'] = 'Status';
 
 $lang['leaves_create_title'] = 'Dien een afwezigheidsverzoek in';
 $lang['leaves_create_field_start'] = 'Begin datum';

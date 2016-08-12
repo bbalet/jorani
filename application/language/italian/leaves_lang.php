@@ -24,6 +24,7 @@ $lang['leaves_index_title'] = 'Le mie richieste di ferie';
 $lang['leaves_index_thead_tip_view'] = 'vedi';
 $lang['leaves_index_thead_tip_edit'] = 'modifica';
 $lang['leaves_index_thead_tip_delete'] = 'elimina';
+$lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
 $lang['leaves_index_thead_start_date'] = 'Data inizio';
 $lang['leaves_index_thead_end_date'] = 'Data fine';
@@ -38,6 +39,16 @@ $lang['leaves_index_popup_delete_message'] = 'Stai per cancellare una richiesta 
 $lang['leaves_index_popup_delete_question'] = 'Vuoi proseguire?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Si';
 $lang['leaves_index_popup_delete_button_no'] = 'No';
+
+$lang['leaves_history_thead_changed_date'] = 'Changed Date';
+$lang['leaves_history_thead_change_type'] = 'Change Type';
+$lang['leaves_history_thead_changed_by'] = 'Changed By';
+$lang['leaves_history_thead_start_date'] = 'Start Date';
+$lang['leaves_history_thead_end_date'] = 'End Date';
+$lang['leaves_history_thead_cause'] = 'Reason';
+$lang['leaves_history_thead_duration'] = 'Duration';
+$lang['leaves_history_thead_type'] = 'Type';
+$lang['leaves_history_thead_status'] = 'Status';
 
 $lang['leaves_create_title'] = 'Invia una richiesta di ferie';
 $lang['leaves_create_field_start'] = 'Data inizio';

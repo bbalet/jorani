@@ -71,6 +71,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'edit';
 $lang['hr_leaves_thead_tip_accept'] = 'accept';
 $lang['hr_leaves_thead_tip_reject'] = 'reject';
 $lang['hr_leaves_thead_tip_delete'] = 'delete';
+$lang['hr_leaves_thead_tip_history'] = 'show history';
 $lang['hr_leaves_thead_id'] = 'ID';
 $lang['hr_leaves_thead_status'] = 'Status';
 $lang['hr_leaves_thead_start'] = 'Start Date';
@@ -84,6 +85,7 @@ $lang['hr_leaves_popup_delete_message'] = 'You are about to delete one leave req
 $lang['hr_leaves_popup_delete_question'] = 'Do you want to proceed?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Yes';
 $lang['hr_leaves_popup_delete_button_no'] = 'No';
+$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
 
 $lang['hr_export_leaves_title'] = 'List of requested leaves';
 $lang['hr_export_leaves_thead_id'] = 'ID';

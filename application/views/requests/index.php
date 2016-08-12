@@ -47,6 +47,10 @@
                 <a href="#" class="lnkAccept" data-id="<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
                 &nbsp;
                 <a href="#" class="lnkReject" data-id="<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
+                <?php if ($this->config->item('enable_history') == TRUE) { ?>
+                &nbsp;
+                <a href="#" class="show-history" data-id="<?php echo $requests_item['leave_id'];?>" title="<?php echo lang('requests_index_thead_tip_history');?>"><i class="icon-time"></i></a>
+                <?php } ?>
             </div>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
@@ -79,6 +83,15 @@
 </div>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
+
+<div id="frmShowHistory" class="modal hide fade">
+    <div class="modal-body" id="frmShowHistoryBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="$('#frmShowHistory').modal('hide');" class="btn"><?php echo lang('OK');?></a>
+    </div>
+</div>
 
 <div id="frmLinkICS" class="modal hide fade">
     <div class="modal-header">
@@ -150,6 +163,19 @@ $(document).ready(function() {
             window.location.href = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
         }
      });
+     
+    <?php if ($this->config->item('enable_history') == TRUE) { ?>
+    //Prevent to load always the same content (refreshed each time)
+    $('#frmShowHistory').on('hidden', function() {
+        $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
+    });
+    
+    //Popup show history
+    $("#leaves tbody").on('click', '.show-history',  function(){
+        $("#frmShowHistory").modal('show');
+        $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history');
+    });
+    <?php } ?>
      
     //Copy/Paste ICS Feed
     var client = new ZeroClipboard($("#cmdCopy"));

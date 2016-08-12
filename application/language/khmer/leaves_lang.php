@@ -24,6 +24,7 @@ $lang['leaves_index_title'] = 'ការសុំច្បាប់របស់�
 $lang['leaves_index_thead_tip_view'] = 'បង្ហាញ';
 $lang['leaves_index_thead_tip_edit'] = 'កែសម្រួល';
 $lang['leaves_index_thead_tip_delete'] = 'លុប';
+$lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'លេខអត្តសញ្ញាណ';
 $lang['leaves_index_thead_start_date'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
 $lang['leaves_index_thead_end_date'] = 'កាលបរិច្ឆេទដែលបញ្ចប់';
@@ -38,6 +39,16 @@ $lang['leaves_index_popup_delete_message'] = 'អ្នកត្រូវបា�
 $lang['leaves_index_popup_delete_question'] = 'តើអ្នកចង់បន្ត?';
 $lang['leaves_index_popup_delete_button_yes'] = 'យល់ព្រម';
 $lang['leaves_index_popup_delete_button_no'] = 'មិនយល់ព្រម';
+
+$lang['leaves_history_thead_changed_date'] = 'Changed Date';
+$lang['leaves_history_thead_change_type'] = 'Change Type';
+$lang['leaves_history_thead_changed_by'] = 'Changed By';
+$lang['leaves_history_thead_start_date'] = 'Start Date';
+$lang['leaves_history_thead_end_date'] = 'End Date';
+$lang['leaves_history_thead_cause'] = 'Reason';
+$lang['leaves_history_thead_duration'] = 'Duration';
+$lang['leaves_history_thead_type'] = 'Type';
+$lang['leaves_history_thead_status'] = 'Status';
 
 $lang['leaves_create_title'] = 'បញ្ជួនការស្នើរសុំឈប់សម្រាក';
 $lang['leaves_create_field_start'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';

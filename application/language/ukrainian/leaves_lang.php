@@ -24,6 +24,7 @@ $lang['leaves_index_title'] = 'Мої заяви на відпустку';
 $lang['leaves_index_thead_tip_view'] = 'переглянути';
 $lang['leaves_index_thead_tip_edit'] = 'редагувати';
 $lang['leaves_index_thead_tip_delete'] = 'видалити';
+$lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
 $lang['leaves_index_thead_start_date'] = 'Дата початку';
 $lang['leaves_index_thead_end_date'] = 'Дата закінчення';
@@ -38,6 +39,16 @@ $lang['leaves_index_popup_delete_message'] = 'Ви збираєтесь вида
 $lang['leaves_index_popup_delete_question'] = 'Продовжити?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Так';
 $lang['leaves_index_popup_delete_button_no'] = 'Ні';
+
+$lang['leaves_history_thead_changed_date'] = 'Changed Date';
+$lang['leaves_history_thead_change_type'] = 'Change Type';
+$lang['leaves_history_thead_changed_by'] = 'Changed By';
+$lang['leaves_history_thead_start_date'] = 'Start Date';
+$lang['leaves_history_thead_end_date'] = 'End Date';
+$lang['leaves_history_thead_cause'] = 'Reason';
+$lang['leaves_history_thead_duration'] = 'Duration';
+$lang['leaves_history_thead_type'] = 'Type';
+$lang['leaves_history_thead_status'] = 'Status';
 
 $lang['leaves_create_title'] = 'Відправити заяву на відпустку';
 $lang['leaves_create_field_start'] = 'Дата початку';

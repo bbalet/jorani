@@ -51,6 +51,21 @@ class Leaves extends CI_Controller {
     }
     
     /**
+     * Display the history of changes of a leave request
+     * @param int $id Identifier of the leave request
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function history($id) {
+        $this->auth->checkIfOperationIsAllowed('list_leaves');
+        $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
+        $data['leave'] = $this->leaves_model->getLeaves($id);
+        $this->load->model('history_model');
+        $data['events'] = $this->history_model->getLeaveRequestsHistory($id);
+        $this->load->view('leaves/history', $data);
+    }
+    
+    /**
      * Display the details of leaves taken/entitled for the connected user
      * @param string $refTmp Timestamp (reference date)
      * @author Benjamin BALET <benjamin.balet@gmail.com>

@@ -431,6 +431,28 @@ CREATE TABLE IF NOT EXISTS `excluded_types` (
   KEY `contract_id` (`contract_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Exclude a leave type from a contract' AUTO_INCREMENT=1 ;
 
+--
+-- Structure of table `leaves_history`
+--
+CREATE TABLE IF NOT EXISTS `leaves_history` (
+  `id` int(11) NOT NULL,
+  `startdate` date DEFAULT NULL,
+  `enddate` date DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `employee` int(11) DEFAULT NULL,
+  `cause` text,
+  `startdatetype` varchar(12) DEFAULT NULL,
+  `enddatetype` varchar(12) DEFAULT NULL,
+  `duration` decimal(10,2) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `change_id` int(11) NOT NULL AUTO_INCREMENT,
+  `change_type` int(11) NOT NULL,
+  `changed_by` int(11) NOT NULL,
+  `change_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`change_id`),
+  KEY `changed_by` (`changed_by`),
+  KEY `change_date` (`change_date`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='List of changes in leave requests table' COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- Tables for OAuth2 server
 CREATE TABLE oauth_clients (client_id VARCHAR(80) NOT NULL, client_secret VARCHAR(80) NOT NULL, redirect_uri VARCHAR(2000) NOT NULL, grant_types VARCHAR(80), scope VARCHAR(100), user_id VARCHAR(80), CONSTRAINT clients_client_id_pk PRIMARY KEY (client_id));

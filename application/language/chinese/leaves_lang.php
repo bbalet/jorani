@@ -24,6 +24,7 @@ $lang['leaves_index_title'] = '我的休假申請';
 $lang['leaves_index_thead_tip_view'] = '預覽';
 $lang['leaves_index_thead_tip_edit'] = '編輯';
 $lang['leaves_index_thead_tip_delete'] = '刪除';
+$lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = '證號';
 $lang['leaves_index_thead_start_date'] = '開始日期';
 $lang['leaves_index_thead_end_date'] = '結束日期';
@@ -38,6 +39,16 @@ $lang['leaves_index_popup_delete_message'] = '你可以刪除一休假申請,但
 $lang['leaves_index_popup_delete_question'] = '你要繼續嗎？';
 $lang['leaves_index_popup_delete_button_yes'] = '是';
 $lang['leaves_index_popup_delete_button_no'] = '否';
+
+$lang['leaves_history_thead_changed_date'] = 'Changed Date';
+$lang['leaves_history_thead_change_type'] = 'Change Type';
+$lang['leaves_history_thead_changed_by'] = 'Changed By';
+$lang['leaves_history_thead_start_date'] = 'Start Date';
+$lang['leaves_history_thead_end_date'] = 'End Date';
+$lang['leaves_history_thead_cause'] = 'Reason';
+$lang['leaves_history_thead_duration'] = 'Duration';
+$lang['leaves_history_thead_type'] = 'Type';
+$lang['leaves_history_thead_status'] = 'Status';
 
 $lang['leaves_create_title'] = '送出休假申請';
 $lang['leaves_create_field_start'] = '開始日期';

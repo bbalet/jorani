@@ -57,6 +57,10 @@
                 &nbsp;
                 <?php } ?>
                 <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
+                <?php if ($this->config->item('enable_history') == TRUE) { ?>
+                &nbsp;
+                <a href="#" class="show-history" data-id="<?php echo $leaves_item['id'];?>" title="<?php echo lang('leaves_index_thead_tip_history');?>"><i class="icon-time"></i></a>
+                <?php } ?>
             </div>
         </td>
         <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leaves_item['startdatetype']). ')'; ?></td>
@@ -100,6 +104,15 @@
     <div class="modal-footer">
         <a href="#" id="lnkDeleteUser" class="btn btn-danger"><?php echo lang('leaves_index_popup_delete_button_yes');?></a>
         <a href="#" onclick="$('#frmDeleteLeaveRequest').modal('hide');" class="btn"><?php echo lang('leaves_index_popup_delete_button_no');?></a>
+    </div>
+</div>
+
+<div id="frmShowHistory" class="modal hide fade">
+    <div class="modal-body" id="frmShowHistoryBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="$('#frmShowHistory').modal('hide');" class="btn"><?php echo lang('OK');?></a>
     </div>
 </div>
 
@@ -176,6 +189,17 @@ $(document).ready(function() {
     $('#frmDeleteLeaveRequest').on('hidden', function() {
         $(this).removeData('modal');
     });
+    <?php if ($this->config->item('enable_history') == TRUE) { ?>
+    $('#frmShowHistory').on('hidden', function() {
+        $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
+    });
+    
+    //Popup show history
+    $("#leaves tbody").on('click', '.show-history',  function(){
+        $("#frmShowHistory").modal('show');
+        $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history');
+    });
+    <?php } ?>
     
     //Copy/Paste ICS Feed
     var client = new ZeroClipboard($("#cmdCopy"));

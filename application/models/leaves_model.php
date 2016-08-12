@@ -39,7 +39,7 @@ class Leaves_model extends CI_Model {
         $this->db->where('leaves.id', $id);
         return $this->db->get()->row_array();
     }
-
+    
     /**
      * Get the the list of leaves requested for a given employee
      * Id are replaced by label
@@ -418,7 +418,15 @@ class Leaves_model extends CI_Model {
             'employee' => $id
         );
         $this->db->insert('leaves', $data);
-        return $this->db->insert_id();
+        $newId = $this->db->insert_id();
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->setHistory(1, 'leaves', $newId, $this->session->userdata('id'));
+        }
+        
+        return $newId;
     }
     
     /**
@@ -435,22 +443,38 @@ class Leaves_model extends CI_Model {
      * @return int Result
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function createRequestForUserList($type, $duration, $startdate, $enddate,
-                    $startdatetype, $enddatetype, $cause, $status, $employees) {
-        $data = array();
-        foreach ($employees as $id) {
-            $data[] = array(
-                'startdate' => $this->input->post('startdate'),
-                'startdatetype' => $this->input->post('startdatetype'),
-                'enddate' => $this->input->post('enddate'),
-                'enddatetype' => $this->input->post('enddatetype'),
-                'duration' => abs($this->input->post('duration')),
-                'type' => $this->input->post('type'),
-                'cause' => $this->input->post('cause'),
-                'status' => $this->input->post('status'),
-                'employee' => $id);
+    public function createRequestForUserList($type, $duration, $startdate, $enddate, $startdatetype, $enddatetype, $cause, $status, $employees) {
+        $affectedRows = 0;
+        if ($this->config->item('enable_history') == TRUE) {
+            foreach ($employees as $id) {
+                $this->createLeaveByApi($this->input->post('startdate'),
+                        $this->input->post('enddate'),
+                        $this->input->post('status'),
+                        $id,
+                        $this->input->post('cause'),
+                        $this->input->post('startdatetype'),
+                        $this->input->post('enddatetype'),
+                        abs($this->input->post('duration')),
+                        $this->input->post('type'));
+                $affectedRows++;
+            }
+        } else {
+            $data = array();
+            foreach ($employees as $id) {
+                $data[] = array(
+                    'startdate' => $this->input->post('startdate'),
+                    'startdatetype' => $this->input->post('startdatetype'),
+                    'enddate' => $this->input->post('enddate'),
+                    'enddatetype' => $this->input->post('enddatetype'),
+                    'duration' => abs($this->input->post('duration')),
+                    'type' => $this->input->post('type'),
+                    'cause' => $this->input->post('cause'),
+                    'status' => $this->input->post('status'),
+                    'employee' => $id);
+            }
+            $affectedRows = $this->db->insert_batch('leaves', $data);
         }
-        return $this->db->insert_batch('leaves', $data); 
+        return $affectedRows;
     }
 
     /**
@@ -482,7 +506,14 @@ class Leaves_model extends CI_Model {
             'type' => $type
         );
         $this->db->insert('leaves', $data);
-        return $this->db->insert_id();
+        $newId = $this->db->insert_id();
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->setHistory(1, 'leaves', $newId, $this->session->userdata('id'));
+        }
+        return $newId;
     }
     
     /**
@@ -503,6 +534,12 @@ class Leaves_model extends CI_Model {
         );
         $this->db->where('id', $id);
         $this->db->update('leaves', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
+        }
     }
     
     /**
@@ -516,7 +553,15 @@ class Leaves_model extends CI_Model {
             'status' => 3
         );
         $this->db->where('id', $id);
-        return $this->db->update('leaves', $data);
+        $affectedRows = $this->db->update('leaves', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
+        }
+        
+        return $affectedRows;
     }
 
     /**
@@ -530,7 +575,15 @@ class Leaves_model extends CI_Model {
             'status' => 4
         );
         $this->db->where('id', $id);
-        return $this->db->update('leaves', $data);
+        $affectedRows = $this->db->update('leaves', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
+        }
+        
+        return $affectedRows;
     }
     
     /**
@@ -540,18 +593,32 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function deleteLeave($id) {
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->setHistory(3, 'leaves', $id, $this->session->userdata('id'));
+        }
         return $this->db->delete('leaves', array('id' => $id));
     }
     
     /**
      * Delete leaves attached to a user
-     * @param int $id identifier of an employee
+     * @param int $employee identifier of an employee
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function deleteLeavesCascadeUser($id) {
-        return $this->db->delete('leaves', array('employee' => $id));
+    public function deleteLeavesCascadeUser($employee) {
+        //Select the leaves of a users (if history feature is enabled)
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $leaves = $this->getLeavesOfEmployee($employee);
+            //TODO in fact, should we cascade delete ?
+            foreach ($leaves as $leave) {
+                $this->history_model->setHistory(3, 'leaves', $leave['id'], $this->session->userdata('id'));   
+            }
+        }
+        return $this->db->delete('leaves', array('employee' => $employee));
     }
-    
+
     /**
      * Leave requests of All leave request of the user (suitable for FullCalendar widget)
      * @param int $user_id connected user
@@ -930,6 +997,7 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function purgeLeaves($toDate) {
+        //TODO : if one day we use this function, should what should we do with the history feature?
         $this->db->where(' <= ', $toDate);
         return $this->db->delete('leaves');
     }

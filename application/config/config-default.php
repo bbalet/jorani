@@ -483,3 +483,7 @@ $config['public_calendar'] = FALSE;
 //Force spreadsheet export format. We strongly recommend XLSX format over Open Document Format.
 //Please note that ods doesn't support all formatting/style options and is considered as experimental
 $config['spreadsheet_format'] = 'xlsx';   //Supported formats: xlsx, ods
+
+//____________________________________________________________________________
+//Set this value to TRUE if you want to enable history of change (beware that it will impact the performance)
+$config['enable_history'] = FALSE;

@@ -23,6 +23,7 @@ $lang['leaves_index_title'] = 'Mes demandes de congé';
 $lang['leaves_index_thead_tip_view'] = 'voir';
 $lang['leaves_index_thead_tip_edit'] = 'modifier';
 $lang['leaves_index_thead_tip_delete'] = 'supprimer';
+$lang['leaves_index_thead_tip_history'] = 'afficher l\'historique';
 $lang['leaves_index_thead_id'] = 'N°';
 $lang['leaves_index_thead_start_date'] = 'Date début';
 $lang['leaves_index_thead_end_date'] = 'Date fin';
@@ -37,6 +38,16 @@ $lang['leaves_index_popup_delete_message'] = 'Vous êtes sur le point de supprim
 $lang['leaves_index_popup_delete_question'] = 'Voulez-vous continuer ?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Oui';
 $lang['leaves_index_popup_delete_button_no'] = 'Non';
+
+$lang['leaves_history_thead_changed_date'] = 'Modifié le';
+$lang['leaves_history_thead_change_type'] = 'Type de modif.';
+$lang['leaves_history_thead_changed_by'] = 'Modifié par';
+$lang['leaves_history_thead_start_date'] = 'Date début';
+$lang['leaves_history_thead_end_date'] = 'Date fin';
+$lang['leaves_history_thead_cause'] = 'Cause';
+$lang['leaves_history_thead_duration'] = 'Durée';
+$lang['leaves_history_thead_type'] = 'Type';
+$lang['leaves_history_thead_status'] = 'Statut';
 
 $lang['leaves_create_title'] = 'Créer une nouvelle demande';
 $lang['leaves_create_field_start'] = 'Date de début';

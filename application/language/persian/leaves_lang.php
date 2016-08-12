@@ -24,6 +24,7 @@ $lang['leaves_index_title'] = 'درخواستهای مرخصی من';
 $lang['leaves_index_thead_tip_view'] = 'نمایش';
 $lang['leaves_index_thead_tip_edit'] = 'ویرایش';
 $lang['leaves_index_thead_tip_delete'] = 'حذف';
+$lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'شناسه';
 $lang['leaves_index_thead_start_date'] = 'تاریخ شروع';
 $lang['leaves_index_thead_end_date'] = 'تاریخ پایان';
@@ -38,6 +39,16 @@ $lang['leaves_index_popup_delete_message'] = 'شما میخواهید یک در�
 $lang['leaves_index_popup_delete_question'] = 'آیا میخواهید ادامه بدهید؟';
 $lang['leaves_index_popup_delete_button_yes'] = 'بله';
 $lang['leaves_index_popup_delete_button_no'] = 'خیر';
+
+$lang['leaves_history_thead_changed_date'] = 'Changed Date';
+$lang['leaves_history_thead_change_type'] = 'Change Type';
+$lang['leaves_history_thead_changed_by'] = 'Changed By';
+$lang['leaves_history_thead_start_date'] = 'Start Date';
+$lang['leaves_history_thead_end_date'] = 'End Date';
+$lang['leaves_history_thead_cause'] = 'Reason';
+$lang['leaves_history_thead_duration'] = 'Duration';
+$lang['leaves_history_thead_type'] = 'Type';
+$lang['leaves_history_thead_status'] = 'Status';
 
 $lang['leaves_create_title'] = 'ارسال یک درخواست مرخصی';
 $lang['leaves_create_field_start'] = 'تاریخ شروع';

@@ -23,6 +23,7 @@ $lang['leaves_index_title'] = 'My leave requests';
 $lang['leaves_index_thead_tip_view'] = 'view';
 $lang['leaves_index_thead_tip_edit'] = 'edit';
 $lang['leaves_index_thead_tip_delete'] = 'delete';
+$lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
 $lang['leaves_index_thead_start_date'] = 'Start Date';
 $lang['leaves_index_thead_end_date'] = 'End Date';
@@ -37,6 +38,16 @@ $lang['leaves_index_popup_delete_message'] = 'You are about to delete one leave 
 $lang['leaves_index_popup_delete_question'] = 'Do you want to proceed?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Yes';
 $lang['leaves_index_popup_delete_button_no'] = 'No';
+
+$lang['leaves_history_thead_changed_date'] = 'Changed Date';
+$lang['leaves_history_thead_change_type'] = 'Change Type';
+$lang['leaves_history_thead_changed_by'] = 'Changed By';
+$lang['leaves_history_thead_start_date'] = 'Start Date';
+$lang['leaves_history_thead_end_date'] = 'End Date';
+$lang['leaves_history_thead_cause'] = 'Reason';
+$lang['leaves_history_thead_duration'] = 'Duration';
+$lang['leaves_history_thead_type'] = 'Type';
+$lang['leaves_history_thead_status'] = 'Status';
 
 $lang['leaves_create_title'] = 'Submit a leave request';
 $lang['leaves_create_field_start'] = 'Start Date';

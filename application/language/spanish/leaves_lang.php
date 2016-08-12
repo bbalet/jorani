@@ -24,6 +24,7 @@ $lang['leaves_index_title'] = 'Mis solicitudes de permiso';
 $lang['leaves_index_thead_tip_view'] = 'ver';
 $lang['leaves_index_thead_tip_edit'] = 'modificar';
 $lang['leaves_index_thead_tip_delete'] = 'suprimir';
+$lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
 $lang['leaves_index_thead_start_date'] = 'Primera fecha';
 $lang['leaves_index_thead_end_date'] = 'Última fecha';
@@ -38,6 +39,16 @@ $lang['leaves_index_popup_delete_message'] = 'Estás a punto de borrar una solic
 $lang['leaves_index_popup_delete_question'] = '¿Quieres continuar?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Sí';
 $lang['leaves_index_popup_delete_button_no'] = 'No';
+
+$lang['leaves_history_thead_changed_date'] = 'Changed Date';
+$lang['leaves_history_thead_change_type'] = 'Change Type';
+$lang['leaves_history_thead_changed_by'] = 'Changed By';
+$lang['leaves_history_thead_start_date'] = 'Start Date';
+$lang['leaves_history_thead_end_date'] = 'End Date';
+$lang['leaves_history_thead_cause'] = 'Reason';
+$lang['leaves_history_thead_duration'] = 'Duration';
+$lang['leaves_history_thead_type'] = 'Type';
+$lang['leaves_history_thead_status'] = 'Status';
 
 $lang['leaves_create_title'] = 'Enviar una solicitud de permiso';
 $lang['leaves_create_field_start'] = 'Primera fecha';

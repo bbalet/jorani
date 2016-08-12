@@ -24,6 +24,7 @@ $lang['leaves_index_title'] = 'İzin taleplerim';
 $lang['leaves_index_thead_tip_view'] = 'görüntüle';
 $lang['leaves_index_thead_tip_edit'] = 'düzenle';
 $lang['leaves_index_thead_tip_delete'] = 'sil';
+$lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
 $lang['leaves_index_thead_start_date'] = 'Başlangıç Tarihi';
 $lang['leaves_index_thead_end_date'] = 'Bitiş Tarihi';
@@ -38,6 +39,16 @@ $lang['leaves_index_popup_delete_message'] = 'Bir izin talebini silmek üzeresin
 $lang['leaves_index_popup_delete_question'] = 'Devam etmek istiyor musunuz?';
 $lang['leaves_index_popup_delete_button_yes'] = 'Evet';
 $lang['leaves_index_popup_delete_button_no'] = 'Hayır';
+
+$lang['leaves_history_thead_changed_date'] = 'Changed Date';
+$lang['leaves_history_thead_change_type'] = 'Change Type';
+$lang['leaves_history_thead_changed_by'] = 'Changed By';
+$lang['leaves_history_thead_start_date'] = 'Start Date';
+$lang['leaves_history_thead_end_date'] = 'End Date';
+$lang['leaves_history_thead_cause'] = 'Reason';
+$lang['leaves_history_thead_duration'] = 'Duration';
+$lang['leaves_history_thead_type'] = 'Type';
+$lang['leaves_history_thead_status'] = 'Status';
 
 $lang['leaves_create_title'] = 'Bir izin talebi gönder';
 $lang['leaves_create_field_start'] = 'Başlangıç Tarihi';

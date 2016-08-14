@@ -8,6 +8,8 @@
  * @since         0.5.0
  */
 
+//You must switch $config['saml_enabled'] to TRUE into config/config.php prior using SAML
+
 //Field Mapping : how to get the e-mail
 $samlMailMap = 'User.email';
 

@@ -22,7 +22,7 @@ SetEnv HTTP_MOD_GZIP Off
 <IfModule !mod_rewrite.c> 
     # Without mod_rewrite, route 404's to the front controller
     SetEnv HTTP_MOD_REWRITE Off
-    ErrorDocument 404 "Error : Module rewrite is not available check your system with requirements.php"
+    ErrorDocument 404 "Error : Module rewrite is not available. Please check your system with requirements.php"
  </IfModule>
 
 <IfModule mod_headers.c>

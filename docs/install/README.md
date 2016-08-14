@@ -1,16 +1,18 @@
 # Installation
 
-Jorani has been tested with Apache, ngnix and lighttpd.
+Jorani has been tested with Apache, ngnix, IIS and lighttpd (it works fine with any webserver supporting fastcgi).
 Jorani is compatible with HHVM as Codeigniter is 100% compatible with the VM. 
-Jorani is compatible with PHP 7.0 (starting from v0.4.0) except for Excel exports (on May, 1st 2015)
+Jorani is 100% compatible with PHP 7.0 (starting from v0.4.0).
 
 ## General considerations
 
-* The Jorani application must have write privileges on <code>application/logs</code> folder.
+* Jorani must have write privileges on <code>application/logs</code> and <code>local/upload/*</code> folders.
 * Some PHP extensions are required (e.g. mcrypt, mysqli, xml, zip, gd). 
 * The default user is *bbalet* and password is *bbalet*.
-* A script at the root of the installation (requirements.php) allows you to check your system.
+* The script <code>requirements.php</code>, at the root of the installation (e.g. *http://localhost/jorani/requirements.php*) allows you to check your system.
 * Change <code>application/config/config.php</code> in order to modify the default behavior of Jorani.
+* Jorani uses MySQL procedures (PROCEDURE). Some web hosting companies don't allow using custom MySQL functions.
+* Jorani doesn't import users from external authentication sources (LDAP, OAuth2, SAML, etc.), so you must create the users into Jorani.
 
 ## Database setup
 
@@ -59,6 +61,14 @@ Since version 0.1.5, Jorani supports complex LDAP authentication schemes (where 
 1. Set <code>ldap_basedn_db</code> to TRUE.
 2. The Base DN is not based on <code>ldap_basedn</code>, but read from the users table, column <code>ldap_path</code> (e.g. from database).
 3. The Base DN should look like <code>uid=bbalet,ou=people,dc=company,dc=com</code>. Note that this feature allows you to authenticate users from different OU.
+
+## SSO/OAuth2 with Google+
+
+Please refer to the script <code>testoauth2.php</code> at the root of installation for guidance and tests. Please read <code>application/config/saml-example-onelogin.php</code> for an example.
+
+## SSO/SAML
+
+Since v0.5.0, Jorani can use SAML for SSO. It has been tested with onelogin as IDP.
 
 ## Apache
 
@@ -123,13 +133,13 @@ For a load test, allow a margin of 25%
 
 If you get this error : <code>upstream sent too big header while reading response header from upstream</code>, you need to enlarge the buffers used by nginx.
 
-Add this to your http {} of the nginx.conf file normally located at /etc/nginx/nginx.conf:
+Add this to your *http* section of the nginx.conf file normally located at /etc/nginx/nginx.conf:
 
     proxy_buffer_size   128k;
     proxy_buffers   4 256k;
     proxy_busy_buffers_size   256k;
 
-Then add this to your php location block, this will be located in your vhost file look for the block that begins with location ~ .php$ {
+Then add this to your php location block, this will be located in your vhost file look for the block that begins with <code>location ~ .php$ {</code>:
 
     fastcgi_buffer_size 128k;
     fastcgi_buffers 4 256k;
@@ -146,4 +156,4 @@ If you are running nginx, tune your configuration (see <code>/etc/nginx/nginx.co
 * Windows 7 / 64 - WAMP
 * Windows XP / 32 - WAMP
 * Centos - Apache + PHP
-* Ubuntu 13.10 to 15.01 x86_64 - ngnix + php-fpm or HHVM
+* Ubuntu 13.10 to 16.04 x86_64 - ngnix + php-fpm or HHVM or Apache

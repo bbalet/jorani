@@ -81,7 +81,7 @@ if ($configFileExists) {
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="assets/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>
     
     <script type="text/javascript">
         function export2csv() {
@@ -113,6 +113,7 @@ if ($configFileExists) {
     <body>
         <div class="container-fluid">
             <ul class="nav nav-pills">
+                <li><a href="home" title="login to Jorani"><i class="icon-home"></i></a></li>
                 <li class="active"><a href="#">Requirements</a></li>
                 <li><a href="testmail.php">Email</a></li>
                 <li><a href="testldap.php">LDAP</a></li>
@@ -172,6 +173,12 @@ if ($configFileExists) {
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;<code>mb_strimwidth</code> function doesn't exist</td>
                       <?php } ?><td>PHP must be compiled with <a href="http://php.net/manual/en/mbstring.installation.php" target="_blank">multibyte string support<a>.</td></tr>
                        
+                      <?php if (is_writable(dirname('local/upload/leaves/'))) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;Jorani can write files</td>
+                      <?php } else { ?>
+                      <tr><td><i class="icon-exclamation-sign"></i>&nbsp;Jorani can't write files</td>
+                      <?php } ?><td>The folder local/upload/leaves/ must be writable.</td></tr>
+                                  
                       <?php if (extension_loaded('mcrypt')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;mcrypt is LOADED</td>
                       <?php } else { ?>

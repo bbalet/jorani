@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Jorani\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Jorani <jorani@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+
+msgid "Access forbidden"
+msgstr ""
+
+msgid "You are not allowed to perform this action."
+msgstr ""
+
+msgid "Leave and Overtime Management System"
+msgstr ""
+
+msgid "Welcome in Jorani. If you are an employee, you could now:"
+msgstr ""
+
+msgid "See your *leave balance*."
+msgstr ""
+
+msgid "See the *list of the leave requests you have submitted*."
+msgstr ""
+
+msgid "Request a *new leave*."
+msgstr ""
+
+msgid "If you are the line manager of other employee(s), you could now:"
+msgstr ""
+
+msgid "Validate *leave requests submitted to you*."
+msgstr ""
+
+msgid "Validate *overtime requests submitted to you*."
+msgstr ""
+
+ 

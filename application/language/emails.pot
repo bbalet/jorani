@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Jorani\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Jorani <jorani@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+
+msgid "Dear {Firstname} {Lastname},"
+msgstr ""
+
+msgid "Unfortunately, the time off you requested has been rejected. Please contact your manager to discuss the matter. "
+msgstr ""
+
+msgid "From {StartDate}"
+msgstr ""
+
+msgid "To {EndDate}"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Reason"
+msgstr ""
+
+msgid "*** This is an automatically generated message, please do not reply to this message ***"
+msgstr ""
+
+msgid "The time off you requested has been approved."
+msgstr ""
+
+msgid "Duration"
+msgstr ""
+
+msgid "Balance"
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Reject"
+msgstr ""
+
+msgid "You can check the *leave balance* before validating the leave request."
+msgstr ""
+
+msgid "{Firstname} {Lastname} cancelled a requested time off. See the *details* below:"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "The password you use in order to open a session on your operating system (Windows, Linux, etc.)."
+msgstr ""
+
+msgid "Welcome to Jorani {Firstname} {Lastname}. Please use these credentials to *login to the system*.</a>"
+msgstr ""
+
+msgid "Once connected, you can change your password, as explained *here*."
+msgstr ""
+
+msgid "Please use these credentials to *login to the system*:"
+msgstr ""
+
+msgid "Your Jorani password has been reset. If you did not perform this operation, please contact your manager."
+msgstr ""
+
+msgid "{Firstname} {Lastname} submitted overtime worked. See the details below:"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "The overtime you submitted has been approved."
+msgstr ""
+
+msgid "Unfortunately, the overtime you submitted has been rejected. Please contact your manager to discuss the matter."
+msgstr ""
+

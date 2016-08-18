@@ -331,52 +331,50 @@ class Leaves extends CI_Controller {
      */
     private function sendGenericMail($leave,$user,$manager,$lang_mail,$title,$detailledSubject,$emailModel) {
 
-            $date = new DateTime($leave['startdate']);
-            $startdate = $date->format($lang_mail->line('global_date_format'));
-            $date = new DateTime($leave['enddate']);
-            $enddate = $date->format($lang_mail->line('global_date_format'));
+        $date = new DateTime($leave['startdate']);
+        $startdate = $date->format($lang_mail->line('global_date_format'));
+        $date = new DateTime($leave['enddate']);
+        $enddate = $date->format($lang_mail->line('global_date_format'));
 
-            $this->load->library('parser');
-            $data = array(
-                'Title' => $title,
-                'Firstname' => $user['firstname'],
-                'Lastname' => $user['lastname'],
-                'StartDate' => $startdate,
-                'EndDate' => $enddate,
-                'StartDateType' => $lang_mail->line($leave['startdatetype']),
-                'EndDateType' => $lang_mail->line($leave['enddatetype']),
-                'Type' => $this->types_model->getName($leave['type']),
-                'Duration' => $leave['duration'],
-                'Balance' => $this->leaves_model->getLeavesTypeBalanceForEmployee($leave['employee'] , $leave['type_name'], $leave['startdate']),
-                'Reason' => $leave['cause'],
-                'BaseUrl' => $this->config->base_url(),
-                'LeaveId' => $leave['id'],
-                'UserId' => $this->user_id
-            );
-            $message = $this->parser->parse('emails/' . $manager['language'] . '/'.$emailModel, $data, TRUE);
-            $this->email->set_encoding('quoted-printable');
+        $this->load->library('parser');
+        $data = array(
+            'Title' => $title,
+            'Firstname' => $user['firstname'],
+            'Lastname' => $user['lastname'],
+            'StartDate' => $startdate,
+            'EndDate' => $enddate,
+            'StartDateType' => $lang_mail->line($leave['startdatetype']),
+            'EndDateType' => $lang_mail->line($leave['enddatetype']),
+            'Type' => $this->types_model->getName($leave['type']),
+            'Duration' => $leave['duration'],
+            'Balance' => $this->leaves_model->getLeavesTypeBalanceForEmployee($leave['employee'] , $leave['type_name'], $leave['startdate']),
+            'Reason' => $leave['cause'],
+            'BaseUrl' => $this->config->base_url(),
+            'LeaveId' => $leave['id'],
+            'UserId' => $this->user_id
+        );
+        $message = $this->parser->parse('emails/' . $manager['language'] . '/'.$emailModel, $data, TRUE);
+        $this->email->set_encoding('quoted-printable');
 
-            if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
-                $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
-            } else {
-                $this->email->from('do.not@reply.me', 'LMS');
-            }
-            $this->email->to($manager['email']);
-            if ($this->config->item('subject_prefix') != FALSE) {
-                $subject = $this->config->item('subject_prefix');
-            } else {
-                $subject = '[Jorani] ';
-            }
-            //Copy to the delegates, if any
-            $delegates = $this->delegations_model->listMailsOfDelegates($manager['id']);
-            if ($delegates != '') {
-                $this->email->cc($delegates);
-            }
+        if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
+            $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
+        } else {
+            $this->email->from('do.not@reply.me', 'LMS');
+        }
+        $to = $manager['email'];
+        if ($this->config->item('subject_prefix') != FALSE) {
+            $subject = $this->config->item('subject_prefix');
+        } else {
+            $subject = '[Jorani] ';
+        }
+        //Copy to the delegates, if any
+        $cc=null;
+        $delegates = $this->delegations_model->listMailsOfDelegates($manager['id']);
+        if ($delegates != '') {
+            $cc = $delegates;
+        }
 
-            $this->email->subject($subject . $detailledSubject. ' ' .$this->session->userdata('firstname') . ' ' .$this->session->userdata('lastname'));
-            $this->email->message($message);
-            $this->email->send();
-//        }
+        sendMailByWrapper($this, $subject, $message, $to, $cc);
     }
 
 
@@ -446,7 +444,7 @@ class Leaves extends CI_Controller {
                 $employee = $this->users_model->getUsers($leaves['employee']);
                 $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
 
-                if (!$this->config->item('allow_collaborator_to_cancel_leave_request_in_past') &&
+                if (!$this->config->item('cancel_past_requests') &&
                     ($this->user_id != $employee['manager']) && !($is_delegate) && new DateTime($leaves['startdate']) < new DateTime()){
                     $this->session->set_flashdata('msg', lang('leaves_cancel_unauthorized_msg_error'));
                     if (isset($_GET['source'])) {
@@ -459,10 +457,14 @@ class Leaves extends CI_Controller {
                     $leaves['status'] == 2) {
                     $can_cancel = TRUE;
                 }
+                if ($this->config->item('cancel_accepted_leave') == TRUE &&
+                    $leaves['status'] == 3) {
+                    $can_cancel = TRUE;
+                }
             }
             if ($can_cancel === TRUE) {
                 $this->leaves_model->cancelLeave($id);
-                if($this->config->item('send_email_on_leave_request_cancellation')){
+                if($this->config->item('notify_cancelled_requests')){
                     $this->sendMailOnLeaveRequestCancellation($id);
                 }
             } else {

@@ -406,6 +406,11 @@ $config['disable_edit_leave_duration'] = FALSE;             //Switch to read-onl
 
 //Allow to cancel a leave request
 $config['cancel_leave_request'] = FALSE;             //Switch to allow the leave request cancellation by the requester
+//Allow to cancel a Accepted request
+$config['cancel_accepted_leave'] = FALSE;             //Switch to allow the accepted leave cancellation by the requester
+//For workflow and cheating reason, it's recommended to don't allow a user cancelling its own leave request without emailing its manager.
+$config['cancel_past_requests'] = TRUE;             //Switch to allow the leave request cancellation by the collaborator even if the leave start in the past
+$config['notify_cancelled_requests'] = TRUE;             //Switch to send email to the manager when a leave request is cancelled
 
 //____________________________________________________________________________
 //Set this value to TRUE if you want to create extras at status requested instead of planned

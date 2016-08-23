@@ -354,13 +354,7 @@ class Leaves extends CI_Controller {
             'UserId' => $this->user_id
         );
         $message = $this->parser->parse('emails/' . $manager['language'] . '/'.$emailModel, $data, TRUE);
-        $this->email->set_encoding('quoted-printable');
 
-        if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
-            $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
-        } else {
-            $this->email->from('do.not@reply.me', 'LMS');
-        }
         $to = $manager['email'];
         if ($this->config->item('subject_prefix') != FALSE) {
             $subject = $this->config->item('subject_prefix');

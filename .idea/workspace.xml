@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dfd78bc1-8c72-4b18-a7ac-7fa59e56220e" name="Default" comment="">
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/config.php" afterPath="$PROJECT_DIR$/application/config/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/calendar/export_tabular.php" afterPath="$PROJECT_DIR$/application/views/calendar/export_tabular.php" />
+>>>>>>> add the XLS tabular export customion capability
     </list>
     <ignored path="jorani.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,6 +40,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
       <file leaf-file-name="export_tabular.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/calendar/export_tabular.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -44,6 +51,15 @@
                 <marker date="1472116285892" expanded="true" signature="10547:10555" placeholder="..." />
                 <marker date="1472116285892" expanded="true" signature="10547:10590" placeholder="..." />
                 <marker date="1472116285892" expanded="true" signature="10547:10613" placeholder="..." />
+=======
+      <file leaf-file-name="export_tabular.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/calendar/export_tabular.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-14">
+              <caret line="205" column="154" selection-start-line="205" selection-start-column="154" selection-end-line="205" selection-end-column="154" />
+              <folding>
+                <element signature="e#6#348#0#PHP" expanded="true" />
+>>>>>>> add the XLS tabular export customion capability
               </folding>
             </state>
           </provider>
@@ -52,6 +68,7 @@
       <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/config/config.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
             <state relative-caret-position="7684">
               <caret line="482" column="0" selection-start-line="482" selection-start-column="0" selection-end-line="482" selection-end-column="0" />
               <folding>
@@ -85,10 +102,16 @@
                 <marker date="1472116393249" expanded="true" signature="12996:13192" placeholder="..." />
                 <marker date="1472116393249" expanded="true" signature="13916:14318" placeholder="//..." />
               </folding>
+=======
+            <state relative-caret-position="724">
+              <caret line="513" column="49" selection-start-line="513" selection-start-column="49" selection-end-line="513" selection-end-column="49" />
+              <folding />
+>>>>>>> add the XLS tabular export customion capability
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/config/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
@@ -134,6 +157,14 @@
                 <marker date="1472116564430" expanded="true" signature="22276:22324" placeholder="..." />
                 <marker date="1472116564430" expanded="true" signature="22332:22373" placeholder="..." />
               </folding>
+=======
+      <file leaf-file-name="leaves.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/leaves.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="202" column="39" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="39" />
+              <folding />
+>>>>>>> add the XLS tabular export customion capability
             </state>
           </provider>
         </entry>
@@ -159,8 +190,11 @@
         <option value="$PROJECT_DIR$/application/controllers/leaves.php" />
         <option value="$PROJECT_DIR$/application/config/config.php" />
         <option value="$PROJECT_DIR$/application/views/calendar/export_tabular.php" />
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/application/language/khmer/admin_lang.php" />
+=======
+>>>>>>> add the XLS tabular export customion capability
       </list>
     </option>
   </component>
@@ -177,8 +211,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="876" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -389,6 +423,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
     <option name="totallyTimeSpent" value="10410000" />
   </component>
   <component name="ToolWindowManager">
@@ -401,10 +436,33 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31989247" sideWeight="0.5051414" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969153" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5389785" sideWeight="0.4974293" order="7" side_tool="false" content_ui="tabs" />
+=======
+    <option name="totallyTimeSpent" value="9345000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2153518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53896105" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> add the XLS tabular export customion capability
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31989247" sideWeight="0.49485862" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -414,6 +472,29 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
+=======
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.53896105" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32258064" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2153518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+>>>>>>> add the XLS tabular export customion capability
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -439,6 +520,23 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
+=======
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2737">
+          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/chinese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> add the XLS tabular export customion capability
     <entry file="file://$PROJECT_DIR$/application/language/turkish/email_lang.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -548,6 +646,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
           <caret line="358" column="8" selection-start-line="358" selection-start-column="8" selection-end-line="358" selection-end-column="8" />
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
           <folding>
             <marker date="1472116564430" expanded="true" signature="21837:21850" placeholder="..." />
             <marker date="1472116564430" expanded="true" signature="21837:22150" placeholder="..." />
@@ -558,6 +657,9 @@
             <marker date="1472116564430" expanded="true" signature="22276:22324" placeholder="..." />
             <marker date="1472116564430" expanded="true" signature="22332:22373" placeholder="..." />
           </folding>
+=======
+          <folding />
+>>>>>>> add the XLS tabular export customion capability
         </state>
       </provider>
     </entry>
@@ -773,6 +875,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/leaves.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
         <state relative-caret-position="5899">
           <caret line="363" column="0" selection-start-line="363" selection-start-column="0" selection-end-line="363" selection-end-column="0" />
           <folding>
@@ -843,15 +946,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+        <state relative-caret-position="280">
+          <caret line="202" column="39" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="39" />
+>>>>>>> add the XLS tabular export customion capability
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< 77dc02289901c2064c05c9998a75b46180e41453
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+=======
+    <entry file="file://$PROJECT_DIR$/application/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="724">
+          <caret line="513" column="49" selection-start-line="513" selection-start-column="49" selection-end-line="513" selection-end-column="49" />
+>>>>>>> add the XLS tabular export customion capability
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/calendar/export_tabular.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-14">
+          <caret line="205" column="154" selection-start-line="205" selection-start-column="154" selection-end-line="205" selection-end-column="154" />
+          <folding>
+            <element signature="e#6#348#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -2,9 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dfd78bc1-8c72-4b18-a7ac-7fa59e56220e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/config.php" afterPath="$PROJECT_DIR$/application/config/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/calendar/export_tabular.php" afterPath="$PROJECT_DIR$/application/views/calendar/export_tabular.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/french/admin_lang.php" afterPath="$PROJECT_DIR$/application/language/french/admin_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/german/admin_lang.php" afterPath="$PROJECT_DIR$/application/language/german/admin_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/german/global_lang.php" afterPath="$PROJECT_DIR$/application/language/german/global_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/italian/admin_lang.php" afterPath="$PROJECT_DIR$/application/language/italian/admin_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/italian/global_lang.php" afterPath="$PROJECT_DIR$/application/language/italian/global_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/khmer/admin_lang.php" afterPath="$PROJECT_DIR$/application/language/khmer/admin_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/khmer/global_lang.php" afterPath="$PROJECT_DIR$/application/language/khmer/global_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/persian/admin_lang.php" afterPath="$PROJECT_DIR$/application/language/persian/admin_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/persian/global_lang.php" afterPath="$PROJECT_DIR$/application/language/persian/global_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/russian/admin_lang.php" afterPath="$PROJECT_DIR$/application/language/russian/admin_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/russian/global_lang.php" afterPath="$PROJECT_DIR$/application/language/russian/global_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/spanish/admin_lang.php" afterPath="$PROJECT_DIR$/application/language/spanish/admin_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/spanish/global_lang.php" afterPath="$PROJECT_DIR$/application/language/spanish/global_lang.php" />
     </list>
     <ignored path="jorani.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,13 +39,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="export_tabular.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="export_tabular.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/calendar/export_tabular.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-14">
-              <caret line="205" column="154" selection-start-line="205" selection-start-column="154" selection-end-line="205" selection-end-column="154" />
+            <state relative-caret-position="3060">
+              <caret line="187" column="97" selection-start-line="187" selection-start-column="97" selection-end-line="187" selection-end-column="97" />
               <folding>
-                <element signature="e#6#348#0#PHP" expanded="true" />
+                <marker date="1472115210408" expanded="true" signature="9:346" placeholder=" This view exports a tabular calendar of the leave taken by a group of users ..." />
+                <marker date="1472115210408" expanded="true" signature="10547:10555" placeholder="..." />
+                <marker date="1472115210408" expanded="true" signature="10547:10590" placeholder="..." />
+                <marker date="1472115210408" expanded="true" signature="10547:10613" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -42,8 +57,57 @@
       <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/config/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="724">
-              <caret line="513" column="49" selection-start-line="513" selection-start-column="49" selection-end-line="513" selection-end-column="49" />
+            <state relative-caret-position="8398">
+              <caret line="509" column="0" selection-start-line="509" selection-start-column="0" selection-end-line="509" selection-end-column="0" />
+              <folding>
+                <marker date="1472115764934" expanded="true" signature="79:476" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="508:859" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="902:1484" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="1524:1877" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="1912:2249" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="2288:2592" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="2628:2960" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="3000:3458" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="3500:4180" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="4237:5143" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="5370:6096" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="6132:6473" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="6847:7177" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="7211:7504" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="7574:8547" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="8910:9363" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="9496:9776" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="9823:10341" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="10379:10564" placeholder="{...}" />
+                <marker date="1472115764934" expanded="true" signature="10441:10496" placeholder="{...}" />
+                <marker date="1472115764934" expanded="true" signature="10505:10561" placeholder="{...}" />
+                <marker date="1472115764934" expanded="true" signature="10570:10614" placeholder="{...}" />
+                <marker date="1472115764934" expanded="true" signature="10750:11585" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="11627:12054" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="12097:12479" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="12524:12963" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="12996:13192" placeholder="..." />
+                <marker date="1472115764934" expanded="true" signature="13916:14318" placeholder="//..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/config/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="103">
+              <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -52,9 +116,13 @@
       <file leaf-file-name="leaves.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/leaves.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="202" column="39" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="39" />
-              <folding />
+            <state relative-caret-position="5219">
+              <caret line="316" column="9" selection-start-line="316" selection-start-column="9" selection-end-line="316" selection-end-column="9" />
+              <folding>
+                <marker date="1472115764941" expanded="true" signature="21153:21166" placeholder="..." />
+                <marker date="1472115764941" expanded="true" signature="21153:21466" placeholder="..." />
+                <marker date="1472115764941" expanded="true" signature="21153:21695" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -80,6 +148,7 @@
         <option value="$PROJECT_DIR$/application/controllers/leaves.php" />
         <option value="$PROJECT_DIR$/application/config/config.php" />
         <option value="$PROJECT_DIR$/application/views/calendar/export_tabular.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -96,8 +165,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -125,10 +194,43 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane />
+      <pane id="Scope">
+        <subPane subId="Changed Files" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="jorani">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Default" />
+        <subPane subId="Tests" />
       </pane>
-      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jorani" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jorani" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jorani" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -206,11 +308,18 @@
       <option name="project" value="LOCAL" />
       <updated>1471961011275</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="remove IDE files">
+      <created>1472115871083</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1472115871083</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9345000" />
+    <option name="totallyTimeSpent" value="9621000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -222,19 +331,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2153518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21786633" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31989247" sideWeight="0.5051414" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53896105" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5389785" sideWeight="0.4974293" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32258064" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31989247" sideWeight="0.49485862" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -244,26 +353,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.53896105" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32258064" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2153518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -281,7 +370,8 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="no change file, git is crazy!" />
     <MESSAGE value="Remove useless code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove useless code" />
+    <MESSAGE value="remove IDE files" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove IDE files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -411,7 +501,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
           <caret line="358" column="8" selection-start-line="358" selection-start-column="8" selection-end-line="358" selection-end-column="8" />
-          <folding />
+          <folding>
+            <marker date="1472115764941" expanded="true" signature="21153:21166" placeholder="..." />
+            <marker date="1472115764941" expanded="true" signature="21153:21466" placeholder="..." />
+            <marker date="1472115764941" expanded="true" signature="21153:21695" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -489,7 +583,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -628,26 +721,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/leaves.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="202" column="39" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="39" />
-          <folding />
+        <state relative-caret-position="5219">
+          <caret line="316" column="9" selection-start-line="316" selection-start-column="9" selection-end-line="316" selection-end-column="9" />
+          <folding>
+            <marker date="1472115764941" expanded="true" signature="21153:21166" placeholder="..." />
+            <marker date="1472115764941" expanded="true" signature="21153:21466" placeholder="..." />
+            <marker date="1472115764941" expanded="true" signature="21153:21695" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="724">
-          <caret line="513" column="49" selection-start-line="513" selection-start-column="49" selection-end-line="513" selection-end-column="49" />
-          <folding />
+        <state relative-caret-position="8398">
+          <caret line="509" column="0" selection-start-line="509" selection-start-column="0" selection-end-line="509" selection-end-column="0" />
+          <folding>
+            <marker date="1472115764934" expanded="true" signature="79:476" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="508:859" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="902:1484" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="1524:1877" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="1912:2249" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="2288:2592" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="2628:2960" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="3000:3458" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="3500:4180" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="4237:5143" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="5370:6096" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="6132:6473" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="6847:7177" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="7211:7504" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="7574:8547" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="8910:9363" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="9496:9776" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="9823:10341" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="10379:10564" placeholder="{...}" />
+            <marker date="1472115764934" expanded="true" signature="10441:10496" placeholder="{...}" />
+            <marker date="1472115764934" expanded="true" signature="10505:10561" placeholder="{...}" />
+            <marker date="1472115764934" expanded="true" signature="10570:10614" placeholder="{...}" />
+            <marker date="1472115764934" expanded="true" signature="10750:11585" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="11627:12054" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="12097:12479" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="12524:12963" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="12996:13192" placeholder="..." />
+            <marker date="1472115764934" expanded="true" signature="13916:14318" placeholder="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/calendar/export_tabular.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-14">
-          <caret line="205" column="154" selection-start-line="205" selection-start-column="154" selection-end-line="205" selection-end-column="154" />
+        <state relative-caret-position="3060">
+          <caret line="187" column="97" selection-start-line="187" selection-start-column="97" selection-end-line="187" selection-end-column="97" />
           <folding>
-            <element signature="e#6#348#0#PHP" expanded="true" />
+            <marker date="1472115210408" expanded="true" signature="9:346" placeholder=" This view exports a tabular calendar of the leave taken by a group of users ..." />
+            <marker date="1472115210408" expanded="true" signature="10547:10555" placeholder="..." />
+            <marker date="1472115210408" expanded="true" signature="10547:10590" placeholder="..." />
+            <marker date="1472115210408" expanded="true" signature="10547:10613" placeholder="..." />
           </folding>
         </state>
       </provider>

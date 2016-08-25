@@ -12,3 +12,5 @@ application/temp/*
 !application/temp/.htaccess
 !application/temp/README.TXT
 /tests/emails-recus/
+
+.idea/

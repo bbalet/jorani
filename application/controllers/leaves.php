@@ -382,6 +382,8 @@ class Leaves extends CI_Controller {
         sendMailByWrapper($this, $subject, $message, $to, $cc);
     }
 
+
+
     /**
      * Delete a leave request
      * @param int $id identifier of the leave request

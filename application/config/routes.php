@@ -288,11 +288,6 @@ $route['session/logout'] = 'session/logout';
 $route['session/oauth2'] = 'session/loginOAuth2';
 $route['session/language'] = 'session/language';
 $route['session/forgetpassword'] = 'session/forgetpassword';
-$route['api/metadata'] = 'session/metadata';
-$route['api/acs'] = 'session/acs';
-$route['api/slo'] = 'session/slo';
-$route['api/sls'] = 'session/sls';
-$route['api/sso'] = 'session/sso';
 
 //_______________________________________________
 //Experimental mobile endpoint

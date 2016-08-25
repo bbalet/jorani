@@ -14,8 +14,10 @@ $lang['email_password_reset_title'] = 'رمز شما تغییر یافت.';
 $lang['email_user_create_subject'] = 'اکانت شما ایجاد گردید';
 $lang['email_user_create_title'] = 'اکانت شما ایجاد گردید';
 
-$lang['email_leave_request_subject'] = 'درخواست مرخصی از';
-$lang['email_leave_request_title'] = 'درخواست مرخصی';
+$lang['email_leave_request_creation_subject'] = 'درخواست مرخصی از';
+$lang['email_leave_request_creation_title'] = 'درخواست مرخصی';
+$lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
+$lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
 
 $lang['email_leave_request_accept_subject'] = 'درخواست مرخصی شما پذیرفته شد';
 $lang['email_leave_request_reject_subject'] = 'درخواست مرخصی شما پذیرفته نشد';

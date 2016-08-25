@@ -13,4 +13,4 @@ application/temp/*
 !application/temp/README.TXT
 /tests/emails-recus/
 
-.idea/
+/.idea/

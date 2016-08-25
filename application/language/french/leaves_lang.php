@@ -88,7 +88,6 @@ $lang['leaves_validate_flash_msg_overlap_period'] = 'Vous ne pouvez pas créer u
 
 $lang['leaves_cancel_flash_msg_error'] = 'Vous ne pouvez pas annuler cette demande d\'absence.';
 $lang['leaves_cancel_flash_msg_success'] = 'La demande d\'absence a été annulée avec succès.';
-$lang['leaves_cancel_unauthorized_msg_error'] = 'Vous ne pouvez pas annuler une demande d\'absence commançant dans le passé. Demandez à votre manager de la rejeter.' ;
 
 $lang['leaves_delete_flash_msg_error'] = 'Vous ne pouvez pas supprimer cette demande d\'absence.';
 $lang['leaves_delete_flash_msg_success'] = 'La demande d\'absence a été supprimée avec succès.';

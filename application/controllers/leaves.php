@@ -182,7 +182,7 @@ class Leaves extends CI_Controller {
             $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
-                $this->sendMailOnLeaveRequestCreation($leave_id);
+                $this->sendMail($leave_id);
             }
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
@@ -250,7 +250,7 @@ class Leaves extends CI_Controller {
             $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
             //If the status is requested, send an email to the manager
             if ($this->input->post('status') == 2) {
-                $this->sendMailOnLeaveRequestCreation($id);
+                $this->sendMail($id);
             }
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
@@ -259,13 +259,13 @@ class Leaves extends CI_Controller {
             }
         }
     }
-
+    
     /**
-     * Send a leave request creation email to the manager of the connected employee
+     * Send a leave request email to the manager of the connected employee
      * @param int $id Leave request identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    private function sendMailOnLeaveRequestCreation($id) {
+    private function sendMail($id) {
         $this->load->model('users_model');
         $this->load->model('types_model');
         $this->load->model('delegations_model');
@@ -273,6 +273,8 @@ class Leaves extends CI_Controller {
         $leave = $this->leaves_model->getLeaves($id);
         $user = $this->users_model->getUsers($leave['employee']);
         $manager = $this->users_model->getUsers($user['manager']);
+
+        //Test if the manager hasn't been deleted meanwhile
         if (empty($manager['email'])) {
             $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_error'));
         } else {
@@ -280,7 +282,7 @@ class Leaves extends CI_Controller {
             $this->load->library('email');
             $this->load->library('polyglot');
             $usr_lang = $this->polyglot->code2language($manager['language']);
-
+            
             //We need to instance an different object as the languages of connected user may differ from the UI lang
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
@@ -366,6 +368,10 @@ class Leaves extends CI_Controller {
         } else {
             $subject = '[Jorani] ';
         }
+        $subject .= $lang_mail->line('email_leave_request_subject') . ' ' .
+        $this->session->userdata('firstname') . ' ' .
+        $this->session->userdata('lastname'));
+            
         //Copy to the delegates, if any
         $cc=null;
         $delegates = $this->delegations_model->listMailsOfDelegates($manager['id']);

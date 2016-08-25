@@ -54,6 +54,12 @@ $lang['admin_diagnostic_overtime_thead_employee'] = 'Employee';
 $lang['admin_diagnostic_overtime_thead_date'] = 'Date';
 $lang['admin_diagnostic_overtime_thead_duration'] = 'Duration';
 $lang['admin_diagnostic_overtime_thead_status'] = 'Status';
+$lang['admin_diagnostic_daysoff_description'] = 'Overtime requests with a negative duration';
+$lang['admin_diagnostic_daysoff_thead_id'] = 'ID';
+$lang['admin_diagnostic_daysoff_thead_employee'] = 'Employee';
+$lang['admin_diagnostic_daysoff_thead_date'] = 'Date';
+$lang['admin_diagnostic_daysoff_thead_duration'] = 'Duration';
+$lang['admin_diagnostic_daysoff_thead_status'] = 'Status';
 
 $lang['admin_diagnostic_contract_tab'] = 'Contracts';
 $lang['admin_diagnostic_contract_description'] = 'Unused contracts (check if the contract is not duplicated).';

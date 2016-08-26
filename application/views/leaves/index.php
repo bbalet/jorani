@@ -29,12 +29,12 @@
     </thead>
     <tbody>
 <?php foreach ($leaves as $leaves_item): 
-    $date = new DateTime($leaves_item['startdate']);
-    $tmpStartDate = $date->getTimestamp();
-    $startdate = $date->format(lang('global_date_format'));
-    $date = new DateTime($leaves_item['enddate']);
-    $tmpEndDate = $date->getTimestamp();
-    $enddate = $date->format(lang('global_date_format'));?>
+    $datetimeStart = new DateTime($leaves_item['startdate']);
+    $tmpStartDate = $datetimeStart->getTimestamp();
+    $startdate = $datetimeStart->format(lang('global_date_format'));
+    $datetimeEnd = new DateTime($leaves_item['enddate']);
+    $tmpEndDate = $datetimeEnd->getTimestamp();
+    $enddate = $datetimeEnd->format(lang('global_date_format'));?>
     <tr>
         <td data-order="<?php echo $leaves_item['id']; ?>">
             <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><?php echo $leaves_item['id']; ?></a>
@@ -42,9 +42,26 @@
             <div class="pull-right">
                 <?php
                 $show_delete = FALSE;
+                $show_cancel = FALSE;
                 $show_edit = FALSE;
                 if ($leaves_item['status'] == 1) $show_delete = TRUE;
                 if ($leaves_item['status'] == 1) $show_edit = TRUE;
+                //For requested status
+                if (($leaves_item['status'] == 2) && ($this->config->item('cancel_leave_request') == TRUE)){
+                    $show_cancel = TRUE;
+                    //Test if the leave start in the past and if the config allow the user to cancel it. If user is not allow, we don't show the icon
+                    if ($datetimeStart< new DateTime() && $this->config->item('cancel_past_requests') == FALSE) {
+                        $show_cancel = FALSE;
+                    }
+                }
+                //For accepted status
+                if (($leaves_item['status'] == 3) && ($this->config->item('cancel_accepted_leave') == TRUE)){
+                    $show_cancel = TRUE;
+                    //Test if the leave start in the past and if the config allow the user to cancel it. If user is not allow, we don't show the icon
+                    if ($datetimeStart< new DateTime() && $this->config->item('cancel_past_requests') == FALSE) {
+                        $show_cancel = FALSE;
+                    }
+                }
                 if (($leaves_item['status'] == 4) && ($this->config->item('delete_rejected_requests') == TRUE))  $show_delete = TRUE;
                 if (($leaves_item['status'] == 4) && ($this->config->item('edit_rejected_requests') == TRUE))  $show_edit = TRUE;    
                 ?>
@@ -55,6 +72,10 @@
                 <?php if ($show_delete == TRUE) { ?>
                 <a href="#" class="confirm-delete" data-id="<?php echo $leaves_item['id'];?>" title="<?php echo lang('leaves_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
                 &nbsp;
+                <?php } ?>
+                <?php if ($show_cancel == TRUE) { ?>
+                    <a href="<?php echo base_url();?>leaves/cancel/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_cancel');?>"><i class="fa fa-undo" style="color:black;"></i></a>
+                    &nbsp;
                 <?php } ?>
                 <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
                 <?php if ($this->config->item('enable_history') == TRUE) { ?>
@@ -184,8 +205,8 @@ $(document).ready(function() {
         var id = $(this).data('id');
         $('#frmDeleteLeaveRequest').data('id', id).modal('show');
     });
-    
-    //Prevent to load always the same content (refreshed each time)
+
+        //Prevent to load always the same content (refreshed each time)
     $('#frmDeleteLeaveRequest').on('hidden', function() {
         $(this).removeData('modal');
     });

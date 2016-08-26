@@ -31,7 +31,11 @@ $unusedContracts_count = ($unusedContracts_count == 0)?'':'<span class="badge ba
     <li><a data-toggle="tab" href="#entitlements"><?php echo $entitlmentOverflow_count . lang('admin_diagnostic_entitlements_tab');?></a></li>
     <li><a data-toggle="tab" href="#overtime"><?php echo $negativeOvertime_count . lang('admin_diagnostic_overtime_tab');?></a></li>
     <li><a data-toggle="tab" href="#contracts"><?php echo $unusedContracts_count . lang('admin_diagnostic_contract_tab');?></a></li>
+<<<<<<< 7ba7cca8c6564bfe316eea3b493f23f58ca7a1f6
     <!--<li><a data-toggle="tab" href="#balance"><?php /*echo $leaveBalance_count . lang('admin_diagnostic_balance_tab');*/?></a></li>//-->
+=======
+    <!--<li><a data-toggle="tab" href="#balance"><?php echo $leaveBalance_count . lang('admin_diagnostic_balance_tab');?></a></li>//-->
+>>>>>>> no change
 </ul>
 
 <div class="tab-content">

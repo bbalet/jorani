@@ -23,6 +23,7 @@ $lang['leaves_summary_date_field'] = 'Fecha del informe';
 $lang['leaves_index_title'] = 'Mis solicitudes de permiso';
 $lang['leaves_index_thead_tip_view'] = 'ver';
 $lang['leaves_index_thead_tip_edit'] = 'modificar';
+$lang['leaves_index_thead_tip_cancel'] = 'cancel';
 $lang['leaves_index_thead_tip_delete'] = 'suprimir';
 $lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
@@ -85,6 +86,10 @@ $lang['leaves_edit_flash_msg_success'] = 'La solicitud de permiso se ha actualiz
 $lang['leaves_validate_mandatory_js_msg'] = '"El campo" + fieldname + " es obligatorio."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'Parece que no tiene contrato. Pongase en contacto con el administrador.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'No se puede crear una solicitud de vacaciones por dos períodos de vacaciones anuales. Por favor, cree dos solicitud de vacaciones diferent.';
+
+$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['leaves_cancel_unauthorized_msg_error'] = 'You can\'t cancel a leave request starting in the past. Ask your manager for rejecting it.';
 
 $lang['leaves_delete_flash_msg_error'] = 'No se puede eliminar esta solicitud de permiso';
 $lang['leaves_delete_flash_msg_success'] = 'La solicitud de permiso se ha eliminado correctamente';

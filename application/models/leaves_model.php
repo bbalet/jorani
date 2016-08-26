@@ -585,7 +585,7 @@ class Leaves_model extends CI_Model {
         
         return $affectedRows;
     }
-    
+
     /**
      * Delete a leave from the database
      * @param int $id leave request identifier
@@ -600,7 +600,21 @@ class Leaves_model extends CI_Model {
         }
         return $this->db->delete('leaves', array('id' => $id));
     }
-    
+
+    /**
+     * Cancel a leave from the database
+     * @param int $id leave request identifier
+     * @return int number of affected rows
+     * @author Guillaume Blaquiere <guillaume.blaquiere@gmail.com>
+     */
+    public function cancelLeave($id) {
+        $data = array(
+            'status' => 1
+        );
+        $this->db->where('id', $id);
+        return $this->db->update('leaves', $data);
+    }
+
     /**
      * Delete leaves attached to a user
      * @param int $employee identifier of an employee

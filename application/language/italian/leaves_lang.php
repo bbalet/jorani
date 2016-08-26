@@ -23,6 +23,7 @@ $lang['leaves_summary_date_field'] = 'Data del report';
 $lang['leaves_index_title'] = 'Le mie richieste di ferie';
 $lang['leaves_index_thead_tip_view'] = 'vedi';
 $lang['leaves_index_thead_tip_edit'] = 'modifica';
+$lang['leaves_index_thead_tip_cancel'] = 'cancel';
 $lang['leaves_index_thead_tip_delete'] = 'elimina';
 $lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
@@ -86,8 +87,13 @@ $lang['leaves_validate_mandatory_js_msg'] = '"Il campo " + fieldname + " è obbl
 $lang['leaves_validate_flash_msg_no_contract'] = 'Sembra che tu non abbia un contratto. Sei pregato di contattare il tuo responsabile delle Risorse Umane / Manager';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'Non è possibile creare una richiesta di congedo per due periodi di ferie annuali. Si prega di creare due diverse richieste di ferie.';
 
+$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['leaves_cancel_unauthorized_msg_error'] = 'You can\'t cancel a leave request starting in the past. Ask your manager for rejecting it.';
+
 $lang['leaves_delete_flash_msg_error'] = 'Non puoi cancellare questa richiesta di ferie';
 $lang['leaves_delete_flash_msg_success'] = 'La richiesta di ferie è stata cancellata con successo';
+
 $lang['leaves_view_title'] = 'Vedi richiesta di ferie #';
 $lang['leaves_view_html_title'] = 'Vedi una richiesta di ferie';
 $lang['leaves_view_field_start'] = 'Data inizio';

@@ -181,6 +181,7 @@ $route['leaves/edit/(:num)'] = 'leaves/edit/$1';
 $route['leaves/update'] = 'leaves/update';
 $route['leaves/delete/(:num)'] = 'leaves/delete/$1';
 $route['leaves/(:num)/history'] = 'leaves/history/$1';
+$route['leaves/cancel/(:num)'] = 'leaves/cancel/$1';
 $route['leaves/([^/]+)/(:num)'] = 'leaves/view/$1/$2';
 $route['leaves/validate'] = 'leaves/validate';
 $route['leaves'] = 'leaves';
@@ -287,11 +288,6 @@ $route['session/logout'] = 'session/logout';
 $route['session/oauth2'] = 'session/loginOAuth2';
 $route['session/language'] = 'session/language';
 $route['session/forgetpassword'] = 'session/forgetpassword';
-$route['api/metadata'] = 'session/metadata';
-$route['api/acs'] = 'session/acs';
-$route['api/slo'] = 'session/slo';
-$route['api/sls'] = 'session/sls';
-$route['api/sso'] = 'session/sso';
 
 //_______________________________________________
 //Experimental mobile endpoint

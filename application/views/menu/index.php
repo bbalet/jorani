@@ -176,6 +176,7 @@ $this->lang->load('menu', $language);?>
                     <?php if ($this->config->item('enable_mobile') != FALSE) { ?>
                     <li><a href="#" id="cmdGenerateQRCode" title="QR Code"><i class="fa fa-mobile"></i></a></li>
                     <?php } ?>
+<<<<<<< 7ba7cca8c6564bfe316eea3b493f23f58ca7a1f6
                     <?php if ($this->config->item('ldap_enabled') === FALSE && $this->config->item('saml_enabled') === FALSE) { ?>
                     <li><a href="#" id="cmdChangePassword" title="<?php echo lang('menu_banner_tip_reset');?>"><i class="icon-lock icon-white"></i></a></li>
                     <?php }
@@ -184,6 +185,12 @@ $this->lang->load('menu', $language);?>
                         $urlLogout = 'api/slo';
                     } ?>
                     <li><a href="<?php echo base_url() . $urlLogout;?>" title="<?php echo lang('menu_banner_logout');?>"><i class="icon-off icon-white"></i></a></li>
+=======
+                    <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
+                    <li><a href="#" id="cmdChangePassword" title="<?php echo lang('menu_banner_tip_reset');?>"><i class="icon-lock icon-white"></i></a></li>
+                    <?php } ?>
+                    <li><a href="<?php echo base_url();?>session/logout" title="<?php echo lang('menu_banner_logout');?>"><i class="icon-off icon-white"></i></a></li>
+>>>>>>> no change
                 </ul>
             </div>
       </div>

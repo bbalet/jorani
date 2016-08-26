@@ -12,8 +12,11 @@ $lang['email_password_reset_subject'] = 'Tu contraseña ha sido reestablecida';
 $lang['email_password_reset_title'] = 'Tu contraseña ha sido reestablecida';
 $lang['email_user_create_subject'] = 'Tu cuenta ha sido creada';
 $lang['email_user_create_title'] = 'Tu cuenta ha sido creada';
-$lang['email_leave_request_subject'] = 'Su solicitud de permiso ';
-$lang['email_leave_request_title'] = 'Solicitar permiso';
+$lang['email_leave_request_creation_subject'] = 'Su solicitud de permiso ';
+$lang['email_leave_request_creation_title'] = 'Solicitar permiso';
+$lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
+$lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
+
 $lang['email_leave_request_accept_subject'] = 'Tu solicitud de permiso ha sido aceptada';
 $lang['email_leave_request_reject_subject'] = 'Tu solicitud de permiso ha sido rechazada';
 $lang['email_leave_request_validation_title'] = 'Solicitar permiso';

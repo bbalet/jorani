@@ -23,6 +23,7 @@ $lang['leaves_summary_date_field'] = 'Datum des Reports';
 $lang['leaves_index_title'] = 'Meine Urlaubsanfragen';
 $lang['leaves_index_thead_tip_view'] = 'anzeigen';
 $lang['leaves_index_thead_tip_edit'] = 'bearbeiten';
+$lang['leaves_index_thead_tip_cancel'] = 'cancel';
 $lang['leaves_index_thead_tip_delete'] = 'löschen';
 $lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';
@@ -85,6 +86,10 @@ $lang['leaves_edit_flash_msg_success'] = 'Urlaubsanfrage erfolgreich aktualisier
 $lang['leaves_validate_mandatory_js_msg'] = '"Das Feld " + fieldname + " ist zwingend erforderlich."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'Es scheint als hätten Sie keinen Vertrag. Bitte kontaktieren Sie Ihre Personalabteilung oder Ihren Vorgesetzten.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'Sie können einen Urlaubsantrag für zwei jährliche Urlaubszeiten nicht zu schaffen. Bitte erstellen Sie zwei verschiedene Urlaubsanträge.';
+
+$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['leaves_cancel_unauthorized_msg_error'] = 'You can\'t cancel a leave request starting in the past. Ask your manager for rejecting it.';
 
 $lang['leaves_delete_flash_msg_error'] = 'Diese Urlaubsanfrage kann nicht gelöscht werden';
 $lang['leaves_delete_flash_msg_success'] = 'Urlaubsanfrage erfolgreich gelöscht';

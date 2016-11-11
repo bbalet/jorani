@@ -29,7 +29,7 @@
                 <td>Mot de passe</td><td>{Password}</td>
             </tr>            
         </table>
-        <p>Une fois connecté, vous pouvez modifier votre mot de passe comme expliqué <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Lien vers la documentation" target="_blank">dans cet article (en anglais)</a>.</p>
+        <p>Une fois connecté, vous pouvez modifier votre mot de passe comme expliqué <a href="http://jorani.org/how-to-change-my-password.html" title="Lien vers la documentation" target="_blank">dans cet article (en anglais)</a>.</p>
         <hr>
         <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
     </body>

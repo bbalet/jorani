@@ -29,7 +29,7 @@
                 <td>Mật khẩu</td><td>{Password}</td>
             </tr>            
         </table>
-        Khi bạn đã kết nối, bạn có thể thay đổi mật khẩu của mình như được giải thích <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">tại đây</a>.
+        Khi bạn đã kết nối, bạn có thể thay đổi mật khẩu của mình như được giải thích <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">tại đây</a>.
         <hr>
         <h5>*** Đây là tin nhắn được tạo tự động, xin đừng trả lời tin nhắn này. ***</h5>
     </body>

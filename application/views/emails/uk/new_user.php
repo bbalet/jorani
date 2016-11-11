@@ -34,7 +34,7 @@
             </tr>            
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        Після входу ви маєте можливість змінити свій пароль відповідно <a href="http:/jorani.org/how-to-change-my-password.html" title="Посилання на документацыію" target="_blank">інструкції</a>.
+        Після входу ви маєте можливість змінити свій пароль відповідно <a href="http://jorani.org/how-to-change-my-password.html" title="Посилання на документацыію" target="_blank">інструкції</a>.
         <?php } ?>
         <hr>
         <h5>*** Це повідомлення створене автоматично, будь ласка не відповідайте на нього ***</h5>

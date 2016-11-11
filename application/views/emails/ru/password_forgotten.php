@@ -29,7 +29,7 @@
                 <td>Пароль</td><td>{Password}</td>
             </tr>            
         </table>
-        Вы можете изменить пароль согласно инструкции при входе в <a href="http:/jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">систему</a>.
+        Вы можете изменить пароль согласно инструкции при входе в <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">систему</a>.
         <hr>
         <h5>*** Это сообщение создано автоматически, пожалуйста, не отвечайте на него ***</h5>
     </body>

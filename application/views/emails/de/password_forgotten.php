@@ -19,6 +19,6 @@
                 <td>Passwort</td><td>{Password}</td>
             </tr>            
         </table>
-        <a href="http://www.leave-management-system.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">Hier</a> wird beschrieben können Sie Ihr Passwort ändern sobald Sie eingeloggt sind..
+        <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">Hier</a> wird beschrieben können Sie Ihr Passwort ändern sobald Sie eingeloggt sind..
     </body>
 </html>

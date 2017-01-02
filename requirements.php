@@ -13,13 +13,14 @@ if (function_exists('apache_get_modules')) {
   $modules = apache_get_modules();
   $mod_rewrite = in_array('mod_rewrite', $modules);
 } else {
-  $mod_rewrite =  getenv('HTTP_MOD_REWRITE')=='On' ? true : false ;
+  $mod_rewrite =  getenv('HTTP_MOD_REWRITE')=='On' ? TRUE : FALSE ;
 }
 
 $allow_overwrite =  getenv('ALLOW_OVERWRITE');
 $mod_rewrite =  getenv('HTTP_MOD_REWRITE');
 $server_software = getenv('SERVER_SOFTWARE');
 $mod_gzip = getenv('HTTP_MOD_GZIP');
+$rowOrg = NULL;
 
 if ($mod_rewrite == "") $mod_rewrite = '<b>.htaccess not visited</b>';
 if ($allow_overwrite == "") $allow_overwrite = '<b>Off</b>';
@@ -46,29 +47,31 @@ if ($configFileExists) {
         if (!$dbSelectDbError) {
             //Examine organization structure
             $resultOrg = $dbConn->query("SELECT id FROM organization WHERE parent_id=-1");
-            $rowOrg = $resultOrg->fetch_assoc();
-            $resultOrg->free();;
-            
-            //Try to use a procedure in order to check the install script
-            //We don't know if the user has access to information schema
-            //So we try to call one of the procedures with a parameter returning a small set of results
-            $dbConn->query("SELECT GetParentIDByID(0) AS result");
-            $dbProcsError = ($dbConn->errno > 0) ? TRUE : FALSE;
-            
-            $sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
-                    . " FROM information_schema.columns"
-                    . " WHERE table_schema =  DATABASE()"
-                    . " GROUP BY TABLE_NAME"
-                    . " ORDER BY TABLE_NAME";
-            $stmt = $dbConn->prepare($sql);
-            $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
-            if (!$dbQueryError) {
-                $stmt->execute();
+            if ($resultOrg !== FALSE) {
+                $rowOrg = $resultOrg->fetch_assoc();
+                $resultOrg->free();;
+
+                //Try to use a procedure in order to check the install script
+                //We don't know if the user has access to information schema
+                //So we try to call one of the procedures with a parameter returning a small set of results
+                $dbConn->query("SELECT GetParentIDByID(0) AS result");
+                $dbProcsError = ($dbConn->errno > 0) ? TRUE : FALSE;
+
+                $sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
+                        . " FROM information_schema.columns"
+                        . " WHERE table_schema =  DATABASE()"
+                        . " GROUP BY TABLE_NAME"
+                        . " ORDER BY TABLE_NAME";
+                $stmt = $dbConn->prepare($sql);
                 $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
-            }
-            if (!$dbQueryError) {
-                $stmt->bind_result($table, $signature);
-                $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
+                if (!$dbQueryError) {
+                    $stmt->execute();
+                    $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
+                }
+                if (!$dbQueryError) {
+                    $stmt->bind_result($table, $signature);
+                    $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
+                }
             }
         }
     }

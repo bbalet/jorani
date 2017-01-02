@@ -285,9 +285,11 @@ class Leaves extends CI_Controller {
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-
-            $this->sendGenericMail($leave,$user,$manager,$lang_mail,$lang_mail->line('email_leave_request_creation_title'),
-                $lang_mail->line('email_leave_request_creation_subject'),'request');
+            
+            $this->sendGenericMail($leave, $user, $manager, $lang_mail, 
+                $lang_mail->line('email_leave_request_creation_title'),
+                $lang_mail->line('email_leave_request_creation_subject'),
+                'request');
         }
     }
 
@@ -317,8 +319,10 @@ class Leaves extends CI_Controller {
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
 
-            $this->sendGenericMail($leave,$user,$manager,$lang_mail,$lang_mail->line('email_leave_request_cancellation_title'),
-                $lang_mail->line('email_leave_request_cancellation_subject'),'cancel');
+            $this->sendGenericMail($leave, $user, $manager, $lang_mail,
+                $lang_mail->line('email_leave_request_cancellation_title'),
+                $lang_mail->line('email_leave_request_cancellation_subject'),
+                'cancel');
         }
     }
 
@@ -334,7 +338,7 @@ class Leaves extends CI_Controller {
      * @author Guillaume Blaquiere <guillaume.blaquiere@gmail.com>
      *
      */
-    private function sendGenericMail($leave,$user,$manager,$lang_mail,$title,$detailledSubject,$emailModel) {
+    private function sendGenericMail($leave, $user, $manager, $lang_mail, $title, $detailledSubject, $emailModel) {
 
         $date = new DateTime($leave['startdate']);
         $startdate = $date->format($lang_mail->line('global_date_format'));
@@ -361,18 +365,14 @@ class Leaves extends CI_Controller {
         $message = $this->parser->parse('emails/' . $manager['language'] . '/'.$emailModel, $data, TRUE);
 
         $to = $manager['email'];
-        if ($this->config->item('subject_prefix') != FALSE) {
-            $subject = $this->config->item('subject_prefix');
-        } else {
-            $subject = '[Jorani] ';
-        }
+        $subject = $detailledSubject . ' ' . $user['firstname'] . ' ' . $user['lastname'];
         //Copy to the delegates, if any
-        $cc=null;
+        $cc = NULL;
         $delegates = $this->delegations_model->listMailsOfDelegates($manager['id']);
         if ($delegates != '') {
             $cc = $delegates;
         }
-
+        
         sendMailByWrapper($this, $subject, $message, $to, $cc);
     }
 

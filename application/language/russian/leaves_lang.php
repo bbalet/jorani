@@ -89,7 +89,6 @@ $lang['leaves_validate_flash_msg_overlap_period'] = 'Вы не можете со
 
 $lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
 $lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
-$lang['leaves_cancel_unauthorized_msg_error'] = 'You can\'t cancel a leave request starting in the past. Ask your manager for rejecting it.';
 
 $lang['leaves_delete_flash_msg_error'] = 'Нельзя удалить это заявление на отпуск';
 $lang['leaves_delete_flash_msg_success'] = 'Заявление на отпуск успешно удалено';

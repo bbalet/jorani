@@ -1,0 +1,1185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+    <list default="true" id="dfd78bc1-8c72-4b18-a7ac-7fa59e56220e" name="Default" comment="" />
+=======
+    <list default="true" id="dfd78bc1-8c72-4b18-a7ac-7fa59e56220e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/config.php" afterPath="$PROJECT_DIR$/application/config/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/calendar/export_tabular.php" afterPath="$PROJECT_DIR$/application/views/calendar/export_tabular.php" />
+    </list>
+>>>>>>> add the XLS tabular export customion capability
+    <ignored path="jorani.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="C:\Projets\dev\jorani\.idea\shelf/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DatabaseView">
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="jorani" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+      <file leaf-file-name="global_lang.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/language/khmer/global_lang.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-51">
+              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="global_lang.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/language/german/global_lang.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <folding />
+=======
+      <file leaf-file-name="export_tabular.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/calendar/export_tabular.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-14">
+              <caret line="205" column="154" selection-start-line="205" selection-start-column="154" selection-end-line="205" selection-end-column="154" />
+              <folding>
+                <element signature="e#6#348#0#PHP" expanded="true" />
+              </folding>
+>>>>>>> add the XLS tabular export customion capability
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+      <file leaf-file-name="global_lang.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/language/persian/global_lang.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-170">
+              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+=======
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/config/config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="724">
+              <caret line="513" column="49" selection-start-line="513" selection-start-column="49" selection-end-line="513" selection-end-column="49" />
+>>>>>>> add the XLS tabular export customion capability
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+      <file leaf-file-name="global_lang.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/language/russian/global_lang.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="global_lang.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/language/spanish/global_lang.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="83" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="global_lang.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/language/italian/global_lang.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="global_lang.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/language/ukrainian/global_lang.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+              <folding>
+                <marker date="1472123723524" expanded="false" signature="9:259" placeholder=" Translation file ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/menu/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3159">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding>
+                <marker date="1472123723511" expanded="true" signature="10:259" placeholder=" This view contains the menu of the application ..." />
+                <marker date="1472123723511" expanded="true" signature="418:1294" placeholder="..." />
+                <marker date="1472123723511" expanded="true" signature="1358:2185" placeholder="..." />
+                <marker date="1472123723511" expanded="true" signature="2769:3968" placeholder="..." />
+                <marker date="1472123723511" expanded="true" signature="4015:5563" placeholder="..." />
+                <marker date="1472123723511" expanded="true" signature="5614:7529" placeholder="..." />
+                <marker date="1472123723511" expanded="true" signature="5860:5985" placeholder="..." />
+                <marker date="1472123723511" expanded="true" signature="7085:7458" placeholder="..." />
+                <marker date="1472123723511" expanded="true" signature="7218:7347" placeholder="..." />
+                <marker date="1472123723511" expanded="true" signature="8313:8733" placeholder="..." />
+                <marker date="1472123723511" expanded="true" signature="9461:9635" placeholder="..." />
+                <marker date="1472123723511" expanded="true" signature="10523:10666" placeholder="..." />
+              </folding>
+=======
+      <file leaf-file-name="leaves.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/leaves.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="202" column="39" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="39" />
+              <folding />
+>>>>>>> add the XLS tabular export customion capability
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="leave_distribution.ini" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/local/reports/leave_distribution.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="12" column="48" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/local/reports/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/application/controllers/leaves.php" />
+        <option value="$PROJECT_DIR$/application/config/config.php" />
+        <option value="$PROJECT_DIR$/application/views/calendar/export_tabular.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/application/config/routes.php" />
+        <option value="$PROJECT_DIR$/application/language/vietnamese/email_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/turkish/email_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/chinese/email_lang.php" />
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <option value="$PROJECT_DIR$/application/language/khmer/admin_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/german/admin_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/russian/admin_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/persian/admin_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/italian/admin_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/spanish/admin_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/ukrainian/admin_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/vietnamese/admin_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/khmer/global_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/german/global_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/persian/global_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/russian/global_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/spanish/global_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/italian/global_lang.php" />
+        <option value="$PROJECT_DIR$/application/language/ukrainian/global_lang.php" />
+        <option value="$PROJECT_DIR$/local/reports/leave_distribution.ini" />
+=======
+        <option value="$PROJECT_DIR$/application/config/routes.php" />
+        <option value="$PROJECT_DIR$/application/controllers/leaves.php" />
+        <option value="$PROJECT_DIR$/application/config/config.php" />
+        <option value="$PROJECT_DIR$/application/views/calendar/export_tabular.php" />
+>>>>>>> add the XLS tabular export customion capability
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true">
+    <include_path>
+      <path value="C:\apps\xampp\php\PEAR" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource ProjectPane="true" />
+      <autoscrollFromSource ProjectPane="true" />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Changed Files" />
+        <subPane subId="Project Files" />
+        <subPane subId="Default" />
+        <subPane subId="Tests" />
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jorani" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="C:/Program Files (x86)/PHP" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dfd78bc1-8c72-4b18-a7ac-7fa59e56220e" name="Default" comment="" />
+      <created>1471527957620</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1471527957620</updated>
+      <workItem from="1471527959880" duration="861000" />
+      <workItem from="1471529347929" duration="256000" />
+      <workItem from="1471962648232" duration="4008000" />
+      <workItem from="1472042050310" duration="3651000" />
+    </task>
+    <task id="LOCAL-00001">
+      <created>1471528332054</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1471528332054</updated>
+    </task>
+    <task id="LOCAL-00002" summary="no change file, git is crazy!">
+      <created>1471528474131</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1471528474131</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Remove useless code">
+      <created>1471961011275</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1471961011275</updated>
+    </task>
+    <task id="LOCAL-00004" summary="remove IDE files">
+      <created>1472115871083</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1472115871083</updated>
+    </task>
+    <task id="LOCAL-00005" summary="remove IDE files">
+      <created>1472116051652</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1472116051652</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+    <option name="totallyTimeSpent" value="14764000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17910448" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31989247" sideWeight="0.5051414" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969153" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53896105" sideWeight="0.4974293" order="7" side_tool="false" content_ui="tabs" />
+=======
+    <option name="totallyTimeSpent" value="9345000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2153518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53896105" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> add the XLS tabular export customion capability
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25757575" sideWeight="0.49485862" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+=======
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.53896105" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32258064" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2153518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+>>>>>>> add the XLS tabular export customion capability
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="no change file, git is crazy!" />
+    <MESSAGE value="Remove useless code" />
+    <MESSAGE value="remove IDE files" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove IDE files" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/application/language/vietnamese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local/reports/leave_distribution.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+=======
+>>>>>>> add the XLS tabular export customion capability
+        <state relative-caret-position="2737">
+          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/chinese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/turkish/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/vietnamese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local/triggers/leave.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+=======
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local/reports/leave_distribution.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="2737">
+          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+=======
+        <state relative-caret-position="2890">
+          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/chinese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+=======
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/turkish/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+=======
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/vietnamese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+=======
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local/reports/leave_distribution.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+=======
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="2890">
+          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+=======
+        <state relative-caret-position="85">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/chinese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="153">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+=======
+        <state relative-caret-position="85">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/turkish/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="51">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+=======
+        <state relative-caret-position="127">
+          <caret line="17" column="79" selection-start-line="17" selection-start-column="79" selection-end-line="17" selection-end-column="79" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/vietnamese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="119">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local/reports/leave_distribution.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+=======
+        <state relative-caret-position="102">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+        <state relative-caret-position="85">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="4" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/leaves.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="5508">
+          <caret line="395" column="4" selection-start-line="395" selection-start-column="4" selection-end-line="395" selection-end-column="4" />
+          <folding>
+            <marker date="1472123720068" expanded="true" signature="780:28540" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="793:883" placeholder=" Default constructor ..." />
+            <marker date="1472123720068" expanded="true" signature="921:1183" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="1197:1328" placeholder=" Display the list of the leave requests of the connected user ..." />
+            <marker date="1472123720068" expanded="true" signature="1360:2064" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="22199:22318" placeholder=" Export the list of all leaves into an Excel file ..." />
+            <marker date="1472123720068" expanded="true" signature="22351:22439" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="22449:22637" placeholder=" Ajax endpoint : Send a list of fullcalendar events ..." />
+            <marker date="1472123720068" expanded="true" signature="22681:22958" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="22968:23089" placeholder=" Ajax endpoint : Send a list of fullcalendar events ..." />
+            <marker date="1472123720068" expanded="true" signature="23125:23374" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="23388:23509" placeholder=" Ajax endpoint : Send a list of fullcalendar events ..." />
+            <marker date="1472123720068" expanded="true" signature="23549:23781" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="23791:23959" placeholder=" Ajax endpoint : Send a list of fullcalendar events ..." />
+            <marker date="1472123720068" expanded="true" signature="24008:24338" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="24348:24469" placeholder=" Ajax endpoint : Send a list of fullcalendar events ..." />
+            <marker date="1472123720068" expanded="true" signature="24506:24871" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="24885:25267" placeholder=" Ajax endpoint. Result varies according to input : ..." />
+            <marker date="1472123720068" expanded="true" signature="25302:28538" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="25922:26252" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="25980:26113" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="26121:26242" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="26319:26702" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="26355:26525" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="26533:26692" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="27384:27980" placeholder="..." />
+            <marker date="1472123720068" expanded="true" signature="28172:28305" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7616">
+          <caret line="483" column="0" selection-start-line="483" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
+          <folding>
+            <marker date="1472123720028" expanded="true" signature="79:476" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="508:859" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="902:1484" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="1524:1877" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="1912:2249" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="2288:2592" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="2628:2960" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="3000:3458" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="3500:4180" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="4237:5143" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="5370:6096" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="6132:6473" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="6505:6797" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="6847:7177" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="7211:7504" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="7574:8547" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="8910:9363" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="9496:9776" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="9823:10341" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="10379:10564" placeholder="{...}" />
+            <marker date="1472123720028" expanded="true" signature="10441:10496" placeholder="{...}" />
+            <marker date="1472123720028" expanded="true" signature="10505:10561" placeholder="{...}" />
+            <marker date="1472123720028" expanded="true" signature="10570:10614" placeholder="{...}" />
+            <marker date="1472123720028" expanded="true" signature="10750:11585" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="11627:12054" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="12097:12479" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="12524:12963" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="12996:13192" placeholder="..." />
+            <marker date="1472123720028" expanded="true" signature="13916:14318" placeholder="//..." />
+          </folding>
+=======
+        <state relative-caret-position="223">
+          <caret line="358" column="8" selection-start-line="358" selection-start-column="8" selection-end-line="358" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3111">
+          <caret line="183" column="0" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/chinese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/calendar/export_tabular.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="3060">
+          <caret line="187" column="97" selection-start-line="187" selection-start-column="97" selection-end-line="187" selection-end-column="97" />
+          <folding>
+            <marker date="1472123722583" expanded="true" signature="9:346" placeholder=" This view exports a tabular calendar of the leave taken by a group of users ..." />
+            <marker date="1472123722583" expanded="true" signature="10547:10555" placeholder="..." />
+            <marker date="1472123722583" expanded="true" signature="10547:10590" placeholder="..." />
+            <marker date="1472123722583" expanded="true" signature="10547:10613" placeholder="..." />
+          </folding>
+=======
+        <state relative-caret-position="221">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="255">
+          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+          <folding />
+=======
+        <state relative-caret-position="221">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/foreign_chars.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="204">
+          <caret line="195" column="70" selection-start-line="195" selection-start-column="70" selection-end-line="195" selection-end-column="70" />
+          <folding />
+=======
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/vietnamese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="204">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="2737">
+          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="51">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+          <folding />
+=======
+        <state relative-caret-position="153">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/turkish/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="119">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="85">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/vietnamese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/chinese/email_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="221">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/khmer/admin_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#230#0#PHP" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="-27">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/german/admin_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="238">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/russian/admin_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="221">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#230#0#PHP" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="2737">
+          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/persian/admin_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="238">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="153">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/italian/admin_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="187">
+          <caret line="63" column="11" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="11" />
+          <folding />
+=======
+        <state relative-caret-position="51">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/spanish/admin_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="85">
+          <caret line="56" column="6" selection-start-line="56" selection-start-column="6" selection-end-line="56" selection-end-column="6" />
+          <folding />
+=======
+        <state relative-caret-position="119">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/ukrainian/admin_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="85">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="-27">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/vietnamese/admin_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="136">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/diagnostic.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="-4621">
+          <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+          <folding />
+=======
+        <state relative-caret-position="2890">
+          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/khmer/global_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="-51">
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="153">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/german/global_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="170">
+          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="51">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/persian/global_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="-170">
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="119">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/russian/global_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="17">
+          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="-27">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/spanish/global_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="272">
+          <caret line="83" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/italian/global_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding />
+=======
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/ukrainian/global_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="68">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding>
+            <marker date="1472123723524" expanded="false" signature="9:259" placeholder=" Translation file ..." />
+          </folding>
+=======
+        <state relative-caret-position="119">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/menu/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="-3159">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <marker date="1472123723511" expanded="true" signature="10:259" placeholder=" This view contains the menu of the application ..." />
+            <marker date="1472123723511" expanded="true" signature="418:1294" placeholder="..." />
+            <marker date="1472123723511" expanded="true" signature="1358:2185" placeholder="..." />
+            <marker date="1472123723511" expanded="true" signature="2769:3968" placeholder="..." />
+            <marker date="1472123723511" expanded="true" signature="4015:5563" placeholder="..." />
+            <marker date="1472123723511" expanded="true" signature="5614:7529" placeholder="..." />
+            <marker date="1472123723511" expanded="true" signature="5860:5985" placeholder="..." />
+            <marker date="1472123723511" expanded="true" signature="7085:7458" placeholder="..." />
+            <marker date="1472123723511" expanded="true" signature="7218:7347" placeholder="..." />
+            <marker date="1472123723511" expanded="true" signature="8313:8733" placeholder="..." />
+            <marker date="1472123723511" expanded="true" signature="9461:9635" placeholder="..." />
+            <marker date="1472123723511" expanded="true" signature="10523:10666" placeholder="..." />
+          </folding>
+=======
+        <state relative-caret-position="204">
+          <caret line="19" column="77" selection-start-line="19" selection-start-column="77" selection-end-line="19" selection-end-column="77" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local/reports/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="153">
+          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding />
+=======
+        <state relative-caret-position="102">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local/reports/leave_distribution.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+>>>>>>> add the XLS tabular export customion capability
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local/reports/leave_distribution.ini">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< 9d2b273b4073ce88dad08b9572c78c550974cb49
+        <state relative-caret-position="153">
+          <caret line="12" column="48" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="48" />
+=======
+        <state relative-caret-position="85">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/leaves.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="202" column="39" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="724">
+          <caret line="513" column="49" selection-start-line="513" selection-start-column="49" selection-end-line="513" selection-end-column="49" />
+>>>>>>> add the XLS tabular export customion capability
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/calendar/export_tabular.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-14">
+          <caret line="205" column="154" selection-start-line="205" selection-start-column="154" selection-end-line="205" selection-end-column="154" />
+          <folding>
+            <element signature="e#6#348#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

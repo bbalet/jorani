@@ -490,6 +490,38 @@ $config['default_timezone'] = 'Europe/Paris';
 $config['public_calendar'] = FALSE;
 
 //____________________________________________________________________________
+//XLS tabular Export configuration
+//Choose the color of th leave type
+//Planned
+$config['styleBgPlanned'] = 'DDD';
+//Requested
+$config['styleBgRequested'] = 'F89406';
+//Accepted
+$config['styleBgAccepted'] = '468847';
+//Rejected
+$config['styleBgRejected'] = 'FF0000';
+//DayOff
+$config['styleBgDayOff'] = '000000';
+
+//Choose the color leave type to display
+$config['showPlanned'] = true;
+//Requested
+$config['showRequested'] = true;
+//Accepted
+$config['showAccepted'] = true;
+//Rejected
+$config['showRejected'] = true;
+
+//Choose how to display leave label in XLS. Set null to print nothing
+//Text in comment of the cell
+$config['displayLeaveInComment'] = null;
+//Text in the cell (for printing)
+//Example : Print the 3 char in parenthesis in my leave label (Example: "Sick Leave (SIC)" will be printed "SIC" in XLS cell)
+$config['displayLeaveInCell'] = function($leaveLabel){return substr($leaveLabel,strpos($leaveLabel,'(')+1,3);};
+
+
+
+//____________________________________________________________________________
 //Force spreadsheet export format. We strongly recommend XLSX format over Open Document Format.
 //Please note that ods doesn't support all formatting/style options and is considered as experimental
 $config['spreadsheet_format'] = 'xlsx';   //Supported formats: xlsx, ods

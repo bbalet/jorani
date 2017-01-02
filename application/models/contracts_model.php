@@ -261,10 +261,12 @@ class Contracts_model extends CI_Model {
         $contract = $this->getContracts($user['contract']);
         //If a default leave type is set on the contract, it overwrites what is set in config file
         $defaultType = $this->config->item('default_leave_type');
-        if (is_null($contract['default_leave_type'])) {
-            $defaultType = ($defaultType == FALSE) ? 0 : $defaultType;
-        } else {
-            $defaultType = $contract['default_leave_type'];
+        if (array_key_exists('default_leave_type', $contract)) {
+            if (is_null($contract['default_leave_type'])) {
+                $defaultType = ($defaultType == FALSE) ? 0 : $defaultType;
+            } else {
+                $defaultType = $contract['default_leave_type'];
+            }
         }
 
         //Build the list of types

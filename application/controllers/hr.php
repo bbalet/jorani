@@ -202,7 +202,7 @@ class Hr extends CI_Controller {
             if (isset($startdate) && isset($enddate) && isset($days) && isset($type) && isset($employees)) {
                 $this->load->model('entitleddays_model');
                 $objectEmployees = json_decode($employees);
-                foreach ($objectEmployees->employeeIds as $user_id) {
+                foreach ($objectEmployees as $user_id) {
                     $id = $this->entitleddays_model->addEntitledDaysToEmployee((int) $user_id, $startdate, $enddate, $days, $type, $description);
                     echo $id . ',';
                 }

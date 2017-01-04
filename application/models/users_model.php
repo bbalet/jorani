@@ -187,8 +187,8 @@ class Users_model extends CI_Model {
         if ($this->input->post('position') !== FALSE && $this->input->post('position') != '') {
             $data['position'] = $this->input->post('position');
         }
-        if ($this->input->post('position') !== FALSE && $this->input->post('datehired') == "") {
-            $datehired = $this->input->post('datehired');
+        if ($this->input->post('datehired') !== FALSE && $this->input->post('datehired') == "") {
+            $data['datehired'] = $this->input->post('datehired');
         }
         
         if ($this->config->item('ldap_basedn_db')) $data['ldap_path'] = $this->input->post('ldap_path');
@@ -326,8 +326,8 @@ class Users_model extends CI_Model {
         if ($this->input->post('position') !== FALSE && $this->input->post('position') != '') {
             $data['position'] = $this->input->post('position');
         }
-        if ($this->input->post('position') !== FALSE && $this->input->post('datehired') == "") {
-            $datehired = $this->input->post('datehired');
+        if ($this->input->post('datehired') !== FALSE && $this->input->post('datehired') == "") {
+            $data['datehired'] = $this->input->post('datehired');
         }
         if ($this->config->item('ldap_basedn_db')) {
             $data['ldap_path'] = $this->input->post('ldap_path');

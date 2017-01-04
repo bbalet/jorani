@@ -165,12 +165,6 @@ class Users_model extends CI_Model {
         $role = 0;
         foreach($this->input->post("role") as $role_bit){
             $role = $role | $role_bit;
-        }        
-        
-        if ($this->input->post('datehired') == "") {
-            $datehired = NULL;
-        } else {
-            $datehired = $this->input->post('datehired');
         }
         
         $data = array(
@@ -182,13 +176,21 @@ class Users_model extends CI_Model {
             'role' => $role,
             'manager' => $this->input->post('manager'),
             'contract' => $this->input->post('contract'),
-            'organization' => $this->input->post('entity'),
-            'position' => $this->input->post('position'),
-            'datehired' => $datehired,
             'identifier' => $this->input->post('identifier'),
             'language' => $this->input->post('language'),
             'timezone' => $this->input->post('timezone')
         );
+        
+        if ($this->input->post('entity') !== FALSE && $this->input->post('entity') != '') {
+            $data['organization'] = $this->input->post('entity');
+        }
+        if ($this->input->post('position') !== FALSE && $this->input->post('position') != '') {
+            $data['position'] = $this->input->post('position');
+        }
+        if ($this->input->post('position') !== FALSE && $this->input->post('datehired') == "") {
+            $datehired = $this->input->post('datehired');
+        }
+        
         if ($this->config->item('ldap_basedn_db')) $data['ldap_path'] = $this->input->post('ldap_path');
         $this->db->insert('users', $data);
         
@@ -306,12 +308,6 @@ class Users_model extends CI_Model {
             $manager = $this->input->post('manager');
         }
         
-        if ($this->input->post('datehired') == "") {
-            $datehired = NULL;
-        } else {
-            $datehired = $this->input->post('datehired');
-        }
-        
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
@@ -320,14 +316,22 @@ class Users_model extends CI_Model {
             'role' => $role,
             'manager' => $manager,
             'contract' => $this->input->post('contract'),
-            'organization' => $this->input->post('entity'),
-            'position' => $this->input->post('position'),
-            'datehired' => $datehired,
             'identifier' => $this->input->post('identifier'),
             'language' => $this->input->post('language'),
             'timezone' => $this->input->post('timezone')
         );
-        if ($this->config->item('ldap_basedn_db')) $data['ldap_path'] = $this->input->post('ldap_path');
+        if ($this->input->post('entity') !== FALSE && $this->input->post('entity') != '') {
+            $data['organization'] = $this->input->post('entity');
+        }
+        if ($this->input->post('position') !== FALSE && $this->input->post('position') != '') {
+            $data['position'] = $this->input->post('position');
+        }
+        if ($this->input->post('position') !== FALSE && $this->input->post('datehired') == "") {
+            $datehired = $this->input->post('datehired');
+        }
+        if ($this->config->item('ldap_basedn_db')) {
+            $data['ldap_path'] = $this->input->post('ldap_path');
+        }
 
         $this->db->where('id', $this->input->post('id'));
         $result = $this->db->update('users', $data);

@@ -1236,9 +1236,9 @@ class Leaves_model extends CI_Model {
                 if (!$one_day && $last_day && $end_afternoon) $display = '1';
                 if (!$one_day && $last_day && $end_morning) $display = '2';
                 
-                //Check if another leave was defined on this day
+                //Check if another leave was defined on this day             
                 if ($user->days[$dayNum]->display != '4') { //Except full day off
-                    if ($user->days[$dayNum]->type != '') { //Overlapping with a day off or another request
+                    if ($user->days[$dayNum]->display != 0) { //Overlapping with a day off or another request
                         if (($user->days[$dayNum]->display == 2) ||
                                 ($user->days[$dayNum]->display == 6)) { //Respect Morning/Afternoon order
                             $user->days[$dayNum]->type .= ';' . $entry->type;

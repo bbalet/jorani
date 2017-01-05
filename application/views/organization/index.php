@@ -180,6 +180,19 @@
     }
     
     $(function () {
+        //Global Ajax error handling mainly used for session expiration
+        $( document ).ajaxError(function(event, jqXHR, settings, errorThrown) {
+            $('#frmModalAjaxWait').modal('hide');
+            if (jqXHR.status == 401) {
+                bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
+                    //After the login page, we'll be redirected to the current page 
+                   location.reload();
+                });
+            } else { //Oups
+                bootbox.alert("<?php echo lang('global_ajax_error');?>");
+            }
+          });
+    
         //On confirm the deletion of the node, launch heavy cascade deletion
         $("#lnkDeleteEntity").click(function() {
             $.ajax({

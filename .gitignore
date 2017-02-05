@@ -14,3 +14,4 @@ application/temp/*
 /tests/emails-recus/
 /application/language/extract.php
 /application/language/test.txt
+/.sonar/

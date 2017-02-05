@@ -14,6 +14,7 @@ $lang['session_login_field_login'] = 'Anmelden';
 $lang['session_login_field_password'] = 'Passwort';
 $lang['session_login_button_login'] = 'Anmelden';
 $lang['session_login_button_forget_password'] = 'Passwort zusenden';
+$lang['session_login_msg_forget_password'] = 'Are you sure that you want to reset your password?';
 $lang['session_login_msg_empty_login'] = 'Bitte füllen Sie das Anmelden-Feld aus';
 $lang['session_login_msg_unknown_login'] = 'Unbekanntes Anmelden';
 $lang['session_login_msg_password_sent'] = 'Ein neues Passwort wurde Ihnen per Mail zugesandt.';

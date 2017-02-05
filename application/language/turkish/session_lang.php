@@ -14,6 +14,7 @@ $lang['session_login_field_login'] = 'Oturum aç';
 $lang['session_login_field_password'] = 'Şifre';
 $lang['session_login_button_login'] = 'Oturum aç';
 $lang['session_login_button_forget_password'] = 'Şifremi gönder';
+$lang['session_login_msg_forget_password'] = 'Are you sure that you want to reset your password?';
 $lang['session_login_msg_empty_login'] = 'Lütfen oturum açma alanını doldurunuz';
 $lang['session_login_msg_unknown_login'] = 'Bilinmeyen oturum. Lütfen İK Sorumlusu / Yöneticisi ile irtibata geçiniz.';
 $lang['session_login_msg_password_sent'] = 'Şifreniz e-posta adresinize gönderildi.';

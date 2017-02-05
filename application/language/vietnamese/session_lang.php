@@ -14,6 +14,7 @@ $lang['session_login_field_login'] = 'Đăng nhập';
 $lang['session_login_field_password'] = 'Mật khẩu';
 $lang['session_login_button_login'] = 'Đăng nhập';
 $lang['session_login_button_forget_password'] = 'Gửi mật khẩu cho tôi';
+$lang['session_login_msg_forget_password'] = 'Are you sure that you want to reset your password?';
 $lang['session_login_msg_empty_login'] = 'Hãy điền đủ các thông tin đăng nhập';
 $lang['session_login_msg_unknown_login'] = 'User không tồn tại. Hãy liên hệ với trưởng bộ phận nhân sự';
 $lang['session_login_msg_password_sent'] = 'Mật khẩu đã được gửi vào e-mail của bạn';

@@ -29,19 +29,19 @@
     }
     
     .vertical-center {
-        min-height: 90%;  /* Fallback for browsers do NOT support vh unit */
+        min-height: 90%;  /* Fallback for browsers not supporting vh unit */
         min-height: 90vh;
         display: flex;
         align-items: center;
-      }
+    }
       
-      .form-box {
+    .form-box {
         padding: 20px;
         border: 1px #e4e4e4 solid;
         border-radius: 4px;
         box-shadow: 0 0 6px #ccc;
         background-color: #fff;
-      }
+    }
 </style>
 
     <div class="row vertical-center">
@@ -87,7 +87,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     <?php } ?>
     <br /><br />
     <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-    <button id="cmdForgetPassword" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
+    <button id="cmdForgetPassword" class="btn btn-danger"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
     <?php } ?>
     
     <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>
@@ -109,6 +109,15 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         </div>
         <div class="span3">&nbsp;</div>
     </div>
+
+<div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <h1><?php echo lang('global_msg_wait');?></h1>
+    </div>
+    <div class="modal-body">
+        <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
+    </div>
+ </div>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
@@ -198,21 +207,29 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
             if ($('#login').val() == "") {
                 bootbox.alert("<?php echo lang('session_login_msg_empty_login');?>");
             } else {
-                $.ajax({
-                   type: "POST",
-                   url: "<?php echo base_url(); ?>session/forgetpassword",
-                   data: { login: $('#login').val() }
-                 })
-                 .done(function(msg) {
-                   switch(msg) {
-                       case "OK":
-                           bootbox.alert("<?php echo lang('session_login_msg_password_sent');?>");
-                           break;
-                       case "UNKNOWN":
-                           bootbox.alert("<?php echo lang('session_login_flash_bad_credentials');?>");
-                           break;
-                   }
-                 });
+                bootbox.confirm("<?php echo lang('session_login_msg_forget_password');?>",
+                    "<?php echo lang('Cancel');?>",
+                    "<?php echo lang('OK');?>", function(result) {
+                    if (result) {
+                        $('#frmModalAjaxWait').modal('show');
+                        $.ajax({
+                           type: "POST",
+                           url: "<?php echo base_url(); ?>session/forgetpassword",
+                           data: { login: $('#login').val() }
+                         })
+                         .done(function(msg) {
+                            $('#frmModalAjaxWait').modal('hide');
+                            switch(msg) {
+                                case "OK":
+                                    bootbox.alert("<?php echo lang('session_login_msg_password_sent');?>");
+                                    break;
+                                case "UNKNOWN":
+                                    bootbox.alert("<?php echo lang('session_login_flash_bad_credentials');?>");
+                                    break;
+                            }
+                         });
+                     }
+                });
             }
         });
         

@@ -14,6 +14,7 @@ $lang['session_login_field_login'] = 'Login';
 $lang['session_login_field_password'] = 'Wachtwoord';
 $lang['session_login_button_login'] = 'Login';
 $lang['session_login_button_forget_password'] = 'Stuur mij mijn wachtwoord';
+$lang['session_login_msg_forget_password'] = 'Are you sure that you want to reset your password?';
 $lang['session_login_msg_empty_login'] = 'Vul aub het login-veld in';
 $lang['session_login_msg_unknown_login'] = 'Onbekende login. Neem aub contact op met uw manager.';
 $lang['session_login_msg_password_sent'] = 'Het wachtwoord is naar uw email adres gestuurd.';

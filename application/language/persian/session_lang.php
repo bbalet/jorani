@@ -14,6 +14,7 @@ $lang['session_login_field_login'] = 'ورود';
 $lang['session_login_field_password'] = 'رمز';
 $lang['session_login_button_login'] = 'ورود';
 $lang['session_login_button_forget_password'] = 'رمز من را به من بفرست';
+$lang['session_login_msg_forget_password'] = 'Are you sure that you want to reset your password?';
 $lang['session_login_msg_empty_login'] = 'لطفاً فورم ورود را پر نمایید';
 $lang['session_login_msg_unknown_login'] = 'ورود ناشناس. لطفاً با مدیر منابع انسانی یا مدیر عمومی تان تماس بگیرید.';
 $lang['session_login_msg_password_sent'] = 'رمز به ایمیل شما فرستاده شد.';

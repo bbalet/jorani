@@ -14,6 +14,7 @@ $lang['session_login_field_login'] = 'ចូលទៅក្នុងប្រព
 $lang['session_login_field_password'] = 'លេខសំងាត់';
 $lang['session_login_button_login'] = 'ចូលទៅក្នុងប្រពន្ធ័កម្មវិធី';
 $lang['session_login_button_forget_password'] = 'ផ្ញើរឱ្យខ្ញុំនូវលេខសម្ងាត់របស់ខ្ញុំ';
+$lang['session_login_msg_forget_password'] = 'Are you sure that you want to reset your password?';
 $lang['session_login_msg_empty_login'] = 'សូមបំពេញពត៌មាន ក្នុងប្រអប់ចូលប្រព័ន្ធ';
 $lang['session_login_msg_unknown_login'] = 'ចូលក្នុងប្រព័ន្ធដោយឥតអត្តសញ្ញាណ។ សូមទំនាកទំនងទៅកាន់មន្ត្រីធនធានមនុស្យ ឬអ្នកគ្រប់គ្រង។';
 $lang['session_login_msg_password_sent'] = 'លេខសម្ងាត់ត្រូវបានបញ្ជួនចូលទៅក្នុង អ៊ីម៉ែលរបស់លោកអ្នករួចហើយ';

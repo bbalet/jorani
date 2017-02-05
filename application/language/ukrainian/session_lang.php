@@ -14,6 +14,7 @@ $lang['session_login_field_login'] = 'Ім\'я користувача';
 $lang['session_login_field_password'] = 'Пароль';
 $lang['session_login_button_login'] = 'Ім\'я користувача';
 $lang['session_login_button_forget_password'] = 'Відіслати мені мій пароль';
+$lang['session_login_msg_forget_password'] = 'Are you sure that you want to reset your password?';
 $lang['session_login_msg_empty_login'] = 'Заповніть поле Ім\'я користувача';
 $lang['session_login_msg_unknown_login'] = 'Невірну ім\'я користувача. Зверніться до свого керівника.';
 $lang['session_login_msg_password_sent'] = 'Пароль був висланий на вашу електронну адресу.';

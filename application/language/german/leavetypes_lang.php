@@ -13,6 +13,7 @@ $lang['leavetypes_type_description'] = 'Leave type #0 is a system type reserved 
 $lang['leavetypes_type_confirm_rename'] = 'Leave type #0 is a system type reserved for overtime management. Are you sure that you want to rename it?';
 $lang['leavetypes_type_thead_id'] = 'ID';
 $lang['leavetypes_type_thead_name'] = 'Name';
+$lang['leavetypes_type_thead_deduct'] = 'Deduct non working days';
 $lang['leavetypes_type_thead_tip_delete'] = 'löschen';
 $lang['leavetypes_type_thead_tip_edit'] = 'bearbeiten';
 $lang['leavetypes_type_button_export'] = 'Diese Liste exportieren';
@@ -25,12 +26,14 @@ $lang['leavetypes_popup_create_title'] = 'Abwesenheitsart hinzufügen';
 $lang['leavetypes_popup_create_button_cancel'] = 'Abbrechen';
 $lang['leavetypes_popup_create_button_create'] = 'Erstellen';
 $lang['leavetypes_popup_create_field_name'] = 'Name';
+$lang['leavetypes_popup_create_field_deduct'] = 'Deduct non working days';
 $lang['leavetypes_popup_create_flash_msg'] = 'Abwesenheitsart erfolgreich erstellt';
 
 $lang['leavetypes_popup_update_title'] = 'Abwesenheitsart bearbeiten';
 $lang['leavetypes_popup_update_button_cancel'] = 'Abbrechen';
 $lang['leavetypes_popup_update_button_update'] = 'Aktualisieren';
 $lang['leavetypes_popup_update_field_name'] = 'Name';
+$lang['leavetypes_popup_update_field_deduct'] = 'Deduct non working days';
 $lang['leavetypes_popup_update_flash_msg'] = 'Abwesenheitsart erfolgreich aktualisiert';
 
 $lang['leavetypes_popup_delete_title'] = 'Abwesenheitsart löschen';
@@ -45,3 +48,4 @@ $lang['leavetypes_popup_delete_flash_forbidden'] = 'Abwesenheitsarten in Benutzu
 $lang['leavetypes_type_export_title'] = 'Abwesenheitsarten';
 $lang['leavetypes_type_export_thead_id'] = 'ID';
 $lang['leavetypes_type_export_thead_name'] = 'Name';
+$lang['leavetypes_type_export_thead_deduct'] = 'Deduct non working days';

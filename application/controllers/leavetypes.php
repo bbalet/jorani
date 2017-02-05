@@ -59,7 +59,7 @@ class LeaveTypes extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/create', $data);
         } else {
-            $this->types_model->setTypes($this->input->post('name'));
+            $this->types_model->setTypes();
             $this->session->set_flashdata('msg', lang('leavetypes_popup_create_flash_msg'));
             redirect('leavetypes');
         }
@@ -76,16 +76,16 @@ class LeaveTypes extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('leavetypes_popup_update_title');
-        $data['leavetypes'] = $this->types_model->getTypes();
         $data['id'] = $id;
-        $data['type_name'] = $this->types_model->getName($id);
+        $data['leavetypes'] = $this->types_model->getTypes();
+        $data['leavetype'] = $this->types_model->getTypes($id);
         
         $this->form_validation->set_rules('name', lang('leavetypes_popup_update_field_name'), 'required|xss_clean|strip_tags');        
         
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/edit', $data);
         } else {
-            $this->types_model->updateTypes($id, $this->input->post('name'));
+            $this->types_model->updateTypes($id, $this->input->post('name'), $this->input->post('deduct_days_off'));
             $this->session->set_flashdata('msg', lang('leavetypes_popup_update_flash_msg'));
             redirect('leavetypes');
         }

@@ -13,6 +13,7 @@ $lang['leavetypes_type_description'] = 'Leave type #0 is a system type reserved 
 $lang['leavetypes_type_confirm_rename'] = 'Leave type #0 is a system type reserved for overtime management. Are you sure that you want to rename it?';
 $lang['leavetypes_type_thead_id'] = 'ID';
 $lang['leavetypes_type_thead_name'] = 'Tên';
+$lang['leavetypes_type_thead_deduct'] = 'Deduct non working days';
 $lang['leavetypes_type_thead_tip_delete'] = 'xóa';
 $lang['leavetypes_type_thead_tip_edit'] = 'sửa';
 $lang['leavetypes_type_button_export'] = 'Xuất danh sách';
@@ -25,12 +26,14 @@ $lang['leavetypes_popup_create_title'] = 'Thêm loại ngày nghỉ';
 $lang['leavetypes_popup_create_button_cancel'] = 'Hủy bỏ';
 $lang['leavetypes_popup_create_button_create'] = 'Khởi tạo';
 $lang['leavetypes_popup_create_field_name'] = 'Tên';
+$lang['leavetypes_popup_create_field_deduct'] = 'Deduct non working days';
 $lang['leavetypes_popup_create_flash_msg'] = 'Loại ngày nghỉ được tạo thành công';
 
 $lang['leavetypes_popup_update_title'] = 'Sửa một loại ngày nghỉ';
 $lang['leavetypes_popup_update_button_cancel'] = 'Hủy bỏ';
 $lang['leavetypes_popup_update_button_update'] = 'Cập nhật';
 $lang['leavetypes_popup_update_field_name'] = 'Tên';
+$lang['leavetypes_popup_update_field_deduct'] = 'Deduct non working days';
 $lang['leavetypes_popup_update_flash_msg'] = 'Loại ngày nghỉ được cập nhật thành công';
 
 $lang['leavetypes_popup_delete_title'] = 'Xóa loại ngày nghỉ';
@@ -45,3 +48,4 @@ $lang['leavetypes_popup_delete_flash_forbidden'] = 'Bạn không thể xóa lo�
 $lang['leavetypes_type_export_title'] = 'Loại ngày nghỉ';
 $lang['leavetypes_type_export_thead_id'] = 'ID';
 $lang['leavetypes_type_export_thead_name'] = 'Tên';
+$lang['leavetypes_type_export_thead_deduct'] = 'Deduct non working days';

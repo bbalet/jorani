@@ -13,6 +13,7 @@ $lang['leavetypes_type_description'] = 'Leave type #0 is a system type reserved 
 $lang['leavetypes_type_confirm_rename'] = 'Leave type #0 is a system type reserved for overtime management. Are you sure that you want to rename it?';
 $lang['leavetypes_type_thead_id'] = 'ID';
 $lang['leavetypes_type_thead_name'] = 'Назва';
+$lang['leavetypes_type_thead_deduct'] = 'Deduct non working days';
 $lang['leavetypes_type_thead_tip_delete'] = 'видалити';
 $lang['leavetypes_type_thead_tip_edit'] = 'редагувати';
 $lang['leavetypes_type_button_export'] = 'Експортувати список';
@@ -25,12 +26,14 @@ $lang['leavetypes_popup_create_title'] = 'Додати тип відпустки
 $lang['leavetypes_popup_create_button_cancel'] = 'Скасувати';
 $lang['leavetypes_popup_create_button_create'] = 'Створити';
 $lang['leavetypes_popup_create_field_name'] = 'Назва';
+$lang['leavetypes_popup_create_field_deduct'] = 'Deduct non working days';
 $lang['leavetypes_popup_create_flash_msg'] = 'Тип відпустки успішно створений';
 
 $lang['leavetypes_popup_update_title'] = 'Редагувати тип відпустки';
 $lang['leavetypes_popup_update_button_cancel'] = 'Скасувати';
 $lang['leavetypes_popup_update_button_update'] = 'Оновити';
 $lang['leavetypes_popup_update_field_name'] = 'Назва';
+$lang['leavetypes_popup_update_field_deduct'] = 'Deduct non working days';
 $lang['leavetypes_popup_update_flash_msg'] = 'Тип відпустки успішно оновлений';
 
 $lang['leavetypes_popup_delete_title'] = 'Видалити тип відпустки';
@@ -45,3 +48,4 @@ $lang['leavetypes_popup_delete_flash_forbidden'] = 'Не можна видали
 $lang['leavetypes_type_export_title'] = 'Типи відпусток';
 $lang['leavetypes_type_export_thead_id'] = 'ID';
 $lang['leavetypes_type_export_thead_name'] = 'Назва';
+$lang['leavetypes_type_export_thead_deduct'] = 'Deduct non working days';

@@ -121,11 +121,13 @@ class Leaves_model extends CI_Model {
      * @param date $enddate end date of the leave request
      * @param string $startdatetype start date type of leave request being created (Morning or Afternoon)
      * @param string $enddatetype end date type of leave request being created (Morning or Afternoon)
-     * @param array List of non-working days
+     * @param array $daysoff List of non-working days
+     * @param bool $deductDayOff Deduct days off when evaluating the actual length
      * @return array (length=>length of leave, overlapping=>excat match with a non-working day, daysoff=>sum of days off)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function actualLengthAndDaysOff($employee, $startdate, $enddate, $startdatetype, $enddatetype, $daysoff) {
+    public function actualLengthAndDaysOff($employee, $startdate, $enddate,
+            $startdatetype, $enddatetype, $daysoff, $deductDayOff = FALSE) {
         $startDateObject = DateTime::createFromFormat('Y-m-d H:i:s', $startdate . ' 00:00:00');
         $endDateObject = DateTime::createFromFormat('Y-m-d H:i:s', $enddate . ' 00:00:00');
         $iDate = clone $startDateObject;
@@ -159,18 +161,19 @@ class Leaves_model extends CI_Model {
                         case 1: //1 : All day
                             if ($one_day && $start_morning && $end_afternoon && $first_day)
                                 $overlapDayOff = TRUE;
+                                if ($deductDayOff) $length++;
                             break;
                         case 2: //2 : Morning
                             if ($one_day && $start_morning && $end_morning && $first_day)
                                 $overlapDayOff = TRUE;
                             else
-                                $length+=0.5;
+                                if ($deductDayOff) $length++; else $length+=0.5;
                             break;
                         case 3: //3 : Afternnon
                             if ($one_day && $start_afternoon && $end_afternoon && $first_day)
                                 $overlapDayOff = TRUE;
                             else
-                                $length+=0.5;
+                                if ($deductDayOff) $length++; else $length+=0.5;
                             break;
                         default:
                             break;

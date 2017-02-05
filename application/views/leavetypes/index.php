@@ -19,6 +19,7 @@
     <tr>
       <th><?php echo lang('leavetypes_type_thead_id');?></th>
       <th><?php echo lang('leavetypes_type_thead_name');?></th>
+     <th><?php echo lang('leavetypes_type_thead_deduct');?></th>
     </tr>
   </thead>
   <tbody>
@@ -26,11 +27,20 @@
     <tr>
       <td><?php echo $type['id'] ?> &nbsp; 
           <?php if ($type['id'] !=0 ) { ?>
-          <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="<?php echo lang('leavetypes_type_thead_tip_delete');?>"><i class="icon-trash"></i></a></td>
+          <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="<?php echo lang('leavetypes_type_thead_tip_delete');?>"><i class="icon-trash"></i></a>
           <?php } ?>
+      </td>
       <td>
           <a href="<?php echo base_url();?>leavetypes/edit/<?php echo $type['id'] ?>" data-target="#frmEditLeaveType" data-toggle="modal" title="<?php echo lang('leavetypes_type_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
-          &nbsp; <?php echo $type['name']; ?></td>
+          &nbsp; <?php echo $type['name']; ?>
+      </td>
+      <td>
+        <?php if ($type['deduct_days_off'] == TRUE ) { ?>
+        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+        <?php } else { ?>
+        <i class="fa fa-square-o" aria-hidden="true"></i>
+        <?php } ?>
+      </td>
     </tr>
   <?php } ?>
   <?php if (count($leavetypes) == 0) { ?>
@@ -44,13 +54,11 @@
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div class="row-fluid">
-    <div class="span3">
-      <a href="<?php echo base_url();?>leavetypes/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('leavetypes_type_button_export');?></a>
-    </div>
-    <div class="span3">
+    <div class="span12">
+        <a href="<?php echo base_url();?>leavetypes/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('leavetypes_type_button_export');?></a>
+        &nbsp;
         <a href="<?php echo base_url();?>leavetypes/create" class="btn btn-primary" data-target="#frmAddLeaveType" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('leavetypes_type_button_create');?></a>
     </div>
-    <div class="span6">&nbsp;</div>
 </div>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
@@ -102,13 +110,13 @@ $(document).ready(function() {
     $("#frmEditLeaveType").alert();
     $("#frmDeleteLeaveType").alert();
 	
-    //On showing the confirmation pop-up, add the user id at the end of the delete url action
+    //On showing the confirmation pop-up, add the type id at the end of the delete url action
     $('#frmDeleteLeaveType').on('show', function() {
         var link = "<?php echo base_url();?>leavetypes/delete/" + $(this).data('id');
         $("#lnkDeleteLeaveType").attr('href', link);
     })
 
-    //Display a modal pop-up so as to confirm if a user has to be deleted or not
+    //Display a modal pop-up so as to confirm if a type has to be deleted or not
     $('.confirm-delete').on('click', function(e) {
         e.preventDefault();
         var id = $(this).data('id');

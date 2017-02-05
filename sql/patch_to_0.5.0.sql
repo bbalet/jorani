@@ -9,8 +9,9 @@
 --      * Users table now supports Regional translations (e.g. 'en' to 'en_GB').
 --      * Add the possibility to exclude leave types from a contract.
 --      * Define a default leave type for a contract (overwrite default type set in config file).
---      * History of changes on leave requests table
---      * Duration of leave and overtime requests were rounded to 2 decimals, now 3 decimals
+--      * History of changes on leave requests table.
+--      * Duration of leave and overtime requests were rounded to 2 decimals, now 3 decimals.
+--      * Option to deduct or not day offs when computing leave balance.
 
 ALTER TABLE `dayoffs` MODIFY `title` varchar(128) CHARACTER SET utf8;
 
@@ -64,5 +65,22 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE sp_add_deduction_days_off_for_type()
+    SQL SECURITY INVOKER
+BEGIN
+        IF NOT EXISTS (
+                SELECT NULL
+                FROM information_schema.columns
+                WHERE table_schema = DATABASE() AND table_name ='types' AND column_name = 'deduct_days_off'
+        ) THEN
+                ALTER TABLE `types` ADD `deduct_days_off` BOOL NOT NULL DEFAULT 0 COMMENT 'Deduct days off when computing the balance of the leave type.';
+        END IF;
+END$$
+DELIMITER ;
+
 CALL sp_add_default_leave_type_contract();
 DROP PROCEDURE sp_add_default_leave_type_contract;
+
+CALL sp_add_deduction_days_off_for_type();
+DROP PROCEDURE sp_add_deduction_days_off_for_type;

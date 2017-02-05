@@ -12,6 +12,7 @@ $lang['leavetypes_type_description'] = 'Leave type #0 is a system type reserved 
 $lang['leavetypes_type_confirm_rename'] = 'Leave type #0 is a system type reserved for overtime management. Are you sure that you want to rename it?';
 $lang['leavetypes_type_thead_id'] = 'ID';
 $lang['leavetypes_type_thead_name'] = 'Name';
+$lang['leavetypes_type_thead_deduct'] = 'Deduct non working days';
 $lang['leavetypes_type_thead_tip_delete'] = 'delete';
 $lang['leavetypes_type_thead_tip_edit'] = 'edit';
 $lang['leavetypes_type_button_export'] = 'Export this list';
@@ -24,12 +25,14 @@ $lang['leavetypes_popup_create_title'] = 'Add a leave type';
 $lang['leavetypes_popup_create_button_cancel'] = 'Cancel';
 $lang['leavetypes_popup_create_button_create'] = 'Create';
 $lang['leavetypes_popup_create_field_name'] = 'Name';
+$lang['leavetypes_popup_create_field_deduct'] = 'Deduct non working days';
 $lang['leavetypes_popup_create_flash_msg'] = 'The leave type has been succesfully created.';
 
 $lang['leavetypes_popup_update_title'] = 'Edit a Leave type';
 $lang['leavetypes_popup_update_button_cancel'] = 'Cancel';
 $lang['leavetypes_popup_update_button_update'] = 'Update';
 $lang['leavetypes_popup_update_field_name'] = 'Name';
+$lang['leavetypes_popup_update_field_deduct'] = 'Deduct non working days';
 $lang['leavetypes_popup_update_flash_msg'] = 'The leave type has been succesfully updated.';
 
 $lang['leavetypes_popup_delete_title'] = 'Delete Leave Type';
@@ -44,3 +47,4 @@ $lang['leavetypes_popup_delete_flash_forbidden'] = 'You cannot delete a leave ty
 $lang['leavetypes_type_export_title'] = 'Leave types';
 $lang['leavetypes_type_export_thead_id'] = 'ID';
 $lang['leavetypes_type_export_thead_name'] = 'Name';
+$lang['leavetypes_type_export_thead_deduct'] = 'Deduct non working days';

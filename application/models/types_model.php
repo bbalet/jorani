@@ -38,6 +38,17 @@ class Types_model extends CI_Model {
     }
     
     /**
+     * Get the list of types or one type
+     * @param string $name type name
+     * @return array record of a leave type
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function getTypeByName($name) {
+        $query = $this->db->get_where('types', array('name' => $name));
+        return $query->row_array();
+    }
+    
+    /**
      * Get the list of types as an ordered associative array
      * @return array Associative array of types (id, name)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -65,14 +76,15 @@ class Types_model extends CI_Model {
     }
     
     /**
-     * Insert a new leave type
-     * @param string $name name of the type
+     * Insert a new leave type. Data are taken from HTML form.
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function setTypes($name) {
+    public function setTypes() {
+        $deduct = ($this->input->post('deduct_days_off') == 'on')?TRUE:FALSE;
         $data = array(
-            'name' => $this->input->post('name')
+            'name' => $this->input->post('name'),
+            'deduct_days_off' => $deduct
         );
         return $this->db->insert('types', $data);
     }
@@ -90,12 +102,15 @@ class Types_model extends CI_Model {
      * Update a given leave type in the database.
      * @param int $id identifier of the leave type
      * @param string $name name of the type
+     * @param bool $deduct Deduct days off
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function updateTypes($id, $name) {
+    public function updateTypes($id, $name, $deduct) {
+        $deduct = ($deduct == 'on')?TRUE:FALSE;
         $data = array(
-            'name' => $name
+            'name' => $name,
+            'deduct_days_off' => $deduct
         );
         $this->db->where('id', $id);
         return $this->db->update('types', $data);

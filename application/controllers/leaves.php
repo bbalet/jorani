@@ -571,7 +571,10 @@ class Leaves extends CI_Controller {
         $enddatetype = $this->input->post('enddatetype', TRUE);       //Mandatory field checked by frontend
         $leave_id = $this->input->post('leave_id', TRUE);
         $leaveValidator = new stdClass;
+        $deductDayOff = FALSE;
         if (isset($id) && isset($type)) {
+            $typeObject = $this->types_model->getTypeByName($type);
+            $deductDayOff = $typeObject['deduct_days_off'];
             if (isset($startdate) && $startdate !== "") {
                 $leaveValidator->credit = $this->leaves_model->getLeavesTypeBalanceForEmployee($id, $type, $startdate);
             } else {
@@ -600,7 +603,7 @@ class Leaves extends CI_Controller {
             $this->load->model('dayoffs_model');
             $leaveValidator->listDaysOff = $this->dayoffs_model->listOfDaysOffBetweenDates($id, $startdate, $enddate);
             //Sum non-working days and overlapping with day off detection
-            $result = $this->leaves_model->actualLengthAndDaysOff($id, $startdate, $enddate, $startdatetype, $enddatetype, $leaveValidator->listDaysOff);
+            $result = $this->leaves_model->actualLengthAndDaysOff($id, $startdate, $enddate, $startdatetype, $enddatetype, $leaveValidator->listDaysOff, $deductDayOff);
             $leaveValidator->overlapDayOff = $result['overlapping'];
             $leaveValidator->lengthDaysOff = $result['daysoff'];
             $leaveValidator->length = $result['length'];

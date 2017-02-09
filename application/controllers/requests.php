@@ -244,14 +244,11 @@ class Requests extends CI_Controller {
             $default_type = $this->config->item('default_leave_type');
             $default_type = $default_type == FALSE ? 0 : $default_type;
             if ($this->form_validation->run() === FALSE) {
-                $this->load->model('types_model');
-                $data['types'] = $this->types_model->getTypes();
-                foreach ($data['types'] as $type) {
-                    if ($type['id'] == $default_type) {
-                        $data['credit'] = $this->leaves_model->getLeavesTypeBalanceForEmployee($id, $type['name']);
-                        break;
-                    }
-                }
+                $this->load->model('contracts_model');
+                $leaveTypesDetails = $this->contracts_model->getLeaveTypesDetailsOTypesForUser($id);
+                $data['defaultType'] = $leaveTypesDetails->defaultType;
+                $data['credit'] = $leaveTypesDetails->credit;
+                $data['types'] = $leaveTypesDetails->types;
                 $this->load->model('users_model');
                 $data['name'] = $this->users_model->getName($id);
                 $this->load->view('templates/header', $data);

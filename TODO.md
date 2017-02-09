@@ -1,21 +1,13 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
-## v0.5.0 (NEEDS A DB PATCH)
+## v0.5.1
 
-- [X] Fix wrong charset problem on table dayoffs.
-- [X] Fix E-mail requets e-mail templates containing wrong links.
-- [X] Add a regional variant to english translation (GB).
-- [X] SSO via SAML protocol (support of onelogin as idp).
-- [X] Add requests list into Reports/Leaves.
-- [X] Exclude leave types from contracts and define a leave type as the default one for a given contract.
-- [ ] Add Turkish language.
-- [ ] Add Chinese language.
-- [ ] Extract mails and pages content into separated PO files.
-- [ ] Maybe: leave type colors (depend on external contributors).
-- [ ] Maybe: leave cancellation.
+- [X] Fix submit leave request in behalf of subordinates.
+- [ ] Fix Leave Request History / Cancel case.
+- [ ] Security update PHPMailer
 
-## v0.5.1 or later
+## v0.5.2 or later
 
 - [ ] Investigate the strange behavior of the compensate balance (see PNC).
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok

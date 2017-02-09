@@ -4,8 +4,9 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 ## v0.5.1
 
 - [X] Fix submit leave request in behalf of subordinates.
-- [ ] Fix Leave Request History / Cancel case.
-- [ ] Security update PHPMailer
+- [X] Fix Leave Request History / Cancel case.
+- [X] Security update PHPMailer.
+- [ ] False positive ajax error message in organization when create / rename.
 
 ## v0.5.2 or later
 

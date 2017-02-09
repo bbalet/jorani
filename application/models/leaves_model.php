@@ -607,7 +607,6 @@ class Leaves_model extends CI_Model {
     /**
      * Cancel a leave from the database
      * @param int $id leave request identifier
-     * @return int number of affected rows
      * @author Guillaume Blaquiere <guillaume.blaquiere@gmail.com>
      */
     public function cancelLeave($id) {
@@ -615,7 +614,13 @@ class Leaves_model extends CI_Model {
             'status' => 1
         );
         $this->db->where('id', $id);
-        return $this->db->update('leaves', $data);
+        $this->db->update('leaves', $data);
+        
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') == TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
+        }
     }
 
     /**

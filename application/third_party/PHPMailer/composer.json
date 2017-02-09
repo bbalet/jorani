@@ -24,16 +24,16 @@
     },
     "require-dev": {
         "phpdocumentor/phpdocumentor": "*",
-        "phpunit/phpunit": "4.3.*"
+        "phpunit/phpunit": "4.7.*"
     },
     "suggest": {
-        "league/oauth2-client": "Needed for Gmail's XOAUTH2 authentication system"
+        "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
     },
     "autoload": {
         "classmap": [
             "class.phpmailer.php",
             "class.phpmaileroauth.php",
-            "class.oauth.php",
+            "class.phpmaileroauthgoogle.php",
             "class.smtp.php",
             "class.pop3.php",
             "extras/EasyPeasyICS.php",

@@ -1,7 +1,7 @@
 <?php
 /**
  * This controller serves all the actions performed by human resources department
- * @copyright  Copyright (c) 2014-2016 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2017 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.1.0

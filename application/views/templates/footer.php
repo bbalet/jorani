@@ -14,19 +14,14 @@
     </div><!-- /wrap -->
     <!-- FOOTER -->
     <div class="row" id="footer">
-      <div class="span4">&copy; 2014-2016 Benjamin BALET</div>
-      <div class="span4">
-          <center>
-              <img src="<?php echo base_url();?>assets/images/logo.png" style="margin-top:-6px;">&nbsp;&nbsp;
-              <b>
-<?php switch ($language_code){
-    case 'fr' : echo '<a class="anchor" href="http://fr.jorani.org/" target="_blank">Jorani</a>'; break;
-    default : echo '<a class="anchor" href="http://jorani.org/" target="_blank">Jorani</a>'; break;
-} ?>
-                  </b>&nbsp;&nbsp;v0.5.1
-          </center>
+      <div class="span4 pull-right">
+            <?php switch ($language_code){
+                case 'fr' : echo '<a class="anchor" href="http://fr.jorani.org/" target="_blank">Jorani</a>'; break;
+                default : echo '<a class="anchor" href="http://jorani.org/" target="_blank">Jorani</a>'; break;
+            } ?>          
+        &nbsp;v0.5.1&nbsp;&copy;2014-2017 Benjamin BALET
       </div>
-      <div class="span4">&nbsp;</div></div>
+    </div>
     </div>
 </body>
 </html>

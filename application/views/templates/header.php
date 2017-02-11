@@ -29,7 +29,7 @@ $this->lang->load('global', $language);?>
     <!--[if lt IE 9]>
     <script src="<?php echo base_url();?>assets/js/html5shiv.min.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
     <link rel="icon" type="image/x-icon" href="<?php echo base_url();?>favicon.ico" sizes="32x32">
     <style>

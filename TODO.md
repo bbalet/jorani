@@ -6,7 +6,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Fix submit leave request in behalf of subordinates.
 - [X] Fix Leave Request History / Cancel case.
 - [X] Security update PHPMailer.
-- [ ] False positive ajax error message in organization when create / rename.
+- [X] False positive ajax error message in organization when create / rename.
 
 ## v0.5.2 or later
 

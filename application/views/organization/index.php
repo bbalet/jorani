@@ -103,12 +103,12 @@
 </div>
 
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
-        <div class="modal-header">
-            <h1><?php echo lang('global_msg_wait');?></h1>
-        </div>
-        <div class="modal-body">
-            <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
-        </div>
+    <div class="modal-header">
+        <h1><?php echo lang('global_msg_wait');?></h1>
+    </div>
+    <div class="modal-body">
+        <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
+    </div>
  </div>
 
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -189,7 +189,10 @@
                    location.reload();
                 });
             } else { //Oups
-                bootbox.alert("<?php echo lang('global_ajax_error');?>");
+                //Deal with mysterious error triggered by jsTree
+                if (jqXHR.status != 200) {
+                    bootbox.alert("<?php echo lang('global_ajax_error');?>");
+                }
             }
           });
     

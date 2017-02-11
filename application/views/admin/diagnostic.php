@@ -185,7 +185,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
     
   <div class="tab-pane" id="overtime">
       
-        <p><?php echo lang('admin_diagnostic_daysoff_description');?></p>
+        <p><?php echo lang('admin_diagnostic_overtime_description');?></p>
 
         <?php if ($negativeOvertime_count==0) {?>
         <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
@@ -233,7 +233,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
       <tbody>
     <?php foreach ($unusedContracts as $contract):?>
         <tr>
-            <td><?php echo $overtime['id'];?></td>
+            <td><?php echo $contract['id'];?></td>
             <td><?php echo $contract['name'];?></td>
         </tr>
         <?php endforeach ?>

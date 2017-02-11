@@ -60,7 +60,7 @@ class Admin extends CI_Controller {
         $data['daysOffYears'] = $this->dayoffs_model->checkIfDefined(date("Y"));
         $data['negativeOvertime'] = $this->overtime_model->detectNegativeOvertime();
         $data['unusedContracts'] = $this->contracts_model->notUsedContracts();
-        //$data['leaveBalance'] = $this->leaves_model->detectBalanceProblems();
+        $data['leaveBalance'] = $this->leaves_model->detectBalanceProblems();
         
         //Count the number of items (will be used for badges in tab 
         $data['duplicatedLeaves_count'] = count($data['duplicatedLeaves']);
@@ -68,7 +68,7 @@ class Admin extends CI_Controller {
         $data['entitlmentOverflow_count'] = count($data['entitlmentOverflow']);
         $data['negativeOvertime_count'] = count($data['negativeOvertime']);
         $data['unusedContracts_count'] = count($data['unusedContracts']);
-        //$data['leaveBalance_count'] = count($data['leaveBalance']);
+        $data['leaveBalance_count'] = count($data['leaveBalance']);
         $data['daysOffYears_count'] = 0;
         foreach ($data['daysOffYears'] as $yearDef) {
             if ($yearDef['y'] == 0) {

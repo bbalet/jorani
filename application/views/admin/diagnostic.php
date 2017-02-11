@@ -15,23 +15,23 @@
         <p><?php echo lang('admin_diagnostic_description');?></p>
 
 <?php
-$daysOffYears_count = ($daysOffYears_count == 0)?'':'<span class="badge badge-info">' . $daysOffYears_count . '</span>&nbsp;';
-$duplicatedLeaves_count = ($duplicatedLeaves_count == 0)?'':'<span class="badge badge-info">' . $duplicatedLeaves_count . '</span>&nbsp;';
-$wrongDateType_count = ($wrongDateType_count == 0)?'':'<span class="badge badge-info">' . $wrongDateType_count . '</span>&nbsp;';
-$entitlmentOverflow_count = ($entitlmentOverflow_count == 0)?'':'<span class="badge badge-info">' . $entitlmentOverflow_count . '</span>&nbsp;';
-$negativeOvertime_count = ($negativeOvertime_count == 0)?'':'<span class="badge badge-info">' . $negativeOvertime_count . '</span>&nbsp;';
-$unusedContracts_count = ($unusedContracts_count == 0)?'':'<span class="badge badge-info">' . $unusedContracts_count . '</span>&nbsp;';
-//$leaveBalance_count = ($leaveBalance_count == 0)?'':'<span class="badge badge-info">' . $leaveBalance_count . '</span>&nbsp;';
+$daysOffYears_badge = ($daysOffYears_count == 0)?'':'<span class="badge badge-info">' . $daysOffYears_count . '</span>&nbsp;';
+$duplicatedLeaves_badge = ($duplicatedLeaves_count == 0)?'':'<span class="badge badge-info">' . $duplicatedLeaves_count . '</span>&nbsp;';
+$wrongDateType_badge = ($wrongDateType_count == 0)?'':'<span class="badge badge-info">' . $wrongDateType_count . '</span>&nbsp;';
+$entitlmentOverflow_badge = ($entitlmentOverflow_count == 0)?'':'<span class="badge badge-info">' . $entitlmentOverflow_count . '</span>&nbsp;';
+$negativeOvertime_badge = ($negativeOvertime_count == 0)?'':'<span class="badge badge-info">' . $negativeOvertime_count . '</span>&nbsp;';
+$unusedContracts_badge = ($unusedContracts_count == 0)?'':'<span class="badge badge-info">' . $unusedContracts_count . '</span>&nbsp;';
+$leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-info">' . $leaveBalance_count . '</span>&nbsp;';
 
 ?>
 <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#daysoff"><?php echo $daysOffYears_count . lang('admin_diagnostic_daysoff_tab');?></a></li>
-    <li><a data-toggle="tab" href="#requests"><?php echo $duplicatedLeaves_count . lang('admin_diagnostic_requests_tab');?></a></li>
-    <li><a data-toggle="tab" href="#datetypes"><?php echo $wrongDateType_count . lang('admin_diagnostic_datetype_tab');?></a></li>
-    <li><a data-toggle="tab" href="#entitlements"><?php echo $entitlmentOverflow_count . lang('admin_diagnostic_entitlements_tab');?></a></li>
-    <li><a data-toggle="tab" href="#overtime"><?php echo $negativeOvertime_count . lang('admin_diagnostic_overtime_tab');?></a></li>
-    <li><a data-toggle="tab" href="#contracts"><?php echo $unusedContracts_count . lang('admin_diagnostic_contract_tab');?></a></li>
-    <!--<li><a data-toggle="tab" href="#balance"><?php /*echo $leaveBalance_count . lang('admin_diagnostic_balance_tab');*/?></a></li>//-->
+    <li class="active"><a data-toggle="tab" href="#daysoff"><?php echo $daysOffYears_badge . lang('admin_diagnostic_daysoff_tab');?></a></li>
+    <li><a data-toggle="tab" href="#requests"><?php echo $duplicatedLeaves_badge . lang('admin_diagnostic_requests_tab');?></a></li>
+    <li><a data-toggle="tab" href="#datetypes"><?php echo $wrongDateType_badge . lang('admin_diagnostic_datetype_tab');?></a></li>
+    <li><a data-toggle="tab" href="#entitlements"><?php echo $entitlmentOverflow_badge . lang('admin_diagnostic_entitlements_tab');?></a></li>
+    <li><a data-toggle="tab" href="#overtime"><?php echo $negativeOvertime_badge . lang('admin_diagnostic_overtime_tab');?></a></li>
+    <li><a data-toggle="tab" href="#contracts"><?php echo $unusedContracts_badge . lang('admin_diagnostic_contract_tab');?></a></li>
+    <li><a data-toggle="tab" href="#balance"><?php echo $leaveBalance_badge . lang('admin_diagnostic_balance_tab');?></a></li>
 </ul>
 
 <div class="tab-content">
@@ -72,7 +72,7 @@ $unusedContracts_count = ($unusedContracts_count == 0)?'':'<span class="badge ba
       
         <p><?php echo lang('admin_diagnostic_requests_description');?></p>
       
-        <?php if (count($duplicatedLeaves)==0) {?>
+        <?php if ($duplicatedLeaves_count==0) {?>
         <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
         <?php } else {?>
         <table class="table table-bordered table-hover table-condensed">
@@ -104,7 +104,7 @@ $unusedContracts_count = ($unusedContracts_count == 0)?'':'<span class="badge ba
       
         <p><?php echo lang('admin_diagnostic_datetype_description');?></p>
       
-        <?php if (count($wrongDateType)==0) {?>
+        <?php if ($wrongDateType_count==0) {?>
         <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
         <?php } else {?>
         <table class="table table-bordered table-hover table-condensed">
@@ -140,7 +140,7 @@ $unusedContracts_count = ($unusedContracts_count == 0)?'':'<span class="badge ba
       
       <p><?php echo lang('admin_diagnostic_entitlements_description');?></p>
       
-        <?php if (count($entitlmentOverflow)==0) {?>
+        <?php if ($entitlmentOverflow_count==0) {?>
         <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
         <?php } else {?>
         <table class="table table-bordered table-hover table-condensed">
@@ -187,7 +187,7 @@ $unusedContracts_count = ($unusedContracts_count == 0)?'':'<span class="badge ba
       
         <p><?php echo lang('admin_diagnostic_daysoff_description');?></p>
 
-        <?php if (count($negativeOvertime)==0) {?>
+        <?php if ($negativeOvertime_count==0) {?>
         <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
         <?php } else {?>
         <table class="table table-bordered table-hover table-condensed">
@@ -218,73 +218,85 @@ $unusedContracts_count = ($unusedContracts_count == 0)?'':'<span class="badge ba
   </div>
     
   <div class="tab-pane" id="contracts">
-      
-        <p><a target="_blank" href="<?php echo base_url();?>contracts"><?php echo lang('admin_diagnostic_contract_description');?></a></p>
+    <p><a target="_blank" href="<?php echo base_url();?>contracts"><?php echo lang('admin_diagnostic_contract_description');?></a></p>
 
-        <?php if (count($negativeOvertime)==0) {?>
-        <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
-        <?php } else {?>
-        <table class="table table-bordered table-hover table-condensed">
-          <thead>
-            <tr>
-                <th><?php echo lang('admin_diagnostic_contract_thead_id');?></th>
-                <th><?php echo lang('admin_diagnostic_contract_thead_name');?></th>
-            </tr>
-          </thead>
-          <tbody>
-        <?php foreach ($unusedContracts as $contract):?>
-            <tr>
-                <td><?php echo $overtime['id'];?></td>
-                <td><?php echo $contract['name'];?></td>
-            </tr>
-            <?php endforeach ?>
-          </tbody>
-        </table>
-        <?php }?>
-  </div>
+    <?php if ($unusedContracts_count==0) {?>
+    <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
+    <?php } else {?>
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+            <th><?php echo lang('admin_diagnostic_contract_thead_id');?></th>
+            <th><?php echo lang('admin_diagnostic_contract_thead_name');?></th>
+        </tr>
+      </thead>
+      <tbody>
+    <?php foreach ($unusedContracts as $contract):?>
+        <tr>
+            <td><?php echo $overtime['id'];?></td>
+            <td><?php echo $contract['name'];?></td>
+        </tr>
+        <?php endforeach ?>
+      </tbody>
+    </table>
+    <?php }?>
+  </div><!-- Unused contracts //-->
     
-  <!--<div class="tab-pane" id="balance">
-      
-        <p><?php echo lang('admin_diagnostic_balance_description');?></a></p>
+  <div class="tab-pane" id="balance">
+    <p><?php echo lang('admin_diagnostic_balance_description');?></a></p>
 
-        <?php if (count($negativeOvertime)==0) {?>
-        <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
-        <?php } else {?>
-        <table class="table table-bordered table-hover table-condensed">
-          <thead>
-            <tr>
-                <th><?php echo lang('admin_diagnostic_contract_thead_id');?></th>
-                <th><?php echo lang('admin_diagnostic_balance_thead_employee');?></th>
-                <th><?php echo lang('admin_diagnostic_balance_thead_contract');?></th>
-                <th><?php echo lang('admin_diagnostic_balance_thead_start_date');?></th>
-                <th><?php echo lang('admin_diagnostic_balance_thead_status');?></th>
-            </tr>
-          </thead>
-          <tbody>
-        <?php foreach ($leaveBalance as $balance): 
-            $date = new DateTime($balance['startdate']);
-            $startdate = $date->format(lang('global_date_format'))?>
-            <tr>
-                <td><a target="_blank" href="<?php echo base_url();?>leaves/edit/"><?php echo $balance['id'];?></a></td>
-                <td>
-                    <a target="_blank" href="<?php echo base_url();?>hr/counters/employees/<?php echo $balance['employee'];?>"><i class="icon-info-sign"></i></a>
-                    <a target="_blank" href="<?php echo base_url();?>entitleddays/user/<?php echo $balance['employee'];?>"><i class="icon-edit"></i></a>
-                    <?php echo $balance['user_label'];?>
-                </td>
-                <td>
-                    <a target="_blank" href="<?php echo base_url();?>entitleddays/contract/<?php echo $balance['employee'];?>"><i class="icon-edit"></i></a>
-                    <?php echo $balance['contract_label'];?>
-                </td>
-                <td><?php echo $startdate;?></td>
-                <td><?php echo $balance['status_label'];?></td>
-            </tr>
-            <?php endforeach ?>
-          </tbody>
-        </table>
-        <?php }?>
-        <i class="fa fa-file-text-o"></i>
-        
-  </div>//-->
+    <?php if ($leaveBalance_count==0) {?>
+    <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
+    <?php } else {?>
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+            <th><?php echo lang('admin_diagnostic_contract_thead_id');?></th>
+            <th><?php echo lang('admin_diagnostic_balance_thead_employee');?></th>
+            <th><?php echo lang('admin_diagnostic_balance_thead_contract');?></th>
+            <th><?php echo lang('admin_diagnostic_balance_thead_start_date');?></th>
+            <th><?php echo lang('admin_diagnostic_balance_thead_status');?></th>
+        </tr>
+      </thead>
+      <tbody>
+    <?php foreach ($leaveBalance as $balance): 
+        $date = new DateTime($balance['startdate']);
+        $startdate = $date->format(lang('global_date_format'))?>
+        <tr>
+            <td><a target="_blank" href="<?php echo base_url();?>leaves/edit/<?php echo $balance['id'];?>"><?php echo $balance['id'];?></a></td>
+            <td>
+                <a target="_blank" href="<?php echo base_url();?>hr/counters/employees/<?php echo $balance['employee'];?>"><i class="icon-info-sign"></i></a>
+                <a target="_blank" href="<?php echo base_url();?>entitleddays/user/<?php echo $balance['employee'];?>"><i class="icon-edit"></i></a>
+                <?php echo $balance['user_label'];?>
+            </td>
+            <td>
+                <a target="_blank" href="<?php echo base_url();?>entitleddays/contract/<?php echo $balance['employee'];?>"><i class="icon-edit"></i></a>
+                <?php echo $balance['contract_label'];?>
+            </td>
+            <td><?php echo $startdate;?></td>
+            <td><?php echo $balance['status_label'];?></td>
+        </tr>
+        <?php endforeach ?>
+      </tbody>
+    </table>
+    <?php }?>
+  </div><!-- Leave Balance //-->
+    
 </div>
     </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    //open a tab if a hash was passed by URL
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+    }
+    
+    //Change hash for page-reload
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+});
+</script>

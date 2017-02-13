@@ -132,13 +132,7 @@ class Session extends CI_Controller {
                     || !($basedn = $this->users_model->getBaseDN($this->input->post('login'))) //can return NULL
                 ) {
                     $basedn = sprintf($this->config->item('ldap_basedn'), $this->input->post('login'));
-                }
-                    
-                $basedn = $this->users_model->getBaseDN($this->input->post('login'));
-                if ($basedn == "") {//can return NULL
-                    $basedn = sprintf($this->config->item('ldap_basedn'), $this->input->post('login'));
-                }
-                    
+                }             
                     
                 $bind = ldap_bind($ldap, $basedn, $password);
                 restore_error_handler();

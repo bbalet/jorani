@@ -19,7 +19,7 @@
                 case 'fr' : echo '<a class="anchor" href="http://fr.jorani.org/" target="_blank">Jorani</a>'; break;
                 default : echo '<a class="anchor" href="http://jorani.org/" target="_blank">Jorani</a>'; break;
             } ?>          
-        &nbsp;v0.5.1&nbsp;&copy;2014-2017 Benjamin BALET
+        &nbsp;v0.5.2&nbsp;&copy;2014-2017 Benjamin BALET
       </div>
     </div>
     </div>

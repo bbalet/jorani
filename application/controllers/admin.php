@@ -54,6 +54,7 @@ class Admin extends CI_Controller {
         $this->load->model('entitleddays_model');
         $this->load->model('dayoffs_model');
         $this->load->model('contracts_model');
+        $this->load->model('overtime_model');
         $data['duplicatedLeaves'] = $this->leaves_model->detectDuplicatedRequests();
         $data['wrongDateType'] = $this->leaves_model->detectWrongDateTypes();
         $data['entitlmentOverflow'] = $this->entitleddays_model->detectOverflow();

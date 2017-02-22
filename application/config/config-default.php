@@ -487,3 +487,9 @@ $config['spreadsheet_format'] = 'xlsx';   //Supported formats: xlsx, ods
 //____________________________________________________________________________
 //Set this value to TRUE if you want to enable history of change (beware that it will impact the performance)
 $config['enable_history'] = FALSE;
+
+//____________________________________________________________________________
+//Set this value to TRUE if you want to enable Application Performance Management features
+$config['enable_apm_rum'] = FALSE;
+//Display navigation timing to user. You need a browser supporting WebTiming API
+$config['enable_apm_display'] = FALSE;     

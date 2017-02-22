@@ -176,8 +176,8 @@ class Requests extends CI_Controller {
             if (isset($manager) && isset($delegation)) {
                 $this->output->set_content_type('text/plain');
                 $this->load->model('delegations_model');
-                $id = $this->delegations_model->deleteDelegation($delegation);
-                echo $id;
+                $this->delegations_model->deleteDelegation($delegation);
+                $this->output->set_output($delegation);
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
             }
@@ -199,9 +199,9 @@ class Requests extends CI_Controller {
                 $this->load->model('delegations_model');
                 if (!$this->delegations_model->isDelegateOfManager($delegate, $manager)) {
                     $id = $this->delegations_model->addDelegate($manager, $delegate);
-                    echo $id;
+                    $this->output->set_output($id);
                 } else {
-                    echo 'null';
+                    $this->output->set_output('null');
                 }
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");

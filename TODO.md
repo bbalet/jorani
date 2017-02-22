@@ -1,14 +1,16 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
-## v0.5.1
+## v0.5.3
 
-- [X] Fix submit leave request in behalf of subordinates.
-- [X] Fix Leave Request History / Cancel case.
-- [X] Security update PHPMailer.
-- [X] False positive ajax error message in organization when create / rename.
+This minor release prepares APM and RUM functions:
 
-## v0.5.2 or later
+- [ ] Static APM (js modal with RUM timing and PHP+DB timing). Set headers for Ajax Calls.
+- [ ] Replace header() by set_header()
+- [ ] Replace set_header("HTTP/1.1 422...) by set_status_header()
+- [ ] Replace echo() by set_output()
+
+## v0.5.3 or later
 
 - [ ] Investigate the strange behavior of the compensate balance (see PNC).
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
@@ -20,7 +22,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
 - [ ] Add a "All" option into Reports/Leaves.
 
-## v0.6.0 or later
+## v0.7.0 or later
 
 Following naming convention, this version will need a DB patch.
 

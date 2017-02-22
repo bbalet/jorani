@@ -369,11 +369,11 @@ class Users extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function checkLoginByAjax() {
-        header("Content-Type: text/plain");
+        $this->output->set_content_type('text/plain');
         if ($this->users_model->isLoginAvailable($this->input->post('login'))) {
-            echo 'true';
+            $this->output->set_output('true');
         } else {
-            echo 'false';
+            $this->output->set_output('false');
         }
     }
 

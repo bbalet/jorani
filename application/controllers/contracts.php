@@ -250,9 +250,9 @@ class Contracts extends CI_Controller {
         if ($this->auth->isAllowed('edit_contract') === FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
-            header("Content-Type: text/plain");
+            $this->output->set_content_type('text/plain');
             $this->contracts_model->includeLeaveTypeInContract($contractId, $typeId);
-            echo "OK";
+            $this->output->set_output('OK');
         }
     }
 
@@ -266,8 +266,8 @@ class Contracts extends CI_Controller {
         if ($this->auth->isAllowed('edit_contract') === FALSE) {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
-            header("Content-Type: text/plain");
-            echo $this->contracts_model->excludeLeaveTypeForContract($contractId, $typeId);
+            $this->output->set_content_type('text/plain');
+            $this->output->set_output($this->contracts_model->excludeLeaveTypeForContract($contractId, $typeId));
         }
     }
 
@@ -287,9 +287,9 @@ class Contracts extends CI_Controller {
                 $this->load->model('dayoffs_model');
                 $this->output->set_content_type('text/plain');
                 if ($type == 0) {
-                    echo $this->dayoffs_model->deleteDayOff($contract, $timestamp);
+                    $this->output->set_output($this->dayoffs_model->deleteDayOff($contract, $timestamp));
                 } else {
-                    echo $this->dayoffs_model->addDayOff($contract, $timestamp, $type, $title);
+                    $this->output->set_output($this->dayoffs_model->addDayOff($contract, $timestamp, $type, $title));
                 }
             } else {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
@@ -308,7 +308,7 @@ class Contracts extends CI_Controller {
             if (($this->input->post('day', TRUE) != NULL) && ($this->input->post('type', TRUE) != NULL) &&
                     ($this->input->post('start', TRUE) != NULL) && ($this->input->post('end', TRUE) != NULL)
                      && ($this->input->post('contract', TRUE) != NULL)) {
-                header("Content-Type: text/plain");
+                $this->output->set_content_type('text/plain');
 
                 //Build the list of dates to be marked
                 $start = strtotime($this->input->post('start', TRUE));

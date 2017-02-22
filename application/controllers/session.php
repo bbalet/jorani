@@ -216,7 +216,7 @@ class Session extends CI_Controller {
         $this->load->model('users_model');
         $user = $this->users_model->getUserByLogin($login);
         if (is_null($user)) {
-            echo "UNKNOWN";
+            $this->output->set_output('UNKNOWN');
         } else {
             //We need to instance an different object as the languages of connected user may differ from the UI lang
             $lang_mail = new CI_Lang();
@@ -242,7 +242,7 @@ class Session extends CI_Controller {
                     $message,
                     $user->email);
             //Tell to the frontend that we've found the login and sent the email
-            echo "OK";
+            $this->output->set_output('OK');
         }
     }
     
@@ -257,7 +257,7 @@ class Session extends CI_Controller {
         $oauth2ClientId = $this->config->item('oauth2_client_id');
         $oauth2ClientSecret = $this->config->item('oauth2_client_secret');
         if ($oauth2Enabled === FALSE) {
-            echo 'ERROR: OAuth2 is disabled';
+            $this->output->set_output('ERROR: OAuth2 is disabled');
             return;
         }
         $authCode = $this->input->post('auth_code');
@@ -280,19 +280,19 @@ class Session extends CI_Controller {
                         //If we find the e-mail address into the database, we're good
                         $loggedin = $this->users_model->checkCredentialsEmail($email);
                         if ($loggedin === TRUE) {
-                            echo 'OK';
+                            $this->output->set_output('OK');
                         } else {
-                            echo lang('session_login_flash_bad_credentials');
+                            $this->output->set_output(lang('session_login_flash_bad_credentials'));
                         }
                     } catch (Exception $e) {
-                        echo 'ERROR: ' . $e->getMessage();
+                        $this->output->set_output('ERROR: ' . $e->getMessage());
                     }
                     break;
                 default:
-                    echo 'ERROR: unsupported OAuth2 provider';
+                    $this->output->set_output('ERROR: unsupported OAuth2 provider');
             }
         } else {
-            echo 'ERROR: Invalid OAuth2 token';
+            $this->output->set_output('ERROR: Invalid OAuth2 token');
         }
     }
 
@@ -308,7 +308,7 @@ class Session extends CI_Controller {
         $errors = $settings->validateMetadata($metadata);
         if (empty($errors)) {
             $this->output->set_content_type('text/xml');
-            echo $metadata;
+            $this->output->set_output($metadata);
         } else {
             throw new OneLogin_Saml2_Error(
             'Invalid SP metadata: ' . implode(', ', $errors), OneLogin_Saml2_Error::METADATA_SP_INVALID

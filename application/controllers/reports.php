@@ -166,8 +166,7 @@ class Reports extends CI_Controller {
                         $tbody .
                     '</tbody>' .
                 '</table>';
-        
-        echo $table;
+        $this->output->set_output($table);
     }
     
     /**
@@ -364,8 +363,7 @@ class Reports extends CI_Controller {
                         $tbody .
                     '</tbody>' .
                 '</table>';
-        
-        echo $table;
+        $this->output->set_output($table);
     }
     
     /**

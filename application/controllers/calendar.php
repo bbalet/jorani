@@ -203,15 +203,15 @@ class Calendar extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function publicOrganization($entity_id) {
-        header("Content-Type: application/json");
+        $this->output->set_content_type('application/json');
         if ($this->config->item('public_calendar') == TRUE) {
             $this->load->model('leaves_model');
             $start = $this->input->get('start', TRUE);
             $end = $this->input->get('end', TRUE);
             $children = filter_var($this->input->get('children', TRUE), FILTER_VALIDATE_BOOLEAN);
-            echo $this->leaves_model->department($entity_id, $start, $end, $children);
+            $this->output->set_output($this->leaves_model->department($entity_id, $start, $end, $children));
         } else {
-            echo 'Forbidden';
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
         }
     }
     
@@ -221,16 +221,16 @@ class Calendar extends CI_Controller {
      * @param int $entity_id Entity identifier
      */
     public function publicDayoffs() {
-        header("Content-Type: application/json");
+        $this->output->set_content_type('application/json');
         if ($this->config->item('public_calendar') == TRUE) {
             $start = $this->input->get('start', TRUE);
             $end = $this->input->get('end', TRUE);
             $entity = $this->input->get('entity', TRUE);
             $children = filter_var($this->input->get('children', TRUE), FILTER_VALIDATE_BOOLEAN);
             $this->load->model('dayoffs_model');
-            echo $this->dayoffs_model->allDayoffs($start, $end, $entity, $children);
+            $this->output->set_output($this->dayoffs_model->allDayoffs($start, $end, $entity, $children));
         } else {
-            echo 'Forbidden';
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
         }
     }
     

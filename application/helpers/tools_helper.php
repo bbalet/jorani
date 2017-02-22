@@ -130,15 +130,15 @@ function exportSpreadsheet($context, $filename)
         $format = $context->config->item('spreadsheet_format');
     }
     $filename .= '.' . $format;
-    header('Cache-Control: max-age=0');
-    header('Content-Disposition: attachment;filename="' . $filename . '"');
+    $context->output->set_header('Cache-Control: max-age=0');
+    $context->output->set_header('Content-Disposition: attachment;filename="' . $filename . '"');
     switch ($format) {
         case 'ods':
-            header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
+            $context->output->set_header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
             $objWriter = PHPExcel_IOFactory::createWriter($context->excel, 'OpenDocument');
             break;
         case 'xlsx':
-            header('Content-Type: application/vnd.ms-excel');
+            $context->output->set_header('Content-Type: application/vnd.ms-excel');
             $objWriter = PHPExcel_IOFactory::createWriter($context->excel, 'Excel2007');
             break;
     }

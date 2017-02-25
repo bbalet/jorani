@@ -90,8 +90,8 @@ class Admin extends CI_Controller {
         require_once(APPPATH . 'third_party/QRCode.php');
         $this->load->model('users_model');
         $user = $this->users_model->getUsers($this->user_id);
-        $qr = new QRCode();
-        $qr = QRCode::getMinimumQRCode(base_url() . '#' . $user['login'] .
+        $qr = new QRCodeGenerator\QRCode();
+        $qr = $qr->getMinimumQRCode(base_url() . '#' . $user['login'] .
                  '#' . $user['email'], QR_ERROR_CORRECT_LEVEL_L);
         echo $qr->printHTML();
     }

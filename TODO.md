@@ -5,6 +5,11 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 This minor release prepares APM and RUM functions:
 
+- [ ] Add SMTPSecure, SMTPAutoTLS, and SMTPAuth email params. See https://mail.google.com/mail/u/0/#inbox/15ae53ce27624515
+- [ ] Manage service accounts.
+- [ ] Implement OAuth scopes in API.
+- [ ] Maybe: edit/import/export settings from WebUI.
+- [ ] Fix: tabular from demo site when user 1 is moved to root.
 - [ ] Static APM (js modal with RUM timing and PHP+DB timing). Set headers for Ajax Calls.
 - [ ] Replace header() by set_header()
 - [ ] Replace set_header("HTTP/1.1 422...) by set_status_header()

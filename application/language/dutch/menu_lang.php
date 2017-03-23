@@ -23,6 +23,7 @@ $lang['menu_admin_add_user'] = 'Maak gebruiker aan';
 $lang['menu_admin_settings_divider'] = 'Settings';
 $lang['menu_admin_settings'] = 'Settings';
 $lang['menu_admin_diagnostic'] = 'Diagnostic';
+$lang['menu_admin_oauth_clients'] = 'OAuth Clients';
 
 $lang['menu_hr_title'] = 'HR';
 $lang['menu_hr_employees_divider'] = 'Werknemers';

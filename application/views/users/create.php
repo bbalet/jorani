@@ -25,7 +25,7 @@ echo form_open('users/create', $attributes); ?>
     <input type="text" name="lastname" id="lastname" required /><br />
 
     <label for="role[]"><?php echo lang('users_create_field_role');?></label>
-    <select name="role[]" multiple="multiple" size="2" required>
+    <select name="role[]" multiple="multiple" size="3" required>
     <?php foreach ($roles as $roles_item): ?>
         <option value="<?php echo $roles_item['id'] ?>" <?php if ($roles_item['id'] == 2) echo "selected"; ?>><?php echo $roles_item['name'] ?></option>
     <?php endforeach ?>

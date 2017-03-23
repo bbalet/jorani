@@ -67,3 +67,17 @@ $lang['admin_diagnostic_balance_thead_employee'] = 'Employé';
 $lang['admin_diagnostic_balance_thead_contract'] = 'Contrat';
 $lang['admin_diagnostic_balance_thead_start_date'] = 'Date début';
 $lang['admin_diagnostic_balance_thead_status'] = 'Statut';
+
+$lang['admin_oauthclients_title'] = 'Clients et sessions OAuth';
+$lang['admin_oauthclients_tab_clients'] = 'Clients';
+$lang['admin_oauthclients_tab_clients_description'] = 'Liste des clients habilités pour l\'API REST';
+$lang['admin_oauthclients_thead_tip_edit'] = 'modifier le client';
+$lang['admin_oauthclients_thead_tip_delete'] = 'supprimer le client';
+$lang['admin_oauthclients_button_add'] = 'Ajouter';
+$lang['admin_oauthclients_popup_add_title'] = 'Ajouter un client OAuth';
+$lang['admin_oauthclients_popup_select_user_title'] = 'Associer à un utilisateur réel';
+$lang['admin_oauthclients_error_exists'] = 'Ce client_id existe déjà';
+$lang['admin_oauthclients_confirm_delete'] = 'Êtes-vous sûr de vouloir continuer?';
+$lang['admin_oauthclients_tab_sessions'] = 'Sessions';
+$lang['admin_oauthclients_tab_sessions_description'] = 'Liste des Sessions OAuth API REST actives';
+$lang['admin_oauthclients_button_purge'] = 'Purge';

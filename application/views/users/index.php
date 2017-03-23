@@ -2,9 +2,9 @@
 /**
  * This view displays the list of users.
  * @copyright  Copyright (c) 2014-2016 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.1.0
  */
 ?>
 
@@ -49,7 +49,7 @@
         <td><?php echo $users_item['lastname']; ?></td>
         <td><?php echo $users_item['login']; ?></td>
         <td><a href="mailto:<?php echo $users_item['email']; ?>"><?php echo $users_item['email']; ?></a></td>
-        <td><?php echo $users_item['role_name']; ?></td>
+        <td><?php echo $users_item['roles_list']; ?></td>
     </tr>
 <?php endforeach ?>
             </tbody>

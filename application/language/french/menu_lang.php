@@ -21,6 +21,7 @@ $lang['menu_admin_add_user'] = 'Ajouter un utilisateur';
 $lang['menu_admin_settings_divider'] = 'Configuration';
 $lang['menu_admin_settings'] = 'Configuration';
 $lang['menu_admin_diagnostic'] = 'Diagnostic';
+$lang['menu_admin_oauth_clients'] = 'Clients OAuth';
 
 $lang['menu_hr_title'] = 'RH';
 $lang['menu_hr_employees_divider'] = 'Employés';

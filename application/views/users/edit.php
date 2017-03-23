@@ -33,7 +33,7 @@
     <input type="email" id="email" name="email" value="<?php echo $users_item['email']; ?>" required /><br />
 		
     <label for="role[]"><?php echo lang('users_edit_field_role');?></label>
-    <select name="role[]" multiple="multiple" size="2">
+    <select name="role[]" multiple="multiple" size="3">
     <?php foreach ($roles as $roles_item): ?>
         <option value="<?php echo $roles_item['id'] ?>" <?php if ((((int)$roles_item['id']) & ((int) $users_item['role']))) echo "selected" ?>><?php echo $roles_item['name'] ?></option>
     <?php endforeach ?>

@@ -35,7 +35,7 @@ class Users extends CI_Controller {
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->lang->load('datatable', $this->language);
-        $data['users'] = $this->users_model->getUsers();
+        $data['users'] = $this->users_model->getUsersAndRoles();
         $data['title'] = lang('users_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_users');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
@@ -102,11 +102,9 @@ class Users extends CI_Controller {
             redirect('notfound');
         }
         $data['title'] = lang('users_myprofile_html_title');
-        $this->load->model('roles_model');
         $this->load->model('positions_model');
         $this->load->model('contracts_model');
         $this->load->model('organization_model');
-        $data['roles'] = $this->roles_model->getRoles();
         $data['manager_label'] = $this->users_model->getName($data['user']['manager']);
         $data['contract_id'] = intval($data['user']['contract']);
         $data['contract_label'] = $this->contracts_model->getName($data['user']['contract']);

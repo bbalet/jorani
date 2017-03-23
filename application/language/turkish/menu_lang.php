@@ -23,6 +23,7 @@ $lang['menu_admin_add_user'] = 'Kullanıcı oluştur';
 $lang['menu_admin_settings_divider'] = 'Ayarlar';
 $lang['menu_admin_settings'] = 'Ayarlar';
 $lang['menu_admin_diagnostic'] = 'Tespit';
+$lang['menu_admin_oauth_clients'] = 'OAuth Clients';
 
 $lang['menu_hr_title'] = 'İK';
 $lang['menu_hr_employees_divider'] = 'Çalışanlar';

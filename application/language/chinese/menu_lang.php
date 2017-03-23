@@ -22,6 +22,7 @@ $lang['menu_admin_add_user'] = '建立使用者';
 $lang['menu_admin_settings_divider'] = '設定';
 $lang['menu_admin_settings'] = '設定';
 $lang['menu_admin_diagnostic'] = '診斷';
+$lang['menu_admin_oauth_clients'] = 'OAuth Clients';
 
 $lang['menu_hr_title'] = '人力管理者';
 $lang['menu_hr_employees_divider'] = '員工';

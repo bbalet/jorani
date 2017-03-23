@@ -43,6 +43,10 @@
 $route['admin/qrcode'] = 'admin/qrCode';
 $route['admin/settings'] = 'admin/settings';
 $route['admin/diagnostic'] = 'admin/diagnostic';
+$route['admin/oauthclients'] = 'admin/oauthClients';
+$route['admin/oauthclients/create'] = 'admin/oauthClientsCreate';
+$route['admin/oauthclients/delete'] = 'admin/oauthClientsDelete';
+$route['admin/oauthtokens/purge'] = 'admin/oauthTokensPurge';
 $route['admin'] = 'admin/settings';
 
 //_______________________________________________

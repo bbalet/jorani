@@ -68,3 +68,17 @@ $lang['admin_diagnostic_balance_thead_employee'] = 'Çalışan';
 $lang['admin_diagnostic_balance_thead_contract'] = 'Sözleşme';
 $lang['admin_diagnostic_balance_thead_start_date'] = 'Başlangıç Tarihi';
 $lang['admin_diagnostic_balance_thead_status'] = 'Durum';
+
+$lang['admin_oauthclients_title'] = 'OAuth clients and sessions';
+$lang['admin_oauthclients_tab_clients'] = 'Clients';
+$lang['admin_oauthclients_tab_clients_description'] = 'List of clients allowed to use the REST API';
+$lang['admin_oauthclients_thead_tip_edit'] = 'edit client';
+$lang['admin_oauthclients_thead_tip_delete'] = 'delete client';
+$lang['admin_oauthclients_button_add'] = 'Add';
+$lang['admin_oauthclients_popup_add_title'] = 'Add OAuth Client';
+$lang['admin_oauthclients_popup_select_user_title'] = 'Associate to an actual user';
+$lang['admin_oauthclients_error_exists'] = 'This client_id already exists';
+$lang['admin_oauthclients_confirm_delete'] = 'Are you sure that you want to proceed?';
+$lang['admin_oauthclients_tab_sessions'] = 'Sessions';
+$lang['admin_oauthclients_tab_sessions_description'] = 'List of active REST API OAuth Sessions';
+$lang['admin_oauthclients_button_purge'] = 'Purge';

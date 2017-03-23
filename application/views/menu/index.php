@@ -70,7 +70,7 @@ $this->lang->load('menu', $language);?>
                 <ul class="nav">
                     <li><a href="<?php echo base_url();?>leaves" title="<?php echo lang('menu_leaves_list_requests');?>"><i class="icon-list icon-white"></i></a></li>
 
-              <?php if ($is_hr == TRUE) { ?>
+              <?php if (($is_hr == TRUE) || ($is_admin == TRUE)) { ?>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('menu_admin_title');?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -81,8 +81,11 @@ $this->lang->load('menu', $language);?>
                     <li><a href="<?php echo base_url();?>leavetypes"><?php echo lang('menu_hr_list_leaves_type');?></a></li>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_admin_settings_divider');?></li>
-                    <li><a href="<?php echo base_url();?>admin/settings"><?php echo lang('menu_admin_settings');?></a></li>
                     <li><a href="<?php echo base_url();?>admin/diagnostic"><?php echo lang('menu_admin_diagnostic');?></a></li>
+                    <?php if ($is_admin == TRUE) { ?>
+                        <li><a href="<?php echo base_url();?>admin/settings"><?php echo lang('menu_admin_settings');?></a></li>
+                        <li><a href="<?php echo base_url();?>admin/oauthclients"><?php echo lang('menu_admin_oauth_clients');?></a></li>
+                    <?php } ?>
                   </ul>
                 </li>
               <?php } ?>

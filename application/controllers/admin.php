@@ -46,9 +46,9 @@ class Admin extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function diagnostic() {
-        $this->auth->checkIfOperationIsAllowed('list_settings');
+        $this->auth->checkIfOperationIsAllowed('diagnostic');
         $data = getUserContext($this);
-        $data['title'] =lang('admin_diagnostic_title');
+        $data['title'] = lang('admin_diagnostic_title');
         $data['help'] = '';
         $this->load->model('leaves_model');
         $this->load->model('entitleddays_model');
@@ -80,6 +80,84 @@ class Admin extends CI_Controller {
         $this->load->view('menu/index', $data);
         $this->load->view('admin/diagnostic', $data);
         $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Display the list of OAuth clients
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function oauthClients() {
+        $this->auth->checkIfOperationIsAllowed('oauth_clients');
+        $data = getUserContext($this);
+        $this->load->model('oauthclients_model');
+        $data['clients'] = $this->oauthclients_model->getOAuthClients();
+        $data['tokens'] = $this->oauthclients_model->getAccessTokens();
+        $data['title'] = lang('admin_oauthclients_title');
+        $data['help'] = '';
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('admin/oauth_clients', $data);
+        $this->load->view('templates/footer');
+    }
+
+    /**
+     * Ajax action: create an OAuth clients
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function oauthClientsCreate() {
+        if ($this->auth->isAllowed('oauth_clients') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $clientId = $this->input->post('client_id', TRUE);
+            $clientSecret = $this->input->post('client_secret', TRUE);
+            $redirectUri = $this->input->post('redirect_uri', TRUE);
+            if (isset($clientId) && isset($clientSecret) && isset($redirectUri)) {
+                $this->output->set_content_type('text/plain');
+                $this->load->model('oauthclients_model');
+                $exists = $this->oauthclients_model->getOAuthClients($clientId);
+                if (empty($exists)) {
+                    $result = $this->oauthclients_model->setOAuthClients();
+                } else {
+                    $result = "DUPLICATE";
+                }
+                $this->output->set_output($result);
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            }
+        }
+    }
+
+    /**
+     * Ajax action: delete an OAuth client
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function oauthClientsDelete() {
+        if ($this->auth->isAllowed('oauth_clients') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $clientId = $this->input->post('client_id', TRUE);
+            $clientSecret = $this->input->post('client_secret', TRUE);
+            $redirectUri = $this->input->post('redirect_uri', TRUE);
+            if (isset($clientId) && isset($clientSecret) && isset($redirectUri)) {
+                $this->output->set_content_type('text/plain');
+                $this->load->model('oauthclients_model');
+                $result = $this->oauthclients_model->deleteOAuthClients($this->input->post('client_id'));
+                $this->output->set_output($result);
+            } else {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            }
+        }
+    }
+    
+    /**
+     * purgeAccessTokens
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function oauthTokensPurge() {
+        $this->auth->checkIfOperationIsAllowed('oauth_clients');
+        $this->load->model('oauthclients_model');
+        $this->oauthclients_model->purgeAccessTokens();
+        redirect('admin/oauthclients#sessions');
     }
     
     /**

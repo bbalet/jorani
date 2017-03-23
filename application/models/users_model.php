@@ -30,14 +30,26 @@ class Users_model extends CI_Model {
      */
     public function getUsers($id = 0) {
         $this->db->select('users.*');
-        $this->db->select('roles.name as role_name');
-        $this->db->join('roles', 'roles.id = users.role');
         if ($id === 0) {
             $query = $this->db->get('users');
             return $query->result_array();
         }
         $query = $this->db->get_where('users', array('users.id' => $id));
         return $query->row_array();
+    }
+    
+    /**
+     * Get the list of users and their roles
+     * @return array record of users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function getUsersAndRoles() {
+        $this->db->select('users.id, active, firstname, lastname, login, email');
+        $this->db->select("GROUP_CONCAT(roles.name SEPARATOR ',') as roles_list", FALSE);
+        $this->db->join('roles', 'roles.id = (users.role & roles.id)');
+        $this->db->group_by('users.id, active, firstname, lastname, login, email');
+        $query = $this->db->get('users');
+        return $query->result_array();
     }
     
     /**

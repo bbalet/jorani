@@ -47,7 +47,7 @@ class Auth {
             
             //Admin functions
             case 'purge_database' :
-                if ($this->CI->session->userdata('is_hr') == true)
+                if ($this->CI->session->userdata('is_admin') == true)
                     if ($this->CI->config->item('enable_purge') == true)
                         return true;
                     else
@@ -58,6 +58,13 @@ class Auth {
             
             //User management
             case 'list_settings' :
+            case 'oauth_clients' :    
+                if ($this->CI->session->userdata('is_admin') == true)
+                    return true;
+                else
+                    return false;
+                break;
+                
             case 'list_users' :
             case 'create_user' :
             case 'delete_user' :
@@ -85,6 +92,7 @@ class Auth {
                 break;
 
             //Configuration of HR objects
+            case 'diagnostic' :
             case 'list_employees' :
             case 'employee_contract' :
             case 'employee_manager' :

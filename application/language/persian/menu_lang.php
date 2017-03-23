@@ -23,6 +23,7 @@ $lang['menu_admin_add_user'] = 'ایجاد کاربر';
 $lang['menu_admin_settings_divider'] = 'تنظیمات';
 $lang['menu_admin_settings'] = 'تنظیمات';
 $lang['menu_admin_diagnostic'] = 'Diagnostic';
+$lang['menu_admin_oauth_clients'] = 'OAuth Clients';
 
 $lang['menu_hr_title'] = 'منابع انسانی';
 $lang['menu_hr_employees_divider'] = 'کارمندان';

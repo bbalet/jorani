@@ -22,6 +22,7 @@ $lang['menu_admin_add_user'] = 'Crea utente';
 $lang['menu_admin_settings_divider'] = 'Impostazioni';
 $lang['menu_admin_settings'] = 'Impostazioni';
 $lang['menu_admin_diagnostic'] = 'Diagnostic';
+$lang['menu_admin_oauth_clients'] = 'OAuth Clients';
 
 $lang['menu_hr_title'] = 'RU';
 $lang['menu_hr_employees_divider'] = 'Dipendenti';

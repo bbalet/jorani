@@ -207,6 +207,7 @@ class Api extends CI_Controller {
      * Accept a leave request
      * @param int $id identifier of leave request to accept
      * @author Guillaume BLAQUIERE <guillaume.blaquiere@gmail.com>
+     * @since 0.4.4
      */
     public function acceptleaves($id = 0) {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
@@ -222,6 +223,7 @@ class Api extends CI_Controller {
      * Reject a leave request
      * @param int $id identifier of leave request to reject
      * @author Guillaume BLAQUIERE <guillaume.blaquiere@gmail.com>
+     * @since 0.4.4
      */
     public function rejectleaves($id = 0) {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
@@ -574,6 +576,26 @@ class Api extends CI_Controller {
             $result = $this->organization_model->allEmployees($id, $children);
             echo json_encode($result);
         }
-    }    
+    }
 
+    /**
+     * Get the list of users with all their attributes
+     * Requires scope users (see tests/rest/api3.php)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     * @since 0.6.0
+     */
+    public function usersExt() {
+        $request = OAuth2\Request::createFromGlobals();
+        $response = new OAuth2\Response();
+        $scopeRequired = 'users';
+        if (!$this->server->verifyResourceRequest($request, $response, $scopeRequired)) {
+            $response->send();
+        } else {
+            $this->load->model('users_model');
+            $result = $this->users_model->getUsers();
+            header("Content-Type: application/json");
+            echo json_encode($result);
+        }
+    }
+    
 }

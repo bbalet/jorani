@@ -1,10 +1,10 @@
 <?php 
 /**
  * This view displays the login form. Its layout differs from other pages of the application.
- * @copyright  Copyright (c) 2014-2016 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
+ * @copyright  Copyright (c) 2014-2017 Benjamin BALET
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.1.0
  */
 ?>
 
@@ -117,7 +117,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     <div class="modal-body">
         <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
     </div>
- </div>
+</div>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>

@@ -3,6 +3,8 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 ## v0.5.3
 
+- [ ] Hide leave types in tabular calendar. display it only to HR Manager and if connected user is manager.
+
 This minor release prepares APM and RUM functions:
 
 - [ ] Add SMTPSecure, SMTPAutoTLS, and SMTPAuth email params. See https://mail.google.com/mail/u/0/#inbox/15ae53ce27624515

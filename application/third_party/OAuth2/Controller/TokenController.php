@@ -12,14 +12,33 @@ use OAuth2\RequestInterface;
 use OAuth2\ResponseInterface;
 
 /**
- * @see OAuth2\Controller\TokenControllerInterface
+ * @see \OAuth2\Controller\TokenControllerInterface
  */
 class TokenController implements TokenControllerInterface
 {
+    /**
+     * @var AccessTokenInterface
+     */
     protected $accessToken;
+
+    /**
+     * @var array
+     */
     protected $grantTypes;
+
+    /**
+     * @var ClientAssertionTypeInterface
+     */
     protected $clientAssertionType;
+
+    /**
+     * @var Scope|ScopeInterface
+     */
     protected $scopeUtil;
+
+    /**
+     * @var ClientInterface
+     */
     protected $clientStorage;
 
     public function __construct(AccessTokenInterface $accessToken, ClientInterface $clientStorage, array $grantTypes = array(), ClientAssertionTypeInterface $clientAssertionType = null, ScopeInterface $scopeUtil = null)
@@ -51,7 +70,11 @@ class TokenController implements TokenControllerInterface
             // server MUST disable caching in headers when tokens are involved
             $response->setStatusCode(200);
             $response->addParameters($token);
-            $response->addHttpHeaders(array('Cache-Control' => 'no-store', 'Pragma' => 'no-cache'));
+            $response->addHttpHeaders(array(
+                'Cache-Control' => 'no-store',
+                'Pragma' => 'no-cache',
+                'Content-Type' => 'application/json'
+            ));
         }
     }
 
@@ -60,11 +83,11 @@ class TokenController implements TokenControllerInterface
      * This would be called from the "/token" endpoint as defined in the spec.
      * You can call your endpoint whatever you want.
      *
-     * @param $request - RequestInterface
-     * Request object to grant access token
+     * @param RequestInterface $request Request object to grant access token
+     * @param ResponseInterface $response
      *
-     * @throws InvalidArgumentException
-     * @throws LogicException
+     * @throws \InvalidArgumentException
+     * @throws \LogicException
      *
      * @see http://tools.ietf.org/html/rfc6749#section-4
      * @see http://tools.ietf.org/html/rfc6749#section-10.6
@@ -204,10 +227,8 @@ class TokenController implements TokenControllerInterface
     /**
      * addGrantType
      *
-     * @param grantType - OAuth2\GrantTypeInterface
-     * the grant type to add for the specified identifier
-     * @param identifier - string
-     * a string passed in as "grant_type" in the response that will call this grantType
+     * @param GrantTypeInterface $grantType the grant type to add for the specified identifier
+     * @param string $identifier a string passed in as "grant_type" in the response that will call this grantType
      */
     public function addGrantType(GrantTypeInterface $grantType, $identifier = null)
     {
@@ -216,5 +237,59 @@ class TokenController implements TokenControllerInterface
         }
 
         $this->grantTypes[$identifier] = $grantType;
+    }
+
+    public function handleRevokeRequest(RequestInterface $request, ResponseInterface $response)
+    {
+        if ($this->revokeToken($request, $response)) {
+            $response->setStatusCode(200);
+            $response->addParameters(array('revoked' => true));
+        }
+    }
+
+    /**
+     * Revoke a refresh or access token. Returns true on success and when tokens are invalid
+     *
+     * Note: invalid tokens do not cause an error response since the client
+     * cannot handle such an error in a reasonable way.  Moreover, the
+     * purpose of the revocation request, invalidating the particular token,
+     * is already achieved.
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @return bool|null
+     */
+    public function revokeToken(RequestInterface $request, ResponseInterface $response)
+    {
+        if (strtolower($request->server('REQUEST_METHOD')) != 'post') {
+            $response->setError(405, 'invalid_request', 'The request method must be POST when revoking an access token', '#section-3.2');
+            $response->addHttpHeaders(array('Allow' => 'POST'));
+
+            return null;
+        }
+
+        $token_type_hint = $request->request('token_type_hint');
+        if (!in_array($token_type_hint, array(null, 'access_token', 'refresh_token'), true)) {
+            $response->setError(400, 'invalid_request', 'Token type hint must be either \'access_token\' or \'refresh_token\'');
+
+            return null;
+        }
+
+        $token = $request->request('token');
+        if ($token === null) {
+            $response->setError(400, 'invalid_request', 'Missing token parameter to revoke');
+
+            return null;
+        }
+
+        // @todo remove this check for v2.0
+        if (!method_exists($this->accessToken, 'revokeToken')) {
+            $class = get_class($this->accessToken);
+            throw new \RuntimeException("AccessToken {$class} does not implement required revokeToken method");
+        }
+
+        $this->accessToken->revokeToken($token, $token_type_hint);
+
+        return true;
     }
 }

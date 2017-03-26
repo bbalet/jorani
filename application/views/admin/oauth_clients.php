@@ -92,26 +92,11 @@
 
         <div class="row-fluid">
             <div class="span12">
-              <button onclick="purgeTokens();" class="btn btn-danger"><i class="icon-trash icon-white"></i>&nbsp;<?php echo lang('admin_oauthclients_button_purge');?></button>
+              <!--<button onclick="purgeTokens();" class="btn btn-danger"><i class="icon-trash icon-white"></i>&nbsp;<?php echo lang('admin_oauthclients_button_purge');?></button>//-->
             </div>
         </div>
    </div>
   </div>
-
-<div id="frmConfirmDelete" class="modal hide fade">
-    <div class="modal-header">
-        <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="close">&times;</a>
-         <h3><?php echo lang('users_index_popup_delete_title');?></h3>
-    </div>
-    <div class="modal-body">
-        <p><?php echo lang('users_index_popup_delete_message');?></p>
-        <p><?php echo lang('users_index_popup_delete_question');?></p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn btn-danger" id="lnkDeleteUser"><?php echo lang('users_index_popup_delete_button_yes');?></a>
-        <a href="#" onclick="$('#frmConfirmDelete').modal('hide');" class="btn"><?php echo lang('users_index_popup_delete_button_no');?></a>
-    </div>
-</div>
 
 <div id="frmAddClient" class="modal hide fade">
     <div class="modal-header">
@@ -208,7 +193,6 @@ function createClient() {
             bootbox.alert("<?php echo lang('admin_oauthclients_error_exists');?>");
         } else {
           //Add into the datatable
-          //TODO by html
           contentHTML = "<tr data-id='" + $('#client_id').val() + "' >" + 
                 "<td>" + 
                     "<a href='#' class='confirm-delete' data-id='" + $('#client_id').val() + "' title='<?php echo lang('admin_oauthclients_thead_tip_delete');?>'><i class='icon-trash'></i></a>" +
@@ -351,12 +335,6 @@ $(document).ready(function() {
     $("#cmdSelectUser").click(function() {
         $("#frmSelectUser").modal('show');
         $("#frmSelectUserBody").load('<?php echo base_url(); ?>users/employees');
-    });
-	
-    //On showing the confirmation pop-up, add the user id at the end of the delete url action
-    $('#frmConfirmDelete').on('show', function() {
-        var link = "<?php echo base_url();?>users/delete/" + $(this).data('id');
-        $("#lnkDeleteUser").attr('href', link);
     });
 
     //Display a modal pop-up so as to confirm if a user has to be deleted or not

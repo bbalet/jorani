@@ -97,6 +97,8 @@ class OAuthClients_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function getAccessTokens() {
+        $this->db->limit(5000);
+        $this->db->order_by("expires", "desc");
         $query = $this->db->get('oauth_access_tokens');
         return $query->result_array();
     }
@@ -107,5 +109,64 @@ class OAuthClients_model extends CI_Model {
      */
     public function purgeAccessTokens() {
         $this->db->truncate('oauth_access_tokens');
+    }
+    
+    /**
+     * Check if the application was already authorized by the user
+     * @param string $clientId id of a OAuth client
+     * @param string $userId id of a Jorani user
+     * @return bool TRUE if the application is allowed
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function isOAuthAppAllowed($clientId, $userId) {
+        $query = $this->db->get_where('oauth_applications',
+                array(
+                    'client_id' => $clientId,
+                    'user' => $userId
+                ));
+        return !empty($query->row_array());
+    }
+    
+    /**
+     * List applications authorized by a user
+     * @param string $userId id of a Jorani user
+     * @return array List of client names (name, url)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function listOAuthApps($userId) {
+        $this->db->select('oauth_applications.client_id, redirect_uri');
+        $this->db->join('oauth_clients', 'oauth_clients.client_id = oauth_applications.client_id');
+        $this->db->order_by("oauth_applications.client_id", "asc");
+        $query = $this->db->get_where('oauth_applications',
+                array('user' => $userId));
+        return $query->result_array();
+    }
+    
+    /**
+     * Revoke an OAuth2 application
+     * @param string $clientId id of a OAuth client
+     * @param string $userId id of a Jorani user
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function revokeOAuthApp($clientId, $userId) {
+        $this->db->delete('oauth_applications', 
+                array(
+                    'client_id' => $clientId,
+                    'user' => $userId
+                ));
+    }
+    
+    /**
+     * Allow an OAuth2 application
+     * @param string $clientId id of a OAuth client
+     * @param string $userId id of a Jorani user
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function allowOAuthApp($clientId, $userId) {
+        $data = array(
+            'client_id' => $clientId,
+            'user' => $userId
+        );
+        return $this->db->insert('oauth_applications', $data);
     }
 }

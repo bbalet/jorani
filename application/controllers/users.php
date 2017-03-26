@@ -105,11 +105,13 @@ class Users extends CI_Controller {
         $this->load->model('positions_model');
         $this->load->model('contracts_model');
         $this->load->model('organization_model');
+        $this->load->model('oauthclients_model');
         $data['manager_label'] = $this->users_model->getName($data['user']['manager']);
         $data['contract_id'] = intval($data['user']['contract']);
         $data['contract_label'] = $this->contracts_model->getName($data['user']['contract']);
         $data['position_label'] = $this->positions_model->getName($data['user']['position']);
         $data['organization_label'] = $this->organization_model->getName($data['user']['organization']);
+        $data['apps'] = $this->oauthclients_model->listOAuthApps($this->user_id);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('users/myprofile', $data);

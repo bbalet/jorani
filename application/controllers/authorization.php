@@ -53,7 +53,8 @@ class Authorization extends CI_Controller {
         }
         $this->lang->load('session', $this->session->userdata('language'));
         $this->lang->load('global', $this->session->userdata('language'));
-        
+     
+        header("Access-Control-Allow-Origin: *");
     }
 
     /**
@@ -88,22 +89,35 @@ class Authorization extends CI_Controller {
         }
         
         if ($this->session->userdata('logged_in')) {
-            //Test if the application is authorized
+            $this->load->model('oauthclients_model');
+            $userId = $this->session->userdata('id');
+            $clientId = $this->input->get_post('client_id');
+            //Test if we received a form authorizing the application
             if (empty($_POST)) {
-                // display an authorization form
-                $data['clientId'] = $this->input->get('client_id');
-                $data['responseType'] = $this->input->get('response_type');
-                $data['state'] = $this->input->get('state');
-                $this->load->view('session/authorize', $data);
+                // Does the application was already authorized by user
+                if ($this->oauthclients_model->isOAuthAppAllowed($clientId, $userId)) {
+                    $this->server->handleAuthorizeRequest($request, $response, TRUE, $userId);
+                    $code = substr($response->getHttpHeader('Location'), strpos($response->getHttpHeader('Location'), 'code=')+5, 40);
+                    header("Content-Type: text/plain");
+                    echo $code;
+                } else {
+                    // display an authorization form
+                    $data['clientId'] = $clientId;
+                    $data['responseType'] = $this->input->get('response_type');
+                    $data['state'] = $this->input->get('state');
+                    $data['language'] = $this->session->userdata('language');
+                    $data['language_code'] = $this->session->userdata('language_code');
+                    $this->load->view('session/authorize', $data);
+                }
             } else {
                 // print the authorization code if the user has authorized your client
                 $is_authorized = ($_POST['authorized'] === 'yes');
-                $this->server->handleAuthorizeRequest($request, $response, $is_authorized, $this->session->userdata('id'));
+                $this->server->handleAuthorizeRequest($request, $response, $is_authorized, $userId);
                 if ($is_authorized) {
-                  // this is only here so that you get to see your code in the cURL request. Otherwise, we'd redirect back to the client
-                  $code = substr($response->getHttpHeader('Location'), strpos($response->getHttpHeader('Location'), 'code=')+5, 40);
-                  header("Content-Type: text/plain");
-                  echo $code;
+                    $this->oauthclients_model->allowOAuthApp($clientId, $userId);
+                    $code = substr($response->getHttpHeader('Location'), strpos($response->getHttpHeader('Location'), 'code=')+5, 40);
+                    header("Content-Type: text/plain");
+                    echo $code;
                 } else {
                     $response->send();
                 }
@@ -119,8 +133,9 @@ class Authorization extends CI_Controller {
         if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
             $this->server->getResponse()->send();
         } else {
+            $token = $this->server->getAccessTokenData(OAuth2\Request::createFromGlobals());
             $this->load->model('users_model');
-            $result = $this->users_model->getUsers($this->session->userdata('id'));
+            $result = $this->users_model->getUsers($token['user_id']);
             unset($result['password']);
             header("Content-Type: application/json");
             echo json_encode($result);

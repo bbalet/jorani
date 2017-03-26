@@ -89,6 +89,7 @@ class Admin extends CI_Controller {
     public function oauthClients() {
         $this->auth->checkIfOperationIsAllowed('oauth_clients');
         $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
         $this->load->model('oauthclients_model');
         $data['clients'] = $this->oauthclients_model->getOAuthClients();
         $data['tokens'] = $this->oauthclients_model->getAccessTokens();

@@ -12,6 +12,7 @@ http://localhost/jorani/tests/rest/oauth2.html
         <link href="../../assets/css/jorani-0.5.1.css" rel="stylesheet" type="text/css"/>
         <script src="../../assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
         <script src="../../assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/js/bootbox.min.js" type="text/javascript"></script>
     </head>
     <body>  
         <div class="container">
@@ -29,7 +30,7 @@ http://localhost/jorani/tests/rest/oauth2.html
 
             <h1>Try to authorize the application</h1>
 
-            <button id="cmdAuthorize" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
+            <button id="cmdAuthorize" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;Who am I?</button>
 
         </div>
         
@@ -51,57 +52,75 @@ var host = "http://localhost/jorani/api/";
 var baseUrl = host + "authorization/authorize";
 var clientId = "demo-login-oauth2";
 
+//Try to authorize the application
+function JoraniOAuthTry() {
+    $.ajax({
+        url: baseUrl,
+        type: "GET",
+        data: {
+            client_id: clientId,
+            response_type: "code",
+            state: "xyz",
+        },
+        success: function(response, status, xhr){
+            var ct = xhr.getResponseHeader("content-type") || "";
+            if (ct.indexOf('html') > -1) {
+                $("#frmAuthorize").modal('show');
+                $("#frmAuthorizeBody").html(response);
+            }
+            if (ct.indexOf('plain') > -1) {
+                JoraniOAuthAuthorizedCallback(response);
+            }
+        }
+    });
+}
+
 //This function is triggered on a successful login
 //We need to reload the view so as to display the accept form
 function JoraniOAuthLoginCallback() {
-    var query = baseUrl + "?response_type=code&client_id=" + clientId + "&state=xyz";
-    $("#frmAuthorizeBody").load(query);
+    JoraniOAuthTry();
 }
 
 //This function is triggered when a user refuses to associate the application
 function JoraniOAuthCancelCallback() {
     $('#frmAuthorize').modal('hide');
-    alert("Not authorized");
+    bootbox.alert("Not authorized");
 }
 
 //This function is triggered when the applications are authorized
 function JoraniOAuthAuthorizedCallback(data) {
-    //Now that we got an OAuth2 token, we can access to the user properties
-    //grant_type=authorization_code&code=YOUR_CODE
-    
+    //We can now get an OAuth2 token using the temporary authorization code
     var query = host + "token";
     $.ajax({
         url: query,
         type: "POST",
         data: {
+            client_id: clientId,
             grant_type: "authorization_code",
             code: data,
         },
         success: function(data){
-            alert(data);
+            //Now that we got an OAuth2 access token, we can access to the user properties
+            var query = host + "authorization/userinfo";
+            $.ajax({
+                url: query,
+                type: "POST",
+                data: {
+                    client_id: clientId,
+                    access_token: data.access_token,
+                },
+                success: function(data){
+                    $('#frmAuthorize').modal('hide');
+                    bootbox.alert("Hello " + data.firstname + " " + data.lastname);
+                }
+            });
         }
     });
-    
-    /*var query = host + "authorization/userinfo";
-    $.ajax({
-        url: query,
-        type: "POST",
-        data: {
-            grant_type: "authorization_code",
-            code: data,
-        },
-        success: function(data){
-            alert(data);
-        }
-    });*/
-    
 }
 
 $(function () {
     $("#cmdAuthorize").click(function() {
-        var query = baseUrl + "?response_type=code&client_id=" + clientId + "&state=xyz";
-        $("#frmAuthorize").modal('show');
-        $("#frmAuthorizeBody").load(query);
+        JoraniOAuthTry();
     });
 });
 </script>

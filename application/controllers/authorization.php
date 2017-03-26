@@ -53,8 +53,12 @@ class Authorization extends CI_Controller {
         }
         $this->lang->load('session', $this->session->userdata('language'));
         $this->lang->load('global', $this->session->userdata('language'));
-     
-        header("Access-Control-Allow-Origin: *");
+        
+        //CORS setup
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Allow-Headers: x-requested-with');
+        header('Access-Control-Allow-Methods: GET, POST');
     }
 
     /**

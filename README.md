@@ -1,23 +1,8 @@
-Jorani is a Leave Management System developed in PHP/MySQL under an AGPL v3 licence.
-Jorani is designed to provide simple leave and overtime request workflows for small organizations.
-
-![Jorani Logo](https://raw.githubusercontent.com/bbalet/jorani/master/assets/images/Jorani_Logo_horizontal-700.png)
-
-## Informations / getting help
-
-[![Join the chat at https://gitter.im/bbalet/jorani](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bbalet/jorani?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-* Official website : http://jorani.org/
-* User group : https://groups.google.com/forum/?hl=en#!forum/jorani
-
-## Status
-
-This project is stable and ready for production. An online demo is available here : https://demo.jorani.org/
-Use bbalet / bbalet for login / password.
+Leave Management System developed in PHP/MySQL under an AGPL v3 licence.
+Designed to provide simple leave and overtime request workflows for small organizations.
 
 ## Features
 
-* Comprehensive online documentation (French and English).
 * Notifications by e-mail (requested, accepted, rejected and new user).
 * Leave request approval workflow (1 validator).
 * Overtime request approval workflow (1 validator).
@@ -32,11 +17,13 @@ Use bbalet / bbalet for login / password.
 * REST API (OAuth2) fully documented and examples with PHP clients.
 * LDAP Authentication (OpenLDAP, AD, etc.).
 * OAuth2 Authentication (only Google+ at the moment).
-* Available in English, French, Spanish, Italian, German, Dutch, Russian, Ukrainian, Persian, Khmer, Vietnamese, and Turkish.
+* Multilingual capable
 
-## Installation
+## __Installation__
 
-[See the installation instructions](docs/install/README.md) for advanced configuration. In a nutshell :
+[See the installation instructions](docs/install/README.md) for advanced configuration. 
+
+## In a nutshell:
 * If you use Apache, **mod_rewrite must be activated and the config must allow overwriting settings with .htaccess file**.
 * Download or clone Jorani.
 * Upload the content of this folder on your server (in <code>/var/www/...</code>).
@@ -51,21 +38,13 @@ Use bbalet / bbalet for login / password.
 
 ## Contribute
 
-* Help us to translate the software in your language https://www.transifex.com/projects/p/jorani
-* Suggest ideas, declare bugs with Github's issue tracking system or Google group.
 * [Read the TODO list](TODO.md) if you want to know what are the priorities.
 
 ## Credits
 
-### Contributors
-
-* NGO Passerelles numériques, our first user http://passerellesnumeriques.org/en/
-* Github and Google groupe users for their ideas and tests.
-* Translation : Roger WOLFS (Dutch), Heng Vongkol (Khmer) Christian SONNENBERG (German), Hector NESTAR (Spanish), Dario BRIGNONE (Italian), Oleg KOPTEV, Yevhen Kyrylchenko (Russian), Ela Alptekin (Turkish), and Sayed Kabir Salehi (Farsi) and all participants of the Transifex project.
-
 ### Third party libraries and components
 
-We thank the following open source projects for the components used by Jorani:
+Thank to the following open source projects for the components.
 
 #### Backend
 

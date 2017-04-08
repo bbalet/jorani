@@ -62,7 +62,7 @@ msgstr ""
 msgid "The password you use in order to open a session on your operating system (Windows, Linux, etc.)."
 msgstr ""
 
-msgid "Welcome to Jorani {Firstname} {Lastname}. Please use these credentials to *login to the system*.</a>"
+msgid "Welcome to Jorani {Firstname} {Lastname}. Please use these credentials to *login to the system*."
 msgstr ""
 
 msgid "Once connected, you can change your password, as explained *here*."
@@ -72,6 +72,9 @@ msgid "Please use these credentials to *login to the system*:"
 msgstr ""
 
 msgid "Your Jorani password has been reset. If you did not perform this operation, please contact your manager."
+msgstr ""
+
+msgid "{Firstname} {Lastname} requested time off. See the *details* below:"
 msgstr ""
 
 msgid "{Firstname} {Lastname} submitted overtime worked. See the details below:"

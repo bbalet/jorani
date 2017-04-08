@@ -1,0 +1,75 @@
+<?php
+/**
+ * Translation file
+ * @copyright  Copyright (c) 2014-2017 Benjamin BALET
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.4.7
+ * @author     Transifex contributors
+ */
+
+$lang['requests_index_title'] = 'Mě předložené žádosti o dovolenou';
+$lang['requests_index_description'] = 'This screen lists the leave requests submitted to you. If you are not a manager, this list will always be empty.';
+$lang['requests_index_thead_tip_view'] = 'zobrazit';
+$lang['requests_index_thead_tip_accept'] = 'schválit';
+$lang['requests_index_thead_tip_reject'] = 'zamítnout';
+$lang['requests_index_thead_tip_history'] = 'show history';
+$lang['requests_index_thead_id'] = 'Identifikace';
+$lang['requests_index_thead_fullname'] = 'Celé jméno';
+$lang['requests_index_thead_startdate'] = 'Datum začátku';
+$lang['requests_index_thead_enddate'] = 'Datum konce';
+$lang['requests_index_thead_duration'] = 'Počet dnů';
+$lang['requests_index_thead_type'] = 'Typ';
+$lang['requests_index_thead_status'] = 'Stav';
+$lang['requests_collaborators_title'] = 'Seznam mých podřízených';
+$lang['requests_collaborators_description'] = 'This screen lists your direct report subordinates. If you are not a manager, this list will always be empty.';
+$lang['requests_collaborators_thead_id'] = 'Identifikace';
+$lang['requests_collaborators_thead_link_balance'] = 'Bilance dovolené';
+$lang['requests_collaborators_thead_link_presence'] = 'Report docházky';
+$lang['requests_collaborators_thead_link_year'] = 'Roční kalendář';
+$lang['requests_collaborators_thead_link_create_leave'] = 'Vytvořit žádost o dovolenou v zastoupení tohoto podřízeného.';
+$lang['requests_collaborators_thead_firstname'] = 'Jméno';
+$lang['requests_collaborators_thead_lastname'] = 'Příjmení';
+$lang['requests_collaborators_thead_email'] = 'E-mail';
+$lang['requests_collaborators_thead_identifier'] = 'Identifikátor';
+$lang['requests_summary_title'] = 'Bilance dovolených uživatele #';
+$lang['requests_summary_thead_type'] = 'Druh dovolené';
+$lang['requests_summary_thead_available'] = 'K dispozici';
+$lang['requests_summary_thead_taken'] = 'Vybráno';
+$lang['requests_summary_thead_entitled'] = 'Nárokováno';
+$lang['requests_summary_thead_description'] = 'Popis';
+$lang['requests_summary_flash_msg_error'] = 'Tento zaměstnanec nemá smlouvu.';
+$lang['requests_summary_flash_msg_forbidden'] = 'Nejste nadřízený tohoto zaměstnance.';
+$lang['requests_summary_button_list'] = 'Seznam podřízených';
+$lang['requests_index_button_export'] = 'Exportovat seznam';
+$lang['requests_index_button_show_all'] = 'Všechny požadavky';
+$lang['requests_index_button_show_pending'] = 'Nevyřízené žádosti';
+$lang['requests_accept_flash_msg_error'] = 'You are not the line manager of this employee. You cannot accept this leave request.';
+$lang['requests_accept_flash_msg_success'] = 'Požadavek o dovolenou byl úspěšně přijat.';
+$lang['requests_reject_flash_msg_error'] = 'You are not the line manager of this employee. You cannot reject this leave request.';
+$lang['requests_reject_flash_msg_success'] = 'Požadavek o dovolenou byl úspěšně zamítnut.';
+$lang['requests_export_title'] = 'Seznam žádostí o dovolenou';
+$lang['requests_export_thead_id'] = 'Identifikace';
+$lang['requests_export_thead_fullname'] = 'Celé jméno';
+$lang['requests_export_thead_startdate'] = 'Datum začátku';
+$lang['requests_export_thead_startdate_type'] = 'Ráno/Odpoledne';
+$lang['requests_export_thead_enddate'] = 'Datum konce';
+$lang['requests_export_thead_enddate_type'] = 'Ráno/Odpoledne';
+$lang['requests_export_thead_duration'] = 'Počet dnů';
+$lang['requests_export_thead_type'] = 'Typ';
+$lang['requests_export_thead_cause'] = 'Účel';
+$lang['requests_export_thead_status'] = 'Stav';
+$lang['requests_delegations_title'] = 'Seznam delegování';
+$lang['requests_delegations_description'] = 'This is the list of employees who can accept or reject a request in your behalf.';
+$lang['requests_delegations_thead_employee'] = 'Zaměstnanec';
+$lang['requests_delegations_thead_tip_delete'] = 'Zamítnout';
+$lang['requests_delegations_button_add'] = 'Přidat';
+$lang['requests_delegations_popup_delegate_title'] = 'Přidat delegování';
+$lang['requests_delegations_popup_delegate_button_ok'] = 'OK';
+$lang['requests_delegations_popup_delegate_button_cancel'] = 'Zrušit';
+$lang['requests_delegations_confirm_delete_message'] = 'Jste si jistí že chcete zneplatnit toto delegování?';
+$lang['requests_delegations_confirm_delete_cancel'] = 'Zrušit';
+$lang['requests_delegations_confirm_delete_yes'] = 'Ano';
+$lang['requests_balance_title'] = 'Bilance dovolené (podřízení)';
+$lang['requests_balance_description'] = 'Leave balance of my direct report subordinates. If you are not a manager, this list will always be empty.';
+$lang['requests_balance_date_field'] = 'Datum reportu';

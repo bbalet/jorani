@@ -20,10 +20,11 @@ $lang['extra_index_thead_status'] = 'Stav';
 $lang['extra_index_button_export'] = 'Exportovat seznam';
 $lang['extra_index_button_create'] = 'Nový požadavek';
 $lang['extra_index_popup_delete_title'] = 'Smazat žádost o přesčas';
-$lang['extra_index_popup_delete_message'] = 'You are about to delete one overtime request, this procedure is irreversible.';
+$lang['extra_index_popup_delete_message'] = 'Chystáte se smazat požadavek o přesčas, tento krok je nevratný.';
 $lang['extra_index_popup_delete_question'] = 'Chcete pokračovat?';
 $lang['extra_index_popup_delete_button_yes'] = 'Ano';
 $lang['extra_index_popup_delete_button_no'] = 'Ne';
+
 $lang['extra_create_title'] = 'Odeslat požadavek o přesčas';
 $lang['extra_create_field_date'] = 'Datum';
 $lang['extra_create_field_duration'] = 'Počet dnů';
@@ -32,9 +33,11 @@ $lang['extra_create_field_cause'] = 'Účel';
 $lang['extra_create_field_status'] = 'Stav';
 $lang['extra_create_button_create'] = 'Požádat o přesčas';
 $lang['extra_create_button_cancel'] = 'Zrušit';
+
 $lang['extra_create_msg_success'] = 'Váš požadavek o přesčas byl úspěšně vytvořen.';
-$lang['extra_create_msg_error'] = 'The overtime request has been succesfully created or updated, but you don\'t have a manager.';
+$lang['extra_create_msg_error'] = 'Žádost o přesčasové byl úspěšně vytvořen nebo aktualizován, ale nemáte nadřízeného.';
 $lang['extra_create_mandatory_js_msg'] = '"Toto pole " + fieldname + " je povinný."';
+
 $lang['extra_edit_title'] = 'Editovat požadavek o přesčas #';
 $lang['extra_edit_hmtl_title'] = 'Editovat požadavek o přesčas';
 $lang['extra_edit_field_date'] = 'Datum';
@@ -46,8 +49,10 @@ $lang['extra_edit_button_update'] = 'Upravit přesčas';
 $lang['extra_edit_button_cancel'] = 'Zrušit';
 $lang['extra_edit_msg_error'] = 'Nemůžete editovat požadavek o přesčas, který jste již vytvořili';
 $lang['extra_edit_msg_success'] = 'Žádost o přesčas byla úspěšně aktualizována';
+
 $lang['extra_delete_msg_success'] = 'Požadavek o přesčas byl úspěšně vymazán';
 $lang['extra_delete_msg_error'] = 'You can\'t delete this overtime request';
+
 $lang['extra_view_title'] = 'Zobrazit požadavek o přesčas #';
 $lang['extra_view_hmtl_title'] = 'Zobrazit požadavek o přesčas';
 $lang['extra_view_field_date'] = 'Datum';

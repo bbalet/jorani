@@ -32,6 +32,7 @@ $lang['entitleddays_contract_confirm_delete_message'] = 'Opravdu to chcete smaza
 $lang['entitleddays_contract_confirm_delete_yes'] = 'Ano';
 $lang['entitleddays_contract_confirm_delete_cancel'] = 'Zrušit';
 $lang['entitleddays_contract_index_field_step'] = 'Krok';
+
 $lang['entitleddays_user_index_title'] = 'Nárokované dny dovolené pro zaměstnance';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Smazat';
 $lang['entitleddays_user_index_thead_tip_copy'] = 'Kopírovat';
@@ -55,6 +56,7 @@ $lang['entitleddays_user_confirm_delete_message'] = 'Opravdu to chcete smazat?';
 $lang['entitleddays_user_confirm_delete_yes'] = 'Ano';
 $lang['entitleddays_user_confirm_delete_cancel'] = 'Zrušit';
 $lang['entitleddays_user_index_field_step'] = 'Krok';
+
 $lang['entitleddays_counters_title_contract'] = 'Nárokované dny dovolené pro smlouvu';
 $lang['entitleddays_counters_description_contract'] = 'Roční období dovolené:';
 $lang['entitleddays_counters_title_employee'] = 'Nárokované dny dovolené pro zaměstnance';

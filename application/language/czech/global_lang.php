@@ -12,8 +12,9 @@ $lang['Leave Management System'] = 'Opustit Managment Systém';
 $lang['global_link_tooltip_documentation'] = 'Odkaz k dokumentaci';
 $lang['global_msg_error_forbidden'] = 'Operace (%s) není udělena';
 $lang['global_msg_wait'] = 'Čekejte prosím';
-$lang['global_msg_old_browser'] = 'Internet Explorer 8 and older browser are not supported. Please upgrade to IE9 or use Firefox, Chrome, etc.';
-$lang['global_msg_not_found'] = 'Object not found. Maybe that you are trying to access to an object that was deleted.';
+$lang['global_msg_old_browser'] = 'Internet Explorer 8 a starší verze prohlížeče nejsou podporovány. Prosím aktualizujte na IE9 nebo použijte Firefox, Chrome atd.';
+$lang['global_msg_not_found'] = 'Soubor nenalezen. Možná se snažíte pokoušíte dostat k souboru, který byl smazán.';
+
 $lang['global_date_format'] = 'd.m.Y';
 $lang['global_date_js_format'] = 'dd.mm.yy';
 $lang['global_date_momentjs_format'] = 'DD.MM.YYYY';
@@ -25,6 +26,7 @@ $lang['Requested'] = 'Požádáno';
 $lang['Planned'] = 'Plánováno';
 $lang['Accepted'] = 'Schváleno';
 $lang['Rejected'] = 'Zamítnuto';
+
 $lang['global_link_doc_page_calendar_individual'] = '';
 $lang['global_link_doc_page_calendar_yearly'] = '';
 $lang['global_link_doc_page_calendar_workmates'] = '';
@@ -59,6 +61,7 @@ $lang['global_link_doc_page_settings'] = 'http://jorani.org/configuration-file.h
 $lang['global_link_doc_page_presence_report'] = '';
 $lang['global_link_doc_page_leave_balance_report'] = 'http://jorani.org/page-leave-balance-report.html';
 $lang['global_link_doc_page_leaves_report'] = '';
+
 $lang['Morning'] = 'Ráno';
 $lang['Afternoon'] = 'Odpoledne';
 $lang['today'] = 'dnes';

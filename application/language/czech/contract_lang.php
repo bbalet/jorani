@@ -28,6 +28,7 @@ $lang['contract_index_popup_delete_button_no'] = 'Ne';
 $lang['contract_index_popup_entitled_title'] = 'Nárok dní';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Zrušit';
 $lang['contract_index_popup_entitled_button_close'] = 'Zavřít';
+
 $lang['contract_exclude_title'] = 'Exclude leave types from a contract';
 $lang['contract_exclude_description'] = 'You cannot exclude leave types already in use (used at least one time by en employee attached to the contract) and the default leave type (set on the contract or into the configuration file).';
 $lang['contract_exclude_title_included'] = 'Included leave types';
@@ -36,6 +37,7 @@ $lang['contract_exclude_tip_include_type'] = 'Include this leave type';
 $lang['contract_exclude_tip_exclude_type'] = 'Exclude this leave type';
 $lang['contract_exclude_tip_already_used'] = 'This leave type is already in use';
 $lang['contract_exclude_tip_default_type'] = 'You cannot exclude the default leave type';
+
 $lang['contract_edit_title'] = 'Upravit úvazek';
 $lang['contract_edit_description'] = 'Upravit úvazek #';
 $lang['contract_edit_field_name'] = 'Jméno';
@@ -47,6 +49,7 @@ $lang['contract_edit_default_leave_type'] = 'Default leave type';
 $lang['contract_edit_button_update'] = 'Aktualizovat smlouvu';
 $lang['contract_edit_button_cancel'] = 'Zrušit';
 $lang['contract_edit_msg_success'] = 'Smlouva byla úspěšně aktualizována.';
+
 $lang['contract_create_title'] = 'Vytvořit nový úvazek';
 $lang['contract_create_field_name'] = 'Jméno';
 $lang['contract_create_field_start_month'] = 'Měsíc / Začátek';
@@ -57,14 +60,16 @@ $lang['contract_create_default_leave_type'] = 'Default leave type';
 $lang['contract_create_button_create'] = 'Vytvořit úvazek';
 $lang['contract_create_button_cancel'] = 'Zrušit';
 $lang['contract_create_msg_success'] = 'Smlouva byla úspěšně vytvořena';
+
 $lang['contract_delete_msg_success'] = 'Smlouva byla úspěšně odstraněna';
 $lang['contract_export_title'] = 'Seznam smluv';
 $lang['contract_export_thead_id'] = 'Identifikace';
 $lang['contract_export_thead_name'] = 'Jméno';
 $lang['contract_export_thead_start'] = 'Začátek období';
 $lang['contract_export_thead_end'] = 'Konec období';
+
 $lang['contract_calendar_title'] = 'Kalendář mimo pracovní dny';
-$lang['contract_calendar_description'] = 'Days off and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".';
+$lang['contract_calendar_description'] = 'Volno a víkendy nejsou defaultně nastaveny. Klepněte na den, který chcete upravit nebo použijte tlačítko "Series".';
 $lang['contract_calendar_legend_title'] = 'Legenda:';
 $lang['contract_calendar_legend_allday'] = 'Celý den';
 $lang['contract_calendar_legend_morning'] = 'Ráno';

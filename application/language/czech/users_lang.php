@@ -36,6 +36,7 @@ $lang['users_index_popup_field_filename'] = 'Název souboru';
 $lang['users_index_popup_import_button_cancel'] = 'Zrušit';
 
 $lang['employees_index_title'] = 'Seznam zaměstnanců';
+
 $lang['users_myprofile_title'] = 'Mé osobní informace';
 $lang['users_myprofile_html_title'] = 'Mé osobní informace';
 $lang['users_myprofile_field_firstname'] = 'Jméno';
@@ -47,6 +48,7 @@ $lang['users_myprofile_field_entity'] = 'Organizační jednotka';
 $lang['users_myprofile_field_hired'] = 'Datum nástupu';
 $lang['users_myprofile_field_identifier'] = 'Interní/Firemní identifikátor';
 $lang['users_myprofile_field_language'] = 'Jazyk';
+
 $lang['users_edit_title'] = 'Upravit uživatele #';
 $lang['users_edit_html_title'] = 'Upravit uživatele';
 $lang['users_edit_field_firstname'] = 'Jméno';
@@ -79,8 +81,10 @@ $lang['users_edit_popup_position_button_cancel'] = 'Zrušit';
 $lang['users_edit_button_update'] = 'Aktualizovat uživatele';
 $lang['users_edit_button_cancel'] = 'Zrušit';
 $lang['users_edit_flash_msg_success'] = 'Uživatel byl úspěšně aktualizován';
+
 $lang['users_delete_flash_msg_success'] = 'Uživatel byl úspěšně vymazán';
 $lang['users_reset_flash_msg_success'] = 'Heslo bylo úspěšně změněno';
+
 $lang['users_create_title'] = 'Vytvořit nového uživatele';
 $lang['users_create_field_firstname'] = 'Jméno';
 $lang['users_create_field_lastname'] = 'Příjmení';
@@ -114,16 +118,19 @@ $lang['users_create_button_generate_password'] = 'Vygenerovat heslo';
 $lang['users_create_button_create'] = 'Vytvořit uživatele';
 $lang['users_create_button_cancel'] = 'Zrušit';
 $lang['users_create_mandatory_js_msg'] = '"Toto pole " + fieldname + " je povinný."';
-$lang['users_create_no_contract_confirm'] = 'It is recommended to select a contract. Do you want to create the user without a contract?';
+$lang['users_create_no_contract_confirm'] = 'Doporučujeme vybrat smlouvu. Opravdu chcete vytvořit uživatele bez smlouvy?';
 $lang['users_create_flash_msg_success'] = 'Uživatel byl úspěšně vytvořen';
 $lang['users_create_login_check'] = 'Uživatelské jméno již existuje';
 $lang['users_create_flash_msg_error'] = 'Toto uživatelské jméno již není k dispozici';
+
 $lang['users_employees_thead_id'] = 'Identifikace';
 $lang['users_employees_thead_firstname'] = 'Jméno';
 $lang['users_employees_thead_lastname'] = 'Příjmení';
 $lang['users_employees_thead_email'] = 'E-mail';
+
 $lang['users_reset_field_password'] = 'Heslo';
 $lang['users_reset_button_reset'] = 'Reset';
+
 $lang['users_export_title'] = 'Seznam uživatelů';
 $lang['users_export_thead_id'] = 'Identifikace';
 $lang['users_export_thead_firstname'] = 'Jméno';

@@ -13,8 +13,10 @@ $lang['menu_banner_welcome'] = 'Vítejte';
 $lang['menu_banner_logout'] = 'Odhlásit';
 $lang['menu_banner_tip_myprofile'] = 'Zobrazit mé personální informace';
 $lang['menu_banner_tip_reset'] = 'resetovat heslo';
+
 $lang['menu_password_popup_title'] = 'Změnit heslo';
 $lang['menu_password_popup_button_cancel'] = 'Zrušit';
+
 $lang['menu_admin_title'] = 'Správa';
 $lang['menu_admin_list_users'] = 'Seznam uživatelů';
 $lang['menu_admin_add_user'] = 'Vytvořit uživatele';
@@ -22,6 +24,7 @@ $lang['menu_admin_settings_divider'] = 'Nastavení';
 $lang['menu_admin_settings'] = 'Nastavení';
 $lang['menu_admin_diagnostic'] = 'Diagnostika';
 $lang['menu_admin_oauth_clients'] = 'OAuth Clients';
+
 $lang['menu_hr_title'] = 'Lidské zdroje';
 $lang['menu_hr_employees_divider'] = 'Zaměstnanci';
 $lang['menu_hr_list_organization'] = 'Organizace';
@@ -34,19 +37,23 @@ $lang['menu_hr_list_leaves_type'] = 'Seznam druhů dovolené';
 $lang['menu_hr_reports_divider'] = 'Přehledy';
 $lang['menu_hr_report_leave_balance'] = 'Bilance dovolené';
 $lang['menu_hr_report_leaves'] = 'Žádosti o dovolenou';
+
 $lang['menu_validation_title'] = 'Schvalování';
 $lang['menu_validation_delegations'] = 'Delegování';
 $lang['menu_validation_collaborators'] = 'Moji podřízení';
 $lang['menu_validation_leaves'] = 'Dovolené';
 $lang['menu_validation_overtime'] = 'Přesčasy';
+
 $lang['menu_requests_title'] = 'Požadavky';
 $lang['menu_requests_leaves'] = 'Dovolené';
 $lang['menu_requests_overtime'] = 'Přesčasy';
 $lang['menu_requests_list_extras'] = 'Seznam odpracovaných přesčasů';
 $lang['menu_requests_request_extra'] = 'Odeslat požadavek o přesčas';
+
 $lang['menu_leaves_counters'] = 'Počítadla';
 $lang['menu_leaves_list_requests'] = 'Seznam žádostí o dovolenou';
 $lang['menu_leaves_create_request'] = 'Požádat o dovolenou';
+
 $lang['menu_calendar_title'] = 'Kalendáře';
 $lang['menu_calendar_year'] = 'Roční kalendář';
 $lang['menu_calendar_individual'] = 'Můj kalendář';

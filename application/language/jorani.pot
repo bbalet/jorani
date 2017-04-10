@@ -77,7 +77,7 @@ msgstr ""
 msgid "Non-working days"
 msgstr ""
 
-msgid "Overtime requests with a negative duration"
+msgid "Number of days (per contract) for which a non-working duration has been defined."
 msgstr ""
 
 msgid "Last year"
@@ -90,6 +90,9 @@ msgid "Next year"
 msgstr ""
 
 msgid "Overtime"
+msgstr ""
+
+msgid "Overtime requests with a negative duration"
 msgstr ""
 
 msgid "Duration"
@@ -105,6 +108,45 @@ msgid "Balance"
 msgstr ""
 
 msgid "Leave requests for which there are no entitlments."
+msgstr ""
+
+msgid "OAuth clients and sessions"
+msgstr ""
+
+msgid "Clients"
+msgstr ""
+
+msgid "List of clients allowed to use the REST API"
+msgstr ""
+
+msgid "edit client"
+msgstr ""
+
+msgid "delete client"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Add OAuth Client"
+msgstr ""
+
+msgid "Associate to an actual user"
+msgstr ""
+
+msgid "This client_id already exists"
+msgstr ""
+
+msgid "Are you sure that you want to proceed?"
+msgstr ""
+
+msgid "Sessions"
+msgstr ""
+
+msgid "List of active REST API OAuth Sessions"
+msgstr ""
+
+msgid "Purge"
 msgstr ""
 
 msgid "Yearly calendar"
@@ -302,6 +344,9 @@ msgstr ""
 msgid "days off and weekends"
 msgstr ""
 
+msgid "Exclude leave types"
+msgstr ""
+
 msgid "Export this list"
 msgstr ""
 
@@ -323,6 +368,30 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+msgid "Exclude leave types from a contract"
+msgstr ""
+
+msgid "You cannot exclude leave types already in use (used at least one time by en employee attached to the contract) and the default leave type (set on the contract or into the configuration file)."
+msgstr ""
+
+msgid "Included leave types"
+msgstr ""
+
+msgid "Excluded leave types"
+msgstr ""
+
+msgid "Include this leave type"
+msgstr ""
+
+msgid "Exclude this leave type"
+msgstr ""
+
+msgid "This leave type is already in use"
+msgstr ""
+
+msgid "You cannot exclude the default leave type"
+msgstr ""
+
 msgid "Edit a contract"
 msgstr ""
 
@@ -339,6 +408,9 @@ msgid "Month / End"
 msgstr ""
 
 msgid "Day / End"
+msgstr ""
+
+msgid "Default leave type"
 msgstr ""
 
 msgid "Update contract"
@@ -512,6 +584,12 @@ msgstr ""
 msgid "Leave Request"
 msgstr ""
 
+msgid "Leave Request Cancellation from"
+msgstr ""
+
+msgid "Leave Request Cancellation"
+msgstr ""
+
 msgid "Your leave request has been accepted"
 msgstr ""
 
@@ -546,9 +624,6 @@ msgid "Description"
 msgstr ""
 
 msgid "Add entitled days"
-msgstr ""
-
-msgid "Add"
 msgstr ""
 
 msgid "\"The field \" + fieldname + \" is mandatory.\""
@@ -839,10 +914,16 @@ msgstr ""
 msgid "reject"
 msgstr ""
 
+msgid "show history"
+msgstr ""
+
 msgid "Delete leave request"
 msgstr ""
 
 msgid "You are about to delete one leave request, this procedure is irreversible."
+msgstr ""
+
+msgid "List of deleted leave requests"
 msgstr ""
 
 msgid "You are exceeding your entitled days"
@@ -944,6 +1025,24 @@ msgstr ""
 msgid "My leave requests"
 msgstr ""
 
+msgid "cancel"
+msgstr ""
+
+msgid "Changed Date"
+msgstr ""
+
+msgid "Change Type"
+msgstr ""
+
+msgid "Changed By"
+msgstr ""
+
+msgid "The leave request has been successfully created"
+msgstr ""
+
+msgid "The leave request has been successfully created or updated, but you don't have a manager."
+msgstr ""
+
 msgid "Edit a leave request"
 msgstr ""
 
@@ -956,13 +1055,22 @@ msgstr ""
 msgid "You cannot edit a leave request already submitted"
 msgstr ""
 
-msgid "The leave request has been succesfully updated"
+msgid "The leave request has been successfully updated"
+msgstr ""
+
+msgid "You can't cancel this leave request"
+msgstr ""
+
+msgid "The leave request has been successfully cancelled"
+msgstr ""
+
+msgid "You can't cancel a leave request starting in the past. Ask your manager for rejecting it."
 msgstr ""
 
 msgid "You can't delete this leave request"
 msgstr ""
 
-msgid "The leave request has been succesfully deleted"
+msgid "The leave request has been successfully deleted"
 msgstr ""
 
 msgid "View leave request #"
@@ -984,6 +1092,9 @@ msgid "Leave type #0 is a system type reserved for overtime management. You shou
 msgstr ""
 
 msgid "Leave type #0 is a system type reserved for overtime management. Are you sure that you want to rename it?"
+msgstr ""
+
+msgid "Deduct non working days"
 msgstr ""
 
 msgid "Create a new type"
@@ -1053,6 +1164,9 @@ msgid "Settings"
 msgstr ""
 
 msgid "Diagnostic"
+msgstr ""
+
+msgid "OAuth Clients"
 msgstr ""
 
 msgid "HR"
@@ -1302,6 +1416,9 @@ msgid "Password"
 msgstr ""
 
 msgid "Send me my password"
+msgstr ""
+
+msgid "Are you sure that you want to reset your password?"
 msgstr ""
 
 msgid "Please fill the login field"

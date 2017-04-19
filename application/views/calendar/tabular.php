@@ -123,7 +123,6 @@
  * This partial view is included into the monthly presence report and the tabular calendar.
  */
   $repeater = 0;
-
   
   foreach ($tabular as $employee) {
       $dayIterator = 0;
@@ -142,8 +141,8 @@
                     case 2: $class = "requested"; break;  // Requested
                     case 3: $class = "accepted"; break;  // Accepted
                     case 4: $class = "rejected"; break;  // Rejected
-                    case 5: $class="dayoff"; break;
-                    case 6: $class="dayoff"; break;
+                    case 5: $class = "dayoff"; break;
+                    case 6: $class = "dayoff"; break;
                 }
                 switch (intval($statuses[0]))
                 {
@@ -151,8 +150,8 @@
                     case 2: $class .= "requested"; break;  // Requested
                     case 3: $class .= "accepted"; break;  // Accepted
                     case 4: $class .= "rejected"; break;  // Rejected
-                    case 5: $class .="dayoff"; break;
-                    case 6: $class .="dayoff"; break;
+                    case 5: $class .= "dayoff"; break;
+                    case 6: $class .= "dayoff"; break;
                 }
                 //If we have two requests the same day (morning/afternoon)
                 if (($statuses[0] == $statuses[1]) && ($periods[0] != $periods[1])){
@@ -163,17 +162,17 @@
                         case 3: $class = "allaccepted"; break;  // Accepted
                         case 4: $class = "allrejected"; break;  // Rejected
                         //The 2 cases below would be weird...
-                        case 5: $class ="dayoff"; break;
-                        case 6: $class ="dayoff"; break;
+                        case 5: $class = "dayoff"; break;
+                        case 6: $class = "dayoff"; break;
                     }
                 }
           } else {
             switch ($day->display) {
-                case '9': $class="error"; break;
-                case '0': $class="working"; break;
-                case '4': $class="dayoff"; break;
-                case '5': $class="amdayoff"; break;
-                case '6': $class="pmdayoff"; break;
+                case '9': $class = "error"; break;
+                case '0': $class = "working"; break;
+                case '4': $class = "dayoff"; break;
+                case '5': $class = "amdayoff"; break;
+                case '6': $class = "pmdayoff"; break;
                 case '1':
                       switch ($day->status)
                       {
@@ -223,10 +222,19 @@
             if ($class == "error"){
                 echo '<td><img src="'.  base_url() .'assets/images/date_error.png"></td>';
             } else {
-                if ($overlapping) {
-                    echo '<td title="' . $day->type . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
+                $dayType = "";
+                if ($mode == 'public') {    //In public access, nobody is connected
+                    $dayType = "";
                 } else {
-                    echo '<td title="' . $day->type . '" class="' . $class . '">&nbsp;</td>';
+                    //Hide leave type to users who are not part of HR/Admin
+                    if (($is_hr == TRUE) || ($is_admin == TRUE) || ($employee->manager == $user_id)) {
+                        $dayType = $day->type;
+                    }
+                }
+                if ($overlapping) {
+                    echo '<td title="' . $dayType . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
+                } else {
+                    echo '<td title="' . $dayType . '" class="' . $class . '">&nbsp;</td>';
                 }
             }
             ?>

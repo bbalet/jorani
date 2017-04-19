@@ -1,23 +1,29 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
-## v0.5.3
+## v0.6.0
 
-- [ ] Hide leave types in tabular calendar. display it only to HR Manager and if connected user is manager.
-
-This minor release prepares APM and RUM functions:
-
+- [X] Add Czech translation.
+- [X] Basic RUM Metrics.
+- [X] Separate Admin and HR roles.
+- [X] Hide leave types in tabular calendar. display it only to HR Manager and if connected user is manager.
+- [X] Option to hide global and tabular calendars to users (employee role).
 - [ ] Add SMTPSecure, SMTPAutoTLS, and SMTPAuth email params. See https://mail.google.com/mail/u/0/#inbox/15ae53ce27624515
+- [ ] Fix missing closing DIV (Firefox).
+- [ ] Maybe: basic LDAP Search / connection.
+- [ ] Jorani a OAuth2 authorization authority.
+- [ ] Simple demo application using OAuth2 authorization and API.
 - [ ] Manage service accounts.
 - [ ] Implement OAuth scopes in API.
 - [ ] Maybe: edit/import/export settings from WebUI.
+- [ ] Maybe: user/group permission.
+- [ ] Maybe: configuration from DB.
 - [ ] Fix: tabular from demo site when user 1 is moved to root.
-- [ ] Static APM (js modal with RUM timing and PHP+DB timing). Set headers for Ajax Calls.
 - [ ] Replace header() by set_header()
 - [ ] Replace set_header("HTTP/1.1 422...) by set_status_header()
 - [ ] Replace echo() by set_output()
 
-## v0.5.3 or later
+## v0.7.0 or later
 
 - [ ] Investigate the strange behavior of the compensate balance (see PNC).
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
@@ -29,7 +35,7 @@ This minor release prepares APM and RUM functions:
 - [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
 - [ ] Add a "All" option into Reports/Leaves.
 
-## v0.7.0 or later
+## v0.8.0 or later
 
 Following naming convention, this version will need a DB patch.
 

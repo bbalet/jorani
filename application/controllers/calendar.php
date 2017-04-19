@@ -245,6 +245,7 @@ class Calendar extends CI_Controller {
     public function tabular($id=-1, $month=0, $year=0, $children=TRUE) {
         if (($this->config->item('public_calendar') == TRUE) && (!$this->session->userdata('logged_in'))) {
             $this->load->library('polyglot');
+            $data['mode'] = 'public';
             $data['language'] = $this->config->item('language');
             $data['language_code'] =  $this->polyglot->language2code($data['language']);
             $this->lang->load('global', $data['language']);
@@ -270,6 +271,7 @@ class Calendar extends CI_Controller {
             $data = getUserContext($this);
             $this->load->model('leaves_model');
             $this->load->model('organization_model');
+            $data['mode'] = 'connected';
             $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);
             $data['entity'] = $id;
             $data['month'] = $month;

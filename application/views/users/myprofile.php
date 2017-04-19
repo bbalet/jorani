@@ -136,6 +136,10 @@ $(function() {
             }
         }
     });
-
+    
+    //Replace missing 3rd party application icons
+    $('img').error(function(){
+            $(this).attr('src', '<?php echo base_url();?>assets/images/application.png');
+    });
 });
 </script>

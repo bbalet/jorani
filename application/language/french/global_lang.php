@@ -88,5 +88,9 @@ $lang['OK'] = 'OK';
 $lang['Cancel'] = 'Annuler';
 $lang['copied'] = 'copié';
 
+$lang['oauth2_authorize_question'] = 'Voulez-vous autoriser l\'application %s ?';
+$lang['Yes'] = 'Oui';
+$lang['No'] = 'Non';
+
 $lang['global_ajax_timeout'] = 'Votre session a expiré, veuillez vous reconnecter';
 $lang['global_ajax_error'] = 'Erreur Ajax inattendue';

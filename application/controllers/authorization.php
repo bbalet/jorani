@@ -53,12 +53,6 @@ class Authorization extends CI_Controller {
         }
         $this->lang->load('session', $this->session->userdata('language'));
         $this->lang->load('global', $this->session->userdata('language'));
-        
-        //CORS setup
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Headers: x-requested-with');
-        header('Access-Control-Allow-Methods: GET, POST');
     }
 
     /**
@@ -76,11 +70,19 @@ class Authorization extends CI_Controller {
             die;
         }
         
-        //Is the user logged in?
-        //Is the application already authorized?
+        //OAuth2 payload
+        $state = $this->input->get('state');
+        $responseType = $this->input->get('response_type');
+        $redirectUri = $this->input->get_post('redirect_uri');
+        $clientId = $this->input->get_post('client_id');
+        $data['state'] = $state;
+        $data['responseType'] = $responseType;
+        $data['redirectUri'] = $redirectUri;
+        $data['clientId'] = $clientId;
         
         //Display simple login form if the user is not logged-in
         if (!$this->session->userdata('logged_in')) {
+            $data['title'] = lang('session_login_title');
             if (empty($_POST)) {
                 $this->load->library('form_validation');
                 $data['public_key'] = file_get_contents('./assets/keys/public.pem', TRUE);
@@ -93,38 +95,39 @@ class Authorization extends CI_Controller {
         }
         
         if ($this->session->userdata('logged_in')) {
-            $this->load->model('oauthclients_model');
             $userId = $this->session->userdata('id');
-            $clientId = $this->input->get_post('client_id');
+            $this->load->model('oauthclients_model');
+
             //Test if we received a form authorizing the application
             if (empty($_POST)) {
                 // Does the application was already authorized by user
                 if ($this->oauthclients_model->isOAuthAppAllowed($clientId, $userId)) {
+                    //redirect with authorization code if the user has authorized your client
                     $this->server->handleAuthorizeRequest($request, $response, TRUE, $userId);
-                    $code = substr($response->getHttpHeader('Location'), strpos($response->getHttpHeader('Location'), 'code=')+5, 40);
-                    header("Content-Type: text/plain");
-                    echo $code;
+                    $response->send();
                 } else {
                     // display an authorization form
-                    $data['clientId'] = $clientId;
-                    $data['responseType'] = $this->input->get('response_type');
-                    $data['state'] = $this->input->get('state');
+                    $data['title'] = sprintf(lang('oauth2_authorize_question'), $clientId);
                     $data['language'] = $this->session->userdata('language');
                     $data['language_code'] = $this->session->userdata('language_code');
+                    //Load the icon of the OAuth2 3rd application or a default icon
+                    $iconPath = FCPATH . 'local/images/' . $clientId . '.png';
+                    if (file_exists($iconPath)) {
+                        $data['iconPath'] = base_url() . 'local/images/' . $clientId . '.png';
+                    } else {
+                        $data['iconPath'] = base_url() . 'assets/images/application.png';
+                    }
+                    $this->load->view('templates/header', $data);
                     $this->load->view('session/authorize', $data);
                 }
             } else {
-                // print the authorization code if the user has authorized your client
+                //redirect with authorization code if the user has authorized your client
                 $is_authorized = ($_POST['authorized'] === 'yes');
-                $this->server->handleAuthorizeRequest($request, $response, $is_authorized, $userId);
                 if ($is_authorized) {
                     $this->oauthclients_model->allowOAuthApp($clientId, $userId);
-                    $code = substr($response->getHttpHeader('Location'), strpos($response->getHttpHeader('Location'), 'code=')+5, 40);
-                    header("Content-Type: text/plain");
-                    echo $code;
-                } else {
-                    $response->send();
                 }
+                $this->server->handleAuthorizeRequest($request, $response, $is_authorized, $userId);
+                $response->send();
             } 
         }
     }
@@ -151,7 +154,6 @@ class Authorization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function login() {
-        header("Content-Type: text/plain");
         //Decrypt password
         $password = '';
         if (function_exists('openssl_pkey_get_private')) {
@@ -170,7 +172,22 @@ class Authorization extends CI_Controller {
         $password = substr($password, 0, $len_salt);
         $this->load->model('users_model');
         $loggedin = $this->users_model->checkCredentials($this->input->post('login'), $password);    
-        echo ($loggedin===TRUE)?"TRUE":"FALSE";
+        if ($loggedin == FALSE) {
+            log_message('error', '{controllers/session/login} Invalid login id or password for user=' . $this->input->post('login'));
+            if ($this->users_model->isActive($this->input->post('login'))) {
+                $this->session->set_flashdata('msg', lang('session_login_flash_bad_credentials'));
+            } else {
+                $this->session->set_flashdata('msg', lang('session_login_flash_account_disabled'));
+            }
+        }
+        
+        //Redirect to the OAtuh2 endpoint whatever the outcome
+        $state = $this->input->get_post('state');
+        $responseType = $this->input->get_post('response_type');
+        $redirectUri = $this->input->get_post('redirect_uri');
+        $clientId = $this->input->get_post('client_id');
+        $params = "state=$state&response_type=$responseType&redirect_uri=$redirectUri&client_id=$clientId";
+        redirect("api/authorization/authorize?$params");
     }
     
     /**

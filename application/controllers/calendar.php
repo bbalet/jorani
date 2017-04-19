@@ -31,52 +31,52 @@ class Calendar extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function year($employee = 0, $year = 0) {
-            setUserContext($this);
-            $this->lang->load('calendar', $this->language);
-            $this->auth->checkIfOperationIsAllowed('organization_calendar');
-            $data = getUserContext($this);
-            $this->load->model('users_model');
+        setUserContext($this);
+        $this->lang->load('calendar', $this->language);
+        $this->auth->checkIfOperationIsAllowed('organization_calendar');
+        $data = getUserContext($this);
+        $this->load->model('users_model');
+        $user = $this->users_model->getUsers($employee);
+        if ($year==0) $year = date("Y");
+        //Either self access, Manager or HR
+        if ($employee == 0) {
+            $employee = $this->user_id;
             $user = $this->users_model->getUsers($employee);
-            if ($year==0) $year = date("Y");
-            //Either self access, Manager or HR
-            if ($employee == 0) {
-                $employee = $this->user_id;
-                $user = $this->users_model->getUsers($employee);
-            } else {
-                if (!$this->is_hr) {
-                    if ($this->user_id != $user['manager']) {
-                        $employee = $this->user_id;
-                        $user = $this->users_model->getUsers($employee);
-                    }
+        } else {
+            if (!$this->is_hr) {
+                if ($this->user_id != $user['manager']) {
+                    $employee = $this->user_id;
+                    $user = $this->users_model->getUsers($employee);
                 }
             }
-            
-            $data['employee_id'] = $employee;
-            $data['employee_name'] =  $user['firstname'] . ' ' . $user['lastname'];
-            //Load the leaves for all the months of the selected year
-            $this->load->model('leaves_model');
-            $months = array(
-                lang('January') => $this->leaves_model->linear($employee, 1, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('February') => $this->leaves_model->linear($employee, 2, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('March') => $this->leaves_model->linear($employee, 3, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('April') => $this->leaves_model->linear($employee, 4, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('May') => $this->leaves_model->linear($employee, 5, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('June') => $this->leaves_model->linear($employee, 6, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('July') => $this->leaves_model->linear($employee, 7, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('August') => $this->leaves_model->linear($employee, 8, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('September') => $this->leaves_model->linear($employee, 9, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('October') => $this->leaves_model->linear($employee, 10, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('November') => $this->leaves_model->linear($employee, 11, $year, TRUE, TRUE, TRUE, TRUE),
-                lang('December') => $this->leaves_model->linear($employee, 12, $year, TRUE, TRUE, TRUE, TRUE),
-            );
-            $data['months'] = $months;
-            $data['year'] = $year;
-            $data['title'] = lang('calendar_year_title');
-            $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_yearly');
-            $this->load->view('templates/header', $data);
-            $this->load->view('menu/index', $data);
-            $this->load->view('calendar/year', $data);
-            $this->load->view('templates/footer');
+        }
+
+        $data['employee_id'] = $employee;
+        $data['employee_name'] =  $user['firstname'] . ' ' . $user['lastname'];
+        //Load the leaves for all the months of the selected year
+        $this->load->model('leaves_model');
+        $months = array(
+            lang('January') => $this->leaves_model->linear($employee, 1, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('February') => $this->leaves_model->linear($employee, 2, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('March') => $this->leaves_model->linear($employee, 3, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('April') => $this->leaves_model->linear($employee, 4, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('May') => $this->leaves_model->linear($employee, 5, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('June') => $this->leaves_model->linear($employee, 6, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('July') => $this->leaves_model->linear($employee, 7, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('August') => $this->leaves_model->linear($employee, 8, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('September') => $this->leaves_model->linear($employee, 9, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('October') => $this->leaves_model->linear($employee, 10, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('November') => $this->leaves_model->linear($employee, 11, $year, TRUE, TRUE, TRUE, TRUE),
+            lang('December') => $this->leaves_model->linear($employee, 12, $year, TRUE, TRUE, TRUE, TRUE),
+        );
+        $data['months'] = $months;
+        $data['year'] = $year;
+        $data['title'] = lang('calendar_year_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_yearly');
+        $this->load->view('templates/header', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('calendar/year', $data);
+        $this->load->view('templates/footer');
     }    
     
     /**

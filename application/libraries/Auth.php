@@ -17,9 +17,19 @@ class Auth {
 
     /**
      * Access to CI framework so as to use other libraries
-     * @var type Code Igniter framework
+     * @var object Code Igniter framework
      */
     private $CI;
+    /**
+     * Is the connected user part of HR team
+     * @var bool Is Human Resource role 
+     */
+    private $isHR;
+    /**
+     * Is the connected user part of Admin team
+     * @var bool Is Admin role  
+     */
+    private $isAdmin;
 
     /**
      * Default constructor
@@ -27,6 +37,9 @@ class Auth {
     public function __construct() {
         $this->CI = & get_instance();
         $this->CI->load->library('session');
+        
+        $this->isHR = ($this->CI->session->userdata('is_hr') === TRUE);
+        $this->isAdmin = ($this->CI->session->userdata('is_admin') === TRUE);
     }
 
     /**
@@ -198,6 +211,7 @@ class Auth {
             case 'collaborators_calendar' :
             case 'department_calendar' :
             case 'organization_calendar' :
+                return ($this->isHR || $this->isAdmin || ($this->CI->config->item('hide_global_cals_to_users') == FALSE));
             case 'download_calendar' :
                 return true;
                 break;

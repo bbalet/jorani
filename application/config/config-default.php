@@ -369,7 +369,7 @@ $config['proxy_ips'] = '';
 
 /*
 |--------------------------------------------------------------------------
-| LMS application settings
+| Jorani application settings
 |--------------------------------------------------------------------------
 |
 | 
@@ -438,8 +438,9 @@ $config['fonts'] =
     );
 
 //____________________________________________________________________________
-//Set this value to TRUE if you want to hide the menu entries related to overtime
-$config['disable_overtime'] = FALSE;
+// Hide/Disable features
+$config['disable_overtime'] = FALSE; //Set this value to TRUE if you want to hide the menu entries related to overtime
+$config['hide_global_cals_to_users'] = FALSE; //Set this value to TRUE if you want to hide global calendars (global/tabular) to users
 
 //____________________________________________________________________________
 //Google analytics tracking code (if empty, the Javascript tracking code will be desactivated).

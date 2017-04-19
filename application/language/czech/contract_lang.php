@@ -4,7 +4,7 @@
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
  * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link       https://github.com/bbalet/jorani
- * @since      0.4.7
+ * @since      0.6.0
  * @author     Transifex contributors
  */
 
@@ -29,14 +29,14 @@ $lang['contract_index_popup_entitled_title'] = 'Nárok dní';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Zrušit';
 $lang['contract_index_popup_entitled_button_close'] = 'Zavřít';
 
-$lang['contract_exclude_title'] = 'Exclude leave types from a contract';
-$lang['contract_exclude_description'] = 'You cannot exclude leave types already in use (used at least one time by en employee attached to the contract) and the default leave type (set on the contract or into the configuration file).';
-$lang['contract_exclude_title_included'] = 'Included leave types';
-$lang['contract_exclude_title_excluded'] = 'Excluded leave types';
-$lang['contract_exclude_tip_include_type'] = 'Include this leave type';
-$lang['contract_exclude_tip_exclude_type'] = 'Exclude this leave type';
-$lang['contract_exclude_tip_already_used'] = 'This leave type is already in use';
-$lang['contract_exclude_tip_default_type'] = 'You cannot exclude the default leave type';
+$lang['contract_exclude_title'] = 'Vyloučit druhy dovolené ze smlouvy';
+$lang['contract_exclude_description'] = 'Nemůžete vyloučit druhy dovolené, které se současně používají (používá se alespoň jeden čas zaměstnance připojené ke smlouvě) a výchozí typ dovolené (nastaveném ve smlouvě nebo v konfiguračním souboru).';
+$lang['contract_exclude_title_included'] = 'Zahrnuté typy volna';
+$lang['contract_exclude_title_excluded'] = 'Vyloučené druhy volna';
+$lang['contract_exclude_tip_include_type'] = 'Zahrnout tento typ volna';
+$lang['contract_exclude_tip_exclude_type'] = 'Vyloučit tento druh volna';
+$lang['contract_exclude_tip_already_used'] = 'Tento druh volna se již používá';
+$lang['contract_exclude_tip_default_type'] = 'Nemůžete vyloučit tento základní druh volna';
 
 $lang['contract_edit_title'] = 'Upravit úvazek';
 $lang['contract_edit_description'] = 'Upravit úvazek #';
@@ -45,7 +45,7 @@ $lang['contract_edit_field_start_month'] = 'Měsíc / Začátek';
 $lang['contract_edit_field_start_day'] = 'Den / Začátek';
 $lang['contract_edit_field_end_month'] = 'Měsíc / Konec';
 $lang['contract_edit_field_end_day'] = 'Den / Konec';
-$lang['contract_edit_default_leave_type'] = 'Default leave type';
+$lang['contract_edit_default_leave_type'] = 'Základní druh volna';
 $lang['contract_edit_button_update'] = 'Aktualizovat smlouvu';
 $lang['contract_edit_button_cancel'] = 'Zrušit';
 $lang['contract_edit_msg_success'] = 'Smlouva byla úspěšně aktualizována.';
@@ -56,7 +56,7 @@ $lang['contract_create_field_start_month'] = 'Měsíc / Začátek';
 $lang['contract_create_field_start_day'] = 'Den / Začátek';
 $lang['contract_create_field_end_month'] = 'Měsíc / Konec';
 $lang['contract_create_field_end_day'] = 'Den / Konec';
-$lang['contract_create_default_leave_type'] = 'Default leave type';
+$lang['contract_create_default_leave_type'] = 'Základní druh volna';
 $lang['contract_create_button_create'] = 'Vytvořit úvazek';
 $lang['contract_create_button_cancel'] = 'Zrušit';
 $lang['contract_create_msg_success'] = 'Smlouva byla úspěšně vytvořena';

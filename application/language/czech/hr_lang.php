@@ -4,7 +4,7 @@
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
  * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link       https://github.com/bbalet/jorani
- * @since      0.4.7
+ * @since      0.6.0
  * @author     Transifex contributors
  */
 
@@ -84,7 +84,7 @@ $lang['hr_leaves_popup_delete_message'] = 'Chystáte se smazat jednu žádost o 
 $lang['hr_leaves_popup_delete_question'] = 'Chcete pokračovat?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Ano';
 $lang['hr_leaves_popup_delete_button_no'] = 'Ne';
-$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
+$lang['hr_leaves_deleted_title'] = 'Seznam smazaných požadavků na volno';
 
 $lang['hr_export_leaves_title'] = 'Seznam požadavků o dovolenou';
 $lang['hr_export_leaves_thead_id'] = 'Identifikace';

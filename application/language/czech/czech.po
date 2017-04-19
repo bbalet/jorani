@@ -1,13 +1,14 @@
 # 
 # Translators:
-# Brad Garrison <v60fan@users.noreply.github.com>, 2017
+# Brad <v60fan@users.noreply.github.com>, 2017
+# Brad <v60fan@users.noreply.github.com>, 2017
 # Martin Nedvěd <martin.nedved@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: jorani\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-04-07 16:20+0000\n"
-"Last-Translator: Brad Garrison <v60fan@users.noreply.github.com>\n"
+"PO-Revision-Date: 2017-04-18 16:45+0000\n"
+"Last-Translator: Brad <v60fan@users.noreply.github.com>\n"
 "Language-Team: Czech (http://www.transifex.com/jorani/jorani/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,8 +83,10 @@ msgstr "Neúplné vymazání v databázi."
 msgid "Non-working days"
 msgstr "Nepracovní dny"
 
-msgid "Overtime requests with a negative duration"
-msgstr "Žádosti o přesčas se záporným počtem dní"
+msgid ""
+"Number of days (per contract) for which a non-working duration has been "
+"defined."
+msgstr "Počet dnů (za smlouva) pracovního volna je definováno ve smlouvě."
 
 msgid "Last year"
 msgstr "Poslední rok"
@@ -96,6 +99,9 @@ msgstr "Další rok"
 
 msgid "Overtime"
 msgstr "Přesčasy"
+
+msgid "Overtime requests with a negative duration"
+msgstr "Žádosti o přesčas se záporným počtem dní"
 
 msgid "Duration"
 msgstr "Počet dnů"
@@ -111,6 +117,45 @@ msgstr "Bilance"
 
 msgid "Leave requests for which there are no entitlments."
 msgstr "Žádosti o dovolenou, na které není nárok."
+
+msgid "OAuth clients and sessions"
+msgstr "OAuth klienti a relací"
+
+msgid "Clients"
+msgstr "Klienti"
+
+msgid "List of clients allowed to use the REST API"
+msgstr "Seznam klientů kteří mají dovoleno použít REST API"
+
+msgid "edit client"
+msgstr "editovat klienta"
+
+msgid "delete client"
+msgstr "smazat klienta"
+
+msgid "Add"
+msgstr "Přidat"
+
+msgid "Add OAuth Client"
+msgstr "Přidat OAuth klienta"
+
+msgid "Associate to an actual user"
+msgstr "Spojit se současným uživatelem"
+
+msgid "This client_id already exists"
+msgstr "Toto client_id již existuje"
+
+msgid "Are you sure that you want to proceed?"
+msgstr "Jste si jisti, že chcete pokračovat?"
+
+msgid "Sessions"
+msgstr "Relace"
+
+msgid "List of active REST API OAuth Sessions"
+msgstr "Seznam aktivních REST API Oauth relací"
+
+msgid "Purge"
+msgstr "Vyčistit"
 
 msgid "Yearly calendar"
 msgstr "Roční kalendář"
@@ -311,6 +356,9 @@ msgstr "nárokovaný počet dnů dovolené"
 msgid "days off and weekends"
 msgstr "dny volna a výkendy"
 
+msgid "Exclude leave types"
+msgstr "Vyloučit druhy dovolené"
+
 msgid "Export this list"
 msgstr "Exportovat seznam"
 
@@ -332,6 +380,33 @@ msgstr "Ano"
 msgid "No"
 msgstr "Ne"
 
+msgid "Exclude leave types from a contract"
+msgstr "Vyloučit druhy dovolené ze smlouvy"
+
+msgid ""
+"You cannot exclude leave types already in use (used at least one time by en "
+"employee attached to the contract) and the default leave type (set on the "
+"contract or into the configuration file)."
+msgstr "Nemůžete vyloučit druhy dovolené, které se současně používají (používá se alespoň jeden čas zaměstnance připojené ke smlouvě) a výchozí typ dovolené (nastaveném ve smlouvě nebo v konfiguračním souboru)."
+
+msgid "Included leave types"
+msgstr "Zahrnuté typy volna"
+
+msgid "Excluded leave types"
+msgstr "Vyloučené druhy volna"
+
+msgid "Include this leave type"
+msgstr "Zahrnout tento typ volna"
+
+msgid "Exclude this leave type"
+msgstr "Vyloučit tento druh volna"
+
+msgid "This leave type is already in use"
+msgstr "Tento druh volna se již používá"
+
+msgid "You cannot exclude the default leave type"
+msgstr "Nemůžete vyloučit tento základní druh volna"
+
 msgid "Edit a contract"
 msgstr "Upravit úvazek"
 
@@ -349,6 +424,9 @@ msgstr "Měsíc / Konec"
 
 msgid "Day / End"
 msgstr "Den / Konec"
+
+msgid "Default leave type"
+msgstr "Základní druh volna"
 
 msgid "Update contract"
 msgstr "Aktualizovat smlouvu"
@@ -523,6 +601,12 @@ msgstr "Žádosti o dovolenou od"
 msgid "Leave Request"
 msgstr "Žádost o dovolenou"
 
+msgid "Leave Request Cancellation from"
+msgstr "Žádost o volno formulář"
+
+msgid "Leave Request Cancellation"
+msgstr "Žádost o volno zrušení"
+
 msgid "Your leave request has been accepted"
 msgstr "Vaše žádost o dovolenou byla schválena"
 
@@ -558,9 +642,6 @@ msgstr "Popis"
 
 msgid "Add entitled days"
 msgstr "Přidat nárokované dny dovolené"
-
-msgid "Add"
-msgstr "Přidat"
 
 msgid "\"The field \" + fieldname + \" is mandatory.\""
 msgstr "\"Toto pole \" + fieldname + \" je povinný.\""
@@ -858,12 +939,18 @@ msgstr "schválit"
 msgid "reject"
 msgstr "zamítnout"
 
+msgid "show history"
+msgstr "zobrazit historii"
+
 msgid "Delete leave request"
 msgstr "Smazat žádost o dovolenou"
 
 msgid ""
 "You are about to delete one leave request, this procedure is irreversible."
 msgstr "Chystáte se smazat jednu žádost o dovolenou, tento krok je nevratný."
+
+msgid "List of deleted leave requests"
+msgstr "Seznam smazaných požadavků na volno"
 
 msgid "You are exceeding your entitled days"
 msgstr "Překročili jste počet dní na které máte nárok"
@@ -974,6 +1061,26 @@ msgstr "Nemáte nárok na dovolenou pro toto období. Kontaktujte prosím person
 msgid "My leave requests"
 msgstr "Mé žádosti o dovolenou"
 
+msgid "cancel"
+msgstr "zrušit"
+
+msgid "Changed Date"
+msgstr "Změněné datum"
+
+msgid "Change Type"
+msgstr "Změnit typ"
+
+msgid "Changed By"
+msgstr "Změněno"
+
+msgid "The leave request has been successfully created"
+msgstr "Žádost o volno byla úspěšně vytvořena"
+
+msgid ""
+"The leave request has been successfully created or updated, but you don't "
+"have a manager."
+msgstr "Žádost o volno byla úspěšně vytvořena nebo aktualizována, ale nemáte manažera."
+
 msgid "Edit a leave request"
 msgstr "Upravit žádost o dovolenou"
 
@@ -986,14 +1093,25 @@ msgstr "Aktualizovat dovolenou"
 msgid "You cannot edit a leave request already submitted"
 msgstr "Nemůžete upravit žádost o dovolenou, který byl již odeslán."
 
-msgid "The leave request has been succesfully updated"
-msgstr "Žádost o dovolenou byla úspěšně aktualizována"
+msgid "The leave request has been successfully updated"
+msgstr "Žádost o volno byla úspěšně aktualizována"
+
+msgid "You can't cancel this leave request"
+msgstr "Nemůžete zrušit tuto žádost o dovolenou"
+
+msgid "The leave request has been successfully cancelled"
+msgstr "Žádost o volno byla úspěšně zrušena"
+
+msgid ""
+"You can't cancel a leave request starting in the past. Ask your manager for "
+"rejecting it."
+msgstr "Nemůžete zrušit žádost o dovolenou, který začíná v minulosti. Požádejte svého manažera o zrušení."
 
 msgid "You can't delete this leave request"
 msgstr "Nemůžete vymazat tuto žádost o dovolenou"
 
-msgid "The leave request has been succesfully deleted"
-msgstr "Žádost o dovolenou byla úspěšně odstraněna"
+msgid "The leave request has been successfully deleted"
+msgstr "Žádost o dovolenou byl úspěšně vymazán"
 
 msgid "View leave request #"
 msgstr "Zobrazit žádost o dovolenou #"
@@ -1019,6 +1137,9 @@ msgid ""
 "Leave type #0 is a system type reserved for overtime management. Are you "
 "sure that you want to rename it?"
 msgstr "Druh dovolené #0 je systémem vyhrazený druh pro správu přesčasů. Jste si jistí, že jej chcete přejmenovat?"
+
+msgid "Deduct non working days"
+msgstr "Odečíst dny pracovního volna"
 
 msgid "Create a new type"
 msgstr "Vytvořit nový typ"
@@ -1089,6 +1210,9 @@ msgstr "Nastavení"
 
 msgid "Diagnostic"
 msgstr "Diagnostika"
+
+msgid "OAuth Clients"
+msgstr "OAuth klienti"
 
 msgid "HR"
 msgstr "Lidské zdroje"
@@ -1360,6 +1484,9 @@ msgstr "Heslo"
 
 msgid "Send me my password"
 msgstr "Zaslat heslo"
+
+msgid "Are you sure that you want to reset your password?"
+msgstr "Opravdu jste jisti, že chcete resetovat vaše heslo?"
 
 msgid "Please fill the login field"
 msgstr "Vyplňte prosím uživatelské jméno"

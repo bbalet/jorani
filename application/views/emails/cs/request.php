@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requested time off. See the <a href="{BaseUrl}leaves/requests/{LeaveId}">details</a> below:<br />
+        {Firstname} {Lastname} požadované volno. Více <a href="{BaseUrl}leaves/requests/{LeaveId}">detailů</a> níže:<br />
         <table border="0">
             <tr>
                 <td>Od &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
@@ -41,7 +41,8 @@
                 <td>Účel &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accept</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">Reject</a></td>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Přijmout</a> &nbsp;</td>
+                <td><a href="{BaseUrl}requests/reject/{LeaveId}">Odmítnout</a></td>
             </tr>
         </table>
         <br />

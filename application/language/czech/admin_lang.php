@@ -4,7 +4,7 @@
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
  * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link       https://github.com/bbalet/jorani
- * @since      0.4.7
+ * @since      0.6.0
  * @author     Transifex contributors
  */
 
@@ -36,7 +36,7 @@ $lang['admin_diagnostic_entitlements_thead_end_date'] = 'Datum konce';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'Smlouva';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'Zaměstnanec';
 $lang['admin_diagnostic_daysoff_tab'] = 'Nepracovní dny';
-$lang['admin_diagnostic_daysoff_description'] = 'Number of days (per contract) for which a non-working duration has been defined.';
+$lang['admin_diagnostic_daysoff_description'] = 'Počet dnů (za smlouva) pracovního volna je definováno ve smlouvě.';
 $lang['admin_diagnostic_daysoff_thead_id'] = 'Identifikace';
 $lang['admin_diagnostic_daysoff_thead_name'] = 'Jméno';
 $lang['admin_diagnostic_daysoff_thead_ym1'] = 'Poslední rok';
@@ -61,16 +61,16 @@ $lang['admin_diagnostic_balance_thead_contract'] = 'Smlouva';
 $lang['admin_diagnostic_balance_thead_start_date'] = 'Datum začátku';
 $lang['admin_diagnostic_balance_thead_status'] = 'Stav';
 
-$lang['admin_oauthclients_title'] = 'OAuth clients and sessions';
-$lang['admin_oauthclients_tab_clients'] = 'Clients';
-$lang['admin_oauthclients_tab_clients_description'] = 'List of clients allowed to use the REST API';
-$lang['admin_oauthclients_thead_tip_edit'] = 'edit client';
-$lang['admin_oauthclients_thead_tip_delete'] = 'delete client';
+$lang['admin_oauthclients_title'] = 'OAuth klienti a relací';
+$lang['admin_oauthclients_tab_clients'] = 'Klienti';
+$lang['admin_oauthclients_tab_clients_description'] = 'Seznam klientů kteří mají dovoleno použít REST API';
+$lang['admin_oauthclients_thead_tip_edit'] = 'editovat klienta';
+$lang['admin_oauthclients_thead_tip_delete'] = 'smazat klienta';
 $lang['admin_oauthclients_button_add'] = 'Přidat';
-$lang['admin_oauthclients_popup_add_title'] = 'Add OAuth Client';
-$lang['admin_oauthclients_popup_select_user_title'] = 'Associate to an actual user';
-$lang['admin_oauthclients_error_exists'] = 'This client_id already exists';
-$lang['admin_oauthclients_confirm_delete'] = 'Are you sure that you want to proceed?';
-$lang['admin_oauthclients_tab_sessions'] = 'Sessions';
-$lang['admin_oauthclients_tab_sessions_description'] = 'List of active REST API OAuth Sessions';
-$lang['admin_oauthclients_button_purge'] = 'Purge';
+$lang['admin_oauthclients_popup_add_title'] = 'Přidat OAuth klienta';
+$lang['admin_oauthclients_popup_select_user_title'] = 'Spojit se současným uživatelem';
+$lang['admin_oauthclients_error_exists'] = 'Toto client_id existuje';
+$lang['admin_oauthclients_confirm_delete'] = 'Jste si jisti, že chcete pokračovat?';
+$lang['admin_oauthclients_tab_sessions'] = 'Relace';
+$lang['admin_oauthclients_tab_sessions_description'] = 'Seznam aktivních REST API Oauth relací';
+$lang['admin_oauthclients_button_purge'] = 'Vyčistit';

@@ -32,8 +32,8 @@
                 <td>Účel &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+        <a href="{UrlAccept}">Přijmout</a>
+        <a href="{UrlReject}">Odmítnout</a>
         <hr>
         <h5>*** Toto je náhodně vygenerována zpráva, prosím neodpovídejte na tuto zprávu ***</h5>
     </body>

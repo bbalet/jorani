@@ -4,7 +4,7 @@
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
  * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link       https://github.com/bbalet/jorani
- * @since      0.4.7
+ * @since      0.6.0
  * @author     Transifex contributors
  */
 
@@ -85,11 +85,11 @@ $lang['leaves_edit_flash_msg_success'] = 'Žádost o dovolenou byla úspěšně 
 $lang['leaves_validate_mandatory_js_msg'] = '"Toto pole " + fieldname + " je povinný."';
 $lang['leaves_validate_flash_msg_no_contract'] = 'Zdá se že nemáte smlouvu. Prosím kontaktujte vaše HR / Manažera.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'Nemůžete vytvořit žádost o dovolenou překračující dvě roční období dovolené. Prosím vytvořte dvě různé žádosti o dovolenou.';
-$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
-$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
-$lang['leaves_cancel_unauthorized_msg_error'] = 'You can\'t cancel a leave request starting in the past. Ask your manager for rejecting it.';
-$lang['leaves_delete_flash_msg_error'] = 'You can\'t delete this leave request';
-$lang['leaves_delete_flash_msg_success'] = 'The leave request has been successfully deleted';
+$lang['leaves_cancel_flash_msg_error'] = 'Nemůžete zrušit tuto žádost o dovolenou';
+$lang['leaves_cancel_flash_msg_success'] = 'Žádost o volno byla úspěšně zrušena';
+$lang['leaves_cancel_unauthorized_msg_error'] = 'Nemůžete zrušit žádost o dovolenou, který začíná v minulosti. Požádejte svého manažera o zrušení.';
+$lang['leaves_delete_flash_msg_error'] = 'Nemůžete zrušit tuto žádost o dovolenou';
+$lang['leaves_delete_flash_msg_success'] = 'Žádost o dovolenou byl úspěšně vymazán';
 
 $lang['leaves_view_title'] = 'Zobrazit žádost o dovolenou #';
 $lang['leaves_view_html_title'] = 'Zobrazit žádost o dovolenou';

@@ -69,7 +69,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lang/<?php echo $language_code;?>.js"></script>
 <?php }?>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     
@@ -148,11 +148,11 @@ $(document).ready(function() {
     });
     
     //Copy/Paste ICS Feed
-    var client = new ZeroClipboard($("#cmdCopy"));
+    var client = new Clipboard("#cmdCopy");
     $('#lnkICS').click(function () {
         $("#frmLinkICS").modal('show');
     });
-    client.on( "aftercopy", function( event ) {
+    client.on( "success", function() {
         $('#tipCopied').tooltip('show');
         setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });

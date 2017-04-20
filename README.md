@@ -88,5 +88,5 @@ We thank the following open source projects for the components used by Jorani:
 * RSA implementation https://github.com/travist/jsencrypt
 * Moment (JS dates library) http://momentjs.com/
 * Selectize https://github.com/brianreavis/selectize.js
-* Zero Clipboard https://github.com/zeroclipboard/zeroclipboard
+* clipboard.js https://github.com/zenorocha/clipboard.js
 * Google noto fonts https://www.google.com/get/noto/

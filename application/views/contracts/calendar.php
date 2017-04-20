@@ -276,7 +276,7 @@ if ($language_code != 'en') { ?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript">
     var timestamp;
@@ -481,11 +481,11 @@ $(function() {
     });
 
     //Copy/Paste ICS Feed
-    var client = new ZeroClipboard($("#cmdCopy"));
+    var client = new Clipboard("#cmdCopy");
     $('#lnkICS').click(function () {
         $("#frmLinkICS").modal('show');
     });
-    client.on( "aftercopy", function( event ) {
+    client.on( "success", function() {
         $('#tipCopied').tooltip('show');
         setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });

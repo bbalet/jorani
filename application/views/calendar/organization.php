@@ -90,7 +90,7 @@
         <div class='input-append'>
                 <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
                     value="" />
-                 <button id="cmdCopy" class="btn" data-clipboard-text="">
+                 <button id="cmdCopy" class="btn" data-clipboard-target="#txtIcsUrl">
                      <i class="fa fa-clipboard"></i>
                  </button>
                 <a href="#" id="tipCopied" data-toggle="tooltip" title="copied" data-placement="right" data-container="#cmdCopy"></a>
@@ -108,7 +108,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lang/<?php echo $language_code;?>.js"></script>
 <?php }?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
-<script src="<?php echo base_url();?>assets/js/ZeroClipboard.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
     var entity = -1; //Id of the selected entity
@@ -304,24 +304,20 @@
         
         <?php if ($logged_in == TRUE) { ?>
         //Copy/Paste ICS Feed
-        var client = new ZeroClipboard($("#cmdCopy"));
         $('#lnkICS').click(function () {
-            if (!('ZeroClipboard' in window)) {
-                alert('e');
+            var urlICS = '<?php echo base_url(); ?>ics/entity/<?php echo $user_id; ?>/0/' + $('#chkIncludeChildren').prop('checked');
+            if (entity != -1) {
+                urlICS = '<?php echo base_url(); ?>ics/entity/<?php echo $user_id; ?>/' + entity + '/' + $('#chkIncludeChildren').prop('checked');
             }
-            if (entity == -1) {
-                var UrlICS = '<?php echo base_url(); ?>ics/entity/<?php echo $user_id; ?>/0/' + $('#chkIncludeChildren').prop('checked');
-            } else {
-                var UrlICS = '<?php echo base_url(); ?>ics/entity/<?php echo $user_id; ?>/' + entity + '/' + $('#chkIncludeChildren').prop('checked');
-            }
-            $('#txtIcsUrl').val(UrlICS);
-            ZeroClipboard.setData( "text/plain", UrlICS);
             $("#frmLinkICS").modal('show');
+            $('#txtIcsUrl').val(urlICS);
+            //$('#txtIcsUrl').data('data-clipboard-text', urlICS);
         });
-        client.on( "aftercopy", function( event ) {
+        var client = new Clipboard("#cmdCopy");
+        client.on( "success", function() {
             $('#tipCopied').tooltip('show');
             setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
-        })
+        });
         <?php } ?>;
     });
 </script>

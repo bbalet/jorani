@@ -1158,6 +1158,7 @@ class Leaves_model extends CI_Model {
         $user = new stdClass;
         $user->name = $employee['firstname'] . ' ' . $employee['lastname'];
         $user->manager = (int) $employee['manager'];  //To enable hiding confidential info in view
+        $user->id = (int) $employee['id'];
         $user->days = array();
 
         //Init all day to working day

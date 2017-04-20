@@ -8,6 +8,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Separate Admin and HR roles.
 - [X] Hide leave types in tabular calendar. display it only to HR Manager and if connected user is manager.
 - [X] Option to hide global and tabular calendars to users (employee role).
+- [ ] Remove the depedency to Flash plugin (copy/paste).
 - [ ] Add SMTPSecure, SMTPAutoTLS, and SMTPAuth email params. See https://mail.google.com/mail/u/0/#inbox/15ae53ce27624515
 - [ ] Fix missing closing DIV (Firefox).
 - [ ] Maybe: basic LDAP Search / connection.

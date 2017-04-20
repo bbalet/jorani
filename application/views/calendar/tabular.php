@@ -218,7 +218,6 @@
           if($isCurrentMonth && $dayIterator === $currentDay){
               $class .= ' currentday-border';
           }
-          
             if ($class == "error"){
                 echo '<td><img src="'.  base_url() .'assets/images/date_error.png"></td>';
             } else {
@@ -227,7 +226,10 @@
                     $dayType = "";
                 } else {
                     //Hide leave type to users who are not part of HR/Admin
-                    if (($is_hr == TRUE) || ($is_admin == TRUE) || ($employee->manager == $user_id)) {
+                    if (($is_hr == TRUE) || 
+                            ($is_admin == TRUE) || 
+                            ($employee->manager == $user_id) || 
+                            ($employee->id == $user_id)) {
                         $dayType = $day->type;
                     }
                 }

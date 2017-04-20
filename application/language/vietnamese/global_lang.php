@@ -81,5 +81,9 @@ $lang['OK'] = 'Chấp nhận';
 $lang['Cancel'] = 'Hủy bỏ';
 $lang['copied'] = 'Đã sao chép';
 
+$lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
+$lang['Yes'] = 'Yes';
+$lang['No'] = 'No';
+
 $lang['global_ajax_timeout'] = 'Phiên làm việc đã hết hạn vui lòng đăng nhập lại';
 $lang['global_ajax_error'] = 'Unexpected Ajax Error';

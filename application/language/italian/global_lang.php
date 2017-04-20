@@ -90,5 +90,9 @@ $lang['OK'] = 'OK';
 $lang['Cancel'] = 'Cancel';
 $lang['copied'] = 'copiato';
 
+$lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
+$lang['Yes'] = 'Yes';
+$lang['No'] = 'No';
+
 $lang['global_ajax_timeout'] = 'Your session has expired please login again';
 $lang['global_ajax_error'] = 'Errore Ajax imprevisto';

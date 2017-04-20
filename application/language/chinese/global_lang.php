@@ -75,9 +75,15 @@ $lang['position'] = '職稱';
 $lang['contract'] = '類別';
 $lang['day off'] = '休假';
 $lang['leave'] = '離職';
+
 $lang['All'] = '所有';
 $lang['OK'] = '好';
 $lang['Cancel'] = '取消';
 $lang['copied'] = '複製';
+
+$lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
+$lang['Yes'] = 'Yes';
+$lang['No'] = 'No';
+
 $lang['global_ajax_timeout'] = '你的時段已過時請重新登錄';
 $lang['global_ajax_error'] = '未預期錯誤';

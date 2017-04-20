@@ -91,5 +91,9 @@ $lang['OK'] = 'យល់ព្រម';
 $lang['Cancel'] = 'បោះបង់';
 $lang['copied'] = 'បានថតចម្លង';
 
+$lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
+$lang['Yes'] = 'Yes';
+$lang['No'] = 'No';
+
 $lang['global_ajax_timeout'] = 'រយៈពេលនៃការប្រើប្រាស់ត្រូវបានផុតកំណត់ សូមចូលក្នុងកម្មវិធីជាថ្មី';
 $lang['global_ajax_error'] = 'មានបញ្ហា Ajax កើតឡើងដោយមិនរំពឹងទុក';

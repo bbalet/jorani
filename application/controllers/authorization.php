@@ -1,6 +1,8 @@
 <?php
 /**
- * TODO : This controller 
+ * This controller helps a 3rd application to use Jorani as an Identity
+ * Provider (SSO scenario) using OAuth2 protocol as explained into the
+ * docuementation of PHP OAuth2 server:
  * http://bshaffer.github.io/oauth2-server-php-docs/cookbook/
  * 
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
@@ -12,15 +14,16 @@
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
 /**
- * This class implements a 
+ * This class implements a OAuth2 Authorization mechanism for a 3rd application
  */
 class Authorization extends CI_Controller {
     
     /**
-     * OAuth2 server used by all methods in order to determine if the user is connected
+     * OAuth2 server used by all methods in order to determine 
+     * if the user is connected
      * @var OAuth2\Server Authentication server 
      */
-    protected $server; 
+    protected $server;
     
     /**
      * Default constructor

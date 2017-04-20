@@ -74,9 +74,15 @@ $lang['position'] = 'pozice';
 $lang['contract'] = 'smlouva';
 $lang['day off'] = 'volno';
 $lang['leave'] = 'dovolená';
+
 $lang['All'] = 'Vše';
 $lang['OK'] = 'OK';
 $lang['Cancel'] = 'Zrušit';
 $lang['copied'] = 'zkopírováno';
+
+$lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
+$lang['Yes'] = 'Yes';
+$lang['No'] = 'No';
+
 $lang['global_ajax_timeout'] = 'Váše přihlášení vypršelo prosíme přihlašte se znovu';
 $lang['global_ajax_error'] = 'Neočekávaná chyba Ajax';

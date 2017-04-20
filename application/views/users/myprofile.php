@@ -82,7 +82,7 @@
         <div class="row-fluid">
             <div class="span12">
             <a href="<?php echo $app['redirect_uri']; ?>" target="_blank">
-               <img width="50" src="<?php echo base_url();?>local/images/<?php echo $app['client_id'];?>.png"></a>
+               <img width="50" src="<?php echo $app['icon_path']; ?>"></a>
             &nbsp;<?php echo $app['client_id']; ?>
             </div>
         </div>
@@ -135,11 +135,6 @@ $(function() {
                 window.location.href = '<?php echo base_url();?>session/language?language=' + value;
             }
         }
-    });
-    
-    //Replace missing 3rd party application icons
-    $('img').error(function(){
-            $(this).attr('src', '<?php echo base_url();?>assets/images/application.png');
     });
 });
 </script>

@@ -82,8 +82,11 @@ $lang['leave'] = 'izin';
 $lang['All'] = 'Hepsi';
 $lang['OK'] = 'Tamam';
 $lang['Cancel'] = 'İptal';
-
 $lang['copied'] = 'kopyalandı';
+
+$lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
+$lang['Yes'] = 'Yes';
+$lang['No'] = 'No';
 
 $lang['global_ajax_timeout'] = 'Oturumunuzun süresi doldu, lütfen tekrar oturum açın';
 $lang['global_ajax_error'] = 'Beklenmedik Ajax hatası';

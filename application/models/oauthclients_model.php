@@ -139,7 +139,18 @@ class OAuthClients_model extends CI_Model {
         $this->db->order_by("oauth_applications.client_id", "asc");
         $query = $this->db->get_where('oauth_applications',
                 array('user' => $userId));
-        return $query->result_array();
+        //Try to resolve the icon path of the 3rd application, 
+        // use a default icon otherwise
+        $apps = $query->result_array();
+        foreach ($apps as $key => $value) {
+            $iconPath = FCPATH . 'local/images/' . $value['client_id'] . '.png';
+            if (file_exists($iconPath)) {
+                $apps[$key]['icon_path'] = base_url() . 'local/images/' . $value['client_id'] . '.png';
+            } else {
+                $apps[$key]['icon_path'] = base_url() . 'assets/images/application.png';
+            }
+        }
+        return $apps;
     }
     
     /**

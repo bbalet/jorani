@@ -89,8 +89,11 @@ $lang['leave'] = 'Отпуск';
 $lang['All'] = 'All';
 $lang['OK'] = 'ОК';
 $lang['Cancel'] = 'Отмена';
-
 $lang['copied'] = 'копировать';
+
+$lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
+$lang['Yes'] = 'Yes';
+$lang['No'] = 'No';
 
 $lang['global_ajax_timeout'] = 'Ваша сессия истекла. Выполните вход снова.';
 $lang['global_ajax_error'] = 'Неожиданная ошибка Ajax';

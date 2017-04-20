@@ -89,5 +89,9 @@ $lang['OK'] = 'ОК';
 $lang['Cancel'] = 'Скасувати';
 $lang['copied'] = 'скопійовано';
 
+$lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
+$lang['Yes'] = 'Yes';
+$lang['No'] = 'No';
+
 $lang['global_ajax_timeout'] = 'Ваша сесія скінчилася. Виконайте вхід знову.';
 $lang['global_ajax_error'] = 'Неочікувана помилка Ajax';

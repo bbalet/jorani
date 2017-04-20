@@ -89,5 +89,9 @@ $lang['OK'] = 'OK';
 $lang['Cancel'] = 'Annuleren';
 $lang['copied'] = 'gekopieerd';
 
+$lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
+$lang['Yes'] = 'Yes';
+$lang['No'] = 'No';
+
 $lang['global_ajax_timeout'] = 'Uw sessie is verlopen, u dient opnieuw in te loggen';
 $lang['global_ajax_error'] = 'Onverwachte Ajax fout';

@@ -89,5 +89,9 @@ $lang['OK'] = 'تایید';
 $lang['Cancel'] = 'لغو';
 $lang['copied'] = 'کپی شده';
 
+$lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
+$lang['Yes'] = 'Yes';
+$lang['No'] = 'No';
+
 $lang['global_ajax_timeout'] = 'شما زمان زیادی غیر فعال بوده و از سیستم خارج شدید، لطفاً دوباره وارد شوید.';
 $lang['global_ajax_error'] = 'خطای غیرمنتظره آجاکس';

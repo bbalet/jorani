@@ -5,6 +5,12 @@
 -- @copyright  Copyright (c) 2014-2016 Benjamin BALET
 
 -- Create a function that will help us to anonymize data
+
+-- Changes:
+-- * Clear LDAP Path because it can contains the fullname of users
+-- * Change login pattern to login_id
+-- * Add a super admin with jorani/bbalet as credentials
+
 DROP FUNCTION IF EXISTS `shuffle`;
 
 DELIMITER $$
@@ -39,8 +45,9 @@ DELIMITER ;
 UPDATE `users` SET 
 `firstname`=shuffle(`firstname`),
 `lastname`=shuffle(`lastname`),
-`login`= shuffle(`login`) + FLOOR(RAND() * 401) + 100,
-`email`='benjamin.balet@gmail.com'
+`login`= CONCAT('login_', `id`),
+`email`='benjamin.balet@gmail.com',
+`ldap_path`=''
 WHERE `login` != 'bbalet';
 
 -- Uppercase the first letter of lastname, while other characters are in lower case
@@ -50,3 +57,7 @@ UPDATE `users` SET `firstname` = CONCAT(UCASE(LEFT(`firstname`, 1)),
 -- Set all passwords to bbalet
 UPDATE `users` 
 SET `password`='$2a$08$LeUbaGFqJjLSAN7to9URsuHB41zcmsMBgBhpZuFp2y2OTxtVcMQ.C';
+
+-- Add a super admin
+INSERT IGNORE INTO `users` (`id`, `firstname`, `lastname`, `login`, `email`, `password`, `role`, `manager`, `country`, `organization`, `contract`, `position`, `datehired`, `identifier`, `language`) VALUES
+(99999, 'Admin', 'ADMIN', 'jorani', 'benjamin.balet@gmail.com', '$2a$08$LeUbaGFqJjLSAN7to9URsuHB41zcmsMBgBhpZuFp2y2OTxtVcMQ.C', 9, 1, NULL, 0, NULL, 1, NULL, NULL, 'en');

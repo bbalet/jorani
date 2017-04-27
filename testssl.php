@@ -54,8 +54,7 @@ define('KEY_SIZE', 1024);   //Change the RSA key size
                   </thead>
                   <tbody>
 <?php
-
-$pathLibFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'third_party', 'phpseclib', 'vendor', 'autoload.php')));
+$pathLibFile = realpath(join(DIRECTORY_SEPARATOR, array('vendor', 'autoload.php')));
 include $pathLibFile;
 
 $cnfFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'third_party', 'phpseclib', 'phpseclib', 'openssl.cnf')));

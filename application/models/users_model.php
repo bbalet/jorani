@@ -162,7 +162,7 @@ class Users_model extends CI_Model {
             $privateKey = openssl_pkey_get_private(file_get_contents('./assets/keys/private.pem', TRUE));
             openssl_private_decrypt(base64_decode($this->input->post('CipheredValue')), $password, $privateKey);
         } else {
-            require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
+            require_once FCPATH . "vendor/autoload.php";
             $rsa = new phpseclib\Crypt\RSA();
             $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
             $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
@@ -362,7 +362,7 @@ class Users_model extends CI_Model {
             $privateKey = openssl_pkey_get_private(file_get_contents('./assets/keys/private.pem', TRUE));
             openssl_private_decrypt(base64_decode($this->input->post('CipheredValue')), $password, $privateKey);
         } else {
-            require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
+            require_once FCPATH . "vendor/autoload.php";
             $rsa = new phpseclib\Crypt\RSA();
             $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
             $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);

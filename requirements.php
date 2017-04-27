@@ -159,8 +159,8 @@ if ($configFileExists) {
                       <tr><td><?php if (strtolower($mod_gzip) == "on") {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>
                       &nbsp;Apache module gzip (mod_gzip)</td><td><?php echo $mod_gzip; ?> Improve response times.</td></tr>
                       
-                      <?php if (version_compare(PHP_VERSION, '5.3.0') >= 0) {?>
-                      <tr><td><i class="icon-ok-sign"></i>&nbsp;PHP 5.3+</td>
+                      <?php if (version_compare(PHP_VERSION, '7.0.0') >= 0) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;PHP 7.0+</td>
                       <?php } else { ?>
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;Old PHP version</td>
                       <?php } ?><td>Ignore this message if you are running an exotic PHP runtime</td></tr>

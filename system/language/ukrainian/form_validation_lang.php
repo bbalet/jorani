@@ -1,29 +1,40 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['required']			= "The %s field is required.";
-$lang['isset']				= "The %s field must have a value.";
-$lang['valid_email']		= "The %s field must contain a valid email address.";
-$lang['valid_emails']		= "The %s field must contain all valid email addresses.";
-$lang['valid_url']			= "The %s field must contain a valid URL.";
-$lang['valid_ip']			= "The %s field must contain a valid IP.";
-$lang['min_length']			= "The %s field must be at least %s characters in length.";
-$lang['max_length']			= "The %s field can not exceed %s characters in length.";
-$lang['exact_length']		= "The %s field must be exactly %s characters in length.";
-$lang['alpha']				= "The %s field may only contain alphabetical characters.";
-$lang['alpha_numeric']		= "The %s field may only contain alpha-numeric characters.";
-$lang['alpha_dash']			= "The %s field may only contain alpha-numeric characters, underscores, and dashes.";
-$lang['numeric']			= "The %s field must contain only numbers.";
-$lang['is_numeric']			= "The %s field must contain only numeric characters.";
-$lang['integer']			= "The %s field must contain an integer.";
-$lang['regex_match']		= "The %s field is not in the correct format.";
-$lang['matches']			= "The %s field does not match the %s field.";
-$lang['is_unique'] 			= "The %s field must contain a unique value.";
-$lang['is_natural']			= "The %s field must contain only positive numbers.";
-$lang['is_natural_no_zero']	= "The %s field must contain a number greater than zero.";
-$lang['decimal']			= "The %s field must contain a decimal number.";
-$lang['less_than']			= "The %s field must contain a number less than %s.";
-$lang['greater_than']		= "The %s field must contain a number greater than %s.";
-
-
-/* End of file form_validation_lang.php */
-/* Location: ./system/language/english/form_validation_lang.php */
+$lang['form_validation_required'] = 'Поле {field} обов’язкове.';
+$lang['form_validation_isset'] = 'Поле {field} повинно бути заповнене.';
+$lang['form_validation_valid_email'] = 'В полі {field} повинна бути правильна E-mail адреса.';
+$lang['form_validation_valid_emails'] = 'В полі {field} повинні бути правильні E-mail адреси.';
+$lang['form_validation_valid_url'] = 'В полі {field} повинен бути правильний URL.';
+$lang['form_validation_valid_ip'] = 'В полі {field} повинен бути правильний IP.';
+$lang['form_validation_min_length'] = 'Довжина поля {field} повинна бути не менш, ніж {param} символів.';
+$lang['form_validation_max_length'] = 'Довжина поля {field} не може перевищувати {param} символів.';
+$lang['form_validation_exact_length'] = 'Довжина поля {field} повинна складати {param} символів.';
+$lang['form_validation_alpha'] = 'Поле {field} може бути заповнене лише літерами.';
+$lang['form_validation_alpha_numeric'] = 'Поле {field} може бути заповнене літерами та цифрами.';
+$lang['form_validation_alpha_numeric_spaces'] = 'Поле {field} може бути заповнене літерами, цифрами та пробілами.';
+$lang['form_validation_alpha_dash'] = 'Поле {field} може бути заповнене літерами, цифрами, знаків підкреслення та тире.';
+$lang['form_validation_numeric'] = 'Поле {field} може складатися лише із цифр.';
+$lang['form_validation_is_numeric'] = 'Поле {field} може складатися тільки з цифрових значень.';
+$lang['form_validation_integer'] = 'Поле {field} може бути лише цілочисельним значенням.';
+$lang['form_validation_regex_match'] = 'Поле {field} заповнено неправильно.';
+$lang['form_validation_matches'] = 'Поле {field} не відповідає параметру {param}.';
+$lang['form_validation_differs'] = 'Поле {field} повинно відрізнятися від параметра {param}.';
+$lang['form_validation_is_unique'] = 'Поле {field} повинно бути унікальним.';
+$lang['form_validation_is_natural'] = 'Поле {field} повинне мати лише цифри.';
+$lang['form_validation_is_natural_no_zero'] = 'Поле {field} повинно мати лише цифри та бути більше нуля.';
+$lang['form_validation_decimal'] = 'Поле {field} повинно мати десяткове значення.';
+$lang['form_validation_less_than'] = 'Поле {field} повинно мати значення менше {param}.';
+$lang['form_validation_less_than_equal_to'] = 'Поле {field} повинно мати значення, не більше {param}.';
+$lang['form_validation_greater_than'] = 'Поле {field} повинно мати значення більше {param}.';
+$lang['form_validation_greater_than_equal_to'] = 'Поле {field} повинно мати значення, не менше ніж {param}.';
+$lang['form_validation_error_message_not_set'] = 'Для поля {field} не встановлено повідомлення про помилку.';
+$lang['form_validation_in_list'] = 'Поле {field} повинно бути одним з: {param}.';  

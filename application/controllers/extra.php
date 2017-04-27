@@ -107,10 +107,10 @@ class Extra extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         
-        $this->form_validation->set_rules('date', lang('extra_create_field_date'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('duration', lang('extra_create_field_duration'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('cause', lang('extra_create_field_cause'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('status', lang('extra_create_field_status'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('date', lang('extra_create_field_date'), 'required|strip_tags');
+        $this->form_validation->set_rules('duration', lang('extra_create_field_duration'), 'required|strip_tags');
+        $this->form_validation->set_rules('cause', lang('extra_create_field_cause'), 'required|strip_tags');
+        $this->form_validation->set_rules('status', lang('extra_create_field_status'), 'required|strip_tags');
 
         if ($this->form_validation->run() === FALSE) {
             $data['title'] = lang('extra_create_title');
@@ -163,10 +163,10 @@ class Extra extends CI_Controller {
         
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('date', lang('extra_edit_field_date'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('duration', lang('extra_edit_field_duration'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('cause', lang('extra_edit_field_cause'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('status', lang('extra_edit_field_status'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('date', lang('extra_edit_field_date'), 'required|strip_tags');
+        $this->form_validation->set_rules('duration', lang('extra_edit_field_duration'), 'required|strip_tags');
+        $this->form_validation->set_rules('cause', lang('extra_edit_field_cause'), 'required|strip_tags');
+        $this->form_validation->set_rules('status', lang('extra_edit_field_status'), 'required|strip_tags');
 
         if ($this->form_validation->run() === FALSE) {
             $data['title'] = lang('extra_edit_hmtl_title');

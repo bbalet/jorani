@@ -1,25 +1,29 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['ut_test_name']		= 'Test Name';
-$lang['ut_test_datatype']	= 'Test Datatype';
-$lang['ut_res_datatype']	= 'Expected Datatype';
-$lang['ut_result']			= 'Result';
-$lang['ut_undefined']		= 'Undefined Test Name';
-$lang['ut_file']			= 'File Name';
-$lang['ut_line']			= 'Line Number';
-$lang['ut_passed']			= 'Passed';
-$lang['ut_failed']			= 'Failed';
-$lang['ut_boolean']			= 'Boolean';
-$lang['ut_integer']			= 'Integer';
-$lang['ut_float']			= 'Float';
-$lang['ut_double']			= 'Float'; // can be the same as float
-$lang['ut_string']			= 'String';
-$lang['ut_array']			= 'Array';
-$lang['ut_object']			= 'Object';
-$lang['ut_resource']		= 'Resource';
-$lang['ut_null']			= 'Null';
-$lang['ut_notes']			= 'Notes';
-
-
-/* End of file unit_test_lang.php */
-/* Location: ./system/language/french/unit_test_lang.php */
+$lang['ut_test_name']     = "Nom du test";
+$lang['ut_test_datatype'] = "Type des données de test";
+$lang['ut_res_datatype']  = "Type attendu";
+$lang['ut_result']        = "Résultat";
+$lang['ut_undefined']     = "Nom du test non défini";
+$lang['ut_file']          = "Nom du fichier";
+$lang['ut_line']          = "Numéro de ligne";
+$lang['ut_passed']        = "Passé";
+$lang['ut_failed']        = "Échoué";
+$lang['ut_boolean']       = "Booléen";
+$lang['ut_integer']       = "Nombre entier";
+$lang['ut_float']         = "Nombre réel";
+$lang['ut_double']        = "Nombre réel"; // can be the same as float
+$lang['ut_string']        = "Chaine de caractères";
+$lang['ut_array']         = "Tableau";
+$lang['ut_object']        = "Objet";
+$lang['ut_resource']      = "Ressource";
+$lang['ut_null']          = "Null";
+$lang['ut_notes']         = "Notes";

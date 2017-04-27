@@ -1,29 +1,35 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['db_invalid_connection_str'] = 'Unable to determine the database settings based on the connection string you submitted.';
-$lang['db_unable_to_connect'] = 'Unable to connect to your database server using the provided settings.';
-$lang['db_unable_to_select'] = 'Unable to select the specified database: %s';
-$lang['db_unable_to_create'] = 'Unable to create the specified database: %s';
-$lang['db_invalid_query'] = 'The query you submitted is not valid.';
-$lang['db_must_set_table'] = 'You must set the database table to be used with your query.';
-$lang['db_must_use_set'] = 'You must use the "set" method to update an entry.';
-$lang['db_must_use_index'] = 'You must specify an index to match on for batch updates.';
-$lang['db_batch_missing_index'] = 'One or more rows submitted for batch updating is missing the specified index.';
-$lang['db_must_use_where'] = 'Updates are not allowed unless they contain a "where" clause.';
-$lang['db_del_must_use_where'] = 'Deletes are not allowed unless they contain a "where" or "like" clause.';
-$lang['db_field_param_missing'] = 'To fetch fields requires the name of the table as a parameter.';
-$lang['db_unsupported_function'] = 'This feature is not available for the database you are using.';
-$lang['db_transaction_failure'] = 'Transaction failure: Rollback performed.';
-$lang['db_unable_to_drop'] = 'Unable to drop the specified database.';
-$lang['db_unsuported_feature'] = 'Unsupported feature of the database platform you are using.';
-$lang['db_unsuported_compression'] = 'The file compression format you chose is not supported by your server.';
-$lang['db_filepath_error'] = 'Unable to write data to the file path you have submitted.';
-$lang['db_invalid_cache_path'] = 'The cache path you submitted is not valid or writable.';
-$lang['db_table_name_required'] = 'A table name is required for that operation.';
-$lang['db_column_name_required'] = 'A column name is required for that operation.';
-$lang['db_column_definition_required'] = 'A column definition is required for that operation.';
-$lang['db_unable_to_set_charset'] = 'Unable to set client connection character set: %s';
-$lang['db_error_heading'] = 'A Database Error Occurred';
-
-/* End of file db_lang.php */
-/* Location: ./system/language/english/db_lang.php */
+$lang['db_invalid_connection_str'] = 'Неможливо визначити параметри бази даних на основі рядка підключення, який Ви надали.';
+$lang['db_unable_to_connect'] = 'Неможливо підключитись до серверу бази даних, використовуючи надані параметри.';
+$lang['db_unable_to_select'] = 'Неможливо вибрати вказану базу даних: %s';
+$lang['db_unable_to_create'] = 'Неможливо створити вказану базу даних: %s';
+$lang['db_invalid_query'] = 'Наданий Вами запит є неприйнятним.';
+$lang['db_must_set_table'] = 'Необхідно вказати таблицю бази даних, котра буде використана у Вашому запиті.';
+$lang['db_must_use_set'] = 'Необхідно використовувати метод "set" для оновлення запису.';
+$lang['db_must_use_index'] = 'Необхідно вказати індекс для пакетного оновлення.';
+$lang['db_batch_missing_index'] = 'Один чи декілька рядків, наданих для пакетного оновлення, не має вказаного індекса.';
+$lang['db_must_use_where'] = 'Оновлення неприйнятне без вказаної через оператор "where" умови.';
+$lang['db_del_must_use_where'] = 'Видалення неприйнятне без умови, вказаної через параметр "where" або "like".';
+$lang['db_field_param_missing'] = 'Для вибору полів необхідне ім’я таблиці в якості параметру.';
+$lang['db_unsupported_function'] = 'Ця функція неприйнятна для вибраної бази даних.';
+$lang['db_transaction_failure'] = 'Збій транзакції: відкат.';
+$lang['db_unable_to_drop'] = 'Неможливо видалити вказану базу даних.';
+$lang['db_unsupported_feature'] = 'Непідтримувана особливість платформи бази даних, яку Ви використовуєте.';
+$lang['db_unsupported_compression'] = 'Формат стискання файлів, який Ви вибрали, не підтримується Вашим сервером.';
+$lang['db_filepath_error'] = 'Неможливо записати дані в файл за вказаним шляхом.';
+$lang['db_invalid_cache_path'] = 'Вказаний шлях до кеш файлів некоректний або недоступний для запису.';
+$lang['db_table_name_required'] = 'Необхідно вказати ім’я таблиці для цієї операції.';
+$lang['db_column_name_required'] = 'Необхідно вказати ім’я стовпця для цієї операції.';
+$lang['db_column_definition_required'] = 'Назва стовпця обов’язкова для цієї операції.';
+$lang['db_unable_to_set_charset'] = 'Неможливо встановити кодування з’єднання: %s';
+$lang['db_error_heading'] = 'Помилка бази даних.';

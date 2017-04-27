@@ -1,22 +1,31 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['date_year'] = "Year";
-$lang['date_years'] = "Years";
-$lang['date_month'] = "Month";
-$lang['date_months'] = "Months";
-$lang['date_week'] = "Week";
-$lang['date_weeks'] = "Weeks";
-$lang['date_day'] = "Day";
-$lang['date_days'] = "Days";
-$lang['date_hour'] = "Hour";
-$lang['date_hours'] = "Hours";
-$lang['date_minute'] = "Minute";
-$lang['date_minutes'] = "Minutes";
-$lang['date_second'] = "Second";
-$lang['date_seconds'] = "Seconds";
+$lang['date_year'] = 'Năm';
+$lang['date_years'] = 'Năm';
+$lang['date_month'] = 'Tháng';
+$lang['date_months'] = 'Tháng';
+$lang['date_week'] = 'Tuần';
+$lang['date_weeks'] = 'Tuần';
+$lang['date_day'] = 'Ngày';
+$lang['date_days'] = 'Ngày';
+$lang['date_hour'] = 'Giờ';
+$lang['date_hours'] = 'Giờ';
+$lang['date_minute'] = 'Phút';
+$lang['date_minutes'] = 'Phút';
+$lang['date_second'] = 'Giây';
+$lang['date_seconds'] = 'Giây';
 
 $lang['UM12']	= '(UTC -12:00) Baker/Howland Island';
-$lang['UM11']	= '(UTC -11:00) Samoa Time Zone, Niue';
+$lang['UM11']	= '(UTC -11:00) Niue';
 $lang['UM10']	= '(UTC -10:00) Hawaii-Aleutian Standard Time, Cook Islands, Tahiti';
 $lang['UM95']	= '(UTC -9:30) Marquesas Islands';
 $lang['UM9']	= '(UTC -9:00) Alaska Standard Time, Gambier Islands';
@@ -33,7 +42,7 @@ $lang['UM1']	= '(UTC -1:00) Azores, Cape Verde Islands';
 $lang['UTC']	= '(UTC) Greenwich Mean Time, Western European Time';
 $lang['UP1']	= '(UTC +1:00) Central European Time, West Africa Time';
 $lang['UP2']	= '(UTC +2:00) Central Africa Time, Eastern European Time, Kaliningrad Time';
-$lang['UP3']	= '(UTC +3:00) Moscow Time, East Africa Time';
+$lang['UP3']	= '(UTC +3:00) Moscow Time, East Africa Time, Arabia Standard Time';
 $lang['UP35']	= '(UTC +3:30) Iran Standard Time';
 $lang['UP4']	= '(UTC +4:00) Azerbaijan Standard Time, Samara Time';
 $lang['UP45']	= '(UTC +4:30) Afghanistan';
@@ -42,20 +51,16 @@ $lang['UP55']	= '(UTC +5:30) Indian Standard Time, Sri Lanka Time';
 $lang['UP575']	= '(UTC +5:45) Nepal Time';
 $lang['UP6']	= '(UTC +6:00) Bangladesh Standard Time, Bhutan Time, Omsk Time';
 $lang['UP65']	= '(UTC +6:30) Cocos Islands, Myanmar';
-$lang['UP7']	= '(UTC +7:00) Krasnoyarsk Time, Cambodia, Laos, Thailand, Vietnam';
+$lang['UP7']	= '(UTC +7:00) Krasnoyarsk Time, Cambodia, Laos, Thailand, Việt Nam';
 $lang['UP8']	= '(UTC +8:00) Australian Western Standard Time, Beijing Time, Irkutsk Time';
 $lang['UP875']	= '(UTC +8:45) Australian Central Western Standard Time';
 $lang['UP9']	= '(UTC +9:00) Japan Standard Time, Korea Standard Time, Yakutsk Time';
 $lang['UP95']	= '(UTC +9:30) Australian Central Standard Time';
 $lang['UP10']	= '(UTC +10:00) Australian Eastern Standard Time, Vladivostok Time';
 $lang['UP105']	= '(UTC +10:30) Lord Howe Island';
-$lang['UP11']	= '(UTC +11:00) Magadan Time, Solomon Islands, Vanuatu';
+$lang['UP11']	= '(UTC +11:00) Srednekolymsk Time, Solomon Islands, Vanuatu';
 $lang['UP115']	= '(UTC +11:30) Norfolk Island';
 $lang['UP12']	= '(UTC +12:00) Fiji, Gilbert Islands, Kamchatka Time, New Zealand Standard Time';
 $lang['UP1275']	= '(UTC +12:45) Chatham Islands Standard Time';
-$lang['UP13']	= '(UTC +13:00) Phoenix Islands Time, Tonga';
+$lang['UP13']	= '(UTC +13:00) Samoa Time Zone, Phoenix Islands Time, Tonga';
 $lang['UP14']	= '(UTC +14:00) Line Islands';
-
-
-/* End of file date_lang.php */
-/* Location: ./system/language/english/date_lang.php */

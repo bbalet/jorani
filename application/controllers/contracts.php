@@ -59,11 +59,11 @@ class Contracts extends CI_Controller {
         $this->lang->load('calendar', $this->language);
         $data['title'] = lang('contract_edit_title');
         
-        $this->form_validation->set_rules('name', lang('contract_edit_field_name'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('startentdatemonth', lang('contract_edit_field_start_month'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('startentdateday', lang('contract_edit_field_start_day'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('endentdatemonth', lang('contract_edit_field_end_month'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('endentdateday', lang('contract_edit_field_end_day'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('name', lang('contract_edit_field_name'), 'required|strip_tags');
+        $this->form_validation->set_rules('startentdatemonth', lang('contract_edit_field_start_month'), 'required|strip_tags');
+        $this->form_validation->set_rules('startentdateday', lang('contract_edit_field_start_day'), 'required|strip_tags');
+        $this->form_validation->set_rules('endentdatemonth', lang('contract_edit_field_end_month'), 'required|strip_tags');
+        $this->form_validation->set_rules('endentdateday', lang('contract_edit_field_end_day'), 'required|strip_tags');
 
         $data['contract'] = $this->contracts_model->getContracts($id);
         if (empty($data['contract'])) {
@@ -105,11 +105,11 @@ class Contracts extends CI_Controller {
         $this->lang->load('calendar', $this->language);
         $data['title'] = lang('contract_create_title');
 
-        $this->form_validation->set_rules('name', lang('contract_create_field_name'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('startentdatemonth', lang('contract_create_field_start_month'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('startentdateday', lang('contract_create_field_start_day'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('endentdatemonth', lang('contract_create_field_end_month'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('endentdateday', lang('contract_create_field_end_day'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('name', lang('contract_create_field_name'), 'required|strip_tags');
+        $this->form_validation->set_rules('startentdatemonth', lang('contract_create_field_start_month'), 'required|strip_tags');
+        $this->form_validation->set_rules('startentdateday', lang('contract_create_field_start_day'), 'required|strip_tags');
+        $this->form_validation->set_rules('endentdatemonth', lang('contract_create_field_end_month'), 'required|strip_tags');
+        $this->form_validation->set_rules('endentdateday', lang('contract_create_field_end_day'), 'required|strip_tags');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->model('types_model');

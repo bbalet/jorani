@@ -68,8 +68,8 @@ class Positions extends CI_Controller {
         $this->load->library('form_validation');
         $data['title'] = lang('positions_create_title');
         
-        $this->form_validation->set_rules('name', lang('positions_create_field_name'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('description', lang('positions_create_field_description'), 'xss_clean|strip_tags');
+        $this->form_validation->set_rules('name', lang('positions_create_field_name'), 'required|strip_tags');
+        $this->form_validation->set_rules('description', lang('positions_create_field_description'), 'strip_tags');
         
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
@@ -99,8 +99,8 @@ class Positions extends CI_Controller {
         if (empty($data['position'])) {
             redirect('notfound');
         }
-        $this->form_validation->set_rules('name', lang('positions_edit_field_name'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('description', lang('positions_edit_field_description'), 'xss_clean|strip_tags');
+        $this->form_validation->set_rules('name', lang('positions_edit_field_name'), 'required|strip_tags');
+        $this->form_validation->set_rules('description', lang('positions_edit_field_description'), 'strip_tags');
         
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);

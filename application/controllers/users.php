@@ -132,20 +132,20 @@ class Users extends CI_Controller {
         $data['title'] = lang('users_edit_html_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_create_user');
         
-        $this->form_validation->set_rules('firstname', lang('users_edit_field_firstname'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('lastname', lang('users_edit_field_lastname'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('login', lang('users_edit_field_login'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('email', lang('users_edit_field_email'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('firstname', lang('users_edit_field_firstname'), 'required|strip_tags');
+        $this->form_validation->set_rules('lastname', lang('users_edit_field_lastname'), 'required|strip_tags');
+        $this->form_validation->set_rules('login', lang('users_edit_field_login'), 'required|strip_tags');
+        $this->form_validation->set_rules('email', lang('users_edit_field_email'), 'required|strip_tags');
         $this->form_validation->set_rules('role[]', lang('users_edit_field_role'), 'required');
-        $this->form_validation->set_rules('manager', lang('users_edit_field_manager'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('contract', lang('users_edit_field_contract'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('entity', lang('users_edit_field_entity'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('position', lang('users_edit_field_position'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('datehired', lang('users_edit_field_hired'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('identifier', lang('users_edit_field_identifier'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('language', lang('users_edit_field_language'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('timezone', lang('users_edit_field_timezone'), 'xss_clean|strip_tags');
-        if ($this->config->item('ldap_basedn_db')) $this->form_validation->set_rules('ldap_path', lang('users_edit_field_ldap_path'), 'xss_clean|strip_tags');
+        $this->form_validation->set_rules('manager', lang('users_edit_field_manager'), 'required|strip_tags');
+        $this->form_validation->set_rules('contract', lang('users_edit_field_contract'), 'strip_tags');
+        $this->form_validation->set_rules('entity', lang('users_edit_field_entity'), 'strip_tags');
+        $this->form_validation->set_rules('position', lang('users_edit_field_position'), 'strip_tags');
+        $this->form_validation->set_rules('datehired', lang('users_edit_field_hired'), 'strip_tags');
+        $this->form_validation->set_rules('identifier', lang('users_edit_field_identifier'), 'strip_tags');
+        $this->form_validation->set_rules('language', lang('users_edit_field_language'), 'strip_tags');
+        $this->form_validation->set_rules('timezone', lang('users_edit_field_timezone'), 'strip_tags');
+        if ($this->config->item('ldap_basedn_db')) $this->form_validation->set_rules('ldap_path', lang('users_edit_field_ldap_path'), 'strip_tags');
         
         $data['users_item'] = $this->users_model->getUsers($id);
         if (empty($data['users_item'])) {
@@ -286,21 +286,21 @@ class Users extends CI_Controller {
         $data['contracts'] = $this->contracts_model->getContracts();
         $data['public_key'] = file_get_contents('./assets/keys/public.pem', TRUE);
 
-        $this->form_validation->set_rules('firstname', lang('users_create_field_firstname'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('lastname', lang('users_create_field_lastname'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('login', lang('users_create_field_login'), 'required|callback_checkLogin|xss_clean|strip_tags');
-        $this->form_validation->set_rules('email', lang('users_create_field_email'), 'required|xss_clean|strip_tags');
+        $this->form_validation->set_rules('firstname', lang('users_create_field_firstname'), 'required|strip_tags');
+        $this->form_validation->set_rules('lastname', lang('users_create_field_lastname'), 'required|strip_tags');
+        $this->form_validation->set_rules('login', lang('users_create_field_login'), 'required|callback_checkLogin|strip_tags');
+        $this->form_validation->set_rules('email', lang('users_create_field_email'), 'required|strip_tags');
         if (!$this->config->item('ldap_enabled')) $this->form_validation->set_rules('CipheredValue', lang('users_create_field_password'), 'required');
         $this->form_validation->set_rules('role[]', lang('users_create_field_role'), 'required');
-        $this->form_validation->set_rules('manager', lang('users_create_field_manager'), 'required|xss_clean|strip_tags');
-        $this->form_validation->set_rules('contract', lang('users_create_field_contract'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('position', lang('users_create_field_position'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('entity', lang('users_create_field_entity'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('datehired', lang('users_create_field_hired'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('identifier', lang('users_create_field_identifier'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('language', lang('users_create_field_language'), 'xss_clean|strip_tags');
-        $this->form_validation->set_rules('timezone', lang('users_create_field_timezone'), 'xss_clean|strip_tags');
-        if ($this->config->item('ldap_basedn_db')) $this->form_validation->set_rules('ldap_path', lang('users_create_field_ldap_path'), 'xss_clean|strip_tags');
+        $this->form_validation->set_rules('manager', lang('users_create_field_manager'), 'required|strip_tags');
+        $this->form_validation->set_rules('contract', lang('users_create_field_contract'), 'strip_tags');
+        $this->form_validation->set_rules('position', lang('users_create_field_position'), 'strip_tags');
+        $this->form_validation->set_rules('entity', lang('users_create_field_entity'), 'strip_tags');
+        $this->form_validation->set_rules('datehired', lang('users_create_field_hired'), 'strip_tags');
+        $this->form_validation->set_rules('identifier', lang('users_create_field_identifier'), 'strip_tags');
+        $this->form_validation->set_rules('language', lang('users_create_field_language'), 'strip_tags');
+        $this->form_validation->set_rules('timezone', lang('users_create_field_timezone'), 'strip_tags');
+        if ($this->config->item('ldap_basedn_db')) $this->form_validation->set_rules('ldap_path', lang('users_create_field_ldap_path'), 'strip_tags');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);

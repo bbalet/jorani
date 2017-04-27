@@ -231,14 +231,14 @@ class Requests extends CI_Controller {
             $data['source'] = 'requests/collaborators';
             $data['employee'] = $id;
 
-            $this->form_validation->set_rules('startdate', lang('hr_leaves_create_field_start'), 'required|xss_clean|strip_tags');
-            $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|xss_clean|strip_tags');
-            $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|xss_clean|strip_tags');
-            $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|xss_clean|strip_tags');
-            $this->form_validation->set_rules('duration', lang('hr_leaves_create_field_duration'), 'required|xss_clean|strip_tags');
-            $this->form_validation->set_rules('type', lang('hr_leaves_create_field_type'), 'required|xss_clean|strip_tags');
-            $this->form_validation->set_rules('cause', lang('hr_leaves_create_field_cause'), 'xss_clean|strip_tags');
-            $this->form_validation->set_rules('status', lang('hr_leaves_create_field_status'), 'required|xss_clean|strip_tags');
+            $this->form_validation->set_rules('startdate', lang('hr_leaves_create_field_start'), 'required|strip_tags');
+            $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|strip_tags');
+            $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|strip_tags');
+            $this->form_validation->set_rules('enddatetype', 'End Date type', 'required|strip_tags');
+            $this->form_validation->set_rules('duration', lang('hr_leaves_create_field_duration'), 'required|strip_tags');
+            $this->form_validation->set_rules('type', lang('hr_leaves_create_field_type'), 'required|strip_tags');
+            $this->form_validation->set_rules('cause', lang('hr_leaves_create_field_cause'), 'strip_tags');
+            $this->form_validation->set_rules('status', lang('hr_leaves_create_field_status'), 'required|strip_tags');
 
             $data['credit'] = 0;
             $default_type = $this->config->item('default_leave_type');

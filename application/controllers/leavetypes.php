@@ -54,7 +54,7 @@ class LeaveTypes extends CI_Controller {
         $data['title'] = lang('leavetypes_popup_create_title');
         $data['leavetypes'] = $this->types_model->getTypes();
         
-        $this->form_validation->set_rules('name', lang('leavetypes_popup_create_field_name'), 'required|xss_clean|strip_tags');        
+        $this->form_validation->set_rules('name', lang('leavetypes_popup_create_field_name'), 'required|strip_tags');        
         
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/create', $data);
@@ -80,7 +80,7 @@ class LeaveTypes extends CI_Controller {
         $data['leavetypes'] = $this->types_model->getTypes();
         $data['leavetype'] = $this->types_model->getTypes($id);
         
-        $this->form_validation->set_rules('name', lang('leavetypes_popup_update_field_name'), 'required|xss_clean|strip_tags');        
+        $this->form_validation->set_rules('name', lang('leavetypes_popup_update_field_name'), 'required|strip_tags');        
         
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/edit', $data);

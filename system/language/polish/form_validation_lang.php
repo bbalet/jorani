@@ -1,29 +1,40 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['required']			= "The %s field is required.";
-$lang['isset']				= "The %s field must have a value.";
-$lang['valid_email']		= "The %s field must contain a valid email address.";
-$lang['valid_emails']		= "The %s field must contain all valid email addresses.";
-$lang['valid_url']			= "The %s field must contain a valid URL.";
-$lang['valid_ip']			= "The %s field must contain a valid IP.";
-$lang['min_length']			= "The %s field must be at least %s characters in length.";
-$lang['max_length']			= "The %s field can not exceed %s characters in length.";
-$lang['exact_length']		= "The %s field must be exactly %s characters in length.";
-$lang['alpha']				= "The %s field may only contain alphabetical characters.";
-$lang['alpha_numeric']		= "The %s field may only contain alpha-numeric characters.";
-$lang['alpha_dash']			= "The %s field may only contain alpha-numeric characters, underscores, and dashes.";
-$lang['numeric']			= "The %s field must contain only numbers.";
-$lang['is_numeric']			= "The %s field must contain only numeric characters.";
-$lang['integer']			= "The %s field must contain an integer.";
-$lang['regex_match']		= "The %s field is not in the correct format.";
-$lang['matches']			= "The %s field does not match the %s field.";
-$lang['is_unique'] 			= "The %s field must contain a unique value.";
-$lang['is_natural']			= "The %s field must contain only positive numbers.";
-$lang['is_natural_no_zero']	= "The %s field must contain a number greater than zero.";
-$lang['decimal']			= "The %s field must contain a decimal number.";
-$lang['less_than']			= "The %s field must contain a number less than %s.";
-$lang['greater_than']		= "The %s field must contain a number greater than %s.";
-
-
-/* End of file form_validation_lang.php */
-/* Location: ./system/language/english/form_validation_lang.php */
+$lang['form_validation_required']               = 'Pole {field} jest wymagane.';
+$lang['form_validation_isset']                  = 'Pole {field} musi posiadać wartość.';
+$lang['form_validation_valid_email']            = 'Pole {field} musi posiadać poprawny adres e-mail.';
+$lang['form_validation_valid_emails']           = 'Pole {field} musi posiadać poprawne adresy e-mail.';
+$lang['form_validation_valid_url']              = 'Pole {field} musi posiadać poprawny adres URL.';
+$lang['form_validation_valid_ip']               = 'Pole {field} musi posiadać poprawny adres IP.';
+$lang['form_validation_min_length']             = 'Długość pola {field} nie może być mniejsza niż {param}.';
+$lang['form_validation_max_length']             = 'Długość pola {field} nie może być większa niż {param}.';
+$lang['form_validation_exact_length']           = 'Pole {field} musi zawierać dokładnie {param} znak(i).';
+$lang['form_validation_alpha']                  = 'Pole {field} może zawierać tylko litery.';
+$lang['form_validation_alpha_numeric']          = 'Pole {field} może zawierać tylko znaki alfanumeryczne.';
+$lang['form_validation_alpha_numeric_spaces']   = 'Pole {field} może zawierać tylko znaki alfanumeryczne i spacje.';
+$lang['form_validation_alpha_dash']             = 'Pole {field} może zawierać tylko znaki alfanumeryczne, podkreślenia i myślniki.';
+$lang['form_validation_numeric']                = 'Pole {field} może zawierać tylko liczby.';
+$lang['form_validation_is_numeric']             = 'Pole {field} może zawierać tylko znaki numeryczne.';
+$lang['form_validation_integer']                = 'Pole {field} może zawierać tylko liczby całkowite.';
+$lang['form_validation_regex_match']            = 'Pole {field} ma nieodpowiedni format.';
+$lang['form_validation_matches']                = 'Pole {field} ma inną wartość niż pole {param}.';
+$lang['form_validation_differs']                = 'Pole {field} musi mieć inną wartość niż pole {param}.';
+$lang['form_validation_is_unique']              = 'Pole {field} musi posiadać unikalną wartość.';
+$lang['form_validation_is_natural']             = 'Pole {field} musi zawierać tylko wartości dodatnie.';
+$lang['form_validation_is_natural_no_zero']     = 'Pole {field} musi zawierać tylko wartości większe od zera.';
+$lang['form_validation_decimal']                = 'Pole {field} musi zawierać liczbę dziesiętną.';
+$lang['form_validation_less_than']              = 'Pole {field} musi zawierać liczbę mniejszą niż {param}.';
+$lang['form_validation_less_than_equal_to']     = 'Pole {field} musi zawierać liczbę mniejszą lub równą {param}.';
+$lang['form_validation_greater_than']           = 'Pole {field} musi zawierać liczbę większą niż {param}.';
+$lang['form_validation_greater_than_equal_to']  = 'Pole {field} musi zawierać liczbę większą lub równą {param}.';
+$lang['form_validation_error_message_not_set']  = 'Nie można uzyskać dostępu do komunikatu o błędzie dla pola {field}.';
+$lang['form_validation_in_list']                = 'Pole {field} musi mieć jedną z następujących wartości: {param}.';

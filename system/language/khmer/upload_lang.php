@@ -1,28 +1,12 @@
 <?php
 /**
- * CodeIgniter
+ * System messages translation for CodeIgniter(tm)
  *
- * An open source application development framework for PHP 5.2.4 or newer
- *
- * NOTICE OF LICENSE
- *
- * Licensed under the Open Software License version 3.0
- *
- * This source file is subject to the Open Software License (OSL 3.0) that is
- * bundled with this package in the files license.txt / license.rst.  It is
- * also available through the world wide web at this URL:
- * http://opensource.org/licenses/OSL-3.0
- * If you did not receive a copy of the license and are unable to obtain it
- * through the world wide web, please send an email to
- * licensing@ellislab.com so we can send you a copy immediately.
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2013, EllisLab, Inc. (http://ellislab.com/)
- * @license		http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
+ * @author	CodeIgniter community
+ * @author	Kim Chanthoeun
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -42,6 +26,3 @@ $lang['upload_no_filepath']             = 'ទីតាំងផ្ទុកឡ�
 $lang['upload_no_file_types']           = 'អ្នកមិនបានបញ្ជាក់ប្រភេទឯកសារណាមួយត្រូវបានអនុញ្ញាត។';
 $lang['upload_bad_filename']            = 'ឈ្មោះឯកសារដែលអ្នកបានដាក់ស្នើមានរួចហើយនៅលើម៉ាស៊ីន។';
 $lang['upload_not_writable']            = 'ទីតាំងថតផ្ទុកឡើងមិនអាចកែតម្រូវបាន។';
-
-/* End of file upload_lang.php */
-/* Location: ./system/language/english/upload_lang.php */

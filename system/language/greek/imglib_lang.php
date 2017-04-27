@@ -1,24 +1,30 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @author	Grigoris Charamidis
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['imglib_source_image_required'] = "You must specify a source image in your preferences.";
-$lang['imglib_gd_required'] = "The GD image library is required for this feature.";
-$lang['imglib_gd_required_for_props'] = "Your server must support the GD image library in order to determine the image properties.";
-$lang['imglib_unsupported_imagecreate'] = "Your server does not support the GD function required to process this type of image.";
-$lang['imglib_gif_not_supported'] = "GIF images are often not supported due to licensing restrictions.  You may have to use JPG or PNG images instead.";
-$lang['imglib_jpg_not_supported'] = "JPG images are not supported.";
-$lang['imglib_png_not_supported'] = "PNG images are not supported.";
-$lang['imglib_jpg_or_png_required'] = "The image resize protocol specified in your preferences only works with JPEG or PNG image types.";
-$lang['imglib_copy_error'] = "An error was encountered while attempting to replace the file.  Please make sure your file directory is writable.";
-$lang['imglib_rotate_unsupported'] = "Image rotation does not appear to be supported by your server.";
-$lang['imglib_libpath_invalid'] = "The path to your image library is not correct.  Please set the correct path in your image preferences.";
-$lang['imglib_image_process_failed'] = "Image processing failed.  Please verify that your server supports the chosen protocol and that the path to your image library is correct.";
-$lang['imglib_rotation_angle_required'] = "An angle of rotation is required to rotate the image.";
-$lang['imglib_writing_failed_gif'] = "GIF image.";
-$lang['imglib_invalid_path'] = "The path to the image is not correct.";
-$lang['imglib_copy_failed'] = "The image copy routine failed.";
-$lang['imglib_missing_font'] = "Unable to find a font to use.";
-$lang['imglib_save_failed'] = "Unable to save the image.  Please make sure the image and file directory are writable.";
-
-
-/* End of file imglib_lang.php */
-/* Location: ./system/language/english/imglib_lang.php */
+$lang['imglib_source_image_required'] = 'Πρέπει να καθορίσετε μια πηγή εικόνας στις προτιμήσεις σας.';
+$lang['imglib_gd_required'] = 'Tο GD image library πακέτο είναι απαραίτητο για αυτήν την ενέργεια.';
+$lang['imglib_gd_required_for_props'] = 'Ο διακομιστής σας πρέπει να υποστηρίζει το πακέτο GD image library προκειμένου να καθορίσει τις ιδιότητες της εικόνας.';
+$lang['imglib_unsupported_imagecreate'] = 'Ο διακομιστής σας δεν υποστηρίζει τη λειτουργία GD, η οποία απαιτείται για την επεξεργασία αυτού του τύπου της εικόνας.';
+$lang['imglib_gif_not_supported'] = 'Οι εικόνες GIF συχνά δεν υποστηρίζονται λόγω περιορισμών της άδειας. Μπορεί να χρειαστεί να χρησιμοποιήσετε JPG ή PNG εικόνες αντ αυτού.';
+$lang['imglib_jpg_not_supported'] = 'Οι JPG εικόνες δεν υποστηρίζονται.';
+$lang['imglib_png_not_supported'] = 'Οι PNG εικόνες δεν υποστηρίζονται.';
+$lang['imglib_jpg_or_png_required'] = 'Το πρωτόκολλο αλλαγής μεγέθους εικόνας που ορίζεται στις προτιμήσεις σας λειτουργεί μόνο με τα είδη εικόνων JPEG ή PNG.';
+$lang['imglib_copy_error'] = 'Παρουσιάστηκε σφάλμα κατά την προσπάθεια να αντικαταστήσετε το αρχείο. Παρακαλώ βεβαιωθείτε ότι ο  κατάλογος του αρχείου σας είναι εγγράψιμος.';
+$lang['imglib_rotate_unsupported'] = 'Η λειτουργία περιστροφής εικόνας δεν υποστηρίζεται απο τον διακομιστή σας.';
+$lang['imglib_libpath_invalid'] = 'Η διαδρομή του πακέτου εικόνας δεν είναι σωστή. Παρακαλώ να ορίσεται στις προτιμήσεις σας την σωστή διαδρομή πακέτου εικόνας.';
+$lang['imglib_image_process_failed'] = 'Σφάλμα στην επεξεργασία της εικόνας. Παρακαλώ επιβεβαίωστε οτι ο διακομιστής σας υποστηρίζει το επιλεγμένο πρωτόκολλο και οτι η διαδρομή του πακέτου εικόνας είναι σωστή.';
+$lang['imglib_rotation_angle_required'] = 'Μια γωνία περιστροφής απαιτέιται για να περιστραφεί η εικόνα.';
+$lang['imglib_invalid_path'] = 'Η διαδρομή για την εικόνα δεν είνα σωστή.';
+$lang['imglib_invalid_image'] = 'The provided image is not valid.';
+$lang['imglib_copy_failed'] = 'Η ρουτίνα αντίγραφο της εικόνας απέτυχε.';
+$lang['imglib_missing_font'] = 'Αδυναμία να βρεθεί η γραμματοσειρά που χρησιμοποιείται.';
+$lang['imglib_save_failed'] = 'Αδυναμία στην αποθήκευση εικόνας. Παρακαλώ βεβαιωθείτε οτι η εικόνα και ο κατάλογος είναι εγγράψιμοι.';

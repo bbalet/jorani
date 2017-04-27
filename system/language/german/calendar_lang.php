@@ -1,4 +1,13 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['cal_su']			= 'So';
 $lang['cal_mo']			= 'Mo';
@@ -23,7 +32,7 @@ $lang['cal_friday']		= 'Freitag';
 $lang['cal_saturday']	= 'Samstag';
 $lang['cal_jan']		= 'Jan';
 $lang['cal_feb']		= 'Feb';
-$lang['cal_mar']		= 'M&auml;r';
+$lang['cal_mar']		= 'Mär';
 $lang['cal_apr']		= 'Apr';
 $lang['cal_may']		= 'Mai';
 $lang['cal_jun']		= 'Jun';
@@ -35,7 +44,7 @@ $lang['cal_nov']		= 'Nov';
 $lang['cal_dec']		= 'Dez';
 $lang['cal_january']	= 'Januar';
 $lang['cal_february']	= 'Februar';
-$lang['cal_march']		= 'M&auml;rz';
+$lang['cal_march']		= 'März';
 $lang['cal_april']		= 'April';
 $lang['cal_mayl']		= 'Mai';
 $lang['cal_june']		= 'Juni';
@@ -45,7 +54,3 @@ $lang['cal_september']	= 'September';
 $lang['cal_october']	= 'Oktober';
 $lang['cal_november']	= 'November';
 $lang['cal_december']	= 'Dezember';
-
-
-/* End of file calendar_lang.php */
-/* Location: ./system/language/german/calendar_lang.php */

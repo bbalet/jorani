@@ -34,10 +34,7 @@ class Authorization extends CI_Controller {
         parent::__construct();
         require_once(APPPATH . 'third_party/OAuth2/Autoloader.php');
         OAuth2\Autoloader::register();
-        $dsn = 'mysql:dbname=' . $this->db->database . ';host=' . $this->db->hostname;
-        $username = $this->db->username;
-        $password = $this->db->password;
-        $storage = new OAuth2\Storage\Pdo(array('dsn' => $dsn, 'username' => $username, 'password' => $password));
+        $storage = new OAuth2\Storage\Pdo($this->db->conn_id);
         $this->server = new OAuth2\Server($storage);
         $this->server->addGrantType(new OAuth2\GrantType\ClientCredentials($storage));
         $this->server->addGrantType(new OAuth2\GrantType\AuthorizationCode($storage));

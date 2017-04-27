@@ -289,11 +289,11 @@ $route['ics/ical/(:num)'] = 'ics/ical/$1';
 
 //_______________________________________________
 //Session management
-$route['session/login'] = 'session/login';
-$route['session/logout'] = 'session/logout';
-$route['session/oauth2'] = 'session/loginOAuth2';
-$route['session/language'] = 'session/language';
-$route['session/forgetpassword'] = 'session/forgetpassword';
+$route['session/login'] = 'connection/login';
+$route['session/logout'] = 'connection/logout';
+$route['session/oauth2'] = 'connection/loginOAuth2';
+$route['session/language'] = 'connection/language';
+$route['session/forgetpassword'] = 'connection/forgetpassword';
 
 //_______________________________________________
 //Experimental mobile endpoint

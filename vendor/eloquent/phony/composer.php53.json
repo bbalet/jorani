@@ -1,0 +1,48 @@
+{
+    "name": "eloquent/phony",
+    "description": "Mocks, stubs, and spies for PHP.",
+    "keywords": ["mock", "mocking", "stub", "stubbing", "spy", "dummy", "double", "test", "fake"],
+    "homepage": "https://github.com/eloquent/phony",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erin Millard",
+            "email": "ezzatron@gmail.com",
+            "homepage": "http://ezzatron.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "require-dev": {
+        "ext-pdo": "*",
+        "errors/exceptions": "^0.1",
+        "hamcrest/hamcrest-php": "^2",
+        "icecave/semver": "^3",
+        "mockery/mockery": "^0.9",
+        "phake/phake": "^2",
+        "phpspec/prophecy": "^1",
+        "phpunit/phpunit": "^4",
+        "simpletest/simpletest": "^1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Eloquent\\Phony\\": "src"
+        },
+        "files": [
+            "src/functions.php",
+            "src/Pho/functions.php",
+            "src/Phpunit/functions.php",
+            "src/Simpletest/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Eloquent\\Phony\\": ["test/src"]
+        },
+        "files": [
+            "test/src/ClassA.php",
+            "test/src/TestClass.php"
+        ]
+    }
+}

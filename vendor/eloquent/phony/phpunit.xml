@@ -1,0 +1,33 @@
+<phpunit
+    bootstrap="vendor/autoload.php"
+    colors="true"
+    beStrictAboutChangesToGlobalState="true"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTestsThatDoNotTestAnything="true"
+    mapTestClassNameToCoveredClassName="true"
+    convertErrorsToExceptions="true"
+>
+    <testsuites>
+        <testsuite>
+            <directory>test/suite</directory>
+            <directory phpVersion="5.5-dev">test/suite-generators</directory>
+        </testsuite>
+    </testsuites>
+
+    <logging>
+        <log type="coverage-html" target="coverage" charset="UTF-8" yui="true" highlight="true" />
+        <log type="coverage-clover" target="coverage/coverage.xml" />
+        <log type="coverage-text" target="coverage/coverage.txt" />
+    </logging>
+
+    <filter>
+        <whitelist>
+            <directory>src</directory>
+        </whitelist>
+    </filter>
+
+    <php>
+        <ini name="error_reporting" value="-1"/>
+        <ini name="memory_limit" value="256M"/>
+    </php>
+</phpunit>

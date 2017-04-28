@@ -1,0 +1,12 @@
+# Composer
+vendor/
+composer.lock
+
+# Tests
+tests/cov/
+
+# Composer binaries
+bin
+
+# Vim
+.*.swp

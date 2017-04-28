@@ -10,6 +10,7 @@
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
 //VObject is used to build an ICS feed (webcal, ical feed)
+require_once FCPATH . "vendor/autoload.php";
 use Sabre\VObject;
 
 /**
@@ -25,7 +26,6 @@ class Ics extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('polyglot');
-        require_once(APPPATH . 'third_party/VObjects/vendor/autoload.php');
     }
     
     /**

@@ -9,6 +9,8 @@
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
+require_once FCPATH . "vendor/autoload.php";
+
 /**
  * This class implements a REST API served through an OAuth2 server.
  * In order to use it, you need to insert an OAuth2 client into the database, for example :
@@ -31,7 +33,6 @@ class Api extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        require_once(APPPATH . 'third_party/OAuth2/Autoloader.php');
         OAuth2\Autoloader::register();
         $storage = new OAuth2\Storage\Pdo($this->db->conn_id);
         $this->server = new OAuth2\Server($storage);
@@ -44,7 +45,6 @@ class Api extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function token() {
-        require_once(APPPATH . 'third_party/OAuth2/Server.php');
         $this->server->handleTokenRequest(OAuth2\Request::createFromGlobals())->send();
     }
     

@@ -9,6 +9,8 @@
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
+require_once FCPATH . "vendor/autoload.php";
+
 /**
  * This class manages the connection to the application
  * CodeIgniter uses a cookie to store session's details.
@@ -109,7 +111,7 @@ class Connection extends CI_Controller {
                 $privateKey = openssl_pkey_get_private(file_get_contents('./assets/keys/private.pem', TRUE));
                 openssl_private_decrypt(base64_decode($this->input->post('CipheredValue')), $password, $privateKey);
             } else {
-                require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
+                require_once FCPATH . "vendor/autoload.php";
                 $rsa = new phpseclib\Crypt\RSA();
                 $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
                 $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
@@ -251,7 +253,6 @@ class Connection extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function loginOAuth2() {
-        require_once APPPATH . 'third_party/OAuthClient/vendor/autoload.php';
         $oauth2Enabled = $this->config->item('oauth2_enabled');
         $oauth2Provider = $this->config->item('oauth2_provider');
         $oauth2ClientId = $this->config->item('oauth2_client_id');
@@ -301,7 +302,6 @@ class Connection extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function metadata() {
-        require_once APPPATH . 'third_party/SAML/_toolkit_loader.php';
         require_once APPPATH . 'config/saml.php';
         $settings = new OneLogin_Saml2_Settings($settingsInfo, true);
         $metadata = $settings->getSPMetadata();
@@ -321,7 +321,6 @@ class Connection extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function sso() {
-        require_once APPPATH . 'third_party/SAML/_toolkit_loader.php';
         require_once APPPATH . 'config/saml.php';
         $auth = new OneLogin_Saml2_Auth($settingsInfo);
         $auth->login();
@@ -332,7 +331,6 @@ class Connection extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function slo() {
-        require_once APPPATH . 'third_party/SAML/_toolkit_loader.php';
         require_once APPPATH . 'config/saml.php';
         $auth = new OneLogin_Saml2_Auth($settingsInfo);
         $returnTo = null;
@@ -355,7 +353,6 @@ class Connection extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function sls() {
-        require_once APPPATH . 'third_party/SAML/_toolkit_loader.php';
         require_once APPPATH . 'config/saml.php';
         $auth = new OneLogin_Saml2_Auth($settingsInfo);
         if (isset($this->session) && ($this->session->userdata("LogoutRequestID") !== FALSE)) {
@@ -378,7 +375,6 @@ class Connection extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function acs() {
-        require_once APPPATH . 'third_party/SAML/_toolkit_loader.php';
         require_once APPPATH . 'config/saml.php';
         $auth = new OneLogin_Saml2_Auth($settingsInfo);
         if (isset($this->session) && ($this->session->userdata("AuthNRequestID") !== FALSE)) {

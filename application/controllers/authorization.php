@@ -13,6 +13,8 @@
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
+require_once FCPATH . "vendor/autoload.php";
+
 /**
  * This class implements a OAuth2 Authorization mechanism for a 3rd application
  */
@@ -32,7 +34,6 @@ class Authorization extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        require_once(APPPATH . 'third_party/OAuth2/Autoloader.php');
         OAuth2\Autoloader::register();
         $storage = new OAuth2\Storage\Pdo($this->db->conn_id);
         $this->server = new OAuth2\Server($storage);
@@ -60,7 +61,6 @@ class Authorization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function authorize() {
-        require_once(APPPATH . 'third_party/OAuth2/Server.php');
         $request = OAuth2\Request::createFromGlobals();
         $response = new OAuth2\Response();
 
@@ -160,7 +160,6 @@ class Authorization extends CI_Controller {
             $privateKey = openssl_pkey_get_private(file_get_contents('./assets/keys/private.pem', TRUE));
             openssl_private_decrypt(base64_decode($this->input->post('CipheredValue')), $password, $privateKey);
         } else {
-            require_once(APPPATH . 'third_party/phpseclib/vendor/autoload.php');
             $rsa = new phpseclib\Crypt\RSA();
             $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
             $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);

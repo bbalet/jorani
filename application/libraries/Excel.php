@@ -8,7 +8,7 @@
  */
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
-require_once APPPATH . "third_party/PHPExcel.php";
+require_once FCPATH . "vendor/autoload.php";
 
 /**
  * This class is a wrapper around PHPExcel library.

@@ -392,23 +392,57 @@ class Api extends CI_Controller {
         } else {
             $this->load->model('users_model');
             $data = array();
-            if ($this->input->post('firstname')!=FALSE) {$data['firstname']= $this->input->post('firstname');}
-            if ($this->input->post('lastname')!=FALSE) {$data['lastname']= $this->input->post('lastname');}
-            if ($this->input->post('login')!=FALSE) {$data['login']= $this->input->post('login');}
-            if ($this->input->post('email')!=FALSE) {$data['email']= $this->input->post('email');}
-            if ($this->input->post('password')!=FALSE) {$data['password']= $this->input->post('password');}
-            if ($this->input->post('role')!=FALSE) {$data['role']= $this->input->post('role');}
-            if ($this->input->post('manager')!=FALSE) {$data['manager']= $this->input->post('manager');}
-            if ($this->input->post('organization')!=FALSE) {$data['organization']= $this->input->post('organization');}
-            if ($this->input->post('contract')!=FALSE) {$data['contract']= $this->input->post('contract');}
-            if ($this->input->post('position')!=FALSE) {$data['position']= $this->input->post('position');}
-            if ($this->input->post('datehired')!=FALSE) {$data['datehired']= $this->input->post('datehired');}
-            if ($this->input->post('identifier')!=FALSE) {$data['identifier']= $this->input->post('identifier');}
-            if ($this->input->post('language')!=FALSE) {$data['language']= $this->input->post('language');}
-            if ($this->input->post('timezone')!=FALSE) {$data['timezone']= $this->input->post('timezone');}
-            if ($this->input->post('ldap_path')!=FALSE) {$data['ldap_path']= $this->input->post('ldap_path');}
-            if ($this->input->post('country')!=FALSE) {$data['country']= $this->input->post('country');}
-            if ($this->input->post('calendar')!=FALSE) {$data['calendar']= $this->input->post('calendar');}
+            if (($this->input->post('firstname')) !== NULL) {
+                $data['firstname'] = $this->input->post('firstname');
+            }
+            if (($this->input->post('lastname')) !== NULL) {
+                $data['lastname'] = $this->input->post('lastname');
+            }
+            if (($this->input->post('login')) !== NULL) {
+                $data['login'] = $this->input->post('login');
+            }
+            if (($this->input->post('email')) !== NULL) {
+                $data['email'] = $this->input->post('email');
+            }
+            if (($this->input->post('password')) !== NULL) {
+                $data['password'] = $this->input->post('password');
+            }
+            if (($this->input->post('role')) !== NULL) {
+                $data['role'] = $this->input->post('role');
+            }
+            if (($this->input->post('manager')) !== NULL) {
+                $data['manager'] = $this->input->post('manager');
+            }
+            if (($this->input->post('organization')) !== NULL) {
+                $data['organization'] = $this->input->post('organization');
+            }
+            if (($this->input->post('contract')) !== NULL) {
+                $data['contract'] = $this->input->post('contract');
+            }
+            if (($this->input->post('position')) !== NULL) {
+                $data['position'] = $this->input->post('position');
+            }
+            if (($this->input->post('datehired')) !== NULL) {
+                $data['datehired'] = $this->input->post('datehired');
+            }
+            if (($this->input->post('identifier')) !== NULL) {
+                $data['identifier'] = $this->input->post('identifier');
+            }
+            if (($this->input->post('language')) !== NULL) {
+                $data['language'] = $this->input->post('language');
+            }
+            if (($this->input->post('timezone')) !== NULL) {
+                $data['timezone'] = $this->input->post('timezone');
+            }
+            if (($this->input->post('ldap_path')) !== NULL) {
+                $data['ldap_path'] = $this->input->post('ldap_path');
+            }
+            if (($this->input->post('country')) !== NULL) {
+                $data['country'] = $this->input->post('country');
+            }
+            if (($this->input->post('calendar')) !== NULL) {
+                $data['calendar'] = $this->input->post('calendar');
+            }
             $result = $this->users_model->updateUserByApi($id, $data);
             if (empty($result)) {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
@@ -417,7 +451,7 @@ class Api extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Create an employee (fields are passed by POST parameters)
      * Returns the new inserted id
@@ -495,13 +529,13 @@ class Api extends CI_Controller {
                         $message = $this->parser->parse('emails/' . $language . '/new_user', $data, TRUE);
                         $this->email->set_encoding('quoted-printable');
 
-                        if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
+                        if (($this->config->item('from_mail') !== NULL) && ($this->config->item('from_name') !== NULL) ) {
                             $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
                         } else {
                            $this->email->from('do.not@reply.me', 'LMS');
                         }
                         $this->email->to($email);
-                        if ($this->config->item('subject_prefix') != FALSE) {
+                        if (($this->config->item('subject_prefix')) !== NULL) {
                             $subject = $this->config->item('subject_prefix');
                         } else {
                            $subject = '[Jorani] ';

@@ -56,7 +56,6 @@ $route['users/employees'] = 'users/employees';
 $route['users/export'] = 'users/export';
 $route['users/reset/(:num)'] = 'users/reset/$1';
 $route['users/create'] = 'users/create';
-$route['users/import'] = 'users/import';
 $route['users/edit/(:num)'] = 'users/edit/$1';
 $route['users/delete/(:num)'] = 'users/delete/$1';
 $route['users/check/login'] = 'users/checkLoginByAjax';
@@ -294,6 +293,11 @@ $route['session/logout'] = 'connection/logout';
 $route['session/oauth2'] = 'connection/loginOAuth2';
 $route['session/language'] = 'connection/language';
 $route['session/forgetpassword'] = 'connection/forgetpassword';
+$route['api/metadata'] = 'connection/metadata';
+$route['api/acs'] = 'connection/acs';
+$route['api/slo'] = 'connection/slo';
+$route['api/sls'] = 'connection/sls';
+$route['api/sso'] = 'connection/sso';
 
 //_______________________________________________
 //Experimental mobile endpoint

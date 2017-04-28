@@ -97,13 +97,13 @@ function sanitize($value)
 function sendMailByWrapper(CI_Controller $controller, $subject, $message, $to, $cc = NULL)
 {
     $controller->load->library('email');
-    if ($controller->config->item('subject_prefix') != FALSE) {
+    if ($controller->config->item('subject_prefix') !== NULL) {
         $controller->email->subject($controller->config->item('subject_prefix') . ' ' . $subject);
     } else {
        $controller->email->subject('[Jorani] ' . $subject);
     }
     $controller->email->set_encoding('quoted-printable');
-    if ($controller->config->item('from_mail') != FALSE && $controller->config->item('from_name') != FALSE ) {
+    if (($controller->config->item('from_mail') !== NULL) && ($controller->config->item('from_name') !== NULL)) {
         $controller->email->from($controller->config->item('from_mail'), $controller->config->item('from_name'));
     } else {
        $controller->email->from('do.not@reply.me', 'LMS');

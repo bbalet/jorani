@@ -52,7 +52,7 @@ class Organization extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function select() {
-        if (($this->config->item('public_calendar') == TRUE) && (!$this->session->userdata('logged_in'))) {
+        if (($this->config->item('public_calendar') === TRUE) && (!$this->session->userdata('logged_in'))) {
             $this->load->library('polyglot');
             $data['language'] = $this->config->item('language');
             $data['language_code'] = $this->polyglot->language2code($data['language']);
@@ -254,7 +254,7 @@ class Organization extends CI_Controller {
      */
     public function root() {
         header("Content-Type: application/json");
-        if (($this->config->item('public_calendar') == TRUE) && (!$this->session->userdata('logged_in'))) {
+        if (($this->config->item('public_calendar') === TRUE) && (!$this->session->userdata('logged_in'))) {
             //nop
         } else {
             setUserContext($this);

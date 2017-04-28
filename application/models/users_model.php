@@ -193,17 +193,19 @@ class Users_model extends CI_Model {
             'timezone' => $this->input->post('timezone')
         );
         
-        if ($this->input->post('entity') !== FALSE && $this->input->post('entity') != '') {
+        if ($this->input->post('entity') != NULL && $this->input->post('entity') != '') {
             $data['organization'] = $this->input->post('entity');
         }
-        if ($this->input->post('position') !== FALSE && $this->input->post('position') != '') {
+        if ($this->input->post('position') != NULL && $this->input->post('position') != '') {
             $data['position'] = $this->input->post('position');
         }
-        if ($this->input->post('datehired') !== FALSE && $this->input->post('datehired') != '') {
+        if ($this->input->post('datehired') != NULL && $this->input->post('datehired') != '') {
             $data['datehired'] = $this->input->post('datehired');
         }
         
-        if ($this->config->item('ldap_basedn_db')) $data['ldap_path'] = $this->input->post('ldap_path');
+        if ($this->config->item('ldap_basedn_db')!==FALSE) {
+            $data['ldap_path'] = $this->input->post('ldap_path');
+        }
         $this->db->insert('users', $data);
         
         //Deal with user having no line manager
@@ -332,16 +334,16 @@ class Users_model extends CI_Model {
             'language' => $this->input->post('language'),
             'timezone' => $this->input->post('timezone')
         );
-        if ($this->input->post('entity') !== FALSE && $this->input->post('entity') != '') {
+        if ($this->input->post('entity') != NULL && $this->input->post('entity') != '') {
             $data['organization'] = $this->input->post('entity');
         }
-        if ($this->input->post('position') !== FALSE && $this->input->post('position') != '') {
+        if ($this->input->post('position') != NULL && $this->input->post('position') != '') {
             $data['position'] = $this->input->post('position');
         }
-        if ($this->input->post('datehired') !== FALSE && $this->input->post('datehired') != '') {
+        if ($this->input->post('datehired') != NULL && $this->input->post('datehired') != '') {
             $data['datehired'] = $this->input->post('datehired');
         }
-        if ($this->config->item('ldap_basedn_db')) {
+        if ($this->config->item('ldap_basedn_db') !== FALSE) {
             $data['ldap_path'] = $this->input->post('ldap_path');
         }
 

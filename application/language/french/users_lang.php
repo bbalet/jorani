@@ -137,3 +137,8 @@ $lang['users_export_thead_firstname'] = 'Prénom';
 $lang['users_export_thead_lastname'] = 'Nom';
 $lang['users_export_thead_email'] = 'E-mail';
 $lang['users_export_thead_manager'] = 'Manager';
+
+$lang['users_reset_change_password'] = "Changer son mot de passe";
+$lang['users_reset_last_password'] = "Ancien mot de passe";
+$lang['users_reset_new_password'] = "Nouveau mot de passe";
+$lang['users_reset_rewamp_password'] = "Retapez votre nouveau mot de passe";

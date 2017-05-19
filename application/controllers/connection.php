@@ -129,25 +129,36 @@ class Connection extends CI_Controller {
             $loggedin = FALSE;
             if ($this->config->item('ldap_enabled') === TRUE) {
                 if ($password != "") { //Bind to MS-AD with blank password might return OK
-                $ldap = ldap_connect($this->config->item('ldap_host'), $this->config->item('ldap_port'));
-                ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
-                set_error_handler(function() { /* ignore errors */ });
-                //Priority is given to the base DN defined into the database, then try with the template
-                $basedn = $this->users_model->getBaseDN($this->input->post('login'));
-                if ($basedn == "") {//can return NULL
-                    $basedn = sprintf($this->config->item('ldap_basedn'), $this->input->post('login'));
-                }
-                $bind = ldap_bind($ldap, $basedn, $password);
-                restore_error_handler();
-                if ($bind) {
-                    $loggedin = $this->users_model->checkCredentialsLDAP($this->input->post('login'));
-                }
-                ldap_close($ldap);
+                    $ldap = ldap_connect($this->config->item('ldap_host'), $this->config->item('ldap_port'));
+                    ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
+                    set_error_handler(function() { /* ignore errors */
+                    });
+
+                    $basedn = "";
+                    if (($this->config->item('ldap_search_enabled')) === TRUE) {
+                        $bind = ldap_bind($ldap, $this->config->item('ldap_search_user'), $this->config->item('ldap_search_password'));
+                        $resultSet = ldap_search($ldap, $this->config->item('ldap_basedn'), sprintf($this->config->item('ldap_search_pattern'), $this->input->post('login')));
+                        $userEntry = ldap_first_entry($ldap, $resultSet);
+                        $basedn = ldap_get_dn($ldap, $userEntry);
+                    } else {
+                        //Priority is given to the base DN defined into the database, then try with the template
+                        $basedn = $this->users_model->getBaseDN($this->input->post('login'));
+                        if ($basedn == "") {//can return NULL
+                            $basedn = sprintf($this->config->item('ldap_basedn'), $this->input->post('login'));
+                        }
+                    }
+
+                    $bind = ldap_bind($ldap, $basedn, $password);
+                    restore_error_handler();
+                    if ($bind) {
+                        $loggedin = $this->users_model->checkCredentialsLDAP($this->input->post('login'));
+                    }
+                    ldap_close($ldap);
                 }
             } else {
                 $loggedin = $this->users_model->checkCredentials($this->input->post('login'), $password);
             }
-            
+
             if ($loggedin == FALSE) {
                 log_message('error', '{controllers/session/login} Invalid login id or password for user=' . $this->input->post('login'));
                 if ($this->users_model->isActive($this->input->post('login'))) {

@@ -506,7 +506,16 @@ $config['ldap_enabled'] = FALSE;
 $config['ldap_host'] = '127.0.0.1';
 $config['ldap_port'] = 389;
 $config['ldap_basedn'] = 'uid=%s,ou=people,dc=company,dc=com';  //Change the pattern, but let %s that symbolizes the user identifier
+//If you switch on <<ldap_search_enabled>>, <<ldap_basedn>> may look like "OU=Users,DC=COMPANY,DC=COM"
 $config['ldap_basedn_db'] = FALSE;      //If TRUE, ldap path is taken from user table
+
+//Use a LDAP search filter as a connection alternative
+//Note that you need to switch <<ldap_enabled>> to TRUE and fill <<ldap_host>>,
+//<<ldap_port>>, and <<ldap_basedn>>
+$config['ldap_search_enabled'] = FALSE;
+$config['ldap_search_user'] = '';
+$config['ldap_search_password'] = '';
+$config['ldap_search_pattern'] = 'cn=%s';   //Change the pattern, but let %s that symbolizes the user identifier
 
 //____________________________________________________________________________
 //Oauth2 configuration

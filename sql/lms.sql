@@ -108,6 +108,51 @@ BEGIN
 END$$
 DELIMITER ;
 
+DROP FUNCTION IF EXISTS `GetInitials`;
+DELIMITER $$
+CREATE FUNCTION `GetInitials`(str text, expr text) RETURNS text CHARSET utf8
+    NOT DETERMINISTIC
+    READS SQL DATA
+    SQL SECURITY INVOKER
+BEGIN
+    declare result text default '';
+    declare buffer text default '';
+    declare i int default 1;
+    if(str is null) then
+        return null;
+    end if;
+    set buffer = trim(str);
+    while i <= length(buffer) do
+        if substr(buffer, i, 1) regexp expr then
+            set result = concat( result, substr( buffer, i, 1 ));
+            set i = i + 1;
+            while i <= length( buffer ) and substr(buffer, i, 1) regexp expr do
+                set i = i + 1;
+            end while;
+            while i <= length( buffer ) and substr(buffer, i, 1) not regexp expr do
+                set i = i + 1;
+            end while;
+        else
+            set i = i + 1;
+        end if;
+    end while;
+    return result;
+END$$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS `GetAcronym`;
+DELIMITER $$
+CREATE FUNCTION `GetAcronym`(str text) RETURNS text CHARSET utf8
+    NOT DETERMINISTIC
+    READS SQL DATA
+    SQL SECURITY INVOKER
+BEGIN
+    declare result text default '';
+    set result = GetInitials( str, '[[:alnum:]]' );
+    return result;
+END$$
+DELIMITER ;
+
 --
 -- Structure of table `actions`
 --
@@ -224,6 +269,7 @@ CREATE TABLE IF NOT EXISTS `leaves` (
   `enddatetype` varchar(12) CHARACTER SET utf8 DEFAULT NULL,
   `duration` decimal(10,3) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
+  `comments` TEXT NULL DEFAULT NULL COMMENT 'Comments on leave request',
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
   KEY `employee` (`employee`)
@@ -290,6 +336,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 -- Content of table `roles`
 --
 INSERT INTO `roles` (`id`, `name`) VALUES
+(1, 'admin'),
 (2, 'user'),
 (8, 'HR admin');
 
@@ -359,6 +406,7 @@ CREATE TABLE IF NOT EXISTS `time` (
 CREATE TABLE IF NOT EXISTS `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `acronym` VARCHAR(10) NULL DEFAULT NULL COMMENT 'Acronym of leave type',
   `deduct_days_off` BOOL NOT NULL DEFAULT 0 COMMENT 'Deduct days off when computing the balance of the leave type.',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
@@ -456,7 +504,7 @@ CREATE TABLE IF NOT EXISTS `leaves_history` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='List of changes in leave requests table' COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- Tables for OAuth2 server
-CREATE TABLE oauth_clients (client_id VARCHAR(80) NOT NULL, client_secret VARCHAR(80) NOT NULL, redirect_uri VARCHAR(2000) NOT NULL, grant_types VARCHAR(80), scope VARCHAR(100), user_id VARCHAR(80), CONSTRAINT clients_client_id_pk PRIMARY KEY (client_id));
+CREATE TABLE oauth_clients (client_id VARCHAR(80) NOT NULL, client_secret VARCHAR(80) DEFAULT NULL, redirect_uri VARCHAR(2000) NOT NULL, grant_types VARCHAR(80), scope VARCHAR(100), user_id VARCHAR(80), CONSTRAINT clients_client_id_pk PRIMARY KEY (client_id));
 CREATE TABLE oauth_access_tokens (access_token VARCHAR(40) NOT NULL, client_id VARCHAR(80) NOT NULL, user_id VARCHAR(255), expires TIMESTAMP NOT NULL, scope VARCHAR(2000), CONSTRAINT access_token_pk PRIMARY KEY (access_token));
 CREATE TABLE oauth_authorization_codes (authorization_code VARCHAR(40) NOT NULL, client_id VARCHAR(80) NOT NULL, user_id VARCHAR(255), redirect_uri VARCHAR(2000), expires TIMESTAMP NOT NULL, scope VARCHAR(2000), CONSTRAINT auth_code_pk PRIMARY KEY (authorization_code));
 CREATE TABLE oauth_refresh_tokens (refresh_token VARCHAR(40) NOT NULL, client_id VARCHAR(80) NOT NULL, user_id VARCHAR(255), expires TIMESTAMP NOT NULL, scope VARCHAR(2000), CONSTRAINT refresh_token_pk PRIMARY KEY (refresh_token));
@@ -465,15 +513,56 @@ CREATE TABLE oauth_scopes (scope TEXT, is_default BOOLEAN);
 CREATE TABLE oauth_jwt (client_id VARCHAR(80) NOT NULL, subject VARCHAR(80), public_key VARCHAR(2000), CONSTRAINT jwt_client_id_pk PRIMARY KEY (client_id));
 
 --
+-- Structure of table `oauth_applications`
+--
+CREATE TABLE IF NOT EXISTS `oauth_applications` (
+  `user` int(11) NOT NULL COMMENT 'Identifier of Jorani user',
+  `client_id` varchar(80) NOT NULL COMMENT 'Identifier of an application using OAuth2',
+  KEY `user` (`user`),
+  KEY `client_id` (`client_id`)
+) COMMENT='List of allowed OAuth2 applications';
+
+--
 -- Structure of table `ci_sessions`
 --
 CREATE TABLE IF NOT EXISTS `ci_sessions` (
-        `id` varchar(128) NOT NULL,
-        `ip_address` varchar(45) NOT NULL,
-        `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
-        `data` blob NOT NULL,
-        KEY `ci_sessions_timestamp` (`timestamp`)
-);
+    `id` varchar(128) NOT NULL,
+    `ip_address` varchar(45) NOT NULL,
+    `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
+    `data` blob NOT NULL,
+    KEY `ci_sessions_timestamp` (`timestamp`)
+) COMMENT='CodeIgniter sessions';
+
+--
+-- Structure of table `org_lists`
+--
+CREATE TABLE IF NOT EXISTS `org_lists` (
+    `id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of a list',
+    `user` INT NOT NULL COMMENT ' Identifier of Jorani user owning the list',
+    `name` VARCHAR(512) NOT NULL,
+PRIMARY KEY (`id`),
+INDEX `org_lists_user` (`user`)
+) COMMENT = 'Custom lists of employees are an alternative to organization';
+
+--
+-- Structure of table `org_lists_employees`
+--
+CREATE TABLE IF NOT EXISTS `org_lists_employees` (
+    `list` INT NOT NULL COMMENT 'Id of the list',
+    `user` INT NOT NULL COMMENT 'id of an employee',
+    `orderlist` INT NOT NULL COMMENT 'order in the list',
+INDEX `org_list_id` (`list`)
+) COMMENT = 'Children table of org_lists (custom list of employees)';
+
+--
+-- Structure of table `parameters`
+--
+CREATE TABLE IF NOT EXISTS `parameters` (
+`name` VARCHAR(32) NOT NULL,
+`scope` INT NOT NULL COMMENT 'Either global(0) or user(1) scope',
+`value` TEXT NOT NULL COMMENT 'PHP/serialize value',
+INDEX `param_name` (`name`, `scope`)
+) COMMENT = 'Application parameters';
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

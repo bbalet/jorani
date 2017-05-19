@@ -43,7 +43,7 @@ if ($configFileExists) {
     include $pathConfigFile;
     //Try to connect to database
     try {
-        $dbConn = new PDO($db[$active_group]['hostname'], $db[$active_group]['username'], $db[$active_group]['password']);
+        $dbConn = new PDO($db[$active_group]['dsn'], $db[$active_group]['username'], $db[$active_group]['password']);
     } catch(PDOException $ex) {
         $dbConnError = TRUE;
         array_push($dbErrorMessages, $ex->getMessage());
@@ -193,7 +193,7 @@ if ($configFileExists) {
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;pdo_mysql is LOADED</td>
                       <?php } else { ?>
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;PDO/mysql IS NOT LOADED.</td>
-                      <?php } ?><td>mysqli is the recommended database driver.</td></tr>
+                      <?php } ?><td>PDO/mysql is the recommended database driver.</td></tr>
                       
                       <?php if (extension_loaded('Zend OPcache')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;OPcache is LOADED</td>

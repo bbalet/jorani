@@ -80,6 +80,10 @@ class Connection extends CI_Controller {
         if ($this->config->item('saml_enabled') === TRUE) {
             redirect('api/sso');
         }
+        //If we are already connected (login bookmarked), then redirect to home
+        if ($this->session->userdata('logged_in') === TRUE) {
+            redirect('home');
+        }
         
         $data['title'] = lang('session_login_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_login');

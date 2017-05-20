@@ -308,13 +308,13 @@ $route['mobile/notifications'] = 'mobile/notifications';
 $route['mobile/leaves/(:num)'] = 'mobile/leaves/$1';
 
 //_______________________________________________
-//Default controllers
-$route['default_controller'] = 'leaves';
-$route['notfound'] = 'pages/notfound';
-$route['(:any)'] = 'pages/view/$1';
-
-//_______________________________________________
 //Authorization endpoint
 $route['api/authorization/authorize'] = 'authorization/authorize';
 $route['api/authorization/login'] = 'authorization/login';
 $route['api/authorization/userinfo'] = 'authorization/userinfo';
+
+//_______________________________________________
+//Default controllers
+$route['default_controller'] = 'leaves';
+$route['notfound'] = 'pages/notfound';
+$route['(:any)'] = 'pages/view/$1';

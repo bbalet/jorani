@@ -38,7 +38,7 @@ server {
 #                   application/vnd.wap.xhtml+xml;
 
 	# If file is an asset, set expires and break
-    	location ~* \.(ico|css|js|gif|jpe?g|png)(\?[0-9]+)?$ {
+    	location ~* \.(ico|css|js|gif|jpe?g|png|otf|eot|svg|ttf|woff|woff2)(\?[0-9]+)?$ {
         	expires max;
         	break;
     	}

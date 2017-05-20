@@ -16,7 +16,7 @@
 */
 $config['base_url']	= '';
 
-if (($config['base_url'] == '') && (ENVIRONMENT == 'development')) {
+if (($config['base_url'] == '')) {
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
     $root = $protocol . $_SERVER['HTTP_HOST'];
     $root .= dirname($_SERVER['SCRIPT_NAME']);
@@ -33,7 +33,7 @@ if (($config['base_url'] == '') && (ENVIRONMENT == 'development')) {
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

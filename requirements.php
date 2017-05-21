@@ -182,7 +182,13 @@ if ($configFileExists) {
                       <?php } else { ?>
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;<code>mb_strimwidth</code> function doesn't exist</td>
                       <?php } ?><td>PHP must be compiled with <a href="http://php.net/manual/en/mbstring.installation.php" target="_blank">multibyte string support<a>.</td></tr>
-                       
+
+                      <?php if (is_writable(dirname('application/logs/'))) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;Jorani can write into logs folder</td>
+                      <?php } else { ?>
+                      <tr><td><i class="icon-exclamation-sign"></i>&nbsp;Jorani can't write into logs folder</td>
+                      <?php } ?><td>The folder application/logs/ must be writable.</td></tr>
+                      
                       <?php if (is_writable(dirname('local/upload/leaves/'))) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;Jorani can write files</td>
                       <?php } else { ?>

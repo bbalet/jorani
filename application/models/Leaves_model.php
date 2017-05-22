@@ -424,7 +424,7 @@ class Leaves_model extends CI_Model {
         $newId = $this->db->insert_id();
         
         //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
+        if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
             $this->history_model->setHistory(1, 'leaves', $newId, $this->session->userdata('id'));
         }
@@ -448,7 +448,7 @@ class Leaves_model extends CI_Model {
      */
     public function createRequestForUserList($type, $duration, $startdate, $enddate, $startdatetype, $enddatetype, $cause, $status, $employees) {
         $affectedRows = 0;
-        if ($this->config->item('enable_history') == TRUE) {
+        if ($this->config->item('enable_history') === TRUE) {
             foreach ($employees as $id) {
                 $this->createLeaveByApi($this->input->post('startdate'),
                         $this->input->post('enddate'),
@@ -512,7 +512,7 @@ class Leaves_model extends CI_Model {
         $newId = $this->db->insert_id();
         
         //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
+        if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
             $this->history_model->setHistory(1, 'leaves', $newId, $this->session->userdata('id'));
         }
@@ -539,7 +539,7 @@ class Leaves_model extends CI_Model {
         $this->db->update('leaves', $data);
         
         //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
+        if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
             $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
         }
@@ -559,7 +559,7 @@ class Leaves_model extends CI_Model {
         $affectedRows = $this->db->update('leaves', $data);
         
         //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
+        if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
             $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
         }
@@ -581,7 +581,7 @@ class Leaves_model extends CI_Model {
         $affectedRows = $this->db->update('leaves', $data);
         
         //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
+        if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
             $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
         }
@@ -597,7 +597,7 @@ class Leaves_model extends CI_Model {
      */
     public function deleteLeave($id) {
         //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
+        if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
             $this->history_model->setHistory(3, 'leaves', $id, $this->session->userdata('id'));
         }
@@ -617,7 +617,7 @@ class Leaves_model extends CI_Model {
         $this->db->update('leaves', $data);
         
         //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') == TRUE) {
+        if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
             $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
         }
@@ -630,7 +630,7 @@ class Leaves_model extends CI_Model {
      */
     public function deleteLeavesCascadeUser($employee) {
         //Select the leaves of a users (if history feature is enabled)
-        if ($this->config->item('enable_history') == TRUE) {
+        if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
             $leaves = $this->getLeavesOfEmployee($employee);
             //TODO in fact, should we cascade delete ?

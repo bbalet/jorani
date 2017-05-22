@@ -78,7 +78,7 @@
                     &nbsp;
                 <?php } ?>
                 <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
-                <?php if ($this->config->item('enable_history') == TRUE) { ?>
+                <?php if ($this->config->item('enable_history') === TRUE) { ?>
                 &nbsp;
                 <a href="#" class="show-history" data-id="<?php echo $leaves_item['id'];?>" title="<?php echo lang('leaves_index_thead_tip_history');?>"><i class="icon-time"></i></a>
                 <?php } ?>
@@ -159,9 +159,10 @@
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function() {
+$(document).ready(function() {    
     $('#frmDeleteLeaveRequest').alert();
     
     //Transform the HTML table in a fancy datatable
@@ -206,11 +207,11 @@ $(document).ready(function() {
         $('#frmDeleteLeaveRequest').data('id', id).modal('show');
     });
 
-        //Prevent to load always the same content (refreshed each time)
+    //Prevent to load always the same content (refreshed each time)
     $('#frmDeleteLeaveRequest').on('hidden', function() {
         $(this).removeData('modal');
     });
-    <?php if ($this->config->item('enable_history') == TRUE) { ?>
+    <?php if ($this->config->item('enable_history') === TRUE) { ?>
     $('#frmShowHistory').on('hidden', function() {
         $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
     });
@@ -218,7 +219,15 @@ $(document).ready(function() {
     //Popup show history
     $("#leaves tbody").on('click', '.show-history',  function(){
         $("#frmShowHistory").modal('show');
-        $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history');
+        $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history', function(response, status, xhr) {
+            if (xhr.status == 401) {
+                $("#frmShowHistory").modal('hide');
+                bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
+                    //After the login page, we'll be redirected to the current page 
+                   location.reload();
+                });
+            }
+          });
     });
     <?php } ?>
     

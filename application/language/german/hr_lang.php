@@ -85,6 +85,7 @@ $lang['hr_leaves_popup_delete_message'] = 'Sie sind dabei eine Urlaubsanfrage zu
 $lang['hr_leaves_popup_delete_question'] = 'Möchten Sie fortfahren?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Ja';
 $lang['hr_leaves_popup_delete_button_no'] = 'Nein';
+$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
 
 $lang['hr_export_leaves_title'] = 'Liste der Urlaubsanfragen';
 $lang['hr_export_leaves_thead_id'] = 'ID';

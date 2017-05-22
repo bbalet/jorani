@@ -85,6 +85,7 @@ $lang['hr_leaves_popup_delete_message'] = 'Вы собираетесь удал�
 $lang['hr_leaves_popup_delete_question'] = 'Продолжить?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Да';
 $lang['hr_leaves_popup_delete_button_no'] = 'Нет';
+$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
 
 $lang['hr_export_leaves_title'] = 'Список запрошенных отпусков';
 $lang['hr_export_leaves_thead_id'] = 'ID';

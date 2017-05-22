@@ -85,6 +85,7 @@ $lang['hr_leaves_popup_delete_message'] = 'U staat op het punt om een afwezighei
 $lang['hr_leaves_popup_delete_question'] = 'Wilt u verder gaan?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Ja';
 $lang['hr_leaves_popup_delete_button_no'] = 'Nee';
+$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
 
 $lang['hr_export_leaves_title'] = 'Overzicht van aangevraagde afwezigheid';
 $lang['hr_export_leaves_thead_id'] = 'ID';

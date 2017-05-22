@@ -47,7 +47,7 @@
                 <a href="#" class="lnkAccept" data-id="<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
                 &nbsp;
                 <a href="#" class="lnkReject" data-id="<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
-                <?php if ($this->config->item('enable_history') == TRUE) { ?>
+                <?php if ($this->config->item('enable_history') === TRUE) { ?>
                 &nbsp;
                 <a href="#" class="show-history" data-id="<?php echo $requests_item['leave_id'];?>" title="<?php echo lang('requests_index_thead_tip_history');?>"><i class="icon-time"></i></a>
                 <?php } ?>
@@ -164,7 +164,7 @@ $(document).ready(function() {
         }
      });
      
-    <?php if ($this->config->item('enable_history') == TRUE) { ?>
+    <?php if ($this->config->item('enable_history') === TRUE) { ?>
     //Prevent to load always the same content (refreshed each time)
     $('#frmShowHistory').on('hidden', function() {
         $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');

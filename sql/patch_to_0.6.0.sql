@@ -140,3 +140,20 @@ END$$
 DELIMITER ;
 CALL sp_add_comments_leave_request();
 DROP PROCEDURE sp_add_comments_leave_request;
+
+-- Adding a field comment has an impact on leave history
+DELIMITER $$
+CREATE PROCEDURE sp_add_comments_leave_history()
+    SQL SECURITY INVOKER
+BEGIN
+    IF NOT EXISTS (
+        SELECT NULL
+        FROM information_schema.columns
+        WHERE table_schema = DATABASE() AND table_name = 'leaves_history' AND column_name = 'comments'
+    ) THEN
+        ALTER TABLE `leaves_history` ADD `comments` TEXT NULL DEFAULT NULL COMMENT 'Comments on leave request' AFTER `type`;
+    END IF;
+END$$
+DELIMITER ;
+CALL sp_add_comments_leave_history();
+DROP PROCEDURE sp_add_comments_leave_history;

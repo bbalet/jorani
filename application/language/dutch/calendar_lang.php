@@ -43,7 +43,6 @@ $lang['calendar_tabular_field_select_entity'] = 'Selecteer entiteit';
 $lang['calendar_tabular_field_month'] = 'Maand';
 $lang['calendar_tabular_field_year'] = 'Jaar';
 $lang['calendar_tabular_button_select_entity'] = 'Selecteer';
-$lang['calendar_tabular_button_execute'] = 'Uitvoeren';
 $lang['calendar_tabular_button_export'] = 'Exporteren';
 $lang['calendar_tabular_check_include_subdept'] = 'Includeer onderliggende entiteiten';
 $lang['calendar_tabular_popup_entity_title'] = 'Selecteer een entiteit';

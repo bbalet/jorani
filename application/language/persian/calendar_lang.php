@@ -40,7 +40,6 @@ $lang['calendar_tabular_field_select_entity'] = 'واحد را انتخاب کن
 $lang['calendar_tabular_field_month'] = 'ماه';
 $lang['calendar_tabular_field_year'] = 'سال';
 $lang['calendar_tabular_button_select_entity'] = 'انتخاب';
-$lang['calendar_tabular_button_execute'] = 'اجرا';
 $lang['calendar_tabular_button_export'] = 'صدور';
 $lang['calendar_tabular_check_include_subdept'] = 'شمولیت دپارتمان فرعی';
 $lang['calendar_tabular_popup_entity_title'] = 'انتخاب یک واحد';

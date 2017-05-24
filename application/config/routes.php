@@ -152,6 +152,7 @@ $route['calendar/organization'] = 'calendar/organization';
 $route['calendar/department'] = 'calendar/department';
 $route['calendar/tabular'] = 'calendar/tabular';
 $route['calendar/tabular/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabular/$1/$2/$3/$4';
+$route['calendar/tabular/partial/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabularPartial/$1/$2/$3/$4';
 $route['calendar/tabular/export/(:num)/(:num)/(:num)/(:any)'] = 'calendar/exportTabular/$1/$2/$3/$4';
 $route['calendar/year/(:num)/(:num)'] = 'calendar/year/$1/$2';
 $route['calendar/year/(:num)'] = 'calendar/year/$1';

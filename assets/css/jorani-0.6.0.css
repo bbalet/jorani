@@ -66,7 +66,7 @@ html, body {
   color: white;
 }
 
-/*Button*/
+/*Buttons*/
 .btn {
   border-radius: 1;
   border-color: black;
@@ -463,11 +463,50 @@ background: linear-gradient(135deg, #ff0000 50%,#468847 50%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#468847',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-/*Current Day*/
+/* Calendar/Tabular Current Day */
 td.currentday-bg {
     background-color: #FCF8E3;
 }
 td.currentday-border {
     border-left: 1px dashed #666;
     border-right: 1px dashed #666;
+}
+
+/*Styles for HR/Contracts/Calendar*/
+.currentDay {
+background:#FFC;
+color:red;
+}
+.days:hover {
+background:#999;
+border-color:#000;
+cursor:pointer;
+}
+.day6 {
+background:#ECECFF;
+}
+.day7 {
+background:#ECECFF;
+}
+.monthName {
+text-align:left;
+vertical-align:middle;
+}
+.monthName div {
+padding-left:10px;
+}
+
+/*Selectize control is vertically aligned*/
+.selectize-control {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/*Apply Jorani'style to datepicker'*/
+.datepicker table tr td span.active.active {
+    border-radius: 1 !important;
+    border-color: black !important;
+    background: #3097d1 !important;
+    border-color: #3097d1 !important;
+    color: white !important;
 }

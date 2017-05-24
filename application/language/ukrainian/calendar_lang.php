@@ -43,7 +43,6 @@ $lang['calendar_tabular_field_select_entity'] = 'Оберіть відділ';
 $lang['calendar_tabular_field_month'] = 'Місяць';
 $lang['calendar_tabular_field_year'] = 'Рік';
 $lang['calendar_tabular_button_select_entity'] = 'Вибрати';
-$lang['calendar_tabular_button_execute'] = 'Виконати';
 $lang['calendar_tabular_button_export'] = 'Експортувати';
 $lang['calendar_tabular_check_include_subdept'] = 'Включаючи підвідділи';
 $lang['calendar_tabular_popup_entity_title'] = 'Оберіть відділ';

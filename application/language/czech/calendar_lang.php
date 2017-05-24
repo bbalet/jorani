@@ -43,7 +43,6 @@ $lang['calendar_tabular_field_select_entity'] = 'Vyberte organizační jednotku'
 $lang['calendar_tabular_field_month'] = 'Měsíc';
 $lang['calendar_tabular_field_year'] = 'Rok';
 $lang['calendar_tabular_button_select_entity'] = 'Vybrat';
-$lang['calendar_tabular_button_execute'] = 'Spustit';
 $lang['calendar_tabular_button_export'] = 'Export';
 $lang['calendar_tabular_check_include_subdept'] = 'Zahrnout podřízená oddělení';
 $lang['calendar_tabular_popup_entity_title'] = 'Vyberte organizační jednotku';

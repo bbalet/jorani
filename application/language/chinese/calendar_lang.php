@@ -42,7 +42,6 @@ $lang['calendar_tabular_field_select_entity'] = '選擇部門';
 $lang['calendar_tabular_field_month'] = '月';
 $lang['calendar_tabular_field_year'] = '年';
 $lang['calendar_tabular_button_select_entity'] = '選擇';
-$lang['calendar_tabular_button_execute'] = '實施';
 $lang['calendar_tabular_button_export'] = '匯出';
 $lang['calendar_tabular_check_include_subdept'] = '包含分部門';
 $lang['calendar_tabular_popup_entity_title'] = '選擇部門';

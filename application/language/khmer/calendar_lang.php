@@ -42,7 +42,6 @@ $lang['calendar_tabular_field_select_entity'] = 'ជ្រើសរើសអង�
 $lang['calendar_tabular_field_month'] = 'ខែ';
 $lang['calendar_tabular_field_year'] = 'ឆ្នាំ';
 $lang['calendar_tabular_button_select_entity'] = 'ជ្រើសរើស';
-$lang['calendar_tabular_button_execute'] = 'ប្រតិបត្តិ';
 $lang['calendar_tabular_button_export'] = 'នាំចេញ';
 $lang['calendar_tabular_check_include_subdept'] = 'រួមបញ្ចូលអនុផ្នែក';
 $lang['calendar_tabular_popup_entity_title'] = 'ជ្រើសរើសអង្គភាព';

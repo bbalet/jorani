@@ -256,10 +256,13 @@ class Calendar extends CI_Controller {
             $data['entity'] = $id;
             $data['month'] = $month;
             $data['year'] = $year;
+            $dateObj = DateTime::createFromFormat('!m', $month);
+            $data['monthName'] = lang($dateObj->format('F'));
             $data['children'] = $children;
             $data['department'] = $this->organization_model->getName($id);
             $data['title'] = lang('calendar_tabular_title');
             $data['help'] = '';
+            $data['tabularPartialView'] = $this->load->view('calendar/tabular_partial', $data, TRUE);
             $this->load->view('templates/header', $data);
             $this->load->view('calendar/tabular', $data);
             $this->load->view('templates/footer_simple');
@@ -276,14 +279,57 @@ class Calendar extends CI_Controller {
             $data['entity'] = $id;
             $data['month'] = $month;
             $data['year'] = $year;
+            $dateObj = DateTime::createFromFormat('!m', $month);
+            $data['monthName'] = lang($dateObj->format('F'));
             $data['children'] = $children;
             $data['department'] = $this->organization_model->getName($id);
             $data['title'] = lang('calendar_tabular_title');
             $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_tabular');
+            $data['tabularPartialView'] = $this->load->view('calendar/tabular_partial', $data, TRUE);
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('calendar/tabular', $data);
             $this->load->view('templates/footer');
+        }
+    }
+    
+    /**
+     * Display a partial tabular widget. Used to reload only a part of the page.
+     * @param int $id identifier of the entity
+     * @param int $month Month number
+     * @param int $year Year number
+     * @param bool $children If TRUE, includes children entity, FALSE otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function tabularPartial($id=-1, $month=0, $year=0, $children=TRUE) {
+        if (($this->config->item('public_calendar') === TRUE) && (!$this->session->userdata('logged_in'))) {
+            $this->load->library('polyglot');
+            $data['mode'] = 'public';
+            $data['language'] = $this->config->item('language');
+            $data['language_code'] =  $this->polyglot->language2code($data['language']);
+            $this->lang->load('global', $data['language']);
+            $this->lang->load('calendar', $data['language']);
+            $this->load->model('leaves_model');
+            $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);
+            $data['entity'] = $id;
+            $data['month'] = $month;
+            $data['year'] = $year;
+            $data['children'] = $children;
+            $this->load->view('calendar/tabular_partial', $data);
+        } else {
+            setUserContext($this);
+            $this->lang->load('global', $this->language);
+            $this->lang->load('calendar', $this->language);
+            $this->auth->checkIfOperationIsAllowed('organization_calendar');
+            $data = getUserContext($this);
+            $this->load->model('leaves_model');
+            $data['mode'] = 'connected';
+            $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);
+            $data['entity'] = $id;
+            $data['month'] = $month;
+            $data['year'] = $year;
+            $data['children'] = $children;
+            $this->load->view('calendar/tabular_partial', $data);
         }
     }
     

@@ -44,7 +44,6 @@ $lang['calendar_tabular_field_select_entity'] = 'Einheit auswählen';
 $lang['calendar_tabular_field_month'] = 'Monat';
 $lang['calendar_tabular_field_year'] = 'Jahr';
 $lang['calendar_tabular_button_select_entity'] = 'Auswahl';
-$lang['calendar_tabular_button_execute'] = 'Ausführen';
 $lang['calendar_tabular_button_export'] = 'Export';
 $lang['calendar_tabular_check_include_subdept'] = 'Unterabteilungen inkludieren';
 $lang['calendar_tabular_popup_entity_title'] = 'Einheit auswählen';

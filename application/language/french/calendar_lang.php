@@ -42,7 +42,6 @@ $lang['calendar_tabular_field_select_entity'] = 'Choisir l\'entité';
 $lang['calendar_tabular_field_month'] = 'Mois';
 $lang['calendar_tabular_field_year'] = 'Année';
 $lang['calendar_tabular_button_select_entity'] = 'Choisir';
-$lang['calendar_tabular_button_execute'] = 'Exécuter';
 $lang['calendar_tabular_button_export'] = 'Exporter';
 $lang['calendar_tabular_check_include_subdept'] = 'Inclure les sous-entités';
 $lang['calendar_tabular_popup_entity_title'] = 'Choisir l\'entité';

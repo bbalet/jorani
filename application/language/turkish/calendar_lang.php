@@ -43,7 +43,6 @@ $lang['calendar_tabular_field_select_entity'] = 'Takımı seç';
 $lang['calendar_tabular_field_month'] = 'Ay';
 $lang['calendar_tabular_field_year'] = 'Yıl';
 $lang['calendar_tabular_button_select_entity'] = 'Seç';
-$lang['calendar_tabular_button_execute'] = 'Uygula';
 $lang['calendar_tabular_button_export'] = 'Dışa aktar';
 $lang['calendar_tabular_check_include_subdept'] = 'Alt departmanlar ekle';
 $lang['calendar_tabular_popup_entity_title'] = 'Bir takım seç';

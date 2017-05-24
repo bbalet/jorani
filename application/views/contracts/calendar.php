@@ -11,36 +11,6 @@ $dDaysOnPage = 37;
 $dDay = 1;
 ?>
 
-<style type="text/css" media="all">
-.currentDay {
-background:#FFC;
-color:red;
-}
-.days:hover {
-background:#999;
-border-color:#000;
-cursor:pointer;
-}
-.day6 {
-background:#ECECFF;
-}
-.day7 {
-background:#ECECFF;
-}
-.monthName {
-text-align:left;
-vertical-align:middle;
-}
-.monthName div {
-padding-left:10px;
-}
-
-.selectize-control {
-    display: inline-block;
-    vertical-align: middle;
-}
-</style>
-
 <h2><?php echo lang('contract_calendar_title');?> <span class="muted"><?php echo $contract_name; ?></span>&nbsp;<?php echo $help;?></h2>
 
 <?php echo $flash_partial_view;?>

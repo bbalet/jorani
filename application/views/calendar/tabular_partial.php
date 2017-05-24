@@ -10,7 +10,9 @@
  */
 ?>
 
-<?php if (count($tabular) > 0) {?>
+<?php 
+$enableAcronyms = FALSE;
+if (count($tabular) > 0) {?>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -153,6 +155,7 @@
             if ($class == "error"){
                 echo '<td><img src="'.  base_url() .'assets/images/date_error.png"></td>';
             } else {
+                $acronym = "";
                 $dayType = "";
                 if ($mode == 'public') {    //In public access, nobody is connected
                     $dayType = "";
@@ -163,12 +166,51 @@
                             ($employee->manager == $user_id) || 
                             ($employee->id == $user_id)) {
                         $dayType = $day->type;
+                        $acronym = $day->acronym;
                     }
                 }
+                //Option to disable acronym (passed by URL)
+                if (!$enableAcronyms) {
+                    $acronym = "";
+                }
+                
                 if ($overlapping) {
                     echo '<td title="' . $dayType . '" class="' . $class . '"><img src="' . base_url() . 'assets/images/date_error.png"></td>';
                 } else {
-                    echo '<td title="' . $dayType . '" class="' . $class . '">&nbsp;</td>';
+                    //Acronyms of types
+                    if ($acronym != "") {
+                        $acronyms = explode(";", $acronym);
+                        //echo var_dump(count($acronyms));
+                        //echo var_dump($class);
+                        if (count($acronyms) == 1) {
+                            //One leave request
+                            if (substr($class, 0, 2) == "am") {
+                                //Diagonal top left
+                                echo '<td title="' . $dayType . '" style="padding:1px; font-size: 0.7em;" class="' . $class . '">' . $acronym . '</td>';
+                            } elseif((substr($class, 0, 2) == "pm")) {
+                                //Diagonal bottom right
+                                echo '<td title="' . $dayType . '" style="vertical-align: bottom; text-align: right; padding:1px; font-size: 0.7em;" class="' . $class . '">' . $acronym . '</td>';
+                            } else {
+                                echo '<td title="' . $dayType . '" class="' . $class . '">' . $acronym . '</td>';
+                            }
+                        } else {
+                            echo '<td class="' . $class . '" style="font-size: 0.7em;">';
+                            echo '<span title="' . $dayType . '" class="pull-left">' . $acronyms[0] . '</span>';
+                            echo '<span title="' . $dayType . '" class="pull-right" >' . $acronyms[1] . '</span>';
+                            echo '</td>';
+
+//                            echo PHP_EOL . '<td style="padding:0px; border:0px;">';
+//                            echo PHP_EOL . '<table style="padding:0px; border:0px;">';
+//                            echo PHP_EOL . '<tr class="' . $class . '">';
+//                            echo PHP_EOL . '<td title="' . $dayType . '" >' . $acronyms[0] . '</td>';
+//                            echo PHP_EOL . '<td title="' . $dayType . '" >' . $acronyms[1] . '</td>';
+//                            echo PHP_EOL . '</tr>';
+//                            echo PHP_EOL . '</table>';
+//                            echo PHP_EOL . '</td>';
+                        }
+                    } else {
+                        echo '<td title="' . $dayType . '" class="' . $class . '">&nbsp;</td>';
+                    }
                 }
             }
             ?>

@@ -1165,6 +1165,7 @@ class Leaves_model extends CI_Model {
         for ($ii = 1; $ii <= $lastDay; $ii++) {
             $day = new stdClass;
             $day->type = '';
+            $day->acronym = '';
             $day->status = '';
             $day->display = 0; //working day
             $user->days[$ii] = $day;
@@ -1181,7 +1182,7 @@ class Leaves_model extends CI_Model {
         }
         
         //Build the complex query for all leaves
-        $this->db->select('leaves.*, types.name as type');
+        $this->db->select('leaves.*, types.acronym, types.name as type');
         $this->db->from('leaves');
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('(leaves.startdate <= DATE(' . $this->db->escape($end) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))');
@@ -1254,15 +1255,18 @@ class Leaves_model extends CI_Model {
                             $user->days[$dayNum]->type .= ';' . $entry->type;
                             $user->days[$dayNum]->display .= ';' . $display;
                             $user->days[$dayNum]->status .= ';' . $entry->status;
+                            $user->days[$dayNum]->acronym .= ';' . $entry->acronym;
                         } else {
                             $user->days[$dayNum]->type = $entry->type . ';' . $user->days[$dayNum]->type;
                             $user->days[$dayNum]->display = $display . ';' . $user->days[$dayNum]->display;
                             $user->days[$dayNum]->status = $entry->status . ';' . $user->days[$dayNum]->status;
+                            $user->days[$dayNum]->acronym .= ';' . $entry->acronym;
                         }
                     } else  {   //All day entry
                         $user->days[$dayNum]->type = $entry->type;
                         $user->days[$dayNum]->display = $display;
                         $user->days[$dayNum]->status = $entry->status;
+                        $user->days[$dayNum]->acronym = $entry->acronym;
                     }
                 }
                 $iDate->modify('+1 day');   //Next day

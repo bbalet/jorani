@@ -13,9 +13,9 @@ $lang['menu_banner_welcome'] = 'Willkommen';
 $lang['menu_banner_logout'] = 'Abmelden';
 $lang['menu_banner_tip_myprofile'] = 'Meine Informationen anzeigen';
 $lang['menu_banner_tip_reset'] = 'Passwort zurücksetzen';
-
 $lang['menu_password_popup_title'] = 'Passwort ändern';
 $lang['menu_password_popup_button_cancel'] = 'Abbrechen';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = 'Admin';
 $lang['menu_admin_list_users'] = 'Liste der User';

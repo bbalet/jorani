@@ -14,6 +14,7 @@ $lang['menu_banner_tip_myprofile'] = 'Voir mes informations personelles';
 $lang['menu_banner_tip_reset'] = 'Changer le mot de passe';
 $lang['menu_password_popup_title'] = 'Changer le mot de passe';
 $lang['menu_password_popup_button_cancel'] = 'Annuler';
+$lang['menu_leaves_request_button'] = 'Nouvelle demande';
 
 $lang['menu_admin_title'] = 'Admin';
 $lang['menu_admin_list_users'] = 'Liste des utilisateurs';

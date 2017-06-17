@@ -149,21 +149,27 @@ $this->lang->load('menu', $language);?>
                       <?php } ?>
                   </ul>
                 </li>
+                
+                <li>
+                    <form class="navbar-form pull-left">
+                        <a class="btn btn-warning" href="<?php echo base_url();?>leaves/create"><?php echo lang('menu_leaves_request_button');?></a>
+                    </form>
+                </li>
               </ul>
 
-                <ul class="nav pull-right">
-                    <a href="<?php echo base_url();?>users/myprofile" class="brand"><?php echo $fullname;?></a>
-                    <li><a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user icon-white"></i></a></li>
-                    <?php if ($this->config->item('ldap_enabled') === FALSE && $this->config->item('saml_enabled') === FALSE) { ?>
-                    <li><a href="#" id="cmdChangePassword" title="<?php echo lang('menu_banner_tip_reset');?>"><i class="icon-lock icon-white"></i></a></li>
-                    <?php }
-                    $urlLogout = 'session/logout';
-                    if ($this->config->item('saml_enabled') === TRUE){
-                        $urlLogout = 'api/slo';
-                    } ?>
-                    <li><a href="<?php echo base_url() . $urlLogout;?>" title="<?php echo lang('menu_banner_logout');?>"><i class="icon-off icon-white"></i></a></li>
-                </ul>
-            </div>
+            <ul class="nav pull-right">
+                <a href="<?php echo base_url();?>users/myprofile" class="brand"><?php echo $fullname;?></a>
+                <li><a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user icon-white"></i></a></li>
+                <?php if ($this->config->item('ldap_enabled') === FALSE && $this->config->item('saml_enabled') === FALSE) { ?>
+                <li><a href="#" id="cmdChangePassword" title="<?php echo lang('menu_banner_tip_reset');?>"><i class="icon-lock icon-white"></i></a></li>
+                <?php }
+                $urlLogout = 'session/logout';
+                if ($this->config->item('saml_enabled') === TRUE){
+                    $urlLogout = 'api/slo';
+                } ?>
+                <li><a href="<?php echo base_url() . $urlLogout;?>" title="<?php echo lang('menu_banner_logout');?>"><i class="icon-off icon-white"></i></a></li>
+            </ul>
+        </div>
       </div>
     </div><!-- /.navbar -->
 

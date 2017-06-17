@@ -13,9 +13,9 @@ $lang['menu_banner_welcome'] = 'Hoş geldiniz';
 $lang['menu_banner_logout'] = 'Oturumu kapat';
 $lang['menu_banner_tip_myprofile'] = 'Kişisel bilgilerimi görüntüle';
 $lang['menu_banner_tip_reset'] = 'şifreyi sıfırla';
-
 $lang['menu_password_popup_title'] = 'Şifreyi değiştir';
 $lang['menu_password_popup_button_cancel'] = 'İptal';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = 'Admin';
 $lang['menu_admin_list_users'] = 'Kullanıcı listesi';

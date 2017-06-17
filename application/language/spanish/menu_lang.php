@@ -11,12 +11,11 @@
 $lang['menu_banner_change_password'] = 'Modificar la contraseña';
 $lang['menu_banner_welcome'] = 'Bienvenido';
 $lang['menu_banner_logout'] = 'Cerrar sesión';
-
 $lang['menu_banner_tip_myprofile'] = 'Ver mi información personal';
 $lang['menu_banner_tip_reset'] = 'restablecer contraseña';
-
 $lang['menu_password_popup_title'] = 'Modificar la contraseña';
 $lang['menu_password_popup_button_cancel'] = 'Cancelar';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = 'Administración';
 $lang['menu_admin_list_users'] = 'Lista de usarios';

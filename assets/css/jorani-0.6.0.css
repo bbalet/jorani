@@ -74,6 +74,7 @@ html, body {
 .btn:focus, .btn:active:focus, .btn.active:focus {
     outline: 0 none;
 }
+
 .btn-primary {
     background: #3097d1;
     border-color: #3097d1;
@@ -86,6 +87,7 @@ html, body {
     background: #3097d1;
     box-shadow: none;
 }
+
 .btn-danger {
     background: #bd362f;
     border-color: #bd362f;
@@ -98,6 +100,7 @@ html, body {
     background: #bd362f;
     box-shadow: none;
 }
+
 .btn-info {
     background: #49afcd;
     border-color: #49afcd;
@@ -108,6 +111,19 @@ html, body {
 }
 .btn-info:active, .btn-info.active {
     background: #49afcd;
+    box-shadow: none;
+}
+
+.btn-warning {
+    background: #f5811e;
+    border-color: #f5811e;
+    color: white;
+}
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open > .dropdown-toggle.btn-warning {
+    background: #f5811e;
+}
+.btn-warning:active, .btn-warning.active {
+    background: #f5811e;
     box-shadow: none;
 }
 

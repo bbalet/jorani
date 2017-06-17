@@ -13,9 +13,9 @@ $lang['menu_banner_welcome'] = 'Welkom';
 $lang['menu_banner_logout'] = 'Uitloggen';
 $lang['menu_banner_tip_myprofile'] = 'Bekijk persoonlijke informatie';
 $lang['menu_banner_tip_reset'] = 'Reset wachtwoord';
-
 $lang['menu_password_popup_title'] = 'Nieuw wachtwoord';
 $lang['menu_password_popup_button_cancel'] = 'Annuleren';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = 'Admin';
 $lang['menu_admin_list_users'] = 'Lijst gebruikers';

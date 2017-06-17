@@ -70,6 +70,19 @@ function getUserContext(CI_Controller $controller)
 }
 
 /**
+ * Check if user is connected, redirect to login form otherwise
+ * Set the user context by retrieving infos from session
+ * and load these data into the array passed to the view
+ * @see setUserContext and getUserContext
+ * @author Benjamin BALET <benjamin.balet@gmail.com>
+ */
+function getCIUserContext() {
+    $controller = & get_instance();
+    setUserContext($controller);
+    return getUserContext($controller);
+}
+
+/**
  * Sanitizes an input (GET/POST) coming from outside a form (eg Ajax request)
  * @param string $value value to be cleansed from characters that prevent Jorani to work
  * @return string value where problematic characters have been removed

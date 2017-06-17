@@ -14,11 +14,12 @@
     <div class="span4">
         <label for="txtEntity">
             <?php echo lang('calendar_organization_field_select_entity');?>
-            &nbsp;(<input type="checkbox" value="" id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>)
+            &nbsp;(<input type="checkbox" checked id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>)
         </label>
         <div class="input-append">
             <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
-            <button id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('calendar_tabular_button_select_entity');?></button>
+            <button id="cmdSelectEntity" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_entity');?>"><i class="fa fa-sitemap" aria-hidden="true"></i></button>
+            <!--<button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>//-->
         </div>
     </div>
     <div class="span4">
@@ -26,9 +27,9 @@
         <?php echo lang('calendar_tabular_field_month');?> / <?php echo lang('calendar_tabular_field_year');?>
         </label>
         <div class="input-prepend input-append">
-            <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
-            <input type="text" id="txtMonthYear" name="txtMonthYear" value="<?php echo $monthName . ' ' . $year;?>" class="input-medium" readonly />
-            <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
+            <button id="cmdPrevious" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_previous');?>"><i class="icon-chevron-left icon-white"></i></button>
+            <input type="text" style="cursor:pointer;" id="txtMonthYear" name="txtMonthYear" value="<?php echo $monthName . ' ' . $year;?>" class="input-medium" readonly />
+            <button id="cmdNext" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_next');?>"><i class="icon-chevron-right icon-white"></i></button>
         </div>
     </div>
     <div class="span4">
@@ -65,7 +66,10 @@
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/css/bootstrap-datepicker.min.css">
 <script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/js/bootstrap-datepicker.min.js"></script>
+<?php if ($language_code != 'en') {?>
 <script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
+<?php }?>
+
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
@@ -75,9 +79,10 @@
     var entity = -1; //Id of the selected entity
     var text; //Label of the selected entity
     var entity = <?php echo $entity;?>;
-    var month = <?php echo $month;?>;
+    var month = (<?php echo $month;?> - 1); //Monent.js uses 0 based numbers!
     var year = <?php echo $year;?>;
     var children = '<?php echo $children;?>';
+    var currentDate = moment().year(year).month(month).date(1);
     
     // After selection of an entity from the modal dialog, refresh the partial
     // view if the entity is diferent
@@ -105,7 +110,8 @@
     function reloadTabularView() {
         children = includeChildren();
         $("#spnTabularView").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
-        $("#spnTabularView").load('<?php echo base_url();?>calendar/tabular/partial/' + entity + '/' + month+ '/' + year+ '/' + children, function(response, status, xhr) {
+        //Month number needs to be converted between monment.js and PHP
+        $("#spnTabularView").load('<?php echo base_url();?>calendar/tabular/partial/' + entity + '/' + (month + 1) + '/' + year+ '/' + children, function(response, status, xhr) {
             if (xhr.status == 401) {
                 $("#frmShowHistory").modal('hide');
                 bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
@@ -146,6 +152,7 @@
             month = new Date(e.date).getMonth();
             //Doesn't work : year = new Date(e.date).getYear();
             year = parseInt(String(e.date).split(" ")[3]);
+            currentDate = moment().year(year).month(month).date(1);
             reloadTabularView();
         });
         
@@ -166,14 +173,12 @@
         
         //Previous/Next
         $('#cmdPrevious').click(function() {
-            currentDate = moment().date(1).month(month).year(year);
             currentDate = currentDate.add(-1, 'M');
             month = currentDate.month();
             year = currentDate.year();
             reloadTabularView();
         });
         $('#cmdNext').click(function() {
-            currentDate = moment().date(1).month(month).year(year);
             currentDate = currentDate.add(1, 'M');
             month = currentDate.month();
             year = currentDate.year();

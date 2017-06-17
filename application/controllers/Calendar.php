@@ -170,6 +170,9 @@ class Calendar extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function organization() {
+        $month = date('m');
+        //When the user uses the calendar for the first time, select the root entity
+        $this->load->model('organization_model');
         if (($this->config->item('public_calendar') === TRUE) && (!$this->session->userdata('logged_in'))) {
             $this->load->library('polyglot');;
             $data['language'] = $this->config->item('language');
@@ -177,6 +180,11 @@ class Calendar extends CI_Controller {
             $data['title'] = lang('calendar_organization_title');
             $data['help'] = '';
             $data['logged_in'] = FALSE;
+            $data['month'] = $month;
+            $data['year'] = date('Y');
+            $dateObj = DateTime::createFromFormat('!m', $month);
+            $data['monthName'] = lang($dateObj->format('F'));
+            $data['departmentName'] = $this->organization_model->getName(0);
             $this->lang->load('calendar', $data['language']);
             $this->load->view('templates/header', $data);
             $this->load->view('calendar/organization', $data);
@@ -187,8 +195,13 @@ class Calendar extends CI_Controller {
             $this->auth->checkIfOperationIsAllowed('organization_calendar');
             $data = getUserContext($this);
             $data['logged_in'] = TRUE;
+            $data['month'] = $month;
+            $data['year'] = date('Y');
+            $dateObj = DateTime::createFromFormat('!m', $month);
+            $data['monthName'] = lang($dateObj->format('F'));
             $data['title'] = lang('calendar_organization_title');
             $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_organization');
+            $data['departmentName'] = $this->organization_model->getName(0);
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('calendar/organization', $data);

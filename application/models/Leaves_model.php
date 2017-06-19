@@ -852,10 +852,11 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function department($entity_id, $start = "", $end = "", $children = FALSE) {
-        $this->db->select('users.firstname, users.lastname,  leaves.*, types.name as type');
+        $this->db->select('users.firstname, users.lastname, users.manager');
+        $this->db->select('leaves.*, types.name as type');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
-        $this->db->join('leaves', 'leaves.employee  = users.id');
+        $this->db->join('leaves', 'leaves.employee = users.id');
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('(leaves.startdate <= DATE(' . $this->db->escape($end) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))');
         if ($children === TRUE) {
@@ -878,7 +879,7 @@ class Leaves_model extends CI_Model {
         $events = $this->db->get()->result();
         $jsonevents = array();
         foreach ($events as $entry) {
-            
+            //Date of event
             if ($entry->startdatetype == "Morning") {
                 $startdate = $entry->startdate . 'T07:00:00';
             } else {
@@ -890,7 +891,6 @@ class Leaves_model extends CI_Model {
             } else {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
-            
             $imageUrl = '';
             $allDay = FALSE;
             $startdatetype =  $entry->startdatetype;
@@ -903,7 +903,7 @@ class Leaves_model extends CI_Model {
                 $enddatetype = "Afternoon";
                 $allDay = TRUE;
             }
-            
+            //color
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -911,7 +911,16 @@ class Leaves_model extends CI_Model {
                 case 3: $color = '#468847'; break;  // Accepted
                 case 4: $color = '#ff0000'; break;  // Rejected
             }
+            //If the connected user can access to the leave request 
+            //(self, HR admin and manager)
+            $url = '';
+            if (($entry->employee == $this->session->userdata('id')) ||
+                ($entry->manager == $this->session->userdata('id')) ||
+                    ($this->session->userdata('is_hr') === TRUE)) {
+                $url = base_url() . 'leaves/leaves/' . $entry->id;
+            }
             
+            //Create the JSON representation of the event
             $jsonevents[] = array(
                 'id' => $entry->id,
                 'title' => $entry->firstname .' ' . $entry->lastname,
@@ -921,7 +930,8 @@ class Leaves_model extends CI_Model {
                 'allDay' => $allDay,
                 'end' => $enddate,
                 'startdatetype' => $startdatetype,
-                'enddatetype' => $enddatetype
+                'enddatetype' => $enddatetype,
+                'url' => $url
             );
         }
         return json_encode($jsonevents);
@@ -1164,6 +1174,7 @@ class Leaves_model extends CI_Model {
         //Init all day to working day
         for ($ii = 1; $ii <= $lastDay; $ii++) {
             $day = new stdClass;
+            $day->id = 0;
             $day->type = '';
             $day->acronym = '';
             $day->status = '';
@@ -1252,17 +1263,20 @@ class Leaves_model extends CI_Model {
                     if ($user->days[$dayNum]->display != 0) { //Overlapping with a day off or another request
                         if (($user->days[$dayNum]->display == 2) ||
                                 ($user->days[$dayNum]->display == 6)) { //Respect Morning/Afternoon order
+                            $user->days[$dayNum]->id .= ';' . $entry->id;
                             $user->days[$dayNum]->type .= ';' . $entry->type;
                             $user->days[$dayNum]->display .= ';' . $display;
                             $user->days[$dayNum]->status .= ';' . $entry->status;
                             $user->days[$dayNum]->acronym .= ';' . $entry->acronym;
                         } else {
+                            $user->days[$dayNum]->id = $entry->id . ';' . $user->days[$dayNum]->id;
                             $user->days[$dayNum]->type = $entry->type . ';' . $user->days[$dayNum]->type;
                             $user->days[$dayNum]->display = $display . ';' . $user->days[$dayNum]->display;
                             $user->days[$dayNum]->status = $entry->status . ';' . $user->days[$dayNum]->status;
                             $user->days[$dayNum]->acronym .= ';' . $entry->acronym;
                         }
                     } else  {   //All day entry
+                        $user->days[$dayNum]->id = $entry->id;
                         $user->days[$dayNum]->type = $entry->type;
                         $user->days[$dayNum]->display = $display;
                         $user->days[$dayNum]->status = $entry->status;

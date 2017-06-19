@@ -167,6 +167,9 @@ if (count($tabular) > 0) {?>
                             ($employee->id == $user_id)) {
                         $dayType = $day->type;
                         $acronym = $day->acronym;
+                        $clickable = TRUE;
+                    } else {
+                        $clickable = FALSE;
                     }
                 }
                 //Option to disable acronym (passed by URL)
@@ -180,18 +183,32 @@ if (count($tabular) > 0) {?>
                     //Acronyms of types
                     if ($acronym != "") {
                         $acronyms = explode(";", $acronym);
-                        //echo var_dump(count($acronyms));
-                        //echo var_dump($class);
                         if (count($acronyms) == 1) {
                             //One leave request
                             if (substr($class, 0, 2) == "am") {
                                 //Diagonal top left
-                                echo '<td title="' . $dayType . '" style="padding:1px; font-size: 0.7em;" class="' . $class . '">' . $acronym . '</td>';
+                                $clickLink = '';
+                                $style = 'padding:1px; font-size: 0.7em;';
+                                if ($clickable) {
+                                    $clickLink = ' onclick="window.open(\'' . base_url() . '/leaves/leaves/' . $day->id . '\');"';
+                                    $style .= ' cursor: pointer;';
+                                }
+                                echo "<td title='$dayType' style='$style' class='$class' $clickLink>$acronym </td>";
                             } elseif((substr($class, 0, 2) == "pm")) {
                                 //Diagonal bottom right
-                                echo '<td title="' . $dayType . '" style="vertical-align: bottom; text-align: right; padding:1px; font-size: 0.7em;" class="' . $class . '">' . $acronym . '</td>';
+                                $clickLink = '';
+                                $style = 'vertical-align: bottom; text-align: right; padding:1px; font-size: 0.7em;';
+                                if ($clickable) {
+                                    $clickLink = ' onclick="window.open(\'' . base_url() . '/leaves/leaves/' . $day->id . '\');"';
+                                    $style .= ' cursor: pointer;';
+                                }
+                                echo "<td title='$dayType' style='$style' class='$class'>$acronym</td>";
                             } else {
-                                echo '<td title="' . $dayType . '" class="' . $class . '">' . $acronym . '</td>';
+                                $clickLink = '';
+                                if ($clickable) {
+                                    $clickLink = ' onclick="window.open(\'' . base_url() . '/leaves/leaves/' . $day->id . '\');"';
+                                }
+                                echo "<td title='$dayType' class='$class' $clickLink>$acronym</td>";
                             }
                         } else {
                             echo '<td class="' . $class . '" style="font-size: 0.7em;">';
@@ -208,8 +225,21 @@ if (count($tabular) > 0) {?>
 //                            echo PHP_EOL . '</table>';
 //                            echo PHP_EOL . '</td>';
                         }
-                    } else {
-                        echo '<td title="' . $dayType . '" class="' . $class . '">&nbsp;</td>';
+                    } else { // ! Acronyms of types
+                        $clickLink = '';
+                        $style = '';
+                        if ($clickable) {
+                            if ($day->id !== 0) {
+                                $idList = explode(";", $day->id);
+                                $style = ' cursor: pointer;';
+                                $clickLink = ' onclick="';
+                                foreach($idList as $id) {
+                                    $clickLink .= 'window.open(\'' . base_url() . '/leaves/leaves/' . $id . '\');';
+                                }
+                                $clickLink .= '"';
+                            }
+                        }
+                        echo "<td title='$dayType' style='$style' class='$class' $clickLink>&nbsp;</td>";
                     }
                 }
             }

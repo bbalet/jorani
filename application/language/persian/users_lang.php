@@ -126,6 +126,7 @@ $lang['users_employees_thead_id'] = 'شناسه';
 $lang['users_employees_thead_firstname'] = 'نام';
 $lang['users_employees_thead_lastname'] = 'نام خانوادگی';
 $lang['users_employees_thead_email'] = 'ایمیل';
+$lang['users_employees_thead_entity'] = 'Entity';
 
 $lang['users_reset_field_password'] = 'رمز';
 $lang['users_reset_button_reset'] = 'بازنشانی';

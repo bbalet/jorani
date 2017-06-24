@@ -321,4 +321,113 @@ class Organization extends CI_Controller {
             echo json_encode($this->organization_model->setSupervisor($id, $entity));
         }
     }
+    
+    /**
+     * Modal form allowing to create and manage custom lists of employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function listsIndex() {
+        $data = getCIUserContext();
+        $this->auth->checkIfOperationIsAllowed('organization_lists_index');
+        $this->load->model('lists_model');
+        $data['lists'] = $this->lists_model->getLists($this->user_id);
+        //
+        $this->lang->load('organization', $this->language);
+        $this->lang->load('datatable', $this->language);
+        //TODO remove
+        $data['title'] = 'REMOVE ME !!';
+        $this->load->view('templates/header', $data);
+        $this->load->view('organization/lists', $data);
+    }
+    
+    /**
+     * Ajax endpoint allowing to create a new list of employees
+     * Return the last inserted ID
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function listsCreate() {
+        header("Content-Type: application/json");
+        $data = getCIUserContext();
+        if ($this->auth->isAllowed('organization_lists_index') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $this->load->model('lists_model');
+            $id = (int) $this->lists_model->setLists($this->user_id, $this->input->post('name'));
+            echo json_encode($id);
+        }
+
+    }
+
+    /**
+     * Ajax endpoint allowing to rename a list of employees
+     * Return the last inserted ID
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function listsRename() {
+        header("Content-Type: application/json");
+        $data = getCIUserContext();
+        if ($this->auth->isAllowed('organization_lists_index') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $this->load->model('lists_model');
+            $this->lists_model->updateLists($this->input->post('id'), $this->input->post('name'));
+            echo "";
+        }
+
+    }
+
+    /**
+     * Ajax endpoint allowing to delete a list of employees
+     * Return the last inserted ID
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function listsDelete() {
+        header("Content-Type: application/json");
+        $data = getCIUserContext();
+        if ($this->auth->isAllowed('organization_lists_index') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $this->load->model('lists_model');
+            $id = (int) $this->lists_model->deleteList($this->input->post('id'));
+            echo "";
+        }
+    }
+
+    /**
+     * Ajax endpoint: load the list of employees attached to a given list id
+     * Format the data as expected by JQuery Datatable 1.10
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function listsEmployees() {
+        header("Content-Type: application/json");
+        $data = getCIUserContext();
+        if ($this->auth->isAllowed('organization_lists_index') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $this->load->model('lists_model');
+            $obj = new stdClass;
+            $employees = $this->lists_model->getListOfEmployees($this->input->get('list'));
+            $msg = '{"draw": 1,';
+            $msg .= '"recordsTotal":' . count($employees);
+            $msg .= ',"recordsFiltered":' . count($employees);
+            $msg .= ',"data":[';
+            foreach ($employees as $employee) {
+                $msg .= '{"DT_RowId":"' . $employee['id'] . '",';
+                $msg .= '"id":"' . $employee['id'] . '",';
+                $msg .= '"firstname":"' . $employee['firstname'] . '",';
+                $msg .= '"lastname":"' . $employee['lastname'] . '",';
+                $msg .= '"entity":"' . $employee['entity'] . '"';
+                $msg .= '},';
+            }
+            $msg = rtrim($msg, ",");
+            $msg .= ']}';
+            echo $msg;
+        }
+    }
+/*
+$route['organization/lists/adduser'] = 'organization/listsAddUser';
+$route['organization/lists/removeuser'] = 'organization/listsRemoveUsser';
+$route['organization/lists/reorder'] = 'organization/listsReorder';
+*/
+    
 }

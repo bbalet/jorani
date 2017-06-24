@@ -62,6 +62,22 @@ class Users_model extends CI_Model {
         $query = $this->db->get('users');
         return $query->result_array();
     }
+
+    /**
+     * Get the list of employees and the name of their entities
+     * @return array record of users
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function getAllEmployeesAndTheirEntities() {
+        $this->db->select('users.id, firstname, lastname');
+        $this->db->select('organization.name as department_name');
+        $this->db->from('users');
+        $this->db->join('organization', 'users.organization = organization.id');
+        $this->db->order_by("lastname", "asc");
+        $this->db->order_by("firstname", "asc");
+        $query = $this->db->get();
+        return $query->result_array();
+    }
     
     /**
      * Get the name of a given user

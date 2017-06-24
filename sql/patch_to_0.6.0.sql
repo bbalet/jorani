@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 -- Arbitrary list of employees
 CREATE TABLE IF NOT EXISTS `org_lists` (
     `id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of a list',
-    `user` INT NOT NULL COMMENT ' Identifier of Jorani user owning the list',
-    `name` VARCHAR(512) NOT NULL,
+    `user` INT NOT NULL COMMENT 'Identifier of Jorani user owning the list',
+    `name` VARCHAR(512) NOT NULL COMMENT 'Name of the list',
 PRIMARY KEY (`id`),
 INDEX `org_lists_user` (`user`)
 ) COMMENT = 'Custom lists of employees are an alternative to organization';

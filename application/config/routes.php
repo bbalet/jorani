@@ -53,6 +53,7 @@ $route['admin'] = 'admin/settings';
 //Admin : user management
 $route['users/myprofile'] = 'users/myProfile';
 $route['users/employees'] = 'users/employees';
+$route['users/employeesMultiSelect'] = 'users/employeesMultiSelect';
 $route['users/export'] = 'users/export';
 $route['users/reset/(:num)'] = 'users/reset/$1';
 $route['users/create'] = 'users/create';
@@ -141,6 +142,14 @@ $route['organization/addemployee'] = 'organization/addemployee';
 $route['organization/delemployee'] = 'organization/delemployee';
 $route['organization/getsupervisor'] = 'organization/getsupervisor';
 $route['organization/setsupervisor'] = 'organization/setsupervisor';
+$route['organization/lists'] = 'organization/listsIndex';
+$route['organization/lists/employees'] = 'organization/listsEmployees';
+$route['organization/lists/create'] = 'organization/listsCreate';
+$route['organization/lists/rename'] = 'organization/listsRename';
+$route['organization/lists/delete'] = 'organization/listsDelete';
+$route['organization/lists/adduser'] = 'organization/listsAddUser';
+$route['organization/lists/removeuser'] = 'organization/listsRemoveUsser';
+$route['organization/lists/reorder'] = 'organization/listsReorder';
 $route['organization'] = 'organization';
 
 //_______________________________________________

@@ -90,6 +90,23 @@ class Users extends CI_Controller {
     }
 
     /**
+     * Display the modal pop-up content of the list of employees.
+     * The differences with the function employees are that multi select is
+     * allowed and the last column contains the name of the entity the employee
+     * belongs to.
+     * @see employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function employeesMultiSelect() {
+        $this->auth->checkIfOperationIsAllowed('employees_list');
+        $data = getUserContext($this);
+        $this->lang->load('datatable', $this->language);
+        $data['employees'] = $this->users_model->getAllEmployeesAndTheirEntities();
+        $data['title'] = lang('employees_index_title');
+        $this->load->view('users/multiselect', $data);
+    }
+    
+    /**
      * Display details of the connected user (contract, line manager, etc.)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */

@@ -48,3 +48,17 @@ $lang['organization_index_error_msg_delete_root'] = 'Vous ne pouvez pas supprime
 
 $lang['organization_select_field_search_placeholder'] = 'chercher une entité';
 $lang['organization_select_button_search'] = 'Chercher';
+
+$lang['organization_lists_modal_title'] = 'Sélectionner une liste d\'employés';
+$lang['organization_lists_button_edit_list'] = 'Renommer une liste';
+$lang['organization_lists_button_add_list'] = 'Ajouter une nouvelle liste';
+$lang['organization_lists_button_delete_list'] = 'Supprimer une liste';
+$lang['organization_lists_button_add_users'] = 'Ajouter des employés';
+$lang['organization_lists_button_add_users'] = 'Supprimer les employés sélectionnés';
+$lang['organization_lists_employees_prompt_new'] = 'Nom de la liste';
+$lang['organization_lists_employees_confirm_delete'] = 'Êtes-vous sûr de vouloir supprimer cette liste ?';
+$lang['organization_lists_employees_prompt_rename'] = 'Nouveau nom de la liste';
+$lang['organization_lists_employees_thead_id'] = 'N°';
+$lang['organization_lists_employees_thead_firstname'] = 'Prénom';
+$lang['organization_lists_employees_thead_lastname'] = 'Nom';
+$lang['organization_lists_employees_thead_entity'] = 'Entitée';

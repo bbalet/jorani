@@ -128,8 +128,11 @@ $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Имя';
 $lang['users_employees_thead_lastname'] = 'Фамилия';
 $lang['users_employees_thead_email'] = 'Эл. почта';
+$lang['users_employees_thead_entity'] = 'Entity';
+
 $lang['users_reset_field_password'] = 'Пароль';
 $lang['users_reset_button_reset'] = 'Reset';
+
 $lang['users_export_title'] = 'Список пользователей';
 $lang['users_export_thead_id'] = 'ID';
 $lang['users_export_thead_firstname'] = 'Имя';

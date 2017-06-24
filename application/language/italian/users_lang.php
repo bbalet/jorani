@@ -127,8 +127,11 @@ $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Nome';
 $lang['users_employees_thead_lastname'] = 'Cognome';
 $lang['users_employees_thead_email'] = 'E-mail';
+$lang['users_employees_thead_entity'] = 'Entity';
+
 $lang['users_reset_field_password'] = 'Password';
 $lang['users_reset_button_reset'] = 'Reset';
+
 $lang['users_export_title'] = 'Elenco utenti';
 $lang['users_export_thead_id'] = 'ID';
 $lang['users_export_thead_firstname'] = 'Nome';

@@ -8,126 +8,266 @@
  */
 ?>
 
+<div class="row-fluid">
+    <div class="span12">
 <h2><?php echo lang('users_create_title');?><?php echo $help;?></h2>
 
-<?php echo validation_errors(); ?>
+<?php echo validation_errors(); ?>        
+    </div>
+</div>
 
 <?php
-$attributes = array('id' => 'target');
+$attributes = array('id' => 'target', 'class' => 'form-horizontal');
 echo form_open('users/create', $attributes); ?>
 
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
+
+<div class="row">
+    <div class="span4">
+        <div class="control-group">
+            <label class="control-label" for="firstname"><?php echo lang('users_create_field_firstname');?></label>
+            <div class="controls">
+                <input type="text" name="firstname" id="firstname" required />
+            </div>
+        </div>
+    </div>
     
-    <label for="firstname"><?php echo lang('users_create_field_firstname');?></label>
-    <input type="text" name="firstname" id="firstname" required /><br />
+    <div class="span4">
+        <div class="control-group">
+            <label class="control-label" for="lastname"><?php echo lang('users_create_field_lastname');?></label>
+            <div class="controls">
+                <input type="text" name="lastname" id="lastname" required />
+            </div>
+        </div>
+    </div>
+    
+    <div class="span4">
+        <div class="control-group">
+            <label class="control-label" for="login"><?php echo lang('users_create_field_login');?></label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="login" id="login" required />
+                    <a id="cmdRefreshLogin" class="btn btn-primary"><i class="icon-refresh icon-white"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="width:100%;" class="alert hide alert-error" id="lblLoginAlert">
+            <button type="button" class="close" onclick="$('#lblLoginAlert').hide();">&times;</button>
+            <?php echo lang('users_create_flash_msg_error');?>
+        </div>
+    </div>
+</div>
 
-    <label for="lastname"><?php echo lang('users_create_field_lastname');?></label>
-    <input type="text" name="lastname" id="lastname" required /><br />
+<div class="row">
+    <div class="span4">
+        <div class="control-group">
+            <label class="control-label" for="email"><?php echo lang('users_create_field_email');?></label>
+            <div class="controls">
+                <input type="email" id="email" name="email" required />
+            </div>
+        </div>
+    </div>
+    
+    <div class="span8">
+        <input type="hidden" name="manager" id="manager" />
+        <div class="control-group">
+            <label class="control-label" for="txtManager">
+                <?php echo lang('users_create_field_manager');?>
+                <a style="color:black;" href="#" data-toggle="tooltip" title="<?php echo lang('users_create_field_manager_description');?>">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a>
+            </label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" id="txtManager" name="txtManager" required readonly />
+                    <a id="cmdSelfManager" class="btn btn-primary"><?php echo lang('users_create_button_self');?></a>
+                    <a id="cmdSelectManager" class="btn btn-primary"><?php echo lang('users_create_button_select');?></a>
+                </div>
+            </div>
+        </div>
 
-    <label for="role[]"><?php echo lang('users_create_field_role');?></label>
-    <select name="role[]" multiple="multiple" size="3" required>
-    <?php foreach ($roles as $roles_item): ?>
-        <option value="<?php echo $roles_item['id'] ?>" <?php if ($roles_item['id'] == 2) echo "selected"; ?>><?php echo $roles_item['name'] ?></option>
-    <?php endforeach ?>
-    </select>
-
-    <label for="login"><?php echo lang('users_create_field_login');?></label>
-    <div class="input-append">
-        <input type="text" name="login" id="login" required />
-        <a id="cmdRefreshLogin" class="btn btn-primary"><i class="icon-refresh icon-white"></i></a>
-    </div><br />
-    <div class="alert hide alert-error" id="lblLoginAlert">
-        <button type="button" class="close" onclick="$('#lblLoginAlert').hide();">&times;</button>
-        <?php echo lang('users_create_flash_msg_error');?>
+    </div>
+</div>
+    
+<div class="row">
+    <div class="span4">
+        <div class="control-group">
+            <label class="control-label" for="role[]"><?php echo lang('users_create_field_role');?></label>
+            <div class="controls">
+                <select name="role[]" multiple="multiple" size="3" required>
+                <?php foreach ($roles as $roles_item): ?>
+                    <option value="<?php echo $roles_item['id'] ?>" <?php if ($roles_item['id'] == 2) echo "selected"; ?>><?php echo $roles_item['name'] ?></option>
+                <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="span4">
+        &nbsp;
+    </div>
+    
+    <div class="span4">
+        &nbsp;
+    </div>
+</div>
+    
+<div class="row">
+    <div class="span6">
+        <?php if ($this->config->item('ldap_enabled')=== FALSE && $this->config->item('saml_enabled') === FALSE) {?>
+        <div class="control-group">
+            <label class="control-label" for="password"><?php echo lang('users_create_field_password');?></label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="password" name="password" id="password" required />
+                    <a class="btn" id="cmdGeneratePassword"><i class="icon-refresh"></i>&nbsp;<?php echo lang('users_create_button_generate_password');?></a>
+                </div>
+            </div>
+        </div>
+        <?php } else { ?>
+        &nbsp;
+        <?php } ?>
     </div>
 
-    <label for="email"><?php echo lang('users_create_field_email');?></label>
-    <input type="email" id="email" name="email" required /><br />
-
-    <input type="hidden" name="manager" id="manager" /><br />
-    <label for="txtManager"><?php echo lang('users_create_field_manager');?></label>
-    <div class="input-append">
-        <input type="text" id="txtManager" name="txtManager" required readonly />
-        <a id="cmdSelfManager" class="btn btn-primary"><?php echo lang('users_create_button_self');?></a>
-        <a id="cmdSelectManager" class="btn btn-primary"><?php echo lang('users_create_button_select');?></a>
-    </div><br />
-    <i><?php echo lang('users_create_field_manager_description');?></i>
-    <br /><br />
-
-    <label for="contract"><?php echo lang('users_create_field_contract');?></label>
-    <select name="contract" id="contract" class="selectized input-xlarge">
-    <?php $index = 0;
-         foreach ($contracts as $contract) { ?>
-        <option value="<?php echo $contract['id'] ?>" <?php if ($index == 0) echo "selected"; ?>><?php echo $contract['name']; ?></option>
-    <?php 
-            $index++;
-        } ?>
-    </select>
-
-    <input type="hidden" name="entity" id="entity" /><br />
-    <label for="txtEntity"><?php echo lang('users_create_field_entity');?></label>
-    <div class="input-append">
-        <input type="text" id="txtEntity" name="txtEntity" readonly />
-        <a id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('users_create_button_select');?></a>
+    <div class="span6">
+        <div class="control-group">
+            <label class="control-label" for="contract"><?php echo lang('users_create_field_contract');?></label>
+            <div class="controls">
+                <select name="contract" id="contract" class="selectized input-xlarge">
+                <?php $index = 0;
+                     foreach ($contracts as $contract) { ?>
+                    <option value="<?php echo $contract['id'] ?>" <?php if ($index == 0) echo "selected"; ?>><?php echo $contract['name']; ?></option>
+                <?php
+                        $index++;
+                    } ?>
+                </select>
+            </div>
+        </div>
     </div>
-    <br />
+</div>
 
-    <input type="hidden" name="position" id="position" /><br />
-    <label for="txtPosition"><?php echo lang('users_create_field_position');?></label>
-    <div class="input-append">
-        <input type="text" id="txtPosition" name="txtPosition" readonly />
-        <a id="cmdSelectPosition" class="btn btn-primary"><?php echo lang('users_create_button_select');?></a>
+<hr />
+
+<div class="row">
+    <div class="span4">
+        <input type="hidden" name="entity" id="entity" />
+        <div class="control-group">
+            <label class="control-label" for="txtEntity"><?php echo lang('users_create_field_entity');?></label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" id="txtEntity" name="txtEntity" readonly />
+                    <a id="cmdSelectEntity" class="btn btn-primary"><?php echo lang('users_create_button_select');?></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <br />
-
-    <label for="viz_datehired"><?php echo lang('users_create_field_hired');?></label>
-    <input type="text" id="viz_datehired" name="viz_datehired" /><br />
-    <input type="hidden" name="datehired" id="datehired" />
-
-    <label for="identifier"><?php echo lang('users_create_field_identifier');?></label>
-    <input type="text" name="identifier" /><br />
     
-    <label for="language"><?php echo lang('users_create_field_language');?></label>
-    <select name="language">
-         <?php 
-         $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
-         $default_lang = $this->polyglot->language2code($this->config->item('language'));
-         foreach ($languages as $code => $language): ?>
-        <option value="<?php echo $code; ?>" <?php if ($code == $default_lang) echo "selected"; ?>><?php echo $language; ?></option>
-        <?php endforeach ?>
-    </select>
+    <div class="span4">
+        <input type="hidden" name="position" id="position" />
+        <div class="control-group">
+            <label class="control-label" for="txtPosition"><?php echo lang('users_create_field_position');?></label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" id="txtPosition" name="txtPosition" readonly />
+                    <a id="cmdSelectPosition" class="btn btn-primary"><?php echo lang('users_create_button_select');?></a>
+                </div>
+            </div>
+        </div>
+    </div>
     
-    <?php 
-    $tzdef = $this->config->item('default_timezone');
-    if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
-    $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);?>
-    <label for="timezone"><?php echo lang('users_create_field_timezone');?></label>
-    <select id="timezone" name="timezone" class="selectized input-xlarge">
-    <?php foreach ($tzlist as $tz) { ?>
-        <option value="<?php echo $tz ?>" <?php if ($tz == $tzdef) echo "selected"; ?>><?php echo $tz; ?></option>
-    <?php 
-            $index++;
-        } ?>
-    </select>
+    <div class="span4">
+        &nbsp;
+    </div>
+</div>
 
-    <?php if ($this->config->item('ldap_basedn_db')) {?>
-    <label for="ldap_path"><?php echo lang('users_create_field_ldap_path');?></label>
-    <input type="text" class="input-xxlarge" name="ldap_path" />
-    <?php }?>
+<div class="row">
+    <div class="span4">
+        <input type="hidden" name="datehired" id="datehired" />
+        <div class="control-group">
+            <label class="control-label" for="viz_datehired"><?php echo lang('users_create_field_hired');?></label>
+            <div class="controls">
+                <input type="text" id="viz_datehired" name="viz_datehired" />
+            </div>
+        </div>
+    </div>
+    
+    <div class="span4">
+        <div class="control-group">
+            <label class="control-label" for="identifier"><?php echo lang('users_create_field_identifier');?></label>
+            <div class="controls">
+                <input type="text" name="identifier" />
+            </div>
+        </div>
+    </div>
+    
+    <div class="span4">
+        &nbsp;
+    </div>
+</div>
+
+<div class="row">
+    <div class="span4">
+        <div class="control-group">
+            <label class="control-label" for="language"><?php echo lang('users_create_field_language');?></label>
+            <div class="controls">
+                <select name="language">
+                     <?php 
+                     $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
+                     $default_lang = $this->polyglot->language2code($this->config->item('language'));
+                     foreach ($languages as $code => $language): ?>
+                    <option value="<?php echo $code; ?>" <?php if ($code == $default_lang) echo "selected"; ?>><?php echo $language; ?></option>
+                    <?php endforeach ?>
+                </select>                
+            </div>
+        </div>
+    </div>
+    
+    <div class="span4">
+        <div class="control-group">
+            <label class="control-label" for="timezone"><?php echo lang('users_create_field_timezone');?></label>
+            <div class="controls">
+                <?php 
+                $tzdef = $this->config->item('default_timezone');
+                if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
+                $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);?>
+                <select id="timezone" name="timezone" class="selectized input-xlarge">
+                <?php foreach ($tzlist as $tz) { ?>
+                    <option value="<?php echo $tz ?>" <?php if ($tz == $tzdef) echo "selected"; ?>><?php echo $tz; ?></option>
+                <?php 
+                        $index++;
+                    } ?>
+                </select>    
+            </div>
+        </div>
+    </div>
+    
+    <div class="span4">
+        <?php if ($this->config->item('ldap_basedn_db')) {?>
+        <div class="control-group">
+            <label class="control-label" for="ldap_path"><?php echo lang('users_create_field_ldap_path');?></label>
+            <div class="controls">
+                <input type="text" class="input-xxlarge" name="ldap_path" />
+            </div>
+        </div>
+        <?php } else { ?>
+        &nbsp;
+        <?php } ?>
+    </div>
+</div>
+
 </form>
 
-    <?php if ($this->config->item('ldap_enabled')=== FALSE && $this->config->item('saml_enabled') === FALSE) {?>
-    <label for="password"><?php echo lang('users_create_field_password');?></label>
-    <div class="input-append">
-        <input type="password" name="password" id="password" required />
-        <a class="btn" id="cmdGeneratePassword"><i class="icon-refresh"></i>&nbsp;<?php echo lang('users_create_button_generate_password');?></a>
+<div class="row-fluid">
+    <div class="span12">
+        <button id="send" class="btn btn-primary">
+            <i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('users_create_button_create');?>
+        </button>
+        &nbsp;
+        <a href="<?php echo base_url(); ?>users" class="btn btn-danger">
+            <i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('users_create_button_cancel');?>
+        </a>
     </div>
-    <?php }?>
-    <br />
-    
-    <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('users_create_button_create');?></button>
-    &nbsp;
-    <a href="<?php echo base_url(); ?>users" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('users_create_button_cancel');?></a>
+</div>
 
 <div id="frmSelectManager" class="modal hide fade">
     <div class="modal-header">
@@ -427,6 +567,9 @@ if ($language_code != 'en') { ?>
             $("#manager").val('-1');
             $('#txtManager').val('<?php echo lang('users_create_field_manager_alt');?>');
         });
+        
+        //Init all tooltips
+        $('[data-toggle="tooltip"]').tooltip({ placement: 'top'}); 
     });
 
 </script>

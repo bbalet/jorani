@@ -174,6 +174,4 @@ $this->lang->load('menu', $language);?>
     </div><!-- /.navbar -->
 
     <div class="container-fluid">
-        <div class="row-fluid"><div class="span12">
-                <div class="row-fluid"><div class="span12">&nbsp;</div></div>
-                <div class="row-fluid"><div class="span12">&nbsp;</div></div>
+        <div class="row-fluid"><div class="span12">&nbsp;</div></div>

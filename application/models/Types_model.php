@@ -83,6 +83,7 @@ class Types_model extends CI_Model {
     public function setTypes() {
         $deduct = ($this->input->post('deduct_days_off') == 'on')?TRUE:FALSE;
         $data = array(
+            'acronym' => $this->input->post('acronym'),
             'name' => $this->input->post('name'),
             'deduct_days_off' => $deduct
         );
@@ -103,12 +104,14 @@ class Types_model extends CI_Model {
      * @param int $id identifier of the leave type
      * @param string $name name of the type
      * @param bool $deduct Deduct days off
+     * @param string $acronym Acronym of leave type
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function updateTypes($id, $name, $deduct) {
+    public function updateTypes($id, $name, $deduct, $acronym) {
         $deduct = ($deduct == 'on')?TRUE:FALSE;
         $data = array(
+            'acronym' => $acronym,
             'name' => $name,
             'deduct_days_off' => $deduct
         );

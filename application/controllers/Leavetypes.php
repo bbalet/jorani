@@ -85,7 +85,10 @@ class LeaveTypes extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/edit', $data);
         } else {
-            $this->types_model->updateTypes($id, $this->input->post('name'), $this->input->post('deduct_days_off'));
+            $this->types_model->updateTypes($id,
+                    $this->input->post('name'),
+                    $this->input->post('deduct_days_off'),
+                    $this->input->post('acronym'));
             $this->session->set_flashdata('msg', lang('leavetypes_popup_update_flash_msg'));
             redirect('leavetypes');
         }

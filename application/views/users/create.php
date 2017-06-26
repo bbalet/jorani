@@ -149,7 +149,7 @@ echo form_open('users/create', $attributes); ?>
 <hr />
 
 <div class="row">
-    <div class="span4">
+    <div class="span12">
         <input type="hidden" name="entity" id="entity" />
         <div class="control-group">
             <label class="control-label" for="txtEntity"><?php echo lang('users_create_field_entity');?></label>
@@ -161,8 +161,10 @@ echo form_open('users/create', $attributes); ?>
             </div>
         </div>
     </div>
-    
-    <div class="span4">
+</div>
+
+<div class="row">
+    <div class="span12">
         <input type="hidden" name="position" id="position" />
         <div class="control-group">
             <label class="control-label" for="txtPosition"><?php echo lang('users_create_field_position');?></label>
@@ -173,10 +175,6 @@ echo form_open('users/create', $attributes); ?>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="span4">
-        &nbsp;
     </div>
 </div>
 

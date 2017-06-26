@@ -119,7 +119,7 @@ if (isset($_GET['source'])) {
 <hr />
 
 <div class="row">
-    <div class="span4">
+    <div class="span12">
         <input type="hidden" name="entity" id="entity" value="<?php echo $users_item['organization']; ?>" />
         <div class="control-group">
             <label class="control-label" for="txtEntity"><?php echo lang('users_edit_field_entity');?></label>
@@ -131,8 +131,10 @@ if (isset($_GET['source'])) {
             </div>
         </div>
     </div>
-    
-    <div class="span4">
+</div>
+
+<div class="row">
+    <div class="span12">
         <input type="hidden" name="position" id="position" value="<?php echo $users_item['position']; ?>" />
         <div class="control-group">
             <label class="control-label" for="txtPosition"><?php echo lang('users_create_field_position');?></label>
@@ -143,10 +145,6 @@ if (isset($_GET['source'])) {
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="span4">
-        &nbsp;
     </div>
 </div>
 

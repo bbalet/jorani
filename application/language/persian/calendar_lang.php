@@ -46,6 +46,7 @@ $lang['calendar_tabular_button_select_list'] = 'Select a list';
 $lang['calendar_tabular_button_select_entity'] = 'انتخاب';
 $lang['calendar_tabular_button_export'] = 'صدور';
 $lang['calendar_tabular_check_include_subdept'] = 'شمولیت دپارتمان فرعی';
+$lang['calendar_tabular_check_display_types'] = 'Display leave types';
 $lang['calendar_tabular_popup_entity_title'] = 'انتخاب یک واحد';
 $lang['calendar_tabular_popup_entity_button_ok'] = 'تایید';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'لغو';

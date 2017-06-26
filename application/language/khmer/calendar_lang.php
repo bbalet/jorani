@@ -48,6 +48,7 @@ $lang['calendar_tabular_button_select_list'] = 'Select a list';
 $lang['calendar_tabular_button_select_entity'] = 'ជ្រើសរើស';
 $lang['calendar_tabular_button_export'] = 'នាំចេញ';
 $lang['calendar_tabular_check_include_subdept'] = 'រួមបញ្ចូលអនុផ្នែក';
+$lang['calendar_tabular_check_display_types'] = 'Display leave types';
 $lang['calendar_tabular_popup_entity_title'] = 'ជ្រើសរើសអង្គភាព';
 $lang['calendar_tabular_popup_entity_button_ok'] = 'យល់ព្រម';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'បោះបង់';

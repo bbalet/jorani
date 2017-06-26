@@ -48,6 +48,7 @@ $lang['calendar_tabular_button_select_list'] = 'Sélectionner une liste';
 $lang['calendar_tabular_button_select_entity'] = 'Choisir';
 $lang['calendar_tabular_button_export'] = 'Exporter';
 $lang['calendar_tabular_check_include_subdept'] = 'Inclure les sous-entités';
+$lang['calendar_tabular_check_display_types'] = 'Afficher les types d\'absence';
 $lang['calendar_tabular_popup_entity_title'] = 'Choisir l\'entité';
 $lang['calendar_tabular_popup_entity_button_ok'] = 'OK';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'Annuler';

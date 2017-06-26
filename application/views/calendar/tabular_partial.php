@@ -10,8 +10,7 @@
  */
 ?>
 
-<?php 
-$enableAcronyms = FALSE;
+<?php
 if (count($tabular) > 0) {?>
 <table class="table table-bordered">
     <thead>
@@ -173,7 +172,7 @@ if (count($tabular) > 0) {?>
                     }
                 }
                 //Option to disable acronym (passed by URL)
-                if (!$enableAcronyms) {
+                if (!$displayTypes) {
                     $acronym = "";
                 }
                 
@@ -202,28 +201,21 @@ if (count($tabular) > 0) {?>
                                     $clickLink = ' onclick="window.open(\'' . base_url() . '/leaves/leaves/' . $day->id . '\');"';
                                     $style .= ' cursor: pointer;';
                                 }
-                                echo "<td title='$dayType' style='$style' class='$class'>$acronym</td>";
+                                echo "<td title='$dayType' style='$style' class='$class' $clickLink>$acronym</td>";
                             } else {
                                 $clickLink = '';
+                                $style = '';
                                 if ($clickable) {
                                     $clickLink = ' onclick="window.open(\'' . base_url() . '/leaves/leaves/' . $day->id . '\');"';
+                                    $style .= ' cursor: pointer;';
                                 }
-                                echo "<td title='$dayType' class='$class' $clickLink>$acronym</td>";
+                                echo "<td title='$dayType' class='$class' style='$style' $clickLink>$acronym</td>";
                             }
                         } else {
                             echo '<td class="' . $class . '" style="font-size: 0.7em;">';
                             echo '<span title="' . $dayType . '" class="pull-left">' . $acronyms[0] . '</span>';
                             echo '<span title="' . $dayType . '" class="pull-right" >' . $acronyms[1] . '</span>';
                             echo '</td>';
-
-//                            echo PHP_EOL . '<td style="padding:0px; border:0px;">';
-//                            echo PHP_EOL . '<table style="padding:0px; border:0px;">';
-//                            echo PHP_EOL . '<tr class="' . $class . '">';
-//                            echo PHP_EOL . '<td title="' . $dayType . '" >' . $acronyms[0] . '</td>';
-//                            echo PHP_EOL . '<td title="' . $dayType . '" >' . $acronyms[1] . '</td>';
-//                            echo PHP_EOL . '</tr>';
-//                            echo PHP_EOL . '</table>';
-//                            echo PHP_EOL . '</td>';
                         }
                     } else { // ! Acronyms of types
                         $clickLink = '';

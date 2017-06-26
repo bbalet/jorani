@@ -11,7 +11,7 @@
 <h2><?php echo lang('calendar_tabular_title');?> &nbsp;<?php echo $help;?></h2>
 
 <div class="row-fluid">
-    <div class="span4">
+    <div class="span3">
         <label for="txtEntity">
             <?php echo lang('calendar_organization_field_select_entity');?>
             &nbsp;(<input type="checkbox" checked id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>)
@@ -22,7 +22,7 @@
             <!--<button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>//-->
         </div>
     </div>
-    <div class="span4">
+    <div class="span3">
         <label for="txtMonthYear">
         <?php echo lang('calendar_tabular_field_month');?> / <?php echo lang('calendar_tabular_field_year');?>
         </label>
@@ -32,7 +32,10 @@
             <button id="cmdNext" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_next');?>"><i class="icon-chevron-right icon-white"></i></button>
         </div>
     </div>
-    <div class="span4">
+    <div class="span3">
+        <input type="checkbox" checked id="chkDisplayTypes" name="chkDisplayTypes"><?php echo lang('calendar_tabular_check_display_types');?>
+    </div>
+    <div class="span3">
         <span class="pull-right">
             <button id="cmdExport" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('calendar_tabular_button_export');?></button>
         </span>
@@ -82,6 +85,7 @@
     var month = (<?php echo $month;?> - 1); //Monent.js uses 0 based numbers!
     var year = <?php echo $year;?>;
     var children = '<?php echo $children;?>';
+    var displayTypes = '<?php echo $displayTypes;?>';
     var currentDate = moment().year(year).month(month).date(1);
     
     // After selection of an entity from the modal dialog, refresh the partial
@@ -97,21 +101,33 @@
         }
     }
     
-    // Return a boolean value representing the value of checkbox
+    // Return a boolean value representing the value of checkbox "include children"
     function includeChildren() {
         if ($('#chkIncludeChildren').prop('checked') == true) {
-            return 'true';
+            return '1';
         } else {
-            return 'false';
+            return '0';
+        }
+    }
+    
+    // Return a boolean value representing the value of checkbox "display types"
+    function displayLeaveTypes() {
+        if ($('#chkDisplayTypes').prop('checked') == true) {
+            return '1';
+        } else {
+            return '0';
         }
     }
     
     // Reload the partial view containing the tabular calendar
     function reloadTabularView() {
         children = includeChildren();
+        displayTypes = displayLeaveTypes();
         $("#spnTabularView").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
         //Month number needs to be converted between monment.js and PHP
-        $("#spnTabularView").load('<?php echo base_url();?>calendar/tabular/partial/' + entity + '/' + (month + 1) + '/' + year+ '/' + children, function(response, status, xhr) {
+        $("#spnTabularView").load('<?php echo base_url();?>calendar/tabular/partial/' +
+                entity + '/' + (month + 1) + '/' + year + '/' + children + '/' + displayTypes,
+            function(response, status, xhr) {
             if (xhr.status == 401) {
                 $("#frmShowHistory").modal('hide');
                 bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
@@ -127,15 +143,24 @@
     }
     
     $(document).ready(function() {
-        //Select radio button depending on URL
+        //Select checkboxes depending on URL
         if (children == '1') {
             $("#chkIncludeChildren").prop("checked", true);
         } else {
             $("#chkIncludeChildren").prop("checked", false);
         }
+        if (displayTypes == '1') {
+            $("#chkDisplayTypes").prop("checked", true);
+        } else {
+            $("#chkDisplayTypes").prop("checked", false);
+        }
         
-        // On changing 'include children' checkbox, reload the partial view
+        // On changing 'include children' / 'include types' checkboxes,
+        // reload the partial view
         $('#chkIncludeChildren').change(function() {
+            reloadTabularView();
+        });
+        $('#chkDisplayTypes').change(function() {
             reloadTabularView();
         });
         
@@ -165,8 +190,11 @@
         //Export the report into Excel
         $("#cmdExport").click(function() {
             children = includeChildren();
+            displayTypes = displayLeaveTypes();
             if (entity != -1) {
-                url = '<?php echo base_url();?>calendar/tabular/export/' + entity + '/' + month+ '/' + year+ '/' + children;
+                url = '<?php echo base_url();?>calendar/tabular/export/' +
+                        entity + '/' + (month+1) + '/' + year + '/' + children +
+                        '/' + displayTypes;
                 document.location.href = url;
             }
         });

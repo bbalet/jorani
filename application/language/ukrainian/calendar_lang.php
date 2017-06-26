@@ -49,6 +49,7 @@ $lang['calendar_tabular_button_select_list'] = 'Select a list';
 $lang['calendar_tabular_button_select_entity'] = 'Вибрати';
 $lang['calendar_tabular_button_export'] = 'Експортувати';
 $lang['calendar_tabular_check_include_subdept'] = 'Включаючи підвідділи';
+$lang['calendar_tabular_check_display_types'] = 'Display leave types';
 $lang['calendar_tabular_popup_entity_title'] = 'Оберіть відділ';
 $lang['calendar_tabular_popup_entity_button_ok'] = 'ОК';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'Скасувати';

@@ -49,6 +49,7 @@ $lang['calendar_tabular_button_select_list'] = 'Select a list';
 $lang['calendar_tabular_button_select_entity'] = 'Seç';
 $lang['calendar_tabular_button_export'] = 'Dışa aktar';
 $lang['calendar_tabular_check_include_subdept'] = 'Alt departmanlar ekle';
+$lang['calendar_tabular_check_display_types'] = 'Display leave types';
 $lang['calendar_tabular_popup_entity_title'] = 'Bir takım seç';
 $lang['calendar_tabular_popup_entity_button_ok'] = 'Tamam';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'İptal';

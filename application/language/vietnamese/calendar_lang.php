@@ -49,6 +49,7 @@ $lang['calendar_tabular_button_select_list'] = 'Select a list';
 $lang['calendar_tabular_button_select_entity'] = 'Chọn';
 $lang['calendar_tabular_button_export'] = 'Xuất';
 $lang['calendar_tabular_check_include_subdept'] = 'Thêm vào các đơn vị trực thuộc';
+$lang['calendar_tabular_check_display_types'] = 'Display leave types';
 $lang['calendar_tabular_popup_entity_title'] = 'Chọn thực thể';
 $lang['calendar_tabular_popup_entity_button_ok'] = 'Chấp nhận';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'Hủy bỏ';

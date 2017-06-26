@@ -49,6 +49,7 @@ $lang['calendar_tabular_button_select_list'] = 'Select a list';
 $lang['calendar_tabular_button_select_entity'] = 'Vybrat';
 $lang['calendar_tabular_button_export'] = 'Export';
 $lang['calendar_tabular_check_include_subdept'] = 'Zahrnout podřízená oddělení';
+$lang['calendar_tabular_check_display_types'] = 'Display leave types';
 $lang['calendar_tabular_popup_entity_title'] = 'Vyberte organizační jednotku';
 $lang['calendar_tabular_popup_entity_button_ok'] = 'OK';
 $lang['calendar_tabular_popup_entity_button_cancel'] = 'Zrušit';

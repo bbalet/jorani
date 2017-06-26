@@ -253,9 +253,10 @@ class Calendar extends CI_Controller {
      * @param int $month Month number
      * @param int $year Year number
      * @param bool $children If TRUE, includes children entity, FALSE otherwise
+     * @param bool $displayTypes If TRUE, display leave types, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular($id=-1, $month=0, $year=0, $children=TRUE) {
+    public function tabular($id=-1, $month=0, $year=0, $children=TRUE, $displayTypes=TRUE) {
         if (($this->config->item('public_calendar') === TRUE) && (!$this->session->userdata('logged_in'))) {
             $this->load->library('polyglot');
             $data['mode'] = 'public';
@@ -272,6 +273,7 @@ class Calendar extends CI_Controller {
             $dateObj = DateTime::createFromFormat('!m', $month);
             $data['monthName'] = lang($dateObj->format('F'));
             $data['children'] = $children;
+            $data['displayTypes'] = $displayTypes;
             $data['department'] = $this->organization_model->getName($id);
             $data['title'] = lang('calendar_tabular_title');
             $data['help'] = '';
@@ -295,6 +297,7 @@ class Calendar extends CI_Controller {
             $dateObj = DateTime::createFromFormat('!m', $month);
             $data['monthName'] = lang($dateObj->format('F'));
             $data['children'] = $children;
+            $data['displayTypes'] = $displayTypes;
             $data['department'] = $this->organization_model->getName($id);
             $data['title'] = lang('calendar_tabular_title');
             $data['help'] = $this->help->create_help_link('global_link_doc_page_calendar_tabular');
@@ -312,9 +315,10 @@ class Calendar extends CI_Controller {
      * @param int $month Month number
      * @param int $year Year number
      * @param bool $children If TRUE, includes children entity, FALSE otherwise
+     * @param bool $displayTypes If TRUE, display leave types, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabularPartial($id=-1, $month=0, $year=0, $children=TRUE) {
+    public function tabularPartial($id=-1, $month=0, $year=0, $children=TRUE, $displayTypes=TRUE) {
         if (($this->config->item('public_calendar') === TRUE) && (!$this->session->userdata('logged_in'))) {
             $this->load->library('polyglot');
             $data['mode'] = 'public';
@@ -328,6 +332,7 @@ class Calendar extends CI_Controller {
             $data['month'] = $month;
             $data['year'] = $year;
             $data['children'] = $children;
+            $data['displayTypes'] = $displayTypes;
             $this->load->view('calendar/tabular_partial', $data);
         } else {
             setUserContext($this);
@@ -342,6 +347,7 @@ class Calendar extends CI_Controller {
             $data['month'] = $month;
             $data['year'] = $year;
             $data['children'] = $children;
+            $data['displayTypes'] = $displayTypes;
             $this->load->view('calendar/tabular_partial', $data);
         }
     }
@@ -353,16 +359,21 @@ class Calendar extends CI_Controller {
      * @param int $month Month number
      * @param int $year Year number
      * @param bool $children If TRUE, includes children entity, FALSE otherwise
+     * @param bool $displayTypes If TRUE, display leave types, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function exportTabular($id=-1, $month=0, $year=0, $children=TRUE) {        
+    public function exportTabular($id=-1, $month=0, $year=0, $children=TRUE, $displayTypes=TRUE) {
+        $data = array();
         //Load the language file (the loaded language depends if it was called from the public view)
         if (($this->config->item('public_calendar') === TRUE) && (!$this->session->userdata('logged_in'))) {
             $this->load->library('polyglot');;
             $language = $this->config->item('language');
+            $data['user_id'] = 0;
+            $data['is_admin'] = FALSE;
         } else {
             setUserContext($this);
             $language = $this->language;
+            $data = getUserContext($this);
         }
         $this->lang->load('calendar', $language);
         $this->lang->load('global', $language);
@@ -373,6 +384,7 @@ class Calendar extends CI_Controller {
         $data['month'] = $month;
         $data['year'] = $year;
         $data['children'] = $children;
+        $data['displayTypes'] = $displayTypes;
         $this->load->view('calendar/export_tabular', $data);
     }
     

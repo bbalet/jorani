@@ -48,6 +48,7 @@ $lang['calendar_tabular_button_select_list'] = 'Select a list';
 $lang['calendar_tabular_button_select_entity'] = '選擇';
 $lang['calendar_tabular_button_export'] = '匯出';
 $lang['calendar_tabular_check_include_subdept'] = '包含分部門';
+$lang['calendar_tabular_check_display_types'] = 'Display leave types';
 $lang['calendar_tabular_popup_entity_title'] = '選擇部門';
 $lang['calendar_tabular_popup_entity_button_ok'] = '好';
 $lang['calendar_tabular_popup_entity_button_cancel'] = '取消';

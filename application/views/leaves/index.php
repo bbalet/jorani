@@ -8,12 +8,31 @@
  */
 ?>
 
-<div class="row-fluid">
-    <div class="span12">
 
 <h2><?php echo lang('leaves_index_title');?> &nbsp;<?php echo $help;?></h2>
 
 <?php echo $flash_partial_view;?>
+
+<div class="row">
+    <div class="span4">
+        <form class="form-horizontal">
+            <div class="control-group">
+            <label class="control-label" for="cboLeaveType"><?php echo lang('leaves_index_thead_type');?></label>
+            <div class="controls">
+                <select name="cboLeaveType" id="cboLeaveType">
+                    <option value="" selected></option>
+                <?php foreach ($types as $type): ?>
+                    <option value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
+                <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+        </form>
+    </div>
+    <div class="span8">
+        &nbsp;
+    </div>
+</div> 
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
     <thead>
@@ -94,8 +113,7 @@
 <?php endforeach ?>
     </tbody>
 </table>
-    </div>
-</div>
+
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
@@ -162,11 +180,18 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function() {    
+var leaveTable = null;
+
+//Return a URL parameter identified by 'name'
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+    
+$(document).ready(function() {
     $('#frmDeleteLeaveRequest').alert();
     
     //Transform the HTML table in a fancy datatable
-    $('#leaves').dataTable({
+    leaveTable = $('#leaves').DataTable({
         order: [[ 1, "desc" ]],
         language: {
             decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
@@ -240,5 +265,20 @@ $(document).ready(function() {
         $('#tipCopied').tooltip('show');
         setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });
+    
+    $('#cboLeaveType').on('change',function(){
+        var leaveType = $("#cboLeaveType option:selected").text();
+        leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
+    });
+    
+    //Analyze URL to get the filter on one type
+    if (getURLParameter('type') != null) {
+        var leaveType = $("#cboLeaveType option[value='" + getURLParameter('type') + "']").text();
+        $("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
+        leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
+    }
+    //Filter on statuses is more complicated as it is a list
+    //console.log(getURLParameter('statuses'));
+    
 });
 </script>

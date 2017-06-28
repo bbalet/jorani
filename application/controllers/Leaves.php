@@ -41,6 +41,7 @@ class Leaves extends CI_Controller {
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($this->session->userdata('id'));
+        $data['types'] = $this->types_model->getTypes();
         $data['title'] = lang('leaves_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_requests_list');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);

@@ -14,23 +14,23 @@
 <?php echo $flash_partial_view;?>
 
 <div class="row">
-    <div class="span4">
-        <form class="form-horizontal">
-            <div class="control-group">
-            <label class="control-label" for="cboLeaveType"><?php echo lang('leaves_index_thead_type');?></label>
-            <div class="controls">
-                <select name="cboLeaveType" id="cboLeaveType">
-                    <option value="" selected></option>
-                <?php foreach ($types as $type): ?>
-                    <option value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
-                <?php endforeach ?>
-                </select>
-            </div>
-        </div>
-        </form>
+    <div class="span3">
+        <?php echo lang('leaves_index_thead_type');?>
+        <select name="cboLeaveType" id="cboLeaveType">
+            <option value="" selected></option>
+        <?php foreach ($types as $type): ?>
+            <option value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
+        <?php endforeach ?>
+        </select>&nbsp;&nbsp;
     </div>
+    <div class="span1">&nbsp;</div>
     <div class="span8">
-        &nbsp;
+    <span class="label"><input type="checkbox" checked id="chkPlanned" class="filterStatus"> &nbsp;<?php echo lang('Planned');?></span> &nbsp;
+    <span class="label label-success"><input type="checkbox" checked id="chkAccepted" class="filterStatus"> &nbsp;<?php echo lang('Accepted');?></span> &nbsp;
+    <span class="label label-warning"><input type="checkbox" checked id="chkRequested" class="filterStatus"> &nbsp;<?php echo lang('Requested');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkRejected" class="filterStatus"> &nbsp;<?php echo lang('Rejected');?></span> &nbsp;
+    <!--<span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCancellation" class="filterStatus"> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCanceled" class="filterStatus"> &nbsp;<?php echo lang('Canceled');?></span>//-->
     </div>
 </div> 
 
@@ -108,7 +108,13 @@
         <td><?php echo $leaves_item['cause']; ?></td>
         <td><?php echo $leaves_item['duration']; ?></td>
         <td><?php echo $leaves_item['type_name']; ?></td>
-        <td><?php echo lang($leaves_item['status_name']); ?></td>
+        <?php
+        switch ($leaves_item['status']) {
+            case 1: echo "<td><span class='label'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
+            case 2: echo "<td><span class='label label-warning'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
+            case 3: echo "<td><span class='label label-success'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
+            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
+        }?>
     </tr>
 <?php endforeach ?>
     </tbody>
@@ -186,7 +192,21 @@ var leaveTable = null;
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
-    
+
+//Apply a filter on the status column
+function filterStatusColumn() {
+    var filter = "^(";
+    if ($('#chkPlanned').prop('checked')) filter += "<?php echo lang('Planned');?>|";
+    if ($('#chkAccepted').prop('checked')) filter += "<?php echo lang('Accepted');?>|";
+    if ($('#chkRequested').prop('checked')) filter += "<?php echo lang('Requested');?>|";
+    if ($('#chkRejected').prop('checked')) filter += "<?php echo lang('Rejected');?>|";
+    if ($('#chkCancellation').prop('checked')) filter += "<?php echo lang('Cancellation');?>|";
+    if ($('#chkCanceled').prop('checked')) filter += "<?php echo lang('Canceled');?>|";
+    filter = filter.slice(0,-1) + ")$";
+    if (filter.indexOf('(') == -1) filter = 'nothing is selected';
+    leaveTable.columns( 6 ).search( filter, true, false ).draw();
+}
+
 $(document).ready(function() {
     $('#frmDeleteLeaveRequest').alert();
     
@@ -268,7 +288,11 @@ $(document).ready(function() {
     
     $('#cboLeaveType').on('change',function(){
         var leaveType = $("#cboLeaveType option:selected").text();
-        leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
+        if (leaveType != '') {
+            leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
+        } else {
+            leaveTable.columns( 5 ).search( "", true, false ).draw();
+        }
     });
     
     //Analyze URL to get the filter on one type
@@ -277,8 +301,27 @@ $(document).ready(function() {
         $("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
         leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
     }
-    //Filter on statuses is more complicated as it is a list
-    //console.log(getURLParameter('statuses'));
     
+    //Filter on statuses is a list of inclusion
+    var statuses = getURLParameter('statuses');
+    if (statuses != null) {
+        //Unselect all statuses and select only the statuses passed by URL
+        $(".filterStatus").prop("checked", false);
+        statuses.split(/,/).forEach(function(status) {
+            switch (status) {
+                case '1': $("#chkPlanned").prop("checked", true); break;
+                case '2': $("#chkAccepted").prop("checked", true); break;
+                case '3': $("#chkRequested").prop("checked", true); break;
+                case '4': $("#chkRejected").prop("checked", true); break;
+                case '5': $("#chkCancellation").prop("checked", true); break;
+                case '6': $("#chkCancellation").prop("checked", true); break;
+            }
+        });
+        //$("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
+        filterStatusColumn();
+    }
+    $('.filterStatus').on('change',function(){
+        filterStatusColumn();
+    });
 });
 </script>

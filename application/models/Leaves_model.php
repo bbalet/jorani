@@ -49,7 +49,8 @@ class Leaves_model extends CI_Model {
      */
     public function getLeavesOfEmployee($employee) {
         $this->db->select('leaves.*');
-        $this->db->select('status.name as status_name, types.name as type_name');
+        $this->db->select('status.id as status, status.name as status_name');
+        $this->db->select('types.name as type_name');
         $this->db->from('leaves');
         $this->db->join('status', 'leaves.status = status.id');
         $this->db->join('types', 'leaves.type = types.id');

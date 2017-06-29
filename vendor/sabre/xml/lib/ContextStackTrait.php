@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php
 
 namespace Sabre\Xml;
 
@@ -91,7 +91,7 @@ trait ContextStackTrait {
      * namespaceMap. After you're done, you can restore the old data again
      * with popContext.
      *
-     * @return void
+     * @return null
      */
     function pushContext() {
 
@@ -107,7 +107,7 @@ trait ContextStackTrait {
     /**
      * Restore the previous "context".
      *
-     * @return void
+     * @return null
      */
     function popContext() {
 

@@ -1,8 +1,8 @@
-<?php declare (strict_types=1);
+<?php
 
 namespace Sabre\Uri;
 
-class ResolveTest extends \PHPUnit\Framework\TestCase {
+class ResolveTest extends \PHPUnit_Framework_TestCase{
 
     /**
      * @dataProvider resolveData
@@ -69,41 +69,6 @@ class ResolveTest extends \PHPUnit\Framework\TestCase {
                 '#comments',
                 'https://example.org/foo?a=b#comments',
             ],
-            // Switching to mailto!
-            [
-                'https://example.org/foo?a=b',
-                'mailto:foo@example.org',
-                'mailto:foo@example.org',
-            ],
-            // Resolving empty path
-            [
-                'http://www.example.org',
-                '#foo',
-                'http://www.example.org/#foo',
-            ],
-            // Another fragment test
-            [
-                'http://example.org/path.json',
-                '#',
-                'http://example.org/path.json',
-            ],
-            [
-                'http://www.example.com',
-                '#',
-                'http://www.example.com/',
-            ],
-            [
-                'http://www.example.org',
-                '#foo',
-                'http://www.example.org/#foo',
-            ],
-            // Another fragment test
-            [
-                'http://example.org/path.json',
-                '#',
-                'http://example.org/path.json',
-            ],
-
         ];
 
     }

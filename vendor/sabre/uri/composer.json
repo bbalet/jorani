@@ -9,7 +9,7 @@
     "homepage": "http://sabre.io/uri/",
     "license": "BSD-3-Clause",
     "require": {
-        "php": ">=7"
+        "php": ">=5.4.7"
     },
     "authors": [
         {
@@ -32,8 +32,8 @@
         }
     },
     "require-dev": {
-        "sabre/cs": "~1.0.0",
-        "phpunit/phpunit" : "^6.0"
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit" : "*"
     },
     "config" : {
         "bin-dir" : "bin/"

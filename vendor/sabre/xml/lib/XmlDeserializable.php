@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php
 
 namespace Sabre\Xml;
 
@@ -30,6 +30,7 @@ interface XmlDeserializable {
      * $reader->parseInnerTree() will parse the entire sub-tree, and advance to
      * the next element.
      *
+     * @param Reader $reader
      * @return mixed
      */
     static function xmlDeserialize(Reader $reader);

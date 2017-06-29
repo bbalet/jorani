@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php
 
 namespace Sabre\Xml\Element;
 
@@ -26,6 +26,8 @@ class Base implements Xml\Element {
 
     /**
      * Constructor
+     *
+     * @param mixed $value
      */
     function __construct($value = null) {
 
@@ -49,6 +51,7 @@ class Base implements Xml\Element {
      *
      * If you are opening new elements, you must also close them again.
      *
+     * @param Writer $writer
      * @return void
      */
     function xmlSerialize(Xml\Writer $writer) {
@@ -75,6 +78,7 @@ class Base implements Xml\Element {
      * $reader->parseInnerTree() will parse the entire sub-tree, and advance to
      * the next element.
      *
+     * @param Xml\Reader $reader
      * @return mixed
      */
     static function xmlDeserialize(Xml\Reader $reader) {

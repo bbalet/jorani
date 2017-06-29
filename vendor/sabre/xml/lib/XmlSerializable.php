@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php
 
 namespace Sabre\Xml;
 
@@ -28,6 +28,7 @@ interface XmlSerializable {
      *
      * If you are opening new elements, you must also close them again.
      *
+     * @param Writer $writer
      * @return void
      */
     function xmlSerialize(Writer $writer);

@@ -16,6 +16,8 @@
         "onelogin/php-saml": "^2.10",
         "bshaffer/oauth2-server-php": "^1.9",
         "league/oauth2-client": "^2.2",
-        "league/oauth2-google": "^2.0"
+        "league/oauth2-google": "^2.0",
+        "sabre/xml": "~1.5",
+        "sabre/uri": "1"
     }
 }

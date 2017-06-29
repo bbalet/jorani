@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php
 
 namespace Sabre\Xml\Deserializer;
 
@@ -52,8 +52,13 @@ use Sabre\Xml\Reader;
  *
  * Attributes will be removed from the top-level elements. If elements with
  * the same name appear twice in the list, only the last one will be kept.
+ *
+ *
+ * @param Reader $reader
+ * @param string $namespace
+ * @return array
  */
-function keyValue(Reader $reader, string $namespace = null) : array {
+function keyValue(Reader $reader, $namespace = null) {
 
     // If there's no children, we don't do anything.
     if ($reader->isEmptyElement) {
@@ -128,9 +133,11 @@ function keyValue(Reader $reader, string $namespace = null) : array {
  *   "elem5",
  * ];
  *
+ * @param Reader $reader
+ * @param string $namespace
  * @return string[]
  */
-function enum(Reader $reader, string $namespace = null) : array {
+function enum(Reader $reader, $namespace = null) {
 
     // If there's no children, we don't do anything.
     if ($reader->isEmptyElement) {
@@ -166,9 +173,12 @@ function enum(Reader $reader, string $namespace = null) : array {
  * This is primarily used by the mapValueObject function from the Service
  * class, but it can also easily be used for more specific situations.
  *
+ * @param Reader $reader
+ * @param string $className
+ * @param string $namespace
  * @return object
  */
-function valueObject(Reader $reader, string $className, string $namespace) {
+function valueObject(Reader $reader, $className, $namespace) {
 
     $valueObject = new $className();
     if ($reader->isEmptyElement) {
@@ -224,10 +234,11 @@ function valueObject(Reader $reader, string $className, string $namespace) {
  *
  * The repeatingElements deserializer simply returns everything as an array.
  *
- * $childElementName must either be a a clark-notation element name, or if no
- * namespace is used, the bare element name.
+ * @param Reader $reader
+ * @param string $childElementName Element name in clark-notation
+ * @return array
  */
-function repeatingElements(Reader $reader, string $childElementName) : array {
+function repeatingElements(Reader $reader, $childElementName) {
 
     if ($childElementName[0] !== '{') {
         $childElementName = '{}' . $childElementName;

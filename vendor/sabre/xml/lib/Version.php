@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php
 
 namespace Sabre\Xml;
 
@@ -14,6 +14,6 @@ class Version {
     /**
      * Full version number
      */
-    const VERSION = '2.0.0';
+    const VERSION = '1.5.0';
 
 }

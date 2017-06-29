@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php
 
 namespace Sabre\Xml\Element;
 
@@ -22,26 +22,15 @@ use Sabre\Xml\Writer;
  */
 class XmlFragment implements Element {
 
-    /**
-     * The inner XML value
-     *
-     * @var string
-     */
     protected $xml;
 
-    /**
-     * Constructor
-     */
-    function __construct(string $xml) {
+    function __construct($xml) {
 
         $this->xml = $xml;
 
     }
 
-    /**
-     * Returns the inner XML document.
-     */
-    function getXml() : string {
+    function getXml() {
 
         return $this->xml;
 
@@ -63,6 +52,7 @@ class XmlFragment implements Element {
      *
      * If you are opening new elements, you must also close them again.
      *
+     * @param Writer $writer
      * @return void
      */
     function xmlSerialize(Writer $writer) {
@@ -143,6 +133,7 @@ XML;
      * $reader->parseInnerTree() will parse the entire sub-tree, and advance to
      * the next element.
      *
+     * @param Reader $reader
      * @return mixed
      */
     static function xmlDeserialize(Reader $reader) {

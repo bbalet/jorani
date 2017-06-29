@@ -18,20 +18,19 @@ The library provides the following functions:
    problems those two functions have.
 
 
-Build status
-------------
-
-| branch       | status | minimum PHP version |
-| ------------ | ------ | ------------------- |
-| master       | [![Build Status](https://travis-ci.org/fruux/sabre-uri.svg?branch=master)](https://travis-ci.org/fruux/sabre-uri) | PHP 7.0 |
-| 1.x          | [![Build Status](https://travis-ci.org/fruux/sabre-uri.svg?branch=1.x)](https://travis-ci.org/fruux/sabre-uri) | PHP 5.4.7 |
-
-
 Further reading
 ---------------
 
 * [Installation][7]
 * [Usage][8]
+
+
+Build status
+------------
+
+| branch | status |
+| ------ | ------ |
+| master | [![Build Status](https://travis-ci.org/fruux/sabre-uri.png?branch=master)](https://travis-ci.org/fruux/sabre-uri) |
 
 
 Questions?
@@ -52,5 +51,5 @@ This library is being developed by [fruux](https://fruux.com/). Drop us a line f
 [4]: http://groups.google.com/group/sabredav-discuss
 [5]: https://github.com/fruux/sabre-uri/issues/
 [6]: http://php.net/manual/en/function.parse-url.php
-[7]: http://sabre.io/uri/install/
-[8]: http://sabre.io/uri/usage/
+[7]: /uri/install/
+[8]: /uri/usage/

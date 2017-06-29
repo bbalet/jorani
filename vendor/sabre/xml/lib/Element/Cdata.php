@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php
 
 namespace Sabre\Xml\Element;
 
@@ -17,8 +17,8 @@ use Sabre\Xml;
  * @author Evert Pot (http://evertpot.com/)
  * @license http://sabre.io/license/ Modified BSD License
  */
-class Cdata implements Xml\XmlSerializable {
-
+class Cdata implements Xml\XmlSerializable
+{
     /**
      * CDATA element value.
      *
@@ -28,8 +28,11 @@ class Cdata implements Xml\XmlSerializable {
 
     /**
      * Constructor
+     *
+     * @param string $value
      */
-    function __construct(string $value) {
+    function __construct($value)
+    {
         $this->value = $value;
     }
 
@@ -49,6 +52,7 @@ class Cdata implements Xml\XmlSerializable {
      *
      * If you are opening new elements, you must also close them again.
      *
+     * @param Writer $writer
      * @return void
      */
     function xmlSerialize(Xml\Writer $writer) {

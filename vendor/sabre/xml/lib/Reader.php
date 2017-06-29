@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php
 
 namespace Sabre\Xml;
 
@@ -51,25 +51,30 @@ class Reader extends XMLReader {
      *
      * This function will also disable the standard libxml error handler (which
      * usually just results in PHP errors), and throw exceptions instead.
+     *
+     * @return array
      */
-    function parse() : array {
+    function parse() {
 
         $previousEntityState = libxml_disable_entity_loader(true);
         $previousSetting = libxml_use_internal_errors(true);
 
         try {
 
-            while ($this->nodeType !== self::ELEMENT) {
-                if (!$this->read()) {
-                    $errors = libxml_get_errors();
-                    libxml_clear_errors();
-                    if ($errors) {
-                        throw new LibXMLException($errors);
-                    }
-                }
+            // Really sorry about the silence operator, seems like I have no
+            // choice. See:
+            //
+            // https://bugs.php.net/bug.php?id=64230
+            while ($this->nodeType !== self::ELEMENT && @$this->read()) {
+                // noop
             }
             $result = $this->parseCurrentElement();
 
+            $errors = libxml_get_errors();
+            libxml_clear_errors();
+            if ($errors) {
+                throw new LibXMLException($errors);
+            }
 
         } finally {
             libxml_use_internal_errors($previousSetting);
@@ -93,8 +98,11 @@ class Reader extends XMLReader {
      *
      * If the $elementMap argument is specified, the existing elementMap will
      * be overridden while parsing the tree, and restored after this process.
+     *
+     * @param array $elementMap
+     * @return array
      */
-    function parseGetElements(array $elementMap = null) : array {
+    function parseGetElements(array $elementMap = null) {
 
         $result = $this->parseInnerTree($elementMap);
         if (!is_array($result)) {
@@ -115,6 +123,7 @@ class Reader extends XMLReader {
      * If the $elementMap argument is specified, the existing elementMap will
      * be overridden while parsing the tree, and restored after this process.
      *
+     * @param array $elementMap
      * @return array|string
      */
     function parseInnerTree(array $elementMap = null) {
@@ -135,7 +144,11 @@ class Reader extends XMLReader {
 
         try {
 
-            if (!$this->read()) {
+            // Really sorry about the silence operator, seems like I have no
+            // choice. See:
+            //
+            // https://bugs.php.net/bug.php?id=64230
+            if (!@$this->read()) {
                 $errors = libxml_get_errors();
                 libxml_clear_errors();
                 if ($errors) {
@@ -192,8 +205,10 @@ class Reader extends XMLReader {
 
     /**
      * Reads all text below the current element, and returns this as a string.
+     *
+     * @return string
      */
-    function readText() : string {
+    function readText() {
 
         $result = '';
         $previousDepth = $this->depth;
@@ -214,8 +229,10 @@ class Reader extends XMLReader {
      *   * name - A clark-notation XML element name.
      *   * value - The parsed value.
      *   * attributes - A key-value list of attributes.
+     *
+     * @return array
      */
-    function parseCurrentElement() : array {
+    function parseCurrentElement() {
 
         $name = $this->getClark();
 
@@ -245,8 +262,10 @@ class Reader extends XMLReader {
      * If the attributes are part of the same namespace, they will simply be
      * short keys. If they are defined on a different namespace, the attribute
      * name will be retured in clark-notation.
+     *
+     * @return array
      */
-    function parseAttributes() : array {
+    function parseAttributes() {
 
         $attributes = [];
 
@@ -274,8 +293,12 @@ class Reader extends XMLReader {
     /**
      * Returns the function that should be used to parse the element identified
      * by it's clark-notation name.
+     *
+     * @param string $name
+     * @return callable
      */
-    function getDeserializerForElementName(string $name) : callable {
+    function getDeserializerForElementName($name) {
+
 
         if (!array_key_exists($name, $this->elementMap)) {
             if (substr($name, 0, 2) == '{}' && array_key_exists(substr($name, 2), $this->elementMap)) {

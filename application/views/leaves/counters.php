@@ -22,19 +22,31 @@
     <tr>
       <th><?php echo lang('leaves_summary_thead_type');?></th>
       <th><?php echo lang('leaves_summary_thead_available');?></th>
-      <th><?php echo lang('leaves_summary_thead_taken');?></th>
+      <th><?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;<span class="label label-success"><?php echo lang('Accepted');?></span></th>
       <th><?php echo lang('leaves_summary_thead_entitled');?></th>
+      <th><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label"><?php echo lang('Planned');?></span></th>
+      <th><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label label-warning"><?php echo lang('Requested');?></span></th>
     </tr>
   </thead>
   <tbody>
   <?php if (count($summary) > 0) {
   foreach ($summary as $key => $value) {
-      if ($value[2] == '') {?>
+      if (($value[2] == '') || ($value[2] == 'x')) {?>
     <tr>
       <td><?php echo $key; ?></td>
       <td><?php echo round(((float) $value[1] - (float) $value[0]), 3, PHP_ROUND_HALF_DOWN); ?></td>
       <td><?php echo ((float) $value[0]); ?></td>
       <td><?php echo ((float) $value[1]); ?></td>
+      <?php if (empty($value[3])) { ?>
+      <td></td>
+      <?php } else { ?>
+      <td><?php echo ((float) $value[3]); ?></td>
+      <?php } ?>
+      <?php if (empty($value[4])) { ?>
+      <td></td>
+      <?php } else { ?>
+      <td><?php echo ((float) $value[4]); ?></td>
+      <?php } ?>
     </tr>
   <?php }
     }
@@ -60,7 +72,7 @@
   <tbody>
   <?php if (count($summary) > 0) {
   foreach ($summary as $key => $value) {
-      if ($value[2] != '') {?>
+      if (($value[2] != '') && ($value[2] != 'x')) {?>
     <tr>
       <td><?php echo str_replace("Catch up for", lang('leaves_summary_key_overtime'), $key); ?></td>
       <td><?php echo (float) $value[1]; ?></td>

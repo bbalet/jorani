@@ -278,7 +278,7 @@ class Leaves_model extends CI_Model {
                 $taken_days = $this->db->get()->result_array();
                 //Count the number of taken days
                 foreach ($taken_days as $taken) {
-                    $summary[$taken['type']][0] = (float) $taken['taken']; //Taken
+                    $summary[$taken['type']][0] = (float) $taken['taken']; //Taken                    
                 }
                 //Report the number of available days
                 $summary[$entitlement['type_name']][1] = (float) $entitlement['entitled'];
@@ -319,9 +319,56 @@ class Leaves_model extends CI_Model {
                 $summary[$compensate_name][1] = (float) $summary[$compensate_name][1] + $sum; //entitled
             }
             
+            //List all planned leaves in a third column
+            //planned leave requests are not deducted from credit
+            foreach ($entitlements as $entitlement) {
+                //Get the total of taken leaves grouped by type
+                $this->db->select('SUM(leaves.duration) as planned, types.name as type');
+                $this->db->from('leaves');
+                $this->db->join('types', 'types.id = leaves.type');
+                $this->db->where('leaves.employee', $id);
+                $this->db->where('leaves.status', 1);
+                $this->db->where('leaves.startdate >= ', $entitlement['min_date']);
+                $this->db->where('leaves.enddate <=', $entitlement['max_date']);
+                $this->db->where('leaves.type', $entitlement['type_id']);
+                $this->db->group_by("leaves.type");
+                $planned_days = $this->db->get()->result_array();
+                //Count the number of planned days
+                foreach ($planned_days as $planned) {
+                    $summary[$planned['type']][3] = (float) $planned['planned']; //Planned
+                    $summary[$planned['type']][2] = 'x'; //Planned
+                }
+                //Report the number of available days
+                $summary[$entitlement['type_name']][1] = (float) $entitlement['entitled'];
+            }
+            
+            //List all requested leaves in a third column
+            //leave requests having a requested status are not deducted from credit
+            foreach ($entitlements as $entitlement) {
+                //Get the total of taken leaves grouped by type
+                $this->db->select('SUM(leaves.duration) as requested, types.name as type');
+                $this->db->from('leaves');
+                $this->db->join('types', 'types.id = leaves.type');
+                $this->db->where('leaves.employee', $id);
+                $this->db->where('leaves.status', 2);
+                $this->db->where('leaves.startdate >= ', $entitlement['min_date']);
+                $this->db->where('leaves.enddate <=', $entitlement['max_date']);
+                $this->db->where('leaves.type', $entitlement['type_id']);
+                $this->db->group_by("leaves.type");
+                $requested_days = $this->db->get()->result_array();
+                //Count the number of planned days
+                foreach ($requested_days as $requested) {
+                    $summary[$requested['type']][4] = (float) $requested['requested']; //requested
+                    $summary[$requested['type']][2] = 'x'; //requested
+                }
+                //Report the number of available days
+                $summary[$entitlement['type_name']][1] = (float) $entitlement['entitled'];
+            }
+            
             //Remove all lines having taken and entitled set to set to 0
             foreach ($summary as $key => $value) {
-                if ($value[0]==0 && $value[1]==0) {
+                //if ($value[0]==0 && $value[1]==0) {
+                if ($value[0]==0 && $value[1]==0  && $value[2]!='x') {
                     unset($summary[$key]);
                 }
             }

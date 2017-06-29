@@ -310,8 +310,8 @@ $(document).ready(function() {
         statuses.split(/,/).forEach(function(status) {
             switch (status) {
                 case '1': $("#chkPlanned").prop("checked", true); break;
-                case '2': $("#chkAccepted").prop("checked", true); break;
-                case '3': $("#chkRequested").prop("checked", true); break;
+                case '2': $("#chkRequested").prop("checked", true); break;
+                case '3': $("#chkAccepted").prop("checked", true); break;
                 case '4': $("#chkRejected").prop("checked", true); break;
                 case '5': $("#chkCancellation").prop("checked", true); break;
                 case '6': $("#chkCancellation").prop("checked", true); break;

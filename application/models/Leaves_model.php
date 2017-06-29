@@ -278,6 +278,7 @@ class Leaves_model extends CI_Model {
                 $taken_days = $this->db->get()->result_array();
                 //Count the number of taken days
                 foreach ($taken_days as $taken) {
+                    $summary[$taken['type']][3] = $entitlement['type_id'];
                     $summary[$taken['type']][0] = (float) $taken['taken']; //Taken                    
                 }
                 //Report the number of available days
@@ -309,6 +310,7 @@ class Leaves_model extends CI_Model {
             $this->db->where("leaves.startdate >= DATE_SUB(STR_TO_DATE('" . $refDate . "', '%Y-%m-%d'),INTERVAL 1 YEAR)");
             $this->db->group_by("leaves.type");
             $taken_days = $this->db->get()->result_array();
+            $summary[$compensate_name][3] = 0;
             if (count($taken_days) > 0) {
                 $summary[$compensate_name][0] = (float) $taken_days[0]['taken']; //taken
             } else {
@@ -335,7 +337,8 @@ class Leaves_model extends CI_Model {
                 $planned_days = $this->db->get()->result_array();
                 //Count the number of planned days
                 foreach ($planned_days as $planned) {
-                    $summary[$planned['type']][3] = (float) $planned['planned']; //Planned
+                    $summary[$planned['type']][3] = $entitlement['type_id'];
+                    $summary[$planned['type']][4] = (float) $planned['planned']; //Planned
                     $summary[$planned['type']][2] = 'x'; //Planned
                 }
                 //Report the number of available days
@@ -358,7 +361,8 @@ class Leaves_model extends CI_Model {
                 $requested_days = $this->db->get()->result_array();
                 //Count the number of planned days
                 foreach ($requested_days as $requested) {
-                    $summary[$requested['type']][4] = (float) $requested['requested']; //requested
+                    $summary[$requested['type']][3] = $entitlement['type_id'];
+                    $summary[$requested['type']][5] = (float) $requested['requested']; //requested
                     $summary[$requested['type']][2] = 'x'; //requested
                 }
                 //Report the number of available days

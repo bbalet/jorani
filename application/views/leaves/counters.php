@@ -35,17 +35,17 @@
     <tr>
       <td><?php echo $key; ?></td>
       <td><?php echo round(((float) $value[1] - (float) $value[0]), 3, PHP_ROUND_HALF_DOWN); ?></td>
-      <td><?php echo ((float) $value[0]); ?></td>
+      <td><a href="<?php echo base_url();?>leaves?statuses=3&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[0]); ?></a></td>
       <td><?php echo ((float) $value[1]); ?></td>
-      <?php if (empty($value[3])) { ?>
-      <td></td>
-      <?php } else { ?>
-      <td><?php echo ((float) $value[3]); ?></td>
-      <?php } ?>
       <?php if (empty($value[4])) { ?>
-      <td></td>
+      <td>&nbsp;</td>
       <?php } else { ?>
-      <td><?php echo ((float) $value[4]); ?></td>
+      <td><a href="<?php echo base_url();?>leaves?statuses=1&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[4]); ?></a></td>
+      <?php } ?>
+      <?php if (empty($value[5])) { ?>
+      <td>&nbsp;</td>
+      <?php } else { ?>
+      <td><a href="<?php echo base_url();?>leaves?statuses=2&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[5]); ?></a></td>
       <?php } ?>
     </tr>
   <?php }

@@ -26,6 +26,8 @@ $lang['Requested'] = 'Đã yêu cầu';
 $lang['Planned'] = 'Kệ hoạch';
 $lang['Accepted'] = 'Được chấp nhận';
 $lang['Rejected'] = 'Bị từ chối';
+$lang['Cancellation'] = 'Cancellation';
+$lang['Canceled'] = 'Canceled';
 
 $lang['global_link_doc_page_calendar_individual'] = '';
 $lang['global_link_doc_page_calendar_yearly'] = '';

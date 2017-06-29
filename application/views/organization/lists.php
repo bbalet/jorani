@@ -49,18 +49,43 @@
     <button id="cmdDiscardOrgList" class="btn btn-warning"><?php echo lang('Cancel');?></button>
     <button id="cmdUseThisOrgList" class="btn btn-primary"><?php echo lang('OK');?></button>
 
+<div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
+        <div class="modal-header">
+            <h1><?php echo lang('global_msg_wait');?></h1>
+        </div>
+        <div class="modal-body">
+            <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
+        </div>
+</div>
+
+<div id="frmSelectEmployees" class="modal hide fade">
+    <div class="modal-header">
+        <a href="#" onclick="$('#frmSelectEmployees').modal('hide');" class="close">&times;</a>
+         <h3><?php echo lang('users_create_popup_manager_title');?></h3>
+    </div>
+    <div class="modal-body" id="frmSelectEmployeesBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="select_employees();" class="btn"><?php echo lang('OK');?></a>
+        <a href="#" onclick="$('#frmSelectEmployees').modal('hide');" class="btn"><?php echo lang('Cancel');?></a>
+    </div>
+</div>
+
+    
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/datatable/RowReorder-1.1.1/css/rowReorder.dataTables.min.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo base_url();?>assets/datatable/Select-1.1.2/css/select.dataTables.min.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
-$lang['organization_lists_employees_prompt_new'] = 'Name of the list';
-$lang['organization_lists_employees_confirm_delete'] = 'Are you sure that you want to delete this list?';
-$lang['organization_lists_employees_prompt_rename'] = 'New name of the list';
-
+<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/Select-1.1.2/js/dataTables.select.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>/assets/datatable/RowReorder-1.1.1/js/dataTables.rowReorder.min.js"></script>
 <script type="text/javascript">
 var listId;
 var listName;
 var employeesOrgList;   //DataTable object
 
+//If a list is selected, activate the controls and load the employees
 function toggleCommands() {
     if ($('#list').val() == "") {
         $('#cmdDeleteList').prop("disabled", true);
@@ -75,11 +100,19 @@ function toggleCommands() {
         //Reload the list of employees
         listId = $('#list').val();
         var urlListEmployees = '<?php echo base_url();?>organization/lists/employees?list=' + listId;
-        employeesOrgList.ajax.url( urlListEmployees ).load();
+        $('#frmModalAjaxWait').modal('show');
+        employeesOrgList.ajax.url(urlListEmployees)
+            .load(function() {
+                $("#frmModalAjaxWait").modal('hide');
+            }, true); 
     }
 }
-    
-    
+
+//Pick employees to be added into the list
+function select_employees() {
+
+}
+
 $(function () {
     //Setup Ajax/CSRF
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
@@ -110,6 +143,7 @@ $(function () {
     //Transform the HTML table in a fancy datatable
     employeesOrgList = $('#employeesOrgList').DataTable({
         select: 'multiple',
+        rowReorder: true,
         pageLength: 5,
             columns: [
                 { data: "id" },
@@ -141,21 +175,124 @@ $(function () {
             }
         }
     });
-        
+    
+    employeesOrgList.on( 'row-reorder', function ( e, diff, edit ) {
+        var result = 'Reorder started on row: ' + edit.triggerRow.data()[1] + '<br>';
+        for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
+            var rowData = employeesOrgList.row( diff[i].node ).data(); 
+            result += rowData[1] + ' updated to be in position ' +
+                diff[i].newData + ' (was '+diff[i].oldData+')<br>';
+        }
+        alert( result );
+    });
+    
     $("#list").on('change', function() {
         toggleCommands();
     });
 
+
 /*
-cmdCreateList
-cmdDeleteList
-cmdRenameList
+$route['organization/lists/adduser'] = 'organization/listsAddUser';
+$route['organization/lists/removeuser'] = 'organization/listsRemoveUsser';
+$route['organization/lists/reorder'] = 'organization/listsReorder';
+
 cmdAddUsers
 cmdRemoveUsers
 */
     //Create a new list by ajax. Add the new option into select control
     $("#cmdCreateList").click(function() {
-        
+        bootbox.prompt("<?php echo lang('organization_lists_employees_prompt_new');?>",
+          "<?php echo lang('Cancel');?>",
+          "<?php echo lang('OK');?>", function(result) {
+          if ((result !== null) && (result != '')) {
+            listName = result;
+            //Call ajax endpoint
+            $('#frmModalAjaxWait').modal('show');
+            $.ajax({
+                url: "<?php echo base_url();?>organization/lists/create",
+                type: "POST",
+                data: {
+                    name: listName
+                }
+              }).done(function( data ) {
+                  $('#frmModalAjaxWait').modal('hide');
+                  if ($.isNumeric(data)) {
+                    $('#list').append($('<option>', {value: data, text: listName}));
+                    $('#list option[value="' + data + '"]').attr('selected','selected');
+                  } else {
+                      bootbox.alert(data);
+                  }
+            });//ajax
+          }//have prompt
+        });//bootbox        
+    });
+
+    //Delete a list by ajax. Remove the option from the select control
+    $("#cmdDeleteList").click(function() {
+        bootbox.confirm("<?php echo lang('organization_lists_employees_confirm_delete');?>",
+          "<?php echo lang('Cancel');?>",
+          "<?php echo lang('OK');?>", function(result) {
+          if (result === true) {
+            listId = $('#list').val();
+            //Call ajax endpoint
+            $('#frmModalAjaxWait').modal('show');
+            $.ajax({
+                url: "<?php echo base_url();?>organization/lists/delete",
+                type: "POST",
+                data: {
+                    id: listId
+                }
+              }).done(function( msg ) {
+                  $('#frmModalAjaxWait').modal('hide');
+                  if (msg == "") {
+                    $('#list option:selected').remove();
+                    $('#list').val('');
+                  } else {
+                      bootbox.alert(data);
+                  }
+            });//ajax
+          }//have prompt
+        });//bootbox        
+    });
+
+    //Rename a list by ajax. Change the option from the select control
+    $("#cmdRenameList").click(function() {
+        listId = $('#list').val();
+        listName = $('#list option:selected').text();
+        bootbox.prompt({
+            title: "<?php echo lang('organization_lists_employees_prompt_rename');?>",
+            value: listName,
+            buttons: {
+                confirm: {
+                    label: "<?php echo lang('OK');?>"
+                },
+                cancel: {
+                    label: "<?php echo lang('Cancel');?>"
+                }
+            },
+            callback: function(result) {
+                if ((result !== null) && (result != '')) {
+                    listName = result;
+                    //Call ajax endpoint
+                    $('#frmModalAjaxWait').modal('show');
+                    $.ajax({
+                        url: "<?php echo base_url();?>organization/lists/rename",
+                        type: "POST",
+                        data: {
+                            id: listId,
+                            name: listName
+                        }
+                      }).done(function( msg ) {
+                          $('#frmModalAjaxWait').modal('hide');
+                          if (msg == "") {
+                            $('#list option:selected').text(listName);
+                          } else {
+                              bootbox.alert(data);
+                          }
+                    });//ajax
+                }//have prompt
+            }//function
+        });//bootbox        
     });
 
 });

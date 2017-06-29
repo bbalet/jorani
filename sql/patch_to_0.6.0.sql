@@ -157,3 +157,7 @@ END$$
 DELIMITER ;
 CALL sp_add_comments_leave_history();
 DROP PROCEDURE sp_add_comments_leave_history;
+
+-- New Leave request statuses
+INSERT IGNORE INTO `status` SET `id` = 5, `name` = 'Cancellation';
+INSERT IGNORE INTO `status` SET `id` = 6, `name` = 'Canceled';

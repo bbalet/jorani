@@ -23,10 +23,13 @@ $lang['global_true'] = 'درست';
 $lang['global_false'] = 'غلط';
 $lang['footer_link_go_top'] = 'برو بالا';
 $lang['footer_copyright_notice'] = 'کپی رایت؛ 2014 جورانی';
+
 $lang['Requested'] = 'درخواست شده';
 $lang['Planned'] = 'برنامه ریزی شده';
 $lang['Accepted'] = 'پذیرفته شده';
 $lang['Rejected'] = 'رد شده';
+$lang['Cancellation'] = 'Cancellation';
+$lang['Canceled'] = 'Canceled';
 
 $lang['global_link_doc_page_calendar_individual'] = '';
 $lang['global_link_doc_page_calendar_yearly'] = '';

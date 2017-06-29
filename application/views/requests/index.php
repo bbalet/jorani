@@ -58,7 +58,13 @@
         <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($requests_item['enddatetype']) . ')'; ?></td>
         <td><?php echo $requests_item['duration']; ?></td>
         <td><?php echo $requests_item['type_name']; ?></td>
-        <td><?php echo lang($requests_item['status_name']); ?></td>
+        <?php
+        switch ($requests_item['status']) {
+            case 1: echo "<td><span class='label'>" . lang($requests_item['status_name']) . "</span></td>"; break;
+            case 2: echo "<td><span class='label label-warning'>" . lang($requests_item['status_name']) . "</span></td>"; break;
+            case 3: echo "<td><span class='label label-success'>" . lang($requests_item['status_name']) . "</span></td>"; break;
+            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($requests_item['status_name']) . "</span></td>"; break;
+        }?>
     </tr>
 <?php endforeach ?>
 	</tbody>

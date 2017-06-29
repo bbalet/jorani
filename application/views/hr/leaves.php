@@ -55,7 +55,13 @@
         <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leave['startdatetype']). ')'; ?></td>
         <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leave['enddatetype']) . ')'; ?></td>
         <td><?php echo $leave['duration']; ?></td>
-        <td><?php echo $leave['type_name']; ?></td>
+        <?php
+        switch ($leave['status']) {
+            case 1: echo "<td><span class='label'>" . lang($leave['status_name']) . "</span></td>"; break;
+            case 2: echo "<td><span class='label label-warning'>" . lang($leave['status_name']) . "</span></td>"; break;
+            case 3: echo "<td><span class='label label-success'>" . lang($leave['status_name']) . "</span></td>"; break;
+            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($leave['status_name']) . "</span></td>"; break;
+        }?>
     </tr>
 <?php endforeach ?>
 	</tbody>

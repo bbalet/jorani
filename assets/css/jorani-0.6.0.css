@@ -142,6 +142,24 @@ html, body {
     margin-left:  -35% !important;
 }
 
+/* Dropdown colors depending on the status */
+.dropdown-planned {
+  color: white;
+  background-color: #999 !important;
+}
+.dropdown-requested {
+  color: white;
+  background-color: #f89406 !important;
+}
+.dropdown-accepted {
+  color: white;
+  background-color: #468847 !important;
+}
+.dropdown-rejected {
+  color: white;
+  background-color: #ff0000 !important;
+}
+
 /*Always put Jquery datepicker on the top layer */
 .ui-datepicker{
     z-index: 9999 !important;

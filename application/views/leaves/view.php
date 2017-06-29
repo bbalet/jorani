@@ -36,8 +36,14 @@
     <label for="cause"><?php echo lang('leaves_view_field_cause');?></label>
     <textarea name="cause" readonly><?php echo $leave['cause']; ?></textarea>
     
+<?php $style= "dropdown-rejected";
+switch ($leave['status']) {
+    case 1: $style= "dropdown-planned"; break;
+    case 2: $style= "dropdown-requested"; break;
+    case 3: $style= "dropdown-accepted"; break;
+} ?>
     <label for="status"><?php echo lang('leaves_view_field_status');?></label>
-    <select name="status" readonly>
+    <select name="status" class="<?php echo $style; ?>" readonly>
         <option selected><?php echo lang($leave['status_name']); ?></option>
     </select><br />
 

@@ -3,7 +3,7 @@
  * This diagnostic page helps you to check openssl setup and to generate a pair of keys.
  * Please note that the configuration is not exposed by this page and that the pair of keys
  * is calculated each time the page is reloaded.
- * @copyright  Copyright (c) 2014-2016 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2017 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.4.3
@@ -54,8 +54,7 @@ define('KEY_SIZE', 1024);   //Change the RSA key size
                   </thead>
                   <tbody>
 <?php
-
-$pathLibFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'third_party', 'phpseclib', 'vendor', 'autoload.php')));
+$pathLibFile = realpath(join(DIRECTORY_SEPARATOR, array('vendor', 'autoload.php')));
 include $pathLibFile;
 
 $cnfFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'third_party', 'phpseclib', 'phpseclib', 'openssl.cnf')));

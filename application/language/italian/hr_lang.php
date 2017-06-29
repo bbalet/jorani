@@ -85,6 +85,7 @@ $lang['hr_leaves_popup_delete_message'] = 'Stai per cancellare una richiesta di 
 $lang['hr_leaves_popup_delete_question'] = 'Vuoi proseguire?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Si';
 $lang['hr_leaves_popup_delete_button_no'] = 'No';
+$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
 
 $lang['hr_export_leaves_title'] = 'Elenco ferie richieste';
 $lang['hr_export_leaves_thead_id'] = 'ID';

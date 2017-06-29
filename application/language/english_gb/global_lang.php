@@ -27,6 +27,8 @@ $lang['Requested'] = 'Requested';
 $lang['Planned'] = 'Planned';
 $lang['Accepted'] = 'Accepted';
 $lang['Rejected'] = 'Rejected';
+$lang['Cancellation'] = 'Cancellation';
+$lang['Canceled'] = 'Canceled';
 
 $lang['global_link_doc_page_calendar_individual'] = '';
 $lang['global_link_doc_page_calendar_yearly'] = '';

@@ -42,3 +42,17 @@ $lang['organization_index_error_msg_select_employee'] = 'សូមជ្រើ�
 $lang['organization_index_error_msg_delete_root'] = 'អ្នកមិនអាចលុបអង្គភាព root ។';
 $lang['organization_select_field_search_placeholder'] = 'ស្ចែងរកអង្គភាពមួយ';
 $lang['organization_select_button_search'] = 'ស្ចែងរក';
+
+$lang['organization_lists_modal_title'] = 'Select a list of employees';
+$lang['organization_lists_button_edit_list'] = 'Rename a list';
+$lang['organization_lists_button_add_list'] = 'Add a new list';
+$lang['organization_lists_button_delete_list'] = 'Delete a list';
+$lang['organization_lists_button_add_users'] = 'Add employees';
+$lang['organization_lists_button_add_users'] = 'Remove selected employees';
+$lang['organization_lists_employees_prompt_new'] = 'Name of the list';
+$lang['organization_lists_employees_confirm_delete'] = 'Are you sure that you want to delete this list?';
+$lang['organization_lists_employees_prompt_rename'] = 'New name of the list';
+$lang['organization_lists_employees_thead_id'] = 'ID';
+$lang['organization_lists_employees_thead_firstname'] = 'Firstname';
+$lang['organization_lists_employees_thead_lastname'] = 'Lastname';
+$lang['organization_lists_employees_thead_entity'] = 'Entity';

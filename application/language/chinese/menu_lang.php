@@ -15,6 +15,7 @@ $lang['menu_banner_tip_myprofile'] = '預覽我個人資料';
 $lang['menu_banner_tip_reset'] = '重設密碼';
 $lang['menu_password_popup_title'] = '更改密碼';
 $lang['menu_password_popup_button_cancel'] = '取消';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = '管理';
 $lang['menu_admin_list_users'] = '使用者列表';

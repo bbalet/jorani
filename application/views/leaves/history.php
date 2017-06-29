@@ -102,7 +102,7 @@ if (!empty($leave)) {
         <td><?php echo $objLeave->cause; ?></td>
         <td><?php echo $objLeave->duration; ?></td>
         <td><?php echo $objLeave->type; ?></td>
-        <td><?php echo $objLeave->status; ?></td>
+        <td><?php echo lang($objLeave->status); ?></td>
     </tr>
     <?php endforeach ?>
     </tbody>

@@ -1,29 +1,35 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['db_invalid_connection_str'] = 'Unable to determine the database settings based on the connection string you submitted.';
-$lang['db_unable_to_connect'] = 'Unable to connect to your database server using the provided settings.';
-$lang['db_unable_to_select'] = 'Unable to select the specified database: %s';
-$lang['db_unable_to_create'] = 'Unable to create the specified database: %s';
-$lang['db_invalid_query'] = 'The query you submitted is not valid.';
-$lang['db_must_set_table'] = 'You must set the database table to be used with your query.';
-$lang['db_must_use_set'] = 'You must use the "set" method to update an entry.';
-$lang['db_must_use_index'] = 'You must specify an index to match on for batch updates.';
-$lang['db_batch_missing_index'] = 'One or more rows submitted for batch updating is missing the specified index.';
-$lang['db_must_use_where'] = 'Updates are not allowed unless they contain a "where" clause.';
-$lang['db_del_must_use_where'] = 'Deletes are not allowed unless they contain a "where" or "like" clause.';
-$lang['db_field_param_missing'] = 'To fetch fields requires the name of the table as a parameter.';
-$lang['db_unsupported_function'] = 'This feature is not available for the database you are using.';
-$lang['db_transaction_failure'] = 'Transaction failure: Rollback performed.';
-$lang['db_unable_to_drop'] = 'Unable to drop the specified database.';
-$lang['db_unsuported_feature'] = 'Unsupported feature of the database platform you are using.';
-$lang['db_unsuported_compression'] = 'The file compression format you chose is not supported by your server.';
-$lang['db_filepath_error'] = 'Unable to write data to the file path you have submitted.';
-$lang['db_invalid_cache_path'] = 'The cache path you submitted is not valid or writable.';
-$lang['db_table_name_required'] = 'A table name is required for that operation.';
-$lang['db_column_name_required'] = 'A column name is required for that operation.';
-$lang['db_column_definition_required'] = 'A column definition is required for that operation.';
-$lang['db_unable_to_set_charset'] = 'Unable to set client connection character set: %s';
-$lang['db_error_heading'] = 'A Database Error Occurred';
-
-/* End of file db_lang.php */
-/* Location: ./system/language/english/db_lang.php */
+$lang['db_invalid_connection_str'] = 'Không thể xác định các giá trị bạn chỉnh trên Cơ Sở Dữ Liệu.';
+$lang['db_unable_to_connect'] = 'Không thể kết nối tới Cơ Sở Dữ Liệu (Kiểm tra cấu hình).';
+$lang['db_unable_to_select'] = 'Không thể chọn Cơ Sở Dữ Liệu: %s';
+$lang['db_unable_to_create'] = 'Không thể tạo Cơ Sở Dữ Liệu: %s';
+$lang['db_invalid_query'] = 'Truy vấn không hợp lệ.'; 
+$lang['db_must_set_table'] = 'Bạn phải thiết lập Cơ Sở Dữ Liệu để truy vấn.';
+$lang['db_must_use_set'] = 'Bạn phải sử dụng phương thức "set" để cập nhật một mục.';
+$lang['db_must_use_index'] = 'Bạn phải xác định chỉ số phù hợp để cập nhật hàng loạt.';
+$lang['db_batch_missing_index'] = 'Một hoặc nhiều hàng đang cập nhật thiếu chỉ số theo qui định.';
+$lang['db_must_use_where'] = 'Câp nhật không cho phép trừ khi chúng có "where" trong câu lệnh.';
+$lang['db_del_must_use_where'] = 'Không được phép XÓA trừ khi trong câu lệnh có chứa "where" hoặc "like".';
+$lang['db_field_param_missing'] = 'Để lấy các trường (fields) yêu cầu tên của bảng (table) như là một tham số.';
+$lang['db_unsupported_function'] = 'Tính năng này không tồn tại trong cở sở dữ liệu bạn đang làm việc.';
+$lang['db_transaction_failure'] = 'Thất bại. Đang quay lại các bước...';
+$lang['db_unable_to_drop'] = 'Không thể DROP Cơ Sở Dữ Liệu được chọn.';
+$lang['db_unsupported_feature'] = 'Cơ Sở Dữ Liệu không hỗ trợ các tính năng này.';
+$lang['db_unsupported_compression'] = 'Máy chủ không hỗ trợ các định dạng tập tin nén này.';
+$lang['db_filepath_error'] = 'Không thể ghi dữ liệu vào đường dẫn này.';
+$lang['db_invalid_cache_path'] = 'Sai đường dẫn CACHE hoặc thư mục không cho phép ghi (vui lòng CHMOD 755 hoặc 777).';
+$lang['db_table_name_required'] = 'Thiếu tên BẢNG (Bắt buộc).';
+$lang['db_column_name_required'] = 'Bạn phải ĐỊNH NGHĨA tên cột.';
+$lang['db_column_definition_required'] = 'Thiếu tên CỘT (Bắt buộc).';
+$lang['db_unable_to_set_charset'] = 'Không thể cài đặt kết nối với ký tự: %s';
+$lang['db_error_heading'] = 'Lỗi Cơ Sở Dữ Liệu.';

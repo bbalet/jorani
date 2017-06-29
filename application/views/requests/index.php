@@ -1,7 +1,7 @@
 <?php 
 /**
  * This view displays the list of leave requests submitted to a manager.
- * @copyright  Copyright (c) 2014-2016 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2017 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.1.0
@@ -47,7 +47,7 @@
                 <a href="#" class="lnkAccept" data-id="<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
                 &nbsp;
                 <a href="#" class="lnkReject" data-id="<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
-                <?php if ($this->config->item('enable_history') == TRUE) { ?>
+                <?php if ($this->config->item('enable_history') === TRUE) { ?>
                 &nbsp;
                 <a href="#" class="show-history" data-id="<?php echo $requests_item['leave_id'];?>" title="<?php echo lang('requests_index_thead_tip_history');?>"><i class="icon-time"></i></a>
                 <?php } ?>
@@ -58,7 +58,13 @@
         <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($requests_item['enddatetype']) . ')'; ?></td>
         <td><?php echo $requests_item['duration']; ?></td>
         <td><?php echo $requests_item['type_name']; ?></td>
-        <td><?php echo lang($requests_item['status_name']); ?></td>
+        <?php
+        switch ($requests_item['status']) {
+            case 1: echo "<td><span class='label'>" . lang($requests_item['status_name']) . "</span></td>"; break;
+            case 2: echo "<td><span class='label label-warning'>" . lang($requests_item['status_name']) . "</span></td>"; break;
+            case 3: echo "<td><span class='label label-success'>" . lang($requests_item['status_name']) . "</span></td>"; break;
+            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($requests_item['status_name']) . "</span></td>"; break;
+        }?>
     </tr>
 <?php endforeach ?>
 	</tbody>
@@ -164,7 +170,7 @@ $(document).ready(function() {
         }
      });
      
-    <?php if ($this->config->item('enable_history') == TRUE) { ?>
+    <?php if ($this->config->item('enable_history') === TRUE) { ?>
     //Prevent to load always the same content (refreshed each time)
     $('#frmShowHistory').on('hidden', function() {
         $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');

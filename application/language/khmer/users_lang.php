@@ -127,6 +127,7 @@ $lang['users_employees_thead_id'] = 'លេខអត្តសញ្ញាណ';
 $lang['users_employees_thead_firstname'] = 'នាមត្រកូលអ្នកប្រើប្រាស់';
 $lang['users_employees_thead_lastname'] = 'ឈ្មោះអ្នកប្រើប្រាស់';
 $lang['users_employees_thead_email'] = 'ម៉ែល';
+$lang['users_employees_thead_entity'] = 'Entity';
 
 $lang['users_reset_field_password'] = 'លេខសំងាត់';
 $lang['users_reset_button_reset'] = 'ធ្វើអោយបានត្រឹមត្រូវ';

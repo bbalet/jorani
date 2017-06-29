@@ -130,6 +130,7 @@ $lang['hr_overtime_popup_delete_message'] = '你可以刪除一加班申請,但�
 $lang['hr_overtime_popup_delete_question'] = '你要繼續嗎？';
 $lang['hr_overtime_popup_delete_button_yes'] = '是';
 $lang['hr_overtime_popup_delete_button_no'] = '否';
+$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
 
 $lang['hr_export_overtime_title'] = '加班申請列表';
 $lang['hr_export_overtime_thead_id'] = '證號';

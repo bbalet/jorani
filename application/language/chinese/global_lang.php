@@ -28,6 +28,9 @@ $lang['Requested'] = '要求';
 $lang['Planned'] = '計畫';
 $lang['Accepted'] = '接受';
 $lang['Rejected'] = '拒絕';
+$lang['Cancellation'] = 'Cancellation';
+$lang['Canceled'] = 'Canceled';
+
 $lang['global_link_doc_page_calendar_individual'] = '';
 $lang['global_link_doc_page_calendar_yearly'] = '';
 $lang['global_link_doc_page_calendar_workmates'] = '';

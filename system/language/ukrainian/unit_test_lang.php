@@ -1,25 +1,30 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['ut_test_name']		= 'Test Name';
-$lang['ut_test_datatype']	= 'Test Datatype';
-$lang['ut_res_datatype']	= 'Expected Datatype';
-$lang['ut_result']			= 'Result';
-$lang['ut_undefined']		= 'Undefined Test Name';
-$lang['ut_file']			= 'File Name';
-$lang['ut_line']			= 'Line Number';
-$lang['ut_passed']			= 'Passed';
-$lang['ut_failed']			= 'Failed';
-$lang['ut_boolean']			= 'Boolean';
-$lang['ut_integer']			= 'Integer';
-$lang['ut_float']			= 'Float';
-$lang['ut_double']			= 'Float'; // can be the same as float
-$lang['ut_string']			= 'String';
-$lang['ut_array']			= 'Array';
-$lang['ut_object']			= 'Object';
-$lang['ut_resource']		= 'Resource';
-$lang['ut_null']			= 'Null';
-$lang['ut_notes']			= 'Notes';
-
-
-/* End of file unit_test_lang.php */
-/* Location: ./system/language/english/unit_test_lang.php */
+$lang['ut_test_name'] = 'Ім’я тесту';
+$lang['ut_test_datatype'] = 'Тип даних тесту';
+$lang['ut_res_datatype'] = 'Очікуємий тип даних';
+$lang['ut_result'] = 'Результат';
+$lang['ut_undefined'] = 'Ім’я тесту не визначено';
+$lang['ut_file'] = 'Ім’я файлу';
+$lang['ut_line'] = 'Номер рядка';
+$lang['ut_passed'] = 'Пройдено';
+$lang['ut_failed'] = 'Невдача';
+$lang['ut_boolean'] = 'Булеве';
+$lang['ut_integer'] = 'Ціле';
+$lang['ut_float'] = 'Дійсне';
+$lang['ut_double'] = 'Дійсне';
+$lang['ut_string'] = 'Рядок';
+$lang['ut_array'] = 'Масив';
+$lang['ut_object'] = 'Об’єкт';
+$lang['ut_resource'] = 'Ресурс';
+$lang['ut_null'] = 'NULL';
+$lang['ut_notes'] = 'Примітки';

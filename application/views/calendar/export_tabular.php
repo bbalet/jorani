@@ -113,6 +113,7 @@ $styleBgDayOff = array(
     )
 );
 
+$canSeeType = TRUE;
 $line = 10;
 //Iterate on all employees of the selected entity
 foreach ($tabular as $employee) {
@@ -125,6 +126,14 @@ foreach ($tabular as $employee) {
     //Iterate on all days of the selected month
     $dayNum = 0;
     foreach ($employee->days as $day) {
+        if (($is_hr == TRUE) || 
+                ($is_admin == TRUE) || 
+                ($employee->manager == $user_id) || 
+                ($employee->id == $user_id)) {
+            $canSeeType = TRUE;
+        } else {
+            $canSeeType = FALSE;
+        }
         $dayNum++;
         $col = $this->excel->column_name(3 + $dayNum);
         if (strstr($day->display, ';')) {//Two statuses in the cell
@@ -145,8 +154,8 @@ foreach ($tabular as $employee) {
                 case 2: $sheet->getStyle($col . $line)->applyFromArray($styleBgRequested); break;  // Requested
                 case 3: $sheet->getStyle($col . $line)->applyFromArray($styleBgAccepted); break;  // Accepted
                 case 4: $sheet->getStyle($col . $line)->applyFromArray($styleBgRejected); break;  // Rejected
-                case '5': $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
-                case '6': $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
+                case 5: $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
+                case 6: $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
               }
               switch (intval($statuses[0]))
               {
@@ -154,12 +163,21 @@ foreach ($tabular as $employee) {
                 case 2: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRequested); break;  // Requested
                 case 3: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgAccepted); break;  // Accepted
                 case 4: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Rejected
-                case '5': $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff); break;    //Day off
-                case '6': $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff); break;    //Day off
-              }//Two statuses in the cell
+                case 5: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff); break;    //Day off
+                case 6: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff); break;    //Day off
+              }
+            if ($displayTypes && $canSeeType) {
+                $acronyms = explode(";", $day->acronym);
+                $sheet->setCellValue($col . $line, $acronyms[0]);
+                $sheet->setCellValue($col . ($line + 1), $acronyms[1]);
+            }
         } else {//Only one status in the cell
             switch ($day->display) {
                 case '1':   //All day
+                        if ($displayTypes && $canSeeType) {
+                            $sheet->setCellValue($col . $line, $day->acronym);
+                            $sheet->setCellValue($col . ($line + 1), $day->acronym);
+                        }
                         $sheet->getComment($col . $line)->getText()->createTextRun($day->type);
                         $sheet->getComment($col . ($line + 1))->getText()->createTextRun($day->type);
                         switch ($day->status)
@@ -175,6 +193,9 @@ foreach ($tabular as $employee) {
                         }
                         break;
                 case '2':   //AM
+                    if ($displayTypes && $canSeeType) {
+                        $sheet->setCellValue($col . $line, $day->acronym);
+                    }
                     $sheet->getComment($col . $line)->getText()->createTextRun($day->type);
                     switch ($day->status)
                       {
@@ -185,6 +206,9 @@ foreach ($tabular as $employee) {
                       }
                     break;
                 case '3':   //PM
+                    if ($displayTypes && $canSeeType) {
+                        $sheet->setCellValue($col . ($line + 1), $day->acronym);
+                    }
                     $sheet->getComment($col . ($line + 1))->getText()->createTextRun($day->type);
                     switch ($day->status)
                       {

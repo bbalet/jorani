@@ -15,6 +15,7 @@ $lang['menu_banner_tip_myprofile'] = 'មើលពត៌មានផ្ទាល
 $lang['menu_banner_tip_reset'] = 'ផ្លាស់ប្តូរពាក្យសម្ងាត់';
 $lang['menu_password_popup_title'] = 'ផ្លាស់ប្តូរពាក្យសម្ងាត់';
 $lang['menu_password_popup_button_cancel'] = 'បោះបង់';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = 'អ្នកគ្រប់គ្រង';
 $lang['menu_admin_list_users'] = 'បញ្ជីនៃអ្នកប្រើប្រាស់';

@@ -7,8 +7,7 @@
  * @since      0.1.0
  */
 ?>
-                    </div><!-- /span12 -->
-                </div><!-- /row -->
+
             </div><!-- /container -->
         <div id="push"></div>
     </div><!-- /wrap -->

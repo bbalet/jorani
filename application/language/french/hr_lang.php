@@ -84,7 +84,7 @@ $lang['hr_leaves_validate_mandatory_js_msg'] = '"Le champ " + fieldname + " est 
 $lang['hr_leaves_validate_flash_msg_no_contract'] = 'Il semble que vous n\'ayez pas de contrat. Veuillez contacter un responsable des ressources humaines.';
 $lang['hr_leaves_validate_flash_msg_overlap_period'] = 'Vous ne pouvez pas créer une demande de congé pour deux périodes annuelles de congé. Veuillez créer deux demandes différentes.';
 
-$lang['hr_leaves_title'] = 'Liste des demandes de ';
+$lang['hr_leaves_title'] = 'Liste des demandes de congé';
 $lang['hr_leaves_html_title'] = 'Liste des demandes de congé de l\'employé n°';
 $lang['hr_leaves_thead_tip_edit'] = 'Modifier';
 $lang['hr_leaves_thead_tip_accept'] = 'Accepter';
@@ -103,6 +103,7 @@ $lang['hr_leaves_popup_delete_message'] = 'Vous êtes sur le point de supprimer 
 $lang['hr_leaves_popup_delete_question'] = 'Voulez-vous continuer ?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Oui';
 $lang['hr_leaves_popup_delete_button_no'] = 'Non';
+$lang['hr_leaves_deleted_title'] = 'Liste des demandes supprimées';
 
 $lang['hr_export_leaves_title'] = 'Liste des demandes de congés';
 $lang['hr_export_leaves_thead_id'] = 'N°';

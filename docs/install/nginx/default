@@ -1,6 +1,6 @@
 # 
 # Jorani nginx sample configuration file
-# @copyright  Copyright (c) 2014-2016 Benjamin BALET
+# @copyright  Copyright (c) 2014-2017 Benjamin BALET
 # @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
 # @link            https://github.com/bbalet/jorani
 #
@@ -38,7 +38,7 @@ server {
 #                   application/vnd.wap.xhtml+xml;
 
 	# If file is an asset, set expires and break
-    	location ~* \.(ico|css|js|gif|jpe?g|png)(\?[0-9]+)?$ {
+    	location ~* \.(ico|css|js|gif|jpe?g|png|otf|eot|svg|ttf|woff|woff2)(\?[0-9]+)?$ {
         	expires max;
         	break;
     	}

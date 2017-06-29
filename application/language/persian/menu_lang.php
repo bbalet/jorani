@@ -13,9 +13,9 @@ $lang['menu_banner_welcome'] = 'خوش آمدید';
 $lang['menu_banner_logout'] = 'خروج';
 $lang['menu_banner_tip_myprofile'] = 'نمایش اطلاعات شخصی من';
 $lang['menu_banner_tip_reset'] = 'بازنشانی رمز';
-
 $lang['menu_password_popup_title'] = 'تغییر رمز';
 $lang['menu_password_popup_button_cancel'] = 'لغو';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = 'مدیر';
 $lang['menu_admin_list_users'] = 'لیست کاربران';

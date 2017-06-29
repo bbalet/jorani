@@ -215,6 +215,18 @@ class Auth {
             case 'download_calendar' :
                 return true;
                 break;
+            
+            //Custom lists of employees (filter of tabular calendars)
+            case 'organization_lists_index' :
+            case 'organization_lists_create' :
+            case 'organization_lists_rename' :
+            case 'organization_lists_delete' :
+            case 'organization_lists_add_user' :
+            case 'organization_lists_remove_user' :
+            case 'organization_lists_list_reorder' :
+                return true;
+                break;        
+            
             //Additionnal access logic: filter on the connected user
             //Additionnal access logic: filter on the team of the connected user
             default:

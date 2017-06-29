@@ -8,12 +8,31 @@
  */
 ?>
 
-<div class="row-fluid">
-    <div class="span12">
 
 <h2><?php echo lang('leaves_index_title');?> &nbsp;<?php echo $help;?></h2>
 
 <?php echo $flash_partial_view;?>
+
+<div class="row">
+    <div class="span3">
+        <?php echo lang('leaves_index_thead_type');?>
+        <select name="cboLeaveType" id="cboLeaveType">
+            <option value="" selected></option>
+        <?php foreach ($types as $type): ?>
+            <option value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
+        <?php endforeach ?>
+        </select>&nbsp;&nbsp;
+    </div>
+    <div class="span1">&nbsp;</div>
+    <div class="span8">
+    <span class="label"><input type="checkbox" checked id="chkPlanned" class="filterStatus"> &nbsp;<?php echo lang('Planned');?></span> &nbsp;
+    <span class="label label-success"><input type="checkbox" checked id="chkAccepted" class="filterStatus"> &nbsp;<?php echo lang('Accepted');?></span> &nbsp;
+    <span class="label label-warning"><input type="checkbox" checked id="chkRequested" class="filterStatus"> &nbsp;<?php echo lang('Requested');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkRejected" class="filterStatus"> &nbsp;<?php echo lang('Rejected');?></span> &nbsp;
+    <!--<span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCancellation" class="filterStatus"> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCanceled" class="filterStatus"> &nbsp;<?php echo lang('Canceled');?></span>//-->
+    </div>
+</div> 
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
     <thead>
@@ -78,7 +97,7 @@
                     &nbsp;
                 <?php } ?>
                 <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
-                <?php if ($this->config->item('enable_history') == TRUE) { ?>
+                <?php if ($this->config->item('enable_history') === TRUE) { ?>
                 &nbsp;
                 <a href="#" class="show-history" data-id="<?php echo $leaves_item['id'];?>" title="<?php echo lang('leaves_index_thead_tip_history');?>"><i class="icon-time"></i></a>
                 <?php } ?>
@@ -89,13 +108,18 @@
         <td><?php echo $leaves_item['cause']; ?></td>
         <td><?php echo $leaves_item['duration']; ?></td>
         <td><?php echo $leaves_item['type_name']; ?></td>
-        <td><?php echo lang($leaves_item['status_name']); ?></td>
+        <?php
+        switch ($leaves_item['status']) {
+            case 1: echo "<td><span class='label'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
+            case 2: echo "<td><span class='label label-warning'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
+            case 3: echo "<td><span class='label label-success'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
+            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
+        }?>
     </tr>
 <?php endforeach ?>
     </tbody>
 </table>
-    </div>
-</div>
+
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
@@ -159,13 +183,35 @@
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">
+var leaveTable = null;
+
+//Return a URL parameter identified by 'name'
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+//Apply a filter on the status column
+function filterStatusColumn() {
+    var filter = "^(";
+    if ($('#chkPlanned').prop('checked')) filter += "<?php echo lang('Planned');?>|";
+    if ($('#chkAccepted').prop('checked')) filter += "<?php echo lang('Accepted');?>|";
+    if ($('#chkRequested').prop('checked')) filter += "<?php echo lang('Requested');?>|";
+    if ($('#chkRejected').prop('checked')) filter += "<?php echo lang('Rejected');?>|";
+    if ($('#chkCancellation').prop('checked')) filter += "<?php echo lang('Cancellation');?>|";
+    if ($('#chkCanceled').prop('checked')) filter += "<?php echo lang('Canceled');?>|";
+    filter = filter.slice(0,-1) + ")$";
+    if (filter.indexOf('(') == -1) filter = 'nothing is selected';
+    leaveTable.columns( 6 ).search( filter, true, false ).draw();
+}
+
 $(document).ready(function() {
     $('#frmDeleteLeaveRequest').alert();
     
     //Transform the HTML table in a fancy datatable
-    $('#leaves').dataTable({
+    leaveTable = $('#leaves').DataTable({
         order: [[ 1, "desc" ]],
         language: {
             decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
@@ -206,11 +252,11 @@ $(document).ready(function() {
         $('#frmDeleteLeaveRequest').data('id', id).modal('show');
     });
 
-        //Prevent to load always the same content (refreshed each time)
+    //Prevent to load always the same content (refreshed each time)
     $('#frmDeleteLeaveRequest').on('hidden', function() {
         $(this).removeData('modal');
     });
-    <?php if ($this->config->item('enable_history') == TRUE) { ?>
+    <?php if ($this->config->item('enable_history') === TRUE) { ?>
     $('#frmShowHistory').on('hidden', function() {
         $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
     });
@@ -218,7 +264,15 @@ $(document).ready(function() {
     //Popup show history
     $("#leaves tbody").on('click', '.show-history',  function(){
         $("#frmShowHistory").modal('show');
-        $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history');
+        $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history', function(response, status, xhr) {
+            if (xhr.status == 401) {
+                $("#frmShowHistory").modal('hide');
+                bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
+                    //After the login page, we'll be redirected to the current page 
+                   location.reload();
+                });
+            }
+          });
     });
     <?php } ?>
     
@@ -230,6 +284,44 @@ $(document).ready(function() {
     client.on( "success", function() {
         $('#tipCopied').tooltip('show');
         setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
+    });
+    
+    $('#cboLeaveType').on('change',function(){
+        var leaveType = $("#cboLeaveType option:selected").text();
+        if (leaveType != '') {
+            leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
+        } else {
+            leaveTable.columns( 5 ).search( "", true, false ).draw();
+        }
+    });
+    
+    //Analyze URL to get the filter on one type
+    if (getURLParameter('type') != null) {
+        var leaveType = $("#cboLeaveType option[value='" + getURLParameter('type') + "']").text();
+        $("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
+        leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
+    }
+    
+    //Filter on statuses is a list of inclusion
+    var statuses = getURLParameter('statuses');
+    if (statuses != null) {
+        //Unselect all statuses and select only the statuses passed by URL
+        $(".filterStatus").prop("checked", false);
+        statuses.split(/,/).forEach(function(status) {
+            switch (status) {
+                case '1': $("#chkPlanned").prop("checked", true); break;
+                case '2': $("#chkRequested").prop("checked", true); break;
+                case '3': $("#chkAccepted").prop("checked", true); break;
+                case '4': $("#chkRejected").prop("checked", true); break;
+                case '5': $("#chkCancellation").prop("checked", true); break;
+                case '6': $("#chkCancellation").prop("checked", true); break;
+            }
+        });
+        //$("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
+        filterStatusColumn();
+    }
+    $('.filterStatus').on('change',function(){
+        filterStatusColumn();
     });
 });
 </script>

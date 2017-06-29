@@ -22,10 +22,13 @@ $lang['global_true'] = 'SPRÁVNÝ';
 $lang['global_false'] = 'CHYBNÝ';
 $lang['footer_link_go_top'] = 'Nahoru';
 $lang['footer_copyright_notice'] = '&copy; 2014 Jorani Autoři';
+
 $lang['Requested'] = 'Požádáno';
 $lang['Planned'] = 'Plánováno';
 $lang['Accepted'] = 'Schváleno';
 $lang['Rejected'] = 'Zamítnuto';
+$lang['Cancellation'] = 'Cancellation';
+$lang['Canceled'] = 'Canceled';
 
 $lang['global_link_doc_page_calendar_individual'] = '';
 $lang['global_link_doc_page_calendar_yearly'] = '';

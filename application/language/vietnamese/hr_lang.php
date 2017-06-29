@@ -85,6 +85,7 @@ $lang['hr_leaves_popup_delete_message'] = 'Bạn muốn xóa một đề nghị 
 $lang['hr_leaves_popup_delete_question'] = 'Bạn muốn tiếp tục chứ?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Có';
 $lang['hr_leaves_popup_delete_button_no'] = 'không';
+$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
 
 $lang['hr_export_leaves_title'] = 'Danh sách các yêu cầu nghỉ';
 $lang['hr_export_leaves_thead_id'] = 'ID';

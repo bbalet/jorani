@@ -10,7 +10,7 @@
 CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('menu', $language);?>
 
-<?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
+<?php if ($this->config->item('ldap_enabled') === FALSE) { ?>
 <div id="frmChangeMyPwd" class="modal hide fade">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -36,36 +36,10 @@ $this->lang->load('menu', $language);?>
 </script>
 <?php } ?>
 
-<?php if ($this->config->item('enable_mobile') != FALSE) { ?>
-<div id="frmGenerateQRCode" class="modal hide fade">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-         <h3>QR Code</h3>
-    </div>
-    <div class="modal-body" id="frmGenerateQRCodeBody">
-        <img src="<?php echo base_url();?>assets/images/loading.gif">
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" data-dismiss="modal"><?php echo lang('OK');?></button>
-    </div>
-</div>
-
-<script type="text/javascript">
-    $(function () {
-        //Popup generate a QR Code for mobile access
-        $("#cmdGenerateQRCode").click(function() {
-            $("#frmGenerateQRCode").modal('show');
-            $("#frmGenerateQRCodeBody").load('<?php echo base_url();?>admin/qrcode');
-        });
-        
-    });
-</script>
-<?php } ?>
-
 <div id="wrap">
 <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-          <a href="<?php echo base_url();?>home" class="brand">&nbsp;<img src="<?php echo base_url();?>assets/images/brand.png" height="18" width="18" style="margin-top:-6px;">&nbsp;Jorani</a>
+          <a href="<?php echo base_url();?>" class="brand">&nbsp;<img src="<?php echo base_url();?>assets/images/brand.png" height="18" width="18" style="margin-top:-6px;">&nbsp;Jorani</a>
             <div class="nav-responsive">
                 <ul class="nav">
                     <li><a href="<?php echo base_url();?>leaves" title="<?php echo lang('menu_leaves_list_requests');?>"><i class="icon-list icon-white"></i></a></li>
@@ -130,7 +104,7 @@ $this->lang->load('menu', $language);?>
                       <span class="badge badge-info"><?php echo $requested_leaves_count;?></span>
                       <?php } ?>
                         <?php echo lang('menu_validation_leaves');?></a></li>
-                    <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
+                    <?php if ($this->config->item('disable_overtime') === FALSE) { ?>
                     <li><a href="<?php echo base_url();?>overtime">
                       <?php if ($requested_extra_count > 0) { ?>
                       <span class="badge badge-info"><?php echo $requested_extra_count;?></span>
@@ -148,7 +122,7 @@ $this->lang->load('menu', $language);?>
                     <li><a href="<?php echo base_url();?>leaves/counters"><?php echo lang('menu_leaves_counters');?></a></li>
                     <li><a href="<?php echo base_url();?>leaves"><?php echo lang('menu_leaves_list_requests');?></a></li>
                     <li><a href="<?php echo base_url();?>leaves/create"><?php echo lang('menu_leaves_create_request');?></a></li>
-                    <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
+                    <?php if ($this->config->item('disable_overtime') === FALSE) { ?>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_requests_overtime');?></li>
                     <li><a href="<?php echo base_url();?>extra"><?php echo lang('menu_requests_list_extras');?></a></li>
@@ -166,35 +140,38 @@ $this->lang->load('menu', $language);?>
                       <?php if ($is_manager == TRUE) { ?>
                       <li><a href="<?php echo base_url();?>calendar/collaborators"><?php echo lang('menu_calendar_collaborators');?></a></li>
                       <?php } ?>
+                      <?php if ($this->config->item('disable_department_calendar') == FALSE) { ?>
                       <li><a href="<?php echo base_url();?>calendar/department"><?php echo lang('menu_calendar_department');?></a></li>
-                      <?php if (($is_hr == TRUE) || ($is_admin == TRUE) || ($this->config->item('hide_global_cals_to_users') == FALSE) ) { ?>
+                      <?php } ?>
+                      <?php if (($is_hr == TRUE) || ($is_admin == TRUE) || ($this->config->item('hide_global_cals_to_users') === FALSE) ) { ?>
                       <li><a href="<?php echo base_url();?>calendar/organization"><?php echo lang('menu_calendar_organization');?></a></li>
                       <li><a href="<?php echo base_url();?>calendar/tabular"><?php echo lang('menu_calendar_tabular');?></a></li>
                       <?php } ?>
                   </ul>
                 </li>
+                
+                <li>
+                    <form class="navbar-form pull-left">
+                        <a class="btn btn-warning" href="<?php echo base_url();?>leaves/create"><?php echo lang('menu_leaves_request_button');?></a>
+                    </form>
+                </li>
               </ul>
 
-                <ul class="nav pull-right">
-                    <a href="<?php echo base_url();?>users/myprofile" class="brand"><?php echo $fullname;?></a>
-                    <li><a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user icon-white"></i></a></li>
-                    <?php if ($this->config->item('enable_mobile') != FALSE) { ?>
-                    <li><a href="#" id="cmdGenerateQRCode" title="QR Code"><i class="fa fa-mobile"></i></a></li>
-                    <?php } ?>
-                    <?php if ($this->config->item('ldap_enabled') === FALSE && $this->config->item('saml_enabled') === FALSE) { ?>
-                    <li><a href="#" id="cmdChangePassword" title="<?php echo lang('menu_banner_tip_reset');?>"><i class="icon-lock icon-white"></i></a></li>
-                    <?php }
-                    $urlLogout = 'session/logout';
-                    if ($this->config->item('saml_enabled') === TRUE){
-                        $urlLogout = 'api/slo';
-                    } ?>
-                    <li><a href="<?php echo base_url() . $urlLogout;?>" title="<?php echo lang('menu_banner_logout');?>"><i class="icon-off icon-white"></i></a></li>
-                </ul>
-            </div>
+            <ul class="nav pull-right">
+                <a href="<?php echo base_url();?>users/myprofile" class="brand"><?php echo $fullname;?></a>
+                <li><a href="<?php echo base_url();?>users/myprofile" title="<?php echo lang('menu_banner_tip_myprofile');?>"><i class="icon-user icon-white"></i></a></li>
+                <?php if ($this->config->item('ldap_enabled') === FALSE && $this->config->item('saml_enabled') === FALSE) { ?>
+                <li><a href="#" id="cmdChangePassword" title="<?php echo lang('menu_banner_tip_reset');?>"><i class="icon-lock icon-white"></i></a></li>
+                <?php }
+                $urlLogout = 'session/logout';
+                if ($this->config->item('saml_enabled') === TRUE){
+                    $urlLogout = 'api/slo';
+                } ?>
+                <li><a href="<?php echo base_url() . $urlLogout;?>" title="<?php echo lang('menu_banner_logout');?>"><i class="icon-off icon-white"></i></a></li>
+            </ul>
+        </div>
       </div>
     </div><!-- /.navbar -->
 
     <div class="container-fluid">
-        <div class="row-fluid"><div class="span12">
-                <div class="row-fluid"><div class="span12">&nbsp;</div></div>
-                <div class="row-fluid"><div class="span12">&nbsp;</div></div>
+        <div class="row-fluid"><div class="span12">&nbsp;</div></div>

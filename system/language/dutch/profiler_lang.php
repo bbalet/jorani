@@ -1,25 +1,33 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Pieter Krul
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ */
+defined('BASEPATH') OR exit('Directe toegang tot scripts is niet toegestaan');
 
 $lang['profiler_database']		= 'DATABASE';
-$lang['profiler_controller_info'] = 'CLASS/METHOD';
-$lang['profiler_benchmarks']	= 'BENCHMARKS';
+$lang['profiler_controller_info']	= 'CLASS/METHODE';
+$lang['profiler_benchmarks']		= 'BENCHMARKS';
 $lang['profiler_queries']		= 'QUERIES';
-$lang['profiler_get_data']		= 'GET DATA';
-$lang['profiler_post_data']		= 'POST DATA';
-$lang['profiler_uri_string']	= 'URI STRING';
-$lang['profiler_memory_usage']	= 'MEMORY USAGE';
-$lang['profiler_config']		= 'CONFIG VARIABLES';
-$lang['profiler_session_data']	= 'SESSION DATA';
+$lang['profiler_get_data']		= 'GET-DATA';
+$lang['profiler_post_data']		= 'POST-DATA';
+$lang['profiler_uri_string']		= 'URI-STRING';
+$lang['profiler_memory_usage']		= 'GEHEUGENGEBRUIK';
+$lang['profiler_config']		= 'CONFIG VARIABELEN';
+$lang['profiler_session_data']		= 'SESSIEDATA';
 $lang['profiler_headers']		= 'HTTP HEADERS';
-$lang['profiler_no_db']			= 'Database driver is not currently loaded';
-$lang['profiler_no_queries']	= 'No queries were run';
-$lang['profiler_no_post']		= 'No POST data exists';
-$lang['profiler_no_get']		= 'No GET data exists';
-$lang['profiler_no_uri']		= 'No URI data exists';
-$lang['profiler_no_memory']		= 'Memory Usage Unavailable';
-$lang['profiler_no_profiles']	= 'No Profile data - all Profiler sections have been disabled.';
-$lang['profiler_section_hide']	= 'Hide';
-$lang['profiler_section_show']	= 'Show';
-
-/* End of file profiler_lang.php */
-/* Location: ./system/language/english/profiler_lang.php */
+$lang['profiler_no_db']			= 'Er is op dit moment geen databasedriver geladen.  ';
+$lang['profiler_no_queries']		= 'Er werden geen queries uitgevoerd.  ';
+$lang['profiler_no_post']		= 'Er is geen POST-data aangetroffen';
+$lang['profiler_no_get']		= 'Er is geen GET-data aangetroffen';
+$lang['profiler_no_uri']		= 'Er is geen URI-data aangetroffen';
+$lang['profiler_no_memory']		= 'Geheugengebruik is niet beschikbaar';
+$lang['profiler_no_profiles']		= 'Er is geen Profile-data - alle Profiler-secties zijn uitgeschakeld.';
+$lang['profiler_section_hide']		= 'Verberg';
+$lang['profiler_section_show']		= 'Weergeven';
+$lang['profiler_seconds']		= 'seconden';

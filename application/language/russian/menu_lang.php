@@ -13,9 +13,9 @@ $lang['menu_banner_welcome'] = 'Добро пожаловать';
 $lang['menu_banner_logout'] = 'Выйти';
 $lang['menu_banner_tip_myprofile'] = 'Показать мою личную информацию';
 $lang['menu_banner_tip_reset'] = 'сбросить пароль';
-
 $lang['menu_password_popup_title'] = 'Изменить пароль';
 $lang['menu_password_popup_button_cancel'] = 'Отмена';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = 'Администратор';
 $lang['menu_admin_list_users'] = 'Список пользователей';

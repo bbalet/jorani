@@ -127,6 +127,7 @@ $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Ad';
 $lang['users_employees_thead_lastname'] = 'Soyad';
 $lang['users_employees_thead_email'] = 'E-posta';
+$lang['users_employees_thead_entity'] = 'Entity';
 
 $lang['users_reset_field_password'] = 'Şifre';
 $lang['users_reset_button_reset'] = 'Reset';

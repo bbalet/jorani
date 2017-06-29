@@ -13,9 +13,9 @@ $lang['menu_banner_welcome'] = 'Chào mừng';
 $lang['menu_banner_logout'] = 'Đăng xuất';
 $lang['menu_banner_tip_myprofile'] = 'Xem thông tin cá nhân';
 $lang['menu_banner_tip_reset'] = 'Thay đổi mật khẩu';
-
 $lang['menu_password_popup_title'] = 'Đổi mật khẩu';
 $lang['menu_password_popup_button_cancel'] = 'Hủy bỏ';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = 'Quản trị hệ thống';
 $lang['menu_admin_list_users'] = 'Danh sách người sử dụng';

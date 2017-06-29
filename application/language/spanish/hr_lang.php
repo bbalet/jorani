@@ -85,6 +85,7 @@ $lang['hr_leaves_popup_delete_message'] = 'Estás a punto de borrar una solicitu
 $lang['hr_leaves_popup_delete_question'] = '¿Quieres continuar?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Sí';
 $lang['hr_leaves_popup_delete_button_no'] = 'No';
+$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
 
 $lang['hr_export_leaves_title'] = 'Lista de permisos solicitados';
 $lang['hr_export_leaves_thead_id'] = 'ID';

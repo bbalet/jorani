@@ -8,24 +8,9 @@
  */
 ?>
 
-<div class="row-fluid">
-    <div class="span12">
-
-<?php if($this->session->flashdata('msg')){ ?>
-<div class="alert fade in" id="flashbox">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <?php echo $this->session->flashdata('msg'); ?>
-</div>
- 
-<script type="text/javascript">
-//Flash message
-$(document).ready(function() {
-    $("#flashbox").alert();
-});
-</script>
-<?php } ?>
-
 <h2><?php echo lang('contract_index_title');?> &nbsp;<?php echo $help;?></h2>
+
+<?php echo $flash_partial_view;?>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="contracts" width="100%">
     <thead>
@@ -70,8 +55,6 @@ $(document).ready(function() {
 <?php endforeach ?>
 	</tbody>
 </table>
-	</div>
-</div>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 

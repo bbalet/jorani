@@ -13,9 +13,9 @@ $lang['menu_banner_welcome'] = 'Vítejte';
 $lang['menu_banner_logout'] = 'Odhlásit';
 $lang['menu_banner_tip_myprofile'] = 'Zobrazit mé personální informace';
 $lang['menu_banner_tip_reset'] = 'resetovat heslo';
-
 $lang['menu_password_popup_title'] = 'Změnit heslo';
 $lang['menu_password_popup_button_cancel'] = 'Zrušit';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = 'Správa';
 $lang['menu_admin_list_users'] = 'Seznam uživatelů';

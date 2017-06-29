@@ -14,6 +14,7 @@ $lang['menu_banner_tip_myprofile'] = 'Voir mes informations personelles';
 $lang['menu_banner_tip_reset'] = 'Changer le mot de passe';
 $lang['menu_password_popup_title'] = 'Changer le mot de passe';
 $lang['menu_password_popup_button_cancel'] = 'Annuler';
+$lang['menu_leaves_request_button'] = 'Nouvelle demande';
 
 $lang['menu_admin_title'] = 'Admin';
 $lang['menu_admin_list_users'] = 'Liste des utilisateurs';
@@ -53,10 +54,10 @@ $lang['menu_leaves_list_requests'] = 'Liste des demandes de congé';
 $lang['menu_leaves_create_request'] = 'Faire une demande de congé';
 
 $lang['menu_calendar_title'] = 'Calendriers';
-$lang['menu_calendar_year'] = 'Calendrier annuel';
-$lang['menu_calendar_individual'] = 'Mon calendrier';
+$lang['menu_calendar_year'] = 'Mon calendrier annuel';
+$lang['menu_calendar_individual'] = 'Mon calendrier mensuel';
 $lang['menu_calendar_workmates'] = 'Mes collègues';
 $lang['menu_calendar_collaborators'] = 'Mes collaborateurs';
 $lang['menu_calendar_department'] = 'Service';
-$lang['menu_calendar_organization'] = 'Global';
-$lang['menu_calendar_tabular'] = 'Tabulaire';
+$lang['menu_calendar_organization'] = 'Mensuel global';
+$lang['menu_calendar_tabular'] = 'Tabulaire global';

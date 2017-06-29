@@ -1,18 +1,23 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['ftp_no_connection']			= "Unable to locate a valid connection ID. Please make sure you are connected before peforming any file routines.";
-$lang['ftp_unable_to_connect']		= "Unable to connect to your FTP server using the supplied hostname.";
-$lang['ftp_unable_to_login']		= "Unable to login to your FTP server. Please check your username and password.";
-$lang['ftp_unable_to_makdir']		= "Unable to create the directory you have specified.";
-$lang['ftp_unable_to_changedir']	= "Unable to change directories.";
-$lang['ftp_unable_to_chmod']		= "Unable to set file permissions. Please check your path. Note: This feature is only available in PHP 5 or higher.";
-$lang['ftp_unable_to_upload']		= "Unable to upload the specified file. Please check your path.";
-$lang['ftp_unable_to_download']		= "Unable to download the specified file. Please check your path.";
-$lang['ftp_no_source_file']			= "Unable to locate the source file. Please check your path.";
-$lang['ftp_unable_to_rename']		= "Unable to rename the file.";
-$lang['ftp_unable_to_delete']		= "Unable to delete the file.";
-$lang['ftp_unable_to_move']			= "Unable to move the file. Please make sure the destination directory exists.";
-
-
-/* End of file ftp_lang.php */
-/* Location: ./system/language/english/ftp_lang.php */
+$lang['ftp_no_connection'] = 'Неможливо знайти дійсний ідентифікатор з’єднання. Будь ласка, переконайтесь, що з’єднання встановлено, перш ніж виконувати будь-які операції з файлами.';
+$lang['ftp_unable_to_connect'] = 'Неможливо підключитися до FTP сервера, використовуючи надане ім’я хосту.';
+$lang['ftp_unable_to_login'] = 'Неможливо підключитися до FTP серверу. Будь ласка, перевірте ім’я користувача та пароль.';
+$lang['ftp_unable_to_mkdir'] = 'Неможливо створити каталог з вказаною Вами назвою.';
+$lang['ftp_unable_to_changedir'] = 'Неможливо змінити каталог.';
+$lang['ftp_unable_to_chmod'] = 'Неможливо встановити права доступу до файлів. Будь ласка, перевірте вказаний Вами шлях. Примітка: ця функція доступна тільки в PHP 5 та вище.';
+$lang['ftp_unable_to_upload'] = 'Неможливо відвантажити вказаний файл. Будь ласка, перевірте заданий Вами шлях.';
+$lang['ftp_unable_to_download'] = 'Неможливо завантажити вказаний файл. Будь ласка, перевірте заданий Вами шлях.';
+$lang['ftp_no_source_file'] = 'Неможливо знайти початковий файл. Будь ласка, перевірте заданий Вами шлях.';
+$lang['ftp_unable_to_rename'] = 'Неможливо перейменувати файл.';
+$lang['ftp_unable_to_delete'] = 'Неможливо видалити файл.';
+$lang['ftp_unable_to_move'] = 'Неможливо перемістити файл. Будь ласка, переконайтесь, що каталог призначення існує.';

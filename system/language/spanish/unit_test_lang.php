@@ -1,25 +1,31 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @author	Iban Eguia
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['ut_test_name']		= 'Test Name';
-$lang['ut_test_datatype']	= 'Test Datatype';
-$lang['ut_res_datatype']	= 'Expected Datatype';
-$lang['ut_result']			= 'Result';
-$lang['ut_undefined']		= 'Undefined Test Name';
-$lang['ut_file']			= 'File Name';
-$lang['ut_line']			= 'Line Number';
-$lang['ut_passed']			= 'Passed';
-$lang['ut_failed']			= 'Failed';
-$lang['ut_boolean']			= 'Boolean';
-$lang['ut_integer']			= 'Integer';
-$lang['ut_float']			= 'Float';
-$lang['ut_double']			= 'Float'; // can be the same as float
-$lang['ut_string']			= 'String';
+$lang['ut_test_name']		= 'Nombre del test';
+$lang['ut_test_datatype']	= 'Tipo de datos del test';
+$lang['ut_res_datatype']	= 'Tipo de datos esperado';
+$lang['ut_result']			= 'Resultado';
+$lang['ut_undefined']		= 'Nombre del test indefinido';
+$lang['ut_file']			= 'Nombre del archivo';
+$lang['ut_line']			= 'Número de línea';
+$lang['ut_passed']			= 'Correcto';
+$lang['ut_failed']			= 'Fallido';
+$lang['ut_boolean']			= 'Booleano';
+$lang['ut_integer']			= 'Entero';
+$lang['ut_float']			= 'Coma flotante';
+$lang['ut_double']			= 'Coma flotante'; // can be the same as float
+$lang['ut_string']			= 'Cadena';
 $lang['ut_array']			= 'Array';
-$lang['ut_object']			= 'Object';
-$lang['ut_resource']		= 'Resource';
-$lang['ut_null']			= 'Null';
-$lang['ut_notes']			= 'Notes';
-
-
-/* End of file unit_test_lang.php */
-/* Location: ./system/language/english/unit_test_lang.php */
+$lang['ut_object']			= 'Objeto';
+$lang['ut_resource']		= 'Recurso';
+$lang['ut_null']			= 'Nulo';
+$lang['ut_notes']			= 'Notas';

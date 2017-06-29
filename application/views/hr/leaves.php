@@ -1,6 +1,7 @@
 <?php
 /**
- * This view lists the list leave requests created by an employee (from HR menu).
+ * This view lists the list leave requests created and deleted by an employee
+ * (from HR menu).
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
@@ -44,7 +45,7 @@
                 <a href="<?php echo base_url();?>requests/reject/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_leaves_thead_tip_reject');?>"><i class="icon-remove"></i></a>
                 &nbsp;
                 <a href="#" class="confirm-delete" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('hr_leaves_thead_tip_delete');?>"><i class="icon-trash"></i></a>
-                <?php if ($this->config->item('enable_history') == TRUE) { ?>
+                <?php if ($this->config->item('enable_history') === TRUE) { ?>
                 &nbsp;
                 <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('hr_leaves_thead_tip_history');?>"><i class="icon-time"></i></a>
                 <?php } ?>
@@ -54,7 +55,13 @@
         <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leave['startdatetype']). ')'; ?></td>
         <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leave['enddatetype']) . ')'; ?></td>
         <td><?php echo $leave['duration']; ?></td>
-        <td><?php echo $leave['type_name']; ?></td>
+        <?php
+        switch ($leave['status']) {
+            case 1: echo "<td><span class='label'>" . lang($leave['status_name']) . "</span></td>"; break;
+            case 2: echo "<td><span class='label label-warning'>" . lang($leave['status_name']) . "</span></td>"; break;
+            case 3: echo "<td><span class='label label-success'>" . lang($leave['status_name']) . "</span></td>"; break;
+            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($leave['status_name']) . "</span></td>"; break;
+        }?>
     </tr>
 <?php endforeach ?>
 	</tbody>
@@ -78,7 +85,7 @@
     <div class="span12">&nbsp;</div>
 </div>
 
-<?php if ($this->config->item('enable_history') == TRUE) { ?>
+<?php if ($this->config->item('enable_history') === TRUE) { ?>
 <div class="row-fluid">
     <div class="span12">
         <h2><?php echo lang('hr_leaves_deleted_title');?></h2>
@@ -151,6 +158,7 @@
 
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">
 $(function () {
@@ -200,7 +208,7 @@ $(function () {
     $('#frmDeleteLeaveRequest').on('hidden', function() {
         $(this).removeData('modal');
     });
-    <?php if ($this->config->item('enable_history') == TRUE) { ?>
+    <?php if ($this->config->item('enable_history') === TRUE) { ?>
     //Prevent to load always the same content (refreshed each time)
     $('#frmShowHistory').on('hidden', function() {
         $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
@@ -209,11 +217,27 @@ $(function () {
     //Popup show history
     $("#leaves tbody").on('click', '.show-history',  function(){
         $("#frmShowHistory").modal('show');
-        $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history');
+        $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history', function(response, status, xhr) {
+            if (xhr.status == 401) {
+                $("#frmShowHistory").modal('hide');
+                bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
+                    //After the login page, we'll be redirected to the current page 
+                   location.reload();
+                });
+            }
+          });
     });
     $("#deleted_leaves tbody").on('click', '.show-history',  function(){
         $("#frmShowHistory").modal('show');
-        $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history');
+        $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history', function(response, status, xhr) {
+            if (xhr.status == 401) {
+                $("#frmShowHistory").modal('hide');
+                bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
+                    //After the login page, we'll be redirected to the current page 
+                   location.reload();
+                });
+            }
+          });
     });
     
     $('#deleted_leaves').dataTable({

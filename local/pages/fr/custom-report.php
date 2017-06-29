@@ -13,7 +13,7 @@
                 <select name="cboYear">
                     <?php
                     $entity_name = $this->input->get('txtEntity', TRUE);
-                    if ($this->input->get('cboYear', TRUE) === FALSE) {
+                    if (is_null($this->input->get('cboYear', TRUE))) {
                         $year =  date('Y');
                     } else {
                         $year =  $this->input->get('cboYear');
@@ -136,7 +136,7 @@ $this->db->select('types.name as type_name');
 $this->db->from('leaves');
 $this->db->join('types', 'leaves.type = types.id');
 $this->db->where('leaves.status', 3);
-if ($this->input->get('cboYear', TRUE) === FALSE) {
+if (is_null($this->input->get('cboYear', TRUE))) {
     $this->db->where('YEAR(startdate) = YEAR(CURDATE())');
 } else {
     $this->db->where('YEAR(startdate) = ' . $this->db->escape($this->input->get('cboYear', TRUE)));

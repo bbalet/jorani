@@ -12,6 +12,13 @@
 echo form_open('leavetypes/create', $attributes); ?>
     <label for="name"><?php echo lang('leavetypes_popup_create_field_name');?></label>
     <input type="text" name="name" id="name" pattern=".{1,}" required />
+    <label for="acronym"><?php echo lang('leavetypes_popup_create_field_acronym');?></label>
+    <div class="input-append">
+        <input type="text" name="acronym" id="acronym" />
+        <a id="cmdSuggestAcronym" class="btn btn-primary" title="<?php echo lang('leavetypes_popup_create_button_suggest');?>">
+            <i class="fa fa-magic" aria-hidden="true"></i>
+        </a>
+    </div>
     <label for="deduct_days_off">
         <input type="checkbox" name="deduct_days_off" id="deduct_days_off" />
         <?php echo lang('leavetypes_popup_create_field_deduct');?>
@@ -31,6 +38,15 @@ echo form_open('leavetypes/create', $attributes); ?>
             } else {
                 $('#formCreateLeaveType').submit();
             }
+        });
+        
+        //Suggest an acronym by using the first letters of the leave type name
+        $('#cmdSuggestAcronym').click(function() {
+            var toMatch = $('#name').val();
+            var result = toMatch.replace(/(\w)\w*\W*/g, function (_, i) {
+                return i.toUpperCase();
+              });
+            $('#acronym').val(result);
         });
     });
 </script>

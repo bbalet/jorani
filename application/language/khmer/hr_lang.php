@@ -85,6 +85,7 @@ $lang['hr_leaves_popup_delete_message'] = 'អ្នកត្រូវបាន�
 $lang['hr_leaves_popup_delete_question'] = 'តើអ្នកចង់បន្ត?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'យល់ព្រម';
 $lang['hr_leaves_popup_delete_button_no'] = 'មិនយល់ព្រម';
+$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
 
 $lang['hr_export_leaves_title'] = 'សំណើរសុំឈប់មុនម៉ោង';
 $lang['hr_export_leaves_thead_id'] = 'លេខអត្តសញ្ញាណ';

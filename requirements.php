@@ -1,13 +1,14 @@
 <?php
 /**
  * This diagnostic page helps you to check your setup.
- * @copyright  Copyright (c) 2014-2016 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.3.0
+ * @copyright  Copyright (c) 2014-2017 Benjamin BALET
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.3.0
  */
 
 define('BASEPATH','.');//Make this script works with nginx
+define('ENVIRONMENT','');//Compatibility with CI3 new index
 
 if (function_exists('apache_get_modules')) {
   $modules = apache_get_modules();
@@ -30,49 +31,55 @@ $tmz = @date_default_timezone_get();
 //Check if we can access to the configuration file
 $pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'database.php')));
 $configFileExists = file_exists($pathConfigFile);
-$dbConnError = TRUE;
-$dbSelectDbError = TRUE;
-$dbQueryError = TRUE;
-$dbProcsError = TRUE;
+$dbErrorMessages = array();
+$dbConn = NULL;
+$rowsSchema = NULL;
+$dbConnError = FALSE;
+$dbQueryError = FALSE;
+$dbDbError = FALSE;
+$dbProcsError = FALSE;
 
 if ($configFileExists) {
     include $pathConfigFile;
     //Try to connect to database
-    $dbConn = new mysqli($db['default']['hostname'], $db['default']['username'], $db['default']['password']);
-    $dbConnError = mysqli_connect_errno() ? TRUE : FALSE;
+    try {
+        $dbConn = new PDO($db[$active_group]['dsn'], $db[$active_group]['username'], $db[$active_group]['password']);
+    } catch(PDOException $ex) {
+        $dbConnError = TRUE;
+        array_push($dbErrorMessages, $ex->getMessage());
+    }
     if (!$dbConnError) {
-        $dbConn->select_db($db['default']['database']);
-        $dbSelectDbError = ($dbConn->errno > 0) ? TRUE : FALSE;
-        //Try to get the signature of the schema
-        if (!$dbSelectDbError) {
-            //Examine organization structure
+        //Examine organization structure
+        try {
             $resultOrg = $dbConn->query("SELECT id FROM organization WHERE parent_id=-1");
-            if ($resultOrg !== FALSE) {
-                $rowOrg = $resultOrg->fetch_assoc();
-                $resultOrg->free();;
+        } catch(PDOException $ex) {
+            $dbQueryError = TRUE;
+            array_push($dbErrorMessages, $ex->getMessage());
+        }
+        if (!$dbQueryError) {
+            $rowOrg = $resultOrg->fetch(PDO::FETCH_ASSOC);
 
-                //Try to use a procedure in order to check the install script
-                //We don't know if the user has access to information schema
-                //So we try to call one of the procedures with a parameter returning a small set of results
+            //Try to use a procedure in order to check the install script
+            //We don't know if the user has access to information schema
+            //So we try to call one of the procedures with a parameter returning a small set of results
+            try {
                 $dbConn->query("SELECT GetParentIDByID(0) AS result");
-                $dbProcsError = ($dbConn->errno > 0) ? TRUE : FALSE;
-
-                $sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
-                        . " FROM information_schema.columns"
-                        . " WHERE table_schema =  DATABASE()"
-                        . " GROUP BY TABLE_NAME"
-                        . " ORDER BY TABLE_NAME";
-                $stmt = $dbConn->prepare($sql);
-                $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
-                if (!$dbQueryError) {
-                    $stmt->execute();
-                    $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
-                }
-                if (!$dbQueryError) {
-                    $stmt->bind_result($table, $signature);
-                    $dbQueryError = ($dbConn->errno > 0) ? TRUE : FALSE;
-                }
+            } catch(PDOException $ex) {
+                $dbProcsError = TRUE;
+                array_push($dbErrorMessages, $ex->getMessage());
             }
+            $sql = "SELECT TABLE_NAME, MD5(GROUP_CONCAT(CONCAT(TABLE_NAME, COLUMN_NAME, COALESCE(COLUMN_DEFAULT, ''), IS_NULLABLE, COLUMN_TYPE, COALESCE(COLLATION_NAME, '')) SEPARATOR ', ')) AS signature"
+                    . " FROM information_schema.columns"
+                    . " WHERE table_schema =  DATABASE()"
+                    . " GROUP BY TABLE_NAME"
+                    . " ORDER BY TABLE_NAME";
+            try {
+                $stmt = $dbConn->query($sql);
+            } catch(PDOException $ex) {
+                $dbQueryError = TRUE;
+                array_push($dbErrorMessages, $ex->getMessage());
+            }
+            $rowsSchema = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 }
@@ -152,8 +159,8 @@ if ($configFileExists) {
                       <tr><td><?php if (strtolower($mod_gzip) == "on") {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>
                       &nbsp;Apache module gzip (mod_gzip)</td><td><?php echo $mod_gzip; ?> Improve response times.</td></tr>
                       
-                      <?php if (version_compare(PHP_VERSION, '5.3.0') >= 0) {?>
-                      <tr><td><i class="icon-ok-sign"></i>&nbsp;PHP 5.3+</td>
+                      <?php if (version_compare(PHP_VERSION, '7.0.0') >= 0) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;PHP 7.0+</td>
                       <?php } else { ?>
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;Old PHP version</td>
                       <?php } ?><td>Ignore this message if you are running an exotic PHP runtime</td></tr>
@@ -175,18 +182,24 @@ if ($configFileExists) {
                       <?php } else { ?>
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;<code>mb_strimwidth</code> function doesn't exist</td>
                       <?php } ?><td>PHP must be compiled with <a href="http://php.net/manual/en/mbstring.installation.php" target="_blank">multibyte string support<a>.</td></tr>
-                       
+
+                      <?php if (is_writable(dirname('application/logs/'))) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;Jorani can write into logs folder</td>
+                      <?php } else { ?>
+                      <tr><td><i class="icon-exclamation-sign"></i>&nbsp;Jorani can't write into logs folder</td>
+                      <?php } ?><td>The folder application/logs/ must be writable.</td></tr>
+                      
                       <?php if (is_writable(dirname('local/upload/leaves/'))) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;Jorani can write files</td>
                       <?php } else { ?>
                       <tr><td><i class="icon-exclamation-sign"></i>&nbsp;Jorani can't write files</td>
                       <?php } ?><td>The folder local/upload/leaves/ must be writable.</td></tr>
                                   
-                      <?php if (extension_loaded('mcrypt')) {?>
-                      <tr><td><i class="icon-ok-sign"></i>&nbsp;mcrypt is LOADED</td>
+                      <?php if (extension_loaded('pdo_mysql')) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;pdo_mysql is LOADED</td>
                       <?php } else { ?>
-                      <tr><td><i class="icon-remove-sign"></i>&nbsp;mcrypt IS NOT LOADED.</td>
-                      <?php } ?><td>PHP Extension mcrypt is required for some security features.</td></tr>
+                      <tr><td><i class="icon-remove-sign"></i>&nbsp;PDO/mysql IS NOT LOADED.</td>
+                      <?php } ?><td>PDO/mysql is the recommended database driver.</td></tr>
                       
                       <?php if (extension_loaded('Zend OPcache')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;OPcache is LOADED</td>
@@ -197,8 +210,8 @@ if ($configFileExists) {
                       <?php if (extension_loaded('openssl')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;openssl is LOADED</td>
                       <?php } else { ?>
-                      <tr><td><i class="icon-exclamation-sign"></i>&nbsp;openssl IS NOT LOADED.</td>
-                      <?php } ?><td>PHP Extension openssl speeds up the log in page.</td></tr>
+                      <tr><td><i class="icon-remove-sign"></i>&nbsp;openssl IS NOT LOADED.</td>
+                      <?php } ?><td>PHP Extension openssl is required if you use PHP7.1.</td></tr>
 
                       <?php if (extension_loaded('curl')) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;curl is LOADED</td>
@@ -230,11 +243,6 @@ if ($configFileExists) {
                       <tr><td><i class="icon-exclamation-sign"></i>&nbsp;gd IS NOT LOADED</td>
                       <?php } ?><td>PHP Extension gd2 allows you to use the export to Excel feature.</td></tr>
                       
-                      <?php if (extension_loaded('mysqli')) {?>
-                      <tr><td><i class="icon-ok-sign"></i>&nbsp;mysqli is LOADED</td>
-                      <?php } else { ?>
-                      <tr><td><i class="icon-exclamation-sign"></i>&nbsp;mysqli IS NOT LOADED</td>
-                      <?php } ?><td>mysqli is the recommended database driver.</td></tr>
                   </tbody>
             </table>
 
@@ -266,10 +274,6 @@ if ($configFileExists) {
                       <?php if (!$dbConnError) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database connection</td><td>OK</td></tr>
                       <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Database connection</td><td>Error</td></tr>
                       <?php } ?>
-                      
-                      <?php if (!$dbSelectDbError) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database name</td><td>Found</td></tr>
-                      <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Database name</td><td>Doesn't exist</td></tr>
-                      <?php } ?>
 
                       <?php if (!$dbQueryError) { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Database query</td><td>OK</td></tr>
                       <?php } else { ?><tr><td><i class="icon-remove-sign"></i>&nbsp;Database query</td><td>Error</td></tr>
@@ -286,6 +290,13 @@ if ($configFileExists) {
                             <?php } else { ?><tr><td><i class="icon-ok-sign"></i>&nbsp;Organization structure</td><td>OK</td></tr>
                       <?php } 
                            }?>
+                            
+                      <?php foreach ($dbErrorMessages as $msg) {?>
+                            <tr>
+                                <td><i class="icon-exclamation-sign"></i>&nbsp;Error</td>
+                                <td><?php echo $msg; ?></td>
+                            </tr>
+                      <?php } ?>
                   </tbody>
             </table>
             
@@ -299,12 +310,10 @@ if ($configFileExists) {
                     </tr>
                   </thead>
                   <tbody id="tblSchema">                      
-<?php if (!$dbQueryError) {
-	while ($stmt->fetch()) {  ?>
-                <tr><td><i class="icon-info-sign"></i>&nbsp;<?php echo $table; ?></td><td><?php echo $signature; ?></td></tr>
+<?php if (!$dbConnError && !$dbQueryError) {
+	foreach ($rowsSchema as $row) {  ?>
+                <tr><td><i class="icon-info-sign"></i>&nbsp;<?php echo $row['TABLE_NAME']; ?></td><td><?php echo $row['signature']; ?></td></tr>
 <?php }
-		$stmt->close();
-		if (!$dbConnError) $dbConn->close();
         } else { ?>
                 <tr><td colspan="2"><i>Impossible to query database</i></td></tr>
 <?php } ?>

@@ -84,6 +84,7 @@ $lang['hr_leaves_popup_delete_message'] = 'You are about to delete one leave req
 $lang['hr_leaves_popup_delete_question'] = 'Do you want to proceed?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Yes';
 $lang['hr_leaves_popup_delete_button_no'] = 'No';
+$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
 
 $lang['hr_export_leaves_title'] = 'List of requested leaves';
 $lang['hr_export_leaves_thead_id'] = 'ID';

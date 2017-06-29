@@ -70,6 +70,19 @@ function getUserContext(CI_Controller $controller)
 }
 
 /**
+ * Check if user is connected, redirect to login form otherwise
+ * Set the user context by retrieving infos from session
+ * and load these data into the array passed to the view
+ * @see setUserContext and getUserContext
+ * @author Benjamin BALET <benjamin.balet@gmail.com>
+ */
+function getCIUserContext() {
+    $controller = & get_instance();
+    setUserContext($controller);
+    return getUserContext($controller);
+}
+
+/**
  * Sanitizes an input (GET/POST) coming from outside a form (eg Ajax request)
  * @param string $value value to be cleansed from characters that prevent Jorani to work
  * @return string value where problematic characters have been removed
@@ -97,13 +110,13 @@ function sanitize($value)
 function sendMailByWrapper(CI_Controller $controller, $subject, $message, $to, $cc = NULL)
 {
     $controller->load->library('email');
-    if ($controller->config->item('subject_prefix') != FALSE) {
+    if ($controller->config->item('subject_prefix') !== NULL) {
         $controller->email->subject($controller->config->item('subject_prefix') . ' ' . $subject);
     } else {
        $controller->email->subject('[Jorani] ' . $subject);
     }
     $controller->email->set_encoding('quoted-printable');
-    if ($controller->config->item('from_mail') != FALSE && $controller->config->item('from_name') != FALSE ) {
+    if (($controller->config->item('from_mail') !== NULL) && ($controller->config->item('from_name') !== NULL)) {
         $controller->email->from($controller->config->item('from_mail'), $controller->config->item('from_name'));
     } else {
        $controller->email->from('do.not@reply.me', 'LMS');

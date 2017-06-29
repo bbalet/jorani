@@ -1,22 +1,28 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @author	Stefano Mazzega
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['upload_userfile_not_set']        = "Non &egrave; stato possibile trovare una variabile di POST chiamata userfile.";
-$lang['upload_file_exceeds_limit']      = "La grandezza del file che si vuole caricare supera la grandezza massima impostata nel file di configurazione.";
-$lang['upload_file_exceeds_form_limit'] = "La grandezza del file che si vuole caricare supera la grandezza massima permessa dal form.";
-$lang['upload_file_partial']            = "Il file &egrave; stato caricato solo in parte.";
-$lang['upload_no_temp_directory']       = "Manca la cartella temporanea.";
-$lang['upload_unable_to_write_file']    = "Non &egrave; stato possibile scrivere il file su disco.";
-$lang['upload_stopped_by_extension']    = "L'upload del file &egrave; stato fermato dall'estensione.";
-$lang['upload_no_file_selected']        = "Non &egrave; stato scelto un file da caricare.";
-$lang['upload_invalid_filetype']        = "La tipologia di file che si vuole caricare non &egrave; permessa.";
-$lang['upload_invalid_filesize']        = "L'immagine che si vuole caricare supera le dimensioni massime consentite.";
-$lang['upload_invalid_dimensions']      = "L'immagine che si vuole caricare supera l'altezza o la larghezza massima consentita.";
-$lang['upload_destination_error']       = "&Egrave; stato riscontrato un problema duranto il spostamento del file nella destinazione finale.";
-$lang['upload_no_filepath']             = "Il percorso di caricamente sembra non essere valido.";
-$lang['upload_no_file_types']           = "Non sono stati specificato quali tipologie di file sono consentite.";
-$lang['upload_bad_filename']            = "Il nome del file che &egrave; stato scelto è gi&agrave; presente sul server.";
-$lang['upload_not_writable']            = "La cartella di destinazione del caricamento sembra non avere i permessi di scrittura.";
-
-
-/* End of file upload_lang.php */
-/* Location: ./system/language/italian/upload_lang.php */
+$lang['upload_userfile_not_set'] = 'Impossibile trovare nel post una variabile chiamata userfile.';
+$lang['upload_file_exceeds_limit'] = 'Il file supera le dimensioni massime consentite nel file di configurazione del PHP.';
+$lang['upload_file_exceeds_form_limit'] = 'Il file supera le dimensioni massime consentite dall\'invio del form.';
+$lang['upload_file_partial'] = 'Il file è stato ricevuto solo parzialmente.';
+$lang['upload_no_temp_directory'] = 'La cartella temporanea è mancante.';
+$lang['upload_unable_to_write_file'] = 'Il file non può essere scritto su disco.';
+$lang['upload_stopped_by_extension'] = 'L\'upload del file è stato interrotto dall\'estensione.';
+$lang['upload_no_file_selected'] = 'Non è stato selezionato nessun file da caricare.';
+$lang['upload_invalid_filetype'] = 'Il tipo di file che si sta cercando di caricare non è consentito.';
+$lang['upload_invalid_filesize'] = 'La dimensione del file che si sta cercando di caricare supera il limite consentito.';
+$lang['upload_invalid_dimensions'] = 'L\'immagine che si sta cercando di caricare supera il limite massimo di altezza e larghezza.';
+$lang['upload_destination_error'] = 'Si è verificato un problema durante il tentativo di spostamento del file alla sua destinazione finale.';
+$lang['upload_no_filepath'] = 'Il percorso di upload non è valido.';
+$lang['upload_no_file_types'] = 'Non sono stati specificati i tipi di file permessi.';
+$lang['upload_bad_filename'] = 'Il nome del file che è stato inviato è già presente sul server.';
+$lang['upload_not_writable'] = 'La cartella di upload non è scrivibile.';

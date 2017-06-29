@@ -126,8 +126,11 @@ $lang['users_employees_thead_id'] = '證號';
 $lang['users_employees_thead_firstname'] = '名';
 $lang['users_employees_thead_lastname'] = '姓';
 $lang['users_employees_thead_email'] = 'E-mail';
+$lang['users_employees_thead_entity'] = 'Entity';
+
 $lang['users_reset_field_password'] = '密碼';
 $lang['users_reset_button_reset'] = '重設';
+
 $lang['users_export_title'] = '使用者列表';
 $lang['users_export_thead_id'] = '證號';
 $lang['users_export_thead_firstname'] = '名';

@@ -18,6 +18,7 @@
 <thead>
     <tr>
       <th><?php echo lang('leavetypes_type_thead_id');?></th>
+      <th><?php echo lang('leavetypes_type_thead_acronym');?></th>
       <th><?php echo lang('leavetypes_type_thead_name');?></th>
      <th><?php echo lang('leavetypes_type_thead_deduct');?></th>
     </tr>
@@ -29,6 +30,9 @@
           <?php if ($type['id'] !=0 ) { ?>
           <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="<?php echo lang('leavetypes_type_thead_tip_delete');?>"><i class="icon-trash"></i></a>
           <?php } ?>
+      </td>
+      <td>
+          <?php echo $type['acronym']; ?>
       </td>
       <td>
           <a href="<?php echo base_url();?>leavetypes/edit/<?php echo $type['id'] ?>" data-target="#frmEditLeaveType" data-toggle="modal" title="<?php echo lang('leavetypes_type_thead_tip_edit');?>"><i class="icon-pencil"></i></a>

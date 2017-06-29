@@ -1,28 +1,12 @@
 <?php
 /**
- * CodeIgniter
+ * System messages translation for CodeIgniter(tm)
  *
- * An open source application development framework for PHP 5.2.4 or newer
- *
- * NOTICE OF LICENSE
- *
- * Licensed under the Open Software License version 3.0
- *
- * This source file is subject to the Open Software License (OSL 3.0) that is
- * bundled with this package in the files license.txt / license.rst.  It is
- * also available through the world wide web at this URL:
- * http://opensource.org/licenses/OSL-3.0
- * If you did not receive a copy of the license and are unable to obtain it
- * through the world wide web, please send an email to
- * licensing@ellislab.com so we can send you a copy immediately.
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2013, EllisLab, Inc. (http://ellislab.com/)
- * @license		http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
+ * @author	CodeIgniter community
+ * @author	Kim Chanthoeun
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -30,6 +14,7 @@ $lang['email_must_be_array']            = 'អ៊ីម៉ែល validation meth
 $lang['email_invalid_address']          = 'អាសយដ្ឋានអ៊ីមែលមិនត្រឹមត្រូវ: %s';
 $lang['email_attachment_missing']       = 'មិនអាចកំណត់ទីតាំងឯកសារភ្ជាប់អ៊ីម៉ែលដូចខាងក្រោមតាម: %s';
 $lang['email_attachment_unreadable']    = 'មិនអាចបើកឯកសារភ្ជាប់នេះ: %s';
+$lang['email_no_from']			= 'មិនអាចផ្ញើអ៊ីមែលដោយមិនមាន​អ្នកផ្ញើរ "From"។';
 $lang['email_no_recipients']            = 'អ្នកត្រូវតែរួមបញ្ចូលទាំងអ្នកទទួល: To, Cc, or Bcc';
 $lang['email_send_failure_phpmail']     = 'មិនអាចផ្ញើអ៊ីមែលដោយប្រើ mail() របស់ PHP។​ ម៉ាស៊ីនរបស់អ្នកមិនបានកំណត់លក្ខ័ន​ត្រឹម​ត្រូវ​ដើម្បីផ្ញើសំបុត្រដោយប្រើវិធីសាស្រ្តនេះ។';
 $lang['email_send_failure_sendmail']    = 'មិនអាចផ្ញើអ៊ីមែលដោយប្រើ Sendmail របស់ PHP។​ ម៉ាស៊ីនរបស់អ្នកមិនបានកំណត់លក្ខ័ន​ត្រឹម​ត្រូវ​ដើម្បីផ្ញើសំបុត្រដោយប្រើវិធីសាស្រ្តនេះ។';
@@ -44,6 +29,3 @@ $lang['email_smtp_auth_un']             = 'បរាជ័យក្នុងក�
 $lang['email_smtp_auth_pw']             = 'បរាជ័យក្នុងការផ្ទៀងផ្ទាត់ពាក្យសម្ងាត់។ កំហុស​: %s';
 $lang['email_smtp_data_failure']        = 'មិន​អាច​ផ្ញើ​ទិន្នន័យ : %s នេះ។';
 $lang['email_exit_status']              = 'កូដស្ថានភាពចេញ: %s';
-
-/* End of file email_lang.php */
-/* Location: ./system/language/english/email_lang.php */

@@ -1,7 +1,7 @@
 <?php 
 /**
  * This view displays the list of users.
- * @copyright  Copyright (c) 2014-2016 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2017 Benjamin BALET
  * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link       https://github.com/bbalet/jorani
  * @since      0.1.0
@@ -64,8 +64,6 @@
       <a href="<?php echo base_url();?>users/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('users_index_button_export');?></a>
       &nbsp;
       <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('users_index_button_create_user');?></a>
-      &nbsp;
-      <!--<a href="#" class="btn btn-primary" data-target="#frmImportUsers" data-toggle="modal"><i class="fa fa-upload"></i>&nbsp;<?php echo lang('users_index_button_import_user');?></a>//-->
     </div>
 </div>
 

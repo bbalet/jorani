@@ -15,6 +15,7 @@ $lang['menu_banner_tip_myprofile'] = 'Vedo le mie informazioni personali';
 $lang['menu_banner_tip_reset'] = 'reimposta password';
 $lang['menu_password_popup_title'] = 'Cambio password';
 $lang['menu_password_popup_button_cancel'] = 'Annulla';
+$lang['menu_leaves_request_button'] = 'New request';
 
 $lang['menu_admin_title'] = 'Admin';
 $lang['menu_admin_list_users'] = 'Elenco utenti';

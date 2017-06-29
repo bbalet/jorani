@@ -53,10 +53,10 @@ $route['admin'] = 'admin/settings';
 //Admin : user management
 $route['users/myprofile'] = 'users/myProfile';
 $route['users/employees'] = 'users/employees';
+$route['users/employeesMultiSelect'] = 'users/employeesMultiSelect';
 $route['users/export'] = 'users/export';
 $route['users/reset/(:num)'] = 'users/reset/$1';
 $route['users/create'] = 'users/create';
-$route['users/import'] = 'users/import';
 $route['users/edit/(:num)'] = 'users/edit/$1';
 $route['users/delete/(:num)'] = 'users/delete/$1';
 $route['users/check/login'] = 'users/checkLoginByAjax';
@@ -142,6 +142,14 @@ $route['organization/addemployee'] = 'organization/addemployee';
 $route['organization/delemployee'] = 'organization/delemployee';
 $route['organization/getsupervisor'] = 'organization/getsupervisor';
 $route['organization/setsupervisor'] = 'organization/setsupervisor';
+$route['organization/lists'] = 'organization/listsIndex';
+$route['organization/lists/employees'] = 'organization/listsEmployees';
+$route['organization/lists/create'] = 'organization/listsCreate';
+$route['organization/lists/rename'] = 'organization/listsRename';
+$route['organization/lists/delete'] = 'organization/listsDelete';
+$route['organization/lists/adduser'] = 'organization/listsAddUser';
+$route['organization/lists/removeuser'] = 'organization/listsRemoveUsser';
+$route['organization/lists/reorder'] = 'organization/listsReorder';
 $route['organization'] = 'organization';
 
 //_______________________________________________
@@ -152,8 +160,9 @@ $route['calendar/collaborators'] = 'calendar/collaborators';
 $route['calendar/organization'] = 'calendar/organization';
 $route['calendar/department'] = 'calendar/department';
 $route['calendar/tabular'] = 'calendar/tabular';
-$route['calendar/tabular/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabular/$1/$2/$3/$4';
-$route['calendar/tabular/export/(:num)/(:num)/(:num)/(:any)'] = 'calendar/exportTabular/$1/$2/$3/$4';
+$route['calendar/tabular/(:num)/(:num)/(:num)/(:any)/(:any)'] = 'calendar/tabular/$1/$2/$3/$4/$5';
+$route['calendar/tabular/partial/(:num)/(:num)/(:num)/(:any)/(:any)'] = 'calendar/tabularPartial/$1/$2/$3/$4/$5';
+$route['calendar/tabular/export/(:num)/(:num)/(:num)/(:any)/(:any)'] = 'calendar/exportTabular/$1/$2/$3/$4/$5';
 $route['calendar/year/(:num)/(:num)'] = 'calendar/year/$1/$2';
 $route['calendar/year/(:num)'] = 'calendar/year/$1';
 $route['calendar/year'] = 'calendar/year';
@@ -289,11 +298,16 @@ $route['ics/ical/(:num)'] = 'ics/ical/$1';
 
 //_______________________________________________
 //Session management
-$route['session/login'] = 'session/login';
-$route['session/logout'] = 'session/logout';
-$route['session/oauth2'] = 'session/loginOAuth2';
-$route['session/language'] = 'session/language';
-$route['session/forgetpassword'] = 'session/forgetpassword';
+$route['session/login'] = 'connection/login';
+$route['session/logout'] = 'connection/logout';
+$route['session/oauth2'] = 'connection/loginOAuth2';
+$route['session/language'] = 'connection/language';
+$route['session/forgetpassword'] = 'connection/forgetpassword';
+$route['api/metadata'] = 'connection/metadata';
+$route['api/acs'] = 'connection/acs';
+$route['api/slo'] = 'connection/slo';
+$route['api/sls'] = 'connection/sls';
+$route['api/sso'] = 'connection/sso';
 
 //_______________________________________________
 //Experimental mobile endpoint
@@ -304,13 +318,13 @@ $route['mobile/notifications'] = 'mobile/notifications';
 $route['mobile/leaves/(:num)'] = 'mobile/leaves/$1';
 
 //_______________________________________________
-//Default controllers
-$route['default_controller'] = 'leaves';
-$route['notfound'] = 'pages/notfound';
-$route['(:any)'] = 'pages/view/$1';
-
-//_______________________________________________
 //Authorization endpoint
 $route['api/authorization/authorize'] = 'authorization/authorize';
 $route['api/authorization/login'] = 'authorization/login';
 $route['api/authorization/userinfo'] = 'authorization/userinfo';
+
+//_______________________________________________
+//Default controllers
+$route['default_controller'] = 'leaves';
+$route['notfound'] = 'pages/notfound';
+$route['(:any)'] = 'pages/view/$1';

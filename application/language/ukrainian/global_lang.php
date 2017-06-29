@@ -27,6 +27,8 @@ $lang['Requested'] = 'Запитано';
 $lang['Planned'] = 'Заплановано';
 $lang['Accepted'] = 'Затверджено';
 $lang['Rejected'] = 'Відхилено';
+$lang['Cancellation'] = 'Cancellation';
+$lang['Canceled'] = 'Canceled';
 
 $lang['global_link_doc_page_calendar_individual'] = '';
 $lang['global_link_doc_page_calendar_yearly'] = '';

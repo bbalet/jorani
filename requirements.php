@@ -183,6 +183,12 @@ if ($configFileExists) {
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;<code>mb_strimwidth</code> function doesn't exist</td>
                       <?php } ?><td>PHP must be compiled with <a href="http://php.net/manual/en/mbstring.installation.php" target="_blank">multibyte string support<a>.</td></tr>
 
+                      <?php if (function_exists('json_encode')) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;<code>json_encode</code> function exists</td>
+                      <?php } else { ?>
+                      <tr><td><i class="icon-remove-sign"></i>&nbsp;<code>json_encode</code> function doesn't exist</td>
+                      <?php } ?><td>PHP must be compiled with <a href="http://php.net/manual/en/json.installation.php" target="_blank">json support<a>.</td></tr>
+                                  
                       <?php if (is_writable(dirname('application/logs/'))) {?>
                       <tr><td><i class="icon-ok-sign"></i>&nbsp;Jorani can write into logs folder</td>
                       <?php } else { ?>

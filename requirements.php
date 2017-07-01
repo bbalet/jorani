@@ -10,15 +10,16 @@
 define('BASEPATH','.');//Make this script works with nginx
 define('ENVIRONMENT','');//Compatibility with CI3 new index
 
+$mod_rewrite =  getenv('HTTP_MOD_REWRITE');
 if (function_exists('apache_get_modules')) {
   $modules = apache_get_modules();
-  $mod_rewrite = in_array('mod_rewrite', $modules);
+  $mod_rewrite = in_array('mod_rewrite', $modules)?TRUE:FALSE;
 } else {
-  $mod_rewrite =  getenv('HTTP_MOD_REWRITE')=='On' ? TRUE : FALSE ;
+  $mod_rewrite =  getenv('HTTP_MOD_REWRITE')=='On'?TRUE:FALSE;
 }
 
+$env = is_null(getenv('CI_ENV'))?'':getenv('CI_ENV');
 $allow_overwrite =  getenv('ALLOW_OVERWRITE');
-$mod_rewrite =  getenv('HTTP_MOD_REWRITE');
 $server_software = getenv('SERVER_SOFTWARE');
 $mod_gzip = getenv('HTTP_MOD_GZIP');
 $rowOrg = NULL;
@@ -29,7 +30,7 @@ if ($allow_overwrite == "") $allow_overwrite = '<b>Off</b>';
 $tmz = @date_default_timezone_get();
 
 //Check if we can access to the configuration file
-$pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'database.php')));
+$pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', $env, 'database.php')));
 $configFileExists = file_exists($pathConfigFile);
 $dbErrorMessages = array();
 $dbConn = NULL;
@@ -148,6 +149,10 @@ if ($configFileExists) {
                     </tr>
                   </thead>
                   <tbody id="tblServer">
+                      <?php if ($env != '') {?>
+                      <tr><td><i class="icon-info-sign"></i>&nbsp;Environment</td><td><?php echo $env; ?></td></tr>
+                      <?php } ?>
+                          
                       <tr><td><i class="icon-info-sign"></i>&nbsp;Server software</td><td><?php echo $server_software; ?></td></tr>
 
                       <tr><td><?php if (strtolower($allow_overwrite) == "on") {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>
@@ -159,8 +164,8 @@ if ($configFileExists) {
                       <tr><td><?php if (strtolower($mod_gzip) == "on") {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>
                       &nbsp;Apache module gzip (mod_gzip)</td><td><?php echo $mod_gzip; ?> Improve response times.</td></tr>
                       
-                      <?php if (version_compare(PHP_VERSION, '7.0.0') >= 0) {?>
-                      <tr><td><i class="icon-ok-sign"></i>&nbsp;PHP 7.0+</td>
+                      <?php if (version_compare(PHP_VERSION, '5.6.0') >= 0) {?>
+                      <tr><td><i class="icon-ok-sign"></i>&nbsp;PHP 5.6.0+</td>
                       <?php } else { ?>
                       <tr><td><i class="icon-remove-sign"></i>&nbsp;Old PHP version</td>
                       <?php } ?><td>Ignore this message if you are running an exotic PHP runtime</td></tr>

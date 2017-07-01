@@ -8,10 +8,11 @@
  */
 
 define('BASEPATH', '.'); //Make this script works with nginx
+$env = is_null(getenv('CI_ENV'))?'':getenv('CI_ENV');
 if (!defined('LDAP_OPT_DIAGNOSTIC_MESSAGE')) {
     define('LDAP_OPT_DIAGNOSTIC_MESSAGE', 0x0032);
 }
-//Configuration values are taken from application/config/config.php
+//Configuration values are taken from application/config/(env)/config.php
 //This script may take some time especially if the LDAP is unreachable
 //-----------------------------------------------------------------
 //Please enter a valid username and password
@@ -43,8 +44,8 @@ define('LDAP_PASSWORD', '');  //This is the password we will use to bind to LDAP
 
 <?php
 //Check if we can access to the configuration file
-$pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'config.php')));
-$pathDbFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'database.php')));
+$pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', $env, 'config.php')));
+$pathDbFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', $env, 'database.php')));
 $configFileExists = file_exists($pathConfigFile);
 $dBFileExists = file_exists($pathDbFile);
 

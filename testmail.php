@@ -9,7 +9,8 @@
  */
 
 define('BASEPATH', '.'); //Make this script works with nginx
-//Configuration values are taken from application/config/email.php
+$env = is_null(getenv('CI_ENV'))?'':getenv('CI_ENV');
+//Configuration values are taken from application/config/(env)/email.php
 //-----------------------------------------------------------------
 //Please enter a valid target email address. A test email will be sent here
 define('EMAIL_ADDRESS', '');
@@ -40,8 +41,8 @@ define('EMAIL_ADDRESS', '');
 
 <?php
 //Check if we can access to the configuration file
-$pathCIConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'config.php')));
-$pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'email.php')));
+$pathCIConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', $env, 'config.php')));
+$pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', $env, 'email.php')));
 $configCIFileExists = file_exists($pathCIConfigFile);
 $configFileExists = file_exists($pathConfigFile);
 

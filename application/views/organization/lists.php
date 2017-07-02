@@ -13,15 +13,13 @@
 
 <div class="row-fluid">
     <div class="span12">
-
-        <label for="list">TODO List</label>
-
+        
 <div class="input-prepend input-append">
     <button id="cmdDeleteList" class="btn btn-danger" title="<?php echo lang('organization_lists_button_delete_list');?>"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
     <button id="cmdRenameList" class="btn btn-primary" title="<?php echo lang('organization_lists_button_edit_list');?>"><i class="fa fa-pencil" aria-hidden="true"></i></button>
     <button id="cmdCreateList" class="btn btn-primary" title="<?php echo lang('organization_lists_button_add_list');?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
-    <select id="list" name="list">
-        <option value="" selected="true"></option>
+    <select id="cboList" name="cboList">
+        <option value="-1" selected="true"></option>
 <?php foreach ($lists as $listItem): ?>
         <option value="<?php echo $listItem['id'];?>"><?php echo $listItem['name'];?></option>
 <?php endforeach ?>
@@ -45,17 +43,13 @@
 	</div>
 </div>
 
-    
-    <button id="cmdDiscardOrgList" class="btn btn-warning"><?php echo lang('Cancel');?></button>
-    <button id="cmdUseThisOrgList" class="btn btn-primary"><?php echo lang('OK');?></button>
-
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
-        <div class="modal-header">
-            <h1><?php echo lang('global_msg_wait');?></h1>
-        </div>
-        <div class="modal-body">
-            <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
-        </div>
+    <div class="modal-header">
+        <h1><?php echo lang('global_msg_wait');?></h1>
+    </div>
+    <div class="modal-body">
+        <img src="<?php echo base_url();?>assets/images/loading.gif"  align="middle">
+    </div>
 </div>
 
 <div id="frmSelectEmployees" class="modal hide fade">
@@ -84,10 +78,11 @@
 var listId;
 var listName;
 var employeesOrgList;   //DataTable object
+var urlListEmployees;
 
 //If a list is selected, activate the controls and load the employees
 function toggleCommands() {
-    if ($('#list').val() == "") {
+    if ($('#cboList').val() == "") {
         $('#cmdDeleteList').prop("disabled", true);
         $('#cmdRenameList').prop("disabled", true);
         $('#cmdAddUsers').prop("disabled", true);
@@ -98,8 +93,8 @@ function toggleCommands() {
         $('#cmdAddUsers').prop("disabled", false);
         $('#cmdRemoveUsers').prop("disabled", false);
         //Reload the list of employees
-        listId = $('#list').val();
-        var urlListEmployees = '<?php echo base_url();?>organization/lists/employees?list=' + listId;
+        listId = $('#cboList').val();
+        urlListEmployees = '<?php echo base_url();?>organization/lists/employees?list=' + listId;
         $('#frmModalAjaxWait').modal('show');
         employeesOrgList.ajax.url(urlListEmployees)
             .load(function() {
@@ -135,10 +130,6 @@ $(function () {
             bootbox.alert("<?php echo lang('global_ajax_error');?>");
         }
       });
-    
-
-    //Toggle buttons
-    toggleCommands();
     
     //Transform the HTML table in a fancy datatable
     employeesOrgList = $('#employeesOrgList').DataTable({
@@ -186,19 +177,16 @@ $(function () {
         alert( result );
     });
     
-    $("#list").on('change', function() {
+    $("#cboList").on('change', function() {
         toggleCommands();
     });
 
+//$route['organization/lists/adduser'] = 'organization/listsAddUser';
+//$route['organization/lists/removeuser'] = 'organization/listsRemoveUsser';
+//$route['organization/lists/reorder'] = 'organization/listsReorder';
+//cmdAddUsers
+//cmdRemoveUsers
 
-/*
-$route['organization/lists/adduser'] = 'organization/listsAddUser';
-$route['organization/lists/removeuser'] = 'organization/listsRemoveUsser';
-$route['organization/lists/reorder'] = 'organization/listsReorder';
-
-cmdAddUsers
-cmdRemoveUsers
-*/
     //Create a new list by ajax. Add the new option into select control
     $("#cmdCreateList").click(function() {
         bootbox.prompt("<?php echo lang('organization_lists_employees_prompt_new');?>",
@@ -217,8 +205,8 @@ cmdRemoveUsers
               }).done(function( data ) {
                   $('#frmModalAjaxWait').modal('hide');
                   if ($.isNumeric(data)) {
-                    $('#list').append($('<option>', {value: data, text: listName}));
-                    $('#list option[value="' + data + '"]').attr('selected','selected');
+                    $('#cboList').append($('<option>', {value: data, text: listName}));
+                    $('#cboList option[value="' + data + '"]').attr('selected','selected');
                   } else {
                       bootbox.alert(data);
                   }
@@ -233,7 +221,7 @@ cmdRemoveUsers
           "<?php echo lang('Cancel');?>",
           "<?php echo lang('OK');?>", function(result) {
           if (result === true) {
-            listId = $('#list').val();
+            listId = $('#cboList').val();
             //Call ajax endpoint
             $('#frmModalAjaxWait').modal('show');
             $.ajax({
@@ -245,8 +233,8 @@ cmdRemoveUsers
               }).done(function( msg ) {
                   $('#frmModalAjaxWait').modal('hide');
                   if (msg == "") {
-                    $('#list option:selected').remove();
-                    $('#list').val('');
+                    $('#cboList option:selected').remove();
+                    $('#cboList').val('');
                   } else {
                       bootbox.alert(data);
                   }
@@ -257,8 +245,8 @@ cmdRemoveUsers
 
     //Rename a list by ajax. Change the option from the select control
     $("#cmdRenameList").click(function() {
-        listId = $('#list').val();
-        listName = $('#list option:selected').text();
+        listId = $('#cboList').val();
+        listName = $('#cboList option:selected').text();
         bootbox.prompt({
             title: "<?php echo lang('organization_lists_employees_prompt_rename');?>",
             value: listName,
@@ -285,7 +273,7 @@ cmdRemoveUsers
                       }).done(function( msg ) {
                           $('#frmModalAjaxWait').modal('hide');
                           if (msg == "") {
-                            $('#list option:selected').text(listName);
+                            $('#cboList option:selected').text(listName);
                           } else {
                               bootbox.alert(data);
                           }
@@ -295,5 +283,7 @@ cmdRemoveUsers
         });//bootbox        
     });
 
+    toggleCommands();
 });
+
 </script>

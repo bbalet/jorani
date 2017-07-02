@@ -1123,7 +1123,7 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE) {
-        //Mangage paramaters
+        //Find default values for parameters (passed by ref)
         if ($month==0) $month = date("m");
         if ($year==0) $year = date("Y");
         $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
@@ -1140,11 +1140,33 @@ class Leaves_model extends CI_Model {
         $tabular = array();
         
         //We must show all users of the departement
-        $this->load->model('dayoffs_model');
         $this->load->model('organization_model');
         $employees = $this->organization_model->allEmployees($entity, $children);
         foreach ($employees as $employee) {
             $tabular[$employee->id] = $this->linear($employee->id, $month, $year, TRUE, TRUE, TRUE, FALSE);
+        }
+        return $tabular;
+    }
+    
+    /**
+     * Leave requests of users of a list (custom list built by user)
+     * @param int $list List identifier
+     * @param int $month Month number
+     * @param int $year Year number
+     * @return array Array of objects containing leave details
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function tabularList($list, &$month=0, &$year=0) {
+        //Find default values for parameters (passed by ref)
+        if ($month==0) $month = date("m");
+        if ($year==0) $year = date("Y");
+        $tabular = array();
+        
+        //We must show all users of the departement
+        $this->load->model('lists_model');
+        $employees = $this->lists_model->getListOfEmployees($list);
+        foreach ($employees as $employee) {
+            $tabular[$employee['id']] = $this->linear($employee['id'], $month, $year, TRUE, TRUE, TRUE, FALSE);
         }
         return $tabular;
     }

@@ -268,4 +268,15 @@ if (count($tabular) > 0) {?>
     }?>
   </tbody>
 </table>
+<?php } else { ?>
+<div class="container">
+  <div class="row"><div class="span12"></div></div>
+  <div class="row"><div class="span12"></div></div>
+  <div class="row">
+      <div class="span12 text-center">
+    <i class="fa fa-calendar-times-o fa-5x" aria-hidden="true"></i>
+      </div>
+  </div>
+</div>
 <?php } ?>
+

@@ -353,6 +353,65 @@ class Calendar extends CI_Controller {
     }
     
     /**
+     * Display a partial tabular widget. Used to reload only a part of the page.
+     * The difference with tabularPartial function is that this view is not available
+     * in public mode and that the list of employees is taken from a custom list
+     * built by the user.
+     * @param int $id identifier of the list
+     * @param int $month Month number
+     * @param int $year Year number
+     * @param bool $displayTypes If TRUE, display leave types, FALSE otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function tabularPartialFromList($id, $month=0, $year=0, $displayTypes=TRUE) {
+        setUserContext($this);
+        $this->lang->load('global', $this->language);
+        $this->lang->load('calendar', $this->language);
+        $this->auth->checkIfOperationIsAllowed('organization_calendar');
+        $data = getUserContext($this);
+        $this->load->model('leaves_model');
+        $data['mode'] = 'connected';
+        $data['tabular'] = $this->leaves_model->tabularList($id, $month, $year);
+        $data['entity'] = $id;
+        $data['month'] = $month;
+        $data['year'] = $year;
+        $data['children'] = FALSE;  //For compatibility
+        $data['displayTypes'] = $displayTypes;
+        $this->load->view('calendar/tabular_partial', $data);
+    }
+    
+    /**
+     * Export the tabular calendar into Excel. The presentation differs a bit according to the limitation of Excel
+     * We'll get one line for the morning and one line for the afternoon
+     * @param int $id identifier of the list
+     * @param int $month Month number
+     * @param int $year Year number
+     * @param bool $displayTypes If TRUE, display leave types, FALSE otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function exportTabularFromList($id=-1, $month=0, $year=0, $displayTypes=TRUE) {
+        $data = array();
+        setUserContext($this);
+        $language = $this->language;
+        $data = getUserContext($this);
+        $this->lang->load('calendar', $language);
+        $this->lang->load('global', $language);
+        $this->load->model('lists_model');
+        $this->load->model('leaves_model');
+        $this->load->library('excel');
+        $data['id'] = $id;
+        $data['entityName'] = $this->lists_model->getName($id);
+        $data['month'] = $month;
+        $dateObj = DateTime::createFromFormat('!m', $month);
+        $data['monthName'] = lang($dateObj->format('F'));
+        $data['year'] = $year;
+        $data['children'] = FALSE; //For compatibility
+        $data['displayTypes'] = $displayTypes;
+        $data['tabular'] = $this->leaves_model->tabularList($id, $month, $year);
+        $this->load->view('calendar/export_tabular', $data);
+    }
+    
+    /**
      * Export the tabular calendar into Excel. The presentation differs a bit according to the limitation of Excel
      * We'll get one line for the morning and one line for the afternoon
      * @param int $id identifier of the entity
@@ -381,10 +440,14 @@ class Calendar extends CI_Controller {
         $this->load->model('leaves_model');
         $this->load->library('excel');
         $data['id'] = $id;
+        $data['entityName'] = $this->organization_model->getName($id);
         $data['month'] = $month;
+        $dateObj = DateTime::createFromFormat('!m', $month);
+        $data['monthName'] = lang($dateObj->format('F'));
         $data['year'] = $year;
         $data['children'] = $children;
         $data['displayTypes'] = $displayTypes;
+        $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);
         $this->load->view('calendar/export_tabular', $data);
     }
     

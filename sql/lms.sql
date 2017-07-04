@@ -496,6 +496,7 @@ CREATE TABLE IF NOT EXISTS `leaves_history` (
   `enddatetype` varchar(12) DEFAULT NULL,
   `duration` decimal(10,2) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
+  `comments` TEXT NULL DEFAULT NULL COMMENT 'Comments on leave request',
   `change_id` int(11) NOT NULL AUTO_INCREMENT,
   `change_type` int(11) NOT NULL,
   `changed_by` int(11) NOT NULL,

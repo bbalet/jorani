@@ -8,14 +8,40 @@
  */
 ?>
 
-<div class="row-fluid">
-    <div class="span12">
-
 <h2><?php echo lang('requests_index_title');?><?php echo $help;?></h2>
 
 <?php echo $flash_partial_view;?>
 
 <p><?php echo lang('requests_index_description');?></p>
+
+<div class="row">
+    <div class="span3">
+        <?php echo lang('requests_index_thead_type');?>
+        <select name="cboLeaveType" id="cboLeaveType">
+            <option value="" selected></option>
+        <?php foreach ($types as $type): ?>
+            <option value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
+        <?php endforeach ?>
+        </select>&nbsp;&nbsp;
+    </div>
+<?php
+$disable = "";
+$checked = "checked";
+if ($showAll == FALSE) {
+    $disable = "disabled";
+    $checked = "";
+}
+?>
+    <div class="span1">&nbsp;</div>
+    <div class="span8">
+    <span class="label"><input type="checkbox" <?php echo $checked;?> id="chkPlanned" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Planned');?></span> &nbsp;
+    <span class="label label-success"><input type="checkbox" <?php echo $checked;?> id="chkAccepted" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Accepted');?></span> &nbsp;
+    <span class="label label-warning"><input type="checkbox" checked id="chkRequested" class="filterStatus"> &nbsp;<?php echo lang('Requested');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" <?php echo $checked;?> id="chkRejected" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Rejected');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" <?php echo $checked;?> id="chkCancellation" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" <?php echo $checked;?> id="chkCanceled" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Canceled');?></span>
+    </div>
+</div> 
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
     <thead>
@@ -69,8 +95,6 @@
 <?php endforeach ?>
 	</tbody>
 </table>
-    </div>
-</div>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
@@ -124,10 +148,30 @@
 
 <script type="text/javascript">
 var clicked = false;
+var leaveTable = null;
+
+//Return a URL parameter identified by 'name'
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+//Apply a filter on the status column
+function filterStatusColumn() {
+    var filter = "^(";
+    if ($('#chkPlanned').prop('checked')) filter += "<?php echo lang('Planned');?>|";
+    if ($('#chkAccepted').prop('checked')) filter += "<?php echo lang('Accepted');?>|";
+    if ($('#chkRequested').prop('checked')) filter += "<?php echo lang('Requested');?>|";
+    if ($('#chkRejected').prop('checked')) filter += "<?php echo lang('Rejected');?>|";
+    if ($('#chkCancellation').prop('checked')) filter += "<?php echo lang('Cancellation');?>|";
+    if ($('#chkCanceled').prop('checked')) filter += "<?php echo lang('Canceled');?>|";
+    filter = filter.slice(0,-1) + ")$";
+    if (filter.indexOf('(') == -1) filter = 'nothing is selected';
+    leaveTable.columns( 6 ).search( filter, true, false ).draw();
+}
     
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
-    $('#leaves').dataTable({
+    leaveTable = $('#leaves').DataTable({
             order: [[ 2, "desc" ]],
             language: {
                 decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
@@ -191,6 +235,44 @@ $(document).ready(function() {
     client.on( "success", function() {
         $('#tipCopied').tooltip('show');
         setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
+    });
+    
+    $('#cboLeaveType').on('change',function(){
+        var leaveType = $("#cboLeaveType option:selected").text();
+        if (leaveType != '') {
+            leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
+        } else {
+            leaveTable.columns( 5 ).search( "", true, false ).draw();
+        }
+    });
+    
+    //Analyze URL to get the filter on one type
+    if (getURLParameter('type') != null) {
+        var leaveType = $("#cboLeaveType option[value='" + getURLParameter('type') + "']").text();
+        $("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
+        leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
+    }
+    
+    //Filter on statuses is a list of inclusion
+    var statuses = getURLParameter('statuses');
+    if (statuses != null) {
+        //Unselect all statuses and select only the statuses passed by URL
+        $(".filterStatus").prop("checked", false);
+        statuses.split(/,/).forEach(function(status) {
+            switch (status) {
+                case '1': $("#chkPlanned").prop("checked", true); break;
+                case '2': $("#chkRequested").prop("checked", true); break;
+                case '3': $("#chkAccepted").prop("checked", true); break;
+                case '4': $("#chkRejected").prop("checked", true); break;
+                case '5': $("#chkCancellation").prop("checked", true); break;
+                case '6': $("#chkCancellation").prop("checked", true); break;
+            }
+        });
+        //$("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
+        filterStatusColumn();
+    }
+    $('.filterStatus').on('change',function(){
+        filterStatusColumn();
     });
 });
 </script>

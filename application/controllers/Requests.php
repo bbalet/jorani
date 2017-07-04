@@ -40,12 +40,15 @@ class Requests extends CI_Controller {
     public function index($filter = 'requested') {
         $this->auth->checkIfOperationIsAllowed('list_requests');
         $data = getUserContext($this);
+        $this->load->model('types_model');
         $this->lang->load('datatable', $this->language);
         $data['filter'] = $filter;
         $data['title'] = lang('requests_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_validation');
         ($filter == 'all')? $showAll = TRUE : $showAll = FALSE;
         $data['requests'] = $this->leaves_model->getLeavesRequestedToManager($this->user_id, $showAll);
+        $data['types'] = $this->types_model->getTypes();
+        $data['showAll'] = $showAll;
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);

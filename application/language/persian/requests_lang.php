@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = 'تاریخ پایان';
 $lang['requests_index_thead_duration'] = 'مدت زمان';
 $lang['requests_index_thead_type'] = 'نوع';
 $lang['requests_index_thead_status'] = 'وضعیت';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'لیست همکاران من';
 $lang['requests_collaborators_description'] = 'این صفحه لیست تمام همکارانتان را نشان میدهد، اگر شما یک مدیر نیستید این لیست همیشه برای شما خالی نشان داده میشود.';

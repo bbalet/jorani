@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = 'Enddatum';
 $lang['requests_index_thead_duration'] = 'Dauer';
 $lang['requests_index_thead_type'] = 'Typ';
 $lang['requests_index_thead_status'] = 'Status';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'Liste meiner Mitarbeiter';
 $lang['requests_collaborators_description'] = 'Diese Anzeige zeigt Ihre Mitarbeiter. Ohne Managerrolle wird diese Liste immer leer angezeigt.';

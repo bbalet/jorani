@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = 'កាលបរិច្ឆេទដែ
 $lang['requests_index_thead_duration'] = 'រយៈពេល';
 $lang['requests_index_thead_type'] = 'ប្រភេទ';
 $lang['requests_index_thead_status'] = 'ស្ថានភាព';
+$lang['leaves_index_thead_requested_date'] = 'Requested';
+$lang['leaves_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'បញ្ជីអ្នករួបការងាររបស់ខ្ញុំ';
 $lang['requests_collaborators_description'] = 'ផ្ទាំងអេក្រង់នេះ បង្ហាញពីអ្នករួមការងាររបស់អ្នក។ ប្រសិនបើលោកអ្នកមិនមែនជាអ្នកគ្រប់គ្រងទេ, បញ្ជីនេះតែងតែទទេជានិច្ច។';

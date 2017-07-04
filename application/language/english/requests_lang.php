@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = 'End Date';
 $lang['requests_index_thead_duration'] = 'Duration';
 $lang['requests_index_thead_type'] = 'Type';
 $lang['requests_index_thead_status'] = 'Status';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'List of my subordinates';
 $lang['requests_collaborators_description'] = 'This screen lists your direct report subordinates. If you are not a manager, this list will always be empty.';

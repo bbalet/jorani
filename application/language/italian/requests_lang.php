@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = 'Data fine';
 $lang['requests_index_thead_duration'] = 'Durata';
 $lang['requests_index_thead_type'] = 'Tipologia';
 $lang['requests_index_thead_status'] = 'Stato';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'Elenco dei miei collaboratori';
 $lang['requests_collaborators_description'] = 'Questa pagina elenca i tuoi collaboratori. Se non sei un manager, questo elenco sarà sempre vuoto.';

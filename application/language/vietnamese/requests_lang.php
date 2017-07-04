@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = 'Ngày kết thúc';
 $lang['requests_index_thead_duration'] = 'Khoảng thời gian';
 $lang['requests_index_thead_type'] = 'Loại';
 $lang['requests_index_thead_status'] = 'Trạng thái';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'Danh sách các cộng tác viên';
 $lang['requests_collaborators_description'] = 'This screen lists your direct report subordinates. If you are not a manager, this list will always be empty.';

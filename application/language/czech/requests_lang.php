@@ -24,6 +24,8 @@ $lang['requests_index_thead_status'] = 'Stav';
 $lang['requests_index_button_export'] = 'Exportovat seznam';
 $lang['requests_index_button_show_all'] = 'Všechny požadavky';
 $lang['requests_index_button_show_pending'] = 'Nevyřízené žádosti';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'Seznam mých podřízených';
 $lang['requests_collaborators_description'] = 'Tato obrazovka obsahuje seznam vašich přímých podřízených. Pokud nejste nadřízený, bude tento seznam vždy prázdný.';

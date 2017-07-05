@@ -900,12 +900,14 @@ class Leaves_model extends CI_Model {
      * @param string $start Unix timestamp / Start date displayed on calendar
      * @param string $end Unix timestamp / End date displayed on calendar
      * @param bool $children Include sub department in the query
+     * @param string $statusFilter optional filter on status
      * @return string JSON encoded list of full calendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function department($entity_id, $start = "", $end = "", $children = FALSE) {
+    public function department($entity_id, $start = "", $end = "", $children = FALSE, $statusFilter = NULL) {
         $this->db->select('users.firstname, users.lastname, users.manager');
-        $this->db->select('leaves.*, types.name as type');
+        $this->db->select('leaves.*');
+        $this->db->select('types.name as type, types.acronym as acronym');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
         $this->db->join('leaves', 'leaves.employee = users.id');
@@ -925,7 +927,11 @@ class Leaves_model extends CI_Model {
         } else {
             $this->db->where('organization.id', $entity_id);
         }
-        $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
+        //$this->db->where('leaves.status != ', 4); //Exclude rejected requests
+        if ($statusFilter != NULL) {
+            $statuses = explode ('|', $statusFilter);
+            $this->db->where_in('status', $statuses );            
+        }
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(1024);  //Security limit
         $events = $this->db->get()->result();
@@ -962,20 +968,30 @@ class Leaves_model extends CI_Model {
                 case 2: $color = '#f89406'; break;  // Requested
                 case 3: $color = '#468847'; break;  // Accepted
                 case 4: $color = '#ff0000'; break;  // Rejected
+                default: $color = '#ff0000'; break;  // Cancellation and Canceled
             }
+            $title = $entry->firstname .' ' . $entry->lastname;
             //If the connected user can access to the leave request 
-            //(self, HR admin and manager)
+            //(self, HR admin and manager), add a link and the acronym
             $url = '';
             if (($entry->employee == $this->session->userdata('id')) ||
                 ($entry->manager == $this->session->userdata('id')) ||
                     ($this->session->userdata('is_hr') === TRUE)) {
                 $url = base_url() . 'leaves/leaves/' . $entry->id;
+                if (!empty($entry->acronym)) {
+                    $title .= ' - ' . $entry->acronym;
+                }
+            } else {
+                //Don't display rejected and cancel* leave requests for other employees
+                if ($entry->status > 3) {
+                    continue;
+                }
             }
             
             //Create the JSON representation of the event
             $jsonevents[] = array(
                 'id' => $entry->id,
-                'title' => $entry->firstname .' ' . $entry->lastname,
+                'title' => $title,
                 'imageurl' => $imageUrl,
                 'start' => $startdate,
                 'color' => $color,

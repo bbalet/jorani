@@ -32,7 +32,7 @@
     <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCancellation" class="filterStatus"> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
     <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCanceled" class="filterStatus"> &nbsp;<?php echo lang('Canceled');?></span>
     </div>
-</div> 
+</div>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
     <thead>
@@ -44,16 +44,41 @@
             <th><?php echo lang('leaves_index_thead_duration');?></th>
             <th><?php echo lang('leaves_index_thead_type');?></th>
             <th><?php echo lang('leaves_index_thead_status');?></th>
+            <?php
+            if ($this->config->item('enable_history') == TRUE){
+              echo "<th>".lang('leaves_index_thead_requested_date')."</th>";
+              echo "<th>".lang('leaves_index_thead_last_change')."</th>";
+            }
+            ?>
         </tr>
     </thead>
     <tbody>
-<?php foreach ($leaves as $leaves_item): 
+<?php foreach ($leaves as $leaves_item):
+    //echo $leaves_item['startdate'];
     $datetimeStart = new DateTime($leaves_item['startdate']);
     $tmpStartDate = $datetimeStart->getTimestamp();
     $startdate = $datetimeStart->format(lang('global_date_format'));
     $datetimeEnd = new DateTime($leaves_item['enddate']);
     $tmpEndDate = $datetimeEnd->getTimestamp();
-    $enddate = $datetimeEnd->format(lang('global_date_format'));?>
+    $enddate = $datetimeEnd->format(lang('global_date_format'));
+    if ($this->config->item('enable_history') == TRUE){
+      if($leaves_item['request_date'] == NULL){
+        $tmpRequestDate = "";
+        $requestdate = "";
+      }else{
+        $datetimeRequested = new DateTime($leaves_item['request_date']);
+        $tmpRequestDate = $datetimeRequested->getTimestamp();
+        $requestdate = $datetimeRequested->format(lang('global_date_format'));
+      }
+      if($leaves_item['change_date'] == NULL){
+        $tmpLastChangeDate = "";
+        $lastchangedate = "";
+      }else{
+        $datetimelastChanged = new DateTime($leaves_item['change_date']);
+        $tmpLastChangeDate = $datetimelastChanged->getTimestamp();
+        $lastchangedate = $datetimelastChanged->format(lang('global_date_format'));
+      }
+    }?>
     <tr>
         <td data-order="<?php echo $leaves_item['id']; ?>">
             <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><?php echo $leaves_item['id']; ?></a>
@@ -82,7 +107,7 @@
                     }
                 }
                 if (($leaves_item['status'] == 4) && ($this->config->item('delete_rejected_requests') == TRUE))  $show_delete = TRUE;
-                if (($leaves_item['status'] == 4) && ($this->config->item('edit_rejected_requests') == TRUE))  $show_edit = TRUE;    
+                if (($leaves_item['status'] == 4) && ($this->config->item('edit_rejected_requests') == TRUE))  $show_edit = TRUE;
                 ?>
                 <?php if ($show_edit == TRUE) { ?>
                 <a href="<?php echo base_url();?>leaves/edit/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
@@ -115,6 +140,12 @@
             case 3: echo "<td><span class='label label-success'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
             default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
         }?>
+        <?php
+        if ($this->config->item('enable_history') == TRUE){
+          echo "<td data-order='".$tmpRequestDate."'>" . $requestdate . "</td>";
+          echo "<td data-order='".$tmpLastChangeDate."'>" . $lastchangedate . "</td>";
+        }
+        ?>
     </tr>
 <?php endforeach ?>
     </tbody>
@@ -167,7 +198,7 @@
     </div>
     <div class="modal-body" id="frmSelectDelegateBody">
         <div class='input-append'>
-                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
                     value="<?php echo base_url() . 'ics/individual/' . $user_id;?>" />
                  <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/individual/' . $user_id;?>">
                      <i class="fa fa-clipboard"></i>
@@ -209,7 +240,7 @@ function filterStatusColumn() {
 
 $(document).ready(function() {
     $('#frmDeleteLeaveRequest').alert();
-    
+
     //Transform the HTML table in a fancy datatable
     leaveTable = $('#leaves').DataTable({
         order: [[ 1, "desc" ]],
@@ -237,16 +268,16 @@ $(document).ready(function() {
             }
         }
     });
-      
+
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
     $('#frmDeleteLeaveRequest').on('show', function() {
         var link = "<?php echo base_url();?>leaves/delete/" + $(this).data('id');
         $("#lnkDeleteUser").attr('href', link);
     })
-    
+
     //Display a modal pop-up so as to confirm if a leave request has to be deleted or not
     //We build a complex selector because datatable does horrible things on DOM...
-    //a simplier selector doesn't work when the delete is on page >1 
+    //a simplier selector doesn't work when the delete is on page >1
     $("#leaves tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
         $('#frmDeleteLeaveRequest').data('id', id).modal('show');
@@ -260,7 +291,7 @@ $(document).ready(function() {
     $('#frmShowHistory').on('hidden', function() {
         $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
     });
-    
+
     //Popup show history
     $("#leaves tbody").on('click', '.show-history',  function(){
         $("#frmShowHistory").modal('show');
@@ -268,14 +299,14 @@ $(document).ready(function() {
             if (xhr.status == 401) {
                 $("#frmShowHistory").modal('hide');
                 bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                    //After the login page, we'll be redirected to the current page 
+                    //After the login page, we'll be redirected to the current page
                    location.reload();
                 });
             }
           });
     });
     <?php } ?>
-    
+
     //Copy/Paste ICS Feed
     var client = new Clipboard("#cmdCopy");
     $('#lnkICS').click(function () {
@@ -285,7 +316,7 @@ $(document).ready(function() {
         $('#tipCopied').tooltip('show');
         setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });
-    
+
     $('#cboLeaveType').on('change',function(){
         var leaveType = $("#cboLeaveType option:selected").text();
         if (leaveType != '') {
@@ -294,14 +325,14 @@ $(document).ready(function() {
             leaveTable.columns( 5 ).search( "", true, false ).draw();
         }
     });
-    
+
     //Analyze URL to get the filter on one type
     if (getURLParameter('type') != null) {
         var leaveType = $("#cboLeaveType option[value='" + getURLParameter('type') + "']").text();
         $("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
         leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
     }
-    
+
     //Filter on statuses is a list of inclusion
     var statuses = getURLParameter('statuses');
     if (statuses != null) {

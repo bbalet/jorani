@@ -66,7 +66,7 @@ class Leaves_model extends CI_Model {
      * @return array list of records
      * @author Emilien NICOLAS <milihhard1996@gmail.com>
      */
-    public function getLeavesHistoryOfEmployee($employee){
+    public function getLeavesOfEmployeeWithHistory($employee){
       return $this->db->query("SELECT leaves.*, status.name as status_name, types.name as type_name, lastchange.date as change_date, requested.date as request_date
         FROM `leaves`
         inner join status ON leaves.status = status.id
@@ -81,7 +81,8 @@ class Leaves_model extends CI_Model {
           FROM leaves_history
           WHERE leaves_history.status = 2
           GROUP BY id
-        ) requested ON leaves.id = requested.id")->result_array();
+        ) requested ON leaves.id = requested.id
+        WHERE leaves.employee = $employee")->result_array();
       //return $this->db->get()->row_array();
     }
 

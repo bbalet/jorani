@@ -18,7 +18,7 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
  * But those reports are not served by this controller (either HR or Calendar controller).
  */
 class Requests extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -46,7 +46,12 @@ class Requests extends CI_Controller {
         $data['title'] = lang('requests_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_validation');
         ($filter == 'all')? $showAll = TRUE : $showAll = FALSE;
-        $data['requests'] = $this->leaves_model->getLeavesRequestedToManager($this->user_id, $showAll);
+        //$data['requests'] = $this->leaves_model->getLeavesRequestedToManager($this->user_id, $showAll);
+        if ($this->config->item('enable_history') == TRUE){
+          $data['requests'] = $this->leaves_model->getLeavesRequestedToManagerWithHistory($this->session->userdata('id'), $showAll);
+        }else{
+          $data['requests'] = $this->leaves_model->getLeavesRequestedToManager($this->session->userdata('id'), $showAll);
+        }
         $data['types'] = $this->types_model->getTypes();
         $data['showAll'] = $showAll;
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
@@ -117,7 +122,7 @@ class Requests extends CI_Controller {
             redirect('leaves');
         }
     }
-    
+
     /**
      * Display the list of all requests submitted to the line manager (Status is submitted)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -165,7 +170,7 @@ class Requests extends CI_Controller {
             redirect('leaves');
         }
     }
-    
+
     /**
      * Ajax endpoint : Delete a delegation for a manager
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -186,7 +191,7 @@ class Requests extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Ajax endpoint : Add a delegation for a manager
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -211,7 +216,7 @@ class Requests extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Create a leave request in behalf of a collaborator
      * @param int $id Identifier of the employee
@@ -266,10 +271,10 @@ class Requests extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Send a leave request email to the employee that requested the leave
-     * The method will check if the leave request was accepted or rejected 
+     * The method will check if the leave request was accepted or rejected
      * before sending the e-mail
      * @param int $id Leave request identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -286,12 +291,12 @@ class Requests extends CI_Controller {
         $this->load->library('email');
         $this->load->library('polyglot');
         $usr_lang = $this->polyglot->code2language($employee['language']);
-        
+
         //We need to instance an different object as the languages of connected user may differ from the UI lang
         $lang_mail = new CI_Lang();
         $lang_mail->load('email', $usr_lang);
         $lang_mail->load('global', $usr_lang);
-        
+
         $date = new DateTime($leave['startdate']);
         $startdate = $date->format($lang_mail->line('global_date_format'));
         $date = new DateTime($leave['enddate']);
@@ -309,7 +314,7 @@ class Requests extends CI_Controller {
             'Cause' => $leave['cause'],
             'Type' => $leave['type_name']
         );
-        
+
         if ($leave['status'] == 3) {    //accepted
             $message = $this->parser->parse('emails/' . $employee['language'] . '/request_accepted', $data, TRUE);
             $subject = $lang_mail->line('email_leave_request_accept_subject');
@@ -319,7 +324,7 @@ class Requests extends CI_Controller {
         }
         sendMailByWrapper($this, $subject, $message, $employee['email'], is_null($supervisor)?NULL:$supervisor->email);
     }
-    
+
     /**
      * Export the list of all leave requests (sent to the connected user) into an Excel file
      * @param string $name Filter the list of submitted leave requests (all or requested)
@@ -330,7 +335,7 @@ class Requests extends CI_Controller {
         $data['filter'] = $filter;
         $this->load->view('requests/export', $data);
     }
-    
+
     /**
      * Leave balance report limited to the subordinates of the connected manager
      * Status is submitted or accepted/rejected depending on the filter parameter.
@@ -343,7 +348,7 @@ class Requests extends CI_Controller {
         $this->lang->load('datatable', $this->language);
         $data['title'] = lang('requests_balance_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_balance_report');
-        
+
         if ($dateTmp === NULL) {
             $refDate = date("Y-m-d");
             $data['isDefault'] = 1;
@@ -355,7 +360,7 @@ class Requests extends CI_Controller {
 
         $this->load->model('types_model');
         $data['types'] = $this->types_model->getTypes();
-        
+
         $result = array();
         $this->load->model('users_model');
         $users = $this->users_model->getCollaboratorsOfManager($this->user_id);
@@ -369,7 +374,7 @@ class Requests extends CI_Controller {
             foreach ($data['types'] as $type) {
                 $result[$user['id']][$type['name']] = '';
             }
-            
+
             $summary = $this->leaves_model->getLeaveBalanceForEmployee($user['id'], TRUE, $refDate);
             if (count($summary) > 0 ) {
                 foreach ($summary as $key => $value) {
@@ -378,7 +383,7 @@ class Requests extends CI_Controller {
             }
         }
         $data['result'] = $result;
-        
+
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('requests/balance', $data);

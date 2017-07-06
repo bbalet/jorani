@@ -18,7 +18,7 @@ require_once FCPATH . "local/triggers/leave.php";
  * see content of /local/triggers/leave.php
  */
 class Leaves extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -31,7 +31,7 @@ class Leaves extends CI_Controller {
         $this->lang->load('leaves', $this->language);
         $this->lang->load('global', $this->language);
     }
-    
+
     /**
      * Display the list of the leave requests of the connected user
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -50,7 +50,7 @@ class Leaves extends CI_Controller {
         $this->load->view('leaves/index', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Display the history of changes of a leave request
      * @param int $id Identifier of the leave request
@@ -65,7 +65,7 @@ class Leaves extends CI_Controller {
         $data['events'] = $this->history_model->getLeaveRequestsHistory($id);
         $this->load->view('leaves/history', $data);
     }
-    
+
     /**
      * Display the details of leaves taken/entitled for the connected user
      * @param string $refTmp Timestamp (reference date)
@@ -106,6 +106,9 @@ class Leaves extends CI_Controller {
      */
     public function view($source, $id) {
         $this->auth->checkIfOperationIsAllowed('view_leaves');
+        $this->load->model('users_model');
+        $this->load->model('status_model');
+        $this->load->helper('form');
         $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->getLeaves($id);
         if (empty($data['leave'])) {
@@ -138,10 +141,51 @@ class Leaves extends CI_Controller {
         } else {
             $data['name'] = '';
         }
+        $data["comments"] = $this->leaves_model->getCommentsLeave($id);
+        if (isset($data["comments"])){
+          $last_comment = new stdClass();;
+          foreach ($data["comments"]->comments as $comments_item) {
+            if($comments_item->type == "comment"){
+              $comments_item->author = $this->users_model->getName($comments_item->author);
+              $comments_item->in = "in";
+              $last_comment->in="";
+              $last_comment=$comments_item;
+            } else if($comments_item->type == "change"){
+              $comments_item->status = $this->status_model->getName($comments_item->status_number);
+            }
+          }
+        }
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leaves/view', $data);
         $this->load->view('templates/footer');
+    }
+
+    /**
+    * create a new comment
+    * @param int $id Id of the leave request
+    * @author Emilien NICOLAS <milihhard1996@gmail.com>
+    */
+    public function createComment($id){
+      $this->auth->checkIfOperationIsAllowed('view_leaves');
+      $data = getUserContext($this);
+      $json_parsed = $this->leaves_model->getCommentsLeave($id);
+      $comment_object = new stdClass;
+      $comment_object->type = "comment";
+      $comment_object->author = $this->session->userdata('id');
+      $comment_object->value = $_POST['comment'];
+      $comment_object->date = date("Y-n-j");
+      if (isset($json_parsed)){
+        array_push($json_parsed->comments, $comment_object);
+      }else {
+        $json_parsed->comments = array($comment_object);
+      }
+      var_dump($json_parsed);
+      echo "<br>";
+      $json = json_encode($json_parsed);
+      echo $json;
+      $this->leaves_model->addComments($id,$json);
+      redirect("/leaves/leaves/$id");
     }
 
     /**
@@ -155,7 +199,7 @@ class Leaves extends CI_Controller {
         $this->load->library('form_validation');
         $data['title'] = lang('leaves_create_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_request_leave');
-        
+
         $this->form_validation->set_rules('startdate', lang('leaves_create_field_start'), 'required|strip_tags');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|strip_tags');
         $this->form_validation->set_rules('enddate', lang('leaves_create_field_end'), 'required|strip_tags');
@@ -164,7 +208,7 @@ class Leaves extends CI_Controller {
         $this->form_validation->set_rules('type', lang('leaves_create_field_type'), 'required|strip_tags');
         $this->form_validation->set_rules('cause', lang('leaves_create_field_cause'), 'strip_tags');
         $this->form_validation->set_rules('status', lang('leaves_create_field_status'), 'required|strip_tags');
-        
+
         if ($this->form_validation->run() === FALSE) {
             $this->load->model('contracts_model');
             $leaveTypesDetails = $this->contracts_model->getLeaveTypesDetailsOTypesForUser($this->session->userdata('id'));
@@ -192,7 +236,7 @@ class Leaves extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Edit a leave request
      * @param int $id Identifier of the leave request
@@ -206,7 +250,7 @@ class Leaves extends CI_Controller {
         if (empty($data['leave'])) {
             redirect('notfound');
         }
-        //If the user is not its own manager and if the leave is 
+        //If the user is not its own manager and if the leave is
         //already requested, the employee can't modify it
         if (!$this->is_hr) {
             if (($this->session->userdata('manager') != $this->user_id) &&
@@ -219,7 +263,7 @@ class Leaves extends CI_Controller {
                  }
             }
         } //Admin
-        
+
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->form_validation->set_rules('startdate', lang('leaves_edit_field_start'), 'required|strip_tags');
@@ -286,8 +330,8 @@ class Leaves extends CI_Controller {
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-            
-            $this->sendGenericMail($leave, $user, $manager, $lang_mail, 
+
+            $this->sendGenericMail($leave, $user, $manager, $lang_mail,
                 $lang_mail->line('email_leave_request_creation_title'),
                 $lang_mail->line('email_leave_request_creation_subject'),
                 'request');
@@ -373,7 +417,7 @@ class Leaves extends CI_Controller {
         if ($delegates != '') {
             $cc = $delegates;
         }
-        
+
         sendMailByWrapper($this, $subject, $message, $to, $cc);
     }
 
@@ -516,7 +560,7 @@ class Leaves extends CI_Controller {
         $end = $this->input->get('end', TRUE);
         echo $this->leaves_model->workmates($this->session->userdata('manager'), $start, $end);
     }
-    
+
     /**
      * Ajax endpoint : Send a list of fullcalendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -553,7 +597,7 @@ class Leaves extends CI_Controller {
         $end = $this->input->get('end', TRUE);
         echo $this->leaves_model->department($department[0]['id'], $start, $end);
     }
-    
+
     /**
      * Ajax endpoint. Result varies according to input :
      *  - difference between the entitled and the taken days
@@ -589,7 +633,7 @@ class Leaves extends CI_Controller {
                 $leaveValidator->overlap = $this->leaves_model->detectOverlappingLeaves($id, $startdate, $enddate, $startdatetype, $enddatetype);
             }
         }
-        
+
         //Returns end date of the yearly leave period or NULL if the user is not linked to a contract
         $this->load->model('contracts_model');
         $startentdate = NULL;
@@ -598,7 +642,7 @@ class Leaves extends CI_Controller {
         $leaveValidator->PeriodStartDate = $startentdate;
         $leaveValidator->PeriodEndDate = $endentdate;
         $leaveValidator->hasContract = $hasContract;
-        
+
         //Add non working days between the two dates (including their type: morning, afternoon and all day)
         if (isset($id) && ($startdate!='') && ($enddate!='')  && $hasContract===TRUE) {
             $this->load->model('dayoffs_model');
@@ -613,11 +657,11 @@ class Leaves extends CI_Controller {
         if (isset($id) && isset($startdate) && isset($enddate)  && $hasContract===FALSE) {
             $leaveValidator->length = $this->leaves_model->length($id, $startdate, $enddate, $startdatetype, $enddatetype);
         }
-        
+
         //Repeat start and end dates of the leave request
         $leaveValidator->RequestStartDate = $startdate;
         $leaveValidator->RequestEndDate = $enddate;
-        
+
         echo json_encode($leaveValidator);
     }
 }

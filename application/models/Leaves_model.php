@@ -1102,7 +1102,6 @@ class Leaves_model extends CI_Model {
      */
     public function getLeavesRequestedToManagerWithHistory($manager, $all = FALSE){
       $manager = intval($manager);
-      $ids = $this->delegations_model->listManagersGivingDelegation($manager);
       $query="SELECT leaves.id as leave_id, users.*, leaves.*, types.name as type_label, status.name as status_name, types.name as type_name, lastchange.date as change_date, requested.date as request_date
         FROM `leaves`
         inner join status ON leaves.status = status.id
@@ -1119,21 +1118,18 @@ class Leaves_model extends CI_Model {
           WHERE leaves_history.status = 2
           GROUP BY id
         ) requested ON leaves.id = requested.id";
+      //Case of manager having delegations
+      $ids = $this->delegations_model->listManagersGivingDelegation($manager);
       if (count($ids) > 0) {
         array_push($ids, $manager);
-        //TODO check syntaxe;
-        $query=$query . " WHERE users.manager in $ids";
-        //$this->db->where_in('users.manager', $ids);
+        $query=$query . " WHERE users.manager IN (" . implode(",", $ids) . ")";
       } else {
         $query=$query . " WHERE users.manager = $manager";
-        //$this->db->where('users.manager', $manager);
       }
       if ($all == FALSE) {
         $query=$query . " AND leaves.status = 2 ";
-        //$this->db->where('leaves.status', 2);
       }
-      $query=$query . "order by leaves.startdate DESC;";
-
+      $query=$query . " order by leaves.startdate DESC;";
       return $this->db->query($query)->result_array();
     }
 

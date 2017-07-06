@@ -60,13 +60,13 @@ class Leaves_model extends CI_Model {
     }
 
     /**
-     * WIP
      * Get the list of history of an employee
      * @param int $employee Id of the employee
      * @return array list of records
      * @author Emilien NICOLAS <milihhard1996@gmail.com>
      */
     public function getLeavesOfEmployeeWithHistory($employee){
+      $employee = intval($employee);
       return $this->db->query("SELECT leaves.*, status.name as status_name, types.name as type_name, lastchange.date as change_date, requested.date as request_date
         FROM `leaves`
         inner join status ON leaves.status = status.id
@@ -83,7 +83,6 @@ class Leaves_model extends CI_Model {
           GROUP BY id
         ) requested ON leaves.id = requested.id
         WHERE leaves.employee = $employee")->result_array();
-      //return $this->db->get()->row_array();
     }
 
     /**
@@ -1076,6 +1075,50 @@ class Leaves_model extends CI_Model {
         $this->db->order_by('leaves.startdate', 'desc');
         $query = $this->db->get('leaves');
         return $query->result_array();
+    }
+
+    /**
+     * Get the list of history of an employee
+     * @param int $manager Id of the employee
+     * @param bool $all TRUE all requests, FALSE otherwise
+     * @return array list of records
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function getLeavesRequestedToManagerWithHistory($manager, $all = FALSE){
+      $manager = intval($manager);
+      $ids = $this->delegations_model->listManagersGivingDelegation($manager);
+      $query="SELECT leaves.id as leave_id, users.*, leaves.*, types.name as type_label, status.name as status_name, types.name as type_name, lastchange.date as change_date, requested.date as request_date
+        FROM `leaves`
+        inner join status ON leaves.status = status.id
+        inner join types ON leaves.type = types.id
+        inner join users ON users.id = leaves.employee
+        left outer join (
+          SELECT id, MAX(change_date) as date
+          FROM leaves_history
+          GROUP BY id
+        ) lastchange ON leaves.id = lastchange.id
+        left outer join (
+          SELECT id, MIN(change_date) as date
+          FROM leaves_history
+          WHERE leaves_history.status = 2
+          GROUP BY id
+        ) requested ON leaves.id = requested.id";
+      if (count($ids) > 0) {
+        array_push($ids, $manager);
+        //TODO check syntaxe;
+        $query=$query . " WHERE users.manager in $ids";
+        //$this->db->where_in('users.manager', $ids);
+      } else {
+        $query=$query . " WHERE users.manager = $manager";
+        //$this->db->where('users.manager', $manager);
+      }
+      if ($all == FALSE) {
+        $query=$query . " AND leaves.status = 2 ";
+        //$this->db->where('leaves.status', 2);
+      }
+      $query=$query . "order by leaves.startdate DESC;";
+
+      return $this->db->query($query)->result_array();
     }
 
     /**

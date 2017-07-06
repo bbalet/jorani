@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays the list of leave requests submitted to a manager.
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
@@ -41,7 +41,7 @@ if ($showAll == FALSE) {
     <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" <?php echo $checked;?> id="chkCancellation" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
     <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" <?php echo $checked;?> id="chkCanceled" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Canceled');?></span>
     </div>
-</div> 
+</div>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
     <thead>
@@ -49,10 +49,12 @@ if ($showAll == FALSE) {
             <th><?php echo lang('requests_index_thead_id');?></th>
             <th><?php echo lang('requests_index_thead_fullname');?></th>
             <th><?php echo lang('requests_index_thead_startdate');?></th>
-            <th><?php echo lang('requests_index_thead_enddate');?></th>            
+            <th><?php echo lang('requests_index_thead_enddate');?></th>
             <th><?php echo lang('requests_index_thead_duration');?></th>
             <th><?php echo lang('requests_index_thead_type');?></th>
             <th><?php echo lang('requests_index_thead_status');?></th>
+            <th><?php echo lang('requests_index_thead_requested_date');?></th>
+            <th><?php echo lang('requests_index_thead_last_change');?></th>
         </tr>
     </thead>
     <tbody>
@@ -62,7 +64,26 @@ if ($showAll == FALSE) {
     $startdate = $date->format(lang('global_date_format'));
     $date = new DateTime($requests_item['enddate']);
     $tmpEndDate = $date->getTimestamp();
-    $enddate = $date->format(lang('global_date_format'));?>
+    $enddate = $date->format(lang('global_date_format'));
+    if ($this->config->item('enable_history') == TRUE){
+      if($requests_item['request_date'] == NULL){
+        $tmpRequestDate = "";
+        $requestdate = "";
+      }else{
+        $datetimeRequested = new DateTime($requests_item['request_date']);
+        $tmpRequestDate = $datetimeRequested->getTimestamp();
+        $requestdate = $datetimeRequested->format(lang('global_date_format'));
+      }
+      if($requests_item['change_date'] == NULL){
+        $tmpLastChangeDate = "";
+        $lastchangedate = "";
+      }else{
+        $datetimelastChanged = new DateTime($requests_item['change_date']);
+        $tmpLastChangeDate = $datetimelastChanged->getTimestamp();
+        $lastchangedate = $datetimelastChanged->format(lang('global_date_format'));
+      }
+    }
+    ?>
     <tr>
         <td data-order="<?php echo $requests_item['leave_id']; ?>">
             <a href="<?php echo base_url();?>leaves/requests/<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><?php echo $requests_item['leave_id']; ?></a>
@@ -91,6 +112,12 @@ if ($showAll == FALSE) {
             case 3: echo "<td><span class='label label-success'>" . lang($requests_item['status_name']) . "</span></td>"; break;
             default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($requests_item['status_name']) . "</span></td>"; break;
         }?>
+        <?php
+        if ($this->config->item('enable_history') == TRUE){
+          echo "<td data-order='".$tmpRequestDate."'>" . $requestdate . "</td>";
+          echo "<td data-order='".$tmpLastChangeDate."'>" . $lastchangedate . "</td>";
+        }
+        ?>
     </tr>
 <?php endforeach ?>
 	</tbody>
@@ -129,7 +156,7 @@ if ($showAll == FALSE) {
     </div>
     <div class="modal-body" id="frmSelectDelegateBody">
         <div class='input-append'>
-                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
                     value="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>" />
                  <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>">
                      <i class="fa fa-clipboard"></i>
@@ -168,7 +195,7 @@ function filterStatusColumn() {
     if (filter.indexOf('(') == -1) filter = 'nothing is selected';
     leaveTable.columns( 6 ).search( filter, true, false ).draw();
 }
-    
+
 $(document).ready(function() {
     //Transform the HTML table in a fancy datatable
     leaveTable = $('#leaves').DataTable({
@@ -213,20 +240,20 @@ $(document).ready(function() {
             window.location.href = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
         }
      });
-     
+
     <?php if ($this->config->item('enable_history') === TRUE) { ?>
     //Prevent to load always the same content (refreshed each time)
     $('#frmShowHistory').on('hidden', function() {
         $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
     });
-    
+
     //Popup show history
     $("#leaves tbody").on('click', '.show-history',  function(){
         $("#frmShowHistory").modal('show');
         $("#frmShowHistoryBody").load('<?php echo base_url();?>leaves/' + $(this).data('id') +'/history');
     });
     <?php } ?>
-     
+
     //Copy/Paste ICS Feed
     var client = new Clipboard("#cmdCopy");
     $('#lnkICS').click(function () {
@@ -236,7 +263,7 @@ $(document).ready(function() {
         $('#tipCopied').tooltip('show');
         setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });
-    
+
     $('#cboLeaveType').on('change',function(){
         var leaveType = $("#cboLeaveType option:selected").text();
         if (leaveType != '') {
@@ -245,14 +272,14 @@ $(document).ready(function() {
             leaveTable.columns( 5 ).search( "", true, false ).draw();
         }
     });
-    
+
     //Analyze URL to get the filter on one type
     if (getURLParameter('type') != null) {
         var leaveType = $("#cboLeaveType option[value='" + getURLParameter('type') + "']").text();
         $("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
         leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
     }
-    
+
     //Filter on statuses is a list of inclusion
     var statuses = getURLParameter('statuses');
     if (statuses != null) {

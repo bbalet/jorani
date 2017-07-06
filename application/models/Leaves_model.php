@@ -304,10 +304,10 @@ class Leaves_model extends CI_Model {
                 $taken_days = $this->db->get()->result_array();
                 //Count the number of taken days
                 foreach ($taken_days as $taken) {
-                    $summary[$taken['type']][3] = $entitlement['type_id'];
                     $summary[$taken['type']][0] = (float) $taken['taken']; //Taken
                 }
                 //Report the number of available days
+                $summary[$entitlement['type_name']][3] = $entitlement['type_id'];
                 $summary[$entitlement['type_name']][1] = (float) $entitlement['entitled'];
             }
 
@@ -371,7 +371,7 @@ class Leaves_model extends CI_Model {
                 $summary[$entitlement['type_name']][1] = (float) $entitlement['entitled'];
             }
 
-            //List all requested leaves in a third column
+            //List all requested leaves in a fourth column
             //leave requests having a requested status are not deducted from credit
             foreach ($entitlements as $entitlement) {
                 //Get the total of taken leaves grouped by type

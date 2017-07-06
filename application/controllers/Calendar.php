@@ -327,7 +327,8 @@ class Calendar extends CI_Controller {
             $this->lang->load('global', $data['language']);
             $this->lang->load('calendar', $data['language']);
             $this->load->model('leaves_model');
-            $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);
+            $statuses = $this->input->get('statuses');
+            $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children, $statuses);
             $data['entity'] = $id;
             $data['month'] = $month;
             $data['year'] = $year;
@@ -342,7 +343,8 @@ class Calendar extends CI_Controller {
             $data = getUserContext($this);
             $this->load->model('leaves_model');
             $data['mode'] = 'connected';
-            $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children);
+            $statuses = $this->input->get('statuses');
+            $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children, $statuses);
             $data['entity'] = $id;
             $data['month'] = $month;
             $data['year'] = $year;
@@ -371,7 +373,8 @@ class Calendar extends CI_Controller {
         $data = getUserContext($this);
         $this->load->model('leaves_model');
         $data['mode'] = 'connected';
-        $data['tabular'] = $this->leaves_model->tabularList($id, $month, $year);
+        $statuses = $this->input->get('statuses');
+        $data['tabular'] = $this->leaves_model->tabularList($id, $month, $year, $statuses);
         $data['entity'] = $id;
         $data['month'] = $month;
         $data['year'] = $year;

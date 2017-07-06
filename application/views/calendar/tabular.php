@@ -21,7 +21,7 @@
             <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
             <button id="cmdSelectEntity" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_entity');?>"><i class="fa fa-sitemap" aria-hidden="true"></i></button>
             <?php if ($mode == 'connected') { ?>
-            <!--<button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>//-->
+<!--            <button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>-->
             <?php } ?>
         </div>
     </div>
@@ -46,11 +46,14 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
-    <div class="span3"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
-    <div class="span3"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
-    <div class="span3">&nbsp;</div>
+    <div class="span12">
+        <span class="label"><input type="checkbox" checked id="chkPlanned" class="filterStatus"> &nbsp;<?php echo lang('Planned');?></span> &nbsp;
+        <span class="label label-success"><input type="checkbox" checked id="chkAccepted" class="filterStatus"> &nbsp;<?php echo lang('Accepted');?></span> &nbsp;
+        <span class="label label-warning"><input type="checkbox" checked id="chkRequested" class="filterStatus"> &nbsp;<?php echo lang('Requested');?></span> &nbsp;
+        <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCancellation" class="filterStatus"> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
+    </div>
 </div>
+
 
 <div class="row-fluid">
     <div class="span12" id="spnTabularView"><?php echo $tabularPartialView; ?></div>
@@ -115,21 +118,17 @@
     var listId;
     var listName = '';
     var source = 'treeview';    //treeview or list
-    var old_entity = -1;
     
     // After selection of an entity from the modal dialog, refresh the partial
     // view if the entity is diferent
     function select_entity() {
         source = 'treeview';
         $('#spnAddOn').html('<i class="fa fa-sitemap" aria-hidden="true"></i>');
-        old_entity = entity;
         entity = $('#organization').jstree('get_selected')[0];
         text = $('#organization').jstree().get_text(entity);
         $('#txtEntity').val(text);
         $("#frmSelectEntity").modal('hide');
-        if (old_entity != entity) {
-            reloadTabularView();
-        }
+        reloadTabularView();
     }
 
     // After selection of a list from the modal dialog, refresh the partial
@@ -139,23 +138,11 @@
         //Reload the partial view
         listId = $('#cboList').val();
         if (listId != -1 ) {
-            old_entity = -1;
             source = 'list';
             $('#spnAddOn').html('<i class="fa fa-users" aria-hidden="true"></i>');
             listName = $('#cboList option:selected').text();
             $('#txtEntity').val(listName);
-            $("#spnTabularView").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
-            $("#spnTabularView").load('<?php echo base_url();?>calendar/tabular/list/partial/' +
-                    listId + '/' + (month + 1) + '/' + year + '/' + displayTypes,
-                function(response, status, xhr) {
-                if (xhr.status == 401) {
-                    $("#frmShowHistory").modal('hide');
-                    bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                        //After the login page, we'll be redirected to the current page 
-                       location.reload();
-                    });
-                }
-            });
+            reloadTabularView();
         }
     }
 
@@ -181,10 +168,30 @@
     function reloadTabularView() {
         children = includeChildren();
         displayTypes = displayLeaveTypes();
+        
+        //Filter on status
+        statuses = "";
+        if ($("#chkPlanned").prop("checked")) statuses+="1|";
+        if ($("#chkRequested").prop("checked")) statuses+="2|";
+        if ($("#chkAccepted").prop("checked")) statuses+="3|";
+        if ($("#chkCancellation").prop("checked")) statuses+="5|";
+        statuses = statuses.replace(/\|*$/, "");
+        if (statuses!="") statuses = '?statuses=' + statuses;
+        
+        url = '';
+        if (source == 'treeview') {
+            url = '<?php echo base_url();?>calendar/tabular/partial/' +
+                entity + '/' + (month + 1) + '/' + year + '/' + children + '/' +
+                displayTypes + statuses;
+        } else {
+            url = '<?php echo base_url();?>calendar/tabular/list/partial/' +
+                    listId + '/' + (month + 1) + '/' + year + '/' +
+                    displayTypes + statuses;
+        }
+        
         $("#spnTabularView").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
         //Month number needs to be converted between monment.js and PHP
-        $("#spnTabularView").load('<?php echo base_url();?>calendar/tabular/partial/' +
-                entity + '/' + (month + 1) + '/' + year + '/' + children + '/' + displayTypes,
+        $("#spnTabularView").load(url,
             function(response, status, xhr) {
             if (xhr.status == 401) {
                 $("#frmShowHistory").modal('hide');
@@ -288,6 +295,10 @@
         $(".alert").alert();
         $('.alert').on('hidden', function() {
             $(this).removeData('modal');
+        });
+        
+        $('.filterStatus').on('change',function(){
+            reloadTabularView();
         });
     });
 </script>

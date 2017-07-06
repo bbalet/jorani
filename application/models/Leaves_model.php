@@ -764,6 +764,7 @@ class Leaves_model extends CI_Model {
                 $allDay = TRUE;
             }
 
+            $color = '#ff0000';
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -831,6 +832,7 @@ class Leaves_model extends CI_Model {
                 $allDay = TRUE;
             }
 
+            $color = '#ff0000';
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -897,6 +899,7 @@ class Leaves_model extends CI_Model {
                 $allDay = TRUE;
             }
 
+            $color = '#ff0000';
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -987,7 +990,8 @@ class Leaves_model extends CI_Model {
                 $enddatetype = "Afternoon";
                 $allDay = TRUE;
             }
-            //color
+            
+            $color = '#ff0000';
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -1201,10 +1205,11 @@ class Leaves_model extends CI_Model {
      * @param int $month Month number
      * @param int $year Year number
      * @param bool $children Include sub department in the query
+     * @param string $statusFilter optional filter on status
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE) {
+    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE, $statusFilter=NULL) {
         //Find default values for parameters (passed by ref)
         if ($month==0) $month = date("m");
         if ($year==0) $year = date("Y");
@@ -1225,7 +1230,19 @@ class Leaves_model extends CI_Model {
         $this->load->model('organization_model');
         $employees = $this->organization_model->allEmployees($entity, $children);
         foreach ($employees as $employee) {
-            $tabular[$employee->id] = $this->linear($employee->id, $month, $year, TRUE, TRUE, TRUE, FALSE);
+            if ($statusFilter != NULL) {
+                $statuses = explode ('|', $statusFilter);
+                $tabular[$employee->id] = $this->linear($employee->id,
+                        $month,
+                        $year,
+                        in_array("1", $statuses),
+                        in_array("2", $statuses),
+                        in_array("3", $statuses),
+                        in_array("4", $statuses),
+                        in_array("5", $statuses));
+            } else {
+                $tabular[$employee->id] = $this->linear($employee->id, $month, $year, TRUE, TRUE, TRUE, FALSE, TRUE);
+            }
         }
         return $tabular;
     }
@@ -1235,10 +1252,11 @@ class Leaves_model extends CI_Model {
      * @param int $list List identifier
      * @param int $month Month number
      * @param int $year Year number
+     * @param string $statusFilter optional filter on status
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabularList($list, &$month=0, &$year=0) {
+    public function tabularList($list, &$month=0, &$year=0, $statusFilter=NULL) {
         //Find default values for parameters (passed by ref)
         if ($month==0) $month = date("m");
         if ($year==0) $year = date("Y");
@@ -1248,7 +1266,19 @@ class Leaves_model extends CI_Model {
         $this->load->model('lists_model');
         $employees = $this->lists_model->getListOfEmployees($list);
         foreach ($employees as $employee) {
-            $tabular[$employee['id']] = $this->linear($employee['id'], $month, $year, TRUE, TRUE, TRUE, FALSE);
+            if ($statusFilter != NULL) {
+                $statuses = explode ('|', $statusFilter);
+                $tabular[$employee['id']] = $this->linear($employee['id'],
+                        $month,
+                        $year,
+                        in_array("1", $statuses),
+                        in_array("2", $statuses),
+                        in_array("3", $statuses),
+                        in_array("4", $statuses),
+                        in_array("5", $statuses));
+            } else {
+                $tabular[$employee['id']] = $this->linear($employee['id'], $month, $year, TRUE, TRUE, TRUE, FALSE, TRUE);
+            }
         }
         return $tabular;
     }
@@ -1308,11 +1338,17 @@ class Leaves_model extends CI_Model {
      * @param int $employee Employee identifier
      * @param int $month Month number
      * @param int $year Year number
+     * @param boolean $planned Include leave requests with status planned
+     * @param boolean $requested Include leave requests with status requested
+     * @param boolean $accepted Include leave requests with status accepted
+     * @param boolean $rejected Include leave requests with status rejected
+     * @param boolean $cancellation Include leave requests with status cancellation
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function linear($employee_id, $month, $year,
-            $planned = FALSE, $requested = FALSE, $accepted = FALSE, $rejected = FALSE) {
+            $planned = FALSE, $requested = FALSE, $accepted = FALSE,
+            $rejected = FALSE, $cancellation = FALSE) {
         $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
         $lastDay = date("t", strtotime($start));    //last day of selected month
         $end = $year . '-' . $month . '-' . $lastDay;    //last date of selected month
@@ -1327,7 +1363,7 @@ class Leaves_model extends CI_Model {
         $user->id = (int) $employee['id'];
         $user->days = array();
 
-        //Init all day to working day
+        //Init all days of the month to working day
         for ($ii = 1; $ii <= $lastDay; $ii++) {
             $day = new stdClass;
             $day->id = 0;
@@ -1344,7 +1380,7 @@ class Leaves_model extends CI_Model {
             $iDate = new DateTime($dayoff->date);
             $dayNum = intval($iDate->format('d'));
             $user->days[$dayNum]->display = (string) $dayoff->type + 3;
-            $user->days[$dayNum]->status = (string) $dayoff->type + 3;
+            $user->days[$dayNum]->status = (string) $dayoff->type + 10;
             $user->days[$dayNum]->type = $dayoff->title;
         }
 
@@ -1357,9 +1393,11 @@ class Leaves_model extends CI_Model {
         if (!$requested) $this->db->where('leaves.status != ', 2);
         if (!$accepted) $this->db->where('leaves.status != ', 3);
         if (!$rejected) $this->db->where('leaves.status != ', 4);
+        if (!$cancellation) $this->db->where('leaves.status != ', 5);
 
         $this->db->where('leaves.employee = ', $employee_id);
         $this->db->order_by('startdate', 'asc');
+        $this->db->order_by('startdatetype', 'desc');
         $events = $this->db->get()->result();
         $limitDate = DateTime::createFromFormat('Y-m-d H:i:s', $end . ' 00:00:00');
         $floorDate = DateTime::createFromFormat('Y-m-d H:i:s', $start . ' 00:00:00');

@@ -68,23 +68,27 @@ if (count($tabular) > 0) {?>
           if (strstr($day->display, ';')) {
               $periods = explode(";", $day->display);
               $statuses = explode(";", $day->status);
-                switch (intval($statuses[1]))
+                switch (intval($statuses[0]))
                 {
                     case 1: $class = "planned"; break;  // Planned
                     case 2: $class = "requested"; break;  // Requested
                     case 3: $class = "accepted"; break;  // Accepted
                     case 4: $class = "rejected"; break;  // Rejected
-                    case 5: $class = "dayoff"; break;
-                    case 6: $class = "dayoff"; break;
+                    case 5: $class = "rejected"; break;  // Cancellation
+                    case 6: $class = "rejected"; break;  // Canceled
+                    case 12: $class = "dayoff"; break;
+                    case 13: $class = "dayoff"; break;
                 }
-                switch (intval($statuses[0]))
+                switch (intval($statuses[1]))
                 {
                     case 1: $class .= "planned"; break;  // Planned
                     case 2: $class .= "requested"; break;  // Requested
                     case 3: $class .= "accepted"; break;  // Accepted
                     case 4: $class .= "rejected"; break;  // Rejected
-                    case 5: $class .= "dayoff"; break;
-                    case 6: $class .= "dayoff"; break;
+                    case 5: $class .= "rejected"; break;  // Cancellation
+                    case 6: $class .= "rejected"; break;  // Canceled
+                    case 12: $class .= "dayoff"; break;
+                    case 13: $class .= "dayoff"; break;
                 }
                 //If we have two requests the same day (morning/afternoon)
                 if (($statuses[0] == $statuses[1]) && ($periods[0] != $periods[1])){
@@ -94,9 +98,8 @@ if (count($tabular) > 0) {?>
                         case 2: $class = "allrequested"; break;  // Requested
                         case 3: $class = "allaccepted"; break;  // Accepted
                         case 4: $class = "allrejected"; break;  // Rejected
-                        //The 2 cases below would be weird...
-                        case 5: $class = "dayoff"; break;
-                        case 6: $class = "dayoff"; break;
+                        case 5: $class = "allrejected"; break;  // Cancellation
+                        case 6: $class = "allrejected"; break;  // Canceled
                     }
                 }
           } else {
@@ -113,6 +116,8 @@ if (count($tabular) > 0) {?>
                           case 2: $class = "allrequested"; break;  // Requested
                           case 3: $class = "allaccepted"; break;  // Accepted
                           case 4: $class = "allrejected"; break;  // Rejected
+                          case 5: $class = "allrejected"; break;  // Cancellation
+                          case 6: $class = "allrejected"; break;  // Canceled
                       }
                       break;
                 case '2':
@@ -122,6 +127,8 @@ if (count($tabular) > 0) {?>
                           case 2: $class = "amrequested"; break;  // Requested
                           case 3: $class = "amaccepted"; break;  // Accepted
                           case 4: $class = "amrejected"; break;  // Rejected
+                          case 5: $class = "amrejected"; break;  // Cancellation
+                          case 6: $class = "amrejected"; break;  // Canceled
                       }
                     break;
                 case '3':
@@ -131,6 +138,8 @@ if (count($tabular) > 0) {?>
                           case 2: $class = "pmrequested"; break;  // Requested
                           case 3: $class = "pmaccepted"; break;  // Accepted
                           case 4: $class = "pmrejected"; break;  // Rejected
+                          case 5: $class = "pmrejected"; break;  // Cancellation
+                          case 6: $class = "pmrejected"; break;  // Canceled
                       }
                     break;
             }

@@ -150,7 +150,7 @@ if (isset($_GET['source'])) {
    if (isset($_GET['source'])) {
        echo form_open('/comments/' . $leave['id'] . '?source=' . $_GET['source'], $attributes);
    } else {
-       echo form_open('/comments/' . $leave['id'], $attributes);
+       echo form_open('/comments/' . $leave['id'] . '?source=edit', $attributes);
    }
    ?>
    <form method="post"

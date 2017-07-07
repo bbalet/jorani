@@ -60,6 +60,32 @@ class Leaves_model extends CI_Model {
     }
 
     /**
+     * Get the list of history of an employee
+     * @param int $employee Id of the employee
+     * @return array list of records
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function getLeavesOfEmployeeWithHistory($employee){
+      $employee = intval($employee);
+      return $this->db->query("SELECT leaves.*, status.name as status_name, types.name as type_name, lastchange.date as change_date, requested.date as request_date
+        FROM `leaves`
+        inner join status ON leaves.status = status.id
+        inner join types ON leaves.type = types.id
+        left outer join (
+          SELECT id, MAX(change_date) as date
+          FROM leaves_history
+          GROUP BY id
+        ) lastchange ON leaves.id = lastchange.id
+        left outer join (
+          SELECT id, MIN(change_date) as date
+          FROM leaves_history
+          WHERE leaves_history.status = 2
+          GROUP BY id
+        ) requested ON leaves.id = requested.id
+        WHERE leaves.employee = $employee")->result_array();
+    }
+
+    /**
      * Return a list of Accepted leaves between two dates and for a given employee
      * @param int $employee ID of the employee
      * @param string $start Start date
@@ -900,12 +926,14 @@ class Leaves_model extends CI_Model {
      * @param string $start Unix timestamp / Start date displayed on calendar
      * @param string $end Unix timestamp / End date displayed on calendar
      * @param bool $children Include sub department in the query
+     * @param string $statusFilter optional filter on status
      * @return string JSON encoded list of full calendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function department($entity_id, $start = "", $end = "", $children = FALSE) {
+    public function department($entity_id, $start = "", $end = "", $children = FALSE, $statusFilter = NULL) {
         $this->db->select('users.firstname, users.lastname, users.manager');
-        $this->db->select('leaves.*, types.name as type');
+        $this->db->select('leaves.*');
+        $this->db->select('types.name as type, types.acronym as acronym');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
         $this->db->join('leaves', 'leaves.employee = users.id');
@@ -925,7 +953,11 @@ class Leaves_model extends CI_Model {
         } else {
             $this->db->where('organization.id', $entity_id);
         }
-        $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
+        //$this->db->where('leaves.status != ', 4); //Exclude rejected requests
+        if ($statusFilter != NULL) {
+            $statuses = explode ('|', $statusFilter);
+            $this->db->where_in('status', $statuses );
+        }
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(1024);  //Security limit
         $events = $this->db->get()->result();
@@ -962,20 +994,30 @@ class Leaves_model extends CI_Model {
                 case 2: $color = '#f89406'; break;  // Requested
                 case 3: $color = '#468847'; break;  // Accepted
                 case 4: $color = '#ff0000'; break;  // Rejected
+                default: $color = '#ff0000'; break;  // Cancellation and Canceled
             }
+            $title = $entry->firstname .' ' . $entry->lastname;
             //If the connected user can access to the leave request
-            //(self, HR admin and manager)
+            //(self, HR admin and manager), add a link and the acronym
             $url = '';
             if (($entry->employee == $this->session->userdata('id')) ||
                 ($entry->manager == $this->session->userdata('id')) ||
                     ($this->session->userdata('is_hr') === TRUE)) {
                 $url = base_url() . 'leaves/leaves/' . $entry->id;
+                if (!empty($entry->acronym)) {
+                    $title .= ' - ' . $entry->acronym;
+                }
+            } else {
+                //Don't display rejected and cancel* leave requests for other employees
+                if ($entry->status > 3) {
+                    continue;
+                }
             }
 
             //Create the JSON representation of the event
             $jsonevents[] = array(
                 'id' => $entry->id,
-                'title' => $entry->firstname .' ' . $entry->lastname,
+                'title' => $title,
                 'imageurl' => $imageUrl,
                 'start' => $startdate,
                 'color' => $color,
@@ -1049,6 +1091,50 @@ class Leaves_model extends CI_Model {
         $this->db->order_by('leaves.startdate', 'desc');
         $query = $this->db->get('leaves');
         return $query->result_array();
+    }
+
+    /**
+     * Get the list of history of an employee
+     * @param int $manager Id of the employee
+     * @param bool $all TRUE all requests, FALSE otherwise
+     * @return array list of records
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function getLeavesRequestedToManagerWithHistory($manager, $all = FALSE){
+      $manager = intval($manager);
+      $ids = $this->delegations_model->listManagersGivingDelegation($manager);
+      $query="SELECT leaves.id as leave_id, users.*, leaves.*, types.name as type_label, status.name as status_name, types.name as type_name, lastchange.date as change_date, requested.date as request_date
+        FROM `leaves`
+        inner join status ON leaves.status = status.id
+        inner join types ON leaves.type = types.id
+        inner join users ON users.id = leaves.employee
+        left outer join (
+          SELECT id, MAX(change_date) as date
+          FROM leaves_history
+          GROUP BY id
+        ) lastchange ON leaves.id = lastchange.id
+        left outer join (
+          SELECT id, MIN(change_date) as date
+          FROM leaves_history
+          WHERE leaves_history.status = 2
+          GROUP BY id
+        ) requested ON leaves.id = requested.id";
+      if (count($ids) > 0) {
+        array_push($ids, $manager);
+        //TODO check syntaxe;
+        $query=$query . " WHERE users.manager in $ids";
+        //$this->db->where_in('users.manager', $ids);
+      } else {
+        $query=$query . " WHERE users.manager = $manager";
+        //$this->db->where('users.manager', $manager);
+      }
+      if ($all == FALSE) {
+        $query=$query . " AND leaves.status = 2 ";
+        //$this->db->where('leaves.status', 2);
+      }
+      $query=$query . "order by leaves.startdate DESC;";
+
+      return $this->db->query($query)->result_array();
     }
 
     /**

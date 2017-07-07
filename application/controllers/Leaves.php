@@ -40,7 +40,11 @@ class Leaves extends CI_Controller {
         $this->auth->checkIfOperationIsAllowed('list_leaves');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
-        $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($this->session->userdata('id'));
+        if ($this->config->item('enable_history') == TRUE){
+          $data['leaves'] = $this->leaves_model->getLeavesOfEmployeeWithHistory($this->session->userdata('id'));
+        }else{
+          $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($this->session->userdata('id'));
+        }
         $data['types'] = $this->types_model->getTypes();
         $data['title'] = lang('leaves_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_requests_list');
@@ -601,7 +605,8 @@ class Leaves extends CI_Controller {
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
         $children = filter_var($this->input->get('children', TRUE), FILTER_VALIDATE_BOOLEAN);
-        echo $this->leaves_model->department($entity_id, $start, $end, $children);
+        $statuses = $this->input->get('statuses');
+        echo $this->leaves_model->department($entity_id, $start, $end, $children, $statuses);
     }
 
     /**

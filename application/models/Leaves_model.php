@@ -1518,4 +1518,87 @@ class Leaves_model extends CI_Model {
         ORDER BY users.id ASC, leaves.startdate DESC', FALSE);
         return $query->result_array();
     }
+
+    /**
+     * Get the JSON of all comments of a leave
+     * @param int $id Id of the leave request
+     * @return array list of records
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function getCommentsLeaveJson($id){
+
+      $this->db->select('leaves.comments');
+      $this->db->from('leaves');
+      $this->db->where('leaves.id', "$id");
+      return $this->db->get()->row_array();
+      /*
+      return "{
+        \"comments\" : [
+          {
+            \"type\" : \"comment\",
+            \"author\" : 2,
+            \"value\" : \"Je prend un congé parce que c'est comme ça.\",
+            \"date\" : \"2017-07-04\"
+          },
+          {
+            \"type\" : \"change\",
+            \"status_number\" : 4,
+            \"date\" : \"2017-07-05\"
+          },
+          {
+            \"type\" : \"comment\",
+            \"author\" : 4,
+            \"value\" : \"C'est mort.\",
+            \"date\" : \"2017-07-05\"
+          },
+          {
+            \"type\" : \"comment\",
+            \"author\" : 1,
+            \"value\" : \"Non ca ne peut pas se faire comme ca!\",
+            \"date\" : \"2017-07-05\"
+          },
+          {
+            \"type\" : \"change\",
+            \"status_number\" : 2,
+            \"date\" : \"2017-07-05\"
+          }
+        ]
+      }";
+      */
+    }
+
+    /**
+     * Get the list of all comments of a leave
+     * @param int $id Id of the leave request
+     * @return array list of records
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function getCommentsLeave($id){
+      $request = $this->getCommentsLeaveJson($id);
+      $json = $request["comments"];
+      if(!empty($json)){
+        return json_decode($json);
+      } else {
+        return null;
+      }
+    }
+    /**
+    * Update the comment of a Leave
+    * @param int $id Id of the leave
+    * @param string $json new json for the comments of the leave
+    *@author Emilien NICOLAS <milihhard1996@gmail.com>
+    */
+    public function addComments($id, $json){
+      $data = array(
+          'comments' => $json
+      );
+      $this->db->where('id', $id);
+      $this->db->update('leaves', $data);
+
+      //Trace the modification if the feature is enabled
+      if ($this->config->item('enable_history') === TRUE) {
+          $this->load->model('history_model');
+          $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
+      }
+    }
 }

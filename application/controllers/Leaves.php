@@ -110,6 +110,9 @@ class Leaves extends CI_Controller {
      */
     public function view($source, $id) {
         $this->auth->checkIfOperationIsAllowed('view_leaves');
+        $this->load->model('users_model');
+        $this->load->model('status_model');
+        $this->load->helper('form');
         $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->getLeaves($id);
         if (empty($data['leave'])) {
@@ -142,10 +145,54 @@ class Leaves extends CI_Controller {
         } else {
             $data['name'] = '';
         }
+        $data["comments"] = $this->leaves_model->getCommentsLeave($id);
+        if (isset($data["comments"])){
+          $last_comment = new stdClass();;
+          foreach ($data["comments"]->comments as $comments_item) {
+            if($comments_item->type == "comment"){
+              $comments_item->author = $this->users_model->getName($comments_item->author);
+              $comments_item->in = "in";
+              $last_comment->in="";
+              $last_comment=$comments_item;
+            } else if($comments_item->type == "change"){
+              $comments_item->status = $this->status_model->getName($comments_item->status_number);
+            }
+          }
+        }
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('leaves/view', $data);
         $this->load->view('templates/footer');
+    }
+
+    /**
+    * create a new comment
+    * @param int $id Id of the leave request
+    * @author Emilien NICOLAS <milihhard1996@gmail.com>
+    */
+    public function createComment($id, $source = "leave"){
+      $this->auth->checkIfOperationIsAllowed('view_leaves');
+      $data = getUserContext($this);
+      $json_parsed = $this->leaves_model->getCommentsLeave($id);
+      $comment_object = new stdClass;
+      $comment_object->type = "comment";
+      $comment_object->author = $this->session->userdata('id');
+      $comment_object->value = $_POST['comment'];
+      $comment_object->date = date("Y-n-j");
+      if (isset($json_parsed)){
+        array_push($json_parsed->comments, $comment_object);
+      }else {
+        $json_parsed->comments = array($comment_object);
+      }
+      var_dump($json_parsed);
+      echo "<br>";
+      $json = json_encode($json_parsed);
+      echo $json;
+      $this->leaves_model->addComments($id,$json);
+      if(isset($_GET['source'])){
+        $source = $_GET['source'];
+      }
+      redirect("/leaves/$source/$id");
     }
 
     /**
@@ -204,6 +251,8 @@ class Leaves extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->checkIfOperationIsAllowed('edit_leaves');
+        $this->load->model('users_model');
+        $this->load->model('status_model');
         $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->getLeaves($id);
         //Check if exists
@@ -246,6 +295,20 @@ class Leaves extends CI_Controller {
             $data['types'] = $leaveTypesDetails->types;
             $this->load->model('users_model');
             $data['name'] = $this->users_model->getName($data['leave']['employee']);
+            $data["comments"] = $this->leaves_model->getCommentsLeave($id);
+            if (isset($data["comments"])){
+              $last_comment = new stdClass();;
+              foreach ($data["comments"]->comments as $comments_item) {
+                if($comments_item->type == "comment"){
+                  $comments_item->author = $this->users_model->getName($comments_item->author);
+                  $comments_item->in = "in";
+                  $last_comment->in="";
+                  $last_comment=$comments_item;
+                } else if($comments_item->type == "change"){
+                  $comments_item->status = $this->status_model->getName($comments_item->status_number);
+                }
+              }
+            }
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('leaves/edit', $data);

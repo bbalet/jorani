@@ -312,6 +312,11 @@ $route['api/sls'] = 'connection/sls';
 $route['api/sso'] = 'connection/sso';
 
 //_______________________________________________
+//Comments
+$route['comments/(:num)'] = 'leaves/createComment/$1';
+
+
+//_______________________________________________
 //Experimental mobile endpoint
 $route['mobile/getPublicKey'] = 'mobile/getPublicKey';
 $route['mobile/login'] = 'mobile/login';

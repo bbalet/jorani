@@ -62,11 +62,11 @@ switch ($leave['status']) {
 <div class="span6">
   <h4>Commentaires</h4>
   <?php
-  if(isset($comments)){
+  if(isset($leave["comments"])){
 
     echo "<div class='accordion' id='accordion'>";
     $i=1;
-    foreach ($comments->comments as $comments_item) {
+    foreach ($leave["comments"]->comments as $comments_item) {
       $date=new DateTime($comments_item->date);
       $dateFormat=$date->format(lang('global_date_format'));
 

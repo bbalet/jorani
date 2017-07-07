@@ -22,9 +22,9 @@ class Dayoffs_model extends CI_Model {
      * Default constructor
      */
     public function __construct() {
-        
+
     }
-    
+
     /**
      * Get the list of dayofs for a contract and a civil year (not to be confused with the yearly period)
      * @param int $contract identifier of the contract
@@ -48,7 +48,7 @@ class Dayoffs_model extends CI_Model {
         }
         return $dayoffs;
     }
-    
+
     /**
      * Get the list of dayofs for a contract (suitable fo ICS feed)
      * @param int $contract identifier of the contract
@@ -61,8 +61,8 @@ class Dayoffs_model extends CI_Model {
         $this->db->where("date >= DATE_SUB(NOW(),INTERVAL 2 YEAR"); //Security/performance limit
         return $query->result();
     }
-    
-    
+
+
     /**
      * Delete a day off into the day offs table
      * @param int $contract Identifier of the contract
@@ -74,8 +74,8 @@ class Dayoffs_model extends CI_Model {
         $this->db->where('contract', $contract);
         $this->db->where('date', date('Y/m/d', $timestamp));
         return $this->db->delete('dayoffs');
-    } 
-    
+    }
+
     /**
      * Delete a day off into the day offs table
      * @param int $contract Identifier of the contract
@@ -86,7 +86,7 @@ class Dayoffs_model extends CI_Model {
         $this->db->where('contract', $contract);
         return $this->db->delete('dayoffs');
     }
-    
+
     /**
      * Delete a list of day offs into the day offs table
      * @param int $contract Identifier of the contract
@@ -123,9 +123,9 @@ class Dayoffs_model extends CI_Model {
             );
             array_push($data, $row);
         }
-        return $this->db->insert_batch('dayoffs', $data); 
+        return $this->db->insert_batch('dayoffs', $data);
     }
-    
+
     /**
      * Copy a list of days off of a source contract to a destination contract (for a given civil year)
      * @param int $source identifier of the source contract
@@ -139,7 +139,7 @@ class Dayoffs_model extends CI_Model {
         $this->db->where('contract', $destination);
         $this->db->where('YEAR(date)', $year);
         $this->db->delete('dayoffs');
-        
+
         //Copy source->destination days off
         $sql = 'INSERT dayoffs(contract, date, type, title) ' .
                 ' SELECT ' . $this->db->escape($destination) . ', date, type, title ' .
@@ -149,7 +149,7 @@ class Dayoffs_model extends CI_Model {
         $query = $this->db->query($sql);
         return $query;
     }
-    
+
     /**
      * Get the length of days off between two dates for a given contract
      * @param int $contract contract identifier
@@ -164,7 +164,7 @@ class Dayoffs_model extends CI_Model {
         $this->db->where('date <=', $end);
         $this->db->from('dayoffs');
         $result = $this->db->get()->result_array();
-        return is_null($result[0]['days'])?0:$result[0]['days']; 
+        return is_null($result[0]['days'])?0:$result[0]['days'];
     }
 
     /**
@@ -181,6 +181,7 @@ class Dayoffs_model extends CI_Model {
         $this->db->where('users.id', $employee);
         $this->db->where('date >=', $start);
         $this->db->where('date <=', $end);
+        $this->db->order_by('date');
         $events = $this->db->get('users')->result();
         $listOfDaysOff = array();
         foreach ($events as $entry) {
@@ -208,7 +209,7 @@ class Dayoffs_model extends CI_Model {
         }
         return $listOfDaysOff;
     }
-    
+
     /**
      * Insert a day off into the day offs table
      * @param int $contract Identifier of the contract
@@ -241,7 +242,7 @@ class Dayoffs_model extends CI_Model {
             return $this->db->insert('dayoffs', $data);
         }
     }
-    
+
     /**
      * Import an ICS feed containing days off (all events are considered as non-working days).
      * This first version is very basic, it supports only full days off.
@@ -269,7 +270,7 @@ class Dayoffs_model extends CI_Model {
             }
         }
     }
-    
+
     /**
      * All day offs of a given user
      * @param int $user_id connected user
@@ -286,7 +287,7 @@ class Dayoffs_model extends CI_Model {
         $this->db->where('date >=', $start);
         $this->db->where('date <=', $end);
         $events = $this->db->get('users')->result();
-        
+
         $jsonevents = array();
         foreach ($events as $entry) {
             switch ($entry->type)
@@ -329,7 +330,7 @@ class Dayoffs_model extends CI_Model {
         }
         return json_encode($jsonevents);
     }
-    
+
     /**
      * All day offs for the organization
      * @param string $start Start date displayed on calendar
@@ -341,7 +342,7 @@ class Dayoffs_model extends CI_Model {
      */
     public function allDayoffs($start, $end, $entity_id, $children) {
         $this->lang->load('calendar', $this->session->userdata('language'));
-        
+
         $this->db->select('dayoffs.*, contracts.name');
         $this->db->distinct();
         $this->db->join('contracts', 'dayoffs.contract = contracts.id');
@@ -349,7 +350,7 @@ class Dayoffs_model extends CI_Model {
         $this->db->join('organization', 'users.organization = organization.id');
         $this->db->where('date >=', $start);
         $this->db->where('date <=', $end);
-        
+
         if ($children === TRUE) {
             $this->load->model('organization_model');
             $list = $this->organization_model->getAllChildren($entity_id);
@@ -361,10 +362,10 @@ class Dayoffs_model extends CI_Model {
             $this->db->where_in('organization.id', $ids);
         } else {
             $this->db->where('organization.id', $entity_id);
-        }        
-        
+        }
+
         $events = $this->db->get('dayoffs')->result();
-        
+
         $jsonevents = array();
         foreach ($events as $entry) {
             switch ($entry->type)
@@ -407,10 +408,10 @@ class Dayoffs_model extends CI_Model {
         }
         return json_encode($jsonevents);
     }
-    
+
     /**
      * Purge the table by deleting the records prior $toDate
-     * @param date $toDate 
+     * @param date $toDate
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -430,7 +431,7 @@ class Dayoffs_model extends CI_Model {
         $result = $this->db->get();
         return $result->row()->number;
     }
-    
+
     /**
      * Count the days off defined for a contract and a year
      * @param int $contract Contract to check
@@ -446,7 +447,7 @@ class Dayoffs_model extends CI_Model {
         $result = $this->db->get();
         return $result->row()->number;
     }
-    
+
     /**
      * All day offs of a given employee and between two dates
      * @param int $user_id connected user
@@ -464,7 +465,7 @@ class Dayoffs_model extends CI_Model {
         $dayoffs = $this->db->get('users')->result();
         return $dayoffs;
     }
-    
+
     /**
      * Check if days off have been defined for year - 1, year and year + 1
      * @param int $year Year to check

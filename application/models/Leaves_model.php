@@ -1519,68 +1519,27 @@ class Leaves_model extends CI_Model {
         return $query->result_array();
     }
 
+
     /**
-     * Get the JSON of all comments of a leave
+     * Get one leave with his comment
      * @param int $id Id of the leave request
      * @return array list of records
      * @author Emilien NICOLAS <milihhard1996@gmail.com>
      */
-    public function getCommentsLeaveJson($id){
-
-      $this->db->select('leaves.comments');
-      $this->db->from('leaves');
-      $this->db->where('leaves.id', "$id");
-      return $this->db->get()->row_array();
-      /*
-      return "{
-        \"comments\" : [
-          {
-            \"type\" : \"comment\",
-            \"author\" : 2,
-            \"value\" : \"Je prend un congé parce que c'est comme ça.\",
-            \"date\" : \"2017-07-04\"
-          },
-          {
-            \"type\" : \"change\",
-            \"status_number\" : 4,
-            \"date\" : \"2017-07-05\"
-          },
-          {
-            \"type\" : \"comment\",
-            \"author\" : 4,
-            \"value\" : \"C'est mort.\",
-            \"date\" : \"2017-07-05\"
-          },
-          {
-            \"type\" : \"comment\",
-            \"author\" : 1,
-            \"value\" : \"Non ca ne peut pas se faire comme ca!\",
-            \"date\" : \"2017-07-05\"
-          },
-          {
-            \"type\" : \"change\",
-            \"status_number\" : 2,
-            \"date\" : \"2017-07-05\"
-          }
-        ]
-      }";
-      */
-    }
-
-    /**
-     * Get the list of all comments of a leave
-     * @param int $id Id of the leave request
-     * @return array list of records
-     * @author Emilien NICOLAS <milihhard1996@gmail.com>
-     */
-    public function getCommentsLeave($id){
-      $request = $this->getCommentsLeaveJson($id);
-      $json = $request["comments"];
-      if(!empty($json)){
-        return json_decode($json);
-      } else {
-        return null;
-      }
+    public function getLeaveWithComments($id = 0) {
+        $this->db->select('leaves.*');
+        $this->db->select('status.name as status_name, types.name as type_name');
+        $this->db->from('leaves');
+        $this->db->join('status', 'leaves.status = status.id');
+        $this->db->join('types', 'leaves.type = types.id');
+        $this->db->where('leaves.id', $id);
+        $leave = $this->db->get()->row_array();
+        if(!empty($leave['comments'])){
+          $leave['comments'] = json_decode($leave['comments']);
+        } else {
+          $leave['comments'] = null;
+        }
+        return $leave;
     }
     /**
     * Update the comment of a Leave

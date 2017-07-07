@@ -1552,4 +1552,46 @@ class Leaves_model extends CI_Model {
         ORDER BY users.id ASC, leaves.startdate DESC', FALSE);
         return $query->result_array();
     }
+
+
+    /**
+     * Get one leave with his comment
+     * @param int $id Id of the leave request
+     * @return array list of records
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function getLeaveWithComments($id = 0) {
+        $this->db->select('leaves.*');
+        $this->db->select('status.name as status_name, types.name as type_name');
+        $this->db->from('leaves');
+        $this->db->join('status', 'leaves.status = status.id');
+        $this->db->join('types', 'leaves.type = types.id');
+        $this->db->where('leaves.id', $id);
+        $leave = $this->db->get()->row_array();
+        if(!empty($leave['comments'])){
+          $leave['comments'] = json_decode($leave['comments']);
+        } else {
+          $leave['comments'] = null;
+        }
+        return $leave;
+    }
+    /**
+    * Update the comment of a Leave
+    * @param int $id Id of the leave
+    * @param string $json new json for the comments of the leave
+    *@author Emilien NICOLAS <milihhard1996@gmail.com>
+    */
+    public function addComments($id, $json){
+      $data = array(
+          'comments' => $json
+      );
+      $this->db->where('id', $id);
+      $this->db->update('leaves', $data);
+
+      //Trace the modification if the feature is enabled
+      if ($this->config->item('enable_history') === TRUE) {
+          $this->load->model('history_model');
+          $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
+      }
+    }
 }

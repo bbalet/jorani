@@ -169,7 +169,7 @@ class Leaves extends CI_Controller {
     * @param int $id Id of the leave request
     * @author Emilien NICOLAS <milihhard1996@gmail.com>
     */
-    public function createComment($id, $source = "leave"){
+    public function createComment($id, $source = "leaves/leaves"){
       $this->auth->checkIfOperationIsAllowed('view_leaves');
       $data = getUserContext($this);
       $json_parsed = $this->leaves_model->getCommentsLeave($id);
@@ -191,7 +191,7 @@ class Leaves extends CI_Controller {
       if(isset($_GET['source'])){
         $source = $_GET['source'];
       }
-      redirect("/leaves/$source/$id");
+      redirect("/$source/$id");
     }
 
     /**

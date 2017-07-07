@@ -110,7 +110,7 @@
             $enddate = $date->format(lang('global_date_format'));?>
             <tr>
                 <td data-order="<?php echo $leave['id']; ?>">
-                    <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_leaves_thead_tip_edit');?>"><?php echo $leave['id'] ?></a>
+                    <?php echo $leave['id'];?>
                     <div class="pull-right">
                         &nbsp;
                         <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('hr_leaves_thead_tip_history');?>"><i class="icon-time"></i></a>

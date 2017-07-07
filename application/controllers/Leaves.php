@@ -186,7 +186,7 @@ class Leaves extends CI_Controller {
       var_dump($json_parsed);
       echo "<br>";
       $json = json_encode($json_parsed);
-      echo $json;
+      //echo $json;
       $this->leaves_model->addComments($id,$json);
       if(isset($_GET['source'])){
         $source = $_GET['source'];

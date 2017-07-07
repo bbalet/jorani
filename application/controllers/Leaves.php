@@ -114,7 +114,7 @@ class Leaves extends CI_Controller {
         $this->load->model('status_model');
         $this->load->helper('form');
         $data = getUserContext($this);
-        $data['leave'] = $this->leaves_model->getLeaves($id);
+        $data['leave'] = $this->leaves_model->getLeaveWithComments($id);
         if (empty($data['leave'])) {
             redirect('notfound');
         }
@@ -145,10 +145,9 @@ class Leaves extends CI_Controller {
         } else {
             $data['name'] = '';
         }
-        $data["comments"] = $this->leaves_model->getCommentsLeave($id);
-        if (isset($data["comments"])){
+        if (isset($data["leave"]["comments"])){
           $last_comment = new stdClass();;
-          foreach ($data["comments"]->comments as $comments_item) {
+          foreach ($data["leave"]["comments"]->comments as $comments_item) {
             if($comments_item->type == "comment"){
               $comments_item->author = $this->users_model->getName($comments_item->author);
               $comments_item->in = "in";
@@ -254,7 +253,7 @@ class Leaves extends CI_Controller {
         $this->load->model('users_model');
         $this->load->model('status_model');
         $data = getUserContext($this);
-        $data['leave'] = $this->leaves_model->getLeaves($id);
+        $data['leave'] = $this->leaves_model->getLeaveWithComments($id);
         //Check if exists
         if (empty($data['leave'])) {
             redirect('notfound');
@@ -295,10 +294,9 @@ class Leaves extends CI_Controller {
             $data['types'] = $leaveTypesDetails->types;
             $this->load->model('users_model');
             $data['name'] = $this->users_model->getName($data['leave']['employee']);
-            $data["comments"] = $this->leaves_model->getCommentsLeave($id);
-            if (isset($data["comments"])){
+            if (isset($data["leave"]["comments"])){
               $last_comment = new stdClass();;
-              foreach ($data["comments"]->comments as $comments_item) {
+              foreach ($data["leave"]["comments"]->comments as $comments_item) {
                 if($comments_item->type == "comment"){
                   $comments_item->author = $this->users_model->getName($comments_item->author);
                   $comments_item->in = "in";

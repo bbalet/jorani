@@ -313,7 +313,6 @@ $route['api/sso'] = 'connection/sso';
 
 //_______________________________________________
 //Comments
-$route['comments/index/(:num)'] = 'comments/index/$1';
 $route['comments/(:num)'] = 'leaves/createComment/$1';
 
 

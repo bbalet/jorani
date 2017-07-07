@@ -1575,6 +1575,71 @@ class Leaves_model extends CI_Model {
         }
         return $leave;
     }
+
+    /**
+     * Get the JSON representation of comments posted on a leave request
+     * @param int $id Id of the leave request
+     * @return array list of records
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function getCommentsLeaveJson($id){
+
+      $this->db->select('leaves.comments');
+      $this->db->from('leaves');
+      $this->db->where('leaves.id', "$id");
+      return $this->db->get()->row_array();
+      /*
+      return "{
+        \"comments\" : [
+          {
+            \"type\" : \"comment\",
+            \"author\" : 2,
+            \"value\" : \"Je prend un congé parce que c'est comme ça.\",
+            \"date\" : \"2017-07-04\"
+          },
+          {
+            \"type\" : \"change\",
+            \"status_number\" : 4,
+            \"date\" : \"2017-07-05\"
+          },
+          {
+            \"type\" : \"comment\",
+            \"author\" : 4,
+            \"value\" : \"C'est mort.\",
+            \"date\" : \"2017-07-05\"
+          },
+          {
+            \"type\" : \"comment\",
+            \"author\" : 1,
+            \"value\" : \"Non ca ne peut pas se faire comme ca!\",
+            \"date\" : \"2017-07-05\"
+          },
+          {
+            \"type\" : \"change\",
+            \"status_number\" : 2,
+            \"date\" : \"2017-07-05\"
+          }
+        ]
+      }";
+      */
+    }
+
+    /**
+     * Get one leave with his comment
+     * @param int $id Id of the leave request
+     * @return array list of records
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function getCommentsLeave($id){
+      $request = $this->getCommentsLeaveJson($id);
+      $json = $request["comments"];
+      if(!empty($json)){
+        return json_decode($json);
+      } else {
+        return null;
+      }
+    }
+
     /**
     * Update the comment of a Leave
     * @param int $id Id of the leave

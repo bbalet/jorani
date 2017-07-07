@@ -244,6 +244,8 @@ class Leaves extends CI_Controller {
      */
     public function edit($id) {
         $this->auth->checkIfOperationIsAllowed('edit_leaves');
+        $this->load->model('users_model');
+        $this->load->model('status_model');
         $data = getUserContext($this);
         $data['leave'] = $this->leaves_model->getLeaves($id);
         //Check if exists
@@ -286,6 +288,20 @@ class Leaves extends CI_Controller {
             $data['types'] = $leaveTypesDetails->types;
             $this->load->model('users_model');
             $data['name'] = $this->users_model->getName($data['leave']['employee']);
+            $data["comments"] = $this->leaves_model->getCommentsLeave($id);
+            if (isset($data["comments"])){
+              $last_comment = new stdClass();;
+              foreach ($data["comments"]->comments as $comments_item) {
+                if($comments_item->type == "comment"){
+                  $comments_item->author = $this->users_model->getName($comments_item->author);
+                  $comments_item->in = "in";
+                  $last_comment->in="";
+                  $last_comment=$comments_item;
+                } else if($comments_item->type == "change"){
+                  $comments_item->status = $this->status_model->getName($comments_item->status_number);
+                }
+              }
+            }
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('leaves/edit', $data);

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view allows an employees (or HR admin) to modify a leave request
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
@@ -9,13 +9,14 @@
 ?>
 
 <h2><?php echo lang('leaves_edit_title');?><?php echo $leave['id']; ?> <?php echo $help;?>&nbsp;<span class="muted">(<?php echo $name ?>)</span></h2>
-
+<div class="row">
+  <div class="span8">
 <div class="row-fluid">
     <div class="span8">
 
 <?php echo validation_errors(); ?>
 
-<?php 
+<?php
 $attributes = array('id' => 'frmLeaveForm');
 if (isset($_GET['source'])) {
     echo form_open('leaves/edit/' . $id . '?source=' . $_GET['source'], $attributes);
@@ -30,9 +31,9 @@ if (isset($_GET['source'])) {
     <select class="input-xxlarge" name="type" id="type">
     <?php foreach ($types as $typeId => $TypeName): ?>
         <option value="<?php echo $typeId; ?>" <?php if ($typeId == $leave['type']) echo "selected"; ?>><?php echo $TypeName; ?></option>
-    <?php endforeach ?>    
+    <?php endforeach ?>
     </select>
-        
+
     <label for="viz_startdate"><?php echo lang('leaves_edit_field_start');?></label>
     <input type="text" name="viz_startdate" id="viz_startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" autocomplete="off" />
     <input type="hidden" name="startdate" id="startdate" value="<?php echo $leave['startdate'];?>" />
@@ -40,7 +41,7 @@ if (isset($_GET['source'])) {
         <option value="Morning" <?php if ($leave['startdatetype'] == "Morning") {echo "selected";}?>><?php echo lang('Morning');?></option>
         <option value="Afternoon" <?php if ($leave['startdatetype'] == "Afternoon") {echo "selected";}?>><?php echo lang('Afternoon');?></option>
     </select><br />
-    
+
     <label for="viz_enddate"><?php echo lang('leaves_edit_field_end');?></label>
     <input type="text" name="viz_enddate" id="viz_enddate" value="<?php $date = new DateTime($leave['enddate']); echo $date->format(lang('global_date_format'));?>" autocomplete="off" />
     <input type="hidden" name="enddate" id="enddate" value="<?php echo $leave['enddate'];?>" />
@@ -48,39 +49,41 @@ if (isset($_GET['source'])) {
         <option value="Morning" <?php if ($leave['enddatetype'] == "Morning") {echo "selected";}?>><?php echo lang('Morning');?></option>
         <option value="Afternoon" <?php if ($leave['enddatetype'] == "Afternoon") {echo "selected";}?>><?php echo lang('Afternoon');?></option>
     </select><br />
+    <label for="duration"><?php echo lang('leaves_edit_field_duration');?> <span id="tooltipDayOff"></span></label>
 
-    <label for="duration"><?php echo lang('leaves_edit_field_duration');?></label>
     <?php if ($this->config->item('disable_edit_leave_duration') == TRUE) { ?>
     <input type="text" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" readonly />
     <?php } else { ?>
     <input type="text" name="duration" id="duration" value="<?php echo $leave['duration']; ?>" />
     <?php } ?>
-    
+
+    <span style="margin-left: 2px;position: relative;top: -5px;" id="spnDayType"></span>
+
     <div class="alert hide alert-error" id="lblCreditAlert">
         <button type="button" class="close">&times;</button>
         <?php echo lang('leaves_edit_field_duration_message');?>
     </div>
-    
+
     <div class="alert hide alert-error" id="lblOverlappingAlert" onclick="$('#lblOverlappingAlert').hide();">
         <button type="button" class="close">&times;</button>
         <?php echo lang('leaves_create_field_overlapping_message');?>
     </div>
-    
+
     <div class="alert hide alert-error" id="lblOverlappingDayOffAlert" onclick="$('#lblOverlappingDayOffAlert').hide();">
         <button type="button" class="close">&times;</button>
         <?php echo lang('leaves_flash_msg_overlap_dayoff');?>
     </div>
-    
+
     <label for="cause"><?php echo lang('leaves_edit_field_cause');?></label>
     <textarea name="cause"><?php echo $leave['cause']; ?></textarea>
-    
+
     <label for="status"><?php echo lang('leaves_edit_field_status');?></label>
     <select name="status">
         <option value="1" <?php if ($leave['status'] == 1) echo 'selected'; ?>><?php echo lang('Planned');?></option>
         <option value="2" <?php if (($leave['status'] == 2) || $this->config->item('leave_status_requested')) echo 'selected'; ?>><?php echo lang('Requested');?></option>
         <?php if ($is_hr) {?>
         <option value="3" <?php if ($leave['status'] == 3) echo 'selected'; ?>><?php echo lang('Accepted');?></option>
-        <option value="4" <?php if ($leave['status'] == 4) echo 'selected'; ?>><?php echo lang('Rejected');?></option>        
+        <option value="4" <?php if ($leave['status'] == 4) echo 'selected'; ?>><?php echo lang('Rejected');?></option>
         <?php } ?>
     </select><br />
 
@@ -91,22 +94,72 @@ if (isset($_GET['source'])) {
     <?php } else {?>
         <a href="<?php echo base_url(); ?>leaves" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('leaves_edit_button_cancel');?></a>
     <?php } ?>
-    
+
 </form>
 
     </div>
-    <div class="span4">
-        <div class="row-fluid">
-            <div class="span12">
-                <span id="spnDayType"></span>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="span12">
-                <span id="spnDaysOffList"></span>
-            </div>
-        </div>
-    </div>
+
+</div>
+</div>
+<div class="span4">
+  <h4>Commentaires</h4>
+  <?php
+  if(isset($comments)){
+
+    echo "<div class='accordion' id='accordion'>";
+    $i=1;
+    foreach ($comments->comments as $comments_item) {
+      $date=new DateTime($comments_item->date);
+      $dateFormat=$date->format(lang('global_date_format'));
+
+      if($comments_item->type == "comment"){
+        echo "<div class='accordion-group'>";
+        echo "  <div class='accordion-heading'>";
+        echo "    <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapse$i'>";
+        echo "      $dateFormat : $comments_item->author a dit";
+        echo "    </a>";
+        echo "  </div>";
+        echo "  <div id='collapse$i' class=\"accordion-body collapse $comments_item->in\">";
+        echo "    <div class='accordion-inner'>";
+        echo "      $comments_item->value";
+        echo "    </div>";
+        echo "  </div>";
+        echo "</div>";
+      }else if ($comments_item->type == "change"){
+        echo "<div class='accordion-group'>";
+        echo "  <div class='accordion-heading'>";
+        echo "    <h6 class='accordion-toggle' data-toggle='collapse' data-parent='#accordion'>";
+        echo "      $dateFormat : Le status de la demande a été changé : ";
+        switch ($comments_item->status_number) {
+          case 1: echo "<span class='label'>" . lang($comments_item->status) . "</span>"; break;
+          case 2: echo "<span class='label label-warning'>" . lang($comments_item->status) . "</span>"; break;
+          case 3: echo "<span class='label label-success'>" . lang($comments_item->status) . "</span>"; break;
+          default: echo "<span class='label label-important' style='background-color: #ff0000;'>" . lang($comments_item->status) . "</span>"; break;
+        }
+        echo "    </h6>";
+        echo "  </div>";
+        echo "</div>";
+      }
+      $i++;
+    }
+    echo " </div>";
+  }
+   ?>
+   <?php
+   $attributes = array('id' => 'frmLeaveNewCommentForm');
+   if (isset($_GET['source'])) {
+       echo form_open('/comments/' . $leave['id'] . '?source=' . $_GET['source'], $attributes);
+   } else {
+       echo form_open('/comments/' . $leave['id'], $attributes);
+   }
+   ?>
+   <form method="post"
+   <label for="comment">Nouveau commentaire</label>
+   <textarea name="comment" class="form-control" rows="5" style="min-width: 100%"></textarea>
+   <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i>&nbsp;<?php echo "Nouveau commentaire";?></button>
+   &nbsp;
+ </form>
+</div>
 </div>
 
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
@@ -130,7 +183,11 @@ if ($language_code != 'en') { ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 
 <?php require_once dirname(BASEPATH) . "/local/triggers/leave_view.php"; ?>
-
+<script>
+$(document).on("click", "#showNoneWorkedDay", function(e) {
+  showListDayOffHTML();
+});
+</script>
 <script type="text/javascript">
     var baseURL = '<?php echo base_url();?>';
     var userId = <?php echo $leave['employee']; ?>;
@@ -138,21 +195,21 @@ if ($language_code != 'en') { ?>
     var languageCode = '<?php echo $language_code;?>';
     var dateJsFormat = '<?php echo lang('global_date_js_format');?>';
     var dateMomentJsFormat = '<?php echo lang('global_date_momentjs_format');?>';
-    
+
     var noContractMsg = "<?php echo lang('leaves_validate_flash_msg_no_contract');?>";
     var noTwoPeriodsMsg = "<?php echo lang('leaves_validate_flash_msg_overlap_period');?>";
-    
+
     var overlappingWithDayOff = "<?php echo lang('leaves_flash_msg_overlap_dayoff');?>";
     var listOfDaysOffTitle = "<?php echo lang('leaves_flash_spn_list_days_off');?>";
-    
+
 function validate_form() {
     var fieldname = "";
-    
+
     //Call custom trigger defined into local/triggers/leave.js
-    if (typeof triggerValidateEditForm == 'function') { 
+    if (typeof triggerValidateEditForm == 'function') {
        if (triggerValidateEditForm() == false) return false;
     }
-    
+
     if ($('#viz_startdate').val() == "") fieldname = "<?php echo lang('leaves_edit_field_start');?>";
     if ($('#viz_enddate').val() == "") fieldname = "<?php echo lang('leaves_edit_field_end');?>";
     if ($('#duration').val() == "" || $('#duration').val() == 0) fieldname = "<?php echo lang('leaves_edit_field_duration');?>";
@@ -162,6 +219,7 @@ function validate_form() {
         bootbox.alert(<?php echo lang('leaves_validate_mandatory_js_msg');?>);
         return false;
     }
+
 }
 
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
@@ -178,10 +236,10 @@ $(function () {
 $(function () {
     //Selectize the leave type combo
     $('#type').selectize();
-    
+
     //On opening, refresh leave request information
     refreshLeaveInfo();
 });
 
 </script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit-0.7.0.js" type="text/javascript"></script>

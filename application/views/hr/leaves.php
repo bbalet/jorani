@@ -9,12 +9,30 @@
  */
 ?>
 
-<div class="row-fluid">
-    <div class="span12">
-
 <h2><?php echo lang('hr_leaves_html_title');?><?php echo $user_id; ?>&nbsp;<span class="muted">(<?php echo $name ?>)</span></h2>
 
 <?php echo $flash_partial_view;?>
+
+<div class="row">
+    <div class="span3">
+        <?php echo lang('leaves_index_thead_type');?>
+        <select name="cboLeaveType" id="cboLeaveType">
+            <option value="" selected></option>
+        <?php foreach ($types as $type): ?>
+            <option value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
+        <?php endforeach ?>
+        </select>&nbsp;&nbsp;
+    </div>
+    <div class="span1">&nbsp;</div>
+    <div class="span8">
+    <span class="label"><input type="checkbox" checked id="chkPlanned" class="filterStatus"> &nbsp;<?php echo lang('Planned');?></span> &nbsp;
+    <span class="label label-success"><input type="checkbox" checked id="chkAccepted" class="filterStatus"> &nbsp;<?php echo lang('Accepted');?></span> &nbsp;
+    <span class="label label-warning"><input type="checkbox" checked id="chkRequested" class="filterStatus"> &nbsp;<?php echo lang('Requested');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkRejected" class="filterStatus"> &nbsp;<?php echo lang('Rejected');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCancellation" class="filterStatus"> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCanceled" class="filterStatus"> &nbsp;<?php echo lang('Canceled');?></span>
+    </div>
+</div>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
     <thead>
@@ -58,10 +76,6 @@
                 <?php } ?>
             </div>
         </td>
-        <td><?php echo lang($leave['status_name']); ?></td>
-        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leave['startdatetype']). ')'; ?></td>
-        <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leave['enddatetype']) . ')'; ?></td>
-        <td><?php echo $leave['duration']; ?></td>
         <?php
         switch ($leave['status']) {
             case 1: echo "<td><span class='label'>" . lang($leave['status_name']) . "</span></td>"; break;
@@ -69,74 +83,65 @@
             case 3: echo "<td><span class='label label-success'>" . lang($leave['status_name']) . "</span></td>"; break;
             default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($leave['status_name']) . "</span></td>"; break;
         }?>
+        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leave['startdatetype']). ')'; ?></td>
+        <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leave['enddatetype']) . ')'; ?></td>
+        <td><?php echo $leave['duration']; ?></td>
+        <td><?php echo $leave['type_name']; ?></td>
     </tr>
 <?php endforeach ?>
 	</tbody>
 </table>
-    </div>
-</div>
 
-<div class="row-fluid">
-    <div class="span12">&nbsp;</div>
-</div>
+<br />
 
-<div class="row-fluid">
-    <div class="span12">
-      <a href="<?php echo base_url();?>hr/leaves/export/<?php echo $user_id; ?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_leaves_button_export');?></a>
-      &nbsp;&nbsp;
-      <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_leaves_button_list');?></a>
-    </div>
-</div>
+<a href="<?php echo base_url();?>hr/leaves/export/<?php echo $user_id; ?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_leaves_button_export');?></a>
+&nbsp;&nbsp;
+<a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_leaves_button_list');?></a>
 
-<div class="row-fluid">
-    <div class="span12">&nbsp;</div>
-</div>
+<br />
 
 <?php if ($this->config->item('enable_history') === TRUE) { ?>
-<div class="row-fluid">
-    <div class="span12">
-        <h2><?php echo lang('hr_leaves_deleted_title');?></h2>
-        <table cellpadding="0" cellspacing="0" border="0" class="display" id="deleted_leaves" width="100%">
-            <thead>
-                <tr>
-                    <th><?php echo lang('hr_leaves_thead_id');?></th>
-                    <th><?php echo lang('hr_leaves_thead_status');?></th>
-                    <th><?php echo lang('hr_leaves_thead_start');?></th>
-                    <th><?php echo lang('hr_leaves_thead_end');?></th>            
-                    <th><?php echo lang('hr_leaves_thead_duration');?></th>
-                    <th><?php echo lang('hr_leaves_thead_type');?></th>
-                </tr>
-            </thead>
-            <tbody>
-        <?php foreach ($deletedLeaves as $leave):
-            $date = new DateTime($leave['startdate']);
-            $tmpStartDate = $date->getTimestamp();
-            $startdate = $date->format(lang('global_date_format'));
-            $date = new DateTime($leave['enddate']);
-            $tmpEndDate = $date->getTimestamp();
-            $enddate = $date->format(lang('global_date_format'));?>
-            <tr>
-                <td data-order="<?php echo $leave['id']; ?>">
-                    <?php echo $leave['id'];?>
-                    <div class="pull-right">
-                        &nbsp;
-                        <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('hr_leaves_thead_tip_history');?>"><i class="icon-time"></i></a>
-                    </div>
-                </td>
-                <td><?php echo lang($leave['status_name']); ?></td>
-                <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leave['startdatetype']). ')'; ?></td>
-                <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leave['enddatetype']) . ')'; ?></td>
-                <td><?php echo $leave['duration']; ?></td>
-                <td><?php echo $leave['type_name']; ?></td>
-            </tr>
-        <?php endforeach ?>
-                </tbody>
-        </table>
-    </div>
-</div>
-<div class="row-fluid">
-    <div class="span12">&nbsp;</div>
-</div>
+
+<h2><?php echo lang('hr_leaves_deleted_title');?></h2>
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="deleted_leaves" width="100%">
+    <thead>
+        <tr>
+            <th><?php echo lang('hr_leaves_thead_id');?></th>
+            <th><?php echo lang('hr_leaves_thead_status');?></th>
+            <th><?php echo lang('hr_leaves_thead_start');?></th>
+            <th><?php echo lang('hr_leaves_thead_end');?></th>            
+            <th><?php echo lang('hr_leaves_thead_duration');?></th>
+            <th><?php echo lang('hr_leaves_thead_type');?></th>
+        </tr>
+    </thead>
+    <tbody>
+<?php foreach ($deletedLeaves as $leave):
+    $date = new DateTime($leave['startdate']);
+    $tmpStartDate = $date->getTimestamp();
+    $startdate = $date->format(lang('global_date_format'));
+    $date = new DateTime($leave['enddate']);
+    $tmpEndDate = $date->getTimestamp();
+    $enddate = $date->format(lang('global_date_format'));?>
+    <tr>
+        <td data-order="<?php echo $leave['id']; ?>">
+            <?php echo $leave['id'];?>
+            <div class="pull-right">
+                &nbsp;
+                <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('hr_leaves_thead_tip_history');?>"><i class="icon-time"></i></a>
+            </div>
+        </td>
+        <td><?php echo lang($leave['status_name']); ?></td>
+        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leave['startdatetype']). ')'; ?></td>
+        <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leave['enddatetype']) . ')'; ?></td>
+        <td><?php echo $leave['duration']; ?></td>
+        <td><?php echo $leave['type_name']; ?></td>
+    </tr>
+<?php endforeach ?>
+        </tbody>
+</table>
+
+<br />
+
 <?php } ?>
 
 <div id="frmDeleteLeaveRequest" class="modal hide fade">
@@ -168,9 +173,25 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">
+var leaveTable = null;
+    
+//Apply a filter on the status column
+function filterStatusColumn() {
+    var filter = "^(";
+    if ($('#chkPlanned').prop('checked')) filter += "<?php echo lang('Planned');?>|";
+    if ($('#chkAccepted').prop('checked')) filter += "<?php echo lang('Accepted');?>|";
+    if ($('#chkRequested').prop('checked')) filter += "<?php echo lang('Requested');?>|";
+    if ($('#chkRejected').prop('checked')) filter += "<?php echo lang('Rejected');?>|";
+    if ($('#chkCancellation').prop('checked')) filter += "<?php echo lang('Cancellation');?>|";
+    if ($('#chkCanceled').prop('checked')) filter += "<?php echo lang('Canceled');?>|";
+    filter = filter.slice(0,-1) + ")$";
+    if (filter.indexOf('(') == -1) filter = 'nothing is selected';
+    leaveTable.columns( 1 ).search( filter, true, false ).draw();
+}
+    
 $(function () {
     //Transform the HTML table in a fancy datatable
-    var oTable = $('#leaves').dataTable({
+    leaveTable = $('#leaves').DataTable({
         order: [[ 2, "desc" ]],
         language: {
             decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
@@ -274,6 +295,21 @@ $(function () {
         }
     });
     <?php } ?>
+
+    //Detect change of filter check boxes
+    $('.filterStatus').on('change',function(){
+        filterStatusColumn();
+    });
+    
+    //Dynamic filter on leave type
+    $('#cboLeaveType').on('change',function(){
+        var leaveType = $("#cboLeaveType option:selected").text();
+        if (leaveType != '') {
+            leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
+        } else {
+            leaveTable.columns( 5 ).search( "", true, false ).draw();
+        }
+    });
 });
 </script>
 

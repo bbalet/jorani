@@ -231,6 +231,8 @@ class Hr extends CI_Controller {
         $data['title'] = lang('hr_leaves_title');
         $data['user_id'] = $id;
         $this->load->model('leaves_model');
+        $this->load->model('types_model');
+        $data['types'] = $this->types_model->getTypes();
         $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($id);
         if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');

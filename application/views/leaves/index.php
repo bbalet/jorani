@@ -85,40 +85,46 @@
             &nbsp;
             <div class="pull-right">
                 <?php
-                $show_delete = FALSE;
-                $show_cancel = FALSE;
-                $show_edit = FALSE;
-                if ($leaves_item['status'] == 1) $show_delete = TRUE;
-                if ($leaves_item['status'] == 1) $show_edit = TRUE;
+                $showDelete = FALSE;
+                $showCancel = FALSE;
+                $showEdit = FALSE;
+                $showReminder = FALSE;
+                if ($leaves_item['status'] == 1) $showDelete = TRUE;
+                if ($leaves_item['status'] == 1) $showEdit = TRUE;
                 //For requested status
                 if (($leaves_item['status'] == 2) && ($this->config->item('cancel_leave_request') == TRUE)){
-                    $show_cancel = TRUE;
+                    $showCancel = TRUE;
                     //Test if the leave start in the past and if the config allow the user to cancel it. If user is not allow, we don't show the icon
                     if ($datetimeStart< new DateTime() && $this->config->item('cancel_past_requests') == FALSE) {
-                        $show_cancel = FALSE;
+                        $showCancel = FALSE;
                     }
                 }
                 //For accepted status
                 if (($leaves_item['status'] == 3) && ($this->config->item('cancel_accepted_leave') == TRUE)){
-                    $show_cancel = TRUE;
+                    $showCancel = TRUE;
                     //Test if the leave start in the past and if the config allow the user to cancel it. If user is not allow, we don't show the icon
                     if ($datetimeStart< new DateTime() && $this->config->item('cancel_past_requests') == FALSE) {
-                        $show_cancel = FALSE;
+                        $showCancel = FALSE;
                     }
                 }
-                if (($leaves_item['status'] == 4) && ($this->config->item('delete_rejected_requests') == TRUE))  $show_delete = TRUE;
-                if (($leaves_item['status'] == 4) && ($this->config->item('edit_rejected_requests') == TRUE))  $show_edit = TRUE;
+                if (($leaves_item['status'] == 4) && ($this->config->item('delete_rejected_requests') == TRUE))  $showDelete = TRUE;
+                if (($leaves_item['status'] == 4) && ($this->config->item('edit_rejected_requests') == TRUE))  $showEdit = TRUE;
+                if (($leaves_item['status'] == 2) || ($leaves_item['status'] == 5))  $showReminder = TRUE;
                 ?>
-                <?php if ($show_edit == TRUE) { ?>
+                <?php if ($showEdit == TRUE) { ?>
                 <a href="<?php echo base_url();?>leaves/edit/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;
                 <?php } ?>
-                <?php if ($show_delete == TRUE) { ?>
+                <?php if ($showDelete == TRUE) { ?>
                 <a href="#" class="confirm-delete" data-id="<?php echo $leaves_item['id'];?>" title="<?php echo lang('leaves_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
                 &nbsp;
                 <?php } ?>
-                <?php if ($show_cancel == TRUE) { ?>
+                <?php if ($showCancel == TRUE) { ?>
                     <a href="<?php echo base_url();?>leaves/cancel/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_cancel');?>"><i class="fa fa-undo" style="color:black;"></i></a>
+                    &nbsp;
+                <?php } ?>
+                <?php if ($showReminder == TRUE) { ?>
+                    <a href="<?php echo base_url();?>leaves/reminder/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_button_send_reminder');?>"><i class="fa fa-envelope" style="color:black;"></i></a>
                     &nbsp;
                 <?php } ?>
                 <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>

@@ -117,3 +117,7 @@ $lang['leaves_export_thead_cause'] = 'Причина';
 $lang['leaves_export_thead_duration'] = 'Тривалість';
 $lang['leaves_export_thead_type'] = 'Тип';
 $lang['leaves_export_thead_status'] = 'Статус';
+
+$lang['leaves_button_send_reminder'] = 'Send a reminder';
+$lang['leaves_reminder_flash_msg_success'] = 'The reminder email was sent to the manager';
+

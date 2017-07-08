@@ -116,3 +116,7 @@ $lang['leaves_export_thead_cause'] = 'Neden';
 $lang['leaves_export_thead_duration'] = 'Süre';
 $lang['leaves_export_thead_type'] = 'Tür';
 $lang['leaves_export_thead_status'] = 'Durum';
+
+$lang['leaves_button_send_reminder'] = 'Send a reminder';
+$lang['leaves_reminder_flash_msg_success'] = 'The reminder email was sent to the manager';
+

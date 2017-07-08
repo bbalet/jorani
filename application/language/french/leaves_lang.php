@@ -116,3 +116,6 @@ $lang['leaves_export_thead_cause'] = 'Cause';
 $lang['leaves_export_thead_duration'] = 'Durée';
 $lang['leaves_export_thead_type'] = 'Type';
 $lang['leaves_export_thead_status'] = 'Statut';
+
+$lang['leaves_button_send_reminder'] = 'Envoyer un rappel';
+$lang['leaves_reminder_flash_msg_success'] = 'L\'email de rappel a été envoyé au manager.';

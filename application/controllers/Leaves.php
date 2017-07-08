@@ -325,6 +325,32 @@ class Leaves extends CI_Controller {
             }
         }
     }
+    
+    /**
+     * Send an email reminder (so as to remind to the manager that he 
+     * must either accept/reject a request or a cancellation)
+     * @param int $id Identifier of the leave request
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function reminder($id) {
+        $this->auth->checkIfOperationIsAllowed('create_leaves');
+        $data = getUserContext($this);
+        $leave = $this->leaves_model->getLeaves($id);
+        switch($leave['status']) {
+            case 2: //Requested
+                $this->sendMailOnLeaveRequestCreation($id);
+                break;
+            case 5: //Cancellation
+                $this->sendMailOnLeaveRequestCancellation($id);
+                break;
+        }
+        $this->session->set_flashdata('msg', lang('leaves_reminder_flash_msg_success'));
+        if (isset($_GET['source'])) {
+            redirect($_GET['source']);
+        } else {
+            redirect('leaves');
+        }
+    }
 
     /**
      * Send a leave request creation email to the manager of the connected employee

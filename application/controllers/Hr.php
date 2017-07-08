@@ -220,6 +220,7 @@ class Hr extends CI_Controller {
     public function leaves($id) {
         $this->auth->checkIfOperationIsAllowed('list_employees');
         $data = getUserContext($this);
+        $this->lang->load('leaves', $this->language);
         $this->load->model('users_model');
         $data['name'] = $this->users_model->getName($id);
         //Check if exists

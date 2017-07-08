@@ -34,11 +34,18 @@
     $startdate = $date->format(lang('global_date_format'));
     $date = new DateTime($leave['enddate']);
     $tmpEndDate = $date->getTimestamp();
-    $enddate = $date->format(lang('global_date_format'));?>
+    $enddate = $date->format(lang('global_date_format'));
+    $showReminder = FALSE;
+    if (($leave['status'] == 2) || ($leave['status'] == 5))  $showReminder = TRUE;
+    ?>
     <tr>
         <td data-order="<?php echo $leave['id']; ?>">
             <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_leaves_thead_tip_edit');?>"><?php echo $leave['id'] ?></a>
             <div class="pull-right">
+                <?php if ($showReminder == TRUE) { ?>
+                    <a href="<?php echo base_url();?>leaves/reminder/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('leaves_button_send_reminder');?>"><i class="fa fa-envelope" style="color:black;"></i></a>
+                    &nbsp;
+                <?php } ?>
                 &nbsp;
                 <a href="<?php echo base_url();?>requests/accept/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_leaves_thead_tip_accept');?>"><i class="icon-ok"></i></a>
                 &nbsp;

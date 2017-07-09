@@ -211,7 +211,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('leaves_model');
-            $result = $this->leaves_model->acceptLeave($id);
+            $result = $this->leaves_model->switchStatus($id, LMS_ACCEPTED);
             echo json_encode($result);
         }
     }
@@ -227,7 +227,7 @@ class Api extends CI_Controller {
             $this->server->getResponse()->send();
         } else {
             $this->load->model('leaves_model');
-            $result = $this->leaves_model->rejectLeave($id);
+            $result = $this->leaves_model->switchStatus($id, LMS_REJECTED);
             echo json_encode($result);
         }
     }

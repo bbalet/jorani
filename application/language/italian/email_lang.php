@@ -18,6 +18,8 @@ $lang['email_leave_request_creation_subject'] = 'Richiesta ferie da';
 $lang['email_leave_request_creation_title'] = 'Richiesta ferie';
 $lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
 $lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
+$lang['email_leave_cancel_accept_subject'] = 'Your Cancellation Request has been accepted';
+$lang['email_leave_cancel_reject_subject'] = 'Your Cancellation Request has been rejected';
 
 $lang['email_leave_request_accept_subject'] = 'La tua richiesta ferie è stata accettata';
 $lang['email_leave_request_reject_subject'] = 'La tua richiesta ferie è stata rifiutata';

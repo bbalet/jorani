@@ -624,50 +624,6 @@ class Leaves_model extends CI_Model {
     }
 
     /**
-     * Accept a leave request
-     * @param int $id leave request identifier
-     * @return int number of affected rows
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function acceptLeave($id) {
-        $data = array(
-            'status' => 3
-        );
-        $this->db->where('id', $id);
-        $affectedRows = $this->db->update('leaves', $data);
-
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') === TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
-        }
-
-        return $affectedRows;
-    }
-
-    /**
-     * Reject a leave request
-     * @param int $id leave request identifier
-     * @return int number of affected rows
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function rejectLeave($id) {
-        $data = array(
-            'status' => 4
-        );
-        $this->db->where('id', $id);
-        $affectedRows = $this->db->update('leaves', $data);
-
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') === TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
-        }
-
-        return $affectedRows;
-    }
-
-    /**
      * Delete a leave from the database
      * @param int $id leave request identifier
      * @return int number of affected rows
@@ -683,13 +639,15 @@ class Leaves_model extends CI_Model {
     }
 
     /**
-     * Cancel a leave from the database
+     * Switch the status of a leave request. You may use one of the constants
+     * listed into config/constants.php
      * @param int $id leave request identifier
-     * @author Guillaume Blaquiere <guillaume.blaquiere@gmail.com>
+     * @param int $status Next Status
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function cancelLeave($id) {
+    public function switchStatus($id, $status) {
         $data = array(
-            'status' => 1
+            'status' => $status
         );
         $this->db->where('id', $id);
         $this->db->update('leaves', $data);
@@ -1090,7 +1048,8 @@ class Leaves_model extends CI_Model {
             $this->db->where('users.manager', $manager);
         }
         if ($all == FALSE) {
-            $this->db->where('leaves.status', 2);
+            $this->db->where('leaves.status', LMS_REQUESTED);
+            $this->db->where('leaves.status', LMS_CANCELLATION);
         }
         $this->db->order_by('leaves.startdate', 'desc');
         $query = $this->db->get('leaves');
@@ -1126,12 +1085,13 @@ class Leaves_model extends CI_Model {
       $ids = $this->delegations_model->listManagersGivingDelegation($manager);
       if (count($ids) > 0) {
         array_push($ids, $manager);
-        $query=$query . " WHERE users.manager IN (" . implode(",", $ids) . ")";
+        $query .= " WHERE users.manager IN (" . implode(",", $ids) . ")";
       } else {
-        $query=$query . " WHERE users.manager = $manager";
+        $query .= " WHERE users.manager = $manager";
       }
       if ($all == FALSE) {
-        $query=$query . " AND leaves.status = 2 ";
+        $query .= " AND (leaves.status = " . LMS_REQUESTED .
+                " OR leaves.status = " . LMS_CANCELLATION . ")";
       }
       $query=$query . " order by leaves.startdate DESC;";
       return $this->db->query($query)->result_array();
@@ -1148,7 +1108,8 @@ class Leaves_model extends CI_Model {
         $ids = $this->delegations_model->listManagersGivingDelegation($manager);
         $this->db->select('count(*) as number', FALSE);
         $this->db->join('users', 'users.id = leaves.employee');
-        $this->db->where('leaves.status', 2);
+        $this->db->where('leaves.status', LMS_REQUESTED);
+        $this->db->or_where('leaves.status', LMS_CANCELLATION);
 
         if (count($ids) > 0) {
             array_push($ids, $manager);

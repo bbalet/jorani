@@ -40,6 +40,12 @@
             <tr>
                 <td>Reason &nbsp;</td><td>{Reason}</td>
             </tr>
+<!--            <tr>
+                <td>Comments &nbsp;</td><td>{Comments}</td>
+            </tr>-->
+            <tr>
+                <td><a href="{BaseUrl}requests/cancellation/accept/{LeaveId}">Confirm cancellation</a> &nbsp;</td><td><a href="{BaseUrl}requests/cancellation/reject/{LeaveId}">Reject cancellation</a></td>
+            </tr>
         </table>
         <br />
         You can check the <a href="{BaseUrl}hr/counters/collaborators/{UserId}">leave balance</a> before validating the leave request.

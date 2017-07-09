@@ -89,6 +89,13 @@ $lang['leaves_validate_mandatory_js_msg'] = '"Поле " + fieldname + " є об
 $lang['leaves_validate_flash_msg_no_contract'] = 'Схоже не те, що у вас немає контракту. Зверніться до свого керівника.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'Ви не можете створити заяву на відпустку для різних років. Будь ласка створіть дві окремі заяви на відпустку.';
 
+$lang['leaves_cancellation_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancellation_flash_msg_success'] = 'The cancellation request has been successfully sent';
+$lang['requests_cancellation_accept_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['requests_cancellation_accept_flash_msg_error'] = 'An error occured while trying to accept the cancellation';
+$lang['requests_cancellation_reject_flash_msg_success'] = 'The leave request has now its original status of Accepted';
+$lang['requests_cancellation_reject_flash_msg_error'] = 'An error occured while trying to reject the cancellation';
+
 $lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
 $lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
 $lang['leaves_cancel_unauthorized_msg_error'] = 'You can\'t cancel a leave request starting in the past. Ask your manager for rejecting it.';

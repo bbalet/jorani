@@ -457,13 +457,6 @@ $config['notify_cancelled_requests'] = TRUE;             //Switch to send email 
 $config['extra_status_requested'] = FALSE;
 
 //____________________________________________________________________________
-//Set this value to TRUE if you want to allow employees to edit or delete rejected leave requests, 2 use cases :
-// - Cancel an accepted leave request : the manager reject it, then the employee can delete it.
-// - Modify a leave request containing a mistake : the manager reject it, then the employee can edit it.
-$config['delete_rejected_requests'] = FALSE;
-$config['edit_rejected_requests'] = FALSE;
-
-//____________________________________________________________________________
 //Set this value to TRUE if you want to allow manager to create leave requests in behalf of their collaborators
 $config['requests_by_manager'] = FALSE;
 
@@ -547,7 +540,7 @@ $config['spreadsheet_format'] = 'xlsx';   //Supported formats: xlsx, ods
 
 //____________________________________________________________________________
 //Set this value to TRUE if you want to enable history of change (beware that it will impact the performance)
-$config['enable_history'] = FALSE;
+$config['enable_history'] = TRUE;
 
 //____________________________________________________________________________
 //Set this value to TRUE if you want to enable Application Performance Management features

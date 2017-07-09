@@ -18,6 +18,8 @@ $lang['email_leave_request_creation_subject'] = 'Заявление на отп�
 $lang['email_leave_request_creation_title'] = 'Заявление на отпуск';
 $lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
 $lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
+$lang['email_leave_cancel_accept_subject'] = 'Your Cancellation Request has been accepted';
+$lang['email_leave_cancel_reject_subject'] = 'Your Cancellation Request has been rejected';
 
 $lang['email_leave_request_accept_subject'] = 'Заявление на отпуск утверждено';
 $lang['email_leave_request_reject_subject'] = 'Заявление на отпуск отклонено';

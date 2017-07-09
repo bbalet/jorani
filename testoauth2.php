@@ -8,6 +8,7 @@
  */
 
 define('BASEPATH','.');//Make this script works with nginx
+$env = is_null(getenv('CI_ENV'))?'':getenv('CI_ENV');
 
 ?>
 <html>
@@ -47,7 +48,7 @@ define('BASEPATH','.');//Make this script works with nginx
                   <tbody>
 <?php
 
-$pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', 'config.php')));
+$pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array('application', 'config', $env, 'config.php')));
 include $pathConfigFile;
 
 echo "<tr><td>PHP_VERSION</td><td>" . (version_compare(PHP_VERSION, '5.6.0', '>=')? '>=5.6.0' : '<5.6.0')  . '</td></tr>';

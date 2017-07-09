@@ -8,7 +8,6 @@
  */
 ?>
 
-
 <h2><?php echo lang('leaves_index_title');?> &nbsp;<?php echo $help;?></h2>
 
 <?php echo $flash_partial_view;?>
@@ -29,10 +28,10 @@
     <span class="label label-success"><input type="checkbox" checked id="chkAccepted" class="filterStatus"> &nbsp;<?php echo lang('Accepted');?></span> &nbsp;
     <span class="label label-warning"><input type="checkbox" checked id="chkRequested" class="filterStatus"> &nbsp;<?php echo lang('Requested');?></span> &nbsp;
     <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkRejected" class="filterStatus"> &nbsp;<?php echo lang('Rejected');?></span> &nbsp;
-    <!--<span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCancellation" class="filterStatus"> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
-    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCanceled" class="filterStatus"> &nbsp;<?php echo lang('Canceled');?></span>//-->
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCancellation" class="filterStatus"> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCanceled" class="filterStatus"> &nbsp;<?php echo lang('Canceled');?></span>
     </div>
-</div> 
+</div>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="leaves" width="100%">
     <thead>
@@ -44,77 +43,119 @@
             <th><?php echo lang('leaves_index_thead_duration');?></th>
             <th><?php echo lang('leaves_index_thead_type');?></th>
             <th><?php echo lang('leaves_index_thead_status');?></th>
+            <?php
+            if ($this->config->item('enable_history') == TRUE){
+              echo "<th>".lang('leaves_index_thead_requested_date')."</th>";
+              echo "<th>".lang('leaves_index_thead_last_change')."</th>";
+            }
+            ?>
         </tr>
     </thead>
     <tbody>
-<?php foreach ($leaves as $leaves_item): 
-    $datetimeStart = new DateTime($leaves_item['startdate']);
+<?php foreach ($leaves as $leave):
+    //echo $leave['startdate'];
+    $datetimeStart = new DateTime($leave['startdate']);
     $tmpStartDate = $datetimeStart->getTimestamp();
     $startdate = $datetimeStart->format(lang('global_date_format'));
-    $datetimeEnd = new DateTime($leaves_item['enddate']);
+    $datetimeEnd = new DateTime($leave['enddate']);
     $tmpEndDate = $datetimeEnd->getTimestamp();
-    $enddate = $datetimeEnd->format(lang('global_date_format'));?>
+    $enddate = $datetimeEnd->format(lang('global_date_format'));
+    if ($this->config->item('enable_history') == TRUE){
+      if($leave['request_date'] == NULL){
+        $tmpRequestDate = "";
+        $requestdate = "";
+      }else{
+        $datetimeRequested = new DateTime($leave['request_date']);
+        $tmpRequestDate = $datetimeRequested->getTimestamp();
+        $requestdate = $datetimeRequested->format(lang('global_date_format'));
+      }
+      if($leave['change_date'] == NULL){
+        $tmpLastChangeDate = "";
+        $lastchangedate = "";
+      }else{
+        $datetimelastChanged = new DateTime($leave['change_date']);
+        $tmpLastChangeDate = $datetimelastChanged->getTimestamp();
+        $lastchangedate = $datetimelastChanged->format(lang('global_date_format'));
+      }
+    }?>
     <tr>
-        <td data-order="<?php echo $leaves_item['id']; ?>">
-            <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><?php echo $leaves_item['id']; ?></a>
+        <td data-order="<?php echo $leave['id']; ?>">
+            <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><?php echo $leave['id']; ?></a>
             &nbsp;
             <div class="pull-right">
                 <?php
-                $show_delete = FALSE;
-                $show_cancel = FALSE;
-                $show_edit = FALSE;
-                if ($leaves_item['status'] == 1) $show_delete = TRUE;
-                if ($leaves_item['status'] == 1) $show_edit = TRUE;
-                //For requested status
-                if (($leaves_item['status'] == 2) && ($this->config->item('cancel_leave_request') == TRUE)){
-                    $show_cancel = TRUE;
-                    //Test if the leave start in the past and if the config allow the user to cancel it. If user is not allow, we don't show the icon
-                    if ($datetimeStart< new DateTime() && $this->config->item('cancel_past_requests') == FALSE) {
-                        $show_cancel = FALSE;
-                    }
+                $showDelete = FALSE;
+                $showCancel = FALSE;
+                $showEdit = FALSE;
+                $showReminder = FALSE;
+                //Edit rules
+                if (($leave['status'] == LMS_PLANNED) || 
+                        ($leave['status'] == LMS_CANCELED)) {
+                    $showEdit = TRUE;
                 }
-                //For accepted status
-                if (($leaves_item['status'] == 3) && ($this->config->item('cancel_accepted_leave') == TRUE)){
-                    $show_cancel = TRUE;
-                    //Test if the leave start in the past and if the config allow the user to cancel it. If user is not allow, we don't show the icon
-                    if ($datetimeStart< new DateTime() && $this->config->item('cancel_past_requests') == FALSE) {
-                        $show_cancel = FALSE;
-                    }
+                if (($leave['status'] == LMS_REJECTED) && 
+                        ($this->config->item('edit_rejected_requests') === TRUE)) {
+                    $showEdit = TRUE;
                 }
-                if (($leaves_item['status'] == 4) && ($this->config->item('delete_rejected_requests') == TRUE))  $show_delete = TRUE;
-                if (($leaves_item['status'] == 4) && ($this->config->item('edit_rejected_requests') == TRUE))  $show_edit = TRUE;    
+                //Cancellation rules
+                if ($leave['status'] == LMS_ACCEPTED) {
+                    $showCancel = TRUE;
+                }
+                //Delete rules
+                if ($leave['status'] == LMS_PLANNED) {
+                    $showDelete = TRUE;
+                }
+                if (($leave['status'] == LMS_REJECTED) && 
+                        ($this->config->item('delete_rejected_requests') === TRUE)) {
+                    $showDelete = TRUE;
+                }
+                //Reminder rules
+                if (($leave['status'] == LMS_REQUESTED) || 
+                        ($leave['status'] == LMS_CANCELLATION)) {
+                    $showReminder = TRUE;
+                }
                 ?>
-                <?php if ($show_edit == TRUE) { ?>
-                <a href="<?php echo base_url();?>leaves/edit/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
+                <?php if ($showEdit == TRUE) { ?>
+                <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
                 &nbsp;
                 <?php } ?>
-                <?php if ($show_delete == TRUE) { ?>
-                <a href="#" class="confirm-delete" data-id="<?php echo $leaves_item['id'];?>" title="<?php echo lang('leaves_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
+                <?php if ($showDelete == TRUE) { ?>
+                <a href="#" class="confirm-delete" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('leaves_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
                 &nbsp;
                 <?php } ?>
-                <?php if ($show_cancel == TRUE) { ?>
-                    <a href="<?php echo base_url();?>leaves/cancel/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_cancel');?>"><i class="fa fa-undo" style="color:black;"></i></a>
+                <?php if ($showCancel == TRUE) { ?>
+                    <a href="<?php echo base_url();?>leaves/cancellation/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_cancel');?>"><i class="fa fa-undo" style="color:black;"></i></a>
                     &nbsp;
                 <?php } ?>
-                <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leaves_item['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
+                <?php if ($showReminder == TRUE) { ?>
+                    <a href="<?php echo base_url();?>leaves/reminder/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_button_send_reminder');?>"><i class="fa fa-envelope" style="color:black;"></i></a>
+                    &nbsp;
+                <?php } ?>
+                <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
                 <?php if ($this->config->item('enable_history') === TRUE) { ?>
                 &nbsp;
-                <a href="#" class="show-history" data-id="<?php echo $leaves_item['id'];?>" title="<?php echo lang('leaves_index_thead_tip_history');?>"><i class="icon-time"></i></a>
+                <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('leaves_index_thead_tip_history');?>"><i class="icon-time"></i></a>
                 <?php } ?>
             </div>
         </td>
-        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leaves_item['startdatetype']). ')'; ?></td>
-        <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leaves_item['enddatetype']) . ')'; ?></td>
-        <td><?php echo $leaves_item['cause']; ?></td>
-        <td><?php echo $leaves_item['duration']; ?></td>
-        <td><?php echo $leaves_item['type_name']; ?></td>
+        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($leave['startdatetype']). ')'; ?></td>
+        <td data-order="<?php echo $tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($leave['enddatetype']) . ')'; ?></td>
+        <td><?php echo $leave['cause']; ?></td>
+        <td><?php echo $leave['duration']; ?></td>
+        <td><?php echo $leave['type_name']; ?></td>
         <?php
-        switch ($leaves_item['status']) {
-            case 1: echo "<td><span class='label'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
-            case 2: echo "<td><span class='label label-warning'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
-            case 3: echo "<td><span class='label label-success'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
-            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($leaves_item['status_name']) . "</span></td>"; break;
+        switch ($leave['status']) {
+            case 1: echo "<td><span class='label'>" . lang($leave['status_name']) . "</span></td>"; break;
+            case 2: echo "<td><span class='label label-warning'>" . lang($leave['status_name']) . "</span></td>"; break;
+            case 3: echo "<td><span class='label label-success'>" . lang($leave['status_name']) . "</span></td>"; break;
+            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($leave['status_name']) . "</span></td>"; break;
         }?>
+        <?php
+        if ($this->config->item('enable_history') == TRUE){
+          echo "<td data-order='".$tmpRequestDate."'>" . $requestdate . "</td>";
+          echo "<td data-order='".$tmpLastChangeDate."'>" . $lastchangedate . "</td>";
+        }
+        ?>
     </tr>
 <?php endforeach ?>
     </tbody>
@@ -167,7 +208,7 @@
     </div>
     <div class="modal-body" id="frmSelectDelegateBody">
         <div class='input-append'>
-                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
                     value="<?php echo base_url() . 'ics/individual/' . $user_id;?>" />
                  <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/individual/' . $user_id;?>">
                      <i class="fa fa-clipboard"></i>
@@ -209,7 +250,7 @@ function filterStatusColumn() {
 
 $(document).ready(function() {
     $('#frmDeleteLeaveRequest').alert();
-    
+
     //Transform the HTML table in a fancy datatable
     leaveTable = $('#leaves').DataTable({
         order: [[ 1, "desc" ]],
@@ -237,16 +278,16 @@ $(document).ready(function() {
             }
         }
     });
-      
+
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
     $('#frmDeleteLeaveRequest').on('show', function() {
         var link = "<?php echo base_url();?>leaves/delete/" + $(this).data('id');
         $("#lnkDeleteUser").attr('href', link);
     })
-    
+
     //Display a modal pop-up so as to confirm if a leave request has to be deleted or not
     //We build a complex selector because datatable does horrible things on DOM...
-    //a simplier selector doesn't work when the delete is on page >1 
+    //a simplier selector doesn't work when the delete is on page >1
     $("#leaves tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
         $('#frmDeleteLeaveRequest').data('id', id).modal('show');
@@ -260,7 +301,7 @@ $(document).ready(function() {
     $('#frmShowHistory').on('hidden', function() {
         $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
     });
-    
+
     //Popup show history
     $("#leaves tbody").on('click', '.show-history',  function(){
         $("#frmShowHistory").modal('show');
@@ -268,14 +309,14 @@ $(document).ready(function() {
             if (xhr.status == 401) {
                 $("#frmShowHistory").modal('hide');
                 bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                    //After the login page, we'll be redirected to the current page 
+                    //After the login page, we'll be redirected to the current page
                    location.reload();
                 });
             }
           });
     });
     <?php } ?>
-    
+
     //Copy/Paste ICS Feed
     var client = new Clipboard("#cmdCopy");
     $('#lnkICS').click(function () {
@@ -285,7 +326,7 @@ $(document).ready(function() {
         $('#tipCopied').tooltip('show');
         setTimeout(function() {$('#tipCopied').tooltip('hide')}, 1000);
     });
-    
+
     $('#cboLeaveType').on('change',function(){
         var leaveType = $("#cboLeaveType option:selected").text();
         if (leaveType != '') {
@@ -294,27 +335,27 @@ $(document).ready(function() {
             leaveTable.columns( 5 ).search( "", true, false ).draw();
         }
     });
-    
+
     //Analyze URL to get the filter on one type
     if (getURLParameter('type') != null) {
         var leaveType = $("#cboLeaveType option[value='" + getURLParameter('type') + "']").text();
         $("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
         leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
     }
-    
+
     //Filter on statuses is a list of inclusion
     var statuses = getURLParameter('statuses');
     if (statuses != null) {
         //Unselect all statuses and select only the statuses passed by URL
         $(".filterStatus").prop("checked", false);
-        statuses.split(/,/).forEach(function(status) {
+        statuses.split(/\|/).forEach(function(status) {
             switch (status) {
                 case '1': $("#chkPlanned").prop("checked", true); break;
                 case '2': $("#chkRequested").prop("checked", true); break;
                 case '3': $("#chkAccepted").prop("checked", true); break;
                 case '4': $("#chkRejected").prop("checked", true); break;
                 case '5': $("#chkCancellation").prop("checked", true); break;
-                case '6': $("#chkCancellation").prop("checked", true); break;
+                case '6': $("#chkCanceled").prop("checked", true); break;
             }
         });
         //$("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);

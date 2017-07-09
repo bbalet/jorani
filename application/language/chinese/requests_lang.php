@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = '結束日期';
 $lang['requests_index_thead_duration'] = '時段';
 $lang['requests_index_thead_type'] = '編輯';
 $lang['requests_index_thead_status'] = '職位';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = '我的部屬清單';
 $lang['requests_collaborators_description'] = '此表為你的部屬直接報告,如你不是管理者此表將為空白';

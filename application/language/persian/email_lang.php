@@ -18,6 +18,8 @@ $lang['email_leave_request_creation_subject'] = 'درخواست مرخصی از'
 $lang['email_leave_request_creation_title'] = 'درخواست مرخصی';
 $lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
 $lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
+$lang['email_leave_cancel_accept_subject'] = 'Your Cancellation Request has been accepted';
+$lang['email_leave_cancel_reject_subject'] = 'Your Cancellation Request has been rejected';
 
 $lang['email_leave_request_accept_subject'] = 'درخواست مرخصی شما پذیرفته شد';
 $lang['email_leave_request_reject_subject'] = 'درخواست مرخصی شما پذیرفته نشد';

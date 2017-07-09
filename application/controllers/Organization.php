@@ -424,10 +424,40 @@ class Organization extends CI_Controller {
             echo $msg;
         }
     }
-/*
-$route['organization/lists/adduser'] = 'organization/listsAddUser';
-$route['organization/lists/removeuser'] = 'organization/listsRemoveUsser';
-$route['organization/lists/reorder'] = 'organization/listsReorder';
-*/
     
+    /**
+     * Ajax endpoint allowing to add a list of employees into a list
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function listsAddEmployees() {
+        header("Content-Type: application/json");
+        $data = getCIUserContext();
+        if ($this->auth->isAllowed('organization_lists_index') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $this->load->model('lists_model');
+            $listId = $this->input->post('id');
+            $employees = json_decode($this->input->post('employees'));
+            $this->lists_model->addEmployees($listId, $employees);
+            echo "";
+        }
+    }
+    
+    /**
+     * Ajax endpoint allowing to remove a list of employees from a list
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function listsRemoveEmployees() {
+        header("Content-Type: application/json");
+        $data = getCIUserContext();
+        if ($this->auth->isAllowed('organization_lists_index') == FALSE) {
+            $this->output->set_header("HTTP/1.1 403 Forbidden");
+        } else {
+            $this->load->model('lists_model');
+            $listId = $this->input->post('id');
+            $employees = json_decode($this->input->post('employees'));
+            $this->lists_model->removeEmployees($listId, $employees);
+            echo "";
+        }
+    }
 }

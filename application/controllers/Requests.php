@@ -18,7 +18,7 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
  * But those reports are not served by this controller (either HR or Calendar controller).
  */
 class Requests extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -40,12 +40,20 @@ class Requests extends CI_Controller {
     public function index($filter = 'requested') {
         $this->auth->checkIfOperationIsAllowed('list_requests');
         $data = getUserContext($this);
+        $this->load->model('types_model');
         $this->lang->load('datatable', $this->language);
         $data['filter'] = $filter;
         $data['title'] = lang('requests_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_validation');
         ($filter == 'all')? $showAll = TRUE : $showAll = FALSE;
-        $data['requests'] = $this->leaves_model->getLeavesRequestedToManager($this->user_id, $showAll);
+        //$data['requests'] = $this->leaves_model->getLeavesRequestedToManager($this->user_id, $showAll);
+        if ($this->config->item('enable_history') == TRUE){
+          $data['requests'] = $this->leaves_model->getLeavesRequestedToManagerWithHistory($this->session->userdata('id'), $showAll);
+        }else{
+          $data['requests'] = $this->leaves_model->getLeavesRequestedToManager($this->session->userdata('id'), $showAll);
+        }
+        $data['types'] = $this->types_model->getTypes();
+        $data['showAll'] = $showAll;
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
@@ -69,8 +77,8 @@ class Requests extends CI_Controller {
         $employee = $this->users_model->getUsers($leave['employee']);
         $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
-            $this->leaves_model->acceptLeave($id);
-            $this->sendMail($id);
+            $this->leaves_model->switchStatus($id, LMS_ACCEPTED);
+            $this->sendMail($id, LMS_REQUESTED_ACCEPTED);
             $this->session->set_flashdata('msg', lang('requests_accept_flash_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
@@ -100,8 +108,8 @@ class Requests extends CI_Controller {
         $employee = $this->users_model->getUsers($leave['employee']);
         $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
-            $this->leaves_model->rejectLeave($id);
-            $this->sendMail($id);
+            $this->leaves_model->switchStatus($id, LMS_REJECTED);
+            $this->sendMail($id, LMS_REQUESTED_REJECTED);
             $this->session->set_flashdata('msg',  lang('requests_reject_flash_msg_success'));
             if (isset($_GET['source'])) {
                 redirect($_GET['source']);
@@ -111,6 +119,68 @@ class Requests extends CI_Controller {
         } else {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to reject leave #' . $id);
             $this->session->set_flashdata('msg', lang('requests_reject_flash_msg_error'));
+            redirect('leaves');
+        }
+    }
+    
+    /**
+     * Accept the cancellation of a leave request
+     * @param int $id leave request identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function acceptCancellation($id) {
+        $this->auth->checkIfOperationIsAllowed('accept_requests');
+        $this->load->model('users_model');
+        $this->load->model('delegations_model');
+        $leave = $this->leaves_model->getLeaves($id);
+        if (empty($leave)) {
+            redirect('notfound');
+        }
+        $employee = $this->users_model->getUsers($leave['employee']);
+        $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
+        if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
+            $this->leaves_model->switchStatus($id, LMS_CANCELED);
+            $this->sendMail($id, LMS_CANCELLATION_CANCELED);
+            $this->session->set_flashdata('msg', lang('requests_cancellation_accept_flash_msg_success'));
+            if (isset($_GET['source'])) {
+                redirect($_GET['source']);
+            } else {
+                redirect('requests');
+            }
+        } else {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to accept the cancellation of leave #' . $id);
+            $this->session->set_flashdata('msg', lang('requests_cancellation_accept_flash_msg_error'));
+            redirect('leaves');
+        }
+    }
+    
+    /**
+     * Reject the cancellation of a leave request
+     * @param int $id leave request identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function rejectCancellation($id) {
+        $this->auth->checkIfOperationIsAllowed('reject_requests');
+        $this->load->model('users_model');
+        $this->load->model('delegations_model');
+        $leave = $this->leaves_model->getLeaves($id);
+        if (empty($leave)) {
+            redirect('notfound');
+        }
+        $employee = $this->users_model->getUsers($leave['employee']);
+        $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
+        if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
+            $this->leaves_model->switchStatus($id, LMS_ACCEPTED);
+            $this->sendMail($id, LMS_CANCELLATION_REQUESTED);
+            $this->session->set_flashdata('msg', lang('requests_cancellation_reject_flash_msg_success'));
+            if (isset($_GET['source'])) {
+                redirect($_GET['source']);
+            } else {
+                redirect('requests');
+            }
+        } else {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to accept the cancellation of leave #' . $id);
+            $this->session->set_flashdata('msg', lang('requests_cancellation_reject_flash_msg_error'));
             redirect('leaves');
         }
     }
@@ -162,7 +232,7 @@ class Requests extends CI_Controller {
             redirect('leaves');
         }
     }
-    
+
     /**
      * Ajax endpoint : Delete a delegation for a manager
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -183,7 +253,7 @@ class Requests extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Ajax endpoint : Add a delegation for a manager
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -208,7 +278,7 @@ class Requests extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Create a leave request in behalf of a collaborator
      * @param int $id Identifier of the employee
@@ -263,15 +333,14 @@ class Requests extends CI_Controller {
             }
         }
     }
-    
+
     /**
-     * Send a leave request email to the employee that requested the leave
-     * The method will check if the leave request was accepted or rejected 
-     * before sending the e-mail
+     * Send a leave request email to the employee that requested the leave.
      * @param int $id Leave request identifier
+     * @param int $transition Transition in the workflow of leave request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    private function sendMail($id)
+    private function sendMail($id, $transition)
     {
         $this->load->model('users_model');
         $this->load->model('organization_model');
@@ -283,20 +352,37 @@ class Requests extends CI_Controller {
         $this->load->library('email');
         $this->load->library('polyglot');
         $usr_lang = $this->polyglot->code2language($employee['language']);
-        
+
         //We need to instance an different object as the languages of connected user may differ from the UI lang
         $lang_mail = new CI_Lang();
         $lang_mail->load('email', $usr_lang);
         $lang_mail->load('global', $usr_lang);
-        
+
         $date = new DateTime($leave['startdate']);
         $startdate = $date->format($lang_mail->line('global_date_format'));
         $date = new DateTime($leave['enddate']);
         $enddate = $date->format($lang_mail->line('global_date_format'));
-
-        $this->load->library('parser');
+        
+        switch ($transition) {
+            case LMS_REQUESTED_ACCEPTED:
+                $title = $lang_mail->line('email_leave_request_validation_title');
+                $subject = $lang_mail->line('email_leave_request_accept_subject');
+                break;
+            case LMS_REQUESTED_REJECTED:
+                $title = $lang_mail->line('email_leave_request_validation_title');
+                $subject = $lang_mail->line('email_leave_request_reject_subject');
+                break;
+            case LMS_CANCELLATION_REQUESTED:
+                $title = $lang_mail->line('email_leave_request_cancellation_title');
+                $subject = $lang_mail->line('email_leave_cancel_reject_subject');
+                break;
+            case LMS_CANCELLATION_CANCELED:
+                $title = $lang_mail->line('email_leave_request_cancellation_title');
+                $subject = $lang_mail->line('email_leave_cancel_accept_subject');
+                break;
+        }
         $data = array(
-            'Title' => $lang_mail->line('email_leave_request_validation_title'),
+            'Title' => $title,
             'Firstname' => $employee['firstname'],
             'Lastname' => $employee['lastname'],
             'StartDate' => $startdate,
@@ -304,19 +390,28 @@ class Requests extends CI_Controller {
             'StartDateType' => $lang_mail->line($leave['startdatetype']),
             'EndDateType' => $lang_mail->line($leave['enddatetype']),
             'Cause' => $leave['cause'],
-            'Type' => $leave['type_name']
+            'Type' => $leave['type_name'],
+            'Comments' => ''
         );
-        
-        if ($leave['status'] == 3) {    //accepted
-            $message = $this->parser->parse('emails/' . $employee['language'] . '/request_accepted', $data, TRUE);
-            $subject = $lang_mail->line('email_leave_request_accept_subject');
-        } else {    //rejected
-            $message = $this->parser->parse('emails/' . $employee['language'] . '/request_rejected', $data, TRUE);
-            $subject = $lang_mail->line('email_leave_request_reject_subject');
+        $this->load->library('parser');
+        switch ($transition) {
+            case LMS_REQUESTED_ACCEPTED:
+                $message = $this->parser->parse('emails/' . $employee['language'] . '/request_accepted', $data, TRUE);
+                break;
+            case LMS_REQUESTED_REJECTED:
+                $message = $this->parser->parse('emails/' . $employee['language'] . '/request_rejected', $data, TRUE);
+                break;
+            case LMS_CANCELLATION_REQUESTED:
+                $message = $this->parser->parse('emails/' . $employee['language'] . '/cancel_rejected', $data, TRUE);
+                $supervisor = NULL; //No need to warn the supervisor as nothing changes
+                break;
+            case LMS_CANCELLATION_CANCELED:
+                $message = $this->parser->parse('emails/' . $employee['language'] . '/cancel_accepted', $data, TRUE);
+                break;
         }
         sendMailByWrapper($this, $subject, $message, $employee['email'], is_null($supervisor)?NULL:$supervisor->email);
     }
-    
+
     /**
      * Export the list of all leave requests (sent to the connected user) into an Excel file
      * @param string $name Filter the list of submitted leave requests (all or requested)
@@ -327,7 +422,7 @@ class Requests extends CI_Controller {
         $data['filter'] = $filter;
         $this->load->view('requests/export', $data);
     }
-    
+
     /**
      * Leave balance report limited to the subordinates of the connected manager
      * Status is submitted or accepted/rejected depending on the filter parameter.
@@ -340,7 +435,7 @@ class Requests extends CI_Controller {
         $this->lang->load('datatable', $this->language);
         $data['title'] = lang('requests_balance_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_balance_report');
-        
+
         if ($dateTmp === NULL) {
             $refDate = date("Y-m-d");
             $data['isDefault'] = 1;
@@ -352,7 +447,7 @@ class Requests extends CI_Controller {
 
         $this->load->model('types_model');
         $data['types'] = $this->types_model->getTypes();
-        
+
         $result = array();
         $this->load->model('users_model');
         $users = $this->users_model->getCollaboratorsOfManager($this->user_id);
@@ -366,7 +461,7 @@ class Requests extends CI_Controller {
             foreach ($data['types'] as $type) {
                 $result[$user['id']][$type['name']] = '';
             }
-            
+
             $summary = $this->leaves_model->getLeaveBalanceForEmployee($user['id'], TRUE, $refDate);
             if (count($summary) > 0 ) {
                 foreach ($summary as $key => $value) {
@@ -375,7 +470,7 @@ class Requests extends CI_Controller {
             }
         }
         $data['result'] = $result;
-        
+
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('requests/balance', $data);

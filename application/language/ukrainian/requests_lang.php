@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = 'Дата закінчення';
 $lang['requests_index_thead_duration'] = 'Тривалість';
 $lang['requests_index_thead_type'] = 'Тип';
 $lang['requests_index_thead_status'] = 'Статус';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'Список моїх співробітників';
 $lang['requests_collaborators_description'] = 'Тут показано список ваших співробітників. Якщо ви не керівник, цей список завжди буде порожнім.';

@@ -32,6 +32,8 @@ $lang['leaves_index_thead_cause'] = '理由';
 $lang['leaves_index_thead_duration'] = '時段';
 $lang['leaves_index_thead_type'] = '編輯';
 $lang['leaves_index_thead_status'] = '職位';
+$lang['leaves_index_thead_requested_date'] = 'Requested';
+$lang['leaves_index_thead_last_change'] = 'Last change';
 $lang['leaves_index_button_export'] = '匯出此單';
 $lang['leaves_index_button_create'] = '新申請';
 $lang['leaves_index_popup_delete_title'] = '刪除休假申請';
@@ -66,6 +68,13 @@ $lang['leaves_create_flash_msg_error'] = '休假申請已建立或更新,但尚�
 
 $lang['leaves_flash_spn_list_days_off'] = '％s非工作日於此時段';
 $lang['leaves_flash_msg_overlap_dayoff'] = '你的休假申請符合非工作日';
+
+$lang['leaves_cancellation_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancellation_flash_msg_success'] = 'The cancellation request has been successfully sent';
+$lang['requests_cancellation_accept_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['requests_cancellation_accept_flash_msg_error'] = 'An error occured while trying to accept the cancellation';
+$lang['requests_cancellation_reject_flash_msg_success'] = 'The leave request has now its original status of Accepted';
+$lang['requests_cancellation_reject_flash_msg_error'] = 'An error occured while trying to reject the cancellation';
 
 $lang['leaves_edit_html_title'] = '編輯一休假申請';
 $lang['leaves_edit_title'] = '編輯休假申請';
@@ -113,3 +122,6 @@ $lang['leaves_export_thead_cause'] = '理由';
 $lang['leaves_export_thead_duration'] = '時段';
 $lang['leaves_export_thead_type'] = '編輯';
 $lang['leaves_export_thead_status'] = '職位';
+
+$lang['leaves_button_send_reminder'] = 'Send a reminder';
+$lang['leaves_reminder_flash_msg_success'] = 'The reminder email was sent to the manager';

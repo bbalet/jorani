@@ -124,7 +124,8 @@ class OAuthClients_model extends CI_Model {
                     'client_id' => $clientId,
                     'user' => $userId
                 ));
-        return !empty($query->row_array());
+        $result = $query->row_array();
+        return !empty($result);
     }
     
     /**

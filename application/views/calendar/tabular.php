@@ -11,15 +11,18 @@
 <h2><?php echo lang('calendar_tabular_title');?> &nbsp;<?php echo $help;?></h2>
 
 <div class="row-fluid">
-    <div class="span3">
+    <div class="span4">
         <label for="txtEntity">
             <?php echo lang('calendar_organization_field_select_entity');?>
             &nbsp;(<input type="checkbox" checked id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>)
         </label>
-        <div class="input-append">
+        <div class="input-prepend input-append">
+            <span class="add-on" id="spnAddOn"><i class="fa fa-sitemap" aria-hidden="true"></i></span>
             <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
             <button id="cmdSelectEntity" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_entity');?>"><i class="fa fa-sitemap" aria-hidden="true"></i></button>
-            <!--<button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>//-->
+            <?php if ($mode == 'connected') { ?>
+<!--            <button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>-->
+            <?php } ?>
         </div>
     </div>
     <div class="span3">
@@ -35,7 +38,7 @@
     <div class="span3">
         <input type="checkbox" checked id="chkDisplayTypes" name="chkDisplayTypes"><?php echo lang('calendar_tabular_check_display_types');?>
     </div>
-    <div class="span3">
+    <div class="span2">
         <span class="pull-right">
             <button id="cmdExport" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('calendar_tabular_button_export');?></button>
         </span>
@@ -43,11 +46,14 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
-    <div class="span3"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
-    <div class="span3"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
-    <div class="span3">&nbsp;</div>
+    <div class="span12">
+        <span class="label"><input type="checkbox" checked id="chkPlanned" class="filterStatus"> &nbsp;<?php echo lang('Planned');?></span> &nbsp;
+        <span class="label label-success"><input type="checkbox" checked id="chkAccepted" class="filterStatus"> &nbsp;<?php echo lang('Accepted');?></span> &nbsp;
+        <span class="label label-warning"><input type="checkbox" checked id="chkRequested" class="filterStatus"> &nbsp;<?php echo lang('Requested');?></span> &nbsp;
+        <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCancellation" class="filterStatus"> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
+    </div>
 </div>
+
 
 <div class="row-fluid">
     <div class="span12" id="spnTabularView"><?php echo $tabularPartialView; ?></div>
@@ -55,15 +61,29 @@
 
 <div id="frmSelectEntity" class="modal hide fade">
     <div class="modal-header">
-        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="close">&times;</a>
-         <h3><?php echo lang('calendar_tabular_popup_entity_title');?></h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3><?php echo lang('calendar_tabular_popup_entity_title');?></h3>
     </div>
     <div class="modal-body" id="frmSelectEntityBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="select_entity();" class="btn"><?php echo lang('calendar_tabular_popup_entity_button_ok');?></a>
-        <a href="#" onclick="$('#frmSelectEntity').modal('hide');" class="btn"><?php echo lang('calendar_tabular_popup_entity_button_cancel');?></a>
+        <button onclick="select_entity();" class="btn" data-dismiss="modal" aria-hidden="true"><?php echo lang('OK');?></button>
+        <button data-dismiss="modal" aria-hidden="true" class="btn"><?php echo lang('Cancel');?></button>
+    </div>
+</div>
+
+<div id="frmSelectList" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3><?php echo lang('calendar_tabular_button_select_list');?></h3>
+    </div>
+    <div class="modal-body" id="frmSelectListBody">
+        <img src="<?php echo base_url();?>assets/images/loading.gif">
+    </div>
+    <div class="modal-footer">
+        <button onclick="select_list();" data-dismiss="modal" class="btn"><?php echo lang('OK');?></button>
+        <button data-dismiss="modal" aria-hidden="true" class="btn"><?php echo lang('Cancel');?></button>
     </div>
 </div>
 
@@ -72,6 +92,14 @@
 <?php if ($language_code != 'en') {?>
 <script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
 <?php }?>
+
+<style>
+#frmSelectList 
+{
+    width: 700px; 
+    margin-left:  -350px !important;
+}
+</style>
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
@@ -87,20 +115,37 @@
     var children = '<?php echo $children;?>';
     var displayTypes = '<?php echo $displayTypes;?>';
     var currentDate = moment().year(year).month(month).date(1);
+    var listId;
+    var listName = '';
+    var source = 'treeview';    //treeview or list
     
     // After selection of an entity from the modal dialog, refresh the partial
     // view if the entity is diferent
     function select_entity() {
-        old_entity = entity;
+        source = 'treeview';
+        $('#spnAddOn').html('<i class="fa fa-sitemap" aria-hidden="true"></i>');
         entity = $('#organization').jstree('get_selected')[0];
         text = $('#organization').jstree().get_text(entity);
         $('#txtEntity').val(text);
         $("#frmSelectEntity").modal('hide');
-        if (old_entity != entity) {
+        reloadTabularView();
+    }
+
+    // After selection of a list from the modal dialog, refresh the partial
+    // view if the entity is diferent
+    function select_list() {
+        //$('#frmSelectList').modal('hide');
+        //Reload the partial view
+        listId = $('#cboList').val();
+        if (listId != -1 ) {
+            source = 'list';
+            $('#spnAddOn').html('<i class="fa fa-users" aria-hidden="true"></i>');
+            listName = $('#cboList option:selected').text();
+            $('#txtEntity').val(listName);
             reloadTabularView();
         }
     }
-    
+
     // Return a boolean value representing the value of checkbox "include children"
     function includeChildren() {
         if ($('#chkIncludeChildren').prop('checked') == true) {
@@ -123,10 +168,30 @@
     function reloadTabularView() {
         children = includeChildren();
         displayTypes = displayLeaveTypes();
+        
+        //Filter on status
+        statuses = "";
+        if ($("#chkPlanned").prop("checked")) statuses+="1|";
+        if ($("#chkRequested").prop("checked")) statuses+="2|";
+        if ($("#chkAccepted").prop("checked")) statuses+="3|";
+        if ($("#chkCancellation").prop("checked")) statuses+="5|";
+        statuses = statuses.replace(/\|*$/, "");
+        if (statuses!="") statuses = '?statuses=' + statuses;
+        
+        url = '';
+        if (source == 'treeview') {
+            url = '<?php echo base_url();?>calendar/tabular/partial/' +
+                entity + '/' + (month + 1) + '/' + year + '/' + children + '/' +
+                displayTypes + statuses;
+        } else {
+            url = '<?php echo base_url();?>calendar/tabular/list/partial/' +
+                    listId + '/' + (month + 1) + '/' + year + '/' +
+                    displayTypes + statuses;
+        }
+        
         $("#spnTabularView").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
         //Month number needs to be converted between monment.js and PHP
-        $("#spnTabularView").load('<?php echo base_url();?>calendar/tabular/partial/' +
-                entity + '/' + (month + 1) + '/' + year + '/' + children + '/' + displayTypes,
+        $("#spnTabularView").load(url,
             function(response, status, xhr) {
             if (xhr.status == 401) {
                 $("#frmShowHistory").modal('hide');
@@ -186,16 +251,29 @@
             $("#frmSelectEntity").modal('show');
             $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
         });
+        //Popup select list
+        $("#cmdSelectList").click(function() {
+            $("#frmSelectList").modal('show');
+            $("#frmSelectListBody").load('<?php echo base_url(); ?>organization/lists');
+        });
 
         //Export the report into Excel
         $("#cmdExport").click(function() {
-            children = includeChildren();
-            displayTypes = displayLeaveTypes();
-            if (entity != -1) {
-                url = '<?php echo base_url();?>calendar/tabular/export/' +
-                        entity + '/' + (month+1) + '/' + year + '/' + children +
-                        '/' + displayTypes;
-                document.location.href = url;
+            var displayTypes = displayLeaveTypes();
+            if (source == 'treeview') {
+                children = includeChildren();
+                if (entity != -1) {
+                    url = '<?php echo base_url();?>calendar/tabular/export/' +
+                            entity + '/' + (month+1) + '/' + year + '/' + children +
+                            '/' + displayTypes;
+                    document.location.href = url;
+                }
+            } else {
+                if (listId != -1) {
+                    url = '<?php echo base_url();?>calendar/tabular/list/export/' +
+                            listId + '/' + (month+1) + '/' + year + '/' + displayTypes;
+                    document.location.href = url;
+                }
             }
         });
         
@@ -214,10 +292,13 @@
         });
         
         //Load alert forms
-        $("#frmSelectEntity").alert();
-        //Prevent to load always the same content (refreshed each time)
-        $('#frmSelectEntity').on('hidden', function() {
+        $(".alert").alert();
+        $('.alert').on('hidden', function() {
             $(this).removeData('modal');
+        });
+        
+        $('.filterStatus').on('change',function(){
+            reloadTabularView();
         });
     });
 </script>

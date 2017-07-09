@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = 'Última fecha';
 $lang['requests_index_thead_duration'] = 'Duración';
 $lang['requests_index_thead_type'] = 'Tipo';
 $lang['requests_index_thead_status'] = 'Estado';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'Lista de mis colaboradores';
 $lang['requests_collaborators_description'] = 'Esta pantalla muestra sus colaboradores. Si usted no es un gerente, esta lista siempre va a estar vacía.';

@@ -32,6 +32,8 @@ $lang['leaves_index_thead_cause'] = 'Reden';
 $lang['leaves_index_thead_duration'] = 'Duur';
 $lang['leaves_index_thead_type'] = 'Type';
 $lang['leaves_index_thead_status'] = 'Status';
+$lang['leaves_index_thead_requested_date'] = 'Requested';
+$lang['leaves_index_thead_last_change'] = 'Last change';
 $lang['leaves_index_button_export'] = 'Exporteer dit overzicht';
 $lang['leaves_index_button_create'] = 'Nieuw verzoek';
 $lang['leaves_index_popup_delete_title'] = 'Verwijder afwezigheidsverzoek';
@@ -67,6 +69,13 @@ $lang['leaves_create_flash_msg_error'] = 'De afwezigheidsmelding is succesvol aa
 
 $lang['leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
 $lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
+
+$lang['leaves_cancellation_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancellation_flash_msg_success'] = 'The cancellation request has been successfully sent';
+$lang['requests_cancellation_accept_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['requests_cancellation_accept_flash_msg_error'] = 'An error occured while trying to accept the cancellation';
+$lang['requests_cancellation_reject_flash_msg_success'] = 'The leave request has now its original status of Accepted';
+$lang['requests_cancellation_reject_flash_msg_error'] = 'An error occured while trying to reject the cancellation';
 
 $lang['leaves_edit_html_title'] = 'Bewerk een afwezigheidsverzoek';
 $lang['leaves_edit_title'] = 'Bewerk afwezigheidsverzoek #';
@@ -114,3 +123,7 @@ $lang['leaves_export_thead_cause'] = 'Reden';
 $lang['leaves_export_thead_duration'] = 'Duur';
 $lang['leaves_export_thead_type'] = 'Type';
 $lang['leaves_export_thead_status'] = 'Status';
+
+$lang['leaves_button_send_reminder'] = 'Send a reminder';
+$lang['leaves_reminder_flash_msg_success'] = 'The reminder email was sent to the manager';
+

@@ -5,14 +5,14 @@
  * @link            https://github.com/bbalet/jorani
  * @since         0.3.0
  */
-    
+
 //Try to calculate the length of the leave
 function getLeaveLength(refreshInfos) {
     refreshInfos = typeof refreshInfos !== 'undefined' ? refreshInfos : true;
     var start = moment($('#startdate').val());
     var end = moment($('#enddate').val());
     var startType = $('#startdatetype option:selected').val();
-    var endType = $('#enddatetype option:selected').val();      
+    var endType = $('#enddatetype option:selected').val();
 
     if (start.isValid() && end.isValid()) {
         if (start.isSame(end)) {
@@ -106,7 +106,7 @@ function getLeaveInfos(preventDefault) {
             }
             showListDayOff(leaveInfo);
             $('#frmModalAjaxWait').modal('hide');
-        });    
+        });
 }
 
 //When editing/viewing a leave request, refresh the information about overlapping and days off in the period
@@ -131,7 +131,7 @@ function refreshLeaveInfo() {
             showOverlappingDayOffMessage(leaveInfo);
             showListDayOff(leaveInfo);
             $('#frmModalAjaxWait').modal('hide');
-        });    
+        });
 }
 
 //Display the list of non-working days occuring between the leave request start and end dates
@@ -154,10 +154,64 @@ function showListDayOff(leaveInfo) {
             }
             htmlTable += "</tbody></table></div>";
             $("#spnDaysOffList").html(htmlTable);
+            var htmlTooltip = "<a href='#' id='showNoneWorkedDay' data-toggle='tooltip' data-toggle='tooltip' data-placement='right' title='";
+            htmlTooltip += listOfDaysOffTitle.replace("%s", leaveInfo.lengthDaysOff);
+            htmlTooltip += "'><i class='icon-info-sign'></i></a>";
+            $("#tooltipDayOff").html(htmlTooltip);
+            $(function () {
+              $('[data-toggle="tooltip"]').tooltip();
+            });
+
         } else {
             //NOP
         }
     }
+}
+
+function showListDayOffHTML(){
+  $('#frmModalAjaxWait').modal('show');
+  var start = moment($('#startdate').val());
+  var end = moment($('#enddate').val());
+  $.ajax({
+  type: "POST",
+  url: baseURL + "leaves/validate",
+  data: {   id: userId,
+              type: $("#type option:selected").text(),
+              startdate: $('#startdate').val(),
+              enddate: $('#enddate').val(),
+              startdatetype: $('#startdatetype').val(),
+              enddatetype: $('#enddatetype').val(),
+              leave_id: leaveId
+          }
+  })
+  .done(function(leaveInfo) {
+      $('#frmModalAjaxWait').modal('hide');
+      if (typeof leaveInfo.listDaysOff !== 'undefined') {
+          var arrayLength = leaveInfo.listDaysOff.length;
+          if (arrayLength>0) {
+              var htmlTable = "<div id='divDaysOff2'>";
+              htmlTable += "<table class='table table-bordered table-hover table-condensed'>\n";
+              htmlTable += "<thead class='thead-inverse'>";
+              htmlTable += "<tr><th>";
+              htmlTable += listOfDaysOffTitle.replace("%s", leaveInfo.lengthDaysOff);
+              htmlTable += "</th></tr></thead>";
+              htmlTable += "<tbody>";
+              for (var i = 0; i < arrayLength; i++) {
+                  htmlTable += "<tr><td>";
+                  htmlTable += moment(leaveInfo.listDaysOff[i].date, 'YYYY-MM-DD').format(dateMomentJsFormat);
+                  htmlTable += " / <b>" + leaveInfo.listDaysOff[i].title + "</b></td>";
+                  htmlTable += "<td>" + leaveInfo.listDaysOff[i].length + "</td>";
+                  htmlTable += "</tr>\n";
+              }
+              htmlTable += "</tbody></table></div>";
+              bootbox.alert(htmlTable, function() {
+                console.log("Alert Callback");
+              });
+          } else {
+              //NOP
+          }
+      }
+  });
 }
 
 //Display the list of non-working days occuring between the leave request start and end dates
@@ -184,7 +238,7 @@ function showOverlappingDayOffMessage(leaveInfo) {
 
 $(function () {
     getLeaveLength(false);
-    
+
     //Init the start and end date picker and link them (end>=date)
     $("#viz_startdate").datepicker({
         changeMonth: true,
@@ -224,13 +278,13 @@ $(function () {
 
     //Check if the user has not exceed the number of entitled days
     $("#duration").keyup(function() {getLeaveInfos(true);});
-    
+
     $("#frmLeaveForm").submit(function(e) {
         if (validate_form()) {
-            return true; 
+            return true;
         } else {
             e.preventDefault();
-            return false; 
+            return false;
         }
     });
 });

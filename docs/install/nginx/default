@@ -94,9 +94,10 @@ server {
 		#Alternatively, you can use FastCGI from a network port
 		fastcgi_pass 127.0.0.1:9000;
 		fastcgi_index index.php;
-                                    fastcgi_param SERVER_SOFTWARE nginx;
-                                    fastcgi_param HTTP_MOD_REWRITE On; #Fake Apache
-                                    fastcgi_param ALLOW_OVERWRITE On; #Fake Apache
+                #fastcgi_param CI_ENV development;
+                fastcgi_param SERVER_SOFTWARE nginx;
+                fastcgi_param HTTP_MOD_REWRITE On; #Mimic Apache
+                fastcgi_param ALLOW_OVERWRITE On; #Mimic Apache
 		fastcgi_param SCRIPT_FILENAME
 			$document_root$fastcgi_script_name;
                 fastcgi_buffer_size 128k;

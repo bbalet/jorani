@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = 'Bitiş Tarihi';
 $lang['requests_index_thead_duration'] = 'Süre';
 $lang['requests_index_thead_type'] = 'Tür';
 $lang['requests_index_thead_status'] = 'Durum';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'Astlarımın listesi';
 $lang['requests_collaborators_description'] = 'Bu ekran size gönderilen izin taleplerini listeler. Eğer bir yönetici değilseniz, bu liste her zaman boş olacaktır.';

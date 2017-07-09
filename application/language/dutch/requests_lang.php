@@ -20,6 +20,8 @@ $lang['requests_index_thead_enddate'] = 'Eind datum';
 $lang['requests_index_thead_duration'] = 'Duur';
 $lang['requests_index_thead_type'] = 'Type';
 $lang['requests_index_thead_status'] = 'Status';
+$lang['requests_index_thead_requested_date'] = 'Requested';
+$lang['requests_index_thead_last_change'] = 'Last change';
 
 $lang['requests_collaborators_title'] = 'Overzicht van mijn medewerkers';
 $lang['requests_collaborators_description'] = 'Dit scherm toont uw medewerkers. Als u geen manager bent, dan zal dit overzicht leeg blijven.';

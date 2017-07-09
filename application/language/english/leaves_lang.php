@@ -32,6 +32,8 @@ $lang['leaves_index_thead_cause'] = 'Reason';
 $lang['leaves_index_thead_duration'] = 'Duration';
 $lang['leaves_index_thead_type'] = 'Type';
 $lang['leaves_index_thead_status'] = 'Status';
+$lang['leaves_index_thead_requested_date'] = 'Requested';
+$lang['leaves_index_thead_last_change'] = 'Last change';
 $lang['leaves_index_button_export'] = 'Export this list';
 $lang['leaves_index_button_create'] = 'New request';
 $lang['leaves_index_popup_delete_title'] = 'Delete leave request';
@@ -85,9 +87,12 @@ $lang['leaves_validate_mandatory_js_msg'] = '"The field " + fieldname + " is man
 $lang['leaves_validate_flash_msg_no_contract'] = 'It appears that you have no contract. Please contact your HR Officer / Manager.';
 $lang['leaves_validate_flash_msg_overlap_period'] = 'You can\'t create a leave request for two yearly leave periods. Please create two different leave requests.';
 
-$lang['leaves_cancel_flash_msg_error'] = 'You can\'t cancel this leave request';
-$lang['leaves_cancel_flash_msg_success'] = 'The leave request has been successfully cancelled';
-$lang['leaves_cancel_unauthorized_msg_error'] = 'You can\'t cancel a leave request starting in the past. Ask your manager for rejecting it.';
+$lang['leaves_cancellation_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancellation_flash_msg_success'] = 'The cancellation request has been successfully sent';
+$lang['requests_cancellation_accept_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['requests_cancellation_accept_flash_msg_error'] = 'An error occured while trying to accept the cancellation';
+$lang['requests_cancellation_reject_flash_msg_success'] = 'The leave request has now its original status of Accepted';
+$lang['requests_cancellation_reject_flash_msg_error'] = 'An error occured while trying to reject the cancellation';
 
 $lang['leaves_delete_flash_msg_error'] = 'You can\'t delete this leave request';
 $lang['leaves_delete_flash_msg_success'] = 'The leave request has been successfully deleted';
@@ -113,3 +118,6 @@ $lang['leaves_export_thead_cause'] = 'Reason';
 $lang['leaves_export_thead_duration'] = 'Duration';
 $lang['leaves_export_thead_type'] = 'Type';
 $lang['leaves_export_thead_status'] = 'Status';
+
+$lang['leaves_button_send_reminder'] = 'Send a reminder';
+$lang['leaves_reminder_flash_msg_success'] = 'The reminder email was sent to the manager';

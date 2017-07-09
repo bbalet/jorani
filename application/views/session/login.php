@@ -72,12 +72,12 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     </select>
     <?php } ?>
     <label for="login"><?php echo lang('session_login_field_login');?></label>
-    <input type="text" class="input-medium" name="login" id="login" value="<?php echo set_value('login'); ?>" required />
+    <input type="text" class="input-medium" name="login" id="login" value="<?php echo (ENVIRONMENT=='demo')?'bbalet':set_value('login'); ?>" required />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
 </form>
     <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
     <label for="password"><?php echo lang('session_login_field_password');?></label>
-    <input class="input-medium" type="password" name="password" id="password" /><br />
+    <input class="input-medium" type="password" name="password" id="password" value="<?php echo (ENVIRONMENT=='demo')?'bbalet':''; ?>" /><br />
     <br />
     <button id="send" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
     <?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
@@ -86,7 +86,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         <?php } ?>
     <?php } ?>
     <br /><br />
-    <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
+    <?php if (($this->config->item('ldap_enabled') == FALSE) && (ENVIRONMENT!='demo')) { ?>
     <button id="cmdForgetPassword" class="btn btn-danger"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
     <?php } ?>
     

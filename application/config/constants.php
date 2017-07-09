@@ -35,3 +35,25 @@ define('FOPEN_WRITE_CREATE',					'ab');
 define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
+
+/*
+|--------------------------------------------------------------------------
+| Application constants
+|--------------------------------------------------------------------------
+|
+| Jorani constants
+|
+*/
+define('LMS_PLANNED', 1);
+define('LMS_REQUESTED', 2);
+define('LMS_ACCEPTED', 3);
+define('LMS_REJECTED', 4);
+define('LMS_CANCELLATION', 5);
+define('LMS_CANCELED', 6);
+
+//Transitions
+define('LMS_PLANNED_REQUESTED', 102);
+define('LMS_REQUESTED_REJECTED', 204);
+define('LMS_REQUESTED_ACCEPTED', 203);
+define('LMS_CANCELLATION_REQUESTED', 502);
+define('LMS_CANCELLATION_CANCELED', 506);

@@ -8,9 +8,6 @@
  */
 ?>
 
-<div class="row-fluid">
-    <div class="span12">
-
 <h2><?php echo lang('calendar_organization_title');?><?php echo $help;?></h2>
 
 <div class="row-fluid">
@@ -43,10 +40,12 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span3"><span class="label"><?php echo lang('Planned');?></span></div>
-    <div class="span3"><span class="label label-success"><?php echo lang('Accepted');?></span></div>
-    <div class="span3"><span class="label label-warning"><?php echo lang('Requested');?></span></div>
-    <div class="span3">&nbsp;</div>
+    <div class="span12">
+        <span class="label"><input type="checkbox" checked id="chkPlanned" class="filterStatus"> &nbsp;<?php echo lang('Planned');?></span> &nbsp;
+        <span class="label label-success"><input type="checkbox" checked id="chkAccepted" class="filterStatus"> &nbsp;<?php echo lang('Accepted');?></span> &nbsp;
+        <span class="label label-warning"><input type="checkbox" checked id="chkRequested" class="filterStatus"> &nbsp;<?php echo lang('Requested');?></span> &nbsp;
+        <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCancellation" class="filterStatus"> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
+    </div>
 </div>
 
 <div id="frmSelectEntity" class="modal hide fade">
@@ -64,9 +63,6 @@
 </div>
 
 <div id='calendar'></div>
-
-    </div>
-</div>
 
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
         <div class="modal-header">
@@ -132,6 +128,16 @@
         } else {
             source += '?children=false';
         }
+        
+        //Filter on status
+        statuses = "";
+        if ($("#chkPlanned").prop("checked")) statuses+="1|";
+        if ($("#chkRequested").prop("checked")) statuses+="2|";
+        if ($("#chkAccepted").prop("checked")) statuses+="3|";
+        if ($("#chkCancellation").prop("checked")) statuses+="5|";
+        statuses = statuses.replace(/\|*$/, "");
+        if (statuses!="") source += '&statuses=' + statuses;
+        
         $('#calendar').fullCalendar('addEventSource', source);
         <?php if ($logged_in == TRUE) {?>
         source = '<?php echo base_url();?>contracts/calendar/alldayoffs?entity=' + entity;
@@ -319,6 +325,10 @@
             $.cookie('cal_dayoffs', toggleDayoffs);
             refresh_calendar();
         }
+        
+        $('.filterStatus').on('change',function(){
+            refresh_calendar();
+        });
         
         <?php if ($logged_in == TRUE) { ?>
         //Copy/Paste ICS Feed

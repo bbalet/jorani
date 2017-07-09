@@ -147,8 +147,8 @@ $route['organization/lists/employees'] = 'organization/listsEmployees';
 $route['organization/lists/create'] = 'organization/listsCreate';
 $route['organization/lists/rename'] = 'organization/listsRename';
 $route['organization/lists/delete'] = 'organization/listsDelete';
-$route['organization/lists/adduser'] = 'organization/listsAddUser';
-$route['organization/lists/removeuser'] = 'organization/listsRemoveUsser';
+$route['organization/lists/addemployees'] = 'organization/listsAddEmployees';
+$route['organization/lists/removeemployees'] = 'organization/listsRemoveEmployees';
 $route['organization/lists/reorder'] = 'organization/listsReorder';
 $route['organization'] = 'organization';
 
@@ -163,6 +163,8 @@ $route['calendar/tabular'] = 'calendar/tabular';
 $route['calendar/tabular/(:num)/(:num)/(:num)/(:any)/(:any)'] = 'calendar/tabular/$1/$2/$3/$4/$5';
 $route['calendar/tabular/partial/(:num)/(:num)/(:num)/(:any)/(:any)'] = 'calendar/tabularPartial/$1/$2/$3/$4/$5';
 $route['calendar/tabular/export/(:num)/(:num)/(:num)/(:any)/(:any)'] = 'calendar/exportTabular/$1/$2/$3/$4/$5';
+$route['calendar/tabular/list/partial/(:num)/(:num)/(:num)/(:any)'] = 'calendar/tabularPartialFromList/$1/$2/$3/$4';
+$route['calendar/tabular/list/export/(:num)/(:num)/(:num)/(:any)'] = 'calendar/exportTabularFromList/$1/$2/$3/$4';
 $route['calendar/year/(:num)/(:num)'] = 'calendar/year/$1/$2';
 $route['calendar/year/(:num)'] = 'calendar/year/$1';
 $route['calendar/year'] = 'calendar/year';
@@ -194,7 +196,8 @@ $route['leaves/edit/(:num)'] = 'leaves/edit/$1';
 $route['leaves/update'] = 'leaves/update';
 $route['leaves/delete/(:num)'] = 'leaves/delete/$1';
 $route['leaves/(:num)/history'] = 'leaves/history/$1';
-$route['leaves/cancel/(:num)'] = 'leaves/cancel/$1';
+$route['leaves/cancellation/(:num)'] = 'leaves/cancellation/$1';
+$route['leaves/reminder/(:num)'] = 'leaves/reminder/$1';
 $route['leaves/([^/]+)/(:num)'] = 'leaves/view/$1/$2';
 $route['leaves/validate'] = 'leaves/validate';
 $route['leaves'] = 'leaves';
@@ -210,6 +213,8 @@ $route['requests/counters/(:num)/(:num)'] = 'requests/counters/$1/$2';
 $route['requests/export/(:any)'] = 'requests/export/$1';
 $route['requests/accept/(:num)'] = 'requests/accept/$1';
 $route['requests/reject/(:num)'] = 'requests/reject/$1';
+$route['requests/cancellation/accept/(:num)'] = 'requests/acceptCancellation/$1';
+$route['requests/cancellation/reject/(:num)'] = 'requests/rejectCancellation/$1';
 $route['requests/delegations/(:num)'] = 'requests/delegations/$1';
 $route['requests/delegations'] = 'requests/delegations';
 $route['requests/ajax/delegations/delete'] = 'requests/deleteDelegations';
@@ -308,6 +313,11 @@ $route['api/acs'] = 'connection/acs';
 $route['api/slo'] = 'connection/slo';
 $route['api/sls'] = 'connection/sls';
 $route['api/sso'] = 'connection/sso';
+
+//_______________________________________________
+//Comments
+$route['comments/(:num)'] = 'leaves/createComment/$1';
+
 
 //_______________________________________________
 //Experimental mobile endpoint

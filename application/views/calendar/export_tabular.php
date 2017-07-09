@@ -17,8 +17,8 @@ $sheet->setCellValue('A2', lang('calendar_tabular_export_param_month'));
 $sheet->setCellValue('A3', lang('calendar_tabular_export_param_year'));
 $sheet->setCellValue('A4', lang('calendar_tabular_export_param_children'));
 $sheet->getStyle('A1:A4')->getFont()->setBold(true);
-$sheet->setCellValue('B1', $this->organization_model->getName($id));
-$sheet->setCellValue('B2', $month);
+$sheet->setCellValue('B1', $entityName);
+$sheet->setCellValue('B2', $month . ' (' . $monthName . ')');
 $sheet->setCellValue('B3', $year);
 if ($children == TRUE) {
     $sheet->setCellValue('B4', lang('global_true'));
@@ -52,9 +52,6 @@ $sheet->mergeCells('C8:C9');
 //The header is horizontally aligned
 $col = $this->excel->column_name(3 + $lastDay);
 $sheet->getStyle('C8:' . $col . '9')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-//Get the tabular data
-$tabular = $this->leaves_model->tabular($id, $month, $year, $children);
 
 //Box around the lines for each employee
 $styleBox = array(

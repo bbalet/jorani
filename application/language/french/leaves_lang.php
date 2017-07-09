@@ -32,6 +32,8 @@ $lang['leaves_index_thead_cause'] = 'Cause';
 $lang['leaves_index_thead_duration'] = 'Durée';
 $lang['leaves_index_thead_type'] = 'Type';
 $lang['leaves_index_thead_status'] = 'Statut';
+$lang['leaves_index_thead_requested_date'] = 'Demandée le';
+$lang['leaves_index_thead_last_change'] = 'Modifiée le';
 $lang['leaves_index_button_export'] = 'Exporter cette liste';
 $lang['leaves_index_button_create'] = 'Nouvelle demande';
 $lang['leaves_index_popup_delete_title'] = 'Suppression d\'une demandes de congé';
@@ -67,6 +69,13 @@ $lang['leaves_create_flash_msg_error'] = 'La demande d\'absence a été créée 
 
 $lang['leaves_flash_spn_list_days_off'] = '%s jours non travaillés dans la période';
 $lang['leaves_flash_msg_overlap_dayoff'] = 'Votre demande coïncide avec un jour non travaillé.';
+
+$lang['leaves_cancellation_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancellation_flash_msg_success'] = 'The cancellation request has been successfully sent';
+$lang['requests_cancellation_accept_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['requests_cancellation_accept_flash_msg_error'] = 'An error occured while trying to accept the cancellation';
+$lang['requests_cancellation_reject_flash_msg_success'] = 'The leave request has now its original status of Accepted';
+$lang['requests_cancellation_reject_flash_msg_error'] = 'An error occured while trying to reject the cancellation';
 
 $lang['leaves_edit_html_title'] = 'Modifier la demande';
 $lang['leaves_edit_title'] = 'Modifier la demande N°';
@@ -114,3 +123,6 @@ $lang['leaves_export_thead_cause'] = 'Cause';
 $lang['leaves_export_thead_duration'] = 'Durée';
 $lang['leaves_export_thead_type'] = 'Type';
 $lang['leaves_export_thead_status'] = 'Statut';
+
+$lang['leaves_button_send_reminder'] = 'Envoyer un rappel';
+$lang['leaves_reminder_flash_msg_success'] = 'L\'email de rappel a été envoyé au manager.';

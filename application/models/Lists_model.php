@@ -94,6 +94,37 @@ class Lists_model extends CI_Model {
         $this->db->delete('org_lists', array('id' => $id));
     }
 
+    /**
+     * Add employees into a list
+     * @param int $id identifier of the list
+     * @param array $employees List of employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function addEmployees($id, $employees) {
+        $data = array();
+        $order = 1;
+        foreach ($employees as $employee) {
+            $data[] = array(
+                'list' => $id,
+                'user' => $employee,
+                'orderlist' => $order
+            );
+            $order++;
+        }
+        $this->db->insert_batch('org_lists_employees', $data); 
+    }
+
+    /**
+     * Remove a list of employees from a list
+     * @param int $id identifier of the list
+     * @param array $employees List of employees
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function removeEmployees($id, $employees) {
+        $this->db->where('list', $id);
+        $this->db->where_in('id', $employees);
+        $this->db->delete('org_lists_employees');
+    }
     
     /**
      * Get the list of employees for the given list identifier

@@ -99,7 +99,7 @@ class Leaves_model extends CI_Model {
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('employee', $employee);
         $this->db->where("(startdate <= STR_TO_DATE('" . $end . "', '%Y-%m-%d') AND enddate >= STR_TO_DATE('" . $start . "', '%Y-%m-%d'))");
-        $this->db->where('leaves.status', 3);   //Accepted
+        $this->db->where('leaves.status', LMS_ACCEPTED);
         $this->db->order_by('startdate', 'asc');
         return $this->db->get()->result_array();
     }
@@ -1167,10 +1167,11 @@ class Leaves_model extends CI_Model {
      * @param int $year Year number
      * @param bool $children Include sub department in the query
      * @param string $statusFilter optional filter on status
+     * @param boolean $calendar Is this function called to display a calendar
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE, $statusFilter=NULL) {
+    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE, $statusFilter=NULL, $calendar=FALSE) {
         //Find default values for parameters (passed by ref)
         if ($month==0) $month = date("m");
         if ($year==0) $year = date("Y");
@@ -1200,9 +1201,12 @@ class Leaves_model extends CI_Model {
                         in_array("2", $statuses),
                         in_array("3", $statuses),
                         in_array("4", $statuses),
-                        in_array("5", $statuses));
+                        in_array("5", $statuses),
+                        in_array("6", $statuses),
+                        $calendar);
             } else {
-                $tabular[$employee->id] = $this->linear($employee->id, $month, $year, TRUE, TRUE, TRUE, FALSE, TRUE);
+                $tabular[$employee->id] = $this->linear($employee->id, $month, $year,
+                        TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, $calendar);
             }
         }
         return $tabular;
@@ -1304,12 +1308,15 @@ class Leaves_model extends CI_Model {
      * @param boolean $accepted Include leave requests with status accepted
      * @param boolean $rejected Include leave requests with status rejected
      * @param boolean $cancellation Include leave requests with status cancellation
+     * @param boolean $canceled Include leave requests with status canceled
+     * @param boolean $calendar Is this function called to display a calendar
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function linear($employee_id, $month, $year,
             $planned = FALSE, $requested = FALSE, $accepted = FALSE,
-            $rejected = FALSE, $cancellation = FALSE) {
+            $rejected = FALSE, $cancellation = FALSE, $canceled = FALSE,
+            $calendar = FALSE) {
         $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
         $lastDay = date("t", strtotime($start));    //last day of selected month
         $end = $year . '-' . $month . '-' . $lastDay;    //last date of selected month
@@ -1346,15 +1353,19 @@ class Leaves_model extends CI_Model {
         }
 
         //Build the complex query for all leaves
-        $this->db->select('leaves.*, types.acronym, types.name as type');
+        $this->db->select('leaves.*');
+        $this->db->select('types.acronym, types.name as type');
+        $this->db->select('users.manager as manager');
         $this->db->from('leaves');
         $this->db->join('types', 'leaves.type = types.id');
+        $this->db->join('users', 'leaves.employee = users.id');
         $this->db->where('(leaves.startdate <= DATE(' . $this->db->escape($end) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))');
-        if (!$planned) $this->db->where('leaves.status != ', 1);
-        if (!$requested) $this->db->where('leaves.status != ', 2);
-        if (!$accepted) $this->db->where('leaves.status != ', 3);
-        if (!$rejected) $this->db->where('leaves.status != ', 4);
-        if (!$cancellation) $this->db->where('leaves.status != ', 5);
+        if (!$planned) $this->db->where('leaves.status != ', LMS_PLANNED);
+        if (!$requested) $this->db->where('leaves.status != ', LMS_REQUESTED);
+        if (!$accepted) $this->db->where('leaves.status != ', LMS_ACCEPTED);
+        if (!$rejected) $this->db->where('leaves.status != ', LMS_REJECTED);
+        if (!$cancellation) $this->db->where('leaves.status != ', LMS_CANCELLATION);
+        if (!$canceled) $this->db->where('leaves.status != ', LMS_CANCELED);
 
         $this->db->where('leaves.employee = ', $employee_id);
         $this->db->order_by('startdate', 'asc');
@@ -1365,7 +1376,18 @@ class Leaves_model extends CI_Model {
 
         $this->load->model('dayoffs_model');
         foreach ($events as $entry) {
-
+            //Hide forbidden entries in calendars
+            if ($calendar) {
+                //Don't display rejected and cancel* leave requests for other employees
+                if (($entry->employee != $this->session->userdata('id')) ||
+                    ($entry->manager != $this->session->userdata('id')) ||
+                        ($this->session->userdata('is_hr') === FALSE)) {
+                    if ($entry->status > LMS_ACCEPTED) {
+                        continue;
+                    }
+                }
+            }
+            
             $startDate = DateTime::createFromFormat('Y-m-d H:i:s', $entry->startdate . ' 00:00:00');
             if ($startDate < $floorDate) $startDate = $floorDate;
             $iDate = clone $startDate;

@@ -427,7 +427,7 @@ class Hr extends CI_Controller {
         $data['non_working_days'] = $non_working_days;
         
         //tabular view of the leaves
-        $data['linear'] = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE);
+        $data['linear'] = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE);
         $data['leave_duration'] = $this->leaves_model->monthlyLeavesDuration($data['linear']);
         $data['work_duration'] = $opened_days - $data['leave_duration'];
         $data['leaves_detail'] = $this->leaves_model->monthlyLeavesByType($data['linear']);

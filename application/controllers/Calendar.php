@@ -344,7 +344,7 @@ class Calendar extends CI_Controller {
             $this->load->model('leaves_model');
             $data['mode'] = 'connected';
             $statuses = $this->input->get('statuses');
-            $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children, $statuses);
+            $data['tabular'] = $this->leaves_model->tabular($id, $month, $year, $children, $statuses, TRUE);
             $data['entity'] = $id;
             $data['month'] = $month;
             $data['year'] = $year;

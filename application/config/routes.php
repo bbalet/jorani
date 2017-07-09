@@ -147,8 +147,8 @@ $route['organization/lists/employees'] = 'organization/listsEmployees';
 $route['organization/lists/create'] = 'organization/listsCreate';
 $route['organization/lists/rename'] = 'organization/listsRename';
 $route['organization/lists/delete'] = 'organization/listsDelete';
-$route['organization/lists/adduser'] = 'organization/listsAddUser';
-$route['organization/lists/removeuser'] = 'organization/listsRemoveUsser';
+$route['organization/lists/addemployees'] = 'organization/listsAddEmployees';
+$route['organization/lists/removeemployees'] = 'organization/listsRemoveEmployees';
 $route['organization/lists/reorder'] = 'organization/listsReorder';
 $route['organization'] = 'organization';
 

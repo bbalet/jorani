@@ -24,8 +24,8 @@
         <option value="<?php echo $listItem['id'];?>"><?php echo $listItem['name'];?></option>
 <?php endforeach ?>
     </select>
-    <button id="cmdAddUsers" class="btn btn-primary" title="<?php echo lang('organization_lists_button_add_users');?>"><i class="fa fa-user-plus" aria-hidden="true"></i></button>
-    <button id="cmdRemoveUsers" class="btn btn-primary" title="<?php echo lang('organization_lists_button_delete_users');?>"><i class="fa fa-user-times" aria-hidden="true"></i></button>
+    <button id="cmdAddEmployees" class="btn btn-primary" title="<?php echo lang('organization_lists_button_add_users');?>"><i class="fa fa-user-plus" aria-hidden="true"></i></button>
+    <button id="cmdRemoveEmployees" class="btn btn-primary" title="<?php echo lang('organization_lists_button_delete_users');?>"><i class="fa fa-user-times" aria-hidden="true"></i></button>
 </div>
         
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="employeesOrgList" width="100%">
@@ -85,13 +85,13 @@ function toggleCommands() {
     if ($('#cboList').val() == "") {
         $('#cmdDeleteList').prop("disabled", true);
         $('#cmdRenameList').prop("disabled", true);
-        $('#cmdAddUsers').prop("disabled", true);
-        $('#cmdRemoveUsers').prop("disabled", true);
+        $('#cmdAddEmployees').prop("disabled", true);
+        $('#cmdRemoveEmployees').prop("disabled", true);
     } else {
         $('#cmdDeleteList').prop("disabled", false);
         $('#cmdRenameList').prop("disabled", false);
-        $('#cmdAddUsers').prop("disabled", false);
-        $('#cmdRemoveUsers').prop("disabled", false);
+        $('#cmdAddEmployees').prop("disabled", false);
+        $('#cmdRemoveEmployees').prop("disabled", false);
         //Reload the list of employees
         listId = $('#cboList').val();
         urlListEmployees = '<?php echo base_url();?>organization/lists/employees?list=' + listId;
@@ -103,9 +103,27 @@ function toggleCommands() {
     }
 }
 
-//Pick employees to be added into the list
+//Pick up employees to be added into the selected list
 function select_employees() {
-
+    var oTable = $('#employees').DataTable();
+    var employeeIds = [];
+    oTable.rows({selected: true}).every( function () {
+        employeeIds.push(this.data().id);
+     });
+    employeeIds = JSON.stringify(employeeIds);
+    listId = $('#cboList').val();
+    $('#frmModalAjaxWait').modal('show');
+    $.ajax({
+        url: "<?php echo base_url();?>organization/lists/addemployees",
+        type: "POST",
+        data: {
+                list: listId,
+                employees: employeeIds
+            }
+      }).done(function() {
+        $('#frmModalAjaxWait').modal('hide');
+    });
+    $("#frmSelectEmployees").modal('hide');
 }
 
 $(function () {
@@ -181,11 +199,11 @@ $(function () {
         toggleCommands();
     });
 
-//$route['organization/lists/adduser'] = 'organization/listsAddUser';
-//$route['organization/lists/removeuser'] = 'organization/listsRemoveUsser';
-//$route['organization/lists/reorder'] = 'organization/listsReorder';
-//cmdAddUsers
-//cmdRemoveUsers
+    //Add a list of employees into the selected list
+    $("#cmdAddEmployees").click(function() {
+        $("#frmSelectEmployees").modal('show');
+        $("#frmSelectEmployeesBody").load('<?php echo base_url(); ?>users/employeesMultiSelect');
+    });
 
     //Create a new list by ajax. Add the new option into select control
     $("#cmdCreateList").click(function() {

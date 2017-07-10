@@ -1108,8 +1108,7 @@ class Leaves_model extends CI_Model {
         $ids = $this->delegations_model->listManagersGivingDelegation($manager);
         $this->db->select('count(*) as number', FALSE);
         $this->db->join('users', 'users.id = leaves.employee');
-        $this->db->where('leaves.status', LMS_REQUESTED);
-        $this->db->or_where('leaves.status', LMS_CANCELLATION);
+        $this->db->where_in('leaves.status', array(LMS_REQUESTED, LMS_CANCELLATION));
 
         if (count($ids) > 0) {
             array_push($ids, $manager);

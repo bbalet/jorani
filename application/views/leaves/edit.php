@@ -102,6 +102,7 @@ if (isset($_GET['source'])) {
 </div>
 </div>
 <div class="span4">
+    <!--
   <h4>Commentaires</h4>
   <?php
   if(isset($leave["comments"])){
@@ -160,6 +161,7 @@ if (isset($_GET['source'])) {
    &nbsp;
  </form>
  <?php }?>
+    //-->
 </div>
 </div>
 

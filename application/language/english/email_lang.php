@@ -17,7 +17,8 @@ $lang['email_leave_request_creation_subject'] = 'Leave Request from';
 $lang['email_leave_request_creation_title'] = 'Leave Request';
 $lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
 $lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
-
+$lang['email_leave_cancel_accept_subject'] = 'Your Cancellation Request has been accepted';
+$lang['email_leave_cancel_reject_subject'] = 'Your Cancellation Request has been rejected';
 
 $lang['email_leave_request_accept_subject'] = 'Your leave request has been accepted';
 $lang['email_leave_request_reject_subject'] = 'Your leave request has been rejected';

@@ -220,6 +220,7 @@ class Hr extends CI_Controller {
     public function leaves($id) {
         $this->auth->checkIfOperationIsAllowed('list_employees');
         $data = getUserContext($this);
+        $this->lang->load('leaves', $this->language);
         $this->load->model('users_model');
         $data['name'] = $this->users_model->getName($id);
         //Check if exists
@@ -230,6 +231,8 @@ class Hr extends CI_Controller {
         $data['title'] = lang('hr_leaves_title');
         $data['user_id'] = $id;
         $this->load->model('leaves_model');
+        $this->load->model('types_model');
+        $data['types'] = $this->types_model->getTypes();
         $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($id);
         if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
@@ -424,7 +427,7 @@ class Hr extends CI_Controller {
         $data['non_working_days'] = $non_working_days;
         
         //tabular view of the leaves
-        $data['linear'] = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE);
+        $data['linear'] = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE);
         $data['leave_duration'] = $this->leaves_model->monthlyLeavesDuration($data['linear']);
         $data['work_duration'] = $opened_days - $data['leave_duration'];
         $data['leaves_detail'] = $this->leaves_model->monthlyLeavesByType($data['linear']);

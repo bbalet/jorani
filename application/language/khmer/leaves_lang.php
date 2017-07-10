@@ -71,6 +71,13 @@ $lang['leaves_create_flash_msg_error'] = 'ការស្នើរសុំឈ�
 $lang['leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
 $lang['leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
 
+$lang['leaves_cancellation_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancellation_flash_msg_success'] = 'The cancellation request has been successfully sent';
+$lang['requests_cancellation_accept_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['requests_cancellation_accept_flash_msg_error'] = 'An error occured while trying to accept the cancellation';
+$lang['requests_cancellation_reject_flash_msg_success'] = 'The leave request has now its original status of Accepted';
+$lang['requests_cancellation_reject_flash_msg_error'] = 'An error occured while trying to reject the cancellation';
+
 $lang['leaves_edit_html_title'] = 'ការសម្រួលការស្នើរសុំឈប់សម្រាក';
 $lang['leaves_edit_title'] = 'កែប្រែការសំុច្បាប់ លេខ#';
 $lang['leaves_edit_field_start'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';
@@ -116,3 +123,7 @@ $lang['leaves_export_thead_cause'] = 'មូលហេតុ';
 $lang['leaves_export_thead_duration'] = 'រយៈពេល';
 $lang['leaves_export_thead_type'] = 'ប្រភេទ';
 $lang['leaves_export_thead_status'] = 'ស្ថានភាព';
+
+$lang['leaves_button_send_reminder'] = 'Send a reminder';
+$lang['leaves_reminder_flash_msg_success'] = 'The reminder email was sent to the manager';
+

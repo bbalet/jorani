@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>{Firstname} {Lastname} a annulé sa demande d'absence. Voici les <a href="{BaseUrl}leaves/{LeaveId}">détails</a> :</p>
+        <p>{Firstname} {Lastname} souhaiterait annuler sa demande d'absence. Voici les <a href="{BaseUrl}leaves/{LeaveId}">détails</a> :</p>
         <table>
             <tr>
                 <td>Du &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
@@ -40,9 +40,15 @@
             <tr>
                 <td>Cause &nbsp;</td><td>{Reason}</td>
             </tr>
+<!--            <tr>
+                <td>Comments &nbsp;</td><td>{Comments}</td>
+            </tr>-->
+            <tr>
+                <td><a href="{BaseUrl}requests/cancellation/accept/{LeaveId}">Confirmer l'annulation</a> &nbsp;</td><td><a href="{BaseUrl}requests/cancellation/reject/{LeaveId}">Refuser l'annulation</a></td>
+            </tr>            
         </table>
         <br />
-       <p>Vous pouvez vérifier <a href="{BaseUrl}hr/counters/collaborators/{UserId}">l'état des congés</a> avant de valider cette demande.</p>
+        <p>Vous pouvez vérifier <a href="{BaseUrl}hr/counters/collaborators/{UserId}">l'état des congés</a> avant de valider cette demande.</p>
         <hr>
         <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
     </body>

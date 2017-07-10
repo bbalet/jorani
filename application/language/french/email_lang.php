@@ -17,6 +17,8 @@ $lang['email_leave_request_creation_subject'] = 'Demande d\'absence de';
 $lang['email_leave_request_creation_title'] = 'Demande d\'absence';
 $lang['email_leave_request_cancellation_subject'] = 'Demande d\'annulation d\'absence de';
 $lang['email_leave_request_cancellation_title'] = 'Demande d\'annulation d\'absence';
+$lang['email_leave_cancel_accept_subject'] = 'Votre demande d\'annulation d\'absence a été acceptée';
+$lang['email_leave_cancel_reject_subject'] = 'Votre demande d\'annulation d\'absence a été refusée';
 
 $lang['email_leave_request_accept_subject'] = 'Votre demande d\'absence a été acceptée';
 $lang['email_leave_request_reject_subject'] = 'Votre demande d\'absence a été refusée';

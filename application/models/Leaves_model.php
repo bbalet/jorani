@@ -99,7 +99,7 @@ class Leaves_model extends CI_Model {
         $this->db->join('types', 'leaves.type = types.id');
         $this->db->where('employee', $employee);
         $this->db->where("(startdate <= STR_TO_DATE('" . $end . "', '%Y-%m-%d') AND enddate >= STR_TO_DATE('" . $start . "', '%Y-%m-%d'))");
-        $this->db->where('leaves.status', 3);   //Accepted
+        $this->db->where('leaves.status', LMS_ACCEPTED);
         $this->db->order_by('startdate', 'asc');
         return $this->db->get()->result_array();
     }
@@ -304,10 +304,10 @@ class Leaves_model extends CI_Model {
                 $taken_days = $this->db->get()->result_array();
                 //Count the number of taken days
                 foreach ($taken_days as $taken) {
-                    $summary[$taken['type']][3] = $entitlement['type_id'];
                     $summary[$taken['type']][0] = (float) $taken['taken']; //Taken
                 }
                 //Report the number of available days
+                $summary[$entitlement['type_name']][3] = $entitlement['type_id'];
                 $summary[$entitlement['type_name']][1] = (float) $entitlement['entitled'];
             }
 
@@ -371,7 +371,7 @@ class Leaves_model extends CI_Model {
                 $summary[$entitlement['type_name']][1] = (float) $entitlement['entitled'];
             }
 
-            //List all requested leaves in a third column
+            //List all requested leaves in a fourth column
             //leave requests having a requested status are not deducted from credit
             foreach ($entitlements as $entitlement) {
                 //Get the total of taken leaves grouped by type
@@ -624,50 +624,6 @@ class Leaves_model extends CI_Model {
     }
 
     /**
-     * Accept a leave request
-     * @param int $id leave request identifier
-     * @return int number of affected rows
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function acceptLeave($id) {
-        $data = array(
-            'status' => 3
-        );
-        $this->db->where('id', $id);
-        $affectedRows = $this->db->update('leaves', $data);
-
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') === TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
-        }
-
-        return $affectedRows;
-    }
-
-    /**
-     * Reject a leave request
-     * @param int $id leave request identifier
-     * @return int number of affected rows
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function rejectLeave($id) {
-        $data = array(
-            'status' => 4
-        );
-        $this->db->where('id', $id);
-        $affectedRows = $this->db->update('leaves', $data);
-
-        //Trace the modification if the feature is enabled
-        if ($this->config->item('enable_history') === TRUE) {
-            $this->load->model('history_model');
-            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
-        }
-
-        return $affectedRows;
-    }
-
-    /**
      * Delete a leave from the database
      * @param int $id leave request identifier
      * @return int number of affected rows
@@ -683,13 +639,15 @@ class Leaves_model extends CI_Model {
     }
 
     /**
-     * Cancel a leave from the database
+     * Switch the status of a leave request. You may use one of the constants
+     * listed into config/constants.php
      * @param int $id leave request identifier
-     * @author Guillaume Blaquiere <guillaume.blaquiere@gmail.com>
+     * @param int $status Next Status
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function cancelLeave($id) {
+    public function switchStatus($id, $status) {
         $data = array(
-            'status' => 1
+            'status' => $status
         );
         $this->db->where('id', $id);
         $this->db->update('leaves', $data);
@@ -764,6 +722,7 @@ class Leaves_model extends CI_Model {
                 $allDay = TRUE;
             }
 
+            $color = '#ff0000';
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -831,6 +790,7 @@ class Leaves_model extends CI_Model {
                 $allDay = TRUE;
             }
 
+            $color = '#ff0000';
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -897,6 +857,7 @@ class Leaves_model extends CI_Model {
                 $allDay = TRUE;
             }
 
+            $color = '#ff0000';
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -987,7 +948,8 @@ class Leaves_model extends CI_Model {
                 $enddatetype = "Afternoon";
                 $allDay = TRUE;
             }
-            //color
+            
+            $color = '#ff0000';
             switch ($entry->status)
             {
                 case 1: $color = '#999'; break;     // Planned
@@ -1086,7 +1048,8 @@ class Leaves_model extends CI_Model {
             $this->db->where('users.manager', $manager);
         }
         if ($all == FALSE) {
-            $this->db->where('leaves.status', 2);
+            $this->db->where('leaves.status', LMS_REQUESTED);
+            $this->db->where('leaves.status', LMS_CANCELLATION);
         }
         $this->db->order_by('leaves.startdate', 'desc');
         $query = $this->db->get('leaves');
@@ -1102,7 +1065,6 @@ class Leaves_model extends CI_Model {
      */
     public function getLeavesRequestedToManagerWithHistory($manager, $all = FALSE){
       $manager = intval($manager);
-      $ids = $this->delegations_model->listManagersGivingDelegation($manager);
       $query="SELECT leaves.id as leave_id, users.*, leaves.*, types.name as type_label, status.name as status_name, types.name as type_name, lastchange.date as change_date, requested.date as request_date
         FROM `leaves`
         inner join status ON leaves.status = status.id
@@ -1119,21 +1081,19 @@ class Leaves_model extends CI_Model {
           WHERE leaves_history.status = 2
           GROUP BY id
         ) requested ON leaves.id = requested.id";
+      //Case of manager having delegations
+      $ids = $this->delegations_model->listManagersGivingDelegation($manager);
       if (count($ids) > 0) {
         array_push($ids, $manager);
-        //TODO check syntaxe;
-        $query=$query . " WHERE users.manager in $ids";
-        //$this->db->where_in('users.manager', $ids);
+        $query .= " WHERE users.manager IN (" . implode(",", $ids) . ")";
       } else {
-        $query=$query . " WHERE users.manager = $manager";
-        //$this->db->where('users.manager', $manager);
+        $query .= " WHERE users.manager = $manager";
       }
       if ($all == FALSE) {
-        $query=$query . " AND leaves.status = 2 ";
-        //$this->db->where('leaves.status', 2);
+        $query .= " AND (leaves.status = " . LMS_REQUESTED .
+                " OR leaves.status = " . LMS_CANCELLATION . ")";
       }
-      $query=$query . "order by leaves.startdate DESC;";
-
+      $query=$query . " order by leaves.startdate DESC;";
       return $this->db->query($query)->result_array();
     }
 
@@ -1148,7 +1108,8 @@ class Leaves_model extends CI_Model {
         $ids = $this->delegations_model->listManagersGivingDelegation($manager);
         $this->db->select('count(*) as number', FALSE);
         $this->db->join('users', 'users.id = leaves.employee');
-        $this->db->where('leaves.status', 2);
+        $this->db->where('leaves.status', LMS_REQUESTED);
+        $this->db->or_where('leaves.status', LMS_CANCELLATION);
 
         if (count($ids) > 0) {
             array_push($ids, $manager);
@@ -1205,10 +1166,12 @@ class Leaves_model extends CI_Model {
      * @param int $month Month number
      * @param int $year Year number
      * @param bool $children Include sub department in the query
+     * @param string $statusFilter optional filter on status
+     * @param boolean $calendar Is this function called to display a calendar
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE) {
+    public function tabular(&$entity=-1, &$month=0, &$year=0, &$children=TRUE, $statusFilter=NULL, $calendar=FALSE) {
         //Find default values for parameters (passed by ref)
         if ($month==0) $month = date("m");
         if ($year==0) $year = date("Y");
@@ -1229,7 +1192,22 @@ class Leaves_model extends CI_Model {
         $this->load->model('organization_model');
         $employees = $this->organization_model->allEmployees($entity, $children);
         foreach ($employees as $employee) {
-            $tabular[$employee->id] = $this->linear($employee->id, $month, $year, TRUE, TRUE, TRUE, FALSE);
+            if ($statusFilter != NULL) {
+                $statuses = explode ('|', $statusFilter);
+                $tabular[$employee->id] = $this->linear($employee->id,
+                        $month,
+                        $year,
+                        in_array("1", $statuses),
+                        in_array("2", $statuses),
+                        in_array("3", $statuses),
+                        in_array("4", $statuses),
+                        in_array("5", $statuses),
+                        in_array("6", $statuses),
+                        $calendar);
+            } else {
+                $tabular[$employee->id] = $this->linear($employee->id, $month, $year,
+                        TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, $calendar);
+            }
         }
         return $tabular;
     }
@@ -1239,10 +1217,11 @@ class Leaves_model extends CI_Model {
      * @param int $list List identifier
      * @param int $month Month number
      * @param int $year Year number
+     * @param string $statusFilter optional filter on status
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function tabularList($list, &$month=0, &$year=0) {
+    public function tabularList($list, &$month=0, &$year=0, $statusFilter=NULL) {
         //Find default values for parameters (passed by ref)
         if ($month==0) $month = date("m");
         if ($year==0) $year = date("Y");
@@ -1252,7 +1231,19 @@ class Leaves_model extends CI_Model {
         $this->load->model('lists_model');
         $employees = $this->lists_model->getListOfEmployees($list);
         foreach ($employees as $employee) {
-            $tabular[$employee['id']] = $this->linear($employee['id'], $month, $year, TRUE, TRUE, TRUE, FALSE);
+            if ($statusFilter != NULL) {
+                $statuses = explode ('|', $statusFilter);
+                $tabular[$employee['id']] = $this->linear($employee['id'],
+                        $month,
+                        $year,
+                        in_array("1", $statuses),
+                        in_array("2", $statuses),
+                        in_array("3", $statuses),
+                        in_array("4", $statuses),
+                        in_array("5", $statuses));
+            } else {
+                $tabular[$employee['id']] = $this->linear($employee['id'], $month, $year, TRUE, TRUE, TRUE, FALSE, TRUE);
+            }
         }
         return $tabular;
     }
@@ -1312,11 +1303,20 @@ class Leaves_model extends CI_Model {
      * @param int $employee Employee identifier
      * @param int $month Month number
      * @param int $year Year number
+     * @param boolean $planned Include leave requests with status planned
+     * @param boolean $requested Include leave requests with status requested
+     * @param boolean $accepted Include leave requests with status accepted
+     * @param boolean $rejected Include leave requests with status rejected
+     * @param boolean $cancellation Include leave requests with status cancellation
+     * @param boolean $canceled Include leave requests with status canceled
+     * @param boolean $calendar Is this function called to display a calendar
      * @return array Array of objects containing leave details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function linear($employee_id, $month, $year,
-            $planned = FALSE, $requested = FALSE, $accepted = FALSE, $rejected = FALSE) {
+            $planned = FALSE, $requested = FALSE, $accepted = FALSE,
+            $rejected = FALSE, $cancellation = FALSE, $canceled = FALSE,
+            $calendar = FALSE) {
         $start = $year . '-' . $month . '-' .  '1';    //first date of selected month
         $lastDay = date("t", strtotime($start));    //last day of selected month
         $end = $year . '-' . $month . '-' . $lastDay;    //last date of selected month
@@ -1331,7 +1331,7 @@ class Leaves_model extends CI_Model {
         $user->id = (int) $employee['id'];
         $user->days = array();
 
-        //Init all day to working day
+        //Init all days of the month to working day
         for ($ii = 1; $ii <= $lastDay; $ii++) {
             $day = new stdClass;
             $day->id = 0;
@@ -1348,29 +1348,46 @@ class Leaves_model extends CI_Model {
             $iDate = new DateTime($dayoff->date);
             $dayNum = intval($iDate->format('d'));
             $user->days[$dayNum]->display = (string) $dayoff->type + 3;
-            $user->days[$dayNum]->status = (string) $dayoff->type + 3;
+            $user->days[$dayNum]->status = (string) $dayoff->type + 10;
             $user->days[$dayNum]->type = $dayoff->title;
         }
 
         //Build the complex query for all leaves
-        $this->db->select('leaves.*, types.acronym, types.name as type');
+        $this->db->select('leaves.*');
+        $this->db->select('types.acronym, types.name as type');
+        $this->db->select('users.manager as manager');
         $this->db->from('leaves');
         $this->db->join('types', 'leaves.type = types.id');
+        $this->db->join('users', 'leaves.employee = users.id');
         $this->db->where('(leaves.startdate <= DATE(' . $this->db->escape($end) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))');
-        if (!$planned) $this->db->where('leaves.status != ', 1);
-        if (!$requested) $this->db->where('leaves.status != ', 2);
-        if (!$accepted) $this->db->where('leaves.status != ', 3);
-        if (!$rejected) $this->db->where('leaves.status != ', 4);
+        if (!$planned) $this->db->where('leaves.status != ', LMS_PLANNED);
+        if (!$requested) $this->db->where('leaves.status != ', LMS_REQUESTED);
+        if (!$accepted) $this->db->where('leaves.status != ', LMS_ACCEPTED);
+        if (!$rejected) $this->db->where('leaves.status != ', LMS_REJECTED);
+        if (!$cancellation) $this->db->where('leaves.status != ', LMS_CANCELLATION);
+        if (!$canceled) $this->db->where('leaves.status != ', LMS_CANCELED);
 
         $this->db->where('leaves.employee = ', $employee_id);
         $this->db->order_by('startdate', 'asc');
+        $this->db->order_by('startdatetype', 'desc');
         $events = $this->db->get()->result();
         $limitDate = DateTime::createFromFormat('Y-m-d H:i:s', $end . ' 00:00:00');
         $floorDate = DateTime::createFromFormat('Y-m-d H:i:s', $start . ' 00:00:00');
 
         $this->load->model('dayoffs_model');
         foreach ($events as $entry) {
-
+            //Hide forbidden entries in calendars
+            if ($calendar) {
+                //Don't display rejected and cancel* leave requests for other employees
+                if (($entry->employee != $this->session->userdata('id')) ||
+                    ($entry->manager != $this->session->userdata('id')) ||
+                        ($this->session->userdata('is_hr') === FALSE)) {
+                    if ($entry->status > LMS_ACCEPTED) {
+                        continue;
+                    }
+                }
+            }
+            
             $startDate = DateTime::createFromFormat('Y-m-d H:i:s', $entry->startdate . ' 00:00:00');
             if ($startDate < $floorDate) $startDate = $floorDate;
             $iDate = clone $startDate;

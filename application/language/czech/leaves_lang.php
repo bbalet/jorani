@@ -70,6 +70,13 @@ $lang['leaves_create_flash_msg_error'] = 'Požadavek na volno byl úspěšně vy
 $lang['leaves_flash_spn_list_days_off'] = '%s období pracovních svátků';
 $lang['leaves_flash_msg_overlap_dayoff'] = 'Vaše žádost o dovolenou připadá na den volna.';
 
+$lang['leaves_cancellation_flash_msg_error'] = 'You can\'t cancel this leave request';
+$lang['leaves_cancellation_flash_msg_success'] = 'The cancellation request has been successfully sent';
+$lang['requests_cancellation_accept_flash_msg_success'] = 'The leave request has been successfully cancelled';
+$lang['requests_cancellation_accept_flash_msg_error'] = 'An error occured while trying to accept the cancellation';
+$lang['requests_cancellation_reject_flash_msg_success'] = 'The leave request has now its original status of Accepted';
+$lang['requests_cancellation_reject_flash_msg_error'] = 'An error occured while trying to reject the cancellation';
+
 $lang['leaves_edit_html_title'] = 'Upravit žádost o dovolenou';
 $lang['leaves_edit_title'] = 'Upravit žádost o dovolenou #';
 $lang['leaves_edit_field_start'] = 'Datum začátku';
@@ -114,3 +121,7 @@ $lang['leaves_export_thead_cause'] = 'Účel';
 $lang['leaves_export_thead_duration'] = 'Počet dnů';
 $lang['leaves_export_thead_type'] = 'Typ';
 $lang['leaves_export_thead_status'] = 'Stav';
+
+$lang['leaves_button_send_reminder'] = 'Send a reminder';
+$lang['leaves_reminder_flash_msg_success'] = 'The reminder email was sent to the manager';
+

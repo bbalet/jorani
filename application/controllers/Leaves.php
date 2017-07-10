@@ -262,9 +262,9 @@ class Leaves extends CI_Controller {
         //already requested, the employee can't modify it
         if (!$this->is_hr) {
             if (($this->session->userdata('manager') != $this->user_id) &&
-                    $data['leave']['status'] != 1) {
+                    $data['leave']['status'] != LMS_PLANNED) {
                 if ($this->config->item('edit_rejected_requests') == FALSE ||
-                    $data['leave']['status'] != 4) {//Configuration switch that allows editing the rejected leave requests
+                    $data['leave']['status'] != LMS_REJECTED) {//Configuration switch that allows editing the rejected leave requests
                     log_message('error', 'User #' . $this->user_id . ' illegally tried to edit leave #' . $id);
                     $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_error'));
                     redirect('leaves');
@@ -315,7 +315,7 @@ class Leaves extends CI_Controller {
             $this->leaves_model->updateLeaves($id);       //We don't use the return value
             $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
             //If the status is requested, send an email to the manager
-            if ($this->input->post('status') == 2) {
+            if ($this->input->post('status') == LMS_REQUESTED) {
                 $this->sendMailOnLeaveRequestCreation($id);
             }
             if (isset($_GET['source'])) {
@@ -323,6 +323,32 @@ class Leaves extends CI_Controller {
             } else {
                 redirect('leaves');
             }
+        }
+    }
+    
+    /**
+     * Send an email reminder (so as to remind to the manager that he 
+     * must either accept/reject a request or a cancellation)
+     * @param int $id Identifier of the leave request
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function reminder($id) {
+        $this->auth->checkIfOperationIsAllowed('create_leaves');
+        $data = getUserContext($this);
+        $leave = $this->leaves_model->getLeaves($id);
+        switch($leave['status']) {
+            case 2: //Requested
+                $this->sendMailOnLeaveRequestCreation($id);
+                break;
+            case 5: //Cancellation
+                $this->sendMailOnLeaveRequestCancellation($id);
+                break;
+        }
+        $this->session->set_flashdata('msg', lang('leaves_reminder_flash_msg_success'));
+        if (isset($_GET['source'])) {
+            redirect($_GET['source']);
+        } else {
+            redirect('leaves');
         }
     }
 
@@ -441,9 +467,7 @@ class Leaves extends CI_Controller {
 
         sendMailByWrapper($this, $subject, $message, $to, $cc);
     }
-
-
-
+    
     /**
      * Delete a leave request
      * @param int $id identifier of the leave request
@@ -487,65 +511,36 @@ class Leaves extends CI_Controller {
     }
 
     /**
-     * Cancel a leave request
+     * Ask for the cancellation of a leave request. Extend the workflow with
+     * cancellation and canceled steps.
+     * Change of behavior (compared to prior versions):
+     *  - Manager and HR do not cancel leave requests, they reject them.
+     *  - Only the connected user can reject its own requests.
+     *  - If the cancellation request is accepted, it goes on accepted
      * @param int $id identifier of the leave request
-     * @author Guillaume Blaquiere <guillaume.blaquiere@gmail.com>
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function cancel($id) {
-        $can_cancel = FALSE;
+    public function cancellation($id) {
         //Test if the leave request exists
-        $leaves = $this->leaves_model->getLeaves($id);
-        if (empty($leaves)) {
+        $leave = $this->leaves_model->getLeaves($id);
+        if (empty($leave)) {
             redirect('notfound');
         } else {
-            if ($this->is_hr) {
-                $can_cancel = TRUE;
-            } else {
-                //If the first leave day is in the past, the collaborator can't cancel himself the leave. Only his manager can do it
-                //if the user is a manager or a delegate, he can cancel the leave
-
-                $this->load->model('delegations_model');
-                $this->load->model('users_model');
-                $employee = $this->users_model->getUsers($leaves['employee']);
-                $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
-
-                if (!$this->config->item('cancel_past_requests') &&
-                    ($this->user_id != $employee['manager']) && !($is_delegate) && new DateTime($leaves['startdate']) < new DateTime()){
-                    $this->session->set_flashdata('msg', lang('leaves_cancel_unauthorized_msg_error'));
-                    if (isset($_GET['source'])) {
-                        redirect($_GET['source']);
-                    } else {
-                        redirect('leaves');
-                    }
-                }
-                if ($this->config->item('cancel_leave_request') == TRUE &&
-                    $leaves['status'] == 2) {
-                    $can_cancel = TRUE;
-                }
-                if ($this->config->item('cancel_accepted_leave') == TRUE &&
-                    $leaves['status'] == 3) {
-                    $can_cancel = TRUE;
-                }
+            //Only the connected user can reject its own requests
+            if ($this->user_id != $leave['employee']){
+                $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_error'));
+                redirect('leaves');
             }
-            if ($can_cancel === TRUE) {
-                $this->leaves_model->cancelLeave($id);
-                if($this->config->item('notify_cancelled_requests')){
-                    $this->sendMailOnLeaveRequestCancellation($id);
-                }
+            //We can cancel a leave request only with a status 'Accepted'
+            if ($leave['status'] == LMS_ACCEPTED) {
+                $this->leaves_model->switchStatus($id, LMS_CANCELLATION);
+                $this->sendMailOnLeaveRequestCancellation($id);
+                $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_success'));
+                redirect('leaves');
             } else {
-                $this->session->set_flashdata('msg', lang('leaves_cancel_flash_msg_error'));
-                if (isset($_GET['source'])) {
-                    redirect($_GET['source']);
-                } else {
-                    redirect('leaves');
-                }
+                $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_error'));
+                redirect('leaves');
             }
-        }
-        $this->session->set_flashdata('msg', lang('leaves_cancel_flash_msg_success'));
-        if (isset($_GET['source'])) {
-            redirect($_GET['source']);
-        } else {
-            redirect('leaves');
         }
     }
 

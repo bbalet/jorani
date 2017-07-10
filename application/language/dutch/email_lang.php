@@ -14,8 +14,12 @@ $lang['email_user_create_subject'] = 'Uw account is aangemaakt';
 $lang['email_user_create_title'] = 'Uw account is aangemaakt';
 $lang['email_leave_request_creation_subject'] = 'Afwezigheidsverzoek van';
 $lang['email_leave_request_creation_title'] = 'Afwezigheidsverzoek';
+
 $lang['email_leave_request_cancellation_subject'] = 'Leave Request Cancellation from';
 $lang['email_leave_request_cancellation_title'] = 'Leave Request Cancellation';
+$lang['email_leave_cancel_accept_subject'] = 'Your Cancellation Request has been accepted';
+$lang['email_leave_cancel_reject_subject'] = 'Your Cancellation Request has been rejected';
+
 $lang['email_leave_request_accept_subject'] = 'Uw afwezigheidsverzoek is goedgekeurd';
 $lang['email_leave_request_reject_subject'] = 'Uw afwezigheidsverzoek is afgekeurd';
 $lang['email_leave_request_validation_title'] = 'Afwezigheidsverzoek';

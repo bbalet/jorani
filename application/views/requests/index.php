@@ -38,7 +38,7 @@ if ($showAll == FALSE) {
     <span class="label label-success"><input type="checkbox" <?php echo $checked;?> id="chkAccepted" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Accepted');?></span> &nbsp;
     <span class="label label-warning"><input type="checkbox" checked id="chkRequested" class="filterStatus"> &nbsp;<?php echo lang('Requested');?></span> &nbsp;
     <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" <?php echo $checked;?> id="chkRejected" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Rejected');?></span> &nbsp;
-    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" <?php echo $checked;?> id="chkCancellation" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
+    <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" checked id="chkCancellation" class="filterStatus"> &nbsp;<?php echo lang('Cancellation');?></span> &nbsp;
     <span class="label label-important" style="background-color: #ff0000;"><input type="checkbox" <?php echo $checked;?> id="chkCanceled" class="filterStatus" <?php echo $disable;?>> &nbsp;<?php echo lang('Canceled');?></span>
     </div>
 </div>
@@ -58,59 +58,73 @@ if ($showAll == FALSE) {
         </tr>
     </thead>
     <tbody>
-<?php foreach ($requests as $requests_item):
-    $date = new DateTime($requests_item['startdate']);
+<?php foreach ($requests as $request):
+    $date = new DateTime($request['startdate']);
     $tmpStartDate = $date->getTimestamp();
     $startdate = $date->format(lang('global_date_format'));
-    $date = new DateTime($requests_item['enddate']);
+    $date = new DateTime($request['enddate']);
     $tmpEndDate = $date->getTimestamp();
     $enddate = $date->format(lang('global_date_format'));
     if ($this->config->item('enable_history') == TRUE){
-      if($requests_item['request_date'] == NULL){
+      if($request['request_date'] == NULL){
         $tmpRequestDate = "";
         $requestdate = "";
       }else{
-        $datetimeRequested = new DateTime($requests_item['request_date']);
+        $datetimeRequested = new DateTime($request['request_date']);
         $tmpRequestDate = $datetimeRequested->getTimestamp();
         $requestdate = $datetimeRequested->format(lang('global_date_format'));
       }
-      if($requests_item['change_date'] == NULL){
+      if($request['change_date'] == NULL){
         $tmpLastChangeDate = "";
         $lastchangedate = "";
       }else{
-        $datetimelastChanged = new DateTime($requests_item['change_date']);
+        $datetimelastChanged = new DateTime($request['change_date']);
         $tmpLastChangeDate = $datetimelastChanged->getTimestamp();
         $lastchangedate = $datetimelastChanged->format(lang('global_date_format'));
       }
     }
     ?>
     <tr>
-        <td data-order="<?php echo $requests_item['leave_id']; ?>">
-            <a href="<?php echo base_url();?>leaves/requests/<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><?php echo $requests_item['leave_id']; ?></a>
+        <td data-order="<?php echo $request['leave_id']; ?>">
+            <a href="<?php echo base_url();?>leaves/requests/<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><?php echo $request['leave_id']; ?></a>
             &nbsp;
             <div class="pull-right">
-                <a href="<?php echo base_url();?>leaves/requests/<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
+                <?php if ($request['status'] == LMS_CANCELLATION) { ?>
+                <a href="#" class="lnkCancellationAccept" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>">
+                    <span class="fa-stack">
+                      <i class="fa fa-undo fa-stack-2x" style="color:black;"></i>
+                      <i class="fa fa-check fa-stack-1x" style="color:black;"></i>
+                    </span>
+                </a>
                 &nbsp;
-                <a href="#" class="lnkAccept" data-id="<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
+                <a href="#" class="lnkCancellationReject" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>">
+                    <span class="fa-stack">
+                      <i class="fa fa-undo fa-stack-2x" style="color:black;"></i>
+                      <i class="fa fa-times fa-stack-1x" style="color:black;"></i>
+                    </span>
+                </a>
+                <?php } else { ?>
+                <a href="#" class="lnkAccept" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="fa fa-check fa-2x" style="color:black;"></i></a>
                 &nbsp;
-                <a href="#" class="lnkReject" data-id="<?php echo $requests_item['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
+                <a href="#" class="lnkReject" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="fa fa-times fa-2x" style="color:black;"></i></a>
+                <?php } ?>
                 <?php if ($this->config->item('enable_history') === TRUE) { ?>
                 &nbsp;
-                <a href="#" class="show-history" data-id="<?php echo $requests_item['leave_id'];?>" title="<?php echo lang('requests_index_thead_tip_history');?>"><i class="icon-time"></i></a>
+                <a href="#" class="show-history" data-id="<?php echo $request['leave_id'];?>" title="<?php echo lang('requests_index_thead_tip_history');?>"><i class="fa fa-clock-o" style="color:black;"></i></a>
                 <?php } ?>
             </div>
         </td>
-        <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
-        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($requests_item['startdatetype']). ')'; ?></td>
-        <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($requests_item['enddatetype']) . ')'; ?></td>
-        <td><?php echo $requests_item['duration']; ?></td>
-        <td><?php echo $requests_item['type_name']; ?></td>
+        <td><?php echo $request['firstname'] . ' ' . $request['lastname']; ?></td>
+        <td data-order="<?php echo $tmpStartDate; ?>"><?php echo $startdate . ' (' . lang($request['startdatetype']). ')'; ?></td>
+        <td data-order="<?php echo$tmpEndDate; ?>"><?php echo $enddate . ' (' . lang($request['enddatetype']) . ')'; ?></td>
+        <td><?php echo $request['duration']; ?></td>
+        <td><?php echo $request['type_name']; ?></td>
         <?php
-        switch ($requests_item['status']) {
-            case 1: echo "<td><span class='label'>" . lang($requests_item['status_name']) . "</span></td>"; break;
-            case 2: echo "<td><span class='label label-warning'>" . lang($requests_item['status_name']) . "</span></td>"; break;
-            case 3: echo "<td><span class='label label-success'>" . lang($requests_item['status_name']) . "</span></td>"; break;
-            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($requests_item['status_name']) . "</span></td>"; break;
+        switch ($request['status']) {
+            case 1: echo "<td><span class='label'>" . lang($request['status_name']) . "</span></td>"; break;
+            case 2: echo "<td><span class='label label-warning'>" . lang($request['status_name']) . "</span></td>"; break;
+            case 3: echo "<td><span class='label label-success'>" . lang($request['status_name']) . "</span></td>"; break;
+            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($request['status_name']) . "</span></td>"; break;
         }?>
         <?php
         if ($this->config->item('enable_history') == TRUE){
@@ -238,6 +252,20 @@ $(document).ready(function() {
         if (!clicked) {
             clicked = true;
             window.location.href = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
+        }
+     });
+     $('#leaves').on('click', '.lnkCancellationAccept', function (event) {
+        event.preventDefault();
+        if (!clicked) {
+            clicked = true;
+            window.location.href = "<?php echo base_url();?>requests/cancellation/accept/" + $(this).data("id");
+        }
+     });
+     $("#leaves").on('click', '.lnkCancellationReject', function (event) {
+        event.preventDefault();
+        if (!clicked) {
+            clicked = true;
+            window.location.href = "<?php echo base_url();?>requests/cancellation/reject/" + $(this).data("id");
         }
      });
 

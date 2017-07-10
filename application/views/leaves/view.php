@@ -15,7 +15,6 @@
 <div class="row-fluid">
     <div class="span12">
 
-
     <label for="startdate"><?php echo lang('leaves_view_field_start');?></label>
     <input type="text" name="startdate" value="<?php $date = new DateTime($leave['startdate']); echo $date->format(lang('global_date_format'));?>" readonly />
     <select name="startdatetype" readonly>
@@ -41,25 +40,30 @@
 
 <?php $style= "dropdown-rejected";
 switch ($leave['status']) {
-    case 1: $style= "dropdown-planned"; break;
-    case 2: $style= "dropdown-requested"; break;
-    case 3: $style= "dropdown-accepted"; break;
+    case LMS_PLANNED: $style= "dropdown-planned"; break;
+    case LMS_REQUESTED: $style= "dropdown-requested"; break;
+    case LMS_ACCEPTED: $style= "dropdown-accepted"; break;
 } ?>
     <label for="status"><?php echo lang('leaves_view_field_status');?></label>
     <select name="status" class="<?php echo $style; ?>" readonly>
         <option selected><?php echo lang($leave['status_name']); ?></option>
     </select><br />
 
-    <?php if (($leave['status'] == 1) || ($is_hr)) { ?>
+    <?php if (($leave['status'] == LMS_PLANNED) || ($is_hr)) { ?>
     <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_edit');?></a>
     &nbsp;
     <?php } ?>
-   <a href="<?php echo base_url() . $source; ?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>
+    <?php if ($leave['status'] == LMS_ACCEPTED) { ?>
+    <a href="<?php echo base_url();?>leaves/cancellation/<?php echo $leave['id'] ?>" class="btn btn-danger"><i class="fa fa-undo"></i>&nbsp;<?php echo lang('Cancellation');?></a>
+    &nbsp;
+    <?php } ?>
+    <a href="<?php echo base_url() . $source; ?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>
 
     </div>
 </div>
 </div>
 <div class="span6">
+    <!--
   <h4>Commentaires</h4>
   <?php
   if(isset($leave["comments"])){
@@ -117,5 +121,6 @@ switch ($leave['status']) {
    <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i>&nbsp;<?php echo "Nouveau commentaire";?></button>
    &nbsp;
  </form>
+    //-->
 </div>
 </div>

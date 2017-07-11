@@ -35,8 +35,11 @@
                 <td>Reden &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
+              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+            </tr>
+            <tr>
                 <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accepteren</a>&nbsp;</td>
-              <td><a href="{BaseUrl}requests/reject/{LeaveId}">Afwijzen</a></td>
+              <td><a href="{BaseUrl}requests?rejected={LeaveId}">Afwijzen</a></td>
             </tr>
         </table>
         <br />

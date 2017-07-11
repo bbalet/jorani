@@ -41,8 +41,11 @@
                 <td>Účel &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
+              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+            </tr>
+            <tr>
                 <td><a href="{BaseUrl}requests/accept/{LeaveId}">Přijmout</a> &nbsp;</td>
-                <td><a href="{BaseUrl}requests/reject/{LeaveId}">Odmítnout</a></td>
+                <td><a href="{BaseUrl}requests?rejected={LeaveId}">Odmítnout</a></td>
             </tr>
         </table>
         <br />

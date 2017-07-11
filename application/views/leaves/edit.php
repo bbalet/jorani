@@ -9,6 +9,13 @@
 ?>
 
 <h2><?php echo lang('leaves_edit_title');?><?php echo $leave['id']; ?> <?php echo $help;?>&nbsp;<span class="muted">(<?php echo $name ?>)</span></h2>
+<?php
+$attributes = array('id' => 'frmLeaveForm');
+if (isset($_GET['source'])) {
+  echo form_open('leaves/edit/' . $id . '?source=' . $_GET['source'], $attributes);
+} else {
+  echo form_open('leaves/edit/' . $id, $attributes);
+} ?>
 <div class="row">
   <div class="span8">
 <div class="row-fluid">
@@ -16,13 +23,6 @@
 
 <?php echo validation_errors(); ?>
 
-<?php
-$attributes = array('id' => 'frmLeaveForm');
-if (isset($_GET['source'])) {
-    echo form_open('leaves/edit/' . $id . '?source=' . $_GET['source'], $attributes);
-} else {
-    echo form_open('leaves/edit/' . $id, $attributes);
-} ?>
 
     <label for="type">
         <?php echo lang('leaves_edit_field_type');?>
@@ -95,14 +95,13 @@ if (isset($_GET['source'])) {
         <a href="<?php echo base_url(); ?>leaves" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('leaves_edit_button_cancel');?></a>
     <?php } ?>
 
-</form>
+<!-- </form> -->
 
     </div>
 
 </div>
 </div>
 <div class="span4">
-    <!--
   <h4>Commentaires</h4>
   <?php
   if(isset($leave["comments"])){
@@ -148,22 +147,24 @@ if (isset($_GET['source'])) {
    ?>
    <?php
    if($is_hr === TRUE){
+     /*
    $attributes = array('id' => 'frmLeaveNewCommentForm');
    if (isset($_GET['source'])) {
        echo form_open('/comments/' . $leave['id'] . '?source=' . $_GET['source'], $attributes);
    } else {
        echo form_open('/comments/' . $leave['id'] . '?source=leaves/edit', $attributes);
    }
+   */
    ?>
    <label for="comment">Nouveau commentaire</label>
    <textarea name="comment" class="form-control" rows="5" style="min-width: 100%"></textarea>
-   <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i>&nbsp;<?php echo "Nouveau commentaire";?></button>
+   <!-- <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i>&nbsp;<?php echo "Nouveau commentaire";?></button> -->
    &nbsp;
- </form>
+ <!-- </form> -->
  <?php }?>
-    //-->
 </div>
 </div>
+</form>
 
 <div class="modal hide" id="frmModalAjaxWait" data-backdrop="static" data-keyboard="false">
         <div class="modal-header">

@@ -40,12 +40,15 @@
             <tr>
                 <td>Cause &nbsp;</td><td>{Reason}</td>
             </tr>
+            <tr>
+              <td>Dernier Commentaire &nbsp;</td><td>{Comments}</td>
+            </tr>
+            <tr>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accepter</a> &nbsp;</td>
+                <td><a href="{BaseUrl}requests?rejected={LeaveId}">Refuser</a></td>
+            </tr>
         </table>
         <br />
-        <p>
-            <a href="{BaseUrl}requests/accept/{LeaveId}">Accepter</a>&nbsp;
-            <a href="{BaseUrl}requests/reject/{LeaveId}">Refuser</a>
-        </p>
         <p>Vous pouvez vérifier <a href="{BaseUrl}hr/counters/collaborators/{UserId}">l'état des congés</a> avant de valider cette demande.</p>
         <hr>
         <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>

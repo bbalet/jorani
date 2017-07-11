@@ -41,7 +41,11 @@
                 <td>دلیل &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-                <td><a href="{BaseUrl}requests/accept/{LeaveId}">پذیرفتن</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">رد</a></td>
+              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+            </tr>
+            <tr>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">پذیرفتن</a> &nbsp;</td>
+                <td><a href="{BaseUrl}requests?rejected={LeaveId}">رد</a></td>
             </tr>
         </table>
         <br />

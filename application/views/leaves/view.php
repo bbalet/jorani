@@ -63,7 +63,7 @@ switch ($leave['status']) {
 </div>
 </div>
 <div class="span6">
-    <!--
+
   <h4>Commentaires</h4>
   <?php
   if(isset($leave["comments"])){
@@ -121,6 +121,5 @@ switch ($leave['status']) {
    <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i>&nbsp;<?php echo "Nouveau commentaire";?></button>
    &nbsp;
  </form>
-    //-->
 </div>
 </div>

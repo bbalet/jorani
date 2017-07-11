@@ -38,9 +38,9 @@
             <tr>
                 <td>Raison &nbsp;</td><td>{Cause}</td>
             </tr>
-<!--            <tr>
+            <tr>
                 <td>Commentaires &nbsp;</td><td>{Comments}</td>
-            </tr>-->
+            </tr>
         </table>
         <hr>
         <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>

@@ -41,8 +41,11 @@
                 <td>Przyczyna &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
+              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+            </tr>
+            <tr>
                 <td><a href="{BaseUrl}requests/accept/{LeaveId}">Akceptować</a> &nbsp;</td>
-                <td><a href="{BaseUrl}requests/reject/{LeaveId}">Odmówić</a></td>
+                <td><a href="{BaseUrl}requests?rejected={LeaveId}">Odmówić</a></td>
             </tr>
         </table>
         <br />

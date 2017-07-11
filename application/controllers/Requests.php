@@ -42,6 +42,7 @@ class Requests extends CI_Controller {
         $data = getUserContext($this);
         $this->load->model('types_model');
         $this->lang->load('datatable', $this->language);
+        $this->load->helper('form');
         $data['filter'] = $filter;
         $data['title'] = lang('requests_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_validation');
@@ -108,7 +109,11 @@ class Requests extends CI_Controller {
         $employee = $this->users_model->getUsers($leave['employee']);
         $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
-            $this->leaves_model->switchStatus($id, LMS_REJECTED);
+            if(isset($_POST['comment'])){
+              $this->leaves_model->switchStatusAndComment($id, LMS_REJECTED, $_POST['comment']);
+            } else {
+              $this->leaves_model->switchStatus($id, LMS_REJECTED);
+            }
             $this->sendMail($id, LMS_REQUESTED_REJECTED);
             $this->session->set_flashdata('msg',  lang('requests_reject_flash_msg_success'));
             if (isset($_GET['source'])) {
@@ -122,7 +127,7 @@ class Requests extends CI_Controller {
             redirect('leaves');
         }
     }
-    
+
     /**
      * Accept the cancellation of a leave request
      * @param int $id leave request identifier
@@ -153,7 +158,7 @@ class Requests extends CI_Controller {
             redirect('leaves');
         }
     }
-    
+
     /**
      * Reject the cancellation of a leave request
      * @param int $id leave request identifier
@@ -170,7 +175,12 @@ class Requests extends CI_Controller {
         $employee = $this->users_model->getUsers($leave['employee']);
         $is_delegate = $this->delegations_model->isDelegateOfManager($this->user_id, $employee['manager']);
         if (($this->user_id == $employee['manager']) || ($this->is_hr)  || ($is_delegate)) {
-            $this->leaves_model->switchStatus($id, LMS_ACCEPTED);
+            //$this->leaves_model->switchStatus($id, LMS_ACCEPTED);
+            if(isset($_POST['comment'])){
+              $this->leaves_model->switchStatusAndComment($id, LMS_ACCEPTED, $_POST['comment']);
+            } else {
+              $this->leaves_model->switchStatus($id, LMS_ACCEPTED);
+            }
             $this->sendMail($id, LMS_CANCELLATION_REQUESTED);
             $this->session->set_flashdata('msg', lang('requests_cancellation_reject_flash_msg_success'));
             if (isset($_GET['source'])) {
@@ -184,7 +194,7 @@ class Requests extends CI_Controller {
             redirect('leaves');
         }
     }
-    
+
     /**
      * Display the list of all requests submitted to the line manager (Status is submitted)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -362,7 +372,7 @@ class Requests extends CI_Controller {
         $startdate = $date->format($lang_mail->line('global_date_format'));
         $date = new DateTime($leave['enddate']);
         $enddate = $date->format($lang_mail->line('global_date_format'));
-        
+
         switch ($transition) {
             case LMS_REQUESTED_ACCEPTED:
                 $title = $lang_mail->line('email_leave_request_validation_title');
@@ -381,6 +391,17 @@ class Requests extends CI_Controller {
                 $subject = $lang_mail->line('email_leave_cancel_accept_subject');
                 break;
         }
+        $comments=$leave['comments'];
+        $comment = '';
+        if(!empty($comments)){
+          $comments=json_decode($comments);
+          foreach ($comments->comments as $comments_item) {
+            if($comments_item->type =="comment"){
+              $comment = $comments_item->value;
+            }
+          }
+        }
+
         $data = array(
             'Title' => $title,
             'Firstname' => $employee['firstname'],
@@ -391,7 +412,7 @@ class Requests extends CI_Controller {
             'EndDateType' => $lang_mail->line($leave['enddatetype']),
             'Cause' => $leave['cause'],
             'Type' => $leave['type_name'],
-            'Comments' => ''
+            'Comments' => $comment
         );
         $this->load->library('parser');
         switch ($transition) {
@@ -414,7 +435,7 @@ class Requests extends CI_Controller {
 
     /**
      * Export the list of all leave requests (sent to the connected user) into an Excel file
-     * @param string $name Filter the list of submitted leave requests (all or requested)
+     * @param string $filter Filter the list of submitted leave requests (all or requested)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export($filter = 'requested') {

@@ -22,7 +22,7 @@
         <h3>{Title}</h3>
         Dear {Firstname} {Lastname}, <br />
         <br />
-        <p>Unfortunately, your cancellation request was not accepted. 
+        <p>Unfortunately, your cancellation request was not accepted.
         The leave request has now its original status of Accepted.</p>
         <p>Please contact your manager to discuss the matter. </p>
         <table border="0">
@@ -38,9 +38,9 @@
             <tr>
                 <td>Reason &nbsp;</td><td>{Cause}</td>
             </tr>
-<!--            <tr>
+            <tr>
                 <td>Comments &nbsp;</td><td>{Comments}</td>
-            </tr>-->
+            </tr>
         </table>
         <hr>
         <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>

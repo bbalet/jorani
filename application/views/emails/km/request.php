@@ -35,7 +35,11 @@
                 <td>Reason &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-                <td><a href="{BaseUrl}requests/accept/{LeaveId}">ទទួលយកបាន</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">បដិសេធចោល</a></td>
+              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+            </tr>
+            <tr>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">ទទួលយកបាន</a> &nbsp;</td>
+                <td><a href="{BaseUrl}requests?rejected={LeaveId}">បដិសេធចោល</a></td>
             </tr>
         </table>
         <br />

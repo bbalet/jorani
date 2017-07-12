@@ -1245,7 +1245,7 @@ class Leaves_model extends CI_Model {
             } else {
                 $this->load->model('users_model');
                 $user = $this->users_model->getUsers($this->session->userdata('id'));
-                $entity = $user['organization'];
+                $entity = is_null($user['organization'])?0:$user['organization'];
             }
         }
         $tabular = array();

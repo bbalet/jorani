@@ -131,4 +131,4 @@ $lang['leaves_comment_title'] = 'Commentaires';
 $lang['leaves_comment_new_comment'] = 'Nouveau commentaire';
 $lang['leaves_comment_send_comment'] = 'Envoyer un commentaire';
 $lang['leaves_comment_author_saying'] = ' a dit';
-$lang['leaves_comment_status_changed'] = 'Le status de al demande à changé : ';
+$lang['leaves_comment_status_changed'] = 'Le statut de la demande a changé : ';

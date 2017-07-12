@@ -327,6 +327,34 @@ class Leaves extends CI_Controller {
     }
 
     /**
+     * change a the status of a planned request to  requested
+     * @param int $id id of the leave
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+     public function requestLeave($id){
+       $leave = $this->leaves_model->getLeaves($id);
+       if (empty($leave)) {
+           redirect('notfound');
+       } else {
+           //Only the connected user can reject its own requests
+           if ($this->user_id != $leave['employee']){
+               $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_error'));
+               redirect('leaves');
+           }
+           //We can cancel a leave request only with a status 'Accepted'
+           if ($leave['status'] == LMS_PLANNED) {
+               $this->leaves_model->switchStatus($id, LMS_REQUESTED);
+               $this->sendMailOnLeaveRequestCreation($id);
+               $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_success'));
+               redirect('leaves');
+           } else {
+               $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_error'));
+               redirect('leaves');
+           }
+       }
+     }
+
+    /**
      * Send an email reminder (so as to remind to the manager that he
      * must either accept/reject a request or a cancellation)
      * @param int $id Identifier of the leave request

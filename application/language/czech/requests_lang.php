@@ -81,3 +81,7 @@ $lang['requests_delegations_confirm_delete_yes'] = 'Ano';
 $lang['requests_balance_title'] = 'Bilance dovolené (podřízení)';
 $lang['requests_balance_description'] = 'Bilance dovolené mých přímých podřízených. Pokud nejste nadřízený, bude tento seznam vždy prázdný.';
 $lang['requests_balance_date_field'] = 'Datum reportu';
+
+$lang['leaves_comment_refuse_request_title'] = 'Send a new comment(opt)';
+$lang['leaves_comment_refuse_request_button_cancel'] = 'Cancel';
+$lang['leaves_comment_refuse_request_button_refuse'] = 'Refuse';

@@ -1166,37 +1166,22 @@ class Leaves_model extends CI_Model {
      * @return int number of requests
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-     public function countLeavesRequestedToManager($manager) {
+    public function countLeavesRequestedToManager($manager) {
+        $this->load->model('delegations_model');
+        $ids = $this->delegations_model->listManagersGivingDelegation($manager);
+        $this->db->select('count(*) as number', FALSE);
+        $this->db->join('users', 'users.id = leaves.employee');
+        $this->db->where_in('leaves.status', array(LMS_REQUESTED, LMS_CANCELLATION));
 
-             $this->load->model('delegations_model');
-
-             $ids = $this->delegations_model->listManagersGivingDelegation($manager);
-
-             $this->db->select('count(*) as number', FALSE);
-
-             $this->db->join('users', 'users.id = leaves.employee');
-
-             $this->db->where_in('leaves.status', array(LMS_REQUESTED, LMS_CANCELLATION));
-
-
-
-             if (count($ids) > 0) {
-
-                 array_push($ids, $manager);
-
-                 $this->db->where_in('users.manager', $ids);
-
-             } else {
-
-                 $this->db->where('users.manager', $manager);
-
-             }
-
-             $result = $this->db->get('leaves');
-
-             return $result->row()->number;
-
-         }
+        if (count($ids) > 0) {
+            array_push($ids, $manager);
+            $this->db->where_in('users.manager', $ids);
+        } else {
+            $this->db->where('users.manager', $manager);
+        }
+        $result = $this->db->get('leaves');
+        return $result->row()->number;
+    }
 
     /**
      * Purge the table by deleting the records prior $toDate

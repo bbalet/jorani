@@ -48,13 +48,21 @@ switch ($leave['status']) {
     <select name="status" class="<?php echo $style; ?>" readonly>
         <option selected><?php echo lang($leave['status_name']); ?></option>
     </select><br />
+    <?php if($leave['status'] == LMS_PLANNED){ ?>
+      <a href="<?php echo base_url();?>leaves/request/<?php echo $leave['id'] ?>/" class="btn btn-primary "><i class="fa fa-check"></i>&nbsp;<?php echo lang('Requested');?></a>
+      <br/><br/>
+    <?php } ?>
+    <?php if ($leave['status'] == LMS_ACCEPTED) { ?>
+      <a href="<?php echo base_url();?>leaves/cancellation/<?php echo $leave['id'] ?>" class="btn btn-primary"><i class="fa fa-undo"></i>&nbsp;<?php echo lang('Cancellation');?></a>
+      <br/><br/>
+    <?php } ?>
+    <?php if ($leave['status'] == LMS_REQUESTED) { ?>
+      <a href="<?php echo base_url();?>leaves/reminder/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_button_send_reminder');?>" class="btn btn-primary"><i class="fa fa-envelope"></i>&nbsp;<?php echo lang('leaves_button_send_reminder');?></a>
+      <br/><br/>
+    <?php } ?>
 
     <?php if (($leave['status'] == LMS_PLANNED) || ($is_hr)) { ?>
     <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_edit');?></a>
-    &nbsp;
-    <?php } ?>
-    <?php if ($leave['status'] == LMS_ACCEPTED) { ?>
-    <a href="<?php echo base_url();?>leaves/cancellation/<?php echo $leave['id'] ?>" class="btn btn-danger"><i class="fa fa-undo"></i>&nbsp;<?php echo lang('Cancellation');?></a>
     &nbsp;
     <?php } ?>
     <a href="<?php echo base_url() . $source; ?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>

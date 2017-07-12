@@ -126,3 +126,9 @@ $lang['leaves_export_thead_status'] = 'Statut';
 
 $lang['leaves_button_send_reminder'] = 'Envoyer un rappel';
 $lang['leaves_reminder_flash_msg_success'] = 'L\'email de rappel a été envoyé au manager.';
+
+$lang['leaves_comment_title'] = 'Commentaires';
+$lang['leaves_comment_new_comment'] = 'Nouveau commentaire';
+$lang['leaves_comment_send_comment'] = 'Envoyer un commentaire';
+$lang['leaves_comment_author_saying'] = ' a dit';
+$lang['leaves_comment_status_changed'] = 'Le status de al demande à changé : ';

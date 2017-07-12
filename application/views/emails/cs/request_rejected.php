@@ -36,6 +36,9 @@
             <tr>
                 <td>Účel &nbsp;</td><td>{Cause}</td>
             </tr>
+            <tr>
+                <td>Comments &nbsp;</td><td>{Comments}</td>
+            </tr>
         </table>
         <hr>
         <h5>*** Toto je náhodně vygenerována zpráva, prosím neodpovídejte na tuto zprávu ***</h5>

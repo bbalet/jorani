@@ -325,9 +325,9 @@ class Leaves extends CI_Controller {
             }
         }
     }
-    
+
     /**
-     * Send an email reminder (so as to remind to the manager that he 
+     * Send an email reminder (so as to remind to the manager that he
      * must either accept/reject a request or a cancellation)
      * @param int $id Identifier of the leave request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -437,6 +437,17 @@ class Leaves extends CI_Controller {
         $date = new DateTime($leave['enddate']);
         $enddate = $date->format($lang_mail->line('global_date_format'));
 
+        $comments=$leave['comments'];
+        $comment = '';
+        if(!empty($comments)){
+          $comments=json_decode($comments);
+          foreach ($comments->comments as $comments_item) {
+            if($comments_item->type == "comment"){
+              $comment = $comments_item->value;
+            }
+          }
+        }
+        log_message('info', "comment : " . $comment);
         $this->load->library('parser');
         $data = array(
             'Title' => $title,
@@ -452,7 +463,8 @@ class Leaves extends CI_Controller {
             'Reason' => $leave['cause'],
             'BaseUrl' => $this->config->base_url(),
             'LeaveId' => $leave['id'],
-            'UserId' => $this->user_id
+            'UserId' => $this->user_id,
+            'Comments' => $comment
         );
         $message = $this->parser->parse('emails/' . $manager['language'] . '/'.$emailModel, $data, TRUE);
 
@@ -467,7 +479,7 @@ class Leaves extends CI_Controller {
 
         sendMailByWrapper($this, $subject, $message, $to, $cc);
     }
-    
+
     /**
      * Delete a leave request
      * @param int $id identifier of the leave request

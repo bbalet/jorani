@@ -121,3 +121,9 @@ $lang['leaves_export_thead_status'] = 'Status';
 
 $lang['leaves_button_send_reminder'] = 'Send a reminder';
 $lang['leaves_reminder_flash_msg_success'] = 'The reminder email was sent to the manager';
+
+$lang['leaves_comment_title'] = 'Comments';
+$lang['leaves_comment_new_comment'] = 'New comment';
+$lang['leaves_comment_send_comment'] = 'Send comment';
+$lang['leaves_comment_author_saying'] = ' says';
+$lang['leaves_comment_status_changed'] = 'The status of the leave have been changed to ';

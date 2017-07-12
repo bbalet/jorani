@@ -136,9 +136,9 @@ html, body {
 }
 
 /* Modal History of changes */
-#frmShowHistory 
+#frmShowHistory
 {
-    width: 80%; 
+    width: 80%;
     margin-left:  -35% !important;
 }
 
@@ -573,4 +573,10 @@ td.currentday-border {
     background: #3097d1 !important;
     border-color: #3097d1 !important;
     color: white !important;
+}
+
+/*Better position of checkbox*/
+.filterStatus{
+  position: relative;
+  top: -2px;
 }

@@ -603,6 +603,21 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function updateLeaves($id) {
+        $json = $this->prepareCommentOnStatusChanged($id, $this->input->post('status'));
+        if(! empty($this->input->post('comment'))){
+          $jsonDecode = json_decode($json);
+          $comment_object = new stdClass;
+          $comment_object->type = "comment";
+          $comment_object->author = $this->session->userdata('id');
+          $comment_object->value = $this->input->post('comment');
+          $comment_object->date = date("Y-n-j");
+          if (isset($jsonDecode)){
+            array_push($jsonDecode->comments, $comment_object);
+          }else {
+            $jsonDecode->comments = array($comment_object);
+          }
+          $json = json_encode($jsonDecode);
+        }
         $data = array(
             'startdate' => $this->input->post('startdate'),
             'startdatetype' => $this->input->post('startdatetype'),
@@ -611,7 +626,8 @@ class Leaves_model extends CI_Model {
             'duration' => abs($this->input->post('duration')),
             'type' => $this->input->post('type'),
             'cause' => $this->input->post('cause'),
-            'status' => $this->input->post('status')
+            'status' => $this->input->post('status'),
+            'comments' => $json
         );
         $this->db->where('id', $id);
         $this->db->update('leaves', $data);
@@ -646,8 +662,55 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function switchStatus($id, $status) {
+
+      $json = $this->prepareCommentOnStatusChanged($id, $status);
+      $data = array(
+          'status' => $status,
+          'comments' => $json
+      );;
+        $this->db->where('id', $id);
+        $this->db->update('leaves', $data);
+
+        //Trace the modification if the feature is enabled
+        if ($this->config->item('enable_history') === TRUE) {
+            $this->load->model('history_model');
+            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
+        }
+    }
+
+    /**
+     * Switch the status of a leave request and a comment. You may use one of the constants
+     * listed into config/constants.php
+     * @param int $id leave request identifier
+     * @param int $status Next Status
+     * @param int $comment New comment
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function switchStatusAndComment($id, $status, $comment) {
+        $json_parsed = $this->getCommentsLeave($id);
+        $comment_object = new stdClass;
+        $comment_object->type = "comment";
+        $comment_object->author = $this->session->userdata('id');
+        $comment_object->value = $comment;
+        $comment_object->date = date("Y-n-j");
+        if (isset($json_parsed)){
+          array_push($json_parsed->comments, $comment_object);
+        }else {
+          $json_parsed->comments = array($comment_object);
+        }
+        $comment_change = new stdClass;
+        $comment_change->type = "change";
+        $comment_change->status_number = $status;
+        $comment_change->date = date("Y-n-j");
+        if (isset($json_parsed)){
+          array_push($json_parsed->comments, $comment_change);
+        }else {
+          $json_parsed->comments = array($comment_change);
+        }
+        $json = json_encode($json_parsed);
         $data = array(
-            'status' => $status
+            'status' => $status,
+            'comments' => $json
         );
         $this->db->where('id', $id);
         $this->db->update('leaves', $data);
@@ -948,7 +1011,7 @@ class Leaves_model extends CI_Model {
                 $enddatetype = "Afternoon";
                 $allDay = TRUE;
             }
-            
+
             $color = '#ff0000';
             switch ($entry->status)
             {
@@ -1386,7 +1449,7 @@ class Leaves_model extends CI_Model {
                     }
                 }
             }
-            
+
             $startDate = DateTime::createFromFormat('Y-m-d H:i:s', $entry->startdate . ' 00:00:00');
             if ($startDate < $floorDate) $startDate = $floorDate;
             $iDate = clone $startDate;
@@ -1570,40 +1633,6 @@ class Leaves_model extends CI_Model {
       $this->db->from('leaves');
       $this->db->where('leaves.id', "$id");
       return $this->db->get()->row_array();
-      /*
-      return "{
-        \"comments\" : [
-          {
-            \"type\" : \"comment\",
-            \"author\" : 2,
-            \"value\" : \"Je prend un congé parce que c'est comme ça.\",
-            \"date\" : \"2017-07-04\"
-          },
-          {
-            \"type\" : \"change\",
-            \"status_number\" : 4,
-            \"date\" : \"2017-07-05\"
-          },
-          {
-            \"type\" : \"comment\",
-            \"author\" : 4,
-            \"value\" : \"C'est mort.\",
-            \"date\" : \"2017-07-05\"
-          },
-          {
-            \"type\" : \"comment\",
-            \"author\" : 1,
-            \"value\" : \"Non ca ne peut pas se faire comme ca!\",
-            \"date\" : \"2017-07-05\"
-          },
-          {
-            \"type\" : \"change\",
-            \"status_number\" : 2,
-            \"date\" : \"2017-07-05\"
-          }
-        ]
-      }";
-      */
     }
 
     /**
@@ -1622,11 +1651,25 @@ class Leaves_model extends CI_Model {
       }
     }
 
+    private function getCommentLeaveAndStatus($id){
+      $this->db->select('leaves.comments, leaves.status');
+      $this->db->from('leaves');
+      $this->db->where('leaves.id', "$id");
+      $request = $this->db->get()->row_array();
+      $json = $request["comments"];
+      if(!empty($json)){
+        $request["comments"] = json_decode($json);
+      } else {
+        $request["comments"] = null;
+      }
+      return $request;
+    }
+
     /**
     * Update the comment of a Leave
     * @param int $id Id of the leave
     * @param string $json new json for the comments of the leave
-    *@author Emilien NICOLAS <milihhard1996@gmail.com>
+    * @author Emilien NICOLAS <milihhard1996@gmail.com>
     */
     public function addComments($id, $json){
       $data = array(
@@ -1639,6 +1682,32 @@ class Leaves_model extends CI_Model {
       if ($this->config->item('enable_history') === TRUE) {
           $this->load->model('history_model');
           $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
+      }
+    }
+
+    /**
+    * Prepare the Json when the status is updated
+    * @param int $id Id of the leave
+    * @param int $status status which is updated
+    * @return string json modified with the new status
+    * @author Emilien NICOLAS <milihhard1996@gmail.com>
+    */
+    private function prepareCommentOnStatusChanged($id,$status){
+      $request = $this->getCommentLeaveAndStatus($id);
+      if($request['status'] === $status){
+        return json_encode($request['comments']);
+      } else {
+        $json_parsed = $request['comments'];
+        $comment_change = new stdClass;
+        $comment_change->type = "change";
+        $comment_change->status_number = $status;
+        $comment_change->date = date("Y-n-j");
+        if (isset($json_parsed)){
+          array_push($json_parsed->comments, $comment_change);
+        }else {
+          $json_parsed->comments = array($comment_change);
+        }
+        return json_encode($json_parsed);
       }
     }
 }

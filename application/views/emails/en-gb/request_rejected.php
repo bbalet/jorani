@@ -36,6 +36,9 @@
             <tr>
                 <td>Reason &nbsp;</td><td>{Cause}</td>
             </tr>
+            <tr>
+                <td>Comments &nbsp;</td><td>{Comments}</td>
+            </tr>
         </table>
         <hr>
         <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>

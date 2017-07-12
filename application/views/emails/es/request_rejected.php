@@ -26,6 +26,9 @@
             <tr>
                 <td>Motivo &nbsp;</td><td>{Cause}</td>
             </tr>
+            <tr>
+                <td>Comments &nbsp;</td><td>{Comments}</td>
+            </tr>
         </table>
     </body>
 </html>

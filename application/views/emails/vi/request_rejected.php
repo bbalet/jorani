@@ -36,6 +36,9 @@
             <tr>
                 <td>Lý do</td><td>{Cause}</td>
             </tr>
+            <tr>
+                <td>Comments &nbsp;</td><td>{Comments}</td>
+            </tr>
         </table>
         <hr>
         <h5>*** Đây là tin nhắn được tạo tự động, xin đừng trả lời tin nhắn này. ***</h5>

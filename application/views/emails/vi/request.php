@@ -41,8 +41,11 @@
                 <td>Lý do</td><td>{Reason}</td>
             </tr>
             <tr>
+              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+            </tr>
+            <tr>
                 <td><a href="{BaseUrl}requests/accept/{LeaveId}">Chấp nhận</a> &nbsp;</td>
-                <td><a href="{BaseUrl}requests/reject/{LeaveId}">Từ chối</a></td>
+                <td><a href="{BaseUrl}requests?rejected={LeaveId}">Từ chối</a></td>
             </tr>
         </table>
         <br />

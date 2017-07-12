@@ -101,8 +101,8 @@ if (isset($_GET['source'])) {
 
 </div>
 </div>
-<div class="span4">
-  <h4>Commentaires</h4>
+<div class="span6">
+  <h4><?php echo lang('leaves_comment_title');?></h4>
   <?php
   if(isset($leave["comments"])){
 
@@ -116,7 +116,7 @@ if (isset($_GET['source'])) {
         echo "<div class='accordion-group'>";
         echo "  <div class='accordion-heading'>";
         echo "    <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapse$i'>";
-        echo "      $dateFormat : $comments_item->author a dit";
+        echo "      $dateFormat : $comments_item->author" . lang('leaves_comment_author_saying');
         echo "    </a>";
         echo "  </div>";
         echo "  <div id='collapse$i' class=\"accordion-body collapse $comments_item->in\">";
@@ -129,7 +129,7 @@ if (isset($_GET['source'])) {
         echo "<div class='accordion-group'>";
         echo "  <div class='accordion-heading'>";
         echo "    <h6 class='accordion-toggle' data-toggle='collapse' data-parent='#accordion'>";
-        echo "      $dateFormat : Le status de la demande a été changé : ";
+        echo "      $dateFormat : " . lang('leaves_comment_status_changed');
         switch ($comments_item->status_number) {
           case 1: echo "<span class='label'>" . lang($comments_item->status) . "</span>"; break;
           case 2: echo "<span class='label label-warning'>" . lang($comments_item->status) . "</span>"; break;
@@ -156,7 +156,7 @@ if (isset($_GET['source'])) {
    }
    */
    ?>
-   <label for="comment">Nouveau commentaire</label>
+   <label for="comment"><?php echo lang('leaves_comment_new_comment');?></label>
    <textarea name="comment" class="form-control" rows="5" style="min-width: 100%"></textarea>
    <!-- <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i>&nbsp;<?php echo "Nouveau commentaire";?></button> -->
    &nbsp;

@@ -270,7 +270,9 @@ $(document).ready(function() {
             clicked = true;
             var id =$(this).data("id");
             var validateUrl = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
-            bootbox.prompt("Send a new comment(opt)", 'Cancel', 'Refuse',
+            bootbox.prompt(<?php echo "'" . lang('leaves_comment_refuse_request_title') . "'";?>,
+              <?php echo "'" . lang('leaves_comment_refuse_request_button_cancel') . "'";?>,
+              <?php echo "'" . lang('leaves_comment_refuse_request_button_refuse') . "'";?>,
               function (result) {
                 if (result !== null){
                   console.log(validateUrl + " - " + id + " - " + result);
@@ -280,6 +282,8 @@ $(document).ready(function() {
                   console.log("comment : " + $("#sendComment form input#comment").attr("value"));
                   $("#sendComment #frmRejectLeaveForm").submit();
 
+                } else {
+                  clicked = false;
                 }
               });
             //window.location.href = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
@@ -298,7 +302,9 @@ $(document).ready(function() {
             clicked = true;
             var id =$(this).data("id");
             var validateUrl = "<?php echo base_url();?>requests/cancellation/reject/" + $(this).data("id");
-            bootbox.prompt("Send a new comment(opt)", 'Cancel', 'Refuse',
+            bootbox.prompt(<?php echo "'" . lang('leaves_comment_refuse_request_title') . "'";?>,
+              <?php echo "'" . lang('leaves_comment_refuse_request_button_cancel') . "'";?>,
+              <?php echo "'" . lang('leaves_comment_refuse_request_button_refuse') . "'";?>,
               function (result) {
                 if (result !== null){
                   console.log(validateUrl + " - " + id + " - " + result);
@@ -308,6 +314,8 @@ $(document).ready(function() {
                   console.log("comment : " + $("#sendComment form input#comment").attr("value"));
                   $("#sendComment #frmRejectLeaveForm").submit();
 
+                } else {
+                  clicked = false;
                 }
               });
           //  window.location.href = "<?php echo base_url();?>requests/cancellation/reject/" + $(this).data("id");
@@ -376,7 +384,9 @@ $(document).ready(function() {
     if (id != null && !isNaN(id)) {
       //bootbox.alert(id);
       var validateUrl = "<?php echo base_url();?>requests/reject/" + id;
-      bootbox.prompt("Send a new comment(opt)", 'Cancel', 'Refuse',
+      bootbox.prompt(<?php echo "'" . lang('leaves_comment_refuse_request_title') . "'";?>,
+        <?php echo "'" . lang('leaves_comment_refuse_request_button_cancel') . "'";?>,
+        <?php echo "'" . lang('leaves_comment_refuse_request_button_refuse') . "'";?>,
       function (result) {
         if (result !== null){
           console.log(validateUrl + " - " + id + " - " + result);
@@ -393,7 +403,9 @@ $(document).ready(function() {
     if (idCancel != null && !isNaN(idCancel)) {
       //bootbox.alert(id);
       var validateUrl = "<?php echo base_url();?>requests/cancellation/reject/" + idCancel;
-      bootbox.prompt("Send a new comment(opt)", 'Cancel', 'Refuse',
+      bootbox.prompt(<?php echo "'" . lang('leaves_comment_refuse_request_title') . "'";?>,
+        <?php echo "'" . lang('leaves_comment_refuse_request_button_cancel') . "'";?>,
+        <?php echo "'" . lang('leaves_comment_refuse_request_button_refuse') . "'";?>,
       function (result) {
         if (result !== null){
           console.log(validateUrl + " - " + idCancel + " - " + result);

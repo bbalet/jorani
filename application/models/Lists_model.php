@@ -27,7 +27,7 @@ class Lists_model extends CI_Model {
 
     /**
      * Get the list of custom lists for an employee (often the connected user)
-     * @param int $id identifier of a user owing the lists
+     * @param int $user identifier of a user owing the lists
      * @return array record of lists
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -105,16 +105,45 @@ class Lists_model extends CI_Model {
         $order = $this->getLastOrderList($id);
 
         foreach ($employees as $employee) {
+          if (!$this->hasEmployeeOnList($id, $employee)){
             $data[] = array(
-                'list' => $id,
-                'user' => $employee,
-                'orderlist' => $order
+              'list' => $id,
+              'user' => $employee,
+              'orderlist' => $order
             );
             $order++;
+          }
         }
-        $this->db->insert_batch('org_lists_employees', $data);
+        if(! empty($data)){
+          $this->db->insert_batch('org_lists_employees', $data);
+        }
     }
 
+    /**
+     * check if a user is already on the list
+     * @param int $id Id of the list
+     * @param int $employee Id of the user
+     * @author Emilien NICOALS <milihhard1996@gmail.com>
+     */
+    private function hasEmployeeOnList($id, $employee){
+      $this->db->select('org_lists_employees.user');
+      $this->db->from('org_lists_employees');
+      $this->db->where('user', $employee);
+      $this->db->where('list', $id);
+      $record = $this->db->get()->result_array();
+      if(count($record) == 0) {
+          return false;
+      } else {
+          return true;
+      }
+
+    }
+
+    /**
+     * get the last orderlist
+     * @param int $idList Id of the list
+     * @author Emilien NICOALS <milihhard1996@gmail.com>
+     */
     public function getLastOrderList($idList) {
       $this->db->select('org_lists_employees.orderlist');
       $this->db->from('org_lists_employees');
@@ -163,7 +192,11 @@ class Lists_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-
+    /**
+     * reorder the list when a employe is removed
+     * @param int $id Id of the list
+     * @author Emilien NICOALS <milihhard1996@gmail.com>
+     */
     private function reorderList($id){
       $this->db->select('org_lists_employees.orderlist');
       $this->db->from('org_lists_employees');
@@ -179,5 +212,23 @@ class Lists_model extends CI_Model {
         $this->db->update('org_lists_employees', $data);
         $count ++;
       }
+    }
+
+    /**
+     * reorder the list
+     * @param int $id Id of the list
+     * @param array $moves move of the employees
+     * @author Emilien NICOALS <milihhard1996@gmail.com>
+     */
+    public function reorderListEmployees($id, $moves){
+      foreach ($moves as $move) {
+        $this->db->where('user', $move->user);
+        $this->db->where('list', $id);
+        $data = array(
+            'orderlist' => $move->newPos
+        );
+        $this->db->update('org_lists_employees', $data);
+      }
+
     }
 }

@@ -31,10 +31,10 @@
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="employeesOrgList" width="100%">
     <thead>
         <tr>
-            <th><?php echo lang('organization_lists_employees_thead_id');?></th>
-            <th><?php echo lang('organization_lists_employees_thead_firstname');?></th>
-            <th><?php echo lang('organization_lists_employees_thead_lastname');?></th>
-            <th><?php echo lang('organization_lists_employees_thead_entity');?></th>
+            <th id='id'><?php echo lang('organization_lists_employees_thead_id');?></th>
+            <th id='firstname'><?php echo lang('organization_lists_employees_thead_firstname');?></th>
+            <th id='lastname'><?php echo lang('organization_lists_employees_thead_lastname');?></th>
+            <th id ='entity'><?php echo lang('organization_lists_employees_thead_entity');?></th>
         </tr>
     </thead>
     <tbody>
@@ -93,6 +93,7 @@ function toggleCommands() {
         $('#cmdRenameList').prop("disabled", false);
         $('#cmdAddEmployees').prop("disabled", false);
         $('#cmdRemoveEmployees').prop("disabled", false);
+    }
         //Reload the list of employees
         listId = $('#cboList').val();
         urlListEmployees = '<?php echo base_url();?>organization/lists/employees?list=' + listId;
@@ -101,7 +102,6 @@ function toggleCommands() {
             .load(function() {
                 $("#frmModalAjaxWait").modal('hide');
             }, true);
-    }
 }
 
 //Pick up employees to be added into the selected list
@@ -157,13 +157,15 @@ $(function () {
     employeesOrgList = $('#employeesOrgList').DataTable({
         select: 'multiple',
         rowReorder: true,
-        pageLength: 5,
-            columns: [
-                { data: "id" },
-                { data: "firstname" },
-                { data: "lastname" },
-                { data: "entity" }
-            ],
+        colReorder: true,
+        pageLength: 10,
+        order: [],
+        columns: [
+          { data: "id" },
+          { data: "firstname" },
+          { data: "lastname" },
+          { data: "entity" }
+        ],
         language: {
             decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
             processing:       "<?php echo lang('datatable_sProcessing');?>",
@@ -190,17 +192,61 @@ $(function () {
     });
 
     employeesOrgList.on( 'row-reorder', function ( e, diff, edit ) {
-        var result = 'Reorder started on row: ' + edit.triggerRow.data()[1] + '<br>';
+        var retour = [];
         for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
-            var rowData = employeesOrgList.row( diff[i].node ).data();
-            result += rowData[1] + ' updated to be in position ' +
-                diff[i].newData + ' (was '+diff[i].oldData+')<br>';
+            retour.push({newPos: diff[i].newPosition + 1,
+                        user: diff[i].node.outerText.split("	")[0]});
         }
-        alert( result );
+        retour = JSON.stringify(retour);
+        if(retour != "[]"){
+          $('#frmModalAjaxWait').modal('show');
+          $.ajax({
+            url: "<?php echo base_url();?>organization/lists/reorder",
+            type: "POST",
+            data: {
+              id: listId,
+              moves: retour
+            }
+          }).done(function(message) {
+            toggleCommands();
+            $('#frmModalAjaxWait').modal('hide');
+          });
+        }
+
+    });
+    var columnId = -1;
+    var orderColumn = "";
+    $('#employeesOrgList').on( 'order.dt', function () {
+      // This will show: "Ordering on column 1 (asc)", for example
+      var order = employeesOrgList.order();
+      if(order.length > 0){
+          columnId = order[0][0];
+          orderColumn = order[0][1];
+        var retour = [];
+        for ( var i=0, ien=employeesOrgList.rows()[0].length ; i<ien ; i++ ) {
+            retour.push({newPos: i + 1,
+                        user: employeesOrgList.rows().data()[i].id});
+        }
+        retour = JSON.stringify(retour);
+        if(retour != "[]"){
+          $('#frmModalAjaxWait').modal('show');
+          $.ajax({
+            url: "<?php echo base_url();?>organization/lists/reorder",
+            type: "POST",
+            data: {
+              id: listId,
+              moves: retour
+            }
+          }).done(function(message) {
+            $('#frmModalAjaxWait').modal('hide');
+          });
+        }
+      }
     });
 
     $("#cboList").on('change', function() {
-        toggleCommands();
+      //console.log($('#cboList').val());
+      toggleCommands();
     });
 
     //Add a list of employees into the selected list
@@ -305,10 +351,11 @@ $(function () {
                   $('#frmModalAjaxWait').modal('hide');
                   if (msg == "") {
                     $('#cboList option:selected').remove();
-                    $('#cboList').val('');
+                    $('#cboList').val(-1);
                   } else {
                       bootbox.alert(data);
                   }
+                  toggleCommands();
             });//ajax
           }//have prompt
         }

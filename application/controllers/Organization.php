@@ -460,4 +460,22 @@ class Organization extends CI_Controller {
             echo json_encode("");
         }
     }
+
+    /**
+    * Ajax endpoint allowing to remove a list of employees from a list
+    * @author Benjamin BALET <benjamin.balet@gmail.com>
+    */
+    public function listsReorder() {
+      header("Content-Type: application/json");
+      $data = getCIUserContext();
+      if ($this->auth->isAllowed('organization_lists_index') == FALSE) {
+          $this->output->set_header("HTTP/1.1 403 Forbidden");
+      } else {
+          $this->load->model('lists_model');
+          $listId = $this->input->post('id');
+          $mooves = json_decode($this->input->post('moves'));
+          $this->lists_model->reorderListEmployees($listId, $mooves);
+          echo json_encode("");
+      }
+    }
 }

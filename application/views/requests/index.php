@@ -417,6 +417,10 @@ $(document).ready(function() {
         }
       });
     }
+    
+    //Filter on statuses is a list of inclusion
+    var statuses = getURLParameter('statuses');
+    if (statuses != null) {
         //Unselect all statuses and select only the statuses passed by URL
         $(".filterStatus").prop("checked", false);
         statuses.split(/\|/).forEach(function(status) {
@@ -431,6 +435,7 @@ $(document).ready(function() {
         });
         //$("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
         filterStatusColumn();
+    }
     $('.filterStatus').on('change',function(){
         filterStatusColumn();
     });

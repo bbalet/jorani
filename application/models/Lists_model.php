@@ -22,7 +22,7 @@ class Lists_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
-        
+
     }
 
     /**
@@ -35,7 +35,7 @@ class Lists_model extends CI_Model {
         $query = $this->db->get_where('org_lists', array('user' => $user));
         return $query->result_array();
     }
-    
+
     /**
      * Get the name of a org_lists
      * @param int $id identifier of a list
@@ -44,7 +44,7 @@ class Lists_model extends CI_Model {
      */
     public function getName($id) {
         $this->db->from('org_lists');
-        $this->db->where('id', $id); 
+        $this->db->where('id', $id);
         $query = $this->db->get();
         $record = $query->result_array();
         if(count($record) > 0) {
@@ -53,7 +53,7 @@ class Lists_model extends CI_Model {
             return '';
         }
     }
-    
+
     /**
      * Insert a new list into the database
      * @param int $user User owning the list
@@ -84,7 +84,7 @@ class Lists_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('org_lists', $data);
     }
-    
+
     /**
      * Delete a list from the database
      * @param int $id identifier of the list
@@ -102,7 +102,8 @@ class Lists_model extends CI_Model {
      */
     public function addEmployees($id, $employees) {
         $data = array();
-        $order = 1;
+        $order = $this->getLastOrderList($id);
+
         foreach ($employees as $employee) {
             $data[] = array(
                 'list' => $id,
@@ -111,7 +112,21 @@ class Lists_model extends CI_Model {
             );
             $order++;
         }
-        $this->db->insert_batch('org_lists_employees', $data); 
+        $this->db->insert_batch('org_lists_employees', $data);
+    }
+
+    public function getLastOrderList($idList) {
+      $this->db->select('org_lists_employees.orderlist');
+      $this->db->from('org_lists_employees');
+      $this->db->where('list', $idList);
+      $this->db->order_by('orderlist', 'DESC');
+      $query = $this->db->get();
+      $record = $query->result_array();
+      if(count($record) > 0) {
+          return $record[0]['orderlist'] + 1;
+      } else {
+          return 1;
+      }
     }
 
     /**
@@ -122,13 +137,16 @@ class Lists_model extends CI_Model {
      */
     public function removeEmployees($id, $employees) {
         $this->db->where('list', $id);
-        $this->db->where_in('id', $employees);
+        $this->db->where_in('orderlist', $employees);
         $this->db->delete('org_lists_employees');
+
+        $this->reorderList($id);
+
     }
-    
+
     /**
      * Get the list of employees for the given list identifier
-     * @param int $id Identifier of the list of employees 
+     * @param int $id Identifier of the list of employees
      * @return array record of employees
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -144,5 +162,22 @@ class Lists_model extends CI_Model {
         $this->db->order_by('org_lists_employees.orderlist');
         $query = $this->db->get();
         return $query->result_array();
+    }
+
+    private function reorderList($id){
+      $this->db->select('org_lists_employees.orderlist');
+      $this->db->from('org_lists_employees');
+      $this->db->where('org_lists_employees.list', $id);
+      $this->db->order_by('org_lists_employees.orderlist');
+      $employees = $this->db->get()->result_array();
+      $count = 1;
+      foreach ($employees as $employee) {
+        $data = array(
+            'orderlist' => $count
+        );
+        $this->db->where('orderlist', $employee['orderlist']);
+        $this->db->update('org_lists_employees', $data);
+        $count ++;
+      }
     }
 }

@@ -21,7 +21,7 @@
             <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
             <button id="cmdSelectEntity" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_entity');?>"><i class="fa fa-sitemap" aria-hidden="true"></i></button>
             <?php if ($mode == 'connected') { ?>
-<!--            <button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>-->
+           <button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>
             <?php } ?>
         </div>
     </div>
@@ -94,9 +94,9 @@
 <?php }?>
 
 <style>
-#frmSelectList 
+#frmSelectList
 {
-    width: 700px; 
+    width: 700px;
     margin-left:  -350px !important;
 }
 </style>
@@ -118,7 +118,7 @@
     var listId;
     var listName = '';
     var source = 'treeview';    //treeview or list
-    
+
     // After selection of an entity from the modal dialog, refresh the partial
     // view if the entity is diferent
     function select_entity() {
@@ -154,7 +154,7 @@
             return '0';
         }
     }
-    
+
     // Return a boolean value representing the value of checkbox "display types"
     function displayLeaveTypes() {
         if ($('#chkDisplayTypes').prop('checked') == true) {
@@ -163,12 +163,12 @@
             return '0';
         }
     }
-    
+
     // Reload the partial view containing the tabular calendar
     function reloadTabularView() {
         children = includeChildren();
         displayTypes = displayLeaveTypes();
-        
+
         //Filter on status
         statuses = "";
         if ($("#chkPlanned").prop("checked")) statuses+="1|";
@@ -177,7 +177,7 @@
         if ($("#chkCancellation").prop("checked")) statuses+="5|";
         statuses = statuses.replace(/\|*$/, "");
         if (statuses!="") statuses = '?statuses=' + statuses;
-        
+
         url = '';
         if (source == 'treeview') {
             url = '<?php echo base_url();?>calendar/tabular/partial/' +
@@ -188,7 +188,7 @@
                     listId + '/' + (month + 1) + '/' + year + '/' +
                     displayTypes + statuses;
         }
-        
+
         $("#spnTabularView").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
         //Month number needs to be converted between monment.js and PHP
         $("#spnTabularView").load(url,
@@ -196,7 +196,7 @@
             if (xhr.status == 401) {
                 $("#frmShowHistory").modal('hide');
                 bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                    //After the login page, we'll be redirected to the current page 
+                    //After the login page, we'll be redirected to the current page
                    location.reload();
                 });
             }
@@ -206,7 +206,7 @@
         fullDate = fullDate + ' ' + year;
         $("#txtMonthYear").val(fullDate);
     }
-    
+
     $(document).ready(function() {
         //Select checkboxes depending on URL
         if (children == '1') {
@@ -219,7 +219,7 @@
         } else {
             $("#chkDisplayTypes").prop("checked", false);
         }
-        
+
         // On changing 'include children' / 'include types' checkboxes,
         // reload the partial view
         $('#chkIncludeChildren').change(function() {
@@ -228,7 +228,7 @@
         $('#chkDisplayTypes').change(function() {
             reloadTabularView();
         });
-        
+
         //Intialize Month/Year selection
         $("#txtMonthYear").datepicker({
             format: "MM yyyy",
@@ -245,7 +245,7 @@
             currentDate = moment().year(year).month(month).date(1);
             reloadTabularView();
         });
-        
+
         //Popup select entity
         $("#cmdSelectEntity").click(function() {
             $("#frmSelectEntity").modal('show');
@@ -276,7 +276,7 @@
                 }
             }
         });
-        
+
         //Previous/Next
         $('#cmdPrevious').click(function() {
             currentDate = currentDate.add(-1, 'M');
@@ -290,13 +290,13 @@
             year = currentDate.year();
             reloadTabularView();
         });
-        
+
         //Load alert forms
         $(".alert").alert();
         $('.alert').on('hidden', function() {
             $(this).removeData('modal');
         });
-        
+
         $('.filterStatus').on('change',function(){
             reloadTabularView();
         });

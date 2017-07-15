@@ -15,7 +15,7 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
  * It allows to use filters on a part of your structure, whatever your organization is.
  */
 class Organization extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -88,7 +88,7 @@ class Organization extends CI_Controller {
             $this->organization_model->rename($id, $text);
         }
     }
-    
+
     /**
      * Ajax endpoint: Create an entity in the organization
      * takes parameters by GET
@@ -106,7 +106,7 @@ class Organization extends CI_Controller {
             $this->organization_model->create($id, $text);
         }
     }
-    
+
     /**
      * Ajax endpoint: Move an entity into the organization
      * takes parameters by GET
@@ -124,7 +124,7 @@ class Organization extends CI_Controller {
             $this->organization_model->move($id, $parent);
         }
     }
-    
+
     /**
      * Ajax endpoint: Copy an entity into the organization
      * takes parameters by GET
@@ -168,7 +168,7 @@ class Organization extends CI_Controller {
         $msg .= ']}';
         echo $msg;
     }
-    
+
     /**
      * Ajax endpoint: Returns the list of the employees attached to an entity
      * The difference with employees endpoint is that the information is condensed and that we display the entry date
@@ -194,7 +194,7 @@ class Organization extends CI_Controller {
         $msg .= ']}';
         echo $msg;
     }
-    
+
     /**
      * Ajax endpoint: Add an employee to an entity of the organization
      * takes parameters by GET
@@ -211,8 +211,8 @@ class Organization extends CI_Controller {
             $this->load->model('organization_model');
             echo json_encode($this->organization_model->attachEmployee($id, $entity));
         }
-    }   
-    
+    }
+
     /**
      * Ajax endpoint: Add an employee to an entity of the organization
      * takes parameters by GET
@@ -228,8 +228,8 @@ class Organization extends CI_Controller {
             $this->load->model('organization_model');
             echo json_encode($this->organization_model->detachEmployee($id));
         }
-    } 
-    
+    }
+
     /**
      * Ajax endpoint: Cascade delete children and set employees' org to NULL
      * takes parameters by GET
@@ -246,7 +246,7 @@ class Organization extends CI_Controller {
             echo json_encode($this->organization_model->delete($entity));
         }
     }
-    
+
     /**
      * Ajax endpoint: Returns a JSON string describing the organization structure.
      * In a format expected by jsTree component.
@@ -260,7 +260,7 @@ class Organization extends CI_Controller {
             setUserContext($this);
             $this->auth->checkIfOperationIsAllowed('organization_select');
         }
-        
+
         $id = $this->input->get('id', TRUE);
         if ($id == "#") {
             unset($id);
@@ -282,9 +282,9 @@ class Organization extends CI_Controller {
         $msg .= ']';
         echo $msg;
     }
-    
+
     /**
-     * Ajax endpoint:Returns the supervisor of an entity of the organization 
+     * Ajax endpoint:Returns the supervisor of an entity of the organization
      * (string containing an id)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -321,7 +321,7 @@ class Organization extends CI_Controller {
             echo json_encode($this->organization_model->setSupervisor($id, $entity));
         }
     }
-    
+
     /**
      * Modal form allowing to create and manage custom lists of employees
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -339,7 +339,7 @@ class Organization extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('organization/lists', $data);
     }
-    
+
     /**
      * Ajax endpoint allowing to create a new list of employees
      * Return the last inserted ID
@@ -371,7 +371,7 @@ class Organization extends CI_Controller {
         } else {
             $this->load->model('lists_model');
             $this->lists_model->updateLists($this->input->post('id'), $this->input->post('name'));
-            echo "";
+            echo json_encode("");
         }
 
     }
@@ -389,7 +389,7 @@ class Organization extends CI_Controller {
         } else {
             $this->load->model('lists_model');
             $id = (int) $this->lists_model->deleteList($this->input->post('id'));
-            echo "";
+            echo json_encode("");
         }
     }
 
@@ -424,7 +424,7 @@ class Organization extends CI_Controller {
             echo $msg;
         }
     }
-    
+
     /**
      * Ajax endpoint allowing to add a list of employees into a list
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -436,13 +436,13 @@ class Organization extends CI_Controller {
             $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $this->load->model('lists_model');
-            $listId = $this->input->post('id');
+            $listId = $this->input->post('list');
             $employees = json_decode($this->input->post('employees'));
             $this->lists_model->addEmployees($listId, $employees);
-            echo "";
+            echo json_encode("");
         }
     }
-    
+
     /**
      * Ajax endpoint allowing to remove a list of employees from a list
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -457,7 +457,25 @@ class Organization extends CI_Controller {
             $listId = $this->input->post('id');
             $employees = json_decode($this->input->post('employees'));
             $this->lists_model->removeEmployees($listId, $employees);
-            echo "";
+            echo json_encode("");
         }
+    }
+
+    /**
+    * Ajax endpoint allowing to remove a list of employees from a list
+    * @author Benjamin BALET <benjamin.balet@gmail.com>
+    */
+    public function listsReorder() {
+      header("Content-Type: application/json");
+      $data = getCIUserContext();
+      if ($this->auth->isAllowed('organization_lists_index') == FALSE) {
+          $this->output->set_header("HTTP/1.1 403 Forbidden");
+      } else {
+          $this->load->model('lists_model');
+          $listId = $this->input->post('id');
+          $mooves = json_decode($this->input->post('moves'));
+          $this->lists_model->reorderListEmployees($listId, $mooves);
+          echo json_encode("");
+      }
     }
 }

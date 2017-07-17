@@ -1501,7 +1501,7 @@ class Leaves_model extends CI_Model {
                 if ($user->days[$dayNum]->display != '4') { //Except full day off
                     if ($user->days[$dayNum]->display != 0) { //Overlapping with a day off or another request
                         if (($user->days[$dayNum]->display == 2) ||
-                                ($user->days[$dayNum]->display == 6)) { //Respect Morning/Afternoon order
+                                ($user->days[$dayNum]->display == 5)) { //Respect Morning/Afternoon order
                             $user->days[$dayNum]->id .= ';' . $entry->id;
                             $user->days[$dayNum]->type .= ';' . $entry->type;
                             $user->days[$dayNum]->display .= ';' . $display;
@@ -1512,7 +1512,7 @@ class Leaves_model extends CI_Model {
                             $user->days[$dayNum]->type = $entry->type . ';' . $user->days[$dayNum]->type;
                             $user->days[$dayNum]->display = $display . ';' . $user->days[$dayNum]->display;
                             $user->days[$dayNum]->status = $entry->status . ';' . $user->days[$dayNum]->status;
-                            $user->days[$dayNum]->acronym .= ';' . $entry->acronym;
+                            $user->days[$dayNum]->acronym .= $entry->acronym . ';' . $user->days[$dayNum]->acronym;
                         }
                     } else  {   //All day entry
                         $user->days[$dayNum]->id = $entry->id;

@@ -165,6 +165,10 @@ html, body {
     z-index: 9999 !important;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 /* Leave Request Status */
 .allplanned {
     background-color: #999;

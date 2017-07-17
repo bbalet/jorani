@@ -59,12 +59,14 @@ if (count($tabular) > 0) {?>
   
   foreach ($tabular as $employee) {
       $dayIterator = 0;
+      //echo var_dump($employee);
       ?>
     <tr>
       <td><?php echo $employee->name; ?></td>
       <?php foreach ($employee->days as $day) {
           $dayIterator++;
           $overlapping = FALSE;
+          $style = '';
           if (strstr($day->display, ';')) {
               $periods = explode(";", $day->display);
               $statuses = explode(";", $day->status);
@@ -169,15 +171,17 @@ if (count($tabular) > 0) {?>
                     $dayType = "";
                 } else {
                     //Hide leave type to users who are not part of HR/Admin
+                    $dataIds= '';
                     if (($is_hr == TRUE) || 
                             ($is_admin == TRUE) || 
                             ($employee->manager == $user_id) || 
                             ($employee->id == $user_id)) {
                         $dayType = $day->type;
                         $acronym = $day->acronym;
-                        $clickable = TRUE;
-                    } else {
-                        $clickable = FALSE;
+                        $dataIds= $day->id;
+                        if ((!$overlapping) && ($day->id !== 0)) {
+                            $class .= ' clickable';
+                        }
                     }
                 }
                 //Option to disable acronym (passed by URL)
@@ -193,54 +197,24 @@ if (count($tabular) > 0) {?>
                         $acronyms = explode(";", $acronym);
                         if (count($acronyms) == 1) {
                             //One leave request
-                            if (substr($class, 0, 2) == "am") {
+                            if ((substr($class, 0, 2) == "am")) {
                                 //Diagonal top left
-                                $clickLink = '';
                                 $style = 'padding:1px; font-size: 0.7em;';
-                                if ($clickable) {
-                                    $clickLink = ' onclick="window.open(\'' . base_url() . '/leaves/leaves/' . $day->id . '\');"';
-                                    $style .= ' cursor: pointer;';
-                                }
-                                echo "<td title='$dayType' style='$style' class='$class' $clickLink>$acronym </td>";
-                            } elseif((substr($class, 0, 2) == "pm")) {
-                                //Diagonal bottom right
-                                $clickLink = '';
-                                $style = 'vertical-align: bottom; text-align: right; padding:1px; font-size: 0.7em;';
-                                if ($clickable) {
-                                    $clickLink = ' onclick="window.open(\'' . base_url() . '/leaves/leaves/' . $day->id . '\');"';
-                                    $style .= ' cursor: pointer;';
-                                }
-                                echo "<td title='$dayType' style='$style' class='$class' $clickLink>$acronym</td>";
-                            } else {
-                                $clickLink = '';
-                                $style = '';
-                                if ($clickable) {
-                                    $clickLink = ' onclick="window.open(\'' . base_url() . '/leaves/leaves/' . $day->id . '\');"';
-                                    $style .= ' cursor: pointer;';
-                                }
-                                echo "<td title='$dayType' class='$class' style='$style' $clickLink>$acronym</td>";
                             }
+                            if((substr($class, 0, 2) == "pm")) {
+                                //Diagonal bottom right
+                                $style = 'vertical-align: bottom; text-align: right; padding:1px; font-size: 0.7em;';
+                            }
+                            echo "<td title='$dayType' class='$class' style='$style' data-id='$dataIds'>$acronym</td>";
                         } else {
-                            echo '<td class="' . $class . '" style="font-size: 0.7em;">';
-                            echo '<span title="' . $dayType . '" class="pull-left">' . $acronyms[0] . '</span>';
-                            echo '<span title="' . $dayType . '" class="pull-right" >' . $acronyms[1] . '</span>';
+                            echo "<td class='$class' style='font-size: 0.7em;' data-id='$dataIds'>";
+                            echo '  <span title="' . $dayType . '" class="pull-left">' . $acronyms[0] . '</span>';
+                            echo '  <span title="' . $dayType . '" class="pull-right" >' . $acronyms[1] . '</span>';
                             echo '</td>';
                         }
-                    } else { // ! Acronyms of types
-                        $clickLink = '';
-                        $style = '';
-                        if ($clickable) {
-                            if ($day->id !== 0) {
-                                $idList = explode(";", $day->id);
-                                $style = ' cursor: pointer;';
-                                $clickLink = ' onclick="';
-                                foreach($idList as $id) {
-                                    $clickLink .= 'window.open(\'' . base_url() . '/leaves/leaves/' . $id . '\');';
-                                }
-                                $clickLink .= '"';
-                            }
-                        }
-                        echo "<td title='$dayType' style='$style' class='$class' $clickLink>&nbsp;</td>";
+                    } else {
+                        //We don't display the acronyms of type or it is not available
+                        echo "<td title='$dayType' style='$style' class='$class' data-id='$dataIds'>&nbsp;</td>";
                     }
                 }
             }
@@ -289,3 +263,43 @@ if (count($tabular) > 0) {?>
 </div>
 <?php } ?>
 
+<script type="text/javascript">
+function sign (p1, p2, p3) {
+    return(p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+}
+
+$('.clickable').click(function(event){
+    //Get the position of the click into the cell
+    var cell = $(event.target).closest( 'td' );
+    var ids = String(cell.data("id"));
+    var leaveId = ids;
+    
+    if (ids.indexOf(';') !== -1) {    //A day with more than one request
+        var cellPos = cell.offset();
+        var point = { x: event.pageX - cellPos.left,
+                      y: event.pageY - cellPos.top};
+
+        //Describe the coordinates of the upper left triangle
+        var t1 = { x: 0, y: 0 };
+        var t2 = { x: cell[0].clientWidth, y: 0 };
+        var t3 = { x: 0, y: cell[0].clientHeight };
+
+        //Determine if the click occured into the upper triangle (i.e. morning)
+        b1 = sign(point, t1, t2) < 0.0;
+        b2 = sign(point, t2, t3) < 0.0;
+        b3 = sign(point, t3, t1) < 0.0;
+        isMorning = ((b1 == b2) && (b2 == b3));
+        if (isMorning) {
+            leaveId = ids.split(';')[0];
+        } else {
+            leaveId = ids.split(';')[1];
+        }
+    }
+    //TODO build a source arg. using encodeURIComponent(myUrl) with:
+    //calendar/tabular?filters=x&statuses=y
+    if (leaveId != 0) {
+        var link = '<?php echo base_url(); ?>/leaves/leaves/' + leaveId;
+        window.open(link);
+    }
+});
+</script>

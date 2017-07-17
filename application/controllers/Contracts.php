@@ -17,7 +17,7 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
  *  - The default period for leave credit (taken, available, entitled).
  */
 class Contracts extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -28,7 +28,7 @@ class Contracts extends CI_Controller {
         $this->lang->load('contract', $this->language);
         $this->load->model('contracts_model');
     }
-    
+
     /**
      * Display the list of all contracts defined in the system
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -46,7 +46,7 @@ class Contracts extends CI_Controller {
         $this->load->view('contracts/index', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Display a form that allows to update a contract
      * @param int $id Contract identifier
@@ -59,7 +59,7 @@ class Contracts extends CI_Controller {
         $this->load->library('form_validation');
         $this->lang->load('calendar', $this->language);
         $data['title'] = lang('contract_edit_title');
-        
+
         $this->form_validation->set_rules('name', lang('contract_edit_field_name'), 'required|strip_tags');
         $this->form_validation->set_rules('startentdatemonth', lang('contract_edit_field_start_month'), 'required|strip_tags');
         $this->form_validation->set_rules('startentdateday', lang('contract_edit_field_start_day'), 'required|strip_tags');
@@ -93,7 +93,7 @@ class Contracts extends CI_Controller {
             redirect('contracts');
         }
     }
-    
+
     /**
      * Display the form / action Create a new contract
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -128,7 +128,7 @@ class Contracts extends CI_Controller {
             redirect('contracts');
         }
     }
-    
+
     /**
      * Delete a given contract
      * @param int $id contract identifier
@@ -146,7 +146,7 @@ class Contracts extends CI_Controller {
         $this->session->set_flashdata('msg', lang('contract_delete_msg_success'));
         redirect('contracts');
     }
-    
+
     /**
      * Display an interactive calendar that allows to dynamically set the days
      * off, bank holidays, etc. for a given contract
@@ -165,7 +165,7 @@ class Contracts extends CI_Controller {
         } else {
             $data['year'] = date("Y");
         }
-        
+
         //Load the list of contracts (select destination contract / copy dayoff feature)
         $data['contracts'] = $this->contracts_model->getContracts();
         //Remove the contract being displayed (source)
@@ -190,7 +190,7 @@ class Contracts extends CI_Controller {
         $this->load->view('contracts/calendar', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Copy the days off defined on a souce contract to another contract
      * for the civil year being displayed
@@ -207,7 +207,7 @@ class Contracts extends CI_Controller {
         $this->session->set_flashdata('msg', lang('contract_calendar_copy_msg_success'));
         redirect('contracts/' . $destination . '/calendar/' . $year);
     }
-    
+
     /**
      * Display a form that allows to exclude some leave types from a contract
      * @param int $id Contract identifier
@@ -240,7 +240,7 @@ class Contracts extends CI_Controller {
         $this->load->view('contracts/exclude_types', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Ajax endpoint : include a leave type into a contract
      * @param int $contractId identifier of the contract
@@ -297,7 +297,7 @@ class Contracts extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Ajax endpoint : Edit a series of day offs for a given contract
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -321,7 +321,7 @@ class Contracts extends CI_Controller {
                 } else {
                     $day = strtotime($freq, $start);
                 }
-                
+
                 $list = '';
                 while ($day <= $end) {
                     $list .= date("Y-m-d", $day) . ",";
@@ -373,7 +373,7 @@ class Contracts extends CI_Controller {
             echo("$url is not a valid URL");
         }
     }
-    
+
     /**
      * Ajax endpoint : Send a list of fullcalendar events
      * List of day offs for the connected user
@@ -388,7 +388,7 @@ class Contracts extends CI_Controller {
         if ($id == 0) $id =$this->user_id;
         echo $this->dayoffs_model->userDayoffs($id, $start, $end);
     }
-    
+
     /**
      * Ajax endpoint : Send a list of fullcalendar events
      * List of all possible day offs
@@ -404,7 +404,22 @@ class Contracts extends CI_Controller {
         $this->load->model('dayoffs_model');
         echo $this->dayoffs_model->allDayoffs($start, $end, $entity, $children);
     }
-    
+
+    /**
+     * Ajax endpoint : Send a list of fullcalendar events
+     * List of all possible day offs
+     * @param int $entity_id Entity identifier
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function allDayoffsForList() {
+        header("Content-Type: application/json");
+        $start = $this->input->get('start', TRUE);
+        $end = $this->input->get('end', TRUE);
+        $list = $this->input->get('entity', TRUE);
+        $this->load->model('dayoffs_model');
+        echo $this->dayoffs_model->allDayoffsForList($start, $end, $list);
+    }
+
     /**
      * Action: export the list of all contracts into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>

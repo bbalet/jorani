@@ -649,6 +649,19 @@ class Leaves extends CI_Controller {
 
     /**
      * Ajax endpoint : Send a list of fullcalendar events
+     * @param int $list_id List identifier
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function listEvents($list_id){
+      header("Content-Type: application/json");
+      $start = $this->input->get('start', TRUE);
+      $end = $this->input->get('end', TRUE);
+      $statuses = $this->input->get('statuses');
+      echo $this->leaves_model->getListRequest($list_id, $start, $end, $statuses);
+    }
+
+    /**
+     * Ajax endpoint : Send a list of fullcalendar events
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function department() {

@@ -55,7 +55,7 @@
 <div id="frmSelectEmployees" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmSelectEmployees').modal('hide');" class="close">&times;</a>
-         <h3><?php echo lang('users_create_popup_manager_title');?></h3>
+         <h3><?php echo lang('organization_lists_button_add_users');?></h3>
     </div>
     <div class="modal-body" id="frmSelectEmployeesBody">
         <img src="<?php echo base_url();?>assets/images/loading.gif">

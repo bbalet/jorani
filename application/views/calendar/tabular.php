@@ -12,9 +12,9 @@
 
 <div class="row-fluid">
     <div class="span4">
-        <label for="txtEntity">
+        <label for="chkIncludeChildren">
             <?php echo lang('calendar_organization_field_select_entity');?>
-            &nbsp;(<input type="checkbox" checked id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>)
+            &nbsp;(<input type="checkbox" class="input-centered" checked id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>)
         </label>
         <div class="input-prepend input-append">
             <span class="add-on" id="spnAddOn"><i class="fa fa-sitemap" aria-hidden="true"></i></span>
@@ -36,7 +36,9 @@
         </div>
     </div>
     <div class="span3">
-        <input type="checkbox" checked id="chkDisplayTypes" name="chkDisplayTypes"><?php echo lang('calendar_tabular_check_display_types');?>
+        <label for="chkDisplayTypes">
+            <input type="checkbox" class="input-centered" checked id="chkDisplayTypes" name="chkDisplayTypes"><?php echo lang('calendar_tabular_check_display_types');?>
+        </label>
     </div>
     <div class="span2">
         <span class="pull-right">

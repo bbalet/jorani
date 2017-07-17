@@ -12,9 +12,9 @@
 
 <div class="row-fluid">
     <div class="span5">
-        <label for="txtEntity">
+        <label for="chkIncludeChildren">
             <?php echo lang('calendar_organization_field_select_entity');?>&nbsp;
-            (<input type="checkbox" checked id="chkIncludeChildren"> <?php echo lang('calendar_organization_check_include_subdept');?>)
+            (<input type="checkbox" class="input-centered" checked id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_organization_check_include_subdept');?>)
         </label>
         <div class="input-prepend input-append">
             <span class="add-on" id="spnAddOn"><i class="fa fa-sitemap" aria-hidden="true"></i></span>
@@ -26,8 +26,8 @@
         </div>
     </div>
     <div class="span5">
-        <label for="txtMonthYear">
-        <input type="checkbox" checked id="chkIncludeDaysOffs"> <?php echo lang('calendar_individual_day_offs');?>
+        <label for="chkIncludeDaysOffs">
+            <input type="checkbox" class="input-centered" checked id="chkIncludeDaysOffs" name="chkIncludeDaysOffs"> <?php echo lang('calendar_individual_day_offs');?>
         </label>
         <div class="input-prepend input-append">
             <button id="cmdPrevious" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_previous');?>"><i class="icon-chevron-left icon-white"></i></button>

@@ -160,6 +160,10 @@ html, body {
   background-color: #ff0000 !important;
 }
 
+.input-centered {
+    vertical-align: top;
+}
+
 /*Always put Jquery datepicker on the top layer */
 .ui-datepicker{
     z-index: 9999 !important;

@@ -14,13 +14,15 @@
 
 <div class="row">
     <div class="span3">
-        <?php echo lang('leaves_index_thead_type');?>
-        <select name="cboLeaveType" id="cboLeaveType">
-            <option value="" selected></option>
-        <?php foreach ($types as $type): ?>
-            <option value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
-        <?php endforeach ?>
-        </select>&nbsp;&nbsp;
+        <label for="cboLeaveType">
+            <?php echo lang('leaves_index_thead_type');?>
+            <select name="cboLeaveType" id="cboLeaveType">
+                <option value="" selected></option>
+            <?php foreach ($types as $type): ?>
+                <option value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
+            <?php endforeach ?>
+            </select>
+        </label>
     </div>
     <div class="span1">&nbsp;</div>
     <div class="span8">

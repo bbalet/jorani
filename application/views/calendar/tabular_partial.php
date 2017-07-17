@@ -295,10 +295,14 @@ $('.clickable').click(function(event){
             leaveId = ids.split(';')[1];
         }
     }
-    //TODO build a source arg. using encodeURIComponent(myUrl) with:
-    //calendar/tabular?filters=x&statuses=y
+    //Build a link to leaves/view ending by a source argument, e.g.:
+    //calendar/tabular/a/b/c/d?statuses=y
     if (leaveId != 0) {
-        var link = '<?php echo base_url(); ?>/leaves/leaves/' + leaveId;
+        var currentUrl = 'calendar/tabular/' + entity + '/' + 
+                (month + 1) + '/' + year + '/' + children + '/' + displayTypes +
+                buildStatusesFilter();
+        var sourceLink = encodeURIComponent(currentUrl);
+        var link = '<?php echo base_url(); ?>/leaves/leaves/' + leaveId + '?source=' + sourceLink;
         window.open(link);
     }
 });

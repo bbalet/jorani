@@ -134,6 +134,11 @@ class Leaves extends CI_Controller {
             } //Admin
         } //Current employee
         $data['source'] = $source;
+        //overwrite source (for taking into account the tabular calendar)
+        if ($this->input->get('source') != NULL) {
+            $data['source'] = urldecode($this->input->get('source'));
+        }
+        
         $data['title'] = lang('leaves_view_html_title');
         if ($source == 'requests') {
             if (empty($employee)) {

@@ -163,13 +163,9 @@
             return '0';
         }
     }
-
-    // Reload the partial view containing the tabular calendar
-    function reloadTabularView() {
-        children = includeChildren();
-        displayTypes = displayLeaveTypes();
-
-        //Filter on status
+    
+    // Build the status filter based on the selected options
+    function buildStatusesFilter() {
         statuses = "";
         if ($("#chkPlanned").prop("checked")) statuses+="1|";
         if ($("#chkRequested").prop("checked")) statuses+="2|";
@@ -177,8 +173,16 @@
         if ($("#chkCancellation").prop("checked")) statuses+="5|";
         statuses = statuses.replace(/\|*$/, "");
         if (statuses!="") statuses = '?statuses=' + statuses;
+        return statuses;
+    }
 
-        url = '';
+    // Reload the partial view containing the tabular calendar
+    function reloadTabularView() {
+        var url ='';
+        children = includeChildren();
+        displayTypes = displayLeaveTypes();
+        statuses = buildStatusesFilter();
+        
         if (source == 'treeview') {
             url = '<?php echo base_url();?>calendar/tabular/partial/' +
                 entity + '/' + (month + 1) + '/' + year + '/' + children + '/' +
@@ -205,6 +209,11 @@
         var fullDate = moment().date(1).month(month).year(year).format("MMMM");
         fullDate = fullDate + ' ' + year;
         $("#txtMonthYear").val(fullDate);
+    }
+    
+    //Return a URL parameter identified by 'name'
+    function getURLParameter(name) {
+      return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
     }
 
     $(document).ready(function() {
@@ -259,20 +268,21 @@
 
         //Export the report into Excel
         $("#cmdExport").click(function() {
+            var exportUrl = '';
             var displayTypes = displayLeaveTypes();
             if (source == 'treeview') {
                 children = includeChildren();
                 if (entity != -1) {
-                    url = '<?php echo base_url();?>calendar/tabular/export/' +
+                    exportUrl = '<?php echo base_url();?>calendar/tabular/export/' +
                             entity + '/' + (month+1) + '/' + year + '/' + children +
                             '/' + displayTypes;
-                    document.location.href = url;
+                    document.location.href = exportUrl;
                 }
             } else {
                 if (listId != -1) {
-                    url = '<?php echo base_url();?>calendar/tabular/list/export/' +
+                    exportUrl = '<?php echo base_url();?>calendar/tabular/list/export/' +
                             listId + '/' + (month+1) + '/' + year + '/' + displayTypes;
-                    document.location.href = url;
+                    document.location.href = exportUrl;
                 }
             }
         });
@@ -297,6 +307,23 @@
             $(this).removeData('modal');
         });
 
+        //Filter on statuses is a list of inclusion
+        var statuses = getURLParameter('statuses');
+        if (statuses != null) {
+            //Unselect all statuses and select only the statuses passed by URL
+            $(".filterStatus").prop("checked", false);
+            statuses.split(/\|/).forEach(function(status) {
+                switch (status) {
+                    case '1': $("#chkPlanned").prop("checked", true); break;
+                    case '2': $("#chkRequested").prop("checked", true); break;
+                    case '3': $("#chkAccepted").prop("checked", true); break;
+                    case '4': $("#chkRejected").prop("checked", true); break;
+                    case '5': $("#chkCancellation").prop("checked", true); break;
+                    case '6': $("#chkCanceled").prop("checked", true); break;
+                }
+            });
+            reloadTabularView();
+        }
         $('.filterStatus').on('change',function(){
             reloadTabularView();
         });

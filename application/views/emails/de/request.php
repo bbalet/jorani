@@ -31,7 +31,11 @@
                 <td>Begründung &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Akzeptieren</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">Ablehnen</a></td>
+              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+            </tr>
+            <tr>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Akzeptieren</a> &nbsp;</td>
+                <td><a href="{BaseUrl}requests?rejected={LeaveId}">Ablehnen</a></td>
             </tr>
         </table>
         <br />

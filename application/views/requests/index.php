@@ -7,7 +7,6 @@
  * @since         0.1.0
  */
 ?>
-
 <h2><?php echo lang('requests_index_title');?><?php echo $help;?></h2>
 
 <?php echo $flash_partial_view;?>
@@ -182,10 +181,27 @@ if ($showAll == FALSE) {
         <a href="#" onclick="$('#frmLinkICS').modal('hide');" class="btn btn-primary"><?php echo lang('OK');?></a>
     </div>
 </div>
+<div id="sendComment">
+  <?php
+    echo form_open("requests/", array('id' => 'frmRejectLeaveForm'))
+  ?>
+  <input id="comment" type="hidden" name="comment" value="">
+  <?php
+  /*
+  if ($this->config->item('csrf_protection') == TRUE) {
+    echo "<input type='hidden' name='" . $this->security->get_csrf_token_name() . "' value='" . $this->security->get_csrf_hash() ."'>";
+  }
+  */
+  ?>
+
+</form>
+</div>
+
 
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
 <script type="text/javascript">
 var clicked = false;
@@ -211,6 +227,7 @@ function filterStatusColumn() {
 }
 
 $(document).ready(function() {
+
     //Transform the HTML table in a fancy datatable
     leaveTable = $('#leaves').DataTable({
             order: [[ 2, "desc" ]],
@@ -251,9 +268,27 @@ $(document).ready(function() {
         event.preventDefault();
         if (!clicked) {
             clicked = true;
-            window.location.href = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
+            var id =$(this).data("id");
+            var validateUrl = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
+            bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
+              <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
+              <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
+              function (result) {
+                if (result !== null){
+                  console.log(validateUrl + " - " + id + " - " + result);
+                  $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
+                  console.log("url : " + $("#sendComment form").attr("action"));
+                  $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
+                  console.log("comment : " + $("#sendComment form input#comment").attr("value"));
+                  $("#sendComment #frmRejectLeaveForm").submit();
+
+                } else {
+                  clicked = false;
+                }
+              });
+            //window.location.href = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
         }
-     });
+      });
      $('#leaves').on('click', '.lnkCancellationAccept', function (event) {
         event.preventDefault();
         if (!clicked) {
@@ -265,7 +300,25 @@ $(document).ready(function() {
         event.preventDefault();
         if (!clicked) {
             clicked = true;
-            window.location.href = "<?php echo base_url();?>requests/cancellation/reject/" + $(this).data("id");
+            var id =$(this).data("id");
+            var validateUrl = "<?php echo base_url();?>requests/cancellation/reject/" + $(this).data("id");
+            bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
+              <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
+              <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
+              function (result) {
+                if (result !== null){
+                  console.log(validateUrl + " - " + id + " - " + result);
+                  $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
+                  console.log("url : " + $("#sendComment form").attr("action"));
+                  $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
+                  console.log("comment : " + $("#sendComment form input#comment").attr("value"));
+                  $("#sendComment #frmRejectLeaveForm").submit();
+
+                } else {
+                  clicked = false;
+                }
+              });
+          //  window.location.href = "<?php echo base_url();?>requests/cancellation/reject/" + $(this).data("id");
         }
      });
 
@@ -308,6 +361,63 @@ $(document).ready(function() {
         leaveTable.columns( 5 ).search( "^" + leaveType + "$", true, false ).draw();
     }
 
+    //Filter on statuses is a list of inclusion
+    var statuses = getURLParameter('statuses');
+    if (statuses != null) {
+        //Unselect all statuses and select only the statuses passed by URL
+        $(".filterStatus").prop("checked", false);
+        statuses.split(/\|/).forEach(function(status) {
+            switch (status) {
+                case '1': $("#chkPlanned").prop("checked", true); break;
+                case '2': $("#chkRequested").prop("checked", true); break;
+                case '3': $("#chkAccepted").prop("checked", true); break;
+                case '4': $("#chkRejected").prop("checked", true); break;
+                case '5': $("#chkCancellation").prop("checked", true); break;
+                case '6': $("#chkCanceled").prop("checked", true); break;
+            }
+        });
+        //$("#cboLeaveType option[value='" + getURLParameter('type') + "']").prop("selected", true);
+        filterStatusColumn();
+    }
+    var rejected = getURLParameter('rejected');
+    var id = parseInt(rejected)
+    if (id != null && !isNaN(id)) {
+      //bootbox.alert(id);
+      var validateUrl = "<?php echo base_url();?>requests/reject/" + id;
+      bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
+        <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
+        <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
+      function (result) {
+        if (result !== null){
+          console.log(validateUrl + " - " + id + " - " + result);
+          $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
+          console.log("url : " + $("#sendComment form").attr("action"));
+          $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
+          console.log("comment : " + $("#sendComment form input#comment").attr("value"));
+          $("#sendComment #frmRejectLeaveForm").submit();
+        }
+      });
+    }
+    var cancelRejected = getURLParameter('cancel_rejected');
+    var idCancel = parseInt(cancelRejected)
+    if (idCancel != null && !isNaN(idCancel)) {
+      //bootbox.alert(id);
+      var validateUrl = "<?php echo base_url();?>requests/cancellation/reject/" + idCancel;
+      bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
+        <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
+        <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
+      function (result) {
+        if (result !== null){
+          console.log(validateUrl + " - " + idCancel + " - " + result);
+          $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
+          console.log("url : " + $("#sendComment form").attr("action"));
+          $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
+          console.log("comment : " + $("#sendComment form input#comment").attr("value"));
+          $("#sendComment #frmRejectLeaveForm").submit();
+        }
+      });
+    }
+    
     //Filter on statuses is a list of inclusion
     var statuses = getURLParameter('statuses');
     if (statuses != null) {

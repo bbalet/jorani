@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays a simplified login form for OAtuh2 authorization.
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
@@ -17,7 +17,7 @@
     <meta name="version" content="0.6.0">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="<?php echo base_url();?>assets/css/jorani-0.6.0.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/css/jorani-0.6.2.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css">
 <?php CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('global', $language);?>
@@ -44,7 +44,7 @@ if (!is_null($fonts)) {
     body, button, input, select, .ui-datepicker, .selectize-input {
         font-family: '<?php echo $fonts[$language_code]['name'];?>' !important;
     }
-<?php 
+<?php
         }
     } ?>
 </style>
@@ -98,7 +98,7 @@ if (!is_null($fonts)) {
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript">
-    
+
     //Encrypt the password using RSA and send the ciphered value into the form
     function submit_form() {
         var encrypt = new JSEncrypt();
@@ -110,13 +110,13 @@ if (!is_null($fonts)) {
     }
 
     $(function () {
-    
+
         $('#login').focus();
-        
+
         $('#send').click(function() {
             submit_form();
         });
-        
+
         //Validate the form if the user press enter key in password field
         $('#password').keypress(function(e){
             if(e.keyCode==13)

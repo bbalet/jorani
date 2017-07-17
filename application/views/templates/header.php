@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view is included into all desktop full views. It contains HTML and CSS definitions.
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
@@ -17,7 +17,7 @@
     <meta name="version" content="0.6.0">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="<?php echo base_url();?>assets/css/jorani-0.6.0.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/css/jorani-0.6.2.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css">
 <?php CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('global', $language);?>
@@ -44,7 +44,7 @@ if (!is_null($fonts)) {
     body, button, input, select, .ui-datepicker, .selectize-input {
         font-family: '<?php echo $fonts[$language_code]['name'];?>' !important;
     }
-<?php 
+<?php
         }
     } ?>
 </style>

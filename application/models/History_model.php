@@ -41,12 +41,13 @@ class History_model extends CI_Model {
      */
     public function getLeaveRequestsHistory($leaveId) {
         $this->db->select("CONCAT(users.firstname, ' ', users.lastname) as user_name", FALSE);
-        $this->db->select("types.name as type_name, status.name as status_name, leaves_history.*");
+        $this->db->select('types.name as type_name, status.name as status_name');
+        $this->db->select('leaves_history.*');
         $this->db->join('users', 'leaves_history.changed_by = users.id');
         $this->db->join('types', 'leaves_history.type = types.id');
         $this->db->join('status', 'leaves_history.status = status.id');
         $this->db->where('leaves_history.id', $leaveId);
-        $this->db->order_by("change_id", "asc"); 
+        $this->db->order_by('change_id', 'asc'); 
         $query = $this->db->get('leaves_history');
         $results = $query->result_array();
         return $results;

@@ -81,3 +81,7 @@ $lang['requests_delegations_confirm_delete_yes'] = 'Oui';
 $lang['requests_balance_title'] = 'État des congés (collaborateurs)';
 $lang['requests_balance_description'] = 'État des congés de mes collaborateurs. Si vous n\'êtes pas un manager, cette liste sera vide.';
 $lang['requests_balance_date_field'] = 'Date du rapport';
+
+$lang['requests_comment_reject_request_title'] = 'Envoyer un noveau commentaire (optionnel)';
+$lang['requests_comment_reject_request_button_cancel'] = 'Annuler';
+$lang['requests_comment_reject_request_button_reject'] = 'Refuser';

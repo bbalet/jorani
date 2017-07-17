@@ -75,7 +75,7 @@ echo form_open('leaves/create', $attributes) ?>
     <br/><br/>
     <button name="status" value="1" type="submit" class="btn btn-primary"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; <?php echo lang('Planned');?></button>
     &nbsp;&nbsp;
-    <button name="status" value="2" type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('Requested');?></button>
+    <button name="status" value="2" type="submit" class="btn btn-primary "><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('Requested');?></button>
     <br/><br/>
     <a href="<?php echo base_url(); ?>leaves" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp; <?php echo lang('leaves_create_button_cancel');?></a>
 </form>

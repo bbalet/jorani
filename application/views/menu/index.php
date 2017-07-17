@@ -152,7 +152,7 @@ $this->lang->load('menu', $language);?>
                 
                 <li>
                     <form class="navbar-form pull-left">
-                        <a class="btn btn-warning" href="<?php echo base_url();?>leaves/create"><?php echo lang('menu_leaves_request_button');?></a>
+                        <a class="btn btn-warning" href="<?php echo base_url();?>leaves/create"><b><?php echo lang('menu_leaves_request_button');?></b></a>
                     </form>
                 </li>
               </ul>

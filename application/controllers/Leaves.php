@@ -134,6 +134,11 @@ class Leaves extends CI_Controller {
             } //Admin
         } //Current employee
         $data['source'] = $source;
+        //overwrite source (for taking into account the tabular calendar)
+        if ($this->input->get('source') != NULL) {
+            $data['source'] = urldecode($this->input->get('source'));
+        }
+        
         $data['title'] = lang('leaves_view_html_title');
         if ($source == 'requests') {
             if (empty($employee)) {
@@ -325,9 +330,37 @@ class Leaves extends CI_Controller {
             }
         }
     }
-    
+
     /**
-     * Send an email reminder (so as to remind to the manager that he 
+     * change a the status of a planned request to  requested
+     * @param int $id id of the leave
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+     public function requestLeave($id){
+       $leave = $this->leaves_model->getLeaves($id);
+       if (empty($leave)) {
+           redirect('notfound');
+       } else {
+           //Only the connected user can reject its own requests
+           if ($this->user_id != $leave['employee']){
+               $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_error'));
+               redirect('leaves');
+           }
+           //We can cancel a leave request only with a status 'Accepted'
+           if ($leave['status'] == LMS_PLANNED) {
+               $this->leaves_model->switchStatus($id, LMS_REQUESTED);
+               $this->sendMailOnLeaveRequestCreation($id);
+               $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_success'));
+               redirect('leaves');
+           } else {
+               $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_error'));
+               redirect('leaves');
+           }
+       }
+     }
+
+    /**
+     * Send an email reminder (so as to remind to the manager that he
      * must either accept/reject a request or a cancellation)
      * @param int $id Identifier of the leave request
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -437,6 +470,17 @@ class Leaves extends CI_Controller {
         $date = new DateTime($leave['enddate']);
         $enddate = $date->format($lang_mail->line('global_date_format'));
 
+        $comments=$leave['comments'];
+        $comment = '';
+        if(!empty($comments)){
+          $comments=json_decode($comments);
+          foreach ($comments->comments as $comments_item) {
+            if($comments_item->type == "comment"){
+              $comment = $comments_item->value;
+            }
+          }
+        }
+        log_message('info', "comment : " . $comment);
         $this->load->library('parser');
         $data = array(
             'Title' => $title,
@@ -452,7 +496,8 @@ class Leaves extends CI_Controller {
             'Reason' => $leave['cause'],
             'BaseUrl' => $this->config->base_url(),
             'LeaveId' => $leave['id'],
-            'UserId' => $this->user_id
+            'UserId' => $this->user_id,
+            'Comments' => $comment
         );
         $message = $this->parser->parse('emails/' . $manager['language'] . '/'.$emailModel, $data, TRUE);
 
@@ -467,7 +512,7 @@ class Leaves extends CI_Controller {
 
         sendMailByWrapper($this, $subject, $message, $to, $cc);
     }
-    
+
     /**
      * Delete a leave request
      * @param int $id identifier of the leave request
@@ -600,6 +645,19 @@ class Leaves extends CI_Controller {
         $children = filter_var($this->input->get('children', TRUE), FILTER_VALIDATE_BOOLEAN);
         $statuses = $this->input->get('statuses');
         echo $this->leaves_model->department($entity_id, $start, $end, $children, $statuses);
+    }
+
+    /**
+     * Ajax endpoint : Send a list of fullcalendar events
+     * @param int $list_id List identifier
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function listEvents($list_id){
+      header("Content-Type: application/json");
+      $start = $this->input->get('start', TRUE);
+      $end = $this->input->get('end', TRUE);
+      $statuses = $this->input->get('statuses');
+      echo $this->leaves_model->getListRequest($list_id, $start, $end, $statuses);
     }
 
     /**

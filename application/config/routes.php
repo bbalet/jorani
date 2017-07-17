@@ -125,6 +125,7 @@ $route['contracts/calendar/import'] = 'contracts/import';
 $route['contracts/calendar/userdayoffs/(:num)'] = 'contracts/userDayoffs/$1';
 $route['contracts/calendar/userdayoffs'] = 'contracts/userDayoffs';
 $route['contracts/calendar/alldayoffs'] = 'contracts/allDayoffs';
+$route['contracts/calendar/alldayoffs/lists'] = 'contracts/allDayoffsForList';
 $route['contracts'] = 'contracts';
 
 //_______________________________________________
@@ -150,6 +151,7 @@ $route['organization/lists/delete'] = 'organization/listsDelete';
 $route['organization/lists/addemployees'] = 'organization/listsAddEmployees';
 $route['organization/lists/removeemployees'] = 'organization/listsRemoveEmployees';
 $route['organization/lists/reorder'] = 'organization/listsReorder';
+$route['organization/lists/name'] = 'organization/listName';
 $route['organization'] = 'organization';
 
 //_______________________________________________
@@ -178,6 +180,7 @@ $route['leaves/individual'] = 'leaves/individual';
 $route['leaves/workmates'] = 'leaves/workmates';
 $route['leaves/department'] = 'leaves/department';
 $route['leaves/organization/(:num)'] = 'leaves/organization/$1';
+$route['leaves/list/(:num)'] = 'leaves/listEvents/$1';
 $route['leaves/collaborators'] = 'leaves/collaborators';
 $route['leaves/team'] = 'leaves/team';
 
@@ -193,6 +196,7 @@ $route['leaves/counters/(:num)'] = 'leaves/counters/$1';
 $route['leaves/export'] = 'leaves/export';
 $route['leaves/create'] = 'leaves/create';
 $route['leaves/edit/(:num)'] = 'leaves/edit/$1';
+$route['leaves/request/(:num)'] = 'leaves/requestLeave/$1';
 $route['leaves/update'] = 'leaves/update';
 $route['leaves/delete/(:num)'] = 'leaves/delete/$1';
 $route['leaves/(:num)/history'] = 'leaves/history/$1';

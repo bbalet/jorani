@@ -41,7 +41,11 @@
                 <td>Motivo &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accetta</a> &nbsp;</td><td><a href="{BaseUrl}requests/reject/{LeaveId}">Rifiuta</a></td>
+              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+            </tr>
+            <tr>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accetta</a> &nbsp;</td>
+                <td><a href="{BaseUrl}requests?rejected={LeaveId}">Rifiuta</a></td>
             </tr>
         </table>
         <br />

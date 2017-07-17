@@ -34,8 +34,9 @@ $lastObject->startDate = '';
 $lastObject->endDate = '';
 $lastObject->cause = '';
 $lastObject->duration = '';
-$lastObject->type = '';
+$lastObject->typeName = '';
 $lastObject->status = '';
+$lastObject->statusName = '';
 
 foreach ($events as $event) {
     $objLeave = new stdClass;
@@ -59,8 +60,9 @@ foreach ($events as $event) {
     $objLeave->endDate = $endDate;
     $objLeave->cause = $event['cause'];
     $objLeave->duration = $event['duration'];
-    $objLeave->type = $event['type_name'];
-    $objLeave->status = $event['status_name'];
+    $objLeave->typeName = $event['type_name'];
+    $objLeave->status = $leave['status'];
+    $objLeave->statusName = $event['status_name'];
     $fullObject = clone $objLeave;
     
     //Display only the cells with changes
@@ -68,8 +70,9 @@ foreach ($events as $event) {
     $objLeave->endDate = ($endDate==$lastObject->endDate)?'':$endDate;
     $objLeave->cause = ($event['cause']==$lastObject->cause)?'':$event['cause'];
     $objLeave->duration = ($event['duration']==$lastObject->duration)?'':$event['duration'];
-    $objLeave->type = ($event['type_name']==$lastObject->type)?'':$event['type_name'];
-    $objLeave->status = ($event['status_name']==$lastObject->status)?'':$event['status_name'];
+    $objLeave->typeName = ($event['type_name']==$lastObject->typeName)?'':$event['type_name'];
+    $objLeave->status = ($event['status']==$lastObject->status)?'':$event['status'];
+    $objLeave->statusName = ($event['status_name']==$lastObject->statusName)?'':$event['status_name'];
     array_push($history, $objLeave);
     $lastObject = clone $fullObject;
 }
@@ -85,8 +88,9 @@ if (!empty($leave)) {
     $objLeave->endDate = $date->format(lang('global_date_format')) . ' (' . lang($leave['enddatetype']) . ')';
     $objLeave->cause = $leave['cause'];
     $objLeave->duration = $leave['duration'];
-    $objLeave->type = $leave['type_name'];
-    $objLeave->status = $leave['status_name'];
+    $objLeave->typeName = $leave['type_name'];
+    $objLeave->status = $leave['status'];
+    $objLeave->statusName = $leave['status_name'];
     array_push($history, $objLeave);
 }
 
@@ -101,8 +105,14 @@ if (!empty($leave)) {
         <td><?php echo $objLeave->endDate; ?></td>
         <td><?php echo $objLeave->cause; ?></td>
         <td><?php echo $objLeave->duration; ?></td>
-        <td><?php echo $objLeave->type; ?></td>
-        <td><?php echo lang($objLeave->status); ?></td>
+        <td><?php echo $objLeave->typeName; ?></td>
+        <td><?php
+        switch (intval($objLeave->status)) {
+            case LMS_PLANNED: echo "<td><span class='label'>" . lang($objLeave->statusName) . "</span></td>"; break;
+            case LMS_REQUESTED: echo "<td><span class='label label-warning'>" . lang($objLeave->statusName) . "</span></td>"; break;
+            case LMS_ACCEPTED: echo "<td><span class='label label-success'>" . lang($objLeave->statusName) . "</span></td>"; break;
+            default: echo "<td><span class='label label-important' style='background-color: #ff0000;'>" . lang($objLeave->statusName) . "</span></td>"; break;
+        }?></td>
     </tr>
     <?php endforeach ?>
     </tbody>

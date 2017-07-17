@@ -12,16 +12,16 @@
 
 <div class="row-fluid">
     <div class="span4">
-        <label for="txtEntity">
+        <label for="chkIncludeChildren">
             <?php echo lang('calendar_organization_field_select_entity');?>
-            &nbsp;(<input type="checkbox" checked id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>)
+            &nbsp;(<input type="checkbox" class="input-centered" checked id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>)
         </label>
         <div class="input-prepend input-append">
             <span class="add-on" id="spnAddOn"><i class="fa fa-sitemap" aria-hidden="true"></i></span>
             <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
             <button id="cmdSelectEntity" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_entity');?>"><i class="fa fa-sitemap" aria-hidden="true"></i></button>
             <?php if ($mode == 'connected') { ?>
-<!--            <button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>-->
+           <button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>
             <?php } ?>
         </div>
     </div>
@@ -36,7 +36,9 @@
         </div>
     </div>
     <div class="span3">
-        <input type="checkbox" checked id="chkDisplayTypes" name="chkDisplayTypes"><?php echo lang('calendar_tabular_check_display_types');?>
+        <label for="chkDisplayTypes">
+            <input type="checkbox" class="input-centered" checked id="chkDisplayTypes" name="chkDisplayTypes"><?php echo lang('calendar_tabular_check_display_types');?>
+        </label>
     </div>
     <div class="span2">
         <span class="pull-right">
@@ -94,9 +96,9 @@
 <?php }?>
 
 <style>
-#frmSelectList 
+#frmSelectList
 {
-    width: 700px; 
+    width: 700px;
     margin-left:  -350px !important;
 }
 </style>
@@ -118,7 +120,7 @@
     var listId;
     var listName = '';
     var source = 'treeview';    //treeview or list
-    
+
     // After selection of an entity from the modal dialog, refresh the partial
     // view if the entity is diferent
     function select_entity() {
@@ -154,7 +156,7 @@
             return '0';
         }
     }
-    
+
     // Return a boolean value representing the value of checkbox "display types"
     function displayLeaveTypes() {
         if ($('#chkDisplayTypes').prop('checked') == true) {
@@ -164,12 +166,8 @@
         }
     }
     
-    // Reload the partial view containing the tabular calendar
-    function reloadTabularView() {
-        children = includeChildren();
-        displayTypes = displayLeaveTypes();
-        
-        //Filter on status
+    // Build the status filter based on the selected options
+    function buildStatusesFilter() {
         statuses = "";
         if ($("#chkPlanned").prop("checked")) statuses+="1|";
         if ($("#chkRequested").prop("checked")) statuses+="2|";
@@ -177,8 +175,16 @@
         if ($("#chkCancellation").prop("checked")) statuses+="5|";
         statuses = statuses.replace(/\|*$/, "");
         if (statuses!="") statuses = '?statuses=' + statuses;
+        return statuses;
+    }
+
+    // Reload the partial view containing the tabular calendar
+    function reloadTabularView() {
+        var url ='';
+        children = includeChildren();
+        displayTypes = displayLeaveTypes();
+        statuses = buildStatusesFilter();
         
-        url = '';
         if (source == 'treeview') {
             url = '<?php echo base_url();?>calendar/tabular/partial/' +
                 entity + '/' + (month + 1) + '/' + year + '/' + children + '/' +
@@ -188,7 +194,7 @@
                     listId + '/' + (month + 1) + '/' + year + '/' +
                     displayTypes + statuses;
         }
-        
+
         $("#spnTabularView").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
         //Month number needs to be converted between monment.js and PHP
         $("#spnTabularView").load(url,
@@ -196,7 +202,7 @@
             if (xhr.status == 401) {
                 $("#frmShowHistory").modal('hide');
                 bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                    //After the login page, we'll be redirected to the current page 
+                    //After the login page, we'll be redirected to the current page
                    location.reload();
                 });
             }
@@ -207,6 +213,11 @@
         $("#txtMonthYear").val(fullDate);
     }
     
+    //Return a URL parameter identified by 'name'
+    function getURLParameter(name) {
+      return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+    }
+
     $(document).ready(function() {
         //Select checkboxes depending on URL
         if (children == '1') {
@@ -219,7 +230,7 @@
         } else {
             $("#chkDisplayTypes").prop("checked", false);
         }
-        
+
         // On changing 'include children' / 'include types' checkboxes,
         // reload the partial view
         $('#chkIncludeChildren').change(function() {
@@ -228,7 +239,7 @@
         $('#chkDisplayTypes').change(function() {
             reloadTabularView();
         });
-        
+
         //Intialize Month/Year selection
         $("#txtMonthYear").datepicker({
             format: "MM yyyy",
@@ -245,7 +256,7 @@
             currentDate = moment().year(year).month(month).date(1);
             reloadTabularView();
         });
-        
+
         //Popup select entity
         $("#cmdSelectEntity").click(function() {
             $("#frmSelectEntity").modal('show');
@@ -259,24 +270,25 @@
 
         //Export the report into Excel
         $("#cmdExport").click(function() {
+            var exportUrl = '';
             var displayTypes = displayLeaveTypes();
             if (source == 'treeview') {
                 children = includeChildren();
                 if (entity != -1) {
-                    url = '<?php echo base_url();?>calendar/tabular/export/' +
+                    exportUrl = '<?php echo base_url();?>calendar/tabular/export/' +
                             entity + '/' + (month+1) + '/' + year + '/' + children +
                             '/' + displayTypes;
-                    document.location.href = url;
+                    document.location.href = exportUrl;
                 }
             } else {
                 if (listId != -1) {
-                    url = '<?php echo base_url();?>calendar/tabular/list/export/' +
+                    exportUrl = '<?php echo base_url();?>calendar/tabular/list/export/' +
                             listId + '/' + (month+1) + '/' + year + '/' + displayTypes;
-                    document.location.href = url;
+                    document.location.href = exportUrl;
                 }
             }
         });
-        
+
         //Previous/Next
         $('#cmdPrevious').click(function() {
             currentDate = currentDate.add(-1, 'M');
@@ -290,13 +302,30 @@
             year = currentDate.year();
             reloadTabularView();
         });
-        
+
         //Load alert forms
         $(".alert").alert();
         $('.alert').on('hidden', function() {
             $(this).removeData('modal');
         });
-        
+
+        //Filter on statuses is a list of inclusion
+        var statuses = getURLParameter('statuses');
+        if (statuses != null) {
+            //Unselect all statuses and select only the statuses passed by URL
+            $(".filterStatus").prop("checked", false);
+            statuses.split(/\|/).forEach(function(status) {
+                switch (status) {
+                    case '1': $("#chkPlanned").prop("checked", true); break;
+                    case '2': $("#chkRequested").prop("checked", true); break;
+                    case '3': $("#chkAccepted").prop("checked", true); break;
+                    case '4': $("#chkRejected").prop("checked", true); break;
+                    case '5': $("#chkCancellation").prop("checked", true); break;
+                    case '6': $("#chkCanceled").prop("checked", true); break;
+                }
+            });
+            reloadTabularView();
+        }
         $('.filterStatus').on('change',function(){
             reloadTabularView();
         });

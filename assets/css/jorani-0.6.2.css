@@ -136,9 +136,9 @@ html, body {
 }
 
 /* Modal History of changes */
-#frmShowHistory 
+#frmShowHistory
 {
-    width: 80%; 
+    width: 80%;
     margin-left:  -35% !important;
 }
 
@@ -160,9 +160,17 @@ html, body {
   background-color: #ff0000 !important;
 }
 
+.input-centered {
+    vertical-align: top;
+}
+
 /*Always put Jquery datepicker on the top layer */
 .ui-datepicker{
     z-index: 9999 !important;
+}
+
+.clickable {
+    cursor: pointer;
 }
 
 /* Leave Request Status */
@@ -573,4 +581,10 @@ td.currentday-border {
     background: #3097d1 !important;
     border-color: #3097d1 !important;
     color: white !important;
+}
+
+/*Better position of checkbox*/
+.filterStatus{
+  position: relative;
+  top: -2px;
 }

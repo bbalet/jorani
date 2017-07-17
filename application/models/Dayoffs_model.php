@@ -410,6 +410,72 @@ class Dayoffs_model extends CI_Model {
     }
 
     /**
+     * All day offs for a list
+     * @param string $start Start date displayed on calendar
+     * @param string $end End date displayed on calendar
+     * @param integer $list_id identifier of the entity
+     * @return string JSON encoded list of full calendar events
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function allDayoffsForList($start, $end, $list_id) {
+      $this->lang->load('calendar', $this->session->userdata('language'));
+      $this->db->select('dayoffs.*, contracts.name');
+      $this->db->distinct();
+      $this->db->join('contracts', 'dayoffs.contract = contracts.id');
+      $this->db->join('users', 'users.contract = contracts.id');
+      $this->db->join('organization', 'users.organization = organization.id');
+      $this->db->where('date >=', $start);
+      $this->db->where('date <=', $end);
+      $this->db->where('organization.id', $list_id);
+      $events = $this->db->get('dayoffs')->result();
+      return $this->transformToEvent($events);
+    }
+
+    private function transformToEvent($events){
+      $jsonevents = array();
+      foreach ($events as $entry) {
+          switch ($entry->type)
+          {
+              case 1:
+                  $title = $entry->title;
+                  $startdate = $entry->date . 'T07:00:00';
+                  $enddate = $entry->date . 'T18:00:00';
+                  $allDay = TRUE;
+                  $startdatetype = 'Morning';
+                  $enddatetype = 'Afternoon';
+                  break;
+              case 2:
+                  $title = lang('Morning') . ': ' . $entry->title;
+                  $startdate = $entry->date . 'T07:00:00';
+                  $enddate = $entry->date . 'T12:00:00';
+                  $allDay = FALSE;
+                  $startdatetype = 'Morning';
+                  $enddatetype = 'Morning';
+                  break;
+              case 3:
+                  $title = lang('Afternoon') . ': ' . $entry->title;
+                  $startdate = $entry->date . 'T12:00:00';
+                  $enddate = $entry->date . 'T18:00:00';
+                  $allDay = FALSE;
+                  $startdatetype = 'Afternoon';
+                  $enddatetype = 'Afternoon';
+                  break;
+          }
+          $jsonevents[] = array(
+              'id' => $entry->id,
+              'title' => $entry->name . ': ' . $title,
+              'start' => $startdate,
+              'color' => '#000000',
+              'allDay' => $allDay,
+              'end' => $enddate,
+              'startdatetype' => $startdatetype,
+              'enddatetype' => $enddatetype
+          );
+      }
+      return json_encode($jsonevents);
+    }
+
+    /**
      * Purge the table by deleting the records prior $toDate
      * @param date $toDate
      * @return int number of affected rows

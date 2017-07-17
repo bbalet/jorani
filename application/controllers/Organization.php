@@ -335,8 +335,8 @@ class Organization extends CI_Controller {
         $this->lang->load('organization', $this->language);
         $this->lang->load('datatable', $this->language);
         //TODO remove
-        $data['title'] = 'REMOVE ME !!';
-        $this->load->view('templates/header', $data);
+        //$data['title'] = 'REMOVE ME !!';
+        //$this->load->view('templates/header', $data);
         $this->load->view('organization/lists', $data);
     }
 
@@ -476,6 +476,26 @@ class Organization extends CI_Controller {
           $mooves = json_decode($this->input->post('moves'));
           $this->lists_model->reorderListEmployees($listId, $mooves);
           echo json_encode("");
+      }
+    }
+
+    /**
+    * Ajax endpoint retrieving the name of a list
+    * @author Emilien NICOLAS <milihhard1996@gmail.com>
+    */
+    public function listName(){
+      header("Content-Type: application/json");
+      $data = getCIUserContext();
+      if ($this->auth->isAllowed('organization_lists_index') == FALSE) {
+          $this->output->set_header("HTTP/1.1 403 Forbidden");
+      } else {
+          $this->load->model('lists_model');
+          $listId = $this->input->post('id');
+          $this->lists_model->getName($listId);
+          $list = new stdClass();
+          $list->id=$listId;
+          $list->name = $this->lists_model->getName($listId);
+          echo json_encode($list);
       }
     }
 }

@@ -1057,6 +1057,110 @@ class Leaves_model extends CI_Model {
     }
 
     /**
+     * Leave requests of All users of a list (suitable for FullCalendar widget)
+     * @param int $list_id List identifier
+     * @param string $start Unix timestamp / Start date displayed on calendar
+     * @param string $end Unix timestamp / End date displayed on calendar
+     * @param bool $children Include sub department in the query
+     * @param string $statusFilter optional filter on status
+     * @return string JSON encoded list of full calendar events
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
+    public function getListRequest($list_id, $start = "", $end = "", $statusFilter = NULL) {
+      $this->db->select('users.firstname, users.lastname, users.manager');
+      $this->db->select('leaves.*');
+      $this->db->select('types.name as type, types.acronym as acronym');
+      $this->db->from('organization');
+      $this->db->join('users', 'users.organization = organization.id');
+      $this->db->join('leaves', 'leaves.employee = users.id');
+      $this->db->join('types', 'leaves.type = types.id');
+      $this->db->join('org_lists_employees', 'org_lists_employees.user = users.id');
+      $this->db->where('(leaves.startdate <= DATE(' . $this->db->escape($end) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))');
+      $this->db->where('org_lists_employees.list', $list_id);
+      //$this->db->where('leaves.status != ', 4); //Exclude rejected requests
+      if ($statusFilter != NULL) {
+          $statuses = explode ('|', $statusFilter);
+          $this->db->where_in('status', $statuses );
+      }
+      $this->db->order_by('startdate', 'desc');
+      $this->db->limit(1024);  //Security limit
+      $events = $this->db->get()->result();
+      return $this->transformToEvent($events);
+    }
+
+    private function transformToEvent($events){
+      $jsonevents = array();
+      foreach ($events as $entry) {
+          //Date of event
+          if ($entry->startdatetype == "Morning") {
+              $startdate = $entry->startdate . 'T07:00:00';
+          } else {
+              $startdate = $entry->startdate . 'T12:00:00';
+          }
+
+          if ($entry->enddatetype == "Morning") {
+              $enddate = $entry->enddate . 'T12:00:00';
+          } else {
+              $enddate = $entry->enddate . 'T18:00:00';
+          }
+          $imageUrl = '';
+          $allDay = FALSE;
+          $startdatetype =  $entry->startdatetype;
+          $enddatetype = $entry->enddatetype;
+          if ($startdate == $enddate) { //Deal with invalid start/end date
+              $imageUrl = base_url() . 'assets/images/date_error.png';
+              $startdate = $entry->startdate . 'T07:00:00';
+              $enddate = $entry->enddate . 'T18:00:00';
+              $startdatetype = "Morning";
+              $enddatetype = "Afternoon";
+              $allDay = TRUE;
+          }
+
+          $color = '#ff0000';
+          switch ($entry->status)
+          {
+              case 1: $color = '#999'; break;     // Planned
+              case 2: $color = '#f89406'; break;  // Requested
+              case 3: $color = '#468847'; break;  // Accepted
+              case 4: $color = '#ff0000'; break;  // Rejected
+              default: $color = '#ff0000'; break;  // Cancellation and Canceled
+          }
+          $title = $entry->firstname .' ' . $entry->lastname;
+          //If the connected user can access to the leave request
+          //(self, HR admin and manager), add a link and the acronym
+          $url = '';
+          if (($entry->employee == $this->session->userdata('id')) ||
+              ($entry->manager == $this->session->userdata('id')) ||
+                  ($this->session->userdata('is_hr') === TRUE)) {
+              $url = base_url() . 'leaves/leaves/' . $entry->id;
+              if (!empty($entry->acronym)) {
+                  $title .= ' - ' . $entry->acronym;
+              }
+          } else {
+              //Don't display rejected and cancel* leave requests for other employees
+              if ($entry->status > 3) {
+                  continue;
+              }
+          }
+
+          //Create the JSON representation of the event
+          $jsonevents[] = array(
+              'id' => $entry->id,
+              'title' => $title,
+              'imageurl' => $imageUrl,
+              'start' => $startdate,
+              'color' => $color,
+              'allDay' => $allDay,
+              'end' => $enddate,
+              'startdatetype' => $startdatetype,
+              'enddatetype' => $enddatetype,
+              'url' => $url
+          );
+      }
+      return json_encode($jsonevents);
+    }
+
+    /**
      * Leave requests of All users of an entity
      * @param int $entity_id Entity identifier (the department)
      * @param bool $children Include sub department in the query

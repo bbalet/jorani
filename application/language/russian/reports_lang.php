@@ -43,6 +43,6 @@ $lang['reports_leaves_popup_entity_button_cancel'] = 'Отмена';
 
 $lang['reports_export_leaves_title'] = 'Список заявлений на отпуск';
 
-$lang['leaves_comment_refuse_request_title'] = 'Send a new comment(opt)';
-$lang['leaves_comment_refuse_request_button_cancel'] = 'Cancel';
-$lang['leaves_comment_refuse_request_button_refuse'] = 'Refuse';
+$lang['requests_comment_reject_request_title'] = 'Send a new comment (optional)';
+$lang['requests_comment_reject_request_button_cancel'] = 'Cancel';
+$lang['requests_comment_reject_request_button_reject'] = 'Reject';

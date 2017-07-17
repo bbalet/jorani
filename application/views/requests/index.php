@@ -270,9 +270,9 @@ $(document).ready(function() {
             clicked = true;
             var id =$(this).data("id");
             var validateUrl = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
-            bootbox.prompt(<?php echo "'" . lang('leaves_comment_refuse_request_title') . "'";?>,
-              <?php echo "'" . lang('leaves_comment_refuse_request_button_cancel') . "'";?>,
-              <?php echo "'" . lang('leaves_comment_refuse_request_button_refuse') . "'";?>,
+            bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
+              <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
+              <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
               function (result) {
                 if (result !== null){
                   console.log(validateUrl + " - " + id + " - " + result);
@@ -302,9 +302,9 @@ $(document).ready(function() {
             clicked = true;
             var id =$(this).data("id");
             var validateUrl = "<?php echo base_url();?>requests/cancellation/reject/" + $(this).data("id");
-            bootbox.prompt(<?php echo "'" . lang('leaves_comment_refuse_request_title') . "'";?>,
-              <?php echo "'" . lang('leaves_comment_refuse_request_button_cancel') . "'";?>,
-              <?php echo "'" . lang('leaves_comment_refuse_request_button_refuse') . "'";?>,
+            bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
+              <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
+              <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
               function (result) {
                 if (result !== null){
                   console.log(validateUrl + " - " + id + " - " + result);
@@ -384,9 +384,9 @@ $(document).ready(function() {
     if (id != null && !isNaN(id)) {
       //bootbox.alert(id);
       var validateUrl = "<?php echo base_url();?>requests/reject/" + id;
-      bootbox.prompt(<?php echo "'" . lang('leaves_comment_refuse_request_title') . "'";?>,
-        <?php echo "'" . lang('leaves_comment_refuse_request_button_cancel') . "'";?>,
-        <?php echo "'" . lang('leaves_comment_refuse_request_button_refuse') . "'";?>,
+      bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
+        <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
+        <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
       function (result) {
         if (result !== null){
           console.log(validateUrl + " - " + id + " - " + result);
@@ -403,9 +403,9 @@ $(document).ready(function() {
     if (idCancel != null && !isNaN(idCancel)) {
       //bootbox.alert(id);
       var validateUrl = "<?php echo base_url();?>requests/cancellation/reject/" + idCancel;
-      bootbox.prompt(<?php echo "'" . lang('leaves_comment_refuse_request_title') . "'";?>,
-        <?php echo "'" . lang('leaves_comment_refuse_request_button_cancel') . "'";?>,
-        <?php echo "'" . lang('leaves_comment_refuse_request_button_refuse') . "'";?>,
+      bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
+        <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
+        <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
       function (result) {
         if (result !== null){
           console.log(validateUrl + " - " + idCancel + " - " + result);

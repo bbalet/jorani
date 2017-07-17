@@ -81,6 +81,6 @@ $lang['requests_balance_title'] = '請假餘額(部屬)';
 $lang['requests_balance_description'] = 'Leave balance of my direct report subordinates. If you are not a manager, this list will always be empty.';
 $lang['requests_balance_date_field'] = '報告建立日期';
 
-$lang['leaves_comment_refuse_request_title'] = 'Send a new comment(opt)';
-$lang['leaves_comment_refuse_request_button_cancel'] = 'Cancel';
-$lang['leaves_comment_refuse_request_button_refuse'] = 'Refuse';
+$lang['requests_comment_reject_request_title'] = 'Send a new comment (optional)';
+$lang['requests_comment_reject_request_button_cancel'] = 'Cancel';
+$lang['requests_comment_reject_request_button_reject'] = 'Reject';

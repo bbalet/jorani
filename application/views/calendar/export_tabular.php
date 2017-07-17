@@ -145,23 +145,27 @@ foreach ($tabular as $employee) {
                 //6 - Afternoon Day Off /|
               $sheet->getComment($col . $line)->getText()->createTextRun($types[0]);
               $sheet->getComment($col . ($line + 1))->getText()->createTextRun($types[1]);
-              switch (intval($statuses[1]))
+              switch (intval($statuses[0]))
               {
                 case 1: $sheet->getStyle($col . $line)->applyFromArray($styleBgPlanned); break;  // Planned
                 case 2: $sheet->getStyle($col . $line)->applyFromArray($styleBgRequested); break;  // Requested
                 case 3: $sheet->getStyle($col . $line)->applyFromArray($styleBgAccepted); break;  // Accepted
                 case 4: $sheet->getStyle($col . $line)->applyFromArray($styleBgRejected); break;  // Rejected
-                case 5: $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
-                case 6: $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
+                case 5: $sheet->getStyle($col . $line)->applyFromArray($styleBgRejected); break;    //Cancellation
+                case 6: $sheet->getStyle($col . $line)->applyFromArray($styleBgRejected); break;    //Canceled
+                case 12: $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
+                case 13: $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff); break;    //Day off
               }
-              switch (intval($statuses[0]))
+              switch (intval($statuses[1]))
               {
                 case 1: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgPlanned); break;  // Planned
                 case 2: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRequested); break;  // Requested
                 case 3: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgAccepted); break;  // Accepted
                 case 4: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Rejected
-                case 5: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff); break;    //Day off
-                case 6: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff); break;    //Day off
+                case 5: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRejected); break;    //Cancellation
+                case 6: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRejected); break;    //Canceled
+                case 12: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff); break;    //Day off
+                case 13: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff); break;    //Day off
               }
             if ($displayTypes && $canSeeType) {
                 $acronyms = explode(";", $day->acronym);
@@ -187,6 +191,8 @@ foreach ($tabular as $employee) {
                             case 2: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgRequested); break; // Requested
                             case 3: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgAccepted); break;  // Accepted
                             case 4: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Rejected
+                            case 5: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Cancellation
+                            case 6: $sheet->getStyle($col . $line . ':' . $col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Canceled
                         }
                         break;
                 case '2':   //AM
@@ -200,6 +206,8 @@ foreach ($tabular as $employee) {
                           case 2: $sheet->getStyle($col . $line)->applyFromArray($styleBgRequested); break;  // Requested
                           case 3: $sheet->getStyle($col . $line)->applyFromArray($styleBgAccepted); break;  // Accepted
                           case 4: $sheet->getStyle($col . $line)->applyFromArray($styleBgRejected); break;  // Rejected
+                          case 5: $sheet->getStyle($col . $line)->applyFromArray($styleBgRejected); break;  // Cancellation
+                          case 6: $sheet->getStyle($col . $line)->applyFromArray($styleBgRejected); break;  // Canceled
                       }
                     break;
                 case '3':   //PM
@@ -213,6 +221,8 @@ foreach ($tabular as $employee) {
                           case 2: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRequested); break;  // Requested
                           case 3: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgAccepted); break;  // Accepted
                           case 4: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Rejected
+                          case 5: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Cancellation
+                          case 6: $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgRejected); break;  // Canceled
                       }
                     break;
                 case '4': //Full day off
@@ -220,11 +230,11 @@ foreach ($tabular as $employee) {
                     $sheet->getComment($col . $line)->getText()->createTextRun($day->type);
                     $sheet->getComment($col . ($line + 1))->getText()->createTextRun($day->type);
                     break;
-                case '5':  //AM off
+                case '12':  //AM off
                     $sheet->getStyle($col . $line)->applyFromArray($styleBgDayOff);
                     $sheet->getComment($col . $line)->getText()->createTextRun($day->type);
                     break;
-                case '6':   //PM off
+                case '13':   //PM off
                     $sheet->getStyle($col . ($line + 1))->applyFromArray($styleBgDayOff);
                     $sheet->getComment($col . ($line + 1))->getText()->createTextRun($day->type);
                     break;

@@ -67,6 +67,7 @@ if (count($tabular) > 0) {?>
           $dayIterator++;
           $overlapping = FALSE;
           $style = '';
+          $dataIds= '';
           if (strstr($day->display, ';')) {
               $periods = explode(";", $day->display);
               $statuses = explode(";", $day->status);
@@ -171,7 +172,6 @@ if (count($tabular) > 0) {?>
                     $dayType = "";
                 } else {
                     //Hide leave type to users who are not part of HR/Admin
-                    $dataIds= '';
                     if (($is_hr == TRUE) || 
                             ($is_admin == TRUE) || 
                             ($employee->manager == $user_id) || 

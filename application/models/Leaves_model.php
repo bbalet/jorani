@@ -604,7 +604,7 @@ class Leaves_model extends CI_Model {
      */
     public function updateLeaves($id) {
         $json = $this->prepareCommentOnStatusChanged($id, $this->input->post('status'));
-        if(! empty($this->input->post('comment'))){
+        if($this->input->post('comment') != NULL){
           $jsonDecode = json_decode($json);
           $comment_object = new stdClass;
           $comment_object->type = "comment";

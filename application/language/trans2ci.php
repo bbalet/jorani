@@ -7,7 +7,7 @@
  * @since      0.3.0
  */
 require("POParser.php");
-$target = "chinese";
+$target = "greek";
 
 $copyright = "<?php
 /**
@@ -21,7 +21,7 @@ $copyright = "<?php
 
 //Load and parse the PO file
 $parser = new POParser;
-$messages = $parser->parse($target . '.po');
+$messages = $parser->parse($target . DIRECTORY_SEPARATOR . $target . '.po');
 $lenPO = count($messages[1]);
 
 //Scan all translation files

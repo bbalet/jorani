@@ -216,7 +216,7 @@ class Connection extends CI_Controller {
                     redirect($this->session->userdata('last_page') . '?' . $this->session->userdata('last_page_params'));
                 }
             } else {
-                redirect(base_url() . 'home');
+                redirect('home');
             }
         }
     }

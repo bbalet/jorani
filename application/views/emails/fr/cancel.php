@@ -41,7 +41,7 @@
                 <td>Cause &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-                <td>Comments &nbsp;</td><td>{Comments}</td>
+                <td>Dernier commentaire &nbsp;</td><td>{Comments}</td>
             </tr>
             <tr>
                 <td><a href="{BaseUrl}requests/cancellation/accept/{LeaveId}">Confirmer l'annulation</a> &nbsp;</td><td><a href="{BaseUrl}requests?cancel_rejected={LeaveId}">Refuser l'annulation</a></td>

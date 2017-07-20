@@ -36,7 +36,7 @@
                 <td>Cause &nbsp;</td><td>{Cause}</td>
             </tr>
             <tr>
-                <td>Comments &nbsp;</td><td>{Comments}</td>
+                <td>Dernier commentaire &nbsp;</td><td>{Comments}</td>
             </tr>
         </table>
         <hr>

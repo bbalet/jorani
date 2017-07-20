@@ -230,7 +230,16 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-msgid "Execute"
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Select a list"
+msgstr ""
+
+msgid "Display leave types"
 msgstr ""
 
 msgid "Calendar Tabular"
@@ -542,12 +551,6 @@ msgstr ""
 msgid "Last"
 msgstr ""
 
-msgid "Next"
-msgstr ""
-
-msgid "Previous"
-msgstr ""
-
 msgid ": activate to sort column ascending"
 msgstr ""
 
@@ -588,6 +591,12 @@ msgid "Leave Request Cancellation from"
 msgstr ""
 
 msgid "Leave Request Cancellation"
+msgstr ""
+
+msgid "Your Cancellation Request has been accepted"
+msgstr ""
+
+msgid "Your Cancellation Request has been rejected"
 msgstr ""
 
 msgid "Your leave request has been accepted"
@@ -776,6 +785,12 @@ msgstr ""
 msgid "Rejected"
 msgstr ""
 
+msgid "Cancellation"
+msgstr ""
+
+msgid "Canceled"
+msgstr ""
+
 msgid "today"
 msgstr ""
 
@@ -810,6 +825,9 @@ msgid "All"
 msgstr ""
 
 msgid "copied"
+msgstr ""
+
+msgid "Do You Authorize %s application?"
 msgstr ""
 
 msgid "Your session has expired please login again"
@@ -983,6 +1001,9 @@ msgstr ""
 msgid "By default this report shows the values for the last month. Please note that the list of leaves shows only the accepted leave requests."
 msgstr ""
 
+msgid "Execute"
+msgstr ""
+
 msgid "Number of days"
 msgstr ""
 
@@ -1028,6 +1049,9 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
+msgid "Last change"
+msgstr ""
+
 msgid "Changed Date"
 msgstr ""
 
@@ -1061,10 +1085,19 @@ msgstr ""
 msgid "You can't cancel this leave request"
 msgstr ""
 
+msgid "The cancellation request has been successfully sent"
+msgstr ""
+
 msgid "The leave request has been successfully cancelled"
 msgstr ""
 
-msgid "You can't cancel a leave request starting in the past. Ask your manager for rejecting it."
+msgid "An error occured while trying to accept the cancellation"
+msgstr ""
+
+msgid "The leave request has now its original status of Accepted"
+msgstr ""
+
+msgid "An error occured while trying to reject the cancellation"
 msgstr ""
 
 msgid "You can't delete this leave request"
@@ -1085,6 +1118,27 @@ msgstr ""
 msgid "Morning/Afternoon"
 msgstr ""
 
+msgid "Send a reminder"
+msgstr ""
+
+msgid "The reminder email was sent to the manager"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "New comment"
+msgstr ""
+
+msgid "Send comment"
+msgstr ""
+
+msgid " says"
+msgstr ""
+
+msgid "The status of the leave have been changed to "
+msgstr ""
+
 msgid "Leave types"
 msgstr ""
 
@@ -1092,6 +1146,9 @@ msgid "Leave type #0 is a system type reserved for overtime management. You shou
 msgstr ""
 
 msgid "Leave type #0 is a system type reserved for overtime management. Are you sure that you want to rename it?"
+msgstr ""
+
+msgid "Acronym"
 msgstr ""
 
 msgid "Deduct non working days"
@@ -1107,6 +1164,9 @@ msgid "This leave type already exists."
 msgstr ""
 
 msgid "Add a leave type"
+msgstr ""
+
+msgid "Suggest an acronym"
 msgstr ""
 
 msgid "The leave type has been succesfully created."
@@ -1280,6 +1340,33 @@ msgstr ""
 msgid "You cannot delete the root entity."
 msgstr ""
 
+msgid "Select a list of employees"
+msgstr ""
+
+msgid "Rename a list"
+msgstr ""
+
+msgid "Add a new list"
+msgstr ""
+
+msgid "Delete a list"
+msgstr ""
+
+msgid "Add employees"
+msgstr ""
+
+msgid "Remove selected employees"
+msgstr ""
+
+msgid "Name of the list"
+msgstr ""
+
+msgid "Are you sure that you want to delete this list?"
+msgstr ""
+
+msgid "New name of the list"
+msgstr ""
+
 msgid "Overtime Requests submitted to me"
 msgstr ""
 
@@ -1404,6 +1491,12 @@ msgid "Leave balance (subordinates)"
 msgstr ""
 
 msgid "Leave balance of my direct report subordinates. If you are not a manager, this list will always be empty."
+msgstr ""
+
+msgid "Send a new comment (optional)"
+msgstr ""
+
+msgid "Reject"
 msgstr ""
 
 msgid "Login"

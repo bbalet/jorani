@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license     http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link          https://github.com/bbalet/jorani
- * @since       0.4.7
- * @author      Ceibga Bao <info@sansin.com.tw>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.3
+ * @author     Kostas Simvoulidis <kostas.simvoulidis@gmail.com>
  */
 
 $lang['admin_diagnostic_title'] = 'Διαγνωστικός έλεγχος δεδομένων και διαμόρφωσης';
@@ -60,6 +60,7 @@ $lang['admin_diagnostic_balance_thead_employee'] = 'Υπάλληλος';
 $lang['admin_diagnostic_balance_thead_contract'] = 'Σύμβαση';
 $lang['admin_diagnostic_balance_thead_start_date'] = 'Ημερομηνία έναρξης';
 $lang['admin_diagnostic_balance_thead_status'] = 'Κατάσταση';
+
 $lang['admin_oauthclients_title'] = 'OAuth πελάτες και περιόδους σύνδεσης';
 $lang['admin_oauthclients_tab_clients'] = 'Χρήστες';
 $lang['admin_oauthclients_tab_clients_description'] = 'Κατάλογος χρηστών που επιτρέπεται να χρησιμοποιούν το API REST';

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jorani\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-07-19 14:14+0000\n"
+"PO-Revision-Date: 2017-07-21 09:42+0000\n"
 "Last-Translator: ksimvoulidis <kostas.simvoulidis@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/jorani/jorani/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -240,8 +240,17 @@ msgstr "Μήνας"
 msgid "Year"
 msgstr "Έτος"
 
-msgid "Execute"
-msgstr "Εκτέλεση"
+msgid "Previous"
+msgstr "Προηγούμενος"
+
+msgid "Next"
+msgstr "Επόμενος"
+
+msgid "Select a list"
+msgstr "Επιλέξτε μια λίστα"
+
+msgid "Display leave types"
+msgstr "Εμφάνιση τύπων άδειας"
 
 msgid "Calendar Tabular"
 msgstr "Καρτέλες ημερολογίου"
@@ -557,12 +566,6 @@ msgstr "Πρώτος"
 msgid "Last"
 msgstr "Τελευταίος"
 
-msgid "Next"
-msgstr "Επόμενος"
-
-msgid "Previous"
-msgstr "Προηγούμενος"
-
 msgid ": activate to sort column ascending"
 msgstr ": ενεργοποίηση για την ταξινόμηση της στήλης αύξουσα"
 
@@ -604,6 +607,12 @@ msgstr "Ακύρωση αίτηση αδείας από"
 
 msgid "Leave Request Cancellation"
 msgstr "Ακύρωση αίτηση αδείας"
+
+msgid "Your Cancellation Request has been accepted"
+msgstr "Το αίτημά σας ακύρωσης έχει γίνει αποδεκτό"
+
+msgid "Your Cancellation Request has been rejected"
+msgstr "Το αίτημα ακύρωσης απορρίφθηκε"
 
 msgid "Your leave request has been accepted"
 msgstr "Το αίτημα άδειας σας έγινε δεκτό"
@@ -799,6 +808,12 @@ msgstr "Αποδεκτό"
 msgid "Rejected"
 msgstr "Απορρίφθηκε"
 
+msgid "Cancellation"
+msgstr "Ακύρωση"
+
+msgid "Canceled"
+msgstr "Ακυρώθηκε"
+
 msgid "today"
 msgstr "σήμερα"
 
@@ -834,6 +849,9 @@ msgstr "Όλα"
 
 msgid "copied"
 msgstr "αντιγράφηκαν"
+
+msgid "Do You Authorize %s application?"
+msgstr "Επιτρέπετε την εφαρμογή %s;"
 
 msgid "Your session has expired please login again"
 msgstr "Η συνεδρία σας έχει λήξει, παρακαλούμε συνδεθείτε ξανά"
@@ -1015,6 +1033,9 @@ msgid ""
 " the list of leaves shows only the accepted leave requests."
 msgstr "Από προεπιλογή, αυτή η αναφορά εμφανίζει τις τιμές για τον τελευταίο μήνα. Σημειώστε ότι ο κατάλογος των φύλλων δείχνει μόνο τα αποδεκτά αιτήματα άδειας."
 
+msgid "Execute"
+msgstr "Εκτέλεση"
+
 msgid "Number of days"
 msgstr "Αριθμός ημερών"
 
@@ -1062,6 +1083,9 @@ msgstr "Οι αιτήσεις άδειας μου"
 msgid "cancel"
 msgstr "άκυρο"
 
+msgid "Last change"
+msgstr "Τελευταία αλλαγή"
+
 msgid "Changed Date"
 msgstr "Ημερομηνία αλλαγής"
 
@@ -1097,13 +1121,20 @@ msgstr "Η αίτηση άδειας ενημερώθηκε με επιτυχί�
 msgid "You can't cancel this leave request"
 msgstr "Δεν μπορείτε να ακυρώσετε αυτό το αίτημα άδειας"
 
+msgid "The cancellation request has been successfully sent"
+msgstr "Το αίτημα ακύρωσης έχει σταλεί με επιτυχία"
+
 msgid "The leave request has been successfully cancelled"
 msgstr "Η αίτηση άδειας ακυρώθηκε με επιτυχία"
 
-msgid ""
-"You can't cancel a leave request starting in the past. Ask your manager for "
-"rejecting it."
-msgstr "Δεν μπορείτε να ακυρώσετε ένα αίτημα άδειας που ξεκίνησε στο παρελθόν. Ρωτήστε τον διαχειριστή σας για την απόρριψή του."
+msgid "An error occured while trying to accept the cancellation"
+msgstr "Παρουσιάστηκε σφάλμα κατά την προσπάθεια αποδοχής της ακύρωσης"
+
+msgid "The leave request has now its original status of Accepted"
+msgstr "Η αίτηση άδειας έχει τώρα την αρχική της κατάσταση Αποδεκτή"
+
+msgid "An error occured while trying to reject the cancellation"
+msgstr "Παρουσιάστηκε σφάλμα κατά την απόρριψη της ακύρωσης"
 
 msgid "You can't delete this leave request"
 msgstr "Δεν μπορείτε να διαγράψετε αυτό το αίτημα άδειας"
@@ -1123,6 +1154,27 @@ msgstr "Κατάλογος αδειών"
 msgid "Morning/Afternoon"
 msgstr "Πρωί / απόγευμα"
 
+msgid "Send a reminder"
+msgstr "Αποστολή υπενθύμισης"
+
+msgid "The reminder email was sent to the manager"
+msgstr "Το μήνυμα ηλεκτρονικού ταχυδρομείου υπενθύμισης στάλθηκε στον διαχειριστή"
+
+msgid "Comments"
+msgstr "Σχόλια"
+
+msgid "New comment"
+msgstr "Νέο σχόλιο"
+
+msgid "Send comment"
+msgstr "Αποστολή σχολίου"
+
+msgid " says"
+msgstr "λέει"
+
+msgid "The status of the leave have been changed to "
+msgstr "Η κατάσταση της άδειας έχει αλλάξει"
+
 msgid "Leave types"
 msgstr "Τύποι αδειών"
 
@@ -1135,6 +1187,9 @@ msgid ""
 "Leave type #0 is a system type reserved for overtime management. Are you "
 "sure that you want to rename it?"
 msgstr "Ο τύπος άδειας # 0 είναι ένας τύπος συστήματος που προορίζεται για τη διαχείριση υπερωριών. Είστε βέβαιοι ότι θέλετε να το μετονομάσετε;"
+
+msgid "Acronym"
+msgstr "Ακρώνυμο"
 
 msgid "Deduct non working days"
 msgstr "Μειώστε τις μη εργάσιμες ημέρες"
@@ -1150,6 +1205,9 @@ msgstr "Αυτός ο τύπος άδειας υπάρχει ήδη."
 
 msgid "Add a leave type"
 msgstr "Προσθέστε έναν τύπο άδειας"
+
+msgid "Suggest an acronym"
+msgstr "Προτείνετε ένα ακρωνύμιο"
 
 msgid "The leave type has been succesfully created."
 msgstr "Ο τύπος άδειας δημιουργήθηκε με επιτυχία."
@@ -1327,6 +1385,33 @@ msgstr "Επιλέξτε έναν υπάλληλο στον πίνακα χρη�
 msgid "You cannot delete the root entity."
 msgstr "Δεν μπορείτε να διαγράψετε τη κυρία οντότητα."
 
+msgid "Select a list of employees"
+msgstr "Επιλέξτε μια λίστα με τους υπαλλήλους"
+
+msgid "Rename a list"
+msgstr "Μετονομασία μιας λίστας"
+
+msgid "Add a new list"
+msgstr "Προσθέστε μια νέα λίστα"
+
+msgid "Delete a list"
+msgstr "Διαγραφή μιας λίστας"
+
+msgid "Add employees"
+msgstr "Προσθέστε  υπαλλήλους"
+
+msgid "Remove selected employees"
+msgstr "Κατάργηση επιλεγμένων υπαλλήλων"
+
+msgid "Name of the list"
+msgstr "Όνομα της λίστας"
+
+msgid "Are you sure that you want to delete this list?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη λίστα;"
+
+msgid "New name of the list"
+msgstr "Νέο όνομα της λίστας"
+
 msgid "Overtime Requests submitted to me"
 msgstr "Αιτήσεις υπερωριών που υποβλήθηκαν σε εμένα"
 
@@ -1470,6 +1555,12 @@ msgid ""
 "Leave balance of my direct report subordinates. If you are not a manager, "
 "this list will always be empty."
 msgstr "Υπόλοιπο αδειών των υπαλλήλων της άμεσης έκθεσής μου. Εάν δεν είστε διαχειριστής, αυτή η λίστα θα είναι πάντα κενή."
+
+msgid "Send a new comment (optional)"
+msgstr "Αποστολή νέου σχολίου (προαιρετικό)"
+
+msgid "Reject"
+msgstr "Απόρριψη"
 
 msgid "Login"
 msgstr "Σύνδεση"

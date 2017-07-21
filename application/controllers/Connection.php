@@ -25,7 +25,7 @@ class Connection extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('polyglot');
-        if ($this->session->userdata('language') === FALSE) {
+        if ($this->session->userdata('language') == NULL) {
             $availableLanguages = explode(",", $this->config->item('languages'));
             $languageCode = $this->polyglot->language2code($this->config->item('language'));
             if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {

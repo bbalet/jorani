@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license     http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link          https://github.com/bbalet/jorani
- * @since       0.4.7
- * @author      Ceibga Bao <info@sansin.com.tw>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.3
+ * @author     Kostas Simvoulidis <kostas.simvoulidis@gmail.com>
  */
 
 $lang['contract_index_title'] = 'Κατάλογος συμβάσεων';
@@ -28,14 +28,16 @@ $lang['contract_index_popup_delete_button_no'] = 'Όχι';
 $lang['contract_index_popup_entitled_title'] = 'Μερικές ημέρες';
 $lang['contract_index_popup_entitled_button_cancel'] = 'Ακύρωση';
 $lang['contract_index_popup_entitled_button_close'] = 'Κλείσιμο';
+
 $lang['contract_exclude_title'] = 'Εξαιρούνται οι τύποι άδειας από σύμβαση';
-$lang['contract_exclude_description'] = 'You cannot exclude leave types already in use (used at least one time by en employee attached to the contract) and the default leave type (set on the contract or into the configuration file).';
+$lang['contract_exclude_description'] = 'Δεν μπορείτε να αποκλείσετε τους τύπους άδειας που χρησιμοποιούνται ήδη (που χρησιμοποιούνται τουλάχιστον μία φορά από τον υπάλληλο που έχει επισυναφθεί στη σύμβαση) και τον προκαθορισμένο τύπο άδειας (που έχει οριστεί για τη σύμβαση ή στο αρχείο ρυθμίσεων).';
 $lang['contract_exclude_title_included'] = 'Περιέχονται τα είδη άδειας';
 $lang['contract_exclude_title_excluded'] = 'Δεν περιέχονται τα είδη άδειας';
 $lang['contract_exclude_tip_include_type'] = 'Συμπεριλάβετε αυτόν τον τύπο άδειας';
 $lang['contract_exclude_tip_exclude_type'] = 'Εξαίρεση αυτού του τύπου άδειας';
 $lang['contract_exclude_tip_already_used'] = 'Αυτός ο τύπος άδειας χρησιμοποιείται ήδη';
 $lang['contract_exclude_tip_default_type'] = 'Δεν μπορείτε να εξαιρέσετε τον προεπιλεγμένο τύπο άδειας';
+
 $lang['contract_edit_title'] = 'Επεξεργασία μιας σύμβασης';
 $lang['contract_edit_description'] = 'Επεξεργασία σύμβασης #';
 $lang['contract_edit_field_name'] = 'Όνομα';
@@ -47,6 +49,7 @@ $lang['contract_edit_default_leave_type'] = 'Προεπιλεγμένος τύπ
 $lang['contract_edit_button_update'] = 'Ενημέρωση σύμβασης';
 $lang['contract_edit_button_cancel'] = 'Ακύρωση';
 $lang['contract_edit_msg_success'] = 'Η σύμβαση ενημερώθηκε με επιτυχία';
+
 $lang['contract_create_title'] = 'Δημιουργήστε μια νέα σύμβαση';
 $lang['contract_create_field_name'] = 'Όνομα';
 $lang['contract_create_field_start_month'] = 'Μηνάς / Αρχή';
@@ -57,14 +60,17 @@ $lang['contract_create_default_leave_type'] = 'Προεπιλεγμένος τύ
 $lang['contract_create_button_create'] = 'Δημιουργία σύμβασης';
 $lang['contract_create_button_cancel'] = 'Ακύρωση';
 $lang['contract_create_msg_success'] = 'Η σύμβαση έχει δημιουργηθεί με επιτυχία';
+
 $lang['contract_delete_msg_success'] = 'Η σύμβαση διαγράφηκε με επιτυχία';
+
 $lang['contract_export_title'] = 'Κατάλογος συμβάσεων';
 $lang['contract_export_thead_id'] = 'ID';
 $lang['contract_export_thead_name'] = 'Όνομα';
 $lang['contract_export_thead_start'] = 'Περίοδος έναρξης';
 $lang['contract_export_thead_end'] = 'Περίοδος λήξης';
+
 $lang['contract_calendar_title'] = 'Χρονοδιάγραμμα μη εργάσιμων ημερών';
-$lang['contract_calendar_description'] = 'Days off and weekends are not configured by default. Click on a day to edit it individually or use the button "Series".';
+$lang['contract_calendar_description'] = 'Οι ημέρες αργίας και τα σαββατοκύριακα δεν έχουν ρυθμιστεί από προεπιλογή. Κάντε κλικ σε μια ημέρα για να την επεξεργαστείτε ξεχωριστά ή χρησιμοποιήστε το κουμπί "Σειρά".';
 $lang['contract_calendar_legend_title'] = 'Τίτλος:';
 $lang['contract_calendar_legend_allday'] = 'Όλη μέρα';
 $lang['contract_calendar_legend_morning'] = 'Πρωί';

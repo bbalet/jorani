@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license     http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link          https://github.com/bbalet/jorani
- * @since       0.4.7
- * @author      Ceibga Bao <info@sansin.com.tw>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.3
+ * @author     Kostas Simvoulidis <kostas.simvoulidis@gmail.com>
  */
 
 $lang['organization_index_title'] = 'Εταιρία';
@@ -20,7 +20,7 @@ $lang['organization_index_button_add_employee'] = 'Σύνδεσε έναν υπ�
 $lang['organization_index_button_remove_employee'] = 'Αποσύνδεσε έναν υπάλληλο';
 $lang['organization_index_button_select_supervisor'] = 'Επιλογή';
 $lang['organization_index_title_supervisor'] = 'Επόπτης';
-$lang['organization_index_description_supervisor'] = 'If you select a supervisor, he will receive a copy of accepted and rejected leave requests submitted by employees of this entity.';
+$lang['organization_index_description_supervisor'] = 'Εάν επιλέξετε έναν επόπτη, θα λάβει ένα αντίγραφο των αιτήσεων άδειας που εγκρίθηκαν και απορρίφθηκαν από υπαλλήλους αυτής της οντότητας.';
 $lang['organization_index_popup_supervisor_title'] = 'Επιλέξτε έναν επόπτη';
 $lang['organization_index_popup_supervisor_button_ok'] = 'ΟΚ';
 $lang['organization_index_popup_supervisor_button_cancel'] = 'Ακύρωση';
@@ -38,19 +38,20 @@ $lang['organization_index_popup_error_title'] = 'Προέκυψε ένα σφά�
 $lang['organization_index_popup_error_button_ok'] = 'ΟΚ';
 $lang['organization_index_prompt_entity_name'] = 'Ονομασία της οντότητας';
 $lang['organization_index_error_msg_select_entity'] = 'Επιλέξτε μια οντότητα από την εταιρία (δέντρο στα δεξιά).';
-$lang['organization_index_error_msg_select_employee'] = 'Please select one employee in the table of users belonging to the selected entity.';
+$lang['organization_index_error_msg_select_employee'] = 'Επιλέξτε έναν υπάλληλο στον πίνακα χρηστών που ανήκουν στην επιλεγμένη οντότητα.';
 $lang['organization_index_error_msg_delete_root'] = 'Δεν μπορείτε να διαγράψετε τη κυρία οντότητα.';
 $lang['organization_select_field_search_placeholder'] = 'Αναζήτηση για μια οντότητα';
 $lang['organization_select_button_search'] = 'Αναζήτηση';
-$lang['organization_lists_modal_title'] = 'Select a list of employees';
-$lang['organization_lists_button_edit_list'] = 'Rename a list';
-$lang['organization_lists_button_add_list'] = 'Add a new list';
-$lang['organization_lists_button_delete_list'] = 'Delete a list';
-$lang['organization_lists_button_add_users'] = 'Add employees';
-$lang['organization_lists_button_remove_users'] = 'Remove selected employees';
-$lang['organization_lists_employees_prompt_new'] = 'Name of the list';
-$lang['organization_lists_employees_confirm_delete'] = 'Are you sure that you want to delete this list?';
-$lang['organization_lists_employees_prompt_rename'] = 'New name of the list';
+
+$lang['organization_lists_modal_title'] = 'Επιλέξτε μια λίστα με τους υπαλλήλους';
+$lang['organization_lists_button_edit_list'] = 'Μετονομασία μιας λίστας';
+$lang['organization_lists_button_add_list'] = 'Προσθέστε μια νέα λίστα';
+$lang['organization_lists_button_delete_list'] = 'Διαγραφή μιας λίστας';
+$lang['organization_lists_button_add_users'] = 'Προσθέστε  υπαλλήλους';
+$lang['organization_lists_button_remove_users'] = 'Κατάργηση επιλεγμένων υπαλλήλων';
+$lang['organization_lists_employees_prompt_new'] = 'Όνομα της λίστας';
+$lang['organization_lists_employees_confirm_delete'] = 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη λίστα;';
+$lang['organization_lists_employees_prompt_rename'] = 'Νέο όνομα της λίστας';
 $lang['organization_lists_employees_thead_id'] = 'ID';
 $lang['organization_lists_employees_thead_firstname'] = 'Όνομα';
 $lang['organization_lists_employees_thead_lastname'] = 'Επίθετο';

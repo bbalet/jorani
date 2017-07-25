@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license     http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link          https://github.com/bbalet/jorani
- * @since       0.4.7
- * @author      Ceibga Bao <info@sansin.com.tw>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.3
+ * @author     Kostas Simvoulidis <kostas.simvoulidis@gmail.com>
  */
 
 $lang['users_index_title'] = 'Κατάλογος χρηστών';
@@ -34,7 +34,9 @@ $lang['users_index_popup_password_button_cancel'] = 'Ακύρωση';
 $lang['users_index_popup_import_title'] = 'Εισαγωγή χρηστών';
 $lang['users_index_popup_field_filename'] = 'Όνομα αρχείου';
 $lang['users_index_popup_import_button_cancel'] = 'Ακύρωση';
+
 $lang['employees_index_title'] = 'Κατάλογος υπαλλήλων';
+
 $lang['users_myprofile_title'] = 'Τα προσωπικά μου στοιχεία';
 $lang['users_myprofile_html_title'] = 'Τα προσωπικά μου στοιχεία';
 $lang['users_myprofile_field_firstname'] = 'Όνομα';
@@ -46,6 +48,7 @@ $lang['users_myprofile_field_entity'] = 'Οντότητα';
 $lang['users_myprofile_field_hired'] = 'Ημερομηνία πρόσληψης / έναρξης';
 $lang['users_myprofile_field_identifier'] = 'Εσωτερικό / εταιρικό αναγνωριστικό';
 $lang['users_myprofile_field_language'] = 'Γλώσσα';
+
 $lang['users_edit_title'] = 'Επεξεργασία χρήστη #';
 $lang['users_edit_html_title'] = 'Επεξεργασία χρήστη';
 $lang['users_edit_field_firstname'] = 'Όνομα';
@@ -78,8 +81,10 @@ $lang['users_edit_popup_position_button_cancel'] = 'Ακύρωση';
 $lang['users_edit_button_update'] = 'Ενημέρωση χρήστη';
 $lang['users_edit_button_cancel'] = 'Ακύρωση';
 $lang['users_edit_flash_msg_success'] = 'Ο χρήστης ενημερώθηκε με επιτυχία';
+
 $lang['users_delete_flash_msg_success'] = 'Ο χρήστης έχει διαγραφεί με επιτυχία';
 $lang['users_reset_flash_msg_success'] = 'Ο κωδικός πρόσβασης έχει αλλάξει επιτυχώς';
+
 $lang['users_create_title'] = 'Δημιουργία νέου χρήστη';
 $lang['users_create_field_firstname'] = 'Όνομα';
 $lang['users_create_field_lastname'] = 'Επίθετο';
@@ -113,10 +118,11 @@ $lang['users_create_button_generate_password'] = 'Δημιουργία κωδι�
 $lang['users_create_button_create'] = 'Δημιουργία χρήστη';
 $lang['users_create_button_cancel'] = 'Ακύρωση';
 $lang['users_create_mandatory_js_msg'] = '"Το πεδίο" + fieldname + "είναι υποχρεωτικό."';
-$lang['users_create_no_contract_confirm'] = 'It is recommended to select a contract. Do you want to create the user without a contract?';
+$lang['users_create_no_contract_confirm'] = 'Συνιστάται να επιλέξετε μια σύμβαση. Θέλετε να δημιουργήσετε το χρήστη χωρίς σύμβαση;';
 $lang['users_create_flash_msg_success'] = 'Ο χρήστης έχει δημιουργηθεί με επιτυχία';
 $lang['users_create_login_check'] = 'Το όνομα χρήστη υπάρχει ήδη.';
 $lang['users_create_flash_msg_error'] = 'Αυτό το όνομα χρήστη δεν είναι διαθέσιμο.';
+
 $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Όνομα';
 $lang['users_employees_thead_lastname'] = 'Επίθετο';

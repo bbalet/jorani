@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license     http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link          https://github.com/bbalet/jorani
- * @since       0.4.7
- * @author      Ceibga Bao <info@sansin.com.tw>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.3
+ * @author     Kostas Simvoulidis <kostas.simvoulidis@gmail.com>
  */
 
 $lang['hr_employees_title'] = 'Κατάλογος υπαλλήλων';
@@ -54,6 +54,7 @@ $lang['hr_employees_button_entitleddays'] = 'Μερικές ημέρες';
 $lang['hr_employees_button_create_request'] = 'Υποβάλετε αίτημα άδειας';
 $lang['hr_employees_popup_manager_title'] = 'Επιλέξτε το διαχειριστή';
 $lang['hr_employees_multiple_edit_selection_msg'] = 'Πρέπει να επιλέξετε τουλάχιστον έναν υπάλληλο στον πίνακα';
+
 $lang['hr_export_employees_title'] = 'Κατάλογος υπαλλήλων';
 $lang['hr_export_employees_thead_id'] = 'ID';
 $lang['hr_export_employees_thead_firstname'] = 'Όνομα';
@@ -62,6 +63,7 @@ $lang['hr_export_employees_thead_email'] = 'E-mail';
 $lang['hr_export_employees_thead_entity'] = 'Οντότητα';
 $lang['hr_export_employees_thead_contract'] = 'Σύμβαση';
 $lang['hr_export_employees_thead_manager'] = 'Διευθυντής';
+
 $lang['hr_leaves_title'] = 'Κατάλογος των αιτηθέντων αδειών';
 $lang['hr_leaves_html_title'] = 'Κατάλογος των αδειών για τον υπάλληλο #';
 $lang['hr_leaves_thead_tip_edit'] = 'επεξεργασία';
@@ -78,11 +80,12 @@ $lang['hr_leaves_thead_type'] = 'Πληκτρολογήστε';
 $lang['hr_leaves_button_export'] = 'Εξαγωγή αυτής της λίστας';
 $lang['hr_leaves_button_list'] = 'Κατάλογος υπαλλήλων';
 $lang['hr_leaves_popup_delete_title'] = 'Διαγραφή αιτήματος άδειας';
-$lang['hr_leaves_popup_delete_message'] = 'You are about to delete one leave request, this procedure is irreversible.';
+$lang['hr_leaves_popup_delete_message'] = 'Πρόκειται να διαγράψετε ένα αίτημα άδειας, αυτή η διαδικασία είναι μη αναστρέψιμη.';
 $lang['hr_leaves_popup_delete_question'] = 'Θέλετε να συνεχίσετε;';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Ναι';
 $lang['hr_leaves_popup_delete_button_no'] = 'Όχι';
 $lang['hr_leaves_deleted_title'] = 'Κατάλογος των διαγραμμένων αιτήσεων άδειας';
+
 $lang['hr_export_leaves_title'] = 'Κατάλογος των αιτηθέντων αδειών';
 $lang['hr_export_leaves_thead_id'] = 'ID';
 $lang['hr_export_leaves_thead_status'] = 'Κατάσταση';
@@ -90,6 +93,7 @@ $lang['hr_export_leaves_thead_start'] = 'Ημερομηνία έναρξης';
 $lang['hr_export_leaves_thead_end'] = 'Ημερομηνία λήξης';
 $lang['hr_export_leaves_thead_duration'] = 'Διάρκεια';
 $lang['hr_export_leaves_thead_type'] = 'Πληκτρολογήστε';
+
 $lang['hr_leaves_create_title'] = 'Υποβάλετε αίτημα άδειας';
 $lang['hr_leaves_create_field_start'] = 'Ημερομηνία έναρξης';
 $lang['hr_leaves_create_field_end'] = 'Ημερομηνία λήξης';
@@ -102,12 +106,14 @@ $lang['hr_leaves_create_field_status'] = 'Κατάσταση';
 $lang['hr_leaves_create_button_create'] = 'Αίτηση άδειας';
 $lang['hr_leaves_create_button_cancel'] = 'Ακύρωση';
 $lang['hr_leaves_create_flash_msg_success'] = 'Το αίτημα άδειας έχει δημιουργηθεί με επιτυχία';
-$lang['hr_leaves_create_flash_msg_error'] = 'The leave request has been succesfully created or updated, but you don\'t have a manager.';
+$lang['hr_leaves_create_flash_msg_error'] = 'Η αίτηση άδειας έχει δημιουργηθεί ή ενημερωθεί με επιτυχία, αλλά δεν έχετε διαχειριστή.';
+
 $lang['hr_leaves_flash_spn_list_days_off'] = '%s μη εργάσιμες ημέρες της περιόδου';
 $lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Η αίτηση άδειας αντιστοιχεί σε μη εργάσιμη ημέρα.';
 $lang['hr_leaves_validate_mandatory_js_msg'] = '"Το πεδίο" + fieldname + "είναι υποχρεωτικό."';
-$lang['hr_leaves_validate_flash_msg_no_contract'] = 'It appears that you have no contract. Please contact your HR Officer / Manager.';
-$lang['hr_leaves_validate_flash_msg_overlap_period'] = 'You can\'t create a leave request for two yearly leave periods. Please create two different leave requests.';
+$lang['hr_leaves_validate_flash_msg_no_contract'] = 'Φαίνεται ότι δεν έχετε συμβόλαιο. Επικοινωνήστε με τον υπεύθυνο / διευθυντή HR.';
+$lang['hr_leaves_validate_flash_msg_overlap_period'] = 'Δεν μπορείτε να δημιουργήσετε μια αίτηση άδειας για δύο ετήσιες περιόδους άδειας. Δημιουργήστε δύο διαφορετικά αιτήματα άδειας.';
+
 $lang['hr_overtime_title'] = 'Κατάλογος αιτήσεων υπερωριών';
 $lang['hr_overtime_html_title'] = 'Κατάλογος αιτήσεων υπερωριών για υπάλληλο #';
 $lang['hr_overtime_thead_tip_edit'] = 'επεξεργασία';
@@ -122,16 +128,18 @@ $lang['hr_overtime_thead_cause'] = 'Αιτία';
 $lang['hr_overtime_button_export'] = 'Εξαγωγή αυτής της λίστας';
 $lang['hr_overtime_button_list'] = 'Κατάλογος υπαλλήλων';
 $lang['hr_overtime_popup_delete_title'] = 'Διαγραφή αιτήματος υπερωριών';
-$lang['hr_overtime_popup_delete_message'] = 'You are about to delete one overtime request, this procedure is irreversible.';
+$lang['hr_overtime_popup_delete_message'] = 'Πρόκειται να διαγράψετε ένα αίτημα υπερωριών, η διαδικασία αυτή είναι μη αναστρέψιμη.';
 $lang['hr_overtime_popup_delete_question'] = 'Θέλετε να συνεχίσετε;';
 $lang['hr_overtime_popup_delete_button_yes'] = 'Ναι';
 $lang['hr_overtime_popup_delete_button_no'] = 'Όχι';
+
 $lang['hr_export_overtime_title'] = 'Κατάλογος αιτήσεων υπερωριών';
 $lang['hr_export_overtime_thead_id'] = 'ID';
 $lang['hr_export_overtime_thead_status'] = 'Κατάσταση';
 $lang['hr_export_overtime_thead_date'] = 'Ημερομηνία';
 $lang['hr_export_overtime_thead_duration'] = 'Διάρκεια';
 $lang['hr_export_overtime_thead_cause'] = 'Αιτία';
+
 $lang['hr_summary_title'] = 'Υπόλοιπο αδείας για τον χρήστη #';
 $lang['hr_summary_thead_type'] = 'Τύπος άδειας';
 $lang['hr_summary_thead_available'] = 'Διαθέσιμος';
@@ -141,8 +149,9 @@ $lang['hr_summary_thead_description'] = 'Περιγραφή';
 $lang['hr_summary_flash_msg_error'] = 'Αυτός ο υπάλληλος δεν έχει σύμβαση.';
 $lang['hr_summary_button_list'] = 'Κατάλογος υπαλλήλων';
 $lang['hr_summary_date_field'] = 'Ημερομηνία της αναφοράς';
+
 $lang['hr_presence_title'] = 'Αναφορά παρουσίας';
-$lang['hr_presence_description'] = 'By default this report shows the values for the last month. Please note that the list of leaves shows only the accepted leave requests.';
+$lang['hr_presence_description'] = 'Από προεπιλογή, αυτή η αναφορά εμφανίζει τις τιμές για τον τελευταίο μήνα. Σημειώστε ότι ο κατάλογος των φύλλων δείχνει μόνο τα αποδεκτά αιτήματα άδειας.';
 $lang['hr_presence_thead_tip_edit'] = 'επεξεργασία';
 $lang['hr_presence_thead_id'] = 'ID';
 $lang['hr_presence_thead_start'] = 'Ημερομηνία έναρξης';

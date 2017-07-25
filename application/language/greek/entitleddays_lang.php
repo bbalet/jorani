@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license     http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link          https://github.com/bbalet/jorani
- * @since       0.4.7
- * @author      Ceibga Bao <info@sansin.com.tw>
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.3
+ * @author     Kostas Simvoulidis <kostas.simvoulidis@gmail.com>
  */
 
 $lang['entitleddays_contract_index_title'] = 'Ορισμένες ημέρες για σύμβαση';
@@ -32,6 +32,7 @@ $lang['entitleddays_contract_confirm_delete_message'] = 'Είστε βέβαιο
 $lang['entitleddays_contract_confirm_delete_yes'] = 'Ναι';
 $lang['entitleddays_contract_confirm_delete_cancel'] = 'Ακύρωση';
 $lang['entitleddays_contract_index_field_step'] = 'Βήμα';
+
 $lang['entitleddays_user_index_title'] = 'Ορισμένες ημέρες για τον εργαζόμενο';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Διαγραφή';
 $lang['entitleddays_user_index_thead_tip_copy'] = 'Αντιγραφή';
@@ -55,6 +56,7 @@ $lang['entitleddays_user_confirm_delete_message'] = 'Είστε βέβαιοι �
 $lang['entitleddays_user_confirm_delete_yes'] = 'Ναι';
 $lang['entitleddays_user_confirm_delete_cancel'] = 'Ακύρωση';
 $lang['entitleddays_user_index_field_step'] = 'Βήμα';
+
 $lang['entitleddays_counters_title_contract'] = 'Ορισμένες ημέρες μέχρι τη Σύμβαση #';
 $lang['entitleddays_counters_description_contract'] = 'Ετήσια περίοδος άδειας:';
 $lang['entitleddays_counters_title_employee'] = 'Ορισμένες ημέρες για τον υπάλληλο';

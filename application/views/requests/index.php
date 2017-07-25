@@ -52,8 +52,10 @@ if ($showAll == FALSE) {
             <th><?php echo lang('requests_index_thead_duration');?></th>
             <th><?php echo lang('requests_index_thead_type');?></th>
             <th><?php echo lang('requests_index_thead_status');?></th>
+        <?php if ($this->config->item('enable_history') == TRUE){?>
             <th><?php echo lang('requests_index_thead_requested_date');?></th>
             <th><?php echo lang('requests_index_thead_last_change');?></th>
+        <?php } ?>
         </tr>
     </thead>
     <tbody>
@@ -186,14 +188,6 @@ if ($showAll == FALSE) {
     echo form_open("requests/", array('id' => 'frmRejectLeaveForm'))
   ?>
   <input id="comment" type="hidden" name="comment" value="">
-  <?php
-  /*
-  if ($this->config->item('csrf_protection') == TRUE) {
-    echo "<input type='hidden' name='" . $this->security->get_csrf_token_name() . "' value='" . $this->security->get_csrf_hash() ."'>";
-  }
-  */
-  ?>
-
 </form>
 </div>
 

@@ -13,6 +13,7 @@ $lang['requests_index_description'] = 'Здесь показан список з
 $lang['requests_index_thead_tip_view'] = 'просмотреть';
 $lang['requests_index_thead_tip_accept'] = 'утвердить';
 $lang['requests_index_thead_tip_reject'] = 'отклонить';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'ID';
 $lang['requests_index_thead_fullname'] = 'ФИО';
 $lang['requests_index_thead_startdate'] = 'Дата начала';

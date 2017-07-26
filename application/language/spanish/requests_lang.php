@@ -13,6 +13,7 @@ $lang['requests_index_description'] = 'Esta pantalla muestra las solicitudes de 
 $lang['requests_index_thead_tip_view'] = 'ver';
 $lang['requests_index_thead_tip_accept'] = 'aceptar';
 $lang['requests_index_thead_tip_reject'] = 'rechazar';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'ID';
 $lang['requests_index_thead_fullname'] = 'Nombre completo';
 $lang['requests_index_thead_startdate'] = 'Primera fecha';

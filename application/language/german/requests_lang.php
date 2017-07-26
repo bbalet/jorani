@@ -13,6 +13,7 @@ $lang['requests_index_description'] = 'Diese Anzeige zeigt die an Sie übermitte
 $lang['requests_index_thead_tip_view'] = 'anzeigen';
 $lang['requests_index_thead_tip_accept'] = 'akzeptieren';
 $lang['requests_index_thead_tip_reject'] = 'ablehnen';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'ID';
 $lang['requests_index_thead_fullname'] = 'Voller Name';
 $lang['requests_index_thead_startdate'] = 'Anfangsdatum';

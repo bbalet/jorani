@@ -13,6 +13,7 @@ $lang['requests_index_description'] = '休假申請列表已傳送給你,如你�
 $lang['requests_index_thead_tip_view'] = '預覽';
 $lang['requests_index_thead_tip_accept'] = '接受';
 $lang['requests_index_thead_tip_reject'] = '拒絕';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = '證號';
 $lang['requests_index_thead_fullname'] = '全名';
 $lang['requests_index_thead_startdate'] = '開始日期';

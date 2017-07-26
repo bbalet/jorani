@@ -12,6 +12,7 @@ $lang['requests_index_description'] = 'This screen lists the leave requests subm
 $lang['requests_index_thead_tip_view'] = 'view';
 $lang['requests_index_thead_tip_accept'] = 'accept';
 $lang['requests_index_thead_tip_reject'] = 'reject';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'ID';
 $lang['requests_index_thead_fullname'] = 'Fullname';
 $lang['requests_index_thead_startdate'] = 'Start Date';

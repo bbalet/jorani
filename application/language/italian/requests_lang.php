@@ -13,6 +13,7 @@ $lang['requests_index_description'] = 'Questa pagina elenca le richieste di feri
 $lang['requests_index_thead_tip_view'] = 'vedi';
 $lang['requests_index_thead_tip_accept'] = 'accetta';
 $lang['requests_index_thead_tip_reject'] = 'rifiuta';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'ID';
 $lang['requests_index_thead_fullname'] = 'Nome completo';
 $lang['requests_index_thead_startdate'] = 'Data inizio';

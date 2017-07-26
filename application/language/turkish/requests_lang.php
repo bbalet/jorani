@@ -13,6 +13,7 @@ $lang['requests_index_description'] = 'Bu ekran size gönderilen fazla mesai tal
 $lang['requests_index_thead_tip_view'] = 'görüntüle';
 $lang['requests_index_thead_tip_accept'] = 'kabul et';
 $lang['requests_index_thead_tip_reject'] = 'reddet';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'ID';
 $lang['requests_index_thead_fullname'] = 'Tam adı';
 $lang['requests_index_thead_startdate'] = 'Başlangıç Tarihi';

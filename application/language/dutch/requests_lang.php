@@ -13,6 +13,7 @@ $lang['requests_index_description'] = 'Dit scherm toont de afwezigheidsverzoeken
 $lang['requests_index_thead_tip_view'] = 'bekijken';
 $lang['requests_index_thead_tip_accept'] = 'goedkeuren';
 $lang['requests_index_thead_tip_reject'] = 'afkeuren';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'ID';
 $lang['requests_index_thead_fullname'] = 'Volledige naam';
 $lang['requests_index_thead_startdate'] = 'Begin datum';

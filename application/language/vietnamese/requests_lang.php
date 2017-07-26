@@ -13,6 +13,7 @@ $lang['requests_index_description'] = 'Danh sách này hiển ghị các yêu c�
 $lang['requests_index_thead_tip_view'] = 'xem';
 $lang['requests_index_thead_tip_accept'] = 'chấp nhận';
 $lang['requests_index_thead_tip_reject'] = 'từ chối';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'ID';
 $lang['requests_index_thead_fullname'] = 'Tên đầy đủ';
 $lang['requests_index_thead_startdate'] = 'Ngày bắt đầu';

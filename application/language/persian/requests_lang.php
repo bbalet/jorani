@@ -13,6 +13,7 @@ $lang['requests_index_description'] = 'این صفحه لیست تمام درخ�
 $lang['requests_index_thead_tip_view'] = 'نمایش';
 $lang['requests_index_thead_tip_accept'] = 'پذیرفتن';
 $lang['requests_index_thead_tip_reject'] = 'رد';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'شناسه';
 $lang['requests_index_thead_fullname'] = 'نام کامل';
 $lang['requests_index_thead_startdate'] = 'تاریخ شروع';

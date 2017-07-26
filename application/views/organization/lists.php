@@ -25,7 +25,7 @@
 <?php endforeach ?>
     </select>
     <button id="cmdAddEmployees" class="btn btn-primary" title="<?php echo lang('organization_lists_button_add_users');?>"><i class="fa fa-user-plus" aria-hidden="true"></i></button>
-    <button id="cmdRemoveEmployees" class="btn btn-primary" title="<?php echo lang('organization_lists_button_delete_users');?>"><i class="fa fa-user-times" aria-hidden="true"></i></button>
+    <button id="cmdRemoveEmployees" class="btn btn-primary" title="<?php echo lang('organization_lists_button_remove_users');?>"><i class="fa fa-user-times" aria-hidden="true"></i></button>
 </div>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="employeesOrgList" width="100%">

@@ -12,6 +12,7 @@ $lang['requests_index_description'] = 'Cet écran liste les demandes de congé q
 $lang['requests_index_thead_tip_view'] = 'voir';
 $lang['requests_index_thead_tip_accept'] = 'accepter';
 $lang['requests_index_thead_tip_reject'] = 'refuser';
+$lang['requests_index_thead_tip_history'] = 'afficher l\'historique';
 $lang['requests_index_thead_id'] = 'N°';
 $lang['requests_index_thead_fullname'] = 'Nom complet';
 $lang['requests_index_thead_startdate'] = 'Date début';

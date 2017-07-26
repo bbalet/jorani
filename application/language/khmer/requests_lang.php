@@ -13,6 +13,7 @@ $lang['requests_index_description'] = 'បញ្ជីកញ្ចក់នេ�
 $lang['requests_index_thead_tip_view'] = 'បង្ហាញ';
 $lang['requests_index_thead_tip_accept'] = 'ទទួលយកបាន';
 $lang['requests_index_thead_tip_reject'] = 'បដិសេធចោល';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'លេខអត្តសញ្ញាណ';
 $lang['requests_index_thead_fullname'] = 'ឈ្មោះពេញ';
 $lang['requests_index_thead_startdate'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';

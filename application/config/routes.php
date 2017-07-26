@@ -190,7 +190,7 @@ $route['leaves/public/organization/(:num)'] = 'calendar/publicOrganization/$1';
 $route['contracts/public/calendar/alldayoffs'] = 'calendar/publicDayoffs';
 
 //_______________________________________________
-//My leave requests
+//Leave requests created by an employee
 $route['leaves/counters'] = 'leaves/counters';
 $route['leaves/counters/(:num)'] = 'leaves/counters/$1';
 $route['leaves/export'] = 'leaves/export';
@@ -200,6 +200,7 @@ $route['leaves/request/(:num)'] = 'leaves/requestLeave/$1';
 $route['leaves/update'] = 'leaves/update';
 $route['leaves/delete/(:num)'] = 'leaves/delete/$1';
 $route['leaves/(:num)/history'] = 'leaves/history/$1';
+$route['leaves/(:num)/comments/add'] = 'leaves/createComment/$1';
 $route['leaves/cancellation/(:num)'] = 'leaves/cancellation/$1';
 $route['leaves/reminder/(:num)'] = 'leaves/reminder/$1';
 $route['leaves/([^/]+)/(:num)'] = 'leaves/view/$1/$2';
@@ -317,11 +318,6 @@ $route['api/acs'] = 'connection/acs';
 $route['api/slo'] = 'connection/slo';
 $route['api/sls'] = 'connection/sls';
 $route['api/sso'] = 'connection/sso';
-
-//_______________________________________________
-//Comments
-$route['comments/(:num)'] = 'leaves/createComment/$1';
-
 
 //_______________________________________________
 //Experimental mobile endpoint

@@ -170,29 +170,29 @@ class Leaves extends CI_Controller {
     }
 
     /**
-    * create a new comment
-    * @param int $id Id of the leave request
-    * @author Emilien NICOLAS <milihhard1996@gmail.com>
-    */
+     * Create a new comment or append a comment to the comments
+     * on a leave request
+     * @param int $id Id of the leave request
+     * @param string $source Page where we redirect after posting
+     * @author Emilien NICOLAS <milihhard1996@gmail.com>
+     */
     public function createComment($id, $source = "leaves/leaves"){
       $this->auth->checkIfOperationIsAllowed('view_leaves');
       $data = getUserContext($this);
-      $json_parsed = $this->leaves_model->getCommentsLeave($id);
-      $comment_object = new stdClass;
-      $comment_object->type = "comment";
-      $comment_object->author = $this->session->userdata('id');
-      $comment_object->value = $_POST['comment'];
-      $comment_object->date = date("Y-n-j");
-      if (isset($json_parsed)){
-        array_push($json_parsed->comments, $comment_object);
+      $oldComment = $this->leaves_model->getCommentsLeave($id);
+      $newComment = new stdClass;
+      $newComment->type = "comment";
+      $newComment->author = $this->session->userdata('id');
+      $newComment->value = $this->input->post('comment');
+      $newComment->date = date("Y-n-j");
+      if ($oldComment != NULL){
+        array_push($oldComment->comments, $newComment);
       }else {
-        $json_parsed->comments = array($comment_object);
+        $oldComment = new stdClass;
+        $oldComment->comments = array($newComment);
       }
-      var_dump($json_parsed);
-      echo "<br>";
-      $json = json_encode($json_parsed);
-      //echo $json;
-      $this->leaves_model->addComments($id,$json);
+      $json = json_encode($oldComment);
+      $this->leaves_model->addComments($id, $json);
       if(isset($_GET['source'])){
         $source = $_GET['source'];
       }

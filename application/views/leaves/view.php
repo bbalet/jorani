@@ -118,9 +118,9 @@ switch ($leave['status']) {
    <?php
    $attributes = array('id' => 'frmLeaveNewCommentForm');
    if (isset($_GET['source'])) {
-       echo form_open('/comments/' . $leave['id'] . '?source=' . $_GET['source'], $attributes);
+       echo form_open('leaves/' . $leave['id'] . '/comments/add?source=' . $_GET['source'], $attributes);
    } else {
-       echo form_open('/comments/' . $leave['id'], $attributes);
+       echo form_open('leaves/' . $leave['id'] . '/comments/add', $attributes);
    }
    ?>
    <form method="post"

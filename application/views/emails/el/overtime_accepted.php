@@ -7,7 +7,7 @@
  * @since         0.1.0
  */
 ?>
-<html lang="en">
+<html lang="el">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,9 +20,9 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        Αγαπητέ / η {Firstname} {Lastname}, <br />
         <br />
-        The overtime you submitted has been approved.<br />
+        <p>Οι υπερωρίες που υποβάλλατε έχουν εγκριθεί</p>
         <table border="0">
             <tr>
                 <td>Date &nbsp;</td><td>{Date}</td>
@@ -31,10 +31,10 @@
                 <td>Duration &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Αιτία &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Αυτό είναι ένα μήνυμα που δημιουργήθηκε αυτόματα, παρακαλώ μην απαντήσετε σε αυτό το μήνυμα ***</h5>
     </body>
 </html>

@@ -7,7 +7,7 @@
  * @since         0.1.0
  */
 ?>
-<html lang="en">
+<html lang="el">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,17 +20,17 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        <p>Χρησιμοποιήστε αυτά τα διαπιστευτήρια για <a href="{BaseURL}">σύνδεση στο σύστημα</a> :</p>
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>Σύνδεση</td><td>{Login}</td>
             </tr>
             <tr>
-                <td>Password</td><td>{Password}</td>
+                <td>Κωδικός πρόσβασης</td><td>{Password}</td>
             </tr>            
         </table>
-        Once connected, you can change your password, as explained <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        <p>Μόλις συνδεθείτε, μπορείτε να αλλάξετε τον κωδικό πρόσβασης, όπως εξηγείται <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">εδώ</a>.</p>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Αυτό είναι ένα μήνυμα που δημιουργήθηκε αυτόματα, παρακαλώ μην απαντήσετε σε αυτό το μήνυμα ***</h5>
     </body>
 </html>

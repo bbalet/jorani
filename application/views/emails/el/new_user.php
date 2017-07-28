@@ -7,7 +7,7 @@
  * @since         0.1.0
  */
 ?>
-<html lang="en">
+<html lang="el">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,23 +20,23 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Welcome to Jorani {Firstname} {Lastname}. Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        <p>Καλώς ήλθατε στο Jorani {Firstname} {Lastname}. Χρησιμοποιήστε αυτά τα διαπιστευτήρια για <a href="{BaseURL}">σύνδεση στο σύστημα</a> :</p>
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>Σύνδεση</td><td>{Login}</td>
             </tr>
             <tr>
                 <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-                <td>Password</td><td>{Password}</td>
+                <td>Κωδικός πρόσβασης</td><td>{Password}</td>
                 <?php } else { ?>
-                <td>Password</td><td><i>The password you use in order to open a session on your operating system (Windows, Linux, etc.).</i></td>
+                <td>Κωδικός πρόσβασης</td><td><i>Ο κωδικός πρόσβασης που χρησιμοποιείτε για να συνδεθείτε στο λειτουργικό σας σύστημα (Windows, Linux κ.λπ.).</i></td>
                 <?php } ?>
-            </tr>            
+            </tr>
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        Once connected, you can change your password, as explained <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        <p>Μόλις συνδεθείτε, μπορείτε να αλλάξετε τον κωδικό πρόσβασης, όπως εξηγείται <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">εδώ</a>.</p>
         <?php } ?>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Αυτό είναι ένα μήνυμα που δημιουργήθηκε αυτόματα, παρακαλώ μην απαντήσετε σε αυτό το μήνυμα ***</h5>
     </body>
 </html>

@@ -166,6 +166,10 @@ $(function () {
           { data: "lastname" },
           { data: "entity" }
         ],
+        columnDefs: [
+            { orderable: true, className: 'reorder', targets: 0 },
+            { orderable: false, targets: '_all' }
+        ],
         language: {
             decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
             processing:       "<?php echo lang('datatable_sProcessing');?>",

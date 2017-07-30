@@ -820,7 +820,7 @@ class Leaves_model extends CI_Model {
     public function workmates($user_id, $start = "", $end = "") {
         $this->db->join('users', 'users.id = leaves.employee');
         $this->db->where('users.manager', $user_id);
-        $this->db->where('leaves.status != ', 4);       //Exclude rejected requests
+        $this->db->where('leaves.status < ', LMS_REJECTED);       //Exclude rejected requests
         $this->db->where('(leaves.startdate <= DATE(' . $this->db->escape($end) . ') AND leaves.enddate >= DATE(' . $this->db->escape($start) . '))');
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(1024);  //Security limit

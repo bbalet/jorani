@@ -152,6 +152,11 @@ class Connection extends CI_Controller {
                     restore_error_handler();
                     if ($bind) {
                         $loggedin = $this->users_model->checkCredentialsLDAP($this->input->post('login'));
+                    } else {
+                        //Attempt to login the user with the password stored into DB, provided this password is not emptye
+                        if ($password != "") {
+                            $loggedin = $this->users_model->checkCredentials($this->input->post('login'), $password);
+                        }
                     }
                     ldap_close($ldap);
                 }

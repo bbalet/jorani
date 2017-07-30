@@ -21,9 +21,9 @@
 <thead>
     <tr>
       <th><?php echo lang('leaves_summary_thead_type');?></th>
-      <th><?php echo lang('leaves_summary_thead_available');?></th>
-      <th><?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;<span class="label label-success"><?php echo lang('Accepted');?></span></th>
+      <th colspan="2"><?php echo lang('leaves_summary_thead_available');?></th>
       <th><?php echo lang('leaves_summary_thead_entitled');?></th>
+      <th><?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;<span class="label label-success"><?php echo lang('Accepted');?></span></th>
       <th><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label"><?php echo lang('Planned');?></span></th>
       <th><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label label-warning"><?php echo lang('Requested');?></span></th>
     </tr>
@@ -31,12 +31,24 @@
   <tbody>
   <?php if (count($summary) > 0) {
   foreach ($summary as $key => $value) {
-      if (($value[2] == '') || ($value[2] == 'x')) {?>
+      if (($value[2] == '') || ($value[2] == 'x')) {
+          $estimated = round(((float) $value[1] - (float) $value[0]), 3, PHP_ROUND_HALF_DOWN);
+          $simulated = $estimated;
+          if (!empty($value[4])) $simulated -= (float) $value[4];
+          if (!empty($value[5])) $simulated -= (float) $value[5];
+          ?>
     <tr>
       <td><?php echo $key; ?></td>
-      <td><?php echo round(((float) $value[1] - (float) $value[0]), 3, PHP_ROUND_HALF_DOWN); ?></td>
-      <td><a href="<?php echo base_url();?>leaves?statuses=3&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[0]); ?></a></td>
+      <td>
+          <i class="icon-info-sign" data-toggle="tooltip" title="<?php echo lang('Accepted');?>"></i>&nbsp;
+          <?php echo $estimated; ?>
+      </td>
+      <td>
+          <i class="icon-info-sign" data-toggle="tooltip" title="<?php echo lang('Accepted');?> + <?php echo lang('Planned');?> + <?php echo lang('Requested');?>"></i>&nbsp;
+          <?php echo $simulated; ?>
+      </td>
       <td><?php echo ((float) $value[1]); ?></td>
+      <td><a href="<?php echo base_url();?>leaves?statuses=3&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[0]); ?></a></td>
       <?php if (empty($value[4])) { ?>
       <td>&nbsp;</td>
       <?php } else { ?>
@@ -104,26 +116,26 @@ if ($language_code != 'en') { ?>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(function () {
-        //Init datepicker widget (it is complicated because we cannot based it on UTC)
-        isDefault = <?php echo $isDefault;?>;
-        moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});
-        reportDate = '<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>';
-        todayDate = moment().format('L');
-        if (isDefault == 1) {
-            $("#refdate").val(todayDate);
-        } else {
-            $("#refdate").val(reportDate);
+$(function () {
+    //Init datepicker widget (it is complicated because we cannot based it on UTC)
+    isDefault = <?php echo $isDefault;?>;
+    moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});
+    reportDate = '<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>';
+    todayDate = moment().format('L');
+    if (isDefault == 1) {
+        $("#refdate").val(todayDate);
+    } else {
+        $("#refdate").val(reportDate);
+    }
+    $('#refdate').datepicker({
+        dateFormat: '<?php echo lang('global_date_js_format');?>',
+        onSelect: function(dateText, inst) {
+                tmpUnix = moment($("#refdate").datepicker("getDate")).unix();
+                url = "<?php echo base_url();?>leaves/counters/" + tmpUnix;
+                window.location = url;
         }
-        $('#refdate').datepicker({
-            dateFormat: '<?php echo lang('global_date_js_format');?>',
-            onSelect: function(dateText, inst) {
-                    tmpUnix = moment($("#refdate").datepicker("getDate")).unix();
-                    url = "<?php echo base_url();?>leaves/counters/" + tmpUnix;
-                    window.location = url;
-            }
-        });
-        
+    });
+
     //Transform the HTML table into a dynamic datatable
     $('#overtime').dataTable({
         language: {
@@ -150,5 +162,8 @@ if ($language_code != 'en') { ?>
                     }
                 }
         });
-    });
+        
+    //Display tooltips
+    $("[ data-toggle=tooltip]").tooltip({ placement: 'top'});
+});
 </script>

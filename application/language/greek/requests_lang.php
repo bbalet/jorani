@@ -82,6 +82,6 @@ $lang['requests_balance_title'] = 'Υπόλοιπο αδείας (υφισταμ
 $lang['requests_balance_description'] = 'Υπόλοιπο αδειών των υπαλλήλων της άμεσης έκθεσής μου. Εάν δεν είστε διαχειριστής, αυτή η λίστα θα είναι πάντα κενή.';
 $lang['requests_balance_date_field'] = 'Ημερομηνία της αναφοράς';
 
-$lang['requests_comment_reject_request_title'] = 'Αποστολή νέου σχολίου (προαιρετικό)';
+$lang['requests_comment_reject_request_title'] = 'σχόλιο';
 $lang['requests_comment_reject_request_button_cancel'] = 'Ακύρωση';
 $lang['requests_comment_reject_request_button_reject'] = 'Απόρριψη';

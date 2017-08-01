@@ -262,25 +262,23 @@ $(document).ready(function() {
         event.preventDefault();
         if (!clicked) {
             clicked = true;
-            var id =$(this).data("id");
             var validateUrl = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
-            bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
-              <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
-              <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
+            bootbox.prompt('<?php echo (($this->config->item('mandatory_comment_on_reject') === TRUE)?'<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;':'') .
+                    lang('requests_comment_reject_request_title');?>',
+              '<?php echo lang('requests_comment_reject_request_button_cancel');?>',
+              '<?php echo lang('requests_comment_reject_request_button_reject');?>',
               function (result) {
                 if (result !== null){
-                  console.log(validateUrl + " - " + id + " - " + result);
+                    <?php if ($this->config->item('mandatory_comment_on_reject') === TRUE) { ?>
+                    if (result === "") return false;     
+                    <?php } ?>
                   $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
-                  console.log("url : " + $("#sendComment form").attr("action"));
                   $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
-                  console.log("comment : " + $("#sendComment form input#comment").attr("value"));
                   $("#sendComment #frmRejectLeaveForm").submit();
-
                 } else {
                   clicked = false;
                 }
               });
-            //window.location.href = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
         }
       });
      $('#leaves').on('click', '.lnkCancellationAccept', function (event) {
@@ -294,25 +292,25 @@ $(document).ready(function() {
         event.preventDefault();
         if (!clicked) {
             clicked = true;
-            var id =$(this).data("id");
+            var id = $(this).data("id");
             var validateUrl = "<?php echo base_url();?>requests/cancellation/reject/" + $(this).data("id");
-            bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
-              <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
-              <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
+            bootbox.prompt('<?php echo (($this->config->item('mandatory_comment_on_reject') === TRUE)?'<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;':'') .
+                    lang('requests_comment_reject_request_title');?>',
+              '<?php echo lang('requests_comment_reject_request_button_cancel');?>',
+              '<?php echo lang('requests_comment_reject_request_button_reject');?>',
               function (result) {
                 if (result !== null){
-                  console.log(validateUrl + " - " + id + " - " + result);
+                    <?php if ($this->config->item('mandatory_comment_on_reject') === TRUE) { ?>
+                    if (result === "") return false;     
+                    <?php } ?>
                   $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
-                  console.log("url : " + $("#sendComment form").attr("action"));
                   $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
-                  console.log("comment : " + $("#sendComment form input#comment").attr("value"));
                   $("#sendComment #frmRejectLeaveForm").submit();
 
                 } else {
                   clicked = false;
                 }
               });
-          //  window.location.href = "<?php echo base_url();?>requests/cancellation/reject/" + $(this).data("id");
         }
      });
 
@@ -376,18 +374,17 @@ $(document).ready(function() {
     var rejected = getURLParameter('rejected');
     var id = parseInt(rejected)
     if (id != null && !isNaN(id)) {
-      //bootbox.alert(id);
       var validateUrl = "<?php echo base_url();?>requests/reject/" + id;
-      bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
-        <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
-        <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
+      bootbox.prompt('<?php echo lang('requests_comment_reject_request_title');?>',
+        '<?php echo lang('requests_comment_reject_request_button_cancel');?>',
+        '<?php echo lang('requests_comment_reject_request_button_reject');?>',
       function (result) {
         if (result !== null){
-          console.log(validateUrl + " - " + id + " - " + result);
+            <?php if ($this->config->item('mandatory_comment_on_reject') === TRUE) { ?>
+            if (result === "") return false;     
+            <?php } ?>
           $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
-          console.log("url : " + $("#sendComment form").attr("action"));
           $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
-          console.log("comment : " + $("#sendComment form input#comment").attr("value"));
           $("#sendComment #frmRejectLeaveForm").submit();
         }
       });
@@ -395,18 +392,17 @@ $(document).ready(function() {
     var cancelRejected = getURLParameter('cancel_rejected');
     var idCancel = parseInt(cancelRejected)
     if (idCancel != null && !isNaN(idCancel)) {
-      //bootbox.alert(id);
       var validateUrl = "<?php echo base_url();?>requests/cancellation/reject/" + idCancel;
-      bootbox.prompt(<?php echo "'" . lang('requests_comment_reject_request_title') . "'";?>,
-        <?php echo "'" . lang('requests_comment_reject_request_button_cancel') . "'";?>,
-        <?php echo "'" . lang('requests_comment_reject_request_button_reject') . "'";?>,
+      bootbox.prompt('<?php echo lang('requests_comment_reject_request_title');?>',
+        '<?php echo lang('requests_comment_reject_request_button_cancel');?>',
+        '<?php echo lang('requests_comment_reject_request_button_reject');?>',
       function (result) {
         if (result !== null){
-          console.log(validateUrl + " - " + idCancel + " - " + result);
+            <?php if ($this->config->item('mandatory_comment_on_reject') === TRUE) { ?>
+            if (result === "") return false;     
+            <?php } ?>
           $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
-          console.log("url : " + $("#sendComment form").attr("action"));
           $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
-          console.log("comment : " + $("#sendComment form input#comment").attr("value"));
           $("#sendComment #frmRejectLeaveForm").submit();
         }
       });

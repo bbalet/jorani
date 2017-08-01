@@ -25,6 +25,8 @@ $lang['email_leave_request_accept_subject'] = 'Заявление на отпу�
 $lang['email_leave_request_reject_subject'] = 'Заявление на отпуск отклонено';
 $lang['email_leave_request_validation_title'] = 'Заявление на отпуск';
 
+$lang['email_leave_request_reminder'] = '[напоминание]';
+
 $lang['email_overtime_request_accept_subject'] = 'Ваш запрос о сверхурочных утвержден';
 $lang['email_overtime_request_reject_subject'] = 'Ваш запрос о сверхурочных отклонен';
 $lang['email_overtime_request_validation_title'] = 'Запрос на сверхурочную работу';

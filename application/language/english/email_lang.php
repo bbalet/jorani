@@ -24,6 +24,8 @@ $lang['email_leave_request_accept_subject'] = 'Your leave request has been accep
 $lang['email_leave_request_reject_subject'] = 'Your leave request has been rejected';
 $lang['email_leave_request_validation_title'] = 'Leave Request';
 
+$lang['email_leave_request_reminder'] = '[reminder]';
+
 $lang['email_overtime_request_accept_subject'] = 'Your overtime request has been accepted';
 $lang['email_overtime_request_reject_subject'] = 'Your overtime request has been rejected';
 $lang['email_overtime_request_validation_title'] = 'Overtime Request';

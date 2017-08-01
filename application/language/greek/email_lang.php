@@ -23,6 +23,8 @@ $lang['email_leave_request_cancellation_title'] = 'Ακύρωση αίτηση �
 $lang['email_leave_cancel_accept_subject'] = 'Το αίτημά σας ακύρωσης έχει γίνει αποδεκτό';
 $lang['email_leave_cancel_reject_subject'] = 'Το αίτημα ακύρωσης απορρίφθηκε';
 
+$lang['email_leave_request_reminder'] = '[υπενθύμιση]';
+
 $lang['email_leave_request_accept_subject'] = 'Το αίτημα άδειας σας έγινε δεκτό';
 $lang['email_leave_request_reject_subject'] = 'Το αίτημα άδειας απορρίφθηκε';
 $lang['email_leave_request_validation_title'] = 'Αίτηση αδείας';

@@ -25,6 +25,8 @@ $lang['email_leave_request_accept_subject'] = 'Ihre angefragter Urlaub wurde gen
 $lang['email_leave_request_reject_subject'] = 'Ihr angefragter Urlaub wurde abgelehnt';
 $lang['email_leave_request_validation_title'] = 'Urlaubsanfrage';
 
+$lang['email_leave_request_reminder'] = '[Mahnung]';
+
 $lang['email_overtime_request_accept_subject'] = 'Ihre Überstunden wurden genehmigt';
 $lang['email_overtime_request_reject_subject'] = 'Ihre Überstunden wurden nicht genehmight';
 $lang['email_overtime_request_validation_title'] = 'Überstundenanfrage';

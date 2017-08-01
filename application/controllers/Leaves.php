@@ -370,11 +370,11 @@ class Leaves extends CI_Controller {
         $data = getUserContext($this);
         $leave = $this->leaves_model->getLeaves($id);
         switch($leave['status']) {
-            case 2: //Requested
-                $this->sendMailOnLeaveRequestCreation($id);
+            case LMS_REQUESTED: //Requested
+                $this->sendMailOnLeaveRequestCreation($id, TRUE);
                 break;
-            case 5: //Cancellation
-                $this->sendMailOnLeaveRequestCancellation($id);
+            case LMS_CANCELLATION: //Cancellation
+                $this->sendMailOnLeaveRequestCancellation($id, TRUE);
                 break;
         }
         $this->session->set_flashdata('msg', lang('leaves_reminder_flash_msg_success'));
@@ -388,9 +388,10 @@ class Leaves extends CI_Controller {
     /**
      * Send a leave request creation email to the manager of the connected employee
      * @param int $id Leave request identifier
+     * @param int $reminder In case where the employee wants to send a reminder
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    private function sendMailOnLeaveRequestCreation($id) {
+    private function sendMailOnLeaveRequestCreation($id, $reminder=FALSE) {
         $this->load->model('users_model');
         $this->load->model('types_model');
         $this->load->model('delegations_model');
@@ -410,20 +411,30 @@ class Leaves extends CI_Controller {
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-
-            $this->sendGenericMail($leave, $user, $manager, $lang_mail,
-                $lang_mail->line('email_leave_request_creation_title'),
-                $lang_mail->line('email_leave_request_creation_subject'),
-                'request');
+            
+            if ($reminder) {
+                $this->sendGenericMail($leave, $user, $manager, $lang_mail,
+                    $lang_mail->line('email_leave_request_reminder') . ' ' .
+                    $lang_mail->line('email_leave_request_creation_title'),
+                    $lang_mail->line('email_leave_request_reminder') . ' ' .
+                    $lang_mail->line('email_leave_request_creation_subject'),
+                    'request');
+            } else {
+                $this->sendGenericMail($leave, $user, $manager, $lang_mail,
+                    $lang_mail->line('email_leave_request_creation_title'),
+                    $lang_mail->line('email_leave_request_creation_subject'),
+                    'request');
+            }
         }
     }
 
     /**
      * Send a leave request cancellation email to the manager of the connected employee
      * @param int $id Leave request identifier
+     * @param int $reminder In case where the employee wants to send a reminder
      * @author Guillaume Blaquiere <guillaume.blaquiere@gmail.com>
      */
-    private function sendMailOnLeaveRequestCancellation($id) {
+    private function sendMailOnLeaveRequestCancellation($id, $reminder=FALSE) {
         $this->load->model('users_model');
         $this->load->model('types_model');
         $this->load->model('delegations_model');
@@ -443,11 +454,20 @@ class Leaves extends CI_Controller {
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-
-            $this->sendGenericMail($leave, $user, $manager, $lang_mail,
-                $lang_mail->line('email_leave_request_cancellation_title'),
-                $lang_mail->line('email_leave_request_cancellation_subject'),
-                'cancel');
+            
+            if ($reminder) {
+                $this->sendGenericMail($leave, $user, $manager, $lang_mail,
+                    $lang_mail->line('email_leave_request_reminder') . ' ' .
+                    $lang_mail->line('email_leave_request_cancellation_title'),
+                    $lang_mail->line('email_leave_request_reminder') . ' ' .
+                    $lang_mail->line('email_leave_request_cancellation_subject'),
+                    'request');
+            } else {
+                $this->sendGenericMail($leave, $user, $manager, $lang_mail,
+                    $lang_mail->line('email_leave_request_cancellation_title'),
+                    $lang_mail->line('email_leave_request_cancellation_subject'),
+                    'cancel');
+            }
         }
     }
 

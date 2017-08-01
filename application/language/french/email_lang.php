@@ -24,6 +24,8 @@ $lang['email_leave_request_accept_subject'] = 'Votre demande d\'absence a été 
 $lang['email_leave_request_reject_subject'] = 'Votre demande d\'absence a été refusée';
 $lang['email_leave_request_validation_title'] = 'Demande d\'absence';
 
+$lang['email_leave_request_reminder'] = '[rappel]';
+
 $lang['email_overtime_request_accept_subject'] = 'Votre déclaration d\'heure supplémentaire a été acceptée';
 $lang['email_overtime_request_reject_subject'] = 'Votre déclaration d\'heure supplémentaire a été refusée';
 $lang['email_overtime_request_validation_title'] = 'Déclaration heure supplémentaire';

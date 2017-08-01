@@ -29,6 +29,8 @@ $lang['email_overtime_request_accept_subject'] = 'Ваша заява на по�
 $lang['email_overtime_request_reject_subject'] = 'Ваша заява на понаднормові була відхилена';
 $lang['email_overtime_request_validation_title'] = 'Заява на понаднормові';
 
+$lang['email_leave_request_reminder'] = '[Нагадування]';
+
 $lang['email_extra_request_reject_subject'] = 'Заява на понаднормові від';
 $lang['email_extra_request_validation_title'] = 'Заява на понаднормові';
 

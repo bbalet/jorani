@@ -25,6 +25,8 @@ $lang['email_leave_request_accept_subject'] = 'ការចាកចេញរប
 $lang['email_leave_request_reject_subject'] = 'ការស្នើសុំចាកចេញរបស់អ្នកត្រូវបានច្រានចោល';
 $lang['email_leave_request_validation_title'] = 'ការស្នើសុំឈប់សំរាក';
 
+$lang['email_leave_request_reminder'] = '[reminder]';
+
 $lang['email_overtime_request_accept_subject'] = 'ការស្នើសុំម៉ោងបន្ថែមរបស់អ្នកត្រូវបានទទួលយក';
 $lang['email_overtime_request_reject_subject'] = 'ការស្នើសុំម៉ោងបន្ថែមរបស់អ្នកត្រូវបាច្រាលចោល';
 $lang['email_overtime_request_validation_title'] = 'ការស្នើសុំម៉ោងបន្ថែម';

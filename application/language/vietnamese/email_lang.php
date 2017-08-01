@@ -25,6 +25,9 @@ $lang['email_leave_cancel_reject_subject'] = 'Your Cancellation Request has been
 $lang['email_leave_request_accept_subject'] = 'Yêu cầu nghỉ của bạn được chấp nhận';
 $lang['email_leave_request_reject_subject'] = 'Yêu cầu nghỉ của bạn bị từ chối';
 $lang['email_leave_request_validation_title'] = 'Yêu cầu ra ngoài';
+
+$lang['email_leave_request_reminder'] = '[người nhắc lại]';
+
 $lang['email_overtime_request_accept_subject'] = 'Yêu cầu làm thêm giờ được chấp nhận';
 $lang['email_overtime_request_reject_subject'] = 'Yêu cầu làm thêm giờ bị từ chối';
 $lang['email_overtime_request_validation_title'] = 'Yều làm thêm giờ';

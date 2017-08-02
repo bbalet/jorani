@@ -25,6 +25,9 @@ $lang['email_leave_cancel_reject_subject'] = 'Your Cancellation Request has been
 $lang['email_leave_request_accept_subject'] = '你的休假申請已被接受';
 $lang['email_leave_request_reject_subject'] = '你的休假申請已被拒絕';
 $lang['email_leave_request_validation_title'] = '休假申請';
+
+$lang['email_leave_request_reminder'] = '[提醒]';
+
 $lang['email_overtime_request_accept_subject'] = '你的加班申請已被接受';
 $lang['email_overtime_request_reject_subject'] = '你的加班申請已被拒絕';
 $lang['email_overtime_request_validation_title'] = '加班申請';

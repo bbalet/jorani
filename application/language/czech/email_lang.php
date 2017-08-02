@@ -27,6 +27,8 @@ $lang['email_leave_request_reject_subject'] = 'Vaše žádost o dovolenou byla z
 
 $lang['email_leave_request_validation_title'] = 'Žádost o dovolenou';
 
+$lang['email_leave_request_reminder'] = '[připomínka]';
+
 $lang['email_overtime_request_accept_subject'] = 'Vámi požadovaný přesčas byl schválen';
 $lang['email_overtime_request_reject_subject'] = 'Vámi požadovaný přesčas byl zamítnut';
 

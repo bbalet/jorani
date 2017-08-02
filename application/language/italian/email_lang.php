@@ -25,6 +25,8 @@ $lang['email_leave_request_accept_subject'] = 'La tua richiesta ferie è stata a
 $lang['email_leave_request_reject_subject'] = 'La tua richiesta ferie è stata rifiutata';
 $lang['email_leave_request_validation_title'] = 'Richiesta ferie';
 
+$lang['email_leave_request_reminder'] = '[promemoria]';
+
 $lang['email_overtime_request_accept_subject'] = 'La tua richiesta di straordinario è stata accettata';
 $lang['email_overtime_request_reject_subject'] = 'La tua richiesta di straordinario è stata rifiutata';
 $lang['email_overtime_request_validation_title'] = 'Richieste di straordinario';

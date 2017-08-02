@@ -26,6 +26,9 @@ $lang['email_leave_cancel_reject_subject'] = 'Your Cancellation Request has been
 $lang['email_leave_request_accept_subject'] = 'İzin talebiniz kabul edildi.';
 $lang['email_leave_request_reject_subject'] = 'İzin talebiniz reddedildi.';
 $lang['email_leave_request_validation_title'] = 'İzin Talebi';
+
+$lang['email_leave_request_reminder'] = '[hatırlatma]';
+
 $lang['email_overtime_request_accept_subject'] = 'Fazla mesai talebiniz kabul edildi.';
 $lang['email_overtime_request_reject_subject'] = 'Fazla mesai talebiniz reddedildi.';
 $lang['email_overtime_request_validation_title'] = 'Fazla Mesai Talebi';

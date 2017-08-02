@@ -23,6 +23,9 @@ $lang['email_leave_cancel_reject_subject'] = 'Your Cancellation Request has been
 $lang['email_leave_request_accept_subject'] = 'Uw afwezigheidsverzoek is goedgekeurd';
 $lang['email_leave_request_reject_subject'] = 'Uw afwezigheidsverzoek is afgekeurd';
 $lang['email_leave_request_validation_title'] = 'Afwezigheidsverzoek';
+
+$lang['email_leave_request_reminder'] = '[herinnering]';
+
 $lang['email_overtime_request_accept_subject'] = 'Uw overuren aanmelding is goedgekeurd';
 $lang['email_overtime_request_reject_subject'] = 'Uw overuren aanmelding is afgekeurd';
 $lang['email_overtime_request_validation_title'] = 'Overuren aanmelding';

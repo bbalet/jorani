@@ -25,6 +25,8 @@ $lang['email_leave_request_accept_subject'] = 'درخواست مرخصی شما 
 $lang['email_leave_request_reject_subject'] = 'درخواست مرخصی شما پذیرفته نشد';
 $lang['email_leave_request_validation_title'] = 'درخواست مرخصی';
 
+$lang['email_leave_request_reminder'] = '[reminder]';
+
 $lang['email_overtime_request_accept_subject'] = 'درخواست اضافه کاری شما پذیرفته شد';
 $lang['email_overtime_request_reject_subject'] = 'درخواست اضافه کاری شما پذیرفته نشد';
 $lang['email_overtime_request_validation_title'] = 'درخواست اضافه کاری';

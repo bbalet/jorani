@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        Cher {Firstname} {Lastname}, <br />
         <br />
         <p>Votre demande d'annulation a été validée et la demande de congé est maintenant annulée.</p>
         <table border="0">
@@ -37,7 +37,7 @@
                 <td>Raison &nbsp;</td><td>{Cause}</td>
             </tr>
             <tr>
-                <td>Commentaires &nbsp;</td><td>{Comments}</td>
+                <td>Dernier commentaire &nbsp;</td><td>{Comments}</td>
             </tr>
         </table>
         <hr>

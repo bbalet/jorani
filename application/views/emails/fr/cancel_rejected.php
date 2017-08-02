@@ -20,9 +20,9 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        Cher {Firstname} {Lastname}, <br />
         <br />
-        <p>Malheureusement, votre demande d'annulation n'a pas été acceptée.
+        <p>Votre demande d'annulation n'a pas été acceptée.
          La demande de congé est maintenant à son statut initial d'Acceptée.</p>
          <p>Veuillez contacter votre responsable pour en discuter.</p>
         <table border="0">
@@ -39,7 +39,7 @@
                 <td>Raison &nbsp;</td><td>{Cause}</td>
             </tr>
             <tr>
-                <td>Commentaires &nbsp;</td><td>{Comments}</td>
+                <td>Dernier commentaire &nbsp;</td><td>{Comments}</td>
             </tr>
         </table>
         <hr>

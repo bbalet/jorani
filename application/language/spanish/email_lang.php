@@ -23,6 +23,9 @@ $lang['email_leave_cancel_reject_subject'] = 'Your Cancellation Request has been
 $lang['email_leave_request_accept_subject'] = 'Tu solicitud de permiso ha sido aceptada';
 $lang['email_leave_request_reject_subject'] = 'Tu solicitud de permiso ha sido rechazada';
 $lang['email_leave_request_validation_title'] = 'Solicitar permiso';
+
+$lang['email_leave_request_reminder'] = '[recordatorio]';
+
 $lang['email_overtime_request_accept_subject'] = 'Tu solicitud de horas extras ha sido aceptada';
 $lang['email_overtime_request_reject_subject'] = 'Tu solicitud de horas extras ha sido rechazada';
 $lang['email_overtime_request_validation_title'] = 'Solicitud de horas extras';

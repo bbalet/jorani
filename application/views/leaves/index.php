@@ -91,8 +91,7 @@
                 $showEdit = FALSE;
                 $showReminder = FALSE;
                 //Edit rules
-                if (($leave['status'] == LMS_PLANNED) || 
-                        ($leave['status'] == LMS_CANCELED)) {
+                if (($leave['status'] == LMS_PLANNED)) {
                     $showEdit = TRUE;
                 }
                 if (($leave['status'] == LMS_REJECTED) && 

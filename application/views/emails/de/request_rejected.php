@@ -27,7 +27,7 @@
                 <td>Begründung &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-                <td>Comments &nbsp;</td><td>{Comments}</td>
+                <td>Last comment &nbsp;</td><td>{Comments}</td>
             </tr>
         </table>
     </body>

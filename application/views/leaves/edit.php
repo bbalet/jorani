@@ -146,21 +146,10 @@ if (isset($_GET['source'])) {
   }
    ?>
    <?php
-   if($is_hr === TRUE){
-     /*
-   $attributes = array('id' => 'frmLeaveNewCommentForm');
-   if (isset($_GET['source'])) {
-       echo form_open('/comments/' . $leave['id'] . '?source=' . $_GET['source'], $attributes);
-   } else {
-       echo form_open('/comments/' . $leave['id'] . '?source=leaves/edit', $attributes);
-   }
-   */
-   ?>
+   if ($is_hr === TRUE) { ?>
    <label for="comment"><?php echo lang('leaves_comment_new_comment');?></label>
    <textarea name="comment" class="form-control" rows="5" style="min-width: 100%"></textarea>
-   <!-- <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i>&nbsp;<?php echo "Nouveau commentaire";?></button> -->
    &nbsp;
- <!-- </form> -->
  <?php }?>
 </div>
 </div>

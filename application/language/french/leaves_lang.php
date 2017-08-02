@@ -70,12 +70,12 @@ $lang['leaves_create_flash_msg_error'] = 'La demande d\'absence a été créée 
 $lang['leaves_flash_spn_list_days_off'] = '%s jours non travaillés dans la période';
 $lang['leaves_flash_msg_overlap_dayoff'] = 'Votre demande coïncide avec un jour non travaillé.';
 
-$lang['leaves_cancellation_flash_msg_error'] = 'You can\'t cancel this leave request';
-$lang['leaves_cancellation_flash_msg_success'] = 'The cancellation request has been successfully sent';
-$lang['requests_cancellation_accept_flash_msg_success'] = 'The leave request has been successfully cancelled';
-$lang['requests_cancellation_accept_flash_msg_error'] = 'An error occured while trying to accept the cancellation';
-$lang['requests_cancellation_reject_flash_msg_success'] = 'The leave request has now its original status of Accepted';
-$lang['requests_cancellation_reject_flash_msg_error'] = 'An error occured while trying to reject the cancellation';
+$lang['leaves_cancellation_flash_msg_error'] = 'Vous ne pouvez pas annuler cette demande de congé.';
+$lang['leaves_cancellation_flash_msg_success'] = 'La demande d\'annulation a été envoyée avec succès.';
+$lang['requests_cancellation_accept_flash_msg_success'] = 'La demande de congé a été annulée avec succès.';
+$lang['requests_cancellation_accept_flash_msg_error'] = 'Une erreur est apparue en tentant d\'annuler la demande.';
+$lang['requests_cancellation_reject_flash_msg_success'] = 'La demande de congé a maintenant son statut originel *Acceptée*';
+$lang['requests_cancellation_reject_flash_msg_error'] = 'Une erreur est apparue en tentant de rejetter la demande d\'annulation.';
 
 $lang['leaves_edit_html_title'] = 'Modifier la demande';
 $lang['leaves_edit_title'] = 'Modifier la demande N°';
@@ -129,6 +129,6 @@ $lang['leaves_reminder_flash_msg_success'] = 'L\'email de rappel a été envoyé
 
 $lang['leaves_comment_title'] = 'Commentaires';
 $lang['leaves_comment_new_comment'] = 'Nouveau commentaire';
-$lang['leaves_comment_send_comment'] = 'Envoyer un commentaire';
+$lang['leaves_comment_send_comment'] = 'Ajouter un commentaire';
 $lang['leaves_comment_author_saying'] = ' a dit';
 $lang['leaves_comment_status_changed'] = 'Le statut de la demande a changé : ';

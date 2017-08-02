@@ -35,7 +35,7 @@ $lastObject->endDate = '';
 $lastObject->cause = '';
 $lastObject->duration = '';
 $lastObject->typeName = '';
-$lastObject->status = '';
+$lastObject->status = 0;
 $lastObject->statusName = '';
 
 foreach ($events as $event) {
@@ -71,7 +71,7 @@ foreach ($events as $event) {
     $objLeave->cause = ($event['cause']==$lastObject->cause)?'':$event['cause'];
     $objLeave->duration = ($event['duration']==$lastObject->duration)?'':$event['duration'];
     $objLeave->typeName = ($event['type_name']==$lastObject->typeName)?'':$event['type_name'];
-    $objLeave->status = ($event['status']==$lastObject->status)?'':$event['status'];
+    $objLeave->status = $event['status'];
     $objLeave->statusName = ($event['status_name']==$lastObject->statusName)?'':$event['status_name'];
     array_push($history, $objLeave);
     $lastObject = clone $fullObject;

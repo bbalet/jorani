@@ -31,7 +31,7 @@
                 <td>Reden &nbsp;</td><td>{Cause}</td>
             </tr>
             <tr>
-                <td>Comments &nbsp;</td><td>{Comments}</td>
+                <td>Last comment &nbsp;</td><td>{Comments}</td>
             </tr>
         </table>
     </body>

@@ -89,3 +89,21 @@ msgstr ""
 msgid "Unfortunately, the overtime you submitted has been rejected. Please contact your manager to discuss the matter."
 msgstr ""
 
+msgid "Last Comment"
+msgstr ""
+
+msgid "Unfortunately, your cancellation request was not accepted. The leave request has now its original status of Accepted. Please contact your manager to discuss the matter."
+msgstr ""
+
+msgid "Your cancellation request was accepted and the leave request has been cancelled."
+msgstr ""
+
+msgid "{Firstname} {Lastname} would like to cancel a requested time off. See the *details* below:"
+msgstr ""
+
+msgid "Confirm cancellation"
+msgstr ""
+
+msgid "Reject cancellation"
+msgstr ""
+

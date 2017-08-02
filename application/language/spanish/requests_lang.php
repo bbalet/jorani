@@ -13,6 +13,7 @@ $lang['requests_index_description'] = 'Esta pantalla muestra las solicitudes de 
 $lang['requests_index_thead_tip_view'] = 'ver';
 $lang['requests_index_thead_tip_accept'] = 'aceptar';
 $lang['requests_index_thead_tip_reject'] = 'rechazar';
+$lang['requests_index_thead_tip_history'] = 'show history';
 $lang['requests_index_thead_id'] = 'ID';
 $lang['requests_index_thead_fullname'] = 'Nombre completo';
 $lang['requests_index_thead_startdate'] = 'Primera fecha';
@@ -83,6 +84,6 @@ $lang['requests_balance_title'] = 'Leave balance (subordinates)';
 $lang['requests_balance_description'] = 'Leave balance of my direct report subordinates. If you are not a manager, this list will always be empty.';
 $lang['requests_balance_date_field'] = 'Date of report';
 
-$lang['requests_comment_reject_request_title'] = 'Send a new comment (optional)';
+$lang['requests_comment_reject_request_title'] = 'Comment';
 $lang['requests_comment_reject_request_button_cancel'] = 'Cancel';
 $lang['requests_comment_reject_request_button_reject'] = 'Reject';

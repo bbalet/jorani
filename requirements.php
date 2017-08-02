@@ -15,7 +15,7 @@ if (function_exists('apache_get_modules')) {
   $modules = apache_get_modules();
   $mod_rewrite = in_array('mod_rewrite', $modules)?TRUE:FALSE;
 } else {
-  $mod_rewrite =  getenv('HTTP_MOD_REWRITE')=='On'?TRUE:FALSE;
+  $mod_rewrite = strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'?TRUE:FALSE;
 }
 
 $env = is_null(getenv('CI_ENV'))?'':getenv('CI_ENV');
@@ -158,7 +158,7 @@ if ($configFileExists) {
                       <tr><td><?php if (strtolower($allow_overwrite) == "on") {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>
                       &nbsp;Allow overwrite (.htaccess files)</td><td><?php echo $allow_overwrite; ?> (used for cool URLs) Ignore this message if you are running something else than Apache.</td></tr>
 
-                      <tr><td><?php if (strtolower($mod_rewrite) == "on") {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>
+                      <tr><td><?php if ($mod_rewrite) {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>
                       &nbsp;Apache module rewrite (mod_rewrite)</td><td><?php echo $mod_rewrite; ?> (used for cool URLs) Ignore this message if you are running something else than Apache.</td></tr>
 
                       <tr><td><?php if (strtolower($mod_gzip) == "on") {?><i class="icon-ok-sign"></i><?php } else { ?><i class="icon-remove-sign"></i><?php } ?>

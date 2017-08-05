@@ -319,8 +319,11 @@ class Leaves extends CI_Controller {
         } else {
             $this->leaves_model->updateLeaves($id);       //We don't use the return value
             $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
-            //If the status is requested, send an email to the manager
+            //If the status is requested or cancellation, send an email to the manager
             if ($this->input->post('status') == LMS_REQUESTED) {
+                $this->sendMailOnLeaveRequestCreation($id);
+            }
+            if ($this->input->post('status') == LMS_CANCELLATION) {
                 $this->sendMailOnLeaveRequestCreation($id);
             }
             if (isset($_GET['source'])) {

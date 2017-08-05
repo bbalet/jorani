@@ -17,7 +17,7 @@ if (isset($_GET['source'])) {
   echo form_open('leaves/edit/' . $id, $attributes);
 } ?>
 <div class="row">
-  <div class="span8">
+  <div class="span6">
 <div class="row-fluid">
     <div class="span8">
 
@@ -79,11 +79,13 @@ if (isset($_GET['source'])) {
 
     <label for="status"><?php echo lang('leaves_edit_field_status');?></label>
     <select name="status">
-        <option value="1" <?php if ($leave['status'] == 1) echo 'selected'; ?>><?php echo lang('Planned');?></option>
-        <option value="2" <?php if (($leave['status'] == 2) || $this->config->item('leave_status_requested')) echo 'selected'; ?>><?php echo lang('Requested');?></option>
+        <option value="1" <?php if ($leave['status'] == LMS_PLANNED) echo 'selected'; ?>><?php echo lang('Planned');?></option>
+        <option value="2" <?php if (($leave['status'] == LMS_REQUESTED) || $this->config->item('leave_status_requested')) echo 'selected'; ?>><?php echo lang('Requested');?></option>
         <?php if ($is_hr) {?>
-        <option value="3" <?php if ($leave['status'] == 3) echo 'selected'; ?>><?php echo lang('Accepted');?></option>
-        <option value="4" <?php if ($leave['status'] == 4) echo 'selected'; ?>><?php echo lang('Rejected');?></option>
+        <option value="3" <?php if ($leave['status'] == LMS_ACCEPTED) echo 'selected'; ?>><?php echo lang('Accepted');?></option>
+        <option value="4" <?php if ($leave['status'] == LMS_REJECTED) echo 'selected'; ?>><?php echo lang('Rejected');?></option>
+        <option value="5" <?php if ($leave['status'] == LMS_CANCELLATION) echo 'selected'; ?>><?php echo lang('Cancellation');?></option>
+        <option value="6" <?php if ($leave['status'] == LMS_CANCELED) echo 'selected'; ?>><?php echo lang('Canceled');?></option>
         <?php } ?>
     </select><br />
 

@@ -253,7 +253,7 @@ class Dayoffs_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function importDaysOffFromICS($contract, $url) {
-        require_once(APPPATH . 'third_party/VObjects/vendor/autoload.php');
+        require_once FCPATH . "vendor/autoload.php";
         $ical = VObject\Reader::read(fopen($url,'r'), VObject\Reader::OPTION_FORGIVING);
         foreach($ical->VEVENT as $event) {
             $start = new DateTime($event->DTSTART);

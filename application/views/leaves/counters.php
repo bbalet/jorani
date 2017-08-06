@@ -22,8 +22,8 @@
     <tr>
       <th><?php echo lang('leaves_summary_thead_type');?></th>
       <th colspan="2"><?php echo lang('leaves_summary_thead_available');?></th>
-      <th><?php echo lang('leaves_summary_thead_entitled');?></th>
-      <th><?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;<span class="label label-success"><?php echo lang('Accepted');?></span></th>
+      <th><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_entitled');?></th>
+      <th><i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>"></i></th>
       <th><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label"><?php echo lang('Planned');?></span></th>
       <th><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label label-warning"><?php echo lang('Requested');?></span></th>
     </tr>
@@ -40,11 +40,11 @@
     <tr>
       <td><?php echo $key; ?></td>
       <td>
-          <i class="icon-info-sign" data-toggle="tooltip" title="<?php echo lang('Accepted');?>"></i>&nbsp;
+          <i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>)"></i>&nbsp;
           <?php echo $estimated; ?>
       </td>
       <td>
-          <i class="icon-info-sign" data-toggle="tooltip" title="<?php echo lang('Accepted');?> + <?php echo lang('Planned');?> + <?php echo lang('Requested');?>"></i>&nbsp;
+          <i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?> + <?php echo lang('Planned');?> + <?php echo lang('Requested');?>)"></i>&nbsp;
           <?php echo $simulated; ?>
       </td>
       <td><?php echo ((float) $value[1]); ?></td>

@@ -68,7 +68,7 @@ $route['users'] = 'users';
 //Human Resources Management
 $route['hr/employees'] = 'hr/employees';
 $route['hr/employees/entity/(:num)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)'] = 'hr/employeesOfEntity/$1/$2/$3/$4/$5/$6/$7';
-$route['hr/employees/export/(:num)/(:any)/(:any)'] = 'hr/exportEmployees/$1/$2/$3';
+$route['hr/employees/export/(:num)/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)'] = 'hr/exportEmployees/$1/$2/$3/$4/$5/$6/$7';
 $route['hr/employees/edit/manager'] = 'hr/editManager';
 $route['hr/employees/edit/entity'] = 'hr/editEntity';
 $route['hr/employees/edit/contract'] = 'hr/editContract';

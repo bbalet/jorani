@@ -43,6 +43,7 @@ switch ($leave['status']) {
     case LMS_PLANNED: $style= "dropdown-planned"; break;
     case LMS_REQUESTED: $style= "dropdown-requested"; break;
     case LMS_ACCEPTED: $style= "dropdown-accepted"; break;
+    default: $style= "dropdown-rejected"; break;
 } ?>
     <label for="status"><?php echo lang('leaves_view_field_status');?></label>
     <select name="status" class="<?php echo $style; ?>" readonly>

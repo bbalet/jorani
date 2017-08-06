@@ -551,11 +551,12 @@ class Leaves extends CI_Controller {
             if ($this->is_hr) {
                 $can_delete = TRUE;
             } else {
-                if ($leaves['status'] == 1 ) {
+                if (($leaves['status'] == LMS_PLANNED) &&
+                        $leaves['employee'] == $this->user_id) {
                     $can_delete = TRUE;
                 }
                 if ($this->config->item('delete_rejected_requests') == TRUE ||
-                    $leaves['status'] == 4) {
+                    $leaves['status'] == LMS_REJECTED) {
                     $can_delete = TRUE;
                 }
             }

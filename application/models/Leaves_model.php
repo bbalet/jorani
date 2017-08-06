@@ -1406,7 +1406,8 @@ class Leaves_model extends CI_Model {
                         in_array("2", $statuses),
                         in_array("3", $statuses),
                         in_array("4", $statuses),
-                        in_array("5", $statuses));
+                        in_array("5", $statuses),
+                        in_array("6", $statuses));
             } else {
                 $tabular[$employee['id']] = $this->linear($employee['id'], $month, $year, TRUE, TRUE, TRUE, FALSE, TRUE);
             }
@@ -1545,8 +1546,8 @@ class Leaves_model extends CI_Model {
             //Hide forbidden entries in calendars
             if ($calendar) {
                 //Don't display rejected and cancel* leave requests for other employees
-                if (($entry->employee != $this->session->userdata('id')) ||
-                    ($entry->manager != $this->session->userdata('id')) ||
+                if (($entry->employee != $this->session->userdata('id')) &&
+                    ($entry->manager != $this->session->userdata('id')) &&
                         ($this->session->userdata('is_hr') === FALSE)) {
                     if ($entry->status > LMS_ACCEPTED) {
                         continue;

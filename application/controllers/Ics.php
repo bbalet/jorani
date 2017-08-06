@@ -116,27 +116,29 @@ class Ics extends CI_Controller {
                 
                 $vcalendar = new VObject\Component\VCalendar();
                 foreach ($result as $event) {
-                    $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
-                    $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
-                    if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
-                    if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Afternoon'){
-                        $enddate->setTime(0, 0);
-                        $enddate->modify('+1 day');
-                    } 
-                    
-                    //In order to support Outlook, we convert start and end dates to UTC
-                    $startdate->setTimezone(new DateTimeZone("UTC"));
-                    $enddate->setTimezone(new DateTimeZone("UTC"));
-                    $vcalendar->add('VEVENT', Array(
-                            'SUMMARY' => lang('leave'),
-                            'CATEGORIES' => lang('leave'),
-                            'DTSTART' => $startdate,
-                            'DTEND' => $enddate,
-                            'DESCRIPTION' => $event['cause'],
-                            'URL' => base_url() . "leaves/" . $event['id'],
-                    ));
+                    if (($event['status'] != LMS_CANCELED) && ($event['status'] != LMS_REJECTED)) {
+                        $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
+                        $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
+                        if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
+                        if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
+                        if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
+                        if ($event['enddatetype'] == 'Afternoon'){
+                            $enddate->setTime(0, 0);
+                            $enddate->modify('+1 day');
+                        } 
+
+                        //In order to support Outlook, we convert start and end dates to UTC
+                        $startdate->setTimezone(new DateTimeZone("UTC"));
+                        $enddate->setTimezone(new DateTimeZone("UTC"));
+                        $vcalendar->add('VEVENT', Array(
+                                'SUMMARY' => lang('leave'),
+                                'CATEGORIES' => lang('leave'),
+                                'DTSTART' => $startdate,
+                                'DTEND' => $enddate,
+                                'DESCRIPTION' => $event['cause'],
+                                'URL' => base_url() . "leaves/" . $event['id'],
+                        ));
+                    }
                 }
                 echo $vcalendar->serialize();
             }
@@ -173,24 +175,26 @@ class Ics extends CI_Controller {
                 
                 $vcalendar = new VObject\Component\VCalendar();
                 foreach ($result as $event) {
-                    $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
-                    $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
-                    if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 1);
-                    if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
-                    
-                    //In order to support Outlook, we convert start and end dates to UTC
-                    $startdate->setTimezone(new DateTimeZone("UTC"));
-                    $enddate->setTimezone(new DateTimeZone("UTC"));
-                    $vcalendar->add('VEVENT', Array(
-                        'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
-                        'CATEGORIES' => lang('leave'),
-                        'DTSTART' => $startdate,
-                        'DTEND' => $enddate,
-                        'DESCRIPTION' => $event['type'] . ($event['cause']!=''?(' / ' . $event['cause']):''),
-                        'URL' => base_url() . "leaves/" . $event['id'],
-                    ));    
+                    if (($event['status'] != LMS_CANCELED) && ($event['status'] != LMS_REJECTED)) {
+                        $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
+                        $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
+                        if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 1);
+                        if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
+                        if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
+                        if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
+
+                        //In order to support Outlook, we convert start and end dates to UTC
+                        $startdate->setTimezone(new DateTimeZone("UTC"));
+                        $enddate->setTimezone(new DateTimeZone("UTC"));
+                        $vcalendar->add('VEVENT', Array(
+                            'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
+                            'CATEGORIES' => lang('leave'),
+                            'DTSTART' => $startdate,
+                            'DTEND' => $enddate,
+                            'DESCRIPTION' => $event['type'] . ($event['cause']!=''?(' / ' . $event['cause']):''),
+                            'URL' => base_url() . "leaves/" . $event['id'],
+                        )); 
+                    }
                 }
                 echo $vcalendar->serialize();
             }
@@ -224,24 +228,26 @@ class Ics extends CI_Controller {
                 
                 $vcalendar = new VObject\Component\VCalendar();
                 foreach ($result as $event) {
-                    $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
-                    $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
-                    if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 1);
-                    if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
-                    
-                    //In order to support Outlook, we convert start and end dates to UTC
-                    $startdate->setTimezone(new DateTimeZone("UTC"));
-                    $enddate->setTimezone(new DateTimeZone("UTC"));
-                    $vcalendar->add('VEVENT', Array(
-                        'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
-                        'CATEGORIES' => lang('leave'),
-                        'DTSTART' => $startdate,
-                        'DTEND' => $enddate,
-                        'DESCRIPTION' => $event['type_label'] . ($event['cause']!=''?(' / ' . $event['cause']):''),
-                        'URL' => base_url() . "leaves/" . $event['id'],
-                    ));    
+                    if (($event['status'] != LMS_CANCELED) && ($event['status'] != LMS_REJECTED)) {
+                        $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
+                        $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
+                        if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 1);
+                        if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
+                        if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
+                        if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
+
+                        //In order to support Outlook, we convert start and end dates to UTC
+                        $startdate->setTimezone(new DateTimeZone("UTC"));
+                        $enddate->setTimezone(new DateTimeZone("UTC"));
+                        $vcalendar->add('VEVENT', Array(
+                            'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
+                            'CATEGORIES' => lang('leave'),
+                            'DTSTART' => $startdate,
+                            'DTEND' => $enddate,
+                            'DESCRIPTION' => $event['type_label'] . ($event['cause']!=''?(' / ' . $event['cause']):''),
+                            'URL' => base_url() . "leaves/" . $event['id'],
+                        ));
+                    }
                 }
                 echo $vcalendar->serialize();
             }

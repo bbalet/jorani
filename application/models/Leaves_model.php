@@ -296,7 +296,7 @@ class Leaves_model extends CI_Model {
                 $this->db->from('leaves');
                 $this->db->join('types', 'types.id = leaves.type');
                 $this->db->where('leaves.employee', $id);
-                $this->db->where('leaves.status', 3);
+                $this->db->where_in('leaves.status', array(LMS_ACCEPTED, LMS_CANCELLATION));
                 $this->db->where('leaves.startdate >= ', $entitlement['min_date']);
                 $this->db->where('leaves.enddate <=', $entitlement['max_date']);
                 $this->db->where('leaves.type', $entitlement['type_id']);
@@ -355,7 +355,7 @@ class Leaves_model extends CI_Model {
                 $this->db->from('leaves');
                 $this->db->join('types', 'types.id = leaves.type');
                 $this->db->where('leaves.employee', $id);
-                $this->db->where('leaves.status', 1);
+                $this->db->where('leaves.status', LMS_PLANNED);
                 $this->db->where('leaves.startdate >= ', $entitlement['min_date']);
                 $this->db->where('leaves.enddate <=', $entitlement['max_date']);
                 $this->db->where('leaves.type', $entitlement['type_id']);
@@ -379,7 +379,7 @@ class Leaves_model extends CI_Model {
                 $this->db->from('leaves');
                 $this->db->join('types', 'types.id = leaves.type');
                 $this->db->where('leaves.employee', $id);
-                $this->db->where('leaves.status', 2);
+                $this->db->where('leaves.status', LMS_REQUESTED);
                 $this->db->where('leaves.startdate >= ', $entitlement['min_date']);
                 $this->db->where('leaves.enddate <=', $entitlement['max_date']);
                 $this->db->where('leaves.type', $entitlement['type_id']);

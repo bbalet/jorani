@@ -430,6 +430,41 @@ class Leaves extends CI_Controller {
             }
         }
     }
+    
+    /**
+     * Send a notification to the manager of the connected employee when the
+     * leave request has been canceled by its collaborator.
+     * @param int $id Leave request identifier
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    private function sendMailOnLeaveRequestCanceled($id) {
+        $this->load->model('users_model');
+        $this->load->model('types_model');
+        $this->load->model('delegations_model');
+        //We load everything from DB as the LR can be edited from HR/Employees
+        $leave = $this->leaves_model->getLeaves($id);
+        $user = $this->users_model->getUsers($leave['employee']);
+        $manager = $this->users_model->getUsers($user['manager']);
+        if (empty($manager['email'])) {
+            //TODO: create specific error message when the employee has no manager
+            $this->session->set_flashdata('msg', lang('leaves_cancel_flash_msg_error'));
+        } else {
+            //Send an e-mail to the manager
+            $this->load->library('email');
+            $this->load->library('polyglot');
+            $usr_lang = $this->polyglot->code2language($manager['language']);
+
+            //We need to instance an different object as the languages of connected user may differ from the UI lang
+            $lang_mail = new CI_Lang();
+            $lang_mail->load('email', $usr_lang);
+            $lang_mail->load('global', $usr_lang);
+            
+            $this->sendGenericMail($leave, $user, $manager, $lang_mail,
+                $lang_mail->line('email_leave_request_cancellation_title'),
+                $lang_mail->line('email_leave_request_cancellation_subject'),
+                'cancelled');
+        }
+    }
 
     /**
      * Send a leave request cancellation email to the manager of the connected employee
@@ -605,6 +640,38 @@ class Leaves extends CI_Controller {
                 $this->leaves_model->switchStatus($id, LMS_CANCELLATION);
                 $this->sendMailOnLeaveRequestCancellation($id);
                 $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_success'));
+                redirect('leaves');
+            } else {
+                $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_error'));
+                redirect('leaves');
+            }
+        }
+    }
+    
+    /**
+     * Allows the employee to cancel a requested leave request.
+     * Only the connected user can reject its own requests.
+     * Send a notification to the line manager.
+     * Next status is 'Canceled'
+     * @param int $id identifier of the leave request
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function cancel($id) {
+        //Test if the leave request exists
+        $leave = $this->leaves_model->getLeaves($id);
+        if (empty($leave)) {
+            redirect('notfound');
+        } else {
+            //Only the connected user can reject its own requests
+            if ($this->user_id != $leave['employee']){
+                $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_error'));
+                redirect('leaves');
+            }
+            //We can cancel a leave request only with a status 'Requested'
+            if ($leave['status'] == LMS_REQUESTED) {
+                $this->leaves_model->switchStatus($id, LMS_CANCELED);
+                $this->sendMailOnLeaveRequestCanceled($id);
+                $this->session->set_flashdata('msg', lang('requests_cancellation_accept_flash_msg_success'));
                 redirect('leaves');
             } else {
                 $this->session->set_flashdata('msg', lang('leaves_cancellation_flash_msg_error'));

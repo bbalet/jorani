@@ -88,6 +88,7 @@
                 <?php
                 $showDelete = FALSE;
                 $showCancel = FALSE;
+                $showCancelByUser = FALSE;
                 $showEdit = FALSE;
                 $showReminder = FALSE;
                 //Edit rules
@@ -115,6 +116,10 @@
                         ($leave['status'] == LMS_CANCELLATION)) {
                     $showReminder = TRUE;
                 }
+                //Direct cancelation by the employee
+                if (($leave['status'] == LMS_REQUESTED)) {
+                    $showCancelByUser = TRUE;
+                }
                 ?>
                 <?php if ($showEdit == TRUE) { ?>
                 <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
@@ -126,6 +131,10 @@
                 <?php } ?>
                 <?php if ($showCancel == TRUE) { ?>
                     <a href="<?php echo base_url();?>leaves/cancellation/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_cancel');?>"><i class="fa fa-undo" style="color:black;"></i></a>
+                    &nbsp;
+                <?php } ?>
+                <?php if ($showCancelByUser == TRUE) { ?>
+                    <a href="<?php echo base_url();?>leaves/cancel/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_cancel');?>"><i class="fa fa-undo" style="color:black;"></i></a>
                     &nbsp;
                 <?php } ?>
                 <?php if ($showReminder == TRUE) { ?>

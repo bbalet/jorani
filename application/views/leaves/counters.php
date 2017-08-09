@@ -20,12 +20,16 @@
 <table class="table table-bordered table-hover">
 <thead>
     <tr>
-      <th><?php echo lang('leaves_summary_thead_type');?></th>
-      <th colspan="2"><?php echo lang('leaves_summary_thead_available');?></th>
-      <th><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_entitled');?></th>
-      <th><i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>"></i></th>
-      <th><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label"><?php echo lang('Planned');?></span></th>
-      <th><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label label-warning"><?php echo lang('Requested');?></span></th>
+      <th rowspan="2"><?php echo lang('leaves_summary_thead_type');?></th>
+      <th colspan="2" style="text-align: center;"><?php echo lang('leaves_summary_thead_available');?></th>
+      <th rowspan="2"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_entitled');?></th>
+      <th rowspan="2"><i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>"></i></th>
+      <th rowspan="2"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label"><?php echo lang('Planned');?></span></th>
+      <th rowspan="2"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label label-warning"><?php echo lang('Requested');?></span></th>
+    </tr>
+    <tr>
+      <th><?php echo lang('leaves_summary_thead_actual');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>)"></i></th>
+      <th><?php echo lang('leaves_summary_thead_simulated');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?> + <?php echo lang('Planned');?> + <?php echo lang('Requested');?>)"></i></th>
     </tr>
   </thead>
   <tbody>
@@ -40,11 +44,9 @@
     <tr>
       <td><?php echo $key; ?></td>
       <td>
-          <i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>)"></i>&nbsp;
           <?php echo $estimated; ?>
       </td>
       <td>
-          <i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?> + <?php echo lang('Planned');?> + <?php echo lang('Requested');?>)"></i>&nbsp;
           <?php echo $simulated; ?>
       </td>
       <td><?php echo ((float) $value[1]); ?></td>

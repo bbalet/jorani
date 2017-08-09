@@ -176,7 +176,7 @@ class Ics extends CI_Controller {
                         if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
                         if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
                         if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                        if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(25, 00);
+                        if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(24, 00);
 
                         //In order to support Outlook, we convert start and end dates to UTC
                         $startdate->setTimezone(new DateTimeZone("UTC"));

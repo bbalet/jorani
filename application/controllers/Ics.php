@@ -61,8 +61,7 @@ class Ics extends CI_Controller {
                     switch ($event->type) {
                         case 1: 
                             $startdate->setTime(0, 0);
-                            $enddate->setTime(0, 0);
-                            $enddate->modify('+1 day');
+                            $enddate->setTime(24, 0);
                             break;
                         case 2:
                             $startdate->setTime(0, 0);
@@ -70,8 +69,7 @@ class Ics extends CI_Controller {
                             break;
                         case 3:
                             $startdate->setTime(12, 0);
-                            $enddate->setTime(0, 0);
-                            $enddate->modify('+1 day');
+                            $enddate->setTime(24, 0);
                             break;
                     }
                     //In order to support Outlook, we convert start and end dates to UTC
@@ -122,10 +120,7 @@ class Ics extends CI_Controller {
                         if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
                         if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
                         if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                        if ($event['enddatetype'] == 'Afternoon'){
-                            $enddate->setTime(0, 0);
-                            $enddate->modify('+1 day');
-                        } 
+                        if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(24, 0);
 
                         //In order to support Outlook, we convert start and end dates to UTC
                         $startdate->setTimezone(new DateTimeZone("UTC"));
@@ -178,10 +173,10 @@ class Ics extends CI_Controller {
                     if (($event['status'] != LMS_CANCELED) && ($event['status'] != LMS_REJECTED)) {
                         $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
                         $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
-                        if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 1);
+                        if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
                         if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
                         if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                        if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
+                        if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(24, 00);
 
                         //In order to support Outlook, we convert start and end dates to UTC
                         $startdate->setTimezone(new DateTimeZone("UTC"));
@@ -231,10 +226,10 @@ class Ics extends CI_Controller {
                     if (($event['status'] != LMS_CANCELED) && ($event['status'] != LMS_REJECTED)) {
                         $startdate = new \DateTime($event['startdate'], new \DateTimeZone($tzdef));
                         $enddate = new \DateTime($event['enddate'], new \DateTimeZone($tzdef));
-                        if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 1);
+                        if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
                         if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
                         if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                        if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
+                        if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(24, 00);
 
                         //In order to support Outlook, we convert start and end dates to UTC
                         $startdate->setTimezone(new DateTimeZone("UTC"));

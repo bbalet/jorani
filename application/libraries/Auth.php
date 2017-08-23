@@ -209,6 +209,7 @@ class Auth {
             case 'individual_calendar' :
             case 'workmates_calendar' :
             case 'collaborators_calendar' :
+                return true;
             case 'department_calendar' :
             case 'organization_calendar' :
                 return ($this->isHR || $this->isAdmin || ($this->CI->config->item('hide_global_cals_to_users') == FALSE));

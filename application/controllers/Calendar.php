@@ -33,7 +33,11 @@ class Calendar extends CI_Controller {
     public function year($employee = 0, $year = 0) {
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
-        $this->auth->checkIfOperationIsAllowed('organization_calendar');
+        if ($employee == 0) {
+            $this->auth->checkIfOperationIsAllowed('individual_calendar');
+        } else {
+            $this->auth->checkIfOperationIsAllowed('organization_calendar');
+        }
         $data = getUserContext($this);
         $this->load->model('users_model');
         $user = $this->users_model->getUsers($employee);
@@ -466,7 +470,11 @@ class Calendar extends CI_Controller {
     public function exportYear($employee = 0, $year = 0) {
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
-        $this->auth->checkIfOperationIsAllowed('organization_calendar');
+        if ($employee == 0) {
+            $this->auth->checkIfOperationIsAllowed('individual_calendar');
+        } else {
+            $this->auth->checkIfOperationIsAllowed('organization_calendar');
+        }
         $this->load->model('users_model');
         $user = $this->users_model->getUsers($employee);
         //Either self access, Manager or HR

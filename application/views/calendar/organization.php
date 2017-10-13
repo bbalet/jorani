@@ -125,7 +125,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lib/moment.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.min.js"></script>
 <?php if ($language_code != 'en') {?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lang/<?php echo $language_code;?>.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lang/<?php echo strtolower($language_code);?>.js"></script>
 <script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
 <?php }?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>

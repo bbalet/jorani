@@ -1,14 +1,18 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
-## v0.6.0
+## v0.7.0 or later
 
-- [X] Add Czech translation.
-- [X] Basic RUM Metrics.
-- [X] Separate Admin and HR roles.
-- [X] Hide leave types in tabular calendar. display it only to HR Manager and if connected user is manager.
-- [X] Option to hide global and tabular calendars to users (employee role).
-- [X] Remove the depedency to Flash plugin (copy/paste).
+- [ ] Get rid of JQuery UI (mostly used by calendars)
+- [ ] Investigate the strange behavior of the compensate balance (see PNC).
+- [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
+- [ ] i18n: Last 3 columns in Reports/Leaves.
+- [ ] Maybe: Filter Excel export on visible rows (lot of security backend).
+- [ ] Maybe: user/index Ajaxload.
+- [ ] Compute automatically: length of multiple leave requests.
+- [ ] Maybe: series of leave requests (Employees / Multiple edit); take into account days off. and...
+- [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
+- [ ] Add a "All" option into Reports/Leaves.
 - [ ] Add SMTPSecure, SMTPAutoTLS, and SMTPAuth email params. See https://mail.google.com/mail/u/0/#inbox/15ae53ce27624515
 - [ ] Fix missing closing DIV (Firefox).
 - [ ] Maybe: basic LDAP Search / connection.
@@ -23,18 +27,6 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] Replace header() by set_header()
 - [ ] Replace set_header("HTTP/1.1 422...) by set_status_header()
 - [ ] Replace echo() by set_output()
-
-## v0.7.0 or later
-
-- [ ] Investigate the strange behavior of the compensate balance (see PNC).
-- [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
-- [ ] i18n: Last 3 columns in Reports/Leaves.
-- [ ] Maybe: Filter Excel export on visible rows (lot of security backend).
-- [ ] Maybe: user/index Ajaxload.
-- [ ] Compute automatically: length of multiple leave requests.
-- [ ] Maybe: series of leave requests (Employees / Multiple edit); take into account days off. and...
-- [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
-- [ ] Add a "All" option into Reports/Leaves.
 
 ## v0.8.0 or later
 

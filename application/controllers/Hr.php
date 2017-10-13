@@ -65,42 +65,45 @@ class Hr extends CI_Controller {
      */
     public function employeesOfEntity($id = 0, $children = TRUE, $filterActive = "all",
             $criterion1 = NULL, $date1 = NULL, $criterion2 = NULL, $date2 = NULL) {
-        header("Content-Type: application/json");
         if ($this->auth->isAllowed('list_employees') == FALSE) {
-            $this->output->set_header("HTTP/1.1 403 Forbidden");
+            return $this->output->set_header("HTTP/1.1 403 Forbidden");
         } else {
             $children = filter_var($children, FILTER_VALIDATE_BOOLEAN);
             $this->load->model('users_model');
             $employees = $this->users_model->employeesOfEntity($id, $children, $filterActive,
                     $criterion1, $date1, $criterion2, $date2);
-            $msg = '{"draw": 1,';
-            $msg .= '"recordsTotal":' . count($employees);
-            $msg .= ',"recordsFiltered":' . count($employees);
-            $msg .= ',"data":[';
+            
+            //Prepare an object that will be encoded in JSON
+            $msg = new \stdClass();
+            $msg->draw = 1;
+            $msg->recordsTotal = count($employees);
+            $msg->recordsFiltered = count($employees);
+            $msg->data = array();
+            
             foreach ($employees as $employee) {
                 $date = new DateTime($employee->datehired);
                 $tmpDate = $date->getTimestamp();
                 $displayDate = $date->format(lang('global_date_format'));
                 
-                $msg .= '{"DT_RowId":"' . $employee->id . '",';
-                $msg .= '"id":"' . $employee->id . '",';
-                $msg .= '"firstname":"' . $employee->firstname . '",';
-                $msg .= '"lastname":"' . $employee->lastname . '",';
-                $msg .= '"email":"' . $employee->email . '",';
-                $msg .= '"entity":"' . $employee->entity . '",';
-                $msg .= '"identifier":"' . $employee->identifier . '",';
-                $msg .= '"contract":"' . $employee->contract . '",';
-                $msg .= '"datehired": {';
-                $msg .=     '"display":"' . $displayDate . '",';
-                $msg .=     '"timestamp":' . $tmpDate;
-                $msg .= '},';
-                $msg .= '"position":"' . $employee->position . '",';
-                $msg .= '"manager_name":"' . $employee->manager_name . '"';
-                $msg .= '},';
+                $row = new \stdClass();
+                $row->DT_RowId = $employee->id;
+                $row->id = $employee->id;
+                $row->firstname = $employee->firstname;
+                $row->lastname = $employee->lastname;
+                $row->email = $employee->email;
+                $row->entity = $employee->entity;
+                $row->identifier = $employee->identifier;
+                $row->contract = $employee->contract;
+                $row->datehired = new \stdClass();
+                $row->datehired->display = $displayDate;
+                $row->datehired->timestamp = $tmpDate;
+                $row->position = $employee->position;
+                $row->manager_name = $employee->manager_name;
+                $msg->data[] = $row;
             }
-            $msg = rtrim($msg, ",");
-            $msg .= ']}';
-            echo $msg;
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($msg));
         }
     }
     

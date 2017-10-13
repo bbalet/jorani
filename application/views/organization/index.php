@@ -302,6 +302,12 @@
         
         //Transform the HTML table in a fancy datatable
         oTable = $('#collaborators').DataTable({
+            columns: [
+                { data: "id" },
+                { data: "firstname" },
+                { data: "lastname" },
+                { data: "email" }
+            ],
             select: 'single',
             language: {
                 decimal:            "<?php echo lang('datatable_sInfoThousands');?>",

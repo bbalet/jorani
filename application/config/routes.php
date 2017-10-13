@@ -138,7 +138,6 @@ $route['organization/rename'] = 'organization/rename';
 $route['organization/move'] = 'organization/move';
 $route['organization/copy'] = 'organization/copy';
 $route['organization/employees'] = 'organization/employees';
-$route['organization/employeesDateHired'] = 'organization/employeesDateHired';
 $route['organization/addemployee'] = 'organization/addemployee';
 $route['organization/delemployee'] = 'organization/delemployee';
 $route['organization/getsupervisor'] = 'organization/getsupervisor';

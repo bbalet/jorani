@@ -21,7 +21,9 @@ Jorani has been tested with MySQL and MariaDB (please note that functions are cr
 * Import <code>/sql/lms.sql</code>.
 * Change <code>application/config/database.php</code> according to your environment.
 
-Please note that the schema contains procedures, so the user created must have EXECUTE permission.
+Please note that the schema contains procedures, so the user used for Jorani must have EXECUTE permission. 
+Please check errors output by the script as some users reported that procedures are not created if you don't have SUPER privilege. 
+A possible workaround is to start your MySQL session by this command `SET GLOBAL log_bin_trust_function_creators = 1;` (please refer to MySQL documentation).
 
 ## E-mail setup
 

@@ -12,7 +12,7 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 require_once FCPATH . "vendor/autoload.php";
 
 /**
- * This class implements a REST API served through an OAuth2 server.
+ * This class implements a HTTP API served through an OAuth2 server.
  * In order to use it, you need to insert an OAuth2 client into the database, for example :
  * INSERT INTO oauth_clients (client_id, client_secret, redirect_uri) VALUES ("testclient", "testpass", "http://fake/");
  * where "testclient" and "testpass" are respectively the login and password.

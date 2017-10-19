@@ -265,7 +265,7 @@ $route['reports/leaves/export'] = 'reports/exportLeavesReport';
 $route['reports'] = 'reports';
 
 //_______________________________________________
-//REST API
+//HTTP API
 $route['api/token'] = 'api/token';
 $route['api/contracts/(:num)'] = 'api/contracts/$1';
 $route['api/contracts'] = 'api/contracts';
@@ -299,6 +299,14 @@ $route['api/rejectleaves/(:num)'] = 'api/rejectleaves/$1';
 $route['api/users/ext'] = 'api/usersExt';
 
 //_______________________________________________
+//REST API (for mobile/HTML Clients)
+$route['api/rest/leaves']['OPTIONS'] = 'rest/options';
+$route['api/rest/leaves']['GET'] = 'rest/leaves';
+
+$route['api/rest/contracts']['OPTIONS'] = 'rest/options';
+$route['api/rest/users']['OPTIONS'] = 'rest/options';
+
+//_______________________________________________
 //ICS Feeds
 $route['ics/individual/(:num)'] = 'ics/individual/$1';
 $route['ics/dayoffs/(:num)/(:num)'] = 'ics/dayoffs/$1/$2';
@@ -318,14 +326,6 @@ $route['api/acs'] = 'connection/acs';
 $route['api/slo'] = 'connection/slo';
 $route['api/sls'] = 'connection/sls';
 $route['api/sso'] = 'connection/sso';
-
-//_______________________________________________
-//Experimental mobile endpoint
-$route['mobile/getPublicKey'] = 'mobile/getPublicKey';
-$route['mobile/login'] = 'mobile/login';
-$route['mobile/logout'] = 'mobile/logout';
-$route['mobile/notifications'] = 'mobile/notifications';
-$route['mobile/leaves/(:num)'] = 'mobile/leaves/$1';
 
 //_______________________________________________
 //Authorization endpoint

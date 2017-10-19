@@ -98,6 +98,8 @@ server {
                 fastcgi_param SERVER_SOFTWARE nginx;
                 fastcgi_param HTTP_MOD_REWRITE On; #Mimic Apache
                 fastcgi_param ALLOW_OVERWRITE On; #Mimic Apache
+                fastcgi_param PHP_AUTH_USER $remote_user;       #Pass BasicAuth headers
+                fastcgi_param PHP_AUTH_PW $http_authorization;  #Pass BasicAuth headers
 		fastcgi_param SCRIPT_FILENAME
 			$document_root$fastcgi_script_name;
                 fastcgi_buffer_size 128k;

@@ -7,8 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInitb2c19c4733b91c457f6df577c2111d3e
 {
     public static $files = array (
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '383eaff206634a77a1be54e64e6459c7' => __DIR__ . '/..' . '/sabre/uri/lib/functions.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
@@ -114,7 +114,6 @@ class ComposerStaticInitb2c19c4733b91c457f6df577c2111d3e
         'OneLogin_Saml2_AuthnRequest' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/AuthnRequest.php',
         'OneLogin_Saml2_Constants' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/Constants.php',
         'OneLogin_Saml2_Error' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/Error.php',
-        'OneLogin_Saml2_IdPMetadataParser' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/IdPMetadataParser.php',
         'OneLogin_Saml2_LogoutRequest' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/LogoutRequest.php',
         'OneLogin_Saml2_LogoutResponse' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/LogoutResponse.php',
         'OneLogin_Saml2_Metadata' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/Metadata.php',

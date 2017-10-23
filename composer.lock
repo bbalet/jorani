@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2223b79a4255849d30fc25a7761153e2",
     "content-hash": "7aa032c0d2c5f8062c10355ce108b994",
     "packages": [
         {
@@ -61,7 +60,7 @@
                 "oauth",
                 "oauth2"
             ],
-            "time": "2017-01-06 23:20:00"
+            "time": "2017-01-06T23:20:00+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -126,7 +125,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-06-22 18:50:49"
+            "time": "2017-06-22T18:50:49+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -309,7 +308,7 @@
                 "oauth2",
                 "single sign on"
             ],
-            "time": "2017-04-25 14:43:14"
+            "time": "2017-04-25T14:43:14+00:00"
         },
         {
             "name": "league/oauth2-google",
@@ -360,7 +359,7 @@
                 "oauth",
                 "oauth2"
             ],
-            "time": "2017-06-14 14:06:56"
+            "time": "2017-06-14T14:06:56+00:00"
         },
         {
             "name": "onelogin/php-saml",
@@ -414,7 +413,7 @@
                 "onelogin",
                 "saml"
             ],
-            "time": "2017-07-21 20:16:31"
+            "time": "2017-07-21T20:16:31+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -462,7 +461,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-09-27 21:40:39"
+            "time": "2017-09-27T21:40:39+00:00"
         },
         {
             "name": "phpoffice/phpexcel",
@@ -532,12 +531,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "6d51f2bf850c06fa0457bbaa223f6b58a7f00e20"
+                "reference": "f4b6a522dfa1fd1e477c9cfe5909d5b31f098c0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/6d51f2bf850c06fa0457bbaa223f6b58a7f00e20",
-                "reference": "6d51f2bf850c06fa0457bbaa223f6b58a7f00e20",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/f4b6a522dfa1fd1e477c9cfe5909d5b31f098c0b",
+                "reference": "f4b6a522dfa1fd1e477c9cfe5909d5b31f098c0b",
                 "shasum": ""
             },
             "require": {
@@ -616,7 +615,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2017-10-05 10:39:00"
+            "time": "2017-10-23 05:04:54"
         },
         {
             "name": "psr/http-message",
@@ -717,7 +716,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2015-01-27 22:21:38"
+            "time": "2015-01-27T22:21:38+00:00"
         },
         {
             "name": "sabre/vobject",
@@ -814,7 +813,7 @@
                 "xCal",
                 "xCard"
             ],
-            "time": "2017-10-18 08:29:40"
+            "time": "2017-10-18T08:29:40+00:00"
         },
         {
             "name": "sabre/xml",

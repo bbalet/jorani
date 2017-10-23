@@ -1,27 +1,211 @@
 [
     {
-        "name": "phpoffice/phpexcel",
-        "version": "1.8.1",
-        "version_normalized": "1.8.1.0",
+        "name": "bshaffer/oauth2-server-php",
+        "version": "v1.9.0",
+        "version_normalized": "1.9.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/PHPOffice/PHPExcel.git",
-            "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+            "url": "https://github.com/bshaffer/oauth2-server-php.git",
+            "reference": "8856aed1a98d6da596ae3f9b8095b5c7a1581697"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
-            "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+            "url": "https://api.github.com/repos/bshaffer/oauth2-server-php/zipball/8856aed1a98d6da596ae3f9b8095b5c7a1581697",
+            "reference": "8856aed1a98d6da596ae3f9b8095b5c7a1581697",
             "shasum": ""
         },
         "require": {
-            "ext-xml": "*",
-            "ext-xmlwriter": "*",
-            "php": ">=5.2.0"
+            "php": ">=5.3.9"
         },
-        "time": "2015-05-01 07:00:55",
+        "require-dev": {
+            "aws/aws-sdk-php": "~2.8",
+            "firebase/php-jwt": "~2.2",
+            "mongodb/mongodb": "^1.1",
+            "predis/predis": "dev-master",
+            "thobbs/phpcassa": "dev-master"
+        },
+        "suggest": {
+            "aws/aws-sdk-php": "~2.8 is required to use DynamoDB storage",
+            "firebase/php-jwt": "~1.1 is required to use MondoDB storage",
+            "predis/predis": "Required to use Redis storage",
+            "thobbs/phpcassa": "Required to use Cassandra storage"
+        },
+        "time": "2017-01-06 23:20:00",
         "type": "library",
         "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "OAuth2": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Brent Shaffer",
+                "email": "bshafs@gmail.com",
+                "homepage": "http://brentertainment.com"
+            }
+        ],
+        "description": "OAuth2 Server for PHP",
+        "homepage": "http://github.com/bshaffer/oauth2-server-php",
+        "keywords": [
+            "auth",
+            "oauth",
+            "oauth2"
+        ]
+    },
+    {
+        "name": "league/oauth2-client",
+        "version": "2.2.1",
+        "version_normalized": "2.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thephpleague/oauth2-client.git",
+            "reference": "313250eab923e673a5c0c8f463f443ee79f4383f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/313250eab923e673a5c0c8f463f443ee79f4383f",
+            "reference": "313250eab923e673a5c0c8f463f443ee79f4383f",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/guzzle": "^6.0",
+            "paragonie/random_compat": "^1|^2",
+            "php": ">=5.6.0"
+        },
+        "require-dev": {
+            "eloquent/liberator": "^2.0",
+            "eloquent/phony": "^0.14.1",
+            "jakub-onderka/php-parallel-lint": "~0.9",
+            "phpunit/phpunit": "^5.0",
+            "squizlabs/php_codesniffer": "^2.0"
+        },
+        "time": "2017-04-25 14:43:14",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-2.x": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "League\\OAuth2\\Client\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Alex Bilbie",
+                "email": "hello@alexbilbie.com",
+                "homepage": "http://www.alexbilbie.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Woody Gilk",
+                "homepage": "https://github.com/shadowhand",
+                "role": "Contributor"
+            }
+        ],
+        "description": "OAuth 2.0 Client Library",
+        "keywords": [
+            "Authentication",
+            "SSO",
+            "authorization",
+            "identity",
+            "idp",
+            "oauth",
+            "oauth2",
+            "single sign on"
+        ]
+    },
+    {
+        "name": "sabre/uri",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sabre-io/uri.git",
+            "reference": "0368d3cfb006a5a27660e20c23ffd71117da41b8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sabre-io/uri/zipball/0368d3cfb006a5a27660e20c23ffd71117da41b8",
+            "reference": "0368d3cfb006a5a27660e20c23ffd71117da41b8",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.7"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*",
+            "squizlabs/php_codesniffer": "*"
+        },
+        "time": "2015-01-27 22:21:38",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/functions.php"
+            ],
+            "psr-4": {
+                "Sabre\\Uri\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Evert Pot",
+                "email": "me@evertpot.com",
+                "homepage": "http://evertpot.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "Functions for making sense out of URIs.",
+        "homepage": "http://sabre.io/uri/",
+        "keywords": [
+            "rfc3986",
+            "uri",
+            "url"
+        ]
+    },
+    {
+        "name": "phpoffice/phpexcel",
+        "version": "1.8.x-dev",
+        "version_normalized": "1.8.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPOffice/PHPExcel.git",
+            "reference": "185bf412339526c97a98d959c3c0ecf4b7c80016"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/185bf412339526c97a98d959c3c0ecf4b7c80016",
+            "reference": "185bf412339526c97a98d959c3c0ecf4b7c80016",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "ext-xml": "*",
+            "ext-xmlwriter": "*",
+            "php": "^5.2|^7.0"
+        },
+        "require-dev": {
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2017-03-02 00:38:00",
+        "type": "library",
+        "installation-source": "source",
         "autoload": {
             "psr-0": {
                 "PHPExcel": "Classes/"
@@ -29,7 +213,7 @@
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "LGPL"
+            "LGPL-2.1"
         ],
         "authors": [
             {
@@ -37,18 +221,19 @@
                 "homepage": "http://blog.maartenballiauw.be"
             },
             {
-                "name": "Mark Baker"
+                "name": "Erik Tilt"
             },
             {
                 "name": "Franck Lefevre",
-                "homepage": "http://blog.rootslabs.net"
+                "homepage": "http://rootslabs.net"
             },
             {
-                "name": "Erik Tilt"
+                "name": "Mark Baker",
+                "homepage": "http://markbakeruk.net"
             }
         ],
         "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
-        "homepage": "http://phpexcel.codeplex.com",
+        "homepage": "https://github.com/PHPOffice/PHPExcel",
         "keywords": [
             "OpenXML",
             "excel",
@@ -59,18 +244,83 @@
         ]
     },
     {
-        "name": "sabre/vobject",
-        "version": "4.1.2",
-        "version_normalized": "4.1.2.0",
+        "name": "sabre/xml",
+        "version": "1.5.x-dev",
+        "version_normalized": "1.5.9999999.9999999-dev",
         "source": {
             "type": "git",
-            "url": "https://github.com/fruux/sabre-vobject.git",
-            "reference": "d0fde2fafa2a3dad1f559c2d1c2591d4fd75ae3c"
+            "url": "https://github.com/sabre-io/xml.git",
+            "reference": "acd210f68c54946aac6fbf75ce7da772d5b1d6a4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/d0fde2fafa2a3dad1f559c2d1c2591d4fd75ae3c",
-            "reference": "d0fde2fafa2a3dad1f559c2d1c2591d4fd75ae3c",
+            "url": "https://api.github.com/repos/sabre-io/xml/zipball/acd210f68c54946aac6fbf75ce7da772d5b1d6a4",
+            "reference": "acd210f68c54946aac6fbf75ce7da772d5b1d6a4",
+            "shasum": ""
+        },
+        "require": {
+            "ext-dom": "*",
+            "ext-xmlreader": "*",
+            "ext-xmlwriter": "*",
+            "lib-libxml": ">=2.6.20",
+            "php": ">=5.5.5",
+            "sabre/uri": ">=1.0,<3.0.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.8|~5.7",
+            "sabre/cs": "~1.0.0"
+        },
+        "time": "2017-10-09 21:26:59",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Sabre\\Xml\\": "lib/"
+            },
+            "files": [
+                "lib/Deserializer/functions.php",
+                "lib/Serializer/functions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Evert Pot",
+                "email": "me@evertpot.com",
+                "homepage": "http://evertpot.com/",
+                "role": "Developer"
+            },
+            {
+                "name": "Markus Staab",
+                "email": "markus.staab@redaxo.de",
+                "role": "Developer"
+            }
+        ],
+        "description": "sabre/xml is an XML library that you may not hate.",
+        "homepage": "https://sabre.io/xml/",
+        "keywords": [
+            "XMLReader",
+            "XMLWriter",
+            "dom",
+            "xml"
+        ]
+    },
+    {
+        "name": "sabre/vobject",
+        "version": "4.1.3",
+        "version_normalized": "4.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sabre-io/vobject.git",
+            "reference": "df9916813d1d83e4f761c4cba13361ee74196fac"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sabre-io/vobject/zipball/df9916813d1d83e4f761c4cba13361ee74196fac",
+            "reference": "df9916813d1d83e4f761c4cba13361ee74196fac",
             "shasum": ""
         },
         "require": {
@@ -79,13 +329,13 @@
             "sabre/xml": ">=1.5 <3.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "*",
+            "phpunit/phpunit": "> 4.8, <6.0.0",
             "sabre/cs": "^1.0.0"
         },
         "suggest": {
             "hoa/bench": "If you would like to run the benchmark scripts"
         },
-        "time": "2016-12-06 04:14:09",
+        "time": "2017-10-18 08:29:40",
         "bin": [
             "bin/vobject",
             "bin/generate_vcards"
@@ -159,17 +409,17 @@
     },
     {
         "name": "phpseclib/phpseclib",
-        "version": "2.0.4",
-        "version_normalized": "2.0.4.0",
+        "version": "2.0.x-dev",
+        "version_normalized": "2.0.9999999.9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "ab8028c93c03cc8d9c824efa75dc94f1db2369bf"
+            "reference": "6d51f2bf850c06fa0457bbaa223f6b58a7f00e20"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/ab8028c93c03cc8d9c824efa75dc94f1db2369bf",
-            "reference": "ab8028c93c03cc8d9c824efa75dc94f1db2369bf",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/6d51f2bf850c06fa0457bbaa223f6b58a7f00e20",
+            "reference": "6d51f2bf850c06fa0457bbaa223f6b58a7f00e20",
             "shasum": ""
         },
         "require": {
@@ -187,9 +437,9 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
             "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
         },
-        "time": "2016-10-04 00:57:04",
+        "time": "2017-10-05 10:39:00",
         "type": "library",
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
             "files": [
                 "phpseclib/bootstrap.php"
@@ -253,17 +503,17 @@
     },
     {
         "name": "onelogin/php-saml",
-        "version": "2.10.5",
-        "version_normalized": "2.10.5.0",
+        "version": "2.11.0",
+        "version_normalized": "2.11.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/onelogin/php-saml.git",
-            "reference": "3319d7707f342e38291eee6b01a4a5f8df1b333b"
+            "reference": "818d6ee07e3797fd7e4006bff01bd2abc295cb65"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/onelogin/php-saml/zipball/3319d7707f342e38291eee6b01a4a5f8df1b333b",
-            "reference": "3319d7707f342e38291eee6b01a4a5f8df1b333b",
+            "url": "https://api.github.com/repos/onelogin/php-saml/zipball/818d6ee07e3797fd7e4006bff01bd2abc295cb65",
+            "reference": "818d6ee07e3797fd7e4006bff01bd2abc295cb65",
             "shasum": ""
         },
         "require": {
@@ -278,14 +528,14 @@
             "phpunit/phpunit": "4.8",
             "satooshi/php-coveralls": "1.0.1",
             "sebastian/phpcpd": "*",
-            "squizlabs/php_codesniffer": "*"
+            "squizlabs/php_codesniffer": "2.9.0"
         },
         "suggest": {
             "ext-gettext": "Install gettext and php5-gettext libs to handle translations",
             "ext-mcrypt": "Install mcrypt and php5-mcrypt libs in order to support encryption",
             "lib-openssl": "Install openssl lib in order to handle with x509 certs (require to support sign and encryption)"
         },
-        "time": "2017-03-13 09:56:49",
+        "time": "2017-07-21 20:16:31",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -308,76 +558,18 @@
         ]
     },
     {
-        "name": "bshaffer/oauth2-server-php",
-        "version": "v1.9.0",
-        "version_normalized": "1.9.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/bshaffer/oauth2-server-php.git",
-            "reference": "8856aed1a98d6da596ae3f9b8095b5c7a1581697"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/bshaffer/oauth2-server-php/zipball/8856aed1a98d6da596ae3f9b8095b5c7a1581697",
-            "reference": "8856aed1a98d6da596ae3f9b8095b5c7a1581697",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.9"
-        },
-        "require-dev": {
-            "aws/aws-sdk-php": "~2.8",
-            "firebase/php-jwt": "~2.2",
-            "mongodb/mongodb": "^1.1",
-            "predis/predis": "dev-master",
-            "thobbs/phpcassa": "dev-master"
-        },
-        "suggest": {
-            "aws/aws-sdk-php": "~2.8 is required to use DynamoDB storage",
-            "firebase/php-jwt": "~1.1 is required to use MondoDB storage",
-            "predis/predis": "Required to use Redis storage",
-            "thobbs/phpcassa": "Required to use Cassandra storage"
-        },
-        "time": "2017-01-06 23:20:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "OAuth2": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Brent Shaffer",
-                "email": "bshafs@gmail.com",
-                "homepage": "http://brentertainment.com"
-            }
-        ],
-        "description": "OAuth2 Server for PHP",
-        "homepage": "http://github.com/bshaffer/oauth2-server-php",
-        "keywords": [
-            "auth",
-            "oauth",
-            "oauth2"
-        ]
-    },
-    {
         "name": "paragonie/random_compat",
-        "version": "v2.0.10",
-        "version_normalized": "2.0.10.0",
+        "version": "v2.0.11",
+        "version_normalized": "2.0.11.0",
         "source": {
             "type": "git",
             "url": "https://github.com/paragonie/random_compat.git",
-            "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
+            "reference": "5da4d3c796c275c55f057af5a643ae297d96b4d8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
-            "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/5da4d3c796c275c55f057af5a643ae297d96b4d8",
+            "reference": "5da4d3c796c275c55f057af5a643ae297d96b4d8",
             "shasum": ""
         },
         "require": {
@@ -389,7 +581,7 @@
         "suggest": {
             "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
         },
-        "time": "2017-03-13 16:27:32",
+        "time": "2017-09-27 21:40:39",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -416,62 +608,9 @@
         ]
     },
     {
-        "name": "guzzlehttp/promises",
-        "version": "v1.3.1",
-        "version_normalized": "1.3.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/guzzle/promises.git",
-            "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-            "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.5.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.0"
-        },
-        "time": "2016-12-20 10:07:11",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "GuzzleHttp\\Promise\\": "src/"
-            },
-            "files": [
-                "src/functions_include.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Michael Dowling",
-                "email": "mtdowling@gmail.com",
-                "homepage": "https://github.com/mtdowling"
-            }
-        ],
-        "description": "Guzzle promises library",
-        "keywords": [
-            "promise"
-        ]
-    },
-    {
         "name": "psr/http-message",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/php-fig/http-message.git",
@@ -493,7 +632,7 @@
                 "dev-master": "1.0.x-dev"
             }
         },
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
             "psr-4": {
                 "Psr\\Http\\Message\\": "src/"
@@ -522,17 +661,17 @@
     },
     {
         "name": "guzzlehttp/psr7",
-        "version": "1.4.2",
-        "version_normalized": "1.4.2.0",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/psr7.git",
-            "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
+            "reference": "d2537c86fa8b004c29e9b9f5e10028f0a29df101"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-            "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/d2537c86fa8b004c29e9b9f5e10028f0a29df101",
+            "reference": "d2537c86fa8b004c29e9b9f5e10028f0a29df101",
             "shasum": ""
         },
         "require": {
@@ -545,14 +684,14 @@
         "require-dev": {
             "phpunit/phpunit": "~4.0"
         },
-        "time": "2017-03-20 17:10:46",
+        "time": "2017-10-07 03:19:56",
         "type": "library",
         "extra": {
             "branch-alias": {
                 "dev-master": "1.4-dev"
             }
         },
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
             "psr-4": {
                 "GuzzleHttp\\Psr7\\": "src/"
@@ -588,18 +727,71 @@
         ]
     },
     {
-        "name": "guzzlehttp/guzzle",
-        "version": "6.2.3",
-        "version_normalized": "6.2.3.0",
+        "name": "guzzlehttp/promises",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
-            "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "8d6c6cc55186db87b7dc5009827429ba4e9dc006"
+            "url": "https://github.com/guzzle/promises.git",
+            "reference": "e9cdab6ff93ff789b5b599326c727f51d10893a6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/8d6c6cc55186db87b7dc5009827429ba4e9dc006",
-            "reference": "8d6c6cc55186db87b7dc5009827429ba4e9dc006",
+            "url": "https://api.github.com/repos/guzzle/promises/zipball/e9cdab6ff93ff789b5b599326c727f51d10893a6",
+            "reference": "e9cdab6ff93ff789b5b599326c727f51d10893a6",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.36"
+        },
+        "time": "2017-10-06 12:25:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "GuzzleHttp\\Promise\\": "src/"
+            },
+            "files": [
+                "src/functions_include.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "Guzzle promises library",
+        "keywords": [
+            "promise"
+        ]
+    },
+    {
+        "name": "guzzlehttp/guzzle",
+        "version": "6.3.0",
+        "version_normalized": "6.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/guzzle.git",
+            "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f4db5a78a5ea468d4831de7f0bf9d9415e348699",
+            "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699",
             "shasum": ""
         },
         "require": {
@@ -609,10 +801,13 @@
         },
         "require-dev": {
             "ext-curl": "*",
-            "phpunit/phpunit": "^4.0",
+            "phpunit/phpunit": "^4.0 || ^5.0",
             "psr/log": "^1.0"
         },
-        "time": "2017-02-28 22:50:30",
+        "suggest": {
+            "psr/log": "Required for using the Log middleware"
+        },
+        "time": "2017-06-22 18:50:49",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -652,170 +847,30 @@
         ]
     },
     {
-        "name": "league/oauth2-client",
-        "version": "2.2.1",
-        "version_normalized": "2.2.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/thephpleague/oauth2-client.git",
-            "reference": "313250eab923e673a5c0c8f463f443ee79f4383f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/313250eab923e673a5c0c8f463f443ee79f4383f",
-            "reference": "313250eab923e673a5c0c8f463f443ee79f4383f",
-            "shasum": ""
-        },
-        "require": {
-            "guzzlehttp/guzzle": "^6.0",
-            "paragonie/random_compat": "^1|^2",
-            "php": ">=5.6.0"
-        },
-        "require-dev": {
-            "eloquent/liberator": "^2.0",
-            "eloquent/phony": "^0.14.1",
-            "jakub-onderka/php-parallel-lint": "~0.9",
-            "phpunit/phpunit": "^5.0",
-            "squizlabs/php_codesniffer": "^2.0"
-        },
-        "time": "2017-04-25 14:43:14",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-2.x": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "League\\OAuth2\\Client\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Alex Bilbie",
-                "email": "hello@alexbilbie.com",
-                "homepage": "http://www.alexbilbie.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Woody Gilk",
-                "homepage": "https://github.com/shadowhand",
-                "role": "Contributor"
-            }
-        ],
-        "description": "OAuth 2.0 Client Library",
-        "keywords": [
-            "Authentication",
-            "SSO",
-            "authorization",
-            "identity",
-            "idp",
-            "oauth",
-            "oauth2",
-            "single sign on"
-        ]
-    },
-    {
-        "name": "eloquent/phony",
-        "version": "0.14.7",
-        "version_normalized": "0.14.7.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/eloquent/phony.git",
-            "reference": "d72aa17ac008fb8b595679eeafad832a340f06aa"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/eloquent/phony/zipball/d72aa17ac008fb8b595679eeafad832a340f06aa",
-            "reference": "d72aa17ac008fb8b595679eeafad832a340f06aa",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3"
-        },
-        "require-dev": {
-            "counterpart/counterpart": "^1",
-            "danielstjules/pho": "^1",
-            "errors/exceptions": "^0.1",
-            "ext-pdo": "*",
-            "hamcrest/hamcrest-php": "^2",
-            "icecave/semver": "^3",
-            "mockery/mockery": "^0.9",
-            "peridot-php/leo": "^1",
-            "peridot-php/peridot": "^1",
-            "phake/phake": "^2",
-            "phpspec/prophecy": "^1",
-            "phpunit/phpunit": "^4|^5|^6",
-            "simpletest/simpletest": "^1"
-        },
-        "time": "2017-04-22 10:50:55",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Eloquent\\Phony\\": "src"
-            },
-            "files": [
-                "src/functions.php",
-                "src/Pho/functions.php",
-                "src/Phpunit/functions.php",
-                "src/Simpletest/functions.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Erin Millard",
-                "email": "ezzatron@gmail.com",
-                "homepage": "http://ezzatron.com/"
-            }
-        ],
-        "description": "Mocks, stubs, and spies for PHP.",
-        "homepage": "https://github.com/eloquent/phony",
-        "keywords": [
-            "Double",
-            "Dummy",
-            "fake",
-            "mock",
-            "mocking",
-            "spy",
-            "stub",
-            "stubbing",
-            "test"
-        ]
-    },
-    {
         "name": "league/oauth2-google",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/thephpleague/oauth2-google.git",
-            "reference": "365ceed2d068fa4c0bde41afb0acc6c2976f0c22"
+            "reference": "1001ecf1f00d657cc12e70e7a7a647e623194fd2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/oauth2-google/zipball/365ceed2d068fa4c0bde41afb0acc6c2976f0c22",
-            "reference": "365ceed2d068fa4c0bde41afb0acc6c2976f0c22",
+            "url": "https://api.github.com/repos/thephpleague/oauth2-google/zipball/1001ecf1f00d657cc12e70e7a7a647e623194fd2",
+            "reference": "1001ecf1f00d657cc12e70e7a7a647e623194fd2",
             "shasum": ""
         },
         "require": {
-            "eloquent/phony": "^0.14.6",
             "league/oauth2-client": "^2.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "^5.0",
+            "eloquent/phony": "^0.14.6",
+            "phpunit/phpunit": "^5.7",
+            "satooshi/php-coveralls": "dev-master as 2.0.0",
             "squizlabs/php_codesniffer": "^2.0"
         },
-        "time": "2017-01-24 15:15:42",
+        "time": "2017-06-14 14:06:56",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -845,121 +900,57 @@
         ]
     },
     {
-        "name": "sabre/xml",
-        "version": "1.5.0",
-        "version_normalized": "1.5.0.0",
+        "name": "willdurand/negotiation",
+        "version": "2.x-dev",
+        "version_normalized": "2.9999999.9999999.9999999-dev",
         "source": {
             "type": "git",
-            "url": "https://github.com/fruux/sabre-xml.git",
-            "reference": "59b20e5bbace9912607481634f97d05a776ffca7"
+            "url": "https://github.com/willdurand/Negotiation.git",
+            "reference": "cf78c9a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fruux/sabre-xml/zipball/59b20e5bbace9912607481634f97d05a776ffca7",
-            "reference": "59b20e5bbace9912607481634f97d05a776ffca7",
+            "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/cf78c9a",
+            "reference": "cf78c9a",
             "shasum": ""
         },
         "require": {
-            "ext-dom": "*",
-            "ext-xmlreader": "*",
-            "ext-xmlwriter": "*",
-            "lib-libxml": ">=2.6.20",
-            "php": ">=5.5.5",
-            "sabre/uri": ">=1.0,<3.0.0"
+            "php": ">=5.4.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "*",
-            "sabre/cs": "~1.0.0"
+            "phpunit/phpunit": "~4.5"
         },
-        "time": "2016-10-09 22:57:52",
+        "time": "2017-08-04 15:54:30",
         "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Sabre\\Xml\\": "lib/"
-            },
-            "files": [
-                "lib/Deserializer/functions.php",
-                "lib/Serializer/functions.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Evert Pot",
-                "email": "me@evertpot.com",
-                "homepage": "http://evertpot.com/",
-                "role": "Developer"
-            },
-            {
-                "name": "Markus Staab",
-                "email": "markus.staab@redaxo.de",
-                "role": "Developer"
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.3-dev"
             }
-        ],
-        "description": "sabre/xml is an XML library that you may not hate.",
-        "homepage": "https://sabre.io/xml/",
-        "keywords": [
-            "XMLReader",
-            "XMLWriter",
-            "dom",
-            "xml"
-        ]
-    },
-    {
-        "name": "sabre/uri",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fruux/sabre-uri.git",
-            "reference": "0368d3cfb006a5a27660e20c23ffd71117da41b8"
         },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fruux/sabre-uri/zipball/0368d3cfb006a5a27660e20c23ffd71117da41b8",
-            "reference": "0368d3cfb006a5a27660e20c23ffd71117da41b8",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.7"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "*",
-            "squizlabs/php_codesniffer": "*"
-        },
-        "time": "2015-01-27 22:21:38",
-        "type": "library",
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
-            "files": [
-                "lib/functions.php"
-            ],
             "psr-4": {
-                "Sabre\\Uri\\": "lib/"
+                "Negotiation\\": "src/Negotiation"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "BSD-3-Clause"
+            "MIT"
         ],
         "authors": [
             {
-                "name": "Evert Pot",
-                "email": "me@evertpot.com",
-                "homepage": "http://evertpot.com/",
-                "role": "Developer"
+                "name": "William Durand",
+                "email": "will+git@drnd.me"
             }
         ],
-        "description": "Functions for making sense out of URIs.",
-        "homepage": "http://sabre.io/uri/",
+        "description": "Content Negotiation tools for PHP provided as a standalone library.",
+        "homepage": "http://williamdurand.fr/Negotiation/",
         "keywords": [
-            "rfc3986",
-            "uri",
-            "url"
+            "accept",
+            "content",
+            "format",
+            "header",
+            "negotiation"
         ]
     }
 ]

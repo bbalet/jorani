@@ -303,6 +303,9 @@ $route['api/users/ext'] = 'api/usersExt';
 $route['api/rest/leaves']['OPTIONS'] = 'rest/options';
 $route['api/rest/leaves']['GET'] = 'rest/leaves';
 
+//User properties : is admin, is manager, id, id of manager, manager, contract..
+$route['api/rest/users/self']['GET'] = 'rest/getPropertiesOfConnectedUser';
+
 $route['api/rest/contracts']['OPTIONS'] = 'rest/options';
 $route['api/rest/users']['OPTIONS'] = 'rest/options';
 

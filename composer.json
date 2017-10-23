@@ -9,6 +9,7 @@
             "email": "benjamin.balet@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "phpoffice/phpexcel": "^1.8",
         "sabre/vobject": "^4.1",
@@ -18,6 +19,7 @@
         "league/oauth2-client": "^2.2",
         "league/oauth2-google": "^2.0",
         "sabre/xml": "~1.5",
-        "sabre/uri": "1"
+        "sabre/uri": "1",
+        "willdurand/negotiation":"2.x-dev#cf78c9a"
     }
 }

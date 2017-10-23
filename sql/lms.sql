@@ -12,6 +12,8 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+CREATE DATABASE IF NOT EXISTS lms CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 --
 -- Functions
 --
@@ -161,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `actions` (
   `mask` bit(16) NOT NULL,
   `Description` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='List of possible actions';
 
 --
 -- Content of table `actions`
@@ -191,25 +193,6 @@ INSERT INTO `actions` (`name`, `mask`, `Description`) VALUES
 ('view_user', b'0011000100110010', 'View user''s details');
 
 --
--- Structure of table `activities`
---
-CREATE TABLE IF NOT EXISTS `activities` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Activity unique identifier',
-  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Name of the activity (short)',
-  `description` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'Full description of the activity',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='List of activities' AUTO_INCREMENT=1 ;
-
---
--- Structure of table `activities_employee`
---
-CREATE TABLE IF NOT EXISTS `activities_employee` (
-  `employee` int(11) NOT NULL COMMENT 'employee identifier',
-  `activity` int(11) NOT NULL COMMENT 'activity identifier',
-  KEY `employee` (`employee`,`activity`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
 -- Structure of table `contracts`
 --
 CREATE TABLE IF NOT EXISTS `contracts` (
@@ -221,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `daily_duration` int(11) DEFAULT NULL COMMENT 'Approximate duration of work per day and (in minutes)',
   `default_leave_type` INT NULL DEFAULT NULL COMMENT 'default leave type for the contract (overwrite default type set in config file).',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='List of contracts' AUTO_INCREMENT=1;
 
 --
 -- Structure of table `dayoffs`
@@ -235,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `dayoffs` (
   PRIMARY KEY (`id`),
   KEY `type` (`type`),
   KEY `contract` (`contract`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='List of non working days' AUTO_INCREMENT=1;
 
 --
 -- Structure of table `entitleddays`
@@ -253,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `entitleddays` (
   KEY `contract` (`contract`),
   KEY `employee` (`employee`),
   KEY `type` (`type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='Add or sub entitlement for employees or contracts' AUTO_INCREMENT=1;
 
 --
 -- Structure of table `leaves`

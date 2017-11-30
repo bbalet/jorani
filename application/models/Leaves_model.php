@@ -1216,7 +1216,7 @@ class Leaves_model extends CI_Model {
         }
         if ($all == FALSE) {
             $this->db->where('leaves.status', LMS_REQUESTED);
-            $this->db->where('leaves.status', LMS_CANCELLATION);
+            $this->db->or_where('leaves.status', LMS_CANCELLATION);
         }
         $this->db->order_by('leaves.startdate', 'desc');
         $query = $this->db->get('leaves');

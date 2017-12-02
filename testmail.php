@@ -54,7 +54,7 @@ if (EMAIL_ADDRESS == '') {
         include $pathConfigFile;
         try {
             //Include shipped PHPMailer library
-            $phpmailerLib = realpath(join(DIRECTORY_SEPARATOR, array('application', 'third_party', 'PHPMailer', 'PHPMailerAutoload.php')));
+            $phpmailerLib = realpath(join(DIRECTORY_SEPARATOR, array('application', 'third_party', 'phpmailer', 'PHPMailerAutoload.php')));
             require_once $phpmailerLib;
             $mail = new PHPMailer(true); //true => throw exceptions on error
             $mail->SMTPDebug = 2;     //Debug informations

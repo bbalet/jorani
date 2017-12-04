@@ -72,7 +72,8 @@ class OneLogin_Saml2_LogoutRequest
             }
 
             if (!empty($nameId)) {
-                if (empty($nameIdFormat)) {
+                if (empty($nameIdFormat) &&
+                  $spData['NameIDFormat'] != OneLogin_Saml2_Constants::NAMEID_UNSPECIFIED) {
                     $nameIdFormat = $spData['NameIDFormat'];
                 }
                 $spNameQualifier = null;
@@ -380,7 +381,7 @@ LOGOUTREQUEST;
             $this->_error = $e->getMessage();
             $debug = $this->_settings->isDebugActive();
             if ($debug) {
-                echo $this->_error;
+                echo htmlentities($this->_error);
             }
             return false;
         }

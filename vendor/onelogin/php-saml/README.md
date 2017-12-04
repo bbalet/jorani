@@ -152,8 +152,10 @@ start, for example to use the static method getSelfURLNoQuery use:
 Security warning
 ----------------
 
-In production, the `strict` parameter **MUST** be set as `"true"`. Otherwise
-your environment is not secure and will be exposed to attacks.
+In production, the `strict` parameter **MUST** be set as `"true"` and the
+`signatureAlgorithm` and `digestAlgorithm` under `security` must be set to
+something other than SHA1 (see https://shattered.io/ ). Otherwise your
+environment is not secure and will be exposed to attacks.
 
 
 Getting started
@@ -496,14 +498,16 @@ $advancedSettings = array (
         //    'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
         //    'http://www.w3.org/2001/04/xmldsig-more#rsa-sha384'
         //    'http://www.w3.org/2001/04/xmldsig-more#rsa-sha512'
-        'signatureAlgorithm' => 'http://www.w3.org/2000/09/xmldsig#rsa-sha1',
+        // Notice that sha1 is a deprecated algorithm and should not be used
+        'signatureAlgorithm' => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256',
 
         // Algorithm that the toolkit will use on digest process. Options:
         //    'http://www.w3.org/2000/09/xmldsig#sha1'
         //    'http://www.w3.org/2001/04/xmlenc#sha256'
         //    'http://www.w3.org/2001/04/xmldsig-more#sha384'
         //    'http://www.w3.org/2001/04/xmlenc#sha512'
-        'digestAlgorithm' => 'http://www.w3.org/2000/09/xmldsig#sha1',
+        // Notice that sha1 is a deprecated algorithm and should not be used
+        'digestAlgorithm' => 'http://www.w3.org/2001/04/xmlenc#sha256',
 
         // ADFS URL-Encodes SAML data as lowercase, and the toolkit by default uses
         // uppercase. Turn it True for ADFS compatibility on signature verification
@@ -726,7 +730,7 @@ unset($_SESSION['AuthNRequestID']);
 $errors = $auth->getErrors();
 
 if (!empty($errors)) {
-    print_r('<p>'.implode(', ', $errors).'</p>');
+    echo '<p>', implode(', ', $errors), '</p>';
     exit();
 }
 
@@ -865,9 +869,9 @@ $auth->processSLO(false, $requestID);
 $errors = $auth->getErrors();
 
 if (empty($errors)) {
-    print_r('Sucessfully logged out');
+    echo 'Sucessfully logged out';
 } else {
-    print_r(implode(', ', $errors));
+    echo implode(', ', $errors);
 }
 ```
 
@@ -1009,7 +1013,7 @@ if (isset($_SESSION['samlNameIdFormat'])) {
     $nameIdFormat = $_SESSION['samlNameIdFormat'];
 }
 $auth->logout($returnTo, $paramters, $nameId, $sessionIndex, false, $nameIdFormat);
-``` 
+```
 
 If a match on the future LogoutResponse ID and the LogoutRequest ID to be sent is required, that LogoutRequest ID must to be extracted and stored.
 
@@ -1037,8 +1041,7 @@ session_start();    // Initialize the session, we do that because
                     // Note that processResponse and processSLO
                     // methods could manipulate/close that session
 
-require_once dirname(dirname(__FILE__)).'/_toolkit_loader.php'; // Load Saml2 and
-                                                                // external libs
+require_once dirname(__DIR__).'/_toolkit_loader.php'; // Load Saml2 and external libs
 require_once 'settings.php';    // Load the setting info as an Array
 
 $auth = new OneLogin_Saml2_Auth($settingsInfo);  // Initialize the SP SAML instance
@@ -1059,7 +1062,7 @@ if (isset($_GET['sso'])) {    // SSO action.  Will send an AuthNRequest to the I
                                    // that could took place during the process
 
     if (!empty($errors)) {
-        print_r('<p>'.implode(', ', $errors).'</p>');
+        echo '<p>', implode(', ', $errors), '</p>';
     }
                                           // This check if the response was
     if (!$auth->isAuthenticated()) {      // sucessfully validated and the user
@@ -1075,9 +1078,9 @@ if (isset($_GET['sso'])) {    // SSO action.  Will send an AuthNRequest to the I
     $auth->processSLO();            // Process the Logout Request & Logout Response
     $errors = $auth->getErrors(); // Retrieves possible validation errors
     if (empty($errors)) {
-        print_r('<p>Sucessfully logged out</p>');
+        echo '<p>Sucessfully logged out</p>';
     } else {
-        print_r('<p>'.implode(', ', $errors).'</p>');
+        echo '<p>', implode(', ', $errors), '</p>';
     }
 }
 

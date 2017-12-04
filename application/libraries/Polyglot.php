@@ -35,7 +35,7 @@ class Polyglot {
         }
         return $languages;
     }
- 
+
     /**
      * Explodes a string containing a comma separated list of language codes into an associative array
      * You can pass the config object $this->config->item('languages') as a parameter
@@ -51,7 +51,7 @@ class Polyglot {
         }
         return $languages;
     }
-    
+
     /**
      * Convert a two characters language code to the english language name
      * @param string $code ISO 639-1 language code
@@ -189,7 +189,7 @@ class Polyglot {
             case 'fa' : return 'persian'; break;
             case 'pl' : return 'polish'; break;
 //            case 'ps' : return 'pashto'; break;
-//            case 'pt' : return 'portuguese'; break;
+            case 'pt' : return 'portuguese'; break;
 //            case 'qu' : return 'quechua'; break;
 //            case 'rm' : return 'romansh'; break;
 //            case 'rn' : return 'kirundi'; break;
@@ -384,7 +384,7 @@ class Polyglot {
             case 'persian' : return 'fa'; break;
             case 'polish' : return 'pl'; break;
 //            case 'pashto' : return 'ps'; break;
-//            case 'portuguese' : return 'pt'; break;
+            case 'portuguese' : return 'pt'; break;
 //            case 'quechua' : return 'qu'; break;
 //            case 'romansh' : return 'rm'; break;
 //            case 'kirundi' : return 'rn'; break;
@@ -442,7 +442,7 @@ class Polyglot {
             default: return 'en'; break;
         }
     }
-    
+
     /**
      * Convert a two characters language code to the language native name
      * @param string $code ISO 639-1 language code
@@ -580,7 +580,7 @@ class Polyglot {
             case 'fa' : return 'فارسی'; break;
             case 'pl' : return 'Polski'; break;
 //            case 'ps' : return 'nativeName'; break;
-//            case 'pt' : return 'Português'; break;
+            case 'pt' : return 'Português'; break;
 //            case 'qu' : return 'Runa Simi'; break;
 //            case 'rm' : return 'rumantsch grischun'; break;
 //            case 'rn' : return 'kiRundi'; break;
@@ -775,7 +775,7 @@ class Polyglot {
 //            case 'فارسی' : return 'fa'; break;
             case 'polski' : return 'pl'; break;
 //            case 'nativeName' : return 'ps'; break;
-//            case 'Português' : return 'pt'; break;
+            case 'Português' : return 'pt'; break;
 //            case 'Runa Simi' : return 'qu'; break;
 //            case 'rumantsch grischun' : return 'rm'; break;
 //            case 'kiRundi' : return 'rn'; break;

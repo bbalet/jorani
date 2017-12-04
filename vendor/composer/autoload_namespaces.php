@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Sepia' => array($vendorDir . '/sepia/po-parser/src'),
     'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
     'OAuth2' => array($vendorDir . '/bshaffer/oauth2-server-php/src'),
 );

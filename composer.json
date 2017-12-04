@@ -20,6 +20,7 @@
         "league/oauth2-google": "^2.0",
         "sabre/xml": "~1.5",
         "sabre/uri": "1",
-        "willdurand/negotiation":"2.x-dev#cf78c9a"
+        "willdurand/negotiation":"2.x-dev#cf78c9a",
+        "sepia/po-parser": "dev-master"
     }
 }

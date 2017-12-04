@@ -93,6 +93,13 @@ class ComposerStaticInitb2c19c4733b91c457f6df577c2111d3e
     );
 
     public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'Sepia' => 
+            array (
+                0 => __DIR__ . '/..' . '/sepia/po-parser/src',
+            ),
+        ),
         'P' => 
         array (
             'PHPExcel' => 
@@ -114,6 +121,7 @@ class ComposerStaticInitb2c19c4733b91c457f6df577c2111d3e
         'OneLogin_Saml2_AuthnRequest' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/AuthnRequest.php',
         'OneLogin_Saml2_Constants' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/Constants.php',
         'OneLogin_Saml2_Error' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/Error.php',
+        'OneLogin_Saml2_IdPMetadataParser' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/IdPMetadataParser.php',
         'OneLogin_Saml2_LogoutRequest' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/LogoutRequest.php',
         'OneLogin_Saml2_LogoutResponse' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/LogoutResponse.php',
         'OneLogin_Saml2_Metadata' => __DIR__ . '/..' . '/onelogin/php-saml/lib/Saml2/Metadata.php',

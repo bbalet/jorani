@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * Utils of OneLogin PHP Toolkit
  *
@@ -18,22 +18,22 @@ class OneLogin_Saml2_Utils
 
 
     /**
-     * @var string
+     * @var string|null
      */
     private static $_host;
 
     /**
-     * @var string
+     * @var string|null
      */
     private static $_protocol;
 
     /**
-     * @var int
+     * @var int|null
      */
     private static $_port;
 
     /**
-     * @var string
+     * @var string|null
      */
     private static $_baseurlpath;
 
@@ -50,7 +50,7 @@ class OneLogin_Saml2_Utils
     {
         assert('is_string($msg)');
         if (extension_loaded('gettext')) {
-            bindtextdomain("phptoolkit", dirname(dirname(dirname(__FILE__))).'/locale');
+            bindtextdomain("phptoolkit", dirname(dirname(__DIR__)).'/locale');
             textdomain('phptoolkit');
 
             $translatedMsg = gettext($msg);
@@ -73,7 +73,7 @@ class OneLogin_Saml2_Utils
      *
      * @throws Exception
      *
-     * @return DOMDocument $dom The result of load the XML at the DomDocument
+     * @return DOMDocument|false $dom The result of load the XML at the DomDocument
      */
     public static function loadXML($dom, $xml)
     {
@@ -124,7 +124,7 @@ class OneLogin_Saml2_Utils
             }
         }
 
-        $schemaFile = dirname(__FILE__).'/schemas/' . $schema;
+        $schemaFile = __DIR__.'/schemas/' . $schema;
         $oldEntityLoader = libxml_disable_entity_loader(false);
         $res = $dom->schemaValidate($schemaFile);
         libxml_disable_entity_loader($oldEntityLoader);
@@ -134,7 +134,7 @@ class OneLogin_Saml2_Utils
 
             if ($debug) {
                 foreach ($xmlErrors as $error) {
-                    echo $error->message."\n";
+                    echo htmlentities($error->message."\n");
                 }
             }
 
@@ -253,14 +253,15 @@ class OneLogin_Saml2_Utils
         }
 
         /* Verify that the URL is to a http or https site. */
-        if (!preg_match('@^https?:\/\/@i', $url)) {
+        $wrongProtocol = !preg_match('@^https?://@i', $url);
+        $url = filter_var($url, FILTER_VALIDATE_URL);
+        if ($wrongProtocol || empty($url)) {
             throw new OneLogin_Saml2_Error(
                 'Redirect to invalid URL: ' . $url,
                 OneLogin_Saml2_Error::REDIRECT_INVALID_URL
             );
         }
 
-        
         /* Add encoded parameters */
         if (strpos($url, '?') === false) {
             $paramPrefix = '?';
@@ -306,7 +307,7 @@ class OneLogin_Saml2_Utils
     {
         if (!empty($baseurl)) {
             $baseurlpath = '/';
-            if (preg_match('#^https?:\/\/([^\/]*)\/?(.*)#i', $baseurl, $matches)) {
+            if (preg_match('#^https?://([^/]*)/?(.*)#i', $baseurl, $matches)) {
                 if (strpos($baseurl, 'https://') === false) {
                     self::setSelfProtocol('http');
                     $port = '80';
@@ -587,7 +588,7 @@ class OneLogin_Saml2_Utils
         if (!empty($_SERVER['REQUEST_URI'])) {
             $requestURI = $_SERVER['REQUEST_URI'];
             if ($requestURI[0] !== '/') {
-                if (preg_match('#^https?:\/\/[^\/]*(\/.*)#i', $requestURI, $matches)) {
+                if (preg_match('#^https?://[^/]*(/.*)#i', $requestURI, $matches)) {
                     $requestURI = $matches[1];
                 }
             }
@@ -645,23 +646,21 @@ class OneLogin_Saml2_Utils
      */
     public static function generateUniqueID()
     {
-        return 'ONELOGIN_' . sha1(uniqid(mt_rand(), true));
+        return 'ONELOGIN_' . sha1(uniqid((string)mt_rand(), true));
     }
 
     /**
      * Converts a UNIX timestamp to SAML2 timestamp on the form
      * yyyy-mm-ddThh:mm:ss(\.s+)?Z.
      *
-     * @param string $time The time we should convert (DateTime).
+     * @param string|int $time The time we should convert (DateTime).
      *
      * @return string $timestamp SAML2 timestamp.
      */
     public static function parseTime2SAML($time)
     {
-        $defaultTimezone = date_default_timezone_get();
-        date_default_timezone_set('UTC');
-        $timestamp = strftime("%Y-%m-%dT%H:%M:%SZ", $time);
-        date_default_timezone_set($defaultTimezone);
+        $date = new DateTime("@$time", new DateTimeZone('UTC'));
+        $timestamp = $date->format("Y-m-d\TH:i:s\Z");
         return $timestamp;
     }
 
@@ -690,15 +689,15 @@ class OneLogin_Saml2_Utils
         }
 
         /* Extract the different components of the time from the
-         * matches in the regex. intval will ignore leading zeroes
+         * matches in the regex. int cast will ignore leading zeroes
          * in the string.
          */
-        $year = intval($matches[1]);
-        $month = intval($matches[2]);
-        $day = intval($matches[3]);
-        $hour = intval($matches[4]);
-        $minute = intval($matches[5]);
-        $second = intval($matches[6]);
+        $year = (int)$matches[1];
+        $month = (int)$matches[2];
+        $day = (int)$matches[3];
+        $hour = (int)$matches[4];
+        $minute = (int)$matches[5];
+        $second = (int)$matches[6];
 
         /* We use gmmktime because the timestamp will always be given
          * in UTC.
@@ -728,6 +727,7 @@ class OneLogin_Saml2_Utils
 
         /* Parse the duration. We use a very strict pattern. */
         $durationRegEx = '#^(-?)P(?:(?:(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)D)?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)S)?)?)|(?:(\\d+)W))$#D';
+        $matches = [];
         if (!preg_match($durationRegEx, $duration, $matches)) {
             throw new Exception('Invalid ISO 8601 duration: ' . $duration);
         }
@@ -802,7 +802,7 @@ class OneLogin_Saml2_Utils
      * @param string $cacheDuration The duration, as a string.
      * @param string $validUntil    The valid until date, as a string or as a timestamp
      *
-     * @return int $expireTime  The expiration time.
+     * @return int|null $expireTime  The expiration time.
      */
     public static function getExpireTime($cacheDuration = null, $validUntil = null)
     {
@@ -862,7 +862,7 @@ class OneLogin_Saml2_Utils
      */
     public static function isSessionStarted()
     {
-        if (version_compare(phpversion(), '5.4.0', '>=')) {
+        if (PHP_VERSION_ID >= 50400) {
             return session_status() === PHP_SESSION_ACTIVE ? true : false;
         } else {
             return session_id() === '' ? false : true;
@@ -886,6 +886,7 @@ class OneLogin_Saml2_Utils
      * Calculates the fingerprint of a x509cert.
      *
      * @param string $x509cert x509 cert
+     * @param string $alg
      *
      * @return null|string Formatted fingerprint
      */
@@ -955,7 +956,7 @@ class OneLogin_Saml2_Utils
      *
      * @return string $nameIDElement DOMElement | XMLSec nameID
      */
-    public static function generateNameId($value, $spnq, $format, $cert = null, $nq = null)
+    public static function generateNameId($value, $spnq, $format = null, $cert = null, $nq = null)
     {
 
         $doc = new DOMDocument();
@@ -967,7 +968,9 @@ class OneLogin_Saml2_Utils
         if (isset($nq)) {
             $nameId->setAttribute('NameQualifier', $nq);
         }
-        $nameId->setAttribute('Format', $format);
+        if (isset($format)) {
+            $nameId->setAttribute('Format', $format);
+        }
         $nameId->appendChild($doc->createTextNode($value));
 
         $doc->appendChild($nameId);
@@ -1151,7 +1154,7 @@ class OneLogin_Saml2_Utils
                 OneLogin_Saml2_ValidationError::INVALID_XML_FORMAT
             );
         }
- 
+
         $decryptedElement = $newDoc->firstChild->firstChild;
         if ($decryptedElement === null) {
             throw new OneLogin_Saml2_ValidationError(

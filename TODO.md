@@ -11,19 +11,12 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [ ] Maybe: user/index Ajaxload.
 - [ ] Compute automatically: length of multiple leave requests.
 - [ ] Maybe: series of leave requests (Employees / Multiple edit); take into account days off. and...
-- [ ] Maybe: swap a leave request / ask for change (-> back to Planned status or formal swap ?).
-- [ ] Add a "All" option into Reports/Leaves.
 - [ ] Add SMTPSecure, SMTPAutoTLS, and SMTPAuth email params. See https://mail.google.com/mail/u/0/#inbox/15ae53ce27624515
 - [ ] Fix missing closing DIV (Firefox).
-- [ ] Maybe: basic LDAP Search / connection.
-- [ ] Jorani a OAuth2 authorization authority.
-- [ ] Simple demo application using OAuth2 authorization and API.
-- [ ] Manage service accounts.
 - [ ] Implement OAuth scopes in API.
 - [ ] Maybe: edit/import/export settings from WebUI.
 - [ ] Maybe: user/group permission.
 - [ ] Maybe: configuration from DB.
-- [ ] Fix: tabular from demo site when user 1 is moved to root.
 - [ ] Replace header() by set_header()
 - [ ] Replace set_header("HTTP/1.1 422...) by set_status_header()
 - [ ] Replace echo() by set_output()
@@ -70,7 +63,7 @@ Code sample:
 - [ ] HR officers of a part of the organization (defined in HR/organization), for future functions when they'll be CCed. and/or ...
 - [ ] ... Multitenancy (add global filter / Additionnal field on all tables). Allow access to the same instance for multiple tenants.
 - [ ] Add a field explaining why a request is rejected. Validation E-mail will redirect to a form is this option is activated ?
-- [ ] Anticipated leaves (entitled days of next yearly period). Today we can deal with it manually because LMS doesn't forbid to 
+- [ ] Anticipated leaves (entitled days of next yearly period). Today we can deal with it manually because LMS doesn't forbid to
 request a leave even if your credit is negative and because leave balance reports can be executed with a past/future date.
 - [ ] Setup assistant (with links to requirements, testldap and testmail scripts).
 - [ ] Mass importer of users (from CSV, LDAP ?). From GUI or a side tool using the REST API ?

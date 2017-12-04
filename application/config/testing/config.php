@@ -331,7 +331,7 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_cookie_name' = The cookie name
 | 'csrf_expire' = The number in seconds the token should expire.
 */
-if (isset($_SERVER["REQUEST_URI"])) 
+if (isset($_SERVER["REQUEST_URI"]))
 {
     if(stripos($_SERVER["REQUEST_URI"],'/api/') === FALSE)
     {
@@ -340,9 +340,9 @@ if (isset($_SERVER["REQUEST_URI"]))
     else
     {
         $config['csrf_protection'] = FALSE;
-    } 
-} 
-else 
+    }
+}
+else
 {
     $config['csrf_protection'] = TRUE;
 }
@@ -412,10 +412,10 @@ $config['proxy_ips'] = '';
 | Jorani application settings
 |--------------------------------------------------------------------------
 |
-| 
-| 
-| 
-| 
+|
+|
+|
+|
 |
 */
 
@@ -465,7 +465,7 @@ $config['mandatory_comment_on_reject'] = FALSE;
 //____________________________________________________________________________
 //List of available languages. If you limit this list to one language, the list of available languages will be hidden from the login form
 //Beware that regional variant is case sensitivie (e.g. "en-GB" and not "en-gb")
-$config['languages'] = 'en,en-GB,fr,es,nl,de,it,ru,cs,uk,km,fa,vi,tr,zh,el';
+$config['languages'] = 'en,en-GB,fr,es,nl,de,it,ru,cs,uk,km,fa,vi,tr,zh,el,pt';
 
 //If you want to use another font for a specific language, put the font into assets/fonts folder and map as in this example
 //Extra fonts are coming from Google noto font project: https://www.google.com/get/noto/
@@ -549,4 +549,4 @@ $config['enable_history'] = FALSE;
 //Set this value to TRUE if you want to enable Application Performance Management features
 $config['enable_apm_rum'] = FALSE;
 //Display navigation timing to user. You need a browser supporting WebTiming API
-$config['enable_apm_display'] = FALSE;     
+$config['enable_apm_display'] = FALSE;

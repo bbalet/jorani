@@ -20,30 +20,28 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} cancelled a requested time off. See the <a href="{BaseUrl}leaves/leaves/{LeaveId}">details</a> below:<br />
+        {Firstname} {Lastname} hat eine Abwesenheit abgesagt.. Siehe <a href="{BaseUrl}leaves/leaves/{LeaveId}">nachfolgende</a> Meldung:<br />
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>Von &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>Bis &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
-                <td>Type &nbsp;</td><td>{Type}</td>
+                <td>Typ &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Dauer &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Balance &nbsp;</td><td>{Balance}</td>
+                <td>Guthaben &nbsp;</td><td>{Balance}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Reason}</td>
+                <td>Grund &nbsp;</td><td>{Reason}</td>
             </tr>
         </table>
-        <br />
-        You can check the <a href="{BaseUrl}hr/counters/collaborators/{UserId}">leave balance</a> before validating the leave request.
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Dies ist eine automatisch generierte Nachricht; bitte antworten Sie nicht auf diese Nachricht ***</h5>
     </body>
 </html>

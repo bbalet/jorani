@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Christian SONNENBERG
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['overtime_index_title'] = 'Überstundenanfragen an mich übermittelt';
@@ -21,13 +21,10 @@ $lang['overtime_index_thead_status'] = 'Status';
 $lang['overtime_index_button_export'] = 'Diese Liste exportieren';
 $lang['overtime_index_button_show_all'] = 'Alle Anfragen';
 $lang['overtime_index_button_show_pending'] = 'Ausstehende Anfragen';
-
 $lang['overtime_reject_flash_msg_error'] = 'Anfragen dieses Mitarbeiters können nur von dessen eingetragenen Vorgesetzten oder Gruppenleiter abgelehnt werden.';
 $lang['overtime_reject_flash_msg_success'] = 'Überstundenanfrage erfolgreich abgelehnt.';
-
 $lang['overtime_accept_flash_msg_error'] = 'Anfragen dieses Mitarbeiters können nur von dessen eingetragenen Vorgesetzten oder Gruppenleiter akzeptiert werden.';
 $lang['overtime_accept_flash_msg_success'] = 'Überstundenanfrage erfolgreich akzeptiert.';
-
 $lang['overtime_export_title'] = 'Liste der Überstundenanfragen';
 $lang['overtime_export_thead_id'] = 'ID';
 $lang['overtime_export_thead_fullname'] = 'Voller Name';

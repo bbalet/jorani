@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Christian SONNENBERG
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['extra_index_title'] = 'Meine Überstundenanfragen';
@@ -24,7 +24,6 @@ $lang['extra_index_popup_delete_message'] = 'Sie sind dabei eine Überstundenanf
 $lang['extra_index_popup_delete_question'] = 'Möchten Sie fortfahren?';
 $lang['extra_index_popup_delete_button_yes'] = 'Ja';
 $lang['extra_index_popup_delete_button_no'] = 'Nein';
-
 $lang['extra_create_title'] = 'Überstundenanfrage übermitteln';
 $lang['extra_create_field_date'] = 'Datum';
 $lang['extra_create_field_duration'] = 'Dauer';
@@ -34,9 +33,8 @@ $lang['extra_create_field_status'] = 'Status';
 $lang['extra_create_button_create'] = 'Überstundenanfrage';
 $lang['extra_create_button_cancel'] = 'Abbrechen';
 $lang['extra_create_msg_success'] = 'Die Überstundenanfrage wurde erfolgreich erstellt';
-$lang['extra_create_msg_error'] = 'The overtime request has been succesfully created or updated, but you don\'t have a manager.';
+$lang['extra_create_msg_error'] = 'Überstundenanfrage wurde erfolgreich erstellt oder aktualisiert, Sie haben jedoch keinen eingetragenen Vorgesetzten';
 $lang['extra_create_mandatory_js_msg'] = '"Das Feld " + fieldname + " ist zwingend erforderlich."';
-
 $lang['extra_edit_title'] = 'Überstundenanfrage # bearbeiten';
 $lang['extra_edit_hmtl_title'] = 'Eine Überstundenanfrage bearbeiten';
 $lang['extra_edit_field_date'] = 'Datum';
@@ -48,10 +46,8 @@ $lang['extra_edit_button_update'] = 'Überstunden aktualisieren';
 $lang['extra_edit_button_cancel'] = 'Abbrechen';
 $lang['extra_edit_msg_error'] = 'Bereits übermittelte Überstundenanfragen können nicht bearbeitet werden.';
 $lang['extra_edit_msg_success'] = 'Überstundenanfrage erfolgreich aktualisiert';
-
 $lang['extra_delete_msg_success'] = 'Überstundenanfrage erfolgreich gelöscht';
 $lang['extra_delete_msg_error'] = 'Diese Überstundenanfrage kann nicht gelöscht werden';
-
 $lang['extra_view_title'] = 'Überstundenanfrage # anzeigen';
 $lang['extra_view_hmtl_title'] = 'Überstundenanfrage anzeigen';
 $lang['extra_view_field_date'] = 'Datum';

@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Christian SONNENBERG
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['users_index_title'] = 'Liste der User';
@@ -34,9 +34,7 @@ $lang['users_index_popup_password_button_cancel'] = 'Abbrechen';
 $lang['users_index_popup_import_title'] = 'User importieren';
 $lang['users_index_popup_field_filename'] = 'Dateiname';
 $lang['users_index_popup_import_button_cancel'] = 'Abbrechen';
-
 $lang['employees_index_title'] = 'Liste der Angestellten';
-
 $lang['users_myprofile_title'] = 'Meine persönlichen Informationen';
 $lang['users_myprofile_html_title'] = 'Meine persönlichen Informationen';
 $lang['users_myprofile_field_firstname'] = 'Vorname';
@@ -48,7 +46,6 @@ $lang['users_myprofile_field_entity'] = 'Einheit';
 $lang['users_myprofile_field_hired'] = 'Anmeldedatum';
 $lang['users_myprofile_field_identifier'] = 'Interner Identifikator';
 $lang['users_myprofile_field_language'] = 'Sprache';
-
 $lang['users_edit_title'] = 'User # bearbeiten';
 $lang['users_edit_html_title'] = 'User bearbeiten';
 $lang['users_edit_field_firstname'] = 'Vorname';
@@ -81,10 +78,8 @@ $lang['users_edit_popup_position_button_cancel'] = 'Abbrechen';
 $lang['users_edit_button_update'] = 'User aktualisieren';
 $lang['users_edit_button_cancel'] = 'Abbrechen';
 $lang['users_edit_flash_msg_success'] = 'User wurde erfolgreich aktualisiert';
-
 $lang['users_delete_flash_msg_success'] = 'User wurde erfolgreich gelöscht';
 $lang['users_reset_flash_msg_success'] = 'Passwort erfolgreich geändert';
-
 $lang['users_create_title'] = 'Neuen User anlegen';
 $lang['users_create_field_firstname'] = 'Vorname';
 $lang['users_create_field_lastname'] = 'Nachname';
@@ -122,16 +117,13 @@ $lang['users_create_no_contract_confirm'] = 'Es wird empfohlen einen Vertrag zu 
 $lang['users_create_flash_msg_success'] = 'User erfolgreich erstellt';
 $lang['users_create_login_check'] = 'Username ist bereits vergeben.';
 $lang['users_create_flash_msg_error'] = 'Dieser Username ist nicht verfügbar.';
-
 $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Vorname';
 $lang['users_employees_thead_lastname'] = 'Nachname';
 $lang['users_employees_thead_email'] = 'E-Mail';
-$lang['users_employees_thead_entity'] = 'Entity';
-
+$lang['users_employees_thead_entity'] = 'Einheit';
 $lang['users_reset_field_password'] = 'Passwort';
 $lang['users_reset_button_reset'] = 'Zurücksetzen';
-
 $lang['users_export_title'] = 'Liste der User';
 $lang['users_export_thead_id'] = 'ID';
 $lang['users_export_thead_firstname'] = 'Vorname';

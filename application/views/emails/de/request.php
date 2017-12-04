@@ -7,7 +7,17 @@
  * @since         0.1.0
  */
 ?>
-<html lang="en">
+<html lang="de">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta charset="UTF-8">
+    <style>
+        table {width:50%;margin:5px;border-collapse:collapse;}
+        table, th, td {border: 1px solid black;}
+        th, td {padding: 20px;}
+        h5 {color:red;}
+    </style>
+</head>
     <body>
         <h3>{Title}</h3>
         {Firstname} {Lastname} beantragt Urlaub. Hierzu die <a href="{BaseUrl}leaves/requests/{LeaveId}">Details</a> :
@@ -22,16 +32,16 @@
                 <td>Art &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Dauer &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Balance &nbsp;</td><td>{Balance}</td>
+                <td>Guthaben &nbsp;</td><td>{Balance}</td>
             </tr>
             <tr>
                 <td>Begründung &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+              <td>Neuster Kommentar &nbsp;</td><td>{Comments}</td>
             </tr>
             <tr>
                 <td><a href="{BaseUrl}requests/accept/{LeaveId}">Akzeptieren</a> &nbsp;</td>
@@ -41,6 +51,6 @@
         <br />
         Über die <a href="{BaseUrl}hr/counters/collaborators/{UserId}">Urlaubsstatistik</a> können Sie sich vor Beantwortung der Anfrage einen Überblick verschaffen.
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Dies ist eine automatisch generierte Nachricht; bitte antworten Sie nicht auf diese Nachricht ***</h5>
     </body>
 </html>

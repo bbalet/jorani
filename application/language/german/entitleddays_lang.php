@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Christian SONNENBERG
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['entitleddays_contract_index_title'] = 'Bezugsberechtigte Tage für Vertrag';
@@ -32,7 +32,6 @@ $lang['entitleddays_contract_confirm_delete_message'] = 'Wollen Sie wirklich lö
 $lang['entitleddays_contract_confirm_delete_yes'] = 'Ja';
 $lang['entitleddays_contract_confirm_delete_cancel'] = 'Abbrechen';
 $lang['entitleddays_contract_index_field_step'] = 'Zuwachs';
-
 $lang['entitleddays_user_index_title'] = 'Bezugsberechtigte Tag für Angestellten';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Löschen';
 $lang['entitleddays_user_index_thead_tip_copy'] = 'Kopieren';
@@ -56,7 +55,6 @@ $lang['entitleddays_user_confirm_delete_message'] = 'Wollen Sie wirklich lösche
 $lang['entitleddays_user_confirm_delete_yes'] = 'Ja';
 $lang['entitleddays_user_confirm_delete_cancel'] = 'Abbrechen';
 $lang['entitleddays_user_index_field_step'] = 'Zuwachs';
-
 $lang['entitleddays_counters_title_contract'] = 'Bezugsberechtigte Tage Vertrag #';
 $lang['entitleddays_counters_description_contract'] = 'Jährlicher Urlaubszeitraum : ';
 $lang['entitleddays_counters_title_employee'] = 'Bezugsberechtigte Tage für Angestellten';

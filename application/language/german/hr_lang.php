@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Christian SONNENBERG
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['hr_employees_title'] = 'Liste der Angestellten';
@@ -15,7 +15,7 @@ $lang['hr_employees_thead_link_leaves'] = 'Urlaube';
 $lang['hr_employees_thead_link_extra'] = 'Extras';
 $lang['hr_employees_thead_link_balance'] = 'Urlaubsstatistik';
 $lang['hr_employees_thead_link_create_leave'] = 'Urlaubsanfrage erstellen';
-$lang['hr_employees_thead_link_calendar'] = 'Yearly calendar';
+$lang['hr_employees_thead_link_calendar'] = 'Jahreskalender';
 $lang['hr_employees_thead_link_presence'] = 'Anwesenheitsstatistik';
 $lang['hr_employees_thead_link_delegation'] = 'Delegationen';
 $lang['hr_employees_thead_id'] = 'ID';
@@ -40,23 +40,20 @@ $lang['hr_employees_popup_entity_button_ok'] = 'OK';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Abbrechen';
 $lang['hr_employees_description'] = 'Rechtsklick auf einen Mitarbeiter für Kontextmenü.';
 $lang['hr_employees_field_subdepts'] = 'Unterabteilungen inkludieren';
-
-$lang['hr_employees_button_all'] = 'All';
-$lang['hr_employees_button_active'] = 'Active';
-$lang['hr_employees_button_inactive'] = 'Inactive';
-$lang['hr_employees_button_selection'] = 'Selection';
-$lang['hr_employees_button_select_all'] = 'Select all';
-$lang['hr_employees_button_deselect_all'] = 'Deselect all';
-$lang['hr_employees_button_select_manager'] = 'Select Manager';
-$lang['hr_employees_button_select_contract'] = 'Select Contract';
-$lang['hr_employees_button_select_entity'] = 'Select Entity';
-$lang['hr_employees_popup_contract_title'] = 'Select Contract';
-$lang['hr_employees_button_entitleddays'] = 'Entitled days';
-$lang['hr_employees_button_create_request'] = 'Submit a leave request';
-
-$lang['hr_employees_popup_manager_title'] = 'Select the manager';
-$lang['hr_employees_multiple_edit_selection_msg'] = 'You must select at least one employee into the table';
-
+$lang['hr_employees_button_all'] = 'Alle';
+$lang['hr_employees_button_active'] = 'Aktiv';
+$lang['hr_employees_button_inactive'] = 'Inaktiv';
+$lang['hr_employees_button_selection'] = 'Auswahl';
+$lang['hr_employees_button_select_all'] = 'Alles auswählen';
+$lang['hr_employees_button_deselect_all'] = 'Alles abwählen';
+$lang['hr_employees_button_select_manager'] = 'Vorgesetzten auswählen';
+$lang['hr_employees_button_select_contract'] = 'Vertrag auswählen';
+$lang['hr_employees_button_select_entity'] = 'Einheit auswählen';
+$lang['hr_employees_popup_contract_title'] = 'Vertrag auswählen';
+$lang['hr_employees_button_entitleddays'] = 'Bezugsberechtigte Tage';
+$lang['hr_employees_button_create_request'] = 'Urlaubsanfrage übermitteln';
+$lang['hr_employees_popup_manager_title'] = 'Vorgesetzten auswählen';
+$lang['hr_employees_multiple_edit_selection_msg'] = 'Sie müssen mindestens einen Angestellten in der Tabelle auswählen';
 $lang['hr_export_employees_title'] = 'Liste der Angestellten';
 $lang['hr_export_employees_thead_id'] = 'ID';
 $lang['hr_export_employees_thead_firstname'] = 'Vorname';
@@ -65,7 +62,6 @@ $lang['hr_export_employees_thead_email'] = 'E-Mail';
 $lang['hr_export_employees_thead_entity'] = 'Einheit';
 $lang['hr_export_employees_thead_contract'] = 'Vertrag';
 $lang['hr_export_employees_thead_manager'] = 'Vorgesetzter';
-
 $lang['hr_leaves_title'] = 'Liste der Urlaubsanfragen';
 $lang['hr_leaves_html_title'] = 'Liste der Urlaube für Angestellten #';
 $lang['hr_leaves_thead_tip_edit'] = 'bearbeiten';
@@ -85,8 +81,7 @@ $lang['hr_leaves_popup_delete_message'] = 'Sie sind dabei eine Urlaubsanfrage zu
 $lang['hr_leaves_popup_delete_question'] = 'Möchten Sie fortfahren?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Ja';
 $lang['hr_leaves_popup_delete_button_no'] = 'Nein';
-$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
-
+$lang['hr_leaves_deleted_title'] = 'Liste gelöschter Abwesenheitsanfragen';
 $lang['hr_export_leaves_title'] = 'Liste der Urlaubsanfragen';
 $lang['hr_export_leaves_thead_id'] = 'ID';
 $lang['hr_export_leaves_thead_status'] = 'Status';
@@ -94,7 +89,6 @@ $lang['hr_export_leaves_thead_start'] = 'Anfangsdatum';
 $lang['hr_export_leaves_thead_end'] = 'Enddatum';
 $lang['hr_export_leaves_thead_duration'] = 'Dauer';
 $lang['hr_export_leaves_thead_type'] = 'Typ';
-
 $lang['hr_leaves_create_title'] = 'Urlaubsanfrage übermitteln';
 $lang['hr_leaves_create_field_start'] = 'Anfangsdatum';
 $lang['hr_leaves_create_field_end'] = 'Enddatum';
@@ -108,12 +102,11 @@ $lang['hr_leaves_create_button_create'] = 'Urlaubsanfrage';
 $lang['hr_leaves_create_button_cancel'] = 'Abbrechen';
 $lang['hr_leaves_create_flash_msg_success'] = 'Urlaubsanfrage erfolgreich erstellt';
 $lang['hr_leaves_create_flash_msg_error'] = 'Urlaubsanfrage erfolgreich erstellt, Sie haben jedoch keinen eingetragenen Vorgesetzten.';
-$lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
-$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s arbeitsfreie Tage in diesem Zeitraum';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Ihre Urlaubsanfrage überschneidet sich mit einem arbeitsfreien Tag.';
 $lang['hr_leaves_validate_mandatory_js_msg'] = '"Das Feld " + fieldname + " ist zwingend erforderlich."';
 $lang['hr_leaves_validate_flash_msg_no_contract'] = 'Es scheint als hätten Sie keinen Vertrag. Bitte kontaktieren Sie Ihre Personalabteilung oder Ihren Vorgesetzten.';
 $lang['hr_leaves_validate_flash_msg_overlap_period'] = 'Sie können einen Urlaubsantrag für zwei jährliche Urlaubszeiten nicht zu schaffen. Bitte erstellen Sie zwei verschiedene Urlaubsanträge.';
-
 $lang['hr_overtime_title'] = 'Liste der Überstundenanfragen';
 $lang['hr_overtime_html_title'] = 'Liste der Überstundenanfragen für Angestellten #';
 $lang['hr_overtime_thead_tip_edit'] = 'bearbeiten';
@@ -132,14 +125,12 @@ $lang['hr_overtime_popup_delete_message'] = 'Sie sind dabei eine Überstundenanf
 $lang['hr_overtime_popup_delete_question'] = 'Möchten Sie fortfahren?';
 $lang['hr_overtime_popup_delete_button_yes'] = 'Ja';
 $lang['hr_overtime_popup_delete_button_no'] = 'Nein';
-
 $lang['hr_export_overtime_title'] = 'Liste der Überstundenanfragen';
 $lang['hr_export_overtime_thead_id'] = 'ID';
 $lang['hr_export_overtime_thead_status'] = 'Status';
 $lang['hr_export_overtime_thead_date'] = 'Datum';
 $lang['hr_export_overtime_thead_duration'] = 'Dauer';
 $lang['hr_export_overtime_thead_cause'] = 'Grund';
-
 $lang['hr_summary_title'] = 'Urlaubsstatistik für Angestellten #';
 $lang['hr_summary_thead_type'] = 'Art des Urlaubs';
 $lang['hr_summary_thead_available'] = 'Verfügbar';
@@ -149,7 +140,6 @@ $lang['hr_summary_thead_description'] = 'Beschreibung';
 $lang['hr_summary_flash_msg_error'] = 'Dieser Mitarbeiter hat keinen Vertrag.';
 $lang['hr_summary_button_list'] = 'Liste der Angestellten';
 $lang['hr_summary_date_field'] = 'Datum des Reports';
-
 $lang['hr_presence_title'] = 'Anwesenheitsstatistik';
 $lang['hr_presence_description'] = 'Ohne weitere Eingaben zeigt dieser Report die Werte des letzten Monats. Die Liste zeigt nur genehmigte Urlaubsanfragen.';
 $lang['hr_presence_thead_tip_edit'] = 'bearbeiten';

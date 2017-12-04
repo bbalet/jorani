@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author       Christian SONNENBERG
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['datatable_sEmptyTable'] = 'Keine Daten in Tabelle';
@@ -25,11 +25,10 @@ $lang['datatable_sNext'] = 'Nächstes';
 $lang['datatable_sPrevious'] = 'Vorhergehend';
 $lang['datatable_sSortAscending'] = ': aktivieren um Spalte aufwärts zu sortieren';
 $lang['datatable_sSortDescending'] = ': aktivieren um Spalte abwärts zu sortieren';
-
-$lang['datatable_pagination'] = 'Page length';
-$lang['datatable_10_rows'] = '10 rows';
-$lang['datatable_25_rows'] = '25 rows';
-$lang['datatable_50_rows'] = '50 rows';
-$lang['datatable_all_rows'] = 'Show all';
-$lang['datatable_colvis'] = 'Change columns';
-$lang['datatable_colvisRestore'] = 'Show all';
+$lang['datatable_pagination'] = 'Seitenlänge';
+$lang['datatable_10_rows'] = '10 Einträge';
+$lang['datatable_25_rows'] = '25 Einträge';
+$lang['datatable_50_rows'] = '50 Einträge';
+$lang['datatable_all_rows'] = 'Alle anzeigen';
+$lang['datatable_colvis'] = 'Spalten ändern';
+$lang['datatable_colvisRestore'] = 'Alle anzeigen';

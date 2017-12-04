@@ -7,7 +7,7 @@
  * @since      0.6.1
  */
 ?>
-<html lang="en">
+<html lang="de">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,29 +20,28 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        Sehr geehrter {Firstname} {Lastname}, <br />
         <br />
-        <p>Unfortunately, your cancellation request was not accepted.
-        The leave request has now its original status of Accepted.</p>
-        <p>Please contact your manager to discuss the matter. </p>
+        <p>Ihre Absage wurde nicht akzeptiert, es wurde der ursprüngliche Status wiederhergestellt.</p>
+        <p>Bitte wenden Sie sich an Ihren Vorgesetzten. </p>
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>Von &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>Bis &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
-                <td>Type &nbsp;</td><td>{Type}</td>
+                <td>Typ &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Grund &nbsp;</td><td>{Cause}</td>
             </tr>
             <tr>
-                <td>Last comment &nbsp;</td><td>{Comments}</td>
+                <td>Neuster Kommentar &nbsp;</td><td>{Comments}</td>
             </tr>
         </table>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Dies ist eine automatisch generierte Nachricht; bitte antworten Sie nicht auf diese Nachricht ***</h5>
     </body>
 </html>

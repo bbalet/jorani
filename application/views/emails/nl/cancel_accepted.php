@@ -7,7 +7,7 @@
  * @since      0.6.1
  */
 ?>
-<html lang="en">
+<html lang="nl">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,27 +20,27 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        Beste {Firstname} {Lastname}, <br />
         <br />
-        <p>Your cancellation request was accepted and the leave request has been cancelled.</p>
+        <p>Uw annuleringsverzoek is geaccepteerd en de verlofaanvraag is geannuleerd.</p>
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>Van &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>Tot &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
                 <td>Type &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Reden &nbsp;</td><td>{Cause}</td>
             </tr>
             <tr>
-                <td>Last comment &nbsp;</td><td>{Comments}</td>
+                <td>Laatste opmerking &nbsp;</td><td>{Comments}</td>
             </tr>
         </table>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Dit is een automatisch gegenereerd bericht, antwoord alsjeblieft niet op dit bericht ***</h5>
     </body>
 </html>

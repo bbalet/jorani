@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author Roger WOLFS
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['datatable_sEmptyTable'] = 'Geen gegevens beschikbaar in de tabel';
@@ -25,11 +25,10 @@ $lang['datatable_sNext'] = 'Volgende';
 $lang['datatable_sPrevious'] = 'Vorige';
 $lang['datatable_sSortAscending'] = ': oplopend sorteren';
 $lang['datatable_sSortDescending'] = ': aflopend sorteren';
-
-$lang['datatable_pagination'] = 'Page length';
-$lang['datatable_10_rows'] = '10 rows';
-$lang['datatable_25_rows'] = '25 rows';
-$lang['datatable_50_rows'] = '50 rows';
-$lang['datatable_all_rows'] = 'Show all';
-$lang['datatable_colvis'] = 'Change columns';
-$lang['datatable_colvisRestore'] = 'Show all';
+$lang['datatable_pagination'] = 'Pagina lengte';
+$lang['datatable_10_rows'] = '10 rijen';
+$lang['datatable_25_rows'] = '25 rijen';
+$lang['datatable_50_rows'] = '50 rijen';
+$lang['datatable_all_rows'] = 'Toon alles';
+$lang['datatable_colvis'] = 'Pas kolommen aan';
+$lang['datatable_colvisRestore'] = 'Toon alles';

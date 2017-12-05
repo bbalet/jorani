@@ -8,10 +8,16 @@
  */
 ?>
 <html lang="nl">
-    <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta charset="UTF-8">
-    </head>
+  <head>
+      <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+      <meta charset="UTF-8">
+      <style>
+          table {width:50%;margin:5px;border-collapse:collapse;}
+          table, th, td {border: 1px solid black;}
+          th, td {padding: 20px;}
+          h5 {color:red;}
+      </style>
+  </head>
     <body>
         <h3>{Title}</h3>
         Afwezigheidsverzoek van {Firstname} {Lastname}. Hieronder de <a href="{BaseUrl}leaves/requests/{LeaveId}">details</a> :
@@ -26,16 +32,16 @@
                 <td>Type &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Duur &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Balance &nbsp;</td><td>{Balance}</td>
+                <td>Balans &nbsp;</td><td>{Balance}</td>
             </tr>
             <tr>
                 <td>Reden &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+              <td>Laatste opmerking &nbsp;</td><td>{Comments}</td>
             </tr>
             <tr>
                 <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accepteren</a>&nbsp;</td>
@@ -44,5 +50,7 @@
         </table>
         <br />
         Hier kunt u het <a href="{BaseUrl}hr/counters/collaborators/{UserId}">dagensaldo</a> controleren <a href="{BaseUrl}requests/counters/{UserId}"></a>voordat u dit verzoek valideert.
+        <hr>
+        <h5>*** Dit is een automatisch gegenereerd bericht, antwoord alsjeblieft niet op dit bericht ***</h5>
 </body>
 </html>

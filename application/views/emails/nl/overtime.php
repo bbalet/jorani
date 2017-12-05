@@ -8,10 +8,16 @@
  */
 ?>
 <html lang="nl">
-    <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta charset="UTF-8">
-    </head>
+  <head>
+      <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+      <meta charset="UTF-8">
+      <style>
+          table {width:50%;margin:5px;border-collapse:collapse;}
+          table, th, td {border: 1px solid black;}
+          th, td {padding: 20px;}
+          h5 {color:red;}
+      </style>
+  </head>
     <body>
         <h3>{Title}</h3>
         {Firstname} {Lastname} vraagt overuren aan. Hieronder de details :
@@ -28,5 +34,8 @@
         </table>
         <a href="{UrlAccept}">Accepteren</a>
         <a href="{UrlReject}">Afwijzen</a>
+        <br />
+        <hr>
+        <h5>*** Dit is een automatisch gegenereerd bericht, antwoord alsjeblieft niet op dit bericht ***</h5>
     </body>
 </html>

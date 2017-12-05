@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author Roger WOLFS
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['organization_index_title'] = 'Organisatie';
@@ -42,17 +42,16 @@ $lang['organization_index_error_msg_select_employee'] = 'Selecteer één werknem
 $lang['organization_index_error_msg_delete_root'] = 'U kunt de hoofd entiteit niet verwijderen.';
 $lang['organization_select_field_search_placeholder'] = 'Zoek entiteit';
 $lang['organization_select_button_search'] = 'Zoeken';
-
-$lang['organization_lists_modal_title'] = 'Select a list of employees';
-$lang['organization_lists_button_edit_list'] = 'Rename a list';
-$lang['organization_lists_button_add_list'] = 'Add a new list';
-$lang['organization_lists_button_delete_list'] = 'Delete a list';
-$lang['organization_lists_button_add_users'] = 'Add employees';
-$lang['organization_lists_button_remove_users'] = 'Remove selected employees';
-$lang['organization_lists_employees_prompt_new'] = 'Name of the list';
-$lang['organization_lists_employees_confirm_delete'] = 'Are you sure that you want to delete this list?';
-$lang['organization_lists_employees_prompt_rename'] = 'New name of the list';
+$lang['organization_lists_modal_title'] = 'Selecteer een lijst van medewerkers';
+$lang['organization_lists_button_edit_list'] = 'Hernoem een lijst';
+$lang['organization_lists_button_add_list'] = 'Voeg een nieuwe lijst toe';
+$lang['organization_lists_button_delete_list'] = 'Verwijder een lijst';
+$lang['organization_lists_button_add_users'] = 'Voeg medewerkers toe';
+$lang['organization_lists_button_remove_users'] = 'Verwijder geselecteerde medewerkers';
+$lang['organization_lists_employees_prompt_new'] = 'Naam van de lijst';
+$lang['organization_lists_employees_confirm_delete'] = 'Bent u zeker dat u deze lijst wil verwijderen?';
+$lang['organization_lists_employees_prompt_rename'] = 'Nieuwe naam van de lijst';
 $lang['organization_lists_employees_thead_id'] = 'ID';
-$lang['organization_lists_employees_thead_firstname'] = 'Firstname';
-$lang['organization_lists_employees_thead_lastname'] = 'Lastname';
-$lang['organization_lists_employees_thead_entity'] = 'Entity';
+$lang['organization_lists_employees_thead_firstname'] = 'Voornaam';
+$lang['organization_lists_employees_thead_lastname'] = 'Achternaam';
+$lang['organization_lists_employees_thead_entity'] = 'Entiteit';

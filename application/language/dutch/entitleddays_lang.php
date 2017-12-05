@@ -2,15 +2,15 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author Roger WOLFS
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['entitleddays_contract_index_title'] = 'Beschikbare dagen voor contract';
 $lang['entitleddays_contract_index_thead_tip_delete'] = 'Verwijder';
-$lang['entitleddays_contract_index_thead_tip_copy'] = 'Copy';
+$lang['entitleddays_contract_index_thead_tip_copy'] = 'Kopieren';
 $lang['entitleddays_contract_index_thead_tip_edit'] = 'Edit';
 $lang['entitleddays_contract_index_thead_start'] = 'Start';
 $lang['entitleddays_contract_index_thead_end'] = 'Einde';
@@ -32,10 +32,9 @@ $lang['entitleddays_contract_confirm_delete_message'] = 'Weet u zeker dat u dit 
 $lang['entitleddays_contract_confirm_delete_yes'] = 'Ja';
 $lang['entitleddays_contract_confirm_delete_cancel'] = 'Annuleren';
 $lang['entitleddays_contract_index_field_step'] = 'Stap';
-
 $lang['entitleddays_user_index_title'] = 'Beschikbare dagen voor werknemer';
 $lang['entitleddays_user_index_thead_tip_delete'] = 'Verwijder';
-$lang['entitleddays_user_index_thead_tip_copy'] = 'Copy';
+$lang['entitleddays_user_index_thead_tip_copy'] = 'Kopieren';
 $lang['entitleddays_user_index_thead_tip_edit'] = 'Edit';
 $lang['entitleddays_user_index_thead_start'] = 'Start';
 $lang['entitleddays_user_index_thead_end'] = 'Einde';
@@ -56,7 +55,6 @@ $lang['entitleddays_user_confirm_delete_message'] = 'Weet u zeker dat u dit wil 
 $lang['entitleddays_user_confirm_delete_yes'] = 'Ja';
 $lang['entitleddays_user_confirm_delete_cancel'] = 'Annuleren';
 $lang['entitleddays_user_index_field_step'] = 'Stap';
-
 $lang['entitleddays_counters_title_contract'] = 'Beschikbare dagen voor Contract #';
 $lang['entitleddays_counters_description_contract'] = 'Jaarlijkse afwezigheid tijdvak:';
 $lang['entitleddays_counters_title_employee'] = 'Beschikbare dagen voor werknemer:';

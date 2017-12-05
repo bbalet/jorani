@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author Roger WOLFS
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['hr_employees_title'] = 'Lijst werknemers';
@@ -40,23 +40,20 @@ $lang['hr_employees_popup_entity_button_ok'] = 'OK';
 $lang['hr_employees_popup_entity_button_cancel'] = 'Annuleren';
 $lang['hr_employees_description'] = 'Klik met de rechtermuisknop op een werknemer voor contextuele acties.';
 $lang['hr_employees_field_subdepts'] = 'Includeer onderliggende entiteiten';
-
-$lang['hr_employees_button_all'] = 'All';
-$lang['hr_employees_button_active'] = 'Active';
-$lang['hr_employees_button_inactive'] = 'Inactive';
-$lang['hr_employees_button_selection'] = 'Selection';
-$lang['hr_employees_button_select_all'] = 'Select all';
-$lang['hr_employees_button_deselect_all'] = 'Deselect all';
-$lang['hr_employees_button_select_manager'] = 'Select Manager';
-$lang['hr_employees_button_select_contract'] = 'Select Contract';
-$lang['hr_employees_button_select_entity'] = 'Select Entity';
-$lang['hr_employees_popup_contract_title'] = 'Select Contract';
-$lang['hr_employees_button_entitleddays'] = 'Entitled days';
-$lang['hr_employees_button_create_request'] = 'Submit a leave request';
-
-$lang['hr_employees_popup_manager_title'] = 'Select the manager';
-$lang['hr_employees_multiple_edit_selection_msg'] = 'You must select at least one employee into the table';
-
+$lang['hr_employees_button_all'] = 'Alle';
+$lang['hr_employees_button_active'] = 'Aktief';
+$lang['hr_employees_button_inactive'] = 'Inaktief';
+$lang['hr_employees_button_selection'] = 'Selectie';
+$lang['hr_employees_button_select_all'] = 'Selecteer alles';
+$lang['hr_employees_button_deselect_all'] = 'Deselecteer alles';
+$lang['hr_employees_button_select_manager'] = 'Selecteer manager';
+$lang['hr_employees_button_select_contract'] = 'Selecteer contract';
+$lang['hr_employees_button_select_entity'] = 'Selecteer entiteit';
+$lang['hr_employees_popup_contract_title'] = 'Selecteer contract';
+$lang['hr_employees_button_entitleddays'] = 'Beschikbare dagen';
+$lang['hr_employees_button_create_request'] = 'Dien een afwezigheidsverzoek in';
+$lang['hr_employees_popup_manager_title'] = 'Selecteer een manager';
+$lang['hr_employees_multiple_edit_selection_msg'] = 'U moet minimaal één werknemer in de tabel selecteren';
 $lang['hr_export_employees_title'] = 'Lijst werknemers';
 $lang['hr_export_employees_thead_id'] = 'ID';
 $lang['hr_export_employees_thead_firstname'] = 'Voornaam';
@@ -65,7 +62,6 @@ $lang['hr_export_employees_thead_email'] = 'E-mail';
 $lang['hr_export_employees_thead_entity'] = 'Entiteit';
 $lang['hr_export_employees_thead_contract'] = 'Contract';
 $lang['hr_export_employees_thead_manager'] = 'Manager';
-
 $lang['hr_leaves_title'] = 'Overzicht van aangevraagde afwezigheid';
 $lang['hr_leaves_html_title'] = 'Overzicht van afwezigheid van werknemer #';
 $lang['hr_leaves_thead_tip_edit'] = 'bewerken';
@@ -85,8 +81,7 @@ $lang['hr_leaves_popup_delete_message'] = 'U staat op het punt om een afwezighei
 $lang['hr_leaves_popup_delete_question'] = 'Wilt u verder gaan?';
 $lang['hr_leaves_popup_delete_button_yes'] = 'Ja';
 $lang['hr_leaves_popup_delete_button_no'] = 'Nee';
-$lang['hr_leaves_deleted_title'] = 'List of deleted leave requests';
-
+$lang['hr_leaves_deleted_title'] = 'Lijst met verwijderde verlofverzoeken';
 $lang['hr_export_leaves_title'] = 'Overzicht van aangevraagde afwezigheid';
 $lang['hr_export_leaves_thead_id'] = 'ID';
 $lang['hr_export_leaves_thead_status'] = 'Status';
@@ -94,7 +89,6 @@ $lang['hr_export_leaves_thead_start'] = 'Begin datum';
 $lang['hr_export_leaves_thead_end'] = 'Eind datum';
 $lang['hr_export_leaves_thead_duration'] = 'Duur';
 $lang['hr_export_leaves_thead_type'] = 'Type';
-
 $lang['hr_leaves_create_title'] = 'Dien een afwezigheidsverzoek in';
 $lang['hr_leaves_create_field_start'] = 'Begin datum';
 $lang['hr_leaves_create_field_end'] = 'Eind datum';
@@ -108,12 +102,11 @@ $lang['hr_leaves_create_button_create'] = 'Vraaag afwezigheid aan';
 $lang['hr_leaves_create_button_cancel'] = 'Annuleren';
 $lang['hr_leaves_create_flash_msg_success'] = 'Het afwezigheidsverzoek is succesvol aangemaakt';
 $lang['hr_leaves_create_flash_msg_error'] = 'De afwezigheidsmelding is succesvol aangemaakt/bijgewerkt, echter u heeft geen manager.';
-$lang['hr_leaves_flash_spn_list_days_off'] = '%s non-working days in the period';
-$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Your leave request matches with a non-working day.';
+$lang['hr_leaves_flash_spn_list_days_off'] = '%s niet-werk-dagen in deze periode';
+$lang['hr_leaves_flash_msg_overlap_dayoff'] = 'Uw verlofverzoek komt overeen met een niet-werkdag.';
 $lang['hr_leaves_validate_mandatory_js_msg'] = '"Het veld" + fieldname + "is verplicht."';
 $lang['hr_leaves_validate_flash_msg_no_contract'] = 'Geen contract gegevens gevonden. Neem contact op met uw HR Officer / manager.';
 $lang['hr_leaves_validate_flash_msg_overlap_period'] = 'U kunt geen afwezigheidsverzoek aanmaken dat de jaarperiode overschrijdt. Maak a.u.b. 2 aparte verzoeken aan.';
-
 $lang['hr_overtime_title'] = 'Overzicht van overuren aanmeldingen';
 $lang['hr_overtime_html_title'] = 'Overzicht overuren voor werknemer #';
 $lang['hr_overtime_thead_tip_edit'] = 'bewerken';
@@ -132,14 +125,12 @@ $lang['hr_overtime_popup_delete_message'] = 'U staat op het punt een overuren aa
 $lang['hr_overtime_popup_delete_question'] = 'Wilt u verder gaan?';
 $lang['hr_overtime_popup_delete_button_yes'] = 'Ja';
 $lang['hr_overtime_popup_delete_button_no'] = 'Nee';
-
 $lang['hr_export_overtime_title'] = 'Overzicht van overuren aanmeldingen';
 $lang['hr_export_overtime_thead_id'] = 'ID';
 $lang['hr_export_overtime_thead_status'] = 'Status';
 $lang['hr_export_overtime_thead_date'] = 'Datum';
 $lang['hr_export_overtime_thead_duration'] = 'Duur';
 $lang['hr_export_overtime_thead_cause'] = 'Reden';
-
 $lang['hr_summary_title'] = 'Afwezigheidsoverzicht voor gebruiker #';
 $lang['hr_summary_thead_type'] = 'Soort afwezigheid';
 $lang['hr_summary_thead_available'] = 'Beschikbaar';
@@ -149,7 +140,6 @@ $lang['hr_summary_thead_description'] = 'Omschrijving';
 $lang['hr_summary_flash_msg_error'] = 'Deze werknemer heeft geen contract';
 $lang['hr_summary_button_list'] = 'Lijst werknemers';
 $lang['hr_summary_date_field'] = 'Datum rapport';
-
 $lang['hr_presence_title'] = 'Aanwezigheid overzicht';
 $lang['hr_presence_description'] = 'Standaard laat dit rapport de waarden zien voor de afgelopen maand. Let op: dit overzicht toont alleen de geaccepteerde verzoeken. ';
 $lang['hr_presence_thead_tip_edit'] = 'bewerken';

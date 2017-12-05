@@ -2,10 +2,10 @@
 /**
  * Translation file
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- * @author Roger WOLFS
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.6.5
+ * @author     Transifex users
  */
 
 $lang['users_index_title'] = 'Lijst gebruikers';
@@ -34,9 +34,7 @@ $lang['users_index_popup_password_button_cancel'] = 'Annuleren';
 $lang['users_index_popup_import_title'] = 'Importeer gebruikers';
 $lang['users_index_popup_field_filename'] = 'Bestandsnaam';
 $lang['users_index_popup_import_button_cancel'] = 'Annuleren';
-
 $lang['employees_index_title'] = 'Lijst werknemers';
-
 $lang['users_myprofile_title'] = 'Mijn persoonlijke info';
 $lang['users_myprofile_html_title'] = 'Mijn persoonlijke info';
 $lang['users_myprofile_field_firstname'] = 'Voornaam';
@@ -48,7 +46,6 @@ $lang['users_myprofile_field_entity'] = 'Entiteit';
 $lang['users_myprofile_field_hired'] = 'Datum start aanstelling';
 $lang['users_myprofile_field_identifier'] = 'Interne identifier';
 $lang['users_myprofile_field_language'] = 'Taal';
-
 $lang['users_edit_title'] = 'Wijzig gebruiker #';
 $lang['users_edit_html_title'] = 'Wijzig gebruiker';
 $lang['users_edit_field_firstname'] = 'Voornaam';
@@ -81,10 +78,8 @@ $lang['users_edit_popup_position_button_cancel'] = 'Annuleren';
 $lang['users_edit_button_update'] = 'Update gebruiker';
 $lang['users_edit_button_cancel'] = 'Annuleren';
 $lang['users_edit_flash_msg_success'] = 'De gebruiker is succesvol geupdate';
-
 $lang['users_delete_flash_msg_success'] = 'De gebruiker is succesvol verwijderd';
 $lang['users_reset_flash_msg_success'] = 'Het wachtwoord is succesvol bijgewerkt';
-
 $lang['users_create_title'] = 'Maak een nieuwe gebruiker aan';
 $lang['users_create_field_firstname'] = 'Voornaam';
 $lang['users_create_field_lastname'] = 'Achternaam';
@@ -122,16 +117,13 @@ $lang['users_create_no_contract_confirm'] = 'Het word aangeraden om een contract
 $lang['users_create_flash_msg_success'] = 'De gebruiker is succesvol aangemaakt';
 $lang['users_create_login_check'] = 'Gebruikersnaam bestaat al.';
 $lang['users_create_flash_msg_error'] = 'De gebruikersnaam is niet beschikbaar.';
-
 $lang['users_employees_thead_id'] = 'ID';
 $lang['users_employees_thead_firstname'] = 'Voornaam';
 $lang['users_employees_thead_lastname'] = 'Achternaam';
 $lang['users_employees_thead_email'] = 'E-mail';
-$lang['users_employees_thead_entity'] = 'Entity';
-
+$lang['users_employees_thead_entity'] = 'Entiteit';
 $lang['users_reset_field_password'] = 'Wachtwoord';
 $lang['users_reset_button_reset'] = 'Reset';
-
 $lang['users_export_title'] = 'Lijst gebruikers';
 $lang['users_export_thead_id'] = 'ID';
 $lang['users_export_thead_firstname'] = 'Voornaam';

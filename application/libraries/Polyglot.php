@@ -66,7 +66,7 @@ class Polyglot {
             //case 'ak' : return 'akan'; break;
             //case 'sq' : return 'albanian'; break;
             //case 'am' : return 'amharic'; break;
-            //case 'ar' : return 'arabic'; break;
+            case 'ar' : return 'arabic'; break;
             //case 'an' : return 'aragonese'; break;
             //case 'hy' : return 'armenian'; break;
             //case 'as' : return 'assamese'; break;
@@ -262,7 +262,7 @@ class Polyglot {
 //            case 'akan' : return 'ak'; break;
 //            case 'albanian' : return 'sq'; break;
 //            case 'amharic' : return 'am'; break;
-//            case 'arabic' : return 'ar'; break;
+            case 'arabic' : return 'ar'; break;
 //            case 'aragonese' : return 'an'; break;
 //            case 'armenian' : return 'hy'; break;
 //            case 'assamese' : return 'as'; break;
@@ -457,7 +457,7 @@ class Polyglot {
 //            case 'ak' : return 'Akan'; break;
 //            case 'sq' : return 'Shqip'; break;
 //            case 'am' : return 'አማርኛ'; break;
-//            case 'ar' : return 'العربية'; break;
+            case 'ar' : return 'العربية'; break;
 //            case 'an' : return 'Aragonés'; break;
 //            case 'hy' : return 'Հայերեն'; break;
 //            case 'as' : return 'অসমীয়া'; break;
@@ -653,7 +653,7 @@ class Polyglot {
 //            case 'Akan' : return 'ak'; break;
 //            case 'Shqip' : return 'sq'; break;
 //            case 'አማርኛ' : return 'am'; break;
-//            case 'العربية' : return 'ar'; break;
+            case 'العربية' : return 'ar'; break;
 //            case 'Aragonés' : return 'an'; break;
 //            case 'Հայերեն' : return 'hy'; break;
 //            case 'অসমীয়া' : return 'as'; break;

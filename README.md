@@ -32,7 +32,7 @@ Use bbalet / bbalet for login / password.
 * REST API (OAuth2) fully documented and examples with PHP clients.
 * LDAP Authentication (OpenLDAP, AD, etc.).
 * OAuth2 Authentication (only Google+ at the moment).
-* Available in English, French, Spanish, Italian, Portuguese, German, Dutch, Russian, Ukrainian, Persian, Khmer, Vietnamese, Czech, and Turkish.
+* Available in English, French, Spanish, Italian, Portuguese, German, Dutch, Russian, Ukrainian, Persian, Khmer, Vietnamese, Czech, Arabic and Turkish.
 
 ## Installation
 

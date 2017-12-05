@@ -8,7 +8,7 @@
  */
 //require("POParser.php");
 require_once "../../vendor/autoload.php";
-$target = "dutch";
+$target = "arabic";
 
 $copyright = "<?php
 /**

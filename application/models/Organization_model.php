@@ -38,7 +38,7 @@ class Organization_model extends CI_Model {
         $arr = $query->result_array();
         return $arr;
     }
-    
+
     /**
      * Get the label of a given entity id
      * @param int $id Identifier of the entity
@@ -46,7 +46,7 @@ class Organization_model extends CI_Model {
      */
     public function getName($id) {
         $this->db->from('organization');
-        $this->db->where("id", $id); 
+        $this->db->where("id", $id);
         $query = $this->db->get();
         $record = $query->result_array();
         if(count($record) > 0) {
@@ -55,7 +55,7 @@ class Organization_model extends CI_Model {
             return '';
         }
     }
-    
+
     /**
      * List all entities of the organisation
      * @return array all entities of the organization sorted out by id and name
@@ -63,7 +63,7 @@ class Organization_model extends CI_Model {
      */
     public function getAllEntities() {
         $this->db->from('organization');
-        $this->db->order_by("parent_id", "desc"); 
+        $this->db->order_by("parent_id", "desc");
         $this->db->order_by("name", "asc");
         return $this->db->get();
     }
@@ -78,11 +78,15 @@ class Organization_model extends CI_Model {
         $query = 'SELECT GetFamilyTree(id) as id' .
                     ' FROM organization' .
                     ' WHERE id =' . $id;
-        $query = $this->db->query($query); 
-        $arr = $query->result_array();
+        $query = $this->db->query($query);
+        if(!$query) {
+            $arr = [];
+        } else {
+            $arr = $query->result_array();
+        }
         return $arr;
     }
-    
+
     /**
      * Move an entity into the organization
      * @param int $id identifier of the entity
@@ -97,7 +101,7 @@ class Organization_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('organization', $data);
     }
-    
+
     /**
      * Add an employee into an entity of the organization
      * @param int $id identifier of the employee
@@ -137,7 +141,7 @@ class Organization_model extends CI_Model {
         $res2 = $this->db->delete('organization');
         return $res1 && $res2;
     }
-    
+
     /**
      * Delete an employee from an entity of the organization
      * @param int $id identifier of the employee
@@ -151,7 +155,7 @@ class Organization_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('users', $data);
     }
-    
+
     /**
      * Rename an entity of the organization
      * @param int $id identifier of the entity
@@ -166,7 +170,7 @@ class Organization_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('organization', $data);
     }
-    
+
     /**
      * Create an entity in the organization
      * @param int $parent_id identifier of the parent entity
@@ -181,7 +185,7 @@ class Organization_model extends CI_Model {
         );
         return $this->db->insert('organization', $data);
     }
-    
+
     /**
      * Copy an entity in the organization
      * @param int $id identifier of the source entity
@@ -200,7 +204,7 @@ class Organization_model extends CI_Model {
         );
         return $this->db->insert('organization', $data);
     }
-    
+
     /**
      * Returns the list of the employees attached to an entity
      * @param int $id identifier of the entity
@@ -211,11 +215,11 @@ class Organization_model extends CI_Model {
         $this->db->select('id, firstname, lastname, email, datehired');
         $this->db->from('users');
         $this->db->where('organization', $id);
-        $this->db->order_by('lastname', 'asc'); 
+        $this->db->order_by('lastname', 'asc');
         $this->db->order_by('firstname', 'asc');
         return $this->db->get();
     }
-    
+
     /**
      * Returns the list of the employees attached to an entity
      * @param int $id identifier of the entity
@@ -247,12 +251,12 @@ class Organization_model extends CI_Model {
         } else {
             $this->db->where('organization.id', $id);
         }
-        $this->db->order_by('lastname', 'asc'); 
+        $this->db->order_by('lastname', 'asc');
         $this->db->order_by('firstname', 'asc');
         $employees = $this->db->get()->result();
         return $employees;
     }
-    
+
     /**
      * Add an employee into an entity of the organization
      * @param int $id identifier of the employee
@@ -267,7 +271,7 @@ class Organization_model extends CI_Model {
         $this->db->where('id', $entity);
         return $this->db->update('organization', $data);
     }
-    
+
     /**
      * Returns the supervisor of an entity
      * @param int $entity identifier of the entity

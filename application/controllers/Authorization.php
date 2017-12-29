@@ -5,7 +5,7 @@
  * docuementation of PHP OAuth2 server:
  * http://bshaffer.github.io/oauth2-server-php-docs/cookbook/
  * 
- * @copyright  Copyright (c) 2014-2017 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2018 Benjamin BALET
  * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link       https://github.com/bbalet/jorani
  * @since      0.6.0

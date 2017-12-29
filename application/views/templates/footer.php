@@ -1,7 +1,7 @@
-<?php 
+<?php
 /**
  * This view is included into all desktop full views. It contains the footer of the application.
- * @copyright  Copyright (c) 2014-2017 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2018 Benjamin BALET
  * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link       https://github.com/bbalet/jorani
  * @since      0.1.0
@@ -21,7 +21,7 @@
                   case 'fr' : echo '<a class="anchor" href="http://fr.jorani.org/" target="_blank">Jorani</a>'; break;
                   default : echo '<a class="anchor" href="http://jorani.org/" target="_blank">Jorani</a>'; break;
               } ?>
-          &nbsp;v0.6.5&nbsp;&copy;2014-2017 Benjamin BALET
+          &nbsp;v0.6.5&nbsp;&copy;2014-2018 Benjamin BALET
         </div>
     </div>
     </div>
@@ -64,7 +64,7 @@ if ($this->config->item("enable_apm_rum")) {
 // Add a load event listener that display web timing
 window.addEventListener("load", displayRUMInfo, false);
 function displayRUMInfo() {
-  var perfData = window.performance.timing; 
+  var perfData = window.performance.timing;
   var pageLoadTime = parseInt(perfData.domComplete - perfData.domLoading);
   var networkLatency = parseInt(perfData.responseEnd - perfData.requestStart);
   var ciElapsedTime = parseInt($("#ci_elapsed_time").val());

@@ -4,7 +4,7 @@
 -- not reversible.
 -- 
 -- @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
--- @copyright  Copyright (c) 2014-2017 Benjamin BALET
+-- @copyright  Copyright (c) 2014-2018 Benjamin BALET
 
 -- Behaviour:
 -- Generate a new firstname and lastname

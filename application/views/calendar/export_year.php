@@ -2,7 +2,7 @@
 /**
  * This view exports a yearly calendar of the leave taken by a user (can be displayed by HR or manager)
  * It builds an Excel 2007 file downloaded by the browser.
- * @copyright  Copyright (c) 2014-2017 Benjamin BALET
+ * @copyright  Copyright (c) 2014-2018 Benjamin BALET
  * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link            https://github.com/bbalet/jorani
  * @since         0.4.3

@@ -20,16 +20,16 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        <p><a href="{BaseURL}"> يرجى استخدام هذه المعلومات الغرض الولوج الى النظام.</a></p>
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>الدخول</td><td>{Login}</td>
             </tr>
             <tr>
-                <td>Password</td><td>{Password}</td>
+                <td>كلمة المرور</td><td>{Password}</td>
             </tr>
         </table>
-        Once connected, you can change your password, as explained <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        <p><a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">حال تأمين الإتصال، يمكنك تغيير كلمة المرور، وكما مبين هنا.</a></p>
         <hr>
         <h5>*** هذه الرسالة كتبت اوتوماتيكياً، يرجى عدم الإجابة عليها ***</h5>
     </body>

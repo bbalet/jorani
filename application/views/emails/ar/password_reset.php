@@ -20,8 +20,8 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>Dear {Firstname} {Lastname},</p>
-        <p>Your Jorani password has been reset. If you did not perform this operation, please contact your manager.</p>
+        <p>  عزيزي/عزيزت {Firstname} {Lastname},</p>
+        <p>تم تغيير كلمة المرور الخاصة بنظام جوراني. اذا لم تقم بهذا الإجراء، يرجى "الإتصال بالمدير.</p>
         <hr>
         <h5>*** هذه الرسالة كتبت اوتوماتيكياً، يرجى عدم الإجابة عليها ***</h5>
     </body>

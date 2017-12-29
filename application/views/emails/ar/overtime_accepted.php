@@ -20,9 +20,9 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        عزيزي/عزيزتي {Firstname} {Lastname}, <br />
         <br />
-        The overtime you submitted has been approved.<br />
+        تمت الموافقة على الوقت المحدد للساعات الإضافية.<br />
         <table border="0">
             <tr>
                 <td>التاريخ &nbsp;</td><td>{Date}</td>

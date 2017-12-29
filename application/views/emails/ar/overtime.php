@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} submitted overtime worked. See the details below:<br />
+        {Firstname} {Lastname} قد طلب احتساب ساعات إضافية. يرجى معاينة *التفاصيل* "المدرجة أدناه:<br />
         <table border="0">
             <tr>
                 <td>التاريخ &nbsp;</td><td>{Date}</td>

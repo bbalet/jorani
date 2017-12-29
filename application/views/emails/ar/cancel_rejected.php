@@ -20,11 +20,9 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        عزيزي/عزيزتي {Firstname} {Lastname}, <br />
         <br />
-        <p>Unfortunately, your cancellation request was not accepted.
-        The leave request has now its original status of Accepted.</p>
-        <p>Please contact your manager to discuss the matter. </p>
+        <p>للأسف، طلب إلغاء الإجازة قد تم رفضه. الإجازة المعنية بالطلب مستمرة. يرجى الإتصال بالمدير لحل الموضوع.</p>
         <table border="0">
             <tr>
                 <td>من &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

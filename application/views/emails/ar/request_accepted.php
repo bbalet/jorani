@@ -20,9 +20,9 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        عزيزي/عزيزتي {Firstname} {Lastname}, <br />
         <br />
-        The time off you requested has been approved.<br />
+        تمت الموافقة على الوقت المحدد لإجازتك.<br />
         <table border="0">
             <tr>
                 <td>من &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

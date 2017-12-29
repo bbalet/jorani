@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>{Firstname} {Lastname} would like to cancel a requested time off. See the <a href="{BaseUrl}leaves/{LeaveId}">details</a> below:</p>
+        <p><a href="{BaseUrl}leaves/{LeaveId}">{Firstname} {Lastname} يود الغاء طلب اجازته. يرجى معاينة التفاصيل أدناه:</a></p>
         <table border="0">
             <tr>
                 <td>من &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

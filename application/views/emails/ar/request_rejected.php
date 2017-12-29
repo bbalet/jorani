@@ -20,9 +20,9 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        عزيزي/عزيزتي {Firstname} {Lastname}, <br />
         <br />
-        Unfortunately, the time off you requested has been rejected. Please contact your manager to discuss the matter. <br />
+        للأسف، الوقد المحدد لإجازتك قد تم رفضه. يرجى الإتصال بالمدير لحل الموضوع.<br />
         <table border="0">
             <tr>
                 <td>من &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

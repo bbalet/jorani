@@ -20,9 +20,9 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        عزيزي/عزيزتي {Firstname} {Lastname}, <br />
         <br />
-        Unfortunately, the overtime you submitted has been rejected. Please contact your manager to discuss the matter.<br />
+        للأسف، الوقد المحدد للساعات الإضافية قد تم رفضه. يرجى الإتصال بالمدير لحل "الموضوع.<br />
         <table border="0">
             <tr>
                 <td>التاريخ &nbsp;</td><td>{Date}</td>

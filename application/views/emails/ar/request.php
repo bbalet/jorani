@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requested time off. See the <a href="{BaseUrl}leaves/requests/{LeaveId}">details</a> below:<br />
+        <a href="{BaseUrl}leaves/requests/{LeaveId}">{Firstname} {Lastname} قد طلب إجازة. يرجى معاينة التفاصيل المدرجة أدناه:<br />
         <table border="0">
             <tr>
                 <td>من &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
@@ -49,7 +49,7 @@
             </tr>
         </table>
         <br />
-        You can check the <a href="{BaseUrl}hr/counters/collaborators/{UserId}">leave balance</a> before validating the leave request.
+        <a href="{BaseUrl}hr/counters/collaborators/{UserId}">يمكن فحص رصيد الإجازات قبل مراجعة طلب الإجازة.</a>
         <hr>
         <h5>*** هذه الرسالة كتبت اوتوماتيكياً، يرجى عدم الإجابة عليها ***</h5>
     </body>

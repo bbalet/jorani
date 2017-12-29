@@ -20,9 +20,9 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        عزيزي/عزيزتي {Firstname} {Lastname}, <br />
         <br />
-        <p>Your cancellation request was accepted and the leave request has been cancelled.</p>
+        <p>تم قبول إلغاء الإجازة، الغيت الإجازة المعنية بالطلب.</p>
         <table border="0">
             <tr>
                 <td>من &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

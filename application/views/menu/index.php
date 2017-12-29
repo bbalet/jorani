@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view contains the menu of the application
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
@@ -31,7 +31,7 @@ $this->lang->load('menu', $language);?>
             $("#frmChangeMyPwd").modal('show');
             $("#frmChangeMyPwdBody").load('<?php echo base_url();?>users/reset/<?php echo $user_id; ?>');
         });
-        
+
     });
 </script>
 <?php } ?>
@@ -136,7 +136,9 @@ $this->lang->load('menu', $language);?>
                   <ul class="dropdown-menu">
                       <li><a href="<?php echo base_url();?>calendar/individual"><?php echo lang('menu_calendar_individual');?></a></li>
                       <li><a href="<?php echo base_url();?>calendar/year"><?php echo lang('menu_calendar_year');?></a></li>
+                      <?php if ($this->config->item('disable_workmates_calendar') == FALSE) { ?>
                       <li><a href="<?php echo base_url();?>calendar/workmates"><?php echo lang('menu_calendar_workmates');?></a></li>
+                      <?php } ?>
                       <?php if ($is_manager == TRUE) { ?>
                       <li><a href="<?php echo base_url();?>calendar/collaborators"><?php echo lang('menu_calendar_collaborators');?></a></li>
                       <?php } ?>
@@ -149,7 +151,7 @@ $this->lang->load('menu', $language);?>
                       <?php } ?>
                   </ul>
                 </li>
-                
+
                 <li>
                     <form class="navbar-form pull-left">
                         <a class="btn btn-warning" href="<?php echo base_url();?>leaves/create"><b><?php echo lang('menu_leaves_request_button');?></b></a>

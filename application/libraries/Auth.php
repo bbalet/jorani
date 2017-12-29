@@ -22,14 +22,19 @@ class Auth {
     private $CI;
     /**
      * Is the connected user part of HR team
-     * @var bool Is Human Resource role 
+     * @var bool Is Human Resource role
      */
     private $isHR;
     /**
      * Is the connected user part of Admin team
-     * @var bool Is Admin role  
+     * @var bool Is Admin role
      */
     private $isAdmin;
+    /**
+     * Is the connected user a manager of at least one employee
+     * @var bool Is the user validating any request
+     */
+    private $isManager;
 
     /**
      * Default constructor
@@ -37,9 +42,10 @@ class Auth {
     public function __construct() {
         $this->CI = & get_instance();
         $this->CI->load->library('session');
-        
+
         $this->isHR = ($this->CI->session->userdata('is_hr') === TRUE);
         $this->isAdmin = ($this->CI->session->userdata('is_admin') === TRUE);
+        $this->isManager = ($this->CI->session->userdata('is_manager') === TRUE);
     }
 
     /**
@@ -47,7 +53,7 @@ class Auth {
      * Note that other business rules may be implemented in the controllers.
      * For instance, a user can approve a leave only if it is a manager of the submitter.
      * Or a user may delete a leave only if the leave is at the planned status
-     * This function only prevents gross security issues when a user try to access 
+     * This function only prevents gross security issues when a user try to access
      * a restricted screen.
      * Note that any operation needs the user to be connected.
      * @param string $operation Operation attempted by the user
@@ -57,7 +63,7 @@ class Auth {
      */
     public function isAllowed($operation, $object_id = 0) {
         switch ($operation) {
-            
+
             //Admin functions
             case 'purge_database' :
                 if ($this->CI->session->userdata('is_admin') == true)
@@ -68,16 +74,16 @@ class Auth {
                 else
                     return false;
                 break;
-            
+
             //User management
             case 'list_settings' :
-            case 'oauth_clients' :    
+            case 'oauth_clients' :
                 if ($this->CI->session->userdata('is_admin') == true)
                     return true;
                 else
                     return false;
                 break;
-                
+
             case 'list_users' :
             case 'create_user' :
             case 'delete_user' :
@@ -129,7 +135,7 @@ class Auth {
                 else
                     return false;
                 break;
-            
+
             case 'native_report_balance':
             case 'native_report_leaves':
             case 'report_list' :
@@ -139,7 +145,7 @@ class Auth {
                 else
                     return false;
                 break;
-            
+
             //HR
             case 'leavetypes_delete' :
             case 'leavetypes_list' :
@@ -162,14 +168,14 @@ class Auth {
                 else
                     return false;
                 break;
-            
+
             //General
             case 'view_myprofile' :
             case 'employees_list' :
             case 'organization_select' :
                 return true;
                 break;
-                
+
             //Leaves
             case 'list_leaves' :
             case 'create_leaves' :
@@ -179,7 +185,7 @@ class Auth {
             case 'counters_leaves' :
                 return true;
                 break;
-            
+
             //Extra
             case 'list_extra' :
             case 'create_extra' :
@@ -195,7 +201,7 @@ class Auth {
             case 'reject_overtime' :
                 return true;
                 break;
-            
+
             //Additionnal access logic: cannot view/edit/update the leave of another user except for admin/manager
             //Request
             case 'list_collaborators' :
@@ -207,16 +213,19 @@ class Auth {
             //Access logic is in the controller : if the connected user manages nobody, the list will be empty
             //Calendar
             case 'individual_calendar' :
+              return true;
             case 'workmates_calendar' :
+              return ($this->isHR || $this->isAdmin || ($this->CI->config->item('disable_workmates_calendar') == FALSE));
             case 'collaborators_calendar' :
-                return true;
+              return ($this->isHR || $this->isAdmin || $this->isManager);
             case 'department_calendar' :
+              return ($this->CI->config->item('disable_department_calendar') == FALSE);
             case 'organization_calendar' :
                 return ($this->isHR || $this->isAdmin || ($this->CI->config->item('hide_global_cals_to_users') == FALSE));
             case 'download_calendar' :
                 return true;
                 break;
-            
+
             //Custom lists of employees (filter of tabular calendars)
             case 'organization_lists_index' :
             case 'organization_lists_create' :
@@ -226,8 +235,8 @@ class Auth {
             case 'organization_lists_remove_user' :
             case 'organization_lists_list_reorder' :
                 return true;
-                break;        
-            
+                break;
+
             //Additionnal access logic: filter on the connected user
             //Additionnal access logic: filter on the team of the connected user
             default:

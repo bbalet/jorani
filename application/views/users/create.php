@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view allows to create a new employee
  * @copyright  Copyright (c) 2014-2017 Benjamin BALET
@@ -12,7 +12,7 @@
     <div class="span12">
 <h2><?php echo lang('users_create_title');?><?php echo $help;?></h2>
 
-<?php echo validation_errors(); ?>        
+<?php echo validation_errors(); ?>
     </div>
 </div>
 
@@ -31,7 +31,7 @@ echo form_open('users/create', $attributes); ?>
             </div>
         </div>
     </div>
-    
+
     <div class="span4">
         <div class="control-group">
             <label class="control-label" for="lastname"><?php echo lang('users_create_field_lastname');?></label>
@@ -40,7 +40,7 @@ echo form_open('users/create', $attributes); ?>
             </div>
         </div>
     </div>
-    
+
     <div class="span4">
         <div class="control-group">
             <label class="control-label" for="login"><?php echo lang('users_create_field_login');?></label>
@@ -67,7 +67,7 @@ echo form_open('users/create', $attributes); ?>
             </div>
         </div>
     </div>
-    
+
     <div class="span8">
         <input type="hidden" name="manager" id="manager" />
         <div class="control-group">
@@ -88,7 +88,7 @@ echo form_open('users/create', $attributes); ?>
 
     </div>
 </div>
-    
+
 <div class="row">
     <div class="span4">
         <div class="control-group">
@@ -102,16 +102,16 @@ echo form_open('users/create', $attributes); ?>
             </div>
         </div>
     </div>
-    
+
     <div class="span4">
         &nbsp;
     </div>
-    
+
     <div class="span4">
         &nbsp;
     </div>
 </div>
-    
+
 <div class="row">
     <div class="span6">
         <?php if ($this->config->item('ldap_enabled')=== FALSE && $this->config->item('saml_enabled') === FALSE) {?>
@@ -188,7 +188,7 @@ echo form_open('users/create', $attributes); ?>
             </div>
         </div>
     </div>
-    
+
     <div class="span4">
         <div class="control-group">
             <label class="control-label" for="identifier"><?php echo lang('users_create_field_identifier');?></label>
@@ -197,7 +197,7 @@ echo form_open('users/create', $attributes); ?>
             </div>
         </div>
     </div>
-    
+
     <div class="span4">
         &nbsp;
     </div>
@@ -209,36 +209,36 @@ echo form_open('users/create', $attributes); ?>
             <label class="control-label" for="language"><?php echo lang('users_create_field_language');?></label>
             <div class="controls">
                 <select name="language">
-                     <?php 
+                     <?php
                      $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
                      $default_lang = $this->polyglot->language2code($this->config->item('language'));
                      foreach ($languages as $code => $language): ?>
                     <option value="<?php echo $code; ?>" <?php if ($code == $default_lang) echo "selected"; ?>><?php echo $language; ?></option>
                     <?php endforeach ?>
-                </select>                
+                </select>
             </div>
         </div>
     </div>
-    
+
     <div class="span4">
         <div class="control-group">
             <label class="control-label" for="timezone"><?php echo lang('users_create_field_timezone');?></label>
             <div class="controls">
-                <?php 
+                <?php
                 $tzdef = $this->config->item('default_timezone');
                 if ($tzdef == FALSE) $tzdef = 'Europe/Paris';
                 $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);?>
                 <select id="timezone" name="timezone" class="selectized input-xlarge">
                 <?php foreach ($tzlist as $tz) { ?>
                     <option value="<?php echo $tz ?>" <?php if ($tz == $tzdef) echo "selected"; ?>><?php echo $tz; ?></option>
-                <?php 
+                <?php
                         $index++;
                     } ?>
-                </select>    
+                </select>
             </div>
         </div>
     </div>
-    
+
     <div class="span4">
         <?php if ($this->config->item('ldap_basedn_db')) {?>
         <div class="control-group">
@@ -310,12 +310,11 @@ echo form_open('users/create', $attributes); ?>
 </div>
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
-<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
-<script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
-<?php //Prevent HTTP-404 when localization isn't needed
-if ($language_code != 'en') { ?>
-<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
-<?php } ?>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/css/bootstrap-datepicker.min.css">
+<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/js/bootstrap-datepicker.min.js"></script>
+<?php if ($language_code != 'en') {?>
+<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
+<?php }?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
@@ -332,7 +331,7 @@ if ($language_code != 'en') { ?>
         }
         $("#frmSelectManager").modal('hide');
     }
-    
+
     //Popup select entity: on click OK, find the entity id for the selected node
     function select_entity() {
         var entity = $('#organization').jstree('get_selected')[0];
@@ -341,7 +340,7 @@ if ($language_code != 'en') { ?>
         $('#txtEntity').val(text);
         $("#frmSelectEntity").modal('hide');
     }
-    
+
     //Popup select postion: on click OK, find the position id for the selected line
     function select_position() {
         var positions = $('#positions').DataTable();
@@ -372,7 +371,7 @@ if ($language_code != 'en') { ?>
             return false;
         }
     }
-    
+
     //Before submitting the form, encrypt the password and don't send the clear value
     function submit_form() {
         var encrypt = new JSEncrypt();
@@ -381,7 +380,7 @@ if ($language_code != 'en') { ?>
         $('#CipheredValue').val(encrypted);
         $('#target').submit();
     }
-    
+
     /**
      * Generate a password of the specified length
      * @param int len Length of password to be generated
@@ -408,7 +407,7 @@ if ($language_code != 'en') { ?>
         }
         return password;
     }
-    
+
     /**
      * Generate a login according to a pattern
      * @param string User's firstname
@@ -439,7 +438,7 @@ if ($language_code != 'en') { ?>
         }
         return login.substring(0, max);
     }
-    
+
     //Check if the login is valid or not
     function checkLogin() {
         if ($("#login").val() != '') {
@@ -457,7 +456,7 @@ if ($language_code != 'en') { ?>
                 });
         }
     }
-    
+
     $(function () {
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
     $.ajaxSetup({
@@ -466,22 +465,25 @@ if ($language_code != 'en') { ?>
         }
     });
 <?php }?>
-        $("#viz_datehired").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: '<?php echo lang('global_date_js_format');?>',
-            altFormat: "yy-mm-dd",
-            altField: "#datehired"
-        }, $.datepicker.regional['<?php echo $language_code;?>']);
         $("#lblLoginAlert").alert();
-        
+
+        $("#viz_datehired").datepicker({
+          format: '<?php echo lang('global_date_js_format');?>',
+          language: "<?php echo $language_code;?>",
+          startDate: "01/01/1970",
+          autoclose: true
+        }).on('changeDate', function(e){
+          $('#datehired').val(e.format('yyyy-mm-dd'));
+        });
+
+        //Transform SELECT tags in richer controls
         $('#timezone').selectize();
         $('#contract').selectize();
-        
+
         $("#cmdGeneratePassword").click(function() {
             $("#password").val(password_generator(<?php echo $this->config->item('password_length');?>));
         });
-        
+
         //On any change on firstname or lastname fields, automatically build the
         //login identifier with first character of firstname and the 31 first characters of lastname
         $("#firstname").change(function() {
@@ -495,19 +497,19 @@ if ($language_code != 'en') { ?>
             var login = generateLogin($("#firstname").val(), $("#lastname").val(), '<?php echo $this->config->item('login_pattern')!==FALSE?$this->config->item('login_pattern'):'jdoe';?>',32);
             $("#login").val(login);
         });
-        
+
         //
         $('#cmdRefreshLogin').click(function() {
             var login = generateLogin($("#firstname").val(), $("#lastname").val(), '<?php echo $this->config->item('login_pattern')!==FALSE?$this->config->item('login_pattern'):'jdoe';?>',32);
             $("#login").val(login);
             checkLogin();
         });
-        
+
         //Check if the user has not exceed the number of entitled days
         $("#login").change(function() {
             checkLogin();
         });
-        
+
         $('#send').click(function() {
             if (validate_form() == false) {
                 //Error of validation
@@ -534,19 +536,19 @@ if ($language_code != 'en') { ?>
                 });
             }
         });
-        
+
         //Popup select manager
         $("#cmdSelectManager").click(function() {
             $("#frmSelectManager").modal('show');
             $("#frmSelectManagerBody").load('<?php echo base_url(); ?>users/employees');
         });
-        
+
         //Popup select position
         $("#cmdSelectPosition").click(function() {
             $("#frmSelectPosition").modal('show');
             $("#frmSelectPositionBody").load('<?php echo base_url(); ?>positions/select');
         });
-        
+
         //Popup select entity
         $("#cmdSelectEntity").click(function() {
             $("#frmSelectEntity").modal('show');
@@ -559,15 +561,15 @@ if ($language_code != 'en') { ?>
         $('#frmSelectEntity').on('hidden', function() {
             $(this).removeData('modal');
         });
-        
+
         //Self manager button
         $("#cmdSelfManager").click(function() {
             $("#manager").val('-1');
             $('#txtManager').val('<?php echo lang('users_create_field_manager_alt');?>');
         });
-        
+
         //Init all tooltips
-        $('[data-toggle="tooltip"]').tooltip({ placement: 'top'}); 
+        $('[data-toggle="tooltip"]').tooltip({ placement: 'top'});
     });
 
 </script>

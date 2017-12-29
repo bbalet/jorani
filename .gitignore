@@ -15,3 +15,5 @@ application/temp/*
 /application/language/extract.php
 /application/language/test.txt
 /.sonar/
+
+/vendor/

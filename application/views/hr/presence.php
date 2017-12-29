@@ -218,7 +218,7 @@
         <tr>
             <th><?php echo lang('hr_presence_thead_id');?></th>
             <th><?php echo lang('hr_presence_thead_start');?></th>
-            <th><?php echo lang('hr_presence_thead_end');?></th>            
+            <th><?php echo lang('hr_presence_thead_end');?></th>
             <th><?php echo lang('hr_presence_thead_duration');?></th>
             <th><?php echo lang('hr_presence_thead_type');?></th>
         </tr>
@@ -250,10 +250,16 @@
     <div class="span12">
         <h3><?php echo lang('hr_summary_title');?>&nbsp;<?php echo $employee_id; ?>&nbsp;<span class="muted"> (<?php echo $employee_name; ?>)</span>&nbsp;<?php echo $help;?></h3>
 
+        <?php if (is_null($summary)) { ?>
+        <div class="alert">
+        <?php echo lang('hr_presence_no_contract');?>
+        </div>
+        <?php } else { ?>
+
         <p><?php echo lang('hr_summary_date_field');?>&nbsp;
             <input type="text" value="<?php echo $refDate; ?>" readonly />
         </p>
-        
+
         <table id="counters" cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
             <thead>
                 <tr>
@@ -276,6 +282,7 @@
               <?php } ?>
               </tbody>
         </table>
+        <?php } ?>
     </div>
 </div>
 
@@ -307,9 +314,9 @@
 
 <script type="text/javascript">
 var employee = <?php echo $user_id;?>;
-    
+
 $(function () {
-    
+
     //Transform the HTML tables into fancy datatables
     var oTable = $('#leaves').dataTable({
             order: [[ 1, "asc" ]],
@@ -337,7 +344,7 @@ $(function () {
                 }
             },
         });
-        
+
         $('#counters').dataTable({
             order: [[ 0, "desc" ]],
             language: {
@@ -364,7 +371,7 @@ $(function () {
                 }
             }
         });
-        
+
         //Load a tiny calendar
         $('#calendar').fullCalendar({
             timeFormat: ' ', /*Trick to remove the start time of the event*/
@@ -380,7 +387,7 @@ $(function () {
                     $('#frmModalAjaxWait').modal('show');
                 } else {
                     $('#frmModalAjaxWait').modal('hide');
-                }    
+                }
             },
             eventRender: function(event, element, view) {
                 if(event.imageurl){
@@ -429,7 +436,7 @@ $(function () {
         $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>leaves/individual/' + employee);
         $('#calendar').fullCalendar('addEventSource', '<?php echo base_url();?>contracts/calendar/userdayoffs/' + employee);
 
-        
+
         //Execute the report for another date
         $('#cmdExecute').click(function() {
             var month = $('#cboMonth').val();
@@ -454,8 +461,7 @@ date_sub($datePrev, date_interval_create_from_date_string('1 month'));?>
             var url = '<?php echo base_url();?>hr/presence/<?php echo $source;?>/' + employee + '/' + month+ '/' + year;
             document.location.href = url;
         });
-        
+
         refresh_calendar();
 });
 </script>
-

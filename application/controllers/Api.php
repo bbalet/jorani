@@ -443,6 +443,9 @@ class Api extends CI_Controller {
             if (($this->input->post('calendar')) !== NULL) {
                 $data['calendar'] = $this->input->post('calendar');
             }
+            if (($this->input->post('active')) !== NULL) {
+                $data['active'] = $this->input->post('active');
+            }
             $result = $this->users_model->updateUserByApi($id, $data);
             if (empty($result)) {
                 $this->output->set_header("HTTP/1.1 422 Unprocessable entity");

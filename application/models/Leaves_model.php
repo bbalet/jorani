@@ -1231,6 +1231,7 @@ class Leaves_model extends CI_Model {
      * @author Emilien NICOLAS <milihhard1996@gmail.com>
      */
     public function getLeavesRequestedToManagerWithHistory($manager, $all = FALSE){
+      $this->load->model('delegations_model');
       $manager = intval($manager);
       $query="SELECT leaves.id as leave_id, users.*, leaves.*, types.name as type_label, status.name as status_name, types.name as type_name, lastchange.date as change_date, requested.date as request_date
         FROM `leaves`

@@ -14,10 +14,13 @@ $lang['global_msg_error_forbidden'] = 'عملیات (%) تصدیق نشده.';
 $lang['global_msg_wait'] = 'لطفاً صبر نمایید';
 $lang['global_msg_old_browser'] = 'اینترنت اکسپلورر 8 و مرورگر قدیمی تر پشتیبانی نمیشوند. لطفاً به به اینترنت اکسپلورر 9 ارتقا داده یا از فایرفاکس، گوگل کروم و دیگر مرورگرها استفاده نمایید.';
 $lang['global_msg_not_found'] = 'Object not found. Maybe that you are trying to access to an object that was deleted.';
-
 $lang['global_date_format'] = 'm/d/Y';
 $lang['global_date_js_format'] = 'mm/dd/yy';
 $lang['global_date_momentjs_format'] = 'MM/DD/YYYY';
+
+$lang['global_msg_new_version_available'] = 'A new version is available.';
+$lang['global_msg_your_version_is_dev'] = 'You are using a development version.';
+$lang['global_msg_your_version_is_up_to_date'] = 'Your version is up to date.';
 
 $lang['global_true'] = 'درست';
 $lang['global_false'] = 'غلط';

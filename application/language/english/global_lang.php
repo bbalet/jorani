@@ -17,6 +17,10 @@ $lang['global_date_format'] = 'm/d/Y';
 $lang['global_date_js_format'] = 'mm/dd/yy';
 $lang['global_date_momentjs_format'] = 'MM/DD/YYYY';
 
+$lang['global_msg_new_version_available'] = 'A new version is available.';
+$lang['global_msg_your_version_is_dev'] = 'You are using a development version.';
+$lang['global_msg_your_version_is_up_to_date'] = 'Your version is up to date.';
+
 $lang['global_true'] = 'TRUE';
 $lang['global_false'] = 'FALSE';
 
@@ -51,8 +55,8 @@ $lang['global_link_doc_page_extra_list'] = '';
 $lang['global_link_doc_page_overtime_list'] = '';
 $lang['global_link_doc_page_create_overtime'] = '';
 
-$lang['global_link_doc_page_entitleddays_employee'] = '';
-$lang['global_link_doc_page_entitleddays_contract'] = '';
+$lang['global_link_doc_page_entitleddays_employee'] = 'https://jorani.org/page-leave-entitlements-for-an-employee.html';
+$lang['global_link_doc_page_entitleddays_contract'] = 'https://jorani.org/page-leave-entitlements-for-a-contract.html';
 
 $lang['global_link_doc_page_my_summary'] = 'http://jorani.org/page-my-summary.html';
 $lang['global_link_doc_page_request_leave'] = 'http://jorani.org/how-to-request-a-leave.html';

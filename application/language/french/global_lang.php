@@ -16,6 +16,11 @@ $lang['global_msg_not_found'] = 'Objet non trouvé. Il est possible que vous ten
 $lang['global_date_format'] = 'd/m/Y';
 $lang['global_date_js_format'] = 'dd/mm/yy';
 $lang['global_date_momentjs_format'] = 'DD/MM/YYYY';
+
+$lang['global_msg_new_version_available'] = 'Une nouvelle version est disponible.';
+$lang['global_msg_your_version_is_dev'] = 'Vous utilisez une version de développement.';
+$lang['global_msg_your_version_is_up_to_date'] = 'Votre version est à jour.';
+
 $lang['global_true'] = 'VRAI';
 $lang['global_false'] = 'FAUX';
 
@@ -70,7 +75,7 @@ $lang['global_link_doc_page_presence_report'] = 'http://fr.jorani.org/ecrans/pag
 
 $lang['global_link_doc_page_leave_balance_report'] = 'http://fr.jorani.org/ecrans/page-rapport-etat-des-conges.html';
 $lang['global_link_doc_page_leaves_report'] = 'http://fr.jorani.org/ecrans/page-rapport-liste-tous-les-conges.html';
-    
+
 $lang['Morning'] = 'Matin';
 $lang['Afternoon'] = 'Après-midi';
 $lang['today'] = 'aujourd\'hui';

@@ -19,6 +19,9 @@ $lang['global_date_js_format'] = 'mm/dd/yy';
 $lang['global_date_momentjs_format'] = 'DD/MM/YYYY';
 $lang['global_true'] = 'ТАК';
 $lang['global_false'] = 'Ні';
+$lang['global_msg_new_version_available'] = 'A new version is available.';
+$lang['global_msg_your_version_is_dev'] = 'You are using a development version.';
+$lang['global_msg_your_version_is_up_to_date'] = 'Your version is up to date.';
 
 $lang['footer_link_go_top'] = 'Нагору';
 $lang['footer_copyright_notice'] = '&copy; 2014 розробникі Jorani';

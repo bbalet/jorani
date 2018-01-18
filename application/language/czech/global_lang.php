@@ -18,6 +18,11 @@ $lang['global_msg_not_found'] = 'Soubor nenalezen. Možná se snažíte pokouš�
 $lang['global_date_format'] = 'd.m.Y';
 $lang['global_date_js_format'] = 'dd.mm.yy';
 $lang['global_date_momentjs_format'] = 'DD.MM.YYYY';
+
+$lang['global_msg_new_version_available'] = 'A new version is available';
+$lang['global_msg_your_version_is_dev'] = 'You are using a development version';
+$lang['global_msg_your_version_is_up_to_date'] = 'Your version is up to date';
+
 $lang['global_true'] = 'SPRÁVNÝ';
 $lang['global_false'] = 'CHYBNÝ';
 $lang['footer_link_go_top'] = 'Nahoru';

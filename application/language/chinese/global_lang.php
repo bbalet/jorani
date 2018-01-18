@@ -19,6 +19,10 @@ $lang['global_date_format'] = 'Y-m-d';
 $lang['global_date_js_format'] = 'yy-mm-dd';
 $lang['global_date_momentjs_format'] = 'YYYY-MM-DD';
 
+$lang['global_msg_new_version_available'] = 'A new version is available';
+$lang['global_msg_your_version_is_dev'] = 'You are using a development version';
+$lang['global_msg_your_version_is_up_to_date'] = 'Your version is up to date';
+
 $lang['global_true'] = '正確';
 $lang['global_false'] = '錯誤';
 $lang['footer_link_go_top'] = '至頂端';

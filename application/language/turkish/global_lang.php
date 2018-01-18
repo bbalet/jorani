@@ -14,10 +14,12 @@ $lang['global_msg_error_forbidden'] = '(%s) operasyonuna hak tanınmamış';
 $lang['global_msg_wait'] = 'Lütfen bekleyin';
 $lang['global_msg_old_browser'] = 'Internet Explorer 8 ve daha eski tarayıcılar desteklenmiyor. Lütfen tarayıcınızı IE9\'a yükseltin veya Firefox, Chrome vb kullanın.';
 $lang['global_msg_not_found'] = 'Nesne bulunamadı. Silinmiş bir nesneye erişmeye çalışıyor olabilirsiniz.';
-
 $lang['global_date_format'] = 'm/d/Y';
 $lang['global_date_js_format'] = 'mm/dd/yy';
 $lang['global_date_momentjs_format'] = 'MM/DD/YYYY';
+$lang['global_msg_new_version_available'] = 'A new version is available.';
+$lang['global_msg_your_version_is_dev'] = 'You are using a development version.';
+$lang['global_msg_your_version_is_up_to_date'] = 'Your version is up to date.';
 
 $lang['global_true'] = 'DOĞRU';
 $lang['global_false'] = 'YANLIŞ';

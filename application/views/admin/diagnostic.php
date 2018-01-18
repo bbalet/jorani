@@ -11,7 +11,13 @@
 <div class="row-fluid">
     <div class="span12">
         <h2><?php echo $title;?><?php echo $help;?></h2>
-        
+
+        <div class="alert fade in">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <img id='checkVersionLoading' src="<?php echo base_url();?>assets/images/loading.gif" align="middle">
+          <span id='checkVersion'><?php echo lang('global_msg_wait');?></span>
+        </div>
+
         <p><?php echo lang('admin_diagnostic_description');?></p>
 
 <?php
@@ -37,9 +43,9 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
 <div class="tab-content">
 
   <div class="tab-pane active" id="daysoff">
-    
+
     <p><?php echo lang('admin_diagnostic_daysoff_description');?></p>
-    
+
     <table class="table table-bordered table-hover table-condensed">
       <thead>
         <tr>
@@ -67,11 +73,11 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
       </tbody>
     </table>
   </div>
-    
+
   <div class="tab-pane" id="requests">
-      
+
         <p><?php echo lang('admin_diagnostic_requests_description');?></p>
-      
+
         <?php if ($duplicatedLeaves_count==0) {?>
         <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
         <?php } else {?>
@@ -85,7 +91,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
             </tr>
           </thead>
           <tbody>
-        <?php foreach ($duplicatedLeaves as $leave): 
+        <?php foreach ($duplicatedLeaves as $leave):
             $date = new DateTime($leave['startdate']);
             $startdate = $date->format(lang('global_date_format'));?>
             <tr>
@@ -99,11 +105,11 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
         </table>
         <?php }?>
   </div>
-    
+
   <div class="tab-pane" id="datetypes">
-      
+
         <p><?php echo lang('admin_diagnostic_datetype_description');?></p>
-      
+
         <?php if ($wrongDateType_count==0) {?>
         <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
         <?php } else {?>
@@ -119,7 +125,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
             </tr>
           </thead>
           <tbody>
-        <?php foreach ($wrongDateType as $dateType): 
+        <?php foreach ($wrongDateType as $dateType):
             $date = new DateTime($dateType['startdate']);
             $startdate = $date->format(lang('global_date_format'));?>
             <tr>
@@ -137,9 +143,9 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
   </div>
 
   <div class="tab-pane" id="entitlements">
-      
+
       <p><?php echo lang('admin_diagnostic_entitlements_description');?></p>
-      
+
         <?php if ($entitlmentOverflow_count==0) {?>
         <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
         <?php } else {?>
@@ -154,7 +160,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
             </tr>
           </thead>
           <tbody>
-        <?php foreach ($entitlmentOverflow as $entitlment): 
+        <?php foreach ($entitlmentOverflow as $entitlment):
             $date = new DateTime($entitlment['startdate']);
             $startdate = $date->format(lang('global_date_format'));
             $date = new DateTime($entitlment['enddate']);
@@ -175,16 +181,16 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
                 <td><?php echo $startdate;?></td>
                 <td><?php echo $enddate;?></td>
             </tr>
-            <?php 
+            <?php
                 }
                 endforeach ?>
           </tbody>
         </table>
         <?php }?>
   </div>
-    
+
   <div class="tab-pane" id="overtime">
-      
+
         <p><?php echo lang('admin_diagnostic_overtime_description');?></p>
 
         <?php if ($negativeOvertime_count==0) {?>
@@ -201,7 +207,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
             </tr>
           </thead>
           <tbody>
-        <?php foreach ($negativeOvertime as $overtime): 
+        <?php foreach ($negativeOvertime as $overtime):
             $date = new DateTime($overtime['date']);
             $date = $date->format(lang('global_date_format'));?>
             <tr>
@@ -216,7 +222,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
         </table>
         <?php }?>
   </div>
-    
+
   <div class="tab-pane" id="contracts">
     <p><a target="_blank" href="<?php echo base_url();?>contracts"><?php echo lang('admin_diagnostic_contract_description');?></a></p>
 
@@ -241,7 +247,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
     </table>
     <?php }?>
   </div><!-- Unused contracts //-->
-    
+
   <div class="tab-pane" id="balance">
     <p><?php echo lang('admin_diagnostic_balance_description');?></a></p>
 
@@ -259,7 +265,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
         </tr>
       </thead>
       <tbody>
-    <?php foreach ($leaveBalance as $balance): 
+    <?php foreach ($leaveBalance as $balance):
         $date = new DateTime($balance['startdate']);
         $startdate = $date->format(lang('global_date_format'))?>
         <tr>
@@ -281,7 +287,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
     </table>
     <?php }?>
   </div><!-- Leave Balance //-->
-    
+
 </div>
     </div>
 </div>
@@ -293,10 +299,102 @@ $(function () {
     if (url.match('#')) {
         $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
     }
-    
+
     //Change hash for page-reload
     $('.nav-tabs a').on('shown.bs.tab', function (e) {
         window.location.hash = e.target.hash;
-    })
+    });
+
+    //Check if we are using the latest version
+    $.get( "https://jorani.org/version.php", function( data ) {
+      comparison = versionCompare('<?php echo $GLOBALS['versionOfJorani'];?>', data);
+      $("#checkVersionLoading").remove();
+      if (comparison < 0) {
+        $("#checkVersion").html('<?php echo lang('global_msg_new_version_available');?>');
+      }
+      if (comparison > 0) {
+        $("#checkVersion").html('<?php echo lang('global_msg_your_version_is_dev');?>');
+      }
+      if (comparison == 0) {
+        $("#checkVersion").html('<?php echo lang('global_msg_your_version_is_up_to_date');?>');
+      }
+    });
 });
+
+/**
+ * Compares two software version numbers (e.g. "1.7.1" or "1.2b").
+ *
+ * This function was born in http://stackoverflow.com/a/6832721.
+ *
+ * @param {string} v1 The first version to be compared.
+ * @param {string} v2 The second version to be compared.
+ * @param {object} [options] Optional flags that affect comparison behavior:
+ * <ul>
+ *     <li>
+ *         <tt>lexicographical: true</tt> compares each part of the version strings lexicographically instead of
+ *         naturally; this allows suffixes such as "b" or "dev" but will cause "1.10" to be considered smaller than
+ *         "1.2".
+ *     </li>
+ *     <li>
+ *         <tt>zeroExtend: true</tt> changes the result if one version string has less parts than the other. In
+ *         this case the shorter string will be padded with "zero" parts instead of being considered smaller.
+ *     </li>
+ * </ul>
+ * @returns {number|NaN}
+ * <ul>
+ *    <li>0 if the versions are equal</li>
+ *    <li>a negative integer iff v1 < v2</li>
+ *    <li>a positive integer iff v1 > v2</li>
+ *    <li>NaN if either version string is in the wrong format</li>
+ * </ul>
+ *
+ * @copyright by Jon Papaioannou (["john", "papaioannou"].join(".") + "@gmail.com")
+ * @license This function is in the public domain. Do what you want with it, no strings attached.
+ */
+function versionCompare(v1, v2, options) {
+    var lexicographical = options && options.lexicographical,
+        zeroExtend = options && options.zeroExtend,
+        v1parts = v1.split('.'),
+        v2parts = v2.split('.');
+
+    function isValidPart(x) {
+        return (lexicographical ? /^\d+[A-Za-z]*$/ : /^\d+$/).test(x);
+    }
+
+    if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
+        return NaN;
+    }
+
+    if (zeroExtend) {
+        while (v1parts.length < v2parts.length) v1parts.push("0");
+        while (v2parts.length < v1parts.length) v2parts.push("0");
+    }
+
+    if (!lexicographical) {
+        v1parts = v1parts.map(Number);
+        v2parts = v2parts.map(Number);
+    }
+
+    for (var i = 0; i < v1parts.length; ++i) {
+        if (v2parts.length == i) {
+            return 1;
+        }
+
+        if (v1parts[i] == v2parts[i]) {
+            continue;
+        }
+        else if (v1parts[i] > v2parts[i]) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
+
+    if (v1parts.length != v2parts.length) {
+        return -1;
+    }
+
+    return 0;
+}
 </script>

@@ -17,6 +17,10 @@ $lang['global_msg_not_found'] = 'Objekt nicht gefunden. Es könnte sein, dass Si
 $lang['global_date_format'] = 'd.m.Y';
 $lang['global_date_js_format'] = 'dd.mm.yy';
 $lang['global_date_momentjs_format'] = 'DD.MM.YYYY';
+$lang['global_msg_new_version_available'] = 'A new version is available.';
+$lang['global_msg_your_version_is_dev'] = 'You are using a development version.';
+$lang['global_msg_your_version_is_up_to_date'] = 'Your version is up to date.';
+
 $lang['global_true'] = 'WAHR';
 $lang['global_false'] = 'FALSCH';
 $lang['footer_link_go_top'] = 'nach oben';

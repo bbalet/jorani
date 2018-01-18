@@ -16,7 +16,7 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
  * The custom reports need to be implemented into local/pages/{lang}/ (see Controller Page)
  */
 class Reports extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -36,7 +36,7 @@ class Reports extends CI_Controller {
         $this->auth->checkIfOperationIsAllowed('report_list');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
-        
+
         $reports = array();
         //List all the available reports
         $files = glob(FCPATH . '/local/reports/*.ini');
@@ -52,15 +52,15 @@ class Reports extends CI_Controller {
                 );
             }
         }
-        
+
         $data['title'] = lang('reports_index_title');
         $data['reports'] = $reports;
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('reports/index', $data);
-        $this->load->view('templates/footer'); 
+        $this->load->view('templates/footer');
     }
-    
+
     /**
      * Landing page of the shipped-in balance report
      * @param string $refTmp Optional Unix timestamp (set a date of reference for the report).
@@ -81,7 +81,7 @@ class Reports extends CI_Controller {
         $this->load->view('reports/balance/index', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Ajax end-point : execute the balance report
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -94,7 +94,7 @@ class Reports extends CI_Controller {
         $result = array();
         $types = $this->types_model->getTypes();
         $this->lang->load('global', $this->language);
-		
+
         $refDate = date("Y-m-d");
         if (isset($_GET['refDate']) && $_GET['refDate'] != NULL) {
             $refDate = date("Y-m-d", $_GET['refDate']);
@@ -114,15 +114,17 @@ class Reports extends CI_Controller {
             foreach ($types as $type) {
                 $result[$user->id][$type['name']] = '';
             }
-            
+
             $summary = $this->leaves_model->getLeaveBalanceForEmployee($user->id, TRUE, $refDate);
-            if (count($summary) > 0 ) {
-                foreach ($summary as $key => $value) {
-                    $result[$user->id][$key] = round($value[1] - $value[0], 3, PHP_ROUND_HALF_DOWN);
-                }
+            if (!is_null($summary)) {
+              if (count($summary) > 0 ) {
+                  foreach ($summary as $key => $value) {
+                      $result[$user->id][$key] = round($value[1] - $value[0], 3, PHP_ROUND_HALF_DOWN);
+                  }
+              }
             }
         }
-        
+
         $table = '';
         $thead = '';
         $tbody = '';
@@ -145,7 +147,7 @@ class Reports extends CI_Controller {
             $tbody .= '</tr>';
             $line++;
         }
-        
+
         //Check if there is any diagnostic alert on balance (LR without entitlments)
         $alerts = $this->leaves_model->detectBalanceProblems();
         if (count($alerts)) {
@@ -168,7 +170,7 @@ class Reports extends CI_Controller {
                 '</table>';
         $this->output->set_output($table);
     }
-    
+
     /**
      * Export the balance report into Excel
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -186,7 +188,7 @@ class Reports extends CI_Controller {
         $data['include_children'] = filter_var($_GET['children'], FILTER_VALIDATE_BOOLEAN);
         $this->load->view('reports/balance/export', $data);
     }
-    
+
     /**
      * Landing page of the shipped-in leaves report
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -202,7 +204,7 @@ class Reports extends CI_Controller {
         $this->load->view('reports/leaves/index', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Report leaves request for a month and an entity
      * This report is inspired by the monthly presence report, but applicable to a set of employee.
@@ -212,13 +214,13 @@ class Reports extends CI_Controller {
     public function executeLeavesReport() {
         $this->auth->checkIfOperationIsAllowed('native_report_leaves');
         $this->lang->load('leaves', $this->language);
-        
+
         $month = $this->input->get("month") === FALSE ? 0 : $this->input->get("month");
         $year = $this->input->get("year") === FALSE ? 0 : $this->input->get("year");
         $entity = $this->input->get("entity") === FALSE ? 0 : $this->input->get("entity");
         $children = filter_var($this->input->get("children"), FILTER_VALIDATE_BOOLEAN);
         $requests = filter_var($this->input->get("requests"), FILTER_VALIDATE_BOOLEAN);
-        
+
         //Compute facts about dates and the selected month
         if ($month == 0) {
             $start = sprintf('%d-01-01', $year);
@@ -230,18 +232,18 @@ class Reports extends CI_Controller {
             $end = sprintf('%d-%02d-%02d', $year, $month, $lastDay);
             $total_days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
         }
-        
+
         $this->load->model('organization_model');
         $this->load->model('leaves_model');
         $this->load->model('types_model');
         $this->load->model('dayoffs_model');
         $types = $this->types_model->getTypes();
-        
-        //Iterate on all employees of the entity 
+
+        //Iterate on all employees of the entity
         $users = $this->organization_model->allEmployees($entity, $children);
         $result = array();
         $leave_requests = array();
-        
+
         foreach ($users as $user) {
             $result[$user->id]['identifier'] = $user->identifier;
             $result[$user->id]['firstname'] = $user->firstname;
@@ -253,7 +255,7 @@ class Reports extends CI_Controller {
             $result[$user->id]['contract'] = $user->contract;
             $non_working_days = $this->dayoffs_model->lengthDaysOffBetweenDates($user->contract_id, $start, $end);
             $opened_days = $total_days - $non_working_days;
-            
+
             //If the user has selected All months
             if ($month == 0) {
                 $leave_duration = 0;
@@ -267,7 +269,7 @@ class Reports extends CI_Controller {
                             if (!array_key_exists($type['name'], $result[$user->id])) {
                                 $result[$user->id][$type['name']] = 0;
                             }
-                            $result[$user->id][$type['name']] += 
+                            $result[$user->id][$type['name']] +=
                                     $leaves_detail[$type['name']];
                         } else {
                             $result[$user->id][$type['name']] = '';
@@ -365,7 +367,7 @@ class Reports extends CI_Controller {
                 '</table>';
         $this->output->set_output($table);
     }
-    
+
     /**
      * Export the leaves report into Excel
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -386,5 +388,5 @@ class Reports extends CI_Controller {
         $data['include_children'] = filter_var($_GET['children'], FILTER_VALIDATE_BOOLEAN);
         $this->load->view('reports/leaves/export', $data);
     }
-    
+
 }

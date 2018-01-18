@@ -11,7 +11,7 @@ $sheet = $this->excel->setActiveSheetIndex(0);
 $sheet->setTitle(mb_strimwidth(lang('reports_export_balance_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
 $result = array();
 $summary = array();
-$types = $this->types_model->getTypes();        
+$types = $this->types_model->getTypes();
 $users = $this->organization_model->allEmployees($_GET['entity'], $include_children);
 foreach ($users as $user) {
     $result[$user->id]['identifier'] = $user->identifier;
@@ -27,10 +27,12 @@ foreach ($users as $user) {
     }
 
     $summary = $this->leaves_model->getLeaveBalanceForEmployee($user->id, TRUE, $refDate);
-    if (count($summary) > 0 ) {
-        foreach ($summary as $key => $value) {
-            $result[$user->id][$key] = round($value[1] - $value[0], 3, PHP_ROUND_HALF_DOWN);
-        }
+    if (!is_null($summary)) {
+      if (count($summary) > 0 ) {
+          foreach ($summary as $key => $value) {
+              $result[$user->id][$key] = round($value[1] - $value[0], 3, PHP_ROUND_HALF_DOWN);
+          }
+      }
     }
 }
 

@@ -6,9 +6,9 @@
  * @link       https://github.com/bbalet/jorani
  * @since      0.3.0
  */
-//require("POParser.php");
+
 require_once "../../vendor/autoload.php";
-$target = "arabic";
+$target = "hungarian";
 
 $copyright = "<?php
 /**

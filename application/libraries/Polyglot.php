@@ -122,7 +122,7 @@ class Polyglot {
 //            case 'hz' : return 'herero'; break;
             case 'hi' : return 'hindi'; break;
 //            case 'ho' : return 'hiri motu'; break;
-//            case 'hu' : return 'hungarian'; break;
+            case 'hu' : return 'hungarian'; break;
 //            case 'ia' : return 'interlingua'; break;
 //            case 'id' : return 'indonesian'; break;
 //            case 'ie' : return 'interlingue'; break;
@@ -317,7 +317,7 @@ class Polyglot {
 //            case 'herero' : return 'hz'; break;
 //            case 'hindi' : return 'hi'; break;
 //            case 'hiri motu' : return 'ho'; break;
-//            case 'hungarian' : return 'hu'; break;
+            case 'hungarian' : return 'hu'; break;
 //            case 'interlingua' : return 'ia'; break;
 //            case 'indonesian' : return 'id'; break;
 //            case 'interlingue' : return 'ie'; break;
@@ -513,7 +513,7 @@ class Polyglot {
 //            case 'hz' : return 'Otjiherero'; break;
 //            case 'hi' : return 'हिन्दी'; break;
 //            case 'ho' : return 'Hiri Motu'; break;
-//            case 'hu' : return 'Magyar'; break;
+            case 'hu' : return 'Magyar'; break;
 //            case 'ia' : return 'Interlingua'; break;
 //            case 'id' : return 'Bahasa Indonesia'; break;
 //            case 'ie' : return 'Interlingue'; break;
@@ -708,7 +708,7 @@ class Polyglot {
 //            case 'Otjiherero' : return 'hz'; break;
 //            case 'हिन्दी' : return 'hi'; break;
 //            case 'Hiri Motu' : return 'ho'; break;
-//            case 'Magyar' : return 'hu'; break;
+            case 'Magyar' : return 'hu'; break;
 //            case 'Interlingua' : return 'ia'; break;
 //            case 'Bahasa Indonesia' : return 'id'; break;
 //            case 'Interlingue' : return 'ie'; break;

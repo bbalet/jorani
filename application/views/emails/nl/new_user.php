@@ -34,7 +34,7 @@
             </tr>
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        Nadat u bent ingelogd, kunt u het wachtwoord wijzigen (zie <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">hier</a> voor nadere uitleg).
+        Nadat u bent ingelogd, kunt u het wachtwoord wijzigen (zie <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">hier</a> voor nadere uitleg).
         <?php } ?>
         <hr>
         <h5>*** Dit is een automatisch gegenereerd bericht, antwoord alsjeblieft niet op dit bericht ***</h5>

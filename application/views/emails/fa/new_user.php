@@ -34,7 +34,7 @@
             </tr>            
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        پس از اتصال میتوانید رمزتان را تغییر دهید، طوریکه توضیح داده شده در <a href="http://jorani.org/how-to-change-my-password.html" title="اتصال به راهنما" target="_blank">اینجا</a>.
+        پس از اتصال میتوانید رمزتان را تغییر دهید، طوریکه توضیح داده شده در <a href="https://jorani.org/how-to-change-my-password.html" title="اتصال به راهنما" target="_blank">اینجا</a>.
         <?php } ?>
         <hr>
         <h5>*** این یک پیام اتوماتیک کامپیوتری است، لطفاً به این ایمیل پاسخ ندهید ***</h5>

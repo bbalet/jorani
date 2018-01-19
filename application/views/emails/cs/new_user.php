@@ -34,7 +34,7 @@
             </tr>            
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        Jakmile jste připojeni, můžete si změnit své heslo jak je vysvětleno <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">zde</a>.
+        Jakmile jste připojeni, můžete si změnit své heslo jak je vysvětleno <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">zde</a>.
         <?php } ?>
         <hr>
         <h5>*** Toto je náhodně vygenerována zpráva, prosím neodpovídejte na tuto zprávu ***</h5>

@@ -25,9 +25,9 @@
 
 <h4>Pour les responsables RH</h4>
 
-<p>Le <a href="http://fr.jorani.org/" target="_blank">site officiel de Jorani</a> contient la documentation complète et en Français du système, par exemple :</p>
+<p>Le <a href="https://fr.jorani.org/" target="_blank">site officiel de Jorani</a> contient la documentation complète et en Français du système, par exemple :</p>
 
 <ul>
-    <li><a href="http://fr.jorani.org/utilisation/prise-en-main.html" target="_blank">Un tutoriel de prise en main</a>.</li>
-    <li><a href="http://fr.jorani.org/utilisation/guide-de-demarrage-rapide.html" target="_blank">Le guide de ce qu'il faut configurer</a> pour commencer.</li>
+    <li><a href="https://fr.jorani.org/utilisation/prise-en-main.html" target="_blank">Un tutoriel de prise en main</a>.</li>
+    <li><a href="https://fr.jorani.org/utilisation/guide-de-demarrage-rapide.html" target="_blank">Le guide de ce qu'il faut configurer</a> pour commencer.</li>
 </ul>

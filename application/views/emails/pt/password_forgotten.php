@@ -29,7 +29,7 @@
                 <td>Password</td><td>{Password}</td>
             </tr>
         </table>
-        Depois de entrar, pode alterar a password conforme explicado <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">aqui</a>.
+        Depois de entrar, pode alterar a password conforme explicado <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">aqui</a>.
         <hr>
         <h5>*** Esta mensagem foi gerada automaticamente, por favor não responda a esta mensagem ***</h5>
     </body>

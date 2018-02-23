@@ -85,7 +85,7 @@ class Polyglot {
             //case 'br' : return 'breton'; break;
             //case 'bg' : return 'bulgarian'; break;
             //case 'my' : return 'burmese'; break;
-            //case 'ca' : return 'catalan'; break;
+            case 'ca' : return 'catalan'; break;
             //case 'ch' : return 'chamorro'; break;
             //case 'ce' : return 'chechen'; break;
             //case 'ny' : return 'chichewa'; break;
@@ -281,7 +281,7 @@ class Polyglot {
 //            case 'breton' : return 'br'; break;
 //            case 'bulgarian' : return 'bg'; break;
 //            case 'burmese' : return 'my'; break;
-//            case 'catalan' : return 'ca'; break;
+            case 'catalan' : return 'ca'; break;
 //            case 'chamorro' : return 'ch'; break;
 //            case 'chechen' : return 'ce'; break;
 //            case 'chichewa' : return 'ny'; break;
@@ -476,7 +476,7 @@ class Polyglot {
 //            case 'br' : return 'brezhoneg'; break;
 //            case 'bg' : return 'български език'; break;
 //            case 'my' : return 'ဗမာစာ'; break;
-//            case 'ca' : return 'Català'; break;
+            case 'ca' : return 'Català'; break;
 //            case 'ch' : return 'Chamoru'; break;
 //            case 'ce' : return 'нохчийн мотт'; break;
 //            case 'ny' : return 'chiCheŵa'; break;
@@ -672,7 +672,7 @@ class Polyglot {
 //            case 'brezhoneg' : return 'br'; break;
 //            case 'български език' : return 'bg'; break;
 //            case 'ဗမာစာ' : return 'my'; break;
-//            case 'Català' : return 'ca'; break;
+            case 'Català' : return 'ca'; break;
 //            case 'Chamoru' : return 'ch'; break;
 //            case 'нохчийн мотт' : return 'ce'; break;
 //            case 'chiCheŵa' : return 'ny'; break;

@@ -8,7 +8,7 @@
  */
 
 require_once "../../vendor/autoload.php";
-$target = "hungarian";
+$target = "catalan";
 
 $copyright = "<?php
 /**
@@ -16,7 +16,7 @@ $copyright = "<?php
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
  * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link       https://github.com/bbalet/jorani
- * @since      0.6.5
+ * @since      0.6.6
  * @author     Transifex users
  */\n\n";
 

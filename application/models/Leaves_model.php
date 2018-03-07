@@ -1262,6 +1262,7 @@ class Leaves_model extends CI_Model {
                 " OR leaves.status = " . LMS_CANCELLATION . ")";
       }
       $query=$query . " order by leaves.startdate DESC;";
+      $this->db->query('SET SQL_BIG_SELECTS=1');
       return $this->db->query($query)->result_array();
     }
 

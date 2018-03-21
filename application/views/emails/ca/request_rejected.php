@@ -22,7 +22,7 @@
         <h3>{Title}</h3>
         Benvolgut/da {Firstname} {Lastname}, <br />
         <br />
-        Unfortunately, the time off you requested has been rejected. Please contact your manager to discuss the matter. <br />
+        Malauradament, la teva petició d'absència ha estat rebutjada. Si us plau, posa't en contacte amb el teu supervisor per més informació.<br />
         <table border="0">
             <tr>
                 <td>Des de &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

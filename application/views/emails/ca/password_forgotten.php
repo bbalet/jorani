@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        Si us plau, utilitza aquestes credencials per <a href="{BaseURL}">accedir al sistema</a> :
         <table border="0">
             <tr>
                 <td>inici de sessió</td><td>{Login}</td>
@@ -29,7 +29,7 @@
                 <td>Contrasenya</td><td>{Password}</td>
             </tr>
         </table>
-        Once connected, you can change your password, as explained <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        Un cop connectat, pots canviar la teva contrasenya tal com s'explica <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">aquí</a>.
         <hr>
         <h5>*** Això és um missatge generat automàticament, si us plau no responguis a aquest missage ***</h5>
     </body>

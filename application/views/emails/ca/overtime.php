@@ -20,10 +20,10 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} submitted overtime worked. See the details below:<br />
+        {Firstname} {Lastname} ha enviat hores extra treballades, Consulta els detalls a sota:<br />
         <table border="0">
             <tr>
-                <td>Date &nbsp;</td><td>{Date}</td>
+                <td>Data &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
                 <td>Duració &nbsp;</td><td>{Duration}</td>

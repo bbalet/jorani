@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requested time off. See the <a href="{BaseUrl}leaves/requests/{LeaveId}">details</a> below:<br />
+        {Firstname} {Lastname} ha demanat una absència. Consulta els <a href="{BaseUrl}leaves/requests/{LeaveId}">detalls</a>a sota:<br />
         <table border="0">
             <tr>
                 <td>Des de &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
@@ -49,7 +49,7 @@
             </tr>
         </table>
         <br />
-        You can check the <a href="{BaseUrl}hr/counters/collaborators/{UserId}">leave balance</a> before validating the leave request.
+        Pots revisar el <a href="{BaseUrl}hr/counters/collaborators/{UserId}">saldo de permisos</a>  abans de validar la petició d'absència.
         <hr>
         <h5>*** Això és um missatge generat automàticament, si us plau no responguis a aquest missage ***</h5>
     </body>

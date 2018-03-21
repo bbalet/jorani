@@ -21,7 +21,7 @@
     <body>
         <h3>{Title}</h3>
         <p>Benvolgut/da {Firstname} {Lastname},</p>
-        <p>Your Jorani password has been reset. If you did not perform this operation, please contact your manager.</p>
+        <p>La teva contrasenya de Jorani s'ha restablert. Si tu no ho has Sol·licitat, si us plau, contacta amb el teu supervisor</p>
         <hr>
         <h5>*** Això és um missatge generat automàticament, si us plau no responguis a aquest missage ***</h5>
     </body>

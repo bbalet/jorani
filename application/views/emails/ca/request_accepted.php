@@ -22,7 +22,7 @@
         <h3>{Title}</h3>
         Benvolgut/da {Firstname} {Lastname}, <br />
         <br />
-        The time off you requested has been approved.<br />
+        La teva petició d'absència ha sigut aprovada.<br />
         <table border="0">
             <tr>
                 <td>Des de &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>

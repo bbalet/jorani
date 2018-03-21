@@ -22,10 +22,10 @@
         <h3>{Title}</h3>
         Benvolgut/da {Firstname} {Lastname}, <br />
         <br />
-        Unfortunately, the overtime you submitted has been rejected. Please contact your manager to discuss the matter.<br />
+        Malauradament, les hores extra que has enviat s'han refusat. Si us plau, posa't en contacte amb el teu supervisor per més informació.<br />
         <table border="0">
             <tr>
-                <td>Date &nbsp;</td><td>{Date}</td>
+                <td>Data &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
                 <td>Duració &nbsp;</td><td>{Duration}</td>

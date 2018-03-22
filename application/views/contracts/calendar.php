@@ -32,12 +32,12 @@ $dDay = 1;
     </div>
     <div class="span3">
         <?php if (!empty($contracts)) { ?>
-        <select name="contract" id="contract" class="selectized input-large">
+        <select name="contract" id="contract" title="<?php echo lang('contract_calendar_button_copy');?>">
         <?php foreach ($contracts as $contract): ?>
             <option value="<?php echo $contract['id'] ?>"><?php echo $contract['name']; ?></option>
         <?php endforeach ?>
         </select>
-        <button id="cmdContractCopy" class="btn btn-primary"><i class="fa fa-copy"></i>&nbsp; <?php echo lang('contract_calendar_button_copy');?></button>
+        <button id="cmdContractCopy" class="btn btn-primary"></button>
         <?php } ?>
     </div>
 </div>
@@ -223,7 +223,7 @@ for ($mC = 1; $mC <= 12; $mC++) {
     </div>
     <div class="modal-body" id="frmSelectDelegateBody">
         <div class='input-append'>
-                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
                     value="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>" />
                  <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>">
                      <i class="fa fa-clipboard"></i>
@@ -243,11 +243,11 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
     var timestamp;
     //Global locale for moment objects
@@ -335,6 +335,16 @@ function edit_series() {
         });
 }
 
+//Change the text of the copy button so as to get a clear indication
+function changeTextCopyButton() {
+  var source = '<?php echo $contract_name; ?>';
+  var data = $('#contract').select2('data');
+  var dest = data[0].text;
+  var text = '<i class="fa fa-copy"></i>&nbsp;' +
+              source + '&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;' + dest;
+  $('#cmdContractCopy').html(text);
+}
+
 //On load
 $(function() {
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
@@ -346,9 +356,15 @@ $(function() {
 <?php }?>
     $("#frmAddDayOff").alert();
     $("#frmSetRangeDayOff").alert();
-    $('#contract').selectize();
-    
-        $("#viz_startdate").datepicker({
+
+    //Widget for contract copy select box
+    $('#contract').select2();
+    $('#contract').on('select2:select', function (e) {
+      changeTextCopyButton();
+    });
+    changeTextCopyButton();
+
+    $("#viz_startdate").datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: '<?php echo lang('global_date_js_format');?>',
@@ -359,7 +375,7 @@ $(function() {
                 $( "#viz_enddate" ).datepicker( "option", "minDate", selectedDate );
               }
     }, $.datepicker.regional['<?php echo $language_code;?>']);
-    
+
     $("#viz_enddate").datepicker({
         changeMonth: true,
         changeYear: true,
@@ -371,7 +387,7 @@ $(function() {
                 $( "#viz_startdate" ).datepicker( "option", "maxDate", selectedDate );
               }
     }, $.datepicker.regional['<?php echo $language_code;?>']);
-    
+
     //Display modal form that allow adding a day off
     $("#fullyear").on("click", "td", function() {
         timestamp = $(this).data("id");
@@ -392,17 +408,17 @@ $(function() {
             $('#frmAddDayOff').modal('show');
         }
     });
-    
+
     //Prevent to load always the same content
     $('#frmAddDayOff').on('hidden', function() {
         $(this).removeData('modal');
     });
-    
+
     //Give focus on first field on opening add day off dialog
     $('#frmAddDayOff').on('shown', function () {
         $('input:text:visible:first', this).focus();
     });
-    
+
     //Copy a contract (if a source contract was selected)
     $("#cmdContractCopy").on("click", function() {
         if ((!$("#contract option:selected").length) || ($("#contract option:selected").text() == '')) {
@@ -411,7 +427,7 @@ $(function() {
             document.location = '<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . $year . '/copy/';?>' + $("#contract").val();
         }
     });
-    
+
     //Import an iCalendar feed by using its URL
     $("#cmdImportCalendar").on("click", function() {
         var last_imported = '';
@@ -431,7 +447,7 @@ $(function() {
               $.ajax({
                   url: "<?php echo base_url(); ?>contracts/calendar/import",
                   type: "POST",
-                  data: { 
+                  data: {
                           contract: <?php echo $contract_id; ?>,
                           url: result
                       }

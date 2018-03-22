@@ -92,7 +92,6 @@ echo form_open('leaves/create', $attributes) ?>
     </div>
  </div>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
@@ -101,7 +100,8 @@ if ($language_code != 'en') { ?>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 
 <?php require_once dirname(BASEPATH) . "/local/triggers/leave_view.php"; ?>
 <script>
@@ -144,7 +144,7 @@ function validate_form() {
 
 $(function () {
     //Selectize the leave type combo
-    $('#type').selectize();
+    $('#type').select2();
 });
 
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>

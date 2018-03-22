@@ -17,10 +17,10 @@ $attributes = array('id' => 'target');
 echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
 
     <input type="hidden" name="id" value="<?php echo $contract['id']; ?>" required />
-    
+
     <label for="name"><?php echo lang('contract_edit_field_name');?></label>
     <input type="text" name="name" value="<?php echo $contract['name']; ?>" autofocus required /><br />
-  
+
     <label for="startentdatemonth"><?php echo lang('contract_edit_field_start_month');?></label>
     <select name="startentdatemonth" required>
         <option value="1" <?php if (substr($contract['startentdate'], 0, 2) == '1') { echo "selected"; } ?>><?php echo lang('January');?></option>
@@ -36,7 +36,7 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
         <option value="11" <?php if (substr($contract['startentdate'], 0, 2) == '11') { echo "selected"; } ?>><?php echo lang('November');?></option>
         <option value="12" <?php if (substr($contract['startentdate'], 0, 2) == '12') { echo "selected"; } ?>><?php echo lang('December');?></option>
     </select>
-    
+
     <label for="startentdateday"><?php echo lang('contract_edit_field_start_day');?></label>
     <select name="startentdateday" required>
         <option value='1' <?php if (substr($contract['startentdate'], 3, 2) == '1') { echo "selected"; } ?>>1</option>
@@ -71,9 +71,9 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
         <option value='30' <?php if (substr($contract['startentdate'], 3, 2) == '30') { echo "selected"; } ?>>30</option>
         <option value='31' <?php if (substr($contract['startentdate'], 3, 2) == '31') { echo "selected"; } ?>>31</option>
     </select>
-    
+
     <br /><br />
-    
+
     <label for="endentdatemonth"><?php echo lang('contract_edit_field_end_month');?></label>
     <select name="endentdatemonth" required>
         <option value="1" <?php if (substr($contract['endentdate'], 0, 2) == '1') { echo "selected"; } ?>><?php echo lang('January');?></option>
@@ -89,7 +89,7 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
         <option value="11" <?php if (substr($contract['endentdate'], 0, 2) == '11') { echo "selected"; } ?>><?php echo lang('November');?></option>
         <option value="12" <?php if (substr($contract['endentdate'], 0, 2) == '12') { echo "selected"; } ?>><?php echo lang('December');?></option>
     </select>
-    
+
     <label for="endentdateday"><?php echo lang('contract_edit_field_end_day');?></label>
     <select name="endentdateday" required>
         <option value='1' <?php if (substr($contract['endentdate'], 3, 2) == '1') { echo "selected"; } ?>>1</option>
@@ -124,25 +124,25 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
         <option value='30' <?php if (substr($contract['endentdate'], 3, 2) == '30') { echo "selected"; } ?>>30</option>
         <option value='31' <?php if (substr($contract['endentdate'], 3, 2) == 31) { echo "selected"; } ?>>31</option>
     </select>
-    
+
     <label for="default_leave_type"><?php echo lang('contract_edit_default_leave_type');?></label>
     <select class="input-xxlarge" name="default_leave_type" id="default_leave_type">
     <?php foreach ($types as $typeId => $TypeName): ?>
         <option value="<?php echo $typeId; ?>" <?php if ($typeId == $defaultType) echo "selected"; ?>><?php echo $TypeName; ?></option>
     <?php endforeach ?>
     </select>
-    
+
     <br /><br />
     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('contract_edit_button_update');?></button>
     &nbsp;
     <a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('contract_edit_button_cancel');?></a>
 </form>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
 $(function () {
     //Selectize the leave type combo
-    $('#default_leave_type').selectize();
+    $('#default_leave_type').select2();
 });
 </script>

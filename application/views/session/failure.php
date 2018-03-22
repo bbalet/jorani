@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays sso failure message. Its layout is the same than the login form.
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
@@ -14,14 +14,14 @@
         background-size: 100% 100%;
         background-repeat: no-repeat;
     }
-    
+
     .vertical-center {
         min-height: 90%;  /* Fallback for browsers that do NOT support vh unit */
         min-height: 90vh;
         display: flex;
         align-items: center;
       }
-      
+
       .form-box {
         padding: 20px;
         border: 1px #e4e4e4 solid;
@@ -73,20 +73,17 @@
         <div class="span3">&nbsp;</div>
     </div>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
     $(function () {
         //Refresh page language
-        $('#language').selectize({
-            onChange: function (value) {
-                if (value != '') {
-                    $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
-                    window.location.href = '<?php echo base_url();?>session/language?language=' + value;
-                }
-            }
+        $('#language').select2();
+        $('#language').on('select2:select', function (e) {
+          var value = e.params.data.id;
+          $.cookie('language', value, { expires: 90, path: '/'});
+          window.location.href = '<?php echo base_url();?>session/language?language=' + value;
         });
-        
     });
 </script>

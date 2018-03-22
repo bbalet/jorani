@@ -94,8 +94,6 @@ if (!is_null($fonts)) {
     </div>
 </div>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript">
 
@@ -110,7 +108,6 @@ if (!is_null($fonts)) {
     }
 
     $(function () {
-
         $('#login').focus();
 
         $('#send').click(function() {

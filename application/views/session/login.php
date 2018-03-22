@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays the login form. Its layout differs from other pages of the application.
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
@@ -27,14 +27,14 @@
         background-size: 100% 100%;
         background-repeat: no-repeat;
     }
-    
+
     .vertical-center {
         min-height: 90%;  /* Fallback for browsers not supporting vh unit */
         min-height: 90vh;
         display: flex;
         align-items: center;
     }
-      
+
     .form-box {
         padding: 20px;
         border: 1px #e4e4e4 solid;
@@ -70,6 +70,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         <option value="<?php echo $lang_code; ?>" <?php if ($language_code == $lang_code) echo 'selected'; ?>><?php echo $lang_name; ?></option>
         <?php }?>
     </select>
+    <br />
     <?php } ?>
     <label for="login"><?php echo lang('session_login_field_login');?></label>
     <input type="text" class="input-medium" name="login" id="login" value="<?php echo (ENVIRONMENT=='demo')?'bbalet':set_value('login'); ?>" required />
@@ -89,7 +90,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     <?php if (($this->config->item('ldap_enabled') == FALSE) && (ENVIRONMENT!='demo')) { ?>
     <button id="cmdForgetPassword" class="btn btn-danger"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
     <?php } ?>
-    
+
     <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>
                 </div>
                 <div class="span6" style="height:100%;">
@@ -119,13 +120,13 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     </div>
 </div>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 <script type="text/javascript">
-    
+
     //Encrypt the password using RSA and send the ciphered value into the form
     function submit_form() {
         var encrypt = new JSEncrypt();
@@ -135,14 +136,14 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         $('#CipheredValue').val(encrypted);
         $('#loginFrom').submit();
     }
-    
+
     //Attempt to authenticate the user using OAuth2 protocol
     function signInCallback(authResult) {
         if (authResult['code']) {
           $.ajax({
             url: '<?php echo base_url();?>session/oauth2',
             type: 'POST',
-            data: { 
+            data: {
                       auth_code: authResult.code
                       },
             success: function(result) {
@@ -184,24 +185,22 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
                 }
             }
         }
-        
+
         //Refresh page language
-        $('#language').selectize({
-            onChange: function (value) {
-                if (value != '') {
-                    $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
-                    $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
-                    $('#loginFrom').submit();
-                }
-            }
+        $('#language').select2();
+        $('#language').on('select2:select', function (e) {
+          var value = e.params.data.id;
+          $.cookie('language', value, { expires: 90, path: '/'});
+          $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
+          $('#loginFrom').submit();
         });
-        
+
         $('#login').focus();
-        
+
         $('#send').click(function() {
             submit_form();
         });
-        
+
         //If the user has forgotten his password, send an e-mail
         $('#cmdForgetPassword').click(function() {
             if ($('#login').val() == "") {
@@ -232,13 +231,13 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
                 });
             }
         });
-        
+
         //Validate the form if the user press enter key in password field
         $('#password').keypress(function(e){
             if(e.keyCode==13)
             submit_form();
         });
-        
+
         //Alternative authentication methods
 <?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
      <?php if ($this->config->item('oauth2_provider') == 'google') { ?>
@@ -247,6 +246,6 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         });
     <?php } ?>
 <?php } ?>
-        
+
     });
 </script>

@@ -35,7 +35,7 @@ class Delegations_model extends CI_Model {
         $query = $this->db->get_where('delegations', array('manager_id' => $manager));
         return $query->result_array();
     }
-    
+
     /**
      * Return TRUE if an employee is the delegate of a manager, FALSE otherwise
      * @param int $employee id of the employee to be checked
@@ -48,13 +48,13 @@ class Delegations_model extends CI_Model {
         $this->db->where('delegate_id', $employee);
         $this->db->where('manager_id', $manager);
         $results = $this->db->get()->row_array();
-        if (count($results) > 0) {
+        if (!empty($results)) {
             return TRUE;
         } else {
             return FALSE;
         }
     }
-    
+
     /**
      * Return TRUE if an employee has any delegation, FALSE otherwise
      * @param int $employee id of the employee to be checked
@@ -65,13 +65,13 @@ class Delegations_model extends CI_Model {
         $this->db->from('delegations');
         $this->db->where('delegate_id', $employee);
         $results = $this->db->get()->row_array();
-        if (count($results) > 0) {
+        if (!empty($results)) {
             return TRUE;
         } else {
             return FALSE;
         }
     }
-    
+
     /**
      * Get the list of manager ids for which an employee has the delegation
      * @param int $employee id of an employee
@@ -89,7 +89,7 @@ class Delegations_model extends CI_Model {
         }
         return $ids;
     }
-    
+
     /**
      * Get the list of e-mails of employees having the delegation from a manager
      * @param int $id id of a manager
@@ -110,7 +110,7 @@ class Delegations_model extends CI_Model {
             return '';
         }
     }
-    
+
     /**
      * Give a delegation to an employee
      * @param int $manager id of a manager giving the delegation
@@ -126,7 +126,7 @@ class Delegations_model extends CI_Model {
         $this->db->insert('delegations', $data);
         return $this->db->insert_id();
     }
-    
+
     /**
      * Delete a delegation from the database
      * @param int $id identifier of the delegation

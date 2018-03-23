@@ -193,7 +193,7 @@ class Polyglot {
 //            case 'qu' : return 'quechua'; break;
 //            case 'rm' : return 'romansh'; break;
 //            case 'rn' : return 'kirundi'; break;
-//            case 'ro' : return 'romanian'; break;
+            case 'ro' : return 'romanian'; break;
             case 'ru' : return 'russian'; break;
 //            case 'sa' : return 'sanskrit'; break;
 //            case 'sc' : return 'sardinian'; break;
@@ -388,7 +388,7 @@ class Polyglot {
 //            case 'quechua' : return 'qu'; break;
 //            case 'romansh' : return 'rm'; break;
 //            case 'kirundi' : return 'rn'; break;
-//            case 'romanian' : return 'ro'; break;
+            case 'romanian' : return 'ro'; break;
             case 'russian' : return 'ru'; break;
 //            case 'sanskrit' : return 'sa'; break;
 //            case 'sardinian' : return 'sc'; break;
@@ -584,7 +584,7 @@ class Polyglot {
 //            case 'qu' : return 'Runa Simi'; break;
 //            case 'rm' : return 'rumantsch grischun'; break;
 //            case 'rn' : return 'kiRundi'; break;
-//            case 'ro' : return ' Moldovan'; break;
+            case 'ro' : return ' Moldovan'; break;
             case 'ru' : return 'Pусский язык'; break;
 //            case 'sa' : return 'संस्कृतम्'; break;
 //            case 'sc' : return 'sardu'; break;
@@ -779,7 +779,7 @@ class Polyglot {
 //            case 'Runa Simi' : return 'qu'; break;
 //            case 'rumantsch grischun' : return 'rm'; break;
 //            case 'kiRundi' : return 'rn'; break;
-//            case ' Moldovan' : return 'ro'; break;
+            case ' Moldovan' : return 'ro'; break;
             case 'Pусский язык' : return 'ru'; break;
 //            case 'संस्कृतम्' : return 'sa'; break;
 //            case 'sardu' : return 'sc'; break;

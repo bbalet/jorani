@@ -8,7 +8,7 @@
  */
 
 require_once "../../vendor/autoload.php";
-$target = "catalan";
+$target = "romanian";
 
 $copyright = "<?php
 /**
@@ -21,8 +21,6 @@ $copyright = "<?php
  */\n\n";
 
 //Load and parse the PO file
-//$parser = new POParser;
-//$messages = $parser->parse($target . DIRECTORY_SEPARATOR . $target . '.po');
 $fileHandler = new Sepia\FileHandler($target . DIRECTORY_SEPARATOR . $target . '.po');
 $poParser = new Sepia\PoParser($fileHandler);
 $entries  = $poParser->parse();

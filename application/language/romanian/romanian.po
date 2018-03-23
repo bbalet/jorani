@@ -1,0 +1,1703 @@
+# 
+# Translators:
+# claudiubanut <claudiu.banut@gmail.com>, 2016
+# claudiubanut <claudiu.banut@gmail.com>, 2016
+# Ionut Richea <ionut.richea@yahoo.ro>, 2018
+# Silviu B <reglonedrs@gmail.com>, 2016,2018
+msgid ""
+msgstr ""
+"Project-Id-Version: jorani\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2018-03-12 08:44+0000\n"
+"Last-Translator: Ionut Richea <ionut.richea@yahoo.ro>\n"
+"Language-Team: Romanian (http://www.transifex.com/jorani/jorani/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+msgid "Data & Config Diagnostic"
+msgstr "Data & Config Diagnostic"
+
+msgid "Detection of configuration and data problems"
+msgstr "Detectarea configurării și probleme cu datele"
+
+msgid "No error"
+msgstr "Fără eroare"
+
+msgid "Leave Requests"
+msgstr "Cereri de concediu"
+
+msgid "Accepted but duplicated Leave Requests"
+msgstr "Cereri de concediu acceptate dar dublate"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Employee"
+msgstr "Angajat"
+
+msgid "Start Date"
+msgstr "Dată start"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Type"
+msgstr "Tip"
+
+msgid "Afternoon/Morning"
+msgstr "După masă/Dimineaţă"
+
+msgid "Leave Requests with a wrong start/end type."
+msgstr "Cereri de concediu cu data de start/sfârșit greșite."
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Start"
+msgstr "Început"
+
+msgid "End"
+msgstr "Sfârşit"
+
+msgid "Entitled days"
+msgstr "Zile de concediu disponibile"
+
+msgid ""
+"List of contracts and employees having entitlements for more than one year."
+msgstr "Lista de contracte și angajați având drepturi pentru mai mult de un an."
+
+msgid "Name"
+msgstr "Nume"
+
+msgid "End Date"
+msgstr "Dată sfârşit"
+
+msgid "Contract"
+msgstr "Contract"
+
+msgid "Incomplete deletion into database."
+msgstr "Ștergere incompletă din baza de date."
+
+msgid "Non-working days"
+msgstr "Zile nelucrătoare"
+
+msgid ""
+"Number of days (per contract) for which a non-working duration has been "
+"defined."
+msgstr "Număr de zile (per contract) pentru care durata de zile nelucrătoare a fost definită."
+
+msgid "Last year"
+msgstr "Anul trecut"
+
+msgid "This year"
+msgstr "Anul curent"
+
+msgid "Next year"
+msgstr "Anul viitor"
+
+msgid "Overtime"
+msgstr "Ore suplimentare"
+
+msgid "Overtime requests with a negative duration"
+msgstr "Ore suplimentare cu o durată negativă"
+
+msgid "Duration"
+msgstr "Durata"
+
+msgid "Contracts"
+msgstr "Contracte"
+
+msgid "Unused contracts (check if the contract is not duplicated)."
+msgstr "Contracte nefolosite (verifică dacă sunt duplicate)"
+
+msgid "Balance"
+msgstr "Balanță"
+
+msgid "Leave requests for which there are no entitlments."
+msgstr "Cereri de concediu care nu au zile disponibile."
+
+msgid "OAuth clients and sessions"
+msgstr "Clienți si sesiuni OAuth"
+
+msgid "Clients"
+msgstr "Clienți"
+
+msgid "List of clients allowed to use the REST API"
+msgstr "Lista de clienți acceptati pentru a folosi REST API"
+
+msgid "edit client"
+msgstr "editează client"
+
+msgid "delete client"
+msgstr "șterge client"
+
+msgid "Add"
+msgstr "Adaugă"
+
+msgid "Add OAuth Client"
+msgstr "Adaugă client OAuth"
+
+msgid "Associate to an actual user"
+msgstr "Asociază cu un utilizator existent"
+
+msgid "This client_id already exists"
+msgstr "Acest client_id deja există"
+
+msgid "Are you sure that you want to proceed?"
+msgstr "Sigur dorești să continui?"
+
+msgid "Sessions"
+msgstr "Sesiuni"
+
+msgid "List of active REST API OAuth Sessions"
+msgstr "Lista sesiunilor REST API OAuth active"
+
+msgid "Purge"
+msgstr "Elimină"
+
+msgid "Yearly calendar"
+msgstr "Calendar anual"
+
+msgid "Export"
+msgstr "Exportă"
+
+msgid "My calendar"
+msgstr "Calendarul meu"
+
+msgid "Calendar of my leaves."
+msgstr "Calendarul concediilor mele"
+
+msgid "Download an iCal file"
+msgstr "Descarcă fişier iCal"
+
+msgid "(import the event into Outlook, Thunderbird, etc.)"
+msgstr "(importă evenimentul în Outlook, Thunderbird, etc)"
+
+msgid "Event details"
+msgstr "Detaliile evenimentului"
+
+msgid "Close"
+msgstr "Închide"
+
+msgid "Days off"
+msgstr "Zile libere"
+
+msgid "Calendar of my workmates"
+msgstr "Calendarul colegilor"
+
+msgid "Leaves of employees having the same line manager"
+msgstr "Cereri ale angajaților care au același manager."
+
+msgid "Calendar of my subordinates"
+msgstr "Calendarul subordonaţilor"
+
+msgid ""
+"Leaves of my direct report subordinates (will be empty if I'm not a "
+"manager)."
+msgstr "Cereri ale subordonaților mei (va fi gol dacă nu sunt manager)"
+
+msgid "Calendar of my department"
+msgstr "Calendarul departamentului meu"
+
+msgid "Calendar of employees working in my department"
+msgstr "Calendar cu angajații din departamentul meu"
+
+msgid ""
+"It appears that you don't belong to any department. Please contact your HR "
+"Officer / Manager."
+msgstr "Se pare că nu ești în nici un departament. Te rog contacteaza managerul tău sau Ofițerul HR"
+
+msgid "Calendar of the organization"
+msgstr "Calendarul organizaţiei"
+
+msgid "Global calendar with a filter on entity"
+msgstr "Calendar global cu filtru pe entitate."
+
+msgid "Select the entity"
+msgstr "Selectați entitatea"
+
+msgid "Select"
+msgstr "Selectează"
+
+msgid "Include sub-departments"
+msgstr "Include sub-departament"
+
+msgid "Select an entity"
+msgstr "Selectează entitatea"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Anulează"
+
+msgid "Tabular Calendar"
+msgstr "Calendar tabular"
+
+msgid "Month"
+msgstr "Luna"
+
+msgid "Year"
+msgstr "An"
+
+msgid "Previous"
+msgstr "Precedent"
+
+msgid "Next"
+msgstr "Următorul"
+
+msgid "Select a list"
+msgstr "Selectează o listă"
+
+msgid "Display leave types"
+msgstr "Afișează tipul de cereri."
+
+msgid "Calendar Tabular"
+msgstr "Calendar Tabular."
+
+msgid "Entity"
+msgstr "Entitate"
+
+msgid "Sub-entities"
+msgstr "Sub-entități"
+
+msgid "Mo"
+msgstr "Lu"
+
+msgid "Tu"
+msgstr "Ma"
+
+msgid "We"
+msgstr "Mi"
+
+msgid "Th"
+msgstr "Jo"
+
+msgid "Fr"
+msgstr "Vi"
+
+msgid "Sa"
+msgstr "Sa"
+
+msgid "Su"
+msgstr "Du"
+
+msgid "Monday"
+msgstr "Luni"
+
+msgid "Tuesday"
+msgstr "Marti"
+
+msgid "Wednesday"
+msgstr "Miercuri"
+
+msgid "Thursday"
+msgstr "Joi"
+
+msgid "Friday"
+msgstr "Vineri"
+
+msgid "Saturday"
+msgstr "Sâmbătă"
+
+msgid "Sunday"
+msgstr "Duminică"
+
+msgid "All days"
+msgstr "Toate zilele"
+
+msgid "January"
+msgstr "Ianuarie"
+
+msgid "February"
+msgstr "Februarie"
+
+msgid "March"
+msgstr "Martie"
+
+msgid "April"
+msgstr "Aprilie"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "June"
+msgstr "Iunie"
+
+msgid "July"
+msgstr "Iulie"
+
+msgid "August"
+msgstr "August"
+
+msgid "September"
+msgstr "Septembrie"
+
+msgid "October"
+msgstr "Octombrie"
+
+msgid "November"
+msgstr "Noimebrie"
+
+msgid "December"
+msgstr "Decembrie"
+
+msgid "List of contracts"
+msgstr "Lisa contractelor"
+
+msgid "Start period"
+msgstr "Perioada de start"
+
+msgid "End period"
+msgstr "Data final."
+
+msgid "delete contract"
+msgstr "şterge contract"
+
+msgid "edit contract"
+msgstr "editează contract"
+
+msgid "entitled days"
+msgstr "zile disponibile"
+
+msgid "days off and weekends"
+msgstr "zile libere si weekend"
+
+msgid "Exclude leave types"
+msgstr "Exclude tipul de cerere"
+
+msgid "Export this list"
+msgstr "Exportă această listă"
+
+msgid "Create contract"
+msgstr "Creează contract"
+
+msgid "Delete Contract"
+msgstr "Şterge Contract"
+
+msgid "You are about to delete one contract, this procedure is irreversible."
+msgstr "Veţi sterge acest contract, procedura e ireversibilă"
+
+msgid "Do you want to proceed?"
+msgstr "Continuaţi?"
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "No"
+msgstr "Nu"
+
+msgid "Exclude leave types from a contract"
+msgstr "Exclude tipuri de cereri dintr-un contract."
+
+msgid ""
+"You cannot exclude leave types already in use (used at least one time by en "
+"employee attached to the contract) and the default leave type (set on the "
+"contract or into the configuration file)."
+msgstr "Nu puteți exclude tipurile de concedii deja în uz (utilizate cel puțin o dată de angajatul atașat la contract) și tipul de concediu implicit (setat pe contract sau în fișierul de configurare)."
+
+msgid "Included leave types"
+msgstr "Include tipurile de cerere"
+
+msgid "Excluded leave types"
+msgstr "Exclude tipurile de cerere"
+
+msgid "Include this leave type"
+msgstr "Include acest tip de cerere"
+
+msgid "Exclude this leave type"
+msgstr "Exclude acest tip de cerere"
+
+msgid "This leave type is already in use"
+msgstr "Acest tip de cerere este deja în uz"
+
+msgid "You cannot exclude the default leave type"
+msgstr "Nu poți exlude tipul implicit de cerere"
+
+msgid "Edit a contract"
+msgstr "Editează contract"
+
+msgid "Edit contract #"
+msgstr "Editează contract #"
+
+msgid "Month / Start"
+msgstr "Lună / Start"
+
+msgid "Day / Start"
+msgstr "Zi / Start"
+
+msgid "Month / End"
+msgstr "Lună / Sfârşit"
+
+msgid "Day / End"
+msgstr "Zi / Sfârşit"
+
+msgid "Default leave type"
+msgstr "Tip implicit de cerere"
+
+msgid "Update contract"
+msgstr "Actualizează contract"
+
+msgid "The contract has been succesfully updated"
+msgstr "Contractul a fost actualizat cu succes"
+
+msgid "Create a new contract"
+msgstr "Creează contract nou"
+
+msgid "The contract has been succesfully created"
+msgstr "Contractul a fost creeat cu succes"
+
+msgid "The contract has been succesfully deleted"
+msgstr "Contractul a fost şters cu succes"
+
+msgid "Calendar of non working days"
+msgstr "Calendar pentru zile nelucrătoare"
+
+msgid ""
+"Days off and weekends are not configured by default. Click on a day to edit "
+"it individually or use the button \"Series\"."
+msgstr "Zilele libere legale si de weekend nu sunt configurate implicit. Click pe o zi pentru a o edita individual sau folosește butonul \"Serie\""
+
+msgid "Legend:"
+msgstr "Legendă:"
+
+msgid "All day"
+msgstr "Toată ziua"
+
+msgid "Morning"
+msgstr "Dimineaţa"
+
+msgid "Afternoon"
+msgstr "După masa"
+
+msgid "Back to contracts"
+msgstr "Înapoi la contracte"
+
+msgid "Series of non-working days"
+msgstr "Serie de zile nelcrătoare"
+
+msgid "Edit day off"
+msgstr "Editează zi liberă"
+
+msgid "Title"
+msgstr "Titlu"
+
+msgid "Working day"
+msgstr "Zi lucrătoare"
+
+msgid "All day is off"
+msgstr "Toată ziua liberă"
+
+msgid "Morning is off"
+msgstr "Dimineaţa liberă"
+
+msgid "Afternoon is off"
+msgstr "După masa liberă"
+
+msgid "Delete"
+msgstr "Şterge"
+
+msgid "Import iCal"
+msgstr "Importă iCal"
+
+msgid "URL of non-working days iCal file"
+msgstr "ULR pentru fisierul iCal al zilelor nelucrătoare"
+
+msgid "Edit a series of days off"
+msgstr "Editează o serie de zile libere"
+
+msgid "Mark every"
+msgstr "Marchează toate"
+
+msgid "From"
+msgstr "De la"
+
+msgid "Current"
+msgstr "Curent"
+
+msgid "To"
+msgstr "Pentru"
+
+msgid "As a"
+msgstr "Ca şi"
+
+msgid "Copy"
+msgstr "Copie"
+
+msgid "You must select a contract."
+msgstr "Trebuie sa selectați un contract"
+
+msgid "Data has been copied successfully."
+msgstr "Datele au fost copiate cu succes"
+
+msgid "No data available in table"
+msgstr "Nu există date în tabel"
+
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "Arata de la _START_ to _END_ of _TOTAL_ intrări"
+
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "Arată de la 0 la 0 din 0 intrări"
+
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(filtered from _MAX_ total entries)"
+
+msgid ","
+msgstr ","
+
+msgid "Show _MENU_ entries"
+msgstr "Arată intrarile din _MENU_"
+
+msgid "Loading..."
+msgstr "Incărcare ..."
+
+msgid "Processing..."
+msgstr "Procesare ..."
+
+msgid "Search:"
+msgstr "Căutare"
+
+msgid "No matching records found"
+msgstr "Nu sunt înregistrari care să se potrivească"
+
+msgid "First"
+msgstr "Primul"
+
+msgid "Last"
+msgstr "Ultimul"
+
+msgid ": activate to sort column ascending"
+msgstr ":activează filtrarea acendentă a coloanei"
+
+msgid ": activate to sort column descending"
+msgstr ":activează filtrarea descendentă a coloanei"
+
+msgid "Page length"
+msgstr "Marimea paginii"
+
+msgid "10 rows"
+msgstr "10 rânduri"
+
+msgid "25 rows"
+msgstr "25 rânduri"
+
+msgid "50 rows"
+msgstr "50  rânduri"
+
+msgid "Show all"
+msgstr "Arată toate"
+
+msgid "Change columns"
+msgstr "Schimbă coloanele"
+
+msgid "Your password has been reset"
+msgstr "Parola dumneavoastră a fost resetată"
+
+msgid "Your account has been created"
+msgstr "Contul dumneavoastră a fost creat."
+
+msgid "Leave Request from"
+msgstr "Formular de cerere de concediu"
+
+msgid "Leave Request"
+msgstr "Cerere de concediu"
+
+msgid "Leave Request Cancellation from"
+msgstr "Formular pentru anularea cererii de concediu"
+
+msgid "Leave Request Cancellation"
+msgstr "Anularea cererii de concediu"
+
+msgid "Your Cancellation Request has been accepted"
+msgstr "Cererea de anulare a concediului a fost acceptată"
+
+msgid "Your Cancellation Request has been rejected"
+msgstr "Cererea de anulare a concediului a fost respinsă"
+
+msgid "Your leave request has been accepted"
+msgstr "Cerere dumneavoastră de concediu a fost acceptata"
+
+msgid "Your leave request has been rejected"
+msgstr "Cererea dumneavoastră de concediu nu a fost acceptată."
+
+msgid "Your overtime request has been accepted"
+msgstr "Cererea pentru ore suplimentare a fost acceptată"
+
+msgid "Your overtime request has been rejected"
+msgstr "Cererea pentru ore suplimentare a fost respinsă"
+
+msgid "Overtime Request"
+msgstr "Cereri de ore suplimentare"
+
+msgid "Overtime request from"
+msgstr "Formular ore suplimentare"
+
+msgid "Entitled days for contract"
+msgstr "Zile disponibile pentru contract"
+
+msgid "Edit"
+msgstr "Editare"
+
+msgid "Days"
+msgstr "Zile"
+
+msgid "Leave type"
+msgstr "Tip de concediu"
+
+msgid "Description"
+msgstr "Descriere"
+
+msgid "Add entitled days"
+msgstr "Adaugă zile disponibile"
+
+msgid "\"The field \" + fieldname + \" is mandatory.\""
+msgstr "\"Câmpul \" + fieldname + \" este obligatoriu.\""
+
+msgid "Back to the list of contracts"
+msgstr "Înapoi la lista de contracte"
+
+msgid "Are you sure that you want to delete it?"
+msgstr "Sunteți sigur că doriți să ștergeți ?"
+
+msgid "Step"
+msgstr "Pas"
+
+msgid "Entitled days for employee"
+msgstr "Zile de concediu disponibile pentru angajat"
+
+msgid "Back to the list of employees"
+msgstr "Inapoi la lista de angajați"
+
+msgid "Entitled days to Contract #"
+msgstr "Zile de concediu disponibile la Contract #"
+
+msgid "Yearly leave period: "
+msgstr "Perioada concediului anual"
+
+msgid "Entitled days to Employee"
+msgstr "Zile de concediu disponibile pentru Angajat"
+
+msgid "My overtime requests"
+msgstr "Cererea mea de ore suplimentare"
+
+msgid "view"
+msgstr "vizualizare"
+
+msgid "edit"
+msgstr "editare"
+
+msgid "delete"
+msgstr "ștergere"
+
+msgid "Reason"
+msgstr "Motiv"
+
+msgid "New request"
+msgstr "Cerere nouă"
+
+msgid "Delete overtime request"
+msgstr "Sterge cererea de ore suplimentare"
+
+msgid ""
+"You are about to delete one overtime request, this procedure is "
+"irreversible."
+msgstr "Sunteți pe cale să ștergeți o cerere de ore suplimentare, această procedură este ireversibilă."
+
+msgid "Submit an overtime request"
+msgstr "Trimite o cerere de ore suplimentare"
+
+msgid "In days or fraction of days (e.g. 0.125 for 1h if you work 8h/day)."
+msgstr "In zile sau bucati de zile ( ex. 0.125 pentru o ora daca lucrați 8 ore/zi )"
+
+msgid "Request overtime"
+msgstr "Cerere ore suplimentare"
+
+msgid "The overtime request has been succesfully created"
+msgstr "Solicitarea pentru ore suplimentare a fost creată cu succes"
+
+msgid ""
+"The overtime request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "Solicitarea pentru ore suplimentare a fost creată/modificată cu succes dar nu sunteți asignat unui manager"
+
+msgid "Edit overtime request #"
+msgstr "Editare cerere de ore suplimentare #"
+
+msgid "Edit a overtime request"
+msgstr "Editare cerere de ore suplimentare"
+
+msgid "Update overtime"
+msgstr "Modificare ore suplimentare"
+
+msgid "You cannot edit an overtime request already submitted"
+msgstr "Nu puteți modifica o cerere de ore suplimentare trimisa"
+
+msgid "The overtime request has been succesfully updated"
+msgstr "Cererea de ore suplimentare a fost modificata cu succes"
+
+msgid "The overtime request has been succesfully deleted"
+msgstr "Cererea de ore suplimentare a fost ștearsă cu succes"
+
+msgid "You can't delete this overtime request"
+msgstr "Nu puteți șterge această cerere de ore suplimentare"
+
+msgid "View overtime request #"
+msgstr "Vizualizare cerere de ore suplimentare #"
+
+msgid "View overtime request"
+msgstr "Vizualizare cerere de ore suplimentare"
+
+msgid "Back to list"
+msgstr "Înapoi la listă"
+
+msgid "List of overtime worked"
+msgstr "Lista orelor suplimentare lucrate"
+
+msgid "Leave Management System"
+msgstr "Sistemul de Management al Concediilor"
+
+msgid "Link to documentation"
+msgstr "Link către documentație"
+
+msgid "Operation (%s) is not granted"
+msgstr "Operația (%s) nu este acordată"
+
+msgid "Please wait"
+msgstr "Vă rugăm așteptați"
+
+msgid ""
+"Internet Explorer 8 and older browser are not supported. Please upgrade to "
+"IE9 or use Firefox, Chrome, etc."
+msgstr "Internet Explorer 8 si browserele mai vechi, nu sunt acceptate. Vă rugăm să faceți upgrade la IE9 sau să utilizați Firefox, Chrome etc."
+
+msgid ""
+"Object not found. Maybe that you are trying to access to an object that was "
+"deleted."
+msgstr "Obiectul nu a fost găsit. Posibil încercați să accesați un obiect care a fost șters."
+
+msgid "m/d/Y"
+msgstr "m/d/Y"
+
+msgid "mm/dd/yy"
+msgstr "mm/dd/yy"
+
+msgid "MM/DD/YYYY"
+msgstr "MM/DD/YYYY"
+
+msgid "TRUE"
+msgstr "TRUE"
+
+msgid "FALSE"
+msgstr "FALSE"
+
+msgid "Go top"
+msgstr "Mergi sus"
+
+msgid "&copy; 2014 Jorani Authors"
+msgstr "&copy; 2014 Jorani Authors"
+
+msgid "Requested"
+msgstr "Solicitat"
+
+msgid "Planned"
+msgstr "Planificat"
+
+msgid "Accepted"
+msgstr "Acceptat"
+
+msgid "Rejected"
+msgstr "Respins"
+
+msgid "Cancellation"
+msgstr "Anulare"
+
+msgid "Canceled"
+msgstr "Anulat"
+
+msgid "today"
+msgstr "astăzi"
+
+msgid "identifier"
+msgstr "identificator"
+
+msgid "firstname"
+msgstr "prenume"
+
+msgid "lastname"
+msgstr "nume"
+
+msgid "date hired"
+msgstr "data angajării"
+
+msgid "department"
+msgstr "departament"
+
+msgid "position"
+msgstr "poziție"
+
+msgid "contract"
+msgstr "contract"
+
+msgid "day off"
+msgstr "zi liberă"
+
+msgid "leave"
+msgstr "concediu"
+
+msgid "All"
+msgstr "Toate"
+
+msgid "copied"
+msgstr "copiat"
+
+msgid "Do You Authorize %s application?"
+msgstr "Autorizați aplicația %s ?"
+
+msgid "Your session has expired please login again"
+msgstr "Sesiunea dumneavoastră a expirat. Logați-vă din nou."
+
+msgid "Unexpected Ajax Error"
+msgstr "Eroare neașteptată Ajax"
+
+msgid "List of employees"
+msgstr "Lista angajaților"
+
+msgid "edit user"
+msgstr "editare utilizator"
+
+msgid "Leaves"
+msgstr "Concedii"
+
+msgid "OT Worked"
+msgstr "OT Lucrate"
+
+msgid "Leave Balance"
+msgstr "Balanța Concediului"
+
+msgid "Create Leave Request"
+msgstr "Creați Cerere Concediu"
+
+msgid "Presence report"
+msgstr "Raportul privind prezența"
+
+msgid "Delegations"
+msgstr "Delegații"
+
+msgid "Firstname"
+msgstr "Nume"
+
+msgid "Lastname"
+msgstr "Prenume"
+
+msgid "E-mail"
+msgstr "E-mail"
+
+msgid "Manager"
+msgstr "Manager"
+
+msgid "Identifier"
+msgstr "Identificator"
+
+msgid "Date hired"
+msgstr "Data angajării"
+
+msgid "Position"
+msgstr "Poziția"
+
+msgid "Create"
+msgstr "Creați"
+
+msgid "Right-click / taphold on an employee for contextual actions."
+msgstr "Click dreapta / apăsați pe un angajat pentru acțiuni contextuale."
+
+msgid "Active"
+msgstr "Activ"
+
+msgid "Inactive"
+msgstr "Inactiv"
+
+msgid "Selection"
+msgstr "Selecție"
+
+msgid "Select all"
+msgstr "Selectează tot"
+
+msgid "Deselect all"
+msgstr "Deselectează tot"
+
+msgid "Select Manager"
+msgstr "Selecteză Manager"
+
+msgid "Select Contract"
+msgstr "Selectează Contract"
+
+msgid "Select Entity"
+msgstr "Selectează Entitate"
+
+msgid "Submit a leave request"
+msgstr "Trimiteți o cerere de concediu"
+
+msgid "Select the manager"
+msgstr "Selectează manager"
+
+msgid "You must select at least one employee into the table"
+msgstr "Trebuie să selectați cel puțin un angajat în tabel"
+
+msgid "List of requested leaves"
+msgstr "Lista cererilor de concediu"
+
+msgid "List of leaves for employee #"
+msgstr "Lista cererilor pentru angajat #"
+
+msgid "accept"
+msgstr "acept"
+
+msgid "reject"
+msgstr "respinge"
+
+msgid "show history"
+msgstr "arată istoric"
+
+msgid "Delete leave request"
+msgstr "Șterge cerere de concediu"
+
+msgid ""
+"You are about to delete one leave request, this procedure is irreversible."
+msgstr "Sunteți pe cale să ștergeți o cerere de concediu. Această procedură este ireversibilă."
+
+msgid "List of deleted leave requests"
+msgstr "Lista cererilor de concediu șterse"
+
+msgid "You are exceeding your entitled days"
+msgstr "Ați depașit numărul de zile alocate"
+
+msgid "You have requested another leave request within the same dates."
+msgstr "Ați trimis o altă cerere de concediu cuprinsă in aceeași perioadă."
+
+msgid "Cause (optional)"
+msgstr "Cauza (opțional)"
+
+msgid "Request leave"
+msgstr "Cerere de concediu"
+
+msgid "The leave request has been succesfully created"
+msgstr "Cererea de concediu a fost creată cu succes"
+
+msgid ""
+"The leave request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "Cererea de concediu a fost creată/modificată cu succes, dar nu sunteți asignat unui manager."
+
+msgid "%s non-working days in the period"
+msgstr "%szile nelucrătoare in această perioadă"
+
+msgid "Your leave request matches with a non-working day."
+msgstr "Perioada cererii de concediu cuprinde zile nelucrătoare. Completați câmpul cu diferența dintre zilele totale și zilele nelucrătoare."
+
+msgid ""
+"It appears that you have no contract. Please contact your HR Officer / "
+"Manager."
+msgstr "Nu sunteți asignat unui contract. Adresați-vă HR Officer / Manager."
+
+msgid ""
+"You can't create a leave request for two yearly leave periods. Please create"
+" two different leave requests."
+msgstr "Nu puteți crea o cerere de concediu pentru două perioade de concediu anuale. Creați două solicitări de concediu diferite."
+
+msgid "List of overtime requests"
+msgstr "Lista cererilor de overtime"
+
+msgid "List of overtime requests for employee #"
+msgstr "Lista cererilor de overtime pentru angajat #"
+
+msgid "Leave balance for user #"
+msgstr "Balanța concediilor pentru utilizatorul #"
+
+msgid "Available"
+msgstr "Disponibil"
+
+msgid "Taken"
+msgstr "Luate"
+
+msgid "Entitled"
+msgstr "Cu drept"
+
+msgid "This employee has no contract."
+msgstr "Angajatul nu are contract"
+
+msgid "Date of report"
+msgstr "Data raportului"
+
+msgid ""
+"By default this report shows the values for the last month. Please note that"
+" the list of leaves shows only the accepted leave requests."
+msgstr "În mod implicit, acest raport prezintă valorile pentru ultima lună. Vă rugăm să rețineți că lista concediilor arată doar cererile acceptate."
+
+msgid "Execute"
+msgstr "Execută"
+
+msgid "Number of days"
+msgstr "Număr de zile"
+
+msgid "Number of working days"
+msgstr "Număr de zile lucrătoare"
+
+msgid "Number of non-working days"
+msgstr "Număr de zile nelucrătoare"
+
+msgid "Duration of leaves"
+msgstr "Durata concediilor"
+
+msgid "Duration of presence"
+msgstr "Durata prezenței"
+
+msgid "Overlapping detected"
+msgstr "Suprapunere detectată"
+
+msgid "The employee has no contract"
+msgstr "Angajatul nu are contract"
+
+msgid "Please check"
+msgstr "Vă rugăm verificați"
+
+msgid "List of leaves in the month"
+msgstr "Lista concediilor intr-o lună"
+
+msgid "My summary"
+msgstr "Sumarul meu"
+
+msgid "Overtime details (added to compensate leaves)"
+msgstr "Detalii suplimentare privind orele suplimentare ( adăugate pentru compensarea concediilor )"
+
+msgid "Catch up for"
+msgstr "Pregătește-te pentru"
+
+msgid ""
+"No entitled or taken days for this period. Please contact your HR Officer / "
+"Manager."
+msgstr "Nu există zile pentru acest interval. Contactați responsabilul / managerul dvs. de resurse umane."
+
+msgid "My leave requests"
+msgstr "Cererile mele de concediu"
+
+msgid "cancel"
+msgstr "anulează"
+
+msgid "Last change"
+msgstr "Ultima modificare"
+
+msgid "Changed Date"
+msgstr "Data modificării"
+
+msgid "Change Type"
+msgstr "Tipul modificării"
+
+msgid "Changed By"
+msgstr "Modificat de"
+
+msgid "The leave request has been successfully created"
+msgstr "Cererea de concediu a fost creată cu succes"
+
+msgid ""
+"The leave request has been successfully created or updated, but you don't "
+"have a manager."
+msgstr "Cererea de concediu a fost creată/modificată cu succes, dar nu sunteți asignat unui manager."
+
+msgid "Edit a leave request"
+msgstr "Modificați o cerere de concediu"
+
+msgid "Edit leave request #"
+msgstr "Modificare cerere de concediu #"
+
+msgid "Update leave"
+msgstr "Modifică un concediu"
+
+msgid "You cannot edit a leave request already submitted"
+msgstr "Nu puteți modifica o cerere de concediu trimisă"
+
+msgid "The leave request has been successfully updated"
+msgstr "Cererea de concediu a fost modificată cu succes"
+
+msgid "You can't cancel this leave request"
+msgstr "Nu puteți anula această cerere de concediu"
+
+msgid "The cancellation request has been successfully sent"
+msgstr "Cererea de anulare a fost trimisă cu succes."
+
+msgid "The leave request has been successfully cancelled"
+msgstr "Cererea de concediu a fost anulată cu succes"
+
+msgid "An error occured while trying to accept the cancellation"
+msgstr "S-a găsit o eroare în timp ce se încerca acceptarea anulării"
+
+msgid "The leave request has now its original status of Accepted"
+msgstr "Cererea de concediu are statusul Acceptată"
+
+msgid "An error occured while trying to reject the cancellation"
+msgstr "S-a găsit o eroare în timp ce se încerca respingerea anulării"
+
+msgid "You can't delete this leave request"
+msgstr "Nu poți șterge această cerere de concediu"
+
+msgid "The leave request has been successfully deleted"
+msgstr "Cererea de concediu a fost ștearsă cu succes"
+
+msgid "View leave request #"
+msgstr "Vezi cererea de concediu #"
+
+msgid "View a leave request"
+msgstr "Vezi o cerere de concediu"
+
+msgid "List of leaves"
+msgstr "Listă de cereri"
+
+msgid "Morning/Afternoon"
+msgstr "Dimineață/După amiază"
+
+msgid "Send a reminder"
+msgstr "Trimite o aducere aminte"
+
+msgid "The reminder email was sent to the manager"
+msgstr "Reminder trimis către manager"
+
+msgid "Comments"
+msgstr "Comentarii"
+
+msgid "New comment"
+msgstr "Comentariu nou"
+
+msgid "Send comment"
+msgstr "Trimite comentariu"
+
+msgid " says"
+msgstr "spune"
+
+msgid "The status of the leave have been changed to "
+msgstr "Statusul concediului a fost schimbat în"
+
+msgid "Leave types"
+msgstr "Tipul cererii"
+
+msgid ""
+"Leave type #0 is a system type reserved for overtime management. You should "
+"not use it for other requests."
+msgstr "Tipul concediului # 0 este un tip de sistem rezervat gestionării orelor suplimentare. Nu trebuie să o utilizați pentru alte cereri."
+
+msgid ""
+"Leave type #0 is a system type reserved for overtime management. Are you "
+"sure that you want to rename it?"
+msgstr "Tipul concediului # 0 este un tip de sistem rezervat gestionării orelor suplimentare. Sunteți sigur că doriți redenumirea lui ?"
+
+msgid "Acronym"
+msgstr "Acronim"
+
+msgid "Deduct non working days"
+msgstr "Deducere ore nelucrătoare"
+
+msgid "Create a new type"
+msgstr "Creeaza un nou tip de cerere"
+
+msgid "No leave type found into the database."
+msgstr "Niciun tip de concediu existent in baza de date"
+
+msgid "This leave type already exists."
+msgstr "Tip de concediu existent !"
+
+msgid "Add a leave type"
+msgstr "Adaugați un tip de concediu"
+
+msgid "Suggest an acronym"
+msgstr "Sugerează un acronim"
+
+msgid "The leave type has been succesfully created."
+msgstr "Tipul de concediu creat cu succes."
+
+msgid "Edit a Leave type"
+msgstr "Modifică un tip de concediu"
+
+msgid "Update"
+msgstr "Actualizează"
+
+msgid "The leave type has been succesfully updated."
+msgstr "Tipul de concediu modificat cu succes."
+
+msgid "Delete Leave Type"
+msgstr "Sterge Tipul de concediu"
+
+msgid ""
+"You are about to delete one leave type, this procedure is irreversible."
+msgstr "Sunteți pe cale să ștergeți un tip de concediu. Această procedură este ireversibilă."
+
+msgid "The leave type has been succesfully deleted."
+msgstr "Tipul de concediu a fost șters cu succes."
+
+msgid "You cannot delete a system leave type."
+msgstr "Nu poți șterge tipul implicit de cerere"
+
+msgid "You cannot delete a leave type that is used."
+msgstr "Nu puteți șterge un tip de concediu care este utilizat."
+
+msgid "Change password"
+msgstr "Schimbă parola"
+
+msgid "Welcome"
+msgstr "Bine ați venit"
+
+msgid "Logout"
+msgstr "Deconectare"
+
+msgid "View my personal information"
+msgstr "Vizualizare informații personale"
+
+msgid "reset password"
+msgstr "resetare parolă"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "List of users"
+msgstr "Listă utilizatori"
+
+msgid "Create user"
+msgstr "Creare cont utilizator"
+
+msgid "Settings"
+msgstr "Setări"
+
+msgid "Diagnostic"
+msgstr "Diagnostic"
+
+msgid "OAuth Clients"
+msgstr "Clienți OAuth"
+
+msgid "HR"
+msgstr "Resurse Umane"
+
+msgid "Employees"
+msgstr "Angajați"
+
+msgid "Organization"
+msgstr "Organizație"
+
+msgid "List of positions"
+msgstr "Lista de posturi"
+
+msgid "List of types"
+msgstr "Lista tipurilor"
+
+msgid "Reports"
+msgstr "Rapoarte"
+
+msgid "Leave balance"
+msgstr "Balanța concediilor"
+
+msgid "Leave requests"
+msgstr "Cereri de concediu"
+
+msgid "Approval"
+msgstr "Aprobare"
+
+msgid "My subordinates"
+msgstr "Subordonații mei"
+
+msgid "Requests"
+msgstr "Cereri"
+
+msgid "List of OT Worked"
+msgstr "Lista OT lucrate"
+
+msgid "Submit an OT Request"
+msgstr "Trimite o cerere de OT"
+
+msgid "Counters"
+msgstr "Contoare"
+
+msgid "List of leave requests"
+msgstr "Lista cererilor de concediu"
+
+msgid "Request a leave"
+msgstr "Cereți un concediu"
+
+msgid "Calendars"
+msgstr "Calendare"
+
+msgid "My workmates"
+msgstr "Colegii mei"
+
+msgid "Department"
+msgstr "Departament"
+
+msgid "Global"
+msgstr "Global"
+
+msgid "Tabular"
+msgstr "Tabular"
+
+msgid "Search for an entity"
+msgstr "Căutați o entitate"
+
+msgid "Search"
+msgstr "Căutare"
+
+msgid "Employees attached to entity"
+msgstr "Engajați atașați entității"
+
+msgid "Attach an Employee"
+msgstr "Atașați un angajat"
+
+msgid "Detach an Employee"
+msgstr "Dezatașați un angajat"
+
+msgid "Supervisor"
+msgstr "Supervizor"
+
+msgid ""
+"If you select a supervisor, he will receive a copy of accepted and rejected "
+"leave requests submitted by employees of this entity."
+msgstr "Dacă selectați un supervisor, acesta va primi o copie a cererilor de concediu acceptate și respinse, depuse de angajații acestei entități."
+
+msgid "Select a Supervisor"
+msgstr "Selectează supervizor"
+
+msgid "Delete Entity"
+msgstr "Ștergere entitate"
+
+msgid "You are about to delete one entity, this procedure is irreversible."
+msgstr "Urmează să ștergeți o entitate, procedura este ireversibilă"
+
+msgid "Add an Employee"
+msgstr "Adaugă angajat"
+
+msgid "An error occured"
+msgstr "A apărut o eroare"
+
+msgid "Name of the entity"
+msgstr "Numele Entități"
+
+msgid "Please select one entity in the organization (treeview on the right)."
+msgstr "Vă rugăm selectați o entitate din organizație (arhivă din partea dreaptă)."
+
+msgid ""
+"Please select one employee in the table of users belonging to the selected "
+"entity."
+msgstr "Selectați un angajat în tabelul de utilizatori aparținând entității selectate."
+
+msgid "You cannot delete the root entity."
+msgstr "Nu puteți șterge entitatea rădăcină."
+
+msgid "Select a list of employees"
+msgstr "Selectați o lista a angajaților"
+
+msgid "Rename a list"
+msgstr "Redenumește o listă"
+
+msgid "Add a new list"
+msgstr "Adaugă o listă nouă"
+
+msgid "Delete a list"
+msgstr "Șterge lista"
+
+msgid "Add employees"
+msgstr "Adaugă angajat"
+
+msgid "Remove selected employees"
+msgstr "Șterge angajatul selectat"
+
+msgid "Name of the list"
+msgstr "Numele listei"
+
+msgid "Are you sure that you want to delete this list?"
+msgstr "Ești sigur ca vrei sa ștergi această listă?"
+
+msgid "New name of the list"
+msgstr "Nume noi în listă"
+
+msgid "Overtime Requests submitted to me"
+msgstr "Cererile de OT trimise către mine"
+
+msgid ""
+"This screen lists the overtime requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "Acestă opțiune listează cererile de ore suplimentare trimise către dvs. . Dacă nu sunteți manager, această listă va fi întotdeauna goală."
+
+msgid "Fullname"
+msgstr "Nume complet"
+
+msgid "All requests"
+msgstr "Toate cererile"
+
+msgid "Pending requests "
+msgstr "Cereri în așteptare"
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this "
+"overtime request."
+msgstr "Nu sunteți managerul de linie al acestui angajat. Nu puteți respinge această cerere de ore suplimentare."
+
+msgid "The overtime request has been successfully rejected."
+msgstr "Cererea de ore suplimentare a fost respinsă"
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this "
+"overtime request."
+msgstr "Nu sunteți managerul de linie al acestui angajat. Nu puteți accepta această cerere de ore suplimentare."
+
+msgid "The overtime request has been successfully accepted."
+msgstr "Cererea de ore suplimentare a fost acceptată."
+
+msgid "Create position"
+msgstr "Creare funcție"
+
+msgid "Delete Position"
+msgstr "Ștergere funcție"
+
+msgid "You are about to delete one position, this procedure is irreversible."
+msgstr "Sunteți pe cale să ștergeți o poziție. Această procedură este ireversibilă."
+
+msgid "Create a new position"
+msgstr "Creare funcție"
+
+msgid "The position has been succesfully created."
+msgstr "Funcția a fost creată cu succes."
+
+msgid "Edit position #"
+msgstr "Editare funcție #"
+
+msgid "Update position"
+msgstr "Actualizare funcție"
+
+msgid "The position has been succesfully updated."
+msgstr "Funcția a fost actualizată cu succes"
+
+msgid "The position has been succesfully deleted."
+msgstr "Funcția fost ștearsă cu succes."
+
+msgid "List of reports"
+msgstr "Lista rapoarte"
+
+msgid "Report"
+msgstr "Raport"
+
+msgid "Back to list of reports"
+msgstr "Înapoi la lista de rapoarte"
+
+msgid "List of Report"
+msgstr "Lista rapoarte"
+
+msgid "Balance of leaves"
+msgstr "Balanța concediilor"
+
+msgid "Launch"
+msgstr "Lansează"
+
+msgid "Leave Requests submitted to me"
+msgstr "Cereri de concediu trimise mie"
+
+msgid ""
+"This screen lists the leave requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "Acestă opțiune listează cererile de concediu trimise către dvs. . Dacă nu sunteți manager, această listă va fi întotdeauna goală."
+
+msgid "List of my subordinates"
+msgstr "Lista cu subordonații mei"
+
+msgid ""
+"This screen lists your direct report subordinates. If you are not a manager,"
+" this list will always be empty."
+msgstr "Acestă opțiune listează echipa dvs. . Dacă nu sunteți manager, această listă va fi întotdeauna goală."
+
+msgid "Create a leave request in behalf of this subordinate"
+msgstr "Creează o cerere de concediu în numele unui subordonat"
+
+msgid "Your are not the manager of this employee."
+msgstr "Nu ești managerul acestui angajat"
+
+msgid "List of subordinates"
+msgstr "Lista cu subordonați"
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this leave "
+"request."
+msgstr "Nu sunteți managerul de linie al acestui angajat. Nu puteți accepta această cerere de concediu."
+
+msgid "The leave request has been successfully accepted."
+msgstr "Cererea de concediu a fost acceptată cu succes."
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this leave "
+"request."
+msgstr "Nu sunteți managerul de linie al acestui angajat. Nu puteți respinge această cerere de concediu."
+
+msgid "The leave request has been successfully rejected."
+msgstr "Cererea de concediu a fost respinsă."
+
+msgid "List of delegations"
+msgstr "Lista delegărilor"
+
+msgid ""
+"This is the list of employees who can accept or reject a request in your "
+"behalf."
+msgstr "Aceasta este lista angajaților care pot accepta sau respinge o cerere în numele dvs."
+
+msgid "Revoke"
+msgstr "Revocă"
+
+msgid "Add a delegate"
+msgstr "Adăugare delegat"
+
+msgid "Are you sure that you want to revoke this delegation?"
+msgstr "Sunteți sigur că doriți să revocați această delegație?"
+
+msgid "Leave balance (subordinates)"
+msgstr "Balanța concediilor ( echipa )"
+
+msgid ""
+"Leave balance of my direct report subordinates. If you are not a manager, "
+"this list will always be empty."
+msgstr "Balanța concediilor echipei mele . Dacă nu sunteți manager, această listă va fi întotdeauna goală."
+
+msgid "Send a new comment (optional)"
+msgstr "Trimite un comentariu (opțional)"
+
+msgid "Reject"
+msgstr "Respinge"
+
+msgid "Login"
+msgstr "Logare"
+
+msgid "Language"
+msgstr "Limbă"
+
+msgid "Password"
+msgstr "Parolă"
+
+msgid "Send me my password"
+msgstr "Trimite-mi parola"
+
+msgid "Are you sure that you want to reset your password?"
+msgstr "Ești sigur că vrei să resetezi parola?"
+
+msgid "Please fill the login field"
+msgstr "Vă rugăm completați câmpul utilizator"
+
+msgid "Unknown login. Please contact your HR Officer / Manager."
+msgstr "Logare necunoscută. Vă rugam contactați un angajat de la resurse umane / Manager"
+
+msgid "The password has been sent to your e-mail adress."
+msgstr "Parola a fost trimisă către adresa dumneavoastră de email."
+
+msgid "Invalid login id or password"
+msgstr "Id sau parolă invalidă"
+
+msgid "The language has been succesfully set to "
+msgstr "Limba a fost schimbată cu succes în "
+
+msgid "Your account is disabled. Please contact your HR Officer / Manager."
+msgstr "Contul dumneavoastră este dezactivat. Vă rugăm să contactați un angajat de la resurse umane / Manager."
+
+msgid "Rename"
+msgstr "Redenumește"
+
+msgid "Remove"
+msgstr "Eliminare"
+
+msgid "Cut"
+msgstr "Tăiere"
+
+msgid "Paste"
+msgstr "Lipire"
+
+msgid "edit user details"
+msgstr "editare detalii utilizator"
+
+msgid "delete user"
+msgstr "ștergere utilizator"
+
+msgid "Role"
+msgstr "Rol"
+
+msgid "Create a new user"
+msgstr "Crează utilizator nou"
+
+msgid "Import users"
+msgstr "Importă utilizatori"
+
+msgid "Delete User"
+msgstr "Șterge utilizator"
+
+msgid "You are about to delete one user, this procedure is irreversible."
+msgstr "Sunteți pe cale să ștergeți un utilizator, această procedură este ireversibilă."
+
+msgid "Import Users"
+msgstr "Importă utilizatori"
+
+msgid "Filename"
+msgstr "Nume fișier"
+
+msgid "My personal information"
+msgstr "Informațiille personale"
+
+msgid "Date hired/started"
+msgstr "Data angajării"
+
+msgid "Internal/Company Identifier"
+msgstr "Intern/Identificator companie"
+
+msgid "Edit user #"
+msgstr "Editare utilizator #"
+
+msgid "Edit user"
+msgstr "Editare utilizator"
+
+msgid "No line manager."
+msgstr "Fară manager"
+
+msgid "If a user has no manager (itself), it can validate its leave requests."
+msgstr "Dacă un utilizator nu are manager (sine), poate să-și valieze cererile de concediu."
+
+msgid "Self"
+msgstr "Sine"
+
+msgid "Timezone"
+msgstr "Zona"
+
+msgid "LDAP Path"
+msgstr "Calea LDAP"
+
+msgid "Select a position"
+msgstr "Selectează funcția"
+
+msgid "Update user"
+msgstr "Actualizare utilizator"
+
+msgid "The user has been succesfully updated"
+msgstr "Utilizatorul a fost actualizat cu succes."
+
+msgid "The user has been succesfully deleted"
+msgstr "Utilizatorul a fost șters cu succes."
+
+msgid "The password has been succesfully changed"
+msgstr "Parola a fost schimbată cu succes."
+
+msgid "Generate password"
+msgstr "Generează parola"
+
+msgid ""
+"It is recommended to select a contract. Do you want to create the user "
+"without a contract?"
+msgstr "Este recomandat să selectați un contract. Doriți să creați un utilizator fără contract?"
+
+msgid "The user has been succesfully created"
+msgstr "Utilizatorul a fost creat cu succes."
+
+msgid "Username already exists."
+msgstr "Utilizatorul există deja."
+
+msgid "This username is not available."
+msgstr "Numele de utilizator nu este disponibil."
+
+msgid "Reset"
+msgstr "Resetare"

@@ -22,7 +22,7 @@ class Positions_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
-        
+
     }
 
     /**
@@ -39,7 +39,7 @@ class Positions_model extends CI_Model {
         $query = $this->db->get_where('positions', array('id' => $id));
         return $query->row_array();
     }
-    
+
     /**
      * Get the name of a position
      * @param int $id Identifier of the postion
@@ -48,13 +48,13 @@ class Positions_model extends CI_Model {
      */
     public function getName($id) {
         $record = $this->getPositions($id);
-        if (count($record) >0) {
+        if (!empty($record)) {
             return $record['name'];
         } else {
             return '';
         }
     }
-    
+
     /**
      * Insert a new position
      * @param string $name Name of the postion
@@ -69,7 +69,7 @@ class Positions_model extends CI_Model {
         );
         return $this->db->insert('positions', $data);
     }
-    
+
     /**
      * Delete a position from the database
      * Cascade update all users having this postion (filled with 0)
@@ -86,7 +86,7 @@ class Positions_model extends CI_Model {
         $update = $this->db->update('users', $data);
         return $delete && $update;
     }
-    
+
     /**
      * Update a given position in the database.
      * @param int $id Identifier of the database

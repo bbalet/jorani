@@ -35,6 +35,7 @@ $lang['admin_diagnostic_entitlements_thead_start_date'] = 'Dată start';
 $lang['admin_diagnostic_entitlements_thead_end_date'] = 'Dată sfârşit';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'Contract';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'Angajat';
+$lang['admin_diagnostic_entitlements_deletion_problem'] = 'Ștergere incompletă din baza de date.';
 $lang['admin_diagnostic_daysoff_tab'] = 'Zile nelucrătoare';
 $lang['admin_diagnostic_daysoff_description'] = 'Număr de zile (per contract) pentru care durata de zile nelucrătoare a fost definită.';
 $lang['admin_diagnostic_daysoff_thead_id'] = 'ID';

@@ -72,6 +72,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'редактировать';
 $lang['hr_leaves_thead_tip_accept'] = 'утвердить';
 $lang['hr_leaves_thead_tip_reject'] = 'отклонить';
 $lang['hr_leaves_thead_tip_delete'] = 'удалить';
+$lang['hr_leaves_thead_tip_history'] = 'show history';
 $lang['hr_leaves_thead_id'] = 'ID';
 $lang['hr_leaves_thead_status'] = 'Состояние';
 $lang['hr_leaves_thead_start'] = 'Дата начала';

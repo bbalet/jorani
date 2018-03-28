@@ -72,6 +72,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'កែសម្រួល';
 $lang['hr_leaves_thead_tip_accept'] = 'ទទួលយកបាន';
 $lang['hr_leaves_thead_tip_reject'] = 'បដិសេធចោល';
 $lang['hr_leaves_thead_tip_delete'] = 'លុប';
+$lang['hr_leaves_thead_tip_history'] = 'show history';
 $lang['hr_leaves_thead_id'] = 'លេខអត្តសញ្ញាណ';
 $lang['hr_leaves_thead_status'] = 'ស្ថានភាព';
 $lang['hr_leaves_thead_start'] = 'កាលបរិច្ឆេទដែលចាប់ផ្តើម';

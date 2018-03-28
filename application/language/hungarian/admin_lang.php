@@ -35,6 +35,7 @@ $lang['admin_diagnostic_entitlements_thead_start_date'] = 'Kezdési dátum';
 $lang['admin_diagnostic_entitlements_thead_end_date'] = 'Vége dátum';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'Szerződés';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'Alkalmazott';
+$lang['admin_diagnostic_entitlements_deletion_problem'] = 'Nem befejezett törlések az adatbázisban.';
 $lang['admin_diagnostic_daysoff_tab'] = 'Munkaszüneti napok';
 $lang['admin_diagnostic_daysoff_description'] = 'Azon napok száma (szerződésenként), amelyeknél a nem munkavégzési idő meghatározásra került.';
 $lang['admin_diagnostic_daysoff_thead_id'] = 'ID';

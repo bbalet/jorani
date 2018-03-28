@@ -71,6 +71,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'edit';
 $lang['hr_leaves_thead_tip_accept'] = 'accept';
 $lang['hr_leaves_thead_tip_reject'] = 'reject';
 $lang['hr_leaves_thead_tip_delete'] = 'delete';
+$lang['hr_leaves_thead_tip_history'] = 'show history';
 $lang['hr_leaves_thead_id'] = 'ID';
 $lang['hr_leaves_thead_status'] = 'Status';
 $lang['hr_leaves_thead_start'] = 'Start Date';

@@ -72,6 +72,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'sửa';
 $lang['hr_leaves_thead_tip_accept'] = 'chấp nhận';
 $lang['hr_leaves_thead_tip_reject'] = 'từ chối';
 $lang['hr_leaves_thead_tip_delete'] = 'xóa';
+$lang['hr_leaves_thead_tip_history'] = 'show history';
 $lang['hr_leaves_thead_id'] = 'ID';
 $lang['hr_leaves_thead_status'] = 'Trạng thái';
 $lang['hr_leaves_thead_start'] = 'Ngày bắt đầu';

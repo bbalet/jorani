@@ -35,6 +35,7 @@ $lang['admin_diagnostic_entitlements_thead_start_date'] = 'Begin datum';
 $lang['admin_diagnostic_entitlements_thead_end_date'] = 'Eind datum';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'Contract';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'Werknemer';
+$lang['admin_diagnostic_entitlements_deletion_problem'] = 'Onvolledige verwijdering in de database.';
 $lang['admin_diagnostic_daysoff_tab'] = 'Niet-werkdagen';
 $lang['admin_diagnostic_daysoff_description'] = 'Aantal dagen (per contract) die als niet-werkdagen zijn gedefinieerd.';
 $lang['admin_diagnostic_daysoff_thead_id'] = 'ID';

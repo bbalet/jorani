@@ -35,6 +35,7 @@ $lang['admin_diagnostic_entitlements_thead_start_date'] = 'Ημερομηνία 
 $lang['admin_diagnostic_entitlements_thead_end_date'] = 'Ημερομηνία λήξης';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'Σύμβαση';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'Υπάλληλος';
+$lang['admin_diagnostic_entitlements_deletion_problem'] = 'Ατελής διαγραφή στη βάση δεδομένων.';
 $lang['admin_diagnostic_daysoff_tab'] = 'Μη εργάσιμες ημέρες';
 $lang['admin_diagnostic_daysoff_description'] = 'Αριθμός ημερών (ανά σύμβαση) για τους οποίους έχει καθοριστεί η διάρκεια μη απασχόλησης.';
 $lang['admin_diagnostic_daysoff_thead_id'] = 'ID';

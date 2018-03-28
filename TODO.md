@@ -3,8 +3,16 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 
 ## v0.7.0 or later
 
-- [ ] Get rid of JQuery UI (mostly used by calendars)
-- [ ] Investigate the strange behavior of the compensate balance (see PNC).
+- [X] Migrate to select2 (selectize is no longer active).
+- [ ] Migrate to PhpSpreadSheet (PHPExcel is no longer active).
+- [ ] Technical update of FullCalendar (beware of LTR bug: https://github.com/fullcalendar/fullcalendar/issues/2516).
+- [ ] ICS feeds should use a random hash when publicly exposed.
+- [ ] Dynamic form for user properties (Jorani to become a SAML2 IdP). For superadmin only.
+- [ ] Dynamic form for user parameters. For superadmin only.
+- [ ] Dynamic form for parameters. For superadmin only.
+- [ ] Get rid of JQuery UI (mostly used by calendars).
+- [ ] Migrate Fontawesome and glyphicon to material design icons set (in preparation of BS4).
+- [ ] Change the system for compensate balance. Give a regular entitlement (start/end dates depend on contract).
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
 - [ ] i18n: Last 3 columns in Reports/Leaves.
 - [ ] Maybe: Filter Excel export on visible rows (lot of security backend).

@@ -25,6 +25,7 @@ $lang['leaves_summary_date_field'] = '報告建立日期';
 $lang['leaves_index_title'] = '我的休假申請';
 $lang['leaves_index_thead_tip_view'] = '預覽';
 $lang['leaves_index_thead_tip_edit'] = '編輯';
+$lang['leaves_index_thead_tip_cancel'] = '取消';
 $lang['leaves_index_thead_tip_delete'] = '刪除';
 $lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = '證號';

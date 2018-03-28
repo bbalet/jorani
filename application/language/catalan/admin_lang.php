@@ -35,6 +35,8 @@ $lang['admin_diagnostic_entitlements_thead_start_date'] = 'Data Inici';
 $lang['admin_diagnostic_entitlements_thead_end_date'] = 'Darrera data';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'Contracte';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'Empleat';
+$lang['admin_diagnostic_entitlements_deletion_problem'] = 'Esborrat incomplet a la base de dades.';
+
 $lang['admin_diagnostic_daysoff_tab'] = 'Dies no laborables';
 $lang['admin_diagnostic_daysoff_description'] = 'Número de dies (definits per contracte) per les duracions d\'absència.';
 $lang['admin_diagnostic_daysoff_thead_id'] = 'ID';

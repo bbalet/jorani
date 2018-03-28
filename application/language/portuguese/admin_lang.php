@@ -35,6 +35,7 @@ $lang['admin_diagnostic_entitlements_thead_start_date'] = 'Data de inicio';
 $lang['admin_diagnostic_entitlements_thead_end_date'] = 'Data final';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'Contrato';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'Colaborador';
+$lang['admin_diagnostic_entitlements_deletion_problem'] = 'Eliminação incompleta no banco de dados.';
 $lang['admin_diagnostic_daysoff_tab'] = 'Dias não úteis';
 $lang['admin_diagnostic_daysoff_description'] = 'Número de dias (por contrato) para o qual uma duração não operacional foi definida.';
 $lang['admin_diagnostic_daysoff_thead_id'] = 'ID';

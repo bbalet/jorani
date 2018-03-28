@@ -24,6 +24,7 @@ $lang['leaves_summary_date_field'] = 'Date of report';
 $lang['leaves_index_title'] = 'My leave requests';
 $lang['leaves_index_thead_tip_view'] = 'view';
 $lang['leaves_index_thead_tip_edit'] = 'edit';
+$lang['leaves_index_thead_tip_cancel'] = 'cancel';
 $lang['leaves_index_thead_tip_delete'] = 'delete';
 $lang['leaves_index_thead_tip_history'] = 'show history';
 $lang['leaves_index_thead_id'] = 'ID';

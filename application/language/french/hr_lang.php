@@ -90,6 +90,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'Modifier';
 $lang['hr_leaves_thead_tip_accept'] = 'Accepter';
 $lang['hr_leaves_thead_tip_reject'] = 'Refuser';
 $lang['hr_leaves_thead_tip_delete'] = 'Supprimer';
+$lang['hr_leaves_thead_tip_history'] = 'Afficherl\'historique';
 $lang['hr_leaves_thead_id'] = 'ID';
 $lang['hr_leaves_thead_status'] = 'Statut';
 $lang['hr_leaves_thead_start'] = 'Date début';

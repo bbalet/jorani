@@ -18,6 +18,7 @@ $lang['admin_diagnostic_requests_thead_employee'] = 'الموظف';
 $lang['admin_diagnostic_requests_thead_start_date'] = 'تاريخ البدئ';
 $lang['admin_diagnostic_requests_thead_status'] = 'الحالة';
 $lang['admin_diagnostic_requests_thead_type'] = 'النوع';
+
 $lang['admin_diagnostic_datetype_tab'] = 'بعد الظهر/ قبل الظهر';
 $lang['admin_diagnostic_datetype_description'] = 'طلبات الإجازات ذات الأخطاء في البدئ والنهاية';
 $lang['admin_diagnostic_datetype_thead_id'] = 'التعريف';
@@ -26,6 +27,7 @@ $lang['admin_diagnostic_datetype_thead_start_date'] = 'التاريخ';
 $lang['admin_diagnostic_datetype_thead_start_type'] = 'البدئ';
 $lang['admin_diagnostic_datetype_thead_end_type'] = 'النهاية';
 $lang['admin_diagnostic_datetype_thead_status'] = 'الحالة';
+
 $lang['admin_diagnostic_entitlements_tab'] = 'الأيام المخولة';
 $lang['admin_diagnostic_entitlements_description'] = 'قائمة العقود والموظفين المخولين لأكثر من عام.';
 $lang['admin_diagnostic_entitlements_thead_id'] = 'التعريف';
@@ -35,6 +37,8 @@ $lang['admin_diagnostic_entitlements_thead_start_date'] = 'تاريخ البدئ
 $lang['admin_diagnostic_entitlements_thead_end_date'] = 'تاريخ الإنتهاء';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'العقد';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'الموظف';
+$lang['admin_diagnostic_entitlements_deletion_problem'] = 'مسح غير تام في قاعدة البيانات.';
+
 $lang['admin_diagnostic_daysoff_tab'] = 'أيام العطل';
 $lang['admin_diagnostic_daysoff_description'] = 'عدد الأيام (حسب العقد) المعرفة فيها العطل.';
 $lang['admin_diagnostic_daysoff_thead_id'] = 'التعريف';

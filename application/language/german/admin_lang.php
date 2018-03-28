@@ -35,6 +35,7 @@ $lang['admin_diagnostic_entitlements_thead_start_date'] = 'Anfangsdatum';
 $lang['admin_diagnostic_entitlements_thead_end_date'] = 'Enddatum';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'Vertrag';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'Angestellter';
+$lang['admin_diagnostic_entitlements_deletion_problem'] = 'Unvollständige Löschung von Einträgen in der Datenbank';
 $lang['admin_diagnostic_daysoff_tab'] = 'Arbeitsfreie Tage';
 $lang['admin_diagnostic_daysoff_description'] = 'Anzahl an Tagen (pro Vertrag), für die eine Nicht-Arbeitsdauer festgelegt wurde.';
 $lang['admin_diagnostic_daysoff_thead_id'] = 'ID';

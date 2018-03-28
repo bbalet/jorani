@@ -68,6 +68,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'bearbeiten';
 $lang['hr_leaves_thead_tip_accept'] = 'akzeptieren';
 $lang['hr_leaves_thead_tip_reject'] = 'ablehnen';
 $lang['hr_leaves_thead_tip_delete'] = 'löschen';
+$lang['hr_leaves_thead_tip_history'] = 'Verlauf anzeigen';
 $lang['hr_leaves_thead_id'] = 'ID';
 $lang['hr_leaves_thead_status'] = 'Status';
 $lang['hr_leaves_thead_start'] = 'Anfangsdatum';

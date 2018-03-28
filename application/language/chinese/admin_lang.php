@@ -38,6 +38,7 @@ $lang['admin_diagnostic_entitlements_thead_start_date'] = '開始日期';
 $lang['admin_diagnostic_entitlements_thead_end_date'] = '結束日期';
 $lang['admin_diagnostic_entitlements_type_contract'] = '類別';
 $lang['admin_diagnostic_entitlements_type_employee'] = '員工';
+$lang['admin_diagnostic_entitlements_deletion_problem'] = '刪除資料失敗';
 
 $lang['admin_diagnostic_daysoff_tab'] = '休假日';
 $lang['admin_diagnostic_daysoff_description'] = 'Number of days (per contract) for which a non-working duration has been defined.';

@@ -35,6 +35,8 @@ $lang['admin_diagnostic_entitlements_thead_start_date'] = 'Datum začátku';
 $lang['admin_diagnostic_entitlements_thead_end_date'] = 'Datum konce';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'Smlouva';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'Zaměstnanec';
+$lang['admin_diagnostic_entitlements_deletion_problem'] = 'Neúplné vymazání v databázi.';
+
 $lang['admin_diagnostic_daysoff_tab'] = 'Nepracovní dny';
 $lang['admin_diagnostic_daysoff_description'] = 'Počet dnů (za smlouva) pracovního volna je definováno ve smlouvě.';
 $lang['admin_diagnostic_daysoff_thead_id'] = 'Identifikace';

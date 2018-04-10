@@ -46,7 +46,7 @@ class Contracts_model extends CI_Model {
      */
     public function getName($id) {
         $record = $this->getContracts($id);
-        if (count($record) > 0) {
+        if ($record > 0) {
             return $record['name'];
         } else {
             return '';

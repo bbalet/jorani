@@ -39,7 +39,7 @@
           &nbsp; <?php echo $type['name']; ?>
       </td>
       <td>
-        <?php if ($type['deduct_days_off'] == TRUE ) { ?>
+        <?php if (!empty($type['deduct_days_off']) == TRUE ) { ?>
         <i class="fa fa-check-square-o" aria-hidden="true"></i>
         <?php } else { ?>
         <i class="fa fa-square-o" aria-hidden="true"></i>

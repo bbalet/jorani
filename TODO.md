@@ -4,7 +4,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 ## v0.7.0 or later
 
 - [X] Migrate to select2 (selectize is no longer active).
-- [ ] Migrate to PhpSpreadSheet (PHPExcel is no longer active).
+- [X] Migrate to PhpSpreadSheet (PHPExcel is no longer active).
 - [ ] Technical update of FullCalendar (beware of LTR bug: https://github.com/fullcalendar/fullcalendar/issues/2516).
 - [ ] ICS feeds should use a random hash when publicly exposed.
 - [ ] Dynamic form for user properties (Jorani to become a SAML2 IdP). For superadmin only.

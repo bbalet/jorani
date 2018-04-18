@@ -1,6 +1,6 @@
 -- ---------------------------------------------------
 -- Jorani Schema definition
--- 
+--
 -- @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
 -- @copyright  Copyright (c) 2014-2018 Benjamin BALET
 
@@ -227,6 +227,7 @@ CREATE TABLE IF NOT EXISTS `entitleddays` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contract` int(11) DEFAULT NULL,
   `employee` int(11) DEFAULT NULL,
+  `overtime` int(11) DEFAULT NULL COMMENT 'Link to an overtime request',
   `startdate` date DEFAULT NULL,
   `enddate` date DEFAULT NULL,
   `type` int(11) NOT NULL,
@@ -256,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `leaves` (
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
   KEY `employee` (`employee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='Leave requests' AUTO_INCREMENT=1 ;
 
 --
 -- Structure of table `organization`
@@ -267,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `organization` (
   `parent_id` int(11) DEFAULT NULL,
   `supervisor` INT NULL DEFAULT NULL COMMENT 'this user will receive a copy of accepted and rejected leave requests',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
 
 --
 -- Content of table `organization`
@@ -288,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `overtime` (
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
   KEY `employee` (`employee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
 
 --
 -- Structure of table `positions`
@@ -298,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `positions` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=2 ;
 
 --
 -- Content of table `positions`
@@ -313,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL,
   `name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Content of table `roles`
@@ -324,25 +325,13 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 (8, 'HR admin');
 
 --
--- Structure of table `settings`
---
-CREATE TABLE IF NOT EXISTS `settings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `category` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-  `key` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-  `value` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
-  `type` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
---
 -- Structure of table `status`
 --
 CREATE TABLE IF NOT EXISTS `status` (
   `id` int(11) NOT NULL,
   `name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Content of table `status`
@@ -356,36 +345,6 @@ INSERT INTO `status` (`id`, `name`) VALUES
 (6, 'Canceled');
 
 --
--- Structure of table `tasks`
---
-CREATE TABLE IF NOT EXISTS `tasks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'unique identifier of the task',
-  `employee` int(11) NOT NULL COMMENT 'assigned to',
-  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Title (short) of the task',
-  `description` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'Long description of the task',
-  `due_date` date NOT NULL COMMENT 'Date when the task is due',
-  `completed_date` date NOT NULL COMMENT 'Date when the task is finnished',
-  `status` int(11) NOT NULL COMMENT 'status are the same than the leaves but a task is always editable',
-  `manager_comment` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'comments are added at the top of the field',
-  `employee_comment` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'comments are added at the top of the field',
-  PRIMARY KEY (`id`),
-  KEY `employee` (`employee`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
---
--- Structure of table `time`
---
-CREATE TABLE IF NOT EXISTS `time` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'unique identifier of the time declaration',
-  `datetime` datetime NOT NULL COMMENT 'date start',
-  `duration` int(11) NOT NULL COMMENT 'duration in minutes',
-  `activity` int(11) NOT NULL COMMENT 'activity identifier',
-  `employee` int(11) NOT NULL COMMENT 'employee identifier',
-  PRIMARY KEY (`id`),
-  KEY `activity` (`activity`,`employee`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Time spent by employees' AUTO_INCREMENT=1 ;
-
---
 -- Structure of table `types`
 --
 CREATE TABLE IF NOT EXISTS `types` (
@@ -394,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `types` (
   `acronym` VARCHAR(10) NULL DEFAULT NULL COMMENT 'Acronym of leave type',
   `deduct_days_off` BOOL NOT NULL DEFAULT 0 COMMENT 'Deduct days off when computing the balance of the leave type.',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=6 ;
 
 --
 -- Content of table `types`
@@ -430,12 +389,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `active` bool DEFAULT TRUE COMMENT 'Is user active',
   `timezone` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT 'Timezone of user',
   `calendar` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT 'External Calendar address',
+  `random_hash` varchar(24) CHARACTER SET utf8 DEFAULT NULL COMMENT 'Obfuscate public URLs',
   PRIMARY KEY (`id`),
   KEY `manager` (`manager`),
   KEY `organization` (`organization`),
   KEY `contract` (`contract`),
   KEY `position` (`position`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=2 ;
 
 --
 -- Content of table `users`
@@ -487,7 +447,7 @@ CREATE TABLE IF NOT EXISTS `leaves_history` (
   PRIMARY KEY (`change_id`),
   KEY `changed_by` (`changed_by`),
   KEY `change_date` (`change_date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='List of changes in leave requests table' COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='List of changes in leave requests table' COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
 
 -- Tables for OAuth2 server
 CREATE TABLE oauth_clients (client_id VARCHAR(80) NOT NULL, client_secret VARCHAR(80) DEFAULT NULL, redirect_uri VARCHAR(2000) NOT NULL, grant_types VARCHAR(80), scope VARCHAR(100), user_id VARCHAR(80), CONSTRAINT clients_client_id_pk PRIMARY KEY (client_id));
@@ -538,7 +498,7 @@ CREATE TABLE IF NOT EXISTS `org_lists_employees` (
     `user` INT NOT NULL COMMENT 'id of an employee',
     `orderlist` INT NOT NULL COMMENT 'order in the list',
 INDEX `org_list_id` (`list`)
-) COMMENT = 'Children table of org_lists (custom list of employees)';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT = 'Children table of org_lists (custom list of employees)' COLLATE=utf8_general_ci;
 
 --
 -- Structure of table `parameters`
@@ -547,8 +507,9 @@ CREATE TABLE IF NOT EXISTS `parameters` (
 `name` VARCHAR(32) NOT NULL,
 `scope` INT NOT NULL COMMENT 'Either global(0) or user(1) scope',
 `value` TEXT NOT NULL COMMENT 'PHP/serialize value',
+`entity_id` TEXT NULL DEFAULT NULL COMMENT 'Entity ID (eg. user id) to which the parameter is applied',
 INDEX `param_name` (`name`, `scope`)
-) COMMENT = 'Application parameters';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Application parameters' COLLATE=utf8_general_ci;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

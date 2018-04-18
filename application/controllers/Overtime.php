@@ -13,7 +13,7 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
  * This class loads the actions allowing a manager to list and manage overtime requests
  */
 class Overtime extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -39,7 +39,7 @@ class Overtime extends CI_Controller {
         } else {
             $showAll = FALSE;
         }
-        
+
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
         $data['filter'] = $filter;
@@ -114,7 +114,7 @@ class Overtime extends CI_Controller {
             redirect('leaves');
         }
     }
-    
+
     /**
      * Send a overtime request email to the employee that requested the overtime
      * The method will check if the overtime request was accepted or rejected before sending the e-mail
@@ -134,12 +134,12 @@ class Overtime extends CI_Controller {
         $this->load->library('email');
         $this->load->library('polyglot');
         $usr_lang = $this->polyglot->code2language($employee['language']);
-        
+
         //We need to instance an different object as the languages of connected user may differ from the UI lang
         $lang_mail = new CI_Lang();
         $lang_mail->load('email', $usr_lang);
         $lang_mail->load('global', $usr_lang);
-        
+
         $date = new DateTime($extra['date']);
         $startdate = $date->format($lang_mail->line('global_date_format'));
 
@@ -152,7 +152,7 @@ class Overtime extends CI_Controller {
             'Duration' => $extra['duration'],
             'Cause' => $extra['cause']
         );
-        
+
         if ($extra['status'] == 3) {
             $message = $this->parser->parse('emails/' . $employee['language'] . '/overtime_accepted', $data, TRUE);
             $subject = $lang_mail->line('email_overtime_request_accept_subject');
@@ -162,16 +162,15 @@ class Overtime extends CI_Controller {
         }
         sendMailByWrapper($this, $subject, $message, $employee['email'], is_null($supervisor)?NULL:$supervisor->email);
     }
-    
+
     /**
      * Export the list of all overtime requests (sent to the connected user) into an Excel file
      * @param string $name Filter the list of submitted overtime requests (all or requested)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export($filter = 'requested') {
-        $this->load->library('excel');
         $data['filter'] = $filter;
         $this->load->view('overtime/export', $data);
     }
-    
+
 }

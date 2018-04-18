@@ -131,31 +131,51 @@ function sendMailByWrapper(CI_Controller $controller, $subject, $message, $to, $
 
 /**
  * Finalize the export to a spreadsheet. Called from an export view.
- * @param $context reference to CI Controller/View object
- * @param string $filename filename of the spreadsheet (xlsx, ods)
+ * @param $spreadsheet reference to the spreadsheet to be exported
  * @author Benjamin BALET <benjamin.balet@gmail.com>
  */
-function exportSpreadsheet($context, $filename)
+function writeSpreadsheet(&$spreadsheet)
 {
+    $CI =& get_instance();
     $format = 'xlsx';
     $objWriter = NULL;
-    if (in_array($context->config->item('spreadsheet_format'), array('ods', 'xlsx'))) {
-        $format = $context->config->item('spreadsheet_format');
+    if (in_array($CI->config->item('spreadsheet_format'), array('ods', 'xlsx'))) {
+        $format = $CI->config->item('spreadsheet_format');
     }
-    $filename .= '.' . $format;
-    $context->output->set_header('Cache-Control: max-age=0');
-    $context->output->set_header('Content-Disposition: attachment;filename="' . $filename . '"');
+    $filename = $spreadsheet->exportName . '.' . $format;
+    $CI->output->set_header('Cache-Control: max-age=0');
+    $CI->output->set_header('Content-Disposition: attachment;filename="' . $filename . '"');
     switch ($format) {
         case 'ods':
-            $context->output->set_header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
-            $objWriter = PHPExcel_IOFactory::createWriter($context->excel, 'OpenDocument');
+            $CI->output->set_header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
+            $objWriter = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Ods');
             break;
         case 'xlsx':
-            $context->output->set_header('Content-Type: application/vnd.ms-excel');
-            $objWriter = PHPExcel_IOFactory::createWriter($context->excel, 'Excel2007');
+            $CI->output->set_header('Content-Type: application/vnd.ms-excel');
+            $objWriter = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
             break;
     }
+    $objWriter->setIncludeCharts(true);
     $objWriter->save('php://output');
+}
+
+/**
+ * Return the excel column name for a given column index
+ * This code example:
+ * <code>
+ * echo $excel->column_name(6);
+ * </code>
+ * would return F
+ * @param int $number Column index
+ * @return string Excel representation of the column index
+ * @author Benjamin BALET <benjamin.balet@gmail.com>
+ */
+function columnName($number) {
+    if ($number < 27) {
+        return substr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", $number - 1, 1);
+    } else {
+        return substr("AAABACADAEAFAGAHAIAJAKALAMANAOAPAQARASATAUAVAWAXAYAZ", (($number -27) * 2), 2);
+    }
 }
 
 //Function cal_days_in_month might not exist with HHVM and FreeBSD without proper config
@@ -177,9 +197,9 @@ if (!function_exists('cal_days_in_month'))
             return 29;
         if (checkdate($month, 28, $year))
             return 28;
-        return 0; // error 
+        return 0; // error
     }
 }
 
-if (!defined('CAL_GREGORIAN')) 
-    define('CAL_GREGORIAN', 1); 
+if (!defined('CAL_GREGORIAN'))
+    define('CAL_GREGORIAN', 1);

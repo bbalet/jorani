@@ -15,7 +15,7 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
  * The list of postion is managed by the HR department.
  */
 class Positions extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -44,7 +44,7 @@ class Positions extends CI_Controller {
         $this->load->view('positions/index', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Display a popup showing the list of positions
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -56,7 +56,7 @@ class Positions extends CI_Controller {
         $data['positions'] = $this->positions_model->getPositions();
         $this->load->view('positions/select', $data);
     }
-    
+
     /**
      * Display a form that allows adding a position
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -67,10 +67,10 @@ class Positions extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('positions_create_title');
-        
+
         $this->form_validation->set_rules('name', lang('positions_create_field_name'), 'required|strip_tags');
         $this->form_validation->set_rules('description', lang('positions_create_field_description'), 'strip_tags');
-        
+
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
@@ -101,7 +101,7 @@ class Positions extends CI_Controller {
         }
         $this->form_validation->set_rules('name', lang('positions_edit_field_name'), 'required|strip_tags');
         $this->form_validation->set_rules('description', lang('positions_edit_field_description'), 'strip_tags');
-        
+
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
@@ -113,7 +113,7 @@ class Positions extends CI_Controller {
             redirect('positions');
         }
     }
-    
+
     /**
      * Delete a position
      * @param int $id position identifier
@@ -132,7 +132,6 @@ class Positions extends CI_Controller {
      */
     public function export() {
         $this->auth->checkIfOperationIsAllowed('export_positions');
-        $this->load->library('excel');
         $this->load->view('positions/export');
     }
 }

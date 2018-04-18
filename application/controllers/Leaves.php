@@ -138,7 +138,7 @@ class Leaves extends CI_Controller {
         if ($this->input->get('source') != NULL) {
             $data['source'] = urldecode($this->input->get('source'));
         }
-        
+
         $data['title'] = lang('leaves_view_html_title');
         if ($source == 'requests') {
             if (empty($employee)) {
@@ -414,7 +414,7 @@ class Leaves extends CI_Controller {
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-            
+
             if ($reminder) {
                 $this->sendGenericMail($leave, $user, $manager, $lang_mail,
                     $lang_mail->line('email_leave_request_reminder') . ' ' .
@@ -430,7 +430,7 @@ class Leaves extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Send a notification to the manager of the connected employee when the
      * leave request has been canceled by its collaborator.
@@ -458,7 +458,7 @@ class Leaves extends CI_Controller {
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-            
+
             $this->sendGenericMail($leave, $user, $manager, $lang_mail,
                 $lang_mail->line('email_leave_request_cancellation_title'),
                 $lang_mail->line('email_leave_request_cancellation_subject'),
@@ -492,7 +492,7 @@ class Leaves extends CI_Controller {
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-            
+
             if ($reminder) {
                 $this->sendGenericMail($leave, $user, $manager, $lang_mail,
                     $lang_mail->line('email_leave_request_reminder') . ' ' .
@@ -647,7 +647,7 @@ class Leaves extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Allows the employee to cancel a requested leave request.
      * Only the connected user can reject its own requests.
@@ -685,7 +685,6 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
-        $this->load->library('excel');
         $this->load->view('leaves/export');
     }
 

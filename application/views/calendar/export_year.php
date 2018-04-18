@@ -8,6 +8,18 @@
  * @since         0.4.3
  */
 
+require_once FCPATH . "vendor/autoload.php";
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+
+$spreadsheet = new Spreadsheet();
+$sheet = $spreadsheet->getActiveSheet();
+
 //Either self access, Manager or HR
 if ($employee == 0) {
     $employee = $this->user_id;
@@ -37,9 +49,6 @@ $months = array(
     lang('December') => $this->leaves_model->linear($employee, 12, $year, TRUE, TRUE, TRUE, TRUE),
 );
 
-
-$sheet = $this->excel->setActiveSheetIndex(0);
-
 //Print the header with the values of the export parameters
 $sheet->setTitle(mb_strimwidth(lang('calendar_year_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
 $sheet->setCellValue('A1', lang('calendar_year_title') . ' ' . $year . ' (' . $employee_name . ') ');
@@ -48,7 +57,7 @@ $sheet->mergeCells('A1:C1');
 
 //Print a line with all possible day numbers (1 to 31)
 for ($ii = 1; $ii <= 31; $ii++) {
-    $col = $this->excel->column_name(3 + $ii);
+    $col = columnName(3 + $ii);
     $sheet->setCellValue($col . '3', $ii);
 }
 
@@ -56,63 +65,65 @@ for ($ii = 1; $ii <= 31; $ii++) {
 $styleBox = array(
     'borders' => array(
         'top' => array(
-            'style' => PHPExcel_Style_Border::BORDER_THIN
+            'borderStyle' => Border::BORDER_THIN
         ),
         'bottom' => array(
-            'style' => PHPExcel_Style_Border::BORDER_THIN
+            'borderStyle' => Border::BORDER_THIN
         )
     )
   );
+
 //Box around a day
 $dayBox =  array(
     'borders' => array(
         'left' => array(
-            'style' => PHPExcel_Style_Border::BORDER_DASHDOT,
-            'rgb' => '808080'
+            'borderStyle' => Border::BORDER_DASHDOT,
+            'color' => array('rgb' => '808080')
         ),
         'right' => array(
-            'style' => PHPExcel_Style_Border::BORDER_DASHDOT,
-            'rgb' => '808080'
+            'borderStyle' => Border::BORDER_DASHDOT,
+            'color' => array('rgb' => '808080')
         )
     )
  );
+
 //To fill at the left of months having less than 31 days
  $styleMonthPad = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => '00FFFF')
+      'fillType' => Fill::FILL_SOLID,
+      'startColor' => array('rgb' => '00FFFF')
     )
 );
 
 //Background colors for the calendar according to the type of leave
 $styleBgPlanned = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => 'DDD')
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => array('rgb' => 'DDD')
     )
 );
 $styleBgRequested = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => 'F89406')
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => array('rgb' => 'F89406')
     )
 );
 $styleBgAccepted = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => '468847')
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => array('rgb' => '468847')
     )
 );
 $styleBgRejected = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => 'FF0000')
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => array('rgb' => 'FF0000')
     )
 );
 $styleBgDayOff = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => '000000')
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => array('rgb' => '000000')
     )
 );
 
@@ -122,14 +133,14 @@ foreach ($months as $month_name => $month) {
     //Merge the two line containing the name of the month and apply a border around it
     $sheet->setCellValue('C' . $line, $month_name);
     $sheet->mergeCells('C' . $line . ':C' . ($line + 1));
-    $col = $this->excel->column_name(34);
+    $col = columnName(34);
     $sheet->getStyle('C' . $line . ':' . $col . ($line + 1))->applyFromArray($styleBox);
 
     //Iterate on all days of the selected month
     $dayNum = 0;
     foreach ($month->days as $day) {
         $dayNum++;
-        $col = $this->excel->column_name(3 + $dayNum);
+        $col = columnName(3 + $dayNum);
         if (strstr($day->display, ';')) {//Two statuses in the cell
             $statuses = explode(";", $day->status);
             $types = explode(";", $day->type);
@@ -215,8 +226,8 @@ foreach ($months as $month_name => $month) {
     }//day
     if ($dayNum < 31) {
         $pad = (int) (35 - (31 - $dayNum));
-        $colFrom = $this->excel->column_name($pad);
-        $colTo = $this->excel->column_name(34);
+        $colFrom = columnName($pad);
+        $colTo = columnName(34);
         $sheet->mergeCells($colFrom . $line . ':' . $colTo . ($line + 1));
         $sheet->getStyle($colFrom . $line . ':' . $colTo . ($line + 1))->applyFromArray($styleMonthPad);
     }
@@ -225,7 +236,7 @@ foreach ($months as $month_name => $month) {
 
 //Autofit for all column containing the days
 for ($ii = 1; $ii <= 31; $ii++) {
-    $col = $this->excel->column_name($ii + 3);
+    $col = columnName($ii + 3);
     $sheet->getStyle($col . '3:' . $col . ($line - 1))->applyFromArray($dayBox);
     $sheet->getColumnDimension($col)->setAutoSize(TRUE);
 }
@@ -233,11 +244,12 @@ $sheet->getColumnDimension('A')->setAutoSize(TRUE);
 $sheet->getColumnDimension('B')->setAutoSize(TRUE);
 $sheet->getColumnDimension('C')->setWidth(40);
 
-//Set layout to landscape and make the Excel sheet fit to the page
-$sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
-$sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
-$sheet->getPageSetup()->setFitToPage(true);
+//Set layout to landscape and make the Excel sheet to fit to the page
+$sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+$sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4);
+$sheet->getPageSetup()->setFitToPage(TRUE);
 $sheet->getPageSetup()->setFitToWidth(1);
 $sheet->getPageSetup()->setFitToHeight(0);
 
-exportSpreadsheet($this, 'year');
+$spreadsheet->exportName = 'year';
+writeSpreadsheet($spreadsheet);

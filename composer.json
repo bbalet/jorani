@@ -11,7 +11,6 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "phpoffice/phpexcel": "^1.8",
         "sabre/vobject": "^4.1",
         "phpseclib/phpseclib": "^2.0",
         "onelogin/php-saml": "^2.10",
@@ -21,6 +20,8 @@
         "sabre/xml": "~1.5",
         "sabre/uri": "1",
         "willdurand/negotiation":"2.x-dev#cf78c9a",
-        "sepia/po-parser": "dev-master"
+        "sepia/po-parser": "dev-master",
+        "phpoffice/phpspreadsheet": "dev-master",
+        "jpgraph/jpgraph": "dev-master"
     }
 }

@@ -180,7 +180,6 @@ class Reports extends CI_Controller {
         $this->load->model('leaves_model');
         $this->load->model('types_model');
         $this->load->model('organization_model');
-        $this->load->library('excel');
         $data['refDate'] = date("Y-m-d");
         if (isset($_GET['refDate']) && $_GET['refDate'] != NULL) {
             $data['refDate'] = date("Y-m-d", $_GET['refDate']);
@@ -380,7 +379,6 @@ class Reports extends CI_Controller {
         $this->load->model('leaves_model');
         $this->load->model('types_model');
         $this->load->model('dayoffs_model');
-        $this->load->library('excel');
         $data['refDate'] = date("Y-m-d");
         if (isset($_GET['refDate']) && $_GET['refDate'] != NULL) {
             $data['refDate'] = date("Y-m-d", $_GET['refDate']);

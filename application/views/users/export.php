@@ -7,7 +7,18 @@
  * @since         0.2.0
  */
 
-$sheet = $this->excel->setActiveSheetIndex(0);
+require_once FCPATH . "vendor/autoload.php";
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+
+$spreadsheet = new Spreadsheet();
+$sheet = $spreadsheet->getActiveSheet();
+
 $sheet->setTitle(mb_strimwidth(lang('users_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
 $sheet->setCellValue('A1', lang('users_export_thead_id'));
 $sheet->setCellValue('B1', lang('users_export_thead_firstname'));
@@ -16,7 +27,7 @@ $sheet->setCellValue('D1', lang('users_export_thead_email'));
 $sheet->setCellValue('E1', lang('users_export_thead_manager'));
 
 $sheet->getStyle('A1:E1')->getFont()->setBold(true);
-$sheet->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+$sheet->getStyle('A1:E1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
 $users = $this->users_model->getUsers();
 $line = 2;
@@ -34,4 +45,5 @@ foreach(range('A', 'E') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-exportSpreadsheet($this, 'users');
+$spreadsheet->exportName = 'users';
+writeSpreadsheet($spreadsheet);

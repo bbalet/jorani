@@ -7,7 +7,18 @@
  * @since         0.2.0
  */
 
-$sheet = $this->excel->setActiveSheetIndex(0);
+require_once FCPATH . "vendor/autoload.php";
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+
+$spreadsheet = new Spreadsheet();
+$sheet = $spreadsheet->getActiveSheet();
+
 $sheet->setTitle(mb_strimwidth(lang('reports_export_balance_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
 $result = array();
 $summary = array();
@@ -43,7 +54,7 @@ foreach ($result as $row) {
     $index = 1;
     foreach ($row as $key => $value) {
         if ($line == 2) {
-            $colidx = $this->excel->column_name($index) . '1';
+            $colidx = columnName($index) . '1';
             if (in_array($key, $i18n)) {
                 $sheet->setCellValue($colidx, lang($key));
             } else {
@@ -51,21 +62,22 @@ foreach ($result as $row) {
             }
             $max++;
         }
-        $colidx = $this->excel->column_name($index) . $line;
+        $colidx = columnName($index) . $line;
         $sheet->setCellValue($colidx, $value);
         $index++;
     }
     $line++;
 }
 
-$colidx = $this->excel->column_name($max) . '1';
+$colidx = columnName($max) . '1';
 $sheet->getStyle('A1:' . $colidx)->getFont()->setBold(true);
-$sheet->getStyle('A1:' . $colidx)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+$sheet->getStyle('A1:' . $colidx)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
 //Autofit
 for ($ii=1; $ii <$max; $ii++) {
-    $col = $this->excel->column_name($ii);
+    $col = columnName($ii);
     $sheet->getColumnDimension($col)->setAutoSize(TRUE);
 }
 
-exportSpreadsheet($this, 'leave_balance');
+$spreadsheet->exportName = 'leave_balance';
+writeSpreadsheet($spreadsheet);

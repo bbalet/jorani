@@ -438,7 +438,6 @@ class Requests extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export($filter = 'requested') {
-        $this->load->library('excel');
         $data['filter'] = $filter;
         $this->load->view('requests/export', $data);
     }

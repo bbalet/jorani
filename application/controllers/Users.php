@@ -44,7 +44,7 @@ class Users extends CI_Controller {
         $this->load->view('users/index', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Set a user as active (TRUE) or inactive (FALSE)
      * @param int $id User identifier
@@ -57,18 +57,18 @@ class Users extends CI_Controller {
         $this->session->set_flashdata('msg', lang('users_edit_flash_msg_success'));
         redirect('users');
     }
-    
+
     /**
-     * Enable a user 
+     * Enable a user
      * @param int $id User identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function enable($id) {
         $this->active($id, TRUE);
     }
-    
+
     /**
-     * Disable a user 
+     * Disable a user
      * @param int $id User identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -105,7 +105,7 @@ class Users extends CI_Controller {
         $data['title'] = lang('employees_index_title');
         $this->load->view('users/multiselect', $data);
     }
-    
+
     /**
      * Display details of the connected user (contract, line manager, etc.)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -134,7 +134,7 @@ class Users extends CI_Controller {
         $this->load->view('users/myprofile', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Display a for that allows updating a given user
      * @param int $id User identifier
@@ -148,7 +148,7 @@ class Users extends CI_Controller {
         $this->load->library('polyglot');
         $data['title'] = lang('users_edit_html_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_create_user');
-        
+
         $this->form_validation->set_rules('firstname', lang('users_edit_field_firstname'), 'required|strip_tags');
         $this->form_validation->set_rules('lastname', lang('users_edit_field_lastname'), 'required|strip_tags');
         $this->form_validation->set_rules('login', lang('users_edit_field_login'), 'required|strip_tags');
@@ -163,7 +163,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('language', lang('users_edit_field_language'), 'strip_tags');
         $this->form_validation->set_rules('timezone', lang('users_edit_field_timezone'), 'strip_tags');
         if ($this->config->item('ldap_basedn_db')) $this->form_validation->set_rules('ldap_path', lang('users_edit_field_ldap_path'), 'strip_tags');
-        
+
         $data['users_item'] = $this->users_model->getUsers($id);
         if (empty($data['users_item'])) {
             redirect('notfound');
@@ -199,7 +199,7 @@ class Users extends CI_Controller {
      * @param int $id User identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function delete($id) { 
+    public function delete($id) {
         $this->auth->checkIfOperationIsAllowed('delete_user');
         //Test if user exists
         $data['users_item'] = $this->users_model->getUsers($id);
@@ -238,7 +238,7 @@ class Users extends CI_Controller {
                 $this->load->view('users/reset', $data);
             } else {
                 $this->users_model->resetPassword($id, $this->input->post('CipheredValue'));
-                
+
                 //Send an e-mail to the user so as to inform that its password has been changed
                 $user = $this->users_model->getUsers($id);
                 $this->load->library('email');
@@ -256,7 +256,7 @@ class Users extends CI_Controller {
                 );
                 $message = $this->parser->parse('emails/' . $user['language'] . '/password_reset', $data, TRUE);
                 $this->email->set_encoding('quoted-printable');
-                
+
                 if ($this->config->item('from_mail') != FALSE && $this->config->item('from_name') != FALSE ) {
                     $this->email->from($this->config->item('from_mail'), $this->config->item('from_name'));
                 } else {
@@ -271,7 +271,7 @@ class Users extends CI_Controller {
                 $this->email->subject($subject . $lang_mail->line('email_password_reset_subject'));
                 $this->email->message($message);
                 $this->email->send();
-                
+
                 //Inform back the user by flash message
                 $this->session->set_flashdata('msg', lang('users_reset_flash_msg_success'));
                 if ($this->is_hr) {
@@ -326,14 +326,14 @@ class Users extends CI_Controller {
             $this->load->view('templates/footer');
         } else {
             $password = $this->users_model->setUsers();
-            
+
             //Send an e-mail to the user so as to inform that its account has been created
             $this->load->library('email');
             $usr_lang = $this->polyglot->code2language($this->input->post('language'));
             //We need to instance an different object as the languages of connected user may differ from the UI lang
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
-            
+
             $this->load->library('parser');
             $data = array(
                 'Title' => $lang_mail->line('email_user_create_title'),
@@ -360,12 +360,12 @@ class Users extends CI_Controller {
             $this->email->subject($subject . $lang_mail->line('email_user_create_subject'));
             $this->email->message($message);
             $this->email->send();
-            
+
             $this->session->set_flashdata('msg', lang('users_create_flash_msg_success'));
             redirect('users');
         }
     }
-   
+
     /**
      * Form validation callback : prevent from login duplication
      * @param string $login Login
@@ -380,7 +380,7 @@ class Users extends CI_Controller {
             return TRUE;
         }
     }
-    
+
     /**
      * Ajax endpoint : check login duplication
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -400,7 +400,6 @@ class Users extends CI_Controller {
      */
     public function export() {
         $this->auth->checkIfOperationIsAllowed('export_user');
-        $this->load->library('excel');
         $this->load->view('users/export');
     }
 }

@@ -8,7 +8,18 @@
  * @since         0.2.0
  */
 
-$sheet = $this->excel->setActiveSheetIndex(0);
+require_once FCPATH . "vendor/autoload.php";
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+
+$spreadsheet = new Spreadsheet();
+$sheet = $spreadsheet->getActiveSheet();
+
 $sheet->setTitle(mb_strimwidth(lang('hr_export_employees_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
 $sheet->setCellValue('A1', lang('hr_export_employees_thead_id'));
 $sheet->setCellValue('B1', lang('hr_export_employees_thead_firstname'));
@@ -18,7 +29,7 @@ $sheet->setCellValue('E1', lang('hr_export_employees_thead_entity'));
 $sheet->setCellValue('F1', lang('hr_export_employees_thead_contract'));
 $sheet->setCellValue('G1', lang('hr_export_employees_thead_manager'));
 $sheet->getStyle('A1:G1')->getFont()->setBold(true);
-$sheet->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+$sheet->getStyle('A1:G1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 $employees = $this->users_model->employeesOfEntity($id, $children, $filterActive, $criterion1, $date1, $criterion2, $date2);
 
 $line = 2;
@@ -38,4 +49,5 @@ foreach(range('A', 'G') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-exportSpreadsheet($this, 'employees');
+$spreadsheet->exportName = 'employees';
+writeSpreadsheet($spreadsheet);

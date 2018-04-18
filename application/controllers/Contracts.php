@@ -426,7 +426,6 @@ class Contracts extends CI_Controller {
      */
     public function export() {
         $this->auth->checkIfOperationIsAllowed('export_contracts');
-        $this->load->library('excel');
         $this->load->view('contracts/export');
     }
 }

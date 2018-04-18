@@ -104,7 +104,7 @@ class Delegations_model extends CI_Model {
         $this->db->where('manager_id', $id);
         $query = $this->db->get();
         $results = $query->row_array();
-        if (count($results) > 0) {
+        if (!empty($results)) {
             return $results['list'];
         } else {
             return '';

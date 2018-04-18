@@ -37,7 +37,7 @@ class Users_model extends CI_Model {
         $query = $this->db->get_where('users', array('users.id' => $id));
         return $query->row_array();
     }
-    
+
     /**
      * Get the list of users and their roles
      * @return array record of users
@@ -51,7 +51,7 @@ class Users_model extends CI_Model {
         $query = $this->db->get('users');
         return $query->result_array();
     }
-    
+
     /**
      * Get the list of employees
      * @return array record of users
@@ -78,7 +78,7 @@ class Users_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-    
+
     /**
      * Get the name of a given user
      * @param int $id Identifier of employee
@@ -87,11 +87,11 @@ class Users_model extends CI_Model {
      */
     public function getName($id) {
         $record = $this->getUsers($id);
-        if (count($record) > 0) {
+        if (!empty($record)) {
             return $record['firstname'] . ' ' . $record['lastname'];
         }
     }
-    
+
     /**
      * Get the list of employees that are the collaborators of the given user
      * @param int $id identifier of the manager
@@ -111,7 +111,7 @@ class Users_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-    
+
     /**
      * Check if an employee is the collaborator of the given user
      * @param int $employee identifier of the collaborator
@@ -126,7 +126,7 @@ class Users_model extends CI_Model {
         $result = $this->db->get()->result_array();
         return (count($result) > 0);
     }
-    
+
     /**
      * Check if a login can be used before creating the user
      * @param string $login login identifier
@@ -144,7 +144,7 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
     /**
      * Delete a user from the database
      * @param int $id identifier of the user
@@ -188,13 +188,13 @@ class Users_model extends CI_Model {
         //Hash the clear password using bcrypt (8 iterations)
         $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
         $hash = crypt($password, $salt);
-        
+
         //Role field is a binary mask
         $role = 0;
         foreach($this->input->post("role") as $role_bit){
             $role = $role | $role_bit;
         }
-        
+
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
@@ -208,7 +208,7 @@ class Users_model extends CI_Model {
             'language' => $this->input->post('language'),
             'timezone' => $this->input->post('timezone')
         );
-        
+
         if ($this->input->post('entity') != NULL && $this->input->post('entity') != '') {
             $data['organization'] = $this->input->post('entity');
         }
@@ -218,12 +218,12 @@ class Users_model extends CI_Model {
         if ($this->input->post('datehired') != NULL && $this->input->post('datehired') != '') {
             $data['datehired'] = $this->input->post('datehired');
         }
-        
+
         if ($this->config->item('ldap_basedn_db')!==FALSE) {
             $data['ldap_path'] = $this->input->post('ldap_path');
         }
         $this->db->insert('users', $data);
-        
+
         //Deal with user having no line manager
         if ($this->input->post('manager') == -1) {
             $id = $this->db->insert_id();
@@ -235,7 +235,7 @@ class Users_model extends CI_Model {
         }
         return $password;
     }
-    
+
     /**
      * Create a user record in the database. the difference with set_users function is that it doesn't rely
      * on values posted by en HTML form. Can be used by a mass importer for example.
@@ -317,27 +317,27 @@ class Users_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('users', $data);
     }
-    
+
     /**
      * Update a given user in the database. Update data are coming from an HTML form
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function updateUsers() {
-        
+
         //Role field is a binary mask
         $role = 0;
         foreach($this->input->post("role") as $role_bit){
             $role = $role | $role_bit;
         }
-        
+
         //Deal with user having no line manager
         if ($this->input->post('manager') == -1) {
             $manager = $this->input->post('id');
         } else {
             $manager = $this->input->post('manager');
         }
-        
+
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
@@ -396,7 +396,7 @@ class Users_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('users', $data);
     }
-    
+
     /**
      * Reset a password. Generate a new password and store its hash into db.
      * @param int $id User identifier
@@ -417,7 +417,7 @@ class Users_model extends CI_Model {
         $this->db->update('users', $data);
         return $password;
     }
-    
+
     /**
      * Generate a random password
      * @param int $length length of the generated password
@@ -429,7 +429,7 @@ class Users_model extends CI_Model {
         $password = substr( str_shuffle( $chars ), 0, $length );
         return $password;
     }
-    
+
     /**
      * Load the profile of a user from the database to the session variables
      * @param array $row database record of a user
@@ -506,7 +506,7 @@ class Users_model extends CI_Model {
             }
         }
     }
-    
+
     /**
      * Check the provided credentials and load user's profile if they are correct
      * It is the LDAP binding operation that checks if Password is correct.
@@ -527,7 +527,7 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
     /**
      * Check the provided credentials and load user's profile if they are correct
      * Mostly used for alternative signin mechanisms such as SSO
@@ -556,7 +556,7 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
      /**
      * Get the LDAP Authentication path of a user
      * @param string $login user login
@@ -575,7 +575,7 @@ class Users_model extends CI_Model {
             return "";
         }
     }
-    
+
     /**
      * Get the list of employees or one employee
      * @param int $id optional id of the entity, all entities if 0
@@ -620,7 +620,7 @@ class Users_model extends CI_Model {
         } else {
             $this->db->where('users.organization', $id);
         }
-        
+
         //Triple value for active filter ("all" = no where criteria)
         if ($filterActive == "active") {
             $this->db->where('users.active', TRUE);
@@ -628,7 +628,7 @@ class Users_model extends CI_Model {
         if ($filterActive == "inactive") {
             $this->db->where('users.active', FALSE);
         }
-        
+
         if (!is_null($criterion1) && !is_null($date1) && $date1!="empty" && $date1!="undefined") {
             $criterion1 = ($criterion1 == "greater"?">":"<");
             $this->db->where("users.datehired " . $criterion1 . " STR_TO_DATE('" . $date1 . "', '%Y-%m-%d')");
@@ -637,10 +637,10 @@ class Users_model extends CI_Model {
             $criterion2 = ($criterion2 == "greater"?">":"<");
             $this->db->where("users.datehired " . $criterion2 . " STR_TO_DATE('" . $date2 . "', '%Y-%m-%d')");
         }
-        
+
         return $this->db->get()->result();
     }
-    
+
     /**
      * Update all employees when a contract is deleted (set the field to NULL)
      * @param int $id Contract ID
@@ -653,7 +653,7 @@ class Users_model extends CI_Model {
         $result = $this->db->update('users');
         return $result;
     }
-    
+
     /**
      * Set a user as active (TRUE) or inactive (FALSE)
      * @param int $id User identifier
@@ -666,7 +666,7 @@ class Users_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('users');
     }
-    
+
     /**
      * Check if a user is active (TRUE) or inactive (FALSE)
      * @param string $login login of a user
@@ -684,7 +684,7 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
     /**
      * Check if a user is active (TRUE) or inactive (FALSE)
      * @param string $email e-mail of a user
@@ -702,7 +702,7 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
     /**
      * Try to return the user information from the login field
      * @param string $login Login
@@ -720,7 +720,7 @@ class Users_model extends CI_Model {
             return $query->row();
         }
     }
-    
+
     /**
      * Generate some random bytes by using openssl, dev/urandom or random
      * @param int $count length of the random string
@@ -751,7 +751,7 @@ class Users_model extends CI_Model {
         }
         return $rnd;
     }
-    
+
     /**
      * Update the manager of a list of employees
      * @param int $managerId DB Identifier of the manager
@@ -767,7 +767,7 @@ class Users_model extends CI_Model {
         $result = $this->db->update('users', $data);
         return $result;
     }
-    
+
     /**
      * Update the entity of a list of employees
      * @param int $entityId DB Identifier of the entity
@@ -783,7 +783,7 @@ class Users_model extends CI_Model {
         $result = $this->db->update('users', $data);
         return $result;
     }
-    
+
     /**
      * Update the contract of a list of employees
      * @param int $contractId DB Identifier of the contract

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays the organization tree and allows to attach and detach employees from sub-entities.
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
@@ -113,8 +113,8 @@
 
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/datatable/Select-1.1.2/css/select.dataTables.min.css" rel="stylesheet">
-<link rel="stylesheet" href='<?php echo base_url(); ?>assets/jsTree-3.3.3/themes/default/style.css' type="text/css" media="screen, projection" />
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/jsTree-3.3.3/jstree.min.js"></script>
+<link rel="stylesheet" href='<?php echo base_url(); ?>assets/jsTree-3.3.5/themes/default/style.css' type="text/css" media="screen, projection" />
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/jsTree-3.3.5/jstree.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/Select-1.1.2/js/dataTables.select.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
@@ -124,7 +124,7 @@
     var oTable;
     //Mutex to prevent rename the root node
     var createMtx = false;
-    
+
     function add_employee() {
         var employees = $('#employees').DataTable();
         var id = employees.rows({selected: true}).data()[0][0];
@@ -144,7 +144,7 @@
             $("#frmAddEmployee").modal('hide');
           });
     }
-    
+
     function select_supervisor() {
         $("#frmSelectSupervisor").modal('hide');
         $('#frmModalAjaxWait').modal('show');
@@ -163,7 +163,7 @@
             $('#frmModalAjaxWait').modal('hide');
           });
     }
-    
+
     function delete_supervisor() {
         $('#frmModalAjaxWait').modal('show');
         var entity = $('#organization').jstree('get_selected')[0];
@@ -178,14 +178,14 @@
             $('#frmModalAjaxWait').modal('hide');
           });
     }
-    
+
     $(function () {
         //Global Ajax error handling mainly used for session expiration
         $( document ).ajaxError(function(event, jqXHR, settings, errorThrown) {
             $('#frmModalAjaxWait').modal('hide');
             if (jqXHR.status == 401) {
                 bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                    //After the login page, we'll be redirected to the current page 
+                    //After the login page, we'll be redirected to the current page
                    location.reload();
                 });
             } else { //Oups
@@ -195,7 +195,7 @@
                 }
             }
           });
-    
+
         //On confirm the deletion of the node, launch heavy cascade deletion
         $("#lnkDeleteEntity").click(function() {
             $.ajax({
@@ -204,12 +204,12 @@
                 data: { 'entity': $('#frmConfirmDelete').data('id') }
               })
               .done(function(msg) {
-                $("#organization").jstree("select_node", "0"); 
+                $("#organization").jstree("select_node", "0");
                 $("#organization").jstree("refresh");
                 $("#frmConfirmDelete").modal('hide');
               });
         });
-       
+
         //Attach an employee to an entity
         $("#cmdAddEmployee").click(function() {
             if ($("#organization").jstree('get_selected').length == 1) {
@@ -231,7 +231,7 @@
                 $("#frmError").modal('show');
             }
         });
-        
+
         //Delete the supervisor of the entity
         $("#cmdDeleteSupervisor").click(function() {
             if ($("#organization").jstree('get_selected').length == 1) {
@@ -283,7 +283,7 @@
             $( "#employees" ).remove();
             $(this).removeData('modal');
         });
-        
+
         //Search in the treeview
         $("#cmdSearch").click(function () {
             $("#organization").jstree("search", $("#txtSearch").val(), true, true);
@@ -291,7 +291,7 @@
         $("#txtSearch").keyup(function(e) {
             if (e.keyCode == 13) { $("#organization").jstree("search", $("#txtSearch").val(), true, true); }   // enter key
         });
-        
+
         //Clear the Search option in the treeview
         $("#cmdClearSearch").click(function () {
             $("#organization").jstree("clear_search");
@@ -299,7 +299,7 @@
         $(document).keyup(function(e) {
             if (e.keyCode == 27) { $("#organization").jstree("clear_search"); }   // escape key
         });
-        
+
         //Transform the HTML table in a fancy datatable
         oTable = $('#collaborators').DataTable({
             columns: [
@@ -333,7 +333,7 @@
                 }
             }
         });
-        
+
         //Initialize the tree of the organization
         $('#organization').jstree({
             contextmenu: {
@@ -360,8 +360,8 @@
               multiple : false,
               data: {
                 url: function (node) {
-                  return node.id === '#' ? 
-                    '<?php echo base_url(); ?>organization/root' : 
+                  return node.id === '#' ?
+                    '<?php echo base_url(); ?>organization/root' :
                     '<?php echo base_url(); ?>organization/children';
                 },
                 data: function (node) {
@@ -444,7 +444,7 @@
                         } else {
                             $('#txtSupervisor').val("");
                         }
-                        $.when(isTableLoaded, isTableLoaded).done(function() { 
+                        $.when(isTableLoaded, isTableLoaded).done(function() {
                             $("#frmModalAjaxWait").modal('hide');
                         });
                   });

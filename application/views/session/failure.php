@@ -52,7 +52,7 @@
     <?php } ?>
     <h4><?php echo $message;?></h4>
     <br />
-    <a href="<?php echo base_url();?>api/sso" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></a>
+    <a href="<?php echo base_url();?>api/sso" class="btn btn-primary"><i class="mdi mdi-login"></i>&nbsp;<?php echo lang('session_login_button_login');?></a>
     <br /><br />
                 </div>
                 <div class="span6" style="height:100%;">

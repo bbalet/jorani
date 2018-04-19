@@ -29,8 +29,8 @@
     <tr data-id="<?php echo $days['id'] ?>">
       <td>
         <a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_delete');?>"><i class="icon-remove"></i></a>
-        &nbsp;<a href="#" onclick="copy_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_copy');?>"><i class="fa fa-copy" style="color:black;"></i></a>
-        &nbsp;<a href="#" onclick="show_edit_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
+        &nbsp;<a href="#" onclick="copy_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_copy');?>"><i class="fa fa-copy nolink"></i></a>
+        &nbsp;<a href="#" onclick="show_edit_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_edit');?>"><i class="mdi mdi-pencil nolink"></i></a>
       </td>
 <?php $startDate = new DateTime($days['startdate']);
 $endDate = new DateTime($days['enddate']);?>
@@ -49,8 +49,8 @@ $endDate = new DateTime($days['enddate']);?>
 
 <div class="row-fluid">
     <div class="span6">
-        <a href="<?php echo base_url();?>hr/employees" class="btn btn-danger"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('entitleddays_user_index_button_back');?></a>
-        <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="show_add_entitleddays();"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('entitleddays_user_index_button_add');?></button>
+        <a href="<?php echo base_url();?>hr/employees" class="btn btn-danger"><i class="mdi mdi-arrow-left-bold"></i>&nbsp;<?php echo lang('entitleddays_user_index_button_back');?></a>
+        <button id="cmdAddEntitledDays" class="btn btn-primary" onclick="show_add_entitleddays();"><i class="mdi mdi-plus-circle"></i>&nbsp;<?php echo lang('entitleddays_user_index_button_add');?></button>
     </div>
     <div class="span6">
         <div class="pull-right">
@@ -336,8 +336,8 @@ if ($language_code != 'en') { ?>
               id = parseInt(msg);
               htmlRow = '<tr data-id="' + id + '">' +
                         '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_user_index_thead_tip_delete');?>"><i class="icon-remove"></i></a>' +
-                        '&nbsp;&nbsp;<a href="#" onclick="copy_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_user_index_thead_tip_copy');?>"><i class="fa fa-copy" style="color:black;"></i></a>' +
-                        '&nbsp;&nbsp;<a href="#" onclick="show_edit_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_user_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a></td>' +
+                        '&nbsp;&nbsp;<a href="#" onclick="copy_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_user_index_thead_tip_copy');?>"><i class="fa fa-copy nolink"></i></a>' +
+                        '&nbsp;&nbsp;<a href="#" onclick="show_edit_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_user_index_thead_tip_edit');?>"><i class="mdi mdi-pencil nolink"></i></a></td>' +
                         '<td data-order="' + moment.utc(startdate, "YYYY-MM-DD").unix() + '">' + viz_startdate + '</td>' +
                         '<td data-order="' + moment.utc(enddate, "YYYY-MM-DD").unix() + '">' + viz_enddate + '</td>' +
                         '<td data-order="' + days.toFixed(2) + '"><span id="days' + id + '" class="credit">' + days.toFixed(2) + '</span> &nbsp; ' +

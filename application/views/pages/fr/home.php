@@ -1,6 +1,6 @@
 <h1>Gestion des congés et des heures supplémentaires</h1>
 
-<p>Bienvenue dans Jorani. N'hésitez pas à cliquer sur l'icône d'aide en ligne de chacun des écrans (<i class="icon-question-sign"></i>). Cela vous donnera accès à la documentation en Français de la fonctionnalité que vous êtes en train d'utiliser.</p>
+<p>Bienvenue dans Jorani. N'hésitez pas à cliquer sur l'icône d'aide en ligne de chacun des écrans (<i class="mdi mdi-help-circle-outline"></i>). Cela vous donnera accès à la documentation en Français de la fonctionnalité que vous êtes en train d'utiliser.</p>
 
 <h4>Pour les employés</h4>
 

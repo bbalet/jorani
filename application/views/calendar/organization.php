@@ -30,13 +30,13 @@
             <input type="checkbox" class="input-centered" checked id="chkIncludeDaysOffs" name="chkIncludeDaysOffs"> <?php echo lang('calendar_individual_day_offs');?>
         </label>
         <div class="input-prepend input-append">
-            <button id="cmdPrevious" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_previous');?>"><i class="icon-chevron-left icon-white"></i></button>
+            <button id="cmdPrevious" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_previous');?>"><i class="mdi mdi-chevron-left"></i></button>
             <input type="text" id="txtMonthYear" style="cursor:pointer;" value="<?php echo $monthName . ' ' . $year;?>" class="input-medium" readonly />
-            <button id="cmdNext" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_next');?>"><i class="icon-chevron-right icon-white"></i></button>
+            <button id="cmdNext" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_next');?>"><i class="mdi mdi-chevron-right"></i></button>
         </div>
     </div>
     <?php if (($this->config->item('ics_enabled') == TRUE) && ($logged_in == TRUE)) {?>
-    <div class="span2 pull-right"><a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a></div>
+    <div class="span2 pull-right"><a id="lnkICS" href="#"><i class="mdi mdi-earth nolink"></i> ICS</a></div>
     <?php } else {?>
     <div class="span2">&nbsp;</div>
     <?php }?>
@@ -100,7 +100,7 @@
                 <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
                     value="" />
                  <button id="cmdCopy" class="btn" data-clipboard-target="#txtIcsUrl">
-                     <i class="fa fa-clipboard"></i>
+                     <i class="mdi mdi-content-copy"></i>
                  </button>
                 <a href="#" id="tipCopied" data-toggle="tooltip" title="copied" data-placement="right" data-container="#cmdCopy"></a>
         </div>

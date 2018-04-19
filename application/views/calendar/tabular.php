@@ -30,9 +30,9 @@
         <?php echo lang('calendar_tabular_field_month');?> / <?php echo lang('calendar_tabular_field_year');?>
         </label>
         <div class="input-prepend input-append">
-            <button id="cmdPrevious" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_previous');?>"><i class="icon-chevron-left icon-white"></i></button>
+            <button id="cmdPrevious" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_previous');?>"><i class="mdi mdi-chevron-left"></i></button>
             <input type="text" style="cursor:pointer;" id="txtMonthYear" name="txtMonthYear" value="<?php echo $monthName . ' ' . $year;?>" class="input-medium" readonly />
-            <button id="cmdNext" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_next');?>"><i class="icon-chevron-right icon-white"></i></button>
+            <button id="cmdNext" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_next');?>"><i class="mdi mdi-chevron-right"></i></button>
         </div>
     </div>
     <div class="span3">
@@ -42,7 +42,7 @@
     </div>
     <div class="span2">
         <span class="pull-right">
-            <button id="cmdExport" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('calendar_tabular_button_export');?></button>
+            <button id="cmdExport" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp;<?php echo lang('calendar_tabular_button_export');?></button>
         </span>
     </div>
 </div>

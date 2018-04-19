@@ -95,7 +95,7 @@
                 if (($leave['status'] == LMS_PLANNED)) {
                     $showEdit = TRUE;
                 }
-                if (($leave['status'] == LMS_REJECTED) && 
+                if (($leave['status'] == LMS_REJECTED) &&
                         ($this->config->item('edit_rejected_requests') === TRUE)) {
                     $showEdit = TRUE;
                 }
@@ -107,12 +107,12 @@
                 if ($leave['status'] == LMS_PLANNED) {
                     $showDelete = TRUE;
                 }
-                if (($leave['status'] == LMS_REJECTED) && 
+                if (($leave['status'] == LMS_REJECTED) &&
                         ($this->config->item('delete_rejected_requests') === TRUE)) {
                     $showDelete = TRUE;
                 }
                 //Reminder rules
-                if (($leave['status'] == LMS_REQUESTED) || 
+                if (($leave['status'] == LMS_REQUESTED) ||
                         ($leave['status'] == LMS_CANCELLATION)) {
                     $showReminder = TRUE;
                 }
@@ -122,29 +122,29 @@
                 }
                 ?>
                 <?php if ($showEdit == TRUE) { ?>
-                <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
+                <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_edit');?>"><i class="mdi mdi-pencil nolink"></i></a>
                 &nbsp;
                 <?php } ?>
                 <?php if ($showDelete == TRUE) { ?>
-                <a href="#" class="confirm-delete" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('leaves_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
+                <a href="#" class="confirm-delete" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('leaves_index_thead_tip_delete');?>"><i class="mdi mdi-delete nolink"></i></a>
                 &nbsp;
                 <?php } ?>
                 <?php if ($showCancel == TRUE) { ?>
-                    <a href="<?php echo base_url();?>leaves/cancellation/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_cancel');?>"><i class="fa fa-undo" style="color:black;"></i></a>
+                    <a href="<?php echo base_url();?>leaves/cancellation/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_cancel');?>"><i class="fa fa-undo nolink"></i></a>
                     &nbsp;
                 <?php } ?>
                 <?php if ($showCancelByUser == TRUE) { ?>
-                    <a href="<?php echo base_url();?>leaves/cancel/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_cancel');?>"><i class="fa fa-undo" style="color:black;"></i></a>
+                    <a href="<?php echo base_url();?>leaves/cancel/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_cancel');?>"><i class="fa fa-undo nolink"></i></a>
                     &nbsp;
                 <?php } ?>
                 <?php if ($showReminder == TRUE) { ?>
-                    <a href="<?php echo base_url();?>leaves/reminder/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_button_send_reminder');?>"><i class="fa fa-envelope" style="color:black;"></i></a>
+                    <a href="<?php echo base_url();?>leaves/reminder/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_button_send_reminder');?>"><i class="fa fa-envelope nolink"></i></a>
                     &nbsp;
                 <?php } ?>
-                <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
+                <a href="<?php echo base_url();?>leaves/leaves/<?php echo $leave['id']; ?>" title="<?php echo lang('leaves_index_thead_tip_view');?>"><i class="mdi mdi-eye nolink"></i></a>
                 <?php if ($this->config->item('enable_history') === TRUE) { ?>
                 &nbsp;
-                <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('leaves_index_thead_tip_history');?>"><i class="icon-time"></i></a>
+                <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('leaves_index_thead_tip_history');?>"><i class="mdi mdi-history nolink"></i></a>
                 <?php } ?>
             </div>
         </td>
@@ -176,12 +176,12 @@
 
 <div class="row-fluid">
     <div class="span12">
-      <a href="<?php echo base_url();?>leaves/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('leaves_index_button_export');?></a>
+      <a href="<?php echo base_url();?>leaves/export" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp; <?php echo lang('leaves_index_button_export');?></a>
       &nbsp;&nbsp;
-      <a href="<?php echo base_url();?>leaves/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('leaves_index_button_create');?></a>
+      <a href="<?php echo base_url();?>leaves/create" class="btn btn-primary"><i class="mdi mdi-plus-circle"></i>&nbsp; <?php echo lang('leaves_index_button_create');?></a>
       &nbsp;&nbsp;
         <?php if ($this->config->item('ics_enabled') == TRUE) {?>
-        <a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a>
+        <a id="lnkICS" href="#"><i class="mdi mdi-earth nolink"></i> ICS</a>
         <?php }?>
     </div>
 </div>
@@ -221,7 +221,7 @@
                 <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
                     value="<?php echo base_url() . 'ics/individual/' . $user_id;?>" />
                  <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/individual/' . $user_id;?>">
-                     <i class="fa fa-clipboard"></i>
+                     <i class="mdi mdi-content-copy"></i>
                  </button>
                 <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
         </div>

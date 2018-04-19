@@ -26,15 +26,15 @@
   <tbody>
   <?php foreach ($delegations as $delegation) { ?>
     <tr data-id="<?php echo $delegation['id']; ?>">
-      <td><a href="#" onclick="delete_delegation(<?php echo $delegation['id'] ?>);" title="<?php echo lang('requests_delegations_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>
+      <td><a href="#" onclick="delete_delegation(<?php echo $delegation['id'] ?>);" title="<?php echo lang('requests_delegations_thead_tip_delete');?>"><i class="mdi mdi-close nolink"></i></a></td>
       <td><?php echo $delegation['delegate_name']; ?></td>
     </tr>
   <?php } ?>
   </tbody>
 </table>
-    
+
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
-<button id="cmdAddDelegate" class="btn btn-primary" onclick="$('#frmSelectDelegate').modal('show');"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('requests_delegations_button_add');?></button>
+<button id="cmdAddDelegate" class="btn btn-primary" onclick="$('#frmSelectDelegate').modal('show');"><i class="mdi mdi-account-search"></i>&nbsp;<?php echo lang('requests_delegations_button_add');?></button>
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
     </div>
@@ -69,7 +69,7 @@
 
 <script type="text/javascript">
     var oTable;     //datatable
-    
+
     function delete_delegation(id) {
         bootbox.confirm("<?php echo lang('requests_delegations_confirm_delete_message');?>",
             "<?php echo lang('requests_delegations_confirm_delete_cancel');?>",
@@ -107,7 +107,7 @@
                   }).done(function(id) {
                       if (id != 'null') {
                         htmlRow = '<tr data-id="' + id + '">' +
-                                  '<td><a href="#" onclick="delete_delegation(' + id + ');" title="<?php echo lang('requests_delegations_thead_tip_delete');?>"><i class="icon-remove"></i></a></td>' +
+                                  '<td><a href="#" onclick="delete_delegation(' + id + ');" title="<?php echo lang('requests_delegations_thead_tip_delete');?>"><i class="mdi mdi-close nolink"></i></a></td>' +
                                   '<td>' + name + '</td>' +
                               '</tr>';
                           objRow=$(htmlRow);
@@ -120,7 +120,7 @@
             $('#frmSelectDelegate').modal('hide');
         }
     }
-    
+
     $(function () {
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
     $.ajaxSetup({
@@ -129,7 +129,7 @@
         }
     });
 <?php }?>
-        
+
         //Transform the HTML table in a fancy datatable
         oTable = $('#delegations').DataTable({
             order: [[ 1, "desc" ]],
@@ -157,7 +157,7 @@
                 }
             }
         });
-            
+
         //Popup select delegate
         $("#cmdAddDelegate").click(function() {
             $("#frmSelectDelegate").modal('show');

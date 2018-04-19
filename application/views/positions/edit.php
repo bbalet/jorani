@@ -21,7 +21,7 @@
     <textarea type="input" name="description" id="description" /><?php echo $position['description']; ?></textarea>
 
     <br /><br />
-    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('positions_edit_button_update');?></button>
+    <button type="submit" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp;<?php echo lang('positions_edit_button_update');?></button>
     &nbsp;
-    <a href="<?php echo base_url();?>positions" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('positions_edit_button_cancel');?></a>
+    <a href="<?php echo base_url();?>positions" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('positions_edit_button_cancel');?></a>
 </form>

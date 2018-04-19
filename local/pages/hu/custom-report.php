@@ -210,7 +210,7 @@ $url_export = base_url() . 'excel-export' .
         '&chkIncludeChildren=' . $include_children;
  ?>
 
-<a href="<?php echo base_url();?>sample-page" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;Back to the form</a>
-<a href="<?php echo $url_export; ?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; Export to Excel</a>
+<a href="<?php echo base_url();?>sample-page" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp;Back to the form</a>
+<a href="<?php echo $url_export; ?>" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp; Export to Excel</a>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>

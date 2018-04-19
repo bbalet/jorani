@@ -44,12 +44,12 @@ n>
     
     <div class="row-fluid"><div class="span12">&nbsp;</div></div>
     <div class="row-fluid"><div class="span12">
-        <button id="cmdEditExtra" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('extra_edit_button_update');?></button>
+        <button id="cmdEditExtra" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp; <?php echo lang('extra_edit_button_update');?></button>
         &nbsp;
     <?php if (isset($_GET['source'])) {?>
-        <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('extra_edit_button_cancel');?></a>
+        <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('extra_edit_button_cancel');?></a>
     <?php } else {?>
-        <a href="<?php echo base_url(); ?>extra" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('extra_edit_button_cancel');?></a>
+        <a href="<?php echo base_url(); ?>extra" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('extra_edit_button_cancel');?></a>
     <?php } ?>
     </div></div>
     <div class="row-fluid"><div class="span12">&nbsp;</div></div>

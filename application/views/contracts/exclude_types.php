@@ -28,15 +28,15 @@
                 <tr id="leave_row_<?php echo $typeId; ?>">
                     <td>
                         <div class="pull-right">
-                            
+
                             <?php if ($typesUsage[$typeId] == 0 && $defaultType != $typeId) { ?>
-                            <a href="#" class="exclude" data-id="<?php echo $typeId; ?>" title="<?php echo lang('contract_exclude_tip_exclude_type');?>"><i class="icon-remove"></i></a>
+                            <a href="#" class="exclude" data-id="<?php echo $typeId; ?>" title="<?php echo lang('contract_exclude_tip_exclude_type');?>"><i class="mdi mdi-close nolink"></i></a>
                             <?php } else { ?>
                             <span class="badge badge-info"><?php echo $typesUsage[$typeId]; ?></span>
                             <?php       if ($defaultType == $typeId) { ?>
-                            <a href="#" title="<?php echo lang('contract_exclude_tip_default_type');?>"><i class="icon-star"></i></a>
+                            <a href="#" title="<?php echo lang('contract_exclude_tip_default_type');?>"><i class="mdi mdi-star nolink"></i></a>
                             <?php       } else { ?>
-                            <a href="#" title="<?php echo lang('contract_exclude_tip_already_used');?>"><i class="icon-exclamation-sign"></i></a>
+                            <a href="#" title="<?php echo lang('contract_exclude_tip_already_used');?>"><i class="mdi mdi-alert-circle nolink"></i></a>
                             <?php       } ?>
                             <?php } ?>
                         </div>
@@ -48,7 +48,7 @@
             </table>
             </div>
     </div>
-    
+
     <div class="span6">
         <h3><?php echo lang('contract_exclude_title_excluded');?></h3>
         <div class="well">
@@ -64,7 +64,7 @@
                 <tr id="leave_row_<?php echo $typeId; ?>">
                     <td>
                         <div class="pull-right">
-                            <a href="#" class="include" data-id="<?php echo $typeId; ?>" title="<?php echo lang('contract_exclude_tip_include_type');?>"><i class="icon-plus"></i></a>
+                            <a href="#" class="include" data-id="<?php echo $typeId; ?>" title="<?php echo lang('contract_exclude_tip_include_type');?>"><i class="mdi mdi-undo nolink"></i></a>
                         </div>
                     </td>
                     <td><?php echo $typeId; ?> &mdash; <span id="leave_name_<?php echo $typeId; ?>"><?php echo $TypeName; ?></span></td>
@@ -80,7 +80,7 @@
 
 <div class="row-fluid">
     <div class="span12">
-        <a href="<?php echo base_url() . 'contracts';?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_back');?></a>
+        <a href="<?php echo base_url() . 'contracts';?>" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp; <?php echo lang('contract_calendar_button_back');?></a>
     </div>
 </div>
 
@@ -119,11 +119,11 @@ function includeExclude(contractId, typeId, operation) {
         url: "<?php echo base_url();?>contracts/" + contractId + "/types/" + typeId + "/" + operation,
         }).done(function() {
             $('#frmModalAjaxWait').modal('hide');
-        });    
+        });
 }
 
 $(function () {
-    
+
     //On click on a valid element of the table of the included types
     //Remove into 'included', add into 'excluded' table
     $("#included").on('click', '.exclude', function() {
@@ -133,7 +133,7 @@ $(function () {
         var newRow = '<tr id="leave_row_' + TypeId + '">' +
                                 '<td>' +
                                     '<div class="pull-right">' +
-                                        '<a href="#" class="include" data-id="' + TypeId + '" title="Include this leave type"><i class="icon-plus"></i></a>' +
+                                        '<a href="#" class="include" data-id="' + TypeId + '" title="Include this leave type"><i class="mdi mdi-undo nolink"></i></a>' +
                                    '</div>' +
                                  '</td>' +
                                 '<td>' + TypeId + ' &mdash; <span id="leave_name_' + TypeId + '">' + leaveName + '</span></td>' +
@@ -152,7 +152,7 @@ $(function () {
         var newRow = '<tr id="leave_row_' + TypeId + '">' +
                                 '<td>' +
                                     '<div class="pull-right">' +
-                                        '<a href="#" class="exclude" data-id="' + TypeId + '" title="Exclude this leave type"><i class="icon-remove"></i></a>' +
+                                        '<a href="#" class="exclude" data-id="' + TypeId + '" title="Exclude this leave type"><i class="mdi mdi-close nolink"></i></a>' +
                                    '</div>' +
                                  '</td>' +
                                 '<td>' + TypeId + ' &mdash; <span id="leave_name_' + TypeId + '">' + leaveName + '</span></td>' +

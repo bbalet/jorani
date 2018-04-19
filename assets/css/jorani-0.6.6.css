@@ -10,6 +10,10 @@
     color: #3097d1;
 }
 
+.nolink {
+    color: black;
+}
+
 /*Sticky footer*/
 html, body {
     height: 100%;

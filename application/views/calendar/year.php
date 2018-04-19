@@ -6,7 +6,7 @@
  * @link            https://github.com/bbalet/jorani
  * @since         0.4.3
  */
- 
+
 $isCurrentYear = (int)date('Y') === (int)$year;
 $currentMonth = (int)date('m');
 $currentDay = (int)date('d');
@@ -22,13 +22,13 @@ $currentDay = (int)date('d');
         <span class="label label-important" style="background-color: #ff0000;"><?php echo lang('Rejected');?></span>
     </div>
     <div class="span4">
-        <a href="<?php echo base_url();?>calendar/year/export/<?php echo $employee_id;?>/<?php echo ($year);?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('calendar_year_button_export');?></a>
+        <a href="<?php echo base_url();?>calendar/year/export/<?php echo $employee_id;?>/<?php echo ($year);?>" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp;<?php echo lang('calendar_year_button_export');?></a>
     </div>
     <div class="span4">
         <div class="pull-right">
-            <a href="<?php echo base_url();?>calendar/year/<?php echo $employee_id;?>/<?php echo ($year - 1);?>" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></a>
-            <?php echo $year;?>
-            <a href="<?php echo base_url();?>calendar/year/<?php echo $employee_id;?>/<?php echo ($year + 1);?>" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></a>
+            <a href="<?php echo base_url();?>calendar/year/<?php echo $employee_id;?>/<?php echo (intval($year) - 1);?>" class="btn btn-primary"><i class="mdi mdi-chevron-left"></i>&nbsp;<?php echo (intval($year) - 1);?></a>
+            <b><?php echo $year;?></b>
+            <a href="<?php echo base_url();?>calendar/year/<?php echo $employee_id;?>/<?php echo (intval($year) + 1);?>" class="btn btn-primary"><?php echo (intval($year) + 1);?>&nbsp;<i class="mdi mdi-chevron-right"></i></a>
         </div>
     </div>
 </div>
@@ -51,10 +51,10 @@ $currentDay = (int)date('d');
         </tr>
     </thead>
   <tbody>
-  <?php 
-  
-  $monthNumber = 0;  
-  foreach ($months as $month_name => $month) { 
+  <?php
+
+  $monthNumber = 0;
+  foreach ($months as $month_name => $month) {
     $monthNumber++;
     $isCurrentMonth = $currentMonth === $monthNumber;
 
@@ -69,7 +69,7 @@ $currentDay = (int)date('d');
             if($isCurrentDay){
                 $class .= ' currentday-border';
             }
-            
+
             if (strstr($day->display, ';')) {//Two statuses in the cell
                 $periods = explode(";", $day->display);
                 $statuses = explode(";", $day->status);
@@ -81,7 +81,7 @@ $currentDay = (int)date('d');
                 } else {
                     $display = $periods[1];
                     $status = $statuses[1];
-                    $type = $types[1];   
+                    $type = $types[1];
                 }
             } else {
                 $display = $day->display;
@@ -111,20 +111,20 @@ $currentDay = (int)date('d');
             }
         $pad_day++;
         } ?>
-      <?php //Fill 
+      <?php //Fill
       if ($pad_day <= 31) echo '<td colspan="' . (32 - $pad_day) . '" rowspan="2" style="background-color:#00FFFF;">&nbsp;</td>';
         ?>
     </tr>
     <tr>
         <?php //Iterate so as to display all afternoons
         foreach ($month->days as $dayNumber => $day) {
-          
+
             $isCurrentDay =  $isCurrentYear && $isCurrentMonth && $currentDay === $dayNumber;
             $class = '';
             if($isCurrentDay){
                 $class .= ' currentday-border';
             }
-            
+
             if (strstr($day->display, ';')) {//Two statuses in the cell
                 $periods = explode(";", $day->display);
                 $statuses = explode(";", $day->status);
@@ -136,7 +136,7 @@ $currentDay = (int)date('d');
                 } else {
                     $display = $periods[1];
                     $status = $statuses[1];
-                    $type = $types[1];   
+                    $type = $types[1];
                 }
             } else {
                 $display = $day->display;
@@ -167,6 +167,6 @@ $currentDay = (int)date('d');
         </tr>
   </tbody>
 </table>
-        
+
     </div>
 </div>

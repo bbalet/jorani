@@ -70,21 +70,21 @@ function displayRUMInfo() {
   var ciElapsedTime = parseInt($("#ci_elapsed_time").val());
   var ciDatabaseTime = parseInt($("#ci_database_time").val());
   var total = ciDatabaseTime + ciElapsedTime + networkLatency + pageLoadTime;
-  var content = '<i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp;';
+  var content = '<i class="mdi mdi-memory" aria-hidden="true" title="Memory"></i>&nbsp;';
   content += $("#ci_memory_usage").val() + ' bytes ';
-  content += '<i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;';
+  content += '<i class="mdi mdi-clock" aria-hidden="true" title="Total time for user"></i>&nbsp;';
   content += total + ' ms ';
   content += '&nbsp;&nbsp;&mdash;&nbsp;&nbsp;';
-  content += '<i class="fa fa-database" aria-hidden="true"></i>&nbsp;';
+  content += '<i class="mdi mdi-database" aria-hidden="true" title="SQL execution time (number of queries)"></i>&nbsp;';
   content += ciDatabaseTime + ' ms (' + $("#ci_database_count").val() + ') ';
   content += '&nbsp;';
-  content += '<i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;';
+  content += '<i class="mdi mdi-code-string" aria-hidden="true" title="PHP Execution time"></i>&nbsp;';
   content += ciElapsedTime + ' ms ';
   content += '&nbsp;';
-  content += '<i class="fa fa-arrow-down" aria-hidden="true"></i>&nbsp;';
+  content += '<i class="mdi mdi-download" aria-hidden="true" title="Download time"></i>&nbsp;';
   content += networkLatency + ' ms ';
   content += '&nbsp;';
-  content += '<i class="fa fa-internet-explorer" aria-hidden="true"></i>&nbsp;';
+  content += '<i class="mdi mdi-internet-explorer" aria-hidden="true" title="Client processing time"></i>&nbsp;';
   content += pageLoadTime + ' ms ';
   $("#rum_info").html(content);
 }

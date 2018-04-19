@@ -47,7 +47,7 @@ echo form_open('users/create', $attributes); ?>
             <div class="controls">
                 <div class="input-append">
                     <input type="text" name="login" id="login" required />
-                    <a id="cmdRefreshLogin" class="btn btn-primary"><i class="icon-refresh icon-white"></i></a>
+                    <a id="cmdRefreshLogin" class="btn btn-primary"><i class="mdi mdi-refresh"></i></a>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@ echo form_open('users/create', $attributes); ?>
             <div class="controls">
                 <div class="input-append">
                     <input type="password" name="password" id="password" required />
-                    <a class="btn" id="cmdGeneratePassword"><i class="icon-refresh"></i>&nbsp;<?php echo lang('users_create_button_generate_password');?></a>
+                    <a class="btn" id="cmdGeneratePassword"><i class="mdi mdi-refresh"></i>&nbsp;<?php echo lang('users_create_button_generate_password');?></a>
                 </div>
             </div>
         </div>
@@ -258,11 +258,11 @@ echo form_open('users/create', $attributes); ?>
 <div class="row-fluid">
     <div class="span12">
         <button id="send" class="btn btn-primary">
-            <i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('users_create_button_create');?>
+            <i class="mdi mdi-check"></i>&nbsp;<?php echo lang('users_create_button_create');?>
         </button>
         &nbsp;
         <a href="<?php echo base_url(); ?>users" class="btn btn-danger">
-            <i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('users_create_button_cancel');?>
+            <i class="mdi mdi-close"></i>&nbsp;<?php echo lang('users_create_button_cancel');?>
         </a>
     </div>
 </div>

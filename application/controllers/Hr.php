@@ -336,6 +336,7 @@ class Hr extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('hr_leaves_create_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_request_leave');
         $data['form_action'] = 'hr/leaves/create/' . $id;
         $data['source'] = 'hr/employees';
         $data['employee'] = $id;
@@ -522,7 +523,7 @@ class Hr extends CI_Controller {
             $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'hr/presence'));
             redirect('leaves');
         }
-        
+
         $data['employee'] = $employee;
         $data['month'] = $month;
         $data['year'] = $year;

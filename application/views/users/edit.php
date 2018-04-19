@@ -226,12 +226,12 @@ if (isset($_GET['source'])) {
 
 <div class="row-fluid">
     <div class="span12">
-        <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('users_edit_button_update');?></button>
+        <button type="submit" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp;<?php echo lang('users_edit_button_update');?></button>
         &nbsp;
         <?php if (isset($_GET['source'])) {?>
-            <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('users_edit_button_cancel');?></a>
+            <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('users_edit_button_cancel');?></a>
         <?php } else {?>
-            <a href="<?php echo base_url();?>users" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('users_edit_button_cancel');?></a>
+            <a href="<?php echo base_url();?>users" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('users_edit_button_cancel');?></a>
         <?php } ?>
     </div>
 </div>

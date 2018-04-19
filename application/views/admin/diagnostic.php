@@ -271,12 +271,12 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
         <tr>
             <td><a target="_blank" href="<?php echo base_url();?>leaves/edit/<?php echo $balance['id'];?>"><?php echo $balance['id'];?></a></td>
             <td>
-                <a target="_blank" href="<?php echo base_url();?>hr/counters/employees/<?php echo $balance['employee'];?>"><i class="icon-info-sign"></i></a>
-                <a target="_blank" href="<?php echo base_url();?>entitleddays/user/<?php echo $balance['employee'];?>"><i class="icon-edit"></i></a>
+                <a target="_blank" href="<?php echo base_url();?>hr/counters/employees/<?php echo $balance['employee'];?>"><i class="mdi mdi-information-outline nolink"></i></a>
+                <a target="_blank" href="<?php echo base_url();?>entitleddays/user/<?php echo $balance['employee'];?>"><i class="mdi mdi-pencil-box-outline nolink"></i></a>
                 <?php echo $balance['user_label'];?>
             </td>
             <td>
-                <a target="_blank" href="<?php echo base_url();?>entitleddays/contract/<?php echo $balance['employee'];?>"><i class="icon-edit"></i></a>
+                <a target="_blank" href="<?php echo base_url();?>entitleddays/contract/<?php echo $balance['employee'];?>"><i class="mdi mdi-pencil-box-outline nolink"></i></a>
                 <?php echo $balance['contract_label'];?>
             </td>
             <td><?php echo $startdate;?></td>

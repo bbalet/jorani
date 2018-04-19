@@ -14,8 +14,8 @@
     <div class="span4">
         <div class="input-append">
             <input type="text" class="input-medium" placeholder="<?php echo lang('organization_index_field_search_placeholder');?>" id="txtSearch" />
-            <button id="cmdClearSearch" class="btn btn-primary"><i class="icon-remove icon-white"></i></button>
-            <button id="cmdSearch" class="btn btn-primary"><i class="icon-search icon-white"></i>&nbsp;<?php echo lang('organization_index_button_search');?></button>
+            <button id="cmdClearSearch" class="btn btn-primary"><i class="mdi mdi-close"></i></button>
+            <button id="cmdSearch" class="btn btn-primary"><i class="mdi mdi-magnify"></i>&nbsp;<?php echo lang('organization_index_button_search');?></button>
         </div>
         <div style="text-align: left;" id="organization"></div>
     </div>
@@ -41,7 +41,7 @@
         <p><?php echo lang('organization_index_description_supervisor');?></p>
         <div class="input-append">
             <input type="text" id="txtSupervisor" />
-            <button id="cmdDeleteSupervisor" class="btn btn-danger"><i class="icon-remove icon-white"></i></button>
+            <button id="cmdDeleteSupervisor" class="btn btn-danger"><i class="mdi mdi-close"></i></button>
             <button id="cmdSelectSupervisor" class="btn btn-primary"><?php echo lang('organization_index_button_select_supervisor');?></button>
         </div>
         <br /><br />

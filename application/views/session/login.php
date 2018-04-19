@@ -80,15 +80,15 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     <label for="password"><?php echo lang('session_login_field_password');?></label>
     <input class="input-medium" type="password" name="password" id="password" value="<?php echo (ENVIRONMENT=='demo')?'bbalet':''; ?>" /><br />
     <br />
-    <button id="send" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
+    <button id="send" class="btn btn-primary"><i class="mdi mdi-login"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
     <?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
          <?php if ($this->config->item('oauth2_provider') == 'google') { ?>
-    <button id="cmdGoogleSignIn" class="btn btn-primary"><i class="fa fa-google"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
+    <button id="cmdGoogleSignIn" class="btn btn-primary"><i class="mdi mdi-google"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
         <?php } ?>
     <?php } ?>
     <br /><br />
     <?php if (($this->config->item('ldap_enabled') == FALSE) && (ENVIRONMENT!='demo')) { ?>
-    <button id="cmdForgetPassword" class="btn btn-danger"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
+    <button id="cmdForgetPassword" class="btn btn-danger"><i class="mdi mdi-email"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
     <?php } ?>
 
     <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>

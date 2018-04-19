@@ -9,12 +9,12 @@
 ?>
 
         <h2><?php echo $title;?><?php echo $help;?></h2>
-        
+
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#clients"><?php echo lang('admin_oauthclients_tab_clients');?></a></li>
     <li><a data-toggle="tab" href="#sessions"><?php echo lang('admin_oauthclients_tab_sessions');?></a></li>
 </ul>
-        
+
 <div class="tab-content">
 
   <div class="tab-pane active" id="clients">
@@ -37,7 +37,7 @@
             <?php foreach ($clients as $client): ?>
             <tr data-id="<?php echo $client['client_id']; ?>">
                 <td>
-                    <a href="#" class="confirm-delete" data-id="<?php echo $client['client_id'];?>" title="<?php echo lang('admin_oauthclients_thead_tip_delete');?>"><i class="icon-trash"></i></a>
+                    <a href="#" class="confirm-delete" data-id="<?php echo $client['client_id'];?>" title="<?php echo lang('admin_oauthclients_thead_tip_delete');?>"><i class="mdi mdi-delete nolink"></i></a>
                     &nbsp;<?php echo $client['client_id']; ?>
                 </td>
                 <td><?php echo $client['client_secret']; ?></td>
@@ -49,22 +49,22 @@
             <?php endforeach ?>
           </tbody>
         </table>
-        
+
          </div>
         </div>
         <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
         <div class="row-fluid">
             <div class="span12">
-              <button onclick="$('#frmAddClient').modal('show');" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('admin_oauthclients_button_add');?></button>
+              <button onclick="$('#frmAddClient').modal('show');" class="btn btn-primary"><i class="mdi mdi-plus-circle"></i>&nbsp;<?php echo lang('admin_oauthclients_button_add');?></button>
               &nbsp;
             </div>
         </div>
   </div>
-    
+
    <div class="tab-pane" id="sessions">
         <p><?php echo lang('admin_oauthclients_tab_sessions_description');?></p>
-        
+
         <table cellpadding="0" cellspacing="0" border="0" class="display" id="sessionsRest" width="100%">
             <thead>
                 <tr>
@@ -87,12 +87,12 @@
             <?php endforeach ?>
           </tbody>
         </table>
-        
+
         <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
         <div class="row-fluid">
             <div class="span12">
-              <!--<button onclick="purgeTokens();" class="btn btn-danger"><i class="icon-trash icon-white"></i>&nbsp;<?php echo lang('admin_oauthclients_button_purge');?></button>//-->
+              <!--<button onclick="purgeTokens();" class="btn btn-danger"><i class="mdi mdi-delete"></i>&nbsp;<?php echo lang('admin_oauthclients_button_purge');?></button>//-->
             </div>
         </div>
    </div>
@@ -116,10 +116,10 @@
                 <input type="text" name="grant_types" id="grant_types" /><br />
                 <label for="scope">scope</label>
                 <input type="text" name="scope" id="scope" /><br />
-                <label for="user_id">user_id</label>        
+                <label for="user_id">user_id</label>
                 <div class="input-append">
                     <input type="text" name="user_id" id="user_id" />
-                    <button id="cmdSelectUser" class="btn btn-primary"><i class="icon-user icon-white"></i></button>
+                    <button id="cmdSelectUser" class="btn btn-primary"><i class="mdi mdi-account-search"></i></button>
                 </div>
                 <br />
             </div>
@@ -143,7 +143,7 @@
         <button onclick="$('#frmAddClient').modal('hide');" class="btn btn-danger"><?php echo lang('Cancel');?></button>
     </div>
 </div>
-        
+
 <div id="frmSelectUser" class="modal hide fade">
     <div class="modal-header">
         <a href="#" onclick="$('#frmSelectUser').modal('hide');" class="close">&times;</a>
@@ -179,7 +179,7 @@ function createClient() {
     $.ajax({
         url: "<?php echo base_url(); ?>admin/oauthclients/create",
             type: "POST",
-            data: { 
+            data: {
                 client_id: $('#client_id').val(),
                 client_secret: $('#client_secret').val(),
                 redirect_uri: $('#redirect_uri').val(),
@@ -193,8 +193,8 @@ function createClient() {
             bootbox.alert("<?php echo lang('admin_oauthclients_error_exists');?>");
         } else {
           //Add into the datatable
-          contentHTML = "<tr data-id='" + $('#client_id').val() + "' >" + 
-                "<td>" + 
+          contentHTML = "<tr data-id='" + $('#client_id').val() + "' >" +
+                "<td>" +
                     "<a href='#' class='confirm-delete' data-id='" + $('#client_id').val() + "' title='<?php echo lang('admin_oauthclients_thead_tip_delete');?>'><i class='icon-trash'></i></a>" +
                     "&nbsp;" + $('#client_id').val() + "" +
                 "</td>" +
@@ -207,13 +207,13 @@ function createClient() {
             oRow = $(contentHTML);
             tableClients.row.add( oRow ).draw();
         }
-          
+
       });
 }
 
 //If confirmed, purge all sessions wether they are active or not
 function purgeTokens() {
-    bootbox.confirm("<?php echo lang('admin_oauthclients_confirm_delete');?>", function(result) {    
+    bootbox.confirm("<?php echo lang('admin_oauthclients_confirm_delete');?>", function(result) {
         if (result) {
             window.location.href = "<?php echo base_url(); ?>admin/oauthtokens/purge";
         }
@@ -229,7 +229,7 @@ function select_user() {
     }
     $("#frmSelectUser").modal('hide');
 }
-    
+
 $(document).ready(function() {
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
     $.ajaxSetup({
@@ -244,14 +244,14 @@ $(document).ready(function() {
         $('#frmModalAjaxWait').modal('hide');
         if (jqXHR.status == 401) {
             bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                //After the login page, we'll be redirected to the current page 
+                //After the login page, we'll be redirected to the current page
                location.reload();
             });
         } else { //Oups
             bootbox.alert("Unexpected Ajax Error");
         }
     });
-    
+
     //Append sope items to scope list on double click
     $("#scopeListItems li").dblclick(function(){
         if ($("#scope").val() == "") {
@@ -260,18 +260,18 @@ $(document).ready(function() {
             $("#scope").val($("#scope").val() + "," + $(this).text());
         }
     });
-    
+
     //open a tab if a hash was passed by URL
     var url = document.location.toString();
     if (url.match('#')) {
         $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
     }
-    
+
     //Change hash for page-reload
     $('.nav-tabs a').on('shown.bs.tab', function (e) {
         window.location.hash = e.target.hash;
     })
-    
+
     //Transform the HTML table in a fancy datatable
     tableClients = $('#clientsRest').DataTable({
         stateSave: true,
@@ -299,7 +299,7 @@ $(document).ready(function() {
             }
         },
     });
-    
+
     //sessions (OAuth2 tokens)
     tableSessions = $('#sessionsRest').DataTable({
         stateSave: true,
@@ -327,10 +327,10 @@ $(document).ready(function() {
             }
         },
     });
-    
+
     //Transform Add Client modal
     $("#frmAddClient").alert();
-    
+
     //Popup select user
     $("#cmdSelectUser").click(function() {
         $("#frmSelectUser").modal('show');
@@ -339,10 +339,10 @@ $(document).ready(function() {
 
     //Display a modal pop-up so as to confirm if a user has to be deleted or not
     //We build a complex selector because datatable does horrible things on DOM...
-    //a simplier selector doesn't work when the delete is on page >1 
+    //a simplier selector doesn't work when the delete is on page >1
     $("#clientsRest tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
-        bootbox.confirm("<?php echo lang('admin_oauthclients_confirm_delete');?>", function(result) {    
+        bootbox.confirm("<?php echo lang('admin_oauthclients_confirm_delete');?>", function(result) {
             if (result) {
                 $('#frmModalAjaxWait').modal('show');
                 $.ajax({
@@ -356,7 +356,7 @@ $(document).ready(function() {
                       tableClients.rows('tr[data-id="' + id + '"]').remove().draw();
                       $('#frmModalAjaxWait').modal('hide');
                   });
-            }    
+            }
         });
     });
 });

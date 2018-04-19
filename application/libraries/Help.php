@@ -8,7 +8,7 @@
  */
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
- 
+
 /**
  * This class helps to build links to documentation pages
  */
@@ -42,10 +42,10 @@ class Help {
             return '&nbsp;' .
                       '<a href="' . lang($page) . '"' .
                       ' title="' . lang('global_link_tooltip_documentation') . '"' .
-                      ' target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>';
+                      ' target="_blank" rel="nofollow"><sup><i class="mdi mdi-help-circle-outline mdi-18px nolink"></i></sup></a>';
         } else {
             return '';
-        }        
+        }
     }
 
     /**

@@ -131,9 +131,9 @@ echo form_open('contracts/create', $attributes); ?>
     </select>
 
     <br /><br />
-    <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('contract_create_button_create');?></button>
+    <button id="send" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp;<?php echo lang('contract_create_button_create');?></button>
     &nbsp;
-    <a href="<?php echo base_url(); ?>contracts" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('contract_create_button_cancel');?></a>
+    <a href="<?php echo base_url(); ?>contracts" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('contract_create_button_cancel');?></a>
 </form>
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">

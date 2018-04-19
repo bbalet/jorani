@@ -17,18 +17,18 @@ $dDay = 1;
 
 <div class="row-fluid">
     <div class="span3">
-        <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) - 1);?>" class="btn btn-primary" id="cmdPrevious"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo intval($year) - 1;?></a>
+        <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) - 1);?>" class="btn btn-primary" id="cmdPrevious"><i class="mdi mdi-chevron-left"></i>&nbsp;<?php echo intval($year) - 1;?></a>
         &nbsp;
         <strong><?php echo $year;?></strong>
         &nbsp;
-        <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) + 1);?>" class="btn btn-primary" id="cmdNext"><?php echo intval($year) + 1;?>&nbsp; <i class="icon-arrow-right icon-white"></i></a>
+        <a href="<?php echo base_url() . 'contracts/' . $contract_id . '/calendar/' . (intval($year) + 1);?>" class="btn btn-primary" id="cmdNext"><?php echo intval($year) + 1;?>&nbsp;<i class="mdi mdi-chevron-right"></i></a>
     </div>
     <div class="span2">
-        <a href="<?php echo base_url() . 'contracts';?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_back');?></a>
+        <a href="<?php echo base_url() . 'contracts';?>" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp; <?php echo lang('contract_calendar_button_back');?></a>
     </div>
     <div class="span4">
-        <button id="cmdImportCalendar" class="btn btn-primary"><i class="icon-calendar icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_import');?></button>&nbsp;
-        <a href="#frmSetRangeDayOff" class="btn btn-primary" data-toggle="modal"><i class="icon-retweet icon-white"></i>&nbsp; <?php echo lang('contract_calendar_button_series');?></a>
+        <button id="cmdImportCalendar" class="btn btn-primary"><i class="mdi mdi-calendar-text"></i>&nbsp; <?php echo lang('contract_calendar_button_import');?></button>&nbsp;
+        <a href="#frmSetRangeDayOff" class="btn btn-primary" data-toggle="modal"><i class="mdi mdi-twitter-retweet"></i>&nbsp; <?php echo lang('contract_calendar_button_series');?></a>
     </div>
     <div class="span3">
         <?php if (!empty($contracts)) { ?>
@@ -60,7 +60,7 @@ $dDay = 1;
         <?php if ($this->config->item('ics_enabled') == FALSE) {?>
         &nbsp;
         <?php } else {?>
-        <span class="pull-right"><a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a></span>
+        <span class="pull-right"><a id="lnkICS" href="#"><i class="mdi mdi-earth nolink"></i> ICS</a></span>
         <?php }?>
     </div>
 </div>
@@ -226,7 +226,7 @@ for ($mC = 1; $mC <= 12; $mC++) {
                 <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
                     value="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>" />
                  <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>">
-                     <i class="fa fa-clipboard"></i>
+                     <i class="mdi mdi-content-copy"></i>
                  </button>
                 <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
         </div>

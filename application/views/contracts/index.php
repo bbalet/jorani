@@ -28,19 +28,19 @@
             <?php echo $contracts_item['id'] ?>
             &nbsp;
             <div class="pull-right">
-                <a href="#" class="confirm-delete" data-id="<?php echo $contracts_item['id'];?>" title="<?php echo lang('contract_index_tip_delete');?>"><i class="icon-trash"></i></a>
+                <a href="#" class="confirm-delete" data-id="<?php echo $contracts_item['id'];?>" title="<?php echo lang('contract_index_tip_delete');?>"><i class="mdi mdi-delete nolink"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>contracts/edit/<?php echo $contracts_item['id'] ?>" title="<?php echo lang('contract_index_tip_edit');?>"><i class="icon-pencil"></i></a>
+                <a href="<?php echo base_url();?>contracts/edit/<?php echo $contracts_item['id'] ?>" title="<?php echo lang('contract_index_tip_edit');?>"><i class="mdi mdi-pencil nolink"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contracts_item['id'] ?>" title="<?php echo lang('contract_index_tip_entitled');?>"><i class="icon-edit"></i></a>
+                <a href="<?php echo base_url();?>entitleddays/contract/<?php echo $contracts_item['id'] ?>" title="<?php echo lang('contract_index_tip_entitled');?>"><i class="mdi mdi-pencil-box-outline nolink"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>/calendar" title="<?php echo lang('contract_index_tip_dayoffs');?>"><i class="icon-calendar"></i></a>
+                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>/calendar" title="<?php echo lang('contract_index_tip_dayoffs');?>"><i class="mdi mdi-calendar nolink"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>/excludetypes" title="<?php echo lang('contract_index_tip_exclude_types');?>"><i class="icon-ban-circle"></i></a>
+                <a href="<?php echo base_url();?>contracts/<?php echo $contracts_item['id'] ?>/excludetypes" title="<?php echo lang('contract_index_tip_exclude_types');?>"><i class="mdi mdi-cancel nolink"></i></a>
             </div>
         </td>
         <td><?php echo $contracts_item['name']; ?></td>
-        <?php 
+        <?php
         $startentdate = $contracts_item['startentdate'];
         $endentdate = $contracts_item['endentdate'];
         if (strpos(lang('global_date_format'), 'd') < strpos(lang('global_date_format'), 'm')) {
@@ -60,9 +60,9 @@
 
 <div class="row-fluid">
     <div class="span12">
-        <a href="<?php echo base_url();?>contracts/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('contract_index_button_export');?></a>
+        <a href="<?php echo base_url();?>contracts/export" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp; <?php echo lang('contract_index_button_export');?></a>
         &nbsp;
-        <a href="<?php echo base_url();?>contracts/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('contract_index_button_create');?></a>
+        <a href="<?php echo base_url();?>contracts/create" class="btn btn-primary"><i class="mdi mdi-plus-circle"></i>&nbsp; <?php echo lang('contract_index_button_create');?></a>
     </div>
 </div>
 
@@ -130,7 +130,7 @@ $(document).ready(function() {
     });
     $("#frmChangePwd").alert();
     $("#frmEntitledDays").alert();
-	
+
     //On showing the confirmation pop-up, add the contract id at the end of the delete url action
     $('#frmDeleteContract').on('show', function() {
         var link = "<?php echo base_url();?>contracts/delete/" + $(this).data('id');
@@ -139,12 +139,12 @@ $(document).ready(function() {
 
     //Display a modal pop-up so as to confirm if a contract has to be deleted or not
     //We build a complex selector because datatable does horrible things on DOM...
-    //a simplier selector doesn't work when the delete is on page >1 
+    //a simplier selector doesn't work when the delete is on page >1
     $("#contracts tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
         $('#frmDeleteContract').data('id', id).modal('show');
     });
-    
+
     $('#frmEntitledDays').on('hidden', function() {
         $(this).removeData('modal');
     });

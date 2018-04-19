@@ -39,9 +39,9 @@ echo form_open('extra/create', $attributes) ?>
 
     <div class="row-fluid"><div class="span12">&nbsp;</div></div>
     <div class="row-fluid"><div class="span12">
-        <button id="cmdCreateExtra" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('extra_create_button_create');?></button>
+        <button id="cmdCreateExtra" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp; <?php echo lang('extra_create_button_create');?></button>
         &nbsp;
-        <a href="<?php echo base_url(); ?>extra" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp; <?php echo lang('extra_create_button_cancel');?></a>
+        <a href="<?php echo base_url(); ?>extra" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp; <?php echo lang('extra_create_button_cancel');?></a>
     </div></div>
     <div class="row-fluid"><div class="span12">&nbsp;</div></div>
     </div>

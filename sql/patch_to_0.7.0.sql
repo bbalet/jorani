@@ -126,9 +126,25 @@ BEGIN
         FROM information_schema.columns
         WHERE table_schema = DATABASE() AND table_name = 'entitleddays' AND column_name = 'overtime'
     ) THEN
-        ALTER TABLE `entitleddays` ADD `overtime` int(11) DEFAULT NULL COMMENT 'Link to an overtime request';
+        ALTER TABLE `entitleddays` ADD `overtime` int(11) DEFAULT NULL COMMENT 'Link to an overtime request' AFTER `employee`;
     END IF;
 END$$
 DELIMITER ;
 CALL sp_add_overtime_link_entitleddays();
 DROP PROCEDURE sp_add_overtime_link_entitleddays;
+
+-- Migrate accepted overtime requests into the new system of entitlement for overtime
+INSERT INTO entitleddays(employee, overtime, startdate, enddate, type, days, description)
+select 	o.employee,
+		o.id,
+		CAST(CONCAT(year(o.date), '-', REPLACE(c.startentdate, '/', '-')) AS DATE) as sd,
+		CAST(CONCAT(year(o.date), '-', REPLACE(c.endentdate, '/', '-')) AS DATE) as ed,
+        0,
+        o.duration,
+        CONCAT('_MIGRATION_: ', o.cause)
+from overtime o
+inner join users u on o.employee = u.id
+inner join contracts c on u.contract = c.id
+left outer join entitleddays e on o.id = e.overtime
+where e.id is null
+and o.status = 3

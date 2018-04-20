@@ -120,20 +120,26 @@ class Extra extends CI_Controller {
             $this->load->view('extra/create');
             $this->load->view('templates/footer');
         } else {
-            if (function_exists('triggerCreateExtraRequest')) {
-                triggerCreateExtraRequest($this);
+          //Prevent thugs to auto validate their extra requests
+          if (!$this->is_hr && !$this->is_admin) {
+            if ($this->input->post('status') > LMS_REQUESTED) {
+              $_POST['status'] = LMS_REQUESTED;
             }
-            $extra_id = $this->overtime_model->setExtra();
-            $this->session->set_flashdata('msg', lang('extra_create_msg_success'));
-            //If the status is requested, send an email to the manager
-            if ($this->input->post('status') == 2) {
-                $this->sendMail($extra_id);
-            }
-            if (isset($_GET['source'])) {
-                redirect($_GET['source']);
-            } else {
-                redirect('extra');
-            }
+          }
+          if (function_exists('triggerCreateExtraRequest')) {
+              triggerCreateExtraRequest($this);
+          }
+          $extra_id = $this->overtime_model->setExtra();
+          $this->session->set_flashdata('msg', lang('extra_create_msg_success'));
+          //If the status is requested, send an email to the manager
+          if ($this->input->post('status') == LMS_REQUESTED) {
+              $this->sendMail($extra_id);
+          }
+          if (isset($_GET['source'])) {
+              redirect($_GET['source']);
+          } else {
+              redirect('extra');
+          }
         }
     }
 
@@ -179,17 +185,23 @@ class Extra extends CI_Controller {
             $this->load->view('extra/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->overtime_model->updateExtra($id);       //We don't use the return value
-            $this->session->set_flashdata('msg', lang('extra_edit_msg_success'));
-            //If the status is requested, send an email to the manager
-            if ($this->input->post('status') == 2) {
-                $this->sendMail($id);
+          //Prevent thugs to auto validate their extra requests
+          if (!$this->is_hr && !$this->is_admin) {
+            if ($this->input->post('status') == LMS_ACCEPTED) {
+              $_POST['status'] = LMS_REQUESTED;
             }
-            if (isset($_GET['source'])) {
-                redirect($_GET['source']);
-            } else {
-                redirect('extra');
-            }
+          }
+          $this->overtime_model->updateExtra($id);       //We don't use the return value
+          $this->session->set_flashdata('msg', lang('extra_edit_msg_success'));
+          //If the status is requested, send an email to the manager
+          if ($this->input->post('status') == LMS_REQUESTED) {
+              $this->sendMail($id);
+          }
+          if (isset($_GET['source'])) {
+              redirect($_GET['source']);
+          } else {
+              redirect('extra');
+          }
         }
     }
 

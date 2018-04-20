@@ -231,20 +231,27 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/create');
             $this->load->view('templates/footer');
         } else {
-            if (function_exists('triggerCreateLeaveRequest')) {
-                triggerCreateLeaveRequest($this);
+          //Prevent thugs to auto validate their leave requests
+          if (!$this->is_hr && !$this->is_admin) {
+            if ($this->input->post('status') > LMS_REQUESTED) {
+              $_POST['status'] = LMS_REQUESTED;
             }
-            $leave_id = $this->leaves_model->setLeaves($this->session->userdata('id'));
-            $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
-            //If the status is requested, send an email to the manager
-            if ($this->input->post('status') == 2) {
-                $this->sendMailOnLeaveRequestCreation($leave_id);
-            }
-            if (isset($_GET['source'])) {
-                redirect($_GET['source']);
-            } else {
-                redirect('leaves');
-            }
+          }
+          if (function_exists('triggerCreateLeaveRequest')) {
+              triggerCreateLeaveRequest($this);
+          }
+          $leave_id = $this->leaves_model->setLeaves($this->session->userdata('id'));
+          $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
+
+          //If the status is requested, send an email to the manager
+          if ($this->input->post('status') == LMS_REQUESTED) {
+              $this->sendMailOnLeaveRequestCreation($leave_id);
+          }
+          if (isset($_GET['source'])) {
+              redirect($_GET['source']);
+          } else {
+              redirect('leaves');
+          }
         }
     }
 
@@ -317,6 +324,15 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/edit', $data);
             $this->load->view('templates/footer');
         } else {
+          //Prevent thugs to auto validate their leave requests
+          if (!$this->is_hr && !$this->is_admin) {
+            if ($this->input->post('status') == LMS_ACCEPTED) {
+              $_POST['status'] = LMS_REQUESTED;
+            }
+            if ($this->input->post('status') == LMS_CANCELED) {
+              $_POST['status'] = LMS_CANCELLATION;
+            }
+          }
             $this->leaves_model->updateLeaves($id);       //We don't use the return value
             $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
             //If the status is requested or cancellation, send an email to the manager

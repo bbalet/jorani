@@ -450,7 +450,7 @@ $config['extra_status_requested'] = FALSE;
 
 //____________________________________________________________________________
 //Set this value to TRUE if you want to allow manager to create leave requests in behalf of their collaborators
-$config['requests_by_manager'] = FALSE;
+$config['requests_by_manager'] = TRUE;
 
 //Set this value to true if you want to force the manager to comment rejections
 $config['mandatory_comment_on_reject'] = FALSE;

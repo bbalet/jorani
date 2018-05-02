@@ -29,23 +29,26 @@
   <?php foreach ($entitleddays as $days) { ?>
     <tr data-id="<?php echo $days['id']; ?>">
         <td>
-          <a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a>
-          &nbsp;<a href="#" onclick="copy_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_copy');?>"><i class="fa fa-copy nolink"></i></a>
+          <a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="mdi mdi-close nolink"></i></a>
+          &nbsp;<a href="#" onclick="copy_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_copy');?>"><i class="mdi mdi-content-copy nolink"></i></a>
           &nbsp;<a href="#" onclick="show_edit_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_contract_index_thead_tip_edit');?>"><i class="mdi mdi-pencil nolink"></i></a>
         </td>
 <?php $startDate = new DateTime($days['startdate']);
 $endDate = new DateTime($days['enddate']);?>
       <td data-order="<?php echo $startDate->getTimestamp(); ?>"><?php echo $startDate->format(lang('global_date_format'));?></td>
       <td data-order="<?php echo $endDate->getTimestamp(); ?>"><?php echo $endDate->format(lang('global_date_format'));?></td>
-      <td data-order="<?php echo $days['days']; ?>"><span id="days<?php echo $days['id']; ?>"><?php echo $days['days']; ?></span> &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'decrease');"><i class="icon-minus"></i></a>
-                     &nbsp; <a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'increase');"><i class="icon-plus"></i></a></td>
+      <td data-order="<?php echo $days['days']; ?>">
+        <span id="days<?php echo $days['id']; ?>"><?php echo $days['days']; ?></span>
+        &nbsp;<a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'decrease');"><i class="mdi mdi-minus nolink"></i></a>
+        &nbsp;<a href="#" onclick="Javascript:incdec(<?php echo $days['id']; ?>, 'increase');"><i class="mdi mdi-plus nolink"></i></a>
+      </td>
       <td data-id="<?php echo $days['type']; ?>"><?php echo $days['type_name']; ?></td>
       <td><?php echo $days['description']; ?></td>
     </tr>
   <?php } ?>
   </tbody>
 </table>
-    
+
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
 <div class="row-fluid">
@@ -85,8 +88,8 @@ $endDate = new DateTime($days['enddate']);?>
             <select name="type" id="type" required>
             <?php foreach ($types as $types_item): ?>
                 <option value="<?php echo $types_item['id'] ?>" <?php if ($types_item['id'] == 1) echo "selected" ?>><?php echo $types_item['name'] ?></option>
-            <?php endforeach ?> 
-            </select>    
+            <?php endforeach ?>
+            </select>
             <label for="days" required><?php echo lang('entitleddays_contract_index_field_days');?></label>
             <input type="text" class="input-mini" name="days" id="days" />
             <label for="description"><?php echo lang('entitleddays_contract_index_field_description');?></label>
@@ -133,7 +136,7 @@ if ($language_code != 'en') { ?>
     var current_id = 1;
     //Global locale for moment objects
     moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});
-    
+
     //Compute the end and start dates with the contract periods
     function set_current_period() {
         var now = moment();
@@ -161,7 +164,7 @@ if ($language_code != 'en') { ?>
         $("#viz_startdate").val(startEntDate.format("L"));
         $("#viz_enddate").val(endEntDate.format("L"));
         }
-    
+
     function validate_form() {
         result = false;
         var fieldname = "";
@@ -192,7 +195,7 @@ if ($language_code != 'en') { ?>
                 }
         });
     }
-    
+
     //Open the pop-up (edit mode), load its fields with the content of the fields
     //of the selected row in the datatable
     function show_edit_entitleddays(id) {
@@ -200,7 +203,7 @@ if ($language_code != 'en') { ?>
         $("#cmdFrmAddEntitledDays").hide();
         $("#cmdFrmSaveEntitledDays").show();
         $("#frmAddEntitledDaysTitle").html("<?php echo lang('entitleddays_contract_index_title');?>");
-        
+
         startdate = $("tr[data-id='" + id + "']>td:eq(1)").data('order');
         startdate = moment(startdate, 'X').format("YYYY-MM-DD");
         enddate = $("tr[data-id='" + id + "']>td:eq(2)").data('order');
@@ -209,7 +212,7 @@ if ($language_code != 'en') { ?>
         type = $("tr[data-id='" + id + "']>td:eq(4)").data('id');
         type_name = $("tr[data-id='" + id + "']>td:eq(4)").text();
         description = $("tr[data-id='" + id + "']>td:eq(5)").text();
-        
+
         $('#viz_startdate').datepicker('setDate', new Date(startdate));
         $('#viz_enddate').datepicker('setDate', new Date(enddate));
         $("#type").val(type);
@@ -217,7 +220,7 @@ if ($language_code != 'en') { ?>
         $("#description").val(description);
         current_id = id;
     }
-    
+
     //Remote Ajax call for saving the modified values, update of the datatable
     function edit_entitleddays() {
         $('#frmAddEntitledDays').modal('hide');
@@ -234,7 +237,7 @@ if ($language_code != 'en') { ?>
                         description: $("#description").val(),
                     }
           })
-   
+
         //Start date
         startdate = moment($("#startdate").val(), "YYYY-MM-DD").unix();
         $("tr[data-id='" + current_id + "'] td:eq(1)").data('order', startdate);
@@ -248,8 +251,8 @@ if ($language_code != 'en') { ?>
         //Days (mind +/- icons)
         days = parseFloat($('#days').val());
         cell_val = '<td data-order="' + days.toFixed(2) + '"><span id="days' + current_id + '">' + days.toFixed(2) + '</span> &nbsp; ' +
-                        '<a href="#" onclick="Javascript:incdec(' + current_id + ', \'decrease\');"><i class="icon-minus"></i></a>' +
-                        '&nbsp; <a href="#" onclick="Javascript:incdec(' + current_id + ', \'increase\');"><i class="icon-plus"></i></a></td>';
+                        '<a href="#" onclick="Javascript:incdec(' + current_id + ', \'decrease\');"><i class="mdi mdi-minus nolink"></i></a>' +
+                        '&nbsp;<a href="#" onclick="Javascript:incdec(' + current_id + ', \'increase\');"><i class="mdi mdi-plus nolink"></i></a></td>';
         cell = oTable.cell("tr[data-id='" + current_id + "'] td:eq(3)");
         cell.data(cell_val).draw();
         //Type of leave
@@ -330,14 +333,14 @@ if ($language_code != 'en') { ?>
           }).done(function( msg ) {
               id = parseInt(msg);
               htmlRow = '<tr data-id="' + id + '">' +
-                        '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="icon-remove"></i></a>' +
-                        '&nbsp;&nbsp;<a href="#" onclick="copy_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_copy');?>"><i class="fa fa-copy nolink"></i></a>' +
+                        '<td><a href="#" onclick="delete_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_delete');?>"><i class="mdi mdi-close nolink"></i></a>' +
+                        '&nbsp;&nbsp;<a href="#" onclick="copy_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_copy');?>"><i class="mdi mdi-content-copy nolink"></i></a>' +
                         '&nbsp;&nbsp;<a href="#" onclick="show_edit_entitleddays(' + id + ');" title="<?php echo lang('entitleddays_contract_index_thead_tip_edit');?>"><i class="mdi mdi-pencil nolink"></i></a></td>' +
                         '<td data-order="' + moment.utc(startdate, "YYYY-MM-DD").unix() + '">' + viz_startdate + '</td>' +
                         '<td data-order="' + moment.utc(enddate, "YYYY-MM-DD").unix() + '">' + viz_enddate + '</td>' +
                         '<td data-order="' + days.toFixed(2) + '"><span id="days' + id + '" class="credit">' + days.toFixed(2) + '</span> &nbsp; ' +
-                        '<a href="#" onclick="Javascript:incdec(' + id + ', \'decrease\');"><i class="icon-minus"></i></a>' +
-                        '&nbsp; <a href="#" onclick="Javascript:incdec(' + id + ', \'increase\');"><i class="icon-plus"></i></a></td>' +
+                        '<a href="#" onclick="Javascript:incdec(' + id + ', \'decrease\');"><i class="mdi mdi-minus nolink"></i></a>' +
+                        '&nbsp; <a href="#" onclick="Javascript:incdec(' + id + ', \'increase\');"><i class="mdi mdi-plus nolink"></i></a></td>' +
                         '<td data-id="' + type + '">' + type_name + '</td>' +
                         '<td>' + description + '</td>' +
                     '</tr>';
@@ -361,14 +364,14 @@ if ($language_code != 'en') { ?>
             $('#frmModalAjaxWait').modal('hide');
             if (jqXHR.status == 401) {
                 bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                    //After the login page, we'll be redirected to the current page 
+                    //After the login page, we'll be redirected to the current page
                    location.reload();
                 });
             } else { //Oups
                 bootbox.alert("<?php echo lang('global_ajax_error');?>");
             }
           });
-      
+
         $("#viz_startdate").datepicker({
             changeMonth: true,
             changeYear: true,
@@ -380,7 +383,7 @@ if ($language_code != 'en') { ?>
                     $( "#viz_enddate" ).datepicker( "option", "minDate", selectedDate );
                   }
         }, $.datepicker.regional['<?php echo $language_code;?>']);
-        
+
         $("#viz_enddate").datepicker({
             changeMonth: true,
             changeYear: true,
@@ -392,14 +395,14 @@ if ($language_code != 'en') { ?>
                     $( "#viz_startdate" ).datepicker( "option", "maxDate", selectedDate );
                   }
         }, $.datepicker.regional['<?php echo $language_code;?>']);
-        
+
         //Force decimal separator whatever the locale is
         $( "#days" ).keyup(function() {
             var value = $("#days").val();
             value = value.replace(",", ".");
             $("#days").val(value);
         });
-        
+
         $("body").on("keyup", function(e){
             if (e.keyCode == 27) {
                 if ($('#frmAddEntitledDays').hasClass('in')) {
@@ -407,7 +410,7 @@ if ($language_code != 'en') { ?>
                 }
             }
         });
-        
+
         //On load, try to get stepping value from a cookie
         if($.cookie('ent_contract_step') != null) {
             step = parseFloat($.cookie('ent_contract_step'));
@@ -420,7 +423,7 @@ if ($language_code != 'en') { ?>
                 step = parseFloat($("#txtStep").val());
             }
         });
-        
+
         //Transform the HTML table in a fancy datatable
         oTable = $('#entitleddayscontract').DataTable({
             order: [[ 1, "desc" ]],

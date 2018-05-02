@@ -76,7 +76,7 @@
                           <i class="fa fa-pencil"></i>&nbsp;<?php echo lang('hr_employees_button_selection');?>&nbsp;<span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="#" id="cmdCreateRequest"><i class="fa fa-plus"></i>&nbsp;<?php echo lang('hr_employees_button_create_request');?></a></li>
+                            <li><a href="#" id="cmdCreateRequest"><i class="mdi mdi-file-plus nolink"></i>&nbsp;<?php echo lang('hr_employees_button_create_request');?></a></li>
                             <li><a href="#" id="cmdSelectManager"><i class="fa fa-user"></i>&nbsp;<?php echo lang('hr_employees_button_select_manager');?></a></li>
                             <li><a href="#" id="cmdAddEntitlments"><i class="fa fa-pencil-square-o"></i>&nbsp;<?php echo lang('hr_employees_button_entitleddays');?></a></li>
                             <li><a href="#" id="cmdSelectContract"><i class="fa fa-file-text-o"></i>&nbsp;<?php echo lang('hr_employees_button_select_contract');?></a></li>
@@ -261,33 +261,33 @@
 
 <div id="context-menu">
   <ul class="dropdown-menu" role="menu">
-        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/leaves/create/{id}"><i class="icon-plus"></i>&nbsp;<?php echo lang('hr_employees_thead_link_create_leave');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/leaves/create/{id}"><i class="mdi mdi-file-plus nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_create_leave');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>users/edit/{id}?source=hr%2Femployees"><i class="mdi mdi-account-edit"></i>&nbsp;<?php echo lang('hr_employees_thead_tip_edit');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>entitleddays/user/{id}"><i class="mdi mdi-pencil-box-outline"></i>&nbsp;<?php echo lang('hr_employees_thead_tip_entitlment');?></a></li>
-        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/leaves/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_leaves');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/leaves/{id}"><i class="mdi mdi-format-list-bulleted nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_leaves');?></a></li>
         <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
-        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/overtime/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/overtime/{id}"><i class="mdi mdi-format-list-bulleted nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a></li>
         <?php } ?>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/counters/employees/{id}"><i class="mdi mdi-information-outline"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/presence/employees/{id}"><i class="fa fa-pie-chart"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>calendar/year/{id}"><i class="mdi mdi-calendar-text"></i>&nbsp;<?php echo lang('hr_employees_thead_link_calendar');?></a></li>
-        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>requests/delegations/{id}"><i class="icon-share-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>requests/delegations/{id}"><i class="mdi mdi-share nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a></li>
   </ul>
 </div>
 
 <div class="modal hide fade" id="frmContextMenu">
     <div class="modal-body">
-        <a class="context-mobile" href="<?php echo base_url();?>hr/leaves/create/{id}"><i class="icon-plus"></i>&nbsp;<?php echo lang('hr_employees_thead_link_create_leave');?></a><br />
-        <a class="context-mobile" href="<?php echo base_url();?>users/edit/{id}?source=hr%2Femployees"><i class="mdi mdi-pencil nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_tip_edit');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>hr/leaves/create/{id}"><i class="mdi mdi-file-plus nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_create_leave');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>users/edit/{id}?source=hr%2Femployees"><i class="mdi mdi-account-edit nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_tip_edit');?></a><br />
         <a class="context-mobile" href="<?php echo base_url();?>entitleddays/user/{id}"><i class="mdi mdi-pencil-box-outline nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_tip_entitlment');?></a><br />
-        <a class="context-mobile" href="<?php echo base_url();?>hr/leaves/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_leaves');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>hr/leaves/{id}"><i class="mdi mdi-format-list-bulleted nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_leaves');?></a><br />
         <?php if ($this->config->item('disable_overtime') == FALSE) { ?>
-        <a class="context-mobile" href="<?php echo base_url();?>hr/overtime/{id}"><i class="icon-list-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>hr/overtime/{id}"><i class="mdi mdi-format-list-bulleted nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a><br />
         <?php } ?>
         <a class="context-mobile" href="<?php echo base_url();?>hr/counters/employees/{id}"><i class="mdi mdi-information-outline nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a><br />
         <a class="context-mobile" href="<?php echo base_url();?>hr/presence/employees/{id}"><i class="fa fa-pie-chart nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a><br />
         <a class="context-mobile" href="<?php echo base_url();?>calendar/year/{id}"><i class="mdi mdi-calendar-text nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_calendar');?></a><br />
-        <a class="context-mobile" href="<?php echo base_url();?>requests/delegations/{id}"><i class="icon-share-alt"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a>
+        <a class="context-mobile" href="<?php echo base_url();?>requests/delegations/{id}"><i class="mdi mdi-share nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a>
   </div>
 </div>
 

@@ -1,7 +1,7 @@
+<img src="https://raw.githubusercontent.com/bbalet/jorani/master/assets/images/logo_simple.png" width="80" align="left" hspace="10">
+
 Jorani is a Leave Management System developed in PHP/MySQL under an AGPL v3 licence.
 Jorani is designed to provide simple leave and overtime request workflows for small organizations.
-
-![Jorani Logo](https://raw.githubusercontent.com/bbalet/jorani/master/assets/images/Jorani_Logo_horizontal-700.png)
 
 ## Informations / getting help
 

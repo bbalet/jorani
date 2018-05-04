@@ -108,6 +108,8 @@ To enable PHP in IIS7, you must follow the instructions provided on the official
 
 Jorani uses rewriting techniques, so you must install the rewriting module prior using Jorani http://www.iis.net/downloads/microsoft/url-rewrite
 
+Jorani uses icons contained in a woff2 font file, so you must make sure that the following MIME types are configured on IIS: `.woff    application/font-woff` and `.woff2    application/font-woff2`.
+
 For your convinience, a sample IIS7 configuration file is provided in this folder <code>/docs/install/iis7/web.config</code>. You need to copy this file at the root of your Jorani installation and to adapt it to your needs.
 
 ## HHVM

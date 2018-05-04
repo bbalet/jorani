@@ -1,13 +1,22 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
+## Dependencies to watch
+
+* https://github.com/travist/jsencrypt should publish v3 (compat to PHP backend).
+* http://bootboxjs.com/ should publish v5 (compat to BS4).
+* https://fullcalendar.io/ should publish v4 (removes JQuery dependencies).
+
 ## v0.6.6 or later
 
 - [X] Compatibility with PHP7.2.
 - [X] Migrate to select2 (selectize is no longer active).
 - [X] Migrate to PhpSpreadSheet (PHPExcel is no longer active).
-- [ ] Remove all glyphicons and use Material Design Icons instead.
-- [ ] Migrate Fontawesome to material design icons set (in preparation of BS4).
+- [X] Remove all glyphicons and use Material Design Icons instead.
+- [X] Migrate to JavaScript Cookie (removes JQuery dependencies).
+- [ ] Forbid negative duration in leave requests (Option).
+- [ ] Maybe: remove all references to JQueryUI (datepicker).
+- [ ] Maybe: Migrate Fontawesome to material design icons set (in preparation of BS4).
 
 ## v0.7.0 or later
 

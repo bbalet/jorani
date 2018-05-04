@@ -117,9 +117,9 @@ class Connection extends CI_Controller {
             } else {
                 require_once FCPATH . "vendor/autoload.php";
                 $rsa = new phpseclib\Crypt\RSA();
-                $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
+                $privateKey = file_get_contents('./assets/keys/private.pem', TRUE);
                 $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
-                $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
+                $rsa->loadKey($privateKey, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
                 $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
             }
             //Remove the salt

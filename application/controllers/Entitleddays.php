@@ -44,7 +44,7 @@ class Entitleddays extends CI_Controller {
         $user = $this->users_model->getUsers($id);
         $data['employee_name'] = $user['firstname'] . ' ' . $user['lastname'];
         
-        if (!empty ($user['contract'])) {
+        if (!empty($user['contract'])) {
             $this->load->model('contracts_model');
             $contract = $this->contracts_model->getContracts($user['contract']);
             $data['contract_name'] = $contract['name'];

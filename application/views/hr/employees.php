@@ -312,7 +312,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/ColReorder-1.3.1/js/dataTables.colReorder.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/Select-1.1.2/js/dataTables.select.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/context.menu.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/toe.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
@@ -343,9 +343,9 @@ function select_entity() {
         includeChildren = $('#chkIncludeChildren').is(':checked');
         $('#entity').val(entity);
         $('#txtEntity').val(entityName);
-        $.cookie('entity', entity);
-        $.cookie('entityName', entityName);
-        $.cookie('includeChildren', includeChildren);
+        Cookies.set('entity', entity);
+        Cookies.set('entityName', entityName);
+        Cookies.set('includeChildren', includeChildren);
         refreshDataTable();
     } else {
         //"change": Move selected employees to another entity
@@ -606,12 +606,12 @@ $(function () {
     });
 
     //Cookie has value ? take -1 by default
-    if($.cookie('entity') != null) {
-        entity = $.cookie('entity');
-        entityName = $.cookie('entityName');
-        includeChildren = $.cookie('includeChildren');
-        if ($.cookie('filterActive') != null) {
-            filterActive = $.cookie('filterActive');
+    if(Cookies.get('entity') !== undefined) {
+        entity = Cookies.get('entity');
+        entityName = Cookies.get('entityName');
+        includeChildren = Cookies.get('includeChildren');
+        if (Cookies.get('filterActive') !== undefined) {
+            filterActive = Cookies.get('filterActive');
         }
         //Parse boolean value contained into the string
         includeChildren = $.parseJSON(includeChildren.toLowerCase());
@@ -623,10 +623,10 @@ $(function () {
             case "all": $("#cmdAll").addClass("active"); break;
         }
     } else { //Set default value
-        $.cookie('entity', entity);
-        $.cookie('entityName', entityName);
-        $.cookie('includeChildren', includeChildren);
-        $.cookie('filterActive', filterActive);
+        Cookies.set('entity', entity);
+        Cookies.set('entityName', entityName);
+        Cookies.set('includeChildren', includeChildren);
+        Cookies.set('filterActive', filterActive);
     }
 
     //Transform the HTML table in a fancy datatable:
@@ -835,7 +835,7 @@ $(function () {
     $("#chkIncludeChildren").on('change', function() {
         $('#frmModalAjaxWait').modal('show');
         includeChildren = $('#chkIncludeChildren').is(':checked');
-        $.cookie('includeChildren', includeChildren);
+        Cookies.set('includeChildren', includeChildren);
         //Refresh datatable
         oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate)
             .load(function() {
@@ -847,7 +847,7 @@ $(function () {
     $("#cmdAll").click(function() {
         $('#frmModalAjaxWait').modal('show');
         filterActive = "all";
-        $.cookie('filterActive', filterActive);
+        Cookies.set('filterActive', filterActive);
         oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate)
             .load(function() {
                 $("#frmModalAjaxWait").modal('hide');
@@ -856,7 +856,7 @@ $(function () {
     $("#cmdActive").click(function() {
         $('#frmModalAjaxWait').modal('show');
         filterActive = "active";
-        $.cookie('filterActive', filterActive);
+        Cookies.set('filterActive', filterActive);
         oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate)
             .load(function() {
                 $("#frmModalAjaxWait").modal('hide');
@@ -865,7 +865,7 @@ $(function () {
     $("#cmdInactive").click(function() {
         $('#frmModalAjaxWait').modal('show');
         filterActive = "inactive";
-        $.cookie('filterActive', filterActive);
+        Cookies.set('filterActive', filterActive);
         oTable.ajax.url('<?php echo base_url();?>hr/employees/entity/' + entity + '/' + includeChildren + '/' + filterActive + '/' + filterDate)
             .load(function() {
                 $("#frmModalAjaxWait").modal('hide');

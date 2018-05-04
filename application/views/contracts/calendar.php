@@ -245,7 +245,7 @@ if ($language_code != 'en') { ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
 <script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
@@ -431,8 +431,8 @@ $(function() {
     //Import an iCalendar feed by using its URL
     $("#cmdImportCalendar").on("click", function() {
         var last_imported = '';
-        if($.cookie('import_ical_url') != null) {
-            last_imported = $.cookie('import_ical_url');
+        if(Cookies.get('import_ical_url') !== undefined) {
+            last_imported = Cookies.get('import_ical_url');
         }
         bootbox.prompt(
         "<?php echo lang('contract_calendar_prompt_import');?>",
@@ -442,22 +442,21 @@ $(function() {
             if (result === null) {
               //NOP
             } else {
-              //http://localhost/import.ics
-              //Ajax call to ics import function (using SabreDAV/VObject
+              //Ajax call to ics import function (using SabreDAV/VObject)
               $.ajax({
                   url: "<?php echo base_url(); ?>contracts/calendar/import",
                   type: "POST",
                   data: {
-                          contract: <?php echo $contract_id; ?>,
-                          url: result
+                        contract: <?php echo $contract_id; ?>,
+                        url: result
                       }
                 }).done(function( msg ) {
                       //If no error, reload the page and save last used URL
                       if (msg == "") {
-                          $.cookie('import_ical_url', result);
-                          location.reload(true);
+                        Cookies.set('import_ical_url', result);
+                        location.reload(true);
                       } else {
-                          bootbox.alert(msg);
+                        bootbox.alert(msg);
                       }
                   });
             }

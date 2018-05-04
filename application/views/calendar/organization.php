@@ -128,7 +128,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lang/<?php echo strtolower($language_code);?>.js"></script>
 <script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
 <?php }?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
@@ -200,10 +200,10 @@
       $('#spnAddOn').html('<i class="fa fa-sitemap" aria-hidden="true"></i>');
       $('#txtEntity').val(entityName);
       refresh_calendar();
-      $.cookie('selected', 'entity');
-      $.cookie('cal_entity', entity);
-      $.cookie('cal_entityName', entityName);
-      $.cookie('cal_includeChildren', includeChildren);
+      Cookies.set('selected', 'entity');
+      Cookies.set('cal_entity', entity);
+      Cookies.set('cal_entityName', entityName);
+      Cookies.set('cal_includeChildren', includeChildren);
       $("#frmSelectEntity").modal('hide');
     }
 
@@ -221,8 +221,8 @@
         listName = $('#cboList option:selected').text();
         $('#txtEntity').val(listName);
         refresh_calendar();
-        $.cookie('selected', 'list');
-        $.cookie('listId', listId);
+        Cookies.set('selected', 'list');
+        Cookies.set('listId', listId);
       }
 
       //entity = 0;
@@ -269,7 +269,7 @@
 
         //On click the check box "include sub-department", refresh the content if a department was selected
         $('#chkIncludeChildren').click(function() {
-            $.cookie('cal_includeChildren', $('#chkIncludeChildren').prop('checked'));
+            Cookies.set('cal_includeChildren', $('#chkIncludeChildren').prop('checked'));
             refresh_calendar();
         });
 
@@ -349,7 +349,7 @@
         //Toggle day offs displays
         $('#chkIncludeDaysOffs').on('click', function() {
             toggleDayoffs = !toggleDayoffs;
-            $.cookie('cal_dayoffs', toggleDayoffs);
+            Cookies.set('cal_dayoffs', toggleDayoffs);
             refresh_calendar();
         });
 
@@ -391,13 +391,13 @@
         });
 
         //Cookie has value ? take -1 by default
-        if($.cookie('cal_entity') != null) {
-            entity = $.cookie('cal_entity');
-            entityName = $.cookie('cal_entityName');
-            includeChildren = $.cookie('cal_includeChildren');
-            toggleDayoffs = $.cookie('cal_dayoffs');
-            selectedEntity = $.cookie('selected') != null && $.cookie('selected') == "list" ? false : true;
-            listId =  $.cookie('listId');
+        if(Cookies.get('cal_entity') !== undefined) {
+            entity = Cookies.get('cal_entity');
+            entityName = Cookies.get('cal_entityName');
+            includeChildren = Cookies.get('cal_includeChildren');
+            toggleDayoffs = Cookies.get('cal_dayoffs');
+            selectedEntity = Cookies.get('selected') !== undefined && Cookies.get('selected') == "list" ? false : true;
+            listId = Cookies.set('listId');
 
             if(selectedEntity == false){
               $('#spnAddOn').html('<i class="fa fa-users" aria-hidden="true"></i>');
@@ -424,11 +424,11 @@
             //Load the calendar events
             refresh_calendar();
         } else { //Set default value
-            $.cookie('cal_entity', entity);
-            $.cookie('cal_entityName', entityName);
-            $.cookie('cal_includeChildren', includeChildren);
-            $.cookie('cal_dayoffs', toggleDayoffs);
-            $.cookie('selected', 'entity');
+            Cookies.set('cal_entity', entity);
+            Cookies.set('cal_entityName', entityName);
+            Cookies.set('cal_includeChildren', includeChildren);
+            Cookies.set('cal_dayoffs', toggleDayoffs);
+            Cookies.set('selected', 'entity');
             refresh_calendar();
         }
 

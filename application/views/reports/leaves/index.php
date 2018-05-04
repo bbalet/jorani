@@ -89,7 +89,7 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 <script type="text/javascript">
 
 var entity = -1; //Id of the selected entity
@@ -104,9 +104,9 @@ function select_entity() {
     entityName = $('#organization').jstree().get_text(entity);
     $('#txtEntity').val(entityName);
     $("#frmSelectEntity").modal('hide');
-    $.cookie('rep_entity', entity);
-    $.cookie('rep_entityName', entityName);
-    $.cookie('rep_includeChildren', includeChildren);
+    Cookies.set('rep_entity', entity);
+    Cookies.set('rep_entityName', entityName);
+    Cookies.set('rep_includeChildren', includeChildren);
 }
 
 $(document).ready(function() {
@@ -187,21 +187,21 @@ $(document).ready(function() {
     //Toggle include sub-entities option
     $('#chkIncludeChildren').on('change', function() {
         includeChildren = $('#chkIncludeChildren').prop('checked');
-        $.cookie('rep_includeChildren', includeChildren);
+        Cookies.set('rep_includeChildren', includeChildren);
     });
 
     //Toggle include leave requests
     $('#chkLeaveDetails').on('change', function() {
         leaveDetails = $('#chkLeaveDetails').prop('checked');
-        $.cookie('rep_leaveDetails', leaveDetails);
+        Cookies.set('rep_leaveDetails', leaveDetails);
     });
 
     //Cookie has value ? take -1 by default
-    if($.cookie('rep_entity') != null) {
-        entity = $.cookie('rep_entity');
-        entityName = $.cookie('rep_entityName');
-        includeChildren = $.cookie('rep_includeChildren');
-        leaveDetails = (typeof $.cookie('rep_leaveDetails') === 'undefined') ? "false" : $.cookie('rep_leaveDetails');
+    if(Cookies.get('rep_entity') !== undefined) {
+        entity = Cookies.get('rep_entity');
+        entityName = Cookies.get('rep_entityName');
+        includeChildren = Cookies.get('rep_includeChildren');
+        leaveDetails = (Cookies.get('rep_leaveDetails') === undefined) ? "false" : Cookies.get('rep_leaveDetails');
         //Parse boolean values
         includeChildren = $.parseJSON(includeChildren.toLowerCase());
         leaveDetails = $.parseJSON(leaveDetails.toLowerCase());
@@ -209,10 +209,10 @@ $(document).ready(function() {
         $('#chkIncludeChildren').prop('checked', includeChildren);
         $('#chkLeaveDetails').prop('checked', leaveDetails);
     } else { //Set default value
-        $.cookie('rep_entity', entity);
-        $.cookie('rep_entityName', entityName);
-        $.cookie('rep_includeChildren', includeChildren);
-        $.cookie('rep_leaveDetails', leaveDetails);
+        Cookies.set('rep_entity', entity);
+        Cookies.set('rep_entityName', entityName);
+        Cookies.set('rep_includeChildren', includeChildren);
+        Cookies.set('rep_leaveDetails', leaveDetails);        
     }
 });
 </script>

@@ -122,7 +122,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
 <script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
@@ -174,12 +174,12 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     });
 <?php }?>
         //Memorize the last selected language with a cookie
-        if($.cookie('language') != null) {
-            var IsLangAvailable = 0 != $('#language option[value=' + $.cookie('language') + ']').length;
-            if ($.cookie('language') != "<?php echo $language_code; ?>") {
+        if(Cookies.get('language') !== undefined) {
+            var IsLangAvailable = 0 != $('#language option[value=' + Cookies.get('language') + ']').length;
+            if (Cookies.get('language') != "<?php echo $language_code; ?>") {
                 //Test if the former selected language is into the list of available languages
                 if (IsLangAvailable) {
-                    $('#language option[value="' + $.cookie('language') + '"]').attr('selected', 'selected');
+                    $('#language option[value="' + Cookies.get('language') + '"]').attr('selected', 'selected');
                     $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
                     $('#loginFrom').submit();
                 }
@@ -190,7 +190,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         $('#language').select2();
         $('#language').on('select2:select', function (e) {
           var value = e.params.data.id;
-          $.cookie('language', value, { expires: 90, path: '/'});
+          Cookies.set('language', value, { expires: 90, path: '/'});
           $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
           $('#loginFrom').submit();
         });

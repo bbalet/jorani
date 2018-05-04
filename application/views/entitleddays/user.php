@@ -117,7 +117,7 @@ if ($language_code != 'en') { ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script><script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 
 <script type="text/javascript">
     //Current cell transformed in input box
@@ -413,14 +413,14 @@ if ($language_code != 'en') { ?>
         });
 
         //On load, try to get stepping value from a cookie
-        if($.cookie('ent_user_step') != null) {
-            step = parseFloat($.cookie('ent_user_step'));
+        if(Cookies.get('ent_user_step') !== undefined) {
+            step = parseFloat(Cookies.get('ent_user_step'));
             $("#txtStep").val(step);
         }//Default to 1
         //Update step value if it is a number
         $("#txtStep").change(function() {
             if (!isNaN($("#txtStep").val())) {
-                $.cookie('ent_user_step', $("#txtStep").val());
+                Cookies.set('ent_user_step', $("#txtStep").val());
                 step = parseFloat($("#txtStep").val());
             }
         });

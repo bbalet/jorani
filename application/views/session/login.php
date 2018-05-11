@@ -187,7 +187,8 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         }
 
         //Refresh page language
-        $('#language').select2();
+        $('#language').select2({width:'165px'});
+
         $('#language').on('select2:select', function (e) {
           var value = e.params.data.id;
           Cookies.set('language', value, { expires: 90, path: '/'});

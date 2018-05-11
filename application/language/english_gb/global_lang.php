@@ -42,11 +42,11 @@ $lang['global_link_doc_page_calendar_department'] = '';
 $lang['global_link_doc_page_calendar_organization'] = 'https://jorani.org/page-calendar-organization.html';
 $lang['global_link_doc_page_calendar_tabular'] = '';
 
-$lang['global_link_doc_page_positions_list'] = '';
-$lang['global_link_doc_page_contracts_list'] = '';
+$lang['global_link_doc_page_positions_list'] = 'https://jorani.org/page-list-of-positions.html';
+$lang['global_link_doc_page_contracts_list'] = 'https://jorani.org/page-list-of-contracts.html';
 $lang['global_link_doc_page_contracts_calendar'] = '';
 $lang['global_link_doc_page_collaborators_list'] = '';
-$lang['global_link_doc_page_delegations'] = '';
+$lang['global_link_doc_page_delegations'] = 'https://jorani.org/temporary-permanent-delegation.html';
 $lang['global_link_doc_page_leave_requests_list'] = '';
 $lang['global_link_doc_page_leave_balance_collaborators'] = '';
 $lang['global_link_doc_page_leave_balance_employee'] = '';

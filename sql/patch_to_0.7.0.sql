@@ -36,6 +36,11 @@ ALTER TABLE `org_lists_employees` CONVERT TO CHARACTER SET utf8 COLLATE utf8_gen
 ALTER TABLE `org_lists` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE `oauth_applications` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+
+-- TODO:
+--  * Profile picture
+--  * Supporting docs
+
 -- Random hash for public feeds
 DELIMITER $$
 CREATE PROCEDURE sp_add_random_hash_users()

@@ -25,7 +25,7 @@ define('KEY_SIZE', 1024);   //Change the RSA key size
         <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
         <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/MDI-2.1.19/css/materialdesignicons.min.css">
-        <script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-2.2.4.min.js"></script>
         <style>
         .nolink {
             color: black;

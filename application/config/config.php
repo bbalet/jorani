@@ -455,6 +455,9 @@ $config['requests_by_manager'] = TRUE;
 //Set this value to true if you want to force the manager to comment rejections
 $config['mandatory_comment_on_reject'] = FALSE;
 
+//Set this value to true if you want to forbid the employee to submit a leave request with a negative amount 
+$config['disallow_requests_without_credit'] = TRUE;
+
 //____________________________________________________________________________
 //List of available languages. If you limit this list to one language, the list of available languages will be hidden from the login form
 //Beware that regional variant is case sensitivie (e.g. "en-GB" and not "en-gb")

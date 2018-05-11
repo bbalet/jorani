@@ -77,6 +77,18 @@ if ($language_code != 'en') { ?>
             return false;
         }
     }
+
+
+    //Disallow the use of negative symbols (through a whitelist of symbols)
+    function keyAllowed(key) {
+    var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
+        51, 52, 53, 54, 55, 56, 57, 91, 92, 93
+    ];
+    if (key && keys.indexOf(key) === -1)
+        return false;
+    else
+        return true;
+    }
     
     $(function () {
         $("#viz_date").datepicker({
@@ -99,5 +111,22 @@ if ($language_code != 'en') { ?>
                 $("#frmCreateExtra").submit();
             }
         });
+
+<?php if ($this->config->item('disallow_requests_without_credit') == TRUE) {?>
+        var durationField = document.getElementById("duration");
+        durationField.setAttribute("min", "0");
+        durationField.addEventListener('keypress', function(e) {
+            var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
+            if (!keyAllowed(key))
+            e.preventDefault();
+        }, false);
+
+        // Disable pasting of non-numbers
+        durationField.addEventListener('paste', function(e) {
+            var pasteData = e.clipboardData.getData('text/plain');
+            if (pasteData.match(/[^0-9]/))
+            e.preventDefault();
+        }, false);
+<?php }?>
     });
 </script>

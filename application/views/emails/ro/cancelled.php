@@ -20,25 +20,25 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} cancelled a requested time off. See the <a href="{BaseUrl}leaves/leaves/{LeaveId}">details</a> below:<br />
+        {Firstname} {Lastname} a anulat o cerere. Vezi <a href="{BaseUrl}leaves/leaves/{LeaveId}">detaliile</a> mai jos:<br />
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>De la &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>Până la &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
-                <td>Type &nbsp;</td><td>{Type}</td>
+                <td>Tip &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Durata &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Balance &nbsp;</td><td>{Balance}</td>
+                <td>Balanță &nbsp;</td><td>{Balance}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Reason}</td>
+                <td>Motiv &nbsp;</td><td>{Reason}</td>
             </tr>
         </table>
         <br />

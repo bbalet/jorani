@@ -20,21 +20,22 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Welcome to Jorani {Firstname} {Lastname}. Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        <p>Bine ai venit la Jorani {Firstname} {Lastname}. 
+        Utilizează aceste credențiale pentru <a href="{BaseURL}">conectarea la aplicație</a>:</p>
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>Logare</td><td>{Login}</td>
             </tr>
             <tr>
                 <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-                <td>Password</td><td>{Password}</td>
+                <td>Parolă</td><td>{Password}</td>
                 <?php } else { ?>
-                <td>Password</td><td><i>The password you use in order to open a session on your operating system (Windows, Linux, etc.).</i></td>
+                <td>Parolă</td><td><i>Parola pe care o folosești pentru a deschide o sesiune a sistemului de operare (Windows, Linux, etc.).</i></td>
                 <?php } ?>
             </tr>            
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        Once connected, you can change your password, as explained <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        <p>Odată conectat, poti schimba parola, urmând <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">acest ghid</a>.</p>
         <?php } ?>
         <hr>
         <h5>*** Acesta este un mesaj generat automat, vă rog să nu răspundeți la acest mesaj ***</h5>

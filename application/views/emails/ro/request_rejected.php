@@ -20,24 +20,24 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        Dragă {Firstname} {Lastname}, <br />
         <br />
-        Unfortunately, the time off you requested has been rejected. Please contact your manager to discuss the matter. <br />
+        <p>Din păcate, timpul liber solicitat a fost respins. Contactează managerul pentru a discuta această problemă.</p>
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>De la &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>Până la &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
-                <td>Type &nbsp;</td><td>{Type}</td>
+                <td>Tip &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Motiv &nbsp;</td><td>{Cause}</td>
             </tr>
             <tr>
-                <td>Last comment &nbsp;</td><td>{Comments}</td>
+                <td>Ultimul comentariu &nbsp;</td><td>{Comments}</td>
             </tr>
         </table>
         <hr>

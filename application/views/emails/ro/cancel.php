@@ -20,32 +20,33 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>{Firstname} {Lastname} would like to cancel a requested time off. See the <a href="{BaseUrl}leaves/{LeaveId}">details</a> below:</p>
+        <p>{Firstname} {Lastname} dorește să anuleze o cerere de ore suplimentare. 
+        Vezi <a href="{BaseUrl}leaves/{LeaveId}">detaliile</a> mai jos:</p>
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>De la &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>Până la &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
-                <td>Type &nbsp;</td><td>{Type}</td>
+                <td>Tip &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Durata &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Balance &nbsp;</td><td>{Balance}</td>
+                <td>Balanță &nbsp;</td><td>{Balance}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Reason}</td>
+                <td>Motiv &nbsp;</td><td>{Reason}</td>
             </tr>
            <tr>
-                <td>Last comment &nbsp;</td><td>{Comments}</td>
+                <td>Ultimul comentariu &nbsp;</td><td>{Comments}</td>
             </tr>
             <tr>
-                <td><a href="{BaseUrl}requests/cancellation/accept/{LeaveId}">Confirm cancellation</a> &nbsp;</td>
-                <td><a href="{BaseUrl}requests?cancel_rejected={LeaveId}">Reject cancellation</a></td>
+                <td><a href="{BaseUrl}requests/cancellation/accept/{LeaveId}">Confirmă anularea</a> &nbsp;</td>
+                <td><a href="{BaseUrl}requests?cancel_rejected={LeaveId}">Refuză anularea</a></td>
             </tr>
         </table>
         <br />

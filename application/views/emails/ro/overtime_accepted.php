@@ -20,18 +20,18 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        Dragă {Firstname} {Lastname}, <br />
         <br />
-        The overtime you submitted has been approved.<br />
+        Timpul suplimentar a fost aprobat.<br />
         <table border="0">
             <tr>
-                <td>Date &nbsp;</td><td>{Date}</td>
+                <td>Data &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Durata &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Motiv &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
         <hr>

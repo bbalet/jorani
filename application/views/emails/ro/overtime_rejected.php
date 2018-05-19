@@ -20,18 +20,19 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
-        <br />
-        Unfortunately, the overtime you submitted has been rejected. Please contact your manager to discuss the matter.<br />
+        <p>Dragă {Firstname} {Lastname},</p>
+
+        <p>Din păcate, timpul suplimentar trimis a fost respins. Contactează managerul pentru a discuta această problemă.</p>
+        
         <table border="0">
             <tr>
-                <td>Date &nbsp;</td><td>{Date}</td>
+                <td>Data &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Durata &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Motiv &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
         <hr>

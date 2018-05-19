@@ -20,20 +20,20 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} submitted overtime worked. See the details below:<br />
+        {Firstname} {Lastname} a trimis timpul suplimentar. Vezi detaliile mai jos:<br />
         <table border="0">
             <tr>
-                <td>Date &nbsp;</td><td>{Date}</td>
+                <td>Data &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Durata &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Motiv &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+        <a href="{UrlAccept}">Acceptă</a>
+        <a href="{UrlReject}">Respinge</a>
         <hr>
         <h5>*** Acesta este un mesaj generat automat, vă rog să nu răspundeți la acest mesaj ***</h5>
     </body>

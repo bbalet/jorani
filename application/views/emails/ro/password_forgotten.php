@@ -20,16 +20,16 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        <p>Utilizați aceste date pentru <a href="{BaseURL}">conectarea la sistem</a> :</p>
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>Logare</td><td>{Login}</td>
             </tr>
             <tr>
-                <td>Password</td><td>{Password}</td>
+                <td>Parolă</td><td>{Password}</td>
             </tr>            
         </table>
-        Once connected, you can change your password, as explained <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        <p>Odată conectat, poti schimba parola, urmând <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">acest ghid</a>.</p>
         <hr>
         <h5>*** Acesta este un mesaj generat automat, vă rog să nu răspundeți la acest mesaj ***</h5>
     </body>

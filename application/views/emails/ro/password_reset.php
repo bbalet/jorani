@@ -20,8 +20,8 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>Dear {Firstname} {Lastname},</p>
-        <p>Your Jorani password has been reset. If you did not perform this operation, please contact your manager.</p>
+        <p>Dragă {Firstname} {Lastname},</p>
+        <p>Parola Jorani a fost resetată. Dacă nu ai inițiat o astfel de cerere, contactează managerul.</p>
         <hr>
         <h5>*** Acesta este un mesaj generat automat, vă rog să nu răspundeți la acest mesaj ***</h5>
     </body>

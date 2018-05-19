@@ -20,26 +20,26 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Dear {Firstname} {Lastname}, <br />
+        Dragă {Firstname} {Lastname}, <br />
         <br />
-        <p>Unfortunately, your cancellation request was not accepted.
-        The leave request has now its original status of Accepted.</p>
-        <p>Please contact your manager to discuss the matter. </p>
+        <p>Din păcate, cererea de anulare nu a fost aprobată. 
+        Cererea de concediu este acum în starea originala - Aprobată.</p>
+        <p>Contactează managerul pentru a discuta această problemă.</p>
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>De la &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>Până la &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
-                <td>Type &nbsp;</td><td>{Type}</td>
+                <td>Tip &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Motiv &nbsp;</td><td>{Cause}</td>
             </tr>
             <tr>
-                <td>Last comment &nbsp;</td><td>{Comments}</td>
+                <td>Ultimul comentariu &nbsp;</td><td>{Comments}</td>
             </tr>
         </table>
         <hr>

@@ -20,36 +20,36 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} requested time off. See the <a href="{BaseUrl}leaves/requests/{LeaveId}">details</a> below:<br />
+        {Firstname} {Lastname} are o cerere de concediu. Vezi <a href="{BaseUrl}leaves/requests/{LeaveId}">detaliile</a> mai jos:<br />
         <table border="0">
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>De la &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>Până la &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
-                <td>Type &nbsp;</td><td>{Type}</td>
+                <td>Tip &nbsp;</td><td>{Type}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Durata &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Balance &nbsp;</td><td>{Balance}</td>
+                <td>Balanță &nbsp;</td><td>{Balance}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Reason}</td>
+                <td>Motiv &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-              <td>Last Comment &nbsp;</td><td>{Comments}</td>
+              <td>Ultimul comentariu &nbsp;</td><td>{Comments}</td>
             </tr>
             <tr>
-                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Accept</a> &nbsp;</td>
-                <td><a href="{BaseUrl}requests?rejected={LeaveId}">Reject</a></td>
+                <td><a href="{BaseUrl}requests/accept/{LeaveId}">Acceptă</a> &nbsp;</td>
+                <td><a href="{BaseUrl}requests?rejected={LeaveId}">Respinge</a></td>
             </tr>
         </table>
         <br />
-        You can check the <a href="{BaseUrl}hr/counters/collaborators/{UserId}">leave balance</a> before validating the leave request.
+        Poți verifica <a href="{BaseUrl}hr/counters/collaborators/{UserId}">balanța concediilor</a> înainte de a valida cererea.
         <hr>
         <h5>*** Acesta este un mesaj generat automat, vă rog să nu răspundeți la acest mesaj ***</h5>
     </body>

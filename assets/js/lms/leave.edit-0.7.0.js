@@ -97,9 +97,13 @@ function getLeaveInfos(preventDefault) {
                 bootbox.alert(noContractMsg);
             } else {
                 //If the employee has a contract, check if the current leave request is not on two yearly leave periods
-                var limit = moment(leaveInfo.PeriodEndDate);
-                if (start.isValid() && end.isValid() && limit.isValid()) {
-                    if (start.isBefore(limit) && limit.isBefore(end)) {
+                var periodStartDate = moment(leaveInfo.PeriodStartDate);
+                var periodEndDate = moment(leaveInfo.PeriodEndDate);
+                if (start.isValid() && end.isValid() && periodEndDate.isValid()) {
+                    if (start.isBefore(periodEndDate) && periodEndDate.isBefore(end)) {
+                        bootbox.alert(noTwoPeriodsMsg);
+                    }
+                    if (start.isBefore(periodStartDate)) {
                         bootbox.alert(noTwoPeriodsMsg);
                     }
                 }

@@ -1705,20 +1705,38 @@ class Leaves_model extends CI_Model {
         return $query->result_array();
     }
 
+    /**
+     * List of leave requests overlapping on two yearly periods.
+     * @return array List of overlapping leave requests
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function detectOverlappingProblems() {
+        $query = $this->db->query('SELECT CONCAT(users.firstname, \' \', users.lastname) AS user_label,
+            contracts.id AS contract_id, contracts.name AS contract_label,
+            status.name AS status_label,
+            leaves.*
+            FROM leaves
+            inner join users on leaves.employee = users.id
+            inner join contracts on users.contract = contracts.id
+            inner join status on status.id = leaves.status
+            WHERE leaves.startdate < CAST(CONCAT(YEAR(leaves.enddate), \'-\', REPLACE(contracts.startentdate, \'/\', \'-\')) AS DATE)
+            ORDER BY users.id ASC, leaves.startdate DESC', FALSE);
+        return $query->result_array();
+    }
 
     /**
      * Get one leave with his comment
-     * @param int $id Id of the leave request
+     * @param int $leaveId Id of the leave request
      * @return array list of records
      * @author Emilien NICOLAS <milihhard1996@gmail.com>
      */
-    public function getLeaveWithComments($id = 0) {
+    public function getLeaveWithComments($leaveId = 0) {
         $this->db->select('leaves.*');
         $this->db->select('status.name as status_name, types.name as type_name');
         $this->db->from('leaves');
         $this->db->join('status', 'leaves.status = status.id');
         $this->db->join('types', 'leaves.type = types.id');
-        $this->db->where('leaves.id', $id);
+        $this->db->where('leaves.id', $leaveId);
         $leave = $this->db->get()->row_array();
         if(!empty($leave['comments'])){
           $leave['comments'] = json_decode($leave['comments']);

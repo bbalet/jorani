@@ -61,6 +61,16 @@ $lang['admin_diagnostic_balance_thead_employee'] = 'Angajat';
 $lang['admin_diagnostic_balance_thead_contract'] = 'Contract';
 $lang['admin_diagnostic_balance_thead_start_date'] = 'Dată start';
 $lang['admin_diagnostic_balance_thead_status'] = 'Status';
+
+$lang['admin_diagnostic_overlapping_tab'] = 'Overlapping';
+$lang['admin_diagnostic_overlapping_description'] = 'Leave requests overlapping on two yearly periods.';
+$lang['admin_diagnostic_overlapping_thead_id'] = 'ID';
+$lang['admin_diagnostic_overlapping_thead_employee'] = 'Employee';
+$lang['admin_diagnostic_overlapping_thead_contract'] = 'Contract';
+$lang['admin_diagnostic_overlapping_thead_start_date'] = 'Start Date';
+$lang['admin_diagnostic_overlapping_thead_end_date'] = 'End Date';
+$lang['admin_diagnostic_overlapping_thead_status'] = 'Status';
+
 $lang['admin_oauthclients_title'] = 'Clienți si sesiuni OAuth';
 $lang['admin_oauthclients_tab_clients'] = 'Clienți';
 $lang['admin_oauthclients_tab_clients_description'] = 'Lista de clienți acceptati pentru a folosi REST API';

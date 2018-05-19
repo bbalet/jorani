@@ -28,6 +28,7 @@ $entitlmentOverflow_badge = ($entitlmentOverflow_count == 0)?'':'<span class="ba
 $negativeOvertime_badge = ($negativeOvertime_count == 0)?'':'<span class="badge badge-info">' . $negativeOvertime_count . '</span>&nbsp;';
 $unusedContracts_badge = ($unusedContracts_count == 0)?'':'<span class="badge badge-info">' . $unusedContracts_count . '</span>&nbsp;';
 $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-info">' . $leaveBalance_count . '</span>&nbsp;';
+$overlappingLeaves_badge = ($overlappingLeaves_count == 0)?'':'<span class="badge badge-info">' . $overlappingLeaves_count . '</span>&nbsp;';
 
 ?>
 <ul class="nav nav-tabs">
@@ -38,6 +39,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
     <li><a data-toggle="tab" href="#overtime"><?php echo $negativeOvertime_badge . lang('admin_diagnostic_overtime_tab');?></a></li>
     <li><a data-toggle="tab" href="#contracts"><?php echo $unusedContracts_badge . lang('admin_diagnostic_contract_tab');?></a></li>
     <li><a data-toggle="tab" href="#balance"><?php echo $leaveBalance_badge . lang('admin_diagnostic_balance_tab');?></a></li>
+    <li><a data-toggle="tab" href="#overlapping"><?php echo $overlappingLeaves_badge . lang('admin_diagnostic_overlapping_tab');?>&nbsp;<i class="mdi mdi-test-tube mdi-rotate-45" title="Beta"></i></a></li>
 </ul>
 
 <div class="tab-content">
@@ -257,7 +259,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
     <table class="table table-bordered table-hover table-condensed">
       <thead>
         <tr>
-            <th><?php echo lang('admin_diagnostic_contract_thead_id');?></th>
+            <th><?php echo lang('admin_diagnostic_balance_thead_id');?></th>
             <th><?php echo lang('admin_diagnostic_balance_thead_employee');?></th>
             <th><?php echo lang('admin_diagnostic_balance_thead_contract');?></th>
             <th><?php echo lang('admin_diagnostic_balance_thead_start_date');?></th>
@@ -267,7 +269,7 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
       <tbody>
     <?php foreach ($leaveBalance as $balance):
         $date = new DateTime($balance['startdate']);
-        $startdate = $date->format(lang('global_date_format'))?>
+        $startdate = $date->format(lang('global_date_format'));?>
         <tr>
             <td><a target="_blank" href="<?php echo base_url();?>leaves/edit/<?php echo $balance['id'];?>"><?php echo $balance['id'];?></a></td>
             <td>
@@ -287,6 +289,45 @@ $leaveBalance_badge = ($leaveBalance_count == 0)?'':'<span class="badge badge-in
     </table>
     <?php }?>
   </div><!-- Leave Balance //-->
+
+  <div class="tab-pane" id="overlapping">
+    <p><?php echo lang('admin_diagnostic_overlapping_description');?></a></p>
+
+    <?php if ($overlappingLeaves_count==0) {?>
+    <p><b><?php echo lang('admin_diagnostic_no_error');?></b></p>
+    <?php } else {?>
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+            <th><?php echo lang('admin_diagnostic_overlapping_thead_id');?></th>
+            <th><?php echo lang('admin_diagnostic_overlapping_thead_employee');?></th>
+            <th><?php echo lang('admin_diagnostic_overlapping_thead_contract');?></th>
+            <th><?php echo lang('admin_diagnostic_overlapping_thead_start_date');?></th>
+            <th><?php echo lang('admin_diagnostic_overlapping_thead_end_date');?></th>
+            <th><?php echo lang('admin_diagnostic_overlapping_thead_status');?></th>
+        </tr>
+      </thead>
+      <tbody>
+    <?php foreach ($overlappingLeaves as $leave):
+        $date = new DateTime($leave['startdate']);
+        $startdate = $date->format(lang('global_date_format'));
+        $date = new DateTime($leave['enddate']);
+        $enddate = $date->format(lang('global_date_format'));?>
+        <tr>
+            <td><a target="_blank" href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id'];?>"><?php echo $leave['id'];?></a></td>
+            <td><?php echo $leave['user_label'];?></td>
+            <td>
+                <a target="_blank" href="<?php echo base_url();?>contracts/edit/<?php echo $leave['contract_id'];?>"><?php echo $leave['contract_label'];?></a>
+            </td>
+            <td><?php echo $startdate;?></td>
+            <td><?php echo $enddate;?></td>            
+            <td><?php echo $leave['status_label'];?></td>
+        </tr>
+        <?php endforeach ?>
+      </tbody>
+    </table>
+    <?php }?>
+  </div><!-- Overlapping Leave Requests //-->
 
 </div>
     </div>

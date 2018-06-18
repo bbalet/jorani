@@ -342,7 +342,7 @@ class Connection extends CI_Controller {
      */
     public function sso() {
         require_once APPPATH . 'config/saml.php';
-        $auth = new OneLogin_Saml2_Auth($settingsInfo);
+        $auth = new OneLogin\Saml2\Auth($settingsInfo);
         $auth->login();
     }
     

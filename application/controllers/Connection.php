@@ -9,7 +9,7 @@
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
-require_once FCPATH . "vendor/autoload.php";
+require_once FCPATH . "application/config/autoload.php";
 
 /**
  * This class manages the connection to the application

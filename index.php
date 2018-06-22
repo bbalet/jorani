@@ -321,4 +321,7 @@ header("Pragma: no-cache");
  *
  * And away we go...
  */
+
+$GLOBALS['versionOfJorani'] = '0.6.6';
+
 require_once BASEPATH.'core/CodeIgniter.php';

@@ -299,17 +299,6 @@ $route['api/rejectleaves/(:num)'] = 'api/rejectleaves/$1';
 $route['api/users/ext'] = 'api/usersExt';
 
 //_______________________________________________
-//REST API (for mobile/HTML Clients)
-$route['api/rest/leaves']['OPTIONS'] = 'rest/options';
-$route['api/rest/leaves']['GET'] = 'rest/leaves';
-
-//User properties : is admin, is manager, id, id of manager, manager, contract..
-$route['api/rest/users/self']['GET'] = 'rest/getPropertiesOfConnectedUser';
-
-$route['api/rest/contracts']['OPTIONS'] = 'rest/options';
-$route['api/rest/users']['OPTIONS'] = 'rest/options';
-
-//_______________________________________________
 //ICS Feeds
 $route['ics/individual/(:num)'] = 'ics/individual/$1';
 $route['ics/dayoffs/(:num)/(:num)'] = 'ics/dayoffs/$1/$2';
@@ -335,6 +324,42 @@ $route['api/sso'] = 'connection/sso';
 $route['api/authorization/authorize'] = 'authorization/authorize';
 $route['api/authorization/login'] = 'authorization/login';
 $route['api/authorization/userinfo'] = 'authorization/userinfo';
+
+//_______________________________________________
+//REST API (for mobile/HTML Clients)
+$route['api/rest/self']['OPTIONS'] = 'Rest/options';
+$route['api/rest/self']['GET'] = 'Rest/self';
+$route['api/rest/version']['OPTIONS'] = 'Rest/options';
+$route['api/rest/version']['GET'] = 'Rest/version';
+$route['api/rest/checksum/(:any)']['OPTIONS'] = 'Rest/options';
+$route['api/rest/checksum/(:any)']['GET'] = 'Rest/checksum/$1';
+$route['api/rest/checksum']['OPTIONS'] = 'Rest/options';
+$route['api/rest/checksum']['GET'] = 'Rest/checksum';
+$route['api/rest/submissions']['OPTIONS'] = 'Rest/options';
+$route['api/rest/submissions']['GET'] = 'Rest/submissions';
+
+$route['api/rest/leaves']['OPTIONS'] = 'RestLeaves/options';
+$route['api/rest/leaves']['GET'] = 'RestLeaves/leaves';
+$route['api/rest/leaves/(:num)']['OPTIONS'] = 'RestLeaves/options';
+$route['api/rest/leaves/(:num)']['GET'] = 'RestLeaves/leaves/$1';
+
+//User properties : is admin, is manager, id, id of manager, manager, contract..
+$route['api/rest/users/(:num)']['OPTIONS'] = 'RestUsers/options';
+$route['api/rest/users/(:num)']['GET'] = 'RestUsers/users/$1';
+$route['api/rest/users']['OPTIONS'] = 'RestUsers/options';
+$route['api/rest/users']['GET'] = 'RestUsers/users';
+
+$route['api/rest/users/(:num)/enable']['OPTIONS'] = 'RestUsers/options';
+$route['api/rest/users/(:num)/enable']['GET'] = 'RestUsers/enable/$1';
+$route['api/rest/users/(:num)/disable']['OPTIONS'] = 'RestUsers/options';
+$route['api/rest/users/(:num)/disable']['GET'] = 'RestUsers/disable/$1';
+$route['api/rest/users/profile']['OPTIONS'] = 'RestUsers/options';
+$route['api/rest/users/profile']['GET'] = 'RestUsers/profile';
+
+$route['api/rest/admin/logs/(:any)']['OPTIONS'] = 'RestAdmin/options';
+$route['api/rest/admin/logs/(:any)']['GET'] = 'RestAdmin/logs/$1';
+$route['api/rest/admin/logs']['OPTIONS'] = 'RestAdmin/options';
+$route['api/rest/admin/logs']['GET'] = 'RestAdmin/logs';
 
 //_______________________________________________
 //Default controllers

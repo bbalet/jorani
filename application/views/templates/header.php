@@ -6,9 +6,6 @@
  * @link       https://github.com/bbalet/jorani
  * @since      0.1.0
  */
-
-$GLOBALS['versionOfJorani'] = '0.6.6';
-
 ?><!DOCTYPE html>
 <html lang="<?php echo $language_code;?>">
 <head>

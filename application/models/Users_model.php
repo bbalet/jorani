@@ -557,6 +557,81 @@ class Users_model extends CI_Model {
         }
     }
 
+    /**
+     * Check the provided credentials and load user's profile if they are correct
+     * @param string $login user login (or email for SSO)
+     * @param string $type login type could be "internal", "ldap", or "sso"
+     * @param string $password password
+     * @return stdClass user properties if the user is succesfully authenticated, NULL otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function checkCredentialsForREST($login, $type = "internal", $password = NULL) {
+        log_message('debug', '++checkCredentialsForREST / login=' . $login . ' / type=' . $type);
+        $this->db->from('users');
+        if ($type == "sso") {
+            $this->db->where('email', $login);
+        } else {
+            $this->db->where('login', $login);
+        }
+        $this->db->where('active = TRUE');
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 0) {
+            log_message('debug', '--checkCredentialsForREST : user not found ' . $login);
+            return NULL;
+        } else {
+            $row = $query->row();
+            if ($type != "ldap") {
+                $hash = crypt($password, $row->password);
+                if ($hash != $row->password) {
+                    log_message('debug', '--checkCredentialsForREST : Password does not match stored password');
+                    return NULL;
+                }
+            }
+            //We can load the profile
+            $user = new stdClass;
+            if (((int) $row->role & 1)) {
+                $user->isAdmin = TRUE;
+            } else {
+                $user->isAdmin = FALSE;
+            }
+    
+            /*
+              00000001 1  Admin
+              00000100 8  HR Officier / Local HR Manager
+              00001000 16 HR Manager
+              = 00001101 25 Can access to HR functions
+             */
+            if (((int) $row->role & 25)) {
+                $user->isHr = TRUE;
+            } else {
+                $user->isHr = FALSE;
+            }
+    
+            //Determine if the connected user is a manager or if he has any delegation
+            $user->isManager = FALSE;
+            if (count($this->getCollaboratorsOfManager($row->id)) > 0) {
+                $user->isManager = TRUE;
+            } else {
+                $this->load->model('delegations_model');
+                if ($this->delegations_model->hasDelegation($row->id))
+                    $user->isManager = TRUE;
+            }
+    
+            $user->login = $row->login;
+            $user->id = $row->id;
+            $user->firstname = $row->firstname;
+            $user->lastname = $row->lastname;
+            $user->manager = $row->manager;
+            $user->email = $row->email;
+            $user->contract = $row->contract;
+            $user->position = $row->position;
+            $user->organization = $row->organization;
+            log_message('debug', '--checkCredentialsForREST : user #' . $user->id);
+            return $user;
+        }
+    }
+
      /**
      * Get the LDAP Authentication path of a user
      * @param string $login user login

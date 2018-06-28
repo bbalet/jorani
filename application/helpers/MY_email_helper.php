@@ -1,10 +1,4 @@
-<?php
-/**
- * This helper contains functions related to e-mails (validation, etc.)
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
- */
-defined('BASEPATH') OR exit('No direct script access allowed.');
+<?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 if (!function_exists('valid_email')) {
 
@@ -31,8 +25,8 @@ if (!function_exists('valid_email')) {
     //
 
         // Added by Ivan Tcholakov, 17-OCT-2015.
-        if (function_exists('idn_to_ascii') && $atpos = strpos($address, '@')) {
-            $address = substr($address, 0, ++$atpos).idn_to_ascii(substr($address, $atpos));
+        if (function_exists('idn_to_ascii') && defined('INTL_IDNA_VARIANT_UTS46') && $atpos = strpos($address, '@')) {
+            $address = substr($address, 0, ++$atpos).idn_to_ascii(substr($address, $atpos), 0, INTL_IDNA_VARIANT_UTS46);
         }
         //
 

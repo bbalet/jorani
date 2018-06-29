@@ -234,9 +234,23 @@ class Leaves extends CI_Controller {
           //Prevent thugs to auto validate their leave requests
           if (!$this->is_hr && !$this->is_admin) {
             if ($this->input->post('status') > LMS_REQUESTED) {
-              $_POST['status'] = LMS_REQUESTED;
+                log_message('error', 'User #' . $this->session->userdata('id') . 
+                    ' tried to submit a LR with an wrong status = ' . $this->input->post('status'));
+                $_POST['status'] = LMS_REQUESTED;
             }
           }
+          
+            //Users must use an existing leave type, otherwise
+            //force leave type to default leave type
+            $this->load->model('contracts_model');
+            $leaveTypesDetails = $this->contracts_model->getLeaveTypesDetailsOTypesForUser($this->session->userdata('id'));
+            if (!array_key_exists($this->input->post('type'), $leaveTypesDetails->types)) {
+                log_message('error', 'User #' . $this->session->userdata('id') . ' tried to submit an wrong LR type = ' . 
+                $this->input->post('type'));
+                $_POST['type'] = $leaveTypesDetails->defaultType;
+                log_message('debug', 'LR type forced to ' . $leaveTypesDetails->defaultType); 
+            }
+
           if (function_exists('triggerCreateLeaveRequest')) {
               triggerCreateLeaveRequest($this);
           }
@@ -327,12 +341,28 @@ class Leaves extends CI_Controller {
           //Prevent thugs to auto validate their leave requests
           if (!$this->is_hr && !$this->is_admin) {
             if ($this->input->post('status') == LMS_ACCEPTED) {
-              $_POST['status'] = LMS_REQUESTED;
+                log_message('error', 'User #' . $this->session->userdata('id') . 
+                    ' tried to submit a LR with an wrong status = ' . $this->input->post('status'));
+                $_POST['status'] = LMS_REQUESTED;
             }
             if ($this->input->post('status') == LMS_CANCELED) {
-              $_POST['status'] = LMS_CANCELLATION;
+                log_message('error', 'User #' . $this->session->userdata('id') . 
+                    ' tried to submit a LR with an wrong status = ' . $this->input->post('status'));
+                $_POST['status'] = LMS_CANCELLATION;
             }
           }
+
+            //Users must use an existing leave type, otherwise
+            //force leave type to default leave type
+            $this->load->model('contracts_model');
+            $leaveTypesDetails = $this->contracts_model->getLeaveTypesDetailsOTypesForUser($this->session->userdata('id'));
+            if (!array_key_exists($this->input->post('type'), $leaveTypesDetails->types)) {
+                log_message('error', 'User #' . $this->session->userdata('id') . ' tried to submit an wrong LR type = ' . 
+                $this->input->post('type'));
+                $_POST['type'] = $leaveTypesDetails->defaultType;
+                log_message('debug', 'LR type forced to ' . $leaveTypesDetails->defaultType); 
+            }
+
             $this->leaves_model->updateLeaves($id);       //We don't use the return value
             $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
             //If the status is requested or cancellation, send an email to the manager

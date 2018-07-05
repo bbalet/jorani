@@ -10,8 +10,8 @@
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
 /**
- * This REST controller serves the API calls related to users
- * The difference with HR Controller is that operations are technical (CRUD, etc.).
+ * This REST controller serves the API calls related to users management
+ * The operations are allowed to Admin and HR users only
  */
 class RestUsers extends MY_RestController {
 
@@ -22,27 +22,10 @@ class RestUsers extends MY_RestController {
     public function __construct() {
         parent::__construct();
         $this->load->model('users_model');
-    }
-
-    /**
-     * Get the the profile of the connected employee
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function profile() {
-        log_message('debug', '++profile');
-        $profile = new \stdClass();
-        $this->load->model('positions_model');
-        $this->load->model('contracts_model');
-        $this->load->model('organization_model');
-        $this->load->model('oauthclients_model');
-        $profile->managerName = $this->users_model->getName($this->user->manager);
-        $profile->contractName = $this->contracts_model->getName($this->user->contract);
-        $profile->positionName = $this->positions_model->getName($this->user->position);
-        $profile->organizationName = $this->organization_model->getName($this->user->organization);
-        $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($profile));
-        log_message('debug', '--profile');
+        //Is the connected user an admin or HR?
+        if (!$this->user->isAdmin || !$this->user->isHr) {
+            $this->forbidden();
+        }
     }
 
     /**
@@ -51,17 +34,13 @@ class RestUsers extends MY_RestController {
      */
     public function users($userID = 0) {
         log_message('debug', '++users / userID = ' . $userID);
-        //Is the connected user an admin or HR?
-        if ($this->user->isAdmin || $this->user->isHr) {
-            if ($userID != 0) {
-                $users = $this->users_model->getUsers($userID);
-                unset($users['password']);
-                unset($users['random_hash']);
-            } else {
-                $users = $this->users_model->getUsersAndRoles();
-            }
+        //Access control is done in constructor
+        if ($userID != 0) {
+            $users = $this->users_model->getUsers($userID);
+            unset($users['password']);
+            unset($users['random_hash']);
         } else {
-            $this->forbidden();
+            $users = $this->users_model->getUsersAndRoles();
         }
         $this->output
             ->set_content_type('application/json')
@@ -76,12 +55,8 @@ class RestUsers extends MY_RestController {
      */
     public function enable($userID) {
         log_message('debug', '++enable');
-        //Is the connected user an admin or HR?
-        if ($this->user->isAdmin || $this->user->isHr) {
-            $this->users_model->setActive($userID, TRUE);
-        } else {
-            $this->forbidden();
-        }
+        //Access control is done in constructor
+        $this->users_model->setActive($userID, TRUE);
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode('OK'));
@@ -95,12 +70,8 @@ class RestUsers extends MY_RestController {
      */
     public function disable($userID) {
         log_message('debug', '++disable');
-        //Is the connected user an admin or HR?
-        if ($this->user->isAdmin || $this->user->isHr) {
-            $this->users_model->setActive($userID, FALSE);
-        } else {
-            $this->forbidden();
-        }
+        //Access control is done in constructor
+        $this->users_model->setActive($userID, FALSE);
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode('OK'));

@@ -14,6 +14,7 @@ I tried to sort them out by priority and to explicitly explain what is out of sc
 - [X] Migrate to PhpSpreadSheet (PHPExcel is no longer active).
 - [X] Remove all glyphicons and use Material Design Icons instead.
 - [X] Migrate to JavaScript Cookie (removes JQuery dependencies).
+- [ ] Maybe: Cannot force LR status from 2 to 1 for regular user.
 - [ ] Forbid negative duration in leave requests (Option).
 - [ ] Maybe: remove all references to JQueryUI (datepicker).
 - [ ] Maybe: Migrate Fontawesome to material design icons set (in preparation of BS4).

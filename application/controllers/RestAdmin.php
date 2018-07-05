@@ -33,22 +33,11 @@ class RestAdmin extends MY_RestController {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function logs($dateLogFile = '') {
-        log_message('debug', '++checksum = ' . $table);
-        $tables = array();
-        //Compute the checksum of all tables if not specified
-        if ($table == '') {
-            $list = $this->db->list_tables();
-            foreach ($list as $table)
-            {
-                $tables[$table] = $query = $this->db->query('CHECKSUM TABLE ' . $table)->result_array()[0]['Checksum'];
-            }
-        } else {
-            $table = preg_replace('/\s+/', '', $table); //Should avoid the method to be used with bad intentions
-            $tables[$table] = $query = $this->db->query('CHECKSUM TABLE ' . $table)->result_array()[0]['Checksum'];
-        }
+        log_message('debug', '++logs = ' . $table);
+        $tables = 'Not implemented';
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($tables));
-        log_message('debug', '--checksum');
+        log_message('debug', '--logs');
     }
 }

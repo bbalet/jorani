@@ -39,7 +39,7 @@ class MY_RestController extends CI_Controller {
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding, Accept-Language");
         if ($this->input->method(FALSE) != 'OPTIONS') {
             if (empty($this->input->server('PHP_AUTH_USER'))) {
-                log_message('debug', 'Authenticate: PHP_AUTH_USER is missing (webserver misconfiguration or BasicAuth wasn\'t sent)');
+                log_message('error', 'Authenticate: PHP_AUTH_USER is missing (webserver misconfiguration or BasicAuth wasn\'t sent)');
                 $this->notAuthenticated();
             } else {
                 $this->load->model('users_model');
@@ -110,6 +110,14 @@ class MY_RestController extends CI_Controller {
                         $this->language = $this->config->item('language');
                     }
                     log_message('debug', 'We\'ll use ' . $this->language);
+
+                    //Decode JSON into POST array
+                    $mediaType = $this->input->get_request_header('Content-Type', TRUE);
+                    log_message('debug', 'Media Type = ' . $mediaType);
+                    if (strpos($mediaType, 'application/json') !== false) {
+                        log_message('debug', 'Decode input JSON into POST array');
+                        $_POST = json_decode(file_get_contents('php://input'), true);
+                    }
                 }
             }
         }
@@ -120,14 +128,14 @@ class MY_RestController extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function options() {
-        
+        log_message('debug', '__options');
     }
 
     /**
      * Terminate lifecycle of the web request if the user can't be authenticated
      */
     protected function notAuthenticated() {
-        log_message('debug', 'notAuthenticated: Send back HTTP 401 Error');
+        log_message('error', ' /!\ notAuthenticated: Send back HTTP 401 Error');
         http_response_code(401);
         header('WWW-Authenticate: Basic realm="Jorani Rest API"');
         die();
@@ -137,7 +145,7 @@ class MY_RestController extends CI_Controller {
      * Terminate lifecycle of the web request if the user doesn't have enough privileges
      */
     protected function forbidden() {
-        log_message('debug', 'forbidden: Send back HTTP 403 Error');
+        log_message('error', ' /!\ forbidden: Send back HTTP 403 Error');
         http_response_code(403);
         die();
     }
@@ -146,9 +154,17 @@ class MY_RestController extends CI_Controller {
      * Terminate lifecycle of the web request if the object was not found
      */
     protected function notFound() {
-        log_message('debug', 'notFound: An object was not found');
+        log_message('error', ' /!\ notFound: The object was not found');
         http_response_code(404);
         die();
     }
 
+    /**
+     * Terminate lifecycle of the web request if the parametersare invalid
+     */
+    protected function badRequest() {
+        log_message('error', ' /!\ badRequest: Invalid input');
+        http_response_code(400);
+        die();
+    }
 }

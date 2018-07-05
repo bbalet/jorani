@@ -482,11 +482,11 @@ class Leaves_model extends CI_Model {
 
     /**
      * Create a leave request
-     * @param int $id Identifier of the employee
+     * @param int $employeeId Identifier of the employee
      * @return int id of the newly created leave request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function setLeaves($id) {
+    public function setLeaves($employeeId) {
         $data = array(
             'startdate' => $this->input->post('startdate'),
             'startdatetype' => $this->input->post('startdatetype'),
@@ -496,7 +496,7 @@ class Leaves_model extends CI_Model {
             'type' => $this->input->post('type'),
             'cause' => $this->input->post('cause'),
             'status' => $this->input->post('status'),
-            'employee' => $id
+            'employee' => $employeeId
         );
         $this->db->insert('leaves', $data);
         $newId = $this->db->insert_id();
@@ -504,7 +504,7 @@ class Leaves_model extends CI_Model {
         //Trace the modification if the feature is enabled
         if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
-            $this->history_model->setHistory(1, 'leaves', $newId, $this->session->userdata('id'));
+            $this->history_model->setHistory(1, 'leaves', $newId, $employeeId);
         }
 
         return $newId;
@@ -599,22 +599,26 @@ class Leaves_model extends CI_Model {
 
     /**
      * Update a leave request in the database with the values posted by an HTTP POST
-     * @param int $id of the leave request
+     * @param int $leaveId of the leave request
+     * @param int $userId Identifier of the user (optional)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function updateLeaves($id) {
-        $json = $this->prepareCommentOnStatusChanged($id, $this->input->post('status'));
+    public function updateLeaves($leaveId, $userId = 0) {
+        if ($userId == 0) {
+            $userId = $this->session->userdata('id');
+        }
+        $json = $this->prepareCommentOnStatusChanged($leaveId, $this->input->post('status'));
         if($this->input->post('comment') != NULL){
           $jsonDecode = json_decode($json);
-          $comment_object = new stdClass;
-          $comment_object->type = "comment";
-          $comment_object->author = $this->session->userdata('id');
-          $comment_object->value = $this->input->post('comment');
-          $comment_object->date = date("Y-n-j");
+          $commentObject = new stdClass;
+          $commentObject->type = "comment";
+          $commentObject->author = $userId;
+          $commentObject->value = $this->input->post('comment');
+          $commentObject->date = date("Y-n-j");
           if (isset($jsonDecode)){
-            array_push($jsonDecode->comments, $comment_object);
+            array_push($jsonDecode->comments, $commentObject);
           }else {
-            $jsonDecode->comments = array($comment_object);
+            $jsonDecode->comments = array($commentObject);
           }
           $json = json_encode($jsonDecode);
         }
@@ -629,29 +633,33 @@ class Leaves_model extends CI_Model {
             'status' => $this->input->post('status'),
             'comments' => $json
         );
-        $this->db->where('id', $id);
+        $this->db->where('id', $leaveId);
         $this->db->update('leaves', $data);
 
         //Trace the modification if the feature is enabled
         if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
-            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
+            $this->history_model->setHistory(2, 'leaves', $leaveId, $userId);
         }
     }
 
     /**
      * Delete a leave from the database
-     * @param int $id leave request identifier
+     * @param int $leaveId leave request identifier
+     * @param int $userId Identifier of the user (optional)
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function deleteLeave($id) {
+    public function deleteLeave($leaveId, $userId = 0) {
         //Trace the modification if the feature is enabled
         if ($this->config->item('enable_history') === TRUE) {
+            if ($userId == 0) {
+                $userId = $this->session->userdata('id');
+            }
             $this->load->model('history_model');
-            $this->history_model->setHistory(3, 'leaves', $id, $this->session->userdata('id'));
+            $this->history_model->setHistory(3, 'leaves', $leaveId, $userId);
         }
-        return $this->db->delete('leaves', array('id' => $id));
+        return $this->db->delete('leaves', array('id' => $leaveId));
     }
 
     /**
@@ -688,15 +696,15 @@ class Leaves_model extends CI_Model {
      */
     public function switchStatusAndComment($id, $status, $comment) {
         $json_parsed = $this->getCommentsLeave($id);
-        $comment_object = new stdClass;
-        $comment_object->type = "comment";
-        $comment_object->author = $this->session->userdata('id');
-        $comment_object->value = $comment;
-        $comment_object->date = date("Y-n-j");
+        $commentObject = new stdClass;
+        $commentObject->type = "comment";
+        $commentObject->author = $this->session->userdata('id');
+        $commentObject->value = $comment;
+        $commentObject->date = date("Y-n-j");
         if (isset($json_parsed)){
-          array_push($json_parsed->comments, $comment_object);
+          array_push($json_parsed->comments, $commentObject);
         }else {
-          $json_parsed->comments = array($comment_object);
+          $json_parsed->comments = array($commentObject);
         }
         $comment_change = new stdClass;
         $comment_change->type = "change";

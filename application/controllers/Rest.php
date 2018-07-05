@@ -29,15 +29,49 @@ class Rest extends MY_RestController {
     }
 
     /**
-     * Get the version of Jorani
+     * Get the the profile of the connected employee
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function version() {
-        log_message('debug', '++version = ' . $GLOBALS['versionOfJorani']);
+    public function profile() {
+        log_message('debug', '++profile');
+        $profile = new \stdClass();
+        $this->load->model('positions_model');
+        $this->load->model('contracts_model');
+        $this->load->model('organization_model');
+        $profile->managerName = $this->users_model->getName($this->user->manager);
+        $profile->contractName = $this->contracts_model->getName($this->user->contract);
+        $profile->positionName = $this->positions_model->getName($this->user->position);
+        $profile->organizationName = $this->organization_model->getName($this->user->organization);
         $this->output
             ->set_content_type('application/json')
-            ->set_output(json_encode($GLOBALS['versionOfJorani']));
-        log_message('debug', '--version');
+            ->set_output(json_encode($profile));
+        log_message('debug', '--profile');
+    }
+
+    /**
+     * Get the configuration of the Jorani server
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function config() {
+        log_message('debug', '++config');
+        $config = new \stdClass();
+        $config->IsOvertimeDisabled = $this->config->item('disable_overtime');
+        $config->IsHistoryEnabled = $this->config->item('enable_history');
+        $config->IsPublicCalendarEnabled = $this->config->item('public_calendar');
+        $config->IsIcsEnabled = $this->config->item('ics_enabled');
+        $config->hideGlobalCalsToUsers = $this->config->item('hide_global_cals_to_users');
+        $config->disableDepartmentCalendar = $this->config->item('disable_department_calendar');
+        $config->disableWorkmatesCalendar = $this->config->item('disable_workmates_calendar');
+        $config->disallowRequestsWithoutCredit = $this->config->item('disallow_requests_without_credit');
+        $config->mandatoryCommentOnReject = $this->config->item('mandatory_comment_on_reject');
+        $config->requestsByManager = $this->config->item('requests_by_manager');
+        $config->extraStatusRequested = $this->config->item('extra_status_requested');
+        $config->disableEditLeaveDuration = $this->config->item('disable_edit_leave_duration');
+        $config->versionOfJorani = $GLOBALS['versionOfJorani'];
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($config));
+        log_message('debug', '--config');
     }
 
     /**
@@ -49,7 +83,7 @@ class Rest extends MY_RestController {
         log_message('debug', '++submissions');
         $submissions = new \stdClass();
         $this->load->model('leaves_model');
-        $submissions->IsOvertimeDisabled = $this->config->item('disable_overtime');
+        $submissions->isOvertimeDisabled = $this->config->item('disable_overtime');
         $submissions->requestedLeavesCount = $this->leaves_model->countLeavesRequestedToManager($this->user->id);
         $submissions->requestedExtrasCount = 0;
         if ($this->config->item('disable_overtime') == FALSE) {

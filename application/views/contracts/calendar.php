@@ -339,10 +339,12 @@ function edit_series() {
 function changeTextCopyButton() {
   var source = '<?php echo $contract_name; ?>';
   var data = $('#contract').select2('data');
-  var dest = data[0].text;
-  var text = '<i class="fa fa-copy"></i>&nbsp;' +
-              source + '&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;' + dest;
-  $('#cmdContractCopy').html(text);
+  if (data !== undefined) {
+    var dest = data[0].text;
+    var text = '<i class="fa fa-copy"></i>&nbsp;' +
+                source + '&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;' + dest;
+    $('#cmdContractCopy').html(text);
+  }
 }
 
 //On load

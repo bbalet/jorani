@@ -132,28 +132,4 @@ class Types_model extends CI_Model {
         $result = $query->row_array();
         return $result['COUNT(*)'];
     }
-    
-    /**
-     * Create an arry containing the list of all existing leave types
-     * Modify the name (key) of the compensate leave type name passed as parameter
-     * @param &$compensate_name compensate leave type name
-     * @return array Bi-dimensionnal array of types
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    public function allTypes(&$compensate_name) {
-        $summary = array();
-        $types = $this->db->get_where('types')->result_array();
-        foreach ($types as $type) {
-            $summary[$type['name']][0] = 0; //Taken
-            if ($type['id'] != 0) {
-                $summary[$type['name']][1] = 0; //Entitled
-                $summary[$type['name']][2] = ''; //Description is only filled for catch-up
-            } else {
-                $compensate_name = $type['name'];
-                $summary[$type['name']][1] = '-'; //Entitled for catch up
-                $summary[$type['name']][2] = ''; //Description is only filled for catch-up
-            }
-        }
-        return $summary;
-    }
 }

@@ -101,7 +101,31 @@ class Overtime_model extends CI_Model {
             'status' => 3
         );
         $this->db->where('id', $id);
-        return $this->db->update('overtime', $data);
+        $this->db->update('overtime', $data);
+
+        //Add entitlement
+        $extra = $this->getExtras($id);
+
+        //Two cases:
+        // - has contract: we take the start and end dates from the contract.
+        // - no contract: boundaries are current year.
+        $this->load->model('contracts_model');
+        $hasContract = $this->contracts_model->getBoundaries($id, $startentdate, $endentdate, date("Y-m-d H:i:s"));
+        if (!$hasContract) {
+            $startentdate = strtotime('first day of january this year');
+            $endentdate = strtotime('last day of december this year');
+        }
+        $data = array(
+            'employee' => $extra['employee'],
+            'startdate' => $startentdate,
+            'enddate' => $endentdate,
+            'days' => $extra['duration'],
+            'type' => 0,
+            'overtime' => $id,
+            'description' => 'Catch up ' . $extra['date']
+        );
+        $this->db->insert('entitleddays', $data);
+        return 1;
     }
 
     /**
@@ -111,6 +135,8 @@ class Overtime_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function rejectExtra($id) {
+        //delete linked entitlement
+        $this->db->delete('entitleddays', array('overtime' => $id));
         $data = array(
             'status' => 4
         );
@@ -125,6 +151,8 @@ class Overtime_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function deleteExtra($id) {
+        //delete linked entitlement
+        $this->db->delete('entitleddays', array('overtime' => $id));
         return $this->db->delete('overtime', array('id' => $id));
     }
     

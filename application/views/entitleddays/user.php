@@ -28,9 +28,12 @@
   <?php foreach ($entitleddays as $days) { ?>
     <tr data-id="<?php echo $days['id'] ?>">
       <td>
-        <a href="#" onclick="delete_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_delete');?>"><i class="mdi mdi-close nolink"></i></a>
-        &nbsp;<a href="#" onclick="copy_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_copy');?>"><i class="mdi mdi-content-copy nolink"></i></a>
-        &nbsp;<a href="#" onclick="show_edit_entitleddays(<?php echo $days['id'] ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_edit');?>"><i class="mdi mdi-pencil nolink"></i></a>
+        <a href="#" onclick="delete_entitleddays(<?php echo $days['id']; ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_delete');?>"><i class="mdi mdi-close nolink"></i></a>
+        &nbsp;<a href="#" onclick="copy_entitleddays(<?php echo $days['id']; ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_copy');?>"><i class="mdi mdi-content-copy nolink"></i></a>
+        &nbsp;<a href="#" onclick="show_edit_entitleddays(<?php echo $days['id']; ?>);" title="<?php echo lang('entitleddays_user_index_thead_tip_edit');?>"><i class="mdi mdi-pencil nolink"></i></a>
+        <?php if (!is_null($days['overtime'])) { ?>
+            &nbsp;<a href="<?php echo base_url();?>extra/entitleddays/<?php echo $days['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><i class="mdi mdi-eye nolink"></i></a>
+        <?php } ?>
       </td>
 <?php $startDate = new DateTime($days['startdate']);
 $endDate = new DateTime($days['enddate']);?>

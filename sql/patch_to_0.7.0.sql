@@ -173,6 +173,7 @@ CALL sp_add_overtime_link_entitleddays();
 DROP PROCEDURE sp_add_overtime_link_entitleddays;
 
 -- Migrate accepted overtime requests into the new system of entitlement for overtime
+--The catch of this query is that it doesn't work for employees without a contract
 INSERT INTO entitleddays(employee, overtime, startdate, enddate, type, days, description)
 select 	o.employee,
 		o.id,
@@ -186,4 +187,4 @@ inner join users u on o.employee = u.id
 inner join contracts c on u.contract = c.id
 left outer join entitleddays e on o.id = e.overtime
 where e.id is null
-and o.status = 3
+and o.status = 3;

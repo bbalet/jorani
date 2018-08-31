@@ -11,97 +11,66 @@
 <div class="row-fluid">
     <div class="span12">
 
-<h2><?php echo lang('leaves_summary_title');?><?php echo $help;?></h2>
+        <h2><?php echo lang('leaves_summary_title');?><?php echo $help;?></h2>
 
-    <p><?php echo lang('leaves_summary_date_field');?>&nbsp;
-        <input type="text" id="refdate" />
-    </p>
+        <p><?php echo lang('leaves_summary_date_field');?>&nbsp;
+            <input type="text" id="refdate" />
+        </p>
 
-<table class="table table-bordered table-hover">
-<thead>
-    <tr>
-      <th rowspan="2"><?php echo lang('leaves_summary_thead_type');?></th>
-      <th colspan="2" style="text-align: center;"><?php echo lang('leaves_summary_thead_available');?></th>
-      <th rowspan="2"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_entitled');?></th>
-      <th rowspan="2"><i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>"></i></th>
-      <th rowspan="2"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label"><?php echo lang('Planned');?></span></th>
-      <th rowspan="2"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label label-warning"><?php echo lang('Requested');?></span></th>
-    </tr>
-    <tr>
-      <th><?php echo lang('leaves_summary_thead_actual');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>)"></i></th>
-      <th><?php echo lang('leaves_summary_thead_simulated');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?> + <?php echo lang('Planned');?> + <?php echo lang('Requested');?>)"></i></th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php if (count($summary) > 0) {
-  foreach ($summary as $key => $value) {
-      if (($value[2] == '') || ($value[2] == 'x')) {
-          $estimated = round(((float) $value[1] - (float) $value[0]), 3, PHP_ROUND_HALF_DOWN);
-          $simulated = $estimated;
-          if (!empty($value[4])) $simulated -= (float) $value[4];
-          if (!empty($value[5])) $simulated -= (float) $value[5];
-          ?>
-    <tr>
-      <td><?php echo $key; ?></td>
-      <td>
-          <?php echo $estimated; ?>
-      </td>
-      <td>
-          <?php echo $simulated; ?>
-      </td>
-      <td><?php echo ((float) $value[1]); ?></td>
-      <td><a href="<?php echo base_url();?>leaves?statuses=3|5&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[0]); ?></a></td>
-      <?php if (empty($value[4])) { ?>
-      <td>&nbsp;</td>
-      <?php } else { ?>
-      <td><a href="<?php echo base_url();?>leaves?statuses=1&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[4]); ?></a></td>
-      <?php } ?>
-      <?php if (empty($value[5])) { ?>
-      <td>&nbsp;</td>
-      <?php } else { ?>
-      <td><a href="<?php echo base_url();?>leaves?statuses=2&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[5]); ?></a></td>
-      <?php } ?>
-    </tr>
-  <?php }
-    }
-  } else {?>
-    <tr>
-      <td colspan="4"><?php echo lang('leaves_summary_tbody_empty');; ?></td>
-    </tr>
-    <?php } ?>
-  </tbody>
-</table>
-
-<?php if ($this->config->item('disable_overtime') == FALSE) { ?>
-<h4><?php echo lang('leaves_summary_title_overtime');?></h4>
-
-<table id="overtime" cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
-<thead>
-    <tr>
-      <th><?php echo lang('leaves_summary_thead_type');?></th>
-      <th><?php echo lang('leaves_summary_thead_entitled');?></th>
-      <th><?php echo lang('leaves_summary_thead_description');?></th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php if (count($summary) > 0) {
-  foreach ($summary as $key => $value) {
-      if (($value[2] != '') && ($value[2] != 'x')) {?>
-    <tr>
-      <td><?php echo str_replace("Catch up for", lang('leaves_summary_key_overtime'), $key); ?></td>
-      <td><?php echo (float) $value[1]; ?></td>
-      <td><?php echo $value[2]; ?></td>
-    </tr>
-  <?php }
-    }
-  } else {?>
-    <tr>
-      <td colspan="4"><?php echo lang('leaves_summary_tbody_empty');; ?></td>
-    </tr>
-    <?php } ?>
-  </tbody>
-</table>
-<?php } ?>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                <th rowspan="2"><?php echo lang('leaves_summary_thead_type');?></th>
+                <th colspan="2" style="text-align: center;"><?php echo lang('leaves_summary_thead_available');?></th>
+                <th rowspan="2"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_entitled');?></th>
+                <th rowspan="2"><i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>"></i></th>
+                <th rowspan="2"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label"><?php echo lang('Planned');?></span></th>
+                <th rowspan="2"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label label-warning"><?php echo lang('Requested');?></span></th>
+                </tr>
+                <tr>
+                <th><?php echo lang('leaves_summary_thead_actual');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>)"></i></th>
+                <th><?php echo lang('leaves_summary_thead_simulated');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?> + <?php echo lang('Planned');?> + <?php echo lang('Requested');?>)"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php if (count($summary) > 0) {
+            foreach ($summary as $key => $value) {
+                if (($value[2] == '') || ($value[2] == 'x')) {
+                    $estimated = round(((float) $value[1] - (float) $value[0]), 3, PHP_ROUND_HALF_DOWN);
+                    $simulated = $estimated;
+                    if (!empty($value[4])) $simulated -= (float) $value[4];
+                    if (!empty($value[5])) $simulated -= (float) $value[5];
+                    ?>
+                <tr>
+                <td><?php echo $key; ?></td>
+                <td>
+                    <?php echo $estimated; ?>
+                </td>
+                <td>
+                    <?php echo $simulated; ?>
+                </td>
+                <td><?php echo ((float) $value[1]); ?></td>
+                <td><a href="<?php echo base_url();?>leaves?statuses=3|5&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[0]); ?></a></td>
+                <?php if (empty($value[4])) { ?>
+                <td>&nbsp;</td>
+                <?php } else { ?>
+                <td><a href="<?php echo base_url();?>leaves?statuses=1&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[4]); ?></a></td>
+                <?php } ?>
+                <?php if (empty($value[5])) { ?>
+                <td>&nbsp;</td>
+                <?php } else { ?>
+                <td><a href="<?php echo base_url();?>leaves?statuses=2&type=<?php echo $value[3]; ?>" target="_blank"><?php echo ((float) $value[5]); ?></a></td>
+                <?php } ?>
+                </tr>
+            <?php }
+                }
+            } else {?>
+                <tr>
+                <td colspan="4"><?php echo lang('leaves_summary_tbody_empty');; ?></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
 
         </div>
 </div>

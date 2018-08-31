@@ -81,7 +81,7 @@ class Extra extends CI_Controller {
 
         $data['title'] = lang('extra_view_hmtl_title');
         $data['source'] = $source;
-        if ($source == 'overtime') {
+        if ($source != 'extra') {
             if (empty($employee)) {
                 $this->load->model('users_model');
                 $data['name'] = $this->users_model->getName($data['extra']['employee']);

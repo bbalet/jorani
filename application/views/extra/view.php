@@ -28,5 +28,8 @@
     <?php if (($extra['status'] == 1) || ($is_hr)) { ?>
     <a href="<?php echo base_url();?>extra/edit/<?php echo $extra['id'] ?>" class="btn btn-primary"><i class="mdi mdi-pencil"></i>&nbsp;<?php echo lang('extra_view_button_edit');?></a>
     &nbsp;
-    <?php } ?>
+    <?php } 
+    if ($source == 'entitleddays') {
+        $source = 'entitleddays/user/' . $extra['employee'];
+    }?>
     <a href="<?php echo base_url() . $source; ?>" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp;<?php echo lang('extra_view_button_back_list');?></a>

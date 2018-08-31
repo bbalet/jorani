@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS `tasks`;
 DROP TABLE IF EXISTS `time`;
 DROP TABLE IF EXISTS `settings`;
 
--- Harmonize the charset and engine
+-- Harmonize the charsets and engines
 ALTER TABLE `actions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='List of possible actions';
 ALTER TABLE `contracts` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='List of contracts';
 ALTER TABLE `dayoffs` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='List of non working days';
@@ -36,13 +36,44 @@ ALTER TABLE `org_lists_employees` CONVERT TO CHARACTER SET utf8 COLLATE utf8_gen
 ALTER TABLE `org_lists` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE `oauth_applications` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+-- Enlarge the login field so as to allow using an email address
 ALTER TABLE `users` 
     CHANGE `login` `login` VARCHAR(255) NULL DEFAULT NULL 
     COMMENT 'Identifier used by a user so as to login (can be an email if coupled with AD)';
 
--- TODO:
---  * Profile picture
---  * Supporting docs
+-- Profile picture
+DELIMITER $$
+CREATE PROCEDURE sp_add_profile_picture_users()
+    SQL SECURITY INVOKER
+BEGIN
+    IF NOT EXISTS (
+        SELECT NULL
+        FROM information_schema.columns
+        WHERE table_schema = DATABASE() AND table_name = 'users' AND column_name = 'picture'
+    ) THEN
+        ALTER TABLE `users` ADD `picture` BLOB NULL COMMENT 'Profile picture of user for tabular calendar';
+    END IF;
+END$$
+DELIMITER ;
+CALL sp_add_profile_picture_users();
+DROP PROCEDURE sp_add_profile_picture_users;
+
+-- Supporting document for a leave request
+DELIMITER $$
+CREATE PROCEDURE sp_add_supporting_doc_leaves()
+    SQL SECURITY INVOKER
+BEGIN
+    IF NOT EXISTS (
+        SELECT NULL
+        FROM information_schema.columns
+        WHERE table_schema = DATABASE() AND table_name = 'leaves' AND column_name = 'document'
+    ) THEN
+        ALTER TABLE `leaves` ADD `document` BLOB NULL COMMENT 'Optional supporting document';
+    END IF;
+END$$
+DELIMITER ;
+CALL sp_add_supporting_doc_leaves();
+DROP PROCEDURE sp_add_supporting_doc_leaves;
 
 -- Random hash for public feeds
 DELIMITER $$
@@ -107,7 +138,7 @@ DELIMITER ;
 CALL sp_add_user_properties_users();
 DROP PROCEDURE sp_add_user_properties_users;
 
--- Entity ID in table  `parameters` (for user/table scope values)
+-- Entity ID in table `parameters` (for user/table scope values)
 DELIMITER $$
 CREATE PROCEDURE sp_add_entity_id_parameters()
     SQL SECURITY INVOKER

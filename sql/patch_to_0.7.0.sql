@@ -36,6 +36,9 @@ ALTER TABLE `org_lists_employees` CONVERT TO CHARACTER SET utf8 COLLATE utf8_gen
 ALTER TABLE `org_lists` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE `oauth_applications` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+ALTER TABLE `users` 
+    CHANGE `login` `login` VARCHAR(255) NULL DEFAULT NULL 
+    COMMENT 'Identifier used by a user so as to login (can be an email if coupled with AD)';
 
 -- TODO:
 --  * Profile picture

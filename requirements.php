@@ -163,13 +163,13 @@ if ($configFileExists) {
                       <tr><td><i class="mdi mdi-information-outline"></i>&nbsp;Server software</td><td><?php echo $server_software; ?></td></tr>
 
                       <tr><td><?php if (strtolower($allow_overwrite) == "on") {?><i class="mdi mdi-check"></i><?php } else { ?><i class="mdi mdi-alert"></i><?php } ?>
-                      &nbsp;Allow overwrite (.htaccess files)</td><td><?php echo $allow_overwrite; ?> (used for cool URLs) Ignore this message if you are running something else than Apache.</td></tr>
+                      &nbsp;Allow overwrite (.htaccess files)</td><td><?php echo $allow_overwrite; ?> (used for cool URLs). Ignore this message if you are running something else than Apache.</td></tr>
 
                       <tr><td><?php if ($mod_rewrite) {?><i class="mdi mdi-check"></i><?php } else { ?><i class="mdi mdi-alert"></i><?php } ?>
-                      &nbsp;Apache module rewrite (mod_rewrite)</td><td><?php echo $mod_rewrite; ?> (used for cool URLs) Ignore this message if you are running something else than Apache.</td></tr>
+                      &nbsp;Apache module rewrite (mod_rewrite)</td><td><?php echo $mod_rewrite; ?> (used for cool URLs). Ignore this message if you are running something else than Apache.</td></tr>
 
                       <tr><td><?php if (strtolower($mod_gzip) == "on") {?><i class="mdi mdi-check"></i><?php } else { ?><i class="mdi mdi-alert"></i><?php } ?>
-                      &nbsp;Apache module gzip (mod_gzip)</td><td><?php echo $mod_gzip; ?> Improve response times.</td></tr>
+                      &nbsp;Apache module gzip (mod_gzip)</td><td><?php echo $mod_gzip; ?> (turning it On would improve response times).</td></tr>
 
                       <?php if (version_compare(PHP_VERSION, '5.6.0') >= 0) {?>
                       <tr><td><i class="mdi mdi-check"></i>&nbsp;PHP 5.6.0+</td>
@@ -201,13 +201,13 @@ if ($configFileExists) {
                       <tr><td><i class="mdi mdi-alert"></i>&nbsp;<code>json_encode</code> function doesn't exist</td>
                       <?php } ?><td>PHP must be compiled with <a href="http://php.net/manual/en/json.installation.php" target="_blank">json support<a>.</td></tr>
 
-                      <?php if (is_writable(dirname('application/logs/'))) {?>
+                      <?php if (is_writable(realpath('application/logs/'))) {?>
                       <tr><td><i class="mdi mdi-check"></i>&nbsp;Jorani can write into logs folder</td>
                       <?php } else { ?>
                       <tr><td><i class="mdi mdi-alert"></i>&nbsp;Jorani can't write into logs folder</td>
                       <?php } ?><td>The folder application/logs/ must be writable.</td></tr>
 
-                      <?php if (is_writable(dirname('local/upload/leaves/'))) {?>
+                      <?php if (is_writable(realpath('local/upload/leaves/'))) {?>
                       <tr><td><i class="mdi mdi-check"></i>&nbsp;Jorani can write files</td>
                       <?php } else { ?>
                       <tr><td><i class="mdi mdi-alert"></i>&nbsp;Jorani can't write files</td>

@@ -15,7 +15,7 @@ $lang['admin_diagnostic_requests_tab'] = 'طلبات الإجازات';
 $lang['admin_diagnostic_requests_description'] = 'تم قبول طلبات الإجازات ولكن يوجد تداخلات';
 $lang['admin_diagnostic_requests_thead_id'] = 'التعريف';
 $lang['admin_diagnostic_requests_thead_employee'] = 'الموظف';
-$lang['admin_diagnostic_requests_thead_start_date'] = 'تاريخ البدء';
+$lang['admin_diagnostic_requests_thead_start_date'] = 'تاريخ البداية';
 $lang['admin_diagnostic_requests_thead_status'] = 'الحالة';
 $lang['admin_diagnostic_requests_thead_type'] = 'النوع';
 
@@ -33,7 +33,7 @@ $lang['admin_diagnostic_entitlements_description'] = 'قائمة العقود و
 $lang['admin_diagnostic_entitlements_thead_id'] = 'التعريف';
 $lang['admin_diagnostic_entitlements_thead_type'] = 'النوع';
 $lang['admin_diagnostic_entitlements_thead_name'] = 'الاسم';
-$lang['admin_diagnostic_entitlements_thead_start_date'] = 'تاريخ البدء';
+$lang['admin_diagnostic_entitlements_thead_start_date'] = 'تاريخ البداية';
 $lang['admin_diagnostic_entitlements_thead_end_date'] = 'تاريخ الإنتهاء';
 $lang['admin_diagnostic_entitlements_type_contract'] = 'العقد';
 $lang['admin_diagnostic_entitlements_type_employee'] = 'الموظف';
@@ -62,7 +62,7 @@ $lang['admin_diagnostic_balance_description'] = 'طلبات إجازة دون ر
 $lang['admin_diagnostic_balance_thead_id'] = 'التعريف';
 $lang['admin_diagnostic_balance_thead_employee'] = 'الموظف';
 $lang['admin_diagnostic_balance_thead_contract'] = 'العقد';
-$lang['admin_diagnostic_balance_thead_start_date'] = 'تاريخ البدء';
+$lang['admin_diagnostic_balance_thead_start_date'] = 'تاريخ البداية';
 $lang['admin_diagnostic_balance_thead_status'] = 'الحالة';
 
 $lang['admin_diagnostic_overlapping_tab'] = 'Overlapping';

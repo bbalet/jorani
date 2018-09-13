@@ -193,8 +193,8 @@ class Connection extends CI_Controller {
      */
     public function language() {
         $this->load->helper('form');
-        $this->session->set_userdata('language_code', $this->input->get_post('language'));
-        $this->session->set_userdata('language', $this->polyglot->code2language($this->input->get_post('language')));
+        $this->session->set_userdata('language_code', $this->input->get_post('language', true));
+        $this->session->set_userdata('language', $this->polyglot->code2language($this->input->get_post('language', true)));
         if ($this->input->post('last_page') == FALSE) {
             $this->redirectToLastPage();
         } else {

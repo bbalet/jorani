@@ -223,12 +223,13 @@ for ($mC = 1; $mC <= 12; $mC++) {
     </div>
     <div class="modal-body" id="frmSelectDelegateBody">
         <div class='input-append'>
-                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
-                    value="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>" />
-                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id;?>">
-                     <i class="mdi mdi-content-copy"></i>
-                 </button>
-                <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
+            <?php $icsUrl = base_url() . 'ics/dayoffs/' . $user_id . '/' . $contract_id . '?token=' . $this->session->userdata('random_hash');?>
+            <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
+                value="<?php echo $icsUrl;?>" />
+                <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo $icsUrl;?>">
+                    <i class="mdi mdi-content-copy"></i>
+                </button>
+            <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
         </div>
     </div>
     <div class="modal-footer">

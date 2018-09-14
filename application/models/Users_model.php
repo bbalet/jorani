@@ -206,7 +206,8 @@ class Users_model extends CI_Model {
             'contract' => $this->input->post('contract'),
             'identifier' => $this->input->post('identifier'),
             'language' => $this->input->post('language'),
-            'timezone' => $this->input->post('timezone')
+            'timezone' => $this->input->post('timezone'),
+            'random_hash' => $this->getRandomBytes(16),
         );
 
         if ($this->input->post('entity') != NULL && $this->input->post('entity') != '') {
@@ -472,6 +473,7 @@ class Users_model extends CI_Model {
             'is_admin' => $is_admin,
             'is_hr' => $is_hr,
             'manager' => $row->manager,
+            'random_hash' => $row->random_hash,
             'logged_in' => TRUE
         );
         $this->session->set_userdata($newdata);
@@ -793,6 +795,23 @@ class Users_model extends CI_Model {
             return null;
         } else {
             return $query->row();
+        }
+    }
+
+    /**
+     * Check if a given hash is associated to an existing user
+     * @param string $randomHash Random Hash associated to user
+     * @return bool TRUE if the user was found, FALSE otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function checkUserByHash($randomHash) {
+        $this->db->from('users');
+        $this->db->where('random_hash', $randomHash);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return TRUE;
         }
     }
 

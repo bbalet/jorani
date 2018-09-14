@@ -80,9 +80,10 @@
     </div>
     <div class="modal-body" id="frmSelectDelegateBody">
         <div class='input-append'>
+                <?php $icsUrl = base_url() . 'ics/individual/' . $user_id . '?token=' . $this->session->userdata('random_hash');?>
                 <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
-                    value="<?php echo base_url() . 'ics/individual/' . $user_id;?>" />
-                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/individual/' . $user_id;?>">
+                    value="<?php echo $icsUrl;?>" />
+                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo $icsUrl;?>">
                      <i class="mdi mdi-content-copy"></i>
                  </button>
                 <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>

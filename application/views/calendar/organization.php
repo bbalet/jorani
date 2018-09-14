@@ -443,9 +443,9 @@
             if (entity != -1) {
                 urlICS = '<?php echo base_url(); ?>ics/entity/<?php echo $user_id; ?>/' + entity + '/' + $('#chkIncludeChildren').prop('checked');
             }
+            urlICS += '?token=<?php echo $this->session->userdata('random_hash'); ?>'; 
             $("#frmLinkICS").modal('show');
             $('#txtIcsUrl').val(urlICS);
-            //$('#txtIcsUrl').data('data-clipboard-text', urlICS);
         });
         var client = new Clipboard("#cmdCopy");
         client.on( "success", function() {

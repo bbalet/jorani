@@ -69,6 +69,7 @@ BEGIN
         WHERE table_schema = DATABASE() AND table_name = 'leaves' AND column_name = 'document'
     ) THEN
         ALTER TABLE `leaves` ADD `document` BLOB NULL COMMENT 'Optional supporting document';
+        ALTER TABLE `leaves_history` ADD COLUMN `document` blob AFTER `comments`;
     END IF;
 END$$
 DELIMITER ;
@@ -173,7 +174,7 @@ CALL sp_add_overtime_link_entitleddays();
 DROP PROCEDURE sp_add_overtime_link_entitleddays;
 
 -- Migrate accepted overtime requests into the new system of entitlement for overtime
---The catch of this query is that it doesn't work for employees without a contract
+-- The catch of this query is that it doesn't work for employees without a contract
 INSERT INTO entitleddays(employee, overtime, startdate, enddate, type, days, description)
 select 	o.employee,
 		o.id,

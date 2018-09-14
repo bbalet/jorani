@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost;dbname=lms',
+	'dsn'	=> 'mysql:host=localhost;dbname=jorani',
 	'hostname' => '',
 	'username' => 'root',
 	'password' => '',
-	'database' => '',
+	'database' => 'jorani',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

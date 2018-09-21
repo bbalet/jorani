@@ -6,7 +6,9 @@
 
 -- Fix default values for database
 
--- Task management feature is part of a 3rd application
+-- TODO: utf8mb4_unicode_ci
+
+-- Task management feature is now part of a 3rd party application
 DROP TABLE IF EXISTS `activities`;
 DROP TABLE IF EXISTS `activities_employee`;
 DROP TABLE IF EXISTS `tasks`;
@@ -14,27 +16,27 @@ DROP TABLE IF EXISTS `time`;
 DROP TABLE IF EXISTS `settings`;
 
 -- Harmonize the charsets and engines
-ALTER TABLE `actions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='List of possible actions';
-ALTER TABLE `contracts` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='List of contracts';
-ALTER TABLE `dayoffs` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='List of non working days';
-ALTER TABLE `entitleddays` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='Add or sub entitlement for employees or contracts';
-ALTER TABLE `types` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='List of leave types';
-ALTER TABLE `users` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='List of employees / users having access to Jorani';
+ALTER TABLE `actions` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='List of possible actions';
+ALTER TABLE `contracts` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='List of contracts (common settings between employees)';
+ALTER TABLE `dayoffs` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='List of non working days';
+ALTER TABLE `entitleddays` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='Add or sub entitlement for employees or contracts';
+ALTER TABLE `types` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='List of leave types (LoV table)';
+ALTER TABLE `users` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='List of employees / users having access to Jorani';
 
-ALTER TABLE `leaves` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='Leave requests';
-ALTER TABLE `organization` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='Tree of the organization';
-ALTER TABLE `overtime` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='Overtime worked (extra time)';
-ALTER TABLE `positions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='Position (job position) in the organization';
-ALTER TABLE `roles` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='Roles in the application';
-ALTER TABLE `status` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='Status of the Leave Request';
-ALTER TABLE `parameters` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci, COMMENT='Parameters can be global or specific to an object';
+ALTER TABLE `leaves` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='Leave requests';
+ALTER TABLE `organization` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='Tree of the organization';
+ALTER TABLE `overtime` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='Overtime worked (extra time)';
+ALTER TABLE `positions` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='Position (job position) in the organization';
+ALTER TABLE `roles` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='Roles in the application (system table)';
+ALTER TABLE `status` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='Status of the Leave Request (system table)';
+ALTER TABLE `parameters` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, COMMENT='Parameters can be global or specific to an object';
 
-ALTER TABLE `delegations` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
-ALTER TABLE `excluded_types` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
-ALTER TABLE `leaves_history` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
-ALTER TABLE `org_lists_employees` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
-ALTER TABLE `org_lists` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
-ALTER TABLE `oauth_applications` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE `delegations` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE `excluded_types` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE `leaves_history` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE `org_lists_employees` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE `org_lists` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE `oauth_applications` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Enlarge the login field so as to allow using an email address
 ALTER TABLE `users` 
@@ -69,7 +71,7 @@ BEGIN
         WHERE table_schema = DATABASE() AND table_name = 'leaves' AND column_name = 'document'
     ) THEN
         ALTER TABLE `leaves` ADD `document` BLOB NULL COMMENT 'Optional supporting document';
-        ALTER TABLE `leaves_history` ADD COLUMN `document` blob AFTER `comments`;
+        ALTER TABLE `leaves_history` ADD COLUMN `document` BLOB NULL COMMENT 'Optional supporting document' AFTER `comments`;
     END IF;
 END$$
 DELIMITER ;

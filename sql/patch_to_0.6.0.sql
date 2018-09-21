@@ -14,6 +14,8 @@
 -- * Some parameters are stored into DB on a global of user scope
 -- * Add comments on leave requests depending on the status and the configuration
 
+SET SQL_SAFE_UPDATES = 0;
+
 -- New admin role
 INSERT IGNORE INTO `roles` SET `id` = 1, `name` = 'admin';
 

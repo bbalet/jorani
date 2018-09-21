@@ -112,8 +112,8 @@ class Overtime_model extends CI_Model {
         $this->load->model('contracts_model');
         $hasContract = $this->contracts_model->getBoundaries($id, $startentdate, $endentdate, date("Y-m-d H:i:s"));
         if (!$hasContract) {
-            $startentdate = strtotime('first day of january this year');
-            $endentdate = strtotime('last day of december this year');
+            $startentdate = date("Y-m-d", strtotime('first day of january this year'));
+            $endentdate = date("Y-m-d", strtotime('last day of december this year'));
         }
         $data = array(
             'employee' => $extra['employee'],

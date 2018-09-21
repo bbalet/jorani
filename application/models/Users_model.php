@@ -207,7 +207,7 @@ class Users_model extends CI_Model {
             'identifier' => $this->input->post('identifier'),
             'language' => $this->input->post('language'),
             'timezone' => $this->input->post('timezone'),
-            'random_hash' => $this->getRandomBytes(16),
+            'random_hash' => rtrim(strtr(base64_encode($this->getRandomBytes(24)), '+/', '-_'), '='),
         );
 
         if ($this->input->post('entity') != NULL && $this->input->post('entity') != '') {
@@ -284,6 +284,7 @@ class Users_model extends CI_Model {
         $this->db->set('email', $email);
         $this->db->set('password', $hash);
         $this->db->set('role', $role);
+        $this->db->set('random_hash', rtrim(strtr(base64_encode($this->getRandomBytes(24)), '+/', '-_'), '='));
         if (isset($manager)) $this->db->set('manager', $manager);
         if (isset($organization)) $this->db->set('organization', $organization);
         if (isset($contract)) $this->db->set('contract', $contract);

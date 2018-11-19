@@ -72,6 +72,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'modificar';
 $lang['hr_leaves_thead_tip_accept'] = 'aceptar';
 $lang['hr_leaves_thead_tip_reject'] = 'rechazar';
 $lang['hr_leaves_thead_tip_delete'] = 'suprimir';
+$lang['hr_leaves_thead_tip_history'] = 'show history';
 $lang['hr_leaves_thead_id'] = 'ID';
 $lang['hr_leaves_thead_status'] = 'Estado';
 $lang['hr_leaves_thead_start'] = 'Primera fecha';

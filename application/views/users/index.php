@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays the list of users.
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
@@ -10,7 +10,7 @@
 
 <div class="row-fluid">
     <div class="span12">
-        
+
 <h2><?php echo lang('users_index_title');?><?php echo $help;?></h2>
 
 <?php echo $flash_partial_view;?>
@@ -33,16 +33,16 @@
             <?php echo $users_item['id'] ?>&nbsp;
             <div class="pull-right">
                 <?php if ($users_item['active']) { ?>
-                <a href="<?php echo base_url();?>users/disable/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_active');?>"><i class="icon-ok"></i></a>
+                <a href="<?php echo base_url();?>users/disable/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_active');?>"><i class="mdi mdi-account-off nolink"></i></a>
                 <?php } else { ?>
-                <a href="<?php echo base_url();?>users/enable/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_inactive');?>"><i class="icon-remove"></i></a>
+                <a href="<?php echo base_url();?>users/enable/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_inactive');?>"><i class="mdi mdi-account mdi-dark mdi-inactive"></i></a>
                 <?php } ?>
                 &nbsp;
-                <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
+                <a href="<?php echo base_url();?>users/edit/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_edit');?>"><i class="mdi mdi-account-edit nolink"></i></a>
                 &nbsp;
-                <a href="#" class="confirm-delete" data-id="<?php echo $users_item['id'];?>" title="<?php echo lang('users_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
+                <a href="#" class="confirm-delete" data-id="<?php echo $users_item['id'];?>" title="<?php echo lang('users_index_thead_tip_delete');?>"><i class="mdi mdi-delete nolink"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>users/reset/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_reset');?>" data-target="#frmResetPwd" data-toggle="modal"><i class="icon-lock"></i></a>
+                <a href="<?php echo base_url();?>users/reset/<?php echo $users_item['id'] ?>" title="<?php echo lang('users_index_thead_tip_reset');?>" data-target="#frmResetPwd" data-toggle="modal"><i class="mdi mdi-lock nolink"></i></a>
             </div>
         </td>
         <td><?php echo $users_item['firstname']; ?></td>
@@ -61,9 +61,9 @@
 
 <div class="row-fluid">
     <div class="span12">
-      <a href="<?php echo base_url();?>users/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('users_index_button_export');?></a>
+      <a href="<?php echo base_url();?>users/export" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp;<?php echo lang('users_index_button_export');?></a>
       &nbsp;
-      <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo lang('users_index_button_create_user');?></a>
+      <a href="<?php echo base_url();?>users/create" class="btn btn-primary"><i class="mdi mdi-account-plus"></i>&nbsp;<?php echo lang('users_index_button_create_user');?></a>
     </div>
 </div>
 
@@ -98,7 +98,7 @@
 </div>
 
 <div id="frmImportUsers" class="modal hide fade">
-    
+
     <div class="modal-header">
         <a href="#" onclick="$('#frmImportUsers').modal('hide');" class="close">&times;</a>
          <h3><?php echo lang('users_index_popup_import_title');?></h3>
@@ -151,7 +151,7 @@ $(document).ready(function() {
     });
     $("#frmResetPwd").alert();
     $("#frmImportUsers").alert();
-	
+
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
     $('#frmConfirmDelete').on('show', function() {
         var link = "<?php echo base_url();?>users/delete/" + $(this).data('id');
@@ -160,12 +160,12 @@ $(document).ready(function() {
 
     //Display a modal pop-up so as to confirm if a user has to be deleted or not
     //We build a complex selector because datatable does horrible things on DOM...
-    //a simplier selector doesn't work when the delete is on page >1 
+    //a simplier selector doesn't work when the delete is on page >1
     $("#users tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
         $('#frmConfirmDelete').data('id', id).modal('show');
     });
-    
+
     //Prevent to load always the same content (refreshed each time)
     $('#frmConfirmDelete').on('hidden', function() {
         $(this).removeData('modal');

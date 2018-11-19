@@ -8,9 +8,7 @@
  */
 ?>
 
-<h2><?php echo lang('hr_leaves_create_title');?> &nbsp;
-<a href="<?php echo lang('global_link_doc_page_request_leave');?>" title="<?php echo lang('global_link_tooltip_documentation');?>" target="_blank" rel="nofollow"><i class="icon-question-sign"></i></a>
-&nbsp;<span class="muted">(<?php echo $name ?>)</span>
+<h2><?php echo lang('hr_leaves_create_title');?> &nbsp;<?php echo $help;?>
 </h2>
 
 <div class="row-fluid">
@@ -80,9 +78,9 @@ echo form_open($form_action, $attributes) ?>
         <option value="6"><?php echo lang('Canceled');?></option>
     </select><br />
 
-    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('hr_leaves_create_button_create');?></button>
+    <button type="submit" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp; <?php echo lang('hr_leaves_create_button_create');?></button>
     &nbsp;
-    <a href="<?php echo base_url() . $source; ?>" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp; <?php echo lang('hr_leaves_create_button_cancel');?></a>
+    <a href="<?php echo base_url() . $source; ?>" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp; <?php echo lang('hr_leaves_create_button_cancel');?></a>
 </form>
 
     </div>
@@ -97,7 +95,6 @@ echo form_open($form_action, $attributes) ?>
         </div>
  </div>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
@@ -108,6 +105,8 @@ if ($language_code != 'en') { ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/lms/leave.edit-0.7.0.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script>
 $(document).on("click", "#showNoneWorkedDay", function(e) {
   showListDayOffHTML();
@@ -157,6 +156,6 @@ function validate_form() {
 
 $(function () {
     //Selectize the leave type combo
-    $('#type').selectize();
+    $('#type').select2();
 });
 </script>

@@ -29,7 +29,7 @@
                 <td>كلمة المرور</td><td>{Password}</td>
             </tr>
         </table>
-        <p><a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">حال تأمين الإتصال، يمكنك تغيير كلمة المرور، وكما مبين هنا.</a></p>
+        <p><a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">حال تأمين الإتصال، يمكنك تغيير كلمة المرور، وكما مبين هنا.</a></p>
         <hr>
         <h5>*** هذه الرسالة كتبت اوتوماتيكياً، يرجى عدم الإجابة عليها ***</h5>
     </body>

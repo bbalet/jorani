@@ -16,4 +16,6 @@ application/temp/*
 /application/language/test.txt
 /.sonar/
 
+/.vscode/
+
 /vendor/

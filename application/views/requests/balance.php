@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays the leave balance of the collaborators of the connected employee (manager).
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
@@ -12,7 +12,7 @@
     <div class="span12">
 
         <h2><?php echo lang('requests_balance_title');?>  &nbsp;<?php echo $help;?></h2>
-        
+
         <p><?php echo lang('requests_balance_description');?></p>
 
         <p><?php echo lang('requests_balance_date_field');?>&nbsp;<input type="text" id="refdate" /></p>
@@ -40,7 +40,7 @@
             <?php endforeach ?>
             </tbody>
         </table>
-        
+
     </div>
 </div>
 
@@ -84,7 +84,7 @@ $(function () {
                     },
                     {
                         extend:    'excelHtml5',
-                        text:      '<i class="fa fa-file-excel-o"></i>',
+                        text:      '<i class="mdi mdi-download"></i>',
                         titleAttr: 'Excel'
                     }
             ],
@@ -94,7 +94,7 @@ $(function () {
                     '<?php echo lang('datatable_10_rows');?>',
                     '<?php echo lang('datatable_25_rows');?>',
                     '<?php echo lang('datatable_50_rows');?>',
-                    '<?php echo lang('datatable_all_rows');?>' 
+                    '<?php echo lang('datatable_all_rows');?>'
                 ]
             ],
         language: {
@@ -124,7 +124,7 @@ $(function () {
             }
         },
     });
-    
+
     //Init datepicker widget (it is complicated because we cannot based it on UTC)
     isDefault = <?php echo $isDefault;?>;
     moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});

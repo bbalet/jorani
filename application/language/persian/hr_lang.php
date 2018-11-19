@@ -72,6 +72,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'ویرایش';
 $lang['hr_leaves_thead_tip_accept'] = 'پذیرفتن';
 $lang['hr_leaves_thead_tip_reject'] = 'رد';
 $lang['hr_leaves_thead_tip_delete'] = 'حذف';
+$lang['hr_leaves_thead_tip_history'] = 'show history';
 $lang['hr_leaves_thead_id'] = 'شناسه';
 $lang['hr_leaves_thead_status'] = 'وضعیت';
 $lang['hr_leaves_thead_start'] = 'تاریخ شروع';

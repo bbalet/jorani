@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays a simplified authorization form for OAtuh2 authorization.
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
@@ -17,7 +17,7 @@
     <div class="row">
         <div class="span12">
             <img width="100" src="<?php echo base_url();?>assets/images/logo_simple.png">
-            &nbsp;<i class="icon-retweet"></i>&nbsp;
+            &nbsp;<i class="mdi mdi-twitter-retweet"></i>&nbsp;
             <img width="100" src="<?php echo $iconPath;?>">
         </div>
     </div>

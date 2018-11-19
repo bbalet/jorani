@@ -27,12 +27,18 @@ define('LDAP_PASSWORD', '');  //This is the password we will use to bind to LDAP
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
         <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>
+        <link rel="stylesheet" href="assets/MDI-2.1.19/css/materialdesignicons.min.css">
+        <script type="text/javascript" src="assets/js/jquery-2.2.4.min.js"></script>
+        <style>
+        .nolink {
+            color: black;
+        }
+        </style>
     </head>
     <body>
         <div class="container-fluid">
             <ul class="nav nav-pills">
-                <li><a href="home" title="login to Jorani"><i class="icon-home"></i></a></li>
+                <li><a href="home" title="login to Jorani"><i class="mdi mdi-home nolink"></i></a></li>
                 <li><a href="requirements.php">Requirements</a></li>
                 <li><a href="testmail.php">Email</a></li>
                 <li class="active"><a href="#">LDAP</a></li>

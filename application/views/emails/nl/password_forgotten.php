@@ -29,7 +29,7 @@
                 <td>Wachtwoord</td><td>{Password}</td>
             </tr>
         </table>
-        Wanneer u ingelogd bent kun u het wachtwoord wijzigen (zie <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">hier</a> voor nadere uitleg).
+        Wanneer u ingelogd bent kun u het wachtwoord wijzigen (zie <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">hier</a> voor nadere uitleg).
         <hr>
         <h5>*** Dit is een automatisch gegenereerd bericht, antwoord alsjeblieft niet op dit bericht ***</h5>
     </body>

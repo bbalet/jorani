@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays sso failure message. Its layout is the same than the login form.
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
@@ -10,18 +10,25 @@
 
 <style>
     body {
-        background-image:url('<?php echo base_url();?>assets/images/login-background.jpg');
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
+        background:
+            -webkit-linear-gradient(315deg, hsla(0, 4.23%, 86.08%, 1) 0%, hsla(0, 4.23%, 86.08%, 0) 70%),
+            -webkit-linear-gradient(65deg, hsla(0, 0%, 100%, 1) 10%, hsla(0, 0%, 100%, 0) 80%),
+            -webkit-linear-gradient(135deg, hsla(201.61, 63.64%, 50.39%, 1) 15%, hsla(201.61, 63.64%, 50.39%, 0) 80%),
+            -webkit-linear-gradient(205deg, hsla(193.64, 56.9%, 54.51%, 1) 100%, hsla(193.64, 56.9%, 54.51%, 0) 70%);
+        background:
+            linear-gradient(135deg, hsla(0, 4.23%, 86.08%, 1) 0%, hsla(0, 4.23%, 86.08%, 0) 70%),
+            linear-gradient(25deg, hsla(0, 0%, 100%, 1) 10%, hsla(0, 0%, 100%, 0) 80%),
+            linear-gradient(315deg, hsla(201.61, 63.64%, 50.39%, 1) 15%, hsla(201.61, 63.64%, 50.39%, 0) 80%),
+            linear-gradient(245deg, hsla(193.64, 56.9%, 54.51%, 1) 100%, hsla(193.64, 56.9%, 54.51%, 0) 70%);
     }
-    
+
     .vertical-center {
         min-height: 90%;  /* Fallback for browsers that do NOT support vh unit */
         min-height: 90vh;
         display: flex;
         align-items: center;
       }
-      
+
       .form-box {
         padding: 20px;
         border: 1px #e4e4e4 solid;
@@ -52,7 +59,7 @@
     <?php } ?>
     <h4><?php echo $message;?></h4>
     <br />
-    <a href="<?php echo base_url();?>api/sso" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></a>
+    <a href="<?php echo base_url();?>api/sso" class="btn btn-primary"><i class="mdi mdi-login"></i>&nbsp;<?php echo lang('session_login_button_login');?></a>
     <br /><br />
                 </div>
                 <div class="span6" style="height:100%;">
@@ -73,20 +80,17 @@
         <div class="span3">&nbsp;</div>
     </div>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
     $(function () {
         //Refresh page language
-        $('#language').selectize({
-            onChange: function (value) {
-                if (value != '') {
-                    $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
-                    window.location.href = '<?php echo base_url();?>session/language?language=' + value;
-                }
-            }
+        $('#language').select2();
+        $('#language').on('select2:select', function (e) {
+          var value = e.params.data.id;
+          Cookies.set('language', value, { expires: 90, path: '/'});
+          window.location.href = '<?php echo base_url();?>session/language?language=' + value;
         });
-        
     });
 </script>

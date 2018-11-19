@@ -9,7 +9,7 @@
  * @since         0.4.3
  */
 ?>
-        
+
 <h2><?php echo lang('reports_leaves_title');?> &nbsp;<?php echo $help;?></h2>
 
 <div class="row-fluid">
@@ -40,7 +40,7 @@
         </label>
         <br />
     </div>
-    <div class="span4">	
+    <div class="span4">
         <label for="txtEntity"><?php echo lang('reports_leaves_field_entity');?></label>
         <div class="input-append">
         <input type="text" id="txtEntity" name="txtEntity" readonly />
@@ -51,13 +51,13 @@
         </label>
     </div>
     <div class="span4">
-        <div class="pull-right">    
+        <div class="pull-right">
             <label for="chkLeaveDetails">
                     <input type="checkbox" id="chkLeaveDetails" name="chkLeaveDetails" /> <?php echo lang('reports_leaves_field_leave_requests');?>
             </label>
             &nbsp;
-            <button class="btn btn-primary" id="cmdLaunchReport"><i class="icon-file icon-white"></i>&nbsp; <?php echo lang('reports_leaves_button_launch');?></button>
-            <button class="btn btn-primary" id="cmdExportReport"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('reports_leaves_button_export');?></button>
+            <button class="btn btn-primary" id="cmdLaunchReport"><i class="mdi mdi-file-chart"></i>&nbsp; <?php echo lang('reports_leaves_button_launch');?></button>
+            <button class="btn btn-primary" id="cmdExportReport"><i class="mdi mdi-download"></i>&nbsp; <?php echo lang('reports_leaves_button_export');?></button>
         </div>
     </div>
 </div>
@@ -89,7 +89,7 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 <script type="text/javascript">
 
 var entity = -1; //Id of the selected entity
@@ -104,32 +104,32 @@ function select_entity() {
     entityName = $('#organization').jstree().get_text(entity);
     $('#txtEntity').val(entityName);
     $("#frmSelectEntity").modal('hide');
-    $.cookie('rep_entity', entity);
-    $.cookie('rep_entityName', entityName);
-    $.cookie('rep_includeChildren', includeChildren);
+    Cookies.set('rep_entity', entity);
+    Cookies.set('rep_entityName', entityName);
+    Cookies.set('rep_includeChildren', includeChildren);
 }
 
 $(document).ready(function() {
     //Init datepicker widget
     moment.locale('<?php echo $language_code;?>');
     $("#refdate").val(moment().format('L'));
-    $('#refdate').datepicker();    
-    
+    $('#refdate').datepicker();
+
     $("#frmSelectEntity").alert();
-    
+
     $("#cmdSelectEntity").click(function() {
         $("#frmSelectEntity").modal('show');
         $("#frmSelectEntityBody").load('<?php echo base_url(); ?>organization/select');
     });
-    
+
     $("#cboMonth").click(function() {
         month = $("#cboMonth").val();
     });
-    
+
     $("#cboYear").click(function() {
         year = $("#cboYear").val();
     });
-    
+
     $('#cmdExportReport').click(function() {
         var rtpQuery = '<?php echo base_url();?>reports/leaves/export';
         var tmpUnix = moment($("#refdate").datepicker("getDate")).utc().unix();
@@ -152,7 +152,7 @@ $(document).ready(function() {
         }
         document.location.href = rtpQuery;
     });
-    
+
     $('#cmdLaunchReport').click(function() {
         var ajaxQuery = '<?php echo base_url();?>reports/leaves/execute';
         var tmpUnix = moment($("#refdate").datepicker("getDate")).utc().unix();
@@ -174,7 +174,7 @@ $(document).ready(function() {
             ajaxQuery += '&requests=false';
         }
         $('#reportResult').html("<img src='<?php echo base_url();?>assets/images/loading.gif' />");
-        
+
         $.ajax({
           url: ajaxQuery
         })
@@ -183,25 +183,25 @@ $(document).ready(function() {
         });
 
     });
-    
+
     //Toggle include sub-entities option
     $('#chkIncludeChildren').on('change', function() {
         includeChildren = $('#chkIncludeChildren').prop('checked');
-        $.cookie('rep_includeChildren', includeChildren);
+        Cookies.set('rep_includeChildren', includeChildren);
     });
-    
+
     //Toggle include leave requests
     $('#chkLeaveDetails').on('change', function() {
         leaveDetails = $('#chkLeaveDetails').prop('checked');
-        $.cookie('rep_leaveDetails', leaveDetails);
+        Cookies.set('rep_leaveDetails', leaveDetails);
     });
-    
+
     //Cookie has value ? take -1 by default
-    if($.cookie('rep_entity') != null) {
-        entity = $.cookie('rep_entity');
-        entityName = $.cookie('rep_entityName');
-        includeChildren = $.cookie('rep_includeChildren');
-        leaveDetails = (typeof $.cookie('rep_leaveDetails') === 'undefined') ? "false" : $.cookie('rep_leaveDetails');
+    if(Cookies.get('rep_entity') !== undefined) {
+        entity = Cookies.get('rep_entity');
+        entityName = Cookies.get('rep_entityName');
+        includeChildren = Cookies.get('rep_includeChildren');
+        leaveDetails = (Cookies.get('rep_leaveDetails') === undefined) ? "false" : Cookies.get('rep_leaveDetails');
         //Parse boolean values
         includeChildren = $.parseJSON(includeChildren.toLowerCase());
         leaveDetails = $.parseJSON(leaveDetails.toLowerCase());
@@ -209,10 +209,10 @@ $(document).ready(function() {
         $('#chkIncludeChildren').prop('checked', includeChildren);
         $('#chkLeaveDetails').prop('checked', leaveDetails);
     } else { //Set default value
-        $.cookie('rep_entity', entity);
-        $.cookie('rep_entityName', entityName);
-        $.cookie('rep_includeChildren', includeChildren);
-        $.cookie('rep_leaveDetails', leaveDetails);
+        Cookies.set('rep_entity', entity);
+        Cookies.set('rep_entityName', entityName);
+        Cookies.set('rep_includeChildren', includeChildren);
+        Cookies.set('rep_leaveDetails', leaveDetails);        
     }
 });
 </script>

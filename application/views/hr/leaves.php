@@ -40,7 +40,7 @@
             <th><?php echo lang('hr_leaves_thead_id');?></th>
             <th><?php echo lang('hr_leaves_thead_status');?></th>
             <th><?php echo lang('hr_leaves_thead_start');?></th>
-            <th><?php echo lang('hr_leaves_thead_end');?></th>            
+            <th><?php echo lang('hr_leaves_thead_end');?></th>
             <th><?php echo lang('hr_leaves_thead_duration');?></th>
             <th><?php echo lang('hr_leaves_thead_type');?></th>
         </tr>
@@ -54,25 +54,27 @@
     $tmpEndDate = $date->getTimestamp();
     $enddate = $date->format(lang('global_date_format'));
     $showReminder = FALSE;
-    if (($leave['status'] == 2) || ($leave['status'] == 5))  $showReminder = TRUE;
+    if (($leave['status'] == LMS_REQUESTED) || ($leave['status'] == LMS_CANCELLATION)) {
+        $showReminder = TRUE;
+    }
     ?>
     <tr>
         <td data-order="<?php echo $leave['id']; ?>">
             <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_leaves_thead_tip_edit');?>"><?php echo $leave['id'] ?></a>
             <div class="pull-right">
                 <?php if ($showReminder == TRUE) { ?>
-                    <a href="<?php echo base_url();?>leaves/reminder/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('leaves_button_send_reminder');?>"><i class="fa fa-envelope" style="color:black;"></i></a>
+                    <a href="<?php echo base_url();?>leaves/reminder/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('leaves_button_send_reminder');?>"><i class="mdi mdi-mail nolink"></i></a>
                     &nbsp;
                 <?php } ?>
                 &nbsp;
-                <a href="<?php echo base_url();?>requests/accept/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_leaves_thead_tip_accept');?>"><i class="icon-ok"></i></a>
+                <a href="<?php echo base_url();?>requests/accept/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_leaves_thead_tip_accept');?>"><i class="mdi mdi-check nolink"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>requests/reject/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_leaves_thead_tip_reject');?>"><i class="icon-remove"></i></a>
+                <a href="<?php echo base_url();?>requests/reject/<?php echo $leave['id']; ?>?source=hr%2Fleaves%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_leaves_thead_tip_reject');?>"><i class="mdi mdi-close nolink"></i></a>
                 &nbsp;
-                <a href="#" class="confirm-delete" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('hr_leaves_thead_tip_delete');?>"><i class="icon-trash"></i></a>
+                <a href="#" class="confirm-delete" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('hr_leaves_thead_tip_delete');?>"><i class="mdi mdi-delete nolink"></i></a>
                 <?php if ($this->config->item('enable_history') === TRUE) { ?>
                 &nbsp;
-                <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('leaves_index_thead_tip_history');?>"><i class="icon-time"></i></a>
+                <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('leaves_index_thead_tip_history');?>"><i class="mdi mdi-history nolink"></i></a>
                 <?php } ?>
             </div>
         </td>
@@ -94,9 +96,9 @@
 
 <br />
 
-<a href="<?php echo base_url();?>hr/leaves/export/<?php echo $user_id; ?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_leaves_button_export');?></a>
+<a href="<?php echo base_url();?>hr/leaves/export/<?php echo $user_id; ?>" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp;<?php echo lang('hr_leaves_button_export');?></a>
 &nbsp;&nbsp;
-<a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_leaves_button_list');?></a>
+<a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp;<?php echo lang('hr_leaves_button_list');?></a>
 
 <br />
 
@@ -109,7 +111,7 @@
             <th><?php echo lang('hr_leaves_thead_id');?></th>
             <th><?php echo lang('hr_leaves_thead_status');?></th>
             <th><?php echo lang('hr_leaves_thead_start');?></th>
-            <th><?php echo lang('hr_leaves_thead_end');?></th>            
+            <th><?php echo lang('hr_leaves_thead_end');?></th>
             <th><?php echo lang('hr_leaves_thead_duration');?></th>
             <th><?php echo lang('hr_leaves_thead_type');?></th>
         </tr>
@@ -127,7 +129,7 @@
             <?php echo $leave['id'];?>
             <div class="pull-right">
                 &nbsp;
-                <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('hr_leaves_thead_tip_history');?>"><i class="icon-time"></i></a>
+                <a href="#" class="show-history" data-id="<?php echo $leave['id'];?>" title="<?php echo lang('hr_leaves_thead_tip_history');?>"><i class="mdi mdi-history nolink"></i></a>
             </div>
         </td>
         <td><?php echo lang($leave['status_name']); ?></td>
@@ -174,7 +176,7 @@
 
 <script type="text/javascript">
 var leaveTable = null;
-    
+
 //Apply a filter on the status column
 function filterStatusColumn() {
     var filter = "^(";
@@ -188,7 +190,7 @@ function filterStatusColumn() {
     if (filter.indexOf('(') == -1) filter = 'nothing is selected';
     leaveTable.columns( 1 ).search( filter, true, false ).draw();
 }
-    
+
 $(function () {
     //Transform the HTML table in a fancy datatable
     leaveTable = $('#leaves').DataTable({
@@ -227,12 +229,12 @@ $(function () {
 
     //Display a modal pop-up so as to confirm if a leave request has to be deleted or not
     //We build a complex selector because datatable does horrible things on DOM...
-    //a simplier selector doesn't work when the delete is on page >1 
+    //a simplier selector doesn't work when the delete is on page >1
     $("#leaves tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
         $('#frmDeleteLeaveRequest').data('id', id).modal('show');
     });
-    
+
     $('#frmDeleteLeaveRequest').on('hidden', function() {
         $(this).removeData('modal');
     });
@@ -241,7 +243,7 @@ $(function () {
     $('#frmShowHistory').on('hidden', function() {
         $("#frmShowHistoryBody").html('<img src="<?php echo base_url();?>assets/images/loading.gif">');
     });
-    
+
     //Popup show history
     $("#leaves tbody").on('click', '.show-history',  function(){
         $("#frmShowHistory").modal('show');
@@ -249,7 +251,7 @@ $(function () {
             if (xhr.status == 401) {
                 $("#frmShowHistory").modal('hide');
                 bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                    //After the login page, we'll be redirected to the current page 
+                    //After the login page, we'll be redirected to the current page
                    location.reload();
                 });
             }
@@ -261,13 +263,13 @@ $(function () {
             if (xhr.status == 401) {
                 $("#frmShowHistory").modal('hide');
                 bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                    //After the login page, we'll be redirected to the current page 
+                    //After the login page, we'll be redirected to the current page
                    location.reload();
                 });
             }
           });
     });
-    
+
     $('#deleted_leaves').dataTable({
         order: [[ 2, "desc" ]],
         language: {
@@ -300,7 +302,7 @@ $(function () {
     $('.filterStatus').on('change',function(){
         filterStatusColumn();
     });
-    
+
     //Dynamic filter on leave type
     $('#cboLeaveType').on('change',function(){
         var leaveType = $("#cboLeaveType option:selected").text();
@@ -312,4 +314,3 @@ $(function () {
     });
 });
 </script>
-

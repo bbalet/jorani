@@ -30,13 +30,13 @@
             <input type="checkbox" class="input-centered" checked id="chkIncludeDaysOffs" name="chkIncludeDaysOffs"> <?php echo lang('calendar_individual_day_offs');?>
         </label>
         <div class="input-prepend input-append">
-            <button id="cmdPrevious" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_previous');?>"><i class="icon-chevron-left icon-white"></i></button>
+            <button id="cmdPrevious" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_previous');?>"><i class="mdi mdi-chevron-left"></i></button>
             <input type="text" id="txtMonthYear" style="cursor:pointer;" value="<?php echo $monthName . ' ' . $year;?>" class="input-medium" readonly />
-            <button id="cmdNext" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_next');?>"><i class="icon-chevron-right icon-white"></i></button>
+            <button id="cmdNext" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_next');?>"><i class="mdi mdi-chevron-right"></i></button>
         </div>
     </div>
     <?php if (($this->config->item('ics_enabled') == TRUE) && ($logged_in == TRUE)) {?>
-    <div class="span2 pull-right"><a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a></div>
+    <div class="span2 pull-right"><a id="lnkICS" href="#"><i class="mdi mdi-earth nolink"></i> ICS</a></div>
     <?php } else {?>
     <div class="span2">&nbsp;</div>
     <?php }?>
@@ -100,7 +100,7 @@
                 <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
                     value="" />
                  <button id="cmdCopy" class="btn" data-clipboard-target="#txtIcsUrl">
-                     <i class="fa fa-clipboard"></i>
+                     <i class="mdi mdi-content-copy"></i>
                  </button>
                 <a href="#" id="tipCopied" data-toggle="tooltip" title="copied" data-placement="right" data-container="#cmdCopy"></a>
         </div>
@@ -118,17 +118,17 @@
 }
 </style>
 
-<link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/css/bootstrap-datepicker.min.css">
-<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/css/bootstrap-datepicker.min.css">
+<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
 <link href="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lib/moment.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/fullcalendar.min.js"></script>
 <?php if ($language_code != 'en') {?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/fullcalendar-2.8.0/lang/<?php echo strtolower($language_code);?>.js"></script>
-<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
+<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
 <?php }?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
@@ -200,10 +200,10 @@
       $('#spnAddOn').html('<i class="fa fa-sitemap" aria-hidden="true"></i>');
       $('#txtEntity').val(entityName);
       refresh_calendar();
-      $.cookie('selected', 'entity');
-      $.cookie('cal_entity', entity);
-      $.cookie('cal_entityName', entityName);
-      $.cookie('cal_includeChildren', includeChildren);
+      Cookies.set('selected', 'entity');
+      Cookies.set('cal_entity', entity);
+      Cookies.set('cal_entityName', entityName);
+      Cookies.set('cal_includeChildren', includeChildren);
       $("#frmSelectEntity").modal('hide');
     }
 
@@ -221,8 +221,8 @@
         listName = $('#cboList option:selected').text();
         $('#txtEntity').val(listName);
         refresh_calendar();
-        $.cookie('selected', 'list');
-        $.cookie('listId', listId);
+        Cookies.set('selected', 'list');
+        Cookies.set('listId', listId);
       }
 
       //entity = 0;
@@ -269,7 +269,7 @@
 
         //On click the check box "include sub-department", refresh the content if a department was selected
         $('#chkIncludeChildren').click(function() {
-            $.cookie('cal_includeChildren', $('#chkIncludeChildren').prop('checked'));
+            Cookies.set('cal_includeChildren', $('#chkIncludeChildren').prop('checked'));
             refresh_calendar();
         });
 
@@ -349,7 +349,7 @@
         //Toggle day offs displays
         $('#chkIncludeDaysOffs').on('click', function() {
             toggleDayoffs = !toggleDayoffs;
-            $.cookie('cal_dayoffs', toggleDayoffs);
+            Cookies.set('cal_dayoffs', toggleDayoffs);
             refresh_calendar();
         });
 
@@ -391,13 +391,13 @@
         });
 
         //Cookie has value ? take -1 by default
-        if($.cookie('cal_entity') != null) {
-            entity = $.cookie('cal_entity');
-            entityName = $.cookie('cal_entityName');
-            includeChildren = $.cookie('cal_includeChildren');
-            toggleDayoffs = $.cookie('cal_dayoffs');
-            selectedEntity = $.cookie('selected') != null && $.cookie('selected') == "list" ? false : true;
-            listId =  $.cookie('listId');
+        if(Cookies.get('cal_entity') !== undefined) {
+            entity = Cookies.get('cal_entity');
+            entityName = Cookies.get('cal_entityName');
+            includeChildren = Cookies.get('cal_includeChildren');
+            toggleDayoffs = Cookies.get('cal_dayoffs');
+            selectedEntity = Cookies.get('selected') !== undefined && Cookies.get('selected') == "list" ? false : true;
+            listId = Cookies.set('listId');
 
             if(selectedEntity == false){
               $('#spnAddOn').html('<i class="fa fa-users" aria-hidden="true"></i>');
@@ -424,11 +424,11 @@
             //Load the calendar events
             refresh_calendar();
         } else { //Set default value
-            $.cookie('cal_entity', entity);
-            $.cookie('cal_entityName', entityName);
-            $.cookie('cal_includeChildren', includeChildren);
-            $.cookie('cal_dayoffs', toggleDayoffs);
-            $.cookie('selected', 'entity');
+            Cookies.set('cal_entity', entity);
+            Cookies.set('cal_entityName', entityName);
+            Cookies.set('cal_includeChildren', includeChildren);
+            Cookies.set('cal_dayoffs', toggleDayoffs);
+            Cookies.set('selected', 'entity');
             refresh_calendar();
         }
 
@@ -443,9 +443,9 @@
             if (entity != -1) {
                 urlICS = '<?php echo base_url(); ?>ics/entity/<?php echo $user_id; ?>/' + entity + '/' + $('#chkIncludeChildren').prop('checked');
             }
+            urlICS += '?token=<?php echo $this->session->userdata('random_hash'); ?>'; 
             $("#frmLinkICS").modal('show');
             $('#txtIcsUrl').val(urlICS);
-            //$('#txtIcsUrl').data('data-clipboard-text', urlICS);
         });
         var client = new Clipboard("#cmdCopy");
         client.on( "success", function() {

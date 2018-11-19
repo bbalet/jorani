@@ -63,10 +63,10 @@ switch ($leave['status']) {
     <?php } ?>
 
     <?php if (($leave['status'] == LMS_PLANNED) || ($is_hr)) { ?>
-    <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id'] ?>" class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_edit');?></a>
+    <a href="<?php echo base_url();?>leaves/edit/<?php echo $leave['id'] ?>" class="btn btn-primary"><i class="mdi mdi-pencil"></i>&nbsp;<?php echo lang('leaves_view_button_edit');?></a>
     &nbsp;
     <?php } ?>
-    <a href="<?php echo base_url() . $source; ?>" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>
+    <a href="<?php echo base_url() . $source; ?>" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp;<?php echo lang('leaves_view_button_back_list');?></a>
 
     </div>
 </div>
@@ -127,7 +127,7 @@ switch ($leave['status']) {
    <form method="post"
    <label for="comment"><?php echo lang('leaves_comment_new_comment');?></label>
    <textarea name="comment" class="form-control" rows="5" style="min-width: 100%"></textarea>
-   <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i>&nbsp;<?php echo lang('leaves_comment_send_comment');?></button>
+   <button type="submit" class="btn btn-primary"><i class="mdi mdi-comment-plus-outline"></i>&nbsp;<?php echo lang('leaves_comment_send_comment');?></button>
    &nbsp;
  </form>
 </div>

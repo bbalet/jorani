@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays the list of overtime requests submitted to the connected manager.
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
@@ -31,13 +31,14 @@
 <?php foreach ($requests as $requests_item): ?>
     <tr>
         <td data-order="<?php echo $requests_item['id'] ?>">
-            <a href="<?php echo base_url();?>extra/overtime/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
+          <a href="<?php echo base_url();?>extra/overtime/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><?php echo $requests_item['id']; ?></a>
+          <div class="pull-right">
+            <a href="<?php echo base_url();?>extra/overtime/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><i class="mdi mdi-eye nolink"></i></a>
             &nbsp;
-            <a href="<?php echo base_url();?>extra/overtime/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
+            <a href="<?php echo base_url();?>overtime/accept/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_accept');?>"><i class="mdi mdi-check nolink"></i></a>
             &nbsp;
-            <a href="<?php echo base_url();?>overtime/accept/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_accept');?>"><i class="icon-ok"></i></a>
-            &nbsp;
-            <a href="<?php echo base_url();?>overtime/reject/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_reject');?>"><i class="icon-remove"></i></a>
+            <a href="<?php echo base_url();?>overtime/reject/<?php echo $requests_item['id']; ?>" title="<?php echo lang('overtime_index_thead_tip_reject');?>"><i class="mdi mdi-close nolink"></i></a>
+          </div>
         </td>
         <td><?php echo $requests_item['firstname'] . ' ' . $requests_item['lastname']; ?></td>
 <?php $date = new DateTime($requests_item['date']);
@@ -45,7 +46,7 @@ $tmpDate = $date->getTimestamp();?>
         <td data-order="<?php echo $tmpDate; ?>"><?php echo $date->format(lang('global_date_format'));?></td>
         <td><?php echo $requests_item['duration']; ?></td>
         <td><?php echo lang($requests_item['status_name']); ?></td>
-        
+
     </tr>
 <?php endforeach ?>
 	</tbody>
@@ -59,11 +60,11 @@ $tmpDate = $date->getTimestamp();?>
 
 <div class="row-fluid">
     <div class="span12">
-      <a href="<?php echo base_url();?>overtime/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('overtime_index_button_export');?></a>
+      <a href="<?php echo base_url();?>overtime/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp; <?php echo lang('overtime_index_button_export');?></a>
       &nbsp;&nbsp;
-      <a href="<?php echo base_url();?>overtime/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_show_all');?></a>
+      <a href="<?php echo base_url();?>overtime/all" class="btn btn-primary"><i class="mdi mdi-filter-remove"></i>&nbsp; <?php echo lang('overtime_index_button_show_all');?></a>
       &nbsp;&nbsp;
-      <a href="<?php echo base_url();?>overtime/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('overtime_index_button_show_pending');?></a>
+      <a href="<?php echo base_url();?>overtime/requested" class="btn btn-primary"><i class="mdi mdi-filter"></i>&nbsp; <?php echo lang('overtime_index_button_show_pending');?></a>
     </div>
 </div>
 

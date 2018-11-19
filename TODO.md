@@ -1,19 +1,46 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
+## Dependencies to watch
+
+* https://github.com/travist/jsencrypt should publish v3 (compat to PHP backend).
+* http://bootboxjs.com/ should publish v5 (compat to BS4).
+* https://fullcalendar.io/ should publish v4 (removes JQuery dependencies).
+
+## v0.6.6 or later
+
+- [X] Compatibility with PHP7.2.
+- [X] Migrate to select2 (selectize is no longer active).
+- [X] Migrate to PhpSpreadSheet (PHPExcel is no longer active).
+- [X] Remove all glyphicons and use Material Design Icons instead.
+- [X] Migrate to JavaScript Cookie (removes JQuery dependencies).
+- [ ] Maybe: Cannot force LR status from 2 to 1 for regular user.
+- [ ] Forbid negative duration in leave requests (Option).
+- [ ] Maybe: remove all references to JQueryUI (datepicker).
+- [ ] Maybe: Migrate Fontawesome to material design icons set (in preparation of BS4).
+
 ## v0.7.0 or later
 
-- [ ] Get rid of JQuery UI (mostly used by calendars)
-- [ ] Investigate the strange behavior of the compensate balance (see PNC).
+Following naming convention, this version will need a DB patch.
+
+- [ ] Technical update of FullCalendar (beware of LTR bug: https://github.com/fullcalendar/fullcalendar/issues/2516).
+- [ ] ICS feeds should use a random hash when publicly exposed.
+- [ ] Dynamic form for user properties (Jorani to become a SAML2 IdP). For superadmin only.
+- [ ] Dynamic form for user parameters. For superadmin only.
+- [ ] Dynamic form for parameters. For superadmin only.
+- [ ] Get rid of JQuery UI (mostly used by calendars).
+- [ ] Change the system for compensate balance. Give a regular entitlement (start/end dates depend on contract).
 - [ ] Remove duplicated string defs (moved into global): users_create_popup_manager_button_ok
 - [ ] i18n: Last 3 columns in Reports/Leaves.
 - [ ] Maybe: Filter Excel export on visible rows (lot of security backend).
 - [ ] Maybe: user/index Ajaxload.
-- [ ] Compute automatically: length of multiple leave requests.
+- [ ] Maybe: Compute automatically: length of multiple leave requests.
 - [ ] Maybe: series of leave requests (Employees / Multiple edit); take into account days off. and...
 - [ ] Add SMTPSecure, SMTPAutoTLS, and SMTPAuth email params. See https://mail.google.com/mail/u/0/#inbox/15ae53ce27624515
 - [ ] Fix missing closing DIV (Firefox).
 - [ ] Implement OAuth scopes in API.
+Maybe:
+- [ ] Add a table to log the execution of services using the API (eg cron tasks) + a sample page in local to display them.
 - [ ] Maybe: edit/import/export settings from WebUI.
 - [ ] Maybe: user/group permission.
 - [ ] Maybe: configuration from DB.
@@ -29,8 +56,6 @@ Following naming convention, this version will need a DB patch.
 - [ ] Mass apply entitled days to a group of employees. (organisation) - (employees in entity) <-> select.
 - [ ] Complete PHP triggers (add fruux lib to put CalDAV -> no : incomplete library).
 - [ ] Simplify Overtime entitlments.
-Maybe:
-- [ ] Add a table to log the execution of services using the API (eg cron tasks) + a sample page in local to display them.
 - [ ] Possible DB optimization on leave table ALTER TABLE `leaves` ADD INDEX(`startdate`); ALTER TABLE `leaves` ADD INDEX(`enddate`);.
 - [ ] Possibility to sort the leave types. NEEDS DB PATCH (maybe). Cookie or DB ? Entity scope ?
 - [ ] Possibility to optionally exclude leave types to a contract. NEEDS DB PATCH (maybe). Impact leave request, should impact a dynamic build of leave balance report. What about type 0?

@@ -39,9 +39,9 @@ echo form_open('extra/create', $attributes) ?>
 
     <div class="row-fluid"><div class="span12">&nbsp;</div></div>
     <div class="row-fluid"><div class="span12">
-        <button id="cmdCreateExtra" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('extra_create_button_create');?></button>
+        <button id="cmdCreateExtra" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp; <?php echo lang('extra_create_button_create');?></button>
         &nbsp;
-        <a href="<?php echo base_url(); ?>extra" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp; <?php echo lang('extra_create_button_cancel');?></a>
+        <a href="<?php echo base_url(); ?>extra" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp; <?php echo lang('extra_create_button_cancel');?></a>
     </div></div>
     <div class="row-fluid"><div class="span12">&nbsp;</div></div>
     </div>
@@ -77,6 +77,18 @@ if ($language_code != 'en') { ?>
             return false;
         }
     }
+
+
+    //Disallow the use of negative symbols (through a whitelist of symbols)
+    function keyAllowed(key) {
+    var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
+        51, 52, 53, 54, 55, 56, 57, 91, 92, 93
+    ];
+    if (key && keys.indexOf(key) === -1)
+        return false;
+    else
+        return true;
+    }
     
     $(function () {
         $("#viz_date").datepicker({
@@ -99,5 +111,22 @@ if ($language_code != 'en') { ?>
                 $("#frmCreateExtra").submit();
             }
         });
+
+<?php if ($this->config->item('disallow_requests_without_credit') == TRUE) {?>
+        var durationField = document.getElementById("duration");
+        durationField.setAttribute("min", "0");
+        durationField.addEventListener('keypress', function(e) {
+            var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
+            if (!keyAllowed(key))
+            e.preventDefault();
+        }, false);
+
+        // Disable pasting of non-numbers
+        durationField.addEventListener('paste', function(e) {
+            var pasteData = e.clipboardData.getData('text/plain');
+            if (pasteData.match(/[^0-9]/))
+            e.preventDefault();
+        }, false);
+<?php }?>
     });
 </script>

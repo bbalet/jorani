@@ -68,6 +68,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'bewerken';
 $lang['hr_leaves_thead_tip_accept'] = 'goedkeuren';
 $lang['hr_leaves_thead_tip_reject'] = 'afkeuren';
 $lang['hr_leaves_thead_tip_delete'] = 'verwijderen';
+$lang['hr_leaves_thead_tip_history'] = 'Laat geschiedenis zien';
 $lang['hr_leaves_thead_id'] = 'ID';
 $lang['hr_leaves_thead_status'] = 'Status';
 $lang['hr_leaves_thead_start'] = 'Begin datum';

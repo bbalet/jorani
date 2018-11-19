@@ -103,19 +103,19 @@ if (isset($_GET['source'])) {
     <br/>
     <button name="status" value="1" type="submit" class="btn btn-primary"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; <?php echo lang('Planned');?></button>
     &nbsp;&nbsp;
-    <button name="status" value="2" type="submit" class="btn btn-primary "><i class="icon-ok icon-white"></i>&nbsp; <?php echo lang('Requested');?></button>
+    <button name="status" value="2" type="submit" class="btn btn-primary "><i class="mdi mdi-check"></i>&nbsp; <?php echo lang('Requested');?></button>
     <br/>
     <?php } ?>
     <br />
 
     <?php if ($is_hr) {?>
-    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('leaves_edit_button_update');?></button>&nbsp;
+    <button type="submit" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp;<?php echo lang('leaves_edit_button_update');?></button>&nbsp;
     <?php } ?>
-    
+
     <?php if (isset($_GET['source'])) {?>
-        <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('leaves_edit_button_cancel');?></a>
+        <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('leaves_edit_button_cancel');?></a>
     <?php } else {?>
-        <a href="<?php echo base_url(); ?>leaves" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('leaves_edit_button_cancel');?></a>
+        <a href="<?php echo base_url(); ?>leaves" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('leaves_edit_button_cancel');?></a>
     <?php } ?>
 
     </div>
@@ -185,7 +185,6 @@ if (isset($_GET['source'])) {
         </div>
  </div>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
 <script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
@@ -194,7 +193,8 @@ if ($language_code != 'en') { ?>
 <?php } ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 
 <?php require_once dirname(BASEPATH) . "/local/triggers/leave_view.php"; ?>
 <script>
@@ -246,13 +246,40 @@ $(function () {
 });
 <?php }?>
 
+//Disallow the use of negative symbols (through a whitelist of symbols)
+function keyAllowed(key) {
+  var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
+    51, 52, 53, 54, 55, 56, 57, 91, 92, 93
+  ];
+  if (key && keys.indexOf(key) === -1)
+    return false;
+  else
+    return true;
+}
 
 $(function () {
     //Selectize the leave type combo
-    $('#type').selectize();
+    $('#type').select2();
 
     //On opening, refresh leave request information
     refreshLeaveInfo();
+
+<?php if ($this->config->item('disallow_requests_without_credit') == TRUE) {?>
+    var durationField = document.getElementById("duration");
+    durationField.setAttribute("min", "0");
+    durationField.addEventListener('keypress', function(e) {
+        var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
+        if (!keyAllowed(key))
+        e.preventDefault();
+    }, false);
+
+    // Disable pasting of non-numbers
+    durationField.addEventListener('paste', function(e) {
+        var pasteData = e.clipboardData.getData('text/plain');
+        if (pasteData.match(/[^0-9]/))
+        e.preventDefault();
+    }, false);
+<?php }?>
 });
 
 </script>

@@ -57,6 +57,6 @@ $rows = $this->db->get()->result_array();
     </div>
 </div>
 
-<a href="<?php echo base_url() . 'excel-export-all-leave-requests'; ?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('requests_index_button_export');?></a>
+<a href="<?php echo base_url() . 'excel-export-all-leave-requests'; ?>" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp; <?php echo lang('requests_index_button_export');?></a>
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>

@@ -15,7 +15,7 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
  * HR controller deals with employees.
  */
 class Hr extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -27,7 +27,7 @@ class Hr extends CI_Controller {
         $this->lang->load('hr', $this->language);
         $this->lang->load('global', $this->language);
     }
-    
+
     /**
      * Display the list of all employees
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -50,7 +50,7 @@ class Hr extends CI_Controller {
         $this->load->view('hr/employees', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Returns the list of the employees attached to an entity
      * Prints the table content in a JSON format expected by jQuery Datatable
@@ -72,19 +72,19 @@ class Hr extends CI_Controller {
             $this->load->model('users_model');
             $employees = $this->users_model->employeesOfEntity($id, $children, $filterActive,
                     $criterion1, $date1, $criterion2, $date2);
-            
+
             //Prepare an object that will be encoded in JSON
             $msg = new \stdClass();
             $msg->draw = 1;
             $msg->recordsTotal = count($employees);
             $msg->recordsFiltered = count($employees);
             $msg->data = array();
-            
+
             foreach ($employees as $employee) {
                 $date = new DateTime($employee->datehired);
                 $tmpDate = $date->getTimestamp();
                 $displayDate = $date->format(lang('global_date_format'));
-                
+
                 $row = new \stdClass();
                 $row->DT_RowId = $employee->id;
                 $row->id = $employee->id;
@@ -106,7 +106,7 @@ class Hr extends CI_Controller {
                 ->set_output(json_encode($msg));
         }
     }
-    
+
     /**
      * Ajax endpoint: edit the manager for a list of employees
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -124,7 +124,7 @@ class Hr extends CI_Controller {
             echo $result;
         }
     }
-    
+
     /**
      * Ajax endpoint: edit the entity for a list of employees
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -142,7 +142,7 @@ class Hr extends CI_Controller {
             echo $result;
         }
     }
-    
+
     /**
      * Ajax endpoint: edit the contract for a list of employees
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -160,7 +160,7 @@ class Hr extends CI_Controller {
             echo $result;
         }
     }
-    
+
     /**
      * Ajax endpoint: create a leave request for a list of employees
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -187,7 +187,7 @@ class Hr extends CI_Controller {
             echo $result;
         }
     }
-    
+
     /**
      * Ajax endpoint : insert into the list of entitled days for a list of employees
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -247,7 +247,7 @@ class Hr extends CI_Controller {
         $this->load->view('hr/leaves', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Display the list of overtime requests for a given employee
      * @param int $id employee id
@@ -273,7 +273,7 @@ class Hr extends CI_Controller {
         $this->load->view('hr/overtime', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Display the details of leaves taken/entitled for a given employee
      * @param string $source page calling the report (employees, collaborators)
@@ -296,7 +296,7 @@ class Hr extends CI_Controller {
         } else {
             $data['isDefault'] = 1;
         }
-        
+
         $data['refDate'] = $refDate;
         $data['summary'] = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $refDate);
         if (!is_null($data['summary'])) {
@@ -305,7 +305,7 @@ class Hr extends CI_Controller {
             $user = $this->users_model->getUsers($id);
             $data['employee_name'] = $user['firstname'] . ' ' . $user['lastname'];
             $this->load->model('contracts_model');
-            $contract = $this->contracts_model->getContracts($user['contract']); 
+            $contract = $this->contracts_model->getContracts($user['contract']);
             $data['contract_name'] = $contract['name'];
             $data['contract_start'] = $contract['startentdate'];
             $data['contract_end'] = $contract['endentdate'];
@@ -324,7 +324,7 @@ class Hr extends CI_Controller {
             redirect('hr/employees');
         }
     }
-    
+
     /**
      * Create a leave request in behalf of an employee
      * @param int $id Identifier of the employee
@@ -336,10 +336,11 @@ class Hr extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['title'] = lang('hr_leaves_create_title');
+        $data['help'] = $this->help->create_help_link('global_link_doc_page_request_leave');
         $data['form_action'] = 'hr/leaves/create/' . $id;
         $data['source'] = 'hr/employees';
         $data['employee'] = $id;
-        
+
         $this->form_validation->set_rules('startdate', lang('hr_leaves_create_field_start'), 'required|strip_tags');
         $this->form_validation->set_rules('startdatetype', 'Start Date type', 'required|strip_tags');
         $this->form_validation->set_rules('enddate', lang('hr_leaves_create_field_end'), 'required|strip_tags');
@@ -368,7 +369,7 @@ class Hr extends CI_Controller {
             redirect('hr/employees');
         }
     }
-    
+
     /**
      * Display presence details for a given employee
      * @param string $source page calling the report (employees, collaborators)
@@ -387,13 +388,13 @@ class Hr extends CI_Controller {
         $this->lang->load('calendar', $this->language);
         $data['title'] = lang('hr_presence_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_presence_report');
-        
+
         $data['user_id'] = $id;
         $this->load->model('leaves_model');
         $this->load->model('users_model');
         $this->load->model('dayoffs_model');
         $this->load->model('contracts_model');
-        
+
         //Details about the employee
         $employee = $this->users_model->getUsers($id);
         if (($this->user_id != $employee['manager']) && ($this->is_hr === FALSE)) {
@@ -410,7 +411,7 @@ class Hr extends CI_Controller {
             $data['contract_id'] = '';
             $data['contract_name'] = '';
         }
-        
+
         //Compute facts about dates and the selected month
         if ($month == 0) $month = date('m', strtotime('last month'));
         if ($year == 0) $year = date('Y', strtotime('last month'));
@@ -428,54 +429,52 @@ class Hr extends CI_Controller {
         $data['total_days'] = $total_days;
         $data['opened_days'] = $opened_days;
         $data['non_working_days'] = $non_working_days;
-        
+
         //tabular view of the leaves
         $data['linear'] = $this->leaves_model->linear($id, $month, $year, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE);
         $data['leave_duration'] = $this->leaves_model->monthlyLeavesDuration($data['linear']);
         $data['work_duration'] = $opened_days - $data['leave_duration'];
         $data['leaves_detail'] = $this->leaves_model->monthlyLeavesByType($data['linear']);
-        
+
         //List of accepted leave requests
         $data['leaves'] = $this->leaves_model->getAcceptedLeavesBetweenDates($id, $start, $end);
-        
+
         //Leave balance of the employee
         $data['employee_id'] = $id;
         $refDate = new DateTime($end);
         $data['refDate'] = $refDate->format(lang('global_date_format'));
         $data['summary'] = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $end);
-        
+
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
         $this->load->view('hr/presence', $data);
         $this->load->view('templates/footer');
     }
-        
+
     /**
      * Export the list of all leave requests of an employee into an Excel file
      * @param int $id employee id
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function exportLeaves($id) {
-        $this->load->library('excel');
         $this->load->model('leaves_model');
         $this->load->model('users_model');
         $data['id'] = $id;
         $this->load->view('hr/export_leaves', $data);
     }
-    
+
     /**
      * Export the list of all overtime requests of an employee into an Excel file
      * @param int $id employee id
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function exportOvertime($id) {
-        $this->load->library('excel');
         $this->load->model('overtime_model');
         $this->load->model('users_model');
         $data['id'] = $id;
         $this->load->view('hr/export_overtime', $data);
     }
-    
+
     /**
      * Export the list of all employees into an Excel file
      * @param int $id optional id of the entity, all entities if 0
@@ -490,7 +489,6 @@ class Hr extends CI_Controller {
     public function exportEmployees($id = 0, $children = TRUE, $filterActive = "all",
                             $criterion1 = NULL, $date1 = NULL, $criterion2 = NULL, $date2 = NULL) {
         $this->load->model('users_model');
-        $this->load->library('excel');
         $data['id'] = $id;
         $data['children'] = filter_var($children, FILTER_VALIDATE_BOOLEAN);
         $data['filterActive'] = $filterActive;
@@ -500,7 +498,7 @@ class Hr extends CI_Controller {
         $data['date2'] = $date2;
         $this->load->view('hr/export_employees', $data);
     }
-    
+
     /**
      * Action: export the presence details for a given employee
      * @param string $source page calling the report (employees, collaborators)
@@ -518,15 +516,14 @@ class Hr extends CI_Controller {
         $this->load->model('users_model');
         $this->load->model('dayoffs_model');
         $this->load->model('contracts_model');
-        
+
         $employee = $this->users_model->getUsers($id);
         if (($this->user_id != $employee['manager']) && ($this->is_hr === FALSE)) {
             log_message('error', 'User #' . $this->user_id . ' illegally tried to access to hr/presence  #' . $id);
             $this->session->set_flashdata('msg', sprintf(lang('global_msg_error_forbidden'), 'hr/presence'));
             redirect('leaves');
         }
-        
-        $this->load->library('excel');       
+
         $data['employee'] = $employee;
         $data['month'] = $month;
         $data['year'] = $year;

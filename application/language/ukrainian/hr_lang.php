@@ -72,6 +72,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'редагувати';
 $lang['hr_leaves_thead_tip_accept'] = 'затвердити';
 $lang['hr_leaves_thead_tip_reject'] = 'відхилити';
 $lang['hr_leaves_thead_tip_delete'] = 'видалити';
+$lang['hr_leaves_thead_tip_history'] = 'show history';
 $lang['hr_leaves_thead_id'] = 'ID';
 $lang['hr_leaves_thead_status'] = 'Статус';
 $lang['hr_leaves_thead_start'] = 'Дата початку';

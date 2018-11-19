@@ -28,14 +28,14 @@
     <tr>
       <td><?php echo $type['id'] ?> &nbsp; 
           <?php if ($type['id'] !=0 ) { ?>
-          <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="<?php echo lang('leavetypes_type_thead_tip_delete');?>"><i class="icon-trash"></i></a>
+          <a href="#" class="confirm-delete" data-id="<?php echo $type['id'];?>" title="<?php echo lang('leavetypes_type_thead_tip_delete');?>"><i class="mdi mdi-delete nolink"></i></a>
           <?php } ?>
       </td>
       <td>
           <?php echo $type['acronym']; ?>
       </td>
       <td>
-          <a href="<?php echo base_url();?>leavetypes/edit/<?php echo $type['id'] ?>" data-target="#frmEditLeaveType" data-toggle="modal" title="<?php echo lang('leavetypes_type_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
+          <a href="<?php echo base_url();?>leavetypes/edit/<?php echo $type['id'] ?>" data-target="#frmEditLeaveType" data-toggle="modal" title="<?php echo lang('leavetypes_type_thead_tip_edit');?>"><i class="mdi mdi-pencil nolink"></i></a>
           &nbsp; <?php echo $type['name']; ?>
       </td>
       <td>
@@ -59,9 +59,9 @@
 
 <div class="row-fluid">
     <div class="span12">
-        <a href="<?php echo base_url();?>leavetypes/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('leavetypes_type_button_export');?></a>
+        <a href="<?php echo base_url();?>leavetypes/export" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp; <?php echo lang('leavetypes_type_button_export');?></a>
         &nbsp;
-        <a href="<?php echo base_url();?>leavetypes/create" class="btn btn-primary" data-target="#frmAddLeaveType" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('leavetypes_type_button_create');?></a>
+        <a href="<?php echo base_url();?>leavetypes/create" class="btn btn-primary" data-target="#frmAddLeaveType" data-toggle="modal"><i class="mdi mdi-plus-circle"></i>&nbsp; <?php echo lang('leavetypes_type_button_create');?></a>
     </div>
 </div>
 

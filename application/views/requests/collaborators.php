@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays the list of collaborators of the connected employee.
  * e.g. users having the connected user as their line manager.
@@ -35,11 +35,11 @@
                 <?php echo $collaborator['id']; ?>
                 <div class="pull-right">
                     <?php if ($this->config->item('requests_by_manager') == TRUE) { ?>
-                    <a href="<?php echo base_url();?>requests/createleave/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_create_leave');?>"><i class="icon-plus"></i></a>
+                    <a href="<?php echo base_url();?>requests/createleave/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_create_leave');?>"><i class="mdi mdi-file-plus nolink"></i></a>
                     <?php } ?>
-                    <a href="<?php echo base_url();?>hr/counters/collaborators/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_balance');?>"><i class="icon-info-sign"></i></a>
-                    &nbsp;<a href="<?php echo base_url();?>hr/presence/collaborators/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_presence');?>"><i class="fa fa-pie-chart" style="color:black;"></i></a>
-                    &nbsp;<a href="<?php echo base_url();?>calendar/year/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_year');?>"><i class="icon-calendar"></i></a>
+                    <a href="<?php echo base_url();?>hr/counters/collaborators/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_balance');?>"><i class="mdi mdi-information-outline nolink"></i></a>
+                    &nbsp;<a href="<?php echo base_url();?>hr/presence/collaborators/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_presence');?>"><i class="mdi mdi-chart-pie nolink"></i></a>
+                    &nbsp;<a href="<?php echo base_url();?>calendar/year/<?php echo $collaborator['id'] ?>" title="<?php echo lang('requests_collaborators_thead_link_year');?>"><i class="mdi mdi-calendar-text nolink"></i></a>
                 </div>
             </td>
             <td><?php echo $collaborator['firstname'] ?></td>
@@ -58,7 +58,7 @@
 <div class="row-fluid">
     <div class="span12">
         <?php if ($this->config->item('ics_enabled') == TRUE) {?>
-        <a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a>
+        <a id="lnkICS" href="#"><i class="mdi mdi-earth nolink"></i> ICS</a>
         <?php }?>
     </div>
 </div>
@@ -69,12 +69,13 @@
     </div>
     <div class="modal-body" id="frmSelectDelegateBody">
         <div class='input-append'>
-                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
-                    value="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>" />
-                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>">
-                     <i class="fa fa-clipboard"></i>
-                 </button>
-                <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
+            <?php $icsUrl = base_url() . 'ics/collaborators/' . $user_id . '?token=' . $this->session->userdata('random_hash');?>
+            <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
+                value="<?php echo $icsUrl;?>" />
+                <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo $icsUrl;?>">
+                    <i class="mdi mdi-content-copy"></i>
+                </button>
+            <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
         </div>
     </div>
     <div class="modal-footer">
@@ -119,7 +120,7 @@ $(document).ready(function() {
                     '<?php echo lang('datatable_10_rows');?>',
                     '<?php echo lang('datatable_25_rows');?>',
                     '<?php echo lang('datatable_50_rows');?>',
-                    '<?php echo lang('datatable_all_rows');?>' 
+                    '<?php echo lang('datatable_all_rows');?>'
                 ]
             ],
             colReorder: {
@@ -152,7 +153,7 @@ $(document).ready(function() {
             }
         },
     });
-    
+
     //Copy/Paste ICS Feed
     var client = new Clipboard("#cmdCopy");
     $('#lnkICS').click(function () {

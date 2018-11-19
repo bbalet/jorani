@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This view displays the login form. Its layout differs from other pages of the application.
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
@@ -23,18 +23,25 @@
 
 <style>
     body {
-        background-image:url('<?php echo base_url();?>assets/images/login-background.jpg');
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
+        background:
+            -webkit-linear-gradient(315deg, hsla(0, 4.23%, 86.08%, 1) 0%, hsla(0, 4.23%, 86.08%, 0) 70%),
+            -webkit-linear-gradient(65deg, hsla(0, 0%, 100%, 1) 10%, hsla(0, 0%, 100%, 0) 80%),
+            -webkit-linear-gradient(135deg, hsla(201.61, 63.64%, 50.39%, 1) 15%, hsla(201.61, 63.64%, 50.39%, 0) 80%),
+            -webkit-linear-gradient(205deg, hsla(193.64, 56.9%, 54.51%, 1) 100%, hsla(193.64, 56.9%, 54.51%, 0) 70%);
+        background:
+            linear-gradient(135deg, hsla(0, 4.23%, 86.08%, 1) 0%, hsla(0, 4.23%, 86.08%, 0) 70%),
+            linear-gradient(25deg, hsla(0, 0%, 100%, 1) 10%, hsla(0, 0%, 100%, 0) 80%),
+            linear-gradient(315deg, hsla(201.61, 63.64%, 50.39%, 1) 15%, hsla(201.61, 63.64%, 50.39%, 0) 80%),
+            linear-gradient(245deg, hsla(193.64, 56.9%, 54.51%, 1) 100%, hsla(193.64, 56.9%, 54.51%, 0) 70%);
     }
-    
+
     .vertical-center {
         min-height: 90%;  /* Fallback for browsers not supporting vh unit */
         min-height: 90vh;
         display: flex;
         align-items: center;
     }
-      
+
     .form-box {
         padding: 20px;
         border: 1px #e4e4e4 solid;
@@ -70,6 +77,7 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         <option value="<?php echo $lang_code; ?>" <?php if ($language_code == $lang_code) echo 'selected'; ?>><?php echo $lang_name; ?></option>
         <?php }?>
     </select>
+    <br />
     <?php } ?>
     <label for="login"><?php echo lang('session_login_field_login');?></label>
     <input type="text" class="input-medium" name="login" id="login" value="<?php echo (ENVIRONMENT=='demo')?'bbalet':set_value('login'); ?>" required />
@@ -79,17 +87,17 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     <label for="password"><?php echo lang('session_login_field_password');?></label>
     <input class="input-medium" type="password" name="password" id="password" value="<?php echo (ENVIRONMENT=='demo')?'bbalet':''; ?>" /><br />
     <br />
-    <button id="send" class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
+    <button id="send" class="btn btn-primary"><i class="mdi mdi-login"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
     <?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
          <?php if ($this->config->item('oauth2_provider') == 'google') { ?>
-    <button id="cmdGoogleSignIn" class="btn btn-primary"><i class="fa fa-google"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
+    <button id="cmdGoogleSignIn" class="btn btn-primary"><i class="mdi mdi-google"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
         <?php } ?>
     <?php } ?>
     <br /><br />
     <?php if (($this->config->item('ldap_enabled') == FALSE) && (ENVIRONMENT!='demo')) { ?>
-    <button id="cmdForgetPassword" class="btn btn-danger"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
+    <button id="cmdForgetPassword" class="btn btn-danger"><i class="mdi mdi-email"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
     <?php } ?>
-    
+
     <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>
                 </div>
                 <div class="span6" style="height:100%;">
@@ -119,13 +127,13 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     </div>
 </div>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pers-brow.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 <script type="text/javascript">
-    
+
     //Encrypt the password using RSA and send the ciphered value into the form
     function submit_form() {
         var encrypt = new JSEncrypt();
@@ -135,14 +143,14 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         $('#CipheredValue').val(encrypted);
         $('#loginFrom').submit();
     }
-    
+
     //Attempt to authenticate the user using OAuth2 protocol
     function signInCallback(authResult) {
         if (authResult['code']) {
           $.ajax({
             url: '<?php echo base_url();?>session/oauth2',
             type: 'POST',
-            data: { 
+            data: {
                       auth_code: authResult.code
                       },
             success: function(result) {
@@ -173,35 +181,34 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     });
 <?php }?>
         //Memorize the last selected language with a cookie
-        if($.cookie('language') != null) {
-            var IsLangAvailable = 0 != $('#language option[value=' + $.cookie('language') + ']').length;
-            if ($.cookie('language') != "<?php echo $language_code; ?>") {
+        if(Cookies.get('language') !== undefined) {
+            var IsLangAvailable = 0 != $('#language option[value=' + Cookies.get('language') + ']').length;
+            if (Cookies.get('language') != "<?php echo $language_code; ?>") {
                 //Test if the former selected language is into the list of available languages
                 if (IsLangAvailable) {
-                    $('#language option[value="' + $.cookie('language') + '"]').attr('selected', 'selected');
+                    $('#language option[value="' + Cookies.get('language') + '"]').attr('selected', 'selected');
                     $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
                     $('#loginFrom').submit();
                 }
             }
         }
-        
+
         //Refresh page language
-        $('#language').selectize({
-            onChange: function (value) {
-                if (value != '') {
-                    $.cookie('language', $('#language option:selected').val(), { expires: 90, path: '/'});
-                    $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
-                    $('#loginFrom').submit();
-                }
-            }
+        $('#language').select2({width:'165px'});
+
+        $('#language').on('select2:select', function (e) {
+          var value = e.params.data.id;
+          Cookies.set('language', value, { expires: 90, path: '/'});
+          $('#loginFrom').prop('action', '<?php echo base_url();?>session/language');
+          $('#loginFrom').submit();
         });
-        
+
         $('#login').focus();
-        
+
         $('#send').click(function() {
             submit_form();
         });
-        
+
         //If the user has forgotten his password, send an e-mail
         $('#cmdForgetPassword').click(function() {
             if ($('#login').val() == "") {
@@ -232,13 +239,13 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
                 });
             }
         });
-        
+
         //Validate the form if the user press enter key in password field
         $('#password').keypress(function(e){
             if(e.keyCode==13)
             submit_form();
         });
-        
+
         //Alternative authentication methods
 <?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
      <?php if ($this->config->item('oauth2_provider') == 'google') { ?>
@@ -247,6 +254,6 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         });
     <?php } ?>
 <?php } ?>
-        
+
     });
 </script>

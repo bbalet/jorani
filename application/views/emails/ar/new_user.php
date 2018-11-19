@@ -34,7 +34,7 @@
             </tr>
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">حال تأمين الإتصال، يمكنك تغيير كلمة المرور، وكما مبين هنا.</a>.
+        <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">حال تأمين الإتصال، يمكنك تغيير كلمة المرور، وكما مبين هنا.</a>.
         <?php } ?>
         <hr>
         <h5>*** هذه الرسالة كتبت اوتوماتيكياً، يرجى عدم الإجابة عليها ***</h5>

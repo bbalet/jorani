@@ -32,12 +32,12 @@
             <a href="<?php echo base_url();?>extra/extra/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_view');?>"><?php echo $extra_item['id']; ?></a>
             &nbsp;
             <div class="pull-right">
-                <a href="<?php echo base_url();?>extra/extra/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_view');?>"><i class="icon-eye-open"></i></a>
+                <a href="<?php echo base_url();?>extra/extra/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_view');?>"><i class="mdi mdi-eye nolink"></i></a>
                 &nbsp;
                 <?php if ($extra_item['status'] == 1) { ?>
-                <a href="<?php echo base_url();?>extra/edit/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_edit');?>"><i class="icon-pencil"></i></a>
+                <a href="<?php echo base_url();?>extra/edit/<?php echo $extra_item['id']; ?>" title="<?php echo lang('extra_index_thead_tip_edit');?>"><i class="mdi mdi-pencil nolink"></i></a>
                 &nbsp;
-                <a href="#" class="confirm-delete" data-id="<?php echo $extra_item['id'];?>" title="<?php echo lang('extra_index_thead_tip_delete');?>"><i class="icon-trash"></i></a>
+                <a href="#" class="confirm-delete" data-id="<?php echo $extra_item['id'];?>" title="<?php echo lang('extra_index_thead_tip_delete');?>"><i class="mdi mdi-delete nolink"></i></a>
                 <?php } ?>
             </div>
         </td>
@@ -58,9 +58,9 @@ $tmpDate = $date->getTimestamp();?>
 
 <div class="row-fluid">
     <div class="span12">
-      <a href="<?php echo base_url();?>extra/export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('extra_index_button_export');?></a>
+      <a href="<?php echo base_url();?>extra/export" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp; <?php echo lang('extra_index_button_export');?></a>
       &nbsp;
-      <a href="<?php echo base_url();?>extra/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>&nbsp; <?php echo lang('extra_index_button_create');?></a>
+      <a href="<?php echo base_url();?>extra/create" class="btn btn-primary"><i class="mdi mdi-plus-circle"></i>&nbsp; <?php echo lang('extra_index_button_create');?></a>
     </div>
 </div>
 
@@ -112,7 +112,7 @@ $(document).ready(function() {
                     }
                 }
     });
-      
+
     //On showing the confirmation pop-up, add the user id at the end of the delete url action
     $('#frmDeleteExtraRequest').on('show', function() {
         var link = "<?php echo base_url();?>extra/delete/" + $(this).data('id');
@@ -121,12 +121,12 @@ $(document).ready(function() {
 
     //Display a modal pop-up so as to confirm if a leave request has to be deleted or not
     //We build a complex selector because datatable does horrible things on DOM...
-    //a simplier selector doesn't work when the delete is on page >1 
+    //a simplier selector doesn't work when the delete is on page >1
     $("#extras tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
         $('#frmDeleteExtraRequest').data('id', id).modal('show');
     });
-    
+
     $('#frmDeleteExtraRequest').on('hidden', function() {
         $(this).removeData('modal');
     });

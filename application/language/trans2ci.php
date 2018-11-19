@@ -6,9 +6,9 @@
  * @link       https://github.com/bbalet/jorani
  * @since      0.3.0
  */
-//require("POParser.php");
+
 require_once "../../vendor/autoload.php";
-$target = "arabic";
+$target = "romanian";
 
 $copyright = "<?php
 /**
@@ -16,13 +16,11 @@ $copyright = "<?php
  * @copyright  Copyright (c) 2014-2018 Benjamin BALET
  * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
  * @link       https://github.com/bbalet/jorani
- * @since      0.6.5
+ * @since      0.6.6
  * @author     Transifex users
  */\n\n";
 
 //Load and parse the PO file
-//$parser = new POParser;
-//$messages = $parser->parse($target . DIRECTORY_SEPARATOR . $target . '.po');
 $fileHandler = new Sepia\FileHandler($target . DIRECTORY_SEPARATOR . $target . '.po');
 $poParser = new Sepia\PoParser($fileHandler);
 $entries  = $poParser->parse();

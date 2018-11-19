@@ -19,7 +19,7 @@ class Contracts_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function __construct() {
-        
+
     }
 
     /**
@@ -37,7 +37,7 @@ class Contracts_model extends CI_Model {
         $query = $this->db->get_where('contracts', array('id' => $id));
         return $query->row_array();
     }
-    
+
     /**
      * Get the name of a given contract
      * @param int $id Unique identifier of a contract
@@ -46,13 +46,13 @@ class Contracts_model extends CI_Model {
      */
     public function getName($id) {
         $record = $this->getContracts($id);
-        if (count($record) > 0) {
+        if (!empty($record)) {
             return $record['name'];
         } else {
             return '';
         }
     }
-    
+
     /**
      * Insert a new contract into the database. Inserted data are coming from an HTML form
      * @return int number of affected rows
@@ -71,7 +71,7 @@ class Contracts_model extends CI_Model {
         );
         return $this->db->insert('contracts', $data);
     }
-    
+
     /**
      * Delete a contract from the database
      * @param int $id identifier of the contract
@@ -86,7 +86,7 @@ class Contracts_model extends CI_Model {
         $this->dayoffs_model->deleteDaysOffCascadeContract($id);
         $this->users_model->updateUsersCascadeContract($id);
     }
-    
+
     /**
      * Update a given contract in the database. Update data are coming from an HTML form
      * @return int number of affected rows
@@ -106,13 +106,13 @@ class Contracts_model extends CI_Model {
         $this->db->where('id', $this->input->post('id'));
         return $this->db->update('contracts', $data);
     }
-    
+
     /**
      * Computes the boundaries (current leave period) of the contract of a user
      * Modifies the start and end dates passed as parameter
      * @param int Unique identifier of a user
-     * @param &date start date of the current leave period 
-     * @param &date end date of the current leave period 
+     * @param &date start date of the current leave period
+     * @param &date end date of the current leave period
      * @param string $refDate tmp of the Date of reference (or current date if NULL)
      * @return bool TRUE means that the user has a contract, FALSE otherwise
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -123,7 +123,7 @@ class Contracts_model extends CI_Model {
         $this->db->join('users', 'users.contract = contracts.id');
         $this->db->where('users.id', $userId);
         $boundaries = $this->db->get()->result_array();
-        
+
         if ($refDate == NULL) {
             $refDate = date("Y-m-d");
         }
@@ -131,7 +131,7 @@ class Contracts_model extends CI_Model {
         $refMonth = substr($refDate, 5, 2);
         $nextYear = strval(intval($refYear) + 1);
         $lastYear = strval(intval($refYear) - 1);
-        
+
         if (count($boundaries) != 0) {
             $startmonth = intval(substr($boundaries[0]['startentdate'], 0, 2));
             if ($startmonth == 1 ) {
@@ -151,7 +151,7 @@ class Contracts_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
     /**
      * Detect not used contracts (maybe duplicated)
      * @return array list of unused contracts
@@ -165,7 +165,7 @@ class Contracts_model extends CI_Model {
         $this->db->where('users.contract IS NULL');
         return $this->db->get('contracts')->result_array();
     }
-    
+
     /**
      * Get the list of included leave types in a contract
      * @param int $id identifier of the contract
@@ -184,10 +184,10 @@ class Contracts_model extends CI_Model {
         $rows = $this->db->get()->result_array();
         foreach ($rows as $row) {
             $listOfTypes[$row['id']] = $row['name'];
-        }        
+        }
         return $listOfTypes;
     }
-    
+
     /**
      * Get the list of excluded leave types in a contract
      * @param int $id identifier of the contract
@@ -204,7 +204,7 @@ class Contracts_model extends CI_Model {
         $rows = $this->db->get()->result_array();
         foreach ($rows as $row) {
             $listOfTypes[$row['id']] = $row['name'];
-        }        
+        }
         return $listOfTypes;
     }
 
@@ -221,7 +221,7 @@ class Contracts_model extends CI_Model {
         foreach ($allTypes as $row) {
             $usageArray[$row['id']] = (int) 0;
         }
-        
+
         //Find out the actual types usage for the contract
         $this->db->select('types.id as type_id, count(types.id) as type_usage', FALSE);
         $this->db->from('types');
@@ -230,7 +230,7 @@ class Contracts_model extends CI_Model {
         $this->db->join('contracts', 'users.contract = contracts.id');
         $this->db->where('contracts.id', $id);
         $this->db->group_by('types.id');
-        
+
         //Complete the associative array type:usage
         $rows = $this->db->get()->result_array();
         foreach ($rows as $row) {
@@ -307,7 +307,7 @@ class Contracts_model extends CI_Model {
         $this->db->insert('excluded_types', $data);
         return "OK";
     }
-    
+
     /**
      * Exclude a leave type for a contract
      * @param int $contractId identifier of the contract

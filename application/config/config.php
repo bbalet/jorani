@@ -185,7 +185,7 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 1;
+$config['log_threshold'] = 2;
 
 /*
 |--------------------------------------------------------------------------
@@ -450,15 +450,18 @@ $config['extra_status_requested'] = FALSE;
 
 //____________________________________________________________________________
 //Set this value to TRUE if you want to allow manager to create leave requests in behalf of their collaborators
-$config['requests_by_manager'] = FALSE;
+$config['requests_by_manager'] = TRUE;
 
 //Set this value to true if you want to force the manager to comment rejections
 $config['mandatory_comment_on_reject'] = FALSE;
 
+//Set this value to true if you want to forbid the employee to submit a leave request with a negative amount 
+$config['disallow_requests_without_credit'] = TRUE;
+
 //____________________________________________________________________________
 //List of available languages. If you limit this list to one language, the list of available languages will be hidden from the login form
 //Beware that regional variant is case sensitivie (e.g. "en-GB" and not "en-gb")
-$config['languages'] = 'en,en-GB,fr,es,nl,de,it,ru,cs,uk,km,fa,vi,tr,zh,el,pt,ar';
+$config['languages'] = 'en,en-GB,fr,es,nl,de,it,ru,cs,uk,km,fa,vi,tr,zh,el,pt,ar,hu,ca,ro';
 
 //If you want to use another font for a specific language, put the font into assets/fonts folder and map as in this example
 //Extra fonts are coming from Google noto font project: https://www.google.com/get/noto/
@@ -524,6 +527,7 @@ $config['saml_enabled'] = FALSE;
 //Enable public ICS feeds (global calendar, contract, personal information)
 $config['ics_enabled'] = TRUE;
 $config['default_timezone'] = 'Europe/Paris';
+$config['legacy_feeds'] = FALSE;    //Maintain the unsecure URLs for ICS feeds
 
 //____________________________________________________________________________
 //Enable public access for tabular and global calendar

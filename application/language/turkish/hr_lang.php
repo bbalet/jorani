@@ -70,6 +70,7 @@ $lang['hr_leaves_thead_tip_edit'] = 'düzenle';
 $lang['hr_leaves_thead_tip_accept'] = 'kabul et';
 $lang['hr_leaves_thead_tip_reject'] = 'reddet';
 $lang['hr_leaves_thead_tip_delete'] = 'sil';
+$lang['hr_leaves_thead_tip_history'] = 'show history';
 $lang['hr_leaves_thead_id'] = 'ID';
 $lang['hr_leaves_thead_status'] = 'Durum';
 $lang['hr_leaves_thead_start'] = 'Başlangıç Tarihi';

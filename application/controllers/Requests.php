@@ -47,7 +47,6 @@ class Requests extends CI_Controller {
         $data['title'] = lang('requests_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_leave_validation');
         ($filter == 'all')? $showAll = TRUE : $showAll = FALSE;
-        //$data['requests'] = $this->leaves_model->getLeavesRequestedToManager($this->user_id, $showAll);
         if ($this->config->item('enable_history') == TRUE){
           $data['requests'] = $this->leaves_model->getLeavesRequestedToManagerWithHistory($this->session->userdata('id'), $showAll);
         }else{
@@ -439,7 +438,6 @@ class Requests extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export($filter = 'requested') {
-        $this->load->library('excel');
         $data['filter'] = $filter;
         $this->load->view('requests/export', $data);
     }

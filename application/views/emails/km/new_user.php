@@ -28,7 +28,7 @@
             </tr>            
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        <a href="http://jorani.org/how-to-change-my-password.html" title="តំណភ្ជាប់ទៅឯកសារ" target="_blank">នៅពេលដែលបានភ្ជាប់អ្នកអាចផ្លាស់ប្តូរពាក្យសម្ងាត់របស់អ្នកជាការពន្យល់នៅទីនេះ</a>.
+        <a href="https://jorani.org/how-to-change-my-password.html" title="តំណភ្ជាប់ទៅឯកសារ" target="_blank">នៅពេលដែលបានភ្ជាប់អ្នកអាចផ្លាស់ប្តូរពាក្យសម្ងាត់របស់អ្នកជាការពន្យល់នៅទីនេះ</a>.
         <?php } ?>
     </body>
 </html>

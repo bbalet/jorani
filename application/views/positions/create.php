@@ -23,7 +23,7 @@ echo form_open('positions/create', $attributes); ?>
     <textarea type="input" name="description" id="description" /></textarea>
     
     <br /><br />
-    <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('positions_create_button_create');?></button>
+    <button id="send" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp;<?php echo lang('positions_create_button_create');?></button>
     &nbsp;
-    <a href="<?php echo base_url(); ?>positions" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('positions_create_button_cancel');?></a>
+    <a href="<?php echo base_url(); ?>positions" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('positions_create_button_cancel');?></a>
 </form>

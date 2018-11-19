@@ -8,7 +8,17 @@
  * @since         0.4.3
  */
 
-$sheet = $this->excel->setActiveSheetIndex(0);  
+require_once FCPATH . "vendor/autoload.php";
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+
+$spreadsheet = new Spreadsheet();
+$sheet = $spreadsheet->getActiveSheet();
 
 //Print the header with the values of the export parameters
 $sheet->setTitle(mb_strimwidth(lang('calendar_tabular_export_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
@@ -31,7 +41,7 @@ $start = $year . '-' . $month . '-' . '1';    //first date of selected month
 $lastDay = date("t", strtotime($start));    //last day of selected month
 for ($ii = 1; $ii <=$lastDay; $ii++) {
     $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
-    $col = $this->excel->column_name(3 + $ii);
+    $col = columnName(3 + $ii);
     //Print day number
     $sheet->setCellValue($col . '9', $ii);
     //Print short name of the day
@@ -50,30 +60,31 @@ for ($ii = 1; $ii <=$lastDay; $ii++) {
 $sheet->setCellValue('C8', lang('calendar_tabular_export_thead_employee'));
 $sheet->mergeCells('C8:C9');
 //The header is horizontally aligned
-$col = $this->excel->column_name(3 + $lastDay);
-$sheet->getStyle('C8:' . $col . '9')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+$col = columnName(3 + $lastDay);
+$sheet->getStyle('C8:' . $col . '9')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
 //Box around the lines for each employee
 $styleBox = array(
     'borders' => array(
         'top' => array(
-            'style' => PHPExcel_Style_Border::BORDER_THIN
+            'borderStyle' => Border::BORDER_THIN
         ),
         'bottom' => array(
-            'style' => PHPExcel_Style_Border::BORDER_THIN
+            'borderStyle' => Border::BORDER_THIN
         )
     )
   );
 
+//Box around a day
 $dayBox =  array(
     'borders' => array(
         'left' => array(
-            'style' => PHPExcel_Style_Border::BORDER_DASHDOT,
-            'rgb' => '808080'
+            'borderStyle' => Border::BORDER_DASHDOT,
+            'color' => array('rgb' => '808080')
         ),
         'right' => array(
-            'style' => PHPExcel_Style_Border::BORDER_DASHDOT,
-            'rgb' => '808080'
+            'borderStyle' => Border::BORDER_DASHDOT,
+            'color' => array('rgb' => '808080')
         )
     )
  );
@@ -81,32 +92,32 @@ $dayBox =  array(
 //Background colors for the calendar according to the type of leave
 $styleBgPlanned = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => 'DDD')
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => array('rgb' => 'DDD')
     )
 );
 $styleBgRequested = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => 'F89406')
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => array('rgb' => 'F89406')
     )
 );
 $styleBgAccepted = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => '468847')
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => array('rgb' => '468847')
     )
 );
 $styleBgRejected = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => 'FF0000')
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => array('rgb' => 'FF0000')
     )
 );
 $styleBgDayOff = array(
     'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => '000000')
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => array('rgb' => '000000')
     )
 );
 
@@ -117,22 +128,22 @@ foreach ($tabular as $employee) {
     //Merge the two line containing the name of the employee and apply a border around it
     $sheet->setCellValue('C' . $line, $employee->name);
     $sheet->mergeCells('C' . $line . ':C' . ($line + 1));
-    $col = $this->excel->column_name($lastDay + 3);
+    $col = columnName($lastDay + 3);
     $sheet->getStyle('C' . $line . ':' . $col . ($line + 1))->applyFromArray($styleBox);
 
     //Iterate on all days of the selected month
     $dayNum = 0;
     foreach ($employee->days as $day) {
-        if (($is_hr == TRUE) || 
-                ($is_admin == TRUE) || 
-                ($employee->manager == $user_id) || 
+        if (($is_hr == TRUE) ||
+                ($is_admin == TRUE) ||
+                ($employee->manager == $user_id) ||
                 ($employee->id == $user_id)) {
             $canSeeType = TRUE;
         } else {
             $canSeeType = FALSE;
         }
         $dayNum++;
-        $col = $this->excel->column_name(3 + $dayNum);
+        $col = columnName(3 + $dayNum);
         if (strstr($day->display, ';')) {//Two statuses in the cell
             $statuses = explode(";", $day->status);
             $types = explode(";", $day->type);
@@ -246,7 +257,7 @@ foreach ($tabular as $employee) {
 
 //Autofit for all column containing the days
 for ($ii = 1; $ii <=$lastDay; $ii++) {
-    $col = $this->excel->column_name($ii + 3);
+    $col = columnName($ii + 3);
     $sheet->getStyle($col . '8:' . $col . ($line - 1))->applyFromArray($dayBox);
     $sheet->getColumnDimension($col)->setAutoSize(TRUE);
 }
@@ -254,11 +265,12 @@ $sheet->getColumnDimension('A')->setAutoSize(TRUE);
 $sheet->getColumnDimension('B')->setAutoSize(TRUE);
 $sheet->getColumnDimension('C')->setWidth(40);
 
-//Set layout to landscape and make the Excel sheet fit to the page
-$sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
-$sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
-$sheet->getPageSetup()->setFitToPage(true);
+//Set layout to landscape and make the Excel sheet to fit to the page
+$sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+$sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4);
+$sheet->getPageSetup()->setFitToPage(TRUE);
 $sheet->getPageSetup()->setFitToWidth(1);
 $sheet->getPageSetup()->setFitToHeight(0);
 
-exportSpreadsheet($this, 'tabular');
+$spreadsheet->exportName = 'tabular';
+writeSpreadsheet($spreadsheet);

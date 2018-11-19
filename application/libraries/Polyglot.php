@@ -85,7 +85,7 @@ class Polyglot {
             //case 'br' : return 'breton'; break;
             //case 'bg' : return 'bulgarian'; break;
             //case 'my' : return 'burmese'; break;
-            //case 'ca' : return 'catalan'; break;
+            case 'ca' : return 'catalan'; break;
             //case 'ch' : return 'chamorro'; break;
             //case 'ce' : return 'chechen'; break;
             //case 'ny' : return 'chichewa'; break;
@@ -122,7 +122,7 @@ class Polyglot {
 //            case 'hz' : return 'herero'; break;
             case 'hi' : return 'hindi'; break;
 //            case 'ho' : return 'hiri motu'; break;
-//            case 'hu' : return 'hungarian'; break;
+            case 'hu' : return 'hungarian'; break;
 //            case 'ia' : return 'interlingua'; break;
 //            case 'id' : return 'indonesian'; break;
 //            case 'ie' : return 'interlingue'; break;
@@ -193,7 +193,7 @@ class Polyglot {
 //            case 'qu' : return 'quechua'; break;
 //            case 'rm' : return 'romansh'; break;
 //            case 'rn' : return 'kirundi'; break;
-//            case 'ro' : return 'romanian'; break;
+            case 'ro' : return 'romanian'; break;
             case 'ru' : return 'russian'; break;
 //            case 'sa' : return 'sanskrit'; break;
 //            case 'sc' : return 'sardinian'; break;
@@ -281,7 +281,7 @@ class Polyglot {
 //            case 'breton' : return 'br'; break;
 //            case 'bulgarian' : return 'bg'; break;
 //            case 'burmese' : return 'my'; break;
-//            case 'catalan' : return 'ca'; break;
+            case 'catalan' : return 'ca'; break;
 //            case 'chamorro' : return 'ch'; break;
 //            case 'chechen' : return 'ce'; break;
 //            case 'chichewa' : return 'ny'; break;
@@ -317,7 +317,7 @@ class Polyglot {
 //            case 'herero' : return 'hz'; break;
 //            case 'hindi' : return 'hi'; break;
 //            case 'hiri motu' : return 'ho'; break;
-//            case 'hungarian' : return 'hu'; break;
+            case 'hungarian' : return 'hu'; break;
 //            case 'interlingua' : return 'ia'; break;
 //            case 'indonesian' : return 'id'; break;
 //            case 'interlingue' : return 'ie'; break;
@@ -388,7 +388,7 @@ class Polyglot {
 //            case 'quechua' : return 'qu'; break;
 //            case 'romansh' : return 'rm'; break;
 //            case 'kirundi' : return 'rn'; break;
-//            case 'romanian' : return 'ro'; break;
+            case 'romanian' : return 'ro'; break;
             case 'russian' : return 'ru'; break;
 //            case 'sanskrit' : return 'sa'; break;
 //            case 'sardinian' : return 'sc'; break;
@@ -476,7 +476,7 @@ class Polyglot {
 //            case 'br' : return 'brezhoneg'; break;
 //            case 'bg' : return 'български език'; break;
 //            case 'my' : return 'ဗမာစာ'; break;
-//            case 'ca' : return 'Català'; break;
+            case 'ca' : return 'Català'; break;
 //            case 'ch' : return 'Chamoru'; break;
 //            case 'ce' : return 'нохчийн мотт'; break;
 //            case 'ny' : return 'chiCheŵa'; break;
@@ -513,7 +513,7 @@ class Polyglot {
 //            case 'hz' : return 'Otjiherero'; break;
 //            case 'hi' : return 'हिन्दी'; break;
 //            case 'ho' : return 'Hiri Motu'; break;
-//            case 'hu' : return 'Magyar'; break;
+            case 'hu' : return 'Magyar'; break;
 //            case 'ia' : return 'Interlingua'; break;
 //            case 'id' : return 'Bahasa Indonesia'; break;
 //            case 'ie' : return 'Interlingue'; break;
@@ -584,7 +584,7 @@ class Polyglot {
 //            case 'qu' : return 'Runa Simi'; break;
 //            case 'rm' : return 'rumantsch grischun'; break;
 //            case 'rn' : return 'kiRundi'; break;
-//            case 'ro' : return ' Moldovan'; break;
+            case 'ro' : return ' Moldovan'; break;
             case 'ru' : return 'Pусский язык'; break;
 //            case 'sa' : return 'संस्कृतम्'; break;
 //            case 'sc' : return 'sardu'; break;
@@ -672,7 +672,7 @@ class Polyglot {
 //            case 'brezhoneg' : return 'br'; break;
 //            case 'български език' : return 'bg'; break;
 //            case 'ဗမာစာ' : return 'my'; break;
-//            case 'Català' : return 'ca'; break;
+            case 'Català' : return 'ca'; break;
 //            case 'Chamoru' : return 'ch'; break;
 //            case 'нохчийн мотт' : return 'ce'; break;
 //            case 'chiCheŵa' : return 'ny'; break;
@@ -708,7 +708,7 @@ class Polyglot {
 //            case 'Otjiherero' : return 'hz'; break;
 //            case 'हिन्दी' : return 'hi'; break;
 //            case 'Hiri Motu' : return 'ho'; break;
-//            case 'Magyar' : return 'hu'; break;
+            case 'Magyar' : return 'hu'; break;
 //            case 'Interlingua' : return 'ia'; break;
 //            case 'Bahasa Indonesia' : return 'id'; break;
 //            case 'Interlingue' : return 'ie'; break;
@@ -779,7 +779,7 @@ class Polyglot {
 //            case 'Runa Simi' : return 'qu'; break;
 //            case 'rumantsch grischun' : return 'rm'; break;
 //            case 'kiRundi' : return 'rn'; break;
-//            case ' Moldovan' : return 'ro'; break;
+            case ' Moldovan' : return 'ro'; break;
             case 'Pусский язык' : return 'ru'; break;
 //            case 'संस्कृतम्' : return 'sa'; break;
 //            case 'sardu' : return 'sc'; break;

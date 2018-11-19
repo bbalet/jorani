@@ -1,11 +1,11 @@
+<img src="https://raw.githubusercontent.com/bbalet/jorani/master/assets/images/logo_simple.png" width="80" align="left" hspace="10">
+
 Jorani is a Leave Management System developed in PHP/MySQL under an AGPL v3 licence.
 Jorani is designed to provide simple leave and overtime request workflows for small organizations.
 
-![Jorani Logo](https://raw.githubusercontent.com/bbalet/jorani/master/assets/images/Jorani_Logo_horizontal-700.png)
-
 ## Informations / getting help
 
-* Official website : http://jorani.org/
+* Official website : https://jorani.org/
 * User group : https://groups.google.com/forum/?hl=en#!forum/jorani
 
 ## Status
@@ -81,12 +81,13 @@ We thank the following open source projects for the components used by Jorani:
 
 #### Frontend
 
-* bootstrap 2.3, bootbox, datepicker and Font Awesome
+* bootstrap 2.3, bootbox, datepicker and FontAwesome
 * JQuery and JQuery-UI
-* FullCalendar http://arshaw.com/fullcalendar/
+* FullCalendar https://fullcalendar.io/
 * Datatable https://datatables.net/
 * RSA implementation https://github.com/travist/jsencrypt
 * Moment (JS dates library) http://momentjs.com/
-* Selectize https://github.com/brianreavis/selectize.js
+* Select2 https://select2.org/
+* JavaScript Cookie https://github.com/js-cookie/js-cookie
 * clipboard.js https://github.com/zenorocha/clipboard.js
 * Google noto fonts https://www.google.com/get/noto/

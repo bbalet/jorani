@@ -226,12 +226,12 @@ if (isset($_GET['source'])) {
 
 <div class="row-fluid">
     <div class="span12">
-        <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('users_edit_button_update');?></button>
+        <button type="submit" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp;<?php echo lang('users_edit_button_update');?></button>
         &nbsp;
         <?php if (isset($_GET['source'])) {?>
-            <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('users_edit_button_cancel');?></a>
+            <a href="<?php echo base_url() . $_GET['source']; ?>" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('users_edit_button_cancel');?></a>
         <?php } else {?>
-            <a href="<?php echo base_url();?>users" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('users_edit_button_cancel');?></a>
+            <a href="<?php echo base_url();?>users" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('users_edit_button_cancel');?></a>
         <?php } ?>
     </div>
 </div>
@@ -280,13 +280,13 @@ if (isset($_GET['source'])) {
     </div>
 </div>
 
-<link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/css/bootstrap-datepicker.min.css">
-<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/css/bootstrap-datepicker.min.css">
+<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/js/bootstrap-datepicker.min.js"></script>
 <?php if ($language_code != 'en') {?>
-<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.6.4/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
+<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
 <?php }?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
 
     //Popup select postion: on click OK, find the user id for the selected line
@@ -334,8 +334,8 @@ if (isset($_GET['source'])) {
         });
 
         //Transform SELECT tags in richer controls
-        $('#timezone').selectize();
-        $('#contract').selectize();
+        $('#timezone').select2();
+        $('#contract').select2();
 
         //Popup select position
         $("#cmdSelectManager").click(function() {

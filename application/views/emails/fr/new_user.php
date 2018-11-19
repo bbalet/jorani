@@ -34,7 +34,7 @@
             </tr>            
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        <p>Une fois connecté, vous pouvez modifier votre mot de passe comme expliqué <a href="http://fr.jorani.org/utilisation/comment-modifier-mon-mot-de-passe.html" title="Lien vers la documentation" target="_blank">dans cet article</a>.</p>
+        <p>Une fois connecté, vous pouvez modifier votre mot de passe comme expliqué <a href="https://fr.jorani.org/utilisation/comment-modifier-mon-mot-de-passe.html" title="Lien vers la documentation" target="_blank">dans cet article</a>.</p>
         <?php } ?>
         <hr>
         <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>

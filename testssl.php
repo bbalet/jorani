@@ -24,12 +24,18 @@ define('KEY_SIZE', 1024);   //Change the RSA key size
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
         <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>
+        <link rel="stylesheet" href="assets/MDI-2.1.19/css/materialdesignicons.min.css">
+        <script type="text/javascript" src="assets/js/jquery-2.2.4.min.js"></script>
+        <style>
+        .nolink {
+            color: black;
+        }
+        </style>
     </head>
     <body>
         <div class="container-fluid">
             <ul class="nav nav-pills">
-                <li><a href="home" title="login to Jorani"><i class="icon-home"></i></a></li>
+                <li><a href="home" title="login to Jorani"><i class="mdi mdi-home nolink"></i></a></li>
                 <li><a href="requirements.php">Requirements</a></li>
                 <li><a href="testmail.php">Email</a></li>
                 <li><a href="testldap.php">LDAP</a></li>
@@ -40,11 +46,11 @@ define('KEY_SIZE', 1024);   //Change the RSA key size
             <h1>Test of your OpenSSL setup</h1>
 
             <p>This page will help you to check your OpenSSL setup and to generate a <a href="#pair">private and public key pair</a>.</p>
-            
+
             <p>The public and private keys are generated on the fly each time the page is loaded.</p>
-            
+
             <h2>PHP Security library</h2>
-            
+
             <table class="table table-bordered table-hover table-condensed">
                 <thead>
                     <tr>
@@ -123,16 +129,16 @@ extract($rsa->createKey(KEY_SIZE));
 ?>
                   </tbody>
             </table>
-            
+
             <h2 id="pair">Private and public key pair</h2>
-            
+
             <p>This section will help you to create <code>assets/keys/private.pem</code> and <code>assets/keys/public.pem</code> files.
              Beware that it is a pair of keys that must be set together (i.e. you must update the both files at the same time with the corresponding content).</p>
-            
+
             <h3>Private Key</h3>
-            
+
             <p>You can copy/paste the content below into <code>assets/keys/private.pem</code>.</p>
-            
+
 <div class="row-fluid">
     <div class="span6">
 <pre><?php echo $privatekey; ?></pre>
@@ -141,11 +147,11 @@ extract($rsa->createKey(KEY_SIZE));
 </div>
 
             <h3>Public Key</h3>
-            
+
             <p>You can copy/paste the content below into <code>assets/keys/public.pem</code>.</p>
-            
+
 <div class="row-fluid">
-    <div class="span6">       
+    <div class="span6">
 <pre><?php echo $publickey; ?></pre>
     </div>
     <div class="span6"></div>

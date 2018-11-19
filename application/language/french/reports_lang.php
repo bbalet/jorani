@@ -14,6 +14,8 @@ $lang['reports_index_thead_description'] = 'Description';
 $lang['reports_execute_title'] = 'Rapport';
 $lang['reports_execute_button_back_list'] = 'Retour à la liste des rapports';
 
+$lang['reports_native_title'] = 'Liste des rapports';
+
 $lang['reports_balance_title'] = 'État des congés';
 $lang['reports_balance_date_field'] = 'Date du rapport';
 $lang['reports_balance_field_entity'] = 'Choisir l\'entité';

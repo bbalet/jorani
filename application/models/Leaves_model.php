@@ -285,7 +285,14 @@ class Leaves_model extends CI_Model {
             $this->load->model('types_model');
             $this->load->model('users_model');
             //Fill a list of all existing leave types
-            $summary = $this->types_model->allTypes($compensate_name);
+            $summary = array();
+            $types = $this->types_model->getTypes();
+            foreach ($types as $type) {
+                $summary[$type['name']][0] = 0; //Taken
+                $summary[$type['name']][1] = 0; //Entitled
+                $summary[$type['name']][2] = ''; //Description
+            }
+
             //Get the sum of entitled days
             $user = $this->users_model->getUsers($id);
             $entitlements = $this->getSumEntitledDays($id, $user['contract'], $refDate);
@@ -310,43 +317,7 @@ class Leaves_model extends CI_Model {
                 $summary[$entitlement['type_name']][3] = $entitlement['type_id'];
                 $summary[$entitlement['type_name']][1] = (float) $entitlement['entitled'];
             }
-
-            //Add the validated catch up days
-            //Employee must catch up in the year
-            $this->db->select('duration, date, cause');
-            $this->db->from('overtime');
-            $this->db->where('employee', $id);
-            $this->db->where("date >= DATE_SUB(STR_TO_DATE('" . $refDate . "', '%Y-%m-%d'),INTERVAL 1 YEAR)");
-            $this->db->where('status = 3'); //Accepted
-            $overtime_days = $this->db->get()->result_array();
-            $sum = 0;
-            foreach ($overtime_days as $entitled) {
-                if ($sum_extra == FALSE) {
-                    $summary['Catch up for ' . $entitled['date']][0] = '-'; //taken
-                    $summary['Catch up for ' . $entitled['date']][1] = (float) $entitled['duration']; //entitled
-                    $summary['Catch up for ' . $entitled['date']][2] = $entitled['cause']; //description
-                }
-                $sum += (float) $entitled['duration']; //entitled
-            }
-            $this->db->select('sum(leaves.duration) as taken');
-            $this->db->from('leaves');
-            $this->db->where('leaves.employee', $id);
-            $this->db->where('leaves.status', 3);
-            $this->db->where('leaves.type', 0);
-            $this->db->where("leaves.startdate >= DATE_SUB(STR_TO_DATE('" . $refDate . "', '%Y-%m-%d'),INTERVAL 1 YEAR)");
-            $this->db->group_by("leaves.type");
-            $taken_days = $this->db->get()->result_array();
-            $summary[$compensate_name][3] = 0;
-            if (count($taken_days) > 0) {
-                $summary[$compensate_name][0] = (float) $taken_days[0]['taken']; //taken
-            } else {
-                $summary[$compensate_name][0] = 0; //taken
-            }
-            //Add the sum of validated catch up for the employee
-            if (array_key_exists($compensate_name, $summary)) {
-                $summary[$compensate_name][1] = (float) $summary[$compensate_name][1] + $sum; //entitled
-            }
-
+            
             //List all planned leaves in a third column
             //planned leave requests are not deducted from credit
             foreach ($entitlements as $entitlement) {
@@ -397,7 +368,6 @@ class Leaves_model extends CI_Model {
 
             //Remove all lines having taken and entitled set to set to 0
             foreach ($summary as $key => $value) {
-                //if ($value[0]==0 && $value[1]==0) {
                 if ($value[0]==0 && $value[1]==0  && $value[2]!='x') {
                     unset($summary[$key]);
                 }
@@ -482,11 +452,11 @@ class Leaves_model extends CI_Model {
 
     /**
      * Create a leave request
-     * @param int $id Identifier of the employee
+     * @param int $employeeId Identifier of the employee
      * @return int id of the newly created leave request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function setLeaves($id) {
+    public function setLeaves($employeeId) {
         $data = array(
             'startdate' => $this->input->post('startdate'),
             'startdatetype' => $this->input->post('startdatetype'),
@@ -496,7 +466,7 @@ class Leaves_model extends CI_Model {
             'type' => $this->input->post('type'),
             'cause' => $this->input->post('cause'),
             'status' => $this->input->post('status'),
-            'employee' => $id
+            'employee' => $employeeId
         );
         $this->db->insert('leaves', $data);
         $newId = $this->db->insert_id();
@@ -504,7 +474,7 @@ class Leaves_model extends CI_Model {
         //Trace the modification if the feature is enabled
         if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
-            $this->history_model->setHistory(1, 'leaves', $newId, $this->session->userdata('id'));
+            $this->history_model->setHistory(1, 'leaves', $newId, $employeeId);
         }
 
         return $newId;
@@ -599,22 +569,26 @@ class Leaves_model extends CI_Model {
 
     /**
      * Update a leave request in the database with the values posted by an HTTP POST
-     * @param int $id of the leave request
+     * @param int $leaveId of the leave request
+     * @param int $userId Identifier of the user (optional)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function updateLeaves($id) {
-        $json = $this->prepareCommentOnStatusChanged($id, $this->input->post('status'));
+    public function updateLeaves($leaveId, $userId = 0) {
+        if ($userId == 0) {
+            $userId = $this->session->userdata('id');
+        }
+        $json = $this->prepareCommentOnStatusChanged($leaveId, $this->input->post('status'));
         if($this->input->post('comment') != NULL){
           $jsonDecode = json_decode($json);
-          $comment_object = new stdClass;
-          $comment_object->type = "comment";
-          $comment_object->author = $this->session->userdata('id');
-          $comment_object->value = $this->input->post('comment');
-          $comment_object->date = date("Y-n-j");
+          $commentObject = new stdClass;
+          $commentObject->type = "comment";
+          $commentObject->author = $userId;
+          $commentObject->value = $this->input->post('comment');
+          $commentObject->date = date("Y-n-j");
           if (isset($jsonDecode)){
-            array_push($jsonDecode->comments, $comment_object);
+            array_push($jsonDecode->comments, $commentObject);
           }else {
-            $jsonDecode->comments = array($comment_object);
+            $jsonDecode->comments = array($commentObject);
           }
           $json = json_encode($jsonDecode);
         }
@@ -629,29 +603,33 @@ class Leaves_model extends CI_Model {
             'status' => $this->input->post('status'),
             'comments' => $json
         );
-        $this->db->where('id', $id);
+        $this->db->where('id', $leaveId);
         $this->db->update('leaves', $data);
 
         //Trace the modification if the feature is enabled
         if ($this->config->item('enable_history') === TRUE) {
             $this->load->model('history_model');
-            $this->history_model->setHistory(2, 'leaves', $id, $this->session->userdata('id'));
+            $this->history_model->setHistory(2, 'leaves', $leaveId, $userId);
         }
     }
 
     /**
      * Delete a leave from the database
-     * @param int $id leave request identifier
+     * @param int $leaveId leave request identifier
+     * @param int $userId Identifier of the user (optional)
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function deleteLeave($id) {
+    public function deleteLeave($leaveId, $userId = 0) {
         //Trace the modification if the feature is enabled
         if ($this->config->item('enable_history') === TRUE) {
+            if ($userId == 0) {
+                $userId = $this->session->userdata('id');
+            }
             $this->load->model('history_model');
-            $this->history_model->setHistory(3, 'leaves', $id, $this->session->userdata('id'));
+            $this->history_model->setHistory(3, 'leaves', $leaveId, $userId);
         }
-        return $this->db->delete('leaves', array('id' => $id));
+        return $this->db->delete('leaves', array('id' => $leaveId));
     }
 
     /**
@@ -688,15 +666,15 @@ class Leaves_model extends CI_Model {
      */
     public function switchStatusAndComment($id, $status, $comment) {
         $json_parsed = $this->getCommentsLeave($id);
-        $comment_object = new stdClass;
-        $comment_object->type = "comment";
-        $comment_object->author = $this->session->userdata('id');
-        $comment_object->value = $comment;
-        $comment_object->date = date("Y-n-j");
+        $commentObject = new stdClass;
+        $commentObject->type = "comment";
+        $commentObject->author = $this->session->userdata('id');
+        $commentObject->value = $comment;
+        $commentObject->date = date("Y-n-j");
         if (isset($json_parsed)){
-          array_push($json_parsed->comments, $comment_object);
+          array_push($json_parsed->comments, $commentObject);
         }else {
-          $json_parsed->comments = array($comment_object);
+          $json_parsed->comments = array($commentObject);
         }
         $comment_change = new stdClass;
         $comment_change->type = "change";
@@ -1231,6 +1209,7 @@ class Leaves_model extends CI_Model {
      * @author Emilien NICOLAS <milihhard1996@gmail.com>
      */
     public function getLeavesRequestedToManagerWithHistory($manager, $all = FALSE){
+      $this->load->model('delegations_model');
       $manager = intval($manager);
       $query="SELECT leaves.id as leave_id, users.*, leaves.*, types.name as type_label, status.name as status_name, types.name as type_name, lastchange.date as change_date, requested.date as request_date
         FROM `leaves`
@@ -1261,6 +1240,7 @@ class Leaves_model extends CI_Model {
                 " OR leaves.status = " . LMS_CANCELLATION . ")";
       }
       $query=$query . " order by leaves.startdate DESC;";
+      $this->db->query('SET SQL_BIG_SELECTS=1');
       return $this->db->query($query)->result_array();
     }
 
@@ -1703,20 +1683,38 @@ class Leaves_model extends CI_Model {
         return $query->result_array();
     }
 
+    /**
+     * List of leave requests overlapping on two yearly periods.
+     * @return array List of overlapping leave requests
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function detectOverlappingProblems() {
+        $query = $this->db->query('SELECT CONCAT(users.firstname, \' \', users.lastname) AS user_label,
+            contracts.id AS contract_id, contracts.name AS contract_label,
+            status.name AS status_label,
+            leaves.*
+            FROM leaves
+            inner join users on leaves.employee = users.id
+            inner join contracts on users.contract = contracts.id
+            inner join status on status.id = leaves.status
+            WHERE leaves.startdate < CAST(CONCAT(YEAR(leaves.enddate), \'-\', REPLACE(contracts.startentdate, \'/\', \'-\')) AS DATE)
+            ORDER BY users.id ASC, leaves.startdate DESC', FALSE);
+        return $query->result_array();
+    }
 
     /**
      * Get one leave with his comment
-     * @param int $id Id of the leave request
+     * @param int $leaveId Id of the leave request
      * @return array list of records
      * @author Emilien NICOLAS <milihhard1996@gmail.com>
      */
-    public function getLeaveWithComments($id = 0) {
+    public function getLeaveWithComments($leaveId = 0) {
         $this->db->select('leaves.*');
         $this->db->select('status.name as status_name, types.name as type_name');
         $this->db->from('leaves');
         $this->db->join('status', 'leaves.status = status.id');
         $this->db->join('types', 'leaves.type = types.id');
-        $this->db->where('leaves.id', $id);
+        $this->db->where('leaves.id', $leaveId);
         $leave = $this->db->get()->row_array();
         if(!empty($leave['comments'])){
           $leave['comments'] = json_decode($leave['comments']);

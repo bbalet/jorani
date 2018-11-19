@@ -117,9 +117,9 @@ class Connection extends CI_Controller {
             } else {
                 require_once FCPATH . "vendor/autoload.php";
                 $rsa = new phpseclib\Crypt\RSA();
-                $private_key = file_get_contents('./assets/keys/private.pem', TRUE);
+                $privateKey = file_get_contents('./assets/keys/private.pem', TRUE);
                 $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
-                $rsa->loadKey($private_key, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
+                $rsa->loadKey($privateKey, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
                 $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
             }
             //Remove the salt
@@ -193,8 +193,8 @@ class Connection extends CI_Controller {
      */
     public function language() {
         $this->load->helper('form');
-        $this->session->set_userdata('language_code', $this->input->get_post('language'));
-        $this->session->set_userdata('language', $this->polyglot->code2language($this->input->get_post('language')));
+        $this->session->set_userdata('language_code', $this->input->get_post('language', true));
+        $this->session->set_userdata('language', $this->polyglot->code2language($this->input->get_post('language', true)));
         if ($this->input->post('last_page') == FALSE) {
             $this->redirectToLastPage();
         } else {
@@ -342,7 +342,7 @@ class Connection extends CI_Controller {
      */
     public function sso() {
         require_once APPPATH . 'config/saml.php';
-        $auth = new OneLogin_Saml2_Auth($settingsInfo);
+        $auth = new OneLogin\Saml2\Auth($settingsInfo);
         $auth->login();
     }
     

@@ -70,6 +70,7 @@ $lang['hr_leaves_thead_tip_edit'] = '編輯';
 $lang['hr_leaves_thead_tip_accept'] = '接受';
 $lang['hr_leaves_thead_tip_reject'] = '拒絕';
 $lang['hr_leaves_thead_tip_delete'] = '刪除';
+$lang['hr_leaves_thead_tip_history'] = 'show history';
 $lang['hr_leaves_thead_id'] = '證號';
 $lang['hr_leaves_thead_status'] = '職位';
 $lang['hr_leaves_thead_start'] = '開始日期';

@@ -3,7 +3,7 @@
 /**
  * CodeIgniter compatible email-library powered by PHPMailer.
  *
- * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2012-2017.
+ * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2012-2018.
  * @license The MIT License (MIT), http://opensource.org/licenses/MIT
  * @link https://github.com/ivantcholakov/codeigniter-phpmailer
  *
@@ -19,6 +19,7 @@ class MY_Email extends CI_Email {
         'mailpath' => '/usr/sbin/sendmail',
         'protocol' => 'mail',
         'smtp_host' => '',
+        'smtp_auth' => NULL,
         'smtp_user' => '',
         'smtp_pass' => '',
         'smtp_port' => 25,
@@ -39,6 +40,7 @@ class MY_Email extends CI_Email {
         'send_multipart' => TRUE,
         'bcc_batch_mode' => FALSE,
         'bcc_batch_size' => 200,
+        'debug_output' => '',
         'smtp_debug' => 0,
         'encoding' => '8bit',
         'smtp_auto_tls' => true,
@@ -55,7 +57,6 @@ class MY_Email extends CI_Email {
 
     protected $mailer_engine = 'codeigniter';
     protected $CI;
-    protected $_is_ci_3 = NULL;
 
     protected static $protocols = array('mail', 'sendmail', 'smtp');
     protected static $mailtypes = array('html', 'text');
@@ -67,11 +68,12 @@ class MY_Email extends CI_Email {
 
     public function __construct(array $config = array()) {
 
-        $this->_is_ci_3 = (bool) ((int) CI_VERSION >= 3);
-
         $this->CI = get_instance();
         $this->CI->load->helper('email');
         $this->CI->load->helper('html');
+
+        // Set the default property 'debug_output' by using CLI autodetection.
+        self::$default_properties['debug_output'] = (strpos(PHP_SAPI, 'cli') !== false OR defined('STDIN')) ? 'echo' : 'html';
 
         // Wipe out certain properties that are declared within the parent class.
         // These properties would be accessed by magic.
@@ -695,12 +697,33 @@ class MY_Email extends CI_Email {
         return $this;
     }
 
+    // See https://github.com/ivantcholakov/codeigniter-phpmailer/issues/31
+    public function set_smtp_auth($value) {
+
+        $this->properties['smtp_auth'] = $value;
+
+        $this->_smtp_auth =
+            $value === NULL
+                ? !($this->smtp_user == '' && $this->smtp_pass == '')
+                : !empty($value);
+
+        if ($this->mailer_engine == 'phpmailer') {
+            $this->phpmailer->SMTPAuth = $this->_smtp_auth;
+        }
+
+        return $this;
+    }
+
     public function set_smtp_user($value) {
 
         $value = (string) $value;
 
         $this->properties['smtp_user'] = $value;
-        $this->_smtp_auth = !($value == '' && $this->smtp_pass == '');
+
+        $this->_smtp_auth =
+            $this->smtp_auth === NULL
+                ? !($value == '' && $this->smtp_pass == '')
+                : !empty($this->smtp_auth);
 
         if ($this->mailer_engine == 'phpmailer') {
 
@@ -716,7 +739,11 @@ class MY_Email extends CI_Email {
         $value = (string) $value;
 
         $this->properties['smtp_pass'] = $value;
-        $this->_smtp_auth = !($this->smtp_user == '' && $value == '');
+
+        $this->_smtp_auth =
+            $this->smtp_auth === NULL
+                ? !($this->smtp_user == '' && $value == '')
+                : !empty($this->smtp_auth);
 
         if ($this->mailer_engine == 'phpmailer') {
 
@@ -956,6 +983,37 @@ class MY_Email extends CI_Email {
 
         if ($this->mailer_engine == 'phpmailer') {
             $this->phpmailer->SMTPDebug = $level;
+        }
+
+        return $this;
+    }
+
+    // PHPMailer's SMTP debug output.
+    // How to handle debug output.
+    // Options:
+    // `html` - the output gets escaped, line breaks are to be converted to `<br>`, appropriate for browser output;
+    // `echo` - the output is plain-text "as-is", it should be avoided in production web pages;
+    // `error_log` - the output is saved in error log as it is configured in php.ini;
+    // NULL or '' - default: 'echo' on CLI, 'html' otherwise.
+    //
+    // Alternatively, you can provide a callable expecting two params: a message string and the debug level:
+    // <code>
+    // function custom_debug($str, $level) {echo "debug level $level; message: $str";};
+    // $this->email->set_debug_output('custom_debug');
+    // </code>
+    public function set_debug_output($handle) {
+
+        if ($handle === null
+            ||
+            is_string($handle) && $handle == ''
+        ) {
+            $handle = self::$default_properties['debug_output'];
+        }
+
+        $this->properties['debug_output'] = $handle;
+
+        if ($this->mailer_engine == 'phpmailer') {
+            $this->phpmailer->Debugoutput = $handle;
         }
 
         return $this;

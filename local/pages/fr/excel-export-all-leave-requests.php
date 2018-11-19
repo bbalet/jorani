@@ -3,13 +3,28 @@
 //If your custom page is making an export to a file (Excel, etc.) simply include 'export' into its name
 //http://localhost/jorani/excel-export
 
+require_once FCPATH . "vendor/autoload.php";
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Chart\Chart;
+use PhpOffice\PhpSpreadsheet\Chart\DataSeries;
+use PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues;
+use PhpOffice\PhpSpreadsheet\Chart\Layout;
+use PhpOffice\PhpSpreadsheet\Chart\Legend;
+use PhpOffice\PhpSpreadsheet\Chart\PlotArea;
+use PhpOffice\PhpSpreadsheet\Chart\Title;
+
+$spreadsheet = new Spreadsheet();
+$sheet = $spreadsheet->getActiveSheet();
+
 //Excel Header
 $title = 'Toutes les demandes';
-$this->lang->load('requests', $this->language);
-$this->lang->load('global', $this->language);
-$ci = get_instance();
-$ci->load->library('excel');
-$sheet = $ci->excel->setActiveSheetIndex(0);
+$ci =& get_instance();
+$ci->lang->load('requests', $ci->language);
+$ci->lang->load('global', $ci->language);
+
 $sheet->setTitle($title);
 $sheet->setCellValue('A1', lang('requests_index_thead_id'));
 $sheet->setCellValue('B1', lang('requests_index_thead_fullname'));
@@ -19,17 +34,17 @@ $sheet->setCellValue('E1', lang('requests_index_thead_duration'));
 $sheet->setCellValue('F1', lang('requests_index_thead_type'));
 $sheet->setCellValue('G1', lang('requests_index_thead_status'));
 $sheet->getStyle('A1:G1')->getFont()->setBold(true);
-$sheet->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+$sheet->getStyle('A1:G1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
 //Database query
-$this->db->select('users.firstname, users.lastname, leaves.*');
-$this->db->select('status.name as status_name, types.name as type_name');
-$this->db->from('leaves');
-$this->db->join('status', 'leaves.status = status.id');
-$this->db->join('types', 'leaves.type = types.id');
-$this->db->join('users', 'leaves.employee = users.id');
-$this->db->order_by('users.lastname, users.firstname, leaves.startdate', 'desc');
-$rows = $this->db->get()->result_array();
+$ci->db->select('users.firstname, users.lastname, leaves.*');
+$ci->db->select('status.name as status_name, types.name as type_name');
+$ci->db->from('leaves');
+$ci->db->join('status', 'leaves.status = status.id');
+$ci->db->join('types', 'leaves.type = types.id');
+$ci->db->join('users', 'leaves.employee = users.id');
+$ci->db->order_by('users.lastname, users.firstname, leaves.startdate', 'desc');
+$rows = $ci->db->get()->result_array();
 
 //Results
 $line = 2;
@@ -53,10 +68,5 @@ foreach(range('A', 'G') as $colD) {
 }
 
 //Export Excel file
-$filename = 'excel-export.xlsx';
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="' . $filename . '"');
-header('Cache-Control: max-age=0');
-$objWriter = PHPExcel_IOFactory::createWriter($ci->excel, 'Excel2007');
-$objWriter->setIncludeCharts(TRUE);
-$objWriter->save('php://output');
+$spreadsheet->exportName = 'excel-export';
+writeSpreadsheet($spreadsheet);

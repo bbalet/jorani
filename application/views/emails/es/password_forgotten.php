@@ -19,6 +19,6 @@
                 <td>Contraseña</td><td>{Password}</td>
             </tr>            
         </table>
-        na vez conectado, puede cambiar su contraseña, pulsando <a href="http://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">aqui</a>.
+        na vez conectado, puede cambiar su contraseña, pulsando <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">aqui</a>.
     </body>
 </html>

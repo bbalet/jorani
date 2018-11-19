@@ -18,7 +18,7 @@ require_once FCPATH . "local/triggers/extra.php";
  * see content of /local/triggers/extra.php
  */
 class Extra extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -48,7 +48,7 @@ class Extra extends CI_Controller {
         $this->load->view('extra/index', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Display an overtime request
      * @param string $source Page source (extra, overtime) (self, manager)
@@ -62,7 +62,7 @@ class Extra extends CI_Controller {
         if (empty($data['extra'])) {
             redirect('notfound');
         }
-        
+
         //If the user is not its not HR, not manager and not the creator of the overtime
         //the employee can't see it, redirect to LR list
         if ($data['extra']['employee'] != $this->user_id) {
@@ -78,10 +78,10 @@ class Extra extends CI_Controller {
                 }
             } //Admin
         } //Current employee
-        
+
         $data['title'] = lang('extra_view_hmtl_title');
         $data['source'] = $source;
-        if ($source == 'overtime') {
+        if ($source != 'extra') {
             if (empty($employee)) {
                 $this->load->model('users_model');
                 $data['name'] = $this->users_model->getName($data['extra']['employee']);
@@ -106,7 +106,7 @@ class Extra extends CI_Controller {
         $data = getUserContext($this);
         $this->load->helper('form');
         $this->load->library('form_validation');
-        
+
         $this->form_validation->set_rules('date', lang('extra_create_field_date'), 'required|strip_tags');
         $this->form_validation->set_rules('duration', lang('extra_create_field_duration'), 'required|strip_tags');
         $this->form_validation->set_rules('cause', lang('extra_create_field_cause'), 'required|strip_tags');
@@ -120,23 +120,29 @@ class Extra extends CI_Controller {
             $this->load->view('extra/create');
             $this->load->view('templates/footer');
         } else {
-            if (function_exists('triggerCreateExtraRequest')) {
-                triggerCreateExtraRequest($this);
+          //Prevent thugs to auto validate their extra requests
+          if (!$this->is_hr && !$this->is_admin) {
+            if ($this->input->post('status') > LMS_REQUESTED) {
+              $_POST['status'] = LMS_REQUESTED;
             }
-            $extra_id = $this->overtime_model->setExtra();
-            $this->session->set_flashdata('msg', lang('extra_create_msg_success'));
-            //If the status is requested, send an email to the manager
-            if ($this->input->post('status') == 2) {
-                $this->sendMail($extra_id);
-            }
-            if (isset($_GET['source'])) {
-                redirect($_GET['source']);
-            } else {
-                redirect('extra');
-            }
+          }
+          if (function_exists('triggerCreateExtraRequest')) {
+              triggerCreateExtraRequest($this);
+          }
+          $extra_id = $this->overtime_model->setExtra();
+          $this->session->set_flashdata('msg', lang('extra_create_msg_success'));
+          //If the status is requested, send an email to the manager
+          if ($this->input->post('status') == LMS_REQUESTED) {
+              $this->sendMail($extra_id);
+          }
+          if (isset($_GET['source'])) {
+              redirect($_GET['source']);
+          } else {
+              redirect('extra');
+          }
         }
     }
-    
+
     /**
      * Edit an overtime request
      * @param int $id identifier of the overtime request
@@ -150,7 +156,7 @@ class Extra extends CI_Controller {
         if (empty($data['extra'])) {
             redirect('notfound');
         }
-        //If the user is not its own manager and if the overtime is 
+        //If the user is not its own manager and if the overtime is
         //already requested, the employee can't modify it
         if (!$this->is_hr) {
             if (($this->session->userdata('manager') != $this->user_id) &&
@@ -160,7 +166,7 @@ class Extra extends CI_Controller {
                 redirect('extra');
             }
         } //Admin
-        
+
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->form_validation->set_rules('date', lang('extra_edit_field_date'), 'required|strip_tags');
@@ -179,20 +185,26 @@ class Extra extends CI_Controller {
             $this->load->view('extra/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->overtime_model->updateExtra($id);       //We don't use the return value
-            $this->session->set_flashdata('msg', lang('extra_edit_msg_success'));
-            //If the status is requested, send an email to the manager
-            if ($this->input->post('status') == 2) {
-                $this->sendMail($id);
+          //Prevent thugs to auto validate their extra requests
+          if (!$this->is_hr && !$this->is_admin) {
+            if ($this->input->post('status') == LMS_ACCEPTED) {
+              $_POST['status'] = LMS_REQUESTED;
             }
-            if (isset($_GET['source'])) {
-                redirect($_GET['source']);
-            } else {
-                redirect('extra');
-            }
+          }
+          $this->overtime_model->updateExtra($id);       //We don't use the return value
+          $this->session->set_flashdata('msg', lang('extra_edit_msg_success'));
+          //If the status is requested, send an email to the manager
+          if ($this->input->post('status') == LMS_REQUESTED) {
+              $this->sendMail($id);
+          }
+          if (isset($_GET['source'])) {
+              redirect($_GET['source']);
+          } else {
+              redirect('extra');
+          }
         }
     }
-    
+
     /**
      * Send a overtime request email to the manager of the connected employee
      * @param int $id overtime request identifier
@@ -276,13 +288,12 @@ class Extra extends CI_Controller {
             redirect('extra');
         }
     }
-    
+
     /**
      * Export the list of all ovetime requests of the connected user into an Excel file
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
-        $this->load->library('excel');
         $this->load->view('extra/export');
     }
 }

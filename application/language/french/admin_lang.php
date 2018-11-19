@@ -68,6 +68,15 @@ $lang['admin_diagnostic_balance_thead_contract'] = 'Contrat';
 $lang['admin_diagnostic_balance_thead_start_date'] = 'Date début';
 $lang['admin_diagnostic_balance_thead_status'] = 'Statut';
 
+$lang['admin_diagnostic_overlapping_tab'] = 'Chevauchement';
+$lang['admin_diagnostic_overlapping_description'] = 'Demandes de congé chevauchant deux périodes annuelles.';
+$lang['admin_diagnostic_overlapping_thead_id'] = 'ID';
+$lang['admin_diagnostic_overlapping_thead_employee'] = 'Employé';
+$lang['admin_diagnostic_overlapping_thead_contract'] = 'Contrat';
+$lang['admin_diagnostic_overlapping_thead_start_date'] = 'Date début';
+$lang['admin_diagnostic_overlapping_thead_end_date'] = 'Date fin';
+$lang['admin_diagnostic_overlapping_thead_status'] = 'Statut';
+
 $lang['admin_oauthclients_title'] = 'Clients et sessions OAuth';
 $lang['admin_oauthclients_tab_clients'] = 'Clients';
 $lang['admin_oauthclients_tab_clients_description'] = 'Liste des clients habilités pour l\'API REST';

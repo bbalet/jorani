@@ -24,6 +24,7 @@ $lang['leaves_summary_date_field'] = 'Datum rapport';
 $lang['leaves_index_title'] = 'Mijn afwezigheidsverzoeken';
 $lang['leaves_index_thead_tip_view'] = 'bekijken';
 $lang['leaves_index_thead_tip_edit'] = 'bewerken';
+$lang['leaves_index_thead_tip_cancel'] = 'Annuleren';
 $lang['leaves_index_thead_tip_delete'] = 'verwijderen';
 $lang['leaves_index_thead_tip_history'] = 'Laat geschiedenis zien';
 $lang['leaves_index_thead_id'] = 'ID';

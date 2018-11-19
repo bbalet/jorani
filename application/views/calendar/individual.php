@@ -19,13 +19,13 @@
 
 <div class="row-fluid">
     <div class="span6">
-        <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
+        <button id="cmdPrevious" class="btn btn-primary"><i class="mdi mdi-chevron-left"></i></button>
         <button id="cmdToday" class="btn btn-primary"><?php echo lang('today');?></button>
-        <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
+        <button id="cmdNext" class="btn btn-primary"><i class="mdi mdi-chevron-right"></i></button>
     </div>
     <div class="span6">
         <div class="pull-right">
-            <button id="cmdDisplayDayOff" class="btn btn-primary"><i class="icon-calendar icon-white"></i>&nbsp;<?php echo lang('calendar_individual_day_offs');?></button>
+            <button id="cmdDisplayDayOff" class="btn btn-primary"><i class="mdi mdi-calendar"></i>&nbsp;<?php echo lang('calendar_individual_day_offs');?></button>
         </div>
     </div>
 </div>
@@ -41,8 +41,8 @@
         <?php if ($this->config->item('ics_enabled') == FALSE) {?>
         &nbsp;
         <?php } else {?>
-        <span class="pull-right"><a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a></span>
-        <?php }?>        
+        <span class="pull-right"><a id="lnkICS" href="#"><i class="mdi mdi-earth nolink"></i> ICS</a></span>
+        <?php }?>
     </div>
 </div>
 
@@ -58,7 +58,7 @@
     </div>
     <div class="modal-body">
         <a href="#" id="lnkDownloadCalEvnt"><?php echo lang('calendar_individual_popup_event_link_ical');?></a> <?php echo lang('calendar_individual_popup_event_link_ical_description');?>
-        
+
     </div>
     <div class="modal-footer">
         <a href="#" onclick="$('#frmEvent').modal('hide');" class="btn"><?php echo lang('calendar_individual_popup_event_button_close');?></a>
@@ -80,10 +80,11 @@
     </div>
     <div class="modal-body" id="frmSelectDelegateBody">
         <div class='input-append'>
-                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;" 
-                    value="<?php echo base_url() . 'ics/individual/' . $user_id;?>" />
-                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/individual/' . $user_id;?>">
-                     <i class="fa fa-clipboard"></i>
+                <?php $icsUrl = base_url() . 'ics/individual/' . $user_id . '?token=' . $this->session->userdata('random_hash');?>
+                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
+                    value="<?php echo $icsUrl;?>" />
+                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo $icsUrl;?>">
+                     <i class="mdi mdi-content-copy"></i>
                  </button>
                 <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
         </div>
@@ -103,21 +104,21 @@
 <script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
 <script type="text/javascript">
 var toggleDayoffs = false;
-    
+
 $(function () {
     //Global Ajax error handling mainly used for session expiration
     $( document ).ajaxError(function(event, jqXHR, settings, errorThrown) {
         $('#frmModalAjaxWait').modal('hide');
         if (jqXHR.status == 401) {
             bootbox.alert("<?php echo lang('global_ajax_timeout');?>", function() {
-                //After the login page, we'll be redirected to the current page 
+                //After the login page, we'll be redirected to the current page
                location.reload();
             });
         } else { //Oups
             bootbox.alert("<?php echo lang('global_ajax_error');?>");
         }
       });
-    
+
     $("#frmEvent").alert();
 
     //Load FullCalendar widget
@@ -142,7 +143,7 @@ $(function () {
                 $('#frmModalAjaxWait').modal('show');
             } else {
                 $('#frmModalAjaxWait').modal('hide');
-            }    
+            }
         },
         eventRender: function(event, element, view) {
             if(event.imageurl){
@@ -152,7 +153,7 @@ $(function () {
         eventAfterRender: function(event, element, view) {
             //Add tooltip to the element
             $(element).attr('title', event.title);
-            
+
             if (event.enddatetype == "Morning" || event.startdatetype == "Afternoon") {
                 var nb_days = event.end.diff(event.start, "days");
                 var duration = 0.5;
@@ -178,7 +179,7 @@ $(function () {
                 }
             }
             $(element).css('width', length + "px");
-            
+
             //Starting afternoon : shift the position of event to the right
             if (event.startdatetype == "Afternoon") {
                 $(element).css('margin-left', halfday_length + "px");
@@ -188,12 +189,12 @@ $(function () {
             $('#calendar').fullCalendar( 'rerenderEvents' );
         }
     });
-    
+
     //Prevent to load always the same content (refreshed each time)
     $('#frmEvent').on('hidden', function() {
         $(this).removeData('modal');
     });
-    
+
     //Toggle day offs display
     $('#cmdDisplayDayOff').on('click', function() {
         toggleDayoffs = !toggleDayoffs;
@@ -203,7 +204,7 @@ $(function () {
             $('#calendar').fullCalendar('removeEventSources', '<?php echo base_url();?>contracts/calendar/userdayoffs');
         }
     });
-    
+
     //Manage Prev/Next buttons
     $('#cmdNext').click(function() {
         $('#calendar').fullCalendar('next');
@@ -211,7 +212,7 @@ $(function () {
     $('#cmdPrevious').click(function() {
         $('#calendar').fullCalendar('prev');
     });
-    
+
     //On click on today, if the current month is the same than the displayed month, we refetch the events
     $('#cmdToday').click(function() {
         var displayedDate = new Date($('#calendar').fullCalendar('getDate'));
@@ -222,7 +223,7 @@ $(function () {
             $('#calendar').fullCalendar('today');
         }
     });
-    
+
     //Copy/Paste ICS Feed
     var client = new Clipboard("#cmdCopy");
     $('#lnkICS').click(function () {

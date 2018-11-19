@@ -407,7 +407,6 @@ class Calendar extends CI_Controller {
         $this->lang->load('global', $language);
         $this->load->model('lists_model');
         $this->load->model('leaves_model');
-        $this->load->library('excel');
         $data['id'] = $id;
         $data['entityName'] = $this->lists_model->getName($id);
         $data['month'] = $month;
@@ -447,7 +446,6 @@ class Calendar extends CI_Controller {
         $this->lang->load('global', $language);
         $this->load->model('organization_model');
         $this->load->model('leaves_model');
-        $this->load->library('excel');
         $data['id'] = $id;
         $data['entityName'] = $this->organization_model->getName($id);
         $data['month'] = $month;
@@ -493,7 +491,6 @@ class Calendar extends CI_Controller {
             $year = date("Y");
         }
         $this->load->model('leaves_model');
-        $this->load->library('excel');
         $data['employee'] = $employee;
         $data['year'] = $year;
         $this->load->view('calendar/export_year', $data);

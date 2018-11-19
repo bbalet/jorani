@@ -7,7 +7,19 @@
  * @link            https://github.com/bbalet/jorani
  * @since         0.4.3
  */
-        
+
+require_once FCPATH . "vendor/autoload.php";
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+
+$spreadsheet = new Spreadsheet();
+$sheet = $spreadsheet->getActiveSheet();
+
 //Details about the employee
 $employee_name =  $employee['firstname'] . ' ' . $employee['lastname'];
 $contract = $this->contracts_model->getContracts($employee['contract']);
@@ -38,7 +50,6 @@ $leaves_detail = $this->leaves_model->monthlyLeavesByType($linear);
 $summary = $this->leaves_model->getLeaveBalanceForEmployee($id, FALSE, $end);
 
 //Print the header with the facts of the presence report
-$sheet = $this->excel->setActiveSheetIndex(0);
 $sheet->setTitle(mb_strimwidth(lang('hr_presence_title'), 0, 28, "..."));  //Maximum 31 characters allowed in sheet title.
 
 $sheet->setCellValue('A1', lang('hr_presence_employee'));
@@ -75,7 +86,7 @@ $start = $year . '-' . $month . '-' . '1';    //first date of selected month
 $lastDay = date("t", strtotime($start));    //last day of selected month
 for ($ii = 1; $ii <=$lastDay; $ii++) {
     $dayNum = date("N", strtotime($year . '-' . $month . '-' . $ii));
-    $col = $this->excel->column_name(3 + $ii);
+    $col = columnName(3 + $ii);
     //Print day number
     $sheet->setCellValue($col . '11', $ii);
     //Print short name of the day
@@ -91,75 +102,76 @@ for ($ii = 1; $ii <=$lastDay; $ii++) {
     }
 }
 //The header is horizontally aligned
-$col = $this->excel->column_name(3 + $lastDay);
-$sheet->getStyle('C8:' . $col . '9')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+$col = columnName(3 + $lastDay);
+$sheet->getStyle('C8:' . $col . '9')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
-//Box around the lines for each employee
+//Box
 $styleBox = array(
-    'borders' => array(
-        'top' => array(
-            'style' => PHPExcel_Style_Border::BORDER_THIN
-        ),
-        'bottom' => array(
-            'style' => PHPExcel_Style_Border::BORDER_THIN
-        )
-    )
-  );
+  'borders' => array(
+      'top' => array(
+          'borderStyle' => Border::BORDER_THIN
+      ),
+      'bottom' => array(
+          'borderStyle' => Border::BORDER_THIN
+      )
+  )
+);
 
+//Box around a day
 $dayBox =  array(
     'borders' => array(
         'left' => array(
-            'style' => PHPExcel_Style_Border::BORDER_DASHDOT,
-            'rgb' => '808080'
+            'borderStyle' => Border::BORDER_DASHDOT,
+            'color' => array('rgb' => '808080')
         ),
         'right' => array(
-            'style' => PHPExcel_Style_Border::BORDER_DASHDOT,
-            'rgb' => '808080'
+            'borderStyle' => Border::BORDER_DASHDOT,
+            'color' => array('rgb' => '808080')
         )
     )
  );
 
-//Background colors for the calendar according to the type of leave
-$styleBgPlanned = array(
-    'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => 'DDD')
-    )
-);
-$styleBgRequested = array(
-    'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => 'F89406')
-    )
-);
-$styleBgAccepted = array(
-    'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => '468847')
-    )
-);
-$styleBgRejected = array(
-    'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => 'FF0000')
-    )
-);
-$styleBgDayOff = array(
-    'fill' => array(
-        'type' => PHPExcel_Style_Fill::FILL_SOLID,
-        'color' => array('rgb' => '000000')
-    )
-);
+ //Background colors for the calendar according to the type of leave
+ $styleBgPlanned = array(
+     'fill' => array(
+         'fillType' => Fill::FILL_SOLID,
+         'startColor' => array('rgb' => 'DDD')
+     )
+ );
+ $styleBgRequested = array(
+     'fill' => array(
+         'fillType' => Fill::FILL_SOLID,
+         'startColor' => array('rgb' => 'F89406')
+     )
+ );
+ $styleBgAccepted = array(
+     'fill' => array(
+         'fillType' => Fill::FILL_SOLID,
+         'startColor' => array('rgb' => '468847')
+     )
+ );
+ $styleBgRejected = array(
+     'fill' => array(
+         'fillType' => Fill::FILL_SOLID,
+         'startColor' => array('rgb' => 'FF0000')
+     )
+ );
+ $styleBgDayOff = array(
+     'fill' => array(
+         'fillType' => Fill::FILL_SOLID,
+         'startColor' => array('rgb' => '000000')
+     )
+ );
 
 $line = 12;
-$col = $this->excel->column_name($lastDay + 3);
+$col = columnName($lastDay + 3);
 $sheet->getStyle('D' . $line . ':' . $col . ($line + 1))->applyFromArray($styleBox);
 
 //Iterate on all days of the selected month
 $dayNum = 0;
 foreach ($linear->days as $day) {
     $dayNum++;
-    $col = $this->excel->column_name(3 + $dayNum);
+    $col = columnName(3 + $dayNum);
     if (strstr($day->display, ';')) {//Two statuses in the cell
         $statuses = explode(";", $day->status);
         $types = explode(";", $day->type);
@@ -246,7 +258,7 @@ foreach ($linear->days as $day) {
 
 //Autofit for all column containing the days
 for ($ii = 1; $ii <=$lastDay; $ii++) {
-    $col = $this->excel->column_name($ii + 3);
+    $col = columnName($ii + 3);
     $sheet->getStyle($col . '10:' . $col . '13')->applyFromArray($dayBox);
     $sheet->getColumnDimension($col)->setAutoSize(TRUE);
 }
@@ -293,10 +305,11 @@ foreach ($summary as $key => $value) {
 }
 
 //Set layout to landscape and make the Excel sheet fit to the page
-$sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
-$sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
+$sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+$sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4);
 $sheet->getPageSetup()->setFitToPage(true);
 $sheet->getPageSetup()->setFitToWidth(1);
 $sheet->getPageSetup()->setFitToHeight(0);
 
-exportSpreadsheet($this, 'presence');
+$spreadsheet->exportName = 'presence';
+writeSpreadsheet($spreadsheet);

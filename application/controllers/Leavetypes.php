@@ -13,7 +13,7 @@ if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
  * This class allows to manage the list of leave types
  */
 class LeaveTypes extends CI_Controller {
-    
+
     /**
      * Default constructor
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -41,7 +41,7 @@ class LeaveTypes extends CI_Controller {
         $this->load->view('leavetypes/index', $data);
         $this->load->view('templates/footer');
     }
-    
+
     /**
      * Display a form that allows adding a leave type
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -53,9 +53,9 @@ class LeaveTypes extends CI_Controller {
         $this->load->library('form_validation');
         $data['title'] = lang('leavetypes_popup_create_title');
         $data['leavetypes'] = $this->types_model->getTypes();
-        
-        $this->form_validation->set_rules('name', lang('leavetypes_popup_create_field_name'), 'required|strip_tags');        
-        
+
+        $this->form_validation->set_rules('name', lang('leavetypes_popup_create_field_name'), 'required|strip_tags');
+
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/create', $data);
         } else {
@@ -79,9 +79,9 @@ class LeaveTypes extends CI_Controller {
         $data['id'] = $id;
         $data['leavetypes'] = $this->types_model->getTypes();
         $data['leavetype'] = $this->types_model->getTypes($id);
-        
-        $this->form_validation->set_rules('name', lang('leavetypes_popup_update_field_name'), 'required|strip_tags');        
-        
+
+        $this->form_validation->set_rules('name', lang('leavetypes_popup_update_field_name'), 'required|strip_tags');
+
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('leavetypes/edit', $data);
         } else {
@@ -93,7 +93,7 @@ class LeaveTypes extends CI_Controller {
             redirect('leavetypes');
         }
     }
-    
+
     /**
      * Action : delete a leave type
      * @param int $id leave type identifier
@@ -120,7 +120,6 @@ class LeaveTypes extends CI_Controller {
      */
     public function export() {
         $this->auth->checkIfOperationIsAllowed('leavetypes_export');
-        $this->load->library('excel');
         $this->load->view('leavetypes/export');
     }
 }

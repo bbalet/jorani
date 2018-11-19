@@ -90,29 +90,31 @@ if ($showAll == FALSE) {
             <a href="<?php echo base_url();?>leaves/requests/<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><?php echo $request['leave_id']; ?></a>
             &nbsp;
             <div class="pull-right">
-                <?php if ($request['status'] == LMS_CANCELLATION) { ?>
-                <a href="#" class="lnkCancellationAccept" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>">
-                    <span class="fa-stack">
-                      <i class="fa fa-undo fa-stack-2x" style="color:black;"></i>
-                      <i class="fa fa-check fa-stack-1x" style="color:black;"></i>
-                    </span>
-                </a>
-                &nbsp;
-                <a href="#" class="lnkCancellationReject" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>">
-                    <span class="fa-stack">
-                      <i class="fa fa-undo fa-stack-2x" style="color:black;"></i>
-                      <i class="fa fa-times fa-stack-1x" style="color:black;"></i>
-                    </span>
-                </a>
-                <?php } else { ?>
-                <a href="#" class="lnkAccept" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="fa fa-check fa-2x" style="color:black;"></i></a>
-                &nbsp;
-                <a href="#" class="lnkReject" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="fa fa-times fa-2x" style="color:black;"></i></a>
-                <?php } ?>
-                <?php if ($this->config->item('enable_history') === TRUE) { ?>
-                &nbsp;
-                <a href="#" class="show-history" data-id="<?php echo $request['leave_id'];?>" title="<?php echo lang('requests_index_thead_tip_history');?>"><i class="fa fa-clock-o" style="color:black;"></i></a>
-                <?php } ?>
+              <?php if ($request['status'] == LMS_CANCELLATION) { ?>
+              <a href="#" class="lnkCancellationAccept" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>">
+                  <span class="fa-stack">
+                    <i class="fa fa-undo fa-stack-2x nolink"></i>
+                    <i class="fa fa-check fa-stack-1x nolink"></i>
+                  </span>
+              </a>
+              &nbsp;
+              <a href="#" class="lnkCancellationReject" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>">
+                  <span class="fa-stack">
+                    <i class="fa fa-undo fa-stack-2x nolink"></i>
+                    <i class="fa fa-times fa-stack-1x nolink"></i>
+                  </span>
+              </a>
+              <?php } else { ?>
+              <a href="#" class="lnkAccept" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="fa fa-check fa-2x nolink"></i></a>
+              &nbsp;
+              <a href="#" class="lnkReject" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="fa fa-times fa-2x nolink"></i></a>
+              <?php } ?>
+              <?php if ($this->config->item('enable_history') === TRUE) { ?>
+              &nbsp;
+              <a href="<?php echo base_url();?>leaves/leaves/<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_view');?>"><i class="mdi mdi-eye nolink"></i></a>
+              &nbsp;
+              <a href="#" class="show-history" data-id="<?php echo $request['leave_id'];?>" title="<?php echo lang('requests_index_thead_tip_history');?>"><i class="mdi mdi-history nolink"></i></a>
+              <?php } ?>
             </div>
         </td>
         <td><?php echo $request['firstname'] . ' ' . $request['lastname']; ?></td>
@@ -142,14 +144,14 @@ if ($showAll == FALSE) {
 
 <div class="row-fluid">
     <div class="span12">
-        <a href="<?php echo base_url();?>requests/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp; <?php echo lang('requests_index_button_export');?></a>
+        <a href="<?php echo base_url();?>requests/export/<?php echo $filter; ?>" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp; <?php echo lang('requests_index_button_export');?></a>
         &nbsp;&nbsp;
-        <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_all');?></a>
+        <a href="<?php echo base_url();?>requests/all" class="btn btn-primary"><i class="mdi mdi-filter-remove"></i>&nbsp; <?php echo lang('requests_index_button_show_all');?></a>
         &nbsp;&nbsp;
-        <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="icon-filter icon-white"></i>&nbsp; <?php echo lang('requests_index_button_show_pending');?></a>
+        <a href="<?php echo base_url();?>requests/requested" class="btn btn-primary"><i class="mdi mdi-filter"></i>&nbsp; <?php echo lang('requests_index_button_show_pending');?></a>
         &nbsp;&nbsp;
         <?php if ($this->config->item('ics_enabled') == TRUE) {?>
-        <a id="lnkICS" href="#"><i class="icon-globe"></i> ICS</a>
+        <a id="lnkICS" href="#"><i class="mdi mdi-earth nolink"></i> ICS</a>
         <?php }?>
     </div>
 </div>
@@ -171,12 +173,13 @@ if ($showAll == FALSE) {
     </div>
     <div class="modal-body" id="frmSelectDelegateBody">
         <div class='input-append'>
-                <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
-                    value="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>" />
-                 <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo base_url() . 'ics/collaborators/' . $user_id;?>">
-                     <i class="fa fa-clipboard"></i>
-                 </button>
-                <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
+            <?php $icsUrl = base_url() . 'ics/collaborators/' . $user_id . '?token=' . $this->session->userdata('random_hash');?>
+            <input type="text" class="input-xlarge" id="txtIcsUrl" onfocus="this.select();" onmouseup="return false;"
+                value="<?php echo $icsUrl;?>" />
+                <button id="cmdCopy" class="btn" data-clipboard-text="<?php echo $icsUrl;?>">
+                    <i class="mdi mdi-content-copy"></i>
+                </button>
+            <a href="#" id="tipCopied" data-toggle="tooltip" title="<?php echo lang('copied');?>" data-placement="right" data-container="#cmdCopy"></a>
         </div>
     </div>
     <div class="modal-footer">
@@ -270,7 +273,7 @@ $(document).ready(function() {
               function (result) {
                 if (result !== null){
                     <?php if ($this->config->item('mandatory_comment_on_reject') === TRUE) { ?>
-                    if (result === "") return false;     
+                    if (result === "") return false;
                     <?php } ?>
                   $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
                   $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
@@ -301,7 +304,7 @@ $(document).ready(function() {
               function (result) {
                 if (result !== null){
                     <?php if ($this->config->item('mandatory_comment_on_reject') === TRUE) { ?>
-                    if (result === "") return false;     
+                    if (result === "") return false;
                     <?php } ?>
                   $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
                   $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
@@ -381,7 +384,7 @@ $(document).ready(function() {
       function (result) {
         if (result !== null){
             <?php if ($this->config->item('mandatory_comment_on_reject') === TRUE) { ?>
-            if (result === "") return false;     
+            if (result === "") return false;
             <?php } ?>
           $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
           $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
@@ -399,7 +402,7 @@ $(document).ready(function() {
       function (result) {
         if (result !== null){
             <?php if ($this->config->item('mandatory_comment_on_reject') === TRUE) { ?>
-            if (result === "") return false;     
+            if (result === "") return false;
             <?php } ?>
           $("#sendComment #frmRejectLeaveForm").attr("action", validateUrl);
           $("#sendComment #frmRejectLeaveForm input#comment").attr("value", result);
@@ -407,7 +410,7 @@ $(document).ready(function() {
         }
       });
     }
-    
+
     //Filter on statuses is a list of inclusion
     var statuses = getURLParameter('statuses');
     if (statuses != null) {

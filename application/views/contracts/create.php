@@ -34,7 +34,7 @@ echo form_open('contracts/create', $attributes); ?>
         <option value="11"><?php echo lang('November');?></option>
         <option value="12"><?php echo lang('December');?></option>
     </select>
-    
+
     <label for="startentdateday"><?php echo lang('contract_create_field_start_day');?></label>
     <select name="startentdateday" id="startentdateday" required>
         <option value='1' selected>1</option>
@@ -69,9 +69,9 @@ echo form_open('contracts/create', $attributes); ?>
         <option value='30'>30</option>
         <option value='31'>31</option>
     </select>
-    
+
     <br /><br />
-    
+
     <label for="endentdatemonth"><?php echo lang('contract_create_field_end_month');?></label>
     <select name="endentdatemonth" id="endentdatemonth" required>
         <option value="1"><?php echo lang('January');?></option>
@@ -87,7 +87,7 @@ echo form_open('contracts/create', $attributes); ?>
         <option value="11"><?php echo lang('November');?></option>
         <option value="12" selected><?php echo lang('December');?></option>
     </select>
-    
+
     <label for="endentdateday"><?php echo lang('contract_create_field_end_day');?></label>
     <select name="endentdateday" id="endentdateday" required>
         <option value='1'>1</option>
@@ -122,25 +122,25 @@ echo form_open('contracts/create', $attributes); ?>
         <option value='30'>30</option>
         <option value='31' selected>31</option>
     </select>
-    
+
     <label for="default_leave_type"><?php echo lang('contract_edit_default_leave_type');?></label>
     <select class="input-xxlarge" name="default_leave_type" id="default_leave_type">
     <?php foreach ($types as $typeId => $TypeName): ?>
         <option value="<?php echo $typeId; ?>" <?php if ($typeId == $defaultType) echo "selected"; ?>><?php echo $TypeName; ?></option>
     <?php endforeach ?>
     </select>
-    
+
     <br /><br />
-    <button id="send" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;<?php echo lang('contract_create_button_create');?></button>
+    <button id="send" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp;<?php echo lang('contract_create_button_create');?></button>
     &nbsp;
-    <a href="<?php echo base_url(); ?>contracts" class="btn btn-danger"><i class="icon-remove icon-white"></i>&nbsp;<?php echo lang('contract_create_button_cancel');?></a>
+    <a href="<?php echo base_url(); ?>contracts" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('contract_create_button_cancel');?></a>
 </form>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.bootstrap2.css" />
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
+<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
 $(function () {
     //Selectize the leave type combo
-    $('#default_leave_type').selectize();
+    $('#default_leave_type').select2();
 });
 </script>

@@ -34,12 +34,12 @@
         <p><?php echo lang('hr_presence_non_working_days');?> : <b><a href="<?php echo base_url();?>contracts/<?php echo $contract_id; ?>/calendar"><?php echo $non_working_days;?></a></b></p>
         <?php } ?>
         <?php } else { ?>
-        <p><?php echo lang('hr_presence_contract');?> : <i class="icon-warning-sign"></i><?php echo lang('hr_presence_no_contract');?></p>
-        <p><?php echo lang('hr_presence_working_days');?> : <i class="icon-warning-sign"></i><?php echo lang('hr_presence_no_contract');?></p>
-        <p><?php echo lang('hr_presence_non_working_days');?> : <i class="icon-warning-sign"></i><?php echo lang('hr_presence_no_contract');?></p>
+        <p><?php echo lang('hr_presence_contract');?> : <i class="mdi mdi-alert"></i><?php echo lang('hr_presence_no_contract');?></p>
+        <p><?php echo lang('hr_presence_working_days');?> : <i class="mdi mdi-alert"></i><?php echo lang('hr_presence_no_contract');?></p>
+        <p><?php echo lang('hr_presence_non_working_days');?> : <i class="mdi mdi-alert"></i><?php echo lang('hr_presence_no_contract');?></p>
         <?php } ?>
-        <p><?php echo lang('hr_presence_work_duration');?> : <b><?php echo $work_duration;?></b>&nbsp;<i class="icon-hand-left"></i><?php echo lang('hr_presence_please_check');?></p>
-        <p><?php echo lang('hr_presence_leave_duration');?> : <b><?php echo $leave_duration;?></b>&nbsp;<i class="icon-hand-left"></i><?php echo lang('hr_presence_please_check');?></p>
+        <p><?php echo lang('hr_presence_work_duration');?> : <b><?php echo $work_duration;?></b>&nbsp;<i class="mdi mdi-alert-circle-outline"></i><?php echo lang('hr_presence_please_check');?></p>
+        <p><?php echo lang('hr_presence_leave_duration');?> : <b><?php echo $leave_duration;?></b>&nbsp;<i class="mdi mdi-alert-circle-outline"></i><?php echo lang('hr_presence_please_check');?></p>
         <?php if (count($leaves_detail) > 0) { ?>
         <ul>
             <?php foreach ($leaves_detail as $leaves_type_name => $leaves_type_sum) { ?>
@@ -71,11 +71,11 @@
                 }
             }?>
         </select><br />
-        <button id="cmdPrevious" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i></button>
+        <button id="cmdPrevious" class="btn btn-primary"><i class="mdi mdi-chevron-left"></i></button>
         <button id="cmdExecute" class="btn btn-primary"><?php echo lang('hr_presence_button_execute');?></button>
-        <button id="cmdNext" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i></button>
+        <button id="cmdNext" class="btn btn-primary"><i class="mdi mdi-chevron-right"></i></button>
         <br /><br />
-        <a href="<?php echo base_url() . 'hr/presence/export/' . $source . '/' . $user_id . '/' . $month . '/' . $year;?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_presence_button_export');?></a>
+        <a href="<?php echo base_url() . 'hr/presence/export/' . $source . '/' . $user_id . '/' . $month . '/' . $year;?>" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp;<?php echo lang('hr_presence_button_export');?></a>
      </div>
 </div>
 
@@ -291,9 +291,9 @@
 <div class="row-fluid">
     <div class="span12">
       <?php if ($source == 'employees') {?>
-      <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_presence_button_list');?></a>
+      <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp;<?php echo lang('hr_presence_button_list');?></a>
       <?php } else { ?>
-      <a href="<?php echo base_url();?>requests/collaborators" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_presence_button_list');?></a>
+      <a href="<?php echo base_url();?>requests/collaborators" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp;<?php echo lang('hr_presence_button_list');?></a>
       <?php } ?>
     </div>
 </div>

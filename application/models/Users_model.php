@@ -37,7 +37,7 @@ class Users_model extends CI_Model {
         $query = $this->db->get_where('users', array('users.id' => $id));
         return $query->row_array();
     }
-    
+
     /**
      * Get the list of users and their roles
      * @return array record of users
@@ -51,7 +51,7 @@ class Users_model extends CI_Model {
         $query = $this->db->get('users');
         return $query->result_array();
     }
-    
+
     /**
      * Get the list of employees
      * @return array record of users
@@ -78,7 +78,7 @@ class Users_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-    
+
     /**
      * Get the name of a given user
      * @param int $id Identifier of employee
@@ -87,11 +87,11 @@ class Users_model extends CI_Model {
      */
     public function getName($id) {
         $record = $this->getUsers($id);
-        if (count($record) > 0) {
+        if (!empty($record)) {
             return $record['firstname'] . ' ' . $record['lastname'];
         }
     }
-    
+
     /**
      * Get the list of employees that are the collaborators of the given user
      * @param int $id identifier of the manager
@@ -111,7 +111,7 @@ class Users_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-    
+
     /**
      * Check if an employee is the collaborator of the given user
      * @param int $employee identifier of the collaborator
@@ -126,7 +126,7 @@ class Users_model extends CI_Model {
         $result = $this->db->get()->result_array();
         return (count($result) > 0);
     }
-    
+
     /**
      * Check if a login can be used before creating the user
      * @param string $login login identifier
@@ -144,7 +144,7 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
     /**
      * Delete a user from the database
      * @param int $id identifier of the user
@@ -188,13 +188,13 @@ class Users_model extends CI_Model {
         //Hash the clear password using bcrypt (8 iterations)
         $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
         $hash = crypt($password, $salt);
-        
+
         //Role field is a binary mask
         $role = 0;
         foreach($this->input->post("role") as $role_bit){
             $role = $role | $role_bit;
         }
-        
+
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
@@ -206,9 +206,10 @@ class Users_model extends CI_Model {
             'contract' => $this->input->post('contract'),
             'identifier' => $this->input->post('identifier'),
             'language' => $this->input->post('language'),
-            'timezone' => $this->input->post('timezone')
+            'timezone' => $this->input->post('timezone'),
+            'random_hash' => rtrim(strtr(base64_encode($this->getRandomBytes(24)), '+/', '-_'), '='),
         );
-        
+
         if ($this->input->post('entity') != NULL && $this->input->post('entity') != '') {
             $data['organization'] = $this->input->post('entity');
         }
@@ -218,12 +219,12 @@ class Users_model extends CI_Model {
         if ($this->input->post('datehired') != NULL && $this->input->post('datehired') != '') {
             $data['datehired'] = $this->input->post('datehired');
         }
-        
+
         if ($this->config->item('ldap_basedn_db')!==FALSE) {
             $data['ldap_path'] = $this->input->post('ldap_path');
         }
         $this->db->insert('users', $data);
-        
+
         //Deal with user having no line manager
         if ($this->input->post('manager') == -1) {
             $id = $this->db->insert_id();
@@ -235,7 +236,7 @@ class Users_model extends CI_Model {
         }
         return $password;
     }
-    
+
     /**
      * Create a user record in the database. the difference with set_users function is that it doesn't rely
      * on values posted by en HTML form. Can be used by a mass importer for example.
@@ -283,6 +284,7 @@ class Users_model extends CI_Model {
         $this->db->set('email', $email);
         $this->db->set('password', $hash);
         $this->db->set('role', $role);
+        $this->db->set('random_hash', rtrim(strtr(base64_encode($this->getRandomBytes(24)), '+/', '-_'), '='));
         if (isset($manager)) $this->db->set('manager', $manager);
         if (isset($organization)) $this->db->set('organization', $organization);
         if (isset($contract)) $this->db->set('contract', $contract);
@@ -317,27 +319,27 @@ class Users_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('users', $data);
     }
-    
+
     /**
      * Update a given user in the database. Update data are coming from an HTML form
      * @return int number of affected rows
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function updateUsers() {
-        
+
         //Role field is a binary mask
         $role = 0;
         foreach($this->input->post("role") as $role_bit){
             $role = $role | $role_bit;
         }
-        
+
         //Deal with user having no line manager
         if ($this->input->post('manager') == -1) {
             $manager = $this->input->post('id');
         } else {
             $manager = $this->input->post('manager');
         }
-        
+
         $data = array(
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
@@ -396,7 +398,7 @@ class Users_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('users', $data);
     }
-    
+
     /**
      * Reset a password. Generate a new password and store its hash into db.
      * @param int $id User identifier
@@ -417,7 +419,7 @@ class Users_model extends CI_Model {
         $this->db->update('users', $data);
         return $password;
     }
-    
+
     /**
      * Generate a random password
      * @param int $length length of the generated password
@@ -429,7 +431,7 @@ class Users_model extends CI_Model {
         $password = substr( str_shuffle( $chars ), 0, $length );
         return $password;
     }
-    
+
     /**
      * Load the profile of a user from the database to the session variables
      * @param array $row database record of a user
@@ -472,6 +474,7 @@ class Users_model extends CI_Model {
             'is_admin' => $is_admin,
             'is_hr' => $is_hr,
             'manager' => $row->manager,
+            'random_hash' => $row->random_hash,
             'logged_in' => TRUE
         );
         $this->session->set_userdata($newdata);
@@ -506,7 +509,7 @@ class Users_model extends CI_Model {
             }
         }
     }
-    
+
     /**
      * Check the provided credentials and load user's profile if they are correct
      * It is the LDAP binding operation that checks if Password is correct.
@@ -527,7 +530,7 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
     /**
      * Check the provided credentials and load user's profile if they are correct
      * Mostly used for alternative signin mechanisms such as SSO
@@ -556,7 +559,82 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
+
+    /**
+     * Check the provided credentials and load user's profile if they are correct
+     * @param string $login user login (or email for SSO)
+     * @param string $type login type could be "internal", "ldap", or "sso"
+     * @param string $password password
+     * @return stdClass user properties if the user is succesfully authenticated, NULL otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function checkCredentialsForREST($login, $type = "internal", $password = NULL) {
+        log_message('debug', '++checkCredentialsForREST / login=' . $login . ' / type=' . $type);
+        $this->db->from('users');
+        if ($type == "sso") {
+            $this->db->where('email', $login);
+        } else {
+            $this->db->where('login', $login);
+        }
+        $this->db->where('active = TRUE');
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 0) {
+            log_message('debug', '--checkCredentialsForREST : user not found ' . $login);
+            return NULL;
+        } else {
+            $row = $query->row();
+            if ($type != "ldap") {
+                $hash = crypt($password, $row->password);
+                if ($hash != $row->password) {
+                    log_message('debug', '--checkCredentialsForREST : Password does not match stored password');
+                    return NULL;
+                }
+            }
+            //We can load the profile
+            $user = new stdClass;
+            if (((int) $row->role & 1)) {
+                $user->isAdmin = TRUE;
+            } else {
+                $user->isAdmin = FALSE;
+            }
     
+            /*
+              00000001 1  Admin
+              00000100 8  HR Officier / Local HR Manager
+              00001000 16 HR Manager
+              = 00001101 25 Can access to HR functions
+             */
+            if (((int) $row->role & 25)) {
+                $user->isHr = TRUE;
+            } else {
+                $user->isHr = FALSE;
+            }
+    
+            //Determine if the connected user is a manager or if he has any delegation
+            $user->isManager = FALSE;
+            if (count($this->getCollaboratorsOfManager($row->id)) > 0) {
+                $user->isManager = TRUE;
+            } else {
+                $this->load->model('delegations_model');
+                if ($this->delegations_model->hasDelegation($row->id))
+                    $user->isManager = TRUE;
+            }
+    
+            $user->login = $row->login;
+            $user->id = $row->id;
+            $user->firstname = $row->firstname;
+            $user->lastname = $row->lastname;
+            $user->manager = $row->manager;
+            $user->email = $row->email;
+            $user->contract = $row->contract;
+            $user->position = $row->position;
+            $user->organization = $row->organization;
+            log_message('debug', '--checkCredentialsForREST : user #' . $user->id);
+            return $user;
+        }
+    }
+
      /**
      * Get the LDAP Authentication path of a user
      * @param string $login user login
@@ -575,7 +653,7 @@ class Users_model extends CI_Model {
             return "";
         }
     }
-    
+
     /**
      * Get the list of employees or one employee
      * @param int $id optional id of the entity, all entities if 0
@@ -620,7 +698,7 @@ class Users_model extends CI_Model {
         } else {
             $this->db->where('users.organization', $id);
         }
-        
+
         //Triple value for active filter ("all" = no where criteria)
         if ($filterActive == "active") {
             $this->db->where('users.active', TRUE);
@@ -628,7 +706,7 @@ class Users_model extends CI_Model {
         if ($filterActive == "inactive") {
             $this->db->where('users.active', FALSE);
         }
-        
+
         if (!is_null($criterion1) && !is_null($date1) && $date1!="empty" && $date1!="undefined") {
             $criterion1 = ($criterion1 == "greater"?">":"<");
             $this->db->where("users.datehired " . $criterion1 . " STR_TO_DATE('" . $date1 . "', '%Y-%m-%d')");
@@ -637,10 +715,10 @@ class Users_model extends CI_Model {
             $criterion2 = ($criterion2 == "greater"?">":"<");
             $this->db->where("users.datehired " . $criterion2 . " STR_TO_DATE('" . $date2 . "', '%Y-%m-%d')");
         }
-        
+
         return $this->db->get()->result();
     }
-    
+
     /**
      * Update all employees when a contract is deleted (set the field to NULL)
      * @param int $id Contract ID
@@ -653,7 +731,7 @@ class Users_model extends CI_Model {
         $result = $this->db->update('users');
         return $result;
     }
-    
+
     /**
      * Set a user as active (TRUE) or inactive (FALSE)
      * @param int $id User identifier
@@ -666,7 +744,7 @@ class Users_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('users');
     }
-    
+
     /**
      * Check if a user is active (TRUE) or inactive (FALSE)
      * @param string $login login of a user
@@ -684,7 +762,7 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
     /**
      * Check if a user is active (TRUE) or inactive (FALSE)
      * @param string $email e-mail of a user
@@ -702,7 +780,7 @@ class Users_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
     /**
      * Try to return the user information from the login field
      * @param string $login Login
@@ -720,7 +798,24 @@ class Users_model extends CI_Model {
             return $query->row();
         }
     }
-    
+
+    /**
+     * Check if a given hash is associated to an existing user
+     * @param string $randomHash Random Hash associated to user
+     * @return bool TRUE if the user was found, FALSE otherwise
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    public function checkUserByHash($randomHash) {
+        $this->db->from('users');
+        $this->db->where('random_hash', $randomHash);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
     /**
      * Generate some random bytes by using openssl, dev/urandom or random
      * @param int $count length of the random string
@@ -751,7 +846,7 @@ class Users_model extends CI_Model {
         }
         return $rnd;
     }
-    
+
     /**
      * Update the manager of a list of employees
      * @param int $managerId DB Identifier of the manager
@@ -767,7 +862,7 @@ class Users_model extends CI_Model {
         $result = $this->db->update('users', $data);
         return $result;
     }
-    
+
     /**
      * Update the entity of a list of employees
      * @param int $entityId DB Identifier of the entity
@@ -783,7 +878,7 @@ class Users_model extends CI_Model {
         $result = $this->db->update('users', $data);
         return $result;
     }
-    
+
     /**
      * Update the contract of a list of employees
      * @param int $contractId DB Identifier of the contract

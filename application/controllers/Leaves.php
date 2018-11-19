@@ -42,7 +42,7 @@ class Leaves extends CI_Controller {
         $this->lang->load('datatable', $this->language);
         if ($this->config->item('enable_history') == TRUE){
           $data['leaves'] = $this->leaves_model->getLeavesOfEmployeeWithHistory($this->session->userdata('id'));
-        }else{
+        } else {
           $data['leaves'] = $this->leaves_model->getLeavesOfEmployee($this->session->userdata('id'));
         }
         $data['types'] = $this->types_model->getTypes();
@@ -138,7 +138,7 @@ class Leaves extends CI_Controller {
         if ($this->input->get('source') != NULL) {
             $data['source'] = urldecode($this->input->get('source'));
         }
-        
+
         $data['title'] = lang('leaves_view_html_title');
         if ($source == 'requests') {
             if (empty($employee)) {
@@ -231,20 +231,41 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/create');
             $this->load->view('templates/footer');
         } else {
-            if (function_exists('triggerCreateLeaveRequest')) {
-                triggerCreateLeaveRequest($this);
+          //Prevent thugs to auto validate their leave requests
+          if (!$this->is_hr && !$this->is_admin) {
+            if ($this->input->post('status') > LMS_REQUESTED) {
+                log_message('error', 'User #' . $this->session->userdata('id') . 
+                    ' tried to submit a LR with an wrong status = ' . $this->input->post('status'));
+                $_POST['status'] = LMS_REQUESTED;
             }
-            $leave_id = $this->leaves_model->setLeaves($this->session->userdata('id'));
-            $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
-            //If the status is requested, send an email to the manager
-            if ($this->input->post('status') == 2) {
-                $this->sendMailOnLeaveRequestCreation($leave_id);
+          }
+          
+            //Users must use an existing leave type, otherwise
+            //force leave type to default leave type
+            $this->load->model('contracts_model');
+            $leaveTypesDetails = $this->contracts_model->getLeaveTypesDetailsOTypesForUser($this->session->userdata('id'));
+            if (!array_key_exists($this->input->post('type'), $leaveTypesDetails->types)) {
+                log_message('error', 'User #' . $this->session->userdata('id') . ' tried to submit an wrong LR type = ' . 
+                $this->input->post('type'));
+                $_POST['type'] = $leaveTypesDetails->defaultType;
+                log_message('debug', 'LR type forced to ' . $leaveTypesDetails->defaultType); 
             }
-            if (isset($_GET['source'])) {
-                redirect($_GET['source']);
-            } else {
-                redirect('leaves');
-            }
+
+          if (function_exists('triggerCreateLeaveRequest')) {
+              triggerCreateLeaveRequest($this);
+          }
+          $leave_id = $this->leaves_model->setLeaves($this->session->userdata('id'));
+          $this->session->set_flashdata('msg', lang('leaves_create_flash_msg_success'));
+
+          //If the status is requested, send an email to the manager
+          if ($this->input->post('status') == LMS_REQUESTED) {
+              $this->sendMailOnLeaveRequestCreation($leave_id);
+          }
+          if (isset($_GET['source'])) {
+              redirect($_GET['source']);
+          } else {
+              redirect('leaves');
+          }
         }
     }
 
@@ -293,7 +314,7 @@ class Leaves extends CI_Controller {
             $data['help'] = $this->help->create_help_link('global_link_doc_page_request_leave');
             $data['id'] = $id;
             $this->load->model('contracts_model');
-            $leaveTypesDetails = $this->contracts_model->getLeaveTypesDetailsOTypesForUser($this->session->userdata('id'), $data['leave']['type']);
+            $leaveTypesDetails = $this->contracts_model->getLeaveTypesDetailsOTypesForUser($data['leave']['employee'], $data['leave']['type']);
             $data['defaultType'] = $leaveTypesDetails->defaultType;
             $data['credit'] = $leaveTypesDetails->credit;
             $data['types'] = $leaveTypesDetails->types;
@@ -317,6 +338,31 @@ class Leaves extends CI_Controller {
             $this->load->view('leaves/edit', $data);
             $this->load->view('templates/footer');
         } else {
+          //Prevent thugs to auto validate their leave requests
+          if (!$this->is_hr && !$this->is_admin) {
+            if ($this->input->post('status') == LMS_ACCEPTED) {
+                log_message('error', 'User #' . $this->session->userdata('id') . 
+                    ' tried to submit a LR with an wrong status = ' . $this->input->post('status'));
+                $_POST['status'] = LMS_REQUESTED;
+            }
+            if ($this->input->post('status') == LMS_CANCELED) {
+                log_message('error', 'User #' . $this->session->userdata('id') . 
+                    ' tried to submit a LR with an wrong status = ' . $this->input->post('status'));
+                $_POST['status'] = LMS_CANCELLATION;
+            }
+          }
+
+            //Users must use an existing leave type, otherwise
+            //force leave type to default leave type
+            $this->load->model('contracts_model');
+            $leaveTypesDetails = $this->contracts_model->getLeaveTypesDetailsOTypesForUser($this->session->userdata('id'));
+            if (!array_key_exists($this->input->post('type'), $leaveTypesDetails->types)) {
+                log_message('error', 'User #' . $this->session->userdata('id') . ' tried to submit an wrong LR type = ' . 
+                $this->input->post('type'));
+                $_POST['type'] = $leaveTypesDetails->defaultType;
+                log_message('debug', 'LR type forced to ' . $leaveTypesDetails->defaultType); 
+            }
+
             $this->leaves_model->updateLeaves($id);       //We don't use the return value
             $this->session->set_flashdata('msg', lang('leaves_edit_flash_msg_success'));
             //If the status is requested or cancellation, send an email to the manager
@@ -414,7 +460,7 @@ class Leaves extends CI_Controller {
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-            
+
             if ($reminder) {
                 $this->sendGenericMail($leave, $user, $manager, $lang_mail,
                     $lang_mail->line('email_leave_request_reminder') . ' ' .
@@ -430,7 +476,7 @@ class Leaves extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Send a notification to the manager of the connected employee when the
      * leave request has been canceled by its collaborator.
@@ -458,7 +504,7 @@ class Leaves extends CI_Controller {
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-            
+
             $this->sendGenericMail($leave, $user, $manager, $lang_mail,
                 $lang_mail->line('email_leave_request_cancellation_title'),
                 $lang_mail->line('email_leave_request_cancellation_subject'),
@@ -492,7 +538,7 @@ class Leaves extends CI_Controller {
             $lang_mail = new CI_Lang();
             $lang_mail->load('email', $usr_lang);
             $lang_mail->load('global', $usr_lang);
-            
+
             if ($reminder) {
                 $this->sendGenericMail($leave, $user, $manager, $lang_mail,
                     $lang_mail->line('email_leave_request_reminder') . ' ' .
@@ -647,7 +693,7 @@ class Leaves extends CI_Controller {
             }
         }
     }
-    
+
     /**
      * Allows the employee to cancel a requested leave request.
      * Only the connected user can reject its own requests.
@@ -685,7 +731,6 @@ class Leaves extends CI_Controller {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function export() {
-        $this->load->library('excel');
         $this->load->view('leaves/export');
     }
 
@@ -776,8 +821,14 @@ class Leaves extends CI_Controller {
         header("Content-Type: application/json");
         $id = $this->input->post('id', TRUE);
         $type = $this->input->post('type', TRUE);
-        $startdate = $this->input->post('startdate', TRUE);
-        $enddate = $this->input->post('enddate', TRUE);
+        //The above parameters could cause an SQL injection vulnerability due to the non standard
+        //SQL query in leave_model::detectOverlappingLeaves
+        $date = $this->input->post('startdate', TRUE);
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        $startdate = ($d && $d->format('Y-m-d') === $date)?$date:'1970-01-01';
+        $date = $this->input->post('enddate', TRUE);
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        $enddate = ($d && $d->format('Y-m-d') === $date)?$date:'1970-01-01';
         $startdatetype = $this->input->post('startdatetype', TRUE);     //Mandatory field checked by frontend
         $enddatetype = $this->input->post('enddatetype', TRUE);       //Mandatory field checked by frontend
         $leave_id = $this->input->post('leave_id', TRUE);

@@ -26,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-<?php foreach ($extras as $extra): 
+<?php foreach ($extras as $extra):
     $date = new DateTime($extra['date']);
     $tmpDate = $date->getTimestamp();
     $date = $date->format(lang('global_date_format'));?>
@@ -35,11 +35,11 @@
             <a href="<?php echo base_url();?>extra/edit/<?php echo $extra['id']; ?>?source=hr%2Fovertime%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_overtime_thead_tip_edit');?>"><?php echo $extra['id'] ?></a>
             <div class="pull-right">
                 &nbsp;
-                <a href="<?php echo base_url();?>overtime/accept/<?php echo $extra['id']; ?>?source=hr%2Fovertime%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_overtime_thead_tip_accept');?>"><i class="icon-ok"></i></a>
+                <a href="<?php echo base_url();?>overtime/accept/<?php echo $extra['id']; ?>?source=hr%2Fovertime%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_overtime_thead_tip_accept');?>"><i class="mdi mdi-check nolink"></i></a>
                 &nbsp;
-                <a href="<?php echo base_url();?>overtime/reject/<?php echo $extra['id']; ?>?source=hr%2Fovertime%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_overtime_thead_tip_reject');?>"><i class="icon-remove"></i></a>
+                <a href="<?php echo base_url();?>overtime/reject/<?php echo $extra['id']; ?>?source=hr%2Fovertime%2F<?php echo $user_id; ?>" title="<?php echo lang('hr_overtime_thead_tip_reject');?>"><i class="mdi mdi-close nolink"></i></a>
                 &nbsp;
-                <a href="#" class="confirm-delete" data-id="<?php echo $extra['id'];?>" title="<?php echo lang('hr_overtime_thead_tip_delete');?>"><i class="icon-trash"></i></a>
+                <a href="#" class="confirm-delete" data-id="<?php echo $extra['id'];?>" title="<?php echo lang('hr_overtime_thead_tip_delete');?>"><i class="mdi mdi-delete nolink"></i></a>
             </div>
         </td>
         <td><?php echo lang($extra['status_name']); ?></td>
@@ -59,9 +59,9 @@
 
 <div class="row-fluid">
     <div class="span12">
-      <a href="<?php echo base_url();?>hr/overtime/export/<?php echo $user_id; ?>" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;<?php echo lang('hr_overtime_button_export');?></a>
+      <a href="<?php echo base_url();?>hr/overtime/export/<?php echo $user_id; ?>" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp;<?php echo lang('hr_overtime_button_export');?></a>
       &nbsp;&nbsp;
-      <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_overtime_button_list');?></a>
+      <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp;<?php echo lang('hr_overtime_button_list');?></a>
     </div>
 </div>
 
@@ -122,15 +122,14 @@ $(function () {
 
     //Display a modal pop-up so as to confirm if a leave request has to be deleted or not
     //We build a complex selector because datatable does horrible things on DOM...
-    //a simplier selector doesn't work when the delete is on page >1 
+    //a simplier selector doesn't work when the delete is on page >1
     $("#extras tbody").on('click', '.confirm-delete',  function(){
         var id = $(this).data('id');
         $('#frmDeleteExtraRequest').data('id', id).modal('show');
     });
-    
+
     $('#frmDeleteExtraRequest').on('hidden', function() {
         $(this).removeData('modal');
     });
 });
 </script>
-

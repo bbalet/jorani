@@ -117,9 +117,9 @@
 <div class="row-fluid">
     <div class="span3">
       <?php if ($source == 'employees') {?>
-      <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_summary_button_list');?></a>
+      <a href="<?php echo base_url();?>hr/employees" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp;<?php echo lang('hr_summary_button_list');?></a>
       <?php } else { ?>
-      <a href="<?php echo base_url();?>requests/collaborators" class="btn btn-primary"><i class="icon-arrow-left icon-white"></i>&nbsp;<?php echo lang('hr_summary_button_list');?></a>
+      <a href="<?php echo base_url();?>requests/collaborators" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>&nbsp;<?php echo lang('hr_summary_button_list');?></a>
       <?php } ?>
     </div>
     <div class="span9">&nbsp;</div>

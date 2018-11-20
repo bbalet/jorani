@@ -33,7 +33,7 @@ class Calendar extends CI_Controller {
     public function year($employee = 0, $year = 0) {
         setUserContext($this);
         $this->lang->load('calendar', $this->language);
-        if ($employee == 0) {
+        if ($employee == 0 || $employee == $this->user_id) {
             $this->auth->checkIfOperationIsAllowed('individual_calendar');
         } else {
             $this->auth->checkIfOperationIsAllowed('organization_calendar');

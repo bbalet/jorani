@@ -323,7 +323,8 @@ class Connection extends CI_Controller {
      */
     public function metadata() {
         require_once APPPATH . 'config/saml.php';
-        $settings = new OneLogin_Saml2_Settings($settingsInfo, true);
+        $auth = new OneLogin\Saml2\Auth($samlSettings);
+        $settings = $auth->getSettings();
         $metadata = $settings->getSPMetadata();
         $errors = $settings->validateMetadata($metadata);
         if (empty($errors)) {
@@ -337,22 +338,23 @@ class Connection extends CI_Controller {
     }
     
     /**
-     * SAML2 SSO endpoint
+     * SAML2 SSO endpoint that performs the login
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function sso() {
         require_once APPPATH . 'config/saml.php';
-        $auth = new OneLogin\Saml2\Auth($settingsInfo);
+        $auth = new OneLogin\Saml2\Auth($samlSettings);
         $auth->login();
     }
     
     /**
-     * SAML2 Logout endpoint
+     * SAML2 Logout endpoint that perfom the logout
+     * This feature is not supported by all IdP (eg. Google)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function slo() {
         require_once APPPATH . 'config/saml.php';
-        $auth = new OneLogin_Saml2_Auth($settingsInfo);
+        $auth = new OneLogin\Saml2\Auth($samlSettings);
         $returnTo = null;
         $paramters = array();
         $nameId = null;
@@ -374,7 +376,7 @@ class Connection extends CI_Controller {
      */
     public function sls() {
         require_once APPPATH . 'config/saml.php';
-        $auth = new OneLogin_Saml2_Auth($settingsInfo);
+        $auth = new OneLogin\Saml2\Auth($samlSettings);
         if (isset($this->session) && ($this->session->userdata("LogoutRequestID") !== FALSE)) {
             $requestID = $this->session->userdata("LogoutRequestID");
         } else {
@@ -391,12 +393,12 @@ class Connection extends CI_Controller {
     }
 
     /**
-     * SAML2 Login endpoint
+     * SAML2 acs endpoint
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function acs() {
         require_once APPPATH . 'config/saml.php';
-        $auth = new OneLogin_Saml2_Auth($settingsInfo);
+        $auth = new OneLogin\Saml2\Auth($samlSettings);
         if (isset($this->session) && ($this->session->userdata("AuthNRequestID") !== FALSE)) {
             $requestID = $this->session->userdata("AuthNRequestID");
         } else {

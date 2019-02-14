@@ -253,13 +253,25 @@ if ($configFileExists) {
                       <tr><td><i class="mdi mdi-check"></i>&nbsp;xml is LOADED</td>
                       <?php } else { ?>
                       <tr><td><i class="mdi mdi-alert"></i>&nbsp;xml IS NOT LOADED</td>
-                      <?php } ?><td>PHP Extension xml allows you to use the export to Excel feature.</td></tr>
+                      <?php } ?><td>PHP Extension xml allows you to use the export to Excel feature (and SAML/SSO).</td></tr>
 
                       <?php if (extension_loaded('gd')) {?>
                       <tr><td><i class="mdi mdi-check"></i>&nbsp;gd is LOADED</td>
                       <?php } else { ?>
                       <tr><td><i class="mdi mdi-alert"></i>&nbsp;gd IS NOT LOADED</td>
                       <?php } ?><td>PHP Extension gd2 allows you to use the export to Excel feature.</td></tr>
+
+                      <?php if (extension_loaded('date')) {?>
+                      <tr><td><i class="mdi mdi-check"></i>&nbsp;date is LOADED</td>
+                      <?php } else { ?>
+                      <tr><td><i class="mdi mdi-alert"></i>&nbsp;date IS NOT LOADED</td>
+                      <?php } ?><td>PHP Extension zlib allows you to use the Authentication by SAML feature (SSO).</td></tr>
+
+                      <?php if (extension_loaded('zlib')) {?>
+                      <tr><td><i class="mdi mdi-check"></i>&nbsp;zlib is LOADED</td>
+                      <?php } else { ?>
+                      <tr><td><i class="mdi mdi-alert"></i>&nbsp;zlib IS NOT LOADED</td>
+                      <?php } ?><td>PHP Extension zlib allows you to use the Authentication by SAML feature (SSO).</td></tr>
 
                   </tbody>
             </table>

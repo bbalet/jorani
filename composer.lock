@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13b51d26d3c00340b6eff2dc5b15b98c",
+    "content-hash": "6f5a611cb07a78613f0319fe794bab07",
     "packages": [
         {
             "name": "bshaffer/oauth2-server-php",
@@ -406,16 +406,16 @@
         },
         {
             "name": "onelogin/php-saml",
-            "version": "3.0.0.x-dev",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/onelogin/php-saml.git",
-                "reference": "c98647228e5260004fe6bc31158f322ea94c152c"
+                "reference": "15016f9d633614c62fe6bb1d4ec86079b3e13a63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/onelogin/php-saml/zipball/c98647228e5260004fe6bc31158f322ea94c152c",
-                "reference": "c98647228e5260004fe6bc31158f322ea94c152c",
+                "url": "https://api.github.com/repos/onelogin/php-saml/zipball/15016f9d633614c62fe6bb1d4ec86079b3e13a63",
+                "reference": "15016f9d633614c62fe6bb1d4ec86079b3e13a63",
                 "shasum": ""
             },
             "require": {
@@ -452,7 +452,7 @@
                 "onelogin",
                 "saml"
             ],
-            "time": "2018-06-19T00:33:13+00:00"
+            "time": "2019-01-28T13:04:13+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -884,23 +884,21 @@
         },
         {
             "name": "robrichards/xmlseclibs",
-            "version": "3.0.1",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robrichards/xmlseclibs.git",
-                "reference": "d937712f70f93a584eb0299ccd87dc6374003781"
+                "reference": "406c68ac9124db033d079284b719958b829cb830"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/d937712f70f93a584eb0299ccd87dc6374003781",
-                "reference": "d937712f70f93a584eb0299ccd87dc6374003781",
+                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/406c68ac9124db033d079284b719958b829cb830",
+                "reference": "406c68ac9124db033d079284b719958b829cb830",
                 "shasum": ""
             },
             "require": {
+                "ext-openssl": "*",
                 "php": ">= 5.4"
-            },
-            "suggest": {
-                "ext-openssl": "OpenSSL extension"
             },
             "type": "library",
             "autoload": {
@@ -920,7 +918,7 @@
                 "xml",
                 "xmldsig"
             ],
-            "time": "2017-08-31T09:27:07+00:00"
+            "time": "2018-11-15T11:59:02+00:00"
         },
         {
             "name": "sabre/uri",
@@ -1300,7 +1298,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "onelogin/php-saml": 20,
         "willdurand/negotiation": 20
     },
     "prefer-stable": false,

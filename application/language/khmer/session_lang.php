@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = 'លេខសម្ងាត់ត្
 $lang['session_login_flash_bad_credentials'] = 'លេខសម្គាល់ ឬ ពាក្យសម្ងាត់ចូលក្នុងប្រព័ន្ធមិនត្រឹមត្រូវ';
 $lang['session_login_flash_change_language'] = 'ភាសាត្រូវបានកំណត់ដោយជោគជ័យ ';
 $lang['session_login_flash_account_disabled'] = 'Your account is disabled. Please contact your HR Officer / Manager.';
+$lang['session_login_no_slo'] = 'You have logged out of Jorani but are still logged into your Identity Provider. Click on Login to automatically log back into Jorani.';

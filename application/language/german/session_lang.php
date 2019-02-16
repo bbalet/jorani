@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = 'Ein neues Passwort wurde Ihnen per M
 $lang['session_login_flash_bad_credentials'] = 'Unbekannter Benutzername oder Passwort';
 $lang['session_login_flash_change_language'] = 'Sprache wurde erfolgreich gesetzt auf';
 $lang['session_login_flash_account_disabled'] = 'Ihr Account ist deaktiviert. Bitte wenden Sie sich an Ihre Personalabteilung oder Ihren Vorgesetzten.';
+$lang['session_login_no_slo'] = 'Sie haben sich von Jorani abgemeldet, sind aber weiterhin bei Ihrem Identitätsanbieter angemeldet. Klicken Sie auf Login, um sich automatisch bei Jorani anzumelden.';

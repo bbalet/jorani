@@ -20,3 +20,4 @@ $lang['session_login_msg_password_sent'] = 'The password has been sent to your e
 $lang['session_login_flash_bad_credentials'] = 'Invalid login id or password';
 $lang['session_login_flash_change_language'] = 'The language has been succesfully set to ';
 $lang['session_login_flash_account_disabled'] = 'Your account is disabled. Please contact your HR Officer / Manager.';
+$lang['session_login_no_slo'] = 'You have logged out of Jorani but are still logged into your Identity Provider. Click on Login to automatically log back into Jorani.';

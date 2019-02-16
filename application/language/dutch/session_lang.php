@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = 'Het wachtwoord is naar uw email adre
 $lang['session_login_flash_bad_credentials'] = 'Ongeldige login of wachtwoord';
 $lang['session_login_flash_change_language'] = 'De taal is succesvol bijgewerkt naar';
 $lang['session_login_flash_account_disabled'] = 'Dit account is gedeactiveerd. Neem aub contact op met uw manager.';
+$lang['session_login_no_slo'] = 'Je bent bij Jorani uitgelogd maar bent nog steeds aangemeld bij je identiteitsprovider. Klik op Inloggen om automatisch weer in te loggen op Jorani.';

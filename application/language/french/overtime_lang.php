@@ -21,10 +21,10 @@ $lang['overtime_index_button_export'] = 'Exporter cette liste';
 $lang['overtime_index_button_show_all'] = 'Toutes les demandes';
 $lang['overtime_index_button_show_pending'] = 'Demandes en cours';
 
-$lang['overtime_reject_flash_msg_error'] = 'Vous n\'êtes pas le responsable hierarchique de cet employé. vous ne pouvez pas rejeter cette déclaration.';
+$lang['overtime_reject_flash_msg_error'] = 'Vous n\'êtes pas le responsable hiérarchique de cet employé. vous ne pouvez pas rejeter cette déclaration.';
 $lang['overtime_reject_flash_msg_success'] = 'La déclaration d\'heures supp. a été rejetée avec succès.';
 
-$lang['overtime_accept_flash_msg_error'] = 'Vous n\'êtes pas le responsable hierarchique de cet employé. vous ne pouvez pas accepter cette déclaration.';
+$lang['overtime_accept_flash_msg_error'] = 'Vous n\'êtes pas le responsable hiérarchique de cet employé. vous ne pouvez pas accepter cette déclaration.';
 $lang['overtime_accept_flash_msg_success'] = 'La déclaration d\'heures supp. a été acceptée avec succès.';
 
 $lang['overtime_export_title'] = 'Déclarations d\'heures supp.';

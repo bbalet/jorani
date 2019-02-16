@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = 'Heslo bylo odesláno na vaši emailo
 $lang['session_login_flash_bad_credentials'] = 'Neplatné přihlašovací jméno nebo heslo';
 $lang['session_login_flash_change_language'] = 'Jazyk byl úspěšně nastaven na ';
 $lang['session_login_flash_account_disabled'] = 'Váš účet je zablokován. Kontaktujte prosím personální oddělení, nebo nadřízeného.';
+$lang['session_login_no_slo'] = 'Odhlásili jste se z Jorani, ale jste stále přihlášeni do vašeho poskytovatele totožnosti. Kliknutím na tlačítko Přihlásit se automaticky přihlásíte zpět do Jorani.';

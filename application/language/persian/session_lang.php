@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = 'رمز به ایمیل شما فرس
 $lang['session_login_flash_bad_credentials'] = 'شناسه یا رمز شما اشتباه است';
 $lang['session_login_flash_change_language'] = 'زبان سیستم موفقانه تنظیم شد به ';
 $lang['session_login_flash_account_disabled'] = 'Your account is disabled. Please contact your HR Officer / Manager.';
+$lang['session_login_no_slo'] = 'شما از Jorani خارج شده اید اما هنوز به ارائهدهنده هویت خود وارد شده اید. روی ورود به سیستم کلیک کنید تا به طور خودکار به Jorani وارد شوید.';

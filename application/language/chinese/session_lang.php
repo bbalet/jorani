@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = '密碼已傳送至你的信箱';
 $lang['session_login_flash_bad_credentials'] = '個別登陸帳號或密碼';
 $lang['session_login_flash_change_language'] = '語言已成功更改';
 $lang['session_login_flash_account_disabled'] = '你的賬號已禁用。請聯絡你的主管';
+$lang['session_login_no_slo'] = '您已退出Jorani但仍登录到您的身份提供商。 单击登录以自动重新登录Jorani。';

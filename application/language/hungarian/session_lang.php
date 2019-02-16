@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = 'A jelszavad elküldésre került az 
 $lang['session_login_flash_bad_credentials'] = 'Érvénytelen bejelentkezési azonosító vagy jelszó';
 $lang['session_login_flash_change_language'] = 'A nyelv sikeresen módosítva a következőre';
 $lang['session_login_flash_account_disabled'] = 'A felhasználói fiók le van tiltva. Kérlek lépj kapcsolatba a HR kollégával / feletteseddel.';
+$lang['session_login_no_slo'] = 'Kilépett a Jorani-ból, de még mindig bejelentkezett az Identity Provider-be. A Jorani-ba való automatikus bejelentkezéshez kattintson a Bejelentkezés gombra.';

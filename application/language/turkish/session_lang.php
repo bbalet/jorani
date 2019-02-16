@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = 'Şifreniz e-posta adresinize gönder
 $lang['session_login_flash_bad_credentials'] = 'Geçersiz giriş kimliği veya şifre';
 $lang['session_login_flash_change_language'] = 'Dil başarıyla ayarlandı';
 $lang['session_login_flash_account_disabled'] = 'Hesabınız devre dışı bırakıldı. Lütfen İK Sorumlusu / Yöneticisi ile irtibata geçiniz.';
+$lang['session_login_no_slo'] = 'Jorani\'den çıkış yaptınız ancak Kimlik Sağlayıcınıza hala giriş yaptınız. Jorani\'ye otomatik olarak tekrar giriş yapmak için Giriş\'i tıklayın.';

@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = 'La contrasenya s\'ha enviat al seu c
 $lang['session_login_flash_bad_credentials'] = 'Identificació o contrasenya incorrecta';
 $lang['session_login_flash_change_language'] = 'L\'idioma s\'ha establert correctament a ';
 $lang['session_login_flash_account_disabled'] = 'El teu compte està desactivat. Si us plau contacta amb Recursos Humans/ Administració.';
+$lang['session_login_no_slo'] = 'Has tancat la sessió de Jorani però encara has iniciat la sessió al teu proveïdor d\'identitat. Feu clic a Inicia sessió per tornar a iniciar sessió automàticament a Jorani.';

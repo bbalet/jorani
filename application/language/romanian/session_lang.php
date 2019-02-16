@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = 'Parola a fost trimisă către adresa
 $lang['session_login_flash_bad_credentials'] = 'Id sau parolă invalidă';
 $lang['session_login_flash_change_language'] = 'Limba a fost schimbată cu succes în ';
 $lang['session_login_flash_account_disabled'] = 'Contul dumneavoastră este dezactivat. Vă rugăm să contactați un angajat de la resurse umane / Manager.';
+$lang['session_login_no_slo'] = 'V-ați deconectat de la Jorani, dar sunteți încă conectat (ă) la furnizorul dvs. de identitate. Dă click pe Login pentru a te autentifica automat în Jorani.';

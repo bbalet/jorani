@@ -10,15 +10,12 @@
 
 //You must switch $config['saml_enabled'] to TRUE into config/config.php prior using SAML
 
-//Field Mapping : how to get the e-mail
-$samlMailMap = 'User.email';
-
 //You shouldn't change the 'sp' sub-array, but only the content of 'idp' sub-array
 //Sp is specific to the application (Jorani)
 //Idp is specific to your identity provider
 $samlSettings = array(
     'sp' => array(
-        'entityId' => base_url() . 'metadata',
+        'entityId' => base_url() . 'api/metadata',
         'assertionConsumerService' => array(
             'url' => base_url() . 'api/acs',
         ),

@@ -323,22 +323,22 @@ class Connection extends CI_Controller {
      */
     public function metadata() {
         require_once APPPATH . 'config/saml.php';
-        $auth = new OneLogin\Saml2\Auth($samlSettings);
-        $settings = $auth->getSettings();
+        $settings = new OneLogin\Saml2\Settings($samlSettings, true);
         $metadata = $settings->getSPMetadata();
         $errors = $settings->validateMetadata($metadata);
         if (empty($errors)) {
             $this->output->set_content_type('text/xml');
             $this->output->set_output($metadata);
         } else {
-            throw new OneLogin_Saml2_Error(
-            'Invalid SP metadata: ' . implode(', ', $errors), OneLogin_Saml2_Error::METADATA_SP_INVALID
+            throw new OneLogin\Saml2\Error(
+                'Invalid SP metadata: '.implode(', ', $errors),
+                OneLogin\Saml2\Error::METADATA_SP_INVALID
             );
         }
     }
     
     /**
-     * SAML2 SSO endpoint that performs the login
+     * SAML2 SSO endpoint that starts the login via SSO
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function sso() {
@@ -350,24 +350,34 @@ class Connection extends CI_Controller {
     /**
      * SAML2 Logout endpoint that perfom the logout
      * This feature is not supported by all IdP (eg. Google)
+     * That why a message might appear to explain that you are not logged from the IdP
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function slo() {
         require_once APPPATH . 'config/saml.php';
         $auth = new OneLogin\Saml2\Auth($samlSettings);
-        $returnTo = null;
-        $paramters = array();
-        $nameId = null;
-        $sessionIndex = null;
-        if ($this->session->userdata("samlNameId") !== FALSE) {
-            $nameId = $this->session->userdata("samlNameId");
+        if ($samlSettings['idp']['singleLogoutService']['url'] === '') {
+            $data['title'] = lang('session_login_title');
+            $data['language'] = $this->session->userdata('language');
+            $data['language_code'] = $this->session->userdata('language_code');
+            $this->load->view('templates/header', $data);
+            $this->load->view('session/noslo', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $returnTo = null;
+            $paramters = array();
+            $nameId = null;
+            $sessionIndex = null;
+            if ($this->session->userdata("samlNameId") !== FALSE) {
+                $nameId = $this->session->userdata("samlNameId");
+            }
+            if ($this->session->userdata("samlSessionIndex") !== FALSE) {
+                $sessionIndex = $this->session->userdata("samlSessionIndex");
+            }
+            $auth->logout($returnTo, $paramters, $nameId, $sessionIndex);
+            $this->session->sess_destroy();
+            redirect('api/sso');
         }
-        if ($this->session->userdata("samlSessionIndex") !== FALSE) {
-            $sessionIndex = $this->session->userdata("samlSessionIndex");
-        }
-        $auth->logout($returnTo, $paramters, $nameId, $sessionIndex);
-        $this->session->sess_destroy();
-        redirect('api/sso');
     }
     
     /**
@@ -393,7 +403,7 @@ class Connection extends CI_Controller {
     }
 
     /**
-     * SAML2 acs endpoint
+     * SAML2 acs endpoint. Called by the IdP to perform the connection
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function acs() {
@@ -413,14 +423,14 @@ class Connection extends CI_Controller {
 
         $loggedin = FALSE;
         if ($auth->isAuthenticated()) {
-        $this->session->set_userdata("samlUserdata", $auth->getAttributes());
-        $this->session->set_userdata("samlNameId", $auth->getNameId());
-        $this->session->set_userdata("samlSessionIndex", $auth->getSessionIndex());
-        $this->session->unset_userdata(array('AuthNRequestID'));
+            $this->session->set_userdata("samlUserdata", $auth->getAttributes());
+            $this->session->set_userdata("samlNameId", $auth->getNameId());
+            $this->session->set_userdata("samlSessionIndex", $auth->getSessionIndex());
+            $this->session->unset_userdata(array('AuthNRequestID'));
+
             //If we find the e-mail address into the database, we're good
-            $attributes = $auth->getAttributes();
             $this->load->model('users_model');
-            $loggedin = $this->users_model->checkCredentialsEmail($attributes[$samlMailMap][0]);
+            $loggedin = $this->users_model->checkCredentialsEmail($auth->getNameId());
             if ($loggedin === TRUE) {
                 $this->redirectToLastPage();
             }
@@ -432,7 +442,7 @@ class Connection extends CI_Controller {
                 $data['language_code'] = $this->session->userdata('language_code');
                 $data['message'] = lang('session_login_flash_account_disabled');
                 $this->load->view('templates/header', $data);
-                $this->load->view('connection/failure', $data);
+                $this->load->view('session/failure', $data);
                 $this->load->view('templates/footer');
             }
         }

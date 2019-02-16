@@ -21,3 +21,4 @@ $lang['session_login_msg_password_sent'] = 'A password foi enviada para o seu em
 $lang['session_login_flash_bad_credentials'] = 'Login ou password invalido';
 $lang['session_login_flash_change_language'] = 'O idioma foi alterado com sucesso para';
 $lang['session_login_flash_account_disabled'] = 'A sua conta foi desativada. Contacte o seu gestor.';
+$lang['session_login_no_slo'] = 'Você saiu do Jorani, mas ainda está conectado ao seu provedor de identidade. Clique no Login para entrar automaticamente em Jorani.';

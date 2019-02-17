@@ -72,18 +72,17 @@ class Leaves extends CI_Controller {
 
     /**
      * Display the details of leaves taken/entitled for the connected user
-     * @param string $refTmp Timestamp (reference date)
+     * @param string $refDate Date (e.g. 2011-10-05)
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function counters($refTmp = NULL) {
+    public function counters($refDate = NULL) {
         $this->auth->checkIfOperationIsAllowed('counters_leaves');
         $data = getUserContext($this);
         $this->lang->load('datatable', $this->language);
-        $refDate = date("Y-m-d");
-        if ($refTmp != NULL) {
-            $refDate = date("Y-m-d", $refTmp);
+        if ($refDate != NULL) {
             $data['isDefault'] = 0;
         } else {
+            $refDate = date("Y-m-d");
             $data['isDefault'] = 1;
         }
         $data['refDate'] = $refDate;

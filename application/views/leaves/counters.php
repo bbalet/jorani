@@ -2,9 +2,9 @@
 /**
  * This view displays the counters (number of available leave) for an employee.
  * @copyright  Copyright (c) 2014-2019 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.2.0
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.2.0
  */
 ?>
 
@@ -22,14 +22,14 @@
                 <tr>
                 <th rowspan="2"><?php echo lang('leaves_summary_thead_type');?></th>
                 <th colspan="2" style="text-align: center;"><?php echo lang('leaves_summary_thead_available');?></th>
-                <th rowspan="2"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_entitled');?></th>
-                <th rowspan="2"><i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>"></i></th>
-                <th rowspan="2"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label"><?php echo lang('Planned');?></span></th>
-                <th rowspan="2"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<span class="label label-warning"><?php echo lang('Requested');?></span></th>
+                <th rowspan="2"><i class="mdi mdi-plus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_entitled');?></th>
+                <th rowspan="2"><i class="mdi mdi-minus-circle" aria-hidden="true"></i>&nbsp;<?php echo lang('leaves_summary_thead_taken');?>&nbsp;<i class="mdi mdi-help-circle" data-toggle="tooltip" title="<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>"></i></th>
+                <th rowspan="2"><i class="mdi mdi-information" aria-hidden="true"></i>&nbsp;<span class="label"><?php echo lang('Planned');?></span></th>
+                <th rowspan="2"><i class="mdi mdi-information" aria-hidden="true"></i>&nbsp;<span class="label label-warning"><?php echo lang('Requested');?></span></th>
                 </tr>
                 <tr>
-                <th><?php echo lang('leaves_summary_thead_actual');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>)"></i></th>
-                <th><?php echo lang('leaves_summary_thead_simulated');?>&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?> + <?php echo lang('Planned');?> + <?php echo lang('Requested');?>)"></i></th>
+                <th><?php echo lang('leaves_summary_thead_actual');?>&nbsp;<i class="mdi mdi-help-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?>)"></i></th>
+                <th><?php echo lang('leaves_summary_thead_simulated');?>&nbsp;<i class="mdi mdi-help-circle" data-toggle="tooltip" title="<?php echo lang('leaves_summary_thead_entitled');?> - (<?php echo lang('Accepted');?> + <?php echo lang('Cancellation');?> + <?php echo lang('Planned');?> + <?php echo lang('Requested');?>)"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -77,62 +77,47 @@
 
 <div class="row-fluid"><div class="span12">&nbsp;</div></div>
 
-<link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
-<script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
-<script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/css/bootstrap-datepicker.min.css">
+<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/js/bootstrap-datepicker.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
 if ($language_code != 'en') { ?>
-<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
+<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
 <?php } ?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
+/**
+ * Converts a local date to an ISO compliant string
+ * Because toISOString converts to UTC causing one day
+ * of shift in some zones
+ * @param Date $d JavaScript native date object
+ */
+function toISODateLocal(d) {
+  var z = n => (n<10? '0':'')+n;
+  return d.getFullYear() + '-' + z(d.getMonth()+1) + '-' + z(d.getDate()); 
+}
+
 $(function () {
     //Init datepicker widget (it is complicated because we cannot based it on UTC)
-    isDefault = <?php echo $isDefault;?>;
-    moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});
-    reportDate = '<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>';
-    todayDate = moment().format('L');
+    var isDefault = <?php echo $isDefault;?>;
+    var reportDate = '<?php $date = new DateTime($refDate); echo $date->format(lang('global_date_format'));?>';
+    var dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    var now = new Date();
+    var todayDate = now.toLocaleDateString('<?php echo $language_code;?>', dateFormat);
     if (isDefault == 1) {
         $("#refdate").val(todayDate);
     } else {
         $("#refdate").val(reportDate);
     }
-    $('#refdate').datepicker({
-        dateFormat: '<?php echo lang('global_date_js_format');?>',
-        onSelect: function(dateText, inst) {
-                tmpUnix = moment($("#refdate").datepicker("getDate")).unix();
-                url = "<?php echo base_url();?>leaves/counters/" + tmpUnix;
-                window.location = url;
-        }
-    });
 
-    //Transform the HTML table into a dynamic datatable
-    $('#overtime').dataTable({
-        language: {
-                    decimal:            "<?php echo lang('datatable_sInfoThousands');?>",
-                    processing:       "<?php echo lang('datatable_sProcessing');?>",
-                    search:              "<?php echo lang('datatable_sSearch');?>",
-                    lengthMenu:     "<?php echo lang('datatable_sLengthMenu');?>",
-                    info:                   "<?php echo lang('datatable_sInfo');?>",
-                    infoEmpty:          "<?php echo lang('datatable_sInfoEmpty');?>",
-                    infoFiltered:       "<?php echo lang('datatable_sInfoFiltered');?>",
-                    infoPostFix:        "<?php echo lang('datatable_sInfoPostFix');?>",
-                    loadingRecords: "<?php echo lang('datatable_sLoadingRecords');?>",
-                    zeroRecords:    "<?php echo lang('datatable_sZeroRecords');?>",
-                    emptyTable:     "<?php echo lang('datatable_sEmptyTable');?>",
-                    paginate: {
-                        first:          "<?php echo lang('datatable_sFirst');?>",
-                        previous:   "<?php echo lang('datatable_sPrevious');?>",
-                        next:           "<?php echo lang('datatable_sNext');?>",
-                        last:           "<?php echo lang('datatable_sLast');?>"
-                    },
-                    aria: {
-                        sortAscending:  "<?php echo lang('datatable_sSortAscending');?>",
-                        sortDescending: "<?php echo lang('datatable_sSortDescending');?>"
-                    }
-                }
-        });
+    $("#refdate").datepicker({
+        format: '<?php echo lang('global_date_js_format');?>',
+        language: "<?php echo $language_code;?>",
+        autoclose: true
+    }).on('changeDate', function(e){
+        isoDate = toISODateLocal(e.date);
+        url = "<?php echo base_url();?>leaves/counters/" + isoDate;
+        window.location = url;
+    });
         
     //Display tooltips
     $("[ data-toggle=tooltip]").tooltip({ placement: 'top'});

@@ -7,7 +7,7 @@
  * @since         0.1.0
  */
 ?>
-<html lang="en">
+<html lang="tr">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,17 +20,17 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        <p>Lütfen <a href="{BaseURL}">sisteme giriş yapmak</a> için bu kimlik bilgilerini kullanın:</p>
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>Oturum aç</td><td>{Login}</td>
             </tr>
             <tr>
-                <td>Password</td><td>{Password}</td>
+                <td>Şifre</td><td>{Password}</td>
             </tr>            
         </table>
-        Once connected, you can change your password, as explained <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        <p>Bağlandıktan sonra, <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">burada</a> açıklandığı şekilde şifrenizi değiştirebilirsiniz.</p>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Bu otomatik olarak oluşturulmuş bir mesajdır, lütfen bu mesaja cevap vermeyin ***</h5>
     </body>
 </html>

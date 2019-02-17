@@ -7,7 +7,7 @@
  * @since         0.1.0
  */
 ?>
-<html lang="en">
+<html lang="tr">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,23 +20,23 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        Welcome to Jorani {Firstname} {Lastname}. Please use these credentials to <a href="{BaseURL}">login to the system</a> :
+        Jorani'ye hoşgeldiniz {Firstname} {Lastname}. Lütfen <a href="{BaseURL}">sisteme giriş yapmak</a> için bu kimlik bilgilerini kullanın:
         <table border="0">
             <tr>
-                <td>Login</td><td>{Login}</td>
+                <td>Oturum aç</td><td>{Login}</td>
             </tr>
             <tr>
                 <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-                <td>Password</td><td>{Password}</td>
+                <td>Şifre</td><td>{Password}</td>
                 <?php } else { ?>
-                <td>Password</td><td><i>The password you use in order to open a session on your operating system (Windows, Linux, etc.).</i></td>
+                <td>Şifre</td><td><i>İşletim sisteminizde bir oturum açmak için kullandığınız şifre (Windows, Linux, vb.).</i></td>
                 <?php } ?>
             </tr>            
         </table>
         <?php if ($this->config->item('ldap_enabled') == FALSE) { ?>
-        Once connected, you can change your password, as explained <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">here</a>.
+        Bağlandıktan sonra, <a href="https://jorani.org/how-to-change-my-password.html" title="Link to documentation" target="_blank">burada</a> açıklandığı şekilde şifrenizi değiştirebilirsiniz.
         <?php } ?>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Bu otomatik olarak oluşturulmuş bir mesajdır, lütfen bu mesaja cevap vermeyin ***</h5>
     </body>
 </html>

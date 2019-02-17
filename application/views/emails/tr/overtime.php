@@ -7,7 +7,7 @@
  * @since         0.1.0
  */
 ?>
-<html lang="en">
+<html lang="tr">
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta charset="UTF-8">
@@ -20,21 +20,21 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        {Firstname} {Lastname} submitted overtime worked. See the details below:<br />
+        {Firstname} {Lastname} fazla mesai gönderdi. Aşağıdaki ayrıntıları bakın:<br />
         <table border="0">
             <tr>
-                <td>Date &nbsp;</td><td>{Date}</td>
+                <td>Tarih &nbsp;</td><td>{Date}</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Süre &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Cause}</td>
+                <td>Neden &nbsp;</td><td>{Cause}</td>
             </tr>
         </table>
-        <a href="{UrlAccept}">Accept</a>
-        <a href="{UrlReject}">Reject</a>
+        <a href="{UrlAccept}">Kabul et</a>
+        <a href="{UrlReject}">Reddet</a>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Bu otomatik olarak oluşturulmuş bir mesajdır, lütfen bu mesaja cevap vermeyin ***</h5>
     </body>
 </html>

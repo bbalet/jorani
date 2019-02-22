@@ -18,7 +18,7 @@
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/css/jorani-0.6.6.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/MDI-2.1.19/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/MDI-3.4.93/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css">
 <?php CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('global', $language);?>

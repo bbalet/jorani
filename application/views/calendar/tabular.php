@@ -17,11 +17,11 @@
             &nbsp;(<input type="checkbox" class="input-centered" checked id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_tabular_check_include_subdept');?>)
         </label>
         <div class="input-prepend input-append">
-            <span class="add-on" id="spnAddOn"><i class="fa fa-sitemap" aria-hidden="true"></i></span>
+            <span class="add-on" id="spnAddOn"><i class="mdi mdi-sitemap"></i></span>
             <input type="text" id="txtEntity" name="txtEntity" value="<?php echo $department;?>" readonly />
-            <button id="cmdSelectEntity" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_entity');?>"><i class="fa fa-sitemap" aria-hidden="true"></i></button>
+            <button id="cmdSelectEntity" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_entity');?>"><i class="mdi mdi-sitemap"></i></button>
             <?php if ($mode == 'connected') { ?>
-           <button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>
+           <button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="mdi mdi-account-multiple"></i></button>
             <?php } ?>
         </div>
     </div>
@@ -70,8 +70,8 @@
         <img src="<?php echo base_url();?>assets/images/loading.gif">
     </div>
     <div class="modal-footer">
-        <button onclick="select_entity();" class="btn" data-dismiss="modal" aria-hidden="true"><?php echo lang('OK');?></button>
-        <button data-dismiss="modal" aria-hidden="true" class="btn"><?php echo lang('Cancel');?></button>
+        <button onclick="select_entity();" class="btn" data-dismiss="modal"><?php echo lang('OK');?></button>
+        <button data-dismiss="modal" class="btn"><?php echo lang('Cancel');?></button>
     </div>
 </div>
 
@@ -85,7 +85,7 @@
     </div>
     <div class="modal-footer">
         <button onclick="select_list();" data-dismiss="modal" class="btn"><?php echo lang('OK');?></button>
-        <button data-dismiss="modal" aria-hidden="true" class="btn"><?php echo lang('Cancel');?></button>
+        <button data-dismiss="modal" class="btn"><?php echo lang('Cancel');?></button>
     </div>
 </div>
 
@@ -125,7 +125,7 @@
     // view if the entity is diferent
     function select_entity() {
         source = 'treeview';
-        $('#spnAddOn').html('<i class="fa fa-sitemap" aria-hidden="true"></i>');
+        $('#spnAddOn').html('<i class="mdi mdi-sitemap"></i>');
         entity = $('#organization').jstree('get_selected')[0];
         text = $('#organization').jstree().get_text(entity);
         $('#txtEntity').val(text);
@@ -141,7 +141,7 @@
         listId = $('#cboList').val();
         if (listId != -1 ) {
             source = 'list';
-            $('#spnAddOn').html('<i class="fa fa-users" aria-hidden="true"></i>');
+            $('#spnAddOn').html('<i class="mdi mdi-account-multiple"></i>');
             listName = $('#cboList option:selected').text();
             $('#txtEntity').val(listName);
             reloadTabularView();

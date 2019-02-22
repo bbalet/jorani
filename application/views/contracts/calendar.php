@@ -342,8 +342,8 @@ function changeTextCopyButton() {
   var data = $('#contract').select2('data');
   if (data !== undefined) {
     var dest = data[0].text;
-    var text = '<i class="fa fa-copy"></i>&nbsp;' +
-                source + '&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;' + dest;
+    var text = '<i class="mdi mdi-content-copy"></i>&nbsp;' +
+                source + '&nbsp;<i class="mdi mdi-arrow-right-thick"></i>&nbsp;' + dest;
     $('#cmdContractCopy').html(text);
   }
 }

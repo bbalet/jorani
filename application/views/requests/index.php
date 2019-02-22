@@ -91,23 +91,13 @@ if ($showAll == FALSE) {
             &nbsp;
             <div class="pull-right">
               <?php if ($request['status'] == LMS_CANCELLATION) { ?>
-              <a href="#" class="lnkCancellationAccept" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>">
-                  <span class="fa-stack">
-                    <i class="fa fa-undo fa-stack-2x nolink"></i>
-                    <i class="fa fa-check fa-stack-1x nolink"></i>
-                  </span>
-              </a>
+              <a href="#" class="lnkCancellationAccept" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="mdi mdi-check nolink"></i></a>
               &nbsp;
-              <a href="#" class="lnkCancellationReject" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>">
-                  <span class="fa-stack">
-                    <i class="fa fa-undo fa-stack-2x nolink"></i>
-                    <i class="fa fa-times fa-stack-1x nolink"></i>
-                  </span>
-              </a>
+              <a href="#" class="lnkCancellationReject" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="mdi mdi-close nolink"></i></a>
               <?php } else { ?>
-              <a href="#" class="lnkAccept" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="fa fa-check fa-2x nolink"></i></a>
+              <a href="#" class="lnkAccept" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_accept');?>"><i class="mdi mdi-check nolink"></i></a>
               &nbsp;
-              <a href="#" class="lnkReject" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="fa fa-times fa-2x nolink"></i></a>
+              <a href="#" class="lnkReject" data-id="<?php echo $request['leave_id']; ?>" title="<?php echo lang('requests_index_thead_tip_reject');?>"><i class="mdi mdi-close nolink"></i></a>
               <?php } ?>
               <?php if ($this->config->item('enable_history') === TRUE) { ?>
               &nbsp;
@@ -266,7 +256,7 @@ $(document).ready(function() {
         if (!clicked) {
             clicked = true;
             var validateUrl = "<?php echo base_url();?>requests/reject/" + $(this).data("id");
-            bootbox.prompt('<?php echo (($this->config->item('mandatory_comment_on_reject') === TRUE)?'<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;':'') .
+            bootbox.prompt('<?php echo (($this->config->item('mandatory_comment_on_reject') === TRUE)?'<i class="mdi mdi-alert"></i>&nbsp;':'') .
                     lang('requests_comment_reject_request_title');?>',
               '<?php echo lang('requests_comment_reject_request_button_cancel');?>',
               '<?php echo lang('requests_comment_reject_request_button_reject');?>',
@@ -297,7 +287,7 @@ $(document).ready(function() {
             clicked = true;
             var id = $(this).data("id");
             var validateUrl = "<?php echo base_url();?>requests/cancellation/reject/" + $(this).data("id");
-            bootbox.prompt('<?php echo (($this->config->item('mandatory_comment_on_reject') === TRUE)?'<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;':'') .
+            bootbox.prompt('<?php echo (($this->config->item('mandatory_comment_on_reject') === TRUE)?'<i class="mdi mdi-alert"></i>&nbsp;':'') .
                     lang('requests_comment_reject_request_title');?>',
               '<?php echo lang('requests_comment_reject_request_button_cancel');?>',
               '<?php echo lang('requests_comment_reject_request_button_reject');?>',

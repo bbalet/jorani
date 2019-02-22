@@ -40,9 +40,9 @@
       </td>
       <td>
         <?php if ($type['deduct_days_off'] == TRUE ) { ?>
-        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+        <i class="mdi mdi-checkbox-marked-outline"></i>
         <?php } else { ?>
-        <i class="fa fa-square-o" aria-hidden="true"></i>
+        <i class="mdi mdi-checkbox-blank-outline"></i>
         <?php } ?>
       </td>
     </tr>

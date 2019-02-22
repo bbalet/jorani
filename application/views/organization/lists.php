@@ -15,17 +15,17 @@
     <div class="span12">
 
 <div class="input-prepend input-append">
-    <button id="cmdDeleteList" class="btn btn-danger" title="<?php echo lang('organization_lists_button_delete_list');?>"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-    <button id="cmdRenameList" class="btn btn-primary" title="<?php echo lang('organization_lists_button_edit_list');?>"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-    <button id="cmdCreateList" class="btn btn-primary" title="<?php echo lang('organization_lists_button_add_list');?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
+    <button id="cmdDeleteList" class="btn btn-danger" title="<?php echo lang('organization_lists_button_delete_list');?>"><i class="mdi mdi-trash-can-outline"></i></button>
+    <button id="cmdRenameList" class="btn btn-primary" title="<?php echo lang('organization_lists_button_edit_list');?>"><i class="mdi mdi-pencil"></i></button>
+    <button id="cmdCreateList" class="btn btn-primary" title="<?php echo lang('organization_lists_button_add_list');?>"><i class="mdi mdi-plus"></i></button>
     <select id="cboList" name="cboList">
         <option value="-1" selected="true"></option>
 <?php foreach ($lists as $listItem): ?>
         <option value="<?php echo $listItem['id'];?>"><?php echo $listItem['name'];?></option>
 <?php endforeach ?>
     </select>
-    <button id="cmdAddEmployees" class="btn btn-primary" title="<?php echo lang('organization_lists_button_add_users');?>"><i class="fa fa-user-plus" aria-hidden="true"></i></button>
-    <button id="cmdRemoveEmployees" class="btn btn-primary" title="<?php echo lang('organization_lists_button_remove_users');?>"><i class="fa fa-user-times" aria-hidden="true"></i></button>
+    <button id="cmdAddEmployees" class="btn btn-primary" title="<?php echo lang('organization_lists_button_add_users');?>"><i class="mdi mdi-account-plus"></i></button>
+    <button id="cmdRemoveEmployees" class="btn btn-primary" title="<?php echo lang('organization_lists_button_remove_users');?>"><i class="mdi mdi-account-remove"></i></button>
 </div>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="employeesOrgList" width="100%">

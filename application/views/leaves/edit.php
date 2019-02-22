@@ -101,7 +101,7 @@ if (isset($_GET['source'])) {
         <option value="2" <?php if (($leave['status'] == LMS_REQUESTED) || $this->config->item('leave_status_requested')) echo 'selected'; ?>><?php echo lang('Requested');?></option>
     </select>
     <br/>
-    <button name="status" value="1" type="submit" class="btn btn-primary"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; <?php echo lang('Planned');?></button>
+    <button name="status" value="1" type="submit" class="btn btn-primary"><i class="mdi mdi-calendar-question" aria-hidden="true"></i>&nbsp; <?php echo lang('Planned');?></button>
     &nbsp;&nbsp;
     <button name="status" value="2" type="submit" class="btn btn-primary "><i class="mdi mdi-check"></i>&nbsp; <?php echo lang('Requested');?></button>
     <br/>

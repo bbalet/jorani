@@ -257,7 +257,9 @@ if (count($tabular) > 0) {?>
   <div class="row"><div class="span12"></div></div>
   <div class="row">
       <div class="span12 text-center">
-    <i class="fa fa-calendar-times-o fa-5x" aria-hidden="true"></i>
+        <span style="font-size: 200px; line-height: 1em; color: #bd362f;">
+            <i class="mdi mdi-calendar-remove"></i>
+        </span>
       </div>
   </div>
 </div>

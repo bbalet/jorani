@@ -73,7 +73,7 @@ echo form_open('leaves/create', $attributes) ?>
     <textarea name="cause"><?php echo set_value('cause'); ?></textarea>
 
     <br/><br/>
-    <button name="status" value="1" type="submit" class="btn btn-primary"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; <?php echo lang('Planned');?></button>
+    <button name="status" value="1" type="submit" class="btn btn-primary"><i class="mdi mdi-calendar-question" aria-hidden="true"></i>&nbsp; <?php echo lang('Planned');?></button>
     &nbsp;&nbsp;
     <button name="status" value="2" type="submit" class="btn btn-primary "><i class="mdi mdi-check"></i>&nbsp; <?php echo lang('Requested');?></button>
     <br/><br/>

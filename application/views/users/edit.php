@@ -69,7 +69,7 @@ if (isset($_GET['source'])) {
         <div class="control-group">
             <label class="control-label" for="txtManager"><?php echo lang('users_edit_field_manager');?>
                 <a style="color:black;" href="#" data-toggle="tooltip" title="<?php echo lang('users_edit_field_manager_description');?>">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <i class="mdi mdi-information"></i>
                 </a>
             </label>
             <div class="controls">

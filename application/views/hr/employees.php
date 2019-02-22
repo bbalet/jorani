@@ -43,22 +43,22 @@
                 <div class="input-prepend input-append">
                     <div class="btn-group">
                         <div class="btn-group" data-toggle="buttons-radio">
-                            <button id="cmdGreater1" type="button" class="btn active"><i class="fa fa-chevron-right"></i></button>
-                            <button id="cmdLesser1" type="button" class="btn"><i class="fa fa-chevron-left"></i></button>
+                            <button id="cmdGreater1" type="button" class="btn active"><i class="mdi mdi-chevron-right"></i></button>
+                            <button id="cmdLesser1" type="button" class="btn"><i class="mdi mdi-chevron-left"></i></button>
                         </div>
                         <input type="text" id="viz_datehired1" class="input-small" readonly />
-                        <button id="cmdResetDate1" type="button" class="btn"><i class="fa fa-times"></i></button>
+                        <button id="cmdResetDate1" type="button" class="btn"><i class="mdi mdi-close"></i></button>
                     </div>
                 </div>
                 &nbsp;&mdash;&nbsp;
                 <div class="input-prepend input-append">
                     <div class="btn-group">
                         <div class="btn-group" data-toggle="buttons-radio">
-                            <button id="cmdGreater2" type="button" class="btn"><i class="fa fa-chevron-right"></i></button>
-                            <button id="cmdLesser2" type="button" class="btn active"><i class="fa fa-chevron-left"></i></button>
+                            <button id="cmdGreater2" type="button" class="btn"><i class="mdi mdi-chevron-right"></i></button>
+                            <button id="cmdLesser2" type="button" class="btn active"><i class="mdi mdi-chevron-left"></i></button>
                         </div>
                         <input type="text" id="viz_datehired2" class="input-small" readonly />
-                        <button id="cmdResetDate2" type="button" class="btn"><i class="fa fa-times"></i></button>
+                        <button id="cmdResetDate2" type="button" class="btn"><i class="mdi mdi-close"></i></button>
                     </div>
                 </div>
                 <input type="hidden" name="datehired1" id="datehired1" />
@@ -73,17 +73,17 @@
                 <div class="pull-right">
                     <div class="btn-group">
                         <button id="cmdSelection" class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-                          <i class="fa fa-pencil"></i>&nbsp;<?php echo lang('hr_employees_button_selection');?>&nbsp;<span class="caret"></span>
+                          <i class="mdi mdi-pencil"></i>&nbsp;<?php echo lang('hr_employees_button_selection');?>&nbsp;<span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="#" id="cmdCreateRequest"><i class="mdi mdi-file-plus nolink"></i>&nbsp;<?php echo lang('hr_employees_button_create_request');?></a></li>
-                            <li><a href="#" id="cmdSelectManager"><i class="fa fa-user"></i>&nbsp;<?php echo lang('hr_employees_button_select_manager');?></a></li>
-                            <li><a href="#" id="cmdAddEntitlments"><i class="fa fa-pencil-square-o"></i>&nbsp;<?php echo lang('hr_employees_button_entitleddays');?></a></li>
-                            <li><a href="#" id="cmdSelectContract"><i class="fa fa-file-text-o"></i>&nbsp;<?php echo lang('hr_employees_button_select_contract');?></a></li>
-                            <li><a href="#" id="cmdChangeEntity"><i class="fa fa-sitemap"></i>&nbsp;<?php echo lang('hr_employees_button_select_entity');?></a></li>
+                            <li><a href="#" id="cmdSelectManager"><i class="mdi mdi-account-supervisor"></i>&nbsp;<?php echo lang('hr_employees_button_select_manager');?></a></li>
+                            <li><a href="#" id="cmdAddEntitlments"><i class="mdi mdi-pencil-box-outline"></i>&nbsp;<?php echo lang('hr_employees_button_entitleddays');?></a></li>
+                            <li><a href="#" id="cmdSelectContract"><i class="mdi mdi-file-document-outline"></i>&nbsp;<?php echo lang('hr_employees_button_select_contract');?></a></li>
+                            <li><a href="#" id="cmdChangeEntity"><i class="mdi mdi-sitemap"></i>&nbsp;<?php echo lang('hr_employees_button_select_entity');?></a></li>
                             <li class="divider"></li>
-                            <li><a href="#" id="cmdSelectAll"><i class="fa fa-circle"></i>&nbsp;<?php echo lang('hr_employees_button_select_all');?></a></li>
-                            <li><a href="#" id="cmdDeselectAll"><i class="fa fa-circle-o"></i>&nbsp;<?php echo lang('hr_employees_button_deselect_all');?></a></li>
+                            <li><a href="#" id="cmdSelectAll"><i class="mdi mdi-checkbox-blank-circle"></i>&nbsp;<?php echo lang('hr_employees_button_select_all');?></a></li>
+                            <li><a href="#" id="cmdDeselectAll"><i class="mdi mdi-checkbox-blank-circle-outline"></i>&nbsp;<?php echo lang('hr_employees_button_deselect_all');?></a></li>
                         </ul>
                     </div>
                   &nbsp;<a href="#" id="cmdExportEmployees" class="btn btn-primary"><i class="mdi mdi-download"></i>&nbsp;<?php echo lang('hr_employees_button_export');?></a>
@@ -269,7 +269,7 @@
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/overtime/{id}"><i class="mdi mdi-format-list-bulleted nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a></li>
         <?php } ?>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/counters/employees/{id}"><i class="mdi mdi-information-outline"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a></li>
-        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/presence/employees/{id}"><i class="fa fa-pie-chart"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a></li>
+        <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>hr/presence/employees/{id}"><i class="mdi mdi-chart-pie"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>calendar/year/{id}"><i class="mdi mdi-calendar-text"></i>&nbsp;<?php echo lang('hr_employees_thead_link_calendar');?></a></li>
         <li><a tabindex="-1" href="#" data-action="<?php echo base_url();?>requests/delegations/{id}"><i class="mdi mdi-share nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a></li>
   </ul>
@@ -285,7 +285,7 @@
         <a class="context-mobile" href="<?php echo base_url();?>hr/overtime/{id}"><i class="mdi mdi-format-list-bulleted nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_extra');?></a><br />
         <?php } ?>
         <a class="context-mobile" href="<?php echo base_url();?>hr/counters/employees/{id}"><i class="mdi mdi-information-outline nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a><br />
-        <a class="context-mobile" href="<?php echo base_url();?>hr/presence/employees/{id}"><i class="fa fa-pie-chart nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a><br />
+        <a class="context-mobile" href="<?php echo base_url();?>hr/presence/employees/{id}"><i class="mdi mdi-chart-pie nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a><br />
         <a class="context-mobile" href="<?php echo base_url();?>calendar/year/{id}"><i class="mdi mdi-calendar-text nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_calendar');?></a><br />
         <a class="context-mobile" href="<?php echo base_url();?>requests/delegations/{id}"><i class="mdi mdi-share nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_delegation');?></a>
   </div>

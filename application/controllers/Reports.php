@@ -154,7 +154,7 @@ class Reports extends CI_Controller {
             $table = "<div class='alert'>" .
                      "<button type='button' class='close' data-dismiss='alert'>&times;</button>" .
                      "<a href='" . base_url() . "admin/diagnostic#balance'>" .
-                     "<i class='fa fa-exclamation-triangle' aria-hidden='true'></i>" .
+                     "<i class='mdi mdi-alert'></i>" .
                      "&nbsp;Error</a>" .
                      "</div>";
         }

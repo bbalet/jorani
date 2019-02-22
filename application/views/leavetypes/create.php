@@ -16,7 +16,7 @@ echo form_open('leavetypes/create', $attributes); ?>
     <div class="input-append">
         <input type="text" name="acronym" id="acronym" />
         <a id="cmdSuggestAcronym" class="btn btn-primary" title="<?php echo lang('leavetypes_popup_create_button_suggest');?>">
-            <i class="fa fa-magic" aria-hidden="true"></i>
+            <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
         </a>
     </div>
     <label for="deduct_days_off">

@@ -2,9 +2,9 @@
 /**
  * This view displays the leave requests for a given entity of the organization.
  * @copyright  Copyright (c) 2014-2019 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.1.0
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.1.0
  */
 ?>
 
@@ -17,11 +17,11 @@
             (<input type="checkbox" class="input-centered" checked id="chkIncludeChildren" name="chkIncludeChildren"> <?php echo lang('calendar_organization_check_include_subdept');?>)
         </label>
         <div class="input-prepend input-append">
-            <span class="add-on" id="spnAddOn"><i class="fa fa-sitemap" aria-hidden="true"></i></span>
+            <span class="add-on" id="spnAddOn"><i class="mdi mdi-sitemap"></i></span>
             <input type="text" id="txtEntity" value="<?php echo $departmentName;?>" readonly />
-            <button id="cmdSelectEntity" class="btn btn-primary" title="<?php echo lang('calendar_organization_button_select_entity');?>"><i class="fa fa-sitemap" aria-hidden="true"></i></button>
+            <button id="cmdSelectEntity" class="btn btn-primary" title="<?php echo lang('calendar_organization_button_select_entity');?>"><i class="mdi mdi-sitemap" aria-hidden="true"></i></button>
             <?php if ($mode == 'connected') { ?>
-           <button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="fa fa-users" aria-hidden="true"></i></button>
+           <button id="cmdSelectList" class="btn btn-primary" title="<?php echo lang('calendar_tabular_button_select_list');?>"><i class="mdi mdi-account-multiple" aria-hidden="true"></i></button>
             <?php } ?>
         </div>
     </div>
@@ -197,7 +197,7 @@
       selectedEntity = true;
       entity = $('#organization').jstree('get_selected')[0];
       entityName = $('#organization').jstree().get_text(entity);
-      $('#spnAddOn').html('<i class="fa fa-sitemap" aria-hidden="true"></i>');
+      $('#spnAddOn').html('<i class="mdi mdi-sitemap" aria-hidden="true"></i>');
       $('#txtEntity').val(entityName);
       refresh_calendar();
       Cookies.set('selected', 'entity');
@@ -217,7 +217,7 @@
       listId = $('#cboList').val();
       if (listId != -1 ) {
         source = 'list';
-        $('#spnAddOn').html('<i class="fa fa-users" aria-hidden="true"></i>');
+        $('#spnAddOn').html('<i class="mdi mdi-account-multiple" aria-hidden="true"></i>');
         listName = $('#cboList option:selected').text();
         $('#txtEntity').val(listName);
         refresh_calendar();
@@ -400,7 +400,7 @@
             listId = Cookies.set('listId');
 
             if(selectedEntity == false){
-              $('#spnAddOn').html('<i class="fa fa-users" aria-hidden="true"></i>');
+              $('#spnAddOn').html('<i class="mdi mdi-account-multiple" aria-hidden="true"></i>');
               //listName = $('#cboList option:selected').text();
               //console.log(listId);
               $.ajax({

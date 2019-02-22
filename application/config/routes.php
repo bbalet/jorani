@@ -373,5 +373,5 @@ $route['api/rest/admin/logs']['GET'] = 'RestAdmin/logs';
 //_______________________________________________
 //Default controllers
 $route['default_controller'] = 'leaves';
-$route['notfound'] = 'pages/notfound';
+$route['404_override'] = 'pages/notfound';
 $route['(:any)'] = 'pages/view/$1';

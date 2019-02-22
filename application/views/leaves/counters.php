@@ -110,7 +110,6 @@ $(function () {
     }
 
     $("#refdate").datepicker({
-        format: '<?php echo lang('global_date_js_format');?>',
         language: "<?php echo $language_code;?>",
         autoclose: true
     }).on('changeDate', function(e){

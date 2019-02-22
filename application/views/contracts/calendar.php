@@ -168,8 +168,8 @@ for ($mC = 1; $mC <= 12; $mC++) {
         </select>
     </div>
     <div class="modal-footer">
-        <button id="cmdDeleteDayOff" onclick="delete_day_off();" class="btn btn-danger"><?php echo lang('contract_calendar_popup_dayoff_button_delete');?></button>
-        <button onclick="add_day_off();" class="btn"><?php echo lang('contract_calendar_popup_dayoff_button_ok');?></button>
+        <button id="cmdDeleteDayOff" onclick="deleteDayOff();" class="btn btn-danger"><?php echo lang('contract_calendar_popup_dayoff_button_delete');?></button>
+        <button onclick="setAsDayOff();" class="btn"><?php echo lang('contract_calendar_popup_dayoff_button_ok');?></button>
         <button onclick="$('#frmAddDayOff').modal('hide');" class="btn"><?php echo lang('contract_calendar_popup_dayoff_button_cancel');?></button>
     </div>
 </div>
@@ -194,7 +194,7 @@ for ($mC = 1; $mC <= 12; $mC++) {
         <label for="txtStartDate"><?php echo lang('contract_calendar_popup_series_field_from');?></label>
         <div class="input-append">
                 <input type="text" id="viz_startdate" name="viz_startdate" required />
-                <button class="btn" onclick="set_current_period();"><?php echo lang('contract_calendar_popup_series_button_current');?></button>
+                <button class="btn" onclick="setCurrentPeriod();"><?php echo lang('contract_calendar_popup_series_button_current');?></button>
             </div><br />
         <input type="hidden" name="txtStartDate" id="txtStartDate" /><br />
         <label for="txtEndDate"><?php echo lang('contract_calendar_popup_series_field_to');?></label>
@@ -212,7 +212,7 @@ for ($mC = 1; $mC <= 12; $mC++) {
         <input type="text" id="cboDayOffSeriesTitle" name="cboDayOffSeriesTitle" />
     </div>
     <div class="modal-footer">
-        <a href="#" onclick="edit_series();" class="btn"><?php echo lang('contract_calendar_popup_series_button_ok');?></a>
+        <a href="#" onclick="editSeriesOfDaysOff();" class="btn"><?php echo lang('contract_calendar_popup_series_button_ok');?></a>
         <a href="#" onclick="$('#frmSetRangeDayOff').modal('hide');" class="btn"><?php echo lang('contract_calendar_popup_series_button_cancel');?></a>
     </div>
 </div>
@@ -237,47 +237,54 @@ for ($mC = 1; $mC <= 12; $mC++) {
     </div>
 </div>
 
-<link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
-<script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/css/bootstrap-datepicker.min.css">
+<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/js/bootstrap-datepicker.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
 if ($language_code != 'en') { ?>
-<script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
+<script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
 <?php } ?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
+
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/clipboard-1.6.1.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
 <script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
-    var timestamp;
-    //Global locale for moment objects
-    moment.locale('<?php echo $language_code;?>', {longDateFormat : {L : '<?php echo lang('global_date_momentjs_format');?>'}});
+/**
+ * Pointer to a day in the calendar, not really an actual date
+ */
+var timestamp;
 
-    //Compute the end and start dates of the civil year being displayed
-    function set_current_period() {
-        var startEntDate = moment();
-        var endEntDate = moment();
+/**
+ * Converts a local date to an ISO compliant string
+ * Because toISOString converts to UTC causing one day
+ * of shift in some zones
+ * @param Date $d JavaScript native date object
+ * @return String Date converted in the format YYYY-MM-DD
+ */
+function toISODateLocal(d) {
+    var z = n => (n<10? '0':'')+n;
+    return d.getFullYear() + '-' + z(d.getMonth()+1) + '-' + z(d.getDate()); 
+}
 
-        //Compute boundaries
-        startEntDate.year(<?php echo $year;?>);
-        startEntDate.month(0);
-        startEntDate.date(1);
-        endEntDate.year(<?php echo $year;?>);
-        endEntDate.month(11);
-        endEntDate.date(31);
+/**
+ * Compute the end and start dates of the civil year being displayed
+ * in the modal for editing a series of non working days
+ * @return void
+ */
+function setCurrentPeriod() {
+    var startEntDate = new Date('<?php echo $year;?>-01-01');
+    var endEntDate = new Date('<?php echo $year;?>-12-31');
+    $("#viz_startdate").datepicker('setDate', startEntDate);
+    $("#viz_enddate").datepicker('setDate', endEntDate);
+}
 
-        //Presentation for DB and Human
-        startEntDate.locale('<?php echo $language_code;?>');
-        endEntDate.locale('<?php echo $language_code;?>');
-        $("#txtStartDate").val(startEntDate.format("YYYY-MM-DD"));
-        $("#txtEndDate").val(endEntDate.format("YYYY-MM-DD"));
-        $("#viz_startdate").val(startEntDate.format("L"));
-        $("#viz_enddate").val(endEntDate.format("L"));
-    }
-
-//Add a day off by an Ajax query
-function add_day_off() {
+/**
+ * Define a day as a non working day
+ * Data taken from modal and current day pointer
+ * @return void
+ */
+function setAsDayOff() {
     $("#cboType").val($('#' + timestamp).data("type"));
     $.ajax({
         url: "<?php echo base_url();?>contracts/calendar/edit",
@@ -300,8 +307,12 @@ function add_day_off() {
         });
 }
 
-//Delete a day off by an Ajax query
-function delete_day_off() {
+/**
+ * Delete a day off by an Ajax query
+ * On click on a day that is a day off
+ * @return void
+ */
+function deleteDayOff() {
     $.ajax({
         url: "<?php echo base_url();?>contracts/calendar/edit",
         type: "POST",
@@ -317,8 +328,12 @@ function delete_day_off() {
         });
 }
 
-//Edit a serie of days off by an Ajax query
-function edit_series() {
+/**
+ * Edit a serie of days off by an Ajax query
+ *
+ * @return void
+ */
+function editSeriesOfDaysOff() {
     $("#cboType").val($('#' + timestamp).data("type"));
     $.ajax({
         url: "<?php echo base_url();?>contracts/calendar/series",
@@ -336,7 +351,11 @@ function edit_series() {
         });
 }
 
-//Change the text of the copy button so as to get a clear indication
+/**
+ * Change the text of the copy button so as to get a clear indication
+ * of which contract is going to be copied to another contract
+ * @return void
+ */
 function changeTextCopyButton() {
   var source = '<?php echo $contract_name; ?>';
   var data = $('#contract').select2('data');
@@ -368,28 +387,20 @@ $(function() {
     changeTextCopyButton();
 
     $("#viz_startdate").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: '<?php echo lang('global_date_js_format');?>',
-        altFormat: "yy-mm-dd",
-        altField: "#txtStartDate",
-        numberOfMonths: 3,
-              onClose: function( selectedDate ) {
-                $( "#viz_enddate" ).datepicker( "option", "minDate", selectedDate );
-              }
-    }, $.datepicker.regional['<?php echo $language_code;?>']);
+        language: "<?php echo $language_code;?>",
+        autoclose: true
+    }).on('changeDate', function(e){
+        $("#txtStartDate").val(toISODateLocal(e.date));
+        $("#viz_enddate").datepicker('setStartDate', e.date);
+    });
 
     $("#viz_enddate").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: '<?php echo lang('global_date_js_format');?>',
-        altFormat: "yy-mm-dd",
-        altField: "#txtEndDate",
-        numberOfMonths: 3,
-              onClose: function( selectedDate ) {
-                $( "#viz_startdate" ).datepicker( "option", "maxDate", selectedDate );
-              }
-    }, $.datepicker.regional['<?php echo $language_code;?>']);
+        language: "<?php echo $language_code;?>",
+        autoclose: true
+    }).on('changeDate', function(e){
+        $("#txtEndDate").val(toISODateLocal(e.date));
+        $("#viz_startdate").datepicker('setEndDate', e.date);
+    });
 
     //Display modal form that allow adding a day off
     $("#fullyear").on("click", "td", function() {

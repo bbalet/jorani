@@ -14,8 +14,9 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd ldap zip pdo pdo_mysql \
     && rm -rf /var/lib/apt/lists/
-RUN a2enmod rewrite
+RUN a2enmod rewrite gzip
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY --from=composer /app/vendor /var/www/html/vendor
 COPY . .
+RUN chown www-data application/logs local/upload/leaves/
 COPY docker/database.php docker/email.php application/config/

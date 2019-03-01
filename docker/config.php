@@ -421,7 +421,7 @@ $config['proxy_ips'] = '';
 
 //____________________________________________________________________________
 //default email from
-$config['from_mail'] = 'do.not@reply.me';
+$config['from_mail'] = getEnv('FROM_MAIL') ?: 'do.not@reply.me';
 $config['from_name'] = 'Jorani';
 $config['subject_prefix'] = '[Jorani] ';
 

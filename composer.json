@@ -23,7 +23,8 @@
         "phpoffice/phpspreadsheet": "^1.3.1",
         "jpgraph/jpgraph": "^4.0.2",
         "respect/validation": "^1.1",
-        "onelogin/php-saml": "3.1.0"
+        "onelogin/php-saml": "3.1.0",
+        "zircote/swagger-php": "dev-master"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^6.3.3"

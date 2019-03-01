@@ -2,9 +2,9 @@
 /**
  * This view allows a manager or HR admin to visualize the leave balance (taken/available/entitled) of an employee.
  * @copyright  Copyright (c) 2014-2019 Benjamin BALET
- * @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
- * @link            https://github.com/bbalet/jorani
- * @since         0.2.0
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      0.2.0
  */
 ?>
 

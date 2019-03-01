@@ -258,6 +258,8 @@ class Users_model extends CI_Model {
      * @param bool $active Is user active or NULL
      * @param string $country country of the employee or NULL
      * @param string $calendar calendar path or NULL
+     * @param string $userProperties JSON encoded user properties or NULL
+     * @param string $picture Base64 encoded avatar picture or NULL
      * @return int Inserted User Identifier
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
@@ -273,7 +275,9 @@ class Users_model extends CI_Model {
             $ldap_path = NULL,
             $active = NULL,
             $country = NULL,
-            $calendar = NULL) {
+            $calendar = NULL,
+            $userProperties = NULL,
+            $picture = NULL) {
 
         //Hash the clear password using bcrypt (8 iterations)
         $salt = '$2a$08$' . substr(strtr(base64_encode($this->getRandomBytes(16)), '+', '.'), 0, 22) . '$';
@@ -297,6 +301,8 @@ class Users_model extends CI_Model {
         if (isset($active)) $this->db->set('active', $active);
         if (isset($country)) $this->db->set('country', $country);
         if (isset($calendar)) $this->db->set('calendar', $calendar);
+        if (isset($userProperties)) $this->db->set('user_properties', $userProperties);
+        if (isset($picture)) $this->db->set('picture', $picture);
         $this->db->insert('users');
         return $this->db->insert_id();
     }
@@ -317,7 +323,7 @@ class Users_model extends CI_Model {
             $this->db->set('password', $hash);
         }
         $this->db->where('id', $id);
-        return $this->db->update('users', $data);
+        $this->db->update('users', $data);
     }
 
     /**

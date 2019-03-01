@@ -266,8 +266,10 @@ $route['reports'] = 'reports';
 
 //_______________________________________________
 //HTTP API
+$route['api/doc'] = 'api/doc';
 $route['api/token'] = 'api/token';
 $route['api/contracts/(:num)'] = 'api/contracts/$1';
+$route['api/contracts/'] = 'api/contracts';
 $route['api/contracts'] = 'api/contracts';
 $route['api/entitleddayscontract/(:num)'] = 'api/entitleddayscontract/$1';
 $route['api/addentitleddayscontract/(:num)'] = 'api/addentitleddayscontract/$1';
@@ -275,26 +277,38 @@ $route['api/entitleddaysemployee/(:num)'] = 'api/entitleddaysemployee/$1';
 $route['api/addentitleddaysemployee/(:num)'] = 'api/addentitleddaysemployee/$1';
 $route['api/leavessummary/(:num)/(:num)'] = 'api/leavessummary/$1/$2';
 $route['api/leavessummary/(:num)'] = 'api/leavessummary/$1';
-$route['api/leaves/(:num)/(:num)'] = 'api/leaves/$1/$2';
+$route['api/leaves/(:any)/(:any)'] = 'api/leavesInRange/$1/$2';
+$route['api/leavetypes/'] = 'api/leavetypes';
 $route['api/leavetypes'] = 'api/leavetypes';
+$route['api/positions/'] = 'api/positions';
 $route['api/positions'] = 'api/positions';
 $route['api/userdepartment/(:num)'] = 'api/userdepartment/$1';
 $route['api/userextras/(:num)'] = 'api/userextras/$1';
 $route['api/userleaves/(:num)'] = 'api/userleaves/$1';
-$route['api/users/(:num)'] = 'api/users/$1';
+$route['api/users/(:num)/leaves/'] = 'api/userleaves/$1';
+$route['api/users/(:num)']['GET'] = 'api/users/$1';
+$route['api/users/']['GET'] = 'api/users';
 $route['api/users'] = 'api/users';
 //v0.4.0
 $route['api/monthlypresence/(:num)/(:num)/(:num)'] = 'api/monthlypresence/$1/$2/$3';
 $route['api/deleteuser/(:num)'] = 'api/deleteuser/$1';
+$route['api/users/(:num)']['DELETE'] = 'api/deleteuser/$1';
 $route['api/updateuser/(:num)'] = 'api/updateuser/$1';
+$route['api/users/(:num)']['PATCH'] = 'api/updateuser/$1';
 $route['api/createuser/(:any)'] = 'api/createuser/$1';
 $route['api/createuser'] = 'api/createuser';
+$route['api/users/']['POST'] = 'api/createuser/$1';
+$route['api/users/(:any)']['POST'] = 'api/createuser/$1';
 $route['api/createleave'] = 'api/createleave';
+$route['api/leaves']['POST'] = 'api/createleave';
+$route['api/leaves/']['POST'] = 'api/createleave';
 //v0.4.3
 $route['api/getListOfEmployeesInEntity/(:num)/(:any)'] = 'api/getListOfEmployeesInEntity/$1/$2';
 //v0.4.4
-$route['api/acceptleaves/(:num)'] = 'api/acceptleaves/$1';
-$route['api/rejectleaves/(:num)'] = 'api/rejectleaves/$1';
+$route['api/acceptleaves/(:num)'] = 'api/acceptleave/$1';
+$route['api/acceptleave/(:num)'] = 'api/acceptleave/$1';
+$route['api/rejectleaves/(:num)'] = 'api/rejectleave/$1';
+$route['api/rejectleave/(:num)'] = 'api/rejectleave/$1';
 //v0.6.0
 $route['api/users/ext'] = 'api/usersExt';
 

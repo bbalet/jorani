@@ -160,7 +160,7 @@ class Calendar extends CI_Controller {
             $this->session->set_flashdata('msg', lang('calendar_department_msg_error'));
             redirect('leaves');
         } else {
-            $data['department'] = $department[0]['name'];
+            $data['department'] = $department->name;
             $this->load->view('templates/header', $data);
             $this->load->view('menu/index', $data);
             $this->load->view('calendar/department', $data);

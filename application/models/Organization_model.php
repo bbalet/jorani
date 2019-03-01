@@ -24,19 +24,18 @@ class Organization_model extends CI_Model {
     }
 
     /**
-     * Get the department details of a given user (label and ID)
-     * @param int $user_id User identifier
+     * Get the department details of an employee (label and ID)
+     * @param int $employeeId User identifier
      * @return array department details
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function getDepartment($user_id) {
-        $this->db->select('organization.id as id, organization.name as name');
+    public function getDepartment($employeeId) {
+        $this->db->select('organization.*');
         $this->db->from('organization');
         $this->db->join('users', 'users.organization = organization.id');
-        $this->db->where('users.id', $user_id);
+        $this->db->where('users.id', $employeeId);
         $query = $this->db->get();
-        $arr = $query->result_array();
-        return $arr;
+        return $query->result()[0];
     }
 
     /**

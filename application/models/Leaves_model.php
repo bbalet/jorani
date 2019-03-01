@@ -539,11 +539,15 @@ class Leaves_model extends CI_Model {
      * @param string $enddatetype End date type (Morning/Afternoon)
      * @param float $duration duration of the leave request
      * @param int $type Type of leave (except compensate, fully customizable by user)
+     * @param string $comments (optional) JSON encoded comment
+     * @param string $document Base64 encoded document
      * @return int id of the newly acreated leave request into the db
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function createLeaveByApi($startdate, $enddate, $status, $employee, $cause,
-            $startdatetype, $enddatetype, $duration, $type) {
+            $startdatetype, $enddatetype, $duration, $type,
+            $comments = NULL,
+            $document = NULL) {
 
         $data = array(
             'startdate' => $startdate,
@@ -556,6 +560,8 @@ class Leaves_model extends CI_Model {
             'duration' => abs($duration),
             'type' => $type
         );
+        if (!empty($comments)) $data['comments'] = $comments;
+        if (!empty($document)) $data['document'] = $document;
         $this->db->insert('leaves', $data);
         $newId = $this->db->insert_id();
 
@@ -640,12 +646,11 @@ class Leaves_model extends CI_Model {
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function switchStatus($id, $status) {
-
-      $json = $this->prepareCommentOnStatusChanged($id, $status);
-      $data = array(
-          'status' => $status,
-          'comments' => $json
-      );;
+        $json = $this->prepareCommentOnStatusChanged($id, $status);
+        $data = array(
+            'status' => $status,
+            'comments' => $json
+        );
         $this->db->where('id', $id);
         $this->db->update('leaves', $data);
 
@@ -1293,15 +1298,15 @@ class Leaves_model extends CI_Model {
 
     /**
      * All leaves between two timestamps, no filters
-     * @param string $start Unix timestamp / Start date displayed on calendar
-     * @param string $end Unix timestamp / End date displayed on calendar
+     * @param string $startDate Start date displayed on calendar
+     * @param string $endDate End date displayed on calendar
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
-    public function all($start, $end) {
+    public function all($startDate, $endDate) {
         $this->db->select("users.id as user_id, users.firstname, users.lastname, leaves.*", FALSE);
         $this->db->join('users', 'users.id = leaves.employee');
-        $this->db->where('( (leaves.startdate <= FROM_UNIXTIME(' . $this->db->escape($start) . ') AND leaves.enddate >= FROM_UNIXTIME(' . $this->db->escape($start) . '))' .
-                                   ' OR (leaves.startdate >= FROM_UNIXTIME(' . $this->db->escape($start) . ') AND leaves.enddate <= FROM_UNIXTIME(' . $this->db->escape($end) . ')))');
+        $this->db->where('( (leaves.startdate <= ' . $this->db->escape($startDate) . ' AND leaves.enddate >= ' . $this->db->escape($endDate) . ')' .
+                                   ' OR (leaves.startdate >= ' . $this->db->escape($endDate) . ' AND leaves.enddate <= ' . $this->db->escape($endDate) . '))');
         $this->db->order_by('startdate', 'desc');
         return $this->db->get('leaves')->result();
     }

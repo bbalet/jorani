@@ -18,7 +18,7 @@ $env = is_null(getenv('CI_ENV'))?'':getenv('CI_ENV');
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
         <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/MDI-2.1.19/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="assets/MDI-3.4.93/css/materialdesignicons.min.css">
         <script type="text/javascript" src="assets/js/jquery-2.2.4.min.js"></script>
         <style>
         .nolink {
@@ -36,6 +36,7 @@ $env = is_null(getenv('CI_ENV'))?'':getenv('CI_ENV');
                 <li><a href="testssl.php">SSL</a></li>
                 <li class="active"><a href="#">OAuth2</a></li>
                 <li><a href="opcache.php">Opcache</a></li>
+                <li><a href="testapi.php">API HTTP</a></li>
               </ul>
 
         <h1>Setup of OAuth2 sign-in</h1>

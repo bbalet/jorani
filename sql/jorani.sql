@@ -160,9 +160,9 @@ DELIMITER ;
 -- Structure of table `actions`
 --
 CREATE TABLE IF NOT EXISTS `actions` (
-  `name` varchar(45) CHARACTER SET utf8mb4 NOT NULL,
+  `name` varchar(45) NOT NULL,
   `mask` bit(16) NOT NULL,
-  `Description` text CHARACTER SET utf8mb4 NOT NULL,
+  `Description` text NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='List of possible actions';
 
@@ -197,15 +197,15 @@ INSERT INTO `actions` (`name`, `mask`, `Description`) VALUES
 -- Structure of table `contracts`
 --
 CREATE TABLE IF NOT EXISTS `contracts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) CHARACTER SET utf8mb4 NOT NULL,
-  `startentdate` varchar(5) CHARACTER SET utf8mb4 NOT NULL,
-  `endentdate` varchar(5) CHARACTER SET utf8mb4 NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of a contract',
+  `name` varchar(128) NOT NULL COMMENT 'Name of the contract',
+  `startentdate` varchar(5) NOT NULL COMMENT 'Day and month numbers of the left boundary',
+  `endentdate` varchar(5) NOT NULL COMMENT 'Day and month numbers of the right boundary',
   `weekly_duration` int(11) DEFAULT NULL COMMENT 'Approximate duration of work per week (in minutes)',
   `daily_duration` int(11) DEFAULT NULL COMMENT 'Approximate duration of work per day and (in minutes)',
   `default_leave_type` INT NULL DEFAULT NULL COMMENT 'default leave type for the contract (overwrite default type set in config file).',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='List of contracts' AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='A contract groups employees having the same days off and entitlement rules' AUTO_INCREMENT=1;
 
 INSERT INTO `contracts` (`id`, `name`, `startentdate`, `endentdate`, `weekly_duration`, `daily_duration`, `default_leave_type`) VALUES
 (1, 'Global', '01/01', '12/31', 2400, 480, 1);
@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `dayoffs` (
   `contract` int(11) NOT NULL COMMENT 'Contract id',
   `date` date NOT NULL COMMENT 'Date of the day off',
   `type` int(11) NOT NULL COMMENT 'Half or full day',
-  `title` varchar(128) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Description of day off',
+  `title` varchar(128) NOT NULL COMMENT 'Description of day off',
   PRIMARY KEY (`id`),
   KEY `type` (`type`),
   KEY `contract` (`contract`)
@@ -228,36 +228,37 @@ CREATE TABLE IF NOT EXISTS `dayoffs` (
 -- Structure of table `entitleddays`
 --
 CREATE TABLE IF NOT EXISTS `entitleddays` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `contract` int(11) DEFAULT NULL,
-  `employee` int(11) DEFAULT NULL,
-  `overtime` int(11) DEFAULT NULL COMMENT 'Link to an overtime request',
-  `startdate` date DEFAULT NULL,
-  `enddate` date DEFAULT NULL,
-  `type` int(11) NOT NULL,
-  `days` decimal(10,2) NOT NULL,
-  `description` text DEFAULT NULL COMMENT 'Description of a credit / debit',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of an entitlement',
+  `contract` int(11) DEFAULT NULL COMMENT 'If entitlement is credited to a contract, Id of contract',
+  `employee` int(11) DEFAULT NULL COMMENT 'If entitlement is credited to an employee, Id of employee',
+  `overtime` int(11) DEFAULT NULL COMMENT 'Optional Link to an overtime request, if the credit is due to an OT',
+  `startdate` date DEFAULT NULL COMMENT 'Left boundary of the credit validity',
+  `enddate` date DEFAULT NULL COMMENT 'Right boundary of the credit validity. Duration cannot exceed one year',
+  `type` int(11) NOT NULL COMMENT 'Leave type',
+  `days` decimal(10,2) NOT NULL COMMENT 'Number of days (can be negative so as to deduct/adjust entitlement)',
+  `description` text DEFAULT NULL COMMENT 'Description of a credit / debit (entitlement / adjustment)',
   PRIMARY KEY (`id`),
   KEY `contract` (`contract`),
   KEY `employee` (`employee`),
   KEY `type` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Add or sub entitlement for employees or contracts' AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Add or substract entitlement on employees or contracts (can be the result of an OT)' AUTO_INCREMENT=1;
 
 --
 -- Structure of table `leaves`
 --
 CREATE TABLE IF NOT EXISTS `leaves` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `startdate` date DEFAULT NULL,
-  `enddate` date DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `employee` int(11) DEFAULT NULL,
-  `cause` text CHARACTER SET utf8,
-  `startdatetype` varchar(12) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `enddatetype` varchar(12) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `duration` decimal(10,3) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
-  `comments` TEXT NULL DEFAULT NULL COMMENT 'Comments on leave request',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of the leave request',
+  `startdate` date DEFAULT NULL COMMENT 'Start date of the leave request',
+  `enddate` date DEFAULT NULL COMMENT 'End date of the leave request',
+  `status` int(11) DEFAULT NULL COMMENT 'Identifier of the status of the leave request (Requested, Accepted, etc.). See status table.',
+  `employee` int(11) DEFAULT NULL COMMENT 'Employee requesting the leave request',
+  `cause` text DEFAULT NULL COMMENT 'Reason of the leave request',
+  `startdatetype` varchar(12) DEFAULT NULL COMMENT 'Morning/Afternoon',
+  `enddatetype` varchar(12) DEFAULT NULL COMMENT 'Morning/Afternoon',
+  `duration` decimal(10,3) DEFAULT NULL COMMENT 'Length of the leave request',
+  `type` int(11) DEFAULT NULL COMMENT 'Identifier of the type of the leave request (Paid, Sick, etc.). See type table.',
+  `comments` TEXT NULL DEFAULT NULL COMMENT 'Comments on leave request (JSon)',
+  `document` BLOB NULL COMMENT 'Optional supporting document',
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
   KEY `employee` (`employee`)
@@ -267,10 +268,10 @@ CREATE TABLE IF NOT EXISTS `leaves` (
 -- Structure of table `organization`
 --
 CREATE TABLE IF NOT EXISTS `organization` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(512) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `parent_id` int(11) DEFAULT NULL,
-  `supervisor` INT NULL DEFAULT NULL COMMENT 'this user will receive a copy of accepted and rejected leave requests',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of the department',
+  `name` varchar(512) DEFAULT NULL COMMENT 'Name of the department',
+  `parent_id` int(11) DEFAULT NULL COMMENT 'Parent department (or -1 if root)',
+  `supervisor` INT NULL DEFAULT NULL COMMENT 'This user will receive a copy of accepted and rejected leave requests',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Tree of the organization' AUTO_INCREMENT=1 ;
 
@@ -284,12 +285,12 @@ INSERT INTO `organization` (`id`, `name`, `parent_id`) VALUES
 -- Structure of table `overtime`
 --
 CREATE TABLE IF NOT EXISTS `overtime` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `employee` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `duration` decimal(10,3) NOT NULL,
-  `cause` text CHARACTER SET utf8mb4 NOT NULL,
-  `status` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of the overtime request',
+  `employee` int(11) NOT NULL COMMENT 'Employee requesting the OT',
+  `date` date NOT NULL COMMENT 'Date when the OT was done',
+  `duration` decimal(10,3) NOT NULL COMMENT 'Duration of the OT',
+  `cause` text NOT NULL COMMENT 'Reason why the OT was done',
+  `status` int(11) NOT NULL COMMENT 'Status of OT (Planned, Requested, Accepted, Rejected)',
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
   KEY `employee` (`employee`)
@@ -299,9 +300,9 @@ CREATE TABLE IF NOT EXISTS `overtime` (
 -- Structure of table `positions`
 --
 CREATE TABLE IF NOT EXISTS `positions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of the position',
+  `name` varchar(64) NOT NULL COMMENT 'Name of the position',
+  `description` text NOT NULL COMMENT 'Description of the position',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Position (job position) in the organization' AUTO_INCREMENT=2 ;
 
@@ -316,7 +317,7 @@ INSERT INTO `positions` (`id`, `name`, `description`) VALUES
 --
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Roles in the application (system table)';
 
@@ -333,7 +334,7 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 --
 CREATE TABLE IF NOT EXISTS `status` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Status of the Leave Request (system table)';
 
@@ -352,10 +353,10 @@ INSERT INTO `status` (`id`, `name`) VALUES
 -- Structure of table `types`
 --
 CREATE TABLE IF NOT EXISTS `types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) CHARACTER SET utf8mb4 NOT NULL,
-  `acronym` VARCHAR(10) NULL DEFAULT NULL COMMENT 'Acronym of leave type',
-  `deduct_days_off` BOOL NOT NULL DEFAULT 0 COMMENT 'Deduct days off when computing the balance of the leave type.',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of the type',
+  `name` varchar(128) NOT NULL COMMENT 'Name of the leave type',
+  `acronym` VARCHAR(10) NULL DEFAULT NULL COMMENT 'Acronym of the leave type',
+  `deduct_days_off` BOOL NOT NULL DEFAULT 0 COMMENT 'Deduct days off when computing the balance of the leave type',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='List of leave types (LoV table)' AUTO_INCREMENT=6 ;
 
@@ -374,26 +375,28 @@ INSERT INTO `types` (`id`, `name`) VALUES
 -- Structure of table `users`
 --
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'First name',
-  `lastname` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Last name',
-  `login` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Identfier used to login (can be an email address)',
-  `email` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Email address',
-  `password` varchar(512) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Password encrypted with BCRYPT or a similar method',
-  `role` int(11) DEFAULT NULL COMMENT 'Role of the employee',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of the user',
+  `firstname` varchar(255) DEFAULT NULL COMMENT 'First name',
+  `lastname` varchar(255) DEFAULT NULL COMMENT 'Last name',
+  `login` varchar(255) DEFAULT NULL COMMENT 'Identfier used to login (can be an email address)',
+  `email` varchar(255) DEFAULT NULL COMMENT 'Email address',
+  `password` varchar(512) DEFAULT NULL COMMENT 'Password encrypted with BCRYPT or a similar method',
+  `role` int(11) DEFAULT NULL COMMENT 'Role of the employee (binary mask). See table roles.',
   `manager` int(11) DEFAULT NULL COMMENT 'Employee validating the requests of the employee',
   `country` int(11) DEFAULT NULL COMMENT 'Country code (for later use)',
   `organization` int(11) DEFAULT 0 COMMENT 'Entity where the employee has a position',
   `contract` int(11) DEFAULT NULL COMMENT 'Contract of the employee',
   `position` int(11) DEFAULT NULL COMMENT 'Position of the employee',
   `datehired` date DEFAULT NULL COMMENT 'Date hired / Started',
-  `identifier` varchar(64) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Internal/company identifier',
-  `language` varchar(5) CHARACTER SET utf8mb4 NOT NULL DEFAULT 'en' COMMENT 'Language ISO code',
+  `identifier` varchar(64) NOT NULL COMMENT 'Internal/company identifier',
+  `language` varchar(5) NOT NULL DEFAULT 'en' COMMENT 'Language ISO code',
   `ldap_path` varchar(1024) DEFAULT NULL COMMENT 'LDAP Path for complex authentication schemes',
   `active` bool DEFAULT TRUE COMMENT 'Is user active',
-  `timezone` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Timezone of user',
-  `calendar` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'External Calendar address',
-  `random_hash` varchar(24) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Obfuscate public URLs',
+  `timezone` varchar(255) DEFAULT NULL COMMENT 'Timezone of user',
+  `calendar` varchar(255) DEFAULT NULL COMMENT 'External Calendar address',
+  `random_hash` varchar(24) DEFAULT NULL COMMENT 'Obfuscate public URLs',
+  `user_properties` TEXT NULL DEFAULT NULL COMMENT 'Entity ID (eg. user id) to which the parameter is applied',
+  `picture` BLOB NULL COMMENT 'Profile picture of user for tabular calendar',
   PRIMARY KEY (`id`),
   KEY `manager` (`manager`),
   KEY `organization` (`organization`),
@@ -452,7 +455,7 @@ CREATE TABLE IF NOT EXISTS `leaves_history` (
   PRIMARY KEY (`change_id`),
   KEY `changed_by` (`changed_by`),
   KEY `change_date` (`change_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='List of changes in leave requests table' COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='List of changes in leave requests table' AUTO_INCREMENT=1 ;
 
 -- Tables for OAuth2 server
 CREATE TABLE oauth_clients (client_id VARCHAR(80) NOT NULL, client_secret VARCHAR(80) DEFAULT NULL, redirect_uri VARCHAR(2000) NOT NULL, grant_types VARCHAR(80), scope VARCHAR(100), user_id VARCHAR(80), CONSTRAINT clients_client_id_pk PRIMARY KEY (client_id)) ENGINE=InnoDB;

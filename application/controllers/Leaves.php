@@ -805,7 +805,7 @@ class Leaves extends CI_Controller {
         $department = $this->organization_model->getDepartment($this->user_id);
         $start = $this->input->get('start', TRUE);
         $end = $this->input->get('end', TRUE);
-        echo $this->leaves_model->department($department[0]['id'], $start, $end);
+        echo $this->leaves_model->department($department->id, $start, $end);
     }
 
     /**

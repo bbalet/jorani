@@ -134,7 +134,7 @@ BEGIN
         FROM information_schema.columns
         WHERE table_schema = DATABASE() AND table_name = 'users' AND column_name = 'user_properties'
     ) THEN
-        ALTER TABLE `users` ADD `user_properties` TEXT NULL DEFAULT NULL COMMENT 'Entity ID (eg. user id) to which the parameter is applied';
+        ALTER TABLE `users` ADD `user_properties` TEXT NULL DEFAULT NULL COMMENT 'Extended properties encoded in JSON';
     END IF;
 END$$
 DELIMITER ;

@@ -1,12 +1,14 @@
 -- ---------------------------------------------------
--- Jorani Schema upgrade to 0.7.0
+-- Jorani Schema upgrade to 1.0.0
 --
 -- @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
 -- @copyright  Copyright (c) 2014-2019 Benjamin BALET
 
+-- Clean model from tables that are now into 3rd party applications
 -- Fix default values for database
-
--- TODO: utf8mb4_unicode_ci
+-- Convert to utf8mb4_unicode_ci
+-- Improve comments
+-- Add columns for features of v1.0.0
 
 -- Task management feature is now part of a 3rd party application
 DROP TABLE IF EXISTS `activities`;
@@ -70,7 +72,7 @@ BEGIN
         FROM information_schema.columns
         WHERE table_schema = DATABASE() AND table_name = 'leaves' AND column_name = 'document'
     ) THEN
-        ALTER TABLE `leaves` ADD `document` BLOB NULL COMMENT 'Optional supporting document';
+        ALTER TABLE `leaves` ADD `document` BLOB NULL COMMENT 'Optional supporting document' AFTER `comments`;
         ALTER TABLE `leaves_history` ADD COLUMN `document` BLOB NULL COMMENT 'Optional supporting document' AFTER `comments`;
     END IF;
 END$$

@@ -311,6 +311,15 @@ $route['api/rejectleaves/(:num)'] = 'api/rejectleave/$1';
 $route['api/rejectleave/(:num)'] = 'api/rejectleave/$1';
 //v0.6.0
 $route['api/users/ext'] = 'api/usersExt';
+//MRM
+$route['api/organization_node/(:num)'] = 'api/organization_node/$1';
+$route['api/organization_children/(:num)'] = 'api/organization_children/$1';
+$route['api/createnodeorganization/'] = 'api/createnodeorganization';
+$route['api/movenodeorganization/(:num)/(:num)'] = 'api/movenodeorganization/$1/$2';
+$route['api/deletenodeorganization/(:num)'] = 'api/deletenodeorganization/$1';
+$route['api/renamenodeorganization/(:num)'] = 'api/renamenodeorganization/$1';
+$route['api/attachEmployee/(:num)/(:num)'] = 'api/attachEmployee/$1/$2';
+$route['api/detachEmployee/(:num)/(:num)'] = 'api/detachEmployee/$1/$2';
 
 //_______________________________________________
 //ICS Feeds

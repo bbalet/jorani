@@ -159,8 +159,8 @@ class Leaves_model extends CI_Model {
         $endDateObject = DateTime::createFromFormat('Y-m-d H:i:s', $enddate . ' 00:00:00');
         $iDate = clone $startDateObject;
 
-        //Simplify logic
-        if ($startdate == $enddate) $one_day = TRUE; else $one_day = FALSE;
+        //Simplify the reading (and logic) by decomposing into atomic variables
+        if ($startdate == $enddate) $oneDay = TRUE; else $oneDay = FALSE;
         if ($startdatetype == 'Morning') $start_morning = TRUE; else $start_morning = FALSE;
         if ($startdatetype == 'Afternoon') $start_afternoon = TRUE; else $start_afternoon = FALSE;
         if ($enddatetype == 'Morning') $end_morning = TRUE; else $end_morning = FALSE;
@@ -186,18 +186,18 @@ class Leaves_model extends CI_Model {
                     $hasDayOff = TRUE;
                     switch ($dayOff['type']) {
                         case 1: //1 : All day
-                            if ($one_day && $start_morning && $end_afternoon && $first_day)
+                            if ($oneDay && $start_morning && $end_afternoon && $first_day)
                                 $overlapDayOff = TRUE;
                                 if ($deductDayOff) $length++;
                             break;
                         case 2: //2 : Morning
-                            if ($one_day && $start_morning && $end_morning && $first_day)
+                            if ($oneDay && $start_morning && $end_morning && $first_day)
                                 $overlapDayOff = TRUE;
                             else
                                 if ($deductDayOff) $length++; else $length+=0.5;
                             break;
                         case 3: //3 : Afternnon
-                            if ($one_day && $start_afternoon && $end_afternoon && $first_day)
+                            if ($oneDay && $start_afternoon && $end_afternoon && $first_day)
                                 $overlapDayOff = TRUE;
                             else
                                 if ($deductDayOff) $length++; else $length+=0.5;
@@ -209,7 +209,7 @@ class Leaves_model extends CI_Model {
                 }
             }
             if (!$isDayOff) {
-                if ($one_day) {
+                if ($oneDay) {
                     if ($start_morning && $end_afternoon) $length++;
                     if ($start_morning && $end_morning) $length+=0.5;
                     if ($start_afternoon && $end_afternoon) $length+=0.5;
@@ -1540,10 +1540,14 @@ class Leaves_model extends CI_Model {
                 }
             }
 
-            $startDate = DateTime::createFromFormat('Y-m-d H:i:s', $entry->startdate . ' 00:00:00');
+            //Note that $eventStartDate and $eventEndDate are related to the leave request event
+            //But $startDate and $endDate are the first and last days being displayed on the calendar
+            $eventStartDate = DateTime::createFromFormat('Y-m-d H:i:s', $entry->startdate . ' 00:00:00');
+            $startDate = clone $eventStartDate;
             if ($startDate < $floorDate) $startDate = $floorDate;
             $iDate = clone $startDate;
-            $endDate = DateTime::createFromFormat('Y-m-d H:i:s', $entry->enddate . ' 00:00:00');
+            $eventEndDate = DateTime::createFromFormat('Y-m-d H:i:s', $entry->enddate . ' 00:00:00');
+            $endDate = clone $eventEndDate;
             if ($endDate > $limitDate) $endDate = $limitDate;
 
             //Iteration between 2 dates
@@ -1553,14 +1557,14 @@ class Leaves_model extends CI_Model {
                 if ($iDate < $startDate) continue;  //The leave starts before the first day of the calendar
                 $dayNum = intval($iDate->format('d'));
 
-                //Simplify logic
-                if ($startDate == $endDate) $one_day = TRUE; else $one_day = FALSE;
+                //Simplify the reading (and logic) by using atomic variables
+                if ($eventStartDate == $eventEndDate) $oneDay = TRUE; else $oneDay = FALSE;
                 if ($entry->startdatetype == 'Morning') $start_morning = TRUE; else $start_morning = FALSE;
                 if ($entry->startdatetype == 'Afternoon') $start_afternoon = TRUE; else $start_afternoon = FALSE;
                 if ($entry->enddatetype == 'Morning') $end_morning = TRUE; else $end_morning = FALSE;
                 if ($entry->enddatetype == 'Afternoon') $end_afternoon = TRUE; else $end_afternoon = FALSE;
-                if ($iDate == $startDate) $first_day = TRUE; else $first_day = FALSE;
-                if ($iDate == $endDate) $last_day = TRUE; else $last_day = FALSE;
+                if ($iDate == $eventStartDate) $first_day = TRUE; else $first_day = FALSE;
+                if ($iDate == $eventEndDate) $last_day = TRUE; else $last_day = FALSE;
 
                 //Display (different from contract/calendar)
                 //0 - Working day  _
@@ -1573,19 +1577,19 @@ class Leaves_model extends CI_Model {
                 //9 - Error in start/end types
 
                 //Length of leave request is one day long
-                if ($one_day && $start_morning && $end_afternoon) $display = '1';
-                if ($one_day && $start_morning && $end_morning) $display = '2';
-                if ($one_day && $start_afternoon && $end_afternoon) $display = '3';
-                if ($one_day && $start_afternoon && $end_morning) $display = '9';
+                if ($oneDay && $start_morning && $end_afternoon) $display = '1';
+                if ($oneDay && $start_morning && $end_morning) $display = '2';
+                if ($oneDay && $start_afternoon && $end_afternoon) $display = '3';
+                if ($oneDay && $start_afternoon && $end_morning) $display = '9';
                 //Length of leave request is one day long is more than one day
                 //We are in the middle of a long leave request
-                if (!$one_day && !$first_day && !$last_day) $display = '1';
+                if (!$oneDay && !$first_day && !$last_day) $display = '1';
                 //First day of a long leave request
-                if (!$one_day && $first_day && $start_morning) $display = '1';
-                if (!$one_day && $first_day && $start_afternoon) $display = '3';
+                if (!$oneDay && $first_day && $start_morning) $display = '1';
+                if (!$oneDay && $first_day && $start_afternoon) $display = '3';
                 //Last day of a long leave request
-                if (!$one_day && $last_day && $end_afternoon) $display = '1';
-                if (!$one_day && $last_day && $end_morning) $display = '2';
+                if (!$oneDay && $last_day && $end_afternoon) $display = '1';
+                if (!$oneDay && $last_day && $end_morning) $display = '2';
 
                 //Check if another leave was defined on this day
                 if ($user->days[$dayNum]->display != '4') { //Except full day off

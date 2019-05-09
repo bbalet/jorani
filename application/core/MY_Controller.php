@@ -7,8 +7,6 @@
  * @since     0.4.3
  */
 
-require_once FCPATH . "vendor/autoload.php";
-
 /**
  * This class specializes the CodeIgniter controller by adding
  * Everything needed for REST (Authentication, content negotiation, etc.)
@@ -93,20 +91,21 @@ class MY_RestController extends CI_Controller {
                     $this->load->library('polyglot');
                     if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
                         log_message('debug', 'Client sent us acceptable language codes: ' . $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-                        $negotiator = new \Negotiation\LanguageNegotiator();
                         $availableLanguages = explode(",", $this->config->item('languages'));
                         log_message('debug', 'Jorani currently support one of these lang codes: ' . $this->config->item('languages'));
-                        $bestLanguage = $negotiator->getBest(
-                                $_SERVER['HTTP_ACCEPT_LANGUAGE'],
-                                $availableLanguages);
-                        $langCode = $bestLanguage->getType();
-                        if (!in_array($langCode, $availableLanguages)) {
-                            log_message('debug', 'Sorry, language code of client is not supported: ' . $langCode);
-                            $langCode = $this->polyglot->language2code($this->config->item('language'));
+                        
+                        $possibleLanguage = $this->preferedLanguages($availableLanguages, $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                        $langCode = $this->polyglot->language2code($this->config->item('language'));
+                        if (count($possibleLanguage) > 0) {
+                            if (!in_array($langCode, $availableLanguages)) {
+                                log_message('debug', 'Sorry, language code of client is not supported: ' . $langCode);
+                            } else {
+                                $langCode = key($possibleLanguage);
+                            }
                         }
                         $this->language = $this->polyglot->code2language($langCode);
                     } else {
-                        log_message('debug', 'Client did not send its favourite languages.');
+                        log_message('debug', 'Client did not send its favorite languages.');
                         $this->language = $this->config->item('language');
                     }
                     log_message('debug', 'We\'ll use ' . $this->language);
@@ -124,7 +123,39 @@ class MY_RestController extends CI_Controller {
     }
 
     /**
-     * Preflight check for CORS requests
+     * Get an associative array of the preferred languages 
+     * Languages are sorted out by their preference score
+     * 
+     * @param array $availableLanguages list of languages supported by Jorani
+     * @param string $httpAcceptLanguage HTTP Request Header (accept-language)
+     * @return array associative array langCode/Score (eg. [en] => 0.8, [es] => 0.4)
+     * @author Benjamin BALET <benjamin.balet@gmail.com>
+     */
+    private function preferedLanguages($availableLanguages, $httpAcceptLanguage) {
+        $availableLanguages = array_flip($availableLanguages);
+        $langs = array();
+        preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($httpAcceptLanguage), $matches, PREG_SET_ORDER);
+        foreach($matches as $match) {
+    
+            list($a, $b) = explode('-', $match[1]) + array('', '');
+            $value = isset($match[2]) ? (float) $match[2] : 1.0;
+    
+            if(isset($availableLanguages[$match[1]])) {
+                $langs[$match[1]] = $value;
+                continue;
+            }
+    
+            if(isset($availableLanguages[$a])) {
+                $langs[$a] = $value - 0.1;
+            }
+    
+        }
+        arsort($langs);
+        return $langs;
+    }
+
+    /**
+     * Pre-flight check for CORS requests
      * @author Benjamin BALET <benjamin.balet@gmail.com>
      */
     public function options() {
@@ -160,7 +191,7 @@ class MY_RestController extends CI_Controller {
     }
 
     /**
-     * Terminate lifecycle of the web request if the parametersare invalid
+     * Terminate lifecycle of the web request if the parameters are invalid
      */
     protected function badRequest() {
         log_message('error', ' /!\ badRequest: Invalid input');

@@ -60,7 +60,7 @@ Use bbalet / bbalet for login / password.
 
 ### Contributors
 
-* Github and Google groupe users for their ideas and tests.
+* Github and Google group users for their ideas and tests.
 * All participants of the Transifex project.
 
 ### Third party libraries and components

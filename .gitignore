@@ -19,3 +19,7 @@ application/temp/*
 /.vscode/
 
 /vendor/
+
+/node_modules/
+/assets/js/app.js
+/assets/css/app.css

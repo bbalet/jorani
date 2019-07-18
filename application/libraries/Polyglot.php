@@ -205,7 +205,7 @@ class Polyglot {
 //            case 'gd' : return 'scottish gaelic'; break;
 //            case 'sn' : return 'shona'; break;
 //            case 'si' : return 'sinhala'; break;
-//            case 'sk' : return 'slovak'; break;
+            case 'sk' : return 'slovak'; break;
 //            case 'sl' : return 'slovene'; break;
 //            case 'so' : return 'somali'; break;
 //            case 'st' : return 'southern sotho'; break;
@@ -400,7 +400,7 @@ class Polyglot {
 //            case 'scottish gaelic' : return 'gd'; break;
 //            case 'shona' : return 'sn'; break;
 //            case 'sinhala' : return 'si'; break;
-//            case 'slovak' : return 'sk'; break;
+            case 'slovak' : return 'sk'; break;
 //            case 'slovene' : return 'sl'; break;
 //            case 'somali' : return 'so'; break;
 //            case 'southern sotho' : return 'st'; break;
@@ -596,7 +596,7 @@ class Polyglot {
 //            case 'gd' : return 'Gàidhlig'; break;
 //            case 'sn' : return 'chiShona'; break;
 //            case 'si' : return 'nativeName'; break;
-//            case 'sk' : return 'slovenčina'; break;
+            case 'sk' : return 'slovenčina'; break;
 //            case 'sl' : return 'slovenščina'; break;
 //            case 'so' : return 'Soomaaliga'; break;
 //            case 'st' : return 'Sesotho'; break;
@@ -791,7 +791,7 @@ class Polyglot {
 //            case 'Gàidhlig' : return 'gd'; break;
 //            case 'chiShona' : return 'sn'; break;
 //            case 'nativeName' : return 'si'; break;
-//            case 'slovenčina' : return 'sk'; break;
+            case 'slovenčina' : return 'sk'; break;
 //            case 'slovenščina' : return 'sl'; break;
 //            case 'Soomaaliga' : return 'so'; break;
 //            case 'Sesotho' : return 'st'; break;

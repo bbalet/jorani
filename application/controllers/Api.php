@@ -32,8 +32,6 @@ define("TOKEN_URL", API_HOST . '/token');
  * )
  */
 
-require_once FCPATH . "vendor/autoload.php";
-
 /**
  * This class implements a HTTP API served through an OAuth2 server.
  * In order to use it, you need to insert an OAuth2 client into the database, for example :

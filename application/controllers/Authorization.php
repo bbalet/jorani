@@ -13,8 +13,6 @@
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
-require_once FCPATH . "vendor/autoload.php";
-
 /**
  * This class implements a OAuth2 Authorization mechanism for a 3rd application
  */

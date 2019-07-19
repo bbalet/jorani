@@ -8,6 +8,11 @@
  * @since         0.4.0
  */
 
+require_once 'vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 define('BASEPATH', '.'); //Make this script works with nginx
 $env = is_null(getenv('CI_ENV'))?'':getenv('CI_ENV');
 //Configuration values are taken from application/config/(env)/email.php
@@ -61,10 +66,8 @@ if (EMAIL_ADDRESS == '') {
         include $pathConfigFile;
         try {
             //Include shipped PHPMailer library
-            $phpmailerLib = realpath(join(DIRECTORY_SEPARATOR, array('application', 'third_party', 'phpmailer', 'PHPMailerAutoload.php')));
-            require_once $phpmailerLib;
             $mail = new PHPMailer(true); //true => throw exceptions on error
-            $mail->SMTPDebug = 2;     //Debug informations
+            $mail->SMTPDebug = 1;     //Errors and messages
             $mail->Debugoutput = function($str, $level) {
                 echo nl2br($str);
             };
@@ -75,6 +78,7 @@ if (EMAIL_ADDRESS == '') {
                 $mail->IsSMTP();
                 $mail->Host = $config['smtp_host'];
                 $mail->Port = $config['smtp_port'];
+                $mail->SMTPAutoTLS = $config['smtp_auto_tls'];
                 if (strpos($config['smtp_port'], 'gmail') !== false) {
                     echo '<b>INFO:</b> Using GMAIL.<br />' . PHP_EOL;
                 }
@@ -93,7 +97,7 @@ if (EMAIL_ADDRESS == '') {
             }
 
             //GMAIL requires _smtp_auth set to TRUE
-            if ($config['_smtp_auth'] == TRUE) {
+            if ($config['smtp_auth'] === TRUE) {
                 echo '<b>INFO:</b> SMTP with authentication.<br />' . PHP_EOL;
                 $mail->SMTPAuth = true;
                 $mail->Username = $config['smtp_user'];

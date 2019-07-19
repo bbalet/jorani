@@ -9,8 +9,6 @@
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
-require_once FCPATH . "vendor/autoload.php";
-
 /**
  * This class manages the connection to the application
  * CodeIgniter uses a cookie to store session's details.
@@ -115,7 +113,6 @@ class Connection extends CI_Controller {
                 $privateKey = openssl_pkey_get_private(file_get_contents('./assets/keys/private.pem', TRUE));
                 openssl_private_decrypt(base64_decode($this->input->post('CipheredValue')), $password, $privateKey);
             } else {
-                require_once FCPATH . "vendor/autoload.php";
                 $rsa = new phpseclib\Crypt\RSA();
                 $privateKey = file_get_contents('./assets/keys/private.pem', TRUE);
                 $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);

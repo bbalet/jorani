@@ -22,7 +22,8 @@
         "jpgraph/jpgraph": "^4.0.2",
         "respect/validation": "^1.1.31",
         "onelogin/php-saml": "^3.1.0",
-        "zircote/swagger-php": "^3.0.1"
+        "zircote/swagger-php": "^3.0.1",
+        "phpmailer/phpmailer": "^6.0"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^6.3.3",

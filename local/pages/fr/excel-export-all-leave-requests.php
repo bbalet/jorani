@@ -3,8 +3,6 @@
 //If your custom page is making an export to a file (Excel, etc.) simply include 'export' into its name
 //http://localhost/jorani/excel-export
 
-require_once FCPATH . "vendor/autoload.php";
-
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;

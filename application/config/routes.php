@@ -266,10 +266,8 @@ $route['reports'] = 'reports';
 
 //_______________________________________________
 //HTTP API
-$route['api/doc'] = 'api/doc';
 $route['api/token'] = 'api/token';
 $route['api/contracts/(:num)'] = 'api/contracts/$1';
-$route['api/contracts/'] = 'api/contracts';
 $route['api/contracts'] = 'api/contracts';
 $route['api/entitleddayscontract/(:num)'] = 'api/entitleddayscontract/$1';
 $route['api/addentitleddayscontract/(:num)'] = 'api/addentitleddayscontract/$1';
@@ -277,38 +275,26 @@ $route['api/entitleddaysemployee/(:num)'] = 'api/entitleddaysemployee/$1';
 $route['api/addentitleddaysemployee/(:num)'] = 'api/addentitleddaysemployee/$1';
 $route['api/leavessummary/(:num)/(:num)'] = 'api/leavessummary/$1/$2';
 $route['api/leavessummary/(:num)'] = 'api/leavessummary/$1';
-$route['api/leaves/(:any)/(:any)'] = 'api/leavesInRange/$1/$2';
-$route['api/leavetypes/'] = 'api/leavetypes';
+$route['api/leaves/(:num)/(:num)'] = 'api/leaves/$1/$2';
 $route['api/leavetypes'] = 'api/leavetypes';
-$route['api/positions/'] = 'api/positions';
 $route['api/positions'] = 'api/positions';
 $route['api/userdepartment/(:num)'] = 'api/userdepartment/$1';
 $route['api/userextras/(:num)'] = 'api/userextras/$1';
 $route['api/userleaves/(:num)'] = 'api/userleaves/$1';
-$route['api/users/(:num)/leaves/'] = 'api/userleaves/$1';
-$route['api/users/(:num)']['GET'] = 'api/users/$1';
-$route['api/users/']['GET'] = 'api/users';
+$route['api/users/(:num)'] = 'api/users/$1';
 $route['api/users'] = 'api/users';
 //v0.4.0
 $route['api/monthlypresence/(:num)/(:num)/(:num)'] = 'api/monthlypresence/$1/$2/$3';
 $route['api/deleteuser/(:num)'] = 'api/deleteuser/$1';
-$route['api/users/(:num)']['DELETE'] = 'api/deleteuser/$1';
 $route['api/updateuser/(:num)'] = 'api/updateuser/$1';
-$route['api/users/(:num)']['PATCH'] = 'api/updateuser/$1';
 $route['api/createuser/(:any)'] = 'api/createuser/$1';
 $route['api/createuser'] = 'api/createuser';
-$route['api/users/']['POST'] = 'api/createuser/$1';
-$route['api/users/(:any)']['POST'] = 'api/createuser/$1';
 $route['api/createleave'] = 'api/createleave';
-$route['api/leaves']['POST'] = 'api/createleave';
-$route['api/leaves/']['POST'] = 'api/createleave';
 //v0.4.3
 $route['api/getListOfEmployeesInEntity/(:num)/(:any)'] = 'api/getListOfEmployeesInEntity/$1/$2';
 //v0.4.4
-$route['api/acceptleaves/(:num)'] = 'api/acceptleave/$1';
-$route['api/acceptleave/(:num)'] = 'api/acceptleave/$1';
-$route['api/rejectleaves/(:num)'] = 'api/rejectleave/$1';
-$route['api/rejectleave/(:num)'] = 'api/rejectleave/$1';
+$route['api/acceptleaves/(:num)'] = 'api/acceptleaves/$1';
+$route['api/rejectleaves/(:num)'] = 'api/rejectleaves/$1';
 //v0.6.0
 $route['api/users/ext'] = 'api/usersExt';
 //MRM
@@ -320,6 +306,17 @@ $route['api/deletenodeorganization/(:num)'] = 'api/deletenodeorganization/$1';
 $route['api/renamenodeorganization/(:num)'] = 'api/renamenodeorganization/$1';
 $route['api/attachEmployee/(:num)/(:num)'] = 'api/attachEmployee/$1/$2';
 $route['api/detachEmployee/(:num)/(:num)'] = 'api/detachEmployee/$1/$2';
+
+//_______________________________________________
+//REST API (for mobile/HTML Clients)
+$route['api/rest/leaves']['OPTIONS'] = 'rest/options';
+$route['api/rest/leaves']['GET'] = 'rest/leaves';
+
+//User properties : is admin, is manager, id, id of manager, manager, contract..
+$route['api/rest/users/self']['GET'] = 'rest/getPropertiesOfConnectedUser';
+
+$route['api/rest/contracts']['OPTIONS'] = 'rest/options';
+$route['api/rest/users']['OPTIONS'] = 'rest/options';
 
 //_______________________________________________
 //ICS Feeds
@@ -349,52 +346,7 @@ $route['api/authorization/login'] = 'authorization/login';
 $route['api/authorization/userinfo'] = 'authorization/userinfo';
 
 //_______________________________________________
-//REST API (for mobile/HTML Clients)
-$route['api/rest/self']['OPTIONS'] = 'Rest/options';
-$route['api/rest/self']['GET'] = 'Rest/self';
-$route['api/rest/profile']['OPTIONS'] = 'Rest/options';
-$route['api/rest/profile']['GET'] = 'Rest/profile';
-
-$route['api/rest/config']['OPTIONS'] = 'Rest/options';
-$route['api/rest/config']['GET'] = 'Rest/config';
-$route['api/rest/checksum/(:any)']['OPTIONS'] = 'Rest/options';
-$route['api/rest/checksum/(:any)']['GET'] = 'Rest/checksum/$1';
-$route['api/rest/checksum']['OPTIONS'] = 'Rest/options';
-$route['api/rest/checksum']['GET'] = 'Rest/checksum';
-$route['api/rest/submissions']['OPTIONS'] = 'Rest/options';
-$route['api/rest/submissions']['GET'] = 'Rest/submissions';
-
-$route['api/rest/leaves']['OPTIONS'] = 'RestLeaves/options';
-$route['api/rest/leaves']['GET'] = 'RestLeaves/leaves';
-$route['api/rest/leaves']['POST'] = 'RestLeaves/create';
-$route['api/rest/leaves/(:num)']['OPTIONS'] = 'RestLeaves/options';
-$route['api/rest/leaves/(:num)']['GET'] = 'RestLeaves/leaves/$1';
-$route['api/rest/leaves/(:num)']['PATCH'] = 'RestLeaves/edit/$1';
-$route['api/rest/leaves/(:num)']['DELETE'] = 'RestLeaves/delete/$1';
-
-$route['api/rest/requests']['OPTIONS'] = 'RestRequests/options';
-$route['api/rest/requests']['GET'] = 'RestRequests/requests';
-$route['api/rest/requests/(:any)']['OPTIONS'] = 'RestRequests/requests/$1';
-$route['api/rest/requests/(:any)']['GET'] = 'RestRequests/requests/$1';
-
-//User properties : is admin, is manager, id, id of manager, manager, contract..
-$route['api/rest/users/(:num)']['OPTIONS'] = 'RestUsers/options';
-$route['api/rest/users/(:num)']['GET'] = 'RestUsers/users/$1';
-$route['api/rest/users']['OPTIONS'] = 'RestUsers/options';
-$route['api/rest/users']['GET'] = 'RestUsers/users';
-
-$route['api/rest/users/(:num)/enable']['OPTIONS'] = 'RestUsers/options';
-$route['api/rest/users/(:num)/enable']['GET'] = 'RestUsers/enable/$1';
-$route['api/rest/users/(:num)/disable']['OPTIONS'] = 'RestUsers/options';
-$route['api/rest/users/(:num)/disable']['GET'] = 'RestUsers/disable/$1';
-
-$route['api/rest/admin/logs/(:any)']['OPTIONS'] = 'RestAdmin/options';
-$route['api/rest/admin/logs/(:any)']['GET'] = 'RestAdmin/logs/$1';
-$route['api/rest/admin/logs']['OPTIONS'] = 'RestAdmin/options';
-$route['api/rest/admin/logs']['GET'] = 'RestAdmin/logs';
-
-//_______________________________________________
 //Default controllers
 $route['default_controller'] = 'leaves';
-$route['404_override'] = 'pages/notfound';
+$route['notfound'] = 'pages/notfound';
 $route['(:any)'] = 'pages/view/$1';

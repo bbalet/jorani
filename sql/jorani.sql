@@ -60,12 +60,13 @@ BEGIN
     SET queue_length = 1;
 
     WHILE queue_length > 0 DO
-        SET front_id = FORMAT(queue,0);
         IF queue_length = 1 THEN
+            SET front_id = CAST(queue AS INT);
             SET queue = '';
         ELSE
-            SET pos = LOCATE(',',queue) + 1;
-            SET q = SUBSTR(queue,pos);
+            SET pos = LOCATE(',',queue);
+            SET front_id = CAST(SUBSTR(queue, 1, pos-1) AS INT);
+            SET q = SUBSTR(queue,pos + 1); 
             SET queue = q;
         END IF;
         SET queue_length = queue_length - 1;

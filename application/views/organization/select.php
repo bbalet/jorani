@@ -15,8 +15,8 @@
 
 <div style="text-align: left;" id="organization"></div>
 
-<link rel="stylesheet" href='<?php echo base_url(); ?>assets/jsTree-3.3.7/themes/default/style.css' type="text/css" media="screen, projection" />
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/jsTree-3.3.7/jstree.min.js"></script>
+<link rel="stylesheet" href='<?php echo base_url(); ?>assets/jsTree-3.3.10/themes/default/style.css' type="text/css" media="screen, projection" />
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/jsTree-3.3.10/jstree.min.js"></script>
 
 <script type="text/javascript">
     $(function () {

@@ -2,16 +2,16 @@ FROM composer as composer
 COPY composer.json composer.lock ./
 RUN composer install --ignore-platform-reqs --no-dev
 
-FROM php:apache
+FROM php:7.4-apache
 RUN apt-get update && apt-get install -y zlib1g-dev \
     libzip-dev \
     libldap2-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
-    && docker-php-ext-configure zip --with-libzip \
+    && docker-php-ext-configure zip \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd ldap zip pdo pdo_mysql \
     && rm -rf /var/lib/apt/lists/
 RUN a2enmod rewrite

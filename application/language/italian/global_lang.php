@@ -87,7 +87,7 @@ $lang['firstname'] = 'nome';
 $lang['lastname'] = 'cognome';
 $lang['datehired'] = 'data assunzione';
 $lang['department'] = 'reparto';
-$lang['position'] = 'position';
+$lang['position'] = 'posizione';
 $lang['contract'] = 'contratto';
 $lang['day off'] = 'giorno libero';
 $lang['leave'] = 'ferie';
@@ -101,5 +101,5 @@ $lang['oauth2_authorize_question'] = 'Do You Authorize %s application?';
 $lang['Yes'] = 'Yes';
 $lang['No'] = 'No';
 
-$lang['global_ajax_timeout'] = 'Your session has expired please login again';
+$lang['global_ajax_timeout'] = 'La sessione è scaduta, effettua nuovamente l\'accesso';
 $lang['global_ajax_error'] = 'Errore Ajax imprevisto';

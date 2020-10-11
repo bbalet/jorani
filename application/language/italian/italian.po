@@ -481,7 +481,7 @@ msgid "Your account has been created"
 msgstr "Il tuo account è stato creato"
 
 msgid "Leave Request from"
-msgstr ""
+msgstr "Richiesta ferie da"
 
 msgid "Leave Request"
 msgstr "Richiesta ferie"
@@ -547,7 +547,7 @@ msgid "Are you sure that you want to delete it?"
 msgstr "Sei sicuro di volerlo eliminare?"
 
 msgid "Step"
-msgstr ""
+msgstr "Passo"
 
 msgid "Entitled days for employee"
 msgstr "Giorni spettanti per dipendente"
@@ -715,7 +715,7 @@ msgid "department"
 msgstr "reparto"
 
 msgid "position"
-msgstr ""
+msgstr "posizione"
 
 msgid "contract"
 msgstr "contratto"
@@ -727,7 +727,7 @@ msgid "leave"
 msgstr "ferie"
 
 msgid "copied"
-msgstr ""
+msgstr "copiato"
 
 msgid "Your session has expired please login again"
 msgstr ""
@@ -1310,10 +1310,10 @@ msgid "Paste"
 msgstr "Incolla"
 
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 msgid "Inactive"
-msgstr ""
+msgstr "Inattivo"
 
 msgid "edit user details"
 msgstr "modifica dettagli utente"

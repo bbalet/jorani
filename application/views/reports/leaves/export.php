@@ -127,7 +127,7 @@ foreach ($result as $user_id => $row) {
             $sheet->setCellValue('C' . $line, lang('leaves_index_thead_type'));
             $sheet->setCellValue('D' . $line, lang('leaves_index_thead_duration'));
             $sheet->getStyle('A' . $line . ':D' . $line)->getFont()->setBold(true);
-            $sheet->getStyle('A' . $line . ':D' . $line)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle('A' . $line . ':D' . $line)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
             $line++;
             //Iterate on leave requests
             foreach ($leave_requests[$user_id] as $request) {

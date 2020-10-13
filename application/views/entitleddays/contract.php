@@ -120,7 +120,6 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <link href="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script><script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
 
 <script type="text/javascript">
     //Current cell transformed in input box

@@ -6,7 +6,9 @@
   "repository": "https://github.com/bbalet/jorani.git",
   "author": "bbalet <benjamin.balet@gmail.com>",
   "license": "AGPL-3.0-or-later",
-  "dependencies": {},
+  "dependencies": {
+    "js-cookie": "^2.2.1"
+  },
   "devDependencies": {
     "webpack": "^5.0.0",
     "webpack-cli": "^4.0.0"

@@ -5,3 +5,10 @@
  * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
  * Released under the MIT license
  */
+
+/*!
+ * clipboard.js v2.0.6
+ * https://clipboardjs.com/
+ * 
+ * Licensed MIT © Zeno Rocha
+ */

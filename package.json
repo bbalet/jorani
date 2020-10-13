@@ -1,0 +1,14 @@
+{
+  "name": "jorani",
+  "version": "1.0.0",
+  "description": "Jorani is a free and open source leave management system",
+  "main": "index.js",
+  "repository": "https://github.com/bbalet/jorani.git",
+  "author": "bbalet <benjamin.balet@gmail.com>",
+  "license": "AGPL-3.0-or-later",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
+  }
+}

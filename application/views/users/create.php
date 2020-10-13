@@ -309,7 +309,6 @@ echo form_open('users/create', $attributes); ?>
     </div>
 </div>
 
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/css/bootstrap-datepicker.min.css">
 <script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/js/bootstrap-datepicker.min.js"></script>
 <?php if ($language_code != 'en') {?>
@@ -374,11 +373,11 @@ echo form_open('users/create', $attributes); ?>
 
     //Before submitting the form, encrypt the password and don't send the clear value
     function submit_form() {
-        var encrypt = new JSEncrypt();
-        encrypt.setPublicKey($('#pubkey').val());
-        var encrypted = encrypt.encrypt($('#password').val());
-        $('#CipheredValue').val(encrypted);
-        $('#target').submit();
+        var encrypter = new CryptoTools();
+        encrypter.encrypt($('#pubkey').val(), $('#password').val()).then((encrypted) => {
+            $('#CipheredValue').val(encrypted);
+            $('#target').submit();
+        });
     }
 
     /**

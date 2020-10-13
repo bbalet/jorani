@@ -130,18 +130,17 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
 <link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
 <script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/js.state-2.2.0.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
 
     //Encrypt the password using RSA and send the ciphered value into the form
     function submit_form() {
-        var encrypt = new JSEncrypt();
-        encrypt.setPublicKey($('#pubkey').val());
-        //Encrypt the concatenation of the password and the salt
-        var encrypted = encrypt.encrypt($('#password').val() + $('#salt').val());
-        $('#CipheredValue').val(encrypted);
-        $('#loginFrom').submit();
+        var encrypter = new CryptoTools();
+        var clearText = $('#password').val() + $('#salt').val();
+        encrypter.encrypt($('#pubkey').val(), clearText).then((encrypted) => {
+            $('#CipheredValue').val(encrypted);
+            $('#loginFrom').submit();
+        });
     }
 
     //Attempt to authenticate the user using OAuth2 protocol

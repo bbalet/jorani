@@ -102,7 +102,7 @@ echo "<tr><td>OpenSSL Header</td><td>" . ((isset($versions['Header']))? $version
 $rsa = new \phpseclib\Crypt\RSA();
 echo "<tr><td>CRYPT_RSA_MODE</td><td>" . ((CRYPT_RSA_MODE==1)? 'MODE_INTERNAL' : 'MODE_OPENSSL')  . '</td></tr>';
 
-$rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
+$rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_OAEP);
 $plaintext = 'Jorani is the best open source Leave Management System';
 
 $rsa->loadKey($publicKey);
@@ -118,7 +118,7 @@ echo "<tr><td>Decryption speed (fallback)</td><td>" . $time  . '</td></tr>';
 if (function_exists('openssl_pkey_get_private')) {
     $time_start = microtime(true);
     $key = openssl_pkey_get_private($privateKey);
-    openssl_private_decrypt($ciphertext, $message, $key);
+    openssl_private_decrypt($ciphertext, $message, $key, OPENSSL_PKCS1_OAEP_PADDING);
     echo "<tr><td>Decrypted message</td><td>" . $message . '</td></tr>';
     $time_end = microtime(true);
     $time = $time_end - $time_start;

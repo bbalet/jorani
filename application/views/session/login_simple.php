@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <title><?php echo $title ?> - Jorani</title>
     <meta description="Jorani a free and open source leave management system. Workflow of approval; e-mail notifications; calendars; reports; export to Excel and more.">
-    <meta name="version" content="0.6.0">
+    <meta name="version" content="1.0.1">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/css/jorani-0.6.6.css" rel="stylesheet">
@@ -31,6 +31,7 @@ $this->lang->load('global', $language);?>
     <![endif]-->
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jorani.js"></script>
     <link rel="icon" type="image/x-icon" href="<?php echo base_url();?>favicon.ico" sizes="32x32">
     <style>
 <?php //Font mapping with languages needing a better font than the default font
@@ -94,17 +95,16 @@ if (!is_null($fonts)) {
     </div>
 </div>
 
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jsencrypt.min.js"></script>
 <script type="text/javascript">
 
     //Encrypt the password using RSA and send the ciphered value into the form
     function submit_form() {
-        var encrypt = new JSEncrypt();
-        encrypt.setPublicKey($('#pubkey').val());
-        //Encrypt the concatenation of the password and the salt
-        var encrypted = encrypt.encrypt($('#password').val() + $('#salt').val());
-        $('#CipheredValue').val(encrypted);
-        $('#loginForm').submit();
+        var encrypter = new CryptoTools();
+        var clearText = $('#password').val() + $('#salt').val();
+        encrypter.encrypt($('#pubkey').val(), clearText).then((encrypted) => {
+            $('#CipheredValue').val(encrypted);
+            $('#loginFrom').submit();
+        });
     }
 
     $(function () {

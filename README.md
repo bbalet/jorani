@@ -85,7 +85,6 @@ We thank the following open source projects for the components used by Jorani:
 * JQuery and JQuery-UI
 * FullCalendar https://fullcalendar.io/
 * Datatable https://datatables.net/
-* RSA implementation https://github.com/travist/jsencrypt
 * Moment (JS dates library) http://momentjs.com/
 * Select2 https://select2.org/
 * JavaScript Cookie https://github.com/js-cookie/js-cookie

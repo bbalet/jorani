@@ -1,28 +1,12 @@
 If you want to contribute to the development of Jorani, here is a list of things to be implemented.
 I tried to sort them out by priority and to explicitly explain what is out of scope.
 
-## Dependencies to watch
-
-* https://github.com/travist/jsencrypt should publish v3 (compat to PHP backend).
-* http://bootboxjs.com/ should publish v5 (compat to BS4).
-* https://fullcalendar.io/ should publish v4 (removes JQuery dependencies).
-
 ## v0.6.6 or later
 
-- [X] Compatibility with PHP7.2.
-- [X] Migrate to select2 (selectize is no longer active).
-- [X] Migrate to PhpSpreadSheet (PHPExcel is no longer active).
-- [X] Remove all glyphicons and use Material Design Icons instead.
-- [X] Migrate to JavaScript Cookie (removes JQuery dependencies).
 - [ ] Maybe: Cannot force LR status from 2 to 1 for regular user.
 - [ ] Forbid negative duration in leave requests (Option).
 - [ ] Maybe: remove all references to JQueryUI (datepicker).
 - [ ] Maybe: Migrate Fontawesome to material design icons set (in preparation of BS4).
-
-## v0.7.0 or later
-
-Following naming convention, this version will need a DB patch.
-
 - [ ] Technical update of FullCalendar (beware of LTR bug: https://github.com/fullcalendar/fullcalendar/issues/2516).
 - [ ] ICS feeds should use a random hash when publicly exposed.
 - [ ] Dynamic form for user properties (Jorani to become a SAML2 IdP). For superadmin only.
@@ -39,19 +23,9 @@ Following naming convention, this version will need a DB patch.
 - [ ] Add SMTPSecure, SMTPAutoTLS, and SMTPAuth email params. See https://mail.google.com/mail/u/0/#inbox/15ae53ce27624515
 - [ ] Fix missing closing DIV (Firefox).
 - [ ] Implement OAuth scopes in API.
-Maybe:
-- [ ] Add a table to log the execution of services using the API (eg cron tasks) + a sample page in local to display them.
-- [ ] Maybe: edit/import/export settings from WebUI.
-- [ ] Maybe: user/group permission.
-- [ ] Maybe: configuration from DB.
 - [ ] Replace header() by set_header()
 - [ ] Replace set_header("HTTP/1.1 422...) by set_status_header()
 - [ ] Replace echo() by set_output()
-
-## v0.8.0 or later
-
-Following naming convention, this version will need a DB patch.
-
 - [ ] Report carried-over leaves wizard : select an entity (change date), opt-in/out employees, check suggested report and go.
 - [ ] Mass apply entitled days to a group of employees. (organisation) - (employees in entity) <-> select.
 - [ ] Complete PHP triggers (add fruux lib to put CalDAV -> no : incomplete library).
@@ -62,6 +36,12 @@ Following naming convention, this version will need a DB patch.
 - [ ] Possibility to optionally sort the leave types (contract-level, types not excluded).
 - [ ] Notification by e-mail : Request deleted / modified (maybe or report v0.5.0). We should maybe have basic objects to pass...
 - [ ] Better LDAP integration with an explorer and better/simpler binding method.
+
+## Maybe
+- [ ] Add a table to log the execution of services using the API (eg cron tasks) + a sample page in local to display them.
+- [ ] Maybe: edit/import/export settings from WebUI.
+- [ ] Maybe: user/group permission.
+- [ ] Maybe: configuration from DB.
 
 ## Ideas
 
@@ -83,8 +63,8 @@ Code sample:
 
 ## Not a priority
 
-- [ ] Supporting docs (upload attachments into local folder).
-- [ ] Implement a kind of heritage in HR/organization for supervisors (child entities).
+- [ ] Supporting docs (upload attachments into database).
+- [ ] Implement a kind of heritage in HR/organization for supervisors (child entities). See PR, it looks to be done already
 - [ ] HR officers of a part of the organization (defined in HR/organization), for future functions when they'll be CCed. and/or ...
 - [ ] ... Multitenancy (add global filter / Additionnal field on all tables). Allow access to the same instance for multiple tenants.
 - [ ] Add a field explaining why a request is rejected. Validation E-mail will redirect to a form is this option is activated ?
@@ -96,15 +76,16 @@ request a leave even if your credit is negative and because leave balance report
 
 ## Post v1.0
 
-- [ ] Mobile-optimized views (limited to few pages : simple user and validation).
-- [ ] Simplified time tracking. Not sure because Jorani is specialized in LMS. Maybe a side project ?
+- [ ] Switch to package.json for JS dependencies
+- [ ] Migrate to latest google analytics javascript (in templates/header.php)
+- [ ] Upgrade JS libs (bootboxjs)
+- [ ] Migrate to latest fullcalendar
 
 ## Might not be implemented
 
-- [ ] Requests are validated by two users (too complicated for targeted users).
+- [ ] Requests are validated by two users (multi level validation).
 - [ ] Different colors for each leave type. Requesters often don't know that you can get the list of leaves elsewhere.
 - [ ] PDF Export (no serious OSS PDF lib dealing correctly with Unicode / Modern browsers can print as PDF).
-- [ ] Migration to CI 3.0.0 (we don't rely too much on the library, so it has no interrest and it is slower than v2).
 
 # Impacts
 

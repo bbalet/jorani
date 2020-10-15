@@ -22,13 +22,10 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/MDI-3.4.93/css/materialdesignicons.min.css">
 <?php CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('global', $language);?>
-    <!--[if lte IE 8]>
+    <!--[if lte IE 9]>
     <script type="text/javascript">
     alert("<?php echo lang('global_msg_old_browser'); ?>");
     </script>
-    <![endif]-->
-    <!--[if lt IE 9]>
-    <script src="<?php echo base_url();?>assets/js/html5shiv.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>

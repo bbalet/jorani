@@ -8,6 +8,7 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "clipboard": "^2.0.6",
+    "hammerjs": "^2.0.8",
     "js-cookie": "^2.2.1"
   },
   "devDependencies": {

@@ -313,7 +313,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/Select-1.1.2/js/dataTables.select.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/context.menu.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/toe.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
 <?php //Prevent HTTP-404 when localization isn't needed
 if ($language_code != 'en') { ?>
@@ -572,16 +571,17 @@ $(function () {
         }
       });
 
-    //Taphold on mobile, display contextual menu as a popup
-    $(document).on('taphold', '.context', function(e){
+    //Long press on mobile, display contextual menu as a popup
+    var hammer = new Hammer(document, {time: 600});
+    hammer.on('press', function(e) {
         id = $(e.target).closest("tr").find('td:eq(0)').text();
         $("#frmContextMenu").modal('show');
         $('.context-mobile').each(function() {
             action =  $(this).attr( 'href');
             var url = action.replace("{id}", id.trim());
             $(this).attr( 'href', url);
-        });
-      });
+        }); 
+    });
 
     //On double click, display contextual menu as a popup
     $(document).on('dblclick', '.context', function (e) {

@@ -60,7 +60,7 @@
 </div>
 
 <!--We can load any asset, just use the base_url methos for safer URLs//-->
-<script src="<?php echo base_url();?>assets/js/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 <script type="text/javascript">
 function select_entity() {
     entity = $('#organization').jstree('get_selected')[0];

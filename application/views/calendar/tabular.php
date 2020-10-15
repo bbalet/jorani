@@ -103,7 +103,6 @@
 }
 </style>
 
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
     //Global locale for moment objects

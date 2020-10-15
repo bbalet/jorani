@@ -305,7 +305,6 @@
 <link href="<?php echo base_url();?>assets/datatable/ColReorder-1.3.1/css/colReorder.dataTables.min.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/datatable/Select-1.1.2/css/select.dataTables.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flick/jquery-ui.custom.min.css">
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/Buttons-1.1.2/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/datatable/Buttons-1.1.2/js/buttons.colVis.min.js"></script>

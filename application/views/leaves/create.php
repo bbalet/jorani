@@ -98,7 +98,6 @@ echo form_open('leaves/create', $attributes) ?>
 if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/moment-with-locales.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
 <script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>

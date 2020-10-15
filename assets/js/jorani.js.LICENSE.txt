@@ -18,3 +18,7 @@
  *
  * Copyright (c) 2016 Jorik Tangelder;
  * Licensed under the MIT license */
+
+//! moment.js
+
+//! moment.js locale configuration

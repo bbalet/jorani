@@ -81,7 +81,7 @@ We thank the following open source projects for the components used by Jorani:
 
 #### Frontend
 
-* bootstrap 2.3, bootbox, datepicker and FontAwesome
+* bootstrap 2.3, bootbox, datepicker
 * JQuery and JQuery-UI
 * FullCalendar https://fullcalendar.io/
 * Datatable https://datatables.net/

@@ -15,11 +15,10 @@
     <title><?php echo $title ?> - Jorani</title>
     <meta description="Jorani a free and open source leave management system. Workflow of approval; e-mail notifications; calendars; reports; export to Excel and more.">
     <meta name="version" content="0.6.0">
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jorani.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/dist/legacy.js"></script>
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="<?php echo base_url();?>assets/css/jorani-0.6.6.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/MDI-3.4.93/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/legacy.css">
 <?php CI_Controller::get_instance()->load->helper('language');
 $this->lang->load('global', $language);?>
     <!--[if lte IE 9]>

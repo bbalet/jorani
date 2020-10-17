@@ -23,3 +23,5 @@ application/temp/*
 /node_modules/
 /assets/js/app.js
 /assets/css/app.css
+
+yarn-error.log

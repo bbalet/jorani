@@ -20,3 +20,9 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# Font files
+*.eot binary
+*.ttf binary
+*.woff binary
+*.woff2 binary

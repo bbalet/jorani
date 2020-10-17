@@ -1,0 +1,21 @@
+/**
+ * Custom styles for Jorani
+ * @copyright  Copyright (c) 2014-2019 Benjamin BALET
+ * @license    http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
+ * @link       https://github.com/bbalet/jorani
+ * @since      1.0.1
+ */
+
+//Material Design Icons
+@import '@mdi/font/css/materialdesignicons.min.css';
+
+//Bootsrap
+@import '~bootstrap/scss/bootstrap';
+
+.nolink {
+    color: black;
+}
+
+h1, h2, h3 {
+    margin-top: 30px;
+}

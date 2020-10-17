@@ -87,70 +87,38 @@ if ($configFileExists) {
 ?>
 <html>
     <head>
-    <title>Jorani Requirements</title>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
-    <link  rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/MDI-3.4.93/css/materialdesignicons.min.css">
-    <script type="text/javascript" src="assets/js/jquery-2.2.4.min.js"></script>
-
-    <style>
-    .nolink {
-        color: black;
-    }
-    </style>
-
-    <script type="text/javascript">
-        function export2csv() {
-        var content = "";
-        content += "Table;Description;Value\n";
-
-        $("#tblServer tr").each(function() {
-          $this = $(this)
-          content += "Server;" + $.trim($(this).find("td:eq(0)").text())
-                  + ";" + $(this).find("td:eq(1)").text()  + "\n";
-        });
-        $("#tblDatabase tr").each(function() {
-          $this = $(this)
-          content += "Database;" + $.trim($(this).find("td:eq(0)").text())
-                  + ";" + $(this).find("td:eq(1)").text()  + "\n";
-        });
-        $("#tblSchema tr").each(function() {
-          $this = $(this)
-          content += "Schema;" + $.trim($(this).find("td:eq(0)").text())
-                  + ";" + $(this).find("td:eq(1)").text()  + "\n";
-        });
-
-        // Build a data URI:
-        uri = "data:text/csv;charset=utf-8," + encodeURIComponent(content);
-        location.href = uri;
-    }
-    </script>
+        <title>Jorani Requirements</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
+        <link rel="stylesheet" href="assets/dist/requirements.css">
+        <script type="text/javascript" src="assets/dist/requirements.js"></script>
     </head>
     <body>
-        <div class="container-fluid">
-            <ul class="nav nav-pills">
-                <li><a href="home" title="login to Jorani"><i class="mdi mdi-home nolink"></i></a></li>
-                <li class="active"><a href="#">Requirements</a></li>
-                <li><a href="testmail.php">Email</a></li>
-                <li><a href="testldap.php">LDAP</a></li>
-                <li><a href="testssl.php">SSL</a></li>
-                <li><a href="testoauth2.php">OAuth2</a></li>
-                <li><a href="opcache.php">Opcache</a></li>
-                <li><a href="testapi.php">API HTTP</a></li>
-              </ul>
-            <h1>Jorani Requirements</h1>
+        <noscript>
+            Javascript is disabled. Jorani requires Javascript to be enabled.
+        </noscript>
 
-            <noscript>
-                Javascript is disabled. Jorani requires Javascript to be enabled.
-            </noscript>
-            <button class="btn btn-primary" onclick="export2csv();"><i class="mdi mdi-download"></i>&nbsp;Export to a CSV file</button>
+        <div class="container">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link" href="home" title="login to Jorani"><i class="mdi mdi-home nolink"></i></a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">Requirements</a></li>
+                <li class="nav-item"><a class="nav-link" href="testmail.php">Email</a></li>
+                <li class="nav-item"><a class="nav-link" href="testldap.php">LDAP</a></li>
+                <li class="nav-item"><a class="nav-link" href="testssl.php">SSL</a></li>
+                <li class="nav-item"><a class="nav-link" href="testoauth2.php">OAuth2</a></li>
+                <li class="nav-item"><a class="nav-link" href="testapi.php">API HTTP</a></li>
+            </ul>
+
+            <h1>
+                Jorani Requirements
+                <button class="btn btn-light" onclick="export2csv();"><i class="mdi mdi-download"></i>&nbsp;Export to a CSV file</button>
+            </h1>
 
             <h2>Web Server</h2>
 
             <table class="table table-bordered table-hover table-condensed">
-                <thead>
+                <thead class="thead-dark">
                     <tr>
                       <th>Requirement</th>
                       <th>Value / Description</th>
@@ -291,7 +259,7 @@ if ($configFileExists) {
             <h2>Database</h2>
 
             <table class="table table-bordered table-hover table-condensed">
-                <thead>
+                <thead class="thead-dark">
                     <tr>
                       <th>Requirement</th>
                       <th>Value / Description</th>
@@ -334,7 +302,7 @@ if ($configFileExists) {
             <h2>Schema</h2>
 
             <table class="table table-bordered table-hover table-condensed">
-                <thead>
+                <thead class="thead-dark">
                     <tr>
                       <th>Table</th>
                       <th>Signature</th>

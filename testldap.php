@@ -23,30 +23,23 @@ define('LDAP_PASSWORD', '');  //This is the password we will use to bind to LDAP
 <html>
     <head>
         <title>Jorani LDAP Configuration</title>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
-        <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/MDI-3.4.93/css/materialdesignicons.min.css">
-        <script type="text/javascript" src="assets/js/jquery-2.2.4.min.js"></script>
-        <style>
-        .nolink {
-            color: black;
-        }
-        </style>
+        <link rel="stylesheet" href="assets/dist/requirements.css">
+        <script type="text/javascript" src="assets/dist/requirements.js"></script>
     </head>
     <body>
-        <div class="container-fluid">
+        <div class="container">
             <ul class="nav nav-pills">
-                <li><a href="home" title="login to Jorani"><i class="mdi mdi-home nolink"></i></a></li>
-                <li><a href="requirements.php">Requirements</a></li>
-                <li><a href="testmail.php">Email</a></li>
-                <li class="active"><a href="#">LDAP</a></li>
-                <li><a href="testssl.php">SSL</a></li>
-                <li><a href="testoauth2.php">OAuth2</a></li>
-                <li><a href="opcache.php">Opcache</a></li>
-                <li><a href="testapi.php">API HTTP</a></li>
-              </ul>
+                <li class="nav-item"><a class="nav-link" href="home" title="login to Jorani"><i class="mdi mdi-home nolink"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="requirements.php">Requirements</a></li>
+                <li class="nav-item"><a class="nav-link" href="testmail.php">Email</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">LDAP</a></li>
+                <li class="nav-item"><a class="nav-link" href="testssl.php">SSL</a></li>
+                <li class="nav-item"><a class="nav-link" href="testoauth2.php">OAuth2</a></li>
+                <li class="nav-item"><a class="nav-link" href="testapi.php">API HTTP</a></li>
+            </ul>
+
             <h1>Test of your LDAP configuration</h1>
 
 <?php
@@ -57,7 +50,7 @@ $configFileExists = file_exists($pathConfigFile);
 $dBFileExists = file_exists($pathDbFile);
 
 if (LDAP_LOGIN == '') {
-    echo '<b>ERROR:</b> Please provide a valid login in testldap.php.<br />' . PHP_EOL;
+    echo '<div class="alert alert-danger" role="alert"><b>ERROR:</b> Please provide a valid login in testldap.php.</div>' . PHP_EOL;
 } else {
     if ($configFileExists && $dBFileExists) {
         if (extension_loaded('ldap')) {
@@ -120,10 +113,10 @@ if (LDAP_LOGIN == '') {
                 echo $text . PHP_EOL;
             }
         } else {
-            echo '<b>ERROR:</b> PHP LDAP extension is not loaded.<br />' . PHP_EOL;
+            echo '<div class="alert alert-danger" role="alert"><b>ERROR:</b> PHP LDAP extension is not loaded.</div>' . PHP_EOL;
         }
     } else {
-        echo '<b>ERROR:</b> The configuration files were not found.<br />' . PHP_EOL;
+        echo '<div class="alert alert-danger" role="alert"><b>ERROR:</b> The configuration files were not found.</div>' . PHP_EOL;
     }
 }
 ?>

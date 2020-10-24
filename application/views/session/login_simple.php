@@ -25,9 +25,8 @@ $this->lang->load('global', $language);?>
     alert("<?php echo lang('global_msg_old_browser'); ?>");
     </script>
     <![endif]-->
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/legacy.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
     <link rel="icon" type="image/x-icon" href="<?php echo base_url();?>favicon.ico" sizes="32x32">
     <style>
 <?php //Font mapping with languages needing a better font than the default font

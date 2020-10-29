@@ -15,8 +15,6 @@
 
 <div style="text-align: left;" id="organization"></div>
 
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/jsTree-3.3.10/jstree.min.js"></script>
-
 <script type="text/javascript">
     $(function () {
         //Search in the treeview

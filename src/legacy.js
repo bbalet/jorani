@@ -7,7 +7,7 @@ window.$ = window.jQuery = require('jquery-legacy')
 
 //Load JQuery plugins
 require('imports-loader?imports=default|jQuery|$!select2')
-
+require('imports-loader?imports=default|jQuery|$!jstree')
 
 //Can't make it to work
 //import jstree from 'jstree'

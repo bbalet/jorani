@@ -17,6 +17,7 @@
     "jstree": "^3.3.10",
     "moment": "^2.29.1",
     "popper.js": "^1.16.0",
+    "select2": "^4.0.13",
     "swagger-ui": "^3.35.2"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "css-loader": "^5.0.0",
     "eslint": "^7.12.0",
     "file-loader": "^6.1.1",
+    "imports-loader": "^1.2.0",
     "mini-css-extract-plugin": "^1.0.0",
     "moment-locales-webpack-plugin": "^1.2.0",
     "node-sass": "^4.14.1",

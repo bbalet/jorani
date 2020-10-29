@@ -138,8 +138,6 @@ echo form_open('contracts/edit/' . $contract['id'], $attributes); ?>
     <a href="<?php echo base_url();?>contracts" class="btn btn-danger"><i class="mdi mdi-close"></i>&nbsp;<?php echo lang('contract_edit_button_cancel');?></a>
 </form>
 
-<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
-<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
 $(function () {
     //Selectize the leave type combo

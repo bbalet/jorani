@@ -285,8 +285,7 @@ if (isset($_GET['source'])) {
 <?php if ($language_code != 'en') {?>
 <script src="<?php echo base_url();?>assets/bootstrap-datepicker-1.8.0/locales/bootstrap-datepicker.<?php echo $language_code;?>.min.js"></script>
 <?php }?>
-<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
-<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
+
 <script type="text/javascript">
 
     //Popup select postion: on click OK, find the user id for the selected line

@@ -80,8 +80,6 @@
         <div class="span3">&nbsp;</div>
     </div>
 
-<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
-<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
     $(function () {
         //Refresh page language

@@ -99,8 +99,6 @@ if ($language_code != 'en') { ?>
 <script src="<?php echo base_url();?>assets/js/i18n/jquery.ui.datepicker-<?php echo $language_code;?>.js"></script>
 <?php } ?>
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
-<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 
 <?php require_once dirname(BASEPATH) . "/local/triggers/leave_view.php"; ?>
 <script>

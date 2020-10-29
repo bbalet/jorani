@@ -245,8 +245,6 @@ if ($language_code != 'en') { ?>
 <?php } ?>
 
 <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
-<link rel="stylesheet" href="<?php echo base_url();?>assets/select2-4.0.5/css/select2.min.css">
-<script src="<?php echo base_url();?>assets/select2-4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
 /**
  * Pointer to a day in the calendar, not really an actual date

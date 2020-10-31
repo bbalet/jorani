@@ -55,6 +55,7 @@ Use bbalet / bbalet for login / password.
 * Suggest ideas, declare bugs with Github's issue tracking system or Google group.
 * [Read the TODO list](TODO.md) if you want to know what are the priorities.
 * Join the developers chat on gitter [![ https://gitter.im/bbalet/jorani](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bbalet/jorani?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbbalet%2Fjorani.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbbalet%2Fjorani?ref=badge_shield)
 
 ## Credits
 
@@ -90,3 +91,7 @@ We thank the following open source projects for the components used by Jorani:
 * JavaScript Cookie https://github.com/js-cookie/js-cookie
 * clipboard.js https://github.com/zenorocha/clipboard.js
 * Google noto fonts https://www.google.com/get/noto/
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbbalet%2Fjorani.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbbalet%2Fjorani?ref=badge_large)

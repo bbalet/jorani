@@ -541,6 +541,13 @@ $config['oauth2_client_id'] = '';
 $config['oauth2_client_secret'] = '';
 
 //____________________________________________________________________________
+//CAS configuration
+$config['cas_enabled'] = FALSE;
+$config['cas_host'] = "";
+$config['cas_port'] = 443;
+$config['cas_folder'] = "";
+
+//____________________________________________________________________________
 //SAML configuration
 $config['saml_enabled'] = FALSE;
 //Please configure SAML settings into config/saml.php

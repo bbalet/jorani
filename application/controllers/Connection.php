@@ -78,6 +78,10 @@ class Connection extends CI_Controller {
         if ($this->config->item('saml_enabled') === TRUE) {
             redirect('api/sso');
         }
+        //The login form is not used with CAS authentication mode
+        if ($this->config->item('cas_enabled') === TRUE) {
+            redirect('api/cas');
+        }        
         //If we are already connected (login bookmarked), then redirect to home
         if ($this->session->userdata('logged_in') === TRUE) {
             redirect('home');
@@ -184,7 +188,20 @@ class Connection extends CI_Controller {
      */
     public function logout() {
         $this->session->sess_destroy();
-        redirect('session/login');
+
+        if ($this->config->item('cas_enabled') === TRUE) {
+            // Init Client CAS
+            @\phpCAS::client("2.0", $this->config->item('cas_host'), $this->config->item('cas_port'), $this->config->item('cas_folder'), false);
+            @\phpCAS::setNoCasServerValidation();
+
+
+            // Logout
+            $url=$this->config->item('base_url')."/session/login";
+            @\phpCAS::logout(array("service"=>$url));
+        }
+        else {
+            redirect('session/login');
+        }
     }
 
     /**
@@ -448,4 +465,29 @@ class Connection extends CI_Controller {
         }
     }
 
+    /**
+     * CAS SSO endpoint that starts the login via SSO
+     * @author arnaud FORNEROT <afornerot@cadoles.com>
+     */
+    public function cas() {
+        // Init Client CAS
+        @\phpCAS::client("2.0", $this->config->item('cas_host'), $this->config->item('cas_port'), $this->config->item('cas_folder'), false);
+        @\phpCAS::setNoCasServerValidation();
+
+        // Authentification
+        @\phpCAS::forceAuthentication();
+
+        // Récupération UID
+        $user = @\phpCAS::getUser();
+
+        // Authentification dans Jorani
+        $this->load->model('users_model');
+        $loggedin = $this->users_model->checkCredentialsLDAP($user);
+        if ($loggedin === TRUE) {
+            $this->redirectToLastPage();
+        }
+        else {
+            echo "<div style='font-family:Helvetica; text-align:center; margin-top:50px'>Votre compte n'existe pas dans Jorani<br>Vous devez demander à un administrateur de créer votre compte si vous souhaitez y accèder.</div>";
+        }        
+    } 
 }

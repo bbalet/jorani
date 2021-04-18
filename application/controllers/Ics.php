@@ -16,7 +16,7 @@ use Sabre\VObject;
  * This class builds all the ICS (webcal, ical) feeds exposed by Jorani.
  */
 class Ics extends CI_Controller {
-    
+
     /**
      * String representing the timezone of an employee or
      * a default timezone if it is not set for the user.
@@ -67,6 +67,132 @@ class Ics extends CI_Controller {
         return TRUE;
     }
 
+
+    /**
+     * Returns a VTIMEZONE component for a Olson timezone identifier
+     * with daylight transitions covering the given date range.
+     *
+     * @param string Timezone ID as used in PHP's Date functions
+     * @param integer Unix timestamp with first date/time in this timezone
+     * @param integer Unix timestap with last date/time in this timezone
+     *
+     * @return mixed A Sabre\VObject\Component object representing a VTIMEZONE definition
+     *               or false if no timezone information is available
+     */
+    function generate_vtimezone($tzid, $from = 0, $to = 0)
+    {
+        if (!$from) $from = time();
+        if (!$to)   $to = $from;
+
+        try {
+            $tz = new \DateTimeZone($tzid);
+        }
+        catch (\Exception $e) {
+            return false;
+        }
+
+        // get all transitions for one year back/ahead
+        $year = 86400 * 360;
+        $transitions = $tz->getTransitions($from - $year, $to + $year);
+
+        $vcalendar = new VObject\Component\VCalendar();
+        $vt = $vcalendar->createComponent('VTIMEZONE');
+        $vt->TZID = $tz->getName();
+
+        $std = null; $dst = null;
+        foreach ($transitions as $i => $trans) {
+            $cmp = null;
+
+            // skip the first entry...
+            if ($i == 0) {
+                // ... but remember the offset for the next TZOFFSETFROM value
+                $tzfrom = $trans['offset'] / 3600;
+                continue;
+            }
+
+            // daylight saving time definition
+            if ($trans['isdst']) {
+                $t_dst = $trans['ts'];
+                $dst = $vcalendar->createComponent('DAYLIGHT');
+                $cmp = $dst;
+            }
+            // standard time definition
+            else {
+                $t_std = $trans['ts'];
+                $std = $vcalendar->createComponent('STANDARD');
+                $cmp = $std;
+            }
+
+            if ($cmp) {
+                $dt = new DateTime($trans['time']);
+                $offset = $trans['offset'] / 3600;
+
+                $cmp->DTSTART = $dt->format('Ymd\THis');
+                $cmp->TZOFFSETFROM = sprintf('%s%02d%02d', $tzfrom >= 0 ? '+' : '-', abs(floor($tzfrom)), ($tzfrom - floor($tzfrom)) * 60);
+                $cmp->TZOFFSETTO   = sprintf('%s%02d%02d', $offset >= 0 ? '+' : '-', abs(floor($offset)), ($offset - floor($offset)) * 60);
+
+                // add abbreviated timezone name if available
+                if (!empty($trans['abbr'])) {
+                    $cmp->TZNAME = $trans['abbr'];
+                }
+
+                $tzfrom = $offset;
+                $vt->add($cmp);
+            }
+
+            // we covered the entire date range
+            if ($std && $dst && min($t_std, $t_dst) < $from && max($t_std, $t_dst) > $to) {
+                break;
+            }
+        }
+
+        // add X-MICROSOFT-CDO-TZID if available
+        $microsoftExchangeMap = array_flip(VObject\TimeZoneUtil::$microsoftExchangeMap);
+        if (array_key_exists($tz->getName(), $microsoftExchangeMap)) {
+            $vt->add('X-MICROSOFT-CDO-TZID', $microsoftExchangeMap[$tz->getName()]);
+        }
+
+        return $vt;
+    }
+
+    private function isFullDayEntry($leave) {
+        if ($leave['startdatetype'] != 'Morning')
+            return FALSE;
+        if ($leave['enddatetype'] != 'Afternoon')
+            return FALSE;
+
+        return TRUE;
+    }
+
+    private function createVEvent($leave) {
+        $vcalendar = new VObject\Component\VCalendar();
+        $vevent = $vcalendar->createComponent('VEVENT');
+
+        $vevent->CATEGORIES = lang('leave');
+        $vevent->URL = base_url() . "leaves/" . $leave['id'];
+
+        $startdate = new \DateTime($leave['startdate'], new \DateTimeZone($this->timezone));
+        $enddate = new \DateTime($leave['enddate'], new \DateTimeZone($this->timezone));
+
+        if ($leave['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
+        if ($leave['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
+        if ($leave['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
+        if ($leave['enddatetype'] == 'Afternoon'){
+            $enddate->setTime(0, 0);
+            $enddate->modify('+1 day');
+        }
+
+        $vevent->DTSTART = $startdate;
+        $vevent->DTEND = $enddate;
+
+        if ($this->isFullDayEntry($leave)) {
+            $vevent->DTSTART['VALUE'] = 'DATE';
+            $vevent->DTEND['VALUE'] = 'DATE';
+        }
+
+        return $vevent;
+    }
+
     /**
      * Get timezone and language of the user
      *
@@ -83,7 +209,7 @@ class Ics extends CI_Controller {
         }
         $this->lang->load('global', $this->polyglot->code2language($employee['language']));
     }
-    
+
     /**
      * Get the list of dayoffs for a given contract identifier
      * @param int $userId identifier of the user wanting to view the list (mind timezone)
@@ -100,11 +226,11 @@ class Ics extends CI_Controller {
             echo "";
         } else {
             $vcalendar = new VObject\Component\VCalendar();
-            foreach ($result as $event) {
-                $startdate = new \DateTime($event->date, new \DateTimeZone($this->timezone));
-                $enddate = new \DateTime($event->date, new \DateTimeZone($this->timezone));
-                switch ($event->type) {
-                    case 1: 
+            foreach ($result as $leave) {
+                $startdate = new \DateTime($leave->date, new \DateTimeZone($this->timezone));
+                $enddate = new \DateTime($leave->date, new \DateTimeZone($this->timezone));
+                switch ($leave->type) {
+                    case 1:
                         $startdate->setTime(0, 0);
                         $enddate->setTime(0, 0);
                         $enddate->modify('+1 day');
@@ -123,16 +249,16 @@ class Ics extends CI_Controller {
                 $startdate->setTimezone(new DateTimeZone("UTC"));
                 $enddate->setTimezone(new DateTimeZone("UTC"));
                 $vcalendar->add('VEVENT', Array(
-                    'SUMMARY' => $event->title,
+                    'SUMMARY' => $leave->title,
                     'CATEGORIES' => lang('day off'),
                     'DTSTART' => $startdate,
                     'DTEND' => $enddate
-                ));    
+                ));
             }
             echo $vcalendar->serialize();
         }
     }
-    
+
     /**
      * Get the list of leaves for a given employee identifier
      * @param int $userId identifier of an employee
@@ -146,33 +272,21 @@ class Ics extends CI_Controller {
         } else {
             //Get timezone and language of the user
             $this->getTimezoneAndLanguageOfUser($userId);
-            
-            $vcalendar = new VObject\Component\VCalendar();
-            foreach ($result as $event) {
-                if (($event['status'] != LMS_CANCELED) && ($event['status'] != LMS_REJECTED)) {
-                    $startdate = new \DateTime($event['startdate'], new \DateTimeZone($this->timezone));
-                    $enddate = new \DateTime($event['enddate'], new \DateTimeZone($this->timezone));
-                    if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 0);
-                    if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Afternoon'){
-                        $enddate->setTime(0, 0);
-                        $enddate->modify('+1 day');
-                    } 
 
-                    //In order to support Outlook, we convert start and end dates to UTC
-                    $startdate->setTimezone(new DateTimeZone("UTC"));
-                    $enddate->setTimezone(new DateTimeZone("UTC"));
-                    $vcalendar->add('VEVENT', Array(
-                            'SUMMARY' => lang('leave'),
-                            'CATEGORIES' => lang('leave'),
-                            'DTSTART' => $startdate,
-                            'DTEND' => $enddate,
-                            'DESCRIPTION' => $event['cause'],
-                            'URL' => base_url() . "leaves/" . $event['id'],
-                    ));
+            $vcalendar = new VObject\Component\VCalendar();
+            foreach ($result as $leave) {
+                if (($leave['status'] != LMS_CANCELED) && ($leave['status'] != LMS_REJECTED)) {
+                    $vevent = $this->createVEvent($leave);
+                    $vevent->SUMMARY = lang('leave');
+                    $vevent->DESCRIPTION = $leave['cause'];
+
+                    $vcalendar->add($vevent);
                 }
             }
+
+            $vtimezone = $this->generate_vtimezone($this->timezone);
+            $vcalendar->add($vtimezone);
+
             echo $vcalendar->serialize();
         }
     }
@@ -193,34 +307,25 @@ class Ics extends CI_Controller {
         } else {
             //Get timezone and language of the user
             $this->getTimezoneAndLanguageOfUser($userId);
-            
-            $vcalendar = new VObject\Component\VCalendar();
-            foreach ($result as $event) {
-                if (($event['status'] != LMS_CANCELED) && ($event['status'] != LMS_REJECTED)) {
-                    $startdate = new \DateTime($event['startdate'], new \DateTimeZone($this->timezone));
-                    $enddate = new \DateTime($event['enddate'], new \DateTimeZone($this->timezone));
-                    if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 1);
-                    if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
 
-                    //In order to support Outlook, we convert start and end dates to UTC
-                    $startdate->setTimezone(new DateTimeZone("UTC"));
-                    $enddate->setTimezone(new DateTimeZone("UTC"));
-                    $vcalendar->add('VEVENT', Array(
-                        'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
-                        'CATEGORIES' => lang('leave'),
-                        'DTSTART' => $startdate,
-                        'DTEND' => $enddate,
-                        'DESCRIPTION' => $event['type'] . ($event['cause']!=''?(' / ' . $event['cause']):''),
-                        'URL' => base_url() . "leaves/" . $event['id'],
-                    )); 
+            $vcalendar = new VObject\Component\VCalendar();
+            foreach ($result as $leave) {
+                if (($leave['status'] != LMS_CANCELED) && ($leave['status'] != LMS_REJECTED)) {
+                    $vevent = $this->createVEvent($leave);
+                    $vevent->SUMMARY = $leave['firstname'] . ' ' . $leave['lastname'];
+                    $vevent->DESCRIPTION = $leave['type'] . ($leave['cause']!=''?(' / ' . $leave['cause']):'');
+
+                    $vcalendar->add($vevent);
                 }
             }
+
+            $vtimezone = $this->generate_vtimezone($this->timezone);
+            $vcalendar->add($vtimezone);
+
             echo $vcalendar->serialize();
         }
     }
-    
+
     /**
      * Get the list of leaves of the collaborators of the connected user (manager)
      * @param int $userId identifier of the user wanting to view the list (mind timezone)
@@ -234,34 +339,26 @@ class Ics extends CI_Controller {
         } else {
             //Get timezone and language of the user
             $this->getTimezoneAndLanguageOfUser($userId);
-            
-            $vcalendar = new VObject\Component\VCalendar();
-            foreach ($result as $event) {
-                if (($event['status'] != LMS_CANCELED) && ($event['status'] != LMS_REJECTED)) {
-                    $startdate = new \DateTime($event['startdate'], new \DateTimeZone($this->timezone));
-                    $enddate = new \DateTime($event['enddate'], new \DateTimeZone($this->timezone));
-                    if ($event['startdatetype'] == 'Morning') $startdate->setTime(0, 1);
-                    if ($event['startdatetype'] == 'Afternoon') $startdate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Morning') $enddate->setTime(12, 0);
-                    if ($event['enddatetype'] == 'Afternoon') $enddate->setTime(23, 59);
 
-                    //In order to support Outlook, we convert start and end dates to UTC
-                    $startdate->setTimezone(new DateTimeZone("UTC"));
-                    $enddate->setTimezone(new DateTimeZone("UTC"));
-                    $vcalendar->add('VEVENT', Array(
-                        'SUMMARY' => $event['firstname'] . ' ' . $event['lastname'],
-                        'CATEGORIES' => lang('leave'),
-                        'DTSTART' => $startdate,
-                        'DTEND' => $enddate,
-                        'DESCRIPTION' => $event['type_label'] . ($event['cause']!=''?(' / ' . $event['cause']):''),
-                        'URL' => base_url() . "leaves/" . $event['id'],
-                    ));
+            $vcalendar = new VObject\Component\VCalendar();
+            foreach ($result as $leave) {
+                if (($leave['status'] != LMS_CANCELED) && ($leave['status'] != LMS_REJECTED)) {
+                    $vevent = $this->createVEvent($leave);
+                    $vevent->SUMMARY = $leave['firstname'] . ' ' . $leave['lastname'];
+                    $vevent->DESCRIPTION = $leave['type_label'] . ($leave['cause']!=''?(' / ' . $leave['cause']):'');
+
+                    $vcalendar = new VObject\Component\VCalendar();
+                    $vcalendar->add($vevent);
                 }
             }
+
+            $vtimezone = $this->generate_vtimezone($this->timezone);
+            $vcalendar->add($vtimezone);
+
             echo $vcalendar->serialize();
         }
     }
-    
+
     /**
      * Action : download an iCal event corresponding to a leave request
      * @param int leave request id
@@ -274,22 +371,15 @@ class Ics extends CI_Controller {
         $leave = $this->leaves_model->getLeaves($id);
         //Get timezone and language of the user
         $this->getTimezoneAndLanguageOfUser($leave['employee']);
-        
-        $startdate = new \DateTime($leave['startdate'], new \DateTimeZone($this->timezone));
-        $enddate = new \DateTime($leave['enddate'], new \DateTimeZone($this->timezone));
-        //In order to support Outlook, we convert start and end dates to UTC
-        $startdate->setTimezone(new DateTimeZone("UTC"));
-        $enddate->setTimezone(new DateTimeZone("UTC"));
-        
+
+        $vevent = $this->createVEvent($leave);
+
         $vcalendar = new VObject\Component\VCalendar();
-        $vcalendar->add('VEVENT', Array(
-            'SUMMARY' => lang('leave'),
-            'CATEGORIES' => lang('leave'),
-            'DESCRIPTION' => $leave['cause'],
-            'DTSTART' => $startdate,
-            'DTEND' => $enddate,
-            'URL' => base_url() . "leaves/" . $id,
-        ));
+        $vcalendar->add($vevent);
+
+        $vtimezone = $this->generate_vtimezone($this->timezone);
+        $vcalendar->add($vtimezone);
+
         echo $vcalendar->serialize();
     }
 }

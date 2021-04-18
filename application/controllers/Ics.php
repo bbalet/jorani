@@ -81,7 +81,7 @@ class Ics extends CI_Controller {
      * @return mixed A Sabre\VObject\Component object representing a VTIMEZONE definition
      *               or false if no timezone information is available
      */
-    function add_vtimezone($vcalendar, $tzid, $from = 0, $to = 0)
+    private function addVTimezone($vcalendar, $tzid, $from = 0, $to = 0)
     {
         if (!$from) $from = time();
         if (!$to)   $to = $from;
@@ -284,7 +284,7 @@ class Ics extends CI_Controller {
                 }
             }
 
-            $this->add_vtimezone($vcalendar, $this->timezone);
+            $this->addVTimezone($vcalendar, $this->timezone);
 
             echo $vcalendar->serialize();
         }
@@ -318,7 +318,7 @@ class Ics extends CI_Controller {
                 }
             }
 
-            $this->add_vtimezone($vcalendar, $this->timezone);
+            $this->addVTimezone($vcalendar, $this->timezone);
 
             echo $vcalendar->serialize();
         }
@@ -350,7 +350,7 @@ class Ics extends CI_Controller {
                 }
             }
 
-            $this->add_vtimezone($vcalendar, $this->timezone);
+            $this->addVTimezone($vcalendar, $this->timezone);
 
             echo $vcalendar->serialize();
         }
@@ -374,7 +374,7 @@ class Ics extends CI_Controller {
         $vevent = $this->createVEvent($vcalendar, $leave);
         $vcalendar->add($vevent);
 
-        $this->add_vtimezone($vcalendar, $this->timezone);
+        $this->addVTimezone($vcalendar, $this->timezone);
 
         echo $vcalendar->serialize();
     }

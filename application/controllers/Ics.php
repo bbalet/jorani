@@ -69,8 +69,10 @@ class Ics extends CI_Controller {
 
 
     /**
-     * Returns a VTIMEZONE component for a Olson timezone identifier
+     * Returns a VTIMEZONE component
      * with daylight transitions covering the given date range.
+     *
+     * Copied from: https://gist.github.com/thomascube/47ff7d530244c669825736b10877a200
      *
      * @param string Timezone ID as used in PHP's Date functions
      * @param integer Unix timestamp with first date/time in this timezone
@@ -79,7 +81,7 @@ class Ics extends CI_Controller {
      * @return mixed A Sabre\VObject\Component object representing a VTIMEZONE definition
      *               or false if no timezone information is available
      */
-    function generate_vtimezone($tzid, $from = 0, $to = 0)
+    function add_vtimezone($vcalendar, $tzid, $from = 0, $to = 0)
     {
         if (!$from) $from = time();
         if (!$to)   $to = $from;
@@ -95,7 +97,6 @@ class Ics extends CI_Controller {
         $year = 86400 * 360;
         $transitions = $tz->getTransitions($from - $year, $to + $year);
 
-        $vcalendar = new VObject\Component\VCalendar();
         $vt = $vcalendar->createComponent('VTIMEZONE');
         $vt->TZID = $tz->getName();
 
@@ -152,7 +153,7 @@ class Ics extends CI_Controller {
             $vt->add('X-MICROSOFT-CDO-TZID', $microsoftExchangeMap[$tz->getName()]);
         }
 
-        return $vt;
+        return $vcalendar->add($vt);
     }
 
     private function isFullDayEntry($leave) {
@@ -284,8 +285,7 @@ class Ics extends CI_Controller {
                 }
             }
 
-            $vtimezone = $this->generate_vtimezone($this->timezone);
-            $vcalendar->add($vtimezone);
+            $this->add_vtimezone($vcalendar, $this->timezone);
 
             echo $vcalendar->serialize();
         }
@@ -319,8 +319,7 @@ class Ics extends CI_Controller {
                 }
             }
 
-            $vtimezone = $this->generate_vtimezone($this->timezone);
-            $vcalendar->add($vtimezone);
+            $this->add_vtimezone($vcalendar, $this->timezone);
 
             echo $vcalendar->serialize();
         }
@@ -352,8 +351,7 @@ class Ics extends CI_Controller {
                 }
             }
 
-            $vtimezone = $this->generate_vtimezone($this->timezone);
-            $vcalendar->add($vtimezone);
+            $this->add_vtimezone($vcalendar, $this->timezone);
 
             echo $vcalendar->serialize();
         }
@@ -377,8 +375,7 @@ class Ics extends CI_Controller {
         $vcalendar = new VObject\Component\VCalendar();
         $vcalendar->add($vevent);
 
-        $vtimezone = $this->generate_vtimezone($this->timezone);
-        $vcalendar->add($vtimezone);
+        $this->add_vtimezone($vcalendar, $this->timezone);
 
         echo $vcalendar->serialize();
     }

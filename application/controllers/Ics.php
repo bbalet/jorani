@@ -165,8 +165,7 @@ class Ics extends CI_Controller {
         return TRUE;
     }
 
-    private function createVEvent($leave) {
-        $vcalendar = new VObject\Component\VCalendar();
+    private function createVEvent($vcalendar, $leave) {
         $vevent = $vcalendar->createComponent('VEVENT');
 
         $vevent->CATEGORIES = lang('leave');
@@ -277,7 +276,7 @@ class Ics extends CI_Controller {
             $vcalendar = new VObject\Component\VCalendar();
             foreach ($result as $leave) {
                 if (($leave['status'] != LMS_CANCELED) && ($leave['status'] != LMS_REJECTED)) {
-                    $vevent = $this->createVEvent($leave);
+                    $vevent = $this->createVEvent($vcalendar, $leave);
                     $vevent->SUMMARY = lang('leave');
                     $vevent->DESCRIPTION = $leave['cause'];
 
@@ -311,7 +310,7 @@ class Ics extends CI_Controller {
             $vcalendar = new VObject\Component\VCalendar();
             foreach ($result as $leave) {
                 if (($leave['status'] != LMS_CANCELED) && ($leave['status'] != LMS_REJECTED)) {
-                    $vevent = $this->createVEvent($leave);
+                    $vevent = $this->createVEvent($vcalendar, $leave);
                     $vevent->SUMMARY = $leave['firstname'] . ' ' . $leave['lastname'];
                     $vevent->DESCRIPTION = $leave['type'] . ($leave['cause']!=''?(' / ' . $leave['cause']):'');
 
@@ -342,7 +341,7 @@ class Ics extends CI_Controller {
             $vcalendar = new VObject\Component\VCalendar();
             foreach ($result as $leave) {
                 if (($leave['status'] != LMS_CANCELED) && ($leave['status'] != LMS_REJECTED)) {
-                    $vevent = $this->createVEvent($leave);
+                    $vevent = $this->createVEvent($vcalendar, $leave);
                     $vevent->SUMMARY = $leave['firstname'] . ' ' . $leave['lastname'];
                     $vevent->DESCRIPTION = $leave['type_label'] . ($leave['cause']!=''?(' / ' . $leave['cause']):'');
 
@@ -370,9 +369,9 @@ class Ics extends CI_Controller {
         //Get timezone and language of the user
         $this->getTimezoneAndLanguageOfUser($leave['employee']);
 
-        $vevent = $this->createVEvent($leave);
-
         $vcalendar = new VObject\Component\VCalendar();
+
+        $vevent = $this->createVEvent($vcalendar, $leave);
         $vcalendar->add($vevent);
 
         $this->add_vtimezone($vcalendar, $this->timezone);

@@ -345,7 +345,6 @@ class Ics extends CI_Controller {
                     $vevent->SUMMARY = $leave['firstname'] . ' ' . $leave['lastname'];
                     $vevent->DESCRIPTION = $leave['type_label'] . ($leave['cause']!=''?(' / ' . $leave['cause']):'');
 
-                    $vcalendar = new VObject\Component\VCalendar();
                     $vcalendar->add($vevent);
                 }
             }

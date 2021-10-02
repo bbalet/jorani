@@ -20,18 +20,18 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>{Firstname} {Lastname} submits a telework request to you. Here are the details :</p>
+        <p>{Firstname} {Lastname} vous soumet une demande de télétravail. Voici les détails :</p>
         <table>
             <tr>
                 <td>Dates</td><td>{Dates}</td>
             </tr>
         </table>        
         <br />
-        <a href="{BaseUrl}teleworkrequests/acceptall/{UserId}">Accept all</a>
+        <a href="{BaseUrl}teleworkrequests/acceptall/{UserId}">Accepter tout</a>
         <br />
-        <a href="{BaseUrl}teleworkrequests/rejectall/{UserId}">Reject all</a>
-        <p>You can check <a href="{BaseUrl}teleworkrequests/campaignteleworks/requested/{UserId}">the telework list</a> to validate this request.</p>
+        <a href="{BaseUrl}teleworkrequests/rejectall/{UserId}">Refuser tout</a>
+        <p>Vous pouvez vérifier <a href="{BaseUrl}teleworkrequests/campaignteleworks/requested/{UserId}">la liste de télétravail</a> afin de valider cette demande.</p>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
     </body>
 </html>

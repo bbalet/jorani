@@ -73,6 +73,11 @@ class Calendar extends CI_Controller {
             lang('November') => $this->leaves_model->linear($employee, 11, $year, TRUE, TRUE, TRUE, TRUE),
             lang('December') => $this->leaves_model->linear($employee, 12, $year, TRUE, TRUE, TRUE, TRUE),
         );
+        if ($this->config->item('disable_telework') === FALSE) {
+            foreach ($months as $month) {
+                $this->leaves_model->removeOverlappingTeleworks($month);
+            }
+        }
         $data['months'] = $months;
         $data['year'] = $year;
         $data['title'] = lang('calendar_year_title');

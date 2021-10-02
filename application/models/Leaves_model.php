@@ -415,12 +415,13 @@ class Leaves_model extends CI_Model {
         $overlapping = FALSE;
         $this->db->where('employee', $id);
         $this->db->where('status != 4');
+        $this->db->where('type != 23');
         $this->db->where('(startdate <= DATE(\'' . $enddate . '\') AND enddate >= DATE(\'' . $startdate . '\'))');
         if (!is_null($leave_id)) {
             $this->db->where('id != ', $leave_id);
         }
         $leaves = $this->db->get('leaves')->result();
-
+        
         if ($startdatetype == "Morning") {
             $startTmp = strtotime($startdate." 08:00:00 UTC");
         } else {
@@ -740,6 +741,11 @@ class Leaves_model extends CI_Model {
         $this->db->limit(1024);  //Security limit
         $events = $this->db->get('leaves')->result();
 
+        if ($this->config->item('disable_telework') === FALSE) {
+            $this->load->model('teleworks_model');
+            $events = array_merge($events, $this->teleworks_model->individual($user_id, $start, $end));
+        }
+        
         $jsonevents = array();
         foreach ($events as $entry) {
 
@@ -753,8 +759,8 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T12:00:00';
             } else {
                 $enddate = $entry->enddate . 'T18:00:00';
-            }
-
+            }            
+                
             $imageUrl = '';
             $allDay = FALSE;
             $startdatetype =  $entry->startdatetype;
@@ -773,8 +779,13 @@ class Leaves_model extends CI_Model {
             {
                 case 1: $color = '#999'; break;     // Planned
                 case 2: $color = '#f89406'; break;  // Requested
-                case 3: $color = '#468847'; break;  // Accepted
+                case 3: if ($entry->type == 'Campaign' || $entry->type == 'Floating') $color = '#3a87ad'; else $color = '#468847'; break; //Accepted
                 case 4: $color = '#ff0000'; break;  // Rejected
+            }
+            
+            if ($this->config->item('disable_telework') === FALSE && ($entry->type == 'Campaign' || $entry->type == 'Floating')) {
+                $this->lang->load('calendar', $this->language);
+                $entry->type = lang($entry->type);
             }
 
             $jsonevents[] = array(
@@ -809,6 +820,11 @@ class Leaves_model extends CI_Model {
         $this->db->limit(1024);  //Security limit
         $events = $this->db->get('leaves')->result();
 
+        if ($this->config->item('disable_telework') === FALSE) {
+           $this->load->model('teleworks_model');
+           $events = array_merge($events, $this->teleworks_model->workmates($user_id, $start, $end));
+        }
+        
         $jsonevents = array();
         foreach ($events as $entry) {
             if ($entry->startdatetype == "Morning") {
@@ -823,6 +839,11 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
 
+            if ($this->config->item('disable_telework') === FALSE && ($entry->type == 'Campaign' || $entry->type == 'Floating')) {
+                $this->lang->load('calendar', $this->language);
+                $entry->firstname = lang($entry->type) . ' - ' . $entry->firstname;
+            }
+                
             $imageUrl = '';
             $allDay = FALSE;
             $startdatetype =  $entry->startdatetype;
@@ -841,13 +862,13 @@ class Leaves_model extends CI_Model {
             {
                 case 1: $color = '#999'; break;     // Planned
                 case 2: $color = '#f89406'; break;  // Requested
-                case 3: $color = '#468847'; break;  // Accepted
+                case 3: if ($entry->type == 'Campaign' || $entry->type == 'Floating')  $color = '#3a87ad'; else $color = '#468847'; break; //Accepted
                 case 4: $color = '#ff0000'; break;  // Rejected
             }
 
             $jsonevents[] = array(
                 'id' => $entry->id,
-                'title' => $entry->firstname .' ' . $entry->lastname,
+                'title' => $entry->firstname . ' ' . $entry->lastname,
                 'imageurl' => $imageUrl,
                 'start' => $startdate,
                 'color' => $color,
@@ -876,6 +897,11 @@ class Leaves_model extends CI_Model {
         $this->db->limit(1024);  //Security limit
         $events = $this->db->get('leaves')->result();
 
+        if ($this->config->item('disable_telework') === FALSE) {
+            $this->load->model('teleworks_model');
+            $events = array_merge($events, $this->teleworks_model->collaborators($user_id, $start, $end));
+        }
+        
         $jsonevents = array();
         foreach ($events as $entry) {
             if ($entry->startdatetype == "Morning") {
@@ -890,6 +916,11 @@ class Leaves_model extends CI_Model {
                 $enddate = $entry->enddate . 'T18:00:00';
             }
 
+            if ($this->config->item('disable_telework') === FALSE && ($entry->type == 'Campaign' || $entry->type == 'Floating')) {
+                $this->lang->load('calendar', $this->language);
+                $entry->firstname = lang($entry->type) . ' - ' . $entry->firstname;
+            }
+                
             $imageUrl = '';
             $allDay = FALSE;
             $startdatetype =  $entry->startdatetype;
@@ -908,13 +939,13 @@ class Leaves_model extends CI_Model {
             {
                 case 1: $color = '#999'; break;     // Planned
                 case 2: $color = '#f89406'; break;  // Requested
-                case 3: $color = '#468847'; break;  // Accepted
+                case 3: if ($entry->type == 'Campaign' || $entry->type == 'Floating') $color = '#3a87ad'; else $color = '#468847'; break; //Accepted
                 case 4: $color = '#ff0000'; break;  // Rejected
             }
 
             $jsonevents[] = array(
                 'id' => $entry->id,
-                'title' => $entry->firstname .' ' . $entry->lastname,
+                'title' => $entry->firstname . ' ' . $entry->lastname,
                 'imageurl' => $imageUrl,
                 'start' => $startdate,
                 'color' => $color,
@@ -968,6 +999,12 @@ class Leaves_model extends CI_Model {
         $this->db->order_by('startdate', 'desc');
         $this->db->limit(1024);  //Security limit
         $events = $this->db->get()->result();
+        
+        if ($this->config->item('disable_telework') === FALSE) {
+            $this->load->model('teleworks_model');
+            $events = array_merge($events, $this->teleworks_model->department($entity_id, $start, $end, $children, $statusFilter));
+        }
+        
         $jsonevents = array();
         foreach ($events as $entry) {
             //Date of event
@@ -1000,7 +1037,7 @@ class Leaves_model extends CI_Model {
             {
                 case 1: $color = '#999'; break;     // Planned
                 case 2: $color = '#f89406'; break;  // Requested
-                case 3: $color = '#468847'; break;  // Accepted
+                case 3: if ($entry->type == 'Campaign' || $entry->type == 'Floating') $color = '#3a87ad'; else $color = '#468847'; break; // Accepted
                 case 4: $color = '#ff0000'; break;  // Rejected
                 default: $color = '#ff0000'; break;  // Cancellation and Canceled
             }
@@ -1011,9 +1048,12 @@ class Leaves_model extends CI_Model {
             if (($entry->employee == $this->session->userdata('id')) ||
                 ($entry->manager == $this->session->userdata('id')) ||
                     ($this->session->userdata('is_hr') === TRUE)) {
+                if ($entry->type == 'Campaign' || $entry->type == 'Floating')
+                $url = base_url() . 'teleworks/teleworks/' . $entry->id;
+                else
                 $url = base_url() . 'leaves/leaves/' . $entry->id;
                 if (!empty($entry->acronym)) {
-                    $title .= ' - ' . $entry->acronym;
+                    $title = $entry->acronym . ' - ' . $title;
                 }
             } else {
                 //Don't display rejected and cancel* leave requests for other employees
@@ -1035,7 +1075,12 @@ class Leaves_model extends CI_Model {
                 'enddatetype' => $enddatetype,
                 'url' => $url
             );
+        }        
+        
+        if ($this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
+            $jsonevents = array_merge($jsonevents, $this->teleworks_model->getTimeOrganisationDatesToJson($entity_id, -1, $start, $end, $children));
         }
+
         return json_encode($jsonevents);
     }
 
@@ -1068,7 +1113,19 @@ class Leaves_model extends CI_Model {
       $this->db->order_by('startdate', 'desc');
       $this->db->limit(1024);  //Security limit
       $events = $this->db->get()->result();
-      return $this->transformToEvent($events);
+
+      if ($this->config->item('disable_telework') === FALSE) {
+          $this->load->model('teleworks_model');
+          $events = array_merge($events, $this->teleworks_model->getListRequest($list_id, $start, $end, $statusFilter));
+      }
+      
+      $jsonevents =  $this->transformToEvent($events);
+      
+      if ($this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
+          $jsonevents = array_merge($jsonevents, $this->teleworks_model->getTimeOrganisationDatesToJson(-1, $list_id, $start, $end));
+      }
+      
+      return json_encode($jsonevents);
     }
 
     private function transformToEvent($events){
@@ -1104,18 +1161,25 @@ class Leaves_model extends CI_Model {
           {
               case 1: $color = '#999'; break;     // Planned
               case 2: $color = '#f89406'; break;  // Requested
-              case 3: $color = '#468847'; break;  // Accepted
+              case 3: if ($entry->type == 'Campaign' || $entry->type == 'Floating') $color = '#3a87ad'; else $color = '#468847'; break; // Accepted
               case 4: $color = '#ff0000'; break;  // Rejected
               default: $color = '#ff0000'; break;  // Cancellation and Canceled
           }
-          $title = $entry->firstname .' ' . $entry->lastname;
+          if ($this->config->item('disable_telework') === FALSE && ($entry->type == 'Campaign' || $entry->type == 'Floating')) {
+              $this->lang->load('calendar', $this->language);
+              $title = $entry->firstname .' ' . $entry->lastname . ' - ' . lang($entry->type);
+          } else 
+              $title = $entry->firstname .' ' . $entry->lastname;
           //If the connected user can access to the leave request
           //(self, HR admin and manager), add a link and the acronym
           $url = '';
           if (($entry->employee == $this->session->userdata('id')) ||
               ($entry->manager == $this->session->userdata('id')) ||
                   ($this->session->userdata('is_hr') === TRUE)) {
-              $url = base_url() . 'leaves/leaves/' . $entry->id;
+                if ($entry->type == 'Campaign' || $entry->type == 'Floating')
+                    $url = base_url() . 'teleworks/teleworks/' . $entry->id;
+                else
+                    $url = base_url() . 'leaves/leaves/' . $entry->id;
               if (!empty($entry->acronym)) {
                   $title .= ' - ' . $entry->acronym;
               }
@@ -1140,7 +1204,7 @@ class Leaves_model extends CI_Model {
               'url' => $url
           );
       }
-      return json_encode($jsonevents);
+      return $jsonevents;
     }
 
     /**
@@ -1355,11 +1419,22 @@ class Leaves_model extends CI_Model {
                         in_array("5", $statuses),
                         in_array("6", $statuses),
                         $calendar);
+                if ($this->config->item('disable_telework') === FALSE)
+                    $tabular[$employee->id] = $this->leaves_model->removeOverlappingTeleworks($tabular[$employee->id]);
             } else {
                 $tabular[$employee->id] = $this->linear($employee->id, $month, $year,
                         TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, $calendar);
+                if ($this->config->item('disable_telework') === FALSE)
+                    $tabular[$employee->id] = $this->leaves_model->removeOverlappingTeleworks($tabular[$employee->id]);
+            }
+            
+            if ($this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
+                $this->load->model('teleworks_model');
+                $timeorganisationdates = $this->teleworks_model->getTimeOrganisationDatesToCalendar($employee->id, $month, $year);                
+                $this->addTimeOrganisationDatesToCalendar($tabular[$employee->id], $timeorganisationdates, $employee->id);
             }
         }
+        // echo '<pre>';print_r($tabular[727]);echo '</pre>';
         return $tabular;
     }
 
@@ -1393,11 +1468,103 @@ class Leaves_model extends CI_Model {
                         in_array("4", $statuses),
                         in_array("5", $statuses),
                         in_array("6", $statuses));
+                if ($this->config->item('disable_telework') === FALSE)
+                    $tabular[$employee['id']] = $this->leaves_model->removeOverlappingTeleworks($tabular[$employee['id']]);
             } else {
                 $tabular[$employee['id']] = $this->linear($employee['id'], $month, $year, TRUE, TRUE, TRUE, FALSE, TRUE);
+                if ($this->config->item('disable_telework') === FALSE)
+                    $tabular[$employee['id']] = $this->leaves_model->removeOverlappingTeleworks($tabular[$employee['id']]);
+            }
+            
+            if ($this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
+                $this->load->model('teleworks_model');
+                $timeorganisationdates = $this->teleworks_model->getTimeOrganisationDatesToCalendar($employee['id'], $month, $year);
+                $this->addTimeOrganisationDatesToCalendar($tabular[$employee['id']], $timeorganisationdates, $employee['id']);
             }
         }
         return $tabular;
+    }
+    
+    /**
+     * Remove overlapping telework requests of users of a list (custom list built by user)
+     * @param $linear Array of objects containing leave details
+     * @return array Array of objects containing leave details without overlapping telework requests
+     * @author Maithyly SIVAPALAN <maithyly.sivapalan@inha.fr>
+     */
+    public function removeOverlappingTeleworks($linear) {
+        $this->lang->load('calendar', $this->language);
+        foreach ($linear->days as $day) {
+            if (strstr($day->type, ';')) {
+                $strid = $strtype = $stracronym = $strstatus = $strdisplay = NULL;
+                $id = explode(";", $day->id);
+                $type = explode(";", $day->type);
+                $acronym = explode(";", $day->acronym);
+                $status = explode(";", $day->status);
+                $display = explode(";", $day->display);
+                $displayvalues = array_count_values($display);
+                for ($i = 0; $i < count($type); $i ++) {
+                    if ($acronym[$i] == lang('telework_acronym')) {
+                        if (($display[$i] == '2' && array_key_exists(2, $displayvalues) && $displayvalues[2] > 1) || ($display[$i] == '3' && array_key_exists(3, $displayvalues) && $displayvalues[3] > 1) || ($display[$i] == '1' && array_key_exists(1, $displayvalues) && $displayvalues[1] > 1)) {
+                            array_splice($id, $i, 1);
+                            array_splice($type, $i, 1);
+                            array_splice($acronym, $i, 1);
+                            array_splice($status, $i, 1);
+                            array_splice($display, $i, 1);
+                        }
+                    }
+                }
+                for ($ii = 0; $ii < count($type); $ii ++) {
+                    if ($ii == (count($type) - 1)) {
+                        $strid .= $id[$ii];
+                        $strtype .= $type[$ii];
+                        $stracronym .= $acronym[$ii];
+                        $strstatus .= $status[$ii];
+                        $strdisplay .= $display[$ii];
+                    } else {
+                        $strid .= $id[$ii] . ';';
+                        $strtype .= $type[$ii] . ';';
+                        $stracronym .= $acronym[$ii] . ';';
+                        $strstatus .= $status[$ii] . ';';
+                        $strdisplay .= $display[$ii] . ';';
+                    }
+                }
+                $day->id = $strid;
+                $day->type = $strtype;
+                $day->acronym = $stracronym;
+                $day->status = $strstatus;
+                $day->display = $strdisplay;
+            }
+        }
+
+        return $linear;
+    }
+    
+    /**
+     * Add time organisation dates in global calendars
+     * @param $linear Array of objects containing leave and telework details
+     * @param $timeorganisationdates Array of objects containing ime organisation details
+     * @param int $id Employee identifier
+     * @return array Array of objects containing leave, telework and time organisation details
+     * @author Maithyly SIVAPALAN <maithyly.sivapalan@inha.fr>
+     */
+    public function addTimeOrganisationDatesToCalendar($linear, $timeorganisationdates, $id) {
+        foreach ($timeorganisationdates as $key => $value) {
+            if ($linear->days[$key]->id == 0) {
+                $linear->days[$key]->id = $value['id'];
+                $linear->days[$key]->type = $value['type'];
+                $linear->days[$key]->acronym = $value['acronym'];
+                $linear->days[$key]->status = $value['status'];
+                $linear->days[$key]->display = $value['display'];
+            } else {
+                $linear->days[$key]->id = $linear->days[$key]->id . ';' . $value['id'];
+                $linear->days[$key]->type = $linear->days[$key]->type . ';' . $value['type'];
+                $linear->days[$key]->acronym = $linear->days[$key]->acronym . ';' . $value['acronym'];
+                $linear->days[$key]->status = $linear->days[$key]->status . ';' . $value['status'];
+                $linear->days[$key]->display = $linear->days[$key]->display . ';' . $value['display'];
+            }
+        }
+
+        return $linear;
     }
 
     /**
@@ -1408,18 +1575,26 @@ class Leaves_model extends CI_Model {
      */
     public function monthlyLeavesDuration($linear) {
         $total = 0;
+        $this->lang->load('calendar', $this->language);
         foreach ($linear->days as $day) {
-          if (strstr($day->display, ';')) {
-              $display = explode(";", $day->display);
-              if ($display[0] == '2') $total += 0.5;
-              if ($display[0] == '3') $total += 0.5;
-              if ($display[1] == '2') $total += 0.5;
-              if ($display[1] == '3') $total += 0.5;
-          } else {
-              if ($day->display == 2) $total += 0.5;
-              if ($day->display == 3) $total += 0.5;
-              if ($day->display == 1) $total += 1;
-          }
+            if (strstr($day->display, ';')) {
+                $acronym = explode(";", $day->acronym);
+                $display = explode(";", $day->display);
+                if ($acronym[0] != lang('telework_acronym') && $acronym[0] != lang('time_organisation_acronym')) {
+                    if ($display[0] == '2') $total += 0.5;
+                    if ($display[0] == '3') $total += 0.5;
+                }
+                if ($acronym[1] != lang('telework_acronym') && $acronym[1] != lang('time_organisation_acronym')) {
+                    if ($display[1] == '2') $total += 0.5;
+                    if ($display[1] == '3') $total += 0.5;
+                }
+            } else {
+                if ($day->acronym != lang('telework_acronym') && $day->acronym != lang('time_organisation_acronym')) {
+                    if ($day->display == 2) $total += 0.5;
+                    if ($day->display == 3) $total += 0.5;
+                    if ($day->display == 1) $total += 1;
+                }
+            }
         }
         return $total;
     }
@@ -1434,18 +1609,18 @@ class Leaves_model extends CI_Model {
     public function monthlyLeavesByType($linear) {
         $by_types = array();
         foreach ($linear->days as $day) {
-          if (strstr($day->display, ';')) {
-              $display = explode(";", $day->display);
-              $type = explode(";", $day->type);
-              if ($display[0] == '2') array_key_exists($type[0], $by_types) ? $by_types[$type[0]] += 0.5: $by_types[$type[0]] = 0.5;
-              if ($display[0] == '3') array_key_exists($type[0], $by_types) ? $by_types[$type[0]] += 0.5: $by_types[$type[0]] = 0.5;
-              if ($display[1] == '2') array_key_exists($type[1], $by_types) ? $by_types[$type[1]] += 0.5: $by_types[$type[1]] = 0.5;
-              if ($display[1] == '3') array_key_exists($type[1], $by_types) ? $by_types[$type[1]] += 0.5: $by_types[$type[1]] = 0.5;
-          } else {
-              if ($day->display == 2) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5: $by_types[$day->type] = 0.5;
-              if ($day->display == 3) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5: $by_types[$day->type] = 0.5;
-              if ($day->display == 1) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 1: $by_types[$day->type] = 1;
-          }
+            if (strstr($day->display, ';')) {
+                $display = explode(";", $day->display);
+                $type = explode(";", $day->type);
+                if ($display[0] == '2') array_key_exists($type[0], $by_types) ? $by_types[$type[0]] += 0.5: $by_types[$type[0]] = 0.5;
+                if ($display[0] == '3') array_key_exists($type[0], $by_types) ? $by_types[$type[0]] += 0.5: $by_types[$type[0]] = 0.5;
+                if ($display[1] == '2') array_key_exists($type[1], $by_types) ? $by_types[$type[1]] += 0.5: $by_types[$type[1]] = 0.5;
+                if ($display[1] == '3') array_key_exists($type[1], $by_types) ? $by_types[$type[1]] += 0.5: $by_types[$type[1]] = 0.5;
+            } else {
+                if ($day->display == 2) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5: $by_types[$day->type] = 0.5;
+                if ($day->display == 3) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5: $by_types[$day->type] = 0.5;
+                if ($day->display == 1) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 1: $by_types[$day->type] = 1;
+            }
         }
         return $by_types;
     }
@@ -1523,6 +1698,12 @@ class Leaves_model extends CI_Model {
         $this->db->order_by('startdate', 'asc');
         $this->db->order_by('startdatetype', 'desc');
         $events = $this->db->get()->result();
+        
+        if ($this->config->item('disable_telework') === FALSE) {
+            $this->load->model('teleworks_model');
+            $events = array_merge($events, $this->teleworks_model->linear($employee_id, $month, $year, $planned, $requested, $accepted, FALSE, $cancellation, FALSE, $calendar));
+        }
+        
         $limitDate = DateTime::createFromFormat('Y-m-d H:i:s', $end . ' 00:00:00');
         $floorDate = DateTime::createFromFormat('Y-m-d H:i:s', $start . ' 00:00:00');
 

@@ -75,10 +75,25 @@ $this->lang->load('menu', $language);?>
                     <li class="nav-header"><?php echo lang('menu_hr_contracts_divider');?></li>
                     <li><a href="<?php echo base_url();?>contracts"><?php echo lang('menu_hr_list_contracts');?></a></li>
                     <li><a href="<?php echo base_url();?>positions"><?php echo lang('menu_hr_list_positions');?></a></li>
+                    <?php if ($this->config->item('disable_telework') === FALSE) { ?>
+                    <li class="divider"></li>
+                    <li class="nav-header"><?php echo lang('menu_hr_teleworks_divider');?></li>  
+                    <?php if ($this->config->item('disable_campaign_telework') === FALSE) { ?> 
+                    <li><a href="<?php echo base_url();?>teleworkcampaigns"><?php echo lang('menu_hr_list_telework_campaigns');?></a></li>              	
+                    <?php } ?>
+                    <li><a href="<?php echo base_url();?>teleworkrules"><?php echo lang('menu_hr_list_telework_rules');?></a></li>
+                    <?php if ($this->config->item('disable_time_organisation') === FALSE) { ?> 
+                    <li><a href="<?php echo base_url();?>timeorganisations"><?php echo lang('menu_hr_list_time_organisation');?></a></li>
+                    <?php }
+                    } ?>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_hr_reports_divider');?></li>
                     <li><a href="<?php echo base_url();?>reports/balance"><?php echo lang('menu_hr_report_leave_balance');?></a></li>
                     <li><a href="<?php echo base_url();?>reports/leaves"><?php echo lang('menu_hr_report_leaves');?></a></li>
+                    <?php if ($this->config->item('disable_telework') === FALSE) { ?>                    	
+                    	<li><a href="<?php echo base_url();?>teleworkreports/teleworks"><?php echo lang('menu_hr_report_teleworks');?></a></li>
+                    	<li><a href="<?php echo base_url();?>teleworkreports/byweek"><?php echo lang('menu_hr_report_weekly_teleworks');?></a></li>
+                    <?php } ?>                    
                     <li><a href="<?php echo base_url();?>reports"><?php echo lang('menu_hr_reports_divider');?></a></li>
                   </ul>
                 </li>
@@ -110,6 +125,18 @@ $this->lang->load('menu', $language);?>
                       <span class="badge badge-info"><?php echo $requested_extra_count;?></span>
                       <?php } ?>
                         <?php echo lang('menu_validation_overtime');?></a></li>
+                    <?php }
+                            if ($this->config->item('disable_telework') === FALSE) { ?>
+                      <li><a href="<?php echo base_url();?>teleworkrequests">
+                      <?php if ($requested_teleworks_count > 0) { ?>
+                      <span class="badge badge-info"><?php echo $requested_teleworks_count;?></span>
+                      <?php } ?>
+                        <?php echo lang('menu_validation_teleworks');?></a></li>
+                        <li><a href="<?php echo base_url();?>requests/collaborators">
+                      <?php if ($requested_campaign_teleworks_count > 0) { ?>
+                      <span class="badge badge-info"><?php echo $requested_campaign_teleworks_count;?></span>
+                      <?php } ?>
+                        <?php echo lang('menu_validation_campaign_teleworks');?></a></li>
                     <?php } ?>
                   </ul>
                 </li>
@@ -127,6 +154,16 @@ $this->lang->load('menu', $language);?>
                     <li class="nav-header"><?php echo lang('menu_requests_overtime');?></li>
                     <li><a href="<?php echo base_url();?>extra"><?php echo lang('menu_requests_list_extras');?></a></li>
                     <li><a href="<?php echo base_url();?>extra/create"><?php echo lang('menu_requests_request_extra');?></a></li>
+                    <?php } ?>
+                    <?php if ($this->config->item('disable_telework') === FALSE) { ?>
+                    <li class="divider"></li>
+                    <li class="nav-header"><?php echo lang('menu_requests_telework');?></li>
+                    <li><a href="<?php echo base_url();?>teleworks/counters"><?php echo lang('menu_teleworks_counters');?></a></li>
+                    <li><a href="<?php echo base_url();?>teleworks"><?php echo lang('menu_requests_list_telework');?></a></li>
+                    <li><a href="<?php echo base_url();?>teleworks/create"><?php echo lang('menu_requests_request_telework');?></a></li>
+                    <?php } ?>
+                    <?php if ($this->config->item('disable_campaign_telework') === FALSE) { ?>
+                    <li><a href="<?php echo base_url();?>teleworks/createforcampaign"><?php echo lang('menu_requests_request_campaign_telework');?></a></li>
                     <?php } ?>
                   </ul>
                 </li>

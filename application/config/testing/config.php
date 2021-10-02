@@ -465,6 +465,7 @@ $config['default_leave_type'] = FALSE;      //Set this value with the default le
 
 //Create a leave request / Allow overwrite of the duration
 $config['disable_edit_leave_duration'] = FALSE;             //Switch to read-only (the duration of leave is computed)
+$config['disable_edit_telework_duration'] = FALSE;             //Switch to read-only (the duration of telework is computed)
 
 //____________________________________________________________________________
 //Set this value to TRUE if you want to create extras at status requested instead of planned
@@ -486,6 +487,8 @@ $config['mandatory_comment_on_reject'] = FALSE;
 
 //Set this value to true if you want to forbid the employee to submit a leave request with a negative amount 
 $config['disallow_requests_without_credit'] = TRUE;
+//Set this value to true if you want to forbid the employee to submit a telework request with a negative amount
+$config['disallow_telework_requests_without_credit'] = FALSE;
 
 //____________________________________________________________________________
 //List of available languages. If you limit this list to one language, the list of available languages will be hidden from the login form
@@ -510,6 +513,10 @@ $config['fonts'] =
 // Hide/Disable features
 $config['disable_overtime'] = FALSE; //Set this value to TRUE if you want to hide the menu entries related to overtime
 $config['hide_global_cals_to_users'] = FALSE; //Set this value to TRUE if you want to hide global calendars (global/tabular) to users
+$config['disable_telework'] = FALSE; //Set this value to TRUE if you want to hide the menu entries related to telework
+$config['disable_campaign_telework'] = FALSE; //Set this value to TRUE if you want to hide the menu entries related to campaign telework
+$config['disable_time_organisation'] = FALSE; //Set this value to TRUE if you want to hide the menu entries related to working time organisation
+$config['hide_time_orgnisation_in_cals'] = FALSE; //Set this value to TRUE if you want to hide time organisation in global calendars (global/tabular)
 $config['disable_department_calendar'] = FALSE; //Set this value to TRUE in order to disable the menu entry 'departement'
 $config['disable_workmates_calendar'] = FALSE; //Set this value to TRUE in order to disable the menu entry 'my workmates'
 
@@ -571,6 +578,8 @@ $config['spreadsheet_format'] = 'xlsx';   //Supported formats: xlsx, ods
 //____________________________________________________________________________
 //Set this value to TRUE if you want to enable history of change (beware that it will impact the performance)
 $config['enable_history'] = FALSE;
+//Set this value to TRUE if you want to enable history of change for teleworks (beware that it will impact the performance)
+$config['enable_teleworks_history'] = TRUE;
 
 //____________________________________________________________________________
 //Set this value to TRUE if you want to enable Application Performance Management features

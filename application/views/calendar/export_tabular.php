@@ -118,21 +118,21 @@ $styleBgDayOff = array(
         'startColor' => array('rgb' => '000000')
     )
 );
-if ($this->config->item('disable_telework') == FALSE) {
+if ($this->config->item('disable_telework') == FALSE)
     $styleBgTWAccepted = array(
         'fill' => array(
             'fillType' => Fill::FILL_SOLID,
             'startColor' => array('rgb' => '3a87ad')
         )
     );
-    
+
+if ($this->config->item('disable_time_organisation') == FALSE && $this->config->item('hide_time_orgnisation_in_cals') === FALSE)
     $styleBgTOAccepted = array(
         'fill' => array(
             'fillType' => Fill::FILL_SOLID,
             'startColor' => array('rgb' => '9d159d')
         )
     );
-}
 
 $canSeeType = TRUE;
 $line = 10;

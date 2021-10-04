@@ -61,6 +61,8 @@ foreach ($users as $user) {
         $leave_duration = 0;
         for ($ii = 1; $ii <13; $ii++) {
             $linear = $this->leaves_model->linear($user->id, $ii, $year, FALSE, FALSE, TRUE, FALSE);
+            if ($this->config->item('disable_telework') === FALSE)
+                $linear = $this->leaves_model->removeOverlappingTeleworks($linear);
             $leave_duration += $this->leaves_model->monthlyLeavesDuration($linear);
             $leaves_detail = $this->leaves_model->monthlyLeavesByType($linear);
             //Init type columns
@@ -80,6 +82,8 @@ foreach ($users as $user) {
         $work_duration = $opened_days - $leave_duration;
     } else {
         $linear = $this->leaves_model->linear($user->id, $month, $year, FALSE, FALSE, TRUE, FALSE);
+        if ($this->config->item('disable_telework') === FALSE)
+            $linear = $this->leaves_model->removeOverlappingTeleworks($linear);
         $leave_duration = $this->leaves_model->monthlyLeavesDuration($linear);
         $work_duration = $opened_days - $leave_duration;
         $leaves_detail = $this->leaves_model->monthlyLeavesByType($linear);
@@ -127,7 +131,7 @@ foreach ($result as $user_id => $row) {
             $sheet->setCellValue('C' . $line, lang('leaves_index_thead_type'));
             $sheet->setCellValue('D' . $line, lang('leaves_index_thead_duration'));
             $sheet->getStyle('A' . $line . ':D' . $line)->getFont()->setBold(true);
-            $sheet->getStyle('A' . $line . ':D' . $line)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle('A' . $line . ':D' . $line)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
             $line++;
             //Iterate on leave requests
             foreach ($leave_requests[$user_id] as $request) {

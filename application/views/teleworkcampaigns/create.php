@@ -24,7 +24,11 @@ echo form_open('teleworkcampaigns/create', $attributes); ?>
 
     <label for="enddate"><?php echo lang('telework_campaign_create_field_enddate');?></label>
     <input type="text" name="enddate" id="enddate" value="<?php echo set_value('enddate'); ?>" autocomplete="off" />
-    
+    <br />
+    <div class="alert hide alert-error" id="lblOverlappingAlert" onclick="$('#lblOverlappingAlert').hide();">
+        <button type="button" class="close">&times;</button>
+        <?php echo lang('telework_campaign_create_field_overlapping_message');?>
+    </div>
     <br />
     <button id="send" class="btn btn-primary"><i class="mdi mdi-check"></i>&nbsp;<?php echo lang('telework_campaign_create_button_create');?></button>
     &nbsp;

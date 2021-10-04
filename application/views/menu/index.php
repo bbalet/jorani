@@ -75,6 +75,9 @@ $this->lang->load('menu', $language);?>
                     <li class="nav-header"><?php echo lang('menu_hr_contracts_divider');?></li>
                     <li><a href="<?php echo base_url();?>contracts"><?php echo lang('menu_hr_list_contracts');?></a></li>
                     <li><a href="<?php echo base_url();?>positions"><?php echo lang('menu_hr_list_positions');?></a></li>
+                    <?php if ($this->config->item('disable_time_organisation') === FALSE) { ?> 
+                    <li><a href="<?php echo base_url();?>timeorganisations"><?php echo lang('menu_hr_list_time_organisation');?></a></li>
+                    <?php } ?>
                     <?php if ($this->config->item('disable_telework') === FALSE) { ?>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_hr_teleworks_divider');?></li>  
@@ -82,10 +85,7 @@ $this->lang->load('menu', $language);?>
                     <li><a href="<?php echo base_url();?>teleworkcampaigns"><?php echo lang('menu_hr_list_telework_campaigns');?></a></li>              	
                     <?php } ?>
                     <li><a href="<?php echo base_url();?>teleworkrules"><?php echo lang('menu_hr_list_telework_rules');?></a></li>
-                    <?php if ($this->config->item('disable_time_organisation') === FALSE) { ?> 
-                    <li><a href="<?php echo base_url();?>timeorganisations"><?php echo lang('menu_hr_list_time_organisation');?></a></li>
-                    <?php }
-                    } ?>
+                    <?php } ?>
                     <li class="divider"></li>
                     <li class="nav-header"><?php echo lang('menu_hr_reports_divider');?></li>
                     <li><a href="<?php echo base_url();?>reports/balance"><?php echo lang('menu_hr_report_leave_balance');?></a></li>
@@ -126,18 +126,20 @@ $this->lang->load('menu', $language);?>
                       <?php } ?>
                         <?php echo lang('menu_validation_overtime');?></a></li>
                     <?php }
-                            if ($this->config->item('disable_telework') === FALSE) { ?>
+                    if ($this->config->item('disable_telework') === FALSE) { ?>
                       <li><a href="<?php echo base_url();?>teleworkrequests">
                       <?php if ($requested_teleworks_count > 0) { ?>
                       <span class="badge badge-info"><?php echo $requested_teleworks_count;?></span>
                       <?php } ?>
                         <?php echo lang('menu_validation_teleworks');?></a></li>
+                      <?php if ($this->config->item('disable_campaign_telework') === FALSE) { ?>
                         <li><a href="<?php echo base_url();?>requests/collaborators">
                       <?php if ($requested_campaign_teleworks_count > 0) { ?>
                       <span class="badge badge-info"><?php echo $requested_campaign_teleworks_count;?></span>
                       <?php } ?>
                         <?php echo lang('menu_validation_campaign_teleworks');?></a></li>
-                    <?php } ?>
+                    <?php }
+                    }?>
                   </ul>
                 </li>
               <?php } ?>
@@ -161,9 +163,9 @@ $this->lang->load('menu', $language);?>
                     <li><a href="<?php echo base_url();?>teleworks/counters"><?php echo lang('menu_teleworks_counters');?></a></li>
                     <li><a href="<?php echo base_url();?>teleworks"><?php echo lang('menu_requests_list_telework');?></a></li>
                     <li><a href="<?php echo base_url();?>teleworks/create"><?php echo lang('menu_requests_request_telework');?></a></li>
-                    <?php } ?>
                     <?php if ($this->config->item('disable_campaign_telework') === FALSE) { ?>
                     <li><a href="<?php echo base_url();?>teleworks/createforcampaign"><?php echo lang('menu_requests_request_campaign_telework');?></a></li>
+                    <?php } ?>
                     <?php } ?>
                   </ul>
                 </li>

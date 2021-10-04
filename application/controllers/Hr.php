@@ -555,9 +555,9 @@ class Hr extends CI_Controller {
         $data['leave_duration'] = $this->leaves_model->monthlyLeavesDuration($data['linear']);
         $data['work_duration'] = $opened_days - $data['leave_duration'];
         $data['leaves_detail'] = $this->leaves_model->monthlyLeavesByType($data['linear']);
-        if ($this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
-            $this->load->model('teleworks_model');
-            $timeorganisationdates = $this->teleworks_model->getTimeOrganisationDatesToCalendar($id, $month, $year);
+        if ($this->config->item('disable_time_organisation') === FALSE && $this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
+            $this->load->model('time_organisation_model');
+            $timeorganisationdates = $this->time_organisation_model->getTimeOrganisationDatesToCalendar($id, $month, $year);
             $this->leaves_model->addTimeOrganisationDatesToCalendar($data['linear'], $timeorganisationdates, $id);
         }
 
@@ -651,6 +651,7 @@ class Hr extends CI_Controller {
         $this->lang->load('calendar', $this->language);
         $this->load->model('leaves_model');
         $this->load->model('teleworks_model');
+        $this->load->model('time_organisation_model');
         $this->load->model('users_model');
         $this->load->model('dayoffs_model');
         $this->load->model('contracts_model');

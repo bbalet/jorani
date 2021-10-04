@@ -271,9 +271,9 @@
         <?php if ($this->config->item('disable_telework') == FALSE) { ?>
         <a class="context" href="<?php echo base_url();?>hr/teleworks/create/{id}"><i class="mdi mdi-file-plus nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_create_telework');?></a><br />
         <a class="context" href="<?php echo base_url();?>hr/teleworks/{id}"><i class="mdi mdi-format-list-numbered-rtl nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_teleworks');?></a><br />
-        <?php } ?>
-        <?php if ($this->config->item('disable_campaign_telework') === FALSE) { ?>
+        <?php if ($this->config->item('disable_campaign_telework') == FALSE) { ?>
         <a class="context" href="<?php echo base_url();?>hr/campaignteleworks/create/{id}"><i class="mdi mdi-file-plus nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_create_campaign_telework');?></a><br />
+        <?php } ?>
         <?php } ?>
         <a class="context" href="<?php echo base_url();?>hr/counters/employees/{id}"><i class="mdi mdi-information-outline nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_balance');?></a><br />
         <a class="context" href="<?php echo base_url();?>hr/presence/employees/{id}"><i class="mdi mdi-chart-pie nolink"></i>&nbsp;<?php echo lang('hr_employees_thead_link_presence');?></a><br />

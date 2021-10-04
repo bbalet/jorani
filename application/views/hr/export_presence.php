@@ -46,8 +46,8 @@ if ($this->config->item('disable_telework') === FALSE)
 $leave_duration = $this->leaves_model->monthlyLeavesDuration($linear);
 $work_duration = $opened_days - $leave_duration;
 $leaves_detail = $this->leaves_model->monthlyLeavesByType($linear);
-if ($this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
-    $timeorganisationdates = $this->teleworks_model->getTimeOrganisationDatesToCalendar($id, $month, $year);
+if ($this->config->item('disable_time_organisation') === FALSE && $this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
+    $timeorganisationdates = $this->time_organisation_model->getTimeOrganisationDatesToCalendar($id, $month, $year);
     $this->leaves_model->addTimeOrganisationDatesToCalendar($linear, $timeorganisationdates, $id);
 }
 //Leave balance of the employee
@@ -167,21 +167,21 @@ $dayBox =  array(
      )
  );
  
- if ($this->config->item('disable_telework') == FALSE) {
+ if ($this->config->item('disable_telework') == FALSE)
      $styleBgTWAccepted = array(
          'fill' => array(
              'fillType' => Fill::FILL_SOLID,
              'startColor' => array('rgb' => '3a87ad')
          )
      );
-     
+
+if ($this->config->item('disable_time_organisation') == FALSE && $this->config->item('hide_time_orgnisation_in_cals') === FALSE)
      $styleBgTOAccepted = array(
          'fill' => array(
              'fillType' => Fill::FILL_SOLID,
              'startColor' => array('rgb' => '9d159d')
          )
      );
- }
 
 $line = 12;
 $col = columnName($lastDay + 3);

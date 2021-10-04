@@ -1077,8 +1077,9 @@ class Leaves_model extends CI_Model {
             );
         }        
         
-        if ($this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
-            $jsonevents = array_merge($jsonevents, $this->teleworks_model->getTimeOrganisationDatesToJson($entity_id, -1, $start, $end, $children));
+        if ($this->config->item('disable_time_organisation') === FALSE && $this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
+            $this->load->model('time_organisation_model');
+            $jsonevents = array_merge($jsonevents, $this->time_organisation_model->getTimeOrganisationDatesToJson($entity_id, -1, $start, $end, $children));
         }
 
         return json_encode($jsonevents);
@@ -1121,8 +1122,9 @@ class Leaves_model extends CI_Model {
       
       $jsonevents =  $this->transformToEvent($events);
       
-      if ($this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
-          $jsonevents = array_merge($jsonevents, $this->teleworks_model->getTimeOrganisationDatesToJson(-1, $list_id, $start, $end));
+      if ($this->config->item('disable_time_organisation') === FALSE && $this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
+          $this->load->model('time_organisation_model');
+          $jsonevents = array_merge($jsonevents, $this->time_organisation_model->getTimeOrganisationDatesToJson(-1, $list_id, $start, $end));
       }
       
       return json_encode($jsonevents);
@@ -1428,9 +1430,9 @@ class Leaves_model extends CI_Model {
                     $tabular[$employee->id] = $this->leaves_model->removeOverlappingTeleworks($tabular[$employee->id]);
             }
             
-            if ($this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
-                $this->load->model('teleworks_model');
-                $timeorganisationdates = $this->teleworks_model->getTimeOrganisationDatesToCalendar($employee->id, $month, $year);                
+            if ($this->config->item('disable_time_organisation') === FALSE && $this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
+                $this->load->model('time_organisation_model');
+                $timeorganisationdates = $this->time_organisation_model->getTimeOrganisationDatesToCalendar($employee->id, $month, $year);                
                 $this->addTimeOrganisationDatesToCalendar($tabular[$employee->id], $timeorganisationdates, $employee->id);
             }
         }
@@ -1476,9 +1478,9 @@ class Leaves_model extends CI_Model {
                     $tabular[$employee['id']] = $this->leaves_model->removeOverlappingTeleworks($tabular[$employee['id']]);
             }
             
-            if ($this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
-                $this->load->model('teleworks_model');
-                $timeorganisationdates = $this->teleworks_model->getTimeOrganisationDatesToCalendar($employee['id'], $month, $year);
+            if ($this->config->item('disable_time_organisation') === FALSE && $this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
+                $this->load->model('time_organisation_model');
+                $timeorganisationdates = $this->time_organisation_model->getTimeOrganisationDatesToCalendar($employee['id'], $month, $year);
                 $this->addTimeOrganisationDatesToCalendar($tabular[$employee['id']], $timeorganisationdates, $employee['id']);
             }
         }

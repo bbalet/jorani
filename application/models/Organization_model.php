@@ -250,6 +250,8 @@ class Organization_model extends CI_Model {
         } else {
             $this->db->where('organization.id', $id);
         }
+        if ($this->config->item('tabular_order_by_organization') === TRUE)
+            $this->db->order_by('department', 'asc');
         $this->db->order_by('lastname', 'asc');
         $this->db->order_by('firstname', 'asc');
         $employees = $this->db->get()->result();

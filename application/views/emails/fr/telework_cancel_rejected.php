@@ -22,8 +22,7 @@
         <h3>{Title}</h3>
         Cher {Firstname} {Lastname}, <br />
         <br />
-        <p>Votre demande d'annulation n'a pas été acceptée.
-         La demande de télétravail est maintenant à son statut initial d'Acceptée.</p>
+        <p>Votre demande d'annulation n'a pas été acceptée. La demande de télétravail est maintenant à son statut initial d'Acceptée.</p>
          <p>Veuillez contacter votre responsable pour en discuter.</p>
         <table border="0">
             <tr>

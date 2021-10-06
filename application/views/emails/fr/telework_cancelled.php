@@ -20,24 +20,24 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>{Firstname} {Lastname} cancelled his or her request for telework. Here are the <a href="{BaseUrl}teleworks/teleworks/{TeleworkId}">details</a> :</p>
+        <p>{Firstname} {Lastname} a annulé sa demande de télétravail. Voici les. <a href="{BaseUrl}teleworks/teleworks/{TeleworkId}">détails</a> :</p>
         <table>
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>Du &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>Au &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Durée &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Reason}</td>
+                <td>Cause &nbsp;</td><td>{Reason}</td>
             </tr>
         </table>
         <br />
-       <p>You can check <a href="{BaseUrl}hr/teleworks/{UserId}">the telework status</a> before validating this request.</p>
+       <p>Vous pouvez vérifier <a href="{BaseUrl}hr/teleworks/{UserId}">l'état des télétravail</a> avant de valider cette demande.</p>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
     </body>
 </html>

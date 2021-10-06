@@ -20,31 +20,31 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>{Firstname} {Lastname} submits a telework request to you. Here are the <a href="{BaseUrl}teleworks/requests/{TeleworkId}">details</a> :</p>
+        <p>{Firstname} {Lastname} vous soumet une demande de télétravail. Voici les <a href="{BaseUrl}teleworks/requests/{TeleworkId}">détails</a> :</p>
         <table>
             <tr>
-                <td>From &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
+                <td>Du &nbsp;</td><td>{StartDate}&nbsp;({StartDateType})</td>
             </tr>
             <tr>
-                <td>To &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
+                <td>Au &nbsp;</td><td>{EndDate}&nbsp;({EndDateType})</td>
             </tr>
             <tr>
-                <td>Duration &nbsp;</td><td>{Duration}</td>
+                <td>Durée &nbsp;</td><td>{Duration}</td>
             </tr>
             <tr>
-                <td>Reason &nbsp;</td><td>{Reason}</td>
+                <td>Cause &nbsp;</td><td>{Reason}</td>
             </tr>
             <tr>
-              <td>Last comment &nbsp;</td><td>{Comments}</td>
+              <td>Dernier Commentaire &nbsp;</td><td>{Comments}</td>
             </tr>
             <tr>
-                <td><a href="{BaseUrl}teleworkrequests/accept/{TeleworkId}">Accept</a> &nbsp;</td>
-                <td><a href="{BaseUrl}teleworkrequests?rejected={TeleworkId}">Reject</a></td>
+                <td><a href="{BaseUrl}teleworkrequests/accept/{TeleworkId}">Accepter</a> &nbsp;</td>
+                <td><a href="{BaseUrl}teleworkrequests?rejected={TeleworkId}">Rejecter</a></td>
             </tr>
         </table>
         <br />
-        <p>You can check <a href="{BaseUrl}hr/teleworks/{UserId}">telework status</a> before approving this request.</p>
+        <p>Vous pouvez vérifier <a href="{BaseUrl}hr/teleworks/{UserId}">l'état des télétravail</a> avant de valider cette demande.</p>
         <hr>
-        <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
+        <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
     </body>
 </html>

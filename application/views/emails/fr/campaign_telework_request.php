@@ -20,7 +20,7 @@
     </head>
     <body>
         <h3>{Title}</h3>
-        <p>{Firstname} {Lastname} vous soumet une demande de télétravail. Voici les détails :</p>
+        <p>{Firstname} {Lastname} vous soumet une demande de télétravail fixe. Voici les détails :</p>
         <table>
             <tr>
                 <td>Dates</td><td>{Dates}</td>

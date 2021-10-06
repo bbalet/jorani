@@ -480,8 +480,6 @@ $config['mandatory_comment_on_reject'] = FALSE;
 
 //Set this value to true if you want to forbid the employee to submit a leave request with a negative amount 
 $config['disallow_requests_without_credit'] = TRUE;
-//Set this value to true if you want to forbid the employee to submit a telework request with a negative amount
-$config['disallow_telework_requests_without_credit'] = FALSE;
 
 //____________________________________________________________________________
 //List of available languages. If you limit this list to one language, the list of available languages will be hidden from the login form
@@ -512,6 +510,7 @@ $config['disable_time_organisation'] = FALSE; //Set this value to TRUE if you wa
 $config['hide_time_orgnisation_in_cals'] = FALSE; //Set this value to TRUE if you want to hide time organisation in global calendars (global/tabular)
 $config['disable_department_calendar'] = FALSE; //Set this value to TRUE in order to disable the menu entry 'departement'
 $config['disable_workmates_calendar'] = FALSE; //Set this value to TRUE in order to disable the menu entry 'my workmates'
+$config['tabular_order_by_organization'] = FALSE; //Set this value to TRUE to display the list in order of department.
 
 //____________________________________________________________________________
 //Google analytics tracking code (if empty, the Javascript tracking code will be desactivated).

@@ -42,7 +42,7 @@
             </tr>
         </table>
         <br />
-        <p>You can check <a href="{BaseUrl}hr/teleworkrequests/{UserId}">the telework status</a> before validating this request.</p>
+        <p>You can check <a href="{BaseUrl}teleworkrequests/teleworks/{UserId}">the telework status</a> before validating this request.</p>
         <hr>
         <h5>*** This is an automatically generated message, please do not reply to this message ***</h5>
     </body>

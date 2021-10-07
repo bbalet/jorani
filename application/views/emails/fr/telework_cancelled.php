@@ -36,7 +36,7 @@
             </tr>
         </table>
         <br />
-       <p>Vous pouvez vérifier <a href="{BaseUrl}hr/teleworks/{UserId}">l'état des télétravail</a> avant de valider cette demande.</p>
+       <p>Vous pouvez vérifier <a href="{BaseUrl}teleworkrequests/teleworks/{UserId}">l'état des télétravail</a> avant de valider cette demande.</p>
         <hr>
         <h5>*** Ceci est un message généré automatiquement, veuillez ne pas répondre à ce message ***</h5>
     </body>

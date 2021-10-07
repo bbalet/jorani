@@ -62,6 +62,49 @@ class TeleworkRequests extends CI_Controller {
     }
     
     /**
+     * Display the list of all telework requests that have been submitted to you by an employee
+     * @param int $id unique identifier of the employee
+     * @author Maithyly SIVAPALAN <maithyly.sivapalan@inha.fr>
+     */
+    public function teleworks($filter = 'requested', $id) {
+        $this->load->helper('form');
+        $this->load->model('users_model');
+        $employee = $this->users_model->getUsers($id);
+        if (($this->user_id != $employee['manager']) && ($this->is_hr === FALSE)) {
+            log_message('error', 'User #' . $this->user_id . ' illegally tried to access to teleworkrequests/teleworks  #' . $id);
+            $this->session->set_flashdata('msg', lang('teleworkrequests_summary_flash_msg_forbidden'));
+            redirect('teleworks');
+        } else {
+            $data = getUserContext($this);
+            $this->lang->load('teleworks', $this->language);
+            $data['name'] = $this->users_model->getName($id);
+            // Check if exists
+            if ($data['name'] == "") {
+                redirect('notfound');
+            }
+            $this->lang->load('datatable', $this->language);
+            
+            $data['title'] = lang('campaign_teleworks_index_html_title');
+            $data['user_id'] = $id;
+            $data['filter'] = $filter;
+            $this->load->model('teleworks_model');
+            $this->load->model('telework_campaign_model');
+            $data['campaigns'] = $this->telework_campaign_model->getTeleworkCampaigns();
+            ($filter == 'all') ? $showAll = TRUE : $showAll = FALSE;
+            if ($this->config->item('enable_teleworks_history') == TRUE) {
+                $data['teleworks'] = $this->teleworks_model->getTeleworksRequestedToManagerWithHistory($this->user_id, $showAll, NULL, $id);
+            } else {
+                $data['teleworks'] = $this->teleworks_model->getTeleworksRequestedToManager($this->user_id, $showAll, NULL, $id);
+            }
+            $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
+            $this->load->view('templates/header', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('teleworkrequests/teleworks', $data);
+            $this->load->view('templates/footer');
+        }
+    }
+    
+    /**
      * Display the list of all campaign telework requests that have been submitted to you by an employee
      * @param int $id unique identifier of the employee
      * @author Maithyly SIVAPALAN <maithyly.sivapalan@inha.fr>
@@ -577,5 +620,16 @@ class TeleworkRequests extends CI_Controller {
         $data['filter'] = $filter;
         $data['user_id'] = $id;
         $this->load->view('teleworkrequests/exportforcampaign', $data);
+    }
+    
+    /**
+     * Export the list of all telework requests (sent to the connected user) into an Excel file
+     * @param string $filter Filter the list of submitted telework requests (all or requested)
+     * @author Maithyly SIVAPALAN <maithyly.sivapalan@inha.fr>
+     */
+    public function exportall($filter = 'requested', $id) {
+        $data['filter'] = $filter;
+        $data['user_id'] = $id;
+        $this->load->view('teleworkrequests/exportall', $data);
     }
 }

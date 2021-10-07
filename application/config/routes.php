@@ -301,14 +301,11 @@ $route['teleworks'] = 'teleworks';
 
 //_______________________________________________
 //telework requests (submitted to the line manager)
-$route['teleworkrequests/balance'] = 'TeleworkRequests/balance';
-$route['teleworkrequests/balance/(:num)'] = 'TeleworkRequests/balance/$1';
 $route['teleworkrequests/createtelework/(:num)'] = 'TeleworkRequests/createtelework/$1';
 $route['teleworkrequests/createforcampaign/(:num)'] = 'TeleworkRequests/createcampaigntelework/$1';
-$route['teleworkrequests/counters/(:num)'] = 'TeleworkRequests/counters/$1';
-$route['teleworkrequests/counters/(:num)/(:num)'] = 'TeleworkRequests/counters/$1/$2';
 $route['teleworkrequests/export/(:any)'] = 'TeleworkRequests/export/$1';
 $route['teleworkrequests/exportforcampaign/(:any)/(:num)'] = 'TeleworkRequests/exportforcampaign/$1/$2';
+$route['teleworkrequests/exportall/(:any)/(:num)'] = 'TeleworkRequests/exportall/$1/$2';
 $route['teleworkrequests/accept/(:num)'] = 'TeleworkRequests/accept/$1';
 $route['teleworkrequests/acceptall/(:num)'] = 'TeleworkRequests/acceptAll/$1';
 $route['teleworkrequests/reject/(:num)'] = 'TeleworkRequests/reject/$1';
@@ -323,6 +320,8 @@ $route['teleworkrequests/(:any)'] = 'TeleworkRequests/index/$1';
 $route['teleworkrequests'] = 'TeleworkRequests/index/requested';
 $route['teleworkrequests/campaignteleworks/(:any)/(:num)'] = 'TeleworkRequests/campaignteleworks/$1/$2';
 $route['teleworkrequests/campaignteleworks/(:num)'] = 'TeleworkRequests/campaignteleworks/requested/$1';
+$route['teleworkrequests/teleworks/(:any)/(:num)'] = 'TeleworkRequests/teleworks/$1/$2';
+$route['teleworkrequests/teleworks/(:num)'] = 'TeleworkRequests/teleworks/requested/$1';
 
 //_______________________________________________
 //Entitled days

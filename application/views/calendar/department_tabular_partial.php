@@ -184,8 +184,8 @@ if (count($tabular) > 0) {
                     //Hide leave type to users who are not part of HR/Admin
                     if (($is_hr == TRUE) || 
                             ($is_admin == TRUE) || 
-                            ($employee->manager == $user_id) || 
-                            ($employee->id == $user_id)) {
+                            ($employee['manager'] == $user_id) || 
+                            ($employee['id'] == $user_id)) {
                         $dayType = $day->type;
                         $acronym = $day->acronym;
                         $dataIds= $day->id;

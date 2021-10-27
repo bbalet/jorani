@@ -1404,7 +1404,7 @@ class Leaves_model extends CI_Model {
             }
         }
         $tabular = array();
-
+        
         //We must show all users of the departement
         $this->load->model('organization_model');
         $employees = $this->organization_model->allEmployees($entity, $children);
@@ -1412,27 +1412,27 @@ class Leaves_model extends CI_Model {
             if ($statusFilter != NULL) {
                 $statuses = explode ('|', $statusFilter);
                 $tabular[$employee->id] = $this->linear($employee->id,
-                        $month,
-                        $year,
-                        in_array("1", $statuses),
-                        in_array("2", $statuses),
-                        in_array("3", $statuses),
-                        in_array("4", $statuses),
-                        in_array("5", $statuses),
-                        in_array("6", $statuses),
-                        $calendar);
+                    $month,
+                    $year,
+                    in_array("1", $statuses),
+                    in_array("2", $statuses),
+                    in_array("3", $statuses),
+                    in_array("4", $statuses),
+                    in_array("5", $statuses),
+                    in_array("6", $statuses),
+                    $calendar);
                 if ($this->config->item('disable_telework') === FALSE)
                     $tabular[$employee->id] = $this->leaves_model->removeOverlappingTeleworks($tabular[$employee->id]);
             } else {
                 $tabular[$employee->id] = $this->linear($employee->id, $month, $year,
-                        TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, $calendar);
+                    TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, $calendar);
                 if ($this->config->item('disable_telework') === FALSE)
                     $tabular[$employee->id] = $this->leaves_model->removeOverlappingTeleworks($tabular[$employee->id]);
             }
             
             if ($this->config->item('disable_time_organisation') === FALSE && $this->config->item('hide_time_orgnisation_in_cals') === FALSE) {
                 $this->load->model('time_organisation_model');
-                $timeorganisationdates = $this->time_organisation_model->getTimeOrganisationDatesToCalendar($employee->id, $month, $year);                
+                $timeorganisationdates = $this->time_organisation_model->getTimeOrganisationDatesToCalendar($employee->id, $month, $year);
                 $this->addTimeOrganisationDatesToCalendar($tabular[$employee->id], $timeorganisationdates, $employee->id);
             }
         }
@@ -1506,7 +1506,7 @@ class Leaves_model extends CI_Model {
                 $displayvalues = array_count_values($display);
                 for ($i = 0; $i < count($type); $i ++) {
                     if ($acronym[$i] == lang('telework_acronym')) {
-                        if (($display[$i] == '2' && array_key_exists(2, $displayvalues) && $displayvalues[2] > 1) || ($display[$i] == '3' && array_key_exists(3, $displayvalues) && $displayvalues[3] > 1) || ($display[$i] == '1' && array_key_exists(1, $displayvalues) && $displayvalues[1] > 1)) {
+                        if (($display[$i] == '2' && array_key_exists(2, $displayvalues) && $displayvalues[2] > 1) || ($display[$i] == '3' && array_key_exists(3, $displayvalues) && $displayvalues[3] > 1) || ($display[$i] == '1' && array_key_exists(1, $displayvalues) && $displayvalues[1] > 1) || ($display[$i] != '1' && array_key_exists(1, $displayvalues) && $displayvalues[1] > 0)) {
                             array_splice($id, $i, 1);
                             array_splice($type, $i, 1);
                             array_splice($acronym, $i, 1);
@@ -1582,19 +1582,24 @@ class Leaves_model extends CI_Model {
             if (strstr($day->display, ';')) {
                 $acronym = explode(";", $day->acronym);
                 $display = explode(";", $day->display);
-                if ($acronym[0] != lang('telework_acronym') && $acronym[0] != lang('time_organisation_acronym')) {
-                    if ($display[0] == '2') $total += 0.5;
-                    if ($display[0] == '3') $total += 0.5;
-                }
-                if ($acronym[1] != lang('telework_acronym') && $acronym[1] != lang('time_organisation_acronym')) {
-                    if ($display[1] == '2') $total += 0.5;
-                    if ($display[1] == '3') $total += 0.5;
+                for ($i = 0; $i < count($acronym); $i ++) {
+                    if ($acronym[$i] != lang('telework_acronym')) {
+                        if ($display[$i] == '1')
+                            $total += 1;
+                        if ($display[$i] == '2')
+                            $total += 0.5;
+                        if ($display[$i] == '3')
+                            $total += 0.5;
+                    }
                 }
             } else {
-                if ($day->acronym != lang('telework_acronym') && $day->acronym != lang('time_organisation_acronym')) {
-                    if ($day->display == 2) $total += 0.5;
-                    if ($day->display == 3) $total += 0.5;
-                    if ($day->display == 1) $total += 1;
+                if ($day->acronym != lang('telework_acronym')) {
+                    if ($day->display == 2)
+                        $total += 0.5;
+                    if ($day->display == 3)
+                        $total += 0.5;
+                    if ($day->display == 1)
+                        $total += 1;
                 }
             }
         }
@@ -1614,14 +1619,21 @@ class Leaves_model extends CI_Model {
             if (strstr($day->display, ';')) {
                 $display = explode(";", $day->display);
                 $type = explode(";", $day->type);
-                if ($display[0] == '2') array_key_exists($type[0], $by_types) ? $by_types[$type[0]] += 0.5: $by_types[$type[0]] = 0.5;
-                if ($display[0] == '3') array_key_exists($type[0], $by_types) ? $by_types[$type[0]] += 0.5: $by_types[$type[0]] = 0.5;
-                if ($display[1] == '2') array_key_exists($type[1], $by_types) ? $by_types[$type[1]] += 0.5: $by_types[$type[1]] = 0.5;
-                if ($display[1] == '3') array_key_exists($type[1], $by_types) ? $by_types[$type[1]] += 0.5: $by_types[$type[1]] = 0.5;
+                for ($i = 0; $i < count($display); $i ++) {
+                    if ($display[$i] == '1')
+                        array_key_exists($type[$i], $by_types) ? $by_types[$type[$i]] += 1 : $by_types[$type[$i]] = 1;
+                    if ($display[$i] == '2')
+                        array_key_exists($type[$i], $by_types) ? $by_types[$type[$i]] += 0.5 : $by_types[$type[$i]] = 0.5;
+                    if ($display[$i] == '3')
+                        array_key_exists($type[$i], $by_types) ? $by_types[$type[$i]] += 0.5 : $by_types[$type[$i]] = 0.5;
+                }
             } else {
-                if ($day->display == 2) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5: $by_types[$day->type] = 0.5;
-                if ($day->display == 3) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5: $by_types[$day->type] = 0.5;
-                if ($day->display == 1) array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 1: $by_types[$day->type] = 1;
+                if ($day->display == 2)
+                    array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5 : $by_types[$day->type] = 0.5;
+                if ($day->display == 3)
+                    array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 0.5 : $by_types[$day->type] = 0.5;
+                if ($day->display == 1)
+                    array_key_exists($day->type, $by_types) ? $by_types[$day->type] += 1 : $by_types[$day->type] = 1;
             }
         }
         return $by_types;

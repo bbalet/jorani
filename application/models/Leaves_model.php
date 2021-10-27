@@ -1791,7 +1791,7 @@ class Leaves_model extends CI_Model {
                             $user->days[$dayNum]->type = $entry->type . ';' . $user->days[$dayNum]->type;
                             $user->days[$dayNum]->display = $display . ';' . $user->days[$dayNum]->display;
                             $user->days[$dayNum]->status = $entry->status . ';' . $user->days[$dayNum]->status;
-                            $user->days[$dayNum]->acronym .= $entry->acronym . ';' . $user->days[$dayNum]->acronym;
+                            $user->days[$dayNum]->acronym = $entry->acronym . ';' . $user->days[$dayNum]->acronym;
                         }
                     } else  {   //All day entry
                         $user->days[$dayNum]->id = $entry->id;

@@ -1316,13 +1316,12 @@ class Teleworks_model extends CI_Model {
             if (strstr($day->display, ';')) {
                 $acronym = explode(";", $day->acronym);
                 $display = explode(";", $day->display);
-                if ($acronym[0] == lang('telework_acronym')) {
-                    if ($display[0] == '2') $total += 0.5;
-                    if ($display[0] == '3') $total += 0.5;
-                }
-                if ($acronym[1] == lang('telework_acronym')) {
-                    if ($display[1] == '2') $total += 0.5;
-                    if ($display[1] == '3') $total += 0.5;
+                for ($i = 0; $i < count($acronym); $i ++) {
+                    if ($acronym[$i] == lang('telework_acronym')) {
+                        if ($display[$i] == '1') $total += 1;
+                        if ($display[$i] == '2') $total += 0.5;
+                        if ($display[$i] == '3') $total += 0.5;
+                    }
                 }
             } else {
                 if ($day->acronym == lang('telework_acronym')) {

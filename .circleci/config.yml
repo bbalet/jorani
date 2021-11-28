@@ -41,6 +41,8 @@ jobs:
       - run: apt install -y php-xml 
       - run: apt install -y php-zip
       - run: apt install -y mysql-server
+      - run: service mysql restart
+      - run: sleep 60
       - run: rm -rf /var/www/html
       - run: git clone https://github.com/fdajek/jorani.git		/var/www/html/
       - run: mysql -u root  -e "CREATE USER 'fdajek'@'localhost' IDENTIFIED BY 'hzerg734';"

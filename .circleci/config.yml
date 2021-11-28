@@ -28,7 +28,7 @@ jobs:
 
       - run: apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: apt upgrade
-      - run: apt install git apache2 php mcrypt  php-mysqli php-gd php-xml php-zip mysql-server
+      - run: apt install -y git apache2 php mcrypt  php-mysqli php-gd php-xml php-zip mysql-server
       - run: rm -rf /var/www/html
       - run: git clone https://github.com/fdajek/jorani.git		/var/www/html/
       - run: mysql -u root  -e "CREATE USER 'fdajek'@'localhost' IDENTIFIED BY 'hzerg734';"

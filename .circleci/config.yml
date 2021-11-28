@@ -29,6 +29,10 @@ jobs:
       - run: apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: apt upgrade
       - run: apt install -y git
+      - run: export DEBIAN_FRONTEND=noninteractive
+      - run: ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+      - run: apt-get install -y tzdata
+      - run: dpkg-reconfigure --frontend noninteractive tzdata
       - run: apt install -y apache2
       - run: apt install -y php
       - run: apt install -y mcrypt  

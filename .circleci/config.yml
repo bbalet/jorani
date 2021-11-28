@@ -27,7 +27,7 @@ jobs:
       - checkout
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - rum: sudo apt upgrade
+      - run: sudo apt upgrade
       - run: sudo apt install git apache2 php mcrypt  php-mysqli php-gd php-xml php-zip mysql-server
       - run: sudo rm -rf /var/www/html
       - run: git clone https://github.com/fdajek/jorani.git		/var/www/html/

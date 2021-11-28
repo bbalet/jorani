@@ -47,7 +47,7 @@ jobs:
       - run: git clone https://github.com/fdajek/jorani.git		/var/www/html/
       - run: mysql -u root  -e "CREATE USER 'fdajek'@'localhost' IDENTIFIED BY 'hzerg734';"
       - run: mysql -u root  -e "GRANT all ON *.* TO 'fdajek'@'localhost';"
-      - run: mysql -u root  -e "create database lms;
+      - run: mysql -u root  -e "create database lms;"
      
 
       

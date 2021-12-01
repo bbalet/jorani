@@ -497,32 +497,42 @@ class Leaves_model extends CI_Model {
      */
     public function createRequestForUserList($type, $duration, $startdate, $enddate, $startdatetype, $enddatetype, $cause, $status, $employees) {
         $affectedRows = 0;
+        $this->load->model('types_model');
+        $typename = $this->types_model->getname($type);
         if ($this->config->item('enable_history') === TRUE) {
             foreach ($employees as $id) {
-                $this->createLeaveByApi($this->input->post('startdate'),
-                        $this->input->post('enddate'),
-                        $this->input->post('status'),
-                        $id,
-                        $this->input->post('cause'),
-                        $this->input->post('startdatetype'),
-                        $this->input->post('enddatetype'),
-                        abs($this->input->post('duration')),
-                        $this->input->post('type'));
-                $affectedRows++;
+                $credit = $this->getLeavesTypeBalanceForEmployee($id, $typename, $startdate);
+                $overlap = $this->detectOverlappingLeaves($id, $startdate, $enddate, $startdatetype, $enddatetype);
+                if ($credit > abs($this->input->post('duration')) && ! $overlap) {
+                    $this->createLeaveByApi($this->input->post('startdate'),
+                            $this->input->post('enddate'),
+                            $this->input->post('status'),
+                            $id,
+                            $this->input->post('cause'),
+                            $this->input->post('startdatetype'),
+                            $this->input->post('enddatetype'),
+                            abs($this->input->post('duration')),
+                            $this->input->post('type'));
+                    $affectedRows++;
+                }
             }
         } else {
             $data = array();
             foreach ($employees as $id) {
-                $data[] = array(
-                    'startdate' => $this->input->post('startdate'),
-                    'startdatetype' => $this->input->post('startdatetype'),
-                    'enddate' => $this->input->post('enddate'),
-                    'enddatetype' => $this->input->post('enddatetype'),
-                    'duration' => abs($this->input->post('duration')),
-                    'type' => $this->input->post('type'),
-                    'cause' => $this->input->post('cause'),
-                    'status' => $this->input->post('status'),
-                    'employee' => $id);
+                $credit = $this->getLeavesTypeBalanceForEmployee($id, $typename, $startdate, $id);
+                $overlap = $this->detectOverlappingLeaves($id, $startdate, $enddate, $startdatetype, $enddatetype);
+                if ($credit > abs($this->input->post('duration')) && ! $overlap)
+                    $data[] = array(
+                        'startdate' => $this->input->post('startdate'),
+                        'startdatetype' => $this->input->post('startdatetype'),
+                        'enddate' => $this->input->post('enddate'),
+                        'enddatetype' => $this->input->post('enddatetype'),
+                        'duration' => abs($this->input->post('duration')),
+                        'type' => $this->input->post('type'),
+                        'cause' => $this->input->post('cause'),
+                        'status' => $this->input->post('status'),
+                        'employee' => $id
+                    );
             }
             $affectedRows = $this->db->insert_batch('leaves', $data);
         }

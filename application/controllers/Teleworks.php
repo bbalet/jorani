@@ -844,6 +844,8 @@ class Teleworks extends CI_Controller {
         $teleworkValidator = new stdClass();
         $deductDayOff = FALSE;
         $teleworkValidator->errors = 0;
+        $this->load->model('users_model');
+        $employee = $this->users_model->getUsers($id);
         if (isset($id) && isset($startdate) && isset($enddate)) {
             if (isset($telework_id)) {
                 $teleworkValidator->overlap = $this->teleworks_model->detectOverlappingTeleworks($id, $startdate, $enddate, $startdatetype, $enddatetype, $telework_id);
@@ -912,9 +914,7 @@ class Teleworks extends CI_Controller {
             $delay = $now->diff($start)->days;
             $teleworkValidator->delay = $delay;
             if (($delay < $deadline && $now->format('W') == $start->format('W')) || $startdate < $now->format('Y-m-d')) {
-                $teleworkValidator->deadlinerespected = FALSE;
-                $this->load->model('users_model');
-                $employee = $this->users_model->getUsers($id);
+                $teleworkValidator->deadlinerespected = FALSE;                
                 if (! $this->is_admin && ! $this->is_hr && $this->user_id != $employee['manager'])
                     $teleworkValidator->errors = $teleworkValidator->errors + 1;
             } else
@@ -955,7 +955,7 @@ class Teleworks extends CI_Controller {
                 $teleworkValidator->halfday = TRUE;
         }
 
-        if ($teleworkValidator->fractionalpart > 0 && ! $teleworkValidator->halfday)
+        if ($teleworkValidator->fractionalpart > 0 && ! $teleworkValidator->halfday && ! $this->is_admin && ! $this->is_hr && $this->user_id != $employee['manager'])
             $teleworkValidator->errors = $teleworkValidator->errors + 1;
 
         // Repeat start and end dates of the telework request

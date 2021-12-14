@@ -72,7 +72,7 @@ echo form_open($form_action, $attributes) ?>
     
     <div class="alert hide alert-error" id="lblHalfdayTeleworkAlert" onclick="$('#lblHalfdayTeleworkAlert').hide();">
         <button type="button" class="close">&times;</button>
-        <?php echo lang('teleworks_flash_msg_halfday_telework');?>
+        <?php echo lang('hr_teleworks_flash_msg_halfday_telework');?>
     </div>
 
     <label for="cause"><?php echo lang('hr_teleworks_create_field_cause');?></label>

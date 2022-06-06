@@ -820,14 +820,14 @@ class Leaves extends CI_Controller {
         header("Content-Type: application/json");
         $id = $this->input->post('id', TRUE);
         $type = $this->input->post('type', TRUE);
-        //The above parameters could cause an SQL injection vulnerability due to the non standard
-        //SQL query in leave_model::detectOverlappingLeaves
         $date = $this->input->post('startdate', TRUE);
         $d = DateTime::createFromFormat('Y-m-d', $date);
         $startdate = ($d && $d->format('Y-m-d') === $date)?$date:'1970-01-01';
+        $startdate = preg_replace("([^0-9-])", "", $startdate);
         $date = $this->input->post('enddate', TRUE);
         $d = DateTime::createFromFormat('Y-m-d', $date);
         $enddate = ($d && $d->format('Y-m-d') === $date)?$date:'1970-01-01';
+        $enddate = preg_replace("([^0-9-])", "", $enddate);
         $startdatetype = $this->input->post('startdatetype', TRUE);     //Mandatory field checked by frontend
         $enddatetype = $this->input->post('enddatetype', TRUE);       //Mandatory field checked by frontend
         $leave_id = $this->input->post('leave_id', TRUE);

@@ -317,7 +317,7 @@ echo form_open('users/create', $attributes); ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
 
-    //Popup select postion: on click OK, find the user id for the selected line
+    //Popup select position: on click OK, find the user id for the selected line
     function select_manager() {
         var employees = $('#employees').DataTable();
         if ( employees.rows({ selected: true }).any() ) {
@@ -338,7 +338,7 @@ echo form_open('users/create', $attributes); ?>
         $("#frmSelectEntity").modal('hide');
     }
 
-    //Popup select postion: on click OK, find the position id for the selected line
+    //Popup select position: on click OK, find the position id for the selected line
     function select_position() {
         var positions = $('#positions').DataTable();
         if ( positions.rows({ selected: true }).any() ) {

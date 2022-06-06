@@ -182,7 +182,7 @@ class Leaves extends CI_Controller {
       $newComment = new stdClass;
       $newComment->type = "comment";
       $newComment->author = $this->session->userdata('id');
-      $newComment->value = $this->input->post('comment');
+      $newComment->value = $this->input->post('comment', TRUE);
       $newComment->date = date("Y-n-j");
       if ($oldComment != NULL){
         array_push($oldComment->comments, $newComment);

@@ -18,12 +18,12 @@
         "league/oauth2-google": "^2.0",
         "sabre/xml": "~1.5",
         "sabre/uri": "1",
-        "phpoffice/phpspreadsheet": "^1.8.2",
+        "phpoffice/phpspreadsheet": "^1.23",
         "jpgraph/jpgraph": "^4.0.2",
         "respect/validation": "^1.1.31",
         "onelogin/php-saml": "^3.4.1",
         "zircote/swagger-php": "^3.0.1",
-        "phpmailer/phpmailer": "^6.1.8"
+        "phpmailer/phpmailer": "^6.6.0"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^6.3.3",

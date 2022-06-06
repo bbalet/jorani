@@ -81,7 +81,7 @@ class Hr extends CI_Controller {
             $msg->data = array();
 
             foreach ($employees as $employee) {
-                $date = new DateTime($employee->datehired);
+                $date = new DateTime(is_null($employee->datehired)?"":$employee->datehired);
                 $tmpDate = $date->getTimestamp();
                 $displayDate = $date->format(lang('global_date_format'));
 

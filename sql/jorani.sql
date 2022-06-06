@@ -61,11 +61,11 @@ BEGIN
 
     WHILE queue_length > 0 DO
         IF queue_length = 1 THEN
-            SET front_id = CAST(queue AS INT);
+            SET front_id = CAST(queue AS DECIMAL);
             SET queue = '';
         ELSE
             SET pos = LOCATE(',',queue);
-            SET front_id = CAST(SUBSTR(queue, 1, pos-1) AS INT);
+            SET front_id = CAST(SUBSTR(queue, 1, pos-1) AS DECIMAL);
             SET q = SUBSTR(queue,pos + 1); 
             SET queue = q;
         END IF;

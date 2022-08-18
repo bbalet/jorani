@@ -644,7 +644,7 @@ class Teleworks_model extends CI_Model {
 
         return $newId;
     }
-    
+
     /**
      * Create a telework request for a campaign
      * @param int $employeeId Identifier of the employee
@@ -659,26 +659,64 @@ class Teleworks_model extends CI_Model {
         $this->load->model('time_organisation_model');
         $startdatetype = 'Morning';
         $enddatetype = 'Afternoon';
-        $duration = 1;
+        $duration = 1.0;
+		if($this->input->post('daytype') == 'morning') {
+            $startdatetype = $enddatetype = 'Morning';
+            $duration = 0.5;
+        }
+        if($this->input->post('daytype') == 'afternoon') {
+            $startdatetype = $enddatetype = 'Afternoon';
+            $duration = 0.5;
+        }
         $recurrence = $this->input->post('recurrence');
         $timeorganisation = $this->time_organisation_model->getTimeOrganisationForEmployee($employeeId);
-        if ($timeorganisation && $timeorganisation['day'] == $this->input->post('day')) {
-            $duration = $timeorganisation['duration'];
-            $recurrence = $timeorganisation['recurrence'];
-            if ($timeorganisation['daytype'] == 'Morning' || $timeorganisation['daytype'] == 'Afternoon') {
-                if ($timeorganisation['daytype'] == 'Morning')
-                    $startdatetype = $enddatetype = 'Afternoon';
-                else
-                    $startdatetype = $enddatetype = 'Morning';
-            } else {
-                if ($timeorganisation['recurrence'] == 'Odd')
-                    $recurrence = 'Even';
-                if ($timeorganisation['recurrence'] == 'Even')
-                    $recurrence = 'Odd';
-            }
-        }
-            
-        $weeklyAllowedTelework = $this->telework_rule_model->getTeleworkRuleForEmployee($employeeId);
+		$weeklyAllowedTelework = $this->telework_rule_model->getTeleworkRuleForEmployee($employeeId);
+		if ($timeorganisation) {
+			if ($timeorganisation['day'] == $this->input->post('day')) {
+				if ($timeorganisation['daytype'] != 'Whole day') {
+					if($recurrence == $timeorganisation['recurrence']) {
+						$duration = 0.5;
+						if ($timeorganisation['daytype'] == 'Morning')
+							$startdatetype = $enddatetype = 'Afternoon';
+						else
+							$startdatetype = $enddatetype = 'Morning';
+					} else {
+						if($recurrence == 'All') {
+							if ($timeorganisation['recurrence'] == 'Odd')
+								$recurrence = 'Even';
+							if ($timeorganisation['recurrence'] == 'Even')
+								$recurrence = 'Odd';
+						}
+						if(($recurrence == 'Odd' || $recurrence == 'Even') && $timeorganisation['recurrence'] == 'All') {
+							$duration = 0.5;
+							if ($timeorganisation['daytype'] == 'Morning')
+								$startdatetype = $enddatetype = 'Afternoon';
+							else
+								$startdatetype = $enddatetype = 'Morning';
+						}
+					}
+				} else {
+					if($recurrence == $timeorganisation['recurrence']) {
+						if ($timeorganisation['recurrence'] == 'Odd')
+							$recurrence = 'Even';
+						if ($timeorganisation['recurrence'] == 'Even')
+							$recurrence = 'Odd';
+						if ($timeorganisation['recurrence'] == 'All')
+							$duration = 0;
+					} else {
+						if($recurrence == 'All') {
+							if ($timeorganisation['recurrence'] == 'Odd')
+								$recurrence = 'Even';
+							if ($timeorganisation['recurrence'] == 'Even')
+								$recurrence = 'Odd';
+						}
+						if(($recurrence == 'Odd' || $recurrence == 'Even') && $timeorganisation['recurrence'] == 'All')
+							$duration  = 0;
+					}
+				}
+			}
+		}
+
         $campaignId = $this->input->post('campaign');
         $campaign = $this->telework_campaign_model->getTeleworkCampaigns($campaignId);
         $dates = list_days_for_campaign($campaign['startdate'], $campaign['enddate'], $this->input->post('day'));
@@ -690,16 +728,20 @@ class Teleworks_model extends CI_Model {
                     array_splice($dates, $i, 1);
             }
         }
-        // print_r($dates); die();
+
         $newIds = array();
         for ($i = 0; $i < count($dates); $i ++) {
             $overlapping = $this->detectOverlappingTeleworks($employeeId, $dates[$i], $dates[$i], $startdatetype, $enddatetype);
             $overlappingleaves = $this->detectOverlappingLeavesForTelework($employeeId, $dates[$i], $dates[$i], $startdatetype, $enddatetype);
             $dayoff = $this->dayoffs_model->listOfDaysOffBetweenDates($employeeId, $dates[$i], $dates[$i]);
             // Detect if the telework request exceeds the number of days allowed
-            $limitExceeding = $this->detectLimitExceeding($employeeId, $dates[$i]) + 1;
+            $limitExceeding = $this->detectLimitExceeding($employeeId, $dates[$i]) + $duration;
+			if($timeorganisation) {
+				if($timeorganisation['recurrence'] == 'All' || ($timeorganisation['recurrence'] == 'Even' && (new DateTime($dates[$i]))->format('W') % 2 == 0) || ($timeorganisation['recurrence'] == 'Odd' && (new DateTime($dates[$i]))->format('W') % 2 != 0))
+					$limitExceeding += $timeorganisation['duration'];
+			}
 
-            if (! $overlapping && ! $overlappingleaves && count($dayoff) == 0 && (($weeklyAllowedTelework && $limitExceeding <= $weeklyAllowedTelework['limit']) || ! $weeklyAllowedTelework)) {
+            if ($duration > 0 && ! $overlapping && ! $overlappingleaves && count($dayoff) == 0 && (($weeklyAllowedTelework && $limitExceeding <= $weeklyAllowedTelework['limit']) || ! $weeklyAllowedTelework)) {
                 $data = array(
                     'startdate' => $dates[$i],
                     'startdatetype' => $startdatetype,
@@ -1318,16 +1360,22 @@ class Teleworks_model extends CI_Model {
                 $display = explode(";", $day->display);
                 for ($i = 0; $i < count($acronym); $i ++) {
                     if ($acronym[$i] == lang('telework_acronym')) {
-                        if ($display[$i] == '1') $total += 1;
-                        if ($display[$i] == '2') $total += 0.5;
-                        if ($display[$i] == '3') $total += 0.5;
+                        if ($display[$i] == '1')
+                            $total += 1;
+                        if ($display[$i] == '2')
+                            $total += 0.5;
+                        if ($display[$i] == '3')
+                            $total += 0.5;
                     }
                 }
             } else {
                 if ($day->acronym == lang('telework_acronym')) {
-                    if ($day->display == 2) $total += 0.5;
-                    if ($day->display == 3) $total += 0.5;
-                    if ($day->display == 1) $total += 1;
+                    if ($day->display == 2)
+                        $total += 0.5;
+                    if ($day->display == 3)
+                        $total += 0.5;
+                    if ($day->display == 1)
+                        $total += 1;
                 }
             }
         }

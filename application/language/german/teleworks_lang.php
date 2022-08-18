@@ -60,6 +60,7 @@ $lang['teleworks_create_field_end'] = 'Enddatum';
 $lang['teleworks_create_field_recurrence'] = 'Wiederholung';
 $lang['teleworks_create_field_duration'] = 'Dauer';
 $lang['teleworks_create_field_campaign'] = 'Kampagne';
+$lang['teleworks_create_field_daytype'] = 'Ganzer Tag/Vormittag/Nachmittag';
 $lang['teleworks_create_field_duration_message'] = 'Sie überschreiten die zulässige Anzahl von Tagen';
 $lang['teleworks_create_field_overlapping_message'] = 'In diesem Zeitraum haben wir einen Antrag auf Telearbeit';
 $lang['teleworks_create_field_overlapping_leaves_message'] = 'In diesem Zeitraum liegt uns ein Antrag auf Urlaub vor';

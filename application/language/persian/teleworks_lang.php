@@ -60,6 +60,7 @@ $lang['teleworks_create_field_end'] = 'End date';
 $lang['teleworks_create_field_recurrence'] = 'Recurrence';
 $lang['teleworks_create_field_duration'] = 'Duration';
 $lang['teleworks_create_field_campaign'] = 'Campaign';
+$lang['teleworks_create_field_daytype'] = 'Whole day/Morning/Afternoon';
 $lang['teleworks_create_field_duration_message'] = 'You are exceeding the number of days allowed';
 $lang['teleworks_create_field_overlapping_message'] = 'In this period, we have a request to telework';
 $lang['teleworks_create_field_overlapping_leaves_message'] = 'In this period, we have a request for a leave of absence.';

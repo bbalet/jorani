@@ -45,6 +45,14 @@ echo form_open('teleworks/createforcampaign', $attributes) ?>
         <option value="Odd" <?php if(set_value('recurrence') == 'Odd') echo 'selected';?>><?php echo lang('odd_week');?></option>        
     </select><br />   
 
+    <label for="daytype"><?php echo lang('teleworks_create_field_daytype');?></label>
+    <select name="daytype" id="daytype">
+        <option value="" selected="selected"></option>
+        <option value="allday" <?php if(set_value('daytype') == 'allday') echo 'selected';?>><?php echo lang('Whole day');?></option>
+        <option value="morning" <?php if(set_value('daytype') == 'morning') echo 'selected';?>><?php echo lang('Morning');?></option>
+        <option value="afternoon" <?php if(set_value('daytype') == 'afternoon') echo 'selected';?>><?php echo lang('Afternoon');?></option>
+    </select>
+
     <span style="margin-left: 2px;position: relative;top: -5px;" id="spnDayType"></span>
 
     <br/><br/>
@@ -81,6 +89,7 @@ function validate_form() {
 	if ($('#recurrence').val() == "") fieldname = "<?php echo lang('teleworks_create_field_recurrence');?>";
     if ($('#day').val() == "") fieldname = "<?php echo lang('teleworks_create_field_day');?>";
     if ($('#campaign').val() == "") fieldname = "<?php echo lang('teleworks_create_field_campaign');?>"; 
+    if ($('#daytype').val() == "") fieldname = "<?php echo lang('teleworks_create_field_daytype');?>";
     if (fieldname == "") {    	
         return true;
     } else {

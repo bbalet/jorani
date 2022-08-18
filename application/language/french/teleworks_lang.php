@@ -60,6 +60,7 @@ $lang['teleworks_create_field_end'] = 'Date de fin';
 $lang['teleworks_create_field_recurrence'] = 'Récurrence';
 $lang['teleworks_create_field_duration'] = 'Durée';
 $lang['teleworks_create_field_campaign'] = 'Campagne';
+$lang['teleworks_create_field_daytype'] = 'Toute la journée/Matin/Après-midi';
 $lang['teleworks_create_field_duration_message'] = 'Vous dépassez le nombre de jours permis';
 $lang['teleworks_create_field_overlapping_message'] = 'Sur cette période, nous avons une demande de télétravail.';
 $lang['teleworks_create_field_overlapping_leaves_message'] = 'Sur cette période, nous avons une demande de congé.';

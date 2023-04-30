@@ -193,8 +193,14 @@ class Connection extends CI_Controller {
      */
     public function language() {
         $this->load->helper('form');
-        $this->session->set_userdata('language_code', $this->input->get_post('language', true));
-        $this->session->set_userdata('language', $this->polyglot->code2language($this->input->get_post('language', true)));
+
+        //Prevent transversal path attack and the selection of an unavailable language
+        $languages = explode(",", $this->config->item('languages'));
+        $language = $this->input->get_post('language', true);
+        if (in_array($language, $languages)) {
+            $this->session->set_userdata('language_code', $language);
+            $this->session->set_userdata('language', $this->polyglot->code2language($language));
+        }
         if ($this->input->post('last_page') == FALSE) {
             $this->redirectToLastPage();
         } else {

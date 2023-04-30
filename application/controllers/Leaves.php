@@ -830,7 +830,7 @@ class Leaves extends CI_Controller {
         $enddate = preg_replace("([^0-9-])", "", $enddate);
         $startdatetype = $this->input->post('startdatetype', TRUE);     //Mandatory field checked by frontend
         $enddatetype = $this->input->post('enddatetype', TRUE);       //Mandatory field checked by frontend
-        $leave_id = $this->input->post('leave_id', TRUE);
+        $leave_id = intval($this->input->post('leave_id', TRUE));
         $leaveValidator = new stdClass;
         $deductDayOff = FALSE;
         if (isset($id) && isset($type)) {

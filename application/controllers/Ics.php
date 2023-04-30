@@ -93,13 +93,12 @@ class Ics extends CI_Controller {
     public function dayoffs($userId, $contract) {
         //Get timezone and language of the user
         $this->getTimezoneAndLanguageOfUser($userId);
+        $vcalendar = new VObject\Component\VCalendar();
+
         //Load the list of day off associated to the contract
         $this->load->model('dayoffs_model');
         $result = $this->dayoffs_model->getDaysOffForContract($contract);
-        if (empty($result)) {
-            echo "";
-        } else {
-            $vcalendar = new VObject\Component\VCalendar();
+        if (!empty($result)) {
             foreach ($result as $event) {
                 $startdate = new \DateTime($event->date, new \DateTimeZone($this->timezone));
                 $enddate = new \DateTime($event->date, new \DateTimeZone($this->timezone));
@@ -129,8 +128,8 @@ class Ics extends CI_Controller {
                     'DTEND' => $enddate
                 ));    
             }
-            echo $vcalendar->serialize();
         }
+        echo $vcalendar->serialize();
     }
     
     /**

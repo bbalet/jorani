@@ -40,7 +40,6 @@
 
 //_______________________________________________
 //Admin : global features
-$route['admin/qrcode'] = 'admin/qrCode';
 $route['admin/settings'] = 'admin/settings';
 $route['admin/diagnostic'] = 'admin/diagnostic';
 $route['admin/oauthclients'] = 'admin/oauthClients';

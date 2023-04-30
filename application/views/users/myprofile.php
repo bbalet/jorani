@@ -49,8 +49,10 @@
         <div class="row-fluid">
             <div class="span6"><strong><?php echo lang('users_myprofile_field_hired');?></strong></div>
             <div class="span6"><?php
-        $date = new DateTime($user['datehired']);
-        echo $date->format(lang('global_date_format'));
+        if (!is_null($user['datehired'])) {
+            $date = new DateTime($user['datehired']);
+            echo $date->format(lang('global_date_format'));            
+        }
         ?></div>
         </div>
 

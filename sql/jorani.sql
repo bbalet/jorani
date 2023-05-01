@@ -2,7 +2,7 @@
 -- Jorani Schema definition
 --
 -- @license      http://opensource.org/licenses/AGPL-3.0 AGPL-3.0
--- @copyright  Copyright (c) 2014-2019 Benjamin BALET
+-- @copyright  Copyright (c) 2014-2023 Benjamin BALET
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";

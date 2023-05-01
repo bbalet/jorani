@@ -48,5 +48,4 @@ foreach(range('A', 'E') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-$spreadsheet->exportName = 'overtime';
-writeSpreadsheet($spreadsheet);
+writeSpreadsheet($spreadsheet, 'overtime');

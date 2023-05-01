@@ -77,5 +77,4 @@ for ($ii=1; $ii <$max; $ii++) {
     $sheet->getColumnDimension($col)->setAutoSize(TRUE);
 }
 
-$spreadsheet->exportName = 'leave_balance';
-writeSpreadsheet($spreadsheet);
+writeSpreadsheet($spreadsheet, 'leave_balance');

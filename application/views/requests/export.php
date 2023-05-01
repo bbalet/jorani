@@ -57,5 +57,4 @@ foreach(range('A', 'J') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-$spreadsheet->exportName = 'requests';
-writeSpreadsheet($spreadsheet);
+writeSpreadsheet($spreadsheet, 'requests');

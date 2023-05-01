@@ -44,5 +44,4 @@ foreach(range('A', 'D') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-$spreadsheet->exportName = 'leave_types';
-writeSpreadsheet($spreadsheet);
+writeSpreadsheet($spreadsheet, 'leave_types');

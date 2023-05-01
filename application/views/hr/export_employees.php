@@ -47,5 +47,4 @@ foreach(range('A', 'G') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-$spreadsheet->exportName = 'employees';
-writeSpreadsheet($spreadsheet);
+writeSpreadsheet($spreadsheet, 'employees');

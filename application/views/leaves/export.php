@@ -54,5 +54,4 @@ foreach(range('A', 'I') as $colD) {
     $sheet->getColumnDimension($colD)->setAutoSize(TRUE);
 }
 
-$spreadsheet->exportName = 'leaves';
-writeSpreadsheet($spreadsheet);
+writeSpreadsheet($spreadsheet, 'leaves');

@@ -249,5 +249,4 @@ $sheet->getPageSetup()->setFitToPage(TRUE);
 $sheet->getPageSetup()->setFitToWidth(1);
 $sheet->getPageSetup()->setFitToHeight(0);
 
-$spreadsheet->exportName = 'year';
-writeSpreadsheet($spreadsheet);
+writeSpreadsheet($spreadsheet, 'year');

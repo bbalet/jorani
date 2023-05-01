@@ -270,5 +270,4 @@ $sheet->getPageSetup()->setFitToPage(TRUE);
 $sheet->getPageSetup()->setFitToWidth(1);
 $sheet->getPageSetup()->setFitToHeight(0);
 
-$spreadsheet->exportName = 'tabular';
-writeSpreadsheet($spreadsheet);
+writeSpreadsheet($spreadsheet, 'tabular');

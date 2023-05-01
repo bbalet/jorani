@@ -309,5 +309,4 @@ $sheet->getPageSetup()->setFitToPage(true);
 $sheet->getPageSetup()->setFitToWidth(1);
 $sheet->getPageSetup()->setFitToHeight(0);
 
-$spreadsheet->exportName = 'presence';
-writeSpreadsheet($spreadsheet);
+writeSpreadsheet($spreadsheet, 'presence');

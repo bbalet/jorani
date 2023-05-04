@@ -23,19 +23,19 @@ class LeaveRequest
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(name: 'startdate', type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $startDate = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(name: 'enddate', type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(length: 255)]
     private ?string $cause = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'startdatetype')]
     private ?int $startDateType = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'enddatetype')]
     private ?int $endDateType = null;
 
     #[ORM\Column]

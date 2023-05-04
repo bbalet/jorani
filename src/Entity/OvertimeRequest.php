@@ -15,9 +15,9 @@ class OvertimeRequest
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'overtimeRequests')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $employee = null;
+    // #[ORM\ManyToOne(inversedBy: 'overtimeRequests')]
+    // #[ORM\JoinColumn(nullable: false)]
+    // private ?User $employee = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
@@ -28,19 +28,19 @@ class OvertimeRequest
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cause = null;
 
-    #[ORM\Column(type: Types::JSON)]
-    private array $status = [];
+    // #[ORM\Column(type: Types::JSON)]
+    // private array $status = [];
 
-    public function getStatus(): array
-    {
-        return $this->status;
-    }
+    // public function getStatus(): array
+    // {
+    //     return $this->status;
+    // }
 
-    public function setStatus(array $status): self
-    {
-        $this->status = $status;
-        return $this;
-    }
+    // public function setStatus(array $status): self
+    // {
+    //     $this->status = $status;
+    //     return $this;
+    // }
 
     public function getId(): ?int
     {

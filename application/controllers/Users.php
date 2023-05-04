@@ -9,7 +9,10 @@
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
+use App\Entity\LeaveRequest;
+use App\Entity\OvertimeRequest;
 use App\Entity\User;
+use App\Repository\DayOffRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -75,8 +78,7 @@ class Users extends CI_Controller  {
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_users');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
 
-        $userRepository = $this->entityManager->getRepository(User::class);
-        $users = $userRepository->findAll();
+        $users = $this->entityManager->getRepository(User::class)->findAll();
 
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);

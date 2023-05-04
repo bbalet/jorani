@@ -1,0 +1,9 @@
+<h1>List of users</h1>
+
+
+<h1>Members</h1>
+<ul>
+    {% for user in users %}
+        <li>{{ user.firstname|e }}</li>
+    {% endfor %}
+</ul>

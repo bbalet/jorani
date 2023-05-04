@@ -1,0 +1,1413 @@
+# 
+# Translators:
+# Benjamin BALET <benjamin.balet@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: jorani\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-12-30 12:37+0000\n"
+"Last-Translator: Benjamin BALET <benjamin.balet@gmail.com>\n"
+"Language-Team: Khmer (http://www.transifex.com/jorani/jorani/language/km/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: km\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Yearly calendar"
+msgstr "ប្រតិទិនប្រចាំឆ្នាំ"
+
+msgid "My calendar"
+msgstr "ប្រតិទិនរបស់ខ្ញុំ"
+
+msgid "Calendar of my leaves."
+msgstr "ប្រតិទិនការឈប់សម្រាក់របស់ខ្ញុំ."
+
+msgid "Download an iCal file"
+msgstr "ទាញយកឯកសារជា iCal"
+
+msgid "(import the event into Outlook, Thunderbird, etc.)"
+msgstr "(នាំព្រឹត្តិការណ៍ចូលទៅក្នុងកម្មវិធី Outlook, Thunderbird, ជាដើម)"
+
+msgid "Event details"
+msgstr "សកម្មភាពលំអិត"
+
+msgid "Close"
+msgstr "បិទ"
+
+msgid "Day offs"
+msgstr "ថ្ងៃឈប់សម្រាក"
+
+msgid "Calendar of my workmates"
+msgstr "កាលបរិច្ឆេទរបស់មិត្តរួមការងារ"
+
+msgid "Leaves of employees having the same line manager"
+msgstr "ការសុំឈប់សម្រាករបស់បុគ្កលិកស្ថិតក្រោមការគ្រប់គ្រងតែបួយ"
+
+msgid "Calendar of my collaborators"
+msgstr "កាលបរិច្ឆេទនៃការជួបជាមួយដៃគូរសហការ"
+
+msgid "Leaves of my collaborators (will be empty if I'm not a manager)."
+msgstr "ការសុំបញ្ឈប់របស់ដៃគូរសហការ(មិនមានប្រសិនបើខ្ញុំមិនមែនជាអ្នកគ្រប់គ្រង)"
+
+msgid "Calendar of my department"
+msgstr "កាលបរិច្ឆេទរបស់ក្រុមរួមការងារ"
+
+msgid "Calendar of employees working in my department"
+msgstr "ប្រតិទិនសំរាប់បុគ្គលិកធ្វុើការងារក្នុងផ្នែករបស់ខ្ញុុំ"
+
+msgid ""
+"It appears that you don't belong to any department. Please contact your HR "
+"Officer / Manager."
+msgstr "វាមិនស្ថិតក្នុងផ្នែកណាមួយទេ។សូមទំនាក់ទំនងទៅកាន់ផ្នែកHRឬប្រធានផ្នែកគ្រប់គ្រង"
+
+msgid "Calendar of the organization"
+msgstr "ប្រតិទិនរបស់អង្គការ"
+
+msgid "Global calendar with a filter on entity"
+msgstr "ប្រតិទិនសកល"
+
+msgid "Select the entity"
+msgstr "ជ្រើសរើសអង្គភាព"
+
+msgid "Select"
+msgstr "ជ្រើសរើស"
+
+msgid "Include sub-departments"
+msgstr "រួមបញ្ចូលអនុផ្នែក"
+
+msgid "Select an entity"
+msgstr "ជ្រើសរើសអង្គភាព"
+
+msgid "OK"
+msgstr "យល់ព្រម"
+
+msgid "Cancel"
+msgstr "បោះបង់"
+
+msgid "Tabular Calendar"
+msgstr "តារាងប្រតិទិន"
+
+msgid "Month"
+msgstr "ខែ"
+
+msgid "Year"
+msgstr "ឆ្នាំ"
+
+msgid "Execute"
+msgstr "ប្រតិបត្តិ"
+
+msgid "Export"
+msgstr "នាំចេញ"
+
+msgid "Employee"
+msgstr "និយោជិក"
+
+msgid "Calendar Tabular"
+msgstr "តារាងប្រតិទិន"
+
+msgid "Entity"
+msgstr "អង្គភាព"
+
+msgid "Sub-entities"
+msgstr "អង្គភាពរង"
+
+msgid ""
+"'January','February','March','April','May','June','July','August','September','October','November','December'"
+msgstr "'ខែមករា','ខែកុម្ភៈ', 'ខែមិនា',​ 'ខែមេសា', 'ខែឧសភា', 'ខែមិថុនា', 'ខែកក្កដា', 'ខែសីហា', 'ខែកញ្ញា', 'ខែតុលា', 'ខែវិច្ឆិកា', 'ខែធ្នូ'"
+
+msgid ""
+"'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'"
+msgstr "'មករា','កុម្ភៈ', 'មិនា',​ 'មេសា', 'ឧសភា', 'មិថុនា', 'កក្កដា', 'សីហា', 'កញ្ញា', 'តុលា', 'វិច្ឆិកា', 'ធ្នូ'"
+
+msgid "'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'"
+msgstr "'ថ្ងៃអាទិត្យ','ថ្ងៃចន្ទ','ថ្ងៃអង្គារ','ថ្ងៃពុធ','ថ្ងៃព្រហស្បិ៍','ថ្ងៃសុក្រ','ថ្ងៃសៅរ៍'"
+
+msgid "'Sun','Mon','Tue','Wed','Thu','Fri','Sat'"
+msgstr "'អាទិត្យ','ចន្ទ','អង្គារ','ពុធ','ព្រហស្បិ៍','សុក្រ','សៅរ៍'"
+
+msgid "MMMM yyyy"
+msgstr "ឈ្មោះខែ ឆ្នាំ"
+
+msgid "MMM d[ yyyy]{ - [ MMM] d yyyy}"
+msgstr "MMM d[ yyyy]{ - [ MMM] d yyyy}"
+
+msgid "dddd, MMM d, yyyy"
+msgstr "dddd, MMM d, yyyy"
+
+msgid "ddd"
+msgstr "ddd"
+
+msgid "ddd M/d"
+msgstr "ddd M/d"
+
+msgid "dddd M/d"
+msgstr "dddd M/d"
+
+msgid "H:mm"
+msgstr "H:mm"
+
+msgid "h(:mm)t"
+msgstr "h(:mm)t"
+
+msgid "H:mm{ - H:mm}"
+msgstr "H:mm{ - H:mm}"
+
+msgid "1"
+msgstr "១"
+
+msgid "today"
+msgstr "ថ្ងៃនេះ"
+
+msgid "day"
+msgstr "ថ្ងៃ"
+
+msgid "week"
+msgstr "សប្តាហ៍"
+
+msgid "month"
+msgstr "ខែ"
+
+msgid "prev,next today"
+msgstr "ម្សិលម៉ិញ, ថ្ងៃស្អែក ថ្ងៃនេះ"
+
+msgid "title"
+msgstr "ចំនងជើង"
+
+msgid "month,basicWeek,basicDay"
+msgstr "ខែ, សប្តាហ៍ជាគោល. ថ្ងៃជាគោល"
+
+msgid "Mo"
+msgstr "ច"
+
+msgid "Tu"
+msgstr "អ"
+
+msgid "We"
+msgstr "ព"
+
+msgid "Th"
+msgstr "ព្រ"
+
+msgid "Fr"
+msgstr "សុ"
+
+msgid "Sa"
+msgstr "ស"
+
+msgid "Su"
+msgstr "អ"
+
+msgid "Monday"
+msgstr "ថ្ងៃចន្ទ"
+
+msgid "Tuesday"
+msgstr "ថ្ងៃអង្គារ៍"
+
+msgid "Wednesday"
+msgstr "ថ្ងៃពុធ"
+
+msgid "Thursday"
+msgstr "ថ្ងៃព្រហស្បិ៍"
+
+msgid "Friday"
+msgstr "ថ្ងៃសុក្រ"
+
+msgid "Saturday"
+msgstr "ថ្ងៃសៅរ៍"
+
+msgid "Sunday"
+msgstr "ថ្ងៃអាទិត្យ"
+
+msgid "All days"
+msgstr "ថ្ងៃទាំងអស់"
+
+msgid "January"
+msgstr "ខែមករា"
+
+msgid "February"
+msgstr "ខែកុម្ផ:"
+
+msgid "March"
+msgstr "ខែមិនា"
+
+msgid "April"
+msgstr "ខែមេសា"
+
+msgid "May"
+msgstr "ខែឧសភា"
+
+msgid "June"
+msgstr "ខែមិថុនា"
+
+msgid "July"
+msgstr "ខែកក្កដា"
+
+msgid "August"
+msgstr "ខែសីហា"
+
+msgid "September"
+msgstr "ខែកញ្ញា"
+
+msgid "October"
+msgstr "ខែតុលា"
+
+msgid "November"
+msgstr "ខែវិច្ចិកា"
+
+msgid "December"
+msgstr "ខែធ្នូរ"
+
+msgid "List of contracts"
+msgstr "បញ្ជីនៃកិច្ចសន្យា"
+
+msgid "ID"
+msgstr "លេខអត្តសញ្ញាណ"
+
+msgid "Name"
+msgstr "ឈ្មោះ"
+
+msgid "Start period"
+msgstr "ពេលចាប់ផ្តើម"
+
+msgid "End period"
+msgstr "ពេលបញ្ចប់"
+
+msgid "delete contract"
+msgstr "លុបកិច្ចសន្យា"
+
+msgid "edit contract"
+msgstr "កែកិច្ចសន្យា"
+
+msgid "entitled days"
+msgstr "ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់"
+
+msgid "day offs and weekends"
+msgstr "ថ្ងៃឈប់សម្រាក់ និងចុងសប្តាហ៍"
+
+msgid "Export this list"
+msgstr "បញ្ជីនាំចេញ"
+
+msgid "Create contract"
+msgstr "ធ្វើកិច្ចសន្យា"
+
+msgid "Delete Contract"
+msgstr "លុបកិច្ចសន្យា"
+
+msgid "You are about to delete one contract, this procedure is irreversible."
+msgstr "អ្នកអាចលុបកិច្ចសន្យាបានមួយប៉ុណ្ណោះ,អ្នកបង្កើតនេះគឺមិនអាចកែប្រែបាន"
+
+msgid "Do you want to proceed?"
+msgstr "តើអ្នកចង់បន្ត?"
+
+msgid "Yes"
+msgstr "យល់ព្រម"
+
+msgid "No"
+msgstr "មិនយល់ព្រម"
+
+msgid "Entitled days"
+msgstr "ថ្ងៃផ្ដល់សិទ្ធិឲ្យឈប់"
+
+msgid "Edit a contract"
+msgstr "កែប្រែកិច្ចសន្យា"
+
+msgid "Edit contract #"
+msgstr "កែប្រែកិច្ចសន្យា#"
+
+msgid "Month / Start"
+msgstr "ខែ/ចាប់ផ្តើម"
+
+msgid "Day / Start"
+msgstr "ថ្ងៃ/ចាប់ផ្តើម"
+
+msgid "Month / End"
+msgstr "ខែ/បញ្ចប់"
+
+msgid "Day / End"
+msgstr "ថ្ងៃ/បញ្ចប់"
+
+msgid "Update contract"
+msgstr "បន្ថែមកិច្ចសន្យា"
+
+msgid "The contract has been succesfully updated"
+msgstr "កិច្ចសន្យាត្រូវបានបន្ថែមដោយជោគជ័យ"
+
+msgid "Create a new contract"
+msgstr "បង្កើតកិច្ចសន្យាថ្មី"
+
+msgid "The contract has been succesfully created"
+msgstr "កិច្ចសន្យាត្រូវបានបង្កើតដោយជោគជ័យ"
+
+msgid "The contract has been succesfully deleted"
+msgstr "កិច្ចសន្យាត្រូវបានលុបដោយជោគជ័យ"
+
+msgid "Calendar of non working days"
+msgstr "ប្រតិទិននៃថ្ងៃឈប់សម្រាក់"
+
+msgid ""
+"Day offs and weekends are not configured by default. Click on a day to edit "
+"it individually or use the button \"Series\"."
+msgstr "ថ្ងៃឈប់សម្រាក់ និងចុងសប្តាហ៍មិនត្រូវបានកំណត់ទុកជាមុនទេ។ ចូរចុចលើថ្ងៃណាមួយ ដើម្បីកែសម្រួលវា ឬក៏ប្រើប្រាស់ប៊ូតុង \"ស៊េរី\""
+
+msgid "Legend:"
+msgstr "ចំណងជើង:"
+
+msgid "All day"
+msgstr "គ្រប់ថ្ងៃទាំងអស់"
+
+msgid "Morning"
+msgstr "ពេលព្រឹក"
+
+msgid "Afternoon"
+msgstr "ពេលរសៀល"
+
+msgid "Back to contracts"
+msgstr "ត្រលប់ទៅកាន់កិច្ចសន្យា"
+
+msgid "Series of non-working days"
+msgstr "ស៊េរីនៃថ្ងៃដែលមិនធ្វើការ"
+
+msgid "Edit day off"
+msgstr "កែសម្រួលថ្ងៃឈប់សម្រាក"
+
+msgid "Title"
+msgstr "ចំណងជើង"
+
+msgid "Type"
+msgstr "ប្រភេទ"
+
+msgid "Working day"
+msgstr "ថ្ងៃធ្វើការ"
+
+msgid "All day is off"
+msgstr "គ្រប់ថ្ងៃទាំងអស់ត្រូវបានបិទ"
+
+msgid "Morning is off"
+msgstr "ពេលព្រឹកត្រូវបានបិទ"
+
+msgid "Afternoon is off"
+msgstr "ពេលរសៀលត្រូវបានបិទ"
+
+msgid "Delete"
+msgstr "លុបចោល"
+
+msgid "Import iCal"
+msgstr "នាំចូល iCal"
+
+msgid "URL of non-working days iCal file"
+msgstr "URL នៃថ្ងៃមិនធ្វើការក្នុងហ្វាល់ iCal"
+
+msgid "Edit a series of day offs"
+msgstr "កែសម្រួលស៊េរីនៃថ្ងៃឈប់សម្រាក"
+
+msgid "Mark every"
+msgstr "កត់សម្គាល់គ្រប់"
+
+msgid "From"
+msgstr "ពី"
+
+msgid "Current"
+msgstr "ថ្មីៗ"
+
+msgid "To"
+msgstr "ដល់"
+
+msgid "As a"
+msgstr "ជា"
+
+msgid "Copy"
+msgstr "ថតចម្លង"
+
+msgid "You must select a contract."
+msgstr "លោកអ្នកត្រូវតែជ្រើសរើសកិច្ចសន្យាមួយ"
+
+msgid "Data has been copied successfully."
+msgstr "ទិន្នន័យត្រូវបានថតចម្លងដោយជោគជ័យ"
+
+msgid "No data available in table"
+msgstr "មិនអាចរកទិន្នន័យនៅក្នុងតារាង"
+
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "បង្ហាញ _START_ ទៅ _END_ / _TOTAL_ ធាតុ"
+
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "បង្ហាញពី 0 ទៅ 0 នៃ 0 នៃធាតុ"
+
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(សម្រងមកពី _MAX_ សរុបការចូលកំណត់)"
+
+msgid ","
+msgstr ","
+
+msgid "Show _MENU_ entries"
+msgstr "បង្ហាញ _MENU_ ការចូលកំណត់"
+
+msgid "Loading..."
+msgstr "កំពុងផ្ទុកទិន្នន័យ..."
+
+msgid "Processing..."
+msgstr "កំពុងដំណើរការ..."
+
+msgid "Search:"
+msgstr "ស្វែងរក:"
+
+msgid "No matching records found"
+msgstr "គ្មានទិន្នន័យដែលកំពុងរក"
+
+msgid "First"
+msgstr "ដំបូង"
+
+msgid "Last"
+msgstr "ចុងក្រោយ"
+
+msgid "Next"
+msgstr "បន្ទាប់"
+
+msgid "Previous"
+msgstr "ពីមុន"
+
+msgid ": activate to sort column ascending"
+msgstr ":ដំណើរការបង្ហាញជួរឈរតាមលំដាប់កើន"
+
+msgid ": activate to sort column descending"
+msgstr ":ដំណើរការបង្ហាញជួរឈរតាមលំដាប់ចុុះ"
+
+msgid "Your password has been reset"
+msgstr "លេខសំងាត់របស់អ្នកត្រូវបានអនុញ្ញាតិ"
+
+msgid "Your account has been created"
+msgstr "គណនីរបស់អ្នកត្រូវបានបង្កើត"
+
+msgid "Leave Request from"
+msgstr "ការស្នើសុំឈប់សំរាកពី "
+
+msgid "Leave Request"
+msgstr "ការស្នើសុំឈប់សំរាក"
+
+msgid "Your leave request has been accepted"
+msgstr "ការចាកចេញរបស់អ្នកត្រូវបានទទួលយក"
+
+msgid "Your leave request has been rejected"
+msgstr "ការស្នើសុំចាកចេញរបស់អ្នកត្រូវបានច្រានចោល"
+
+msgid "Your overtime request has been accepted"
+msgstr "ការស្នើសុំម៉ោងបន្ថែមរបស់អ្នកត្រូវបានទទួលយក"
+
+msgid "Your overtime request has been rejected"
+msgstr "ការស្នើសុំម៉ោងបន្ថែមរបស់អ្នកត្រូវបាច្រាលចោល"
+
+msgid "Overtime Request"
+msgstr "ការស្នើសុំម៉ោងបន្ថែម"
+
+msgid "Overtime request from"
+msgstr "ការស្នើសុំម៉ោងបន្ថែមមកពី "
+
+msgid "Entitled days for contract"
+msgstr "ថ្ងៃដែលអនុញ្ញាតឱ្យឈប់សម្រាក់សម្រាប់កិច្ចសន្យា"
+
+msgid "Start"
+msgstr "ចាប់ផ្តើម"
+
+msgid "End"
+msgstr "បញ្ចប់"
+
+msgid "Days"
+msgstr "ច្រើនថ្ងៃ"
+
+msgid "Leave type"
+msgstr "បែបផែននៃការចាកចេញ"
+
+msgid "Description"
+msgstr "បរិយាយ"
+
+msgid "No entitled days attached to the contract."
+msgstr "មិនមានថ្ងៃដែលអនុញ្ញាតឱ្យឈប់សម្រាក់ ត្រូវបានភ្ជាប់មកជាមួយកិច្ចសន្យាទេ"
+
+msgid "Add entitled days"
+msgstr "បន្ថែមថ្ងៃដែលអនុញ្ញាតឱ្យឈប់សម្រាក"
+
+msgid "Start Date"
+msgstr "កាលបរិច្ឆេទដែលចាប់ផ្តើម"
+
+msgid "End Date"
+msgstr "កាលបរិច្ឆេទដែលបញ្ចប់"
+
+msgid "Add"
+msgstr "ដាក់បនែ្ថម"
+
+msgid "\"The field \" + fieldname + \" is mandatory.\""
+msgstr "\"កាឡោន​ \" + fieldname + \" គី​ចំាបាច់\""
+
+msgid "Back to the list of contracts"
+msgstr "ត្រលប់ទៅកាន់បញ្ជីកិច្ចសន្យា"
+
+msgid "Are you sure that you want to delete it?"
+msgstr "តើលោកអ្នកពិតជាចង់លុបមែនទេ?"
+
+msgid "Step"
+msgstr "ជំហាន"
+
+msgid "Entitled days for employee"
+msgstr "ថ្ងៃដែលអនុញ្ញាតឱ្យឈប់សម្រាកសម្រាប់និយោជិក"
+
+msgid "No entitled days attached to the user."
+msgstr "មិនមានថ្ងៃដែលអនុញ្ញាតឱ្យឈប់សម្រាក់ ត្រូវបានភ្ជាប់មកជាមួយអ្នកប្រើប្រាស់ទេ"
+
+msgid "Back to the list of employees"
+msgstr "ត្រលប់ទៅកាន់បញ្ជីនិយោជិក"
+
+msgid "Entitled days to Contract #"
+msgstr "ថ្ងៃដែលអនុញ្ញាតឱ្យឈប់សម្រាក់សម្រាប់ធ្វើកិច្ចសន្យា"
+
+msgid "Yearly leave period : "
+msgstr "កំឡុងពេលឈប់សម្រាកប្រចាំឆ្នាំ"
+
+msgid "Entitled days to Employee"
+msgstr "ថ្ងៃដែលអនុញ្ញាតឱ្យឈប់សម្រាកសម្រាប់និយោជិក"
+
+msgid "My overtime requests"
+msgstr "ការស្នើរសុំបន្ថែមម៉ោងរបស់ខ្ញុំ"
+
+msgid "view"
+msgstr "បង្ហាញ"
+
+msgid "edit"
+msgstr "កែសម្រួល"
+
+msgid "delete"
+msgstr "លុប"
+
+msgid "Date"
+msgstr "កាលបរិច្ឆេទ"
+
+msgid "Reason"
+msgstr "មូលហេតុ"
+
+msgid "Duration"
+msgstr "រយៈពេល"
+
+msgid "Status"
+msgstr "ស្ថានភាព"
+
+msgid "New request"
+msgstr "សំណើរសំុថ្មី"
+
+msgid "Delete overtime request"
+msgstr "លុបចោលនៅសំណើរសំុក្រៅម៉ោង"
+
+msgid ""
+"You are about to delete one overtime request, this procedure is "
+"irreversible."
+msgstr "អ្នកគឺជាអ្នកច្រានចោលនៅសំណើរសុំក្រៅម៉ោង​​​ ដូចនេះសំណើរនេះគឺមិនអាចថយក្រោយវិញបានទេ"
+
+msgid "Submit an overtime request"
+msgstr "ដាក់កាស្នើសំុកាងារបន្ថែមម៉ោង"
+
+msgid "In days or fraction of days (e.g. 0.13 for 1h if you work 8h/day)."
+msgstr "ពេញគ្រប់ថ្ងៃទាំងអស់ ឬផ្នែកខ្លះនៃថ្ងៃ(ឧទាហរណ៍ ០.១៣ សម្រាប់រយៈពេល ១ម៉ោង ប្រសិនបើលោកអ្នកធ្វើការ ៨ម៉ោក្នុងមួយថ្ងៃ)"
+
+msgid "Request overtime"
+msgstr "ស្នើសុំការងារបន្ថែមម៉ោង"
+
+msgid "The overtime request has been succesfully created"
+msgstr "ការស្នើសំុកាងារបន្ថែមម៉ោងត្រូវបានបង្កើតដោយជោគជ័យ"
+
+msgid ""
+"The overtime request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "ការស្នើរសុំបន្ថែមម៉ោងត្រូវបានបង្កើតឬកែសម្រួលដោយជោគជ័យ, ប៉ុន្តែលោកអ្នកមិនអ្នកគ្រប់គ្រងទេ"
+
+msgid "Edit overtime request #"
+msgstr "កែសម្រួលការស្នើរសុំបន្ថែមម៉ោង#"
+
+msgid "Edit a overtime request"
+msgstr "កែសម្រួលការស្នើរសុំបន្ថែមម៉ោង"
+
+msgid "In days or fraction of days (e.g. 0.125 for 1h if you work 8h/day)."
+msgstr "ពេញគ្រប់ថ្ងៃទាំងអស់ ឬផ្នែកខ្លះនៃថ្ងៃ(ឧទាហរណ៍ ០.១២៥ សម្រាប់រយៈពេល ១ម៉ោង ប្រសិនបើលោកអ្នកធ្វើការ ៨ម៉ោក្នុងមួយថ្ងៃ)"
+
+msgid "Update overtime"
+msgstr "ធ្វើបច្ចុប្បន្នភាពលើម៉ោងបន្ថែម"
+
+msgid "You cannot edit an overtime request already submitted"
+msgstr " អ្នកមិនអាចកែសំណើរដែលបានដាក់រួចហើយទេ"
+
+msgid "The overtime request has been succesfully updated"
+msgstr "សំណើរបន្ថែមម៉ោងនេះត្រូវបានធ្វើដោយជោគជ័យ"
+
+msgid "The overtime request has been succesfully deleted"
+msgstr "សំណើរម៉ោងបន្ថែមត្រូវបានលុបដោយជោគជ័យ"
+
+msgid "You can't delete this overtime request"
+msgstr "អ្នកមិនអាចលុបសំណើរម៉ោងបន្ថែមនេះបានទេ"
+
+msgid "View overtime request #"
+msgstr " មើលសំណើរម៉ោងបន្ថែម លេខ#"
+
+msgid "View overtime request"
+msgstr "មើលសំណើរម៉ោងបន្ថែម"
+
+msgid "Edit"
+msgstr "កែសម្រួល"
+
+msgid "Back to list"
+msgstr "ត្រឡប់ទៅបញ្ជីឈ្មោះ"
+
+msgid "List of overtime requests"
+msgstr "បញ្ជីនៃសំណើសុំក្រៅម៉ោង"
+
+msgid "Link to documentation"
+msgstr "តំណភ្ជាប់ទៅឯកសារ"
+
+msgid "Operation (%s) is not granted"
+msgstr "ប្រតិបត្ដិការ (% s) គឺមិនត្រូវបានផ្តល់"
+
+msgid "Please wait"
+msgstr "សូមមេត្តារងចាំ"
+
+msgid ""
+"Internet Explorer 8 and older browser are not supported. Please upgrade to "
+"IE9 or use Firefox, Chrome, etc."
+msgstr "កម្មវិធី Internet Explorer 8 ឬកម្មវិធីរុករកចាស់ៗ មិនត្រូវបានគាំទ្រទេ។ សូមធ្វើបច្ចុប្បន្នភាពទៅកាន់ IE9 ឬក៏ប្រើកម្មវិធី Firefox, Chrome ជាដើម។"
+
+msgid "m/d/Y"
+msgstr "ខែ/ថ្ងៃ/ឆ្នាំ"
+
+msgid "TRUE"
+msgstr "ពិត"
+
+msgid "FALSE"
+msgstr "មិនពិត"
+
+msgid "Go top"
+msgstr "ទៅខាងលើ"
+
+msgid "&copy; 2014 Jorani Authors"
+msgstr "&copy;  ២០១៤ Jorani Authors"
+
+msgid "Requested"
+msgstr "បានស្នើរសុំ"
+
+msgid "Planned"
+msgstr "បានគ្រោងទុក"
+
+msgid "Accepted"
+msgstr "បានទទួលយក"
+
+msgid "Rejected"
+msgstr "បដិសេធចោល"
+
+msgid "identifier"
+msgstr "ឯកសារកំណត់អត្តសញ្ញាណ"
+
+msgid "firstname"
+msgstr "នាម"
+
+msgid "lastname"
+msgstr "គោត្តនាម"
+
+msgid "date hired"
+msgstr "datehired"
+
+msgid "department"
+msgstr "ផ្នែក"
+
+msgid "position"
+msgstr "មុខតំណែង"
+
+msgid "contract"
+msgstr "កិច្ចសន្យា"
+
+msgid "day off"
+msgstr "ថ្ងៃឈប់សម្រាក"
+
+msgid "leave"
+msgstr "ឈប់សម្រាក់"
+
+msgid "copied"
+msgstr "បានថតចម្លង"
+
+msgid "Your session has expired please login again"
+msgstr "រយៈពេលនៃការប្រើប្រាស់ត្រូវបានផុតកំណត់ សូមចូលក្នុងកម្មវិធីជាថ្មី"
+
+msgid "Unexpected Ajax Error"
+msgstr "មានបញ្ហា Ajax កើតឡើងដោយមិនរំពឹងទុក"
+
+msgid "List of employees"
+msgstr "បញ្ជីនៃបុគ្គលិក"
+
+msgid "edit user"
+msgstr "កែសម្រួលអ្នកប្រើ "
+
+msgid "Leaves"
+msgstr "ស្លឹកឈើ"
+
+msgid "Extras"
+msgstr "បន្ថែម"
+
+msgid "Leave Balance"
+msgstr "តុល្យភាពនៃការចាកចេញ"
+
+msgid "Create Leave Request"
+msgstr "បង្កើតការស្នើរសុំឈប់សម្រាក"
+
+msgid "Presence report"
+msgstr "របាយការណ៍វត្តមាន"
+
+msgid "Delegations"
+msgstr "ការផ្ទេរសិទ្ធ"
+
+msgid "Firstname"
+msgstr "នាមត្រកូលអ្នកប្រើប្រាស់"
+
+msgid "Lastname"
+msgstr "ឈ្មោះអ្នកប្រើប្រាស់"
+
+msgid "E-mail"
+msgstr "ម៉ែល"
+
+msgid "Contract"
+msgstr "ខសន្យា"
+
+msgid "Manager"
+msgstr "អ្នកគ្រប់គ្រង"
+
+msgid "Create"
+msgstr "បង្កើត"
+
+msgid "Right-click / taphold on an employee for contextual actions."
+msgstr "ចុចកណ្តុរខាងស្តាំ / taphold on an employee for contextual actions."
+
+msgid "List of requested leaves"
+msgstr "សំណើរសុំឈប់មុនម៉ោង"
+
+msgid "List of leaves for employee #"
+msgstr "សំណើរសុំឈប់ក្រៅម៉ោងរបស់បុគ្គលិក #"
+
+msgid "accept"
+msgstr "ទទួលយកបាន"
+
+msgid "reject"
+msgstr "បដិសេធចោល"
+
+msgid "Delete leave request"
+msgstr "លុបចោលនៅសំណើរសំុក្រៅម៉ោង"
+
+msgid ""
+"You are about to delete one leave request, this procedure is irreversible."
+msgstr "អ្នកត្រូវបានលុបចោលការស្នេីរសំុ នេះជាច្បាប់មិនអាចកែប្រែ"
+
+msgid "Submit a leave request"
+msgstr "បញ្ជួនការស្នើរសុំឈប់សម្រាក"
+
+msgid "You are exceeding your entitled days"
+msgstr "លោកអ្នកប្រើប្រាស់ថ្ងៃឈប់សម្រាក លើចំនួនកំណត់ហើយ"
+
+msgid "You have requested another leave request within the same dates."
+msgstr "លោកអ្នកធ្វើការស្នើរសុំឈប់សម្រាកមួយផ្សេងទៀត ក្នុងថ្ងៃជាមួយគ្នា។"
+
+msgid "Cause (optional)"
+msgstr "មូលហេតុ(មានក៏បាន អត់ក៏បាន)"
+
+msgid "Request leave"
+msgstr "ស្នើរសុំការឈប់សម្រាក"
+
+msgid "The leave request has been succesfully created"
+msgstr "ការស្នើរសុំឈប់សម្រាកត្រូវបានបង្កើតដោយជោគជ័យ"
+
+msgid ""
+"The leave request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "ការស្នើរសុំឈប់សម្រាកត្រូវបានបង្កើតឬធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ, ប៉ុន្តែលោកអ្នកមិនមានអ្នកគ្រប់គ្រងទេ។"
+
+msgid "List of overtime requests for employee #"
+msgstr "សំណើបន្ថែមម៉ោងរបស់បគ្គលិក #"
+
+msgid "Leave balance for user #"
+msgstr "សមតុល្យនៃថ្ងៃឈប់សម្រាកសម្រាប់អ្នកប្រើប្រាស់ #"
+
+msgid "Available"
+msgstr "ទំនេរ"
+
+msgid "Taken"
+msgstr "ថ្ងៃដែលបានឈប់សម្រាក"
+
+msgid "Entitled"
+msgstr "ថ្ងៃដែលអនុញ្ញាតឱ្យឈប់សម្រាក"
+
+msgid "This employee has no contract."
+msgstr "និយោជិកនេះពុំមានកិច្ចសន្យាទេ"
+
+msgid "Date of report"
+msgstr "កាលបរិច្ឆេទនៃរបាយការណ៍"
+
+msgid ""
+"By default this report shows the values for the last month. Please note that"
+" the list of leaves shows only the accepted leave requests."
+msgstr "ជាដំបូង របាយការណ៍នេះបង្ហាញតំលៃសម្រាប់ខែចុងក្រោយ។ សូមចំណាំថា បញ្ជីឈប់សម្រាកបង្ហាញតែការស្នើរសុំទាំងឡាយណាដែលបានទទួលយកប៉ុណ្ណោះ។"
+
+msgid "Number of days"
+msgstr "ចំនួនថ្ងៃ"
+
+msgid "Number of working days"
+msgstr "ចំនួនថ្ងៃដែលធ្វើការ"
+
+msgid "Number of non-working days"
+msgstr "ចំនួនថ្ងៃដែលមិនធ្វើការ"
+
+msgid "Duration of leaves"
+msgstr "រយៈពេលនៃការឈប់សម្រាក"
+
+msgid "Duration of presence"
+msgstr "រយៈពេលវត្តមាន"
+
+msgid "Overlapping detected"
+msgstr "ការជាន់ត្រូវបានរកឃើញ"
+
+msgid "The employee has no contract"
+msgstr "និយោជិកពុំមានកិច្ចសន្យាទេ"
+
+msgid "Please check"
+msgstr "សូមត្រួតពិនិត្យ"
+
+msgid "List of leaves in the month"
+msgstr "បញ្ជីឈប់សម្រាកក្នុងខែ"
+
+msgid "My summary"
+msgstr "សេចក្តីសង្ខេបរបស់ខ្ញុំ"
+
+msgid "Overtime details (added to compensate leaves)"
+msgstr "ពត៌មានលម្អិតពីការបន្ថែមម៉ោង (ត្រូវបានបន្ថែមទៅក្នុងការឈប់សម្រាកដែលត្រូវទូទាត់សង)"
+
+msgid "Catch up for"
+msgstr "ឈប់សងសម្រាប់"
+
+msgid ""
+"No entitled or taken days for this period. Please contact your HR Officer / "
+"Manager."
+msgstr "ពុំមានថ្ងៃដែលត្រូវអនុញ្ញាតឱ្យឈប់ ឬថ្ងៃត្រូវឈប់សម្រាកក្នុងកំឡុងពេលនេះទេ។ សូមទំនាក់ទំនងទៅកាន់មន្ត្រីធនធានមនុស្យ ឬអ្នកគ្រប់គ្រងរបស់អ្នក។"
+
+msgid ""
+"It appears you have no contract. Please contact your HR Officer / Manager."
+msgstr "ទំនងជាអ្នកមិនមនាកិច្ចសន្យាទេ។ សូមទំនាក់ទំនងមន្ត្រីធនធានមនុស្យ / អ្នកគ្រប់គ្រងរបស់អ្នក។"
+
+msgid "My leave requests"
+msgstr "ការសុំច្បាប់របស់ខ្ញុំ"
+
+msgid "Edit a leave request"
+msgstr "ការសម្រួលការស្នើរសុំឈប់សម្រាក"
+
+msgid "Edit leave request #"
+msgstr "កែប្រែការសំុច្បាប់ លេខ#"
+
+msgid "Update leave"
+msgstr "ធ្វើឱ្យទាន់សម័យការឈប់សម្រាក"
+
+msgid "You cannot edit a leave request already submitted"
+msgstr "អ្នកមិនអាចកែសម្រួលសំណើការឈប់សម្រាកមួយដែលបានដាក់ជូនរួចទៅហើយ"
+
+msgid "The leave request has been succesfully updated"
+msgstr "សំណើរការឈប់សំរាកនេះត្រូវបានគេធ្វើអោយទាន់សម័យដោយជោគជ័យ"
+
+msgid ""
+"You can't create a leave request for two yearly leave periods. Please create"
+" two different leave requests."
+msgstr "លោកអ្នកមិនអាចបង្កើតការស្នើរសុំឈប់សម្រាកសម្រាប់រយៈពេលពីរឆ្នាំបានទេ។ សូមបង្កើតការស្នើរសុំឈប់សម្រាកពីរផ្សេងគ្នា។"
+
+msgid "You can't delete this leave request"
+msgstr "អ្នកមិនអាចលុបការចាកចេញពីការស្នើសំុបានទេ"
+
+msgid "The leave request has been succesfully deleted"
+msgstr "សំណើការឈប់សម្រាកនេះត្រូវបានគេលុបដោយជោគជ័យ"
+
+msgid "View leave request #"
+msgstr "សំណើឈប់សំរាក #"
+
+msgid "View a leave request"
+msgstr "ទិដ្ឋភាពចាកចេញពីសំណើមួយ"
+
+msgid "List of leaves"
+msgstr "បញ្ជីនៃការឈប់សម្រាក"
+
+msgid "Morning/Afternnon"
+msgstr "ព្រឹក/រសៀល"
+
+msgid "Leave types"
+msgstr "ប្រភេទនៃការសុំច្បាប់"
+
+msgid "Create a new type"
+msgstr "បង្កេីតនូវអ្វីដែលថ្មី"
+
+msgid "No leave type found into the database."
+msgstr "គ្មានទម្រង់ថ្មីក្នុងទិន្ន័យទេ"
+
+msgid "Add a leave type"
+msgstr "បន្ថែមការឈប់សម្រាក"
+
+msgid "The leave type has been succesfully created."
+msgstr "ស្លឹកបង្កេីតដោយជោគជ័យ"
+
+msgid "Edit a Leave type"
+msgstr "កែសម្រួលប្រភេទឈប់សំរាក"
+
+msgid "Update"
+msgstr "ធ្វើអោយទាន់សម័យ"
+
+msgid "The leave type has been succesfully updated."
+msgstr "ប្រភេទឈប់សម្រាកបានធ្វើអោយទាន់សម័យដោយជោគជ័យ"
+
+msgid "Delete Leave Type"
+msgstr "លុបចេញពីទម្រង់ដើម"
+
+msgid ""
+"You are about to delete one leave type, this procedure is irreversible."
+msgstr "អ្នកគឺជាអ្នកលុបទម្រង់ដើមវាជាទម្រង់ដែលមិនអាចត្រឡប់វិញបាន"
+
+msgid "The leave type has been succesfully deleted."
+msgstr "ប្រភេទនៃការឈប់សម្រាកត្រួវបានលុបដោយជោគជ័យ"
+
+msgid "You cannot delete a system leave type."
+msgstr "អ្នកមិនអាចលុបនួវទម្រង់ដើម"
+
+msgid "You cannot delete a leave type that is used."
+msgstr "អ្នកមិនអាចលុបប្រភេទនៃការឈប់សម្រាកដែលបានប្រើប្រាស់នោះទេ។"
+
+msgid "Leave Management System"
+msgstr "ប្រពន្ធ័គ្រប់គ្រងការសុំច្បាប់"
+
+msgid "Change password"
+msgstr "ផ្លាស់ប្តូរពាក្យសម្ងាត់"
+
+msgid "Welcome"
+msgstr "សូមស្វាគមន៏"
+
+msgid "Logout"
+msgstr "ចាកចេញពីប្រពន្ធ័"
+
+msgid "View my personal information"
+msgstr "មើលពត៌មានផ្ទាល់ខ្លួនរបស់ខ្ញុំ"
+
+msgid "reset password"
+msgstr "ផ្លាស់ប្តូរពាក្យសម្ងាត់"
+
+msgid "Admin"
+msgstr "អ្នកគ្រប់គ្រង"
+
+msgid "List of users"
+msgstr "បញ្ជីនៃអ្នកប្រើប្រាស់"
+
+msgid "Create user"
+msgstr "បង្កើតឈ្មោះថ្មី"
+
+msgid "Settings"
+msgstr "ការកំណត់"
+
+msgid "HR"
+msgstr "ធនធានមនុស្ស"
+
+msgid "Employees"
+msgstr "បុគ្គលិក"
+
+msgid "Organization"
+msgstr "អង្គការ"
+
+msgid "Contracts"
+msgstr "អង្គការ"
+
+msgid "List of positions"
+msgstr "បញ្ជីមុខតំណែង"
+
+msgid "List of types"
+msgstr "ប្រភេទនៃការសុំច្បាប់"
+
+msgid "Reports"
+msgstr "របាយការណ៍"
+
+msgid "Leave balance"
+msgstr "តុល្យភាពនៃការចាកចេញ"
+
+msgid "Validation"
+msgstr "ការរង្វាយតំលៃ"
+
+msgid "My collaborators"
+msgstr "អ្នករួមការងាររបស់ខ្ញុំ"
+
+msgid "Overtime"
+msgstr "បន្ថែមម៉ោង"
+
+msgid "Requests"
+msgstr "ការស្នើរសុំ"
+
+msgid "List of extras"
+msgstr "បញ្ជីនៃបន្ថែម"
+
+msgid "Request an extra"
+msgstr "ស្នើសុំបន្ថែមមួយ"
+
+msgid "My leaves"
+msgstr "ការឈប់សម្រាករបស់ខ្ញុំ"
+
+msgid "Counters"
+msgstr "ចំនួនសរុបនៃការឈប់"
+
+msgid "List of leave requests"
+msgstr "បញ្ជីនៃសំណើឈប់សំរាក"
+
+msgid "Request a leave"
+msgstr "ស្នើសំុឈប់សំរាក"
+
+msgid "Calendars"
+msgstr "ប្រតិទិន"
+
+msgid "My workmates"
+msgstr "មិត្តរួមការងាររបស់ខ្ញុំ"
+
+msgid "Department"
+msgstr "ផ្នែក ឬ អគារ"
+
+msgid "Global"
+msgstr "សាកល"
+
+msgid "Tabular"
+msgstr "តារាង"
+
+msgid "Search for an entity"
+msgstr "ស្ចែងរកអង្គភាពមួយ"
+
+msgid "Search"
+msgstr "ស្ចែងរក"
+
+msgid "Employees attached to entity"
+msgstr "និយោជិកដែលបានភ្ជាប់ទៅកាន់អង្គភាព"
+
+msgid "Attach an Employee"
+msgstr "ភ្ជាប់ជាមួយបុគ្គលិក"
+
+msgid "Detach an Employee"
+msgstr "ផ្តាច់ចេញពីបុគ្គលិក"
+
+msgid "Supervisor"
+msgstr "ប្រធានផ្នែក"
+
+msgid ""
+"If you select a supervisor, he will receive a copy of accepted and rejected "
+"leave requests submitted by employees of this entity."
+msgstr "ប្រើសិនបើលោកអ្នកជ្រើសរើសប្រធានម្នាក់, គាត់នឹងទទួលបាននូវសំណើរឈប់សម្រាកមួយដែលគេបានទទួលយក ឬបដិសេធន៍ ដែលត្រូវបានដាក់ស្នើរដោយនិយោជិកនៃអង្គភាពនេះ។"
+
+msgid "Select a Supervisor"
+msgstr "សូមជ្រើសរើសប្រធានម្នាក់"
+
+msgid "Delete Entity"
+msgstr "លុបអង្គភាព"
+
+msgid "You are about to delete one entity, this procedure is irreversible."
+msgstr "អ្នកលុបអង្គភាពមួយ​​  នេះជានីតិវិធីដែលមិនអាចថយក្រោយវិញបាន"
+
+msgid "Add an Employee"
+msgstr "បន្ថែមបុគ្គលិក"
+
+msgid "An error occured"
+msgstr "មានបញ្ហាកើតឡើង"
+
+msgid "Name of the entity"
+msgstr "ឈ្មោះរបស់អង្គភាព"
+
+msgid "Please select one entity in the organization (treeview on the right)."
+msgstr "សូមជ្រើសរើសបុគ្គលិកមួយនៅក្នងអង្គការ"
+
+msgid ""
+"Please select one employee in the table of users belonging to the selected "
+"entity."
+msgstr "សូមជ្រើសរើសបុគ្គលិកមួយនៅក្នុងតារាងអ្នកប្រើប្រាស់ដែលជាកម្មសិទ្ធិរបស់អង្គភាពដែលបានជ្រើស។"
+
+msgid "You cannot delete the root entity."
+msgstr "អ្នកមិនអាចលុបអង្គភាព root ។"
+
+msgid "Overtime Requests submitted to me"
+msgstr "សំណើបន្ថែមម៉ោងរបស់បុគ្គលិករួចបញ្ចូនមកខ្ញុំ"
+
+msgid ""
+"This screen lists the overtime requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "អេក្រង់នេះរាយសំណើបន្ថែមម៉ោងដែលបានដាក់ជូនទៅអ្នក ​។ ប្រសិនបើអ្នកមិនមែនជាអ្នកគ្រប់គ្រងទេនោះ បញ្ចីនេះនឹងទទេ."
+
+msgid "Fullname"
+msgstr "ឈ្មោះពេញ"
+
+msgid "All requests"
+msgstr "សំណេីទាំងអស់"
+
+msgid "Pending requests "
+msgstr "សំនើរដែលមិនទាន់​បានទទូលយក"
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this "
+"overtime request."
+msgstr "អ្នកគឺមិនមែនជាអ្នកគ្រប់គ្រងទូទៅនៃបុគ្គលិកនេះទេ ​។ អ្នកមិនអាចបដិសេធសំណើបន្ថែមម៉ោងនេះឡើយ ។"
+
+msgid "The overtime request has been successfully rejected."
+msgstr "សំណើបន្ថែមម៉ោងនេះត្រូវបានច្រានចោលដោយជោគជ័យ។"
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this "
+"overtime request."
+msgstr "លោកអ្នកមិនមែនជាអ្នកគ្រប់គ្រងរបស់និយោជិកនេះទេ។ លោកអ្នកមិនអាចទទួលយក ការស្នើរសុំបន្ថែមម៉ោងនេះទេ។"
+
+msgid "The overtime request has been successfully accepted."
+msgstr "សំណើបន្ថែមម៉ោងត្រូវបានទទួលយកដោយជោគជ័យ។"
+
+msgid "List of overtime resquests"
+msgstr "បញ្ជីការស្នើរសុំបន្ថែមម៉ោង"
+
+msgid "Create position"
+msgstr "ចាប់ផ្ដើមមុខតំណែង"
+
+msgid "Delete Position"
+msgstr "លុបមុខតំណែង"
+
+msgid "You are about to delete one position, this procedure is irreversible."
+msgstr "អ្នកបានចាកចេញពីមុខតំណែងហើយនាក់មិនអាចត្រឡប់មកវិញបានទេ"
+
+msgid "Create a new position"
+msgstr "ចាប់ផ្ដើមមុខតំណែងថ្មី"
+
+msgid "The position has been succesfully created."
+msgstr "ទីតាំងត្រូវបានបង្កើតដោយជោគជ័យ"
+
+msgid "Edit position #"
+msgstr "ទីតាំងកែសម្រួល #"
+
+msgid "Update position"
+msgstr "ទីតាំងធ្វើឱ្យទាន់សម័យ"
+
+msgid "The position has been succesfully updated."
+msgstr "ទីតាំងនេះត្រូវបានធ្វើឱ្យទាន់សម័យដោយជោគជ័យ"
+
+msgid "The position has been succesfully deleted."
+msgstr "ទីតាំងត្រូវបានលុបដោយជោគជ័យ"
+
+msgid "List of reports"
+msgstr "បញ្ជីរបាយកាណ៍"
+
+msgid "Report"
+msgstr "របាយការណ៏"
+
+msgid "Back to list of reports"
+msgstr "ត្រឡប់ក្រោយទៅកាន់បញ្ជីរបាយការណ៍"
+
+msgid "List of Report"
+msgstr "បញ្ជីរបាយកាណ៍"
+
+msgid "Balance of leaves"
+msgstr "តុល្យភាពនៃសំណើរ"
+
+msgid "Launch"
+msgstr "ចាប់ផ្ពើមដំណើរការ"
+
+msgid "Leave Requests submitted to me"
+msgstr "សំបុត្រចាកចេញបញ្ជូនអោយខ្ញុំ"
+
+msgid ""
+"This screen lists the leave requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "បញ្ជីកញ្ចក់នេះនឺងបញ្ជូនទៅអ្នក។​ប្រសិនបេីអ្នកមិនមែនអ្នកគ្រប់គ្រង,បញ្ជីនេះនឺងទទេ"
+
+msgid "List of my collaborators"
+msgstr "បញ្ជីអ្នករួបការងាររបស់ខ្ញុំ"
+
+msgid ""
+"This screen lists your collaborators. If you are not a manager, this list "
+"will always be empty."
+msgstr "ផ្ទាំងអេក្រង់នេះ បង្ហាញពីអ្នករួមការងាររបស់អ្នក។ ប្រសិនបើលោកអ្នកមិនមែនជាអ្នកគ្រប់គ្រងទេ, បញ្ជីនេះតែងតែទទេជានិច្ច។"
+
+msgid "Create a leave request in behalf of this collaborator"
+msgstr "បង្កើតការស្នើរសុំឈប់សម្រាក់ ក្នុងនាមជាអ្នកតំណាងរបស់អ្នករួមការងារ"
+
+msgid "Your are not the manager of this employee."
+msgstr "លោកអ្នកមិនមែនជាអ្នកគ្រប់គ្រងរបស់និយោជិកនេះទេ"
+
+msgid "List of collaborators"
+msgstr "បញ្ជីអ្នករួមការងារ"
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this leave "
+"request."
+msgstr "អ្នកមិនមែនជាបុគ្គលិក​នៅទីនេះទេ។ អ្នកមិនអនុញ្ញាតអោយមានជាសំនើរទេ។"
+
+msgid "The leave request has been successfully accepted."
+msgstr "សំនើររបស់អ្នកត្រូវបានគេទទួលយក។"
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this leave "
+"request."
+msgstr "អ្នកមិនមែនជាបុគ្គលិក​នៅទីនេះទេ។ អ្នកមិនមានសិទ្ធបដិសេធសំនើរនេះទេ។"
+
+msgid "The leave request has been successfully rejected."
+msgstr "សំនើររបស់អ្នកមិនត្រូវបានគេទទួលយកទេ។"
+
+msgid "List of leave resquests"
+msgstr "បញ្ជីស្នើរសុំឈប់សម្រាក"
+
+msgid "Morning/Afternoon"
+msgstr "អរុណសួស្ដី/ទិវាសួស្ដី"
+
+msgid "List of delegations"
+msgstr "បញ្ជីផ្ទេរសិទ្ធ"
+
+msgid ""
+"This is the list of employees who can accept or reject a request in your "
+"behalf."
+msgstr "នេះជាបញ្ជីឈ្មោះនិយោជិកដែលអាចទទួលយក ឬបដិសេធន៍ នូវការស្នើរសុំណាមួយជំនួសអ្នកបាន"
+
+msgid "Revoke"
+msgstr "លុបចោល"
+
+msgid "Add a delegate"
+msgstr "បន្ថែមការផ្ទេរសិទ្ធ"
+
+msgid "Are you sure that you want to revoke this delegation?"
+msgstr "តើអ្នកប្រាកដមែនទេថាអ្នកនឹងលុបចោលនូវការផ្ទេរសិទ្ធនេះ?"
+
+msgid "Login"
+msgstr "ចូលទៅក្នុងប្រពន្ធ័កម្មវិធី"
+
+msgid "Language"
+msgstr "ភាសា"
+
+msgid "Password"
+msgstr "លេខសំងាត់"
+
+msgid "Send me my password"
+msgstr "ផ្ញើរឱ្យខ្ញុំនូវលេខសម្ងាត់របស់ខ្ញុំ"
+
+msgid "Please fill the login field"
+msgstr "សូមបំពេញពត៌មាន ក្នុងប្រអប់ចូលប្រព័ន្ធ"
+
+msgid "Unknown login. Please contact your HR Officer / Manager."
+msgstr "ចូលក្នុងប្រព័ន្ធដោយឥតអត្តសញ្ញាណ។ សូមទំនាកទំនងទៅកាន់មន្ត្រីធនធានមនុស្យ ឬអ្នកគ្រប់គ្រង។"
+
+msgid "The password has been sent to your e-mail adress."
+msgstr "លេខសម្ងាត់ត្រូវបានបញ្ជួនចូលទៅក្នុង អ៊ីម៉ែលរបស់លោកអ្នករួចហើយ"
+
+msgid "Invalid login id or password"
+msgstr "លេខសម្គាល់ ឬ ពាក្យសម្ងាត់ចូលក្នុងប្រព័ន្ធមិនត្រឹមត្រូវ"
+
+msgid "The language has been succesfully set to "
+msgstr "ភាសាត្រូវបានកំណត់ដោយជោគជ័យ "
+
+msgid "Rename"
+msgstr "ប្តូរឈ្មោះ"
+
+msgid "Remove"
+msgstr "ដកចេញ"
+
+msgid "Cut"
+msgstr "កាត់ចេញ"
+
+msgid "Paste"
+msgstr "ផ្តិត"
+
+msgid "Active"
+msgstr "សកម្ម"
+
+msgid "Inactive"
+msgstr "អសកម្ម"
+
+msgid "edit user details"
+msgstr "កែប្រែឈ្មោះអ្នកប្រើប្រាស់"
+
+msgid "delete user"
+msgstr "លុប"
+
+msgid "Role"
+msgstr "ច្បាប់"
+
+msgid "Create a new user"
+msgstr "បង្កើតឈ្មោះថ្មី"
+
+msgid "Import users"
+msgstr "បញ្ចូលឈ្មោះអ្នកប្រើប្រាស់"
+
+msgid "Delete User"
+msgstr "លុប"
+
+msgid "You are about to delete one user, this procedure is irreversible."
+msgstr " អ្នកប្រហែលលុបអ្នកប្រើប្រាស់ម្នាក់បែបបទនេះមិនអាចត្រឡប់វិញឡើយ។"
+
+msgid "Import Users"
+msgstr "បញ្ចូលឈ្មោះអ្នកប្រើប្រាស់"
+
+msgid "Filename"
+msgstr "ឈ្មោះឯកសារ"
+
+msgid "My personal information"
+msgstr "ពត៌មានផ្ទាល់ខ្លួនរបស់ខ្ញុំ"
+
+msgid "Position"
+msgstr "តំណែង"
+
+msgid "Date hired/started"
+msgstr "កាលបរិច្ឆេទជួល / បានចាប់ផ្តើ"
+
+msgid "Internal/Company Identifier"
+msgstr "អ្នកកំណត់អត្តសញ្ញាណ"
+
+msgid "Edit user #"
+msgstr "កែសម្រួលអ្នកប្រើ #"
+
+msgid "Edit user"
+msgstr "កែសម្រួលអ្នកប្រើ"
+
+msgid "No line manager."
+msgstr "មិនមានអ្នកចាត់ការទូទៅទេ"
+
+msgid "If a user has no manager (itself), it can validate its leave requests."
+msgstr "បើសិនអ្នកប្រើមិនមានអ្នកគ្រប់គ្រង​​ (ខ្លួនផ្ទាល់),អ្នកអាចបញ្ជាក់សុំការអនុញ្ញាតិចាកចេញអោយបានត្រឹមត្រូវ"
+
+msgid "Self"
+msgstr "ខ្លួនឯង"
+
+msgid "Timezone"
+msgstr "តំបន់ម៉ោង"
+
+msgid "LDAP Path"
+msgstr "ទីតាំង LDAP"
+
+msgid "Select the manager"
+msgstr "ជ្រើសការគ្រប់គ្រង"
+
+msgid "Select a position"
+msgstr "ជ្រើសទីតាំងមួយ"
+
+msgid "Update user"
+msgstr "ផ្លាស់ប្តូូរព័ត៌មានអ្នកប្រើ"
+
+msgid "The user has been succesfully updated"
+msgstr "ព័ត៌មានអ្នកប្រើប្រាស់ត្រូូវបានផ្លាស់ប្តូូរបានសម្រេច"
+
+msgid "The user has been succesfully deleted"
+msgstr "ព័ត៌មានអ្នកប្រើត្រូូវបានលុបបានសម្រេច"
+
+msgid "The password has been succesfully changed"
+msgstr "លេខសំងាត់ប្ដូរបានសម្រេច"
+
+msgid "Generate password"
+msgstr "ធ្វើការបង្កើតលេខសំងាត់"
+
+msgid ""
+"It is recommanded to select a contract. Do you want to create the user "
+"without a contract?"
+msgstr "សូមណែនាំឱ្យជ្រើសរើសកិច្ចសន្យាណាមួយ៕ តើលោកអ្នកពិតជាចង់បង្កើតអ្នកប្រើប្រាស់ដោយមិនមានកិច្ចសន្យាមែនទេ?"
+
+msgid "The user has been succesfully created"
+msgstr "បង្កើតទិន្នន័យរបស់អ្នកបានសម្រេច"
+
+msgid "Username already exists."
+msgstr "ទិន្នន័យរបស់អ្នកស្ថិតនៅក្នុងប្រព័ន្ឋរួចហើយ"
+
+msgid "This username is not available."
+msgstr "អ្នកប្រើប្រាស់មិនមានក្នុងប្រព័ន្ឋ"
+
+msgid "Reset"
+msgstr "ធ្វើអោយបានត្រឹមត្រូវ"

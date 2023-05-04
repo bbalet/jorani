@@ -36,6 +36,8 @@
  * @filesource
  */
 
+ use App\Kernel;
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -325,4 +327,19 @@ header("Pragma: no-cache");
 $GLOBALS['versionOfJorani'] = '1.0.0';
 
 require_once FCPATH . 'vendor/autoload.php';
+
+
+// get the database connection from CI 3 configuration
+$env = is_null(getenv('CI_ENV'))?'':getenv('CI_ENV');
+$pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array(__DIR__, 'application', 'config', $env, 'database.php')));
+include($pathConfigFile);
+
+$_SERVER['DATABASE_URL'] = $db[$active_group]['dsn'];
+$_SERVER['APP_DEBUG'] = false;
+$_SERVER['DB_USER'] = $db[$active_group]['username'];
+$_SERVER['DB_PASS'] = $db[$active_group]['password'];
+$_SERVER['APP_ENV'] = 'production';
+
+$GLOBALS['kernel'] = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+
 require_once BASEPATH.'core/CodeIgniter.php';

@@ -1,0 +1,1701 @@
+# 
+# Translators:
+# Angel Miralles <angelmiralles@gmail.com>, 2018
+# Benjamin BALET <benjamin.balet@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: jorani\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2018-02-22 08:28+0000\n"
+"Last-Translator: Angel Miralles <angelmiralles@gmail.com>\n"
+"Language-Team: Catalan (http://www.transifex.com/jorani/jorani/language/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Data & Config Diagnostic"
+msgstr "Dades de configuració i diagnòstic"
+
+msgid "Detection of configuration and data problems"
+msgstr "Detectar problemes de la configuració i les dades"
+
+msgid "No error"
+msgstr "No hi han errades"
+
+msgid "Leave Requests"
+msgstr "Peticions d‘Absència"
+
+msgid "Accepted but duplicated Leave Requests"
+msgstr "Peticions d'Absència acceptades però duplicades"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Employee"
+msgstr "Empleat"
+
+msgid "Start Date"
+msgstr "Data Inici"
+
+msgid "Status"
+msgstr "Estat"
+
+msgid "Type"
+msgstr "Tipus"
+
+msgid "Afternoon/Morning"
+msgstr "Matí/Tarda"
+
+msgid "Leave Requests with a wrong start/end type."
+msgstr "Peticions d'absència amb tipus d'inici/fi erronis."
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Start"
+msgstr "Inici"
+
+msgid "End"
+msgstr "Fi"
+
+msgid "Entitled days"
+msgstr "Autoritzar dies"
+
+msgid ""
+"List of contracts and employees having entitlements for more than one year."
+msgstr "Llista de contractes i empleats amb dies lliures en més d'un any."
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "End Date"
+msgstr "Darrera data"
+
+msgid "Contract"
+msgstr "Contracte"
+
+msgid "Incomplete deletion into database."
+msgstr "Esborrat incomplet a la base de dades."
+
+msgid "Non-working days"
+msgstr "Dies no laborables"
+
+msgid ""
+"Number of days (per contract) for which a non-working duration has been "
+"defined."
+msgstr "Número de dies (definits per contracte) per les duracions d'absència."
+
+msgid "Last year"
+msgstr "Any passat"
+
+msgid "This year"
+msgstr "Aquest any"
+
+msgid "Next year"
+msgstr "Proper any"
+
+msgid "Overtime"
+msgstr "Hores extra"
+
+msgid "Overtime requests with a negative duration"
+msgstr "Petició d'hores extra amb duració negativa"
+
+msgid "Duration"
+msgstr "Duració"
+
+msgid "Contracts"
+msgstr "Contractes"
+
+msgid "Unused contracts (check if the contract is not duplicated)."
+msgstr "Contractes sense ús (revisa que el contracte no estigui duplicat)"
+
+msgid "Balance"
+msgstr "Saldo"
+
+msgid "Leave requests for which there are no entitlments."
+msgstr "Peticions d'absència sense dies disponibles."
+
+msgid "OAuth clients and sessions"
+msgstr "OAuth clients i  sessions"
+
+msgid "Clients"
+msgstr "Clients"
+
+msgid "List of clients allowed to use the REST API"
+msgstr "Llistat de clients autoritzats per utilitzar REST API"
+
+msgid "edit client"
+msgstr "editar client"
+
+msgid "delete client"
+msgstr "esborrar client"
+
+msgid "Add"
+msgstr "Afegir"
+
+msgid "Add OAuth Client"
+msgstr "Afegir client OAuth"
+
+msgid "Associate to an actual user"
+msgstr "Associar amb un usuari actual"
+
+msgid "This client_id already exists"
+msgstr "Aquest client_id ja existeix"
+
+msgid "Are you sure that you want to proceed?"
+msgstr "Estàs segur de procedir?"
+
+msgid "Sessions"
+msgstr "Sessions"
+
+msgid "List of active REST API OAuth Sessions"
+msgstr "Llista de sessions REST API OAuth actives"
+
+msgid "Purge"
+msgstr "Purgar"
+
+msgid "Yearly calendar"
+msgstr "Calendari anual"
+
+msgid "Export"
+msgstr "Exportar"
+
+msgid "My calendar"
+msgstr "El meu calendari"
+
+msgid "Calendar of my leaves."
+msgstr "Calendari de les meves absències."
+
+msgid "Download an iCal file"
+msgstr "Baixeu un fitxer iCal"
+
+msgid "(import the event into Outlook, Thunderbird, etc.)"
+msgstr "(importeu l'esdeveniment a Outlook, Thunderbird, etc.)"
+
+msgid "Event details"
+msgstr "Detalls de l’esdeveniment"
+
+msgid "Close"
+msgstr "Tanca"
+
+msgid "Days off"
+msgstr "Dies lliures"
+
+msgid "Calendar of my workmates"
+msgstr "Calendari dels meus companys de treball"
+
+msgid "Leaves of employees having the same line manager"
+msgstr "Vacances dels empleats amb el mateix administrador"
+
+msgid "Calendar of my subordinates"
+msgstr "Calendari dels meus subordinats"
+
+msgid ""
+"Leaves of my direct report subordinates (will be empty if I'm not a "
+"manager)."
+msgstr "Absències dels subordinats que reporten a mi (estarà buit si no sóc supervisor)"
+
+msgid "Calendar of my department"
+msgstr "Calendari del meu departament"
+
+msgid "Calendar of employees working in my department"
+msgstr "Calendari dels empleats del meu departament"
+
+msgid ""
+"It appears that you don't belong to any department. Please contact your HR "
+"Officer / Manager."
+msgstr "Sembla que vostè no pertany a cap departament. Si us plau posi's en contacte amb el/la responsable de recursos humans."
+
+msgid "Calendar of the organization"
+msgstr "Calendari de l'organització"
+
+msgid "Global calendar with a filter on entity"
+msgstr "Calendari Global amb filtre d'entitat"
+
+msgid "Select the entity"
+msgstr "Selecciona el departament"
+
+msgid "Select"
+msgstr "Seleccionar"
+
+msgid "Include sub-departments"
+msgstr "Incloure sub departaments"
+
+msgid "Select an entity"
+msgstr "Selecciona un departament"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Cancel·la"
+
+msgid "Tabular Calendar"
+msgstr "Calendari tabular"
+
+msgid "Month"
+msgstr "Mes"
+
+msgid "Year"
+msgstr "Any"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Proper"
+
+msgid "Select a list"
+msgstr "Selecciona una llista"
+
+msgid "Display leave types"
+msgstr "Mostra els tipus d'absència"
+
+msgid "Calendar Tabular"
+msgstr "Calendari tabular"
+
+msgid "Entity"
+msgstr "Departament"
+
+msgid "Sub-entities"
+msgstr "Subentitats"
+
+msgid "Mo"
+msgstr "dl"
+
+msgid "Tu"
+msgstr "dm"
+
+msgid "We"
+msgstr "dc"
+
+msgid "Th"
+msgstr "dj"
+
+msgid "Fr"
+msgstr "dv"
+
+msgid "Sa"
+msgstr "ds"
+
+msgid "Su"
+msgstr "dg"
+
+msgid "Monday"
+msgstr "dilluns"
+
+msgid "Tuesday"
+msgstr "dimarts"
+
+msgid "Wednesday"
+msgstr "Miércoles"
+
+msgid "Thursday"
+msgstr "dijous"
+
+msgid "Friday"
+msgstr "divendres"
+
+msgid "Saturday"
+msgstr "dissabte"
+
+msgid "Sunday"
+msgstr "diumenge"
+
+msgid "All days"
+msgstr "Tots els dies"
+
+msgid "January"
+msgstr "gener"
+
+msgid "February"
+msgstr "febrer"
+
+msgid "March"
+msgstr "març"
+
+msgid "April"
+msgstr "abril"
+
+msgid "May"
+msgstr "maig"
+
+msgid "June"
+msgstr "juny"
+
+msgid "July"
+msgstr "juliol"
+
+msgid "August"
+msgstr "agost"
+
+msgid "September"
+msgstr "setembre"
+
+msgid "October"
+msgstr "octubre"
+
+msgid "November"
+msgstr "novembre"
+
+msgid "December"
+msgstr "desembre"
+
+msgid "List of contracts"
+msgstr "Llista de contractes"
+
+msgid "Start period"
+msgstr "Inici de període"
+
+msgid "End period"
+msgstr "Fi de període"
+
+msgid "delete contract"
+msgstr "suprimir contracte"
+
+msgid "edit contract"
+msgstr "modificar contracte"
+
+msgid "entitled days"
+msgstr "dies per contracte"
+
+msgid "days off and weekends"
+msgstr "dies lliures i caps de setmana"
+
+msgid "Exclude leave types"
+msgstr "Excloure tipus d'absència"
+
+msgid "Export this list"
+msgstr "Exporta aquest llistat"
+
+msgid "Create contract"
+msgstr "Crear contracte"
+
+msgid "Delete Contract"
+msgstr "Suprimir contracte"
+
+msgid "You are about to delete one contract, this procedure is irreversible."
+msgstr "Estàs segur d'esborrar el contracte, l'acció no es pot desfer.."
+
+msgid "Do you want to proceed?"
+msgstr "¿Vols continuar?"
+
+msgid "Yes"
+msgstr "Sí"
+
+msgid "No"
+msgstr "No"
+
+msgid "Exclude leave types from a contract"
+msgstr "Excloure tipus d'absència d'un contracte"
+
+msgid ""
+"You cannot exclude leave types already in use (used at least one time by en "
+"employee attached to the contract) and the default leave type (set on the "
+"contract or into the configuration file)."
+msgstr "No pots excloure tipus d'absència que estan en ús (utilitzada com a mínim per un empleat assignat al contracte) o que són l'opció per defecte (establerts al contracte o a l'arxiu de configuració)."
+
+msgid "Included leave types"
+msgstr "Tipus d'absència inclosos"
+
+msgid "Excluded leave types"
+msgstr "Tipus d'absència exclosos"
+
+msgid "Include this leave type"
+msgstr "Incloure aquest tipus d'absència"
+
+msgid "Exclude this leave type"
+msgstr "Excloure aquest tipus d'absència"
+
+msgid "This leave type is already in use"
+msgstr "Aquest tipus d'absència ja està en ús"
+
+msgid "You cannot exclude the default leave type"
+msgstr "No pots excloure el tipus d'absència per defecte"
+
+msgid "Edit a contract"
+msgstr "Modificar contracte"
+
+msgid "Edit contract #"
+msgstr "Modificar contracte #"
+
+msgid "Month / Start"
+msgstr "Mes / Inici"
+
+msgid "Day / Start"
+msgstr "Dia / Inici"
+
+msgid "Month / End"
+msgstr "Mes / Fi"
+
+msgid "Day / End"
+msgstr "Dia / Fi"
+
+msgid "Default leave type"
+msgstr "Tipus d'absència per defecte"
+
+msgid "Update contract"
+msgstr "Modificar contracte"
+
+msgid "The contract has been succesfully updated"
+msgstr "El contracte s'ha modificat correctament"
+
+msgid "Create a new contract"
+msgstr "Crear un nou contracte"
+
+msgid "The contract has been succesfully created"
+msgstr "El contracte s'ha creat correctament"
+
+msgid "The contract has been succesfully deleted"
+msgstr "El contracte s'ha esborrat correctament"
+
+msgid "Calendar of non working days"
+msgstr "Calendari de dies no laborales"
+
+msgid ""
+"Days off and weekends are not configured by default. Click on a day to edit "
+"it individually or use the button \"Series\"."
+msgstr "Els festius i caps de setmana no estan configurats per defecte. Clica en un dia per editar-lo o utilitza el botó \"Serie\"."
+
+msgid "Legend:"
+msgstr "Llegenda::"
+
+msgid "All day"
+msgstr "Tot el Dia"
+
+msgid "Morning"
+msgstr "Matí"
+
+msgid "Afternoon"
+msgstr "Tarda"
+
+msgid "Back to contracts"
+msgstr "Tornar a la llista de contractes"
+
+msgid "Series of non-working days"
+msgstr "Serie de dies no laborables"
+
+msgid "Edit day off"
+msgstr "Editar festiu"
+
+msgid "Title"
+msgstr "Títol"
+
+msgid "Working day"
+msgstr "Dia Laborable"
+
+msgid "All day is off"
+msgstr "No laborable tot el dia"
+
+msgid "Morning is off"
+msgstr "Matí no laborable"
+
+msgid "Afternoon is off"
+msgstr "Tarda no laborable"
+
+msgid "Delete"
+msgstr "Esborrar"
+
+msgid "Import iCal"
+msgstr "Importa iCal"
+
+msgid "URL of non-working days iCal file"
+msgstr "URL de l'arxiu iCal amb els festius"
+
+msgid "Edit a series of days off"
+msgstr "Edita una serie de festius"
+
+msgid "Mark every"
+msgstr "Seleccionar cada"
+
+msgid "From"
+msgstr "Des de"
+
+msgid "Current"
+msgstr "Actual"
+
+msgid "To"
+msgstr "Fins"
+
+msgid "As a"
+msgstr "Com"
+
+msgid "Copy"
+msgstr "Copiar"
+
+msgid "You must select a contract."
+msgstr "Has de seleccionar un contracte."
+
+msgid "Data has been copied successfully."
+msgstr "Les dades s'han copiat correctament."
+
+msgid "No data available in table"
+msgstr "No hi ha dades disponibles a la taula"
+
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "Mostran _START_ a _END_ de _TOTAL_ entrades"
+
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "Mostran 0 a 0 de 0 entrades"
+
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(filtre del _MAX_ total entrades)"
+
+msgid ","
+msgstr ","
+
+msgid "Show _MENU_ entries"
+msgstr "Veure _MENU_ entrades"
+
+msgid "Loading..."
+msgstr "Carregant..."
+
+msgid "Processing..."
+msgstr "Processant..."
+
+msgid "Search:"
+msgstr "Cercar:"
+
+msgid "No matching records found"
+msgstr "No s'han trobat registres coincidents"
+
+msgid "First"
+msgstr "Primer"
+
+msgid "Last"
+msgstr "Darrer"
+
+msgid ": activate to sort column ascending"
+msgstr ": ordenar de forma ascendent"
+
+msgid ": activate to sort column descending"
+msgstr ": ordenar de forma descendent"
+
+msgid "Page length"
+msgstr "Mida de la pàgina"
+
+msgid "10 rows"
+msgstr "10 files"
+
+msgid "25 rows"
+msgstr "25 files"
+
+msgid "50 rows"
+msgstr "50 files"
+
+msgid "Show all"
+msgstr "Mostra tot"
+
+msgid "Change columns"
+msgstr "Canvia columnes"
+
+msgid "Your password has been reset"
+msgstr "La teva contrasenya s'ha restablert"
+
+msgid "Your account has been created"
+msgstr "El teu compte s'ha creat"
+
+msgid "Leave Request from"
+msgstr "Petició d'Absència de"
+
+msgid "Leave Request"
+msgstr "Sol·licitar absència"
+
+msgid "Leave Request Cancellation from"
+msgstr "Cancel·lació de Petició d'Absència de"
+
+msgid "Leave Request Cancellation"
+msgstr "Cancel·lació de Petició d'Absència"
+
+msgid "Your Cancellation Request has been accepted"
+msgstr "La teva Petició de Cancel·lació s'ha acceptat"
+
+msgid "Your Cancellation Request has been rejected"
+msgstr "La teva Petició de Cancel·lació s'ha rebutjat"
+
+msgid "Your leave request has been accepted"
+msgstr "La teva petició d'absència s'ha acceptat"
+
+msgid "Your leave request has been rejected"
+msgstr "La teva petició d'absència s'ha rebutjat"
+
+msgid "Your overtime request has been accepted"
+msgstr "La teva sol·licitud d'hores extra s'ha acceptat"
+
+msgid "Your overtime request has been rejected"
+msgstr "La teva sol·licitud d'hores extra s'ha rebutjat"
+
+msgid "Overtime Request"
+msgstr "Sol·licitud d'hores extra"
+
+msgid "Overtime request from"
+msgstr "Sol·licitud d'hores extra de"
+
+msgid "Entitled days for contract"
+msgstr "Dies por contracte"
+
+msgid "Edit"
+msgstr "Modificar"
+
+msgid "Days"
+msgstr "Dies"
+
+msgid "Leave type"
+msgstr "Tipus d'absència"
+
+msgid "Description"
+msgstr "Descripció"
+
+msgid "Add entitled days"
+msgstr "Afegir dies permesos"
+
+msgid "\"The field \" + fieldname + \" is mandatory.\""
+msgstr "\"El camp\" + fieldname + \" es mandatori.\""
+
+msgid "Back to the list of contracts"
+msgstr "Tornar a la llista de contractes"
+
+msgid "Are you sure that you want to delete it?"
+msgstr "¿Segur que voleu esborrar-lo?"
+
+msgid "Step"
+msgstr "Increment"
+
+msgid "Entitled days for employee"
+msgstr "Dies permesos per empleat"
+
+msgid "Back to the list of employees"
+msgstr "Tornar a la llista d'empleats"
+
+msgid "Entitled days to Contract #"
+msgstr "Dies associats al contracte #"
+
+msgid "Yearly leave period: "
+msgstr "Període d'absència anual: "
+
+msgid "Entitled days to Employee"
+msgstr "Dies assignats a l'empleat"
+
+msgid "My overtime requests"
+msgstr "Le meves sol·licituds d'hores extra"
+
+msgid "view"
+msgstr "veure"
+
+msgid "edit"
+msgstr "modificar"
+
+msgid "delete"
+msgstr "esborrar"
+
+msgid "Reason"
+msgstr "Motiu"
+
+msgid "New request"
+msgstr "Nova sol·licitud"
+
+msgid "Delete overtime request"
+msgstr "Esborrar sol·licitud d'hores extra"
+
+msgid ""
+"You are about to delete one overtime request, this procedure is "
+"irreversible."
+msgstr "Estàs a punt d'esborrar una petició d'hores extra, aquest acció no es pot desfer."
+
+msgid "Submit an overtime request"
+msgstr "Enviar sol·licitud d'hores extra"
+
+msgid "In days or fraction of days (e.g. 0.125 for 1h if you work 8h/day)."
+msgstr "El dia o fracció de dia (per exemple, 0,125 per a 1h si treballa 8 hores / dia)."
+
+msgid "Request overtime"
+msgstr "Sol·licitar hores extra"
+
+msgid "The overtime request has been succesfully created"
+msgstr "La sol·licitud d'hores extra s'ha creat correctament"
+
+msgid ""
+"The overtime request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "La sol·licitud d'hores extra s'ha creat o modificat correctament, però no tens responsable assignat."
+
+msgid "Edit overtime request #"
+msgstr "Editar sol·licitud d'hores extra #"
+
+msgid "Edit a overtime request"
+msgstr "Editar una sol·licitud d'hores extra"
+
+msgid "Update overtime"
+msgstr "Modificar hores extra"
+
+msgid "You cannot edit an overtime request already submitted"
+msgstr "No es pot editar una sol·licitud d'hores extra ja enviada"
+
+msgid "The overtime request has been succesfully updated"
+msgstr "La sol·licitud d'hores extra s'ha modificat correctament"
+
+msgid "The overtime request has been succesfully deleted"
+msgstr "La sol·licitud d'hores extra s'ha esborrat correctament"
+
+msgid "You can't delete this overtime request"
+msgstr "No es pot eliminar aquesta petició d'hores extra"
+
+msgid "View overtime request #"
+msgstr "Veure la sol·licitud d'hores extra #"
+
+msgid "View overtime request"
+msgstr "Veure la petició d'hores extra"
+
+msgid "Back to list"
+msgstr "Tornar a la llista"
+
+msgid "List of overtime worked"
+msgstr "Llistat d'hores extra treballades"
+
+msgid "Leave Management System"
+msgstr "Sistema de Gestió d'Absències"
+
+msgid "Link to documentation"
+msgstr "Enllaç a la documentació"
+
+msgid "Operation (%s) is not granted"
+msgstr "Operació (%s) no acceptada"
+
+msgid "Please wait"
+msgstr "Si us plau espera"
+
+msgid ""
+"Internet Explorer 8 and older browser are not supported. Please upgrade to "
+"IE9 or use Firefox, Chrome, etc."
+msgstr "Internet Explorer 8 o anteriors no estan suportats. Si us plau actualitza a IE9 o utilitza Firefox, Chrome, etc."
+
+msgid ""
+"Object not found. Maybe that you are trying to access to an object that was "
+"deleted."
+msgstr "Objecte no trobat. Potser estàs intentant accedir a un objecte que s'ha esborrat."
+
+msgid "m/d/Y"
+msgstr "d/m/Y"
+
+msgid "mm/dd/yy"
+msgstr "dd/mm/yy"
+
+msgid "MM/DD/YYYY"
+msgstr "DD/MM/YYYY"
+
+msgid "TRUE"
+msgstr "Verdader"
+
+msgid "FALSE"
+msgstr "Fals"
+
+msgid "Go top"
+msgstr "A dalt"
+
+msgid "&copy; 2014 Jorani Authors"
+msgstr "&copy; 2014 els Autors de Jorani"
+
+msgid "Requested"
+msgstr "Sol·licitat"
+
+msgid "Planned"
+msgstr "Planificat"
+
+msgid "Accepted"
+msgstr "Acceptat"
+
+msgid "Rejected"
+msgstr "Refusat"
+
+msgid "Cancellation"
+msgstr "Cancel·lació"
+
+msgid "Canceled"
+msgstr "Cancel·lat"
+
+msgid "today"
+msgstr "avui"
+
+msgid "identifier"
+msgstr "usuari"
+
+msgid "firstname"
+msgstr "nom"
+
+msgid "lastname"
+msgstr "cognom"
+
+msgid "date hired"
+msgstr "data d'alta"
+
+msgid "department"
+msgstr "departament"
+
+msgid "position"
+msgstr "càrrec"
+
+msgid "contract"
+msgstr "contracte"
+
+msgid "day off"
+msgstr "dia lliure"
+
+msgid "leave"
+msgstr "absència"
+
+msgid "All"
+msgstr "Tots"
+
+msgid "copied"
+msgstr "copiat"
+
+msgid "Do You Authorize %s application?"
+msgstr "Vols autoritzar l'aplicació %s?"
+
+msgid "Your session has expired please login again"
+msgstr "La teva sessió ha expirat, si us plau torna a identificar-te"
+
+msgid "Unexpected Ajax Error"
+msgstr "S'ha produït una errada"
+
+msgid "List of employees"
+msgstr "Llistat d'empleats"
+
+msgid "edit user"
+msgstr "modificar l'empleat"
+
+msgid "Leaves"
+msgstr "Absències"
+
+msgid "OT Worked"
+msgstr "Hores Extra treballades"
+
+msgid "Leave Balance"
+msgstr "Balanç d'absències"
+
+msgid "Create Leave Request"
+msgstr "Crear una sol·licitud d'absència"
+
+msgid "Presence report"
+msgstr "Informe d'assistència"
+
+msgid "Delegations"
+msgstr "Delegacions"
+
+msgid "Firstname"
+msgstr "Nom"
+
+msgid "Lastname"
+msgstr "Cognom"
+
+msgid "E-mail"
+msgstr "Correu electrònic"
+
+msgid "Manager"
+msgstr "Gestor"
+
+msgid "Identifier"
+msgstr "Usuari"
+
+msgid "Date hired"
+msgstr "Data d'alta"
+
+msgid "Position"
+msgstr "Càrrec"
+
+msgid "Create"
+msgstr "Crear"
+
+msgid "Right-click / taphold on an employee for contextual actions."
+msgstr "Clic amb el botó dret per menú contextual."
+
+msgid "Active"
+msgstr "Actiu"
+
+msgid "Inactive"
+msgstr "Inactiu"
+
+msgid "Selection"
+msgstr "Selecció"
+
+msgid "Select all"
+msgstr "Seleccionar tots"
+
+msgid "Deselect all"
+msgstr "Deseleccionar tots"
+
+msgid "Select Manager"
+msgstr "Seleccionar Responsable"
+
+msgid "Select Contract"
+msgstr "Seleccionar Contracte"
+
+msgid "Select Entity"
+msgstr "Seleccionar Departament"
+
+msgid "Submit a leave request"
+msgstr "Enviar una sol·licitud d'absència"
+
+msgid "Select the manager"
+msgstr "Selecciona el responsable"
+
+msgid "You must select at least one employee into the table"
+msgstr "Has de triar un empleat com a mínim de la taula"
+
+msgid "List of requested leaves"
+msgstr "Llistat de peticions d'absència"
+
+msgid "List of leaves for employee #"
+msgstr "Llistat de permisos per l'empleat #"
+
+msgid "accept"
+msgstr "aceptar"
+
+msgid "reject"
+msgstr "rebutjar"
+
+msgid "show history"
+msgstr "mostra historial"
+
+msgid "Delete leave request"
+msgstr "Esborrar sol·licitud d'absència"
+
+msgid ""
+"You are about to delete one leave request, this procedure is irreversible."
+msgstr "Estàs a punt d'esborrar una petició d'absència, aquesta acció no es pot desfer."
+
+msgid "List of deleted leave requests"
+msgstr "Llistat de peticions esborrades"
+
+msgid "You are exceeding your entitled days"
+msgstr "Estàs excedint el teu número de dies permesos"
+
+msgid "You have requested another leave request within the same dates."
+msgstr "Ja has sol·licitat una petició d'absència en les mateixes dates."
+
+msgid "Cause (optional)"
+msgstr "Motiu (opcional)"
+
+msgid "Request leave"
+msgstr "Sol·licitud d'absència"
+
+msgid "The leave request has been succesfully created"
+msgstr "La sol·licitud d'absència s'ha creat correctament"
+
+msgid ""
+"The leave request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "La sol·licitud d'absència s'ha creat o modificat correctament, però no teniu un supervisor."
+
+msgid "%s non-working days in the period"
+msgstr "%s dies no laborables dins del període"
+
+msgid "Your leave request matches with a non-working day."
+msgstr "La teva petició d'absència coincideix amb un dia no laborable."
+
+msgid ""
+"It appears that you have no contract. Please contact your HR Officer / "
+"Manager."
+msgstr "Sembla que no tens contracte assignat. Si us pau contacta amb Recursos Humans."
+
+msgid ""
+"You can't create a leave request for two yearly leave periods. Please create"
+" two different leave requests."
+msgstr "No podeu crear una petició d'absència que comprèn més d'un any. Si us plau crea dos peticions diferents."
+
+msgid "List of overtime requests"
+msgstr "Llistat de peticions d'hores extra"
+
+msgid "List of overtime requests for employee #"
+msgstr "Llistat de sol·licituds d'hores extra per als empleats #"
+
+msgid "Leave balance for user #"
+msgstr "Balanç d'absències per a l'usuari #"
+
+msgid "Available"
+msgstr "Disponible"
+
+msgid "Taken"
+msgstr "Agafat"
+
+msgid "Entitled"
+msgstr "Assignat"
+
+msgid "This employee has no contract."
+msgstr "Aquest empleat no té contracte."
+
+msgid "Date of report"
+msgstr "Data de l'informe"
+
+msgid ""
+"By default this report shows the values for the last month. Please note that"
+" the list of leaves shows only the accepted leave requests."
+msgstr "Per defecte aquest informe mostra els valors per al darrer mes. Tingui en compte que el llistat d'absències tan sols mostra les sol·licituds acceptades."
+
+msgid "Execute"
+msgstr "Executar"
+
+msgid "Number of days"
+msgstr "Número de dies"
+
+msgid "Number of working days"
+msgstr "Número de dies laborables"
+
+msgid "Number of non-working days"
+msgstr "Número de dies no laborables"
+
+msgid "Duration of leaves"
+msgstr "Duració de l'absència"
+
+msgid "Duration of presence"
+msgstr "Duració de l'assistència"
+
+msgid "Overlapping detected"
+msgstr "Coincidència detectada"
+
+msgid "The employee has no contract"
+msgstr "L'empleat no té contracte assignat"
+
+msgid "Please check"
+msgstr "Si us plau, revisa-ho"
+
+msgid "List of leaves in the month"
+msgstr "Llistat de permisos durant aquest mes"
+
+msgid "My summary"
+msgstr "El meu resum"
+
+msgid "Overtime details (added to compensate leaves)"
+msgstr "Detall de les horas extra (afegit per compensar les absències)"
+
+msgid "Catch up for"
+msgstr "Posi's al día de"
+
+msgid ""
+"No entitled or taken days for this period. Please contact your HR Officer / "
+"Manager."
+msgstr "No hi ha dies autoritzats o agafats per aquest període. Si us plau, posi's en contacte amb l'administrador."
+
+msgid "My leave requests"
+msgstr "Les meves peticions d'absència"
+
+msgid "cancel"
+msgstr "cancel·lar"
+
+msgid "Last change"
+msgstr "Darrer canvi"
+
+msgid "Changed Date"
+msgstr "Data de modificació"
+
+msgid "Change Type"
+msgstr "Tipus de canvi"
+
+msgid "Changed By"
+msgstr "Modificat per"
+
+msgid "The leave request has been successfully created"
+msgstr "La sol·licitud d'absència s'ha creat correctament"
+
+msgid ""
+"The leave request has been successfully created or updated, but you don't "
+"have a manager."
+msgstr "La sol·licitud d'absència s'ha creat o modificat correctament, però no teniu un supervisor."
+
+msgid "Edit a leave request"
+msgstr "Editar una sol·licitud d'absència"
+
+msgid "Edit leave request #"
+msgstr "Editar sol·licituds d'absència #"
+
+msgid "Update leave"
+msgstr "Modificar sol·licitud"
+
+msgid "You cannot edit a leave request already submitted"
+msgstr "No es pot editar una petició ja enviada"
+
+msgid "The leave request has been successfully updated"
+msgstr "La sol·licitud d'absència s'ha creat correctament"
+
+msgid "You can't cancel this leave request"
+msgstr "No es pot eliminar aquesta petició"
+
+msgid "The cancellation request has been successfully sent"
+msgstr "La petició de cancel·lació s'ha enviat correctament"
+
+msgid "The leave request has been successfully cancelled"
+msgstr "La petició d'absència s'ha cancel·lat correctament"
+
+msgid "An error occured while trying to accept the cancellation"
+msgstr "Ha ocorregut una errada a l'acceptar la cancel·lació"
+
+msgid "The leave request has now its original status of Accepted"
+msgstr "La petició d'absència té ara l'estat original de Acceptat"
+
+msgid "An error occured while trying to reject the cancellation"
+msgstr "Ha ocorregut una errada mentre es rebutjava la cancel·lació"
+
+msgid "You can't delete this leave request"
+msgstr "No es pot eliminar aquesta petició d'absència"
+
+msgid "The leave request has been successfully deleted"
+msgstr "La petició d'absència s'ha esborrat correctament"
+
+msgid "View leave request #"
+msgstr "Veure sol·licitud d'absència #"
+
+msgid "View a leave request"
+msgstr "Veure una sol·licitud d'absència"
+
+msgid "List of leaves"
+msgstr "Llistat de sol·licituds"
+
+msgid "Morning/Afternoon"
+msgstr "Matí/Tarda"
+
+msgid "Send a reminder"
+msgstr "Envia un recordatori"
+
+msgid "The reminder email was sent to the manager"
+msgstr "El correu electrònic de recordatori s'ha enviat al responsable"
+
+msgid "Comments"
+msgstr "Comentaris"
+
+msgid "New comment"
+msgstr "Nou comentari"
+
+msgid "Send comment"
+msgstr "Envia un comentari"
+
+msgid " says"
+msgstr " diu"
+
+msgid "The status of the leave have been changed to "
+msgstr "L'estat de la petició s'ha canviat a "
+
+msgid "Leave types"
+msgstr "Tipus d'absència"
+
+msgid ""
+"Leave type #0 is a system type reserved for overtime management. You should "
+"not use it for other requests."
+msgstr "El tipus d'absència #0 està reservat per a la gestió de les hores extra. No s'hauria d'utilitzar per altres peticions."
+
+msgid ""
+"Leave type #0 is a system type reserved for overtime management. Are you "
+"sure that you want to rename it?"
+msgstr "El tipus d'absència #0 està reservat per a la gestió de les hores extra. Estàs segur que vols renombrar-lo?"
+
+msgid "Acronym"
+msgstr "Acrònim"
+
+msgid "Deduct non working days"
+msgstr "Descompta els dies no laborables"
+
+msgid "Create a new type"
+msgstr "Crear un nou tipus"
+
+msgid "No leave type found into the database."
+msgstr "No existeix cap tipus d'absència a la base de dades."
+
+msgid "This leave type already exists."
+msgstr "Aquest tipus d'absència ja existeix."
+
+msgid "Add a leave type"
+msgstr "Afegeix un tipus de permís"
+
+msgid "Suggest an acronym"
+msgstr "Sugerir un acrònim"
+
+msgid "The leave type has been succesfully created."
+msgstr "El tipus d'absència s'ha creat."
+
+msgid "Edit a Leave type"
+msgstr "Editar un tipo de permiso"
+
+msgid "Update"
+msgstr "Modificar"
+
+msgid "The leave type has been succesfully updated."
+msgstr "El tipus d'absència s'ha actualitzat correctament."
+
+msgid "Delete Leave Type"
+msgstr "Esborrar el tipus d'absència"
+
+msgid ""
+"You are about to delete one leave type, this procedure is irreversible."
+msgstr "Estàs a punt d'esborrar un tipus d'absència, aquest procediment és irreversible."
+
+msgid "The leave type has been succesfully deleted."
+msgstr "El tipus d'absència s'ha esborrat."
+
+msgid "You cannot delete a system leave type."
+msgstr "No es pot esborrar un tipus d'absència del sistema."
+
+msgid "You cannot delete a leave type that is used."
+msgstr "No es pot eliminar un tipus d'absència que es troba en ús."
+
+msgid "Change password"
+msgstr "Modificar la contrasenya"
+
+msgid "Welcome"
+msgstr "Benvingut"
+
+msgid "Logout"
+msgstr "Tancar sessió"
+
+msgid "View my personal information"
+msgstr "Veure la meva informació personal"
+
+msgid "reset password"
+msgstr "restablir contrasenya"
+
+msgid "Admin"
+msgstr "Administració"
+
+msgid "List of users"
+msgstr "Llistat d'empleats"
+
+msgid "Create user"
+msgstr "Crear empleat"
+
+msgid "Settings"
+msgstr "Preferències"
+
+msgid "Diagnostic"
+msgstr "Diagnòstic"
+
+msgid "OAuth Clients"
+msgstr "OAuth Clients"
+
+msgid "HR"
+msgstr "RH"
+
+msgid "Employees"
+msgstr "Empleats"
+
+msgid "Organization"
+msgstr "Organització"
+
+msgid "List of positions"
+msgstr "Llistat de categories"
+
+msgid "List of types"
+msgstr "Llistat de tipus"
+
+msgid "Reports"
+msgstr "Informes"
+
+msgid "Leave balance"
+msgstr "Balanç de peticions"
+
+msgid "Leave requests"
+msgstr "Peticions d'absència"
+
+msgid "Approval"
+msgstr "Aprovació"
+
+msgid "My subordinates"
+msgstr "Els meus subordinats"
+
+msgid "Requests"
+msgstr "Peticions"
+
+msgid "List of OT Worked"
+msgstr "Llistat d'hores extra treballades"
+
+msgid "Submit an OT Request"
+msgstr "Enviar una petició d'hores extra"
+
+msgid "Counters"
+msgstr "Comptadors"
+
+msgid "List of leave requests"
+msgstr "Llistat de peticions d'absència"
+
+msgid "Request a leave"
+msgstr "Sol·licitar una absència"
+
+msgid "Calendars"
+msgstr "Calendari"
+
+msgid "My workmates"
+msgstr "Els meus companys de feina"
+
+msgid "Department"
+msgstr "Departament"
+
+msgid "Global"
+msgstr "Global"
+
+msgid "Tabular"
+msgstr "En columnes"
+
+msgid "Search for an entity"
+msgstr "Cercar un departament"
+
+msgid "Search"
+msgstr "Cercar"
+
+msgid "Employees attached to entity"
+msgstr "Empleats associats al departament"
+
+msgid "Attach an Employee"
+msgstr "Associar un empleat"
+
+msgid "Detach an Employee"
+msgstr "Llevar un empleat"
+
+msgid "Supervisor"
+msgstr "Supervisor"
+
+msgid ""
+"If you select a supervisor, he will receive a copy of accepted and rejected "
+"leave requests submitted by employees of this entity."
+msgstr "Si selecciona un supervisor, ell rebrà una còpia de les peticions acceptades u refusades enviats pels empleats d'aquest departament."
+
+msgid "Select a Supervisor"
+msgstr "Selecciona un supervisor"
+
+msgid "Delete Entity"
+msgstr "Esborrar departament"
+
+msgid "You are about to delete one entity, this procedure is irreversible."
+msgstr "Estàs a punt d'esborrar un departament, aquesta acció no es pot desfer."
+
+msgid "Add an Employee"
+msgstr "Afegir un empleat"
+
+msgid "An error occured"
+msgstr "S'ha produït una errada"
+
+msgid "Name of the entity"
+msgstr "Nom del departament"
+
+msgid "Please select one entity in the organization (treeview on the right)."
+msgstr "Si us plau selecciona un departament de l'organització (Vista en arbre de la dreta)."
+
+msgid ""
+"Please select one employee in the table of users belonging to the selected "
+"entity."
+msgstr "Si us plau selecciona un emplear de la taula d'usuaris que pertanyen al departament seleccionat."
+
+msgid "You cannot delete the root entity."
+msgstr "No pots esborrar el departament arrel."
+
+msgid "Select a list of employees"
+msgstr "Selecciona una llista d'empleats"
+
+msgid "Rename a list"
+msgstr "Reanomena una llista"
+
+msgid "Add a new list"
+msgstr "Afegeix una nova llista"
+
+msgid "Delete a list"
+msgstr "Esborra una llista"
+
+msgid "Add employees"
+msgstr "Afegeix empleats"
+
+msgid "Remove selected employees"
+msgstr "Eliminar els empleats seleccionats"
+
+msgid "Name of the list"
+msgstr "Nom de la llista"
+
+msgid "Are you sure that you want to delete this list?"
+msgstr "Estàs segur que vols esborrar aquesta llista?"
+
+msgid "New name of the list"
+msgstr "Nou nom per a la llista"
+
+msgid "Overtime Requests submitted to me"
+msgstr "Peticions d'Hores Extra enviades a mi"
+
+msgid ""
+"This screen lists the overtime requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "Aquesta pantalla mostra les peticions d'hores extra enviades a tu. Si no ets un supervisor, aquesta llista sempre estarà buida."
+
+msgid "Fullname"
+msgstr "Nom complert"
+
+msgid "All requests"
+msgstr "Totes les sol·licituds"
+
+msgid "Pending requests "
+msgstr "Sol·licituds pendents "
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this "
+"overtime request."
+msgstr "Vostè no és el supervisor directe d'aquest empleat. No pot refusar aquesta petició d'hores extra."
+
+msgid "The overtime request has been successfully rejected."
+msgstr "La sol·licitud d'hores extra ha sigut refusada correctament."
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this "
+"overtime request."
+msgstr "Vostè no és el supervisor d'aquest empleat. No pot acceptar aquesta sol·licitud d'hores extra."
+
+msgid "The overtime request has been successfully accepted."
+msgstr "La sol·licitud d'hores extra s'ha acceptat correctament."
+
+msgid "Create position"
+msgstr "Crear càrrec"
+
+msgid "Delete Position"
+msgstr "Esborrar càrrec"
+
+msgid "You are about to delete one position, this procedure is irreversible."
+msgstr "Estàs a punt d'esborrar un càrrec, aquesta acció no es pot desfer."
+
+msgid "Create a new position"
+msgstr "Crear un nou càrrec"
+
+msgid "The position has been succesfully created."
+msgstr "El càrrec s'ha creat correctament."
+
+msgid "Edit position #"
+msgstr "Modificar càrrec #"
+
+msgid "Update position"
+msgstr "Modificar càrrec"
+
+msgid "The position has been succesfully updated."
+msgstr "El càrrec s'ha actualitzat correctament."
+
+msgid "The position has been succesfully deleted."
+msgstr "El càrrec s'ha esborrat correctament."
+
+msgid "List of reports"
+msgstr "Llista d'informes"
+
+msgid "Report"
+msgstr "Informe"
+
+msgid "Back to list of reports"
+msgstr "Tornar a la llista d'informes"
+
+msgid "List of Report"
+msgstr "Llista d'Informe"
+
+msgid "Balance of leaves"
+msgstr "Balanç d'absències"
+
+msgid "Launch"
+msgstr "Iniciar"
+
+msgid "Leave Requests submitted to me"
+msgstr "Peticions d'absència enviades a mi"
+
+msgid ""
+"This screen lists the leave requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "Aquesta pantalla llista les peticions d'absència enviades a vostè. Si no ets un responsable, aquesta llista sempre estarà buida."
+
+msgid "List of my subordinates"
+msgstr "Llista dels meus subordinats"
+
+msgid ""
+"This screen lists your direct report subordinates. If you are not a manager,"
+" this list will always be empty."
+msgstr "Aquesta pantalla llista els teus subordinats directes. Si no ets un responsable, aquesta llista estarà sempre buida."
+
+msgid "Create a leave request in behalf of this subordinate"
+msgstr "Crear una petició d'absència en representació d'aquest subordinat"
+
+msgid "Your are not the manager of this employee."
+msgstr "Tu no ets el responsable d'aquest empleat."
+
+msgid "List of subordinates"
+msgstr "Llista de subordinats"
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this leave "
+"request."
+msgstr "Vostè no és el responsable directe d'aquest empleat. No pot acceptar aquesta petició d'absència."
+
+msgid "The leave request has been successfully accepted."
+msgstr "La sol·licitud d'absència s'ha acceptat correctament."
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this leave "
+"request."
+msgstr "Vostè no és el responsable directe d'aquest empleat. No pots refusar aquesta petició d'absència."
+
+msgid "The leave request has been successfully rejected."
+msgstr "La sol·licitud d'absència s'ha rebutjat correctament."
+
+msgid "List of delegations"
+msgstr "Llista de delegacions"
+
+msgid ""
+"This is the list of employees who can accept or reject a request in your "
+"behalf."
+msgstr "Aquesta és la llista d'empleats que poden acceptar o rebutjar una petició en representació teva."
+
+msgid "Revoke"
+msgstr "Revocar"
+
+msgid "Add a delegate"
+msgstr "Afegir un delegat"
+
+msgid "Are you sure that you want to revoke this delegation?"
+msgstr "Estàs segur que vols revocar aquesta delegació?"
+
+msgid "Leave balance (subordinates)"
+msgstr "Balança d'absències (subordinats)"
+
+msgid ""
+"Leave balance of my direct report subordinates. If you are not a manager, "
+"this list will always be empty."
+msgstr "Balanç d'absències dels meus subordinats directes. Si no ets un supervisor, aquesta llista sempre estarà buida."
+
+msgid "Send a new comment (optional)"
+msgstr "Envia un nou comentari (opcional)"
+
+msgid "Reject"
+msgstr "Rebutjar"
+
+msgid "Login"
+msgstr "Identificació"
+
+msgid "Language"
+msgstr "Idioma"
+
+msgid "Password"
+msgstr "Contrasenya"
+
+msgid "Send me my password"
+msgstr "Envia'm la meva contrasenya"
+
+msgid "Are you sure that you want to reset your password?"
+msgstr "Estàs segur que vols restablir la teva contrasenya?"
+
+msgid "Please fill the login field"
+msgstr "Si us plau, emplena el camp d'identificació"
+
+msgid "Unknown login. Please contact your HR Officer / Manager."
+msgstr "Identificació desconeguda. Si us plau, posi's en contacte amb Recursos Humans/ Administració."
+
+msgid "The password has been sent to your e-mail adress."
+msgstr "La contrasenya s'ha enviat al seu correu electrònic."
+
+msgid "Invalid login id or password"
+msgstr "Identificació o contrasenya incorrecta"
+
+msgid "The language has been succesfully set to "
+msgstr "L'idioma s'ha establert correctament a "
+
+msgid "Your account is disabled. Please contact your HR Officer / Manager."
+msgstr "El teu compte està desactivat. Si us plau contacta amb Recursos Humans/ Administració."
+
+msgid "Rename"
+msgstr "Reanomenar"
+
+msgid "Remove"
+msgstr "Suprimir"
+
+msgid "Cut"
+msgstr "Tallar"
+
+msgid "Paste"
+msgstr "Enganxar"
+
+msgid "edit user details"
+msgstr "editar informació de l'usuari"
+
+msgid "delete user"
+msgstr "suprimir usuari"
+
+msgid "Role"
+msgstr "Rol"
+
+msgid "Create a new user"
+msgstr "Crear un nou usuari"
+
+msgid "Import users"
+msgstr "Importar usuaris"
+
+msgid "Delete User"
+msgstr "Suprimir usuari"
+
+msgid "You are about to delete one user, this procedure is irreversible."
+msgstr "Estás a punt d'eliminar un usuari, aquesta acció no es pot desfer."
+
+msgid "Import Users"
+msgstr "Importar usuaris"
+
+msgid "Filename"
+msgstr "Nom de l'arxiu"
+
+msgid "My personal information"
+msgstr "La meva informació personal"
+
+msgid "Date hired/started"
+msgstr "Data d'alta/contracte"
+
+msgid "Internal/Company Identifier"
+msgstr "Identificador intern de l'empresa"
+
+msgid "Edit user #"
+msgstr "Modificar empleat #"
+
+msgid "Edit user"
+msgstr "Modificar empleat"
+
+msgid "No line manager."
+msgstr "Sense responsable."
+
+msgid "If a user has no manager (itself), it can validate its leave requests."
+msgstr "Si un empleat no té responsable (és ell mateix), pot validar les seves peticions."
+
+msgid "Self"
+msgstr "Ell mateix"
+
+msgid "Timezone"
+msgstr "Zona horària"
+
+msgid "LDAP Path"
+msgstr "Ruta LDAP"
+
+msgid "Select a position"
+msgstr "Selecciona un càrrec"
+
+msgid "Update user"
+msgstr "Modificar empleat"
+
+msgid "The user has been succesfully updated"
+msgstr "L'usuari s'ha modificat correctament"
+
+msgid "The user has been succesfully deleted"
+msgstr "L'usuari s'ha esborrat correctament"
+
+msgid "The password has been succesfully changed"
+msgstr "La contrasenya s'ha canviat correctament"
+
+msgid "Generate password"
+msgstr "Generar contrasenya"
+
+msgid ""
+"It is recommended to select a contract. Do you want to create the user "
+"without a contract?"
+msgstr "És recomanable seleccionar un contracte. Vols crear un empleat sense contracte?"
+
+msgid "The user has been succesfully created"
+msgstr "L'empleat s'ha creat correctament"
+
+msgid "Username already exists."
+msgstr "L'empleat ja existeix."
+
+msgid "This username is not available."
+msgstr "Aquest nom d'usuari no està disponible."
+
+msgid "Reset"
+msgstr "Restablir"

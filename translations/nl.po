@@ -1,0 +1,1700 @@
+# 
+# Translators:
+# Roger Wolfs <r.wolfs@erasmusmc.nl>, 2015-2017
+msgid ""
+msgstr ""
+"Project-Id-Version: jorani\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-09-23 20:59+0000\n"
+"Last-Translator: Roger Wolfs <r.wolfs@erasmusmc.nl>\n"
+"Language-Team: Dutch (http://www.transifex.com/jorani/jorani/language/nl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Data & Config Diagnostic"
+msgstr "Data & Configuratie Diagnose"
+
+msgid "Detection of configuration and data problems"
+msgstr "Opsporen van configuratie en data problemen"
+
+msgid "No error"
+msgstr "Geen fouten"
+
+msgid "Leave Requests"
+msgstr "Afwezigheid verzoek(en)"
+
+msgid "Accepted but duplicated Leave Requests"
+msgstr "Geaccepteerd maar duplicaat afwezigheidsverzoek"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Employee"
+msgstr "Werknemer"
+
+msgid "Start Date"
+msgstr "Begin datum"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Afternoon/Morning"
+msgstr "Middag/Ochtend"
+
+msgid "Leave Requests with a wrong start/end type."
+msgstr "Afwezigheid verzoek met foutief start/eind type."
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "End"
+msgstr "Einde"
+
+msgid "Entitled days"
+msgstr "Beschikbare dagen"
+
+msgid ""
+"List of contracts and employees having entitlements for more than one year."
+msgstr "Lijst van contracten en werknemers met aanspraken voor meer dan een jaar. "
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "End Date"
+msgstr "Eind datum"
+
+msgid "Contract"
+msgstr "Contract"
+
+msgid "Incomplete deletion into database."
+msgstr "Onvolledige verwijdering in de database."
+
+msgid "Non-working days"
+msgstr "Niet-werkdagen"
+
+msgid ""
+"Number of days (per contract) for which a non-working duration has been "
+"defined."
+msgstr "Aantal dagen (per contract) die als niet-werkdagen zijn gedefinieerd."
+
+msgid "Last year"
+msgstr "Afgelopen jaar"
+
+msgid "This year"
+msgstr "Dit jaar"
+
+msgid "Next year"
+msgstr "Volgend jaar"
+
+msgid "Overtime"
+msgstr "Overuren"
+
+msgid "Overtime requests with a negative duration"
+msgstr "Overwerk aanvragen met een negatieve duur"
+
+msgid "Duration"
+msgstr "Duur"
+
+msgid "Contracts"
+msgstr "Contracten"
+
+msgid "Unused contracts (check if the contract is not duplicated)."
+msgstr "Ongebruikte contracten (controleer of dit geen duplicaat is)."
+
+msgid "Balance"
+msgstr "Balans"
+
+msgid "Leave requests for which there are no entitlments."
+msgstr "Afwezigheid verzoeken waarvoor er geen rechten zijn."
+
+msgid "OAuth clients and sessions"
+msgstr "OAuth clienten en sessies"
+
+msgid "Clients"
+msgstr "Clienten"
+
+msgid "List of clients allowed to use the REST API"
+msgstr "Lijst met clienten die gebruik mag maken van de REST API"
+
+msgid "edit client"
+msgstr "wijzig client"
+
+msgid "delete client"
+msgstr "verwijder client"
+
+msgid "Add"
+msgstr "Toevoegen"
+
+msgid "Add OAuth Client"
+msgstr "Voeg OAuth client toe"
+
+msgid "Associate to an actual user"
+msgstr "Associëren met een werkelijke gebruiker"
+
+msgid "This client_id already exists"
+msgstr "Deze client_id bestaat al"
+
+msgid "Are you sure that you want to proceed?"
+msgstr "Weet u zeker dat u wilt doorgaan?"
+
+msgid "Sessions"
+msgstr "Sessies"
+
+msgid "List of active REST API OAuth Sessions"
+msgstr "Lijst met actieve REST API OAuth sessies"
+
+msgid "Purge"
+msgstr "Opschonen"
+
+msgid "Yearly calendar"
+msgstr "jaarkalender"
+
+msgid "Export"
+msgstr "Exporteren"
+
+msgid "My calendar"
+msgstr "Mijn agenda"
+
+msgid "Calendar of my leaves."
+msgstr "Agenda van mijn afwezigheid"
+
+msgid "Download an iCal file"
+msgstr "Download een iCal bestand"
+
+msgid "(import the event into Outlook, Thunderbird, etc.)"
+msgstr "(importeer de gebeurtenis naar  Outlook, Thunderbird, etc.)"
+
+msgid "Event details"
+msgstr "Afspraak details"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "Days off"
+msgstr "Vrije dagen"
+
+msgid "Calendar of my workmates"
+msgstr "Agenda van mijn collega's"
+
+msgid "Leaves of employees having the same line manager"
+msgstr "Afwezigheid van de werknemers met dezelfde manager"
+
+msgid "Calendar of my subordinates"
+msgstr "Agenda van mijn medewerkers"
+
+msgid ""
+"Leaves of my direct report subordinates (will be empty if I'm not a "
+"manager)."
+msgstr "Afwezigheden van mijn medewerkers (zal leeg zijn als u geen manager bent)."
+
+msgid "Calendar of my department"
+msgstr "Agenda van mijn afdeling"
+
+msgid "Calendar of employees working in my department"
+msgstr "Agenda van medewerkers van mijn afdeling"
+
+msgid ""
+"It appears that you don't belong to any department. Please contact your HR "
+"Officer / Manager."
+msgstr "Het lijkt erop dat u niet behoort tot een afdeling. Neem contact op met uw HR Officer / Manager."
+
+msgid "Calendar of the organization"
+msgstr "Agenda van uw organisatie"
+
+msgid "Global calendar with a filter on entity"
+msgstr "Algemene agenda met filter mogelijkheid per entiteit"
+
+msgid "Select the entity"
+msgstr "Selecteer entiteit"
+
+msgid "Select"
+msgstr "Selecteer"
+
+msgid "Include sub-departments"
+msgstr "Includeer onderliggende groepen"
+
+msgid "Select an entity"
+msgstr "Selecteer een entiteit"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Tabular Calendar"
+msgstr "Agenda in tabelvorm"
+
+msgid "Month"
+msgstr "Maand"
+
+msgid "Year"
+msgstr "Jaar"
+
+msgid "Previous"
+msgstr "Vorige"
+
+msgid "Next"
+msgstr "Volgende"
+
+msgid "Select a list"
+msgstr "Selecteer een lijst"
+
+msgid "Display leave types"
+msgstr "Toon verlof types"
+
+msgid "Calendar Tabular"
+msgstr "Agenda in tabelvorm"
+
+msgid "Entity"
+msgstr "Entiteit"
+
+msgid "Sub-entities"
+msgstr "Subgroepen"
+
+msgid "Mo"
+msgstr "Ma"
+
+msgid "Tu"
+msgstr "Di"
+
+msgid "We"
+msgstr "Wo"
+
+msgid "Th"
+msgstr "Do"
+
+msgid "Fr"
+msgstr "Vr"
+
+msgid "Sa"
+msgstr "Za"
+
+msgid "Su"
+msgstr "Zo"
+
+msgid "Monday"
+msgstr "Maandag"
+
+msgid "Tuesday"
+msgstr "Dinsdag"
+
+msgid "Wednesday"
+msgstr "Woensdag"
+
+msgid "Thursday"
+msgstr "Donderdag"
+
+msgid "Friday"
+msgstr "Vrijdag"
+
+msgid "Saturday"
+msgstr "Zaterdag"
+
+msgid "Sunday"
+msgstr "Zondag"
+
+msgid "All days"
+msgstr "Alle dagen"
+
+msgid "January"
+msgstr "Januari"
+
+msgid "February"
+msgstr "Februari"
+
+msgid "March"
+msgstr "Maart"
+
+msgid "April"
+msgstr "April"
+
+msgid "May"
+msgstr "Mei"
+
+msgid "June"
+msgstr "Juni"
+
+msgid "July"
+msgstr "Juli"
+
+msgid "August"
+msgstr "Augustus"
+
+msgid "September"
+msgstr "September"
+
+msgid "October"
+msgstr "Oktober"
+
+msgid "November"
+msgstr "November"
+
+msgid "December"
+msgstr "December"
+
+msgid "List of contracts"
+msgstr "Lijst contracten"
+
+msgid "Start period"
+msgstr "Start datum"
+
+msgid "End period"
+msgstr "Eind datum"
+
+msgid "delete contract"
+msgstr "Verwijder contract"
+
+msgid "edit contract"
+msgstr "Bewerk contract"
+
+msgid "entitled days"
+msgstr "Beschikbare dagen"
+
+msgid "days off and weekends"
+msgstr "vrije dagen en weekenden"
+
+msgid "Exclude leave types"
+msgstr "Excludeer verlof type(s)"
+
+msgid "Export this list"
+msgstr "Exporteer dit overzicht"
+
+msgid "Create contract"
+msgstr "Maak contract aan"
+
+msgid "Delete Contract"
+msgstr "Verwijder contract"
+
+msgid "You are about to delete one contract, this procedure is irreversible."
+msgstr "U staat op het punt een contact te verwijderen; dit kan niet ongedaan gemaakt worden."
+
+msgid "Do you want to proceed?"
+msgstr "Wilt u verder gaan?"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nee"
+
+msgid "Exclude leave types from a contract"
+msgstr "Excludeer verlof type(s) van een contract"
+
+msgid ""
+"You cannot exclude leave types already in use (used at least one time by en "
+"employee attached to the contract) and the default leave type (set on the "
+"contract or into the configuration file)."
+msgstr "U kunt geen verloftypen uitsluiten die al in gebruik zijn (tenminste één keer gebruikt door een medewerker verbonden aan een contract) en het standaardverloftype (als gedefinieerd in het contract of in het configuratiebestand)."
+
+msgid "Included leave types"
+msgstr "Geincludeerde verlof types"
+
+msgid "Excluded leave types"
+msgstr "Geexcludeerde verlof types"
+
+msgid "Include this leave type"
+msgstr "Includeer dit verlof type"
+
+msgid "Exclude this leave type"
+msgstr "Excludeer dit verlof type"
+
+msgid "This leave type is already in use"
+msgstr "Dit verlof type is al in gebruik"
+
+msgid "You cannot exclude the default leave type"
+msgstr "U kunt het standaard verlof type niet excluderen"
+
+msgid "Edit a contract"
+msgstr "Bewerk een contract"
+
+msgid "Edit contract #"
+msgstr "Bewerk contract #"
+
+msgid "Month / Start"
+msgstr "Maand / Start"
+
+msgid "Day / Start"
+msgstr "Dag / Start"
+
+msgid "Month / End"
+msgstr "Maand / Einde"
+
+msgid "Day / End"
+msgstr "Dag / Einde"
+
+msgid "Default leave type"
+msgstr "Standaard verlof type"
+
+msgid "Update contract"
+msgstr "Update contract"
+
+msgid "The contract has been succesfully updated"
+msgstr "Het contract is succesvol bijgewerkt"
+
+msgid "Create a new contract"
+msgstr "Maak een nieuw contract aan"
+
+msgid "The contract has been succesfully created"
+msgstr "Het contract is succesvol aangemaakt"
+
+msgid "The contract has been succesfully deleted"
+msgstr "Het contract is succesvol verwijderd"
+
+msgid "Calendar of non working days"
+msgstr "Agenda van niet werkende dagen"
+
+msgid ""
+"Days off and weekends are not configured by default. Click on a day to edit "
+"it individually or use the button \"Series\"."
+msgstr "Vrije dagen en weekenden zijn standaard niet geconfigureerd. Klik op een dag om deze individueel te bewerken of gebruik de knop \"Serie\"."
+
+msgid "Legend:"
+msgstr "Legenda:"
+
+msgid "All day"
+msgstr "Hele dag"
+
+msgid "Morning"
+msgstr "Ochtend"
+
+msgid "Afternoon"
+msgstr "Middag"
+
+msgid "Back to contracts"
+msgstr "Terug naar contracten"
+
+msgid "Series of non-working days"
+msgstr "Serie van niet-werkende dagen"
+
+msgid "Edit day off"
+msgstr "Bewerk vrije dag"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Working day"
+msgstr "Werkdag"
+
+msgid "All day is off"
+msgstr "Hele dag vrij"
+
+msgid "Morning is off"
+msgstr "Ochtend vrij"
+
+msgid "Afternoon is off"
+msgstr "Middag vrij"
+
+msgid "Delete"
+msgstr "Verwijder"
+
+msgid "Import iCal"
+msgstr "Importeer iCal"
+
+msgid "URL of non-working days iCal file"
+msgstr "URL van vrije dagen - iCal bestand"
+
+msgid "Edit a series of days off"
+msgstr "Bewerk een reeks vrije dagen"
+
+msgid "Mark every"
+msgstr "Markeer alles"
+
+msgid "From"
+msgstr "Van"
+
+msgid "Current"
+msgstr "Vandaag"
+
+msgid "To"
+msgstr "Aan"
+
+msgid "As a"
+msgstr "Als een"
+
+msgid "Copy"
+msgstr "Kopieren"
+
+msgid "You must select a contract."
+msgstr "Het is verplicht een contract te selecteren"
+
+msgid "Data has been copied successfully."
+msgstr "Gegevens zijn succesvol gekopieerd."
+
+msgid "No data available in table"
+msgstr "Geen gegevens beschikbaar in de tabel"
+
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "Toon _START_ to _END_ of _TOTAL_ rijen"
+
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "Toon 0 tot 0 van 0 rijen"
+
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(gefilterd van _MAX_total rijen)"
+
+msgid ","
+msgstr ","
+
+msgid "Show _MENU_ entries"
+msgstr "Toon _MENU_ rijen"
+
+msgid "Loading..."
+msgstr "Laden..."
+
+msgid "Processing..."
+msgstr "Verwerken..."
+
+msgid "Search:"
+msgstr "Zoeken:"
+
+msgid "No matching records found"
+msgstr "Geen overeenkomende records gevonden"
+
+msgid "First"
+msgstr "Eerste"
+
+msgid "Last"
+msgstr "Laatste"
+
+msgid ": activate to sort column ascending"
+msgstr ": oplopend sorteren"
+
+msgid ": activate to sort column descending"
+msgstr ": aflopend sorteren"
+
+msgid "Page length"
+msgstr "Pagina lengte"
+
+msgid "10 rows"
+msgstr "10 rijen"
+
+msgid "25 rows"
+msgstr "25 rijen"
+
+msgid "50 rows"
+msgstr "50 rijen"
+
+msgid "Show all"
+msgstr "Toon alles"
+
+msgid "Change columns"
+msgstr "Pas kolommen aan"
+
+msgid "Your password has been reset"
+msgstr "Uw password is gereset"
+
+msgid "Your account has been created"
+msgstr "Uw account is aangemaakt"
+
+msgid "Leave Request from"
+msgstr "Afwezigheidsverzoek van"
+
+msgid "Leave Request"
+msgstr "Afwezigheidsverzoek"
+
+msgid "Leave Request Cancellation from"
+msgstr "Annulering afwezigheidsaanvraag van"
+
+msgid "Leave Request Cancellation"
+msgstr "Annulering afwezigheidsaanvraag"
+
+msgid "Your Cancellation Request has been accepted"
+msgstr "Uw annuleringsverzoek is geaccepteerd"
+
+msgid "Your Cancellation Request has been rejected"
+msgstr "Uw annuleringsverzoek is NIET geaccepteerd"
+
+msgid "Your leave request has been accepted"
+msgstr "Uw afwezigheidsverzoek is goedgekeurd"
+
+msgid "Your leave request has been rejected"
+msgstr "Uw afwezigheidsverzoek is afgekeurd"
+
+msgid "Your overtime request has been accepted"
+msgstr "Uw overuren aanmelding is goedgekeurd"
+
+msgid "Your overtime request has been rejected"
+msgstr "Uw overuren aanmelding is afgekeurd"
+
+msgid "Overtime Request"
+msgstr "Overuren aanmelding"
+
+msgid "Overtime request from"
+msgstr "Overuren verzoek van"
+
+msgid "Entitled days for contract"
+msgstr "Beschikbare dagen voor contract"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Days"
+msgstr "Dagen"
+
+msgid "Leave type"
+msgstr "Soort afwezigheid"
+
+msgid "Description"
+msgstr "Omschrijving"
+
+msgid "Add entitled days"
+msgstr "Voeg beschikbare dagen toe"
+
+msgid "\"The field \" + fieldname + \" is mandatory.\""
+msgstr "\"Het veld\" + filename + \"is verplicht.\""
+
+msgid "Back to the list of contracts"
+msgstr "Terug naar overzicht contracten"
+
+msgid "Are you sure that you want to delete it?"
+msgstr "Weet u zeker dat u dit wil verwijderen?"
+
+msgid "Step"
+msgstr "Stap"
+
+msgid "Entitled days for employee"
+msgstr "Beschikbare dagen voor werknemer"
+
+msgid "Back to the list of employees"
+msgstr "Terug naar overzicht werknemers"
+
+msgid "Entitled days to Contract #"
+msgstr "Beschikbare dagen voor Contract #"
+
+msgid "Yearly leave period: "
+msgstr "Jaarlijkse vakantie periode:"
+
+msgid "Entitled days to Employee"
+msgstr "Beschikbare dagen voor werknemer:"
+
+msgid "My overtime requests"
+msgstr "Mijn overuren aanmeldingen"
+
+msgid "view"
+msgstr "bekijken"
+
+msgid "edit"
+msgstr "Bewerken"
+
+msgid "delete"
+msgstr "Verwijderen"
+
+msgid "Reason"
+msgstr "Reden"
+
+msgid "New request"
+msgstr "Nieuw verzoek"
+
+msgid "Delete overtime request"
+msgstr "Verwijder overuren aanmelding"
+
+msgid ""
+"You are about to delete one overtime request, this procedure is "
+"irreversible."
+msgstr "U staat op het punt een overuren aanmelding te verwijderen; dit kan niet ongedaan gemaakt worden."
+
+msgid "Submit an overtime request"
+msgstr "Dien een overuren verzoek in"
+
+msgid "In days or fraction of days (e.g. 0.125 for 1h if you work 8h/day)."
+msgstr "In dagen of delen van dagen (bijv 0.125 voor 1 uur als u 8 uren/dag werkt)."
+
+msgid "Request overtime"
+msgstr "Aanmelding overuren"
+
+msgid "The overtime request has been succesfully created"
+msgstr "De overuren aanmelding is succesvol aangemaakt"
+
+msgid ""
+"The overtime request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "De overuren aanmelding is succesvol aangemaakt of geüpdatet, maar u heeft geen manager."
+
+msgid "Edit overtime request #"
+msgstr "Bewerk overuren aanmelding #"
+
+msgid "Edit a overtime request"
+msgstr "Bewerk een overuren aanmelding"
+
+msgid "Update overtime"
+msgstr "Update overuren"
+
+msgid "You cannot edit an overtime request already submitted"
+msgstr "U kunt een overuren aanmelding die reeds ingediend is niet bijwerken"
+
+msgid "The overtime request has been succesfully updated"
+msgstr "De overuren aanmelding is succesvol bijgewerkt"
+
+msgid "The overtime request has been succesfully deleted"
+msgstr "De overuren aanmelding is succesvol verwijderd"
+
+msgid "You can't delete this overtime request"
+msgstr "U kunt deze overuren aanmelding niet verwijderen"
+
+msgid "View overtime request #"
+msgstr "Bekijk overuren aanmelding #"
+
+msgid "View overtime request"
+msgstr "Bekijk overuren aanmelding"
+
+msgid "Back to list"
+msgstr "Terug naar overzicht"
+
+msgid "List of overtime worked"
+msgstr "Lijst van gewerkte overuren"
+
+msgid "Leave Management System"
+msgstr "Afwezigheid Management Systeem"
+
+msgid "Link to documentation"
+msgstr "Link naar documentatie"
+
+msgid "Operation (%s) is not granted"
+msgstr "Deze handeling (%s) is niet toegestaan"
+
+msgid "Please wait"
+msgstr "Een ogenblik geduld aub"
+
+msgid ""
+"Internet Explorer 8 and older browser are not supported. Please upgrade to "
+"IE9 or use Firefox, Chrome, etc."
+msgstr "Internet Explorer 8 en ouder browser worden niet ondersteund. Gelieve te upgraden naar IE9 of gebruik Firefox, Chrome, etc."
+
+msgid ""
+"Object not found. Maybe that you are trying to access to an object that was "
+"deleted."
+msgstr "Object niet gevonden. Misschien probeer je toegang te krijgen tot een object dat verwijderd is."
+
+msgid "m/d/Y"
+msgstr "m/d/Y"
+
+msgid "mm/dd/yy"
+msgstr "mm/dd/yy"
+
+msgid "MM/DD/YYYY"
+msgstr "MM/DD/YYYY"
+
+msgid "TRUE"
+msgstr "WAAR"
+
+msgid "FALSE"
+msgstr "NIET WAAR"
+
+msgid "Go top"
+msgstr "Ga naar boven"
+
+msgid "&copy; 2014 Jorani Authors"
+msgstr "&copy; 2014 Jorani Authors"
+
+msgid "Requested"
+msgstr "Aangevraagd"
+
+msgid "Planned"
+msgstr "Gepland"
+
+msgid "Accepted"
+msgstr "Geaccepteerd"
+
+msgid "Rejected"
+msgstr "Afgewezen"
+
+msgid "Cancellation"
+msgstr "Annulering"
+
+msgid "Canceled"
+msgstr "Geannuleerd"
+
+msgid "today"
+msgstr "vandaag"
+
+msgid "identifier"
+msgstr "identifier"
+
+msgid "firstname"
+msgstr "voornaam"
+
+msgid "lastname"
+msgstr "achternaam"
+
+msgid "date hired"
+msgstr "datum ingehuurd"
+
+msgid "department"
+msgstr "afdeling"
+
+msgid "position"
+msgstr "positie"
+
+msgid "contract"
+msgstr "contract"
+
+msgid "day off"
+msgstr "vrije dag"
+
+msgid "leave"
+msgstr "afwezigheid"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "copied"
+msgstr "gekopieerd"
+
+msgid "Do You Authorize %s application?"
+msgstr "Authoriseert u applicatie %s?"
+
+msgid "Your session has expired please login again"
+msgstr "Uw sessie is verlopen, u dient opnieuw in te loggen "
+
+msgid "Unexpected Ajax Error"
+msgstr "Onverwachte Ajax fout"
+
+msgid "List of employees"
+msgstr "Lijst werknemers"
+
+msgid "edit user"
+msgstr "Bewerk gegevens"
+
+msgid "Leaves"
+msgstr "Afwezigheid"
+
+msgid "OT Worked"
+msgstr "Gewerkte overuren"
+
+msgid "Leave Balance"
+msgstr "Afwezigheid saldo"
+
+msgid "Create Leave Request"
+msgstr "Maak een nieuw afwezigheidsverzoek aan"
+
+msgid "Presence report"
+msgstr "Aanwezigheid overzicht"
+
+msgid "Delegations"
+msgstr "Delegaties"
+
+msgid "Firstname"
+msgstr "Voornaam"
+
+msgid "Lastname"
+msgstr "Achternaam"
+
+msgid "E-mail"
+msgstr "E-mail"
+
+msgid "Manager"
+msgstr "Manager"
+
+msgid "Identifier"
+msgstr "Identifier"
+
+msgid "Date hired"
+msgstr "Datum aangenomen"
+
+msgid "Position"
+msgstr "Functie"
+
+msgid "Create"
+msgstr "Aanmaken"
+
+msgid "Right-click / taphold on an employee for contextual actions."
+msgstr "Klik met de rechtermuisknop op een werknemer voor contextuele acties."
+
+msgid "Active"
+msgstr "Aktief"
+
+msgid "Inactive"
+msgstr "Inaktief"
+
+msgid "Selection"
+msgstr "Selectie"
+
+msgid "Select all"
+msgstr "Selecteer alles"
+
+msgid "Deselect all"
+msgstr "Deselecteer alles"
+
+msgid "Select Manager"
+msgstr "Selecteer manager"
+
+msgid "Select Contract"
+msgstr "Selecteer contract"
+
+msgid "Select Entity"
+msgstr "Selecteer entiteit"
+
+msgid "Submit a leave request"
+msgstr "Dien een afwezigheidsverzoek in"
+
+msgid "Select the manager"
+msgstr "Selecteer een manager"
+
+msgid "You must select at least one employee into the table"
+msgstr "U moet minimaal één werknemer in de tabel selecteren"
+
+msgid "List of requested leaves"
+msgstr "Overzicht van aangevraagde afwezigheid"
+
+msgid "List of leaves for employee #"
+msgstr "Overzicht van afwezigheid van werknemer #"
+
+msgid "accept"
+msgstr "goedkeuren"
+
+msgid "reject"
+msgstr "afkeuren"
+
+msgid "show history"
+msgstr "Laat geschiedenis zien"
+
+msgid "Delete leave request"
+msgstr "Verwijder afwezigheidsverzoek"
+
+msgid ""
+"You are about to delete one leave request, this procedure is irreversible."
+msgstr "U staat op het punt om een afwezigheidsverzoek te verwijderen; dit is onomkeerbaar."
+
+msgid "List of deleted leave requests"
+msgstr "Lijst met verwijderde verlofverzoeken"
+
+msgid "You are exceeding your entitled days"
+msgstr "U overschrijdt het voor u beschikbare aantal dagen"
+
+msgid "You have requested another leave request within the same dates."
+msgstr "U heeft een ander afwezigheidsverzoek ingediend binnen dezelfde data."
+
+msgid "Cause (optional)"
+msgstr "Reden (optioneel)"
+
+msgid "Request leave"
+msgstr "Vraag afwezigheid aan"
+
+msgid "The leave request has been succesfully created"
+msgstr "Het afwezigheidsverzoek is succesvol aangemaakt"
+
+msgid ""
+"The leave request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "De afwezigheidsverzoek is succesvol aangemaakt/bijgewerkt, echter u heeft geen manager."
+
+msgid "%s non-working days in the period"
+msgstr "%s niet-werk-dagen in deze periode"
+
+msgid "Your leave request matches with a non-working day."
+msgstr "Uw verlofverzoek komt overeen met een niet-werkdag."
+
+msgid ""
+"It appears that you have no contract. Please contact your HR Officer / "
+"Manager."
+msgstr "Het lijkt erop dat je geen contract hebt. Neem contact op met je manager."
+
+msgid ""
+"You can't create a leave request for two yearly leave periods. Please create"
+" two different leave requests."
+msgstr "U kunt geen afwezigheidsverzoek aanmaken dat de jaarperiode overschrijdt. Maak a.u.b. 2 aparte verzoeken aan."
+
+msgid "List of overtime requests"
+msgstr "Overzicht van overuren aanmeldingen"
+
+msgid "List of overtime requests for employee #"
+msgstr "Overzicht overuren voor werknemer #"
+
+msgid "Leave balance for user #"
+msgstr "Afwezigheidsoverzicht voor gebruiker #"
+
+msgid "Available"
+msgstr "Beschikbaar"
+
+msgid "Taken"
+msgstr "Opgenomen"
+
+msgid "Entitled"
+msgstr "Recht op"
+
+msgid "This employee has no contract."
+msgstr "Deze werknemer heeft geen contract"
+
+msgid "Date of report"
+msgstr "Datum rapport"
+
+msgid ""
+"By default this report shows the values for the last month. Please note that"
+" the list of leaves shows only the accepted leave requests."
+msgstr "Standaard laat dit rapport de waarden zien voor de afgelopen maand. Let op: dit overzicht toont alleen de geaccepteerde verzoeken. "
+
+msgid "Execute"
+msgstr "Uitvoeren"
+
+msgid "Number of days"
+msgstr "Aantal dagen"
+
+msgid "Number of working days"
+msgstr "Aantal werkdagen"
+
+msgid "Number of non-working days"
+msgstr "Aantal niet-werkdagen"
+
+msgid "Duration of leaves"
+msgstr "Duur afwezigheid"
+
+msgid "Duration of presence"
+msgstr "Duur aanwezigheid"
+
+msgid "Overlapping detected"
+msgstr "Overlap geconstateerd"
+
+msgid "The employee has no contract"
+msgstr "Deze werknemer heeft geen contract"
+
+msgid "Please check"
+msgstr "AUB controleren"
+
+msgid "List of leaves in the month"
+msgstr "Overzicht afwezigheid in de maand"
+
+msgid "My summary"
+msgstr "Mij overzicht"
+
+msgid "Overtime details (added to compensate leaves)"
+msgstr "Overuren details (toegevoegd aan de compensatie verlof)"
+
+msgid "Catch up for"
+msgstr "Catch up for"
+
+msgid ""
+"No entitled or taken days for this period. Please contact your HR Officer / "
+"Manager."
+msgstr "Geen beschikbare of opgenomen dagen voor deze periode. Neem aub contact op met uw HR Officer/Manager."
+
+msgid "My leave requests"
+msgstr "Mijn afwezigheidsverzoeken"
+
+msgid "cancel"
+msgstr "Annuleer"
+
+msgid "Last change"
+msgstr "Laatste wijziging"
+
+msgid "Changed Date"
+msgstr "Gewijzigde datum"
+
+msgid "Change Type"
+msgstr "Gewijzigd type"
+
+msgid "Changed By"
+msgstr "Gewijzigd door"
+
+msgid "The leave request has been successfully created"
+msgstr "Het verlofverzoek is succesvol aangemaakt"
+
+msgid ""
+"The leave request has been successfully created or updated, but you don't "
+"have a manager."
+msgstr "Het verlofverzoek is succesvol aangemaakt of bijgewerkt, maar u heeft geen manager."
+
+msgid "Edit a leave request"
+msgstr "Bewerk een afwezigheidsverzoek"
+
+msgid "Edit leave request #"
+msgstr "Bewerk afwezigheidsverzoek #"
+
+msgid "Update leave"
+msgstr "Update afwezigheidsverzoek"
+
+msgid "You cannot edit a leave request already submitted"
+msgstr "U kunt een reeds verstuurd afwezigheidsverzoek niet bewerken"
+
+msgid "The leave request has been successfully updated"
+msgstr "Het verlofverzoek is succesvol bijgewerkt"
+
+msgid "You can't cancel this leave request"
+msgstr "U kunt deze verlofaanvraag niet annuleren"
+
+msgid "The cancellation request has been successfully sent"
+msgstr "Het annuleringsverzoek is succesvol verzonden"
+
+msgid "The leave request has been successfully cancelled"
+msgstr "Het verlofverzoek is succesvol geannuleerd"
+
+msgid "An error occured while trying to accept the cancellation"
+msgstr "Er is een fout opgetreden tijdens het accepteren van de annulering"
+
+msgid "The leave request has now its original status of Accepted"
+msgstr "Het verlofverzoek heeft nu zijn oorspronkelijke status van Geaccepteerd"
+
+msgid "An error occured while trying to reject the cancellation"
+msgstr "Er is een fout opgetreden tijdens het afwijzen van de annulering"
+
+msgid "You can't delete this leave request"
+msgstr "U kunt dit afwezigheidsverzoek niet verwijderen"
+
+msgid "The leave request has been successfully deleted"
+msgstr "Het verlofverzoek is succesvol verwijderd"
+
+msgid "View leave request #"
+msgstr "Bekijk afwezigheidsverzoek #"
+
+msgid "View a leave request"
+msgstr "Bekijk afwezigheidsverzoek"
+
+msgid "List of leaves"
+msgstr "Overzicht afwezigheid"
+
+msgid "Morning/Afternoon"
+msgstr "Morgen/Middag"
+
+msgid "Send a reminder"
+msgstr "Stuur een herinnering"
+
+msgid "The reminder email was sent to the manager"
+msgstr "De herinnering e-mail is verzonden naar de manager"
+
+msgid "Comments"
+msgstr "Opmerkingen"
+
+msgid "New comment"
+msgstr "Nieuwe opmerking"
+
+msgid "Send comment"
+msgstr "Stuur opmerking"
+
+msgid " says"
+msgstr "zegt"
+
+msgid "The status of the leave have been changed to "
+msgstr "De status van de verlofaanvraag is veranderd in"
+
+msgid "Leave types"
+msgstr "Soort afwezigheid"
+
+msgid ""
+"Leave type #0 is a system type reserved for overtime management. You should "
+"not use it for other requests."
+msgstr "Verlof type # 0 is een systeemtype gereserveerd voor overurenbeheer. U mag het niet gebruiken voor andere verzoeken."
+
+msgid ""
+"Leave type #0 is a system type reserved for overtime management. Are you "
+"sure that you want to rename it?"
+msgstr "Verlof type # 0 is een systeemtype gereserveerd voor overurenbeheer. Weet u zeker dat u het wilt hernoemen?"
+
+msgid "Acronym"
+msgstr "Acroniem"
+
+msgid "Deduct non working days"
+msgstr "Trek niet-werk-dagen af"
+
+msgid "Create a new type"
+msgstr "Maak een nieuw type aan"
+
+msgid "No leave type found into the database."
+msgstr "Geen afwezigheidstype gevonden in database."
+
+msgid "This leave type already exists."
+msgstr "Dit verloftype bestaat al."
+
+msgid "Add a leave type"
+msgstr "Voeg een afwezigheidstype toe"
+
+msgid "Suggest an acronym"
+msgstr "Stel een acroniem voor"
+
+msgid "The leave type has been succesfully created."
+msgstr "Het afwezigheidstype is succesvol toegevoegd"
+
+msgid "Edit a Leave type"
+msgstr "Bewerk afwezigheidstype"
+
+msgid "Update"
+msgstr "Bijwerken"
+
+msgid "The leave type has been succesfully updated."
+msgstr "Het afwezigheidstype is succesvol bijgewerkt"
+
+msgid "Delete Leave Type"
+msgstr "Verwijder afwezigheidstype"
+
+msgid ""
+"You are about to delete one leave type, this procedure is irreversible."
+msgstr "U staat op het punt om een afwezigheidstype te verwijderen. Dit kan niet hersteld worden."
+
+msgid "The leave type has been succesfully deleted."
+msgstr "Het afwezigheidstype is succesvol verwijderd."
+
+msgid "You cannot delete a system leave type."
+msgstr "U kunt een systeemwaarde niet verwijderen."
+
+msgid "You cannot delete a leave type that is used."
+msgstr "U kunt een afwezigheidstype dat nog in gebruik is niet verwijderen."
+
+msgid "Change password"
+msgstr "Nieuw wachtwoord"
+
+msgid "Welcome"
+msgstr "Welkom"
+
+msgid "Logout"
+msgstr "Uitloggen"
+
+msgid "View my personal information"
+msgstr "Bekijk persoonlijke informatie"
+
+msgid "reset password"
+msgstr "Reset wachtwoord"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "List of users"
+msgstr "Lijst gebruikers"
+
+msgid "Create user"
+msgstr "Maak gebruiker aan"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Diagnostic"
+msgstr "Diagnose"
+
+msgid "OAuth Clients"
+msgstr "OAuth Clienten"
+
+msgid "HR"
+msgstr "HR"
+
+msgid "Employees"
+msgstr "Werknemers"
+
+msgid "Organization"
+msgstr "Organisatie"
+
+msgid "List of positions"
+msgstr "Lijst functies"
+
+msgid "List of types"
+msgstr "Lijst types"
+
+msgid "Reports"
+msgstr "Rapporten"
+
+msgid "Leave balance"
+msgstr "Afwezigheidssaldo"
+
+msgid "Leave requests"
+msgstr "Afwezigheid verzoeken"
+
+msgid "Approval"
+msgstr "Goedkeuring"
+
+msgid "My subordinates"
+msgstr "Mijn ondergeschikten"
+
+msgid "Requests"
+msgstr "Verzoeken"
+
+msgid "List of OT Worked"
+msgstr "Lijst van gewerkte overuren"
+
+msgid "Submit an OT Request"
+msgstr "Verstuur een overuren verzoek"
+
+msgid "Counters"
+msgstr "Tellers"
+
+msgid "List of leave requests"
+msgstr "Overzicht van afwezigheidsverzoeken"
+
+msgid "Request a leave"
+msgstr "Vraag afwezigheid aan"
+
+msgid "Calendars"
+msgstr "Agenda's"
+
+msgid "My workmates"
+msgstr "Mijn collega's"
+
+msgid "Department"
+msgstr "Afdeling"
+
+msgid "Global"
+msgstr "Globaal"
+
+msgid "Tabular"
+msgstr "Tabel"
+
+msgid "Search for an entity"
+msgstr "Zoek entiteit"
+
+msgid "Search"
+msgstr "Zoeken"
+
+msgid "Employees attached to entity"
+msgstr "Werknemers in entiteit"
+
+msgid "Attach an Employee"
+msgstr "Voeg een werknemer toe"
+
+msgid "Detach an Employee"
+msgstr "Verwijder een werknemer"
+
+msgid "Supervisor"
+msgstr "Supervisor"
+
+msgid ""
+"If you select a supervisor, he will receive a copy of accepted and rejected "
+"leave requests submitted by employees of this entity."
+msgstr "Als u een supervisor selecteert, zal deze een kopie van alle geaccepteerde en afgewezen verlofaanvragen van werknemers van deze entiteit krijgen."
+
+msgid "Select a Supervisor"
+msgstr "Selecteer een supervisor"
+
+msgid "Delete Entity"
+msgstr "Verwijder een entiteit"
+
+msgid "You are about to delete one entity, this procedure is irreversible."
+msgstr "U staat op het punt een entiteit te verwijderen; dit kant niet ongedaan gemaakt worden"
+
+msgid "Add an Employee"
+msgstr "Voeg een werknemer toe"
+
+msgid "An error occured"
+msgstr "Er heeft zich een probleem voorgedaan"
+
+msgid "Name of the entity"
+msgstr "Naam van entiteit"
+
+msgid "Please select one entity in the organization (treeview on the right)."
+msgstr "Selecteer aub een entiteit in de organisatie (boomstructuur aan rechterkant)."
+
+msgid ""
+"Please select one employee in the table of users belonging to the selected "
+"entity."
+msgstr "Selecteer één werknemer in de tabel van de gebruikers die behoren tot de geselecteerde entiteit."
+
+msgid "You cannot delete the root entity."
+msgstr "U kunt de hoofd entiteit niet verwijderen."
+
+msgid "Select a list of employees"
+msgstr "Selecteer een lijst van medewerkers"
+
+msgid "Rename a list"
+msgstr "Hernoem een lijst"
+
+msgid "Add a new list"
+msgstr "Voeg een nieuwe lijst toe"
+
+msgid "Delete a list"
+msgstr "Verwijder een lijst"
+
+msgid "Add employees"
+msgstr "Voeg medewerkers toe"
+
+msgid "Remove selected employees"
+msgstr "Verwijder geselecteerde medewerkers"
+
+msgid "Name of the list"
+msgstr "Naam van de lijst"
+
+msgid "Are you sure that you want to delete this list?"
+msgstr "Bent u zeker dat u deze lijst wil verwijderen?"
+
+msgid "New name of the list"
+msgstr "Nieuwe naam van de lijst"
+
+msgid "Overtime Requests submitted to me"
+msgstr "Overuren verzoek bij mij ingediend"
+
+msgid ""
+"This screen lists the overtime requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "Dit scherm toont de overurenverzoeken die bij u zijn ingediend. Indien u geen manager bent, zal deze lijst leeg blijven."
+
+msgid "Fullname"
+msgstr "Volledige naam"
+
+msgid "All requests"
+msgstr "Alle verzoeken"
+
+msgid "Pending requests "
+msgstr "In behandeling zijnde verzoeken"
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this "
+"overtime request."
+msgstr "U bent geen manager van deze werknemer. U kunt dit overurenverzoek niet afkeuren."
+
+msgid "The overtime request has been successfully rejected."
+msgstr "Het overurenverzoek is succesvol afgekeurd."
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this "
+"overtime request."
+msgstr "U bent geen manager van deze werknemer. U kunt dit overurenverzoek niet accepteren."
+
+msgid "The overtime request has been successfully accepted."
+msgstr "Het overurenverzoek is succesvol geaccepteerd."
+
+msgid "Create position"
+msgstr "Maak een functie aan"
+
+msgid "Delete Position"
+msgstr "Verwijder een functie"
+
+msgid "You are about to delete one position, this procedure is irreversible."
+msgstr "U staat op het punt een functie te verwijderen; dit kan niet ongedaan gemaakt worden."
+
+msgid "Create a new position"
+msgstr "Maak een nieuwe functie aan"
+
+msgid "The position has been succesfully created."
+msgstr "De nieuwe functie is succesvol aangemaakt."
+
+msgid "Edit position #"
+msgstr "Bewerk functie #"
+
+msgid "Update position"
+msgstr "Update functie"
+
+msgid "The position has been succesfully updated."
+msgstr "De functie os succesvol bijgewerkt."
+
+msgid "The position has been succesfully deleted."
+msgstr "De functie is succesvol verwijderd."
+
+msgid "List of reports"
+msgstr "Overzicht rapporten"
+
+msgid "Report"
+msgstr "Rapport"
+
+msgid "Back to list of reports"
+msgstr "Terug naar overzicht rapporten"
+
+msgid "List of Report"
+msgstr "List of Report"
+
+msgid "Balance of leaves"
+msgstr "Saldo afwezigheid"
+
+msgid "Launch"
+msgstr "Uitvoeren"
+
+msgid "Leave Requests submitted to me"
+msgstr "Afwezigheidsverzoeken bij mij ingediend"
+
+msgid ""
+"This screen lists the leave requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "Dit scherm toont de afwezigheidsverzoeken bij u ingediend. Als u geen manager bent, dan zal dit overzicht leeg blijven."
+
+msgid "List of my subordinates"
+msgstr "Lijst van mijn ondergeschikten"
+
+msgid ""
+"This screen lists your direct report subordinates. If you are not a manager,"
+" this list will always be empty."
+msgstr "Op dit scherm worden alle direct aan u rapporterende medewerkers vermeld. Als u geen manager bent, zal deze lijst altijd leeg zijn."
+
+msgid "Create a leave request in behalf of this subordinate"
+msgstr "Maak een verlofaanvraag namens deze medewerker"
+
+msgid "Your are not the manager of this employee."
+msgstr "U bent niet de manager van deze werknemer."
+
+msgid "List of subordinates"
+msgstr "Lijst met medewerkers"
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this leave "
+"request."
+msgstr "U bent niet de manager van deze werknemer, U kunt dit afwezigheidsverzoek niet accepteren."
+
+msgid "The leave request has been successfully accepted."
+msgstr "Het afwezigheidsverzoek is succesvol geaccepteerd."
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this leave "
+"request."
+msgstr "U bent niet de manager van deze werknemer. U kunt dit afwezigheidsverzoek niet afkeuren."
+
+msgid "The leave request has been successfully rejected."
+msgstr "Het afwezigheidsverzoek is succesvol afgekeurd."
+
+msgid "List of delegations"
+msgstr "Overzicht gedelegeerden"
+
+msgid ""
+"This is the list of employees who can accept or reject a request in your "
+"behalf."
+msgstr "Dit is het overzicht van werknemers die verzoeken kunnen accepteren of afkeuren in uw naam."
+
+msgid "Revoke"
+msgstr "Intrekken"
+
+msgid "Add a delegate"
+msgstr "Voeg een gedelegeerde toe"
+
+msgid "Are you sure that you want to revoke this delegation?"
+msgstr "Weet u zeker dat u deze delegatie wil intrekken?"
+
+msgid "Leave balance (subordinates)"
+msgstr "Verlofbalans (medewerkers)"
+
+msgid ""
+"Leave balance of my direct report subordinates. If you are not a manager, "
+"this list will always be empty."
+msgstr "Afwezigheid balans van alle direct aan mij rapporterende medewerkers. Als u geen manager bent, zal deze lijst altijd leeg zijn."
+
+msgid "Send a new comment (optional)"
+msgstr "Stuur een nieuwe opmerking (optioneel)"
+
+msgid "Reject"
+msgstr "Afwijzen"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Language"
+msgstr "Taal"
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Send me my password"
+msgstr "Stuur mij mijn wachtwoord"
+
+msgid "Are you sure that you want to reset your password?"
+msgstr "Weet u zeker dat u uw wachtwoord wilt resetten?"
+
+msgid "Please fill the login field"
+msgstr "Vul aub het login-veld in"
+
+msgid "Unknown login. Please contact your HR Officer / Manager."
+msgstr "Onbekende login. Neem aub contact op met uw manager."
+
+msgid "The password has been sent to your e-mail adress."
+msgstr "Het wachtwoord is naar uw email adres gestuurd."
+
+msgid "Invalid login id or password"
+msgstr "Ongeldige login of wachtwoord"
+
+msgid "The language has been succesfully set to "
+msgstr "De taal is succesvol bijgewerkt naar"
+
+msgid "Your account is disabled. Please contact your HR Officer / Manager."
+msgstr "Dit account is gedeactiveerd. Neem aub contact op met uw manager."
+
+msgid "Rename"
+msgstr "Hernoemen"
+
+msgid "Remove"
+msgstr "Verwijderen"
+
+msgid "Cut"
+msgstr "Knippen"
+
+msgid "Paste"
+msgstr "Plakken"
+
+msgid "edit user details"
+msgstr "Edit gebruikersdetails"
+
+msgid "delete user"
+msgstr "Verwijder gebruiker"
+
+msgid "Role"
+msgstr "Rol"
+
+msgid "Create a new user"
+msgstr "Maak een nieuwe gebruiker aan"
+
+msgid "Import users"
+msgstr "Importeer gebuikers"
+
+msgid "Delete User"
+msgstr "Verwijder gebruikers"
+
+msgid "You are about to delete one user, this procedure is irreversible."
+msgstr "U staat op het punt een gebruiker te verwijderen; dit kan niet ongedaan gemaakt worden."
+
+msgid "Import Users"
+msgstr "Importeer gebruikers"
+
+msgid "Filename"
+msgstr "Bestandsnaam"
+
+msgid "My personal information"
+msgstr "Mijn persoonlijke info"
+
+msgid "Date hired/started"
+msgstr "Datum start aanstelling"
+
+msgid "Internal/Company Identifier"
+msgstr "Interne identifier"
+
+msgid "Edit user #"
+msgstr "Wijzig gebruiker #"
+
+msgid "Edit user"
+msgstr "Wijzig gebruiker"
+
+msgid "No line manager."
+msgstr "Geen manager."
+
+msgid "If a user has no manager (itself), it can validate its leave requests."
+msgstr "Als een gebruiker geen manager heeft dan kan ze zijn eigen verzoeken valideren!"
+
+msgid "Self"
+msgstr "Zelf"
+
+msgid "Timezone"
+msgstr "Tijd zone"
+
+msgid "LDAP Path"
+msgstr "LDAP pad"
+
+msgid "Select a position"
+msgstr "Selecteer een functie"
+
+msgid "Update user"
+msgstr "Update gebruiker"
+
+msgid "The user has been succesfully updated"
+msgstr "De gebruiker is succesvol geupdate"
+
+msgid "The user has been succesfully deleted"
+msgstr "De gebruiker is succesvol verwijderd"
+
+msgid "The password has been succesfully changed"
+msgstr "Het wachtwoord is succesvol bijgewerkt"
+
+msgid "Generate password"
+msgstr "Genereer een wachtwoord"
+
+msgid ""
+"It is recommended to select a contract. Do you want to create the user "
+"without a contract?"
+msgstr "Het is aanbevolen om een contract te selecteren. Wilt u de gebruiker aanmaken zonder contract?"
+
+msgid "The user has been succesfully created"
+msgstr "De gebruiker is succesvol aangemaakt"
+
+msgid "Username already exists."
+msgstr "Gebruikersnaam bestaat al."
+
+msgid "This username is not available."
+msgstr "De gebruikersnaam is niet beschikbaar."
+
+msgid "Reset"
+msgstr "Reset"

@@ -36,6 +36,11 @@
  * @filesource
  */
 
+use App\Kernel;
+use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\ErrorHandler\Debug;
+use Symfony\Component\HttpFoundation\Request;
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -233,6 +238,45 @@ switch (ENVIRONMENT)
 	// Path to the front controller (this file) directory
 	define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
 
+require_once FCPATH . 'vendor/autoload.php';
+
+// get the database connection from CI 3 configuration
+$env = is_null(getenv('CI_ENV'))?'':getenv('CI_ENV');
+$pathConfigFile = realpath(join(DIRECTORY_SEPARATOR, array(__DIR__, 'application', 'config', $env, 'database.php')));
+include($pathConfigFile);
+
+$_SERVER['DATABASE_URL'] = $db[$active_group]['dsn'];
+$_SERVER['APP_DEBUG'] = true;
+$_SERVER['DB_USER'] = $db[$active_group]['username'];
+$_SERVER['DB_PASS'] = $db[$active_group]['password'];
+$_SERVER['APP_ENV'] = 'local';
+
+$GLOBALS['kernel'] = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+
+if ($_SERVER['APP_DEBUG']) {
+    umask(0000);
+    Debug::enable();
+}
+
+if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? $_ENV['TRUSTED_PROXIES'] ?? false) {
+    Request::setTrustedProxies(
+      explode(',', $trustedProxies),
+      Request::HEADER_X_FORWARDED_FOR | Request::HEADER_X_FORWARDED_PORT | Request::HEADER_X_FORWARDED_PROTO
+    );
+}
+
+if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? $_ENV['TRUSTED_HOSTS'] ?? false) {
+    Request::setTrustedHosts([$trustedHosts]);
+}
+
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+$request = Request::createFromGlobals();
+$response = $kernel->handle($request);
+
+if (false === $response->isNotFound()) {
+    // Symfony successfully handled the route.
+    $response->send();
+} else {
 	// Name of the "system" directory
 	define('SYSDIR', basename(BASEPATH));
 
@@ -306,23 +350,24 @@ switch (ENVIRONMENT)
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 
-        
-//make sure the PHP scripts are reloaded every time
-header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");   // Date in the past
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");  // always modified
-header("Cache-Control: no-store, no-cache, must-revalidate");   // HTTP/1.1
-header("Cache-Control: post-check=0, pre-check=0");  // HTTP/1.0
-header("Pragma: no-cache");
-        
-/*
- * --------------------------------------------------------------------
- * LOAD THE BOOTSTRAP FILE
- * --------------------------------------------------------------------
- *
- * And away we go...
- */
+	//make sure the PHP scripts are reloaded every time
+	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");   // Date in the past
+	header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");  // always modified
+	header("Cache-Control: no-store, no-cache, must-revalidate");   // HTTP/1.1
+	header("Cache-Control: post-check=0, pre-check=0");  // HTTP/1.0
+	header("Pragma: no-cache");
+			
+	/*
+	* --------------------------------------------------------------------
+	* LOAD THE BOOTSTRAP FILE
+	* --------------------------------------------------------------------
+	*
+	* And away we go...
+	*/
 
-$GLOBALS['versionOfJorani'] = '1.0.0';
+	$GLOBALS['versionOfJorani'] = '1.0.0';
 
-require_once FCPATH . 'vendor/autoload.php';
-require_once BASEPATH.'core/CodeIgniter.php';
+    require_once BASEPATH.'core/CodeIgniter.php';
+}
+
+$kernel->terminate($request, $response);

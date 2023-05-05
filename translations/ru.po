@@ -1,0 +1,1416 @@
+# 
+# Translators:
+# Benjamin BALET <benjamin.balet@gmail.com>, 2015
+# oleg koptev <koptev.oleg@gmail.com>, 2015
+# oleg koptev <koptev.oleg@gmail.com>, 2015
+# Yevhen Kyrylchenko <yevhen.kyrylchenko@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: jorani\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-12-05 09:45+0000\n"
+"Last-Translator: Yevhen Kyrylchenko <yevhen.kyrylchenko@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/jorani/jorani/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "Yearly calendar"
+msgstr "Календарь на год"
+
+msgid "My calendar"
+msgstr "Мой календарь"
+
+msgid "Calendar of my leaves."
+msgstr "Календарь моих отпусков"
+
+msgid "Download an iCal file"
+msgstr "Загрузить файл iCal"
+
+msgid "(import the event into Outlook, Thunderbird, etc.)"
+msgstr "(импорт события в Outlook, Thunderbird и т. д.)"
+
+msgid "Event details"
+msgstr "Подробности события"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Day offs"
+msgstr "Нерабочие дни"
+
+msgid "Calendar of my workmates"
+msgstr "Календарь моих коллег"
+
+msgid "Leaves of employees having the same line manager"
+msgstr "Отпуска сотрудников с тем же руководителем отдела"
+
+msgid "Calendar of my collaborators"
+msgstr "Календарь моих сотрудников"
+
+msgid "Leaves of my collaborators (will be empty if I'm not a manager)."
+msgstr "Отпуска моих коллег (будет пустым, если я не руководитель)."
+
+msgid "Calendar of my department"
+msgstr "Календарь моего отдела"
+
+msgid "Calendar of employees working in my department"
+msgstr "Календарь сотрудников, работающих в моем отделе"
+
+msgid ""
+"It appears that you don't belong to any department. Please contact your HR "
+"Officer / Manager."
+msgstr "Судя по всему вы не закреплены ни за одним из отделов. Обратитесь к своему руководителю."
+
+msgid "Calendar of the organization"
+msgstr "Календарь моей организации"
+
+msgid "Global calendar with a filter on entity"
+msgstr "Общий календарь с фильтрацией по отделу"
+
+msgid "Select the entity"
+msgstr "Выберите отдел"
+
+msgid "Select"
+msgstr "Выбрать"
+
+msgid "Include sub-departments"
+msgstr "Включая подотделы"
+
+msgid "Select an entity"
+msgstr "Выберите отдел"
+
+msgid "OK"
+msgstr "ОК"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Tabular Calendar"
+msgstr "Табличный календарь"
+
+msgid "Month"
+msgstr "Месяц"
+
+msgid "Year"
+msgstr "Год"
+
+msgid "Execute"
+msgstr "Выполнить"
+
+msgid "Export"
+msgstr "Экспорт"
+
+msgid "Employee"
+msgstr "Сотрудник"
+
+msgid "Calendar Tabular"
+msgstr "Табличный календарь"
+
+msgid "Entity"
+msgstr "Отдел"
+
+msgid "Sub-entities"
+msgstr "Подотделы"
+
+msgid ""
+"'January','February','March','April','May','June','July','August','September','October','November','December'"
+msgstr "'Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'"
+
+msgid ""
+"'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'"
+msgstr "'Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'"
+
+msgid "'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'"
+msgstr "'Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'"
+
+msgid "'Sun','Mon','Tue','Wed','Thu','Fri','Sat'"
+msgstr "'Вск','Пнд','Втр','Срд','Чтв','Птн','Суб'"
+
+msgid "MMMM yyyy"
+msgstr "MMMM yyyy"
+
+msgid "MMM d[ yyyy]{ - [ MMM] d yyyy}"
+msgstr "MMM d[ yyyy]{ - [ MMM] d yyyy}"
+
+msgid "dddd, MMM d, yyyy"
+msgstr "dddd, MMM d, yyyy"
+
+msgid "ddd"
+msgstr "ddd"
+
+msgid "ddd M/d"
+msgstr "ddd M/d"
+
+msgid "dddd M/d"
+msgstr "dddd M/d"
+
+msgid "H:mm"
+msgstr "H:mm"
+
+msgid "h(:mm)t"
+msgstr "h(:mm)t"
+
+msgid "H:mm{ - H:mm}"
+msgstr "H:mm{ - H:mm}"
+
+msgid "1"
+msgstr "1"
+
+msgid "today"
+msgstr "сегодня"
+
+msgid "day"
+msgstr "день"
+
+msgid "week"
+msgstr "неделя"
+
+msgid "month"
+msgstr "месяц"
+
+msgid "prev,next today"
+msgstr "prev,next today"
+
+msgid "title"
+msgstr "заголовок"
+
+msgid "month,basicWeek,basicDay"
+msgstr "month,basicWeek,basicDay"
+
+msgid "Mo"
+msgstr "Пн"
+
+msgid "Tu"
+msgstr "Вт"
+
+msgid "We"
+msgstr "Ср"
+
+msgid "Th"
+msgstr "Чт"
+
+msgid "Fr"
+msgstr "Пт"
+
+msgid "Sa"
+msgstr "Сб"
+
+msgid "Su"
+msgstr "Вс"
+
+msgid "Monday"
+msgstr "Понедельник"
+
+msgid "Tuesday"
+msgstr "Вторник"
+
+msgid "Wednesday"
+msgstr "Среда"
+
+msgid "Thursday"
+msgstr "Четверг"
+
+msgid "Friday"
+msgstr "Пятница"
+
+msgid "Saturday"
+msgstr "Суббота"
+
+msgid "Sunday"
+msgstr "Воскресенье"
+
+msgid "All days"
+msgstr "Все дни"
+
+msgid "January"
+msgstr "Январь"
+
+msgid "February"
+msgstr "Февраль"
+
+msgid "March"
+msgstr "Март"
+
+msgid "April"
+msgstr "Апрель"
+
+msgid "May"
+msgstr "Май"
+
+msgid "June"
+msgstr "Июнь"
+
+msgid "July"
+msgstr "Июль"
+
+msgid "August"
+msgstr "Август"
+
+msgid "September"
+msgstr "Сентябрь"
+
+msgid "October"
+msgstr "Октябрь"
+
+msgid "November"
+msgstr "Ноябрь"
+
+msgid "December"
+msgstr "Декабрь"
+
+msgid "List of contracts"
+msgstr "Список контрактов"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Name"
+msgstr "Название"
+
+msgid "Start period"
+msgstr "Начало периода"
+
+msgid "End period"
+msgstr "Окончание периода"
+
+msgid "delete contract"
+msgstr "удалить контракт"
+
+msgid "edit contract"
+msgstr "редактировать контракт"
+
+msgid "entitled days"
+msgstr "предоставляемые дни"
+
+msgid "day offs and weekends"
+msgstr "нерабочие и выходные дни"
+
+msgid "Export this list"
+msgstr "Экспортировать список"
+
+msgid "Create contract"
+msgstr "Создать контракт"
+
+msgid "Delete Contract"
+msgstr "Удалить контракт"
+
+msgid "You are about to delete one contract, this procedure is irreversible."
+msgstr "Вы собираетесь удалить контракт. Это действие нельзя будет отменить."
+
+msgid "Do you want to proceed?"
+msgstr "Продолжить?"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Entitled days"
+msgstr "Предоставляемые дни"
+
+msgid "Edit a contract"
+msgstr "Редактировать контракт"
+
+msgid "Edit contract #"
+msgstr "Редактировать контракт №"
+
+msgid "Month / Start"
+msgstr "Месяц/Начало"
+
+msgid "Day / Start"
+msgstr "День/Начало"
+
+msgid "Month / End"
+msgstr "Месяц/Окончание"
+
+msgid "Day / End"
+msgstr "День/Окончание"
+
+msgid "Update contract"
+msgstr "Обновить контракт"
+
+msgid "The contract has been succesfully updated"
+msgstr "Контракт успешно обновлен"
+
+msgid "Create a new contract"
+msgstr "Создать новый контракт"
+
+msgid "The contract has been succesfully created"
+msgstr "Контракт успешно создан"
+
+msgid "The contract has been succesfully deleted"
+msgstr "Контракт успешно удален"
+
+msgid "Calendar of non working days"
+msgstr "Календарь нерабочих дней"
+
+msgid ""
+"Day offs and weekends are not configured by default. Click on a day to edit "
+"it individually or use the button \"Series\"."
+msgstr "Выходные и нерабочие дни по умолчанию не заданы. Щёлкните на дне для индивидуального редактирования или используйте кнопку «Последовательности»."
+
+msgid "Legend:"
+msgstr "Описание:"
+
+msgid "All day"
+msgstr "Весь день"
+
+msgid "Morning"
+msgstr "Утро"
+
+msgid "Afternoon"
+msgstr "После полудня"
+
+msgid "Back to contracts"
+msgstr "Вернуться к контрактам"
+
+msgid "Series of non-working days"
+msgstr "Последовательности нерабочих дней"
+
+msgid "Edit day off"
+msgstr "Редактировать нерабочий день"
+
+msgid "Title"
+msgstr "Название"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Working day"
+msgstr "Рабочий день"
+
+msgid "All day is off"
+msgstr "Все дни — нерабочие"
+
+msgid "Morning is off"
+msgstr "Утро — нерабочие"
+
+msgid "Afternoon is off"
+msgstr "После полудня — нерабочие"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Import iCal"
+msgstr "Импорт iCal"
+
+msgid "URL of non-working days iCal file"
+msgstr "Ссылка на файл iCal с нерабочими днями"
+
+msgid "Edit a series of day offs"
+msgstr "Редактировать последовательности нерабочих дней"
+
+msgid "Mark every"
+msgstr "Пометить каждый"
+
+msgid "From"
+msgstr "От"
+
+msgid "Current"
+msgstr "Текущий"
+
+msgid "To"
+msgstr "До"
+
+msgid "As a"
+msgstr "Как"
+
+msgid "Copy"
+msgstr "Копия"
+
+msgid "You must select a contract."
+msgstr "Необходимо выбрать контракт."
+
+msgid "Data has been copied successfully."
+msgstr "Данные успешно скопированы"
+
+msgid "No data available in table"
+msgstr "В таблице нет данных"
+
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "Показано _START_ — _END_ из _TOTAL_ записей"
+
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "Показано 0 — 0 из 0 записей"
+
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(отфильтровано от общего количества записей: _MAX_)"
+
+msgid ","
+msgstr ","
+
+msgid "Show _MENU_ entries"
+msgstr "Показать _MENU_ записей"
+
+msgid "Loading..."
+msgstr "Загрузка…"
+
+msgid "Processing..."
+msgstr "Обработка…"
+
+msgid "Search:"
+msgstr "Поиск:"
+
+msgid "No matching records found"
+msgstr "Совпадения не найдены"
+
+msgid "First"
+msgstr "Первый"
+
+msgid "Last"
+msgstr "Последний"
+
+msgid "Next"
+msgstr "Следующий"
+
+msgid "Previous"
+msgstr "Предыдущий"
+
+msgid ": activate to sort column ascending"
+msgstr ": активировать для сортировки столбцов по возрастанию"
+
+msgid ": activate to sort column descending"
+msgstr ": активировать для сортировки столбца по убыванию"
+
+msgid "Your password has been reset"
+msgstr "Сброс пароля выполнен"
+
+msgid "Your account has been created"
+msgstr "Учетная запись создана"
+
+msgid "Leave Request from"
+msgstr "Заявление на отпуск от"
+
+msgid "Leave Request"
+msgstr "Заявление на отпуск"
+
+msgid "Your leave request has been accepted"
+msgstr "Заявление на отпуск утверждено"
+
+msgid "Your leave request has been rejected"
+msgstr "Заявление на отпуск отклонено"
+
+msgid "Your overtime request has been accepted"
+msgstr "Ваш запрос о сверхурочных утвержден"
+
+msgid "Your overtime request has been rejected"
+msgstr "Ваш запрос о сверхурочных отклонен"
+
+msgid "Overtime Request"
+msgstr "Запрос на сверхурочную работу"
+
+msgid "Overtime request from"
+msgstr "Запрос на сверхурочную работу от"
+
+msgid "Entitled days for contract"
+msgstr "Предоставляемые по договору дни"
+
+msgid "Start"
+msgstr "Начало"
+
+msgid "End"
+msgstr "Окончание"
+
+msgid "Days"
+msgstr "Дни"
+
+msgid "Leave type"
+msgstr "Тип отпуска"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "No entitled days attached to the contract."
+msgstr "В контракте не указано количество предоставляемых дней."
+
+msgid "Add entitled days"
+msgstr "Добавить предоставляемые дни"
+
+msgid "Start Date"
+msgstr "Дата начала"
+
+msgid "End Date"
+msgstr "Дата окончания"
+
+msgid "Add"
+msgstr "Добавить"
+
+msgid "\"The field \" + fieldname + \" is mandatory.\""
+msgstr "\"Поле \" + fieldname + \" является обязательным.\""
+
+msgid "Back to the list of contracts"
+msgstr "Вернуться к списку контрактов"
+
+msgid "Are you sure that you want to delete it?"
+msgstr "Удалить?"
+
+msgid "Step"
+msgstr "Прирост"
+
+msgid "Entitled days for employee"
+msgstr "Предоставляемые дни для сотрудника"
+
+msgid "No entitled days attached to the user."
+msgstr "Нет предоставляемых дней для сотрудника."
+
+msgid "Back to the list of employees"
+msgstr "Вернуться к списку сотрудников"
+
+msgid "Entitled days to Contract #"
+msgstr "Предоставляемые дни по контракту №"
+
+msgid "Yearly leave period : "
+msgstr "Ежегодные отпуска:"
+
+msgid "Entitled days to Employee"
+msgstr "Предоставляемые дни для сотрудника"
+
+msgid "My overtime requests"
+msgstr "Мои запросы на сверхурочную работу"
+
+msgid "view"
+msgstr "просмотреть"
+
+msgid "edit"
+msgstr "редактировать"
+
+msgid "delete"
+msgstr "удалить"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Reason"
+msgstr "Причина"
+
+msgid "Duration"
+msgstr "Продолжительность"
+
+msgid "Status"
+msgstr "Состояние"
+
+msgid "New request"
+msgstr "Новый запрос"
+
+msgid "Delete overtime request"
+msgstr "Удалить запрос на сверхурочную работу"
+
+msgid ""
+"You are about to delete one overtime request, this procedure is "
+"irreversible."
+msgstr "Вы собираетесь удалить запрос на сверхурочную работу. Это действие нельзя будет отменить."
+
+msgid "Submit an overtime request"
+msgstr "Отправить запрос на сверхурочную работу"
+
+msgid "In days or fraction of days (e.g. 0.13 for 1h if you work 8h/day)."
+msgstr "В целых днях или дробных частях дня (например 0,125 для 1 часа, при 8-часовом рабочем дне)"
+
+msgid "Request overtime"
+msgstr "Запрос на сверхурочную работу"
+
+msgid "The overtime request has been succesfully created"
+msgstr "Запрос на сверхурочную работу успешно создан"
+
+msgid ""
+"The overtime request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "Запрос на сверхурочную работу успешно создан или обновлен, но у вас нет руководителя."
+
+msgid "Edit overtime request #"
+msgstr "Редактировать запрос на сверхурочную работу №"
+
+msgid "Edit a overtime request"
+msgstr "Редактировать запрос на сверхурочную работу"
+
+msgid "In days or fraction of days (e.g. 0.125 for 1h if you work 8h/day)."
+msgstr "В целых днях или дробных частях дня (например 0,125 для 1 часа, при 8-часовом рабочем дне)"
+
+msgid "Update overtime"
+msgstr "Обновить запрос на сверхурочную работу"
+
+msgid "You cannot edit an overtime request already submitted"
+msgstr "Невозможно изменить уже отправленный запрос на сверхурочную работу"
+
+msgid "The overtime request has been succesfully updated"
+msgstr "Запрос на сверхурочную работу успешно обновлен"
+
+msgid "The overtime request has been succesfully deleted"
+msgstr "Запрос на сверхурочную работу успешно удален"
+
+msgid "You can't delete this overtime request"
+msgstr "Нельзя удалить этот запрос на сверхурочную работу"
+
+msgid "View overtime request #"
+msgstr "Просмотреть запрос на сверхурочную работу №"
+
+msgid "View overtime request"
+msgstr "Просмотреть запрос на сверхурочную работу"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Back to list"
+msgstr "Вернуться к списку"
+
+msgid "List of overtime requests"
+msgstr "Список запросов на сверхурочную работу"
+
+msgid "Link to documentation"
+msgstr "Ссылка на документацию"
+
+msgid "Operation (%s) is not granted"
+msgstr "Выполнение данного действия (%s) недоступно."
+
+msgid "Please wait"
+msgstr "Подождите"
+
+msgid ""
+"Internet Explorer 8 and older browser are not supported. Please upgrade to "
+"IE9 or use Firefox, Chrome, etc."
+msgstr "Internet Explorer 8 и более старые версии браузера не поддерживаются. Выполните обновление до IE9 или используйте Firefox, Chrome, и т. д."
+
+msgid "m/d/Y"
+msgstr "m/d/Y"
+
+msgid "TRUE"
+msgstr "ДА"
+
+msgid "FALSE"
+msgstr "НЕТ"
+
+msgid "Go top"
+msgstr "Наверх"
+
+msgid "&copy; 2014 Jorani Authors"
+msgstr "&copy; 2014 Разработчики Jorani"
+
+msgid "Requested"
+msgstr "Запрошено"
+
+msgid "Planned"
+msgstr "Запланировано"
+
+msgid "Accepted"
+msgstr "Утверждено"
+
+msgid "Rejected"
+msgstr "Отклонено"
+
+msgid "identifier"
+msgstr "идентификатор"
+
+msgid "firstname"
+msgstr "имя"
+
+msgid "lastname"
+msgstr "фамилия"
+
+msgid "date hired"
+msgstr "дата принятия на работу"
+
+msgid "department"
+msgstr "отдел"
+
+msgid "position"
+msgstr "должность"
+
+msgid "contract"
+msgstr "контракт"
+
+msgid "day off"
+msgstr "выходной"
+
+msgid "leave"
+msgstr "отпуск"
+
+msgid "copied"
+msgstr "копировать"
+
+msgid "Your session has expired please login again"
+msgstr "Ваша сессия истекла. Выполните вход снова."
+
+msgid "Unexpected Ajax Error"
+msgstr "Неожиданная ошибка Ajax"
+
+msgid "List of employees"
+msgstr "Список сотрудников"
+
+msgid "edit user"
+msgstr "редактировать пользователя"
+
+msgid "Leaves"
+msgstr "Отпуска"
+
+msgid "Extras"
+msgstr "Дополнительно"
+
+msgid "Leave Balance"
+msgstr "Сальдо по отпускам"
+
+msgid "Create Leave Request"
+msgstr "Создать заявление на отпуск"
+
+msgid "Presence report"
+msgstr "Отчет посещаемости"
+
+msgid "Delegations"
+msgstr "Передачи обязанностей"
+
+msgid "Firstname"
+msgstr "Имя"
+
+msgid "Lastname"
+msgstr "Фамилия"
+
+msgid "E-mail"
+msgstr "Эл. почта"
+
+msgid "Contract"
+msgstr "Контракт"
+
+msgid "Manager"
+msgstr "Руководитель"
+
+msgid "Create"
+msgstr "Создать"
+
+msgid "Right-click / taphold on an employee for contextual actions."
+msgstr "Щелкните правой кнопкой мыши/нажмите на работнике для вызова контекстного меню."
+
+msgid "List of requested leaves"
+msgstr "Список запрошенных отпусков"
+
+msgid "List of leaves for employee #"
+msgstr "Список отпусков для сотрудника №"
+
+msgid "accept"
+msgstr "утвердить"
+
+msgid "reject"
+msgstr "отклонить"
+
+msgid "Delete leave request"
+msgstr "Удалить заявление на отпуск"
+
+msgid ""
+"You are about to delete one leave request, this procedure is irreversible."
+msgstr "Вы собираетесь удалить заявление на отпуск. Это действие нельзя будет отменить."
+
+msgid "Submit a leave request"
+msgstr "Отправить заявление на отпуск"
+
+msgid "You are exceeding your entitled days"
+msgstr "Вы превысили лимит предоставленных дней"
+
+msgid "You have requested another leave request within the same dates."
+msgstr "Вы отправили еще одно заявление на отпуск на те же даты."
+
+msgid "Cause (optional)"
+msgstr "Причина (необязательно)"
+
+msgid "Request leave"
+msgstr "Запросить отпуск"
+
+msgid "The leave request has been succesfully created"
+msgstr "Заявление на отпуск успешно создано."
+
+msgid ""
+"The leave request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "Заявление на отпуск было успешно создано/обновлено, но у вас нет руководителя."
+
+msgid "List of overtime requests for employee #"
+msgstr "Список запросов сверхурочных, для сотрудника N°"
+
+msgid "Leave balance for user #"
+msgstr "Сальдо по отпускам, для сотрудника N°"
+
+msgid "Available"
+msgstr "Доступно"
+
+msgid "Taken"
+msgstr "Использовано"
+
+msgid "Entitled"
+msgstr "Предоставляемые дни"
+
+msgid "This employee has no contract."
+msgstr "Этот работник не имеет контракта."
+
+msgid "Date of report"
+msgstr "Дата отчёта"
+
+msgid ""
+"By default this report shows the values for the last month. Please note that"
+" the list of leaves shows only the accepted leave requests."
+msgstr "По умолчанию данный отчет содержит данные за предыдущий месяц. Пожалуйста, обратите внимание на то, что список отпусков отображает только утвержденные заявления на отпуск."
+
+msgid "Number of days"
+msgstr "Количество дней"
+
+msgid "Number of working days"
+msgstr "Количество рабочих дней"
+
+msgid "Number of non-working days"
+msgstr "Количество нерабочих дней"
+
+msgid "Duration of leaves"
+msgstr "Продолжительность отпусков"
+
+msgid "Duration of presence"
+msgstr "Продолжительность присутствия"
+
+msgid "Overlapping detected"
+msgstr "Обнаружено перекрытие"
+
+msgid "The employee has no contract"
+msgstr "У работника нет контракта"
+
+msgid "Please check"
+msgstr "Проверьте"
+
+msgid "List of leaves in the month"
+msgstr "Список отпусков за месяц"
+
+msgid "My summary"
+msgstr "Моя сводная информация"
+
+msgid "Overtime details (added to compensate leaves)"
+msgstr "Подробности сверхурочных (добавлено для компенсации отпусков)"
+
+msgid "Catch up for"
+msgstr "Нагнать"
+
+msgid ""
+"No entitled or taken days for this period. Please contact your HR Officer / "
+"Manager."
+msgstr "Нет предоставленных или использованных дней для этого периода. Обратитесь к своему руководителю."
+
+msgid ""
+"It appears you have no contract. Please contact your HR Officer / Manager."
+msgstr "Похоже вы не имеете контракта. Обратитесь к своему руководителю."
+
+msgid "My leave requests"
+msgstr "Мои заявления на отпуск"
+
+msgid "Edit a leave request"
+msgstr "Редактировать заявление на отпуск"
+
+msgid "Edit leave request #"
+msgstr "Редактировать заявление на отпуск №"
+
+msgid "Update leave"
+msgstr "Обновить отпуск"
+
+msgid "You cannot edit a leave request already submitted"
+msgstr "Невозможно изменить уже отправленное заявление на отпуск"
+
+msgid "The leave request has been succesfully updated"
+msgstr "Заявление на отпуск успешно обновлено"
+
+msgid ""
+"You can't create a leave request for two yearly leave periods. Please create"
+" two different leave requests."
+msgstr "Вы не можете создать заявление на отпуск для разных годов.  Пожалуйста, создайте два разных заявления на отпуск."
+
+msgid "You can't delete this leave request"
+msgstr "Нельзя удалить это заявление на отпуск"
+
+msgid "The leave request has been succesfully deleted"
+msgstr "Заявление на отпуск успешно удалено"
+
+msgid "View leave request #"
+msgstr "Просмотреть заявление на отпуск №"
+
+msgid "View a leave request"
+msgstr "Просмотреть заявление на отпуск"
+
+msgid "List of leaves"
+msgstr "Список отпусков"
+
+msgid "Morning/Afternnon"
+msgstr "Утро/День"
+
+msgid "Leave types"
+msgstr "Типы отпусков"
+
+msgid "Create a new type"
+msgstr "Создать новый тип"
+
+msgid "No leave type found into the database."
+msgstr "Тип отпуска не найден в базе данных."
+
+msgid "Add a leave type"
+msgstr "Добавить тип отпуска"
+
+msgid "The leave type has been succesfully created."
+msgstr "Тип отпуска успешно создан."
+
+msgid "Edit a Leave type"
+msgstr "Редактировать тип отпуска"
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "The leave type has been succesfully updated."
+msgstr "Тип отпуска был успешно обновлен."
+
+msgid "Delete Leave Type"
+msgstr "Удалить тип отпуска"
+
+msgid ""
+"You are about to delete one leave type, this procedure is irreversible."
+msgstr "Вы собираетесь удалить тип отпуска. Это действие нельзя будет отменить."
+
+msgid "The leave type has been succesfully deleted."
+msgstr "Тип отпуска был успешно удален."
+
+msgid "You cannot delete a system leave type."
+msgstr "Вы не можете удалить системный тип отпуска."
+
+msgid "You cannot delete a leave type that is used."
+msgstr "Вы не можете удалить тип отпуска, который используется в системе."
+
+msgid "Leave Management System"
+msgstr "Система управления отпусками"
+
+msgid "Change password"
+msgstr "Изменить пароль"
+
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+msgid "Logout"
+msgstr "Выйти"
+
+msgid "View my personal information"
+msgstr "Показать мою личную информацию"
+
+msgid "reset password"
+msgstr "сбросить пароль"
+
+msgid "Admin"
+msgstr "Администратор"
+
+msgid "List of users"
+msgstr "Список пользователей"
+
+msgid "Create user"
+msgstr "Создать пользователя"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "HR"
+msgstr "Управление HR"
+
+msgid "Employees"
+msgstr "Сотрудники"
+
+msgid "Organization"
+msgstr "Организация"
+
+msgid "Contracts"
+msgstr "Контракты"
+
+msgid "List of positions"
+msgstr "Список должностей"
+
+msgid "List of types"
+msgstr "Список типов"
+
+msgid "Reports"
+msgstr "Отчеты"
+
+msgid "Leave balance"
+msgstr "Сальдо по отпускам"
+
+msgid "Validation"
+msgstr "Утверждение"
+
+msgid "My collaborators"
+msgstr "Моих сотрудников"
+
+msgid "Overtime"
+msgstr "Сверхурочные"
+
+msgid "Requests"
+msgstr "Запросы"
+
+msgid "List of extras"
+msgstr "Список запросов на сверхурочную работу"
+
+msgid "Request an extra"
+msgstr "Запрос на сверхурочную работу"
+
+msgid "My leaves"
+msgstr "Мои отпуска"
+
+msgid "Counters"
+msgstr "Сводная информация"
+
+msgid "List of leave requests"
+msgstr "Список заявлений на отпуск"
+
+msgid "Request a leave"
+msgstr "Создать заявление об отпуске"
+
+msgid "Calendars"
+msgstr "Календари"
+
+msgid "My workmates"
+msgstr "Мои коллеги"
+
+msgid "Department"
+msgstr "Отдел"
+
+msgid "Global"
+msgstr "Общий"
+
+msgid "Tabular"
+msgstr "Табличный"
+
+msgid "Search for an entity"
+msgstr "Искать запись"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Employees attached to entity"
+msgstr "Сотрудники, закрепленные за отделом"
+
+msgid "Attach an Employee"
+msgstr "Закрепить сотрудника"
+
+msgid "Detach an Employee"
+msgstr "Открепить сотрудника"
+
+msgid "Supervisor"
+msgstr "Руководитель"
+
+msgid ""
+"If you select a supervisor, he will receive a copy of accepted and rejected "
+"leave requests submitted by employees of this entity."
+msgstr "Выбранный руководитель будет получать копии утвержденных или отклоненных заявлений на отпуск, созданных пользователем."
+
+msgid "Select a Supervisor"
+msgstr "Выберите руководителя"
+
+msgid "Delete Entity"
+msgstr "Удалить отдел"
+
+msgid "You are about to delete one entity, this procedure is irreversible."
+msgstr "Вы собираетесь удалить отдел. Это действие нельзя будет отменить."
+
+msgid "Add an Employee"
+msgstr "Добавить сотрудника"
+
+msgid "An error occured"
+msgstr "Возникла ошибка"
+
+msgid "Name of the entity"
+msgstr "Название отдела"
+
+msgid "Please select one entity in the organization (treeview on the right)."
+msgstr "Пожалуйста, выберите один отдел организации (древовидное меню справа)"
+
+msgid ""
+"Please select one employee in the table of users belonging to the selected "
+"entity."
+msgstr "Пожалуйста, выберите одного работника из списка пользователей, относящихся к выбранному отделу."
+
+msgid "You cannot delete the root entity."
+msgstr "Вы не можете удалить корневой отдел"
+
+msgid "Overtime Requests submitted to me"
+msgstr "Запросы на сверхурочные, представленные на ваше рассмотрение."
+
+msgid ""
+"This screen lists the overtime requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "Здесь показан список заявлений на сверхурочные, представленных на ваше рассмотрение. Если вы не руководитель, этот список всегда будет пуст."
+
+msgid "Fullname"
+msgstr "ФИО"
+
+msgid "All requests"
+msgstr "Все запросы"
+
+msgid "Pending requests "
+msgstr "Запросы на рассмотрении"
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this "
+"overtime request."
+msgstr "Вы не являетесь прямым руководителем этого сотрудника. Вы не можете утвердить данное заявление на сверхурочную работу."
+
+msgid "The overtime request has been successfully rejected."
+msgstr "Запрос на сверхурочную работу успешно отклонен"
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this "
+"overtime request."
+msgstr "Вы не являетесь прямым руководителем этого сотрудника. Вы не можете утвердить данное заявление на отпуск."
+
+msgid "The overtime request has been successfully accepted."
+msgstr "Запрос на сверхурочную работу успешно утвержден"
+
+msgid "List of overtime resquests"
+msgstr "Список запросов сверхурочных"
+
+msgid "Create position"
+msgstr "Создать должность"
+
+msgid "Delete Position"
+msgstr "Удалить должность"
+
+msgid "You are about to delete one position, this procedure is irreversible."
+msgstr "Вы собираетесь удалить должность. Это действие нельзя отменить."
+
+msgid "Create a new position"
+msgstr "Создать новую должность"
+
+msgid "The position has been succesfully created."
+msgstr "Должность успешно создана"
+
+msgid "Edit position #"
+msgstr "Редактировать должность №"
+
+msgid "Update position"
+msgstr "Обновить должность"
+
+msgid "The position has been succesfully updated."
+msgstr "Должность успешно обновлена."
+
+msgid "The position has been succesfully deleted."
+msgstr "Должность успешно удалена."
+
+msgid "List of reports"
+msgstr "Список отчетов"
+
+msgid "Report"
+msgstr "Отчет"
+
+msgid "Back to list of reports"
+msgstr "Вернуться к списку отчетов"
+
+msgid "List of Report"
+msgstr "Список отчетов"
+
+msgid "Balance of leaves"
+msgstr "Сальдо по отпускам"
+
+msgid "Launch"
+msgstr "Выполнить"
+
+msgid "Leave Requests submitted to me"
+msgstr "Заявления на отпуск, представленные на ваше рассмотрение"
+
+msgid ""
+"This screen lists the leave requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "Здесь показан список заявлений на отпуск, представленных на ваше рассмотрение. Если вы не руководитель, этот список всегда будет пуст."
+
+msgid "List of my collaborators"
+msgstr "Список моих сотрудников"
+
+msgid ""
+"This screen lists your collaborators. If you are not a manager, this list "
+"will always be empty."
+msgstr "Здесь показан список ваших сотрудников. Если вы не руководитель, этот список всегда будет пуст."
+
+msgid "Create a leave request in behalf of this collaborator"
+msgstr "Создать заявление на отпуск от имени этого сотрудника"
+
+msgid "Your are not the manager of this employee."
+msgstr "Вы не являетесь прямым руководителем этого сотрудника."
+
+msgid "List of collaborators"
+msgstr "Список сотрудников"
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this leave "
+"request."
+msgstr "Вы не являетесь прямым руководителем этого сотрудника. Вы не можете утвердить это заявление на отпуск."
+
+msgid "The leave request has been successfully accepted."
+msgstr "Заявление на отпуск успешно утверждено."
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this leave "
+"request."
+msgstr "Вы не являетесь прямым руководителем этого сотрудника. Вы не можете отклонить это заявление на отпуск."
+
+msgid "The leave request has been successfully rejected."
+msgstr "Заявление на отпуск успешно отклонено."
+
+msgid "List of leave resquests"
+msgstr "Список заявлений на отпуск"
+
+msgid "Morning/Afternoon"
+msgstr "Утро/после полудня"
+
+msgid "List of delegations"
+msgstr "Список передачи обязанностей"
+
+msgid ""
+"This is the list of employees who can accept or reject a request in your "
+"behalf."
+msgstr "Это список работников, которые могут утверждать или отклонять заявления от вашего имени."
+
+msgid "Revoke"
+msgstr "Отозвать полномочия"
+
+msgid "Add a delegate"
+msgstr "Добавить уполномоченное лицо"
+
+msgid "Are you sure that you want to revoke this delegation?"
+msgstr "Вы уверены, что хотите отозвать данное полномочие?"
+
+msgid "Login"
+msgstr "Логин"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Send me my password"
+msgstr "Отправить мне мой пароль"
+
+msgid "Please fill the login field"
+msgstr "Заполните поле «Логин»"
+
+msgid "Unknown login. Please contact your HR Officer / Manager."
+msgstr "Неверный логин. Пожалуйста, свяжитесь с руководителем."
+
+msgid "The password has been sent to your e-mail adress."
+msgstr "Пароль был отправлен на ваш адрес электронной почты."
+
+msgid "Invalid login id or password"
+msgstr "Неверный логин или пароль"
+
+msgid "The language has been succesfully set to "
+msgstr "Язык успешно установлен на"
+
+msgid "Rename"
+msgstr "Переименовать"
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "Cut"
+msgstr "Вырезать"
+
+msgid "Paste"
+msgstr "Вставить"
+
+msgid "Active"
+msgstr "Активно"
+
+msgid "Inactive"
+msgstr "Неактивно"
+
+msgid "edit user details"
+msgstr "редактировать информацию пользователя"
+
+msgid "delete user"
+msgstr "удалить пользователя"
+
+msgid "Role"
+msgstr "Роль"
+
+msgid "Create a new user"
+msgstr "Создать нового пользователя"
+
+msgid "Import users"
+msgstr "Импорт пользователей"
+
+msgid "Delete User"
+msgstr "Удалить пользователя"
+
+msgid "You are about to delete one user, this procedure is irreversible."
+msgstr "Вы собираетесь удалить пользователя. Это действие нельзя отменить."
+
+msgid "Import Users"
+msgstr "Импорт пользователей"
+
+msgid "Filename"
+msgstr "Имя файла"
+
+msgid "My personal information"
+msgstr "Моя личная информация"
+
+msgid "Position"
+msgstr "Должность"
+
+msgid "Date hired/started"
+msgstr "Дата принятия на работу"
+
+msgid "Internal/Company Identifier"
+msgstr "Идентификатор"
+
+msgid "Edit user #"
+msgstr "Редактировать пользователя №"
+
+msgid "Edit user"
+msgstr "Редактировать пользователя"
+
+msgid "No line manager."
+msgstr "Нет руководителя отдела."
+
+msgid "If a user has no manager (itself), it can validate its leave requests."
+msgstr "Если у пользователя нет руководителя, то он может утверждать свои заявления на отпуск сам."
+
+msgid "Self"
+msgstr "Сам"
+
+msgid "Timezone"
+msgstr "Часовой пояс"
+
+msgid "LDAP Path"
+msgstr "Путь LDAP"
+
+msgid "Select the manager"
+msgstr "Выбрать руководителя"
+
+msgid "Select a position"
+msgstr "Выбрать должность"
+
+msgid "Update user"
+msgstr "Обновить пользователя"
+
+msgid "The user has been succesfully updated"
+msgstr "Пользователь успешно обновлен"
+
+msgid "The user has been succesfully deleted"
+msgstr "Пользователь успешно удален"
+
+msgid "The password has been succesfully changed"
+msgstr "Пароль успешно изменен"
+
+msgid "Generate password"
+msgstr "Сгенерировать пароль"
+
+msgid ""
+"It is recommanded to select a contract. Do you want to create the user "
+"without a contract?"
+msgstr "Рекомендуется выбрать контракт. Создать пользователя без контракта?"
+
+msgid "The user has been succesfully created"
+msgstr "Пользователь успешно создан"
+
+msgid "Username already exists."
+msgstr "Имя пользователя уже существует"
+
+msgid "This username is not available."
+msgstr "Имя пользователя недоступно"
+
+msgid "Reset"
+msgstr "Сброс"

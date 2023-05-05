@@ -1,0 +1,1413 @@
+# 
+# Translators:
+# Yevhen Kyrylchenko <yevhen.kyrylchenko@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: jorani\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-12-09 19:31+0000\n"
+"Last-Translator: Yevhen Kyrylchenko <yevhen.kyrylchenko@gmail.com>\n"
+"Language-Team: Ukrainian (http://www.transifex.com/jorani/jorani/language/uk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Yearly calendar"
+msgstr "Календар на рік"
+
+msgid "My calendar"
+msgstr "Мій календар"
+
+msgid "Calendar of my leaves."
+msgstr "Календар моїх відпусток"
+
+msgid "Download an iCal file"
+msgstr "Завантажити iCal файл"
+
+msgid "(import the event into Outlook, Thunderbird, etc.)"
+msgstr "(імпортувати подію в Outlook, Thunderbird тощо)"
+
+msgid "Event details"
+msgstr "Подробиці події"
+
+msgid "Close"
+msgstr "Замкнути"
+
+msgid "Day offs"
+msgstr "Неробочі дні"
+
+msgid "Calendar of my workmates"
+msgstr "Календар моїх колег"
+
+msgid "Leaves of employees having the same line manager"
+msgstr "Відпустки працівників з тим самим керівником"
+
+msgid "Calendar of my collaborators"
+msgstr "Календар моїх співробітників"
+
+msgid "Leaves of my collaborators (will be empty if I'm not a manager)."
+msgstr "Відпустки моїх співробітників (буде пустим, якщо я не керівник)"
+
+msgid "Calendar of my department"
+msgstr "Календар мого відділу"
+
+msgid "Calendar of employees working in my department"
+msgstr "Календар співробітників, що працюють в моєму відділі"
+
+msgid ""
+"It appears that you don't belong to any department. Please contact your HR "
+"Officer / Manager."
+msgstr "Схоже не те, що ви не закріплені за жодним відділом. Зверніться до свого керівника."
+
+msgid "Calendar of the organization"
+msgstr "Календар організації"
+
+msgid "Global calendar with a filter on entity"
+msgstr "Загальний календар з фільтрацією по відділу"
+
+msgid "Select the entity"
+msgstr "Оберіть відділ"
+
+msgid "Select"
+msgstr "Вибрати"
+
+msgid "Include sub-departments"
+msgstr "Включаючи підвідділи"
+
+msgid "Select an entity"
+msgstr "Оберіть відділ"
+
+msgid "OK"
+msgstr "ОК"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Tabular Calendar"
+msgstr "Табличний календар"
+
+msgid "Month"
+msgstr "Місяць"
+
+msgid "Year"
+msgstr "Рік"
+
+msgid "Execute"
+msgstr "Виконати"
+
+msgid "Export"
+msgstr "Експортувати"
+
+msgid "Employee"
+msgstr "Працівник"
+
+msgid "Calendar Tabular"
+msgstr "Табличний календар"
+
+msgid "Entity"
+msgstr "Відділ"
+
+msgid "Sub-entities"
+msgstr "Підвідділ"
+
+msgid ""
+"'January','February','March','April','May','June','July','August','September','October','November','December'"
+msgstr "'Січень','Лютий','Березень','Квітень','Травень','Липень','Червень','Серпень','Вересень','Жовтень','Листопад','Грудень'"
+
+msgid ""
+"'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'"
+msgstr "'Січ','Лют','Бер','Кві','Тра','Лип','Чер','Сер','Вер','Жов','Лис','Гру'"
+
+msgid "'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'"
+msgstr "'Неділя','Понеділок','Вівторок','Середа','Четвер','П\\'ятниця','Субота'"
+
+msgid "'Sun','Mon','Tue','Wed','Thu','Fri','Sat'"
+msgstr "'Нед','Пон','Вт','Сер','Чет','Пт','Суб'"
+
+msgid "MMMM yyyy"
+msgstr "MMMM yyyy"
+
+msgid "MMM d[ yyyy]{ - [ MMM] d yyyy}"
+msgstr "MMM d[ yyyy]{ - [ MMM] d yyyy}"
+
+msgid "dddd, MMM d, yyyy"
+msgstr "dddd, MMM d, yyyy"
+
+msgid "ddd"
+msgstr "ddd"
+
+msgid "ddd M/d"
+msgstr "ddd M/d"
+
+msgid "dddd M/d"
+msgstr "dddd M/d"
+
+msgid "H:mm"
+msgstr "H:mm"
+
+msgid "h(:mm)t"
+msgstr "h(:mm)t"
+
+msgid "H:mm{ - H:mm}"
+msgstr "H:mm{ - H:mm}"
+
+msgid "1"
+msgstr "1"
+
+msgid "today"
+msgstr "сьогодні"
+
+msgid "day"
+msgstr "день"
+
+msgid "week"
+msgstr "тиждень"
+
+msgid "month"
+msgstr "місяць"
+
+msgid "prev,next today"
+msgstr "попер,наступ сьогодні"
+
+msgid "title"
+msgstr "назва"
+
+msgid "month,basicWeek,basicDay"
+msgstr "month,basicWeek,basicDay"
+
+msgid "Mo"
+msgstr "Пон"
+
+msgid "Tu"
+msgstr "Вт"
+
+msgid "We"
+msgstr "Сер"
+
+msgid "Th"
+msgstr "Чет"
+
+msgid "Fr"
+msgstr "Пт"
+
+msgid "Sa"
+msgstr "Суб"
+
+msgid "Su"
+msgstr "Нед"
+
+msgid "Monday"
+msgstr "Понеділок"
+
+msgid "Tuesday"
+msgstr "Вівторок"
+
+msgid "Wednesday"
+msgstr "Середа"
+
+msgid "Thursday"
+msgstr "Четвер"
+
+msgid "Friday"
+msgstr "П\\'ятниця"
+
+msgid "Saturday"
+msgstr "Субота"
+
+msgid "Sunday"
+msgstr "Неділя"
+
+msgid "All days"
+msgstr "Всі дні"
+
+msgid "January"
+msgstr "Січень"
+
+msgid "February"
+msgstr "Лютий"
+
+msgid "March"
+msgstr "Березень"
+
+msgid "April"
+msgstr "Квітень"
+
+msgid "May"
+msgstr "Травень"
+
+msgid "June"
+msgstr "Липень"
+
+msgid "July"
+msgstr "Червень"
+
+msgid "August"
+msgstr "Серпень"
+
+msgid "September"
+msgstr "Вересень"
+
+msgid "October"
+msgstr "Жовтень"
+
+msgid "November"
+msgstr "Листопад"
+
+msgid "December"
+msgstr "Грудень"
+
+msgid "List of contracts"
+msgstr "Список контрактів"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Name"
+msgstr "Назва"
+
+msgid "Start period"
+msgstr "Початок періоду"
+
+msgid "End period"
+msgstr "Закінчення періоду"
+
+msgid "delete contract"
+msgstr "видалити контракт"
+
+msgid "edit contract"
+msgstr "редагувати контракт"
+
+msgid "entitled days"
+msgstr "надані дні"
+
+msgid "day offs and weekends"
+msgstr "неробочі та вихідні дні"
+
+msgid "Export this list"
+msgstr "Експортувати список"
+
+msgid "Create contract"
+msgstr "Створити контракт"
+
+msgid "Delete Contract"
+msgstr "Видалити контракт"
+
+msgid "You are about to delete one contract, this procedure is irreversible."
+msgstr "Ви збираєтесь видалити контракт. Цю дію не можна буде скасувати."
+
+msgid "Do you want to proceed?"
+msgstr "Продовжити?"
+
+msgid "Yes"
+msgstr "Так"
+
+msgid "No"
+msgstr "Ні"
+
+msgid "Entitled days"
+msgstr "Надані дні"
+
+msgid "Edit a contract"
+msgstr "Редагувати контракт"
+
+msgid "Edit contract #"
+msgstr "Редагувати контракт №"
+
+msgid "Month / Start"
+msgstr "Місяць/Початок"
+
+msgid "Day / Start"
+msgstr "День/Початок"
+
+msgid "Month / End"
+msgstr "Місяць/Закінчення"
+
+msgid "Day / End"
+msgstr "День/Закінчення"
+
+msgid "Update contract"
+msgstr "Оновити контракт"
+
+msgid "The contract has been succesfully updated"
+msgstr "Контракт був успішно оновлений"
+
+msgid "Create a new contract"
+msgstr "Створити новий контракт"
+
+msgid "The contract has been succesfully created"
+msgstr "Контракт був успішно створений"
+
+msgid "The contract has been succesfully deleted"
+msgstr "Контракт був успішно видалений"
+
+msgid "Calendar of non working days"
+msgstr "Календар неробочих днів"
+
+msgid ""
+"Day offs and weekends are not configured by default. Click on a day to edit "
+"it individually or use the button \"Series\"."
+msgstr "Вихідні та неробочі дні не задані по замовчуванню. Натисніть на день для індивідуального редагування або використовуйте кнопку \"Послідовності\""
+
+msgid "Legend:"
+msgstr "Позначення"
+
+msgid "All day"
+msgstr "Всі дні"
+
+msgid "Morning"
+msgstr "Ранок"
+
+msgid "Afternoon"
+msgstr "Після обіду"
+
+msgid "Back to contracts"
+msgstr "Назад до контрактів"
+
+msgid "Series of non-working days"
+msgstr "Серії неробочих днів"
+
+msgid "Edit day off"
+msgstr "Редагувати неробочий день"
+
+msgid "Title"
+msgstr "Назва"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Working day"
+msgstr "Робочий день"
+
+msgid "All day is off"
+msgstr "Всі дні неробочі"
+
+msgid "Morning is off"
+msgstr "Ранок неробочий"
+
+msgid "Afternoon is off"
+msgstr "Після обіду неробочий"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "Import iCal"
+msgstr "Імпортувати iCal"
+
+msgid "URL of non-working days iCal file"
+msgstr "URL файлу неробочих днів iCal"
+
+msgid "Edit a series of day offs"
+msgstr "Редагувати серії неробочих днів"
+
+msgid "Mark every"
+msgstr "Помітити кожен"
+
+msgid "From"
+msgstr "Від"
+
+msgid "Current"
+msgstr "Поточний"
+
+msgid "To"
+msgstr "До"
+
+msgid "As a"
+msgstr "Як"
+
+msgid "Copy"
+msgstr "Копія"
+
+msgid "You must select a contract."
+msgstr "Необхідно обрати контракт."
+
+msgid "Data has been copied successfully."
+msgstr "Дані успішно скопійовані."
+
+msgid "No data available in table"
+msgstr "Немає даних в таблиці"
+
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "Показано від _START_ до _END_ з _TOTAL_ записів"
+
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "Показано від 0 до 0 з 0 записів"
+
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(відфільтровано від загальної кількості записів _MAX_)"
+
+msgid ","
+msgstr ","
+
+msgid "Show _MENU_ entries"
+msgstr "Показати _MENU_ записів"
+
+msgid "Loading..."
+msgstr "Завантаження..."
+
+msgid "Processing..."
+msgstr "Обробка..."
+
+msgid "Search:"
+msgstr "Пошук:"
+
+msgid "No matching records found"
+msgstr "Співпадінь не знайдено"
+
+msgid "First"
+msgstr "Перший"
+
+msgid "Last"
+msgstr "Остатній"
+
+msgid "Next"
+msgstr "Наступний"
+
+msgid "Previous"
+msgstr "Попередній"
+
+msgid ": activate to sort column ascending"
+msgstr ": активувати для сортування по зростанню"
+
+msgid ": activate to sort column descending"
+msgstr ": активувати для сортування по спаданню"
+
+msgid "Your password has been reset"
+msgstr "Ваш пароль було скинуто"
+
+msgid "Your account has been created"
+msgstr "Ваш обліковий запис створено"
+
+msgid "Leave Request from"
+msgstr "Заява на відпустку від"
+
+msgid "Leave Request"
+msgstr "Заява на відпустку"
+
+msgid "Your leave request has been accepted"
+msgstr "Ваша заява на відпустку була затверджена"
+
+msgid "Your leave request has been rejected"
+msgstr "Ваша заява на відпустку була відхилена"
+
+msgid "Your overtime request has been accepted"
+msgstr "Ваша заява на понаднормові була затверджена"
+
+msgid "Your overtime request has been rejected"
+msgstr "Ваша заява на понаднормові була відхилена"
+
+msgid "Overtime Request"
+msgstr "Заява на понаднормові"
+
+msgid "Overtime request from"
+msgstr "Заява на понаднормові від"
+
+msgid "Entitled days for contract"
+msgstr "Надані дні по контракту"
+
+msgid "Start"
+msgstr "Початок"
+
+msgid "End"
+msgstr "Закінчення"
+
+msgid "Days"
+msgstr "Дні"
+
+msgid "Leave type"
+msgstr "Тип відпустки"
+
+msgid "Description"
+msgstr "Опис"
+
+msgid "No entitled days attached to the contract."
+msgstr "В контракті не вказана кількість наданих днів"
+
+msgid "Add entitled days"
+msgstr "Додати надані дні"
+
+msgid "Start Date"
+msgstr "Дата початку"
+
+msgid "End Date"
+msgstr "Дата закінчення"
+
+msgid "Add"
+msgstr "Додати"
+
+msgid "\"The field \" + fieldname + \" is mandatory.\""
+msgstr "\"Поле \" + fieldname + \" є обов\\'язковим.\""
+
+msgid "Back to the list of contracts"
+msgstr "Назад до списку контрактів"
+
+msgid "Are you sure that you want to delete it?"
+msgstr "Видалити?"
+
+msgid "Step"
+msgstr "Крок"
+
+msgid "Entitled days for employee"
+msgstr "Надані дні для працівника"
+
+msgid "No entitled days attached to the user."
+msgstr "Немає наданих для працівника днів"
+
+msgid "Back to the list of employees"
+msgstr "Назад до списку працівників"
+
+msgid "Entitled days to Contract #"
+msgstr "Надані дні для контракту №"
+
+msgid "Yearly leave period : "
+msgstr "Щорічні відпустки:"
+
+msgid "Entitled days to Employee"
+msgstr "Надані дні для працівника"
+
+msgid "My overtime requests"
+msgstr "Мої заяви на понаднормові"
+
+msgid "view"
+msgstr "переглянути"
+
+msgid "edit"
+msgstr "редагувати"
+
+msgid "delete"
+msgstr "видалити"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Reason"
+msgstr "Причина"
+
+msgid "Duration"
+msgstr "Тривалість"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "New request"
+msgstr "Нова заява"
+
+msgid "Delete overtime request"
+msgstr "Видалити заяву на понаднормові"
+
+msgid ""
+"You are about to delete one overtime request, this procedure is "
+"irreversible."
+msgstr "Ви збираєтесь видалити заяву на понаднормові. Цю дію не можна буде скасувати."
+
+msgid "Submit an overtime request"
+msgstr "Відправити заяву на понаднормові"
+
+msgid "In days or fraction of days (e.g. 0.13 for 1h if you work 8h/day)."
+msgstr "В цілих днях або в дробових частинах (наприклад 0,125 для 1 години, при 8-годинному робочому дні)"
+
+msgid "Request overtime"
+msgstr "Заява на понаднормові"
+
+msgid "The overtime request has been succesfully created"
+msgstr "Заява на понаднормові успішно створена"
+
+msgid ""
+"The overtime request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "Заява на понаднормові успішно створена або оновлена, але у вас немає керівника."
+
+msgid "Edit overtime request #"
+msgstr "Редагувати заяву на понаднормові №"
+
+msgid "Edit a overtime request"
+msgstr "Редагувати заяву на понаднормові"
+
+msgid "In days or fraction of days (e.g. 0.125 for 1h if you work 8h/day)."
+msgstr "В цілих днях або в дробових частинах (наприклад 0,125 для 1 години, при 8-годинному робочому дні)"
+
+msgid "Update overtime"
+msgstr "Оновити заяву на понаднормові"
+
+msgid "You cannot edit an overtime request already submitted"
+msgstr "Не можна оновити відправлену заяву на понаднормові"
+
+msgid "The overtime request has been succesfully updated"
+msgstr "Заява на понаднормові успішно оновлена"
+
+msgid "The overtime request has been succesfully deleted"
+msgstr "Заява на понаднормові успішно видалена"
+
+msgid "You can't delete this overtime request"
+msgstr "Не можна видалити цю заяву на понаднормові"
+
+msgid "View overtime request #"
+msgstr "Перегляд заяви на понаднормові №"
+
+msgid "View overtime request"
+msgstr "Перегляд заяви на понаднормові"
+
+msgid "Edit"
+msgstr "Редагувати"
+
+msgid "Back to list"
+msgstr "Назад до списку"
+
+msgid "List of overtime requests"
+msgstr "Список заяв на понаднормові"
+
+msgid "Link to documentation"
+msgstr "Посилання на документацію"
+
+msgid "Operation (%s) is not granted"
+msgstr "Операція (%s) не дозволена"
+
+msgid "Please wait"
+msgstr "Зачекайте"
+
+msgid ""
+"Internet Explorer 8 and older browser are not supported. Please upgrade to "
+"IE9 or use Firefox, Chrome, etc."
+msgstr "Internet Explorer 8 та старші версії цього браузера не підтримуються. Виконайте оновлення до IE9 або використовуйте Firefox, Chrome тощо."
+
+msgid "m/d/Y"
+msgstr "m/d/Y"
+
+msgid "TRUE"
+msgstr "ТАК"
+
+msgid "FALSE"
+msgstr "Ні"
+
+msgid "Go top"
+msgstr "Нагору"
+
+msgid "&copy; 2014 Jorani Authors"
+msgstr "&copy; 2014 розробникі Jorani"
+
+msgid "Requested"
+msgstr "Запитано"
+
+msgid "Planned"
+msgstr "Заплановано"
+
+msgid "Accepted"
+msgstr "Затверджено"
+
+msgid "Rejected"
+msgstr "Відхилено"
+
+msgid "identifier"
+msgstr "Ідентифікатор"
+
+msgid "firstname"
+msgstr "ім'я"
+
+msgid "lastname"
+msgstr "прізвище"
+
+msgid "date hired"
+msgstr "дата прийому на роботу"
+
+msgid "department"
+msgstr "відділ"
+
+msgid "position"
+msgstr "посада"
+
+msgid "contract"
+msgstr "контракт"
+
+msgid "day off"
+msgstr "вихідний"
+
+msgid "leave"
+msgstr "відпустка"
+
+msgid "copied"
+msgstr "скопійовано"
+
+msgid "Your session has expired please login again"
+msgstr "Ваша сесія скінчилася. Виконайте вхід знову."
+
+msgid "Unexpected Ajax Error"
+msgstr "Неочікувана помилка Ajax"
+
+msgid "List of employees"
+msgstr "Список працівників"
+
+msgid "edit user"
+msgstr "редагувати користувача"
+
+msgid "Leaves"
+msgstr "Відпустки"
+
+msgid "Extras"
+msgstr "Додатково"
+
+msgid "Leave Balance"
+msgstr "Сальдо по відпустках"
+
+msgid "Create Leave Request"
+msgstr "Створити заяву на відпустку"
+
+msgid "Presence report"
+msgstr "Звіт відвідування"
+
+msgid "Delegations"
+msgstr "Передачі обов'язків"
+
+msgid "Firstname"
+msgstr "Ім'я"
+
+msgid "Lastname"
+msgstr "Прізвище"
+
+msgid "E-mail"
+msgstr "Ел. пошта"
+
+msgid "Contract"
+msgstr "Контракт"
+
+msgid "Manager"
+msgstr "Керівник"
+
+msgid "Create"
+msgstr "Створити"
+
+msgid "Right-click / taphold on an employee for contextual actions."
+msgstr "Натисніть правою кнопкою мишки на працівнику щоб відкрити контекстне меню."
+
+msgid "List of requested leaves"
+msgstr "Список запитаних заяв на відпустку"
+
+msgid "List of leaves for employee #"
+msgstr "Список відпусток для працівника №"
+
+msgid "accept"
+msgstr "затвердити"
+
+msgid "reject"
+msgstr "відхилити"
+
+msgid "Delete leave request"
+msgstr "Видалити заяву на відпустку"
+
+msgid ""
+"You are about to delete one leave request, this procedure is irreversible."
+msgstr "Ви збираєтесь видалити заяву на відпустку. Цю дію не можна буде скасувати."
+
+msgid "Submit a leave request"
+msgstr "Відправити заяву на відпустку"
+
+msgid "You are exceeding your entitled days"
+msgstr "Ви перевищили ліміт наданих днів"
+
+msgid "You have requested another leave request within the same dates."
+msgstr "Ви відправили іншу заяву на відпустку на такі самі дні."
+
+msgid "Cause (optional)"
+msgstr "Причина (не обов'язково)"
+
+msgid "Request leave"
+msgstr "Запит відпустки"
+
+msgid "The leave request has been succesfully created"
+msgstr "Заява на відпустку успішно створена"
+
+msgid ""
+"The leave request has been succesfully created or updated, but you don't "
+"have a manager."
+msgstr "Заява на відпустку успішно створена або оновлена, але у вас немає керівника."
+
+msgid "List of overtime requests for employee #"
+msgstr "Список заяв на понаднормові для працівника №"
+
+msgid "Leave balance for user #"
+msgstr "Сальдо по відпустках для працівника №"
+
+msgid "Available"
+msgstr "Доступно"
+
+msgid "Taken"
+msgstr "Використано"
+
+msgid "Entitled"
+msgstr "Надано"
+
+msgid "This employee has no contract."
+msgstr "Цей працівник не має керівника"
+
+msgid "Date of report"
+msgstr "Дата звіту"
+
+msgid ""
+"By default this report shows the values for the last month. Please note that"
+" the list of leaves shows only the accepted leave requests."
+msgstr "За замовченням даний звіт містить дані за попередній місяць. Будь ласка зверніть увагу на то, що список відпусток відтворює тільки затверджені заяви на відпустки."
+
+msgid "Number of days"
+msgstr "Кількість днів"
+
+msgid "Number of working days"
+msgstr "Кількість робочих днів"
+
+msgid "Number of non-working days"
+msgstr "Кількість вихідних"
+
+msgid "Duration of leaves"
+msgstr "Тривалість відпусток"
+
+msgid "Duration of presence"
+msgstr "Тривалість присутності"
+
+msgid "Overlapping detected"
+msgstr "Виявлено перекриття"
+
+msgid "The employee has no contract"
+msgstr "Працівник немає контракту"
+
+msgid "Please check"
+msgstr "Перевірте"
+
+msgid "List of leaves in the month"
+msgstr "Список відпусток за місяць"
+
+msgid "My summary"
+msgstr "Моя зведена інформація"
+
+msgid "Overtime details (added to compensate leaves)"
+msgstr "Подробиці понаднормових (додано для компенсації відпусток)"
+
+msgid "Catch up for"
+msgstr "Нагнати"
+
+msgid ""
+"No entitled or taken days for this period. Please contact your HR Officer / "
+"Manager."
+msgstr "Немає наданих або використаних днів за цей період. Зверніться до свого керівника."
+
+msgid ""
+"It appears you have no contract. Please contact your HR Officer / Manager."
+msgstr "Схоже не те, що у вас немає контракту. Зверніться до свого керівника."
+
+msgid "My leave requests"
+msgstr "Мої заяви на відпустку"
+
+msgid "Edit a leave request"
+msgstr "Редагувати заяву на відпустку"
+
+msgid "Edit leave request #"
+msgstr "Редагувати заяву на відпустку №"
+
+msgid "Update leave"
+msgstr "Оновити заяву на відпустку"
+
+msgid "You cannot edit a leave request already submitted"
+msgstr "Не можна оновити відправлену заяву на відпустку"
+
+msgid "The leave request has been succesfully updated"
+msgstr "Заява на понаднормові відпустку оновлена"
+
+msgid ""
+"You can't create a leave request for two yearly leave periods. Please create"
+" two different leave requests."
+msgstr "Ви не можете створити заяву на відпустку для різних років. Будь ласка створіть дві окремі заяви на відпустку."
+
+msgid "You can't delete this leave request"
+msgstr "Не можна видалити цю заяву на відпустку"
+
+msgid "The leave request has been succesfully deleted"
+msgstr "Заява на відпустку успішно видалена"
+
+msgid "View leave request #"
+msgstr "Перегляд заяви на відпустку №"
+
+msgid "View a leave request"
+msgstr "Перегляд заяви на відпустку"
+
+msgid "List of leaves"
+msgstr "Список відпусток"
+
+msgid "Morning/Afternnon"
+msgstr "Ранок/Після обіду"
+
+msgid "Leave types"
+msgstr "Типи відпусток"
+
+msgid "Create a new type"
+msgstr "Створити новий тип"
+
+msgid "No leave type found into the database."
+msgstr "Тип відпустки не знайдено в базі даних"
+
+msgid "Add a leave type"
+msgstr "Додати тип відпустки"
+
+msgid "The leave type has been succesfully created."
+msgstr "Тип відпустки успішно створений"
+
+msgid "Edit a Leave type"
+msgstr "Редагувати тип відпустки"
+
+msgid "Update"
+msgstr "Оновити"
+
+msgid "The leave type has been succesfully updated."
+msgstr "Тип відпустки успішно оновлений"
+
+msgid "Delete Leave Type"
+msgstr "Видалити тип відпустки"
+
+msgid ""
+"You are about to delete one leave type, this procedure is irreversible."
+msgstr "Ви збираєтесь видалити один тип відпустки. Цю дію не можна буде скасувати."
+
+msgid "The leave type has been succesfully deleted."
+msgstr "Тип відпустки успішно видалений."
+
+msgid "You cannot delete a system leave type."
+msgstr "Не можна видалити системний тип відпустки."
+
+msgid "You cannot delete a leave type that is used."
+msgstr "Не можна видалити тип відпустки, що використовується."
+
+msgid "Leave Management System"
+msgstr "Система управління відпустками"
+
+msgid "Change password"
+msgstr "Змінити пароль"
+
+msgid "Welcome"
+msgstr "Ласкаво просимо"
+
+msgid "Logout"
+msgstr "Вихід"
+
+msgid "View my personal information"
+msgstr "Перегляд моєї особистої інформації"
+
+msgid "reset password"
+msgstr "скинути пароль"
+
+msgid "Admin"
+msgstr "Адміністратор"
+
+msgid "List of users"
+msgstr "Список користувачів"
+
+msgid "Create user"
+msgstr "Створити користувача"
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "HR"
+msgstr "Управління HR"
+
+msgid "Employees"
+msgstr "Працівники"
+
+msgid "Organization"
+msgstr "Організація"
+
+msgid "Contracts"
+msgstr "Контракти"
+
+msgid "List of positions"
+msgstr "Список посад"
+
+msgid "List of types"
+msgstr "Список типів"
+
+msgid "Reports"
+msgstr "Звіти"
+
+msgid "Leave balance"
+msgstr "Сальдо відпусток"
+
+msgid "Validation"
+msgstr "Перевірка"
+
+msgid "My collaborators"
+msgstr "Мої співробітники"
+
+msgid "Overtime"
+msgstr "Наднормові"
+
+msgid "Requests"
+msgstr "Заяви"
+
+msgid "List of extras"
+msgstr "Список заяв на понаднормові"
+
+msgid "Request an extra"
+msgstr "Створити заяву на понаднормові"
+
+msgid "My leaves"
+msgstr "Мої відпустки"
+
+msgid "Counters"
+msgstr "Лічильникі"
+
+msgid "List of leave requests"
+msgstr "Список заяв на відпустку"
+
+msgid "Request a leave"
+msgstr "Створити заяву на відпустку"
+
+msgid "Calendars"
+msgstr "Календарі"
+
+msgid "My workmates"
+msgstr "Мої колеги"
+
+msgid "Department"
+msgstr "Відділ"
+
+msgid "Global"
+msgstr "Загальний"
+
+msgid "Tabular"
+msgstr "Табличний"
+
+msgid "Search for an entity"
+msgstr "Шукати запис"
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Employees attached to entity"
+msgstr "Працівники, закріплені за відділом"
+
+msgid "Attach an Employee"
+msgstr "Закріпити працівника"
+
+msgid "Detach an Employee"
+msgstr "Відкріпити працівника"
+
+msgid "Supervisor"
+msgstr "Керівник"
+
+msgid ""
+"If you select a supervisor, he will receive a copy of accepted and rejected "
+"leave requests submitted by employees of this entity."
+msgstr "Вибраний керівник буде отримувати копії затверджених або відхилених заяв на відпустку, створених працівником."
+
+msgid "Select a Supervisor"
+msgstr "Виберіть керівника"
+
+msgid "Delete Entity"
+msgstr "Видалити запис"
+
+msgid "You are about to delete one entity, this procedure is irreversible."
+msgstr "Ви збираєтесь видалити запис. Цю дію не можна буде скасувати."
+
+msgid "Add an Employee"
+msgstr "Додати працівника"
+
+msgid "An error occured"
+msgstr "Виникла помилка"
+
+msgid "Name of the entity"
+msgstr "Назва відділу"
+
+msgid "Please select one entity in the organization (treeview on the right)."
+msgstr "Будь ласка, виберіть один відділ організації (деревовидне меню справа)."
+
+msgid ""
+"Please select one employee in the table of users belonging to the selected "
+"entity."
+msgstr "Будь ласка, виберіть одного працівника з списку користувачів, що відносяться до вибраного відділу."
+
+msgid "You cannot delete the root entity."
+msgstr "Не можна видалити кореневий відділ."
+
+msgid "Overtime Requests submitted to me"
+msgstr "Заяви на понаднормові, представлені на мій розгляд"
+
+msgid ""
+"This screen lists the overtime requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "Тут показано список заяв на понаднормові, представлені на ваш розгляд. Якщо ви не керівник, цей список завжди буде порожнім."
+
+msgid "Fullname"
+msgstr "ПІБ"
+
+msgid "All requests"
+msgstr "Всі заяви"
+
+msgid "Pending requests "
+msgstr "Заяви на розгляді"
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this "
+"overtime request."
+msgstr "Ви не є прямим керівником цього працівника. Ви не можете відхилити цю заяву на понаднормові."
+
+msgid "The overtime request has been successfully rejected."
+msgstr "Заява на понаднормові успішно відхилена."
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this "
+"overtime request."
+msgstr "Ви не є прямим керівником цього працівника. Ви не можете затвердити цю заяву на понаднормові."
+
+msgid "The overtime request has been successfully accepted."
+msgstr "Заява на понаднормові успішно затверджена."
+
+msgid "List of overtime resquests"
+msgstr "Список заяв на понаднормові"
+
+msgid "Create position"
+msgstr "Створити посаду"
+
+msgid "Delete Position"
+msgstr "Видалити посаду"
+
+msgid "You are about to delete one position, this procedure is irreversible."
+msgstr "Ви збираєтесь видалити посаду. Цю дію не можна буде скасувати."
+
+msgid "Create a new position"
+msgstr "Створити нову посаду"
+
+msgid "The position has been succesfully created."
+msgstr "Посада успішно створена"
+
+msgid "Edit position #"
+msgstr "Редагувати посаду №"
+
+msgid "Update position"
+msgstr "Оновити посаду"
+
+msgid "The position has been succesfully updated."
+msgstr "Посада успішно оновлена."
+
+msgid "The position has been succesfully deleted."
+msgstr "Посада успішно видалена."
+
+msgid "List of reports"
+msgstr "Список звітів"
+
+msgid "Report"
+msgstr "Звіт"
+
+msgid "Back to list of reports"
+msgstr "Назад до списку звітів"
+
+msgid "List of Report"
+msgstr "Список звітів"
+
+msgid "Balance of leaves"
+msgstr "Сальдо по відпустках"
+
+msgid "Launch"
+msgstr "Виконати"
+
+msgid "Leave Requests submitted to me"
+msgstr "Заяви на відпустки, представлені на мій розгляд"
+
+msgid ""
+"This screen lists the leave requests submitted to you. If you are not a "
+"manager, this list will always be empty."
+msgstr "Тут показано список заяв на відпустки, представлені на ваш розгляд. Якщо ви не керівник, цей список завжди буде порожнім."
+
+msgid "List of my collaborators"
+msgstr "Список моїх співробітників"
+
+msgid ""
+"This screen lists your collaborators. If you are not a manager, this list "
+"will always be empty."
+msgstr "Тут показано список ваших співробітників. Якщо ви не керівник, цей список завжди буде порожнім."
+
+msgid "Create a leave request in behalf of this collaborator"
+msgstr "Створити заяву на відпустку від імені цього співробітника"
+
+msgid "Your are not the manager of this employee."
+msgstr "Ви не є керівником цього працівника."
+
+msgid "List of collaborators"
+msgstr "Список співробітників"
+
+msgid ""
+"You are not the line manager of this employee. You cannot accept this leave "
+"request."
+msgstr "Ви не є прямим керівником цього працівника. Ви не можете затвердити цю заяву на відпустку."
+
+msgid "The leave request has been successfully accepted."
+msgstr "Заява на відпустку успішно затверджена."
+
+msgid ""
+"You are not the line manager of this employee. You cannot reject this leave "
+"request."
+msgstr "Ви не є прямим керівником цього працівника. Ви не можете відхилити цю заяву на відпустку."
+
+msgid "The leave request has been successfully rejected."
+msgstr "Заява на відпустку успішно відхилена."
+
+msgid "List of leave resquests"
+msgstr "Список заяв на відпустку"
+
+msgid "Morning/Afternoon"
+msgstr "Ранок/Після обіду"
+
+msgid "List of delegations"
+msgstr "Список передачі повноважень"
+
+msgid ""
+"This is the list of employees who can accept or reject a request in your "
+"behalf."
+msgstr "Це список працівників, котрі можуть затверджувати або відхиляти заяви від вашого імені."
+
+msgid "Revoke"
+msgstr "Відкликати"
+
+msgid "Add a delegate"
+msgstr "Додати уповноважену особу"
+
+msgid "Are you sure that you want to revoke this delegation?"
+msgstr "Ви впевнені, що хочете відкликати це повноваження?"
+
+msgid "Login"
+msgstr "Ім'я користувача"
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Send me my password"
+msgstr "Відіслати мені мій пароль"
+
+msgid "Please fill the login field"
+msgstr "Заповніть поле \"Ім'я користувача\""
+
+msgid "Unknown login. Please contact your HR Officer / Manager."
+msgstr "Невірну ім'я користувача. Зверніться до свого керівника."
+
+msgid "The password has been sent to your e-mail adress."
+msgstr "Пароль був висланий на вашу електронну адресу."
+
+msgid "Invalid login id or password"
+msgstr "Невірне ім'я користувача або пароль"
+
+msgid "The language has been succesfully set to "
+msgstr "Мова біла успішно встановлена на"
+
+msgid "Rename"
+msgstr "Перейменувати"
+
+msgid "Remove"
+msgstr "Видалити"
+
+msgid "Cut"
+msgstr "Вирізати"
+
+msgid "Paste"
+msgstr "Вставити"
+
+msgid "Active"
+msgstr "Активно"
+
+msgid "Inactive"
+msgstr "Не активно"
+
+msgid "edit user details"
+msgstr "редагувати інформацію користувача"
+
+msgid "delete user"
+msgstr "видалити користувача"
+
+msgid "Role"
+msgstr "Роль"
+
+msgid "Create a new user"
+msgstr "Створити нового користувача"
+
+msgid "Import users"
+msgstr "Імпортувати користувачів"
+
+msgid "Delete User"
+msgstr "Видалити користувача"
+
+msgid "You are about to delete one user, this procedure is irreversible."
+msgstr "Ви збираєтесь видалити користувача. Цю дію не можна буде скасувати."
+
+msgid "Import Users"
+msgstr "Імпортувати користувачів"
+
+msgid "Filename"
+msgstr "Назва файлу"
+
+msgid "My personal information"
+msgstr "Моя особиста інформація"
+
+msgid "Position"
+msgstr "Посада"
+
+msgid "Date hired/started"
+msgstr "Дата прийому на роботу"
+
+msgid "Internal/Company Identifier"
+msgstr "Ідентифікатор користувача"
+
+msgid "Edit user #"
+msgstr "Редагувати користувача №"
+
+msgid "Edit user"
+msgstr "Редагувати користувача"
+
+msgid "No line manager."
+msgstr "Немає прямого керівника."
+
+msgid "If a user has no manager (itself), it can validate its leave requests."
+msgstr "Якщо користувач немає керівника (сам), він може сам затверджувати свої заяви."
+
+msgid "Self"
+msgstr "Сам"
+
+msgid "Timezone"
+msgstr "Часовий пояс"
+
+msgid "LDAP Path"
+msgstr "Шлях LDAP"
+
+msgid "Select the manager"
+msgstr "Виберіть курівника"
+
+msgid "Select a position"
+msgstr "Виберіть посаду"
+
+msgid "Update user"
+msgstr "Оновити користувача"
+
+msgid "The user has been succesfully updated"
+msgstr "Користувач був успішно оновлений"
+
+msgid "The user has been succesfully deleted"
+msgstr "Користувач був успішно видалений"
+
+msgid "The password has been succesfully changed"
+msgstr "Пароль був успішно змінений"
+
+msgid "Generate password"
+msgstr "Генерувати пароль"
+
+msgid ""
+"It is recommanded to select a contract. Do you want to create the user "
+"without a contract?"
+msgstr "Рекомендовано вибрати контракт. Створити користувача без контракту?"
+
+msgid "The user has been succesfully created"
+msgstr "Користувач був успішно створений"
+
+msgid "Username already exists."
+msgstr "Користувач з такий іменем вже істнує"
+
+msgid "This username is not available."
+msgstr "Ім'я користувача не доступне"
+
+msgid "Reset"
+msgstr "Скинути"

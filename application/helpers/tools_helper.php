@@ -30,7 +30,7 @@ function setUserContext(CI_Controller $controller) {
         }
     }
     $controller->fullname = $controller->session->userdata('firstname') . ' ' .
-            $controller->session->userdata('lastname');
+    $controller->session->userdata('lastname');
     $controller->is_manager = $controller->session->userdata('is_manager');
     $controller->is_admin = $controller->session->userdata('is_admin');
     $controller->is_hr = $controller->session->userdata('is_hr');

@@ -9,28 +9,11 @@
 
 if (!defined('BASEPATH')) { exit('No direct script access allowed'); }
 
-use App\Entity\LeaveRequest;
-use App\Entity\OvertimeRequest;
-use App\Entity\User;
-use App\Repository\DayOffRepository;
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\Loader\ArrayLoader;
-use Symfony\Component\Translation\Loader\PoFileLoader;
-
-
 /**
  * This controller serves the user management pages and tools.
  * The difference with HR Controller is that operations are technical (CRUD, etc.).
  */
-class Users extends CI_Controller  {
-    //TODO : move this in CI_Controller on inject the dep ?
-    private \Twig\Environment $twig;
-    private Symfony\Component\Translation\Translator $translator;
-    private $container;
-    private $entityManager;
+class Users extends CI_Controller {
 
     /**
      * Default constructor
@@ -41,27 +24,6 @@ class Users extends CI_Controller  {
         setUserContext($this);
         $this->load->model('users_model');
         $this->lang->load('users', $this->language);
-
-        $kernel = $GLOBALS['kernel'];
-        $kernel->boot();
-        $this->container = $kernel->getContainer();
-        $this->translator = $this->container->get('translator');
-        $this->translator->setLocale($this->language_code);
-        $this->translator->addLoader('po', new PoFileLoader());
-        $this->translator->addResource('po', FCPATH . '/translations/' . $this->language_code . '.po', $this->language_code);
-
-        $this->entityManager = $this->container->get('doctrine.orm.default_entity_manager');
-
-        $loader = new \Twig\Loader\FilesystemLoader(FCPATH . 'templates');
-        $this->twig = new \Twig\Environment($loader, [
-            'cache' => FCPATH . 'var/cache',
-        ]);
-        // $this->twig = $this->container->get('twig');
-    }
-
-    public function get($service)
-    {
-        return $this->locator->get($service);
     }
 
     /**
@@ -74,17 +36,12 @@ class Users extends CI_Controller  {
         $this->load->helper('form');
         $this->lang->load('datatable', $this->language);
         $data['users'] = $this->users_model->getUsersAndRoles();
-        $data['title'] = $this->translator->trans('List of users');
+        $data['title'] = lang('users_index_title');
         $data['help'] = $this->help->create_help_link('global_link_doc_page_list_users');
         $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
-
-        $users = $this->entityManager->getRepository(User::class)->findAll();
-
         $this->load->view('templates/header', $data);
         $this->load->view('menu/index', $data);
-        $view = $this->twig->render('user/index.html.twig', ['users' => $users]);
-        $this->output->append_output($view);
-        //$this->load->view('users/index', $data);
+        $this->load->view('users/index', $data);
         $this->load->view('templates/footer');
     }
 

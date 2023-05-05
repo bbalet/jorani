@@ -12,9 +12,10 @@
     "minimum-stability": "stable",
     "require": {
         "bshaffer/oauth2-server-php": "^1.13.0",
-        "doctrine/orm": "*",
         "doctrine/doctrine-bundle": "*",
         "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "*",
+        "gedmo/doctrine-extensions": "^3.11",
         "jpgraph/jpgraph": "^4.0.2",
         "league/oauth2-client": "^2.2",
         "league/oauth2-google": "^2.0",
@@ -29,11 +30,17 @@
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "6.2.*",
         "symfony/flex": "^2.2",
+        "symfony/form": "6.2.*",
+        "symfony/framework-bundle": "6.2.*",
         "symfony/monolog-bundle": "^3.8",
         "symfony/runtime": "6.2.*",
+        "symfony/security-bundle": "6.2.*",
         "symfony/symfony": "^6.2",
         "symfony/translation": "*",
+        "twig/cssinliner-extra": "^3.6",
         "twig/extra-bundle": "^3.6",
+        "twig/inky-extra": "^3.6",
+        "twig/markdown-extra": "^3.6",
         "zircote/swagger-php": "^4.7.10"
     },
     "require-dev": {
@@ -78,8 +85,7 @@
     },
     "scripts": {
         "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+
         },
         "post-install-cmd": [
             "@auto-scripts"

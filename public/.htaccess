@@ -23,6 +23,7 @@ SetEnv HTTP_MOD_GZIP Off
 
     #Remove index.php from URL
     RewriteCond $1 !^(index\.php|(.*)\.images|css|js|robots\.txt|favicon\.ico)
+    RewriteCond %{REQUEST_URI} !^/build/.+$
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ ./index.php?$1 [L,QSA]

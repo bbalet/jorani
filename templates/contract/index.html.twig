@@ -17,5 +17,13 @@
         <li>Is logged in = {{ data }}</li>
         <li>Language Code = {{ languageCode }}</li>
     </ul>
+
+<ul>
+    {% for contract in contracts %}
+        <li>{{ contract.name|e }}</li>
+    {% endfor %}
+</ul>
+
 </div>
+
 {% endblock %}

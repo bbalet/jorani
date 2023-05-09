@@ -1,39 +1,24 @@
 {
-  "name": "jorani",
-  "version": "1.0.0",
-  "description": "Jorani is a free and open source leave management system",
-  "main": "index.js",
-  "repository": "https://github.com/bbalet/jorani.git",
-  "author": "bbalet <benjamin.balet@gmail.com>",
-  "license": "AGPL-3.0-or-later",
-  "dependencies": {
-    "@mdi/font": "^5.7.55",
-    "bootstrap": "^4.5.3",
-    "clipboard": "^2.0.6",
-    "hammerjs": "^2.0.8",
-    "jquery": "^3.5.1",
-    "jquery-legacy": "npm:jquery@2.2.4",
-    "js-cookie": "^2.2.1",
-    "jstree": "^3.3.10",
-    "moment": "^2.29.1",
-    "popper.js": "^1.16.0",
-    "select2": "^4.0.13",
-    "swagger-ui": "^3.35.2"
-  },
   "devDependencies": {
-    "autoprefixer": "^10.0.1",
-    "css-loader": "^5.0.0",
-    "eslint": "^7.12.0",
-    "file-loader": "^6.1.1",
-    "imports-loader": "^1.2.0",
-    "mini-css-extract-plugin": "^1.0.0",
-    "moment-locales-webpack-plugin": "^1.2.0",
-    "node-sass": "^4.14.1",
-    "postcss-loader": "^4.0.4",
-    "sass-loader": "^10.0.3",
-    "style-loader": "^2.0.0",
-    "url-loader": "^4.1.1",
-    "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0"
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "@hotwired/stimulus": "^3.2.1",
+    "@popperjs/core": "^2.11.7",
+    "@symfony/stimulus-bridge": "^3.2.2",
+    "@symfony/webpack-encore": "^4.3.0",
+    "babel-loader": "^9.1.2",
+    "bootstrap": "^5.2.3",
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.0.2",
+    "webpack-notifier": "^1.15.0"
+  },
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "dependencies": {
+    "core-js": "3.30.1"
   }
 }

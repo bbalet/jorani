@@ -38,6 +38,7 @@
         "symfony/dotenv": "6.2.*",
         "symfony/expression-language": "6.2.*",
         "symfony/flex": "^2.2",
+        "symfony/form": "6.2.*",
         "symfony/framework-bundle": "6.2.*",
         "symfony/http-foundation": "6.2.*",
         "symfony/http-kernel": "6.2.*",

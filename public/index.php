@@ -249,7 +249,8 @@ $_SERVER['DATABASE_URL'] = $db[$active_group]['dsn'];
 $_SERVER['APP_DEBUG'] = true;
 $_SERVER['DB_USER'] = $db[$active_group]['username'];
 $_SERVER['DB_PASS'] = $db[$active_group]['password'];
-$_SERVER['APP_ENV'] = 'local';
+$_SERVER['APP_ENV'] = 'dev';
+$_SERVER['APP_SECRET'] = '4aRkhzJ0PLEiplR66pWXPybrk2AefSSd80VX3CFabvbOkANpoi';	//TODO: hard coded during the migration
 $_SERVER['CORS_ALLOW_ORIGIN'] = '^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$';
 
 $GLOBALS['kernel'] = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);

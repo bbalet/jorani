@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'Create new position' |trans }}{% endblock %}
+{% block title %}{{ 'Edit a position' |trans }}{% endblock %}
 
 {% block body %}
 {% include 'menu.html.twig' %}
 
 <div class="container">
-    <h1>{{ 'Create new position' |trans }}</h1>
+    <h1>{{ 'Edit a position' |trans }}</h1>
     {{ form(form) }}
     <a href="{{ path('position_list') }}" class="btn btn-warning" role="button">{{ "Cancel" |trans}}</a>
+    <a href="{{ path('position_delete', {'id': position.id}) }}" class="btn btn-danger" role="button">{{ "Delete" |trans}}</a>
 </div>
 {% endblock %}

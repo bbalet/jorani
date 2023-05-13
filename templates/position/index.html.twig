@@ -3,29 +3,27 @@
 {% block title %}{{ 'List of positions' |trans }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% include 'menu.html.twig' %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ 'List of positions' |trans }}</h1>
-    <table class="table table-striped">
+<div class="container">
+    <h1>{{ 'List of positions' |trans }}</h1>
+    <table class="table table-responsive table-striped table-hover">
         <thead>
             <tr>
                 <th>{{ 'Name' |trans }}</th>
                 <th>{{ 'Description' |trans }}</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
         {% for position in positions %}
-            <tr>
-                <td>{{ position.name }}</td>
+            <tr class="position-relative">
+                <td><a href="{{ path('position_edit', {'id': position.id}) }}" class="stretched-link"></a>{{ position.name }}</td>
                 <td>{{ position.description }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+    <br />
+    <a href="{{ path('position_create') }}" class="btn btn-primary" role="button">{{ "Create Position" |trans}}</a>
 </div>
 {% endblock %}

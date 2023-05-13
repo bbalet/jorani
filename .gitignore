@@ -28,6 +28,7 @@ yarn-error.log
 
 var/cache/*/
 var/log/*/
+var/log/*
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/

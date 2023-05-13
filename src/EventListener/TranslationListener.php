@@ -23,8 +23,6 @@ final class TranslationListener
     public function __invoke(RequestEvent $event): void
     {
         $request = $event->getRequest();
-    
-        // some logic to determine the $locale
         $locale = $this->ciBridge->getLanguageCode();
         $this->translator->setLocale($locale);
         $request->setLocale($locale);

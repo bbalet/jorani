@@ -17,8 +17,9 @@
     "jstree": "^3.3.10",
     "moment": "^2.29.1",
     "popper.js": "^1.16.0",
+    "sass": "^1.69.1",
     "select2": "^4.0.13",
-    "swagger-ui": "^3.35.2"
+    "swagger-ui": "^5.9.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
@@ -28,7 +29,6 @@
     "imports-loader": "^1.2.0",
     "mini-css-extract-plugin": "^1.0.0",
     "moment-locales-webpack-plugin": "^1.2.0",
-    "node-sass": "^4.14.1",
     "postcss-loader": "^4.0.4",
     "sass-loader": "^10.0.3",
     "style-loader": "^2.0.0",

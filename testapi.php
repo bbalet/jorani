@@ -24,8 +24,6 @@ $configAsJson = json_encode($config);
                 <li class="nav-item"><a class="nav-link" href="requirements.php">Requirements</a></li>
                 <li class="nav-item"><a class="nav-link" href="testmail.php">Email</a></li>
                 <li class="nav-item"><a class="nav-link" href="testldap">LDAP</a></li>
-                <li class="nav-item"><a class="nav-link" href="testssl.php">SSL</a></li>
-                <li class="nav-item"><a class="nav-link" href="testoauth2.php">OAuth2</a></li>
                 <li class="nav-item"><a class="nav-link active" href="#">API HTTP</a></li>
             </ul>
 

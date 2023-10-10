@@ -105,8 +105,6 @@ if ($configFileExists) {
                 <li class="nav-item"><a class="nav-link active" href="#">Requirements</a></li>
                 <li class="nav-item"><a class="nav-link" href="testmail.php">Email</a></li>
                 <li class="nav-item"><a class="nav-link" href="testldap.php">LDAP</a></li>
-                <li class="nav-item"><a class="nav-link" href="testssl.php">SSL</a></li>
-                <li class="nav-item"><a class="nav-link" href="testoauth2.php">OAuth2</a></li>
                 <li class="nav-item"><a class="nav-link" href="testapi.php">API HTTP</a></li>
             </ul>
 

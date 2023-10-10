@@ -37,38 +37,7 @@ class Connection extends CI_Controller {
         $this->lang->load('session', $this->session->userdata('language'));
         $this->lang->load('global', $this->session->userdata('language'));
     }
-    
-    /**
-     * Generate a random string by using openssl, dev/urandom or random
-     * @param int $length optional length of the string
-     * @return string random string
-     * @author Benjamin BALET <benjamin.balet@gmail.com>
-     */
-    private function generateRandomString($length = 10) {
-        if(function_exists('openssl_random_pseudo_bytes')) {
-          $rnd = openssl_random_pseudo_bytes($length, $strong);
-          if ($strong === TRUE)
-            return base64_encode($rnd);
-        }
-        $sha =''; $rnd ='';
-        if (file_exists('/dev/urandom')) {
-          $fp = fopen('/dev/urandom', 'rb');
-          if ($fp) {
-              if (function_exists('stream_set_read_buffer')) {
-                  stream_set_read_buffer($fp, 0);
-              }
-              $sha = fread($fp, $length);
-              fclose($fp);
-          }
-        }
-        for ($i=0; $i<$length; $i++) {
-          $sha  = hash('sha256',$sha.mt_rand());
-          $char = mt_rand(0,62);
-          $rnd .= chr(hexdec($sha[$char].$sha[$char+1]));
-        }
-        return base64_encode($rnd);
-    }
-    
+
     /**
      * Login form
      * @author Benjamin BALET <benjamin.balet@gmail.com>
@@ -87,16 +56,12 @@ class Connection extends CI_Controller {
         $data['help'] = $this->help->create_help_link('global_link_doc_page_login');
         $this->load->helper('form');
         $this->load->library('form_validation');
-        //Note that we don't receive the password as a clear string
         $this->form_validation->set_rules('login', lang('session_login_field_login'), 'required');
 
         $data['last_page'] = $this->session->userdata('last_page');
         if ($this->form_validation->run() === FALSE) {
-            $data['public_key'] = file_get_contents('./assets/keys/public.pem', TRUE);
-            $data['salt'] = $this->generateRandomString(rand(5, 20));
             $data['language'] = $this->session->userdata('language');
             $data['language_code'] = $this->session->userdata('language_code');
-            $this->session->set_userdata('salt', $data['salt']);
             $data['flash_partial_view'] = $this->load->view('templates/flash', $data, TRUE);
             $this->load->view('templates/header', $data);
             $this->load->view('session/login', $data);
@@ -108,23 +73,7 @@ class Connection extends CI_Controller {
             $this->session->set_userdata('language', $this->polyglot->code2language($this->input->post('language')));
             
             //Decipher the password value (RSA encoded -> base64 -> decode -> decrypt) and remove the salt!
-            $password = '';
-            if (function_exists('openssl_pkey_get_private')) {
-                $privateKey = openssl_pkey_get_private(file_get_contents('./assets/keys/private.pem', TRUE));
-                openssl_private_decrypt(base64_decode($this->input->post('CipheredValue')), $password, $privateKey, OPENSSL_PKCS1_OAEP_PADDING);
-                while ($msg = openssl_error_string()) {
-                    log_message('error', 'openssl error message=' . $msg);
-                }
-            } else {
-                $rsa = new phpseclib\Crypt\RSA();
-                $privateKey = file_get_contents('./assets/keys/private.pem', TRUE);
-                $rsa->setEncryptionMode(phpseclib\Crypt\RSA::ENCRYPTION_OAEP);
-                $rsa->loadKey($privateKey, phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS1);
-                $password = $rsa->decrypt(base64_decode($this->input->post('CipheredValue')));
-            }
-            //Remove the salt
-            $len_salt = strlen($this->session->userdata('salt')) * (-1);
-            $password = substr($password, 0, $len_salt);
+            $password = $this->input->post('password');
             
             $loggedin = FALSE;
             if ($this->config->item('ldap_enabled') === TRUE) {

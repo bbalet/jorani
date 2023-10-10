@@ -44,20 +44,6 @@ if (!is_null($fonts)) {
         }
     } ?>
 </style>
-<?php if ($this->config->item('ga_code') != "") { ?>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        <?php if (($this->session->userdata('id') != FALSE) && ($this->config->item('ga_code') != FALSE)){
-          $gacode = "ga('create', '%s', { 'userId': '%s' });";
-          echo sprintf($gacode, $this->config->item('ga_code'), $this->session->userdata('id'));
-        }?>
-        ga('create', '<?php echo $this->config->item('ga_code');?>', 'auto');
-        ga('send', 'pageview');
-    </script>
-<?php } ?>
 </head>
 <body>
 
@@ -73,41 +59,23 @@ if (!is_null($fonts)) {
             <form id="loginForm" method="POST" action="<?php echo base_url();?>api/authorization/login">
                 <label for="login"><?php echo lang('session_login_field_login');?></label>
                 <input type="text" class="input-medium" name="login" id="login" value="<?php echo set_value('login'); ?>" required />
-                <input type="hidden" name="CipheredValue" id="CipheredValue" />
                 <input name="state" type="hidden" value="<?php echo $state;?>">
                 <input name="response_type" type="hidden" value="<?php echo $responseType;?>">
                 <input name="redirect_uri" type="hidden" value="<?php echo $redirectUri;?>">
                 <input name="client_id" type="hidden" value="<?php echo $clientId;?>">
+                <label for="password"><?php echo lang('session_login_field_password');?></label>
+                <input class="input-medium" type="password" name="password" id="password" /><br />
+                <br />
+                <button type="submit" class="btn btn-primary"><i class="mdi mdi-login"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
             </form>
-            <label for="password"><?php echo lang('session_login_field_password');?></label>
-            <input class="input-medium" type="password" name="password" id="password" /><br />
             <br />
-            <button id="send" class="btn btn-primary"><i class="mdi mdi-login"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
-            <br />
-            <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
-            <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-
-    //Encrypt the password using RSA and send the ciphered value into the form
-    function submit_form() {
-        var encrypter = new CryptoTools();
-        var clearText = $('#password').val() + $('#salt').val();
-        encrypter.encrypt($('#pubkey').val(), clearText).then((encrypted) => {
-            $('#CipheredValue').val(encrypted);
-            $('#loginFrom').submit();
-        });
-    }
-
     $(function () {
         $('#login').focus();
-
-        $('#send').click(function() {
-            submit_form();
-        });
 
         //Validate the form if the user press enter key in password field
         $('#password').keypress(function(e){

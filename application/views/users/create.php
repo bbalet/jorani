@@ -20,8 +20,6 @@
 $attributes = array('id' => 'target', 'class' => 'form-horizontal');
 echo form_open('users/create', $attributes); ?>
 
-    <input type="hidden" name="CipheredValue" id="CipheredValue" />
-
 <div class="row">
     <div class="span4">
         <div class="control-group">
@@ -369,15 +367,6 @@ echo form_open('users/create', $attributes); ?>
         }
     }
 
-    //Before submitting the form, encrypt the password and don't send the clear value
-    function submit_form() {
-        var encrypter = new CryptoTools();
-        encrypter.encrypt($('#pubkey').val(), $('#password').val()).then((encrypted) => {
-            $('#CipheredValue').val(encrypted);
-            $('#target').submit();
-        });
-    }
-
     /**
      * Generate a password of the specified length
      * @param int len Length of password to be generated
@@ -570,5 +559,3 @@ echo form_open('users/create', $attributes); ?>
     });
 
 </script>
-
-<textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>

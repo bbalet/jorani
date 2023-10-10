@@ -7,20 +7,6 @@
  * @since      0.1.0
  */
 ?>
-
-<?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
-<script type="text/javascript" src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
-<script type="text/javascript">
-    function start() {
-      gapi.load('auth2', function() {
-        auth2 = gapi.auth2.init({
-          client_id: '<?php echo $this->config->item('oauth2_client_id');?>',
-        });
-      });
-    }
-</script>
-<?php }?>
-
 <style>
     body {
         background:
@@ -82,23 +68,17 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
     <label for="login"><?php echo lang('session_login_field_login');?></label>
     <input type="text" class="input-medium" name="login" id="login" value="<?php echo (ENVIRONMENT=='demo')?'bbalet':set_value('login'); ?>" required />
     <input type="hidden" name="CipheredValue" id="CipheredValue" />
-</form>
-    <input type="hidden" name="salt" id="salt" value="<?php echo $salt; ?>" />
     <label for="password"><?php echo lang('session_login_field_password');?></label>
-    <input class="input-medium" type="password" name="password" id="password" value="<?php echo (ENVIRONMENT=='demo')?'bbalet':''; ?>" /><br />
+    <input type="password" class="input-medium" name="password" id="password"  autocomplete="on" value="<?php echo (ENVIRONMENT=='demo')?'bbalet':''; ?>" /><br />
     <br />
-    <button id="send" class="btn btn-primary"><i class="mdi mdi-login"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
-    <?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
-         <?php if ($this->config->item('oauth2_provider') == 'google') { ?>
-    <button id="cmdGoogleSignIn" class="btn btn-primary"><i class="mdi mdi-google"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
-        <?php } ?>
-    <?php } ?>
-    <br /><br />
-    <?php if (($this->config->item('ldap_enabled') == FALSE) && (ENVIRONMENT!='demo')) { ?>
-    <button id="cmdForgetPassword" class="btn btn-danger"><i class="mdi mdi-email"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
-    <?php } ?>
+    <button type="submit" class="btn btn-primary"><i class="mdi mdi-login"></i>&nbsp;<?php echo lang('session_login_button_login');?></button>
+</form>
 
-    <textarea id="pubkey" style="visibility:hidden;"><?php echo $public_key; ?></textarea>
+    <?php if (($this->config->item('ldap_enabled') == FALSE) && (ENVIRONMENT!='demo')) { ?>
+    <!--
+    <button id="cmdForgetPassword" class="btn btn-danger"><i class="mdi mdi-email"></i>&nbsp;<?php echo lang('session_login_button_forget_password');?></button>
+    //-->
+    <?php } ?>
                 </div>
                 <div class="span6" style="height:100%;">
                     <div class="row-fluid">
@@ -129,45 +109,6 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 <script type="text/javascript">
-
-    //Encrypt the password using RSA and send the ciphered value into the form
-    function submit_form() {
-        var encrypter = new CryptoTools();
-        var clearText = $('#password').val() + $('#salt').val();
-        encrypter.encrypt($('#pubkey').val(), clearText).then((encrypted) => {
-            $('#CipheredValue').val(encrypted);
-            $('#loginFrom').submit();
-        });
-    }
-
-    //Attempt to authenticate the user using OAuth2 protocol
-    function signInCallback(authResult) {
-        if (authResult['code']) {
-          $.ajax({
-            url: '<?php echo base_url();?>session/oauth2',
-            type: 'POST',
-            data: {
-                      auth_code: authResult.code
-                      },
-            success: function(result) {
-                if (result == "OK") {
-                    var target = '<?php echo $last_page;?>';
-                    if (target == '') {
-                        window.location = "<?php echo base_url();?>";
-                    } else {
-                        window.location = target;
-                    }
-                } else {
-                    bootbox.alert(result);
-                }
-            }
-          });
-        } else {
-          // There was an error.
-          bootbox.alert("Unknown OAuth2 error");
-        }
-    }
-
     $(function () {
 <?php if ($this->config->item('csrf_protection') == TRUE) {?>
     $.ajaxSetup({
@@ -200,10 +141,6 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
         });
 
         $('#login').focus();
-
-        $('#send').click(function() {
-            submit_form();
-        });
 
         //If the user has forgotten his password, send an e-mail
         $('#cmdForgetPassword').click(function() {
@@ -241,15 +178,6 @@ $languages = $this->polyglot->nativelanguages($this->config->item('languages'));
             if(e.keyCode==13)
             submit_form();
         });
-
-        //Alternative authentication methods
-<?php if ($this->config->item('oauth2_enabled') == TRUE) { ?>
-     <?php if ($this->config->item('oauth2_provider') == 'google') { ?>
-        $('#cmdGoogleSignIn').click(function() {
-            auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
-        });
-    <?php } ?>
-<?php } ?>
 
     });
 </script>

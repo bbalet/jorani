@@ -282,7 +282,6 @@ class Users extends CI_Controller {
         $data['roles'] = $this->roles_model->getRoles();
         $this->load->model('contracts_model');
         $data['contracts'] = $this->contracts_model->getContracts();
-        $data['public_key'] = file_get_contents('./assets/keys/public.pem', TRUE);
 
         $this->form_validation->set_rules('firstname', lang('users_create_field_firstname'), 'required|strip_tags');
         $this->form_validation->set_rules('lastname', lang('users_create_field_lastname'), 'required|strip_tags');

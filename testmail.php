@@ -38,8 +38,6 @@ define('EMAIL_ADDRESS', '');
                 <li class="nav-item"><a class="nav-link" href="requirements.php">Requirements</a></li>
                 <li class="nav-item"><a class="nav-link active" href="#">Email</a></li>
                 <li class="nav-item"><a class="nav-link" href="testldap.php">LDAP</a></li>
-                <li class="nav-item"><a class="nav-link" href="testssl.php">SSL</a></li>
-                <li class="nav-item"><a class="nav-link" href="testoauth2.php">OAuth2</a></li>
                 <li class="nav-item"><a class="nav-link" href="testapi.php">API HTTP</a></li>
             </ul>
 

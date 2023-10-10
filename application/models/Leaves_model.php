@@ -679,7 +679,8 @@ class Leaves_model extends CI_Model {
         if (isset($json_parsed)){
           array_push($json_parsed->comments, $commentObject);
         }else {
-          $json_parsed->comments = array($commentObject);
+            $json_parsed = new stdClass;
+            $json_parsed->comments = array($commentObject);
         }
         $comment_change = new stdClass;
         $comment_change->type = "change";

@@ -1639,6 +1639,133 @@ class Api extends CI_Controller {
         return $d && $d->format($format) === $date;
     }
     
+	/**
+     * Get one node of the organization
+     * @author Mickael ROMMME
+     */
+    public function organization_node($id) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('Organization_model');
+            $result = $this->Organization_model->getName($id);
+            echo json_encode($result);
+        }
+    }
+	
+	/**
+     * Get id of all childrem of one node of the organization
+     * @author Mickael ROMMME
+     */
+    public function organization_children($id) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('Organization_model');
+            $result = $this->Organization_model->getAllChildren($id);
+            echo json_encode($result);
+        }
+    }
+	
+	/**
+     * Create one node of the organization
+     * @author Mickael ROMMME
+     */
+    public function createnodeorganization() {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('Organization_model');
+			
+            $name = $this->input->post('name');
+            $parent_id = $this->input->post('parent_id');
+             
+            //Check mandatory fields
+            if ($name == FALSE || $parent_id == FALSE) {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+                log_message('error', 'Mandatory fields are missing.');
+            } else {
+                    $result = $this->Organization_model->create($parent_id, $name);
+                    echo json_encode($result);
+            }
+        }
+    }
+	
+	/**
+     * Move one node of the organization
+     * @author Mickael ROMMME
+     */
+    public function movenodeorganization($id, $parent_id) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('Organization_model');
+            $result = $this->Organization_model->move($id, $parent_id);
+            echo json_encode($result);
+        }
+    }
+	
+	/**
+     * Delete one node of the organization
+	 * Delete all children and unset organization id for user
+     * @author Mickael ROMMME
+     */
+    public function deletenodeorganization($id) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('Organization_model');
+            $result = $this->Organization_model->delete($id);
+            echo json_encode($result);
+        }
+    }
+	
+	/**
+     * Rename one node of the organization
+     * @author Mickael ROMMME
+     */
+    public function renamenodeorganization($id) {
+		if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('Organization_model');
+            $name = $this->input->post('name');
+            $result = $this->Organization_model->rename($id, $name);
+            if (empty($result)) {
+                $this->output->set_header("HTTP/1.1 422 Unprocessable entity");
+            } else {
+                echo json_encode($result);
+            }
+        }
+    }
+	
+	/**
+     * Attach an employee to one node of the organization
+     * @author Mickael ROMMME
+     */
+    public function attachEmployee($id, $entity) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('Organization_model');
+            $result = $this->Organization_model->attachEmployee($id, $entity);
+            echo json_encode($result);
+        }
+    }
+	
+	/**
+     * Detach an employee to one node of the organization
+     * @author Mickael ROMMME
+     */
+    public function detachEmployee($id) {
+        if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
+            $this->server->getResponse()->send();
+        } else {
+            $this->load->model('Organization_model');
+            $result = $this->Organization_model->detachEmployee($id);
+            echo json_encode($result);
+        }
+    }
 }
 
 

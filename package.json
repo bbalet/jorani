@@ -28,7 +28,7 @@
     "imports-loader": "^1.2.0",
     "mini-css-extract-plugin": "^1.0.0",
     "moment-locales-webpack-plugin": "^1.2.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "postcss-loader": "^4.0.4",
     "sass-loader": "^10.0.3",
     "style-loader": "^2.0.0",

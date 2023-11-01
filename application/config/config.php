@@ -521,13 +521,6 @@ $config['disable_department_calendar'] = FALSE; //Set this value to TRUE in orde
 $config['disable_workmates_calendar'] = FALSE; //Set this value to TRUE in order to disable the menu entry 'my workmates'
 
 //____________________________________________________________________________
-//Google analytics tracking code (if empty, the Javascript tracking code will be desactivated).
-//An option allows you to send the identifier of the connected user (a special configuration must be set in GA first).
-//See https://developers.google.com/analytics/devguides/collection/analyticsjs/user-id
-$config['ga_code'] = '';
-$config['ga_send_userid'] = FALSE;
-
-//____________________________________________________________________________
 //E-mail settings of the application are stored into email.php file
 
 //____________________________________________________________________________
